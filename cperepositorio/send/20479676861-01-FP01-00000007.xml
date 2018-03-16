@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:sac="urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ext:UBLExtensions>
+    <ext:UBLExtension>
+      <ext:ExtensionContent>
+        <sac:AdditionalInformation>
+          <sac:AdditionalMonetaryTotal>
+            <cbc:ID>1001</cbc:ID>
+            <cbc:PayableAmount currencyID="PEN">114.41</cbc:PayableAmount>
+          </sac:AdditionalMonetaryTotal>
+          <sac:AdditionalProperty>
+            <cbc:ID>1000</cbc:ID>
+            <cbc:Value>CIENTO TREINTA Y CINCO</cbc:Value>
+          </sac:AdditionalProperty>
+          <sac:SUNATTransaction>
+            <cbc:ID>01</cbc:ID>
+          </sac:SUNATTransaction>
+        </sac:AdditionalInformation>
+      </ext:ExtensionContent>
+    </ext:UBLExtension>
+    <ext:UBLExtension>
+      <ext:ExtensionContent><ds:Signature Id="SignGRANADOS">
+          <ds:SignedInfo><ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+            <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+          <ds:Reference URI=""><ds:Transforms><ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/></ds:Transforms><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/><ds:DigestValue>CQdkQiZ5U3fyfF+2r9zYDoUgLuE=</ds:DigestValue></ds:Reference></ds:SignedInfo><ds:SignatureValue>Fa7WYYeJH+9TKXgwsT9Dhg7W3X/dKSPxlEifHOWaKuAsUTvUmBU7RnzJ/rs3urCXkHOgRlWMXB8TQZ5/cWnmUK7VWZ4Ff6r/LyhImI+NgQwYF7fNvfmInpEj/ysoyFCiOMqESsJqVfAfRCTGAZZPf+TFMDgM9axzsmZXGUdWONzXR1FhHyi2SD4oWaD0/FyDiwenAvTUssn4+IkMxurvmDQBPjs8rH3h2KMEgPi24tbc3vEZapIYJNJYodJ2kiYoHsGpCEAY7+rj5spLA8MAYNA3LWZU63lbCSJ9srmxUd+CwVmc3P5iERvIOtz/4THxOwl9xxQvX9uA1NT8O7/hDg==</ds:SignatureValue>
+         <ds:KeyInfo><ds:X509Data><ds:X509SubjectName>emailAddress=facturacion@granadosllantas.com,CN=GRANADOS LY VERONICA,OU=Array,O=IMPORTACIONES Y DISTRIBUCIONES GRANADOS SRL,L=LAMBAYEQUE,ST=CHICLAYO,C=PE</ds:X509SubjectName><ds:X509Certificate>MIIFvTCCBKWgAwIBAgIMKflolWBuHZU9g4GAMA0GCSqGSIb3DQEBBQUAMFQxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSowKAYDVQQDEyFHbG9iYWxTaWduIFBlcnNvbmFsU2lnbiAyIENBIC0gRzMwHhcNMTYxMDI1MDAzNTA0WhcNMTcxMDI2MDAzNTA0WjCCAQgxCzAJBgNVBAYTAlBFMREwDwYDVQQIEwhDSElDTEFZTzETMBEGA1UEBxMKTEFNQkFZRVFVRTE0MDIGA1UEChMrSU1QT1JUQUNJT05FUyBZIERJU1RSSUJVQ0lPTkVTIEdSQU5BRE9TIFNSTDElMCMGA1UECxMcRE5JIDE2NzI5MzAyIFJVQyAyMDQ3OTY3Njg2MTElMCMGA1UECxMcRE5JIDE2NzI5MzAyIFJVQyAyMDQ3OTY3Njg2MTEdMBsGA1UEAxMUR1JBTkFET1MgTFkgVkVST05JQ0ExLjAsBgkqhkiG9w0BCQEWH2ZhY3R1cmFjaW9uQGdyYW5hZG9zbGxhbnRhcy5jb20wggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDFPfNs6+vW5jisQ38mK+FjOeHUseXoLhSqlXjeFFb8eXOkOfJjnpxXWCvMMZZRPUertgZTFoQGdMlcLJLBPzMkYuJxSD1LtPJkX4pry35XEsv5LCnXjmv0ie393qdDiqWx0Up4SaA4dHXAlZOghypZ1jGh2XcRSBnSkbMTnV24Dw2rZAvO134jyKgOofMPub2+jqYoTN0T0sz+fEWKE6xeMRoJjRS5Dc022gbRCkxXZiOyH1qjeuX0jX9f6kxIczNp7ANJLJvybbdun18vl/4EhjMvCT78D3BrDjzAobCd1ytL+rH9o/e7DY5mFKKoIHrLXr7zxwWmVhP9xnEFMCOnAgMBAAGjggHXMIIB0zAOBgNVHQ8BAf8EBAMCBaAwgZYGCCsGAQUFBwEBBIGJMIGGMEkGCCsGAQUFBzAChj1odHRwOi8vc2VjdXJlLmdsb2JhbHNpZ24uY29tL2NhY2VydC9nc3BlcnNvbmFsc2lnbjJnM29jc3AuY3J0MDkGCCsGAQUFBzABhi1odHRwOi8vb2NzcDIuZ2xvYmFsc2lnbi5jb20vZ3NwZXJzb25hbHNpZ24yZzMwTQYDVR0gBEYwRDBCBgorBgEEAaAyASgKMDQwMgYIKwYBBQUHAgEWJmh0dHBzOi8vd3d3Lmdsb2JhbHNpZ24uY29tL3JlcG9zaXRvcnkvMAkGA1UdEwQCMAAwQwYDVR0fBDwwOjA4oDagNIYyaHR0cDovL2NybC5nbG9iYWxzaWduLmNvbS9ncy9nc3BlcnNvbmFsc2lnbjJnMy5jcmwwKgYDVR0RBCMwIYEfZmFjdHVyYWNpb25AZ3JhbmFkb3NsbGFudGFzLmNvbTAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwHQYDVR0OBBYEFOkr+jziubMiVKxrgLtUzUI3a5P2MB8GA1UdIwQYMBaAFGQ3lbeBRONanXgssgNROZ29AclRMA0GCSqGSIb3DQEBBQUAA4IBAQCfVPnSyVXIFFB2MynkE2POKq4pJiQ/CwpO/hIcVzZaW5wBMFPg3V3RUZNqixS76RYL5SlRAYZn5W7mx4n8LXcgvnXFWmm84CNNurpom/4Ke9w/zNWutI3ymalp+3T3TNLgsFPol9U0sQ8ldJuOvtGTW6OY97B2nBoK5/tBdVBbVbj7A96D8+biscpVA2N2/FsK6qAsr6c7TROimbLQpexlLhwtCtboqJ8AV4xKOoPwZcXM/9UJyZ7Lsuf96tGYWuBbsk3k4MpIiS5K41YI9Ssjq6loQZJg/HcYaPmpXiMUT5zlQD0YC7gIHRyaQw+KAVDP11bYAcb7lAuhj5LLs10z</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature></ext:ExtensionContent>
+    </ext:UBLExtension>
+  </ext:UBLExtensions>
+  <cbc:UBLVersionID>2.0</cbc:UBLVersionID>
+  <cbc:CustomizationID>1.0</cbc:CustomizationID>
+  <cbc:ID>FP01-00000007</cbc:ID>
+  <cbc:IssueDate>2016-11-25</cbc:IssueDate>
+  <cbc:InvoiceTypeCode>01</cbc:InvoiceTypeCode>
+  <cbc:DocumentCurrencyCode>PEN</cbc:DocumentCurrencyCode>
+  <cac:Signature>
+    <cbc:ID>IdSignGRANADOS</cbc:ID>
+    <cac:SignatoryParty>
+      <cac:PartyIdentification>
+        <cbc:ID>20479676861</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name><![CDATA[IMPORTACIONES Y DISTRIBUCIONES GRANADOS SRL]]></cbc:Name>
+      </cac:PartyName>
+    </cac:SignatoryParty>
+    <cac:DigitalSignatureAttachment>
+      <cac:ExternalReference>
+        <cbc:URI>#SignGRANADOS</cbc:URI>
+      </cac:ExternalReference>
+    </cac:DigitalSignatureAttachment>
+  </cac:Signature>
+  <cac:AccountingSupplierParty>
+    <cbc:CustomerAssignedAccountID>20479676861</cbc:CustomerAssignedAccountID>
+    <cbc:AdditionalAccountID>6</cbc:AdditionalAccountID>
+    <cac:Party>
+      <cac:PartyName>
+        <cbc:Name><![CDATA[IDIGRA SRL]]></cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:ID>140105</cbc:ID>
+        <cbc:StreetName>AV. AUGUSTO B. LEGUIA NRO. 1160</cbc:StreetName>
+        <cbc:CitySubdivisionName>URB. SAN LORENZO</cbc:CitySubdivisionName>
+        <cbc:CityName>LAMBAYEQUE</cbc:CityName>
+        <cbc:CountrySubentity>JOSE LEONARDO ORTIZ</cbc:CountrySubentity>
+        <cbc:District>JOSE LEONARDO ORTIZ</cbc:District>
+        <cac:Country>
+          <cbc:IdentificationCode>PE</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>IMPORTACIONES Y DISTRIBUCIONES GRANADOS SRL</cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+  <cac:AccountingCustomerParty>
+    <cbc:CustomerAssignedAccountID>20487569055</cbc:CustomerAssignedAccountID>
+    <cbc:AdditionalAccountID>6</cbc:AdditionalAccountID>
+    <cac:Party>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName><![CDATA[ACCLIVUS CONTRATISTAS GENERALES SOCIEDAD ANONIMA CERRADA]]></cbc:RegistrationName>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="PEN">20.59</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxAmount currencyID="PEN">20.59</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cac:TaxScheme>
+          <cbc:ID>1000</cbc:ID>
+          <cbc:Name>IGV</cbc:Name>
+          <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+  <cac:LegalMonetaryTotal>
+    <cbc:PayableAmount currencyID="PEN">135</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="NIU">1</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="PEN">135</cbc:LineExtensionAmount>
+    <cac:PricingReference>
+      <cac:AlternativeConditionPrice>
+        <cbc:PriceAmount currencyID="PEN">135</cbc:PriceAmount>
+        <cbc:PriceTypeCode>01</cbc:PriceTypeCode>
+      </cac:AlternativeConditionPrice>
+    </cac:PricingReference>
+    <cac:TaxTotal>
+      <cbc:TaxAmount currencyID="PEN">20.59</cbc:TaxAmount>
+      <cac:TaxSubtotal>
+        <cbc:TaxAmount currencyID="PEN">20.59</cbc:TaxAmount>
+        <cac:TaxCategory>
+          <cbc:TaxExemptionReasonCode>10</cbc:TaxExemptionReasonCode>
+          <cac:TaxScheme>
+            <cbc:ID>1000</cbc:ID>
+            <cbc:Name>IGV</cbc:Name>
+            <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
+          </cac:TaxScheme>
+        </cac:TaxCategory>
+      </cac:TaxSubtotal>
+    </cac:TaxTotal>
+    <cac:Item>
+      <cbc:Description><![CDATA[0986BB4305 DF CERATO MATRIX DFD2902 DEL BOSCH]]></cbc:Description>
+      <cac:SellersItemIdentification>
+        <cbc:ID>2322</cbc:ID>
+      </cac:SellersItemIdentification>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="PEN">114.41</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>

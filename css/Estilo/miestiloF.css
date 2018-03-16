@@ -1,0 +1,24 @@
+@charset "utf-8";
+<!--
+a:link {
+	text-decoration: none;
+	color: #084B8A;
+}
+a:visited {
+	text-decoration: none;
+	color: #084B8A;
+}
+a:hover {
+	text-decoration: underline;
+	color: #36F;
+}
+a:active {
+	text-decoration: none;
+	color: #084B8A;
+}
+body,td,th {
+	font-family: Arial, Geneva, sans-serif;
+	font-size: 12px;
+}
+
+-->

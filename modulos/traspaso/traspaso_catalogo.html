@@ -1,0 +1,54 @@
+<script type="text/javascript">
+function traspaso_filtro(){
+	$.ajax({
+		type: "POST",
+		url: "../traspaso/traspaso_filtro.php",
+		async:true,
+		dataType: "html",                      
+		//data: ({
+			//producto: $('#txt_fil_pro').val()
+		//}),
+		beforeSend: function() {
+			$('#div_catalogo_traspaso_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+		success: function(html){
+			$('#div_catalogo_traspaso_filtro').html(html);
+		},
+		complete: function(){
+			traspaso_tabla();
+		}
+	});
+}
+
+function traspaso_tabla(){
+	$.ajax({
+		type: "POST",
+		url: "../traspaso/traspaso_tabla_seleccionar.php",
+		async:true,
+		dataType: "html",                      
+		data: ({
+			tra_fec1:	$('#txt_fil_tra_fec1').val(),
+			tra_fec2:	$('#txt_fil_tra_fec2').val(),
+			alm_ori:	$('#cmb_fil_tra_alm_ori').val(),
+			alm_des:	$('#cmb_fil_tra_alm_des').val()
+		}),
+		beforeSend: function() {
+			$('#div_catalogo_traspaso_tabla').addClass("ui-state-disabled");
+        },
+		success: function(html){
+			$('#div_catalogo_traspaso_tabla').html(html);
+		},
+		complete: function(){			
+			$('#div_catalogo_traspaso_tabla').removeClass("ui-state-disabled");
+		}
+	});     
+}
+
+$(function() {
+	traspaso_filtro();
+});
+</script>
+<div id="div_catalogo_traspaso_filtro">
+</div>
+<div id="div_catalogo_traspaso_tabla">
+</div>

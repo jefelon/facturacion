@@ -1,0 +1,149 @@
+@charset "utf-8";
+
+/* -------------------------
+
+Dark blue color: 			#146295 		RGB: 20/98/149
+Med blue color: 			#025A8D 		RGB: 2/90/141
+Light blue color: 			#70ace4 		RGB: 112/172/228
+Extra light blue color: 	#BED6FF 		RGB: 190/214/255
+Orange color: 				#FC8F30 		RGB: 252/143/48
+Light grey color:			#f7f7f7 		RGB: 247/247/247
+Medium grey color:			#d7d7d7 		RGB: 215/215/215
+Dark grey color:			#666666 		RGB: 102/102/102
+Border grey color:			#CCCCCC 		RGB: 204/204/204
+
+----------------------------------------------------------*/
+html {
+	overflow-y:scroll
+}
+
+body {
+	font-size: 11px;
+	/*background: #025A8D;*/
+	/*background-image: url(../images/bg.gif);
+	background-attachment: fixed;*/
+	/*background-color: #1A1B1F;
+	/*color: #666;*/
+	background-repeat: no-repeat;
+	background-color:#F0F0F0;
+	margin: 0;
+	padding: 0;
+	color: #000;	/*font-size: 68.8%; /* Set base to 11px */	/*background: #E0DEDF url(../Imagenes/bg2.png) repeat-x;*/	/*color: #333;*/
+}
+body,td,th {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+}
+ul, ol, dl { /* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD) que contienen. Recuerde que lo que haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* la eliminación del margen superior resuelve un problema que origina que los márgenes escapen del bloque contenedor. El margen inferior restante lo mantendrá separado de los elementos de que le sigan.  */
+	padding-right: 15px;
+	padding-left: 15px; /* la adición de relleno a los lados del elemento dentro de los bloques, en lugar de en los elementos del bloque propiamente dicho, elimina todas las matemáticas de modelo de cuadro. Un bloque anidado con relleno lateral también puede usarse como método alternativo. */
+}
+a img { /* este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+	border: none;
+}
+/* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
+a:link {
+	color: #025A8D;
+	text-decoration: none;
+	outline: none;
+	/* [disabled]text-decoration: underline; *//* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
+}
+
+a:visited {
+	color: #025A8D;
+	text-decoration: none;
+	outline: none;
+}
+a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
+	text-decoration: underline;
+	color: #36F;
+}
+a img { /* este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+	border: none;
+}
+
+/* ~~ Este contenedor de anchura fija rodea a todas las demás bloques ~~ */
+.container {
+	width: 995px;
+	/* [disabled]min-width:995px; */
+	/* [disabled]max-width:1300px; */
+	/* [disabled]min-width:995px; */
+	min-height:600px;
+	background: #FFFFFF;
+	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño  */
+	padding: 5px 0;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border:1px solid #CCC;
+}
+
+/* ~~ No se asigna una anchura al encabezado. Se extenderá por toda la anchura del diseño. ~~ */
+header {
+	/* [disabled]background:#FFF; */
+	margin: 0px 3px auto;
+	background: #FFF;
+	/*color:#09C;*/
+	/*font-weight: bold;*/
+}
+
+.content {
+	background:#FFF;
+	padding: 1px 0;
+	width: 100%;
+	float: left;
+}
+* :focus, a:active {
+	outline: none
+}
+fieldset {
+	background:#F9F9F9;
+	margin-bottom: 5px;
+	border: 1px #ccc solid;
+	padding: 5px 5px 5px 5px;
+	text-align: left;
+	-moz-border-radius:5px;   
+  	border-radius: 20px;   
+  	-webkit-border-radius: 5px; //edit :D 
+}
+legend {
+	color: #146295;
+	font-size: 11px;
+	font-weight: bold;
+}
+legend { padding: 0.4em; }
+input, select{
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	border: 1px solid silver;
+	background: #fff;
+}
+input:focus,
+select:focus,
+textarea:focus {
+	background-color: #ffd;
+}
+form label.error{
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	font-size: 10px;
+	color: red;
+	font-style: italic
+}
+/*Alertas*/
+.alerta_r {
+	color:#FF0000;
+	font-size: 10px;
+}
+.alerta_v {
+	color:#088A08;
+	font-size: 10px;
+}
+.alerta_p {
+	color:#828282;
+	font-size: 10px;
+}

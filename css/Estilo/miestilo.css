@@ -1,0 +1,669 @@
+@charset "utf-8";
+
+/* -------------------------
+
+Dark blue color: 			#146295 		RGB: 20/98/149
+Med blue color: 			#025A8D 		RGB: 2/90/141
+Light blue color: 			#70ace4 		RGB: 112/172/228
+Extra light blue color: 	#BED6FF 		RGB: 190/214/255
+Orange color: 				#FC8F30 		RGB: 252/143/48
+Light grey color:			#f7f7f7 		RGB: 247/247/247
+Medium grey color:			#d7d7d7 		RGB: 215/215/215
+Dark grey color:			#666666 		RGB: 102/102/102
+Border grey color:			#CCCCCC 		RGB: 204/204/204
+
+----------------------------------------------------------*/
+html {
+	overflow-y:scroll
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	background-color: #e9ebee;
+	color: #1d2129;
+	/*font-family: Helvetica, Arial, sans-serif;*/
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+}
+
+td,th {
+	/*font-family: Helvetica, Arial, sans-serif;*/
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+}
+ul, ol, dl { /* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD) que contienen. Recuerde que lo que haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* la eliminación del margen superior resuelve un problema que origina que los márgenes escapen del bloque contenedor. El margen inferior restante lo mantendrá separado de los elementos de que le sigan.  */
+	padding-right: 15px;
+	padding-left: 15px; /* la adición de relleno a los lados del elemento dentro de los bloques, en lugar de en los elementos del bloque propiamente dicho, elimina todas las matemáticas de modelo de cuadro. Un bloque anidado con relleno lateral también puede usarse como método alternativo. */
+}
+a img { /* este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+	border: none;
+}
+/* ~~ La aplicación de estilo a los vínculos del sitio debe permanecer en este orden (incluido el grupo de selectores que crea el efecto hover -paso por encima-). ~~ */
+a:link {
+	color: #025A8D;
+	text-decoration: none;
+	outline: none;
+	/* [disabled]text-decoration: underline; *//* a no ser que aplique estilos a los vínculos para que tengan un aspecto muy exclusivo, es recomendable proporcionar subrayados para facilitar una identificación visual rápida */
+}
+
+a:visited {
+	color: #025A8D;
+	text-decoration: none;
+	outline: none;
+}
+a:hover, a:active, a:focus { /* este grupo de selectores proporcionará a un usuario que navegue mediante el teclado la misma experiencia de hover (paso por encima) que experimenta un usuario que emplea un ratón. */
+	text-decoration: underline;
+	color: #36F;
+}
+a img { /* este selector elimina el borde azul predeterminado que se muestra en algunos navegadores alrededor de una imagen cuando está rodeada por un vínculo */
+	border: none;
+}
+
+/* ~~ Este contenedor de anchura fija rodea a todas las demás bloques ~~ */
+.container {
+	min-width: 995px;
+	width:99%;
+	/* [disabled]min-width:995px; */
+	/* [disabled]max-width:1300px; */
+	min-height:600px;
+	/*height:100%;*/
+	background: #FFFFFF;
+	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño  */
+	padding: 5px 0;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border:1px solid #f1f1f1;
+}
+
+/* ~~ No se asigna una anchura al encabezado. Se extenderá por toda la anchura del diseño. ~~ */
+header {
+	/* [disabled]background:#FFF; */
+	margin: 0px 3px auto;
+	background: #FFF;
+	/*color:#09C;*/
+	/*font-weight: bold;*/
+}
+
+.sidebar1 {
+	float: left;
+	width: 180px;
+	background: #EADCAE;
+	padding-bottom: 10px;
+}
+.content {
+	background:#FFF;
+	/*padding: 1px 0;*/
+	width: 100%;
+	float: left;
+}
+.content_titulo {
+	width: 99%;
+	margin: 0 auto;
+}
+.contenido{
+	width: 100%;
+	/*padding:3px 0;*/
+	border-radius: 7px;  
+    -moz-border-radius: 7px;  
+    -webkit-border-radius: 7px;
+	/*border:1px solid #025A8D;*/
+	margin: 0 auto;
+}
+.contenido_des{
+	width: 100%;
+	padding:2px 0;
+	/*
+	border-radius: 7px;  
+    -moz-border-radius: 7px;  
+    -webkit-border-radius: 7px;
+	border:1px solid #025A8D;*/
+	margin: 0 auto;
+}
+.contenido_tabla{
+	width: 99%;
+	padding:3px 0;
+	/*border-radius: 7px;  
+    -moz-border-radius: 7px;  
+    -webkit-border-radius: 7px;
+	border:1px solid #CCC;*/
+	margin: 0 auto;
+	text-align:center;
+}
+aside {
+	float: left;
+	width: 180px;
+	background: #EADCAE;
+	padding: 10px 0;
+}
+
+
+/* ~~ El pie de página ~~ */
+footer {
+	height:16px;
+	position: relative;/* esto da a IE6 el parámetro hasLayout para borrar correctamente */
+	clear: both; /* esta propiedad de borrado fuerza a .container a conocer dónde terminan las columnas y a contenerlas */
+	/*width: 993px;*/
+	/*background: #FFFFFF;*/
+	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño  */
+	/*border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border:1px solid #CCC;*/
+}
+/* ~~ Clases float/clear varias ~~ */
+.fltrt {  /* esta clase puede utilizarse para que un elemento flote en la parte derecha de la página. El elemento flotante debe preceder al elemento junto al que debe aparecer en la página. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* esta clase puede utilizarse para que un elemento flote en la parte izquierda de la página. El elemento flotante debe preceder al elemento junto al que debe aparecer en la página. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* esta clase puede situarse en elemento <br /> o en un bloque vacío como elemento final tras el último bloque flotante (dentro de .container) si el pie se elimina o se saca fuera de .container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+/*Compatibilidad con HTML 5: define nuevas etiquetas HTML 5 como display:block para que los navegadores sepan cómo procesar las etiquetas correctamente. */
+header, section, footer, aside, nav, article, figure {
+	display: block;
+}
+
+.mensaje{
+	background:#CCC;
+	width:400px;
+	height:50px;
+	vertical-align: middle;
+	text-align:center;
+	float:right;
+	
+}
+
+.menu_user {
+	width: 99%;
+	margin: 0 auto;
+}
+
+/*form*/
+form {
+	margin: 0;
+	padding: 0;
+	/*font-size: 11px;*/
+}
+
+* :focus, a:active {
+	outline: none
+}
+
+fieldset {
+	margin-bottom: 5px;
+	border: 1px #ccc solid;
+	padding: 5px 5px 5px 5px;
+	text-align: left;
+	-moz-border-radius:5px;   
+  	border-radius: 20px;   
+  	-webkit-border-radius: 5px; //edit :D 
+}
+
+legend {
+	color: #146295;
+	font-size: 11px;
+	font-weight: bold;
+}
+legend { padding: 0.4em; }
+
+input, select{
+	font-size: 12px;
+	border: 1px solid silver;
+	background: #fff;
+}
+textarea {
+	font-size: 11px;
+	border: 1px solid silver;
+}
+
+iframe {
+	border: 0;
+}
+
+.invalid {
+	color: red;
+	font-weight: bold;
+}
+
+input.invalid {
+	border: 1px solid red;
+}
+
+input.disabled {
+	background-color: #F0F0F0;
+}
+
+/*input.button {
+	cursor: pointer;
+}*/
+
+input:focus,
+select:focus,
+textarea:focus {
+	background-color: #ffd;
+}
+
+.inputMoneda {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	text-align:right;
+}
+.inputR {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	text-align:right;
+}
+
+/*errors*/
+form label.error{
+	/* remove the next line when you have trouble in IE6 with labels in list */
+	font-size: 10px;
+	color: red;
+	font-style: italic
+}
+.ButtonT.trans {
+	-webkit-transition: all 0.4s ease-in-out;
+}
+.ButtonT:hover {
+background:#4195DD;
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4195DD), to(#003C82));
+border-color: #3278BE;
+color: white;
+cursor:pointer;
+}
+.ButtonT {
+-webkit-transition: none;
+background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#EEE));
+/*border: 1px solid #DDD;*/
+border: 1px solid #3278BE;
+border-bottom-left-radius: 3px 3px;
+border-bottom-right-radius: 3px 3px;
+border-top-left-radius: 3px 3px;
+border-top-right-radius: 3px 3px;
+color: black;
+/*display: block;*/
+font-family: Verdana, Geneva, sans-serif;
+/*font-weight:bold;*/
+font-size: 11px;
+padding: 1px 7px 1px 7px;
+text-align: center;
+text-decoration: none;
+/*width: 478px;*/
+}
+
+/*login*/
+.fset {
+	margin-bottom: 10px;
+	border: 1px #ccc solid;
+	padding: 7px 7px 7px 7px;
+	text-align: left;
+	-moz-border-radius:5px;   
+  	border-radius: 5px;   
+  	-webkit-border-radius: 5px; //edit :D 
+}
+
+.leg {
+	color: #146295;
+	font-size: 1.182em;
+	font-weight: bold;
+}
+
+/*Div del menu*/
+#divmenu {
+	background: #F6F6F6;
+	background-color:#c1c1c1;
+	/*background-color:#EAEAEA;*/
+	background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADICAYAAAAp8ov1AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJGA41KpTYroIAAACASURBVCjP7ZE7DsJADESfJiL37znNXoJLUNARa7Ni6Bw5AtFEqXAx8vj/wfZNwBBAakPAWukQEJUu1RGVLt9su4yo9eJ3t0FrDWyTg58HezlujFPE9lXAQ8BdQM93R9LtM2ve/vnB22tcF/DaTpItJwHKVWcBk4BLwlw1/nAUvAGm30u0udPq+QAAAABJRU5ErkJggg==");
+	background-repeat:repeat;
+	background-position:0 0;
+	border-width:1px 1px 1px 1px;
+	border-style:solid;
+	border-color:#EAEAEA;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
+	border-radius:3px;
+	height:100%;
+	height:26px;
+}
+
+
+/*Tabla principal contenedora*/
+.tabla_cont {
+	width: 99%;
+	table-layout:auto;
+	border-collapse:collapse;
+	caption-side: top;
+}
+
+.caption_cont {
+	height: 15px;
+	border: 0px;
+	font-weight: bold;
+	font-size: 12px;
+	letter-spacing: 1px;
+	text-align:center;
+	vertical-align:middle;
+	background-image:url(../../images/iconos/fondo_tr01.png);
+	/*background-image:url(../Imagenes/calback.jpg);*/
+	color: #084B8A;
+	/*color:#FFF;*/
+	font-weight: bold;
+}
+.cont_emp {
+	height: 15px;
+	/* [disabled]border: 0px; */
+	/* [disabled]font-weight: bold; */
+	/* [disabled]font-size: 12px; */
+	/* [disabled]letter-spacing: 1px; */
+	/* [disabled]text-align:center; */
+	/* [disabled]vertical-align:middle; */
+	background-image:url(../../images/iconos/hdr_bg.gif);
+	/*background-image:url(../Imagenes/calback.jpg);*/
+	color: #084B8A;
+	/*color:#FFF;*/
+	font-weight: bold;
+	/* [disabled]display: block; */
+}
+
+
+/*FORMULARIOS*/
+.tabla_form {
+	/*background-color: #EBEBEB;*/
+	width: auto;
+	/*algoritomo de muestra*/
+	table-layout:auto;
+	/*table-layout:fixed;*/
+	border-collapse:collapse;
+	border-spacing:0px;
+	/*empty-cells:show;*/
+	/*empty-cells:hide;*/
+	caption-side: top;
+	background-color: #F7F7F7;
+}
+.caption_form {
+	font-size:11px;
+	height:20px;
+	text-align:center;
+	background-color: #D6D6D6;
+	font-weight: bold;
+	background-image: url(../../images/iconos/hdr_bg.gif);
+	vertical-align: middle;
+	color: #084B8A;
+}
+
+/*TABLA DATOS*/
+/*div de tabla datos*/
+#tabla_datos {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	width:100%;
+	overflow:auto;
+}
+.tabla_datos {
+	/*background-color: #EBEBEB;*/
+	width: 85%;
+	/*algoritomo de muestra*/
+	table-layout:auto;
+	/*table-layout:fixed;*/
+	border-collapse:collapse;
+	border-spacing:0px;
+	/*empty-cells:show;*/
+	/*empty-cells:hide;*/
+	caption-side: top;
+}
+.tabla_datos_form {
+	/*background-color: #EBEBEB;*/
+	width: 100%;
+	/*algoritomo de muestra*/
+	table-layout:auto;
+	/*table-layout:fixed;*/
+	border-collapse:collapse;
+	border-spacing:1px;
+	/*empty-cells:show;*/
+	/*empty-cells:hide;*/
+	caption-side: top;
+}
+.enc_tabla_datos {
+	background-color: #EBEBEB;
+	height:18px;
+}
+.orden_tabla_datos {
+	font-size:11px;
+	font-weight: bold;
+}
+.total_tabla_datos {
+	background-color: #EBEBEB;
+	height:17px;
+}
+/*tabla personal*/
+#tabla_datos_per {
+	width:970px;
+	/* [disabled]height:700px; */
+	min-height: 200px;
+	/* [disabled]height:600px; */
+	height:auto;
+	overflow:scroll;
+	border-left-width: 1px;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-color: #C1C1C1;
+}
+.tabla_datos_per {
+	font-size:9px;
+	/*background-color: #EBEBEB;*/
+	/*width: 4000px;*/
+	/*width: 995px;*/
+	/*algoritomo de muestra*/
+	table-layout:auto;
+	/*table-layout:fixed;*/
+	/*border-collapse:3px;
+	border-spacing:1px;
+	/*empty-cells:show;*/
+	/*empty-cells:hide;*/
+}
+
+
+/*TABLA BUSQUEDA*/
+/*div de tabla datos*/
+#tabla_busqueda {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	width:100%;
+	overflow:auto;
+}
+.tabla_busqueda {
+	/*background-color: #EBEBEB;*/
+	/*width: 500px;*/
+	/*algoritomo de muestra*/
+	table-layout:auto;
+	/*table-layout:fixed;*/
+	border-collapse:collapse;
+	border-spacing:0px;
+	/*empty-cells:show;*/
+	/*empty-cells:hide;*/
+}
+
+/*texto de validacion*/
+.txtval{
+	display:none;
+	color:#CC3333;
+	font-size:10px;
+	/*border: 1px solid #CC3333;*/
+}
+
+
+/*BOLETA DEL TRABAJADOR*/
+/*Titulo 12 negrita*/
+.bol_razsoc {
+	font-size: 14px;
+	font-weight: bold;
+}
+.bol_ruc {
+	font-size: 14px;
+	font-weight: bold;
+}
+.bol_tit {
+	font-size: 16px;
+}
+.bol_dir {
+	font-size: 9px;
+}
+.bol_tel {
+	font-size: 11px;
+}
+.bol_dec {
+	font-size: 10px;
+}
+.bol_cat1 {
+	font-size: 11px;
+}
+.bol_res1 {
+	font-size: 11px;
+	font-weight: bold;
+}
+.bol_for {
+	font-size: 10px;
+}
+.bol_cat2 {
+	font-size: 11px;
+}
+.bol_res2 {
+	font-size: 11px;
+}
+.bol_cat3 {
+	font-size: 12px;
+}
+.bol_res3 {
+	font-size: 12px;
+}
+.bol_cat4 {
+	font-size: 12px;
+}
+.bol_res4 {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+/*Alertas*/
+.alerta_r {
+	color:#FF0000;
+	font-size: 10px;
+}
+.alerta_v {
+	color:#088A08;
+	font-size: 10px;
+}
+.alerta_p {
+	color:#828282;
+	font-size: 10px;
+}
+.alerta_a{
+	color:#3977bd;
+	font-size: 10px;
+}
+
+
+/*TABLA FLUJO DE GASTOS*/
+/*encabezados*/
+.flujo_enc {
+	background-color:#EBEBEB;	
+}
+.flujo_enc1 {
+	font-size: 11px;
+	font-weight: bold;
+}
+
+/*categorias*/
+.flujo_cat1 {
+	font-size: 12px;
+	font-weight: bold;
+}
+.flujo_cat2 {
+	font-size: 11px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+.flujo_cat3 {
+	margin-left: 20px;
+}
+.flujo_cat4 {
+	font-size: 9px;
+	font-weight: bold;
+	margin-left: 10px;
+}
+.flujo_cat5 {
+	font-size: 11px;
+	font-weight: bold;
+	margin-left: 0px;
+}
+/*colores tabla*/
+.entrada_1 {
+	background-color:#CEF6CE;	
+}
+.entrada_2 {
+	background-color:#CEE3F6;	
+}
+.entrada_5 {
+	background-color:#E0F8E0;	
+}
+.salida_1 {
+	background-color:#F6CECE;	
+}
+.salida_2 {
+	background-color:#CEE3F6;	
+}
+.salida_3 {
+	background-color:#EFF5FB;	
+}
+.salida_4 {
+	background-color:#E0ECF8;	
+}
+.salida_5 {
+	background-color:#F8E0E0;	
+}
+.saldo_1 {
+	background-color:#F2F2F2;	
+}
+.acumulado_1 {
+	background-color:#E6E6E6;	
+}
+
+
+/*paginacion*/
+.link_normal {
+	text-decoration: none;
+	color: #084B8A;
+}
+.link_check {
+	font-size:11px;
+	font-weight: bolder;
+	background-color: #EAEAEA;
+	display: block;
+}
+
+/*div*/
+div.m {
+	border-left: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 0 8px;
+	background-color: #f4f4f4;
+}
+
+.loading_16 { background: url(../../images/ui-anim_basic_16x16.gif) right center no-repeat; }
+.ui-autocomplete-loading { background: white url('../../images/ui-anim_basic_16x16.gif') right center no-repeat; }
