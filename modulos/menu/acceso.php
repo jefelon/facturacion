@@ -7,8 +7,8 @@ function ir_principal($usergrupo_id){
         $url='../super/';
         break;
 	case 2:
-        //$url='../puntoventa/';
-		$url='../puntoventa/puntoventa_seleccionar.php';
+        //$url='../administrador/';
+		$url='../administrador/administrador_validar.php';
         break;
   case 3:
         $url='../vendedor/vendedor_validar.php';
