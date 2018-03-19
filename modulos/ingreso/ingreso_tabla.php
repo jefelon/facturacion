@@ -43,21 +43,23 @@ $(function() {
 }); 
 </script>
 <table cellspacing="1" id="tabla_ingreso" class="tablesorter">
-            <thead>
-        <tr>
-          <th nowrap title="Fecha">FECHA</th>
-          <th>DOCUMENTO</th>
-          <th>CLIENTE</th>
-          <th>DETALLE</th>
-          <th>CUENTA</th>
-          <th nowrap>SUB CUENTA</th>
-          <th align="right">IMPORTE</th>
-          <th align="center">ESTADO</th>
-          <th align="center">CAJA</th>
-          <th align="right">ID</th>
-          <th title="Editar">&nbsp;</th>
-          </tr>
-        </thead>
+    <thead>
+    <tr>
+        <th nowrap title="Fecha">FECHA</th>
+        <th>DOCUMENTO</th>
+        <th>CLIENTE</th>
+        <th>DETALLE</th>
+        <th>CUENTA</th>
+        <th nowrap>SUB CUENTA</th>
+        <th align="right">IMPORTE</th>
+        <th align="center">ESTADO</th>
+        <th align="center">CAJA</th>
+        <th align="right">ID</th>
+        <?php if($_SESSION['usuariogrupo_id']==2) { ?>
+            <th title="Editar">&nbsp;</th>
+        <?php } ?>
+    </tr>
+    </thead>
         <tbody>
 <?php
 while($dt1 = mysql_fetch_array($dts1)){
@@ -65,39 +67,46 @@ while($dt1 = mysql_fetch_array($dts1)){
 
   $caja_estado=caja_cierre($dt1['tb_caja_id'],$dt1['tb_ingreso_fec']);
 ?>
-        <tr>
-          <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_ingreso_fec'])?></td>
-          <td nowrap="nowrap">
+    <tr>
+        <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_ingreso_fec'])?></td>
+        <td nowrap="nowrap">
             <?php $documento=$dt1['tb_documento_abr'].' '.$dt1['tb_ingreso_numdoc']?>
             <a style="color: blue;" title="Imprimir" href="#imprimir" onClick="ingreso_impresion('<?php echo $dt1['tb_ingreso_id']?>')"><?php echo $documento?></a>
-          </td>
-          <td><?php echo $dt1['tb_cliente_doc'].' '.$dt1['tb_cliente_nom']?></td>  
-          <td><?php echo $dt1['tb_ingreso_det']?></td>
-          <td><?php echo $dt1['tb_cuenta_des']?></td>
-          <td><?php echo $dt1['tb_subcuenta_des']?></td>
-          <td align="right"><?php echo formato_money($dt1['tb_ingreso_imp'])?></td>
-          <td align="center">
-            <?php 
-              if($dt1['tb_ingreso_est']==1)echo 'CANCELADO';
-              if($dt1['tb_ingreso_est']==2)echo 'EMITIDO';
+        </td>
+        <td><?php echo $dt1['tb_cliente_doc'].' '.$dt1['tb_cliente_nom']?></td>
+        <td><?php echo $dt1['tb_ingreso_det']?></td>
+        <td><?php echo $dt1['tb_cuenta_des']?></td>
+        <td><?php echo $dt1['tb_subcuenta_des']?></td>
+        <td align="right"><?php echo formato_money($dt1['tb_ingreso_imp'])?></td>
+        <td align="center">
+            <?php
+            if($dt1['tb_ingreso_est']==1)echo 'CANCELADO';
+            if($dt1['tb_ingreso_est']==2)echo 'EMITIDO';
             ?>
-          </td>
-          <td align="center" nowrap="nowrap"><?php echo $dt1['tb_caja_nom']?></td>
-          <td align="right"><?php echo $dt1['tb_ingreso_id']?></td>
-          <td align="center" nowrap="nowrap">
-          <?php 
-          if($dt1['tb_ingreso_modide']==0){
-            if($caja_estado==1){?>
-          <a class="btn_editar" href="#update" onClick="ingreso_form('editar','<?php echo $dt1['tb_ingreso_id']?>')">Editar</a> 
-		        <?php //if($_SESSION['usuariogrupo_id']==3){?>
-          <a class="btn_eliminar" href="#eliminar" onClick="ingreso_eliminar('<?php echo $dt1['tb_ingreso_id']?>')">Eliminar</a> 
-          <?php  //}
+        </td>
+        <td align="center" nowrap="nowrap"><?php echo $dt1['tb_caja_nom']?></td>
+        <td align="right"><?php echo $dt1['tb_ingreso_id']?></td>
+        <?php if($_SESSION['usuariogrupo_id']==2) { ?>
+            <td align="center" nowrap="nowrap">
+                <?php
+                if($dt1['tb_ingreso_modide']==0){
+                    if($caja_estado==1){
 
-            }//cierre caja
-          }//trans y venta
-          ?>
-          </td>
-          </tr>
+                        ?>
+                        <a class="btn_editar" href="#update"
+                           onClick="ingreso_form('editar','<?php echo $dt1['tb_ingreso_id'] ?>')">Editar</a>
+                        <?php ?>
+                        <a class="btn_eliminar" href="#eliminar"
+                           onClick="ingreso_eliminar('<?php echo $dt1['tb_ingreso_id'] ?>')">Eliminar</a>
+                        <?php //}
+                    }//cierre caja
+                }//trans y venta
+                ?>
+            </td>
+            <?php
+        }
+        ?>
+    </tr>
 <?php
 }
 mysql_free_result($dts1);
