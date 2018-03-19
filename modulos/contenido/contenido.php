@@ -251,6 +251,124 @@ $menu_contador=
 </ul>
 ';
 
+    $menu_almacenador=
+        '
+<ul id="menu1" class="topmenu">
+  <li class="topfirst"><a href="../administrador/">Principal</a></li>
+  <li class="topmenu"><a href="#">Mantenimiento</a>
+	<ul>
+	  <li class="topmenu"><span><a href="#" >General</a></span>
+	    <ul>
+		  <li><a href="../documento/">Tipos de Documento</a></li>
+		  <li><a href="../talonario/talonariointerno_vista.php">Talonario Interno</a></li>
+		  <li><a href="../tipocambio/">Tipos de Cambio</a></li>
+		  <li><a href="../formula/">Fórmulas</a></li>
+		  <li><a href="../form/">Formularios</a></li>
+		  <li><a href="../tipoperacion/">Tipos de Operación</a></li>
+	    </ul>
+	  </li>
+	  <li class="topmenu"><span><a href="#" >Catálogo</a></span>
+	    <ul>
+		  <li><a href="../categoria/">Categorías</a></li>
+		  <li><a href="../marca/">Marcas</a></li>
+		  <li><a href="../unidad/">Unidades de Medida</a></li>
+		  <li><a href="../producto/">Productos</a></li>
+	    </ul>
+	  </li>
+	  <li class="topmenu"><span><a href="#" >Ventas</a></span>
+	    <ul>
+		  <li><a href="../puntoventa/">Puntos de Venta</a></li>
+		  <li><a href="../horario/">Horarios</a></li>
+		  <li><a href="../usuarios/usuario_vista_ven.php" >Vendedores</a></li>
+		  <li><a href="../talonario/">Talonarios</a></li>
+		  <li><a href="../talonarionc/">Talonario Nota Crédito</a></li>
+		  <li><a href="../talonariond/">Talonario Nota Débito</a></li>
+		  <li><a href="../clientes/">Clientes</a></li>
+		  <li><a href="../tarjeta/">Tarjetas</a></li>
+		  <li><a href="../cuentacorriente/">Cuenta Corriente</a></li>
+	    </ul>
+	  </li>
+	  <li class="topmenu"><span><a href="#" >Compras</a></span>
+	    <ul>
+	  		<li><a href="../proveedor/">Proveedores</a></li>
+	 		<li><a href="../almacen/">Almacenes</a></li>
+	    </ul>
+	  </li>
+	  <li class="topmenu"><span><a href="#" >Caja</a></span>
+	    <ul>
+	  		<li><a href="../cuentas/">Cuentas - Caja General</a></li>
+	    </ul>
+	  </li>
+	  <li class="topmenu"><span><a href="#" >Configuración</a></span>
+	    <ul>
+		  <li><a href="../empresa/">Empresa</a></li>
+		  <li><a href="../usuarios/usuario_vista_adm.php" >Administrador</a></li>
+		</ul>
+	  </li>
+	</ul>
+  </li>
+  <li class="topmenu"><a href="#" >Operaciones</a>
+	<ul>
+	  <li><a href="../compra/">Compras</a></li>
+	  <li class="separator">_____________________</li>
+	  <li><a href="../venta/venta_vista_adm.php">Ventas</a></li>
+	  <li><a href="../venta/venta_vista.php">Registrar Venta</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../notacredito/">Nota de Crédito</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../notadebito/">Nota de Débito</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../resumenboleta/">Resumen Diario de Boletas</a></li>
+	  <li><a href="../comunicacionbaja/">Comunicación de Baja</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../contingencia/">Resumen de Contingencia</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
+	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
+	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
+	  <li class="separator">_____________________</li>
+	  <li><a href="../traspaso/">Traspaso</a></li>
+	  <li class="separator">_____________________</li>
+	  <li><a href="../notalmacen/">Nota de Almacén</a></li>
+
+	</ul>
+  </li>
+  <li class="topmenu"><a href="#" >Consultas</a>
+  	<ul>
+	  <li><a href="../catalogo/">Catálogo de Productos</a></li>
+	  <li><a href="../kardex/">Kardex de Productos</a></li>
+	  <li><a href="../historial/">Historial de Productos</a></li>
+	  <li class="separator">_________________________</li>
+	  <li><a href="../venta_cst/">Ventas - Artículos</a></li>
+	</ul>
+  </li>
+	<li class="topmenu"><a href="#" >Gráficos</a>
+  	<ul>
+
+	</ul>
+  </li>
+  <li class="topmenu"><a href="#" >Caja</a>
+  	<ul>
+  	  <li class="separator">_________GENERAL________</li>
+	  <li><a href="../ingreso/">Ingresos</a></li>
+	  <li><a href="../egreso/">Egresos</a></li>
+	  <li><a href="../transferencia/">Transferencias</a></li>
+	  <li class="separator">---------------------</li>
+	  <li><a href="../flujocaja/caja_vista.php">Consulta Caja</a></li>
+
+	</ul>
+  </li>
+  <li class="topmenu"><a href="#">Opciones</a>
+	<ul>
+	  <li><a href="../usuarios/usuario_datos_vista.php">Modificar Mis Datos</a></li>
+	  <li><a href="../puntoventa/puntoventa_seleccionar.php">Seleccionar Empresa | Punto de Venta</a></li>
+	</ul>
+  </li>
+  <li class="topmenu"><a href="../soporte/">Soporte</a>
+  </li>
+</ul>
+';
+
 
 switch ($_SESSION['usuariogrupo_id']) {
     case 1:
@@ -264,8 +382,11 @@ switch ($_SESSION['usuariogrupo_id']) {
         $menu= $menu_vendedor;
         //if($_SESSION['usuario_id']==8)$menu= $menu_contador;
         break;
-	case 4:
-        $menu= $menu_ejecutor;
+//	case 4:
+//        $menu= $menu_ejecutor;
+//        break;
+    case 5:
+        $menu= $menu_almacenador;
         break;
 	/*default:
        	echo $menu_ejecutor;*/

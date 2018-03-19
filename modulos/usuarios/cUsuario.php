@@ -83,6 +83,7 @@ class cUsuario{
 		INNER JOIN tb_empresa e ON u.tb_empresa_id=e.tb_empresa_id
 		WHERE tb_usuario_id=$id;";
 	$oCado = new Cado();
+	echo $sql;
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}

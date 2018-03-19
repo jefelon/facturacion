@@ -12,6 +12,8 @@ $boton = $_POST['btn_ingresar'];
 $usuario = $_POST['txt_use'];
 $password =$_POST['txt_pas'];
 
+
+
 if(empty($usuario))
 {
 	header("Location: login.php?errorusuario=1");
@@ -35,7 +37,6 @@ if($usuario!="" and $password!="")
 		$dts=$oUsuario->registroAcceso($fila['tb_usuario_id']);
 		$dt = mysql_fetch_array($dts);
 		//verificar si esta bloqueado
-		
 		if($dt['tb_usuario_blo']==1){
 			header("Location: login.php?errorbloqueo=1&usuario=$usuario");
 		}
@@ -43,7 +44,7 @@ if($usuario!="" and $password!="")
 		{
 			//registro ultima visita
 			$oUsuario->modificarUltimaVisita($fila['tb_usuario_id']);
-			
+
 			//datos de usuario
 			session_start();
 				$_SESSION['autentificado']		= "SI";
@@ -59,7 +60,7 @@ if($usuario!="" and $password!="")
 				//datos empresa sesión
 				$_SESSION['empresa_id']			=$dt['tb_empresa_id'];
 				$_SESSION['empresa_nombre']		=$dt['tb_empresa_razsoc'];
-			
+
 			$url=ir_principal($dt['tb_usuariogrupo_id']);
 			header("Location: $url");
 		}

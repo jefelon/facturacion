@@ -160,14 +160,14 @@ if($valhor!=1)
 }//fin valhor
 
 
-if($aut==1){
-	$_SESSION["autentificado"]="NO";
-	session_destroy();
-	header("location: ../usuarios/acceso.php?mm=$mm"); 
-	exit();
-}
-else
-{
+//if($aut==1){
+//	$_SESSION["autentificado"]="NO";
+//	session_destroy();
+//	header("location: ../usuarios/acceso.php?mm=$mm");
+//	exit();
+//}
+//else
+//{
 	header("location: ../vendedor/index.php"); 
-}
+//}
 ?>
