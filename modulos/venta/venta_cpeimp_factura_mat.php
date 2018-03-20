@@ -303,7 +303,8 @@ $html.='<tr>
         <td style="text-align: left" width="15%" align="left">
             <img src="'.$empresa_logo.'" alt="" width: "100%">
         </td>    
-        <td style="text-align: left" width="35%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
+        <td style="text-align: left" width="35%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'<br>
+         Importaciones Mayoristas
         </td>
         <td width="20%" style="text-align: right">
             <img src="../../images/arequipa.jpg" alt="" style="max-width: 10%" height="40px">
