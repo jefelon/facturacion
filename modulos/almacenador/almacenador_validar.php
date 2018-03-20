@@ -36,9 +36,9 @@ $dt = mysql_fetch_array($dts);
 	$dni		=$dt['tb_usuario_dni'];
 	$punven_id	=$dt['tb_puntoventa_id'];
 	$hor_id		=$dt['tb_horario_id'];
-mysql_free_result($dts);
-//
-//	//punto de venta
+
+	mysql_free_result($dts);
+    //punto de venta
 	$dts=$oPuntoventa->mostrarUno($punven_id);
 	$dt = mysql_fetch_array($dts);
 		$punven_nom=$dt['tb_puntoventa_nom'];
@@ -47,25 +47,25 @@ mysql_free_result($dts);
 	$_SESSION['puntoventa_id']=$punven_id;
 	$_SESSION['puntoventa_nom']=$punven_nom;
 
-//	almacen
-//	$dts=$oAlmacen->mostrarUno($alm_id);
-//	$dt = mysql_fetch_array($dts);
-//		$alm_nom=$dt['tb_almacen_nom'];
-//		$alm_ven=$dt['tb_almacen_ven'];
-//	mysql_free_result($dts);
-//	$_SESSION['almacen_id']=$alm_id;
-//	$_SESSION['almacen_nom']=$alm_nom;
+    //	almacen
+	$dts=$oAlmacen->mostrarUno($alm_id);
+	$dt = mysql_fetch_array($dts);
+		$alm_nom=$dt['tb_almacen_nom'];
+		$alm_ven=$dt['tb_almacen_ven'];
+	mysql_free_result($dts);
+	$_SESSION['almacen_id']=$alm_id;
+	$_SESSION['almacen_nom']=$alm_nom;
 
 
 
-//if($aut==1){
-//	$_SESSION["autentificado"]="NO";
-//	session_destroy();
-//	header("location: ../usuarios/acceso.php?mm=$mm");
-//	exit();
-//}
-//else
-//{
+if($aut==1){
+	$_SESSION["autentificado"]="NO";
+	session_destroy();
+	header("location: ../usuarios/acceso.php?mm=$mm");
+	exit();
+}
+else
+{
 	header("location: ../almacenador/index.php");
-//}
+}
 ?>
