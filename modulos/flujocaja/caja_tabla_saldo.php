@@ -48,8 +48,27 @@ mysql_free_result($dts);
 
 $saldo_sol=$saldo_anterior_sol+$ingreso_sol-$egreso_sol;
 
+require_once ("../venta/cVenta.php");
+$oVenta = new cVenta();
+$dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),0,0,'',0,0,$_SESSION['empresa_id'],0);
+$ventas = 0;
+while($dt = mysql_fetch_array($dts1)){
+    echo $dt['tb_venta_valven'];
+    $ventas =$ventas + $dt['tb_venta_valven'];
+}
+
+require_once ("../compra/cCompra.php");
+$oCompra = new cCompra();
+$dts1=$oCompra->mostrar_filtro(fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),0,0,'',$_SESSION['empresa_id']);
+$compras = 0;
+while($dt = mysql_fetch_array($dts1)){
+    $compras =$compras + $dt['tb_compra_valven'];
+}
+
+//Costo promedio
+
 ?>
-<table width="350" border="0" cellspacing="0" cellpadding="0">
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
   <tr>
     <th height="24" align="left">CAJA</th>
     <th height="24" align="right">SOLES S/.</th>
@@ -79,4 +98,22 @@ $saldo_sol=$saldo_anterior_sol+$ingreso_sol-$egreso_sol;
     <td align="right"><?php echo formato_money($saldo_sol)?></td>
     <td align="right">&nbsp;</td>
   </tr>
+</table>
+
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
+    <tr>
+        <th height="24" align="left">GANANCIA</th>
+        <th height="24" align="right">SOLES S/.</th>
+    <tr>
+    <tr>
+        <td align="left">Ventas</td>
+        <td align="right">S/.<?php echo $ventas?></td>
+    </tr>
+    <tr>
+        <td align="left">Compras</td>
+        <td align="right">S/.<?php echo $compras?></td>
+    </tr>
+    <tr style="font-weight:bold" height="25">
+        <td align="left">Total</td><td align="right">S/.<?php echo $ventas - $compras?></td>
+    </tr>
 </table>
