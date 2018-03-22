@@ -80,6 +80,7 @@ while($dt1 = mysql_fetch_array($dts1)){
         }
     }
 }
+$compras = $compras-$compras*0.18;
 
 //End Ganancias
 
