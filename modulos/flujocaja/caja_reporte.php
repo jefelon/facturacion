@@ -7,11 +7,14 @@ require_once ("../ingreso/cIngreso.php");
 $oIngreso = new cIngreso();
 require_once ("../egreso/cEgreso.php");
 $oEgreso = new cEgreso();
-require_once ("../usuarios/cUsuario.php");
 require_once ("../producto/cPresentacion.php");
 $oPresentacion = new cPresentacion();
 require_once("../producto/cCatalogoproducto.php");
 $oCatalogoproducto = new cCatalogoproducto();
+require_once ("../venta/cVenta.php");
+$oVenta = new cVenta();
+require_once ("../catalogo/cst_producto.php");
+require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 require_once ("../caja/cCaja.php");
 $oCaja = new cCaja();
@@ -523,8 +526,7 @@ mysql_free_result($dts);
 
 $saldo_sol=$saldo_anterior_sol+$ingreso_sol-$egreso_sol;
 
-require_once ("../venta/cVenta.php");
-$oVenta = new cVenta();
+//Ganancias
 $dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),0,0,'',0,0,$_SESSION['empresa_id'],0);
 $ventas = 0;
 $compras = 0;
@@ -536,11 +538,16 @@ while($dt1 = mysql_fetch_array($dts1)){
         $dts3=$oPresentacion->mostrar_por_producto($dt2['tb_producto_id']);
         while($dt3 = mysql_fetch_array($dts3)){
             $dts4=$oCatalogoproducto->mostrar_unidad_de_presentacion($dt3['tb_presentacion_id']);
-            $array_result = array();
+            $array_dt4 = array();
             while($dt4 = mysql_fetch_array($dts4)) {
-                $array_result[] = $dt4;
+                $array_dt4[] = $dt4;
             }
-            $compras = $compras + $array_result[0]['precos'];
+            // Costo Ponderado
+            $costo_ponderado="";
+            $stock_kardex=stock_kardex($array_dt4[0]['cat_id'],0,'',date('Y-m-d'),$_SESSION['empresa_id']);
+            $costo_ponderado_array=costo_ponderado_empresa($array_dt4[0]['cat_id'],$_SESSION['almacen_id'],'',date('Y-m-d'),$stock_kardex,$array_dt4[0]['precos'],$precosdol,$_SESSION['empresa_id']);
+            $costo_ponderado=$costo_ponderado_array['soles'];
+            $compras = $compras + $costo_ponderado;
         }
     }
 }
@@ -586,16 +593,16 @@ while($dt1 = mysql_fetch_array($dts1)){
 
 
     $pdf->Cell(35, 4, 'VENTAS', 0, 0, 'L');
-    $pdf->Cell(25, 4, $ventas, 0, 0, 'R');
+    $pdf->Cell(25, 4, formato_money($ventas), 0, 0, 'R');
     $pdf->Cell(5, 4, '', 0, 0, 'L');
     $pdf->Cell(25, 4, '', 0, 1, 'R');
     $pdf->Cell(35, 4, 'COMPRAS', 0, 0, 'L');
-    $pdf->Cell(25, 4, $compras, 0, 0, 'R');
+    $pdf->Cell(25, 4, formato_money($compras), 0, 0, 'R');
     $pdf->Cell(5, 4, '', 0, 0, 'L');
     $pdf->Cell(25, 4, '', 0, 1, 'R');
     $pdf->Cell(90, 1, '', 'T', 1, 'R');
     $pdf->Cell(35, 4, 'TOTAL', 0, 0, 'L');
-    $pdf->Cell(25, 4, $ventas-$compras, 0, 0, 'R');
+    $pdf->Cell(25, 4, formato_money($ventas-$compras), 0, 0, 'R');
     $pdf->Cell(5, 4, '', 0, 0, 'L');
     $pdf->Cell(25, 4, '', 0, 1, 'R');
 
