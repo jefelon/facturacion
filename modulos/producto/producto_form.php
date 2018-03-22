@@ -395,7 +395,7 @@ $(function() {
 		
 		if(tipcam>0 & precosdol>0)
 		{
-			var calculo=tipcam*precosdol;
+			var calculo=(tipcam*precosdol)+(tipcam*precosdol)*0.18;
 			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
 			$( "#txt_cat_precos" ).autoNumericSet(calculo.toFixed(2));
 			
@@ -404,8 +404,7 @@ $(function() {
 			
 			if(uti>=0)
 			{
-				var utilidad=uti/100;
-				var calculo=precos/(1-utilidad);
+				var calculo=precos+(precos*uti/100);
 				//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
 				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
 			}
@@ -418,7 +417,7 @@ $(function() {
 		
 		if(tipcam>0 & precosdol>0)
 		{
-			var calculo=tipcam*precosdol;
+			var calculo=tipcam*precosdol+(tipcam*precosdol)*0.18;
 			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
 			$( "#txt_cat_precos" ).autoNumericSet(calculo.toFixed(2));
 			
@@ -428,8 +427,7 @@ $(function() {
 			
 			if(uti>=0)
 			{
-				var utilidad=uti/100;
-				var calculo=precos/(1-utilidad);
+				var calculo=precos+(precos*uti/100);
 				//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
 				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
 			}
@@ -443,8 +441,7 @@ $(function() {
 		
 		if(uti>=0)
 		{
-			var utilidad=uti/100;
-			var calculo=precom/(1-utilidad);
+			var calculo=precom+(precom*uti/100);
 			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
 			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
 		}
@@ -456,8 +453,7 @@ $(function() {
 		
 		if(precom>=0 && precom!="")
 		{
-			var utilidad=uti/100;
-			var calculo=precom/(1-utilidad);
+			var calculo=precom+(precom*uti/100);
 			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
 			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
 		}
