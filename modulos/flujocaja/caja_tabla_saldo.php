@@ -5,6 +5,12 @@ require_once ("../ingreso/cIngreso.php");
 $oIngreso = new cIngreso();
 require_once ("../egreso/cEgreso.php");
 $oEgreso = new cEgreso();
+require_once ("../producto/cPresentacion.php");
+$oPresentacion = new cPresentacion();
+require_once("../producto/cCatalogoproducto.php");
+$oCatalogoproducto = new cCatalogoproducto();
+require_once ("../venta/cVenta.php");
+$oVenta = new cVenta();
 require_once("../formatos/formato.php");
 require_once("../formatos/mysql.php");
 $oMysql = new cMysql();
@@ -48,8 +54,37 @@ mysql_free_result($dts);
 
 $saldo_sol=$saldo_anterior_sol+$ingreso_sol-$egreso_sol;
 
+//Ganancias
+$dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),0,0,'',0,0,$_SESSION['empresa_id'],0);
+$ventas = 0;
+$compras = 0;
+while($dt1 = mysql_fetch_array($dts1)){
+    $ventas =$ventas + $dt1['tb_venta_valven'];
+    $dts2=$oVenta->mostrar_venta_detalle($dt1['tb_venta_id']);
+    while($dt2 = mysql_fetch_array($dts2)) {
+        $cantidad = $dt2['tb_ventadetalle_can'];
+        $dts3=$oPresentacion->mostrar_por_producto($dt2['tb_producto_id']);
+        while($dt3 = mysql_fetch_array($dts3)){
+            $dts4=$oCatalogoproducto->mostrar_unidad_de_presentacion($dt3['tb_presentacion_id']);
+            $array_dt4 = array();
+            while($dt4 = mysql_fetch_array($dts4)) {
+                $array_dt4[] = $dt4;
+            }
+
+            //Costo Ponderado Hacer Despues
+            //$costo_ponderado="";
+            //$stock_kardex=stock_kardex($array_result['cat_id'],0,'',date('Y-m-d'),$_SESSION['empresa_id']);
+            //$costo_ponderado_array=costo_ponderado_empresa($array_result['cat_id'],$_SESSION['almacen_id'],'',date('Y-m-d'),$stock_kardex,$array_result[0]['precos'],$precosdol,$_SESSION['empresa_id']);
+            //$costo_ponderado=$costo_ponderado_array['soles'];
+            $compras = $compras + $array_dt4[0]['precos'];
+        }
+    }
+}
+
+//End Ganancias
+
 ?>
-<table width="350" border="0" cellspacing="0" cellpadding="0">
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
   <tr>
     <th height="24" align="left">CAJA</th>
     <th height="24" align="right">SOLES S/.</th>
@@ -79,4 +114,22 @@ $saldo_sol=$saldo_anterior_sol+$ingreso_sol-$egreso_sol;
     <td align="right"><?php echo formato_money($saldo_sol)?></td>
     <td align="right">&nbsp;</td>
   </tr>
+</table>
+
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
+    <tr>
+        <th height="24" align="left">GANANCIA</th>
+        <th height="24" align="right">SOLES S/.</th>
+    <tr>
+    <tr>
+        <td align="left">Ventas</td>
+        <td align="right">S/.<?php echo $ventas?></td>
+    </tr>
+    <tr>
+        <td align="left">Compras</td>
+        <td align="right">S/.<?php echo $compras?></td>
+    </tr>
+    <tr style="font-weight:bold" height="25">
+        <td align="left">Total</td><td align="right">S/.<?php echo $ventas - $compras?></td>
+    </tr>
 </table>
