@@ -11,6 +11,7 @@ require_once("../producto/cCatalogoproducto.php");
 $oCatalogoproducto = new cCatalogoproducto();
 require_once ("../venta/cVenta.php");
 $oVenta = new cVenta();
+require_once ("../catalogo/cst_producto.php");
 require_once("../formatos/formato.php");
 require_once("../formatos/mysql.php");
 $oMysql = new cMysql();
@@ -70,13 +71,12 @@ while($dt1 = mysql_fetch_array($dts1)){
             while($dt4 = mysql_fetch_array($dts4)) {
                 $array_dt4[] = $dt4;
             }
-
-            //Costo Ponderado Hacer Despues
-            //$costo_ponderado="";
-            //$stock_kardex=stock_kardex($array_result['cat_id'],0,'',date('Y-m-d'),$_SESSION['empresa_id']);
-            //$costo_ponderado_array=costo_ponderado_empresa($array_result['cat_id'],$_SESSION['almacen_id'],'',date('Y-m-d'),$stock_kardex,$array_result[0]['precos'],$precosdol,$_SESSION['empresa_id']);
-            //$costo_ponderado=$costo_ponderado_array['soles'];
-            $compras = $compras + $array_dt4[0]['precos'];
+            // Costo Ponderado
+            $costo_ponderado="";
+            $stock_kardex=stock_kardex($array_dt4[0]['cat_id'],0,'',date('Y-m-d'),$_SESSION['empresa_id']);
+            $costo_ponderado_array=costo_ponderado_empresa($array_dt4[0]['cat_id'],$_SESSION['almacen_id'],'',date('Y-m-d'),$stock_kardex,$array_dt4[0]['precos'],$precosdol,$_SESSION['empresa_id']);
+            $costo_ponderado=$costo_ponderado_array['soles'];
+            $compras = $compras + $costo_ponderado;
         }
     }
 }
@@ -116,20 +116,20 @@ while($dt1 = mysql_fetch_array($dts1)){
   </tr>
 </table>
 
-<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:right">
     <tr>
         <th height="24" align="left">GANANCIA</th>
         <th height="24" align="right">SOLES S/.</th>
     <tr>
     <tr>
         <td align="left">Ventas</td>
-        <td align="right">S/.<?php echo $ventas?></td>
+        <td align="right">S/.<?php echo formato_money($ventas)?></td>
     </tr>
     <tr>
         <td align="left">Compras</td>
-        <td align="right">S/.<?php echo $compras?></td>
+        <td align="right">S/.<?php echo formato_money($compras)?></td>
     </tr>
     <tr style="font-weight:bold" height="25">
-        <td align="left">Total</td><td align="right">S/.<?php echo $ventas - $compras?></td>
+        <td align="left">Total</td><td align="right">S/.<?php echo formato_money($ventas - $compras)?></td>
     </tr>
 </table>
