@@ -5,6 +5,12 @@ require_once ("../ingreso/cIngreso.php");
 $oIngreso = new cIngreso();
 require_once ("../egreso/cEgreso.php");
 $oEgreso = new cEgreso();
+require_once ("../producto/cPresentacion.php");
+$oPresentacion = new cPresentacion();
+require_once("../producto/cCatalogoproducto.php");
+$oCatalogoproducto = new cCatalogoproducto();
+require_once ("../venta/cVenta.php");
+$oVenta = new cVenta();
 require_once("../formatos/formato.php");
 require_once("../formatos/mysql.php");
 $oMysql = new cMysql();
@@ -48,24 +54,34 @@ mysql_free_result($dts);
 
 $saldo_sol=$saldo_anterior_sol+$ingreso_sol-$egreso_sol;
 
-require_once ("../venta/cVenta.php");
-$oVenta = new cVenta();
+//Ganancias
 $dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),0,0,'',0,0,$_SESSION['empresa_id'],0);
 $ventas = 0;
-while($dt = mysql_fetch_array($dts1)){
-    echo $dt['tb_venta_valven'];
-    $ventas =$ventas + $dt['tb_venta_valven'];
-}
-
-require_once ("../compra/cCompra.php");
-$oCompra = new cCompra();
-$dts1=$oCompra->mostrar_filtro(fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),0,0,'',$_SESSION['empresa_id']);
 $compras = 0;
-while($dt = mysql_fetch_array($dts1)){
-    $compras =$compras + $dt['tb_compra_valven'];
+while($dt1 = mysql_fetch_array($dts1)){
+    $ventas =$ventas + $dt1['tb_venta_valven'];
+    $dts2=$oVenta->mostrar_venta_detalle($dt1['tb_venta_id']);
+    while($dt2 = mysql_fetch_array($dts2)) {
+        $cantidad = $dt2['tb_ventadetalle_can'];
+        $dts3=$oPresentacion->mostrar_por_producto($dt2['tb_producto_id']);
+        while($dt3 = mysql_fetch_array($dts3)){
+            $dts4=$oCatalogoproducto->mostrar_unidad_de_presentacion($dt3['tb_presentacion_id']);
+            $array_dt4 = array();
+            while($dt4 = mysql_fetch_array($dts4)) {
+                $array_dt4[] = $dt4;
+            }
+
+            //Costo Ponderado Hacer Despues
+            //$costo_ponderado="";
+            //$stock_kardex=stock_kardex($array_result['cat_id'],0,'',date('Y-m-d'),$_SESSION['empresa_id']);
+            //$costo_ponderado_array=costo_ponderado_empresa($array_result['cat_id'],$_SESSION['almacen_id'],'',date('Y-m-d'),$stock_kardex,$array_result[0]['precos'],$precosdol,$_SESSION['empresa_id']);
+            //$costo_ponderado=$costo_ponderado_array['soles'];
+            $compras = $compras + $array_dt4[0]['precos'];
+        }
+    }
 }
 
-//Costo promedio
+//End Ganancias
 
 ?>
 <table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
