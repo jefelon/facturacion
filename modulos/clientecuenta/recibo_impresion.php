@@ -320,7 +320,7 @@ if($impresion=='pdf')
 	
 	//require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
 	//require_once('../../libreriasphp/html2pdf/html2pdf.class.php');
-	require_once('../../libreriasphp/html2pdf-old/html2pdf.class.php');
+	require_once('../../libreriasphp/html2pdf/html2pdf.class.php');
 
     try
     {
