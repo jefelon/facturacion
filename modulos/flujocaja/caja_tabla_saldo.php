@@ -76,11 +76,12 @@ while($dt1 = mysql_fetch_array($dts1)){
             $stock_kardex=stock_kardex($array_dt4[0]['cat_id'],0,'',date('Y-m-d'),$_SESSION['empresa_id']);
             $costo_ponderado_array=costo_ponderado_empresa($array_dt4[0]['cat_id'],$_SESSION['almacen_id'],'',date('Y-m-d'),$stock_kardex,$array_dt4[0]['precos'],$precosdol,$_SESSION['empresa_id']);
             $costo_ponderado=$costo_ponderado_array['soles'];
+            $costo_ponderado=$costo_ponderado*$cantidad;
             $compras = $compras + $costo_ponderado;
         }
     }
 }
-$compras = $compras-$compras*0.18;
+$compras = $compras-$compras/1.18;
 
 //End Ganancias
 
