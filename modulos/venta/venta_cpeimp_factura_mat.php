@@ -19,6 +19,7 @@ $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
 $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
+$empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
 
 $sucursales='
@@ -28,8 +29,12 @@ $sucursales='
         <td width="580">'.$dt['tb_empresa_dir'] .'</td>
     </tr>
     <tr>
-        <td></td>
-        <td>TELEFONO: ' .$dt['tb_empresa_tel'] .'</td>
+        <td width="80">SUCURSAL:</td>
+        <td width="580">CAR.AREQUIPA KM. 9 (CC AREQUIPA NORTE GO 15 Y GO 16)<br> AREQUIPA - AREQUIPA - CERRO COLORADO</td>
+    </tr>
+    <tr>
+        <td>TELEFONO: </td>
+        <td>'.$dt['tb_empresa_tel'] .'</td>
     </tr>
 
     <tr>
@@ -260,6 +265,7 @@ $html = '
         border-bottom: 0.9px solid #ddd;
         border-right: 0.9px solid #ddd;
         border-left: 0.9px solid #ddd;
+        background-color: #efaa7c
     }
     .odd_row td {
         background-color: transparent;
@@ -293,10 +299,19 @@ if($estado=="ANULADA"){
 	    <td td width="40%" style="text-align: center"><strong>ANULADO</strong></td>
 	    </tr>';
 }
-    $html.='<tr>
-        <td style="text-align: left" width="60%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
+$html.='<tr>
+        <td style="text-align: left" width="15%" align="left">
+            <img src="'.$empresa_logo.'" alt="" width: "100%">
+        </td>    
+        <td style="text-align: left" width="35%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'<br>
+         Importaciones Mayoristas
         </td>
-        <td style="text-align: center;" width="40%" border="1">
+        <td width="20%" style="text-align: right">
+            <img src="../../images/arequipa.jpg" alt="" style="max-width: 10%" height="40px">
+            <img src="../../images/peru.jpg" alt="" style="max-width: 10%" height="40px" >
+           
+        </td>
+        <td style="text-align: center;" width="30%" border="1">
             <strong style="font-size: 11pt">'.$tipodoc.'<br>
             RUC: '.$ruc_empresa.'<br>
             '.$serie.'-'.$numero.'</strong>

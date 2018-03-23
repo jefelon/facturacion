@@ -9,12 +9,12 @@ class Cado{
 	var $conexion;
 	var $rsql;
 
-	function Cado(){
-		  $this->Servidor = 'ns1.ssdhosting.com.pe'; $this->Usuario = 'yfmhytrg_userfactura'; $this->Clave = 'eM=!hvSN(aLR'; 
-		  
-		  //$this->Servidor = 'localhost'; $this->Usuario = ''; $this->Clave = '';
-		  $this->BaseDatos ="yfmhytrg_dbfactura";
-	}
+    function Cado(){
+        $this->Servidor = 'ns1.ssdhosting.com.pe'; $this->Usuario = 'yfmhytrg_userfactura'; $this->Clave = 'eM=!hvSN(aLR';
+
+        //$this->Servidor = 'localhost'; $this->Usuario = ''; $this->Clave = '';
+        $this->BaseDatos ="yfmhytrg_dbfactura";
+    }
 	
 	function conectar()
 	{
