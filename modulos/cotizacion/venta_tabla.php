@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once ("../../config/Cado.php");
-require_once ("../venta/cVenta.php");
-$oVenta = new cVenta();
+require_once ("../cotizacion/cCotizacion.php");
+$oCotizacion = new cCotizacion();
 require_once ("../venta/cVentacorreo.php");
 $oVentacorreo = new cVentacorreo();
 require_once ("../formatos/formato.php");
@@ -11,16 +11,14 @@ require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
-$ruc_empresa=$dt['tb_empresa_ruc'];
+$ruc_empresa = $dt['tb_empresa_ruc'];
 
-$dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_POST['cmb_fil_ven_ven'],$_POST['cmb_fil_ven_punven'],$_SESSION['empresa_id'],$_POST['chk_fil_ven_may']);
-
+$dts1=$oCotizacion->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],'',$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may']);
 $num_rows= mysql_num_rows($dts1);
 ?>
 
 <script type="text/javascript">
     $(function() {
-
         $('.btn_accion').button({
             icons: {primary: "ui-icon-mail-closed"},
             text: false
@@ -29,15 +27,9 @@ $num_rows= mysql_num_rows($dts1);
             icons: {primary: "ui-icon-pencil"},
             text: false
         });
-        $('.btn_sunat').button({
-            text: true
-        });
+
         $('.btn_anular').button({
             icons: {primary: "ui-icon-cancel"},
-            text: false
-        });
-        $('.btn_eliminar').button({
-            icons: {primary: "ui-icon-trash"},
             text: false
         });
         $('.btn_pdf').button({
@@ -52,9 +44,11 @@ $num_rows= mysql_num_rows($dts1);
         $("#tabla_venta").tablesorter({
             widgets: ['zebra', 'zebraHover'],
             headers: {
-                0: {sorter: 'digit' }
+                0: {sorter: 'shortDate' },
+                10: { sorter: false}
             },
-            sortList: [[0,0],[2,0],[1,0]]
+            //sortForce: [[0,0]],
+            sortList: [[2,0],[0,0],[1,0]]
         });
 
     });
@@ -62,16 +56,15 @@ $num_rows= mysql_num_rows($dts1);
 <table cellspacing="1" id="tabla_venta" class="tablesorter">
     <thead>
     <tr>
-        <th align="center">Nro</th>
-        <th align="center">COD. VEN.</th>
-        <th align="center">PEDIDO</th>
-        <th align="center">LUGAR DE ENTREGA</th>
+        <th align="center">TIPO DE DOCUMENTO</th>
+        <th align="center">DOCUMENTO</th>
+        <th align="center">FECHA EMISIÓN</th>
         <th align="center">CLIENTE</th>
-        <th align="center">MONTO</th>
-        <th align="center">COMPLETO</th>
-        <th align="center">A CUENTA</th>
-        <th align="center">SALDO/DÍA</th>
-        <th align="center">RECIBÍO CONF</th>
+        <th align="center">RUC/DNI</th>
+        <th align="center">MONEDA</th>
+        <th align="center">IMPORTE TOTAL</th>
+        <th align="center">ESTADO DOC.</th>
+        <th>&nbsp;</th>
     </tr>
     </thead>
     <?php
@@ -79,12 +72,9 @@ $num_rows= mysql_num_rows($dts1);
         ?>
         <tbody>
         <?php
-        $num_rows = 0;
         while($dt1 = mysql_fetch_array($dts1)){
-            $num_rows++;
-            if($dt1['tb_venta_est']=='CANCELADA'){
-                $total_ventas+=$dt1['tb_venta_tot'];
-            }
+
+            $tipodoc = $dt1['cs_tipodocumento_cod'];
 
             $xml="";
             $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
@@ -92,21 +82,22 @@ $num_rows= mysql_num_rows($dts1);
             $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
             ?>
             <tr>
-                <td nowrap="nowrap"><?php echo $num_rows?></td>
-                <td nowrap="nowrap"></td>
+                <td nowrap="nowrap"><?php echo $dt1['tb_documento_nom'];?></td>
                 <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
-                <td><?php echo $dt1['tb_cliente_dir']?></td>
+                <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                 <td><?php echo $dt1['tb_cliente_nom']?></td>
-                <td align="right"><?php
+                <td><?php echo $dt1['tb_cliente_doc']?></td>
+                <td align="center">
+                    <?php
                     if($dt1['cs_tipomoneda_id']=='1'){
-                        echo 'S/.';
-                    }
-                    ?>
-                    <?php echo formato_money($dt1['tb_venta_tot'])?></td>
-                <td align="center"> SI &nbsp | &nbsp NO</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                        echo 'SOLES';
+                    }?>
+                </td>
+                <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
+                <td><?php echo $dt1['tb_venta_est']?></td>
+                <td align="left" nowrap="nowrap">
+                    <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">Editar</a>
+                </td>
             </tr>
             <?php
         }

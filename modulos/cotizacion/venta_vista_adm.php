@@ -55,7 +55,7 @@ function venta_filtro()
 {
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_filtro_reparto.php",
+		url: "../cotizacion/venta_filtro_adm.php",
 		async:true,
 		dataType: "html",                      
 		//data: ({
@@ -479,7 +479,7 @@ $(function() {
                     <tr>
                       <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>
-                      <a href="#" onClick="modo('venta_tabla_reparto.php')" class="btn_modo" title="Modo Vista Ventas">Ventas</a>
+                      <a href="#" onClick="modo('venta_tabla_adm.php')" class="btn_modo" title="Modo Vista Ventas">Ventas</a>
                       </td>
                       <td width="8%" align="left" valign="middle" nowrap>
                       <a href="#" onClick="modo('venta_tabla_detalle_adm.php')" class="btn_modo" title="Modo Vista Detalle de Ventas">Detalle Ventas</a>
@@ -491,7 +491,7 @@ $(function() {
                       <td width="8%" align="left" valign="middle" nowrap>
                       <a href="#" onClick="modo('venta_tabla_caja_adm.php')" class="btn_modo" title="Caja">Caja</a>
                       </td><?php */?>
-<!--                      <td width="6%" align="left" valign="middle"><a class="imprimir_pdf" id="btn_imprimir_pdf" href="#" onClick="venta_reporte('venta_reporte_adm.php')" title="Imprimir en Pdf">Pdf</a></td>-->
+                      <td width="6%" align="left" valign="middle"><a class="imprimir_pdf" id="btn_imprimir_pdf" href="#" onClick="venta_reporte('venta_reporte_adm.php')" title="Imprimir en Pdf">Pdf</a></td>
                       <td width="6%" align="left" valign="middle">
                       <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="venta_reporte_xls()" title="Imprimir en Excel">Excel</a>
                       <form action="venta_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
