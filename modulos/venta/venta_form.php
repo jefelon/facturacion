@@ -4,8 +4,13 @@ require_once ("../../config/Cado.php");
 require_once("../venta/cVenta.php");
 $oVenta = new cVenta();
 
+require_once("../cotizacion/cCotizacion.php");
+$oCotizacion = new cCotizacion();
+
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
+
+$cot_id = $_POST['cot_id'];
 
 if($_POST['action']=="insertar"){
 	//$cli_id=1;
@@ -14,6 +19,42 @@ if($_POST['action']=="insertar"){
 	$venpag_fec=date('d-m-Y');
 
 	$unico_id=uniqid();
+}
+
+if($_POST['action']=="insertar_cot"){
+    $dts= $oCotizacion->mostrarUno($_POST['cot_id']);
+
+    $dt = mysql_fetch_array($dts);
+    $unico_id=uniqid();
+//    $reg	=mostrarFechaHora($dt['tb_venta_reg']);
+
+//    $fec	=mostrarFecha($dt['tb_venta_fec']);
+
+
+    //$numdoc	=$dt['tb_venta_numdoc'];
+//    $ser	=$dt['tb__ser'];
+//    $num	=$dt['tb_venta_num'];
+    $est='CANCELADA';
+    $fec=date('d-m-Y');
+    $cli_id	=$dt['tb_cliente_id'];
+    $cli_nom = $dt['tb_cliente_nom'];
+    $cli_doc = $dt['tb_cliente_doc'];
+    $cli_dir = $dt['tb_cliente_dir'];
+    $cli_tip = $dt['tb_cliente_tip'];
+
+    $subtot	=$dt['tb_venta_subtot'];
+    $igv	=$dt['tb_cotizacion_igv'];
+    $tot	=$dt['tb_cotizacion_tot'];
+
+    $punven_nom	=$dt['tb_puntocotizacion_nom'];
+    $alm_nom	=$dt['tb_almacen_nom'];
+
+    $lab1	=$dt['tb_cotizacion_lab1'];
+    $lab2	=$dt['tb_cotizacion_lab2'];
+    $lab3	=$dt['tb_cotizacion_lab3'];
+
+    $may	=$dt['tb_cotizacion_may'];
+    mysql_free_result($dts);
 }
 
 if($_POST['action']=="editar"){
@@ -34,7 +75,7 @@ if($_POST['action']=="editar"){
 		$cli_tip = $dt['tb_cliente_tip'];
 		
 		$subtot	=$dt['tb_venta_subtot'];
-		$igv	=$dt['tb_venta_igv'];
+ 		$igv	=$dt['tb_venta_igv'];
 		$tot	=$dt['tb_venta_tot'];
 		$est	=$dt['tb_venta_est'];
 		
@@ -299,6 +340,7 @@ function txt_venpag_fecven(){
 	});
 }
 
+
 function venta_car(act,cat_id){
 	if(act=='agregar') {
 		var stouni=$('#hdd_bus_cat_stouni').val();
@@ -338,9 +380,12 @@ function venta_car(act,cat_id){
 					cat_id:	 cat_id,
 					cat_can: $('#txt_bus_cat_can').val(),
 					cat_tip: 1,//Tipo Gravado/Exonerado/Inafecto/premio...  1=grabada
-					cat_preven: $('#txt_bus_cat_preven').val()
+					cat_preven: $('#txt_bus_cat_preven').val(),
+                    cot_id: $('#hdd_cot_id').val()
 				}),
 				beforeSend: function() {
+				    console.log('aqui va cot');
+                    console.log($('#hdd_cot_id').val());
 					$("#txt_fil_pro_nom").val(''); $("#txt_fil_pro_nom").focus();
 					$('#div_venta_car_tabla').addClass("ui-state-disabled");
 		    	},
@@ -505,6 +550,29 @@ function venta_detalle_tabla()
 			$('#div_venta_detalle_tabla').removeClass("ui-state-disabled");
 		}
 	});     
+}
+
+function cotizacion_detalle_tabla()
+{
+    $.ajax({
+        type: "POST",
+        url: "../cotizacion/cotizacion_detalle_tabla.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            ven_id:	'<?php echo $_POST['ven_id']?>',
+            action: 'insertar_cot'
+        }),
+        beforeSend: function() {
+            $('#div_venta_car_tabla').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('#div_venta_car_tabla').html(html);
+        },
+        complete: function(){
+            $('#div_venta_car_tabla').removeClass("ui-state-disabled");
+        }
+    });
 }
 
 function editar_datos_item(act,idf){	
@@ -751,7 +819,7 @@ $(function() {
     });
 	
 	<?php
-	if($_POST['action']=="insertar"){
+	if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
 	?>
 	$('#cmb_ven_doc').change( function() {
 		txt_ven_numdoc();
@@ -877,6 +945,16 @@ $(function() {
 	$('#hdd_ven_doc').val('1');
 
 	<?php }?>
+
+
+    <?php
+    if($_POST['action']=="insertar_cot"){
+    ?>
+    // cotizacion_detalle_tabla();
+    $('#hdd_ven_doc').val('1');
+
+    <?php }?>
+
 	
 	$( "#div_cliente_form" ).dialog({
 		title:'Información de Cliente',
@@ -1234,6 +1312,7 @@ function bus_cantidad(act)
 <form id="for_ven">
 <input name="action_venta" id="action_venta" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_ven_id" id="hdd_ven_id" type="hidden" value="<?php echo $_POST['ven_id']?>">
+    <input name="hdd_cot_id" id="hdd_cot_id" type="hidden" value="<?php echo $_POST['cot_id']?>">
 <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="hdd_punven_id" id="hdd_punven_id" type="hidden" value="<?php echo $_SESSION['puntoventa_id']?>">
 <input name="hdd_emp_id" id="hdd_emp_id" type="hidden" value="<?php echo $_SESSION['empresa_id']?>">
@@ -1311,7 +1390,7 @@ function bus_cantidad(act)
   </table>
 </fieldset>
 <fieldset><legend>Registro de Pagos</legend>
-<?php if($_POST['action']=='insertar'){?>
+<?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
 <table border="0" cellspacing="2" cellpadding="0">
   <tr>
     <td width="70" valign="top"><label for="chk_venpag_aut" title="Registrar Pago Automaticamente">Reg Auto</label></br>
@@ -1444,6 +1523,7 @@ function bus_cantidad(act)
 
         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
+
         <br>
         <!--a class="btn_agregar_producto" title="Abrir Catálogo" href="#" onClick="catalogo_venta_tab1()">Catálogo</a -->
         <a class="btn_rest_act" href="#" onClick="foco(); venta_car('actualizar')">Actualizar</a>
@@ -1466,7 +1546,7 @@ function bus_cantidad(act)
     </fieldset>
 
 <?php
-if($_POST['action']=="insertar"){
+if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
 ?>
 <div id="div_venta_car_tabla">
 </div>
@@ -1478,7 +1558,7 @@ if($_POST['action']=="insertar"){
 </form>
 </div>
 <?php
-if($_POST['action']=="insertar"){
+if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
 ?>
 <div id="div_catalogo_venta">
 </div>

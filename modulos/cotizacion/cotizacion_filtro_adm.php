@@ -166,7 +166,7 @@ $(function() {
 }*/
 </style>
 <form name="for_fil_ven" id="for_fil_ven" target="_blank" action="" method="post">
-<input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla_adm.php">
+<input name="hdd_modo" id="hdd_modo" type="hidden" value="cotizacion_tabla_adm.php">
 <fieldset><legend>Filtro de Venta</legend>
 	
     <label for="txt_fil_ven_fec1">Fecha entre:</label>

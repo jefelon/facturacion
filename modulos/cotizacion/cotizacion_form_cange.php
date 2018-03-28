@@ -467,7 +467,7 @@ function venta_detalle_tabla()
 {
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_detalle_tabla.php",
+		url: "../cotizacion/cotizacion_detalle_tabla.php",
 		async:true,
 		dataType: "html",                      
 		data: ({

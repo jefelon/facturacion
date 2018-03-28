@@ -112,8 +112,8 @@ $menu_administrador=
 	  <li class="separator">_____________________</li>
 	  <li><a href="../notalmacen/">Nota de Almacén</a></li>
 	  <li class="separator">_____________________</li>
-	  <li><a href="../cotizacion/venta_vista_adm.php">Cotizaciones</a></li>
-	  <li><a href="../cotizacion/venta_vista.php">Registrar Cotizaciones</a></li>
+	  <li><a href="../cotizacion/cotizacion_vista_adm.php">Cotizaciones</a></li>
+	  <li><a href="../cotizacion/cotizacion_vista.php">Registrar Cotizaciones</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Consultas</a>

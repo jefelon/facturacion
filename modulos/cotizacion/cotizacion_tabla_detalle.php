@@ -63,37 +63,37 @@ $(function() {
             <tbody>
                 <?php
 				while($dt1 = mysql_fetch_array($dts1)){
-					$sub_total=$dt1['tb_ventadetalle_valven']+$dt1['tb_ventadetalle_igv'];
+					$sub_total=$dt1['tb_cotizaciondetalle_valven']+$dt1['tb_cotizaciondetalle_igv'];
 					
-					if($dt1['tb_venta_est']=='CANCELADA'){
-						$total_valven	+=$dt1['tb_ventadetalle_valven'];
-						$total_igv		+=$dt1['tb_ventadetalle_igv'];
+					if($dt1['tb_cotizacion_est']=='CANCELADA'){
+						$total_valven	+=$dt1['tb_cotizaciontalle_valven'];
+						$total_igv		+=$dt1['tb_cotizaciondetalle_igv'];
 						
 						//$total_des		+=$dt1['tb_venta_des'];
 						$total_ventas	+=$sub_total;
 					}
 				?>
                     <tr>
-                      <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
-                      <td nowrap="nowrap"><?php echo mostrarHora_fh($dt1['tb_venta_reg'])?></td>
-                      <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_venta_numdoc']?></td>
+                      <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_cotizacion_fec'])?></td>
+                      <td nowrap="nowrap"><?php echo mostrarHora_fh($dt1['tb_cotizacion_reg'])?></td>
+                      <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_cotizacion_numdoc']?></td>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_producto_nom'];
-						if($dt1['tb_ventadetalle_tipven']==2)echo $dt1['tb_servicio_nom'];
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo $dt1['tb_producto_nom'];
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo $dt1['tb_servicio_nom'];
 					  ?></td>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_unidad_abr'];
-						if($dt1['tb_ventadetalle_tipven']==2)echo 'UN';
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo $dt1['tb_unidad_abr'];
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo 'UN';
 					  ?></td>
-                      <td align="right"><?php echo $dt1['tb_ventadetalle_can']?></td>
-                      <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+                      <td align="right"><?php echo $dt1['tb_cotizaciondetalle_can']?></td>
+                      <td align="right"><?php echo formato_money($dt1['tb_cotizaciondetalle_preuni'])?></td>
                       <!--<td align="right"><?php //echo $dt1['tb_venta_des']?></td>-->
-                      <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_valven'])?></td>
-                      <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_igv'])?></td>
+                      <td align="right"><?php echo formato_money($dt1['tb_cotizaciondetalle_valven'])?></td>
+                      <td align="right"><?php echo formato_money($dt1['tb_cotizaciondetalle_igv'])?></td>
                       <td align="right"><?php echo formato_money($sub_total)?></td>
-                      <td align="right"><?php echo $dt1['tb_venta_est']?></td>
+                      <td align="right"><?php echo $dt1['tb_cotizacion_est']?></td>
                       <td align="left" nowrap="nowrap">
-                      <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">Editar</a> 
+                      <a class="btn_editar" href="#update" onClick="cotizacion_form('editar','<?php echo $dt1['tb_cotizacion_id']?>')">Editar</a>
                       <?php /*if($dt1['tb_venta_est']!='ANULADA'){?>
                       <a class="btn_anular" href="#anular" onClick="venta_anular('<?php echo $dt1['tb_venta_id']?>')">Anular</a> 
                       <?php }*/?>

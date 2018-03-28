@@ -115,9 +115,9 @@ $res_total_ventas=0;
 if($num_rows>0){
 	while($dt1 = mysql_fetch_array($dts1)){
 
-		if($dt1['tb_venta_est']=='CANCELADA'){
-			$res_can+=$dt1['tb_ventadetalle_can'];
-			$res_sub_total=$dt1['tb_ventadetalle_valven']+$dt1['tb_ventadetalle_igv'];
+		if($dt1['tb_cotizacion_est']=='CANCELADA'){
+			$res_can+=$dt1['tb_cotizacion_can'];
+			$res_sub_total=$dt1['tb_cotizacion_valven']+$dt1['tb_cotizacion_igv'];
 			$res_total_ventas	+=$res_sub_total;
 		}
 	
@@ -161,7 +161,7 @@ $num_rows= mysql_num_rows($dts1);
 				while($dt1 = mysql_fetch_array($dts1)){
 					$sub_total=$dt1['valven']+$dt1['igv'];
 					
-					if($dt1['tb_venta_est']=='CANCELADA'){
+					if($dt1['tb_cotizacion_est']=='CANCELADA'){
 						$total_valven	+=$dt1['valven'];
 						$total_igv		+=$dt1['igv'];
 						
@@ -171,16 +171,16 @@ $num_rows= mysql_num_rows($dts1);
 				?>
                     <tr>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo 'PRODUCTO';
-						if($dt1['tb_ventadetalle_tipven']==2)echo 'SERVICIO';
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo 'PRODUCTO';
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo 'SERVICIO';
 					  ?></td>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_producto_nom'];
-						if($dt1['tb_ventadetalle_tipven']==2)echo $dt1['tb_servicio_nom'];
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo $dt1['tb_producto_nom'];
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo $dt1['tb_servicio_nom'];
 					  ?></td>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_unidad_abr'];
-						if($dt1['tb_ventadetalle_tipven']==2)echo 'UN';
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo $dt1['tb_unidad_abr'];
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo 'UN';
 					  ?></td>
                       <td align="right"><?php echo $dt1['can']?></td>
                       <!--<td align="right"><?php //echo $dt1['tb_venta_des']?></td>-->
@@ -205,7 +205,7 @@ $num_rows2= mysql_num_rows($dts1);
 				while($dt1 = mysql_fetch_array($dts1)){
 					$sub_total=$dt1['valven']+$dt1['igv'];
 					
-					if($dt1['tb_venta_est']=='CANCELADA'){
+					if($dt1['cotizacion_est']=='CANCELADA'){
 						$total_valven	+=$dt1['valven'];
 						$total_igv		+=$dt1['igv'];
 						
@@ -215,16 +215,16 @@ $num_rows2= mysql_num_rows($dts1);
 				?>
                     <tr>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo 'PRODUCTO';
-						if($dt1['tb_ventadetalle_tipven']==2)echo 'SERVICIO';
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo 'PRODUCTO';
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo 'SERVICIO';
 					  ?></td>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_producto_nom'];
-						if($dt1['tb_ventadetalle_tipven']==2)echo $dt1['tb_servicio_nom'];
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo $dt1['tb_producto_nom'];
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo $dt1['tb_servicio_nom'];
 					  ?></td>
                       <td><?php 
-					  	if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_unidad_abr'];
-						if($dt1['tb_ventadetalle_tipven']==2)echo 'UN';
+					  	if($dt1['tb_cotizaciondetalle_tipven']==1)echo $dt1['tb_unidad_abr'];
+						if($dt1['tb_cotizaciondetalle_tipven']==2)echo 'UN';
 					  ?></td>
                       <td align="right"><?php echo $dt1['can']?></td>
                       <!--<td align="right"><?php //echo $dt1['tb_venta_des']?></td>-->

@@ -106,9 +106,9 @@ $res_total_ventas=0;
 if($num_rows>0){
 	while($dt1 = mysql_fetch_array($dts1)){
 
-		if($dt1['tb_venta_est']=='CANCELADA'){
-			$res_can+=$dt1['tb_ventadetalle_can'];
-			$res_sub_total=$dt1['tb_ventadetalle_valven']+$dt1['tb_ventadetalle_igv'];
+		if($dt1['tb_cotizacion_est']=='CANCELADA'){
+			$res_can+=$dt1['tb_cotizaciondetalle_can'];
+			$res_sub_total=$dt1['tb_cotizaciondetalle_valven']+$dt1['tb_cotizaciondetalle_igv'];
 			$res_total_ventas	+=$res_sub_total;
 		}
 	

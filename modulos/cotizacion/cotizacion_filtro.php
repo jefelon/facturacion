@@ -113,7 +113,7 @@ $(function() {
 }*/
 </style>
 <form name="for_fil_ven" id="for_fil_ven" target="_blank" action="venta_reporte.php" method="post">
-<input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla.php">
+<input name="hdd_modo" id="hdd_modo" type="hidden" value="cotizacion_tabla.php">
 <fieldset><legend>Filtro de Venta</legend>
     <label for="txt_fil_ven_fec1">Fecha:</label>
     <input name="txt_fil_ven_fec1" type="text" id="txt_fil_ven_fec1" value="<?php echo $fec1?>" size="8" readonly>

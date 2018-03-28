@@ -19,33 +19,33 @@ if($_POST['action']=="insertar"){
 if($_POST['action']=="editar"){
 	$dts= $oCotizacion->mostrarUno($_POST['ven_id']);
 	$dt = mysql_fetch_array($dts);
-		$reg	=mostrarFechaHora($dt['tb_venta_reg']);
+		$reg	=mostrarFechaHora($dt['tb_cotizacion_reg']);
 		
-		$fec	=mostrarFecha($dt['tb_venta_fec']);
+		$fec	=mostrarFecha($dt['tb_cotizacion_fec']);
 		
 		$doc_id	=$dt['tb_documento_id'];
 		//$numdoc	=$dt['tb_venta_numdoc'];
-		$ser	=$dt['tb_venta_ser'];
-		$num	=$dt['tb_venta_num'];
+		$ser	=$dt['tb_cotizacion_ser'];
+		$num	=$dt['tb_cotizacion_num'];
 		$cli_id	=$dt['tb_cliente_id'];
 		$cli_nom = $dt['tb_cliente_nom'];
 		$cli_doc = $dt['tb_cliente_doc'];
 		$cli_dir = $dt['tb_cliente_dir'];
 		$cli_tip = $dt['tb_cliente_tip'];
 		
-		$subtot	=$dt['tb_venta_subtot'];
-		$igv	=$dt['tb_venta_igv'];
-		$tot	=$dt['tb_venta_tot'];
-		$est	=$dt['tb_venta_est'];
+		$subtot	=$dt['tb_cotizacion_subtot'];
+		$igv	=$dt['tb_cotizacion_igv'];
+		$tot	=$dt['tb_cotizacion_tot'];
+		$est	=$dt['tb_cotizacion_est'];
 		
 		$punven_nom	=$dt['tb_puntoventa_nom'];
 		$alm_nom	=$dt['tb_almacen_nom'];
 		
-		$lab1	=$dt['tb_venta_lab1'];
-		$lab2	=$dt['tb_venta_lab2'];
-		$lab3	=$dt['tb_venta_lab3'];
+		$lab1	=$dt['tb_cotizacion_lab1'];
+		$lab2	=$dt['tb_cotizacion_lab2'];
+		$lab3	=$dt['tb_cotizacion_lab3'];
 		
-		$may	=$dt['tb_venta_may'];
+		$may	=$dt['tb_cotizacion_may'];
 	mysql_free_result($dts);
 }
 ?>
@@ -182,7 +182,7 @@ function cmb_ven_doc()
 		async:true,
 		dataType: "html",                      
 		data: ({
-			doc_tip:	'2',
+			doc_tip:	'10',
 			doc_id: '<?php echo $doc_id?>',
 			vista:	'<?php echo $_POST['action']?>'
 		}),
@@ -463,7 +463,7 @@ function venta_pago_tabla()
 		async:true,
 		dataType: "html",                      
 		data: ({
-			ven_id:	'<?php echo $_POST['ven_id']?>'
+			cot_id:	'<?php echo $_POST['cot_id']?>'
 		}),
 		beforeSend: function() {
 			$('#div_venta_pago_tabla').addClass("ui-state-disabled");
@@ -477,11 +477,11 @@ function venta_pago_tabla()
 	});     
 }
 
-function venta_detalle_tabla()
+function cotizacion_detalle_tabla()
 {
 	$.ajax({
 		type: "POST",
-		url: "../cotizacion/venta_detalle_tabla.php",
+		url: "../cotizacion/cotizacion_detalle_tabla.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -863,8 +863,7 @@ $(function() {
 	<?php
 	if($_POST['action']=="editar"){
 	?>
-	venta_pago_tabla();
-	venta_detalle_tabla();
+	cotizacion_detalle_tabla();
 	$('#cmb_ven_est').attr('disabled','disabled');
 	$('#hdd_ven_doc').val('1');
 
@@ -1265,6 +1264,16 @@ function bus_cantidad(act)
       <a class="btn_newwin" target="_blank" title="Saltar a otra pestaña" href="<?php echo $url?>">Saltar</a>
       </td>
     </tr>
+      <tr>
+          <td height="27">
+              <label for="cmb_ven_est">Estado:</label>
+              <select name="cmb_ven_est" id="cmb_ven_est">
+                  <option value="">-</option>
+                  <option value="COTIZADA" <?php if($est=='COTIZADA')echo 'selected'?>>COTIZADA</option>
+                  <option value="VENDIDA" <?php if($est=='VENDIDA')echo 'selected'?>>VENDIDA</option>
+              </select>
+          </td>
+      </tr>
     <tr>
       <td align="right">
       <?php

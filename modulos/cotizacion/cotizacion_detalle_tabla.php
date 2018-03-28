@@ -7,25 +7,25 @@ require_once ("../formatos/formato.php");
 
 $dts= $oCotizacion->mostrarUno($_POST['ven_id']);
 $dt = mysql_fetch_array($dts);
-	$fec	=mostrarFecha($dt['tb_venta_fec']);
+	$fec	=mostrarFecha($dt['tb_cotizacion_fec']);
 	$doc_id	=$dt['tb_documento_id'];
   $doc_ele =$dt['tb_documento_ele'];
-	$numdoc	=$dt['tb_venta_numdoc'];
+	$numdoc	=$dt['tb_cotizacion_numdoc'];
 
 	$cli_id	=$dt['tb_cliente_id'];
-  $subtotal=$dt["tb_venta_gra"];
-	$valven	=$dt['tb_venta_valven'];
-	$igv	=$dt['tb_venta_igv'];
-	$des	=$dt['tb_venta_des'];
-	$tot	=$dt['tb_venta_tot'];
-  $ope_gratuitas = $dt['tb_venta_grat'];
+  $subtotal=$dt["tb_cotizacion_gra"];
+	$valven	=$dt['tb_cotizacion_valven'];
+	$igv	=$dt['tb_cotizacion_igv'];
+	$des	=$dt['tb_cotizacion_des'];
+	$tot	=$dt['tb_cotizacion_tot'];
+  $ope_gratuitas = $dt['tb_cotizacion_grat'];
 
-  $estsun=$dt['tb_venta_estsun'];
-  $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
-  $faucod=$dt['tb_venta_faucod'];
-  $digval=$dt['tb_venta_digval'];
-  $sigval=$dt['tb_venta_sigval'];
-  $val=$dt['tb_venta_val'];
+  $estsun=$dt['tb_cotizacion_estsun'];
+  $fecenvsun=mostrarFechaHora($dt['tb_cotizacion_fecenvsun']);
+  $faucod=$dt['tb_cotizacion_faucod'];
+  $digval=$dt['tb_cotizacion_digval'];
+  $sigval=$dt['tb_cotizacion_sigval'];
+  $val=$dt['tb_cotizacion_val'];
 mysql_free_result($dts);
 
 $dts1=$oCotizacion->mostrar_venta_detalle($_POST['ven_id']);
@@ -97,15 +97,15 @@ $(document).ready(function() {
 				?>
                         <tr>
                           <td align="right"><?php 
-							echo $dt1['tb_ventadetalle_can'];
+							echo $dt1['tb_cotizaciondetalle_can'];
 							?></td>
                           <td title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
                           <td>Producto</td>
                             <td>
 							<?php 
-							if($dt1['tb_ventadetalle_nom']!="")
+							if($dt1['tb_cotizaciondetalle_nom']!="")
               {
-                echo '<strong>'.$dt1['tb_ventadetalle_nom'].'</strong>';
+                echo '<strong>'.$dt1['tb_cotizaciondetalle_nom'].'</strong>';
               }
               else
               {
@@ -117,10 +117,10 @@ $(document).ready(function() {
 							echo $dt1['tb_categoria_nom'];
 							echo ' | '.$dt1['tb_marca_nom'];
 							?></td>
-                            <td align="right"><?php echo $dt1['tb_ventadetalle_preuni']?></td>
+                            <td align="right"><?php echo $dt1['tb_cotizaciondetalle_preuni']?></td>
                             <td align="right"><?php
-							$tipdes			=$dt1['tb_ventadetalle_tipdes'];
-							$descuento_linea=$dt1['tb_ventadetalle_des']; 
+							$tipdes			=$dt1['tb_cotizaciondetalle_tipdes'];
+							$descuento_linea=$dt1['tb_cotizaciondetalle_des'];
 									if($tipdes == 1 and $descuento_linea!=0){										
 										echo $descuento_linea."%";	
 									}
@@ -128,8 +128,8 @@ $(document).ready(function() {
 										echo "S/. ".$descuento_linea;
 									}									
 								?></td>
-                            <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_valven'])?></td>
-                            <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                            <td align="right"><?php echo formato_money($dt1['tb_cotizaciondetalle_valven'])?></td>
+                            <td align="right"><?php echo formato_money($dt1['tb_cotizaciondetalle_preunilin']*$dt1['tb_cotizaciondetalle_can'])?></td>
                         </tr>
                         <?php						
                 	}
@@ -137,16 +137,16 @@ $(document).ready(function() {
                 ?>
                 <?php
 					while($dt2 = mysql_fetch_array($dts2)){
-						$precio_venta=$dt2['tb_ventadetalle_valven']+$dt2['tb_ventadetalle_igv'];
+						$precio_venta=$dt2['tb_cotizaciondetalle_valven']+$dt2['tb_cotizaciondetalle_igv'];
 						?>
                         <tr>
-                          <td align="right"><?php echo $dt2['tb_ventadetalle_can'];?></td>
+                          <td align="right"><?php echo $dt2['tb_cotizaciondetalle_can'];?></td>
                           <td>UN</td>
                           <td>Servicio</td>
                         	<td><?php
-                          if($dt2['tb_ventadetalle_nom']!="")
+                          if($dt2['tb_cotizaciondetalle_nom']!="")
                           {
-                            echo '<strong>'.$dt2['tb_ventadetalle_nom'].'</strong>';
+                            echo '<strong>'.$dt2['tb_cotizaciondetalle_nom'].'</strong>';
                           }
                           else
                           {
@@ -156,10 +156,10 @@ $(document).ready(function() {
                             
                           </td>
                           <td><?php echo $dt2['tb_categoria_nom'];?></td>
-                            <td align="right"><?php echo $dt2['tb_ventadetalle_preuni']?></td>
+                            <td align="right"><?php echo $dt2['tb_cotizaciondetalle_preuni']?></td>
                           	<td align="right"><?php
-							$tipdes			=$dt2['tb_ventadetalle_tipdes'];
-							$descuento_linea=$dt2['tb_ventadetalle_des']; 
+							$tipdes			=$dt2['tb_cotizaciondetalle_tipdes'];
+							$descuento_linea=$dt2['tb_cotizaciondetalle_des'];
 									if($tipdes == 1 and $descuento_linea!=0){										
 										echo $descuento_linea."%";	
 									}
@@ -167,7 +167,7 @@ $(document).ready(function() {
 										echo "S/. ".$descuento_linea;
 									}									
 								?></td>                                                        
-                            <td align="right"><?php echo $dt2['tb_ventadetalle_valven']?></td>
+                            <td align="right"><?php echo $dt2['tb_cotizaciondetalle_valven']?></td>
                             <td align="right"><?php echo formato_money($precio_venta)?></td>
               </tr>
               <?php						
@@ -180,6 +180,25 @@ $(document).ready(function() {
         <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
+<!--      <td>-->
+<!--          <div id="div_calcular_vuelto">-->
+<!--              <fieldset style="width:200px">-->
+<!--                  <legend>Calcular Vuelto</legend>-->
+<!--                  <table>-->
+<!--                      <tr>-->
+<!--                          <td align="right"><label style="font-size:12px">Paga con:</label></td>-->
+<!--                          <td align="right"><input type="text" name="txt_importe_cliente" id="txt_importe_cliente" size="10" style="text-align:right; font-size:14px" class="moneda2" /></td>-->
+<!--                      </tr>-->
+<!---->
+<!---->
+<!--                      <tr>-->
+<!--                          <td align="right"><label for="lbl_ven_vuelto" style="font-size:12px">Vuelto:</label></td>-->
+<!--                          <td align="right"><input type="text" name="lbl_ven_vuelto" id="lbl_ven_vuelto" readonly size="10" style="text-align:right; font-size:14px" class="moneda2" /></td>-->
+<!--                      </tr>-->
+<!--                  </table>-->
+<!--              </fieldset>-->
+<!--          </div>-->
+<!--      </td>-->
     <td valign="top">
       <div style="margin-left:20px; margin-top:10px; float:right">
         <table border="0" align="right" cellpadding="0" cellspacing="0">

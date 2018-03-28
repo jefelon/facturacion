@@ -28,6 +28,11 @@ $num_rows= mysql_num_rows($dts1);
             text: false
         });
 
+        $('.btn_generar').button({
+            icons: {primary: "ui-icon-document"},
+            text: false
+        });
+
         $('.btn_anular').button({
             icons: {primary: "ui-icon-cancel"},
             text: false
@@ -77,14 +82,14 @@ $num_rows= mysql_num_rows($dts1);
             $tipodoc = $dt1['cs_tipodocumento_cod'];
 
             $xml="";
-            $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+            $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_cotizacion_ser']."-".$dt1['tb_cotizacion_num'];
             $cdr="";
-            $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+            $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_cotizacion_ser']."-".$dt1['tb_cotizacion_num'];
             ?>
             <tr>
                 <td nowrap="nowrap"><?php echo $dt1['tb_documento_nom'];?></td>
-                <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
-                <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
+                <td nowrap="nowrap"><?php echo $dt1['tb_cotizacion_ser'].'-'.$dt1['tb_cotizacion_num']?></td>
+                <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_cotizacion_fec'])?></td>
                 <td><?php echo $dt1['tb_cliente_nom']?></td>
                 <td><?php echo $dt1['tb_cliente_doc']?></td>
                 <td align="center">
@@ -93,10 +98,13 @@ $num_rows= mysql_num_rows($dts1);
                         echo 'SOLES';
                     }?>
                 </td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
-                <td><?php echo $dt1['tb_venta_est']?></td>
+                <td align="right"><?php echo formato_money($dt1['tb_cotizacion_tot'])?></td>
+                <td><?php echo $dt1['tb_cotizacion_est']?></td>
                 <td align="left" nowrap="nowrap">
-                    <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">Editar</a>
+                    <a class="btn_editar" href="#update" onClick="cotizacion_form('editar','<?php echo $dt1['tb_cotizacion_id']?>')">Editar</a>
+                    <button class="btn_generar" id="btn_accion" title="Generar Venta" onClick="venta_form('insertar_cot',
+                            '<?php echo $dt1['tb_cotizacion_id']?>'
+                            )">Generar Factura</button>
                 </td>
             </tr>
             <?php
