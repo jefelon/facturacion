@@ -7,10 +7,10 @@ require_once('../../config/datos.php');
 
 //EMPRESA
 //$empresa[] = array();
- $empresa[0]['certificado']			= "ECIMPORT.pfx";
- $empresa[0]['clave_certificado']	= "3C1m9OR7=!";
-$empresa[0]['usuario_sunat']		="20434814953USER3454 ";
-$empresa[0]['clave_sunat']			="ER35645f";
+$empresa[0]['certificado']			= $certificado;
+$empresa[0]['clave_certificado']	= $clave_certificado;
+$empresa[0]['usuario_sunat']		= $usuario_sunat;
+$empresa[0]['clave_sunat']			= $clave_sunat;
 $empresa[0]['idempresa']			= $idempresa;
 $empresa[0]['signature_id']			= $signature_id;
 $empresa[0]['signature_id2']		= $signature_id2;
