@@ -358,14 +358,14 @@ if($estado=="ANULADA"){
 <table style="width: 100%; border: 0.5px solid #eeeeee; border-collapse:collapse;">
     
         <tr class="header_row">
-            <th style="text-align: center; width: 5%;"><b>Ítem</b></th>
-            <th style="text-align: center; width: 40%;"><b>Descripción</b></th>
-            <th style="text-align: center; width: 7%;"><b>Unidad</b></th>
-            <th style="text-align: center; width: 8%;"><b>Cantidad</b></th>
-            <th style="text-align: center; width: 10%;"><b>Precio Unitario</b></th>
-            <th style="text-align: center; width: 10%;"><b>Descuento</b></th>
-            <th style="text-align: center; width: 10%;"><b>Valor Venta</b></th>
-            <th style="text-align: center; width: 10%;"><b>Precio Venta</b></th>
+            <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
+            <th style="text-align: center; width: 49%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
+            <th style="text-align: center; width: 6%;"><b>CANT.</b></th>
+            <th style="text-align: center; width: 8%;"><b>VALOR U.</b></th>
+            <th style="text-align: center; width: 8%;"><b>PRECIO U.</b></th>
+            <th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: center; width: 8%;"><b>PRECIO VENTA</b></th>
         </tr>';
             $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
             $cont = 1;
@@ -378,7 +378,7 @@ $html.='<tr class="row">';
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>
+                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preuni"]*1.18).'</td>
                 <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
             }else{
