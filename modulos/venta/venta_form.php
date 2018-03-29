@@ -369,6 +369,8 @@ function venta_car(act,cat_id){
 			alert('Precio debe ser mayor al costo. Diferencia en '+(precio)+'.');
 			$('#txt_bus_cat_preven').autoNumericSet($('#hdd_bus_cat_cospro').autoNumericGet());
 		} else {
+            var cot_id = '';
+            cot_id = $('#hdd_cot_id').val();
 			$.ajax({
 				type: "POST",
 				url: "../venta/venta_car.php",
@@ -381,7 +383,7 @@ function venta_car(act,cat_id){
 					cat_can: $('#txt_bus_cat_can').val(),
 					cat_tip: 1,//Tipo Gravado/Exonerado/Inafecto/premio...  1=grabada
 					cat_preven: $('#txt_bus_cat_preven').val(),
-                    cot_id: $('#hdd_cot_id').val()
+                    cot_id: cot_id
 				}),
 				beforeSend: function() {
 				    console.log('aqui va cot');
@@ -390,6 +392,7 @@ function venta_car(act,cat_id){
 					$('#div_venta_car_tabla').addClass("ui-state-disabled");
 		    	},
 				success: function(html){
+
 					$('#div_venta_car_tabla').html(html);
 				},
 				complete: function(){			
@@ -824,7 +827,7 @@ $(function() {
 	$('#cmb_ven_doc').change( function() {
 		txt_ven_numdoc();
 	});
-	
+
 	venta_car();
 
 	$("#cmb_ven_est").change(function(){

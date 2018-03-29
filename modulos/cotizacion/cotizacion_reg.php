@@ -818,7 +818,7 @@ if($_POST['action_venta']=="insertar")
 			if($documento_cod==3)$oCotizacion->modificar_campo($ven_id,'estsun','10');
 		}
 
-		$data['ven_msj']='Se registró venta correctamente.';
+		$data['ven_msj']='Se registró cotización correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -846,7 +846,7 @@ if($_POST['action_venta']=="editar")
 			$_POST['txt_ven_lab1']
 		);
 
-		$data['ven_msj']='Se registró venta correctamente.';
+		$data['ven_msj']='Se registró cotización correctamente.';
 		echo json_encode($data);
 	}
 	else

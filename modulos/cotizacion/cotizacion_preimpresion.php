@@ -23,14 +23,8 @@ require_once("../formatos/formato.php");
 		$tot	=$dt['tb_venta_tot'];*/
 	mysql_free_result($dts);
 
-	if($doc_nom=='FACTURA')$archivo_destino='../venta/venta_impresion_gra_factura.php';
-	if($doc_nom=='BOLETA')$archivo_destino='../venta/venta_impresion_gra_boleta.php';
-	
-	//if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura.php';
-	//if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta.php';
+	if($doc_nom=='COTIZACION')$archivo_destino='../venta/venta_impresion_gra_cotizacion.php';
 
-	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura_mat.php';
-	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta_mat.php';
 
 ?>
 <script type="text/javascript">

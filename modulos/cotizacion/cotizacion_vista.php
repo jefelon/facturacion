@@ -162,11 +162,6 @@ function cotizacion_form(act,idf){
 				$( "#div_venta_form" ).dialog({
 					title:'Información de Cotización | <?php echo $_SESSION['empresa_nombre']?> | Editar',
 					buttons: {
-						<?php if($_SESSION['usuariogrupo_id']==2):?>
-						Guardar: function(){
-							$("#for_ven").submit();
-						},
-						<?php endif;?>
 						Cancelar: function() {
 							$('#for_ven').each (function(){this.reset();});
 							$( this ).dialog( "close" );
@@ -199,7 +194,7 @@ function venta_form(act,idf){
             $('#div_venta_form').html(html);
         },
         complete: function(){
-            if(act=='insertar')
+            if(act=='insertar' || act=='insertar_cot')
             {
                 $( "#div_venta_form" ).dialog({
                     title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
@@ -286,39 +281,11 @@ function venta_check(){
 	});
 }
 
-function generar_factura(act,venid){
-    //if($("#hdd_fil_cli_id").val()>0)
-    //{
-    $.ajax({
-        type: "POST",
-        url: "../cotizacion/cotizacion_generar_venta.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            action: act,
-            ven_id: venid
-        }),
-        beforeSend: function() {
-            // $('#msj_venta').hide();
-            // $('#div_venta_correo_form').dialog("open");
-            $('#div_venta_correo_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-        success: function(html){
-            console.log('recibiend22o');
-            window.location.href =  "../venta/venta_vista.php";
-        }
-    });
-    /*}
-    else
-    {
-        alert('Seleccione un Cliente para poder envíar reporte por correo.');
-    }*/
-}
 
 function venta_impresion(idf){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_preimpresion.php",
+		url: "../cotizacion/cotizacion_preimpresion.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -560,7 +527,7 @@ $(function() {
 	});
 	
 	$( "#div_venta_form" ).dialog({
-		title:'Información de Cotización | <?php echo $_SESSION['empresa_nombre']?>',
+		title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
 		autoOpen: false,
 		resizable: false,
 		height: 600,
@@ -569,6 +536,12 @@ $(function() {
 		modal: true,
 		position: "top",
 		closeOnEscape: false,
+        buttons: {
+            Cancelar: function() {
+                $('#for_ven').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
 		close: function(event, ui) {
 			$('#div_catalogo_venta').dialog( "close" );
 			$('#div_venta_form').html('venta_form');
@@ -667,10 +640,10 @@ $(function() {
                       <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="cotizacion_form('insertar')">Agregar</a></td>
                       <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>
-                      <a href="#" onClick="modo('cotizacion_tabla.php')" class="btn_modo" title="Modo Vista Ventas">Ventas</a>
+                      <a href="#" onClick="modo('cotizacion_tabla.php')" class="btn_modo" title="Modo Vista Ventas">Cotizaciones</a>
                       </td>
                       <td width="8%" align="left" valign="middle" nowrap>
-                      <a href="#" onClick="modo('cotizacion_tabla_detalle.php')" class="btn_modo" title="Modo Vista Detalle de Ventas">Detalle Ventas</a>
+                      <a href="#" onClick="modo('cotizacion_tabla_detalle.php')" class="btn_modo" title="Modo Vista Detalle de Ventas">Detalle Cotizaciones</a>
                       </td>
                       <td width="8%" align="left" valign="middle" nowrap>
                       <a href="#" onClick="modo('cotizacion_tabla_resumen.php')" class="btn_modo" title="Resumen">Resumen</a>

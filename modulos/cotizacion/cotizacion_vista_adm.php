@@ -102,30 +102,114 @@ function venta_tabla()
 		}
 	});     
 }
-	
+
 function cotizacion_form(act,idf){
-    console.log( 'idf');
-    console.log(idf);
-	$.ajax({
-		type: "POST",
-		url: "../cotizacion/cotizacion_form.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			action: act,
-			ven_id:	idf,
-			vista:	'administrador'
-		}),
-		beforeSend: function() {
-			$('#msj_venta').hide();
-			$('#div_venta_form').dialog("open");
-			$('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+    $.ajax({
+        type: "POST",
+        url: "../cotizacion/cotizacion_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            ven_id:	idf
+        }),
+        beforeSend: function() {
+            $('#msj_venta').hide();
+            $('#msj_venta_sunat').hide();
+            $('#div_venta_form').dialog("open");
+            $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
-		success: function(html){
-			$('#div_venta_form').html(html);				
-		}
-	});
+        success: function(html){
+            $('#div_venta_form').html(html);
+        },
+        complete: function(){
+                $( "#div_venta_form" ).dialog({
+                    title:'Información de Cotización | <?php echo $_SESSION['empresa_nombre']?> | Editar',
+                    buttons: {
+                        Cancelar: function() {
+                            $('#for_ven').each (function(){this.reset();});
+                            $( this ).dialog( "close" );
+                        }
+                    }
+                });
+        }
+    });
 }
+
+
+function venta_form(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            ven_id:	idf,
+            cot_id:	idf
+        }),
+        beforeSend: function() {
+            $('#msj_venta').hide();
+            $('#msj_venta_sunat').hide();
+            $('#div_venta_form').dialog("open");
+            $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_form').html(html);
+        },
+        complete: function(){
+            if(act=='insertar')
+            {
+                $( "#div_venta_form" ).dialog({
+                    title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
+                    height: 650,
+                    width: 980,
+                    buttons: {
+                        Guardar: function(){
+                            txt_ven_numdoc();
+                            if($('#hdd_ven_doc').val()==1){
+                                if($('#hdd_ven_numite').val()>0)
+                                {
+                                    venta_check();
+                                }
+                                else{
+                                    $("#for_ven").submit();
+                                }
+                            }
+                            else
+                            {
+                                $("#for_ven").submit();
+                            }
+                        },
+                        Cancelar: function() {
+                            $('#for_ven').each (function(){this.reset();});
+                            $( this ).dialog( "close" );
+                        }
+                    }
+                });
+            }
+
+            if(act=='editar')
+            {
+                $( "#div_venta_form" ).dialog({
+                    title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar',
+                    buttons: {
+                        <?php if($_SESSION['usuariogrupo_id']==2):?>
+                        Guardar: function(){
+                            $("#for_ven").submit();
+                        },
+                        <?php endif;?>
+                        Cancelar: function() {
+                            $('#for_ven').each (function(){this.reset();});
+                            $( this ).dialog( "close" );
+                        }
+                    }
+                });
+            }
+        }
+    });
+}
+
 
 function venta_check(){	
 	$.ajax({
@@ -164,7 +248,7 @@ function venta_check(){
 function venta_impresion(idf){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_preimpresion.php",
+		url: "../cotizacion/cotizacion_preimpresion.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -331,33 +415,6 @@ function venta_correo_email(ven_id){
 	});
 }
 
-function generar_factura(act,venid){
-    //if($("#hdd_fil_cli_id").val()>0)
-    //{
-    $.ajax({
-        type: "POST",
-        url: "../cotizacion/cotizacion_generar_venta.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            action: act,
-            ven_id: venid
-        }),
-        beforeSend: function() {
-            // $('#msj_venta').hide();
-            // $('#div_venta_correo_form').dialog("open");
-            // $('#div_venta_correo_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-        success: function(html){
-            $('#div_venta_correo_form').html(html);
-        }
-    });
-    /*}
-    else
-    {
-        alert('Seleccione un Cliente para poder envíar reporte por correo.');
-    }*/
-}
 
 $(function() {
 	
@@ -386,36 +443,45 @@ $(function() {
 		text: true
 	});
 		
-	venta_filtro();		
-	
-	$( "#div_venta_form" ).dialog({
-		title:'Información de Cotizacion | <?php echo $_SESSION['empresa_nombre']?>',
-		autoOpen: false,
-		resizable: false,
-		height: 550,
-		width: 940,
-		modal: true,
-		position: "top",
-		closeOnEscape: false,
-		buttons: {
-			/*Guardar: function() {
-				if($('#hdd_ven_numite').val()>0)
-				{
-					venta_check();
-				}
-				else{
-				$("#for_ven").submit();
-				}
-			},
-			Cancelar: function() {
-				$('#for_ven').each (function(){this.reset();});
-				$( this ).dialog( "close" );
-			}*/
-			Cerrar: function() {
-				$( this ).dialog( "close" );
-			}
-		}
-	});
+	venta_filtro();
+
+    $( "#div_venta_form" ).dialog({
+        title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+        autoOpen: false,
+        resizable: false,
+        height: 600,
+        width: 980,
+        zIndex: 1,
+        modal: true,
+        position: "top",
+        closeOnEscape: false,
+        buttons: {
+            Guardar: function(){
+                txt_ven_numdoc();
+                if($('#hdd_ven_doc').val()==1){
+                    if($('#hdd_ven_numite').val()>0)
+                    {
+                        venta_check();
+                    }
+                    else{
+                        $("#for_ven").submit();
+                    }
+                }
+                else
+                {
+                    $("#for_ven").submit();
+                }
+            },
+            Cancelar: function() {
+                $('#for_ven').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function(event, ui) {
+            $('#div_catalogo_venta').dialog( "close" );
+            $('#div_venta_form').html('venta_form');
+        }
+    })
 	
 	$( "#div_venta_check" ).dialog({
 		title:'Verificando Venta...',
@@ -509,10 +575,10 @@ $(function() {
                     <tr>
                       <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>
-                      <a href="#" onClick="modo('cotizacion_tabla_adm.php')" class="btn_modo" title="Modo Vista Ventas">Ventas</a>
+                      <a href="#" onClick="modo('cotizacion_tabla_adm.php')" class="btn_modo" title="Modo Vista Ventas">Cotizaciones</a>
                       </td>
                       <td width="8%" align="left" valign="middle" nowrap>
-                      <a href="#" onClick="modo('cotizacion_tabla_detalle_adm.php')" class="btn_modo" title="Modo Vista Detalle de Ventas">Detalle Ventas</a>
+                      <a href="#" onClick="modo('cotizacion_tabla_detalle_adm.php')" class="btn_modo" title="Modo Vista Detalle de Ventas">Detalle Cotizaciones</a>
                       </td>
                       <td width="8%" align="left" valign="middle" nowrap>
                       <a href="#" onClick="modo('cotizacion_tabla_resumen_adm.php')" class="btn_modo" title="Resumen">Resumen</a>

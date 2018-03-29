@@ -951,7 +951,7 @@ $(function() {
 		submitHandler: function(){
 			$.ajax({
 				type: "POST",
-				url: "../cotizacion/venta_reg.php",
+				url: "../cotizacion/cotizacion_reg.php",
 				async:true,
 				dataType: "json",
 				data: $("#for_ven").serialize(),

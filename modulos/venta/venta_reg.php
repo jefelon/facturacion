@@ -66,7 +66,7 @@ if($_POST['hdd_punven_id']>0)
 	mysql_free_result($dts);
 }
 
-if($_POST['action_venta']=="insertar")
+if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 {
 	if(!empty($_POST['txt_ven_fec']))
 	{

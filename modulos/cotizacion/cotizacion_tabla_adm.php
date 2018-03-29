@@ -113,9 +113,9 @@ $num_rows= mysql_num_rows($dts1);
 
                 <td align="left" nowrap="nowrap">
                     <a class="btn_editar" href="#update" onClick="cotizacion_form('editar','<?php echo $dt1['tb_cotizacion_id']?>')">Editar</a>
-                    <a class="btn_generar" id="btn_accion" href="#generar" title="Generar Venta" onClick="generar_factura('enviar',
+                    <button class="btn_generar" id="btn_accion" title="Generar Venta" onClick="venta_form('insertar_cot',
                             '<?php echo $dt1['tb_cotizacion_id']?>'
-                            )">Generar Factura</a>
+                            )">Generar Factura</button>
                 </td>
             </tr>
             <?php
