@@ -22,8 +22,8 @@ if( $_POST['hdd_usu_id']!==$_SESSION['usuario_id'] ||
 }
 
 require_once ("../../config/Cado.php");
-require_once("cVenta.php");
-$oVenta = new cVenta();
+require_once("cCotizacion.php");
+$oCotizacion = new cCotizacion();
 require_once("cVentapago.php");
 $oVentapago = new cVentapago();
 require_once("../clientecuenta/cClientecuenta.php");
@@ -66,7 +66,7 @@ if($_POST['hdd_punven_id']>0)
 	mysql_free_result($dts);
 }
 
-if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
+if($_POST['action_venta']=="insertar")
 {
 	if(!empty($_POST['txt_ven_fec']))
 	{
@@ -96,7 +96,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 
 		//insertamos venta
-		$oVenta->insertar( 
+		$oCotizacion->insertar(
 			fecha_mysql($_POST['txt_ven_fec']),
 			$_POST['cmb_ven_doc'],
 			$numdoc,
@@ -130,7 +130,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			0//cs_documentosrelacionados_id
 		);
 		//ultima venta
-			$dts=$oVenta->ultimoInsert();
+			$dts=$oCotizacion->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
 		$ven_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
@@ -648,7 +648,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$unimed_id=12;//NIU
 
 			//////////////////////
-			$oVenta->insertar_detalle(
+			$oCotizacion->insertar_detalle(
 				$tipo_venta,
 				$indice,
 				$ser_id,
@@ -770,7 +770,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			//////////////////////
 			//registro detalle de venta de servicio
-			$oVenta->insertar_detalle( 
+			$oCotizacion->insertar_detalle(
 				$tipo_venta,
 				$cat_id,  
 				$indice,
@@ -815,10 +815,10 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		if($documento_ele==1)
 		{
 			if($documento_cod==1 or $documento_cod==3)$data['ven_sun']='enviar';
-			if($documento_cod==3)$oVenta->modificar_campo($ven_id,'estsun','10');
+			if($documento_cod==3)$oCotizacion->modificar_campo($ven_id,'estsun','10');
 		}
 
-		$data['ven_msj']='Se registró venta correctamente.';
+		$data['ven_msj']='Se registró cotización correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -839,14 +839,14 @@ if($_POST['action_venta']=="editar")
 			$_POST['hdd_ven_est'],
 			$_POST['txt_ven_lab1']
 		);*/
-		
-		$oVenta->modificar_adm(
+
+        $oCotizacion->modificar_adm(
 			$_POST['hdd_ven_id'],
 			$_POST['chk_ven_may'],
 			$_POST['txt_ven_lab1']
 		);
 
-		$data['ven_msj']='Se registró venta correctamente.';
+		$data['ven_msj']='Se registró cotización correctamente.';
 		echo json_encode($data);
 	}
 	else

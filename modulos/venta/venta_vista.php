@@ -162,11 +162,6 @@ function venta_form(act,idf){
 				$( "#div_venta_form" ).dialog({
 					title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar',
 					buttons: {
-						<?php if($_SESSION['usuariogrupo_id']==2):?>
-						Guardar: function(){
-							$("#for_ven").submit();
-						},
-						<?php endif;?>
 						Cancelar: function() {
 							$('#for_ven').each (function(){this.reset();});
 							$( this ).dialog( "close" );
