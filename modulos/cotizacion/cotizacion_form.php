@@ -1,92 +1,51 @@
 <?php
 session_start();
 require_once ("../../config/Cado.php");
-require_once("../venta/cVenta.php");
-$oVenta = new cVenta();
-
 require_once("../cotizacion/cCotizacion.php");
 $oCotizacion = new cCotizacion();
 
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 
-$cot_id = $_POST['cot_id'];
-
 if($_POST['action']=="insertar"){
 	//$cli_id=1;
 	$fec=date('d-m-Y');
-	$est='CANCELADA';
+	$est='COTIZADA';
 	$venpag_fec=date('d-m-Y');
 
 	$unico_id=uniqid();
 }
 
-if($_POST['action']=="insertar_cot"){
-    $dts= $oCotizacion->mostrarUno($_POST['cot_id']);
-
-    $dt = mysql_fetch_array($dts);
-    $unico_id=uniqid();
-//    $reg	=mostrarFechaHora($dt['tb_venta_reg']);
-
-//    $fec	=mostrarFecha($dt['tb_venta_fec']);
-
-
-    //$numdoc	=$dt['tb_venta_numdoc'];
-//    $ser	=$dt['tb__ser'];
-//    $num	=$dt['tb_venta_num'];
-    $est='CANCELADA';
-    $fec=date('d-m-Y');
-    $cli_id	=$dt['tb_cliente_id'];
-    $cli_nom = $dt['tb_cliente_nom'];
-    $cli_doc = $dt['tb_cliente_doc'];
-    $cli_dir = $dt['tb_cliente_dir'];
-    $cli_tip = $dt['tb_cliente_tip'];
-
-    $subtot	=$dt['tb_venta_subtot'];
-    $igv	=$dt['tb_cotizacion_igv'];
-    $tot	=$dt['tb_cotizacion_tot'];
-
-    $punven_nom	=$dt['tb_puntocotizacion_nom'];
-    $alm_nom	=$dt['tb_almacen_nom'];
-
-    $lab1	=$dt['tb_cotizacion_lab1'];
-    $lab2	=$dt['tb_cotizacion_lab2'];
-    $lab3	=$dt['tb_cotizacion_lab3'];
-
-    $may	=$dt['tb_cotizacion_may'];
-    mysql_free_result($dts);
-}
-
 if($_POST['action']=="editar"){
-	$dts= $oVenta->mostrarUno($_POST['ven_id']);
+	$dts= $oCotizacion->mostrarUno($_POST['ven_id']);
 	$dt = mysql_fetch_array($dts);
-		$reg	=mostrarFechaHora($dt['tb_venta_reg']);
+		$reg	=mostrarFechaHora($dt['tb_cotizacion_reg']);
 		
-		$fec	=mostrarFecha($dt['tb_venta_fec']);
+		$fec	=mostrarFecha($dt['tb_cotizacion_fec']);
 		
 		$doc_id	=$dt['tb_documento_id'];
 		//$numdoc	=$dt['tb_venta_numdoc'];
-		$ser	=$dt['tb_venta_ser'];
-		$num	=$dt['tb_venta_num'];
+		$ser	=$dt['tb_cotizacion_ser'];
+		$num	=$dt['tb_cotizacion_num'];
 		$cli_id	=$dt['tb_cliente_id'];
 		$cli_nom = $dt['tb_cliente_nom'];
 		$cli_doc = $dt['tb_cliente_doc'];
 		$cli_dir = $dt['tb_cliente_dir'];
 		$cli_tip = $dt['tb_cliente_tip'];
 		
-		$subtot	=$dt['tb_venta_subtot'];
- 		$igv	=$dt['tb_venta_igv'];
-		$tot	=$dt['tb_venta_tot'];
-		$est	=$dt['tb_venta_est'];
+		$subtot	=$dt['tb_cotizacion_subtot'];
+		$igv	=$dt['tb_cotizacion_igv'];
+		$tot	=$dt['tb_cotizacion_tot'];
+		$est	=$dt['tb_cotizacion_est'];
 		
 		$punven_nom	=$dt['tb_puntoventa_nom'];
 		$alm_nom	=$dt['tb_almacen_nom'];
 		
-		$lab1	=$dt['tb_venta_lab1'];
-		$lab2	=$dt['tb_venta_lab2'];
-		$lab3	=$dt['tb_venta_lab3'];
+		$lab1	=$dt['tb_cotizacion_lab1'];
+		$lab2	=$dt['tb_cotizacion_lab2'];
+		$lab3	=$dt['tb_cotizacion_lab3'];
 		
-		$may	=$dt['tb_venta_may'];
+		$may	=$dt['tb_cotizacion_may'];
 	mysql_free_result($dts);
 }
 ?>
@@ -128,14 +87,6 @@ $('#btn_cli_form_modificar').button({
 });
 $("#btn_cli_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
-$('.venpag_moneda').autoNumeric({
-	aSep: ',',
-	aDec: '.',
-	//aSign: 'S/. ',
-	//pSign: 's',
-	vMin: '0.00',
-	vMax: '99999.99'
-});
 $('.dias').autoNumeric({
 	aSep: ',',
 	aDec: '.',
@@ -188,12 +139,12 @@ $( "#txt_venpag_fec" ).datepicker({
 });*/
 
 function cmb_cuecor_id(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../cuentacorriente/cmb_cuecor_id.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			cuecor_id: ids
 		}),
@@ -206,12 +157,12 @@ function cmb_cuecor_id(ids)
 	});
 }
 function cmb_tar_id(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../tarjeta/cmb_tar_id.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			tar_id: ids
 		}),
@@ -231,7 +182,7 @@ function cmb_ven_doc()
 		async:true,
 		dataType: "html",                      
 		data: ({
-			doc_tip:	'2',
+			doc_tip:	'10',
 			doc_id: '<?php echo $doc_id?>',
 			vista:	'<?php echo $_POST['action']?>'
 		}),
@@ -340,7 +291,6 @@ function txt_venpag_fecven(){
 	});
 }
 
-
 function venta_car(act,cat_id){
 	if(act=='agregar') {
 		var stouni=$('#hdd_bus_cat_stouni').val();
@@ -369,11 +319,9 @@ function venta_car(act,cat_id){
 			alert('Precio debe ser mayor al costo. Diferencia en '+(precio)+'.');
 			$('#txt_bus_cat_preven').autoNumericSet($('#hdd_bus_cat_cospro').autoNumericGet());
 		} else {
-            var cot_id = '';
-            cot_id = $('#hdd_cot_id').val();
 			$.ajax({
 				type: "POST",
-				url: "../venta/venta_car.php",
+				url: "../cotizacion/venta_car.php",
 				async:false,
 				dataType: "html",                      
 				data: ({
@@ -382,17 +330,13 @@ function venta_car(act,cat_id){
 					cat_id:	 cat_id,
 					cat_can: $('#txt_bus_cat_can').val(),
 					cat_tip: 1,//Tipo Gravado/Exonerado/Inafecto/premio...  1=grabada
-					cat_preven: $('#txt_bus_cat_preven').val(),
-                    cot_id: cot_id
+					cat_preven: $('#txt_bus_cat_preven').val()
 				}),
 				beforeSend: function() {
-				    console.log('aqui va cot');
-                    console.log($('#hdd_cot_id').val());
 					$("#txt_fil_pro_nom").val(''); $("#txt_fil_pro_nom").focus();
 					$('#div_venta_car_tabla').addClass("ui-state-disabled");
 		    	},
 				success: function(html){
-
 					$('#div_venta_car_tabla').html(html);
 				},
 				complete: function(){			
@@ -511,33 +455,12 @@ function catalogo_venta_tab(){
 	});	
 }
 
-function venta_pago_tabla()
-{
-	$.ajax({
-		type: "POST",
-		url: "../venta/venta_pago_tabla.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			ven_id:	'<?php echo $_POST['ven_id']?>'
-		}),
-		beforeSend: function() {
-			$('#div_venta_pago_tabla').addClass("ui-state-disabled");
-        },
-		success: function(html){
-			$('#div_venta_pago_tabla').html(html);
-		},
-		complete: function(){			
-			$('#div_venta_pago_tabla').removeClass("ui-state-disabled");
-		}
-	});     
-}
 
-function venta_detalle_tabla()
+function cotizacion_detalle_tabla()
 {
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_detalle_tabla.php",
+		url: "../cotizacion/cotizacion_detalle_tabla.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -553,29 +476,6 @@ function venta_detalle_tabla()
 			$('#div_venta_detalle_tabla').removeClass("ui-state-disabled");
 		}
 	});     
-}
-
-function cotizacion_detalle_tabla()
-{
-    $.ajax({
-        type: "POST",
-        url: "../cotizacion/cotizacion_detalle_tabla.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            ven_id:	'<?php echo $_POST['ven_id']?>',
-            action: 'insertar_cot'
-        }),
-        beforeSend: function() {
-            $('#div_venta_car_tabla').addClass("ui-state-disabled");
-        },
-        success: function(html){
-            $('#div_venta_car_tabla').html(html);
-        },
-        complete: function(){
-            $('#div_venta_car_tabla').removeClass("ui-state-disabled");
-        }
-    });
 }
 
 function editar_datos_item(act,idf){	
@@ -822,12 +722,12 @@ $(function() {
     });
 	
 	<?php
-	if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
+	if($_POST['action']=="insertar"){
 	?>
 	$('#cmb_ven_doc').change( function() {
 		txt_ven_numdoc();
 	});
-
+	
 	venta_car();
 
 	$("#cmb_ven_est").change(function(){
@@ -844,16 +744,16 @@ $(function() {
 		}
 	});
 	<?php }?>
-	
+
 	$("#chk_venpag_aut").change(function(){
-		if($('#chk_venpag_aut').is(':checked')){  
+		if($('#chk_venpag_aut').is(':checked')){
 			//var chk=1;
 			$("#div_pago_agregar").hide(100);
 			$("#hdd_ven_pag_numite").attr('disabled', 'disabled');
 			//venta_pago_car('restablecer');
 			$("#hdd_ven_pag_numite").attr('disabled', 'disabled');
 			$("#hdd_venpag_tot").attr('disabled', 'disabled');
-		} else {  
+		} else {
 			//var chk=0;
 			$("#div_pago_agregar").show(100);
 			venta_pago_car('actualizar');
@@ -942,22 +842,11 @@ $(function() {
 	<?php
 	if($_POST['action']=="editar"){
 	?>
-	venta_pago_tabla();
-	venta_detalle_tabla();
+	cotizacion_detalle_tabla();
 	$('#cmb_ven_est').attr('disabled','disabled');
 	$('#hdd_ven_doc').val('1');
 
 	<?php }?>
-
-
-    <?php
-    if($_POST['action']=="insertar_cot"){
-    ?>
-    // cotizacion_detalle_tabla();
-    $('#hdd_ven_doc').val('1');
-
-    <?php }?>
-
 	
 	$( "#div_cliente_form" ).dialog({
 		title:'Información de Cliente',
@@ -1041,7 +930,7 @@ $(function() {
 		submitHandler: function(){
 			$.ajax({
 				type: "POST",
-				url: "../venta/venta_reg.php",
+				url: "../cotizacion/cotizacion_reg.php",
 				async:true,
 				dataType: "json",
 				data: $("#for_ven").serialize(),
@@ -1059,18 +948,12 @@ $(function() {
 					
 					$('#msj_venta').html(data.ven_msj);	
 
-					if(data.ven_sun=='enviar')
-					{
-						enviar_sunat(data.ven_id,data.ven_act);
-					}
-					else
-					{
+
 						if(data.ven_act=='imprime')
 						{
 							venta_impresion(data.ven_id);
 						}
-					}
-								
+
 				},
 				complete: function(){
 					venta_tabla();
@@ -1102,9 +985,6 @@ $(function() {
 			},
 			hdd_venpag_tot: {
 				equalTo: "#txt_ven_tot"
-			},
-			hdd_ven_cli_tip: {
-				equalTo: "#hdd_val_cli_tip"
 			},
 			hdd_ven_doc: {
 				required: true
@@ -1315,17 +1195,16 @@ function bus_cantidad(act)
 <form id="for_ven">
 <input name="action_venta" id="action_venta" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_ven_id" id="hdd_ven_id" type="hidden" value="<?php echo $_POST['ven_id']?>">
-    <input name="hdd_cot_id" id="hdd_cot_id" type="hidden" value="<?php echo $_POST['cot_id']?>">
 <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="hdd_punven_id" id="hdd_punven_id" type="hidden" value="<?php echo $_SESSION['puntoventa_id']?>">
 <input name="hdd_emp_id" id="hdd_emp_id" type="hidden" value="<?php echo $_SESSION['empresa_id']?>">
-<input name="hdd_ven_est" id="hdd_ven_est" type="hidden" value="<?php echo $est?>">
+    <input name="hdd_ven_est" id="hdd_ven_est" type="hidden" value="<?php echo $est?>">
 
 <input name="unico_id" id="unico_id" type="hidden" value="<?php echo $unico_id?>">
 
 <fieldset>
   <legend>Datos Principales</legend>
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0ESTADO SUNAT:">
     <tr>
       <td style="width:80%;"><label for="txt_ven_fec">Fecha:</label>
         <input name="txt_ven_fec" type="text" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
@@ -1358,26 +1237,17 @@ function bus_cantidad(act)
       <a class="btn_newwin" target="_blank" title="Saltar a otra pestaña" href="<?php echo $url?>">Saltar</a>
       </td>
     </tr>
+      <tr>
+          <td height="27">
+              <label for="cmb_ven_est">Estado:</label>
+              <select name="cmb_ven_est" id="cmb_ven_est">
+                  <option value="">-</option>
+                  <option value="COTIZADA" <?php if($est=='COTIZADA')echo 'selected'?>>COTIZADA</option>
+                  <option value="VENDIDA" <?php if($est=='VENDIDA')echo 'selected'?>>VENDIDA</option>
+              </select>
+          </td>
+      </tr>
     <tr>
-      <td height="27">
-        <label for="cmb_ven_est">Estado:</label>
-        <select name="cmb_ven_est" id="cmb_ven_est">
-          <option value="">-</option>
-          <option value="CANCELADA" <?php if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
-          <option value="ANULADA" <?php if($est=='ANULADA')echo 'selected'?>>ANULADA</option>
-        </select>
-        <div id="msj_venta_form" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-        <label for="txt_ven_lab1">Nro. Placa:</label>
-        <input type="text" name="txt_ven_lab1" id="txt_ven_lab1" value="<?php echo $lab1?>" size="9" maxlength="8">
-        <label for="txt_ven_lab2">Kilometraje:</label>
-        <input type="text" name="txt_ven_lab2" id="txt_ven_lab2" value="<?php echo $lab2?>" size="9" maxlength="8">
-        <label for="txt_ven_lab3">Ord. Servicio:</label>
-        <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
-        <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
-        <br>
-        <label for="chk_ven_may">Venta al por mayor</label>
-        <input name="chk_ven_may" type="checkbox" id="chk_ven_may" value="1"  <?php if($may==1)echo 'checked'?>>
-        </td>
       <td align="right">
       <?php
       if($_POST['action']=="insertar"){
@@ -1392,75 +1262,11 @@ function bus_cantidad(act)
     </tr>
   </table>
 </fieldset>
-<fieldset><legend>Registro de Pagos</legend>
-<?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
-<table border="0" cellspacing="2" cellpadding="0">
-  <tr>
-    <td width="70" valign="top"><label for="chk_venpag_aut" title="Registrar Pago Automaticamente">Reg Auto</label></br>
-    <input name="chk_venpag_aut" type="checkbox" id="chk_venpag_aut" value="1" checked="CHECKED">
-    </td>
-    <td width="40" valign="middle">
-    <div id="div_pago_agregar" style="display:none">
-    <a class="btn_venpag_agregar" href="#" onClick="venta_pago_car('agregar')">Agregar</a>
-    </div>
-    </td>
-    <?php /*?><td>
-    <label for="txt_venpag_fec">Fecha:</label>
-      <input type="text" name="txt_venpag_fec" id="txt_venpag_fec" size="10" maxlength="10" value="<?php echo $venpag_fec?>" readonly>
-    </td><?php */?>
-    <td valign="top"><label for="txt_venpag_mon">Monto:</label></br>
-      <input name="txt_venpag_mon" type="text" class="venpag_moneda" id="txt_venpag_mon" style="text-align:right;" size="10" maxlength="10"></td>
+
     <td valign="top">
-    <label for="cmb_forpaf_id">Forma<!-- Pago-->:</label></br>
-      <select name="cmb_forpag_id" id="cmb_forpag_id">
-        <option value="1" selected="selected">CONTADO</option>
-        <option value="2">CREDITO</option>
-        </select>
+        <input name="txt_venpag_mon" type="hidden" class="venpag_moneda" id="txt_venpag_mon" style="text-align:right;" size="10" maxlength="10">
     </td>
-    <td valign="top"><!--<label for="cmb_modpaf_id">Modo Pago:</label>--></br>
-      <select name="cmb_modpag_id" id="cmb_modpag_id">
-        <option value="1" selected="selected">EFECTIVO</option>
-        <option value="2">DEPOSITO</option>
-        <option value="3">TARJETA</option>
-        </select></td>
-    <td valign="top">
-    <div id="div_tarjeta" style="display:none">
-    <label for="cmb_tar_id">Tarjeta:</label></br>
-      <select name="cmb_tar_id" id="cmb_tar_id">
-      </select>
-    </div>
-    <div id="div_cuentacorriente" style="display:none">
-    <label for="cmb_cuecor_id">Cuenta Corriente:</label></br>
-      <select name="cmb_cuecor_id" id="cmb_cuecor_id">
-      </select>
-    </div>
-    </td>
-    <td valign="top">
-    <div id="div_operacion" style="display:none">
-    <label for="txt_venpag_numope">N° Operación:</label></br>
-      <input type="text" name="txt_venpag_numope" id="txt_venpag_numope" size="15">
-    </div>
-    </td>
-    <td valign="top">
-    <div id="div_dia" style="display:none">
-    <label for="txt_venpag_numdia">N° Días:</label></br>
-    <input name="txt_venpag_numdia" id="txt_venpag_numdia" type="text" class="dias" size="5" maxlength="3">
-    </div>
-    </td>
-    <td valign="top">
-    <div id="div_fecven" style="display:none">
-    <label for="txt_venpag_fecven">Fec Vencto:</label></br>
-      <input type="text" name="txt_venpag_fecven" id="txt_venpag_fecven" size="10" maxlength="10" readonly>
-    </div>
-    </td>
-    </tr>
-</table>
-<div id="div_venta_pago_car">
-</div>
-<?php }?>
-<div id="div_venta_pago_tabla">
-</div>
-</fieldset>
+
 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_tip?>" />
 <input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
@@ -1526,7 +1332,6 @@ function bus_cantidad(act)
 
         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
-
         <br>
         <!--a class="btn_agregar_producto" title="Abrir Catálogo" href="#" onClick="catalogo_venta_tab1()">Catálogo</a -->
         <a class="btn_rest_act" href="#" onClick="foco(); venta_car('actualizar')">Actualizar</a>
@@ -1549,7 +1354,7 @@ function bus_cantidad(act)
     </fieldset>
 
 <?php
-if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
+if($_POST['action']=="insertar"){
 ?>
 <div id="div_venta_car_tabla">
 </div>
@@ -1561,7 +1366,7 @@ if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
 </form>
 </div>
 <?php
-if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
+if($_POST['action']=="insertar"){
 ?>
 <div id="div_catalogo_venta">
 </div>

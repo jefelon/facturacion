@@ -166,7 +166,7 @@ $(function() {
 }*/
 </style>
 <form name="for_fil_ven" id="for_fil_ven" target="_blank" action="" method="post">
-<input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla_reparto.php">
+<input name="hdd_modo" id="hdd_modo" type="hidden" value="cotizacion_tabla_adm.php">
 <fieldset><legend>Filtro de Venta</legend>
 	
     <label for="txt_fil_ven_fec1">Fecha entre:</label>
@@ -190,8 +190,8 @@ $(function() {
     <label for="cmb_fil_ven_est">Estado:</label>
 	<select name="cmb_fil_ven_est" id="cmb_fil_ven_est">
 	  <option value="">-</option>
-	  <option value="CANCELADA" selected>CANCELADA</option>
-	  <option value="ANULADA">ANULADA</option>
+        <option value="COTIZADA" selected>COTIZADA</option>
+        <option value="VENDIDA">VENDIDA</option>
     </select>
     <br>
     <label for="cmb_fil_ven_ven">Vendedor:</label>
