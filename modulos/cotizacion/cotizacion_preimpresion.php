@@ -7,12 +7,12 @@ $oCotizacion = new cCotizacion();
 
 require_once("../formatos/formato.php");
 
-	$dts= $oCotizacion->mostrarUno($_POST['ven_id']);
+	$dts= $oCotizacion->mostrarUno($_POST['cot_id']);
 	$dt = mysql_fetch_array($dts);
 		$doc_id	=$dt['tb_documento_id'];
 		$doc_nom=$dt['tb_documento_nom'];
-		$ser	=$dt['tb_venta_ser'];
-		$num	=$dt['tb_venta_num'];
+		$ser	=$dt['tb_cotizacion_ser'];
+		$num	=$dt['tb_cotizacion_num'];
 		
 		/*$cli_id	=$dt['tb_cliente_id'];
 		$cli_nom=$dt['tb_cliente_nom'];
@@ -23,7 +23,7 @@ require_once("../formatos/formato.php");
 		$tot	=$dt['tb_venta_tot'];*/
 	mysql_free_result($dts);
 
-	if($doc_nom=='COTIZACION')$archivo_destino='../venta/venta_impresion_gra_cotizacion.php';
+	if($doc_nom=='COTIZACION')$archivo_destino='../cotizacion/cotizacion_impresion_gra_cotizacion.php';
 
 
 ?>
@@ -73,7 +73,7 @@ $(function() {
 <?php echo"$doc_nom N° $ser-$num"?>
 </div>
 <form id="for_preimp" target="_blank" action="<?php echo $archivo_destino?>" method="post">
-<input name="ven_id" type="hidden" value="<?php echo $_POST['ven_id']?>">
+<input name="cot_id" type="hidden" value="<?php echo $_POST['cot_id']?>">
 <br>
 <div id="rad_formato">
 <!--<p align="center">Formato de Impresión: 

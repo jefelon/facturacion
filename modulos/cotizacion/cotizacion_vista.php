@@ -282,14 +282,14 @@ function venta_check(){
 }
 
 
-function venta_impresion(idf){
+function cotizacion_impresion(idf){
 	$.ajax({
 		type: "POST",
 		url: "../cotizacion/cotizacion_preimpresion.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
-			ven_id:	idf
+			cot_id:	idf
 
 		}),
 		beforeSend: function() {
@@ -302,113 +302,9 @@ function venta_impresion(idf){
 	});
 }
 
-function enviar_sunat(id,imp)
-{      
-	//if(confirm("Realmente desea Enviar a la Sunat?"))
-	//{
-		$.ajax({
-			type: "POST",
-			url: "../venta/enviar_sunat.php",
-			async:true,
-			dataType: "json",
-			data: ({
-				ven_id:		id
-			}),
-			beforeSend: function() {
-				$('#msj_venta_sunat').html("Enviando a SUNAT...");
-				$('#msj_venta_sunat').show(100);
-			},
-			success: function(data){
-				$('#msj_venta_sunat').html(data.msj);
-				$('#msj_venta_sunat').show();
-				if(data.enviar==1)
-				{
-					enviar_sunat2(id,'');
-					//alert(data.enviar);
-				}
-			},
-			complete: function(){
-				venta_tabla();
-				if(imp=='imprime')
-				{
-					venta_impresion(id);
-				}
-			}
-		});
-	//}
-}
 
-function enviar_sunat2(id,imp)
-{      
-	//if(confirm("Realmente desea Enviar a la Sunat?"))
-	//{
-		$.ajax({
-			type: "POST",
-			url: "../venta/enviar_sunat.php",
-			async:true,
-			dataType: "json",
-			data: ({
-				ven_id:		id
-			}),
-			beforeSend: function() {
-				$('#msj_venta_sunat').html("Enviando a SUNAT...");
-				$('#msj_venta_sunat').show(100);
-			},
-			success: function(data){
-				$('#msj_venta_sunat').html(data.msj);
-				$('#msj_venta_sunat').show();
-				// if(data.enviar==1)
-				// {
-				// 	enviar_sunat(id,'');
-				// 	//alert(data.enviar);
-				// }
-			},
-			complete: function(){
-				venta_tabla();
-				// if(imp=='imprime')
-				// {
-				// 	venta_impresion(id);
-				// }
-			}
-		});
-	//}
-}
 
-function venta_anular(id,texto)
-{      
-	if(confirm("Realmente desea anular venta "+texto+", se actualizará el stock. ASEGURESE QUE LAS CANTIDADES DE PRODUCTO SE PUEDAN REPONER CORRECTAMENTE.  Continuar?")){
-		$.ajax({
-			type: "POST",
-			url: "../venta/venta_anular.php",
-			async:true,
-			dataType: "json",
-			data: ({
-				action: "anular",
-				ven_id:		id
-			}),
-			beforeSend: function() {
-				$('#msj_venta').html("Cargando...");
-				$('#msj_venta').show(100);
-			},
-			success: function(data){
-				if(data.act!='correcto')
-				{
-					venta_anular(id);
-				}
-				$('#msj_venta').html(data.msj);
-			},
-			complete: function(){
-				$("#chk_ven_anu").removeAttr("checked");
-				venta_tabla();
-			}
-		});
-	}
-	else
-	{
-		$("#chk_ven_anu").removeAttr("checked");
-		venta_tabla();	
-	}
-}
+
 	
 function eliminar_venta(id)
 {      
@@ -449,52 +345,7 @@ function venta_reporte(url)
 }
 
 
-function venta_correo_form(act,venid){
-	//if($("#hdd_fil_cli_id").val()>0)
-	//{
-		$.ajax({
-			type: "POST",
-			url: "../venta/venta_correo_form.php",
-			async:true,
-			dataType: "html",
-			data: ({
-				action: act,
-				ven_id: venid
-			}),
-			beforeSend: function() {
-				$('#msj_venta').hide();
-				$('#div_venta_correo_form').dialog("open");
-				$('#div_venta_correo_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-	        },
-			success: function(html){
-				$('#div_venta_correo_form').html(html);				
-			}
-		});
-	/*}
-	else
-	{
-		alert('Seleccione un Cliente para poder envíar reporte por correo.');
-	}*/
-}
-function venta_correo_email(ven_id){
-	$.ajax({
-		type: "POST",
-		url: "../venta/venta_correo_email.php",
-		async:true,
-		dataType: "html",
-		data: ({
-			ven_id:	ven_id
-		}),
-		beforeSend: function() {
-			$('#msj_venta').hide();
-			$('#div_venta_email').dialog("open");
-			$('#div_venta_email').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-		success: function(html){
-			$('#div_venta_email').html(html);				
-		}
-	});
-}
+
 
 $(function() {
 	
@@ -572,28 +423,7 @@ $(function() {
 		position: 'top'
 	});
 
-	$( "#div_venta_correo_form" ).dialog({
-		title:'Enviar por Correo',
-		autoOpen: false,
-		resizable: false,
-		//height: 600,
-		width: 990,
-		modal: true,
-		position: "top",
-		closeOnEscape: false,
-		buttons: {
-			Enviar: function() {
-				//if(confirm("Confirmar envío de correo?"))
-				//{
-					$("#for_ven_cor").submit();
-				//}
-			},
-			Cancelar: function() {
-				$('#for_ven_cor').each (function(){this.reset();});
-				$( this ).dialog( "close" );
-			}
-		}
-	});
+
 
 
 	$( "#div_venta_email" ).dialog({
@@ -672,7 +502,6 @@ $(function() {
 			</div>
             <div id="div_venta_impresion">
 			</div>
-			<div id="div_venta_correo_form"></div>
 			<div id="div_venta_email"></div>
             <div id="div_venta_tabla" class="contenido_tabla">
       		</div>

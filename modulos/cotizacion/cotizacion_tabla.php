@@ -3,8 +3,6 @@ session_start();
 require_once ("../../config/Cado.php");
 require_once ("../cotizacion/cCotizacion.php");
 $oCotizacion = new cCotizacion();
-require_once ("../venta/cVentacorreo.php");
-$oVentacorreo = new cVentacorreo();
 require_once ("../formatos/formato.php");
 
 require_once ("../empresa/cEmpresa.php");
@@ -105,6 +103,7 @@ $num_rows= mysql_num_rows($dts1);
                     <button class="btn_generar" id="btn_accion" title="Generar Venta" onClick="venta_form('insertar_cot',
                             '<?php echo $dt1['tb_cotizacion_id']?>'
                             )">Generar Factura</button>
+                    <button class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="cotizacion_impresion('<?php echo $dt1['tb_cotizacion_id']?>')">PDF</button>
                 </td>
             </tr>
             <?php

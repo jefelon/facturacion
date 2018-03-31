@@ -50,7 +50,7 @@ $margen_array=array(10, 10, 10, 10);
 
 $borde_tablas=0;
 
-$ven_id=$_POST['ven_id'];
+$cot_id=$_POST['cot_id'];
 
 $dts=$oEmpresa->mostrarUno(1);
 $dt = mysql_fetch_array($dts);
@@ -67,34 +67,34 @@ mysql_free_result($dts);
 if($emp_tel!="")$texto_telefono='Teléfono: '.$emp_tel;
 if($emp_ema!="")$texto_email='Correo: '.$emp_ema;
 if($emp_ruc==0)$emp_ruc="";
-//venta
-$dts= $oCotizacion->mostrarUno($ven_id);
+//cotizacion
+$dts= $oCotizacion->mostrarUno($cot_id);
 $dt = mysql_fetch_array($dts);
 	//$reg	=mostrarFechaHora($dt['tb_venta_reg']);
-	$reg	=mostrarFechaHoraH($dt['tb_venta_reg']);
+	$reg	=mostrarFechaHoraH($dt['tb_cotizacion_reg']);
 	
-	$fec	=mostrarFecha($dt['tb_venta_fec']);
+	$fec	=mostrarFecha($dt['tb_cotizacion_fec']);
 	
 	$doc_id	=$dt['tb_documento_id'];
 	$doc_nom=$dt['tb_documento_nom'];
-	$numdoc	=$dt['tb_venta_numdoc'];
+	$numdoc	=$dt['tb_cotizacion_numdoc'];
 	
 	$cli_id	=$dt['tb_cliente_id'];
 	$cli_nom=$dt['tb_cliente_nom'];
 	$cli_doc=$dt['tb_cliente_doc'];
 	$cli_dir=$dt['tb_cliente_dir'];
 	
-	$valven	=$dt['tb_venta_valven'];
-	$igv	=$dt['tb_venta_igv'];
-	$tot	=$dt['tb_venta_tot'];
+	$valven	=$dt['tb_cotizacion_valven'];
+	$igv	=$dt['tb_cotizacion_igv'];
+	$tot	=$dt['tb_cotizacion_tot'];
 	
-	$lab1	=$dt['tb_venta_lab1'];
+	$lab1	=$dt['tb_cotizacion_lab1'];
 	
 	$usu_id	=$dt['tb_usuario_id'];
 mysql_free_result($dts);
 
 //pagos
-$rws1=$oVentapago->mostrar_pagos($ven_id);
+$rws1=$oVentapago->mostrar_pagos($cot_id);
 $num_rows_vp= mysql_num_rows($rws1);
 
 if($num_rows_vp>0){
@@ -163,10 +163,10 @@ mysql_free_result($dts);
 $texto_vendedor="$usu_nom $usu_apepat $usu_apemat";
 $texto_vendedor=substr($usu_nom, 0, 3).substr($usu_apepat, 0, 1).substr($usu_apemat, 0, 1);
 
-$dts1=$oCotizacion->mostrar_venta_detalle($ven_id);
+$dts1=$oCotizacion->mostrar_venta_detalle($cot_id);
 $num_rows= mysql_num_rows($dts1);
 
-$dts2=$oCotizacion->mostrar_venta_detalle_servicio($ven_id);
+$dts2=$oCotizacion->mostrar_venta_detalle_servicio($cot_id);
 $num_rows_2= mysql_num_rows($dts2);
 
 $numero_filas=$num_rows+$num_rows_2;
@@ -289,7 +289,7 @@ if($impresion=='pdf')ob_start();
 					while($dt1 = mysql_fetch_array($dts1)){
 				?>
                         <tr class="even">
-                          	<td style="text-align: right; width: 11mm; font-size: 11pt;"><?php echo $dt1['tb_ventadetalle_can']?></td>
+                          	<td style="text-align: right; width: 11mm; font-size: 11pt;"><?php echo $dt1['tb_cotizaciondetalle_can']?></td>
                           	<td style="text-align: right; width: 5mm; font-size: 11pt;">&nbsp;</td>
                         	<td style="text-align: left; width: 115mm; font-size: 11pt;">
 							<?php 
@@ -300,8 +300,8 @@ if($impresion=='pdf')ob_start();
 							//echo ' | '.$dt1['tb_marca_nom'];
 							//echo ' | '.$dt1['tb_unidad_abr'];
 							?></td>
-                            <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
-                            <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_ventadetalle_valven'])?></td>
+                            <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_cotizaciondetalle_preuni'])?></td>
+                            <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_cotizaciondetalle_valven'])?></td>
                         </tr>
                         <?php
                 	}
@@ -311,14 +311,14 @@ if($impresion=='pdf')ob_start();
 					while($dt2 = mysql_fetch_array($dts2)){
 						?>
                         <tr>
-                          <td style="text-align: right; width: 11mm; font-size: 11pt;"><?php echo $dt2['tb_ventadetalle_can'];?></td>
+                          <td style="text-align: right; width: 11mm; font-size: 11pt;"><?php echo $dt2['tb_cotizaciondetalle_can'];?></td>
                           <td style="text-align: right; width: 5mm; font-size: 11pt;">&nbsp;</td>
                         	<td style="text-align: left; width: 115mm; font-size: 11pt;">
 							<?php 
 							echo ''.$dt2['tb_servicio_nom'].'';
 							//echo ' | '.$dt2['tb_categoria_nom'];?></td>
-                          <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
-                          <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_ventadetalle_valven'])?></td>                                                        
+                          <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_cotizaciondetalle_preuni'])?></td>
+                          <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_cotizaciondetalle_valven'])?></td>
               </tr><?php						
                 	}
                 mysql_free_result($dts2);

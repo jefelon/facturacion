@@ -376,27 +376,6 @@ $('.moneda2').autoNumeric({
 	vMax: '9999.99'
 });
 
-function calcular_vuelto(){
-	var importe = $("#txt_importe_cliente").val();
-	var total = $('#txt_ven_tot').val();	
-	$.ajax({
-		type: "POST",
-		url: "../venta/venta_vuelto.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			importe: importe,				
-			total:	total
-		}),
-		beforeSend: function(){				
-			
-		},
-		success: function(vuelto){
-			$('#lbl_ven_vuelto').val(vuelto);					
-		}
-	});	
-}
-
 $(function() {	
 	$("#txt_importe_cliente").keyup(function() {		
 		calcular_vuelto();

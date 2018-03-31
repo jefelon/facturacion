@@ -455,27 +455,6 @@ function catalogo_venta_tab(){
 	});	
 }
 
-function venta_pago_tabla()
-{
-	$.ajax({
-		type: "POST",
-		url: "../venta/venta_pago_tabla.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			cot_id:	'<?php echo $_POST['cot_id']?>'
-		}),
-		beforeSend: function() {
-			$('#div_venta_pago_tabla').addClass("ui-state-disabled");
-        },
-		success: function(html){
-			$('#div_venta_pago_tabla').html(html);
-		},
-		complete: function(){			
-			$('#div_venta_pago_tabla').removeClass("ui-state-disabled");
-		}
-	});     
-}
 
 function cotizacion_detalle_tabla()
 {
@@ -969,18 +948,12 @@ $(function() {
 					
 					$('#msj_venta').html(data.ven_msj);	
 
-					if(data.ven_sun=='enviar')
-					{
-						enviar_sunat(data.ven_id,data.ven_act);
-					}
-					else
-					{
+
 						if(data.ven_act=='imprime')
 						{
 							venta_impresion(data.ven_id);
 						}
-					}
-								
+
 				},
 				complete: function(){
 					venta_tabla();

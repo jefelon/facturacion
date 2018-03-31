@@ -3,8 +3,6 @@ session_start();
 require_once ("../../config/Cado.php");
 require_once ("../cotizacion/cCotizacion.php");
 $oCotizacion = new cCotizacion();
-require_once ("../venta/cVentacorreo.php");
-$oVentacorreo = new cVentacorreo();
 require_once ("../formatos/formato.php");
 
 require_once ("../empresa/cEmpresa.php");
@@ -86,8 +84,8 @@ $num_rows= mysql_num_rows($dts1);
         <tbody>
         <?php
         while($dt1 = mysql_fetch_array($dts1)){
-            if($dt1['tb_cotizacion_est']=='CANCELADA'){
-                $total_ventas+=$dt1['tb_cotizacion_tot'];
+            if($dt1['tb_cotizacion_est']=='COTIZADA'){
+                $total_cotizaciones+=$dt1['tb_cotizacion_tot'];
             }
 
             $xml="";
@@ -116,6 +114,7 @@ $num_rows= mysql_num_rows($dts1);
                     <button class="btn_generar" id="btn_accion" title="Generar Venta" onClick="venta_form('insertar_cot',
                             '<?php echo $dt1['tb_cotizacion_id']?>'
                             )">Generar Factura</button>
+                    <button class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="cotizacion_impresion('<?php echo $dt1['tb_cotizacion_id']?>')">PDF</button>
                 </td>
             </tr>
             <?php
@@ -128,7 +127,7 @@ $num_rows= mysql_num_rows($dts1);
     ?>
     <tr class="even">
         <td colspan="6">TOTAL</td>
-        <td align="right"><strong><?php echo formato_money($total_ventas)?></strong></td>
+        <td align="right"><strong><?php echo formato_money($total_cotizaciones)?></strong></td>
         <td colspan="5" align="right">&nbsp;</td>
     </tr>
     <tr class="even">
