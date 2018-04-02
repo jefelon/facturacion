@@ -1042,7 +1042,7 @@ $(function() {
 //formulario			
 	$("#for_ven").validate({
 		submitHandler: function(){
-            var action_venta = $('#action_venta').val();
+           
 			$.ajax({
 				type: "POST",
 				url: "../venta/venta_reg.php",
@@ -1062,7 +1062,7 @@ $(function() {
 					}
 					
 					$('#msj_venta').html(data.ven_msj);
-                        console.log(action_venta);
+                       
                         if(data.ven_sun=='enviar')
                         {
                             enviar_sunat(data.ven_id,data.ven_act);
