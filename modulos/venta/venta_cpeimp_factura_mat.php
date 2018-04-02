@@ -15,11 +15,15 @@ $oEmpresa = new cEmpresa();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
-$dts=$oUsuario->mostrarUno($_SESSION['usuario_id']);
+$ven_id=$_POST['ven_id'];
+$dts = $oVenta->mostrarUno($ven_id);
+$dt = mysql_fetch_array($dts);
+
+$dts=$oUsuario->mostrarUno($dt['tb_usuario_id']);
 $dt = mysql_fetch_array($dts);
 $usugru		=$dt['tb_usuariogrupo_id'];
 $usugru_nom	=$dt['tb_usuariogrupo_nom'];
-$usu_nom		=$dt['tb_usuario_nom'];
+$usu_nom	=$dt['tb_usuario_nom'];
 $apepat		=$dt['tb_usuario_apepat'];
 $apemat		=$dt['tb_usuario_apemat'];
 $ema		=$dt['tb_usuario_ema'];
@@ -64,7 +68,7 @@ $sucursales='
 
 $tipodoc = 'FACTURA ELECTRONICA';
 
-$ven_id=$_POST['ven_id'];
+
 
 $dts = $oVenta->mostrarUno($ven_id);
 while($dt = mysql_fetch_array($dts))
