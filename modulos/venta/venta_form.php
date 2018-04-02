@@ -23,8 +23,9 @@ if($_POST['action']=="insertar"){
 
 if($_POST['action']=="insertar_cot"){
     $dts= $oCotizacion->mostrarUno($_POST['cot_id']);
-
     $dt = mysql_fetch_array($dts);
+    $fec=date('d-m-Y');
+    $est='CANCELADA';
     $unico_id=uniqid();
 //    $reg	=mostrarFechaHora($dt['tb_venta_reg']);
 
@@ -34,8 +35,8 @@ if($_POST['action']=="insertar_cot"){
     //$numdoc	=$dt['tb_venta_numdoc'];
 //    $ser	=$dt['tb__ser'];
 //    $num	=$dt['tb_venta_num'];
-    $est='CANCELADA';
-    $fec=date('d-m-Y');
+
+
     $cli_id	=$dt['tb_cliente_id'];
     $cli_nom = $dt['tb_cliente_nom'];
     $cli_doc = $dt['tb_cliente_doc'];
@@ -773,6 +774,9 @@ function compararSunat(doc, nom, dir, id) {
 }
 
 
+
+
+
 $(function() {
 	cmb_ven_doc();
 	$("#txt_ven_numdoc").addClass("ui-state-active");
@@ -1038,6 +1042,7 @@ $(function() {
 //formulario			
 	$("#for_ven").validate({
 		submitHandler: function(){
+            var action_venta = $('#action_venta').val();
 			$.ajax({
 				type: "POST",
 				url: "../venta/venta_reg.php",
@@ -1056,20 +1061,21 @@ $(function() {
 					 	return;
 					}
 					
-					$('#msj_venta').html(data.ven_msj);	
+					$('#msj_venta').html(data.ven_msj);
+                        console.log(action_venta);
+                        if(data.ven_sun=='enviar')
+                        {
+                            enviar_sunat(data.ven_id,data.ven_act);
+                        }
+                        else
+                        {
+                            if(data.ven_act=='imprime')
+                            {
+                                venta_impresion(data.ven_id);
+                            }
+                        }
 
-					if(data.ven_sun=='enviar')
-					{
-						enviar_sunat(data.ven_id,data.ven_act);
-					}
-					else
-					{
-						if(data.ven_act=='imprime')
-						{
-							venta_impresion(data.ven_id);
-						}
-					}
-								
+
 				},
 				complete: function(){
 					venta_tabla();
@@ -1334,7 +1340,7 @@ function bus_cantidad(act)
         <label for="txt_ven_numdoc">N° Doc:</label>
         <input name="txt_ven_numdoc" type="text" id="txt_ven_numdoc" style="text-align:right; font-size:14px"  value="<?php echo $ser.'-'.$num?>" size="10" readonly>
         <?php //if($_POST['action']=="editar")echo $est?>
-        <?php if($_POST['action']=="insertar"){?>
+        <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
         <label for="chk_imprimir"> Imprimir Documento</label>
         <input name="chk_imprimir" type="checkbox" id="chk_imprimir" value="1" checked="CHECKED">
         <?php }?>
@@ -1379,7 +1385,7 @@ function bus_cantidad(act)
         </td>
       <td align="right">
       <?php
-      if($_POST['action']=="insertar"){
+      if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
 	  	echo "PV: ".$_SESSION['puntoventa_nom'];
 		echo " | A: ".$_SESSION['almacen_nom'];
 	  }

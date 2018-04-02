@@ -302,6 +302,25 @@ function cotizacion_impresion(idf){
 	});
 }
 
+function venta_impresion(idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_preimpresion.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            ven_id:	idf
+        }),
+        beforeSend: function() {
+            $('#div_venta_impresion').dialog("open");
+            $('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_impresion').html(html);
+        }
+    });
+}
+
 
 
 
@@ -344,8 +363,33 @@ function venta_reporte(url)
 	$("#for_fil_ven").submit();
 }
 
-
-
+function enviar_sunat(id)
+{
+    if(confirm("Realmente desea Enviar a la Sunat?")){
+        $.ajax({
+            type: "POST",
+            url: "../venta/enviar_sunat.php",
+            async:true,
+            dataType: "json",
+            data: ({
+                ven_id:		id
+            }),
+            beforeSend: function() {
+                $('#msj_venta').html("Enviando a SUNAT...");
+                $('#msj_venta').show(100);
+            },
+            success: function(data){
+                $('#msj_venta').html(data.msj);
+                //$('#msj_venta').html(data.msj2);
+                $('#msj_venta').show();
+            },
+            complete: function(){
+                venta_tabla();
+                venta_impresion(id);
+            }
+        });
+    }
+}
 
 $(function() {
 	

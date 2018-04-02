@@ -941,7 +941,7 @@ $(function() {
 				},
 				success: function(data){
 					if(data.redireccionar){
-					 	alert("Venta No Registrada.\n Por Favor Inicie Sesión Nuevamente.");
+					 	alert("Cotización No Registrada.\n Por Favor Inicie Sesión Nuevamente.");
 					 	window.location.href = "../usuarios/cerrar_sesion.php";
 					 	return;
 					}
@@ -951,7 +951,7 @@ $(function() {
 
 						if(data.ven_act=='imprime')
 						{
-							venta_impresion(data.ven_id);
+							cotizacion_impresion(data.ven_id);
 						}
 
 				},
@@ -1229,7 +1229,7 @@ function bus_cantidad(act)
       <?php
       if($_POST['action']=="editar"){
 	  ?>
-      <a class="btn_imp" title="Imprimir" href="#imprimir" onClick="venta_impresion('<?php echo $_POST['ven_id']?>')">Imprimir</a>
+      <a class="btn_imp" title="Imprimir" href="#imprimir" onClick="cotizacion_impresion('<?php echo $_POST['ven_id']?>')">Imprimir</a>
       <?php }?>
       <?php
       $url=ir_principal($_SESSION['usuariogrupo_id']);

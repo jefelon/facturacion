@@ -12,6 +12,21 @@ require_once ("../formatos/numletras.php");
 require_once ("../formatos/formato.php");
 require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
+require_once ("../usuarios/cUsuario.php");
+$oUsuario = new cUsuario();
+
+$dts=$oUsuario->mostrarUno($_SESSION['usuario_id']);
+$dt = mysql_fetch_array($dts);
+$usugru		=$dt['tb_usuariogrupo_id'];
+$usugru_nom	=$dt['tb_usuariogrupo_nom'];
+$usu_nom		=$dt['tb_usuario_nom'];
+$apepat		=$dt['tb_usuario_apepat'];
+$apemat		=$dt['tb_usuario_apemat'];
+$ema		=$dt['tb_usuario_ema'];
+
+mysql_free_result($dts);
+
+$texto_vendedor="$usu_nom $apepat $apemat";
 
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
@@ -42,6 +57,11 @@ $sucursales='
         <td>CORREO:</td>
         <td>'.$dt['tb_empresa_ema'].'</td>
     </tr>
+    <tr>
+        <td>VENDEDOR:</td>
+        <td>'.$texto_vendedor.'</td>
+    </tr>
+    
 </table>';
 
 $tipodoc = 'BOLETA ELECTRONICA';
@@ -358,14 +378,14 @@ if($estado=="ANULADA"){
 <table style="width: 100%; border: 0.5px solid #eeeeee; border-collapse:collapse;">
     
         <tr class="header_row">
-            <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 49%;"><b>DESCRIPCION</b></th>
-            <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
-            <th style="text-align: center; width: 6%;"><b>CANT.</b></th>
-            <th style="text-align: center; width: 8%;"><b>VALOR U.</b></th>
-            <th style="text-align: center; width: 8%;"><b>PRECIO U.</b></th>
-            <th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>
-            <th style="text-align: center; width: 8%;"><b>PRECIO VENTA</b></th>
+            <th style="text-align: center; width: 5%;"><b>Ítem</b></th>
+            <th style="text-align: center; width: 40%;"><b>Descripción</b></th>
+            <th style="text-align: center; width: 7%;"><b>Unidad</b></th>
+            <th style="text-align: center; width: 8%;"><b>Cantidad</b></th>
+            <th style="text-align: center; width: 10%;"><b>Precio Unitario</b></th>
+            <th style="text-align: center; width: 10%;"><b>Descuento</b></th>
+            <th style="text-align: center; width: 10%;"><b>Valor Venta</b></th>
+            <th style="text-align: center; width: 10%;"><b>Precio Venta</b></th>
         </tr>';
             $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
             $cont = 1;
@@ -378,7 +398,7 @@ $html.='<tr class="row">';
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preuni"]*1.18).'</td>
+                <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>
                 <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
             }else{
