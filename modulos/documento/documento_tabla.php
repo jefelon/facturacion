@@ -71,6 +71,8 @@ $(function() {
 						case 5:
 							echo "TRANSFERENCIA";
 						break;
+                        case 10:
+                            echo "COTIZACIÓN";
 					}
 				  ?></strong></th>
       		  </tr>
