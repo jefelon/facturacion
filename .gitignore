@@ -4,3 +4,4 @@ cpegeneracion/
 .zip
 config/Cado.php
 cperepositorio/
+.idea/workspace.xml

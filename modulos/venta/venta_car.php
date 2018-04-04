@@ -780,7 +780,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             <td align="left" title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
             <td align="right"><?php echo $cantidad?></td>
             <td align="right"><?php echo formato_money($precio_unitario)?></td>
-            <td align="right"><?php echo formato_money($precio_unitario*$igv_dato)?></td>
+            <td align="right"><?php echo formato_money($precio_unitario*(1+$igv_dato))?></td>
             <td align="right">
                 <?php
                 if($tipdes == 1 and $descuento_linea!=0){
