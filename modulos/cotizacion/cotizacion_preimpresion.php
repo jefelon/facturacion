@@ -23,7 +23,7 @@ require_once("../formatos/formato.php");
 		$tot	=$dt['tb_venta_tot'];*/
 	mysql_free_result($dts);
 
-	if($doc_nom=='COTIZACION')$archivo_destino='../cotizacion/cotizacion_impresion_gra_cotizacion.php';
+	if($doc_nom=='COTIZACION')$archivo_destino='../cotizacion/cotizacion_cpeimp_cotizacion_mat.php';
 
 
 ?>
