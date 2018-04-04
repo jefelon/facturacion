@@ -67,7 +67,7 @@ footer {
 
 
 form {
-    border: 1px solid #d4261f;
+    border: 1px solid #84af43;
     margin-left: auto;
     margin-right: auto;
     width: 50%;
@@ -91,7 +91,7 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-    background-color: #d4261f;
+    background-color: #84af43;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;

@@ -52,7 +52,7 @@
 
    <form action="ctaInicio.php" method="post" name="form" id="form">
       <div id="main-header">
-            <h1 class="site-name">PLATAFORMA DE GESTIÓN</h1>
+            <h1 class="site-name">AQPFACT 5.0  - FACTURACIÓN ELECTRÓNICA</h1>
       </div>
      <div class="imgcontainer">
        <img src="../../images/logo.jpg" alt="Logo" class="avatar">
@@ -60,10 +60,10 @@
 
      <div class="container">
        <label><b>Usuario</b></label>
-       <input type="text" name="txt_use" id="txt_use" placeholder="Nombre de Usuario" value="<?php echo $_GET['usuario']?>" required>
+       <input type="text" name="txt_use" id="txt_use" placeholder="Nombre de Usuario" value="admin" required>
       <br>
        <label><b>Clave</b></label>
-       <input type="password" placeholder="Contraseña" name="txt_pas" id="txt_pas" required>
+       <input type="password" placeholder="Contraseña" name="txt_pas" id="txt_pas" required value="admin">
 
        <button type="submit" id="btn_ingresar">Ingresar</button>
      </div>
@@ -96,10 +96,10 @@
    </form>
 <div>
 
-      <footer>
+<!--       <footer>
          <div>
             <p>Nombre de la Empresa</p>
          </div>
-      </footer>
+      </footer> -->
    </body>
 </html>
