@@ -335,7 +335,7 @@ if($impresion=='pdf')
 		
         $html2pdf->writeHTML($content, isset($html_d));
 		$html2pdf->pdf->IncludeJS("print(true);");
-		//$html2pdf->pdf->IncludeJS("app.alert('inticap.com');");
+		//$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
 		
 		
 

@@ -323,7 +323,7 @@ function print_footer2()
 $footer=
 	'
     <div align="center">
-		<a href="http://www.inticap.com" target="_blank">Sistema de Ventas. INTICAP www.inticap.com</a>
+		<a href="http://www.a-zetasoft.com" target="_blank">Sistema de Ventas. INTICAP www.a-zetasoft.com</a>
 	</div>
 	';
 	return $footer;

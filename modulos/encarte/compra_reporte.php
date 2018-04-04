@@ -95,7 +95,7 @@ $num_rows= mysql_num_rows($dts1);
 			
 			$this->Cell(120,4,utf8_decode("Impresión: $fecha_actual"),0,0,'L');
 			
-			//$this->Cell(70,4,'www.inticap.com',0,0,'L');
+			//$this->Cell(70,4,'www.a-zetasoft.com',0,0,'L');
 			
 			$pagTxt =utf8_decode("Página {$this->PageNo()} / {nb}");
 			$this->MultiCell(0, 4, $pagTxt, 0, 'R');

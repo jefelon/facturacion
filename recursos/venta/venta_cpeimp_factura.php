@@ -126,10 +126,10 @@ class MYPDF extends TCPDF
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('www.inticap.com');
+$pdf->SetAuthor('www.a-zetasoft.com');
 $pdf->SetTitle($title);
-$pdf->SetSubject('www.inticap.com');
-$pdf->SetKeywords('www.inticap.com');
+$pdf->SetSubject('www.a-zetasoft.com');
+$pdf->SetKeywords('www.a-zetasoft.com');
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));

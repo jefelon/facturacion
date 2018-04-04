@@ -95,7 +95,7 @@ if($impresion=='pdf')ob_start();
         <table style="width: 100%; border: solid 0px black;">
             <tr>
                 <td style="text-align: left; width: 35%; font-size: 7pt;">Registro: <?php echo $reg//date('d/m/Y'); ?></td>
-                <td style="text-align: center; width: 30%; font-size: 6pt;">Sistema de Ventas. www.inticap.com</td>
+                <td style="text-align: center; width: 30%; font-size: 6pt;">Sistema de Ventas. www.a-zetasoft.com</td>
                 <td style="text-align: right;    width: 35%; font-size: 7pt;">Página [[page_cu]]/[[page_nb]]</td>
             </tr>
         </table>
@@ -362,7 +362,7 @@ if($impresion=='pdf')
         $html2pdf->pdf->SetDisplayMode('fullpage');
         $html2pdf->writeHTML($content, isset($_GET['vuehtml']));
 		//$html2pdf->pdf->IncludeJS("print(true);");
-		//$html2pdf->pdf->IncludeJS("app.alert('inticap.com');");
+		//$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
 
 		$nombre_arc='venta_'.$numdoc.'.pdf';
         $html2pdf->Output($nombre_arc);
