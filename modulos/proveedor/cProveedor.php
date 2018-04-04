@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cProveedor{
 	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema){
 	$sql = "INSERT tb_proveedor(
@@ -8,10 +9,11 @@ class cProveedor{
 	`tb_proveedor_dir` ,
 	`tb_proveedor_con` ,
 	`tb_proveedor_tel` ,
-	`tb_proveedor_ema`
+	`tb_proveedor_ema`,
+	`tb_empresa_id`
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema'
+	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema','{$_SESSION['empresa_id']}'
 	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -24,7 +26,7 @@ class cProveedor{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_proveedor ORDER BY tb_proveedor_nom";
+	$sql="SELECT * FROM tb_proveedor WHERE tb_empresa_id={$_SESSION['empresa_id']} ORDER BY tb_proveedor_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -32,7 +34,7 @@ class cProveedor{
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_proveedor 
-	WHERE tb_proveedor_id=$id";
+	WHERE tb_proveedor_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -46,7 +48,7 @@ class cProveedor{
 	`tb_proveedor_con` =  '$con',
 	`tb_proveedor_tel` =  '$tel',
 	`tb_proveedor_ema` =  '$ema'
-	WHERE tb_proveedor_id =$id"; 
+	WHERE tb_proveedor_id =$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -62,14 +64,14 @@ class cProveedor{
 	function verifica_proveedor_doc($doc,$pro_id){
 	$sql="SELECT * 
 	FROM tb_proveedor
-	WHERE tb_proveedor_doc LIKE '$doc' ";
+	WHERE tb_proveedor_doc LIKE '$doc' AND tb_empresa_id={$_SESSION['empresa_id']}";
 	if($pro_id>0)$sql.= " AND tb_proveedor_id <> $pro_id ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_proveedor WHERE tb_proveedor_id=$id";
+	$sql="DELETE FROM tb_proveedor WHERE tb_proveedor_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -78,7 +80,7 @@ class cProveedor{
 	function complete_nom($dato){
 	$sql="SELECT *
 		FROM tb_proveedor
-		WHERE tb_proveedor_nom LIKE '%$dato%' OR tb_proveedor_doc LIKE '%$dato%'
+		WHERE (tb_proveedor_nom LIKE '%$dato%' OR tb_proveedor_doc LIKE '%$dato%') AND tb_empresa_id={$_SESSION['empresa_id']}
 		GROUP BY tb_proveedor_nom
 		LIMIT 0,12
 		";
@@ -90,7 +92,12 @@ class cProveedor{
 	$sql="SELECT * 
 	FROM tb_proveedor	
 	";	
-	if($pro_id>0)$sql.=" WHERE tb_proveedor_id = $pro_id";		
+	if($pro_id>0){
+	    $sql.="WHERE tb_proveedor_id = $pro_id AND tb_empresa_id={$_SESSION['empresa_id']}";
+    }else{
+        $sql.="WHERE tb_empresa_id={$_SESSION['empresa_id']}";
+    }
+
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -103,7 +110,7 @@ class cProveedor{
 	INNER JOIN tb_documento d ON c.tb_documento_id=d.tb_documento_id
 	INNER JOIN tb_usuario u ON c.tb_usuario_id=u.tb_usuario_id
 	INNER JOIN tb_almacen a ON c.tb_almacen_id = a.tb_almacen_id
-	WHERE tb_compra_fec BETWEEN '$fec1' AND '$fec2' ";		
+	WHERE tb_compra_fec BETWEEN '$fec1' AND '$fec2' AND p.tb_empresa_id={$_SESSION['empresa_id']} ";
 	if($pro_id>0)$sql.=" AND c.tb_proveedor_id = ".$pro_id;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

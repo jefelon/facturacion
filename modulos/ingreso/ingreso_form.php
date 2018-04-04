@@ -244,7 +244,7 @@ function ingreso_txt_numdoc(){
 function cliente_form_i(act,idf){
 	$.ajax({
 		type: "POST",
-		url: "../cliente/cliente_form.php",
+		url: "../clientes/cliente_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -294,7 +294,7 @@ function cliente_form_i(act,idf){
 function cliente_cargar_datos(idf){	
 	$.ajax({
 		type: "POST",
-		url: "../cliente/cliente_reg.php",
+		url: "../clientes/cliente_reg.php",
 		async:true,
 		dataType: "json",                      
 		data: ({

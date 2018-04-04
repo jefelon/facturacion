@@ -1,12 +1,14 @@
 <?php
+session_start();
 class cCuentacorriente{
 	function insertar($nom,$caj_id){
 	$sql = "INSERT tb_cuentacorriente (
 		`tb_cuentacorriente_nom`,
-		`tb_caja_id`
+		`tb_caja_id`,
+		`tb_empresa_id`
 		)
 		VALUES (
-		 '$nom', '$caj_id'
+		 '$nom', '$caj_id', '{$_SESSION['empresa_id']}'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -22,6 +24,7 @@ class cCuentacorriente{
 	$sql="SELECT * 
 	FROM tb_cuentacorriente t
 	LEFT JOIN tb_caja c ON t.tb_caja_id=c.tb_caja_id
+	WHERE t.tb_empresa_id={$_SESSION['empresa_id']}
 	ORDER BY tb_cuentacorriente_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -30,7 +33,7 @@ class cCuentacorriente{
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_cuentacorriente
-	WHERE tb_cuentacorriente_id=$id";
+	WHERE tb_cuentacorriente_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -39,7 +42,7 @@ class cCuentacorriente{
 	$sql = "UPDATE tb_cuentacorriente SET  
 	`tb_cuentacorriente_nom` =  '$nom',
 	`tb_caja_id` =  '$caj_id'
-	WHERE  tb_cuentacorriente_id =$id;"; 
+	WHERE  tb_cuentacorriente_id =$id AND tb_empresa_id={$_SESSION['empresa_id']};";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -53,7 +56,7 @@ class cCuentacorriente{
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_cuentacorriente WHERE tb_cuentacorriente_id=$id";
+	$sql="DELETE FROM tb_cuentacorriente WHERE tb_cuentacorriente_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

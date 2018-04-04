@@ -43,6 +43,20 @@ class cDocumento{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrar_por_tipo_cot($tip,$tip_cot,$mos){
+        $sql="SELECT * 
+	FROM tb_documento 
+	WHERE tb_documento_xac=1";
+        if($tip>0)$sql.=" AND tb_documento_tip=$tip ";
+        if($tip_cot>0)$sql.="OR tb_documento_tip=$tip_cot ";
+        if($mos>0)$sql.=" AND tb_documento_mos=$mos ";
+
+
+        $sql.=" ORDER BY tb_documento_id ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_documento d 

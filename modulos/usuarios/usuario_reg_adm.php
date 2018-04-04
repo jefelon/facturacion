@@ -31,7 +31,7 @@ if($_POST['action_usuario'] == 'insertar'){
 		else
 		{
 			//$oUsuario->insertar($_POST['txt_use'],$_POST['txt_apepat'],$_POST['txt_apepat'],$_POST['txt_apemat'],$_POST['txt_nom'],$_POST['txt_ema'],$_POST['cmb_usugru'],$emp);
-			$oUsuario->insertar($_POST['txt_use'],$_POST['txt_pas'],$_POST['txt_apepat'],$_POST['txt_apemat'],$_POST['txt_nom'],$_POST['txt_ema'],$_POST['hdd_usugru_id'],$_POST['hdd_emp_id']);
+			$oUsuario->insertar($_POST['txt_use'],$_POST['txt_pas'],$_POST['txt_apepat'],$_POST['txt_apemat'],$_POST['txt_nom'],$_POST['txt_ema'],$_POST['hdd_usugru_id'],$_POST['cmb_emp_id']);
 			
 				$dts=$oUsuario->ultimoInsert();
 				$dt = mysql_fetch_array($dts);
@@ -122,7 +122,7 @@ if($_POST['action_usuario'] == 'insertar'){
 if($_POST['action_usuario'] == 'editar'){
 	if(!empty($_POST['hdd_usu_id']) and $_POST['txt_ema']!="" and $_POST['txt_apepat']!="" and $_POST['txt_apemat']!="" and $_POST['txt_nom']!="")
 	{
-		$oUsuario->modificar_sup($_POST['hdd_usu_id'],$_POST['txt_apepat'],$_POST['txt_apemat'],$_POST['txt_nom'],$_POST['txt_ema'],$_POST['hdd_usugru_id'],$_POST['hdd_emp_id']);
+		$oUsuario->modificar_sup($_POST['hdd_usu_id'],$_POST['txt_apepat'],$_POST['txt_apemat'],$_POST['txt_nom'],$_POST['txt_ema'],$_POST['hdd_usugru_id'],$_POST['cmb_emp_id']);
 		
 		//$oUsuariodetalle->modificar_sup($_POST['hdd_usu_id'],$_POST['txt_dni']);
 		

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cCliente{
 	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est){
 	$sql = "INSERT tb_cliente(
@@ -9,10 +10,11 @@ class cCliente{
 	`tb_cliente_con` ,
 	`tb_cliente_tel` ,
 	`tb_cliente_ema` ,
-	`tb_cliente_est`
+	`tb_cliente_est` ,
+	`tb_empresa_id`
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est'
+	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '{$_SESSION['empresa_id']}' 
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -25,7 +27,7 @@ class cCliente{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_cliente ORDER BY tb_cliente_nom";
+	$sql="SELECT * FROM tb_cliente WHERE tb_empresa_id={$_SESSION['empresa_id']} ORDER BY tb_cliente_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -33,7 +35,11 @@ class cCliente{
 	function mostrar_filtro($cli_id){
 		$sql="SELECT * 
 		FROM tb_cliente	";	
-		if($cli_id>0)$sql.=" WHERE tb_cliente_id = $cli_id";
+		if($cli_id>0){
+		    $sql.=" WHERE tb_cliente_id = $cli_id AND tb_empresa_id={$_SESSION['empresa_id']}";
+        }else{
+            $sql.=" WHERE tb_empresa_id={$_SESSION['empresa_id']}";
+        }
 				
 		$oCado = new Cado();
 		$rst=$oCado->ejecute_sql($sql);
@@ -42,7 +48,7 @@ class cCliente{
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_cliente 
-	WHERE tb_cliente_id=$id";
+	WHERE tb_cliente_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -57,7 +63,7 @@ class cCliente{
 	`tb_cliente_tel` =  '$tel',
 	`tb_cliente_ema` =  '$ema',
 	`tb_cliente_est` =  '$est'
-	WHERE tb_cliente_id =$id"; 
+	WHERE tb_cliente_id =$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -73,14 +79,14 @@ class cCliente{
 	function verifica_cliente_doc($doc,$cli_id){
 	$sql="SELECT * 
 	FROM tb_cliente 
-	WHERE tb_cliente_doc LIKE '$doc' ";
+	WHERE tb_cliente_doc LIKE '$doc' AND tb_empresa_id={$_SESSION['empresa_id']}";
 	if($cli_id>0)$sql.= " AND tb_cliente_id <> $cli_id ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_cliente WHERE tb_cliente_id=$id";
+	$sql="DELETE FROM tb_cliente WHERE tb_cliente_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -89,7 +95,7 @@ class cCliente{
 	function complete_nom($dato){
 	$sql="SELECT *
 		FROM tb_cliente
-		WHERE tb_cliente_nom LIKE '%$dato%' OR tb_cliente_doc LIKE '%$dato%'
+		WHERE (tb_cliente_nom LIKE '%$dato%' OR tb_cliente_doc LIKE '%$dato%') AND tb_empresa_id={$_SESSION['empresa_id']}
 		GROUP BY tb_cliente_nom
 		LIMIT 0,12
 		";
@@ -104,7 +110,7 @@ class cCliente{
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
 	INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
-	WHERE tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";		
+	WHERE tb_venta_fec BETWEEN '$fec1' AND '$fec2' AND c.tb_empresa_id={$_SESSION['empresa_id']}";
 	if($cli_id>0)$sql.=" AND v.tb_cliente_id = ".$cli_id;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

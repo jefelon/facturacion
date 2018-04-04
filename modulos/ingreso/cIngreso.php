@@ -154,7 +154,7 @@ class cIngreso{
 	INNER JOIN tb_documento d ON i.tb_documento_id=d.tb_documento_id
 	LEFT JOIN tb_subcuenta sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
 	WHERE tb_ingreso_xac=1
-	AND tb_empresa_id=$emp_id 
+	AND i.tb_empresa_id=$emp_id 
 	AND i.tb_ingreso_fec BETWEEN '$fec1' AND '$fec2' ";
 	
 		if($caj_id>0){
@@ -235,7 +235,7 @@ class cIngreso{
 	INNER JOIN tb_documento d ON i.tb_documento_id=d.tb_documento_id
 	LEFT JOIN tb_subcuenta sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
 	WHERE tb_ingreso_xac=1
-	AND tb_empresa_id=$emp_id 
+	AND i.tb_empresa_id=$emp_id 
 	AND tb_ingreso_fec BETWEEN '$fec1' AND '$fec2' ";
 	
 		if($caj_id>0){
