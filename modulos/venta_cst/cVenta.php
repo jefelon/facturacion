@@ -114,7 +114,7 @@ class cVenta{
 	LEFT JOIN tb_categoria cg ON p.tb_categoria_id = cg.tb_categoria_id
 	LEFT JOIN tb_unidad un ON ct.tb_unidad_id_bas = un.tb_unidad_id 
 	
-	WHERE v.tb_empresa_id = $emp_id 
+	WHERE v.tb_empresa_id = $emp_id AND p.tb_empresa_id = $emp_id 
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
 	if($cat_ids!="")$sql.=" AND p.tb_categoria_id IN ($cat_ids) ";

@@ -1,12 +1,14 @@
 <?php
+session_start();
 class cCategoria{
 	function insertar($nom,$idp){
 	$sql = "INSERT tb_categoria (
 		`tb_categoria_nom` ,
-		`tb_categoria_idp`
+		`tb_categoria_idp`,
+		`tb_empresa_id`
 		)
 		VALUES (
-		 '$nom',  '$idp'
+		 '$nom',  '$idp' ,'{$_SESSION['empresa_id']}'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -21,6 +23,7 @@ class cCategoria{
 	function mostrarTodos(){
 	$sql="SELECT * 
 	FROM tb_categoria
+	WHERE tb_empresa_id={$_SESSION['empresa_id']}
 	ORDER BY tb_categoria_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -29,7 +32,7 @@ class cCategoria{
 	function mostrar_cat_idp(){
 	$sql="SELECT * 
 	FROM tb_categoria
-	WHERE tb_categoria_idp=0
+	WHERE tb_categoria_idp=0 AND tb_empresa_id={$_SESSION['empresa_id']}
 	ORDER BY tb_categoria_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -37,48 +40,48 @@ class cCategoria{
 	}
 	function mostrar_por_idp($idp){
 	$sql="SELECT * 
-	FROM tb_categoria
-	WHERE tb_categoria_idp=$idp
-	ORDER BY tb_categoria_nom";
+          FROM tb_categoria
+          WHERE tb_categoria_idp=$idp AND tb_empresa_id={$_SESSION['empresa_id']}
+          ORDER BY tb_categoria_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function mostrarUno($id){
 	$sql="SELECT * 
-	FROM tb_categoria
-	WHERE tb_categoria_id=$id";
+	      FROM tb_categoria
+	      WHERE tb_categoria_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function modificar($id,$nom,$idp){ 
 	$sql = "UPDATE tb_categoria SET  
-	`tb_categoria_nom` =  '$nom',
-	`tb_categoria_idp` =  '$idp'
-	WHERE  tb_categoria_id =$id;"; 
+	       `tb_categoria_nom` =  '$nom',
+	       `tb_categoria_idp` =  '$idp'
+	       WHERE  tb_categoria_id =$id AND tb_empresa_id={$_SESSION['empresa_id']};";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
 	function verifica_categoria_padre($idp){
 		$sql = "SELECT * 
-	FROM  `tb_categoria` 
-	WHERE tb_categoria_idp =$idp";
+	            FROM  `tb_categoria` 
+	            WHERE tb_categoria_idp =$idp AND tb_empresa_id={$_SESSION['empresa_id']}";
 		$oCado = new Cado();
 		$rst=$oCado->ejecute_sql($sql);
 		return $rst;
 	}
 	function verifica_categoria_tabla($id,$tabla){
 	$sql = "SELECT * 
-		FROM  $tabla 
-		WHERE tb_categoria_id =$id";
+		    FROM  $tabla 
+		    WHERE tb_categoria_id =$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_categoria WHERE tb_categoria_id=$id";
+	$sql="DELETE FROM tb_categoria WHERE tb_categoria_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

@@ -62,6 +62,7 @@ if($aut==1){
 }
 else
 {*/
+
     header("location: ../puntoventa/puntoventa_seleccionar.php");
 
 //}

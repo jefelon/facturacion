@@ -7,7 +7,9 @@ $oDocumento = new cDocumento();
 
 <?php
 $mos=1;
-	$dts1=$oDocumento->mostrar_por_tipo($_POST['doc_tip'],$mos);
+
+    $dts1=$oDocumento->mostrar_por_tipo_cot($_POST['doc_tip'],$_POST['doc_cot'],$mos);
+
 	while($dt1 = mysql_fetch_array($dts1))
 	{
 ?>

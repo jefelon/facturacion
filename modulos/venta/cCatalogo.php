@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cCatalogo
 {
     function filtrar($nom,$codbar,$est,$alm_id, $limit)
@@ -11,7 +12,7 @@ class cCatalogo
 		INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 		INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id 
 		LEFT JOIN tb_stock s ON pr.tb_presentacion_id=s.tb_presentacion_id
-		WHERE ct.tb_catalogo_verven=1
+		WHERE ct.tb_catalogo_verven=1 AND p.tb_empresa_id={$_SESSION['empresa_id']}
 		";
 
         if($nom!="") $sql .= " AND tb_producto_nom LIKE '$nom' ";
@@ -23,7 +24,6 @@ class cCatalogo
         $sql.=" GROUP BY tb_producto_nom ";
         if($limit>0)$sql.=" LIMIT 0,$limit ";
         //echo $sql;exit;
-
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

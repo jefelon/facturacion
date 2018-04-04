@@ -187,6 +187,7 @@ function eliminar_producto(id)
 			success: function(html){
 				$('#msj_producto').html(html);
 				$('#msj_producto').show();
+
 			},
 			complete: function(){
 				producto_tabla();
