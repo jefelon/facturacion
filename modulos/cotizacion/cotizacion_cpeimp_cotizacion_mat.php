@@ -50,10 +50,6 @@ $sucursales='
         <td width="580">'.$dt['tb_empresa_dir'] .'</td>
     </tr>
     <tr>
-        <td width="80">SUCURSAL:</td>
-        <td width="580">CAR.AREQUIPA KM. 9 (CC AREQUIPA NORTE GO 15 Y GO 16)<br> AREQUIPA - AREQUIPA - CERRO COLORADO</td>
-    </tr>
-    <tr>
         <td>TELEFONO: </td>
         <td>'.$dt['tb_empresa_tel'] .'</td>
     </tr>
@@ -234,10 +230,10 @@ class MYPDF extends TCPDF
 $pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 
 $pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('www.inticap.com');
+$pdf->SetAuthor('www.a-zetasoft.com');
 $pdf->SetTitle($title);
-$pdf->SetSubject('www.inticap.com');
-$pdf->SetKeywords('www.inticap.com');
+$pdf->SetSubject('www.a-zetasoft.com');
+$pdf->SetKeywords('www.a-zetasoft.com');
 
 // set header and footer fonts
 $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
@@ -370,14 +366,14 @@ $html.='<tr>
 <table style="width: 100%; border: 0.5px solid #eeeeee; border-collapse:collapse;">
     <tbody>
         <tr class="header_row">
-            <th style="text-align: center; width: 5%;"><b>Ítem</b></th>
-            <th style="text-align: center; width: 40%;"><b>Descripción</b></th>
-            <th style="text-align: center; width: 7%;"><b>Unidad</b></th>
-            <th style="text-align: center; width: 8%;"><b>Cantidad</b></th>
-            <th style="text-align: center; width: 10%;"><b>Precio Unitario</b></th>
-            <th style="text-align: center; width: 10%;"><b>Descuento</b></th>
-            <th style="text-align: center; width: 10%;"><b>Valor Venta</b></th>
-            <th style="text-align: center; width: 10%;"><b>Precio Venta</b></th>
+            <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
+            <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
+            <th style="text-align: center; width: 8%;"><b>CANT</b></th>
+            <th style="text-align: center; width: 9%;"><b>VALOR UNIT</b></th>
+            <th style="text-align: center; width: 10%;"><b>PRECIO UNIT</b></th>
+            <th style="text-align: center; width: 10%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: center; width: 10%;"><b>PRECIO VENTA</b></th>
         </tr>';
             $dts = $oCotizacion->mostrar_venta_detalle_ps($cot_id);
             $cont = 1;
@@ -390,7 +386,7 @@ $html.='<tr class="row">';
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_cotizaciondetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"].'</td>
-                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_des"].'</td>
+                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"]*1.18 .'</td>
                 <td style="text-align: right">'.formato_moneda($dt["tb_cotizaciondetalle_valven"]).'</td>';
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_cotizaciondetalle_preunilin"]*$dt["tb_cotizaciondetalle_can"]).'</td>';
             }else{
@@ -525,29 +521,8 @@ $html.='
 $html.='<br/>'.$sucursales;
 
 $html.='<br/>
-<p style="font-size:7pt">
-Representación Impresa de la '.$tipodoc.'.<br>Esta puede ser consultada en: '.$d_documentos_app.'<br>
-'.$d_resolucion.'
-</p>
 </td>
-<td>
-';
 
-
-$style = array(
-	'border' => 2,
-	'vpadding' => 'auto',
-	'hpadding' => 'auto',
-	'fgcolor' => array(0,0,0),
-	'bgcolor' => false, //array(255,255,255)
-	'module_width' => 1, // width of a single module in points
-	'module_height' => 1 // height of a single module in points
-);
-
-
-$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 40, 40, $style, 'N'));
-$html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
-</td>
 </tr>
 </table>
 </body>
