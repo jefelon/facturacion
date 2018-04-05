@@ -61,6 +61,7 @@ function cmb_doc_id()
 		dataType: "html",                      
 		data: ({
 			doc_tip:	'2',
+            doc_cot: '10',
 			doc_id: '<?php echo $doc_id?>',
 			vista:	'<?php //echo $_POST['action']?>'
 		}),

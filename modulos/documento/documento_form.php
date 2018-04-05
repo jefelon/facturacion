@@ -83,7 +83,7 @@ $(function() {
             <option value="3" <?php if($doc_tip=='3')echo 'selected'?>>NOTA DE VENTA</option>
             <option value="4" <?php if($doc_tip=='4')echo 'selected'?>>NOTA DE ALMACEN</option>
             <option value="5" <?php if($doc_tip=='5')echo 'selected'?>>TRANSFERENCIA</option>
-                  <option value="5" <?php if($doc_tip=='10')echo 'selected'?>>COTIZACIÓN</option>
+                  <option value="6" <?php if($doc_tip=='10')echo 'selected'?>>COTIZACIÓN</option>
           </select></td>
         </tr>
         <tr>

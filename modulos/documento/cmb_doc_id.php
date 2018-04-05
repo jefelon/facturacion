@@ -6,9 +6,9 @@ $oDocumento = new cDocumento();
 	<option value="">-</option>
 
 <?php
-$mos=1;
-	$dts1=$oDocumento->mostrar_por_tipo($_POST['doc_tip'],$mos);
-	while($dt1 = mysql_fetch_array($dts1))
+    $mos=1;
+    $dts1=$oDocumento->mostrar_por_tipo_cot($_POST['doc_tip'],$_POST['doc_cot'],$mos);
+    while($dt1 = mysql_fetch_array($dts1))
 	{
 ?>
 	<option value="<?php echo $dt1['tb_documento_id']?>" <?php 
