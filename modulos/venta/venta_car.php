@@ -922,6 +922,25 @@ $total_factura=$sub_total+$igv_total;
 ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
+        <td>
+            <div id="div_calcular_vuelto">
+                <fieldset style="width:200px">
+                    <legend>Calcular Vuelto</legend>
+                    <table>
+                        <tr>
+                            <td align="right"><label style="font-size:12px">Paga con:</label></td>
+                            <td align="right"><input type="text" name="txt_importe_cliente" id="txt_importe_cliente" size="10" style="text-align:right; font-size:14px" class="moneda2" /></td>
+                        </tr>
+
+
+                        <tr>
+                            <td align="right"><label for="lbl_ven_vuelto" style="font-size:12px">Vuelto:</label></td>
+                            <td align="right"><input type="text" name="lbl_ven_vuelto" id="lbl_ven_vuelto" readonly size="10" style="text-align:right; font-size:14px" class="moneda2" /></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </td>
         <td valign="top">
             <div style="margin-left:20px; margin-top:10px; float:right">
                 <table border="0" align="right" cellpadding="0" cellspacing="0">
