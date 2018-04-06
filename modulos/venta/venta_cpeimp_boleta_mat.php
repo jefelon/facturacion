@@ -66,12 +66,11 @@ $sucursales='
         <td>VENDEDOR:</td>
         <td>'.$texto_vendedor.'</td>
     </tr>
-    
 </table>';
 
 $tipodoc = 'BOLETA ELECTRONICA';
 
-
+$ven_id=$_POST['ven_id'];
 
 $dts = $oVenta->mostrarUno($ven_id);
 while($dt = mysql_fetch_array($dts))
@@ -288,26 +287,26 @@ $html = '
         font-size: 7.5pt;
     }
     .header_row th {
-        border-bottom: 0.9px solid #ddd;
-        border-right: 0.9px solid #ddd;
-        border-left: 0.9px solid #ddd;
-        background-color: #efaa7c
+        border-bottom: 0.9px solid #01a2e6;
+        border-right: 0.9px solid #01a2e6;
+        border-left: 0.9px solid #01a2e6;
+        background-color: #01a2e6
     }
     .odd_row td {
         background-color: transparent;
-        border-bottom: 0.9px solid #ddd;
+        border-bottom: 0.9px solid #01a2e6;
         padding-top: 5px;
         padding-bottom: 5px;
     }
     .even_row td {
         padding-top: 5px;
         padding-bottom: 5px;
-        background-color: #f6f6f6;
-        border-bottom: 0.9px solid #ddd;
+        background-color: #01a2e6;
+        border-bottom: 0.9px solid #01a2e6;
     }
     .row td{
-        border-right: 0.9px solid #ddd;
-        border-left: 0.9px solid #ddd;
+        border-right: 0.9px solid #01a2e6;
+        border-left: 0.9px solid #01a2e6;
     }
     
    
@@ -332,19 +331,15 @@ if($estado=="ANULADA"){
         <td style="text-align: left" width="15%" align="left">
             <img src="'.$empresa_logo.'" alt="" width: "100%">
         </td>    
-        <td style="text-align: left" width="35%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong>
-            <br>'.$direccion_defecto.' 
-            <br> Importaciones Mayoristas
+        <td style="text-align: left" width="35%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
         </td>
-        <td width="20%" style="text-align: right">
-            <img src="../../images/arequipa.jpg" alt="" style="max-width: 10%" height="40px">
-            <img src="../../images/peru.jpg" alt="" style="max-width: 10%" height="40px" >
-           
+        <td width="20%" style="text-align: center">
+            <img src="../../images/banderas.jpg" alt="" style="max-width: 50%" height="40px" align="left">
         </td>
         <td style="text-align: center;" width="30%" border="1">
             <strong style="font-size: 11pt">'.$tipodoc.'<br>
             RUC: '.$ruc_empresa.'<br>
-            '.$serie.'-'.$numero.'</strong> 
+            '.$serie.'-'.$numero.'</strong>
         </td>
     </tr>
 </table>
@@ -380,17 +375,17 @@ if($estado=="ANULADA"){
 <br/>
 <br/>
 
-<table style="width: 100%; border: 0.5px solid #eeeeee; border-collapse:collapse;">
+<table style="width: 100%; border: 0.5px solid #01a2e6; border-collapse:collapse;">
     
         <tr class="header_row">
-            <th style="text-align: center; width: 5%;"><b>Ítem</b></th>
-            <th style="text-align: center; width: 40%;"><b>Descripción</b></th>
-            <th style="text-align: center; width: 7%;"><b>Unidad</b></th>
-            <th style="text-align: center; width: 8%;"><b>Cantidad</b></th>
-            <th style="text-align: center; width: 10%;"><b>Precio Unitario</b></th>
-            <th style="text-align: center; width: 10%;"><b>Descuento</b></th>
-            <th style="text-align: center; width: 10%;"><b>Valor Venta</b></th>
-            <th style="text-align: center; width: 10%;"><b>Precio Venta</b></th>
+            <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
+            <th style="text-align: center; width: 49%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
+            <th style="text-align: center; width: 6%;"><b>CANT.</b></th>
+            <th style="text-align: center; width: 8%;"><b>VALOR U.</b></th>
+            <th style="text-align: center; width: 8%;"><b>PRECIO U.</b></th>
+            <th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: center; width: 8%;"><b>PRECIO VENTA</b></th>
         </tr>';
             $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
             $cont = 1;
@@ -403,7 +398,7 @@ $html.='<tr class="row">';
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>
+                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preuni"]*1.18).'</td>
                 <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
             }else{
@@ -484,7 +479,7 @@ if($num_rows_vp>1)
 
 $num=0;
 $html.='INFORMACIÓN ADICIONAL<br>
-<table style="width: 50%; border: 0.5px solid #eeeeee; border-collapse:collapse;">';
+<table style="width: 50%; border: 0.5px solid #01a2e6; border-collapse:collapse;">';
     $num++;
     $html.='
     <tr class="row">
