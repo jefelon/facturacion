@@ -1,7 +1,7 @@
 <?php
 class cVenta{
 	function mostrar_filtro($fec1,$doc_id,$ser,$cor,$mon){
-	$cor=str_pad($cor,8, '0', STR_PAD_LEFT);
+//	$cor=str_pad($cor,8, '0', STR_PAD_LEFT);
 	$sql="SELECT * 
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
