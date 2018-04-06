@@ -64,12 +64,9 @@ $(function() {
                     <tr>
                       <td nowrap="nowrap"><?php echo $dt1['tb_cliente_nom']?></td>
                       <td nowrap="nowrap">
-                      <?php 
-                      if($dt1['tb_documento_id']=='2'){
-                        echo 'Factura';
-                      }else{
-                        echo 'Boleta';
-                      }?>
+                      <?php
+                        echo $dt1['tb_documento_nom'];
+                      ?>
                       </td>
                       <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
                       <td>
@@ -85,7 +82,7 @@ $(function() {
                       <td><?php echo $dt1['tb_venta_est']?></td>
                       <td align="center" nowrap="nowrap">
                       <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
-                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="../venta/pre_cargarPDF.php?action=paraDescargar&id_factura=<?php echo $dt1['tb_venta_id'] ?>" title="Descargar pdf">PDF</a>
+                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="venta_cpeimp.php?action=paraDescargar&ven_id=<?php echo $dt1['tb_venta_id'] ?>" title="Descargar pdf">PDF</a>
                       <a class="btn_xml" id="btn_xml" target="_blank" href="../venta/pre_cargarXML.php?action=paraDescargar&id_factura=<?php echo $dt1['tb_venta_id'] ?>" title="Descargar XML">XML</a>
                       </td>
                     </tr>
