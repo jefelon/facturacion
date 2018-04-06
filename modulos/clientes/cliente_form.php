@@ -39,8 +39,16 @@ if($_POST['action']=="editarSunat"){
 ?>
 
 <script type="text/javascript">
+    jQuery.validator.addMethod("tip_doc", function(value, element, parameter) {
+        if (($('input[name="rad_cli_tip"]:checked').val()==1 && $('#txt_cli_doc').val().length==8)||($('input[name="rad_cli_tip"]:checked').val()==2 && $('#txt_cli_doc').val().length==11)){
+            return true;
+        }else{
+            return false;
+        }
+    }, "Número de digitos incorrecto");
 
-function buscar() {
+
+    function buscar() {
 	/*if($("#txt_cli_doc").val().substr(0,2)=='20'){
 		$('#radio2').prop( "checked", true );
 	}else if($("#txt_cli_doc").val().substr(0,2)=='10'){
@@ -163,7 +171,8 @@ $(function() {
 			},
 			txt_cli_doc: {
 				required: true,
-				digits: true
+				digits: true,
+                tip_doc: true
 			},
 			txt_cli_dir: {
 				maxlength: 150

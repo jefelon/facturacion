@@ -87,7 +87,8 @@ if($_POST['action']=="editar"){
 		$lab2	=$dt['tb_venta_lab2'];
 		$lab3	=$dt['tb_venta_lab3'];
 		
-		$may	=$dt['tb_venta_may'];
+		$may	= $dt['tb_venta_may'];
+        $use_id = $dt['tb_usuario_id'];
 	mysql_free_result($dts);
 }
 ?>
@@ -321,6 +322,30 @@ function verificar_numdoc(){
 		}
 	});
 }
+
+function cmb_ven_id()
+{
+    $.ajax({
+        type: "POST",
+        url: "../usuarios/cmb_ven_id.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            use_id: '<?php echo $use_id?>',
+            vista:	'<?php echo $_POST['action']?>'
+        }),
+        beforeSend: function() {
+            $('#hdd_usu_id').html('<option value="">Cargando...</option>');
+        },
+        success: function(html){
+            $('#hdd_usu_id').html(html);
+        },
+        complete: function(){
+
+        }
+    });
+}
+
 function txt_venpag_fecven(){	
 	$.ajax({
 		type: "POST",
@@ -779,6 +804,7 @@ function compararSunat(doc, nom, dir, id) {
 
 $(function() {
 	cmb_ven_doc();
+    cmb_ven_id();
 	$("#txt_ven_numdoc").addClass("ui-state-active");
 	
 	$('#txt_ven_lab1').change(function(){
@@ -1321,7 +1347,6 @@ function bus_cantidad(act)
 <input name="action_venta" id="action_venta" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_ven_id" id="hdd_ven_id" type="hidden" value="<?php echo $_POST['ven_id']?>">
     <input name="hdd_cot_id" id="hdd_cot_id" type="hidden" value="<?php echo $_POST['cot_id']?>">
-<input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="hdd_punven_id" id="hdd_punven_id" type="hidden" value="<?php echo $_SESSION['puntoventa_id']?>">
 <input name="hdd_emp_id" id="hdd_emp_id" type="hidden" value="<?php echo $_SESSION['empresa_id']?>">
 <input name="hdd_ven_est" id="hdd_ven_est" type="hidden" value="<?php echo $est?>">
@@ -1465,6 +1490,24 @@ function bus_cantidad(act)
 <?php }?>
 <div id="div_venta_pago_tabla">
 </div>
+    <div>
+        <?php
+        if($_SESSION['usuariogrupo_id']==2){
+            ?>
+                <label for="hdd_usu_id">Vendedor:</label>
+                <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
+                </select>
+            <?php
+        }
+        ?>
+        <?php
+        if($_SESSION['usuariogrupo_id']==3){
+            ?>
+            <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
+            <?php
+        }
+        ?>
+    </div>
 </fieldset>
 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_tip?>" />
@@ -1576,7 +1619,9 @@ if($_POST['action']=="editar"){
 ?>
 <br>
 <div id="div_venta_detalle_tabla">
+
 </div>
+
 <?php }?>
 <script type="text/javascript">
 //catalogo_venta_tab();
