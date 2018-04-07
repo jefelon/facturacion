@@ -128,7 +128,7 @@ $menu_administrador=
   </li>
 	<li class="topmenu"><a href="#" >Gráficos</a>
   	<ul>
-
+        <li><a href="../grafico" >Volumen de ventas</a>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Caja</a>

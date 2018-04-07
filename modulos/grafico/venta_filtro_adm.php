@@ -177,8 +177,9 @@ $(function() {
     </select>-->
     <label for="cmb_fil_ven_y">Año:</label>
 	<select name="cmb_fil_ven_y" id="cmb_fil_ven_y">
-	  <option value="2013">2013</option>
-    <option value="2014" selected="selected">2014</option>
+        <option value="2018" selected="selected">2018</option>
+	  <option value="2017">2017</option>
+
     </select>
     
     <label for="cmb_fil_ven_doc">Doc:</label>
