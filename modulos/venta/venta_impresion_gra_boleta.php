@@ -300,6 +300,9 @@ if($impresion=='pdf')ob_start();
 							<?php
 							//echo $dt1['tb_unidad_abr'].' | ';
 							echo ''.$dt1['tb_producto_nom'].'';
+                            if ($dt1['tb_ventadetalle_serie']!=''){
+                                echo ' - '.$dt1['tb_ventadetalle_serie'];
+                            }
 							//echo ' | '.$dt1['tb_presentacion_nom'];
 							//echo ' | '.$dt1['tb_categoria_nom'];
 							//echo ' | '.$dt1['tb_marca_nom'];
