@@ -102,7 +102,11 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		$documento_cod=$dt['cs_tipodocumento_cod'];
 			mysql_free_result($dts);
 
-
+        if ($_POST['hdd_usu_id']==''){
+            $usu_id= $_SESSION['usuario_id'];
+        }else{
+            $usu_id= $_POST['hdd_usu_id'];
+        }
 		//insertamos venta
 		$oVenta->insertar( 
 			fecha_mysql($_POST['txt_ven_fec']),
@@ -120,7 +124,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$_POST['txt_ven_lab2'],
 			$_POST['txt_ven_lab3'],
 			$_POST['chk_ven_may'],
-			$_POST['hdd_usu_id'],
+            $_SESSION['usuario_id'],
 			$_POST['hdd_punven_id'],
 			$_SESSION['empresa_id'],
 
@@ -135,7 +139,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			moneda_mysql($_POST['txt_ven_otrcar']),
 			0,//tb_venta_desglo
 			1,//cs_tipooperacion_id
-			0//cs_documentosrelacionados_id
+			0,//cs_documentosrelacionados_id
+            $usu_id
 		);
 		//ultima venta
 			$dts=$oVenta->ultimoInsert();
