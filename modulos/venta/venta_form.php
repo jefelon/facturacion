@@ -1506,9 +1506,12 @@ function bus_cantidad(act)
                 <label for="hdd_usu_id">Vendedor:</label>
                 <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                 </select>
-
-            <div id="msj_hdd_ven" class="ui-state-highlight ui-corner-all" style="width: auto; display: inline-block; padding: 2px;">No ha seleccionado vendedor.</div>
-            <?php
+	    <?php if($_POST['action']=='insertar'||$_POST['action']=='insertar_cot') { ?>
+                <div id="msj_hdd_ven" class="ui-state-highlight ui-corner-all"
+                     style="width: auto; display: inline-block; padding: 2px;">No ha seleccionado vendedor.
+                </div>
+                <?php
+            	}
         }
         ?>
         <?php
