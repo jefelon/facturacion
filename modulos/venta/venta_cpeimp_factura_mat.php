@@ -19,7 +19,7 @@ $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
 $dt = mysql_fetch_array($dts);
 
-$dts=$oUsuario->mostrarUno($dt['tb_usuario_id']);
+$dts=$oUsuario->mostrarUno($dt['tb_vendedor_id']);
 $dt = mysql_fetch_array($dts);
 $usugru		=$dt['tb_usuariogrupo_id'];
 $usugru_nom	=$dt['tb_usuariogrupo_nom'];

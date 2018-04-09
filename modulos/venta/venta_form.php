@@ -62,9 +62,9 @@ if($_POST['action']=="editar"){
 	$dts= $oVenta->mostrarUno($_POST['ven_id']);
 	$dt = mysql_fetch_array($dts);
 		$reg	=mostrarFechaHora($dt['tb_venta_reg']);
-		
+
 		$fec	=mostrarFecha($dt['tb_venta_fec']);
-		
+
 		$doc_id	=$dt['tb_documento_id'];
 		//$numdoc	=$dt['tb_venta_numdoc'];
 		$ser	=$dt['tb_venta_ser'];
@@ -74,21 +74,21 @@ if($_POST['action']=="editar"){
 		$cli_doc = $dt['tb_cliente_doc'];
 		$cli_dir = $dt['tb_cliente_dir'];
 		$cli_tip = $dt['tb_cliente_tip'];
-		
+
 		$subtot	=$dt['tb_venta_subtot'];
  		$igv	=$dt['tb_venta_igv'];
 		$tot	=$dt['tb_venta_tot'];
 		$est	=$dt['tb_venta_est'];
-		
+
 		$punven_nom	=$dt['tb_puntoventa_nom'];
 		$alm_nom	=$dt['tb_almacen_nom'];
-		
+
 		$lab1	=$dt['tb_venta_lab1'];
 		$lab2	=$dt['tb_venta_lab2'];
 		$lab3	=$dt['tb_venta_lab3'];
-		
+
 		$may	= $dt['tb_venta_may'];
-        $use_id = $dt['tb_usuario_id'];
+        $use_id = $dt['tb_vendedor_id'];
 	mysql_free_result($dts);
 }
 ?>
@@ -148,7 +148,7 @@ $('.dias').autoNumeric({
 });
 
 $( "#txt_ven_fec" ).datepicker({
-	minDate: "-0D", 
+	minDate: "-0D",
 	maxDate:"+0D",
 	yearRange: 'c-0:c+0',
 	changeMonth: true,
@@ -162,7 +162,7 @@ $( "#txt_ven_fec" ).datepicker({
 });
 
 $( "#txt_venpag_fec" ).datepicker({
-	//minDate: "-1M", 
+	//minDate: "-1M",
 	maxDate:"+0D",
 	yearRange: 'c-0:c+0',
 	changeMonth: true,
@@ -176,7 +176,7 @@ $( "#txt_venpag_fec" ).datepicker({
 });
 
 /*$( "#txt_venpag_fecven" ).datepicker({
-	minDate: "-0D", 
+	minDate: "-0D",
 	//maxDate:"+0D",
 	yearRange: 'c-0:c+0',
 	changeMonth: true,
@@ -190,12 +190,12 @@ $( "#txt_venpag_fec" ).datepicker({
 });*/
 
 function cmb_cuecor_id(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../cuentacorriente/cmb_cuecor_id.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			cuecor_id: ids
 		}),
@@ -208,12 +208,12 @@ function cmb_cuecor_id(ids)
 	});
 }
 function cmb_tar_id(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../tarjeta/cmb_tar_id.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			tar_id: ids
 		}),
@@ -226,12 +226,12 @@ function cmb_tar_id(ids)
 	});
 }
 function cmb_ven_doc()
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../documento/cmb_doc_id.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			doc_tip:	'2',
 			doc_id: '<?php echo $doc_id?>',
@@ -240,7 +240,7 @@ function cmb_ven_doc()
 		beforeSend: function() {
 			$('#cmb_ven_doc').html('<option value="">Cargando...</option>');
         },
-		success: function(html){			
+		success: function(html){
 			$('#cmb_ven_doc').html(html);
 		},
 		complete: function(){
@@ -250,18 +250,18 @@ function cmb_ven_doc()
 		}
 	});
 }
-function txt_ven_numdoc(){	
+function txt_ven_numdoc(){
 	$.ajax({
 		type: "POST",
 		url: "../venta/venta_txt_numdoc.php",
 		async:false,
-		dataType: "json",                      
+		dataType: "json",
 		data: ({
 			doc_id: $('#cmb_ven_doc').val()
 		}),
 		beforeSend: function() {
 			$('#txt_ven_numdoc').val('Cargando...');
-			
+
 			if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
 			{
 				$('#hdd_val_cli_tip').val('2');
@@ -269,9 +269,9 @@ function txt_ven_numdoc(){
 			if($('#cmb_ven_doc').val()*1==3 || $('#cmb_ven_doc').val()*1==12)//boleta
 			{
 				$('#hdd_val_cli_tip').val('1');
-			}			
+			}
         },
-		success: function(data){			
+		success: function(data){
 			$('#txt_ven_numdoc').val(data.numero);
 			if(data.msj!="")
 			{
@@ -290,12 +290,12 @@ function txt_ven_numdoc(){
 		}
 	});
 }
-function verificar_numdoc(){	
+function verificar_numdoc(){
 	$.ajax({
 		type: "POST",
 		url: "../venta/venta_ver_numdoc.php",
 		async:false,
-		dataType: "json",                      
+		dataType: "json",
 		data: ({
 			doc_id: $('#cmb_ven_doc').val(),
 			numdoc: $('#txt_ven_numdoc').val(),
@@ -304,11 +304,11 @@ function verificar_numdoc(){
 		beforeSend: function() {
 
         },
-		success: function(data){			
+		success: function(data){
 			$('#hdd_ven_doc').val(data.valor);
 			if(data.msj!="")
 			{
-				$('#div_venta_validar_form').dialog("open");			  
+				$('#div_venta_validar_form').dialog("open");
 				$('#div_venta_validar_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
 				$('#div_venta_validar_form').html(data.msj);
 				//alert(data.msj);
@@ -346,18 +346,18 @@ function cmb_ven_id()
     });
 }
 
-function txt_venpag_fecven(){	
+function txt_venpag_fecven(){
 	$.ajax({
 		type: "POST",
 		url: "../venta/venta_txt_fecven.php",
 		async:true,
-		dataType: "json",                      
+		dataType: "json",
 		data: ({
 			ven_fec: 		$('#txt_ven_fec').val(),
 			venpag_numdia: 	$('#txt_venpag_numdia').val()
 		}),
 		beforeSend: function() {
-			//$('#txt_ven_numdoc').val('Cargando...');			
+			//$('#txt_ven_numdoc').val('Cargando...');
         },
 		success: function(data){
 			//alert(data.fecha);
@@ -370,7 +370,7 @@ function venta_car(act,cat_id){
 	if(act=='agregar') {
 		var stouni=$('#hdd_bus_cat_stouni').val();
 		var cantidad=$('#txt_bus_cat_can').val();
-		
+
 		var dif = stouni-$('#txt_bus_cat_can').val();
 
 		// if($('#txt_bus_cat_preven').autoNumericGet()>0) {
@@ -400,7 +400,7 @@ function venta_car(act,cat_id){
 				type: "POST",
 				url: "../venta/venta_car.php",
 				async:false,
-				dataType: "html",                      
+				dataType: "html",
 				data: ({
 					action:	 act,
 					unico_id: $('#unico_id').val(),
@@ -420,7 +420,7 @@ function venta_car(act,cat_id){
 
 					$('#div_venta_car_tabla').html(html);
 				},
-				complete: function(){			
+				complete: function(){
 					$('#div_venta_car_tabla').removeClass("ui-state-disabled");
                     if(!($('#chk_modo').is(':checked'))) {
                         $('#hdd_bus_cat_id').val('');
@@ -439,12 +439,12 @@ function venta_car(act,cat_id){
 	}
 }
 
-function venta_car_servicio(act,idf){	
+function venta_car_servicio(act,idf){
 	$.ajax({
 		type: "POST",
 		url: "../venta/venta_car.php",
 		async:false,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action:	 act,
 			unico_id: $('#unico_id').val(),
@@ -454,7 +454,7 @@ function venta_car_servicio(act,idf){
 			ser_tip: $('#cmb_detven_tip_'+idf).val(),
 			ser_des: $('#txt_ser_detven_des_'+idf).val(),//Descuento
 			ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
-			ser_pre: $('#txt_servicio_pre_'+idf).val()		
+			ser_pre: $('#txt_servicio_pre_'+idf).val()
 		}),
 		beforeSend: function() {
 			$("#txt_fil_ser_nom").val(''); $("#txt_fil_ser_nom").focus();
@@ -463,18 +463,18 @@ function venta_car_servicio(act,idf){
 		success: function(html){
 			$('#div_venta_car_tabla').html(html);
 		},
-		complete: function(){			
+		complete: function(){
 			$('#div_venta_car_tabla').removeClass("ui-state-disabled");
 		}
 	});
 }
 
-function catalogo_venta(){	
+function catalogo_venta(){
 	$.ajax({
 		type: "POST",
 		url: "../catalogo/catalogo_venta.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			//action: act,
 			//ven_id:	idf
@@ -485,17 +485,17 @@ function catalogo_venta(){
 			$('#div_tab_producto').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
 		},
 		success: function(html){
-			$('#div_tab_producto').html(html);				
+			$('#div_tab_producto').html(html);
 		}
 	});
 }
-	
+
 function catalogo_servicio(){
 	$.ajax({
 		type: "POST",
 		url: "../catalogo/catalogo_servicio.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			//action: act,
 			//ven_id:	idf
@@ -506,7 +506,7 @@ function catalogo_servicio(){
 			$('#div_tab_servicio').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_tab_servicio').html(html);				
+			$('#div_tab_servicio').html(html);
 		}
 	});
 }
@@ -516,7 +516,7 @@ function catalogo_venta_tab(){
 		type: "POST",
 		url: "../catalogo/catalogo_venta_tab.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			//action: act,
 			//ven_id:	idf
@@ -527,13 +527,13 @@ function catalogo_venta_tab(){
 			$('#div_catalogo_venta').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_catalogo_venta').html(html);				
+			$('#div_catalogo_venta').html(html);
 		},
 		complete: function(){
 			catalogo_venta();
-			catalogo_servicio();	
+			catalogo_servicio();
 		}
-	});	
+	});
 }
 
 function venta_pago_tabla()
@@ -542,7 +542,7 @@ function venta_pago_tabla()
 		type: "POST",
 		url: "../venta/venta_pago_tabla.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			ven_id:	'<?php echo $_POST['ven_id']?>'
 		}),
@@ -552,10 +552,10 @@ function venta_pago_tabla()
 		success: function(html){
 			$('#div_venta_pago_tabla').html(html);
 		},
-		complete: function(){			
+		complete: function(){
 			$('#div_venta_pago_tabla').removeClass("ui-state-disabled");
 		}
-	});     
+	});
 }
 
 function venta_detalle_tabla()
@@ -564,7 +564,7 @@ function venta_detalle_tabla()
 		type: "POST",
 		url: "../venta/venta_detalle_tabla.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			ven_id:	'<?php echo $_POST['ven_id']?>'
 		}),
@@ -574,10 +574,10 @@ function venta_detalle_tabla()
 		success: function(html){
 			$('#div_venta_detalle_tabla').html(html);
 		},
-		complete: function(){			
+		complete: function(){
 			$('#div_venta_detalle_tabla').removeClass("ui-state-disabled");
 		}
-	});     
+	});
 }
 
 function cotizacion_detalle_tabla()
@@ -603,29 +603,29 @@ function cotizacion_detalle_tabla()
     });
 }
 
-function editar_datos_item(act,idf){	
+function editar_datos_item(act,idf){
 	$.ajax({
 		type: "POST",
 		url: "../venta/venta_car_item.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: act,
 			unico_id: $('#unico_id').val(),
 			ite_id:	idf
 		}),
-		beforeSend: function() {			
+		beforeSend: function() {
 			//$('#msj_proveedor').hide();
 			$(".btn_item").click(function(e){
 			  x=e.pageX-200;
 			  y=e.pageY+15;
 			  $('#div_item_form').dialog({ position: [x,y] });
-			  $('#div_item_form').dialog("open");			  
+			  $('#div_item_form').dialog("open");
 		    });
 			$('#div_item_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
 		},
-		success: function(html){						
-			$('#div_item_form').html(html);				
+		success: function(html){
+			$('#div_item_form').html(html);
 		}
 	});
 }
@@ -635,7 +635,7 @@ function cliente_form_i(act,idf,nom,dir,con,tel,est){
 		type: "POST",
 		url: "../clientes/cliente_form.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: 		act,
 			cli_id:			idf,
@@ -655,7 +655,7 @@ function cliente_form_i(act,idf,nom,dir,con,tel,est){
 			  //$('#div_cliente_form').dialog({ position: [x,y] });
 			  $('#div_cliente_form').dialog("open");
 		    });
-			
+
 			if(act=='editar'){
 				if(idf>0){
 					$("#btn_cli_form_modificar").click(function(e){
@@ -676,11 +676,11 @@ function cliente_form_i(act,idf,nom,dir,con,tel,est){
 				//$('#div_cliente_form').dialog({ position: [x,y] });
 				$('#div_cliente_form').dialog("open");
 			}
-		
+
 			$('#div_cliente_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_cliente_form').html(html);					
+			$('#div_cliente_form').html(html);
 		},
 		complete: function(){
 			if(act=='insertar' & $('#hdd_ven_cli_id').val()=="")
@@ -688,17 +688,17 @@ function cliente_form_i(act,idf,nom,dir,con,tel,est){
 				$('#txt_cli_doc').val($('#txt_ven_cli_doc').val());
 				$('#txt_cli_nom').val($('#txt_ven_cli_nom').val());
 			}
-			
+
 		}
 	});
 }
 
-function cliente_cargar_datos(idf){	
+function cliente_cargar_datos(idf){
 	$.ajax({
 		type: "POST",
 		url: "../clientes/cliente_reg.php",
 		async:true,
-		dataType: "json",                      
+		dataType: "json",
 		data: ({
 			action: "obtener_datos",
 			cli_id:	idf
@@ -707,23 +707,23 @@ function cliente_cargar_datos(idf){
 			//$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(data){
-			$('#hdd_ven_cli_id').val(idf);	
-			$('#txt_ven_cli_nom').val(data.nombre);	
-			$('#txt_ven_cli_doc').val(data.documento);						
+			$('#hdd_ven_cli_id').val(idf);
+			$('#txt_ven_cli_nom').val(data.nombre);
+			$('#txt_ven_cli_doc').val(data.documento);
 			$('#txt_ven_cli_dir').val(data.direccion);
 			$("#hdd_ven_cli_tip").val(data.tipo);
 			$('#txt_ven_cli_est').val(data.estado);
 		}
-	});		
+	});
 }
 
 function clientecuenta_detalle(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../clientecuenta/clientecuenta_detalle.php",
 		async:true,
-		dataType: "html",                    
+		dataType: "html",
 		data: ({
 			cli_id: ids,
 			emp_id: '<?php echo $_SESSION[empresa_id]?>',
@@ -739,12 +739,12 @@ function clientecuenta_detalle(ids)
 	//$('#div_clientecuenta_detalle').html(ids);
 }
 
-function venta_pago_car(act,idf){	
+function venta_pago_car(act,idf){
 	$.ajax({
 		type: "POST",
 		url: "../venta/venta_pago_car.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action:	 act,
 			unico_id: $('#unico_id').val(),
@@ -757,7 +757,7 @@ function venta_pago_car(act,idf){
 			venpag_numope: $('#txt_venpag_numope').val(),
 			venpag_numdia: $('#txt_venpag_numdia').val(),
 			venpag_fecven: $('#txt_venpag_fecven').val(),
-			ven_tot: $('#txt_ven_tot').val()		
+			ven_tot: $('#txt_ven_tot').val()
 		}),
 		beforeSend: function() {
 			$('#div_venta_pago_car').addClass("ui-state-disabled");
@@ -765,7 +765,7 @@ function venta_pago_car(act,idf){
 		success: function(html){
 			$('#div_venta_pago_car').html(html);
 		},
-		complete: function(){			
+		complete: function(){
 			$('#div_venta_pago_car').removeClass("ui-state-disabled");
 		}
 	});
@@ -806,7 +806,7 @@ $(function() {
 	cmb_ven_doc();
     cmb_ven_id();
 	$("#txt_ven_numdoc").addClass("ui-state-active");
-	
+
 	$('#txt_ven_lab1').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
@@ -814,14 +814,14 @@ $(function() {
 	$('#txt_ven_cli_nom').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-	
+
 	cmb_tar_id(<?php echo $tar_id?>);
 	cmb_cuecor_id(<?php echo $cuecor_id?>);
 
 	$( "#txt_ven_cli_doc" ).autocomplete({
    		minLength: 1,
    		source: "../clientes/cliente_complete_doc.php",
-		select: function(event, ui){			
+		select: function(event, ui){
 			$("#hdd_ven_cli_id").val(ui.item.id);
 			$("#txt_ven_cli_nom").val(ui.item.nombre);
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
@@ -833,12 +833,12 @@ $(function() {
 			compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
 		}
     });
-	
+
 	$( "#txt_ven_cli_nom" ).autocomplete({
    		minLength: 1,
    		source: "../clientes/cliente_complete_nom.php",
-		select: function(event, ui){			
-			$("#hdd_ven_cli_id").val(ui.item.id);							
+		select: function(event, ui){
+			$("#hdd_ven_cli_id").val(ui.item.id);
 			$("#txt_ven_cli_doc").val(ui.item.documento);
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
 			$("#hdd_ven_cli_tip").val(ui.item.tipo);
@@ -849,7 +849,7 @@ $(function() {
 			compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
 		}
     });
-	
+
 	<?php
 	if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
 	?>
@@ -860,29 +860,29 @@ $(function() {
 	venta_car();
 
 	$("#cmb_ven_est").change(function(){
-		verificar_numdoc();	
+		verificar_numdoc();
 		var est = $("#cmb_ven_est").val();
 
-		if(est == 'ANULADA'){			
+		if(est == 'ANULADA'){
 			$("#hdd_ven_numite").attr('disabled', 'disabled');
-			$("#hdd_ven_cli_id").attr('disabled', 'disabled');	
+			$("#hdd_ven_cli_id").attr('disabled', 'disabled');
 		}
-		if(est == 'CANCELADA'){			
+		if(est == 'CANCELADA'){
 			$("#hdd_ven_numite").attr('disabled', false);
 			$("#hdd_ven_cli_id").attr('disabled', false);
 		}
 	});
 	<?php }?>
-	
+
 	$("#chk_venpag_aut").change(function(){
-		if($('#chk_venpag_aut').is(':checked')){  
+		if($('#chk_venpag_aut').is(':checked')){
 			//var chk=1;
 			$("#div_pago_agregar").hide(100);
 			$("#hdd_ven_pag_numite").attr('disabled', 'disabled');
 			//venta_pago_car('restablecer');
 			$("#hdd_ven_pag_numite").attr('disabled', 'disabled');
 			$("#hdd_venpag_tot").attr('disabled', 'disabled');
-		} else {  
+		} else {
 			//var chk=0;
 			$("#div_pago_agregar").show(100);
 			venta_pago_car('actualizar');
@@ -890,12 +890,12 @@ $(function() {
 			$("#hdd_venpag_tot").attr('disabled', false);
 		}
 	});
-	
-	$("#cmb_forpag_id").change(function(){		
+
+	$("#cmb_forpag_id").change(function(){
 		var tipo = $("#cmb_forpag_id").val();
-		
+
 		//$('#cmb_forpag_id').val();
-		
+
 		//$('#txt_venpag_mon').val('');
 		$('#cmb_modpag_id').val('');
 		$('#cmb_cuecor_id').val('');
@@ -904,12 +904,12 @@ $(function() {
 		$('#txt_venpag_numdia').val('');
 		$('#txt_venpag_fecven').val('');
 
-		$("#div_cuentacorriente").hide(100);			
+		$("#div_cuentacorriente").hide(100);
 		$("#div_tarjeta").hide(100);
 		$("#div_operacion").hide(100);
-		
+
 		//contado
-		if(tipo == 1){			
+		if(tipo == 1){
 			$("#div_dia").hide(100);
 			$("#div_fecven").hide(100);
 			//ocultar deposito y tarjeta
@@ -917,27 +917,27 @@ $(function() {
 			$("#cmb_modpag_id option[value='3']").attr("disabled",false);
 		}
 		//credito
-		if(tipo == 2){			
+		if(tipo == 2){
 			$("#div_dia").show(100);
-			$("#div_fecven").show(100);	
+			$("#div_fecven").show(100);
 			//ocultar deposito y tarjeta
 			$("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
 			$("#cmb_modpag_id option[value='3']").attr("disabled","disabled");
-		}		
+		}
 	});
-	
-	$("#cmb_modpag_id").change(function(){		
+
+	$("#cmb_modpag_id").change(function(){
 		var tipo = $("#cmb_modpag_id").val();
-		
+
 		$('#cmb_tar_id').val('');
 		$('#cmb_cuecor_id').val('');
 		$('#txt_venpag_numope').val('');
 		$('#txt_venpag_numdia').val('');
 		$('#txt_venpag_fecven').val('');
-		
+
 		//efectivo
 		if(tipo == 1){
-			$("#div_cuentacorriente").hide(100);			
+			$("#div_cuentacorriente").hide(100);
 			$("#div_tarjeta").hide(100);
 			$("#div_operacion").hide(100);
 		}
@@ -949,12 +949,12 @@ $(function() {
 		}
 		//tarjeta
 		if(tipo == 3){
-			$("#div_cuentacorriente").hide(100);		
+			$("#div_cuentacorriente").hide(100);
 			$("#div_tarjeta").show(100);
 			$("#div_operacion").show(100);
 		}
 	});
-	
+
 	$('#txt_venpag_numdia').change( function() {
 		if($('#txt_venpag_numdia').val()!="")
 		{
@@ -965,9 +965,9 @@ $(function() {
 			$('#txt_venpag_fecven').val('');
 		}
 	});
-	
+
 	cmb_tar_id();
-	
+
 	<?php
 	if($_POST['action']=="editar"){
 	?>
@@ -987,7 +987,7 @@ $(function() {
 
     <?php }?>
 
-	
+
 	$( "#div_cliente_form" ).dialog({
 		title:'Información de Cliente',
 		autoOpen: false,
@@ -1007,7 +1007,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	$( "#div_catalogo_venta" ).dialog({
 		open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); },
 		title:'Catálogo de Venta',
@@ -1024,8 +1024,8 @@ $(function() {
 				$( this ).dialog( "close" );
 			}
 		}
-	});	
-	
+	});
+
 	//Formulario para actualizar Item de Detalle de Venta
 	$( "#div_item_form" ).dialog({
 		title:'Información de Item',
@@ -1045,7 +1045,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	$( "#div_venta_validar_form" ).dialog({
 		title:'Validar venta...',
 		autoOpen: false,
@@ -1064,11 +1064,11 @@ $(function() {
 			}
 		}
 	});
-	
+
 //formulario			
 	$("#for_ven").validate({
 		submitHandler: function(){
-           
+
 			$.ajax({
 				type: "POST",
 				url: "../venta/venta_reg.php",
@@ -1086,9 +1086,9 @@ $(function() {
 					 	window.location.href = "../usuarios/cerrar_sesion.php";
 					 	return;
 					}
-					
+
 					$('#msj_venta').html(data.ven_msj);
-                       
+
                         if(data.ven_sun=='enviar')
                         {
                             enviar_sunat(data.ven_id,data.ven_act);
@@ -1106,7 +1106,7 @@ $(function() {
 				complete: function(){
 					venta_tabla();
 				}
-			});			
+			});
 		},
 		rules: {
 			txt_ven_fec: {
@@ -1525,7 +1525,7 @@ function bus_cantidad(act)
 				<label for="txt_ven_cli_doc">RUC/DNI:</label>
 			</td>
 			<td>
-				<input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" /> 
+				<input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
 				<label for="txt_ven_cli_nom">Cliente:</label>
 				<input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="64" value='<?php echo $cli_nom?>' />
 			</td>
