@@ -815,6 +815,15 @@ $(function() {
 		$(this).val($(this).val().toUpperCase());
 	});
 
+    $('#hdd_usu_id').change(function(){
+        if($(this).val()=='') {
+            $('#msj_hdd_ven').show();
+        }else{
+            $('#msj_hdd_ven').hide();
+        }
+
+    });
+
 	cmb_tar_id(<?php echo $tar_id?>);
 	cmb_cuecor_id(<?php echo $cuecor_id?>);
 
@@ -1497,6 +1506,8 @@ function bus_cantidad(act)
                 <label for="hdd_usu_id">Vendedor:</label>
                 <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                 </select>
+
+            <div id="msj_hdd_ven" class="ui-state-highlight ui-corner-all" style="width: auto; display: inline-block; padding: 2px;">No ha seleccionado vendedor.</div>
             <?php
         }
         ?>
