@@ -618,7 +618,7 @@ function editar_datos_item(act,idf){
 			//$('#msj_proveedor').hide();
 			$(".btn_item").click(function(e){
 			  x=e.pageX-200;
-			  y=e.pageY+15;
+			  y=e.pageY-200;
 			  $('#div_item_form').dialog({ position: [x,y] });
 			  $('#div_item_form').dialog("open");
 		    });

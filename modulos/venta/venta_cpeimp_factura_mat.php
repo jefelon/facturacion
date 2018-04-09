@@ -390,8 +390,14 @@ $html.='<tr>
             	$codigo = $cont; 
 $html.='<tr class="row">';
             if($dt["tb_ventadetalle_tipven"]==1){
+
+                $ven_det_serie= '';
+                if ($dt['tb_ventadetalle_serie']!=''){
+                    $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
+                }
+
                 $html.='<td style="text-align: left">'.$cont.'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].'</td>
+                <td style="text-align: left">'.$dt["tb_producto_nom"].$ven_det_serie.'</td>
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
