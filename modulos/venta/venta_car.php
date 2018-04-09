@@ -251,7 +251,9 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
     }
 }
 //$num_rows_2= mysql_num_rows($dtscot2);
+//End Cotización
 
+//Venta
 
 //agregar a cesta
 if($_POST['action']=='agregar'){
@@ -260,6 +262,7 @@ if($_POST['action']=='agregar'){
         $dts= $oCatalogoProducto->presentacion_catalogo_stock_almacen($_POST['cat_id'],$almacen_venta);
         $dt = mysql_fetch_array($dts);
         $pro_nom=$dt['tb_producto_nom'];
+
         $pre_nom=$dt['tb_presentacion_nom'];
         $pre_id	=$dt['tb_presentacion_id'];
         $sto_num=$dt['tb_stock_num'];
@@ -317,6 +320,8 @@ if($_POST['action']=='agregar'){
                     break;
             }
             $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom . ' ' . $tipo_item_txt;
+
+            $_SESSION['venta_serial'][$unico_id][$_POST['cat_id']] = '';
 
             //IGV
             //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];
@@ -387,6 +392,7 @@ if($_POST['action']=='agregar'){
                                 break;
                         }
                         $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                        $_SESSION['venta_serial'][$unico_id][$_POST['cat_id']] = '';
                         $_SESSION['venta_tipdes'][$unico_id][$_POST['cat_id']]=$_POST['cat_tipdes'];
                         //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
                         $_SESSION['venta_preven'][$unico_id][$_POST['cat_id']]=moneda_mysql($_POST['cat_preven']);//id cat - precio venta
@@ -404,6 +410,7 @@ if($_POST['action']=='agregar'){
                             unset($_SESSION['venta_des'][$unico_id][$indice]);
                             unset($_SESSION['venta_tip'][$unico_id][$indice]);
                             unset($_SESSION['venta_nom'][$unico_id][$indice]);
+                            unset($_SESSION['venta_serial'][$unico_id][$indice]);
                             unset($_SESSION['venta_tipdes'][$unico_id][$indice]);
                             //unset($_SESSION['venta_igv'][$unico_id][$indice]);
                             unset($_SESSION['venta_preven'][$unico_id][$indice]);
@@ -459,6 +466,7 @@ if($_POST['action']=='agregar'){
                                     break;
                             }
                             $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                            $_SESSION['venta_serial'][$unico_id][$_POST['cat_id']] = '';
                             //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
                             $_SESSION['venta_preven'][$unico_id][$_POST['cat_id']]=$_POST['cat_preven'];//id cat - precio venta
                             $_SESSION['presentacion_id'][$unico_id][$_POST['cat_id']]=$pre_id;//id cat-presentacion - pre_id
@@ -521,6 +529,7 @@ if($_POST['action']=='quitar'){
     unset($_SESSION['venta_car'][$unico_id][$_POST['cat_id']]);
     unset($_SESSION['venta_preven'][$unico_id][$_POST['cat_id']]);
     unset($_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]);
+    unset($_SESSION['venta_serial'][$unico_id][$_POST['cat_id']]);
     unset($_SESSION['venta_tipdes'][$unico_id][$_POST['cat_id']]);
     unset($_SESSION['venta_des'][$unico_id][$_POST['cat_id']]);
     unset($_SESSION['venta_tip'][$unico_id][$_POST['cat_id']]);
@@ -770,12 +779,18 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
         $precio_venta = $precio_venta * $cantidad;
 
+
         ?>
         <tr>
             <td>Producto</td>
             <td>Gravado</td>
             <td><?php echo $dt1['tb_presentacion_cod']?></td>
-            <td><?php echo $_SESSION['venta_nom'][$unico_id][$indice] ?></td>
+            <td><?php echo $_SESSION['venta_nom'][$unico_id][$indice];
+                if ($_SESSION['venta_serial'][$unico_id][$indice]!=''){
+                    echo ' - '.$_SESSION['venta_serial'][$unico_id][$indice];
+                }
+                ?>
+            </td>
             <!--<td><?php //echo $dt1['tb_presentacion_nom']?></td>-->
             <td align="left" title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
             <td align="right"><?php echo $cantidad?></td>

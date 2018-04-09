@@ -28,7 +28,8 @@ if($_POST['action']=="editar_producto"){
 	mysql_free_result($dts);
 	
 	$can 	= $_SESSION['venta_car'][$unico_id][$_POST['ite_id']];
-	$preven = $_SESSION['venta_preven'][$unico_id][$_POST['ite_id']];	
+	$preven = $_SESSION['venta_preven'][$unico_id][$_POST['ite_id']];
+    $serie  = $_SESSION['venta_serial'][$unico_id][$_POST['ite_id']];
 	
 	//Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
 	$tipdes = $_SESSION['venta_tipdes'][$unico_id][$_POST['ite_id']];				
@@ -129,6 +130,9 @@ $(function() {
 				required: true,
 				min: '<?php echo $costo_ponderado2?>'
 			},
+            txt_item_serie: {
+                required: false
+            },
 			txt_item_des: {
 				required: false
 			}
@@ -140,6 +144,9 @@ $(function() {
 			txt_item_preven: {
 				required: '*'
 			},
+            txt_item_serie: {
+                required: '*'
+            },
 			txt_item_des: {
 				required: '*'
 			}
@@ -175,6 +182,10 @@ $(function() {
     	  <td nowrap="nowrap">Promedio:</td>
     	  <td><?php echo formato_money($costo_ponderado1)?></td>
   	  </tr>
+        <tr>
+            <td nowrap="nowrap"><label for="txt_item_serie">Serie:</label></td>
+            <td><input name="txt_item_serie" id="txt_item_serie" type="text" value="<?php echo formato_money($serie)?>" size="10" maxlength="11" style="text-align:right; font-size:11px; font-weight:bold;"></td>
+        </tr>
     	<!-- <tr>
     	  <td valign="top"><label for="txt_item_des">Descuento:</label></td>
     	  <td>
