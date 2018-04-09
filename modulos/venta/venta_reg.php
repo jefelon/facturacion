@@ -618,7 +618,6 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 	$descuento_global = 0;
 	  if($_POST['cmb_ven_est']!='ANULADA')
 	  {
-
 	  	$autoin = 0;
 		
 		//detalle de productos
@@ -633,6 +632,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$precio_unitario=$precio_venta/(1+$igv_dato);
 			
 			$nom = $_SESSION['venta_nom'][$unico_id][$indice];
+            $pro_ser = $_SESSION['venta_serial'][$unico_id][$indice];
 			//Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
 			$tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];				
 			$descuento_linea=formato_money($_SESSION['venta_des'][$unico_id][$indice]/1.18);
@@ -678,7 +678,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 				$unimed_id,
 				$calisc,
 				$det_isc,
-				$autoin
+				$autoin,
+                $pro_ser
 			);
 			
 			///-----------------------------------
@@ -800,7 +801,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 				$unimed_id,
 				$calisc,
 				$det_isc,
-				$autoin
+				$autoin,
+                $pro_ser
 			);		
         }
 		

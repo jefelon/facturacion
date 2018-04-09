@@ -9,6 +9,8 @@ if($_POST['action_item']=="editar_producto"){
 	$_SESSION['venta_car'][$unico_id][$_POST['hdd_catalogo_id']] = $_POST['txt_item_can'];
 	
 	$_SESSION['venta_preven'][$unico_id][$_POST['hdd_catalogo_id']]=moneda_mysql($_POST['txt_item_preven']);
+
+	$_SESSION['venta_serial'][$unico_id][$_POST['hdd_catalogo_id']] = $_POST['txt_item_serie'];
 	
 	$_SESSION['venta_tipdes'][$unico_id][$_POST['hdd_catalogo_id']] = $_POST['rad_tip_des'];
 	

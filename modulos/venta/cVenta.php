@@ -71,7 +71,7 @@ class cVenta{
 	// $rst=$oCado->ejecute_sql($sql);
 	// return $rst;	
 	// }
-	function insertar_detalle($tipven,$cat_id,$ser_id,$nom,$preuni,$can,$tipdes,$des,$preunilin,$valven,$igv,$ven_id,$afeigv,$unimed,$calisc,$isc,$nro){
+	function insertar_detalle($tipven,$cat_id,$ser_id,$nom,$preuni,$can,$tipdes,$des,$preunilin,$valven,$igv,$ven_id,$afeigv,$unimed,$calisc,$isc,$nro,$pro_ser){
 	$sql = "INSERT INTO tb_ventadetalle(
 	`tb_ventadetalle_tipven`, 
 	`tb_catalogo_id`, 
@@ -89,8 +89,9 @@ class cVenta{
 	`cs_tipounidadmedida_id`, 
 	`cs_tiposistemacalculoisc_id`, 
 	`tb_ventadetalle_isc`, 
-	`tb_ventadetalle_nro`
-	) VALUES ('$tipven', '$cat_id', '$ser_id', '$nom', '$preuni', '$can', '$tipdes', '$des', '$preunilin', '$valven', '$igv', '$ven_id', '$afeigv', '$unimed', '$calisc', '$isc', '$nro');"; 
+	`tb_ventadetalle_nro`,
+	`tb_ventadetalle_serie`
+	) VALUES ('$tipven', '$cat_id', '$ser_id', '$nom', '$preuni', '$can', '$tipdes', '$des', '$preunilin', '$valven', '$igv', '$ven_id', '$afeigv', '$unimed', '$calisc', '$isc', '$nro','$pro_ser');";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	

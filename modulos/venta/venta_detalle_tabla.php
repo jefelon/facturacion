@@ -103,14 +103,19 @@ $(document).ready(function() {
                           <td title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
                           <td>Producto</td>
                             <td>
-							<?php 
+							<?php
+                            $ven_det_serie= '';
+                            if ($dt1['tb_ventadetalle_serie']!=''){
+                                $ven_det_serie= ' - '.$dt1['tb_ventadetalle_serie'];
+                            }
+
 							if($dt1['tb_ventadetalle_nom']!="")
               {
-                echo '<strong>'.$dt1['tb_ventadetalle_nom'].'</strong>';
+                echo '<strong>'.$dt1['tb_ventadetalle_nom'].$ven_det_serie.'</strong>';
               }
               else
               {
-                echo '<strong>'.$dt1['tb_producto_nom'].'</strong>';
+                echo '<strong>'.$dt1['tb_producto_nom'].' - '.$ven_det_serie.'</strong>';
               }
 							//echo ' | '.$dt1['tb_presentacion_nom'];
 							?></td>
