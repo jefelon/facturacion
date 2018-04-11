@@ -6,7 +6,9 @@ $oTelefono = new cTelefono();
 
 if($_POST['action']=="insertar")
 {
-	$emp_id=$_SESSION['empresa_id'];
+    $dts=$oUsuario->mostrarUno($_POST['usu_id']);
+    $dt = mysql_fetch_array($dts);
+    $emp_id		=$dt['tb_empresa_id'];
 }
 ?>
 

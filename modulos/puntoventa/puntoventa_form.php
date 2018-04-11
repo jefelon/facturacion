@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once ("../../config/Cado.php");
 require_once ("cPuntoventa.php");
 $oPuntoventa = new cPuntoventa();
@@ -9,11 +10,30 @@ if($_POST['action']=="editar")
 	$dt = mysql_fetch_array($dts);
 		$punven_nom=$dt['tb_puntoventa_nom'];
 		$alm_id=$dt['tb_almacen_id'];
+		$emp_id=$dt['tb_empresa_id'];
 	mysql_free_result($dts);
 }
 ?>
 
 <script type="text/javascript">
+
+    function cmb_pv_emp_id(idf) {
+        $.ajax({
+            type: "POST",
+            url: "../empresa/cmb_emp_id.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                emp_id: idf
+            }),
+            beforeSend: function () {
+                $('#cmb_pv_emp_id').html('<option value="">Cargando...</option>');
+            },
+            success: function (html) {
+                $('#cmb_pv_emp_id').html(html);
+            },
+        });
+    }
 
 function cmb_alm_id()
 {	
@@ -35,7 +55,8 @@ function cmb_alm_id()
 }
 
 $(function() {
-	
+    cmb_pv_emp_id('<?php echo $emp_id?>');
+
 	$('#txt_punven_nom').keyup(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
@@ -96,6 +117,13 @@ $(function() {
 <input name="action_puntoventa" id="action_puntoventa" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_punven_id" id="hdd_punven_id" type="hidden" value="<?php echo $_POST['punven_id']?>">
     <table>
+        <tr>
+            <td><label for="cmb_pv_emp_id">Empresa:</label></td>
+        </tr>
+        <tr>
+            <td><select name="cmb_pv_emp_id" id="cmb_pv_emp_id" <?php if($_SESSION['usuariogrupo_id']==2)echo 'disabled'?>>
+                </select></td>
+        </tr>
         <tr>
           <td><label for="txt_punven_nom">Nombre:</label></td>
         </tr>

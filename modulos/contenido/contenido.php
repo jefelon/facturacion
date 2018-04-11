@@ -20,6 +20,7 @@ $menu_superusuario=
 	  <li><a href="../empresa/empresa_vista.php">Empresa</a></li>
 	  <li><a href="ubigeo_vista.php">Ubigeo</a></li>
 	  <li><a href="usuarioGrupo_vista.php">Grupo de Usuarios</a></li>
+	  <li><a href="../puntoventa/">Puntos de Venta</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#">Opciones</a>

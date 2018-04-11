@@ -118,7 +118,7 @@ if($_POST['action_usuario'] == 'insertar'){
 if($_POST['action_usuario'] == 'editar'){
 	if(!empty($_POST['hdd_usu_id']) and $_POST['txt_ema']!="" and $_POST['txt_apepat']!="" and $_POST['txt_apemat']!="" and $_POST['txt_nom']!="")
 	{
-		$oUsuario->modificar_usu_ven($_POST['hdd_usu_id'],$_POST['txt_apepat'],$_POST['txt_apemat'],$_POST['txt_nom'],$_POST['txt_ema'],$_POST['hdd_usugru_id'],$_POST['hdd_emp_id']);
+		$oUsuario->modificar_usu_ven($_POST['hdd_usu_id'],$_POST['txt_pas'],$_POST['txt_apepat'],$_POST['txt_apemat'],$_POST['txt_nom'],$_POST['txt_ema'],$_POST['hdd_usugru_id'],$_POST['hdd_emp_id']);
 		
 		$oUsuariodetalle->modificar_vendedor($_POST['hdd_usu_id'],$_POST['txt_dni'],$_POST['cmb_punven_id'],$_POST['cmb_hor_id']);
 		

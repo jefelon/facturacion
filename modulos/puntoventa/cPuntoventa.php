@@ -59,10 +59,11 @@ class cPuntoventa{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$nom,$alm_id){ 
+	function modificar($id,$nom,$alm_id,$emp_id){
 	$sql = "UPDATE tb_puntoventa SET  
 	`tb_puntoventa_nom` =  '$nom',
-	`tb_almacen_id` =  '$alm_id'
+	`tb_almacen_id` =  '$alm_id',
+	`tb_empresa_id` =  '$emp_id'
 	WHERE  tb_puntoventa_id =$id;"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

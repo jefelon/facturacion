@@ -8,7 +8,7 @@ if($_POST['action_puntoventa']=="insertar")
 {
 	if(!empty($_POST['txt_punven_nom']))
 	{
-		$oPuntoventa->insertar($_POST['txt_punven_nom'],$_POST['cmb_alm_id'],$_SESSION['empresa_id']);
+		$oPuntoventa->insertar($_POST['txt_punven_nom'],$_POST['cmb_alm_id'],$_POST['cmb_pv_emp_id']);
 		echo 'Se registró punto de venta correctamente.';
 	}
 	else
@@ -21,7 +21,7 @@ if($_POST['action_puntoventa']=="editar")
 {
 	if(!empty($_POST['txt_punven_nom']))
 	{
-		$oPuntoventa->modificar($_POST['hdd_punven_id'],$_POST['txt_punven_nom'],$_POST['cmb_alm_id']);
+		$oPuntoventa->modificar($_POST['hdd_punven_id'],$_POST['txt_punven_nom'],$_POST['cmb_alm_id'],$_POST['cmb_pv_emp_id']);
 		echo 'Se registró punto de venta correctamente.';
 	}
 	else

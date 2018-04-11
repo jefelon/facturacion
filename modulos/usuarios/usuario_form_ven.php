@@ -24,6 +24,7 @@ if($_POST['action']=="editar")
 		$apepat		=$dt['tb_usuario_apepat'];
 		$apemat		=$dt['tb_usuario_apemat'];
 		$use		=$dt['tb_usuario_use'];
+        $pas		=$dt['tb_usuario_pas'];
 		$ema		=$dt['tb_usuario_ema'];
 		
 		$emp_id		=$dt['tb_empresa_id'];
@@ -682,12 +683,12 @@ $(function() {
     <input name="txt_use" type="text" id="txt_use" value="<?php echo $use?>" size="30">
     </label></td>
     </tr>
-    <?php if($_POST['action']=="insertar"){?>
+<!--    --><?php //if($_POST['action']=="insertar"){?>
     <tr>
       <td align="right">Contraseña:</td>
-      <td><input name="txt_pas" type="password" id = "txt_pas" value="<?php //if($_POST['action']=="insertar") { echo GeneraPassword(6);}else { echo '*******';}?>" size="20" maxlength="16"></td>
+      <td><input name="txt_pas" type="password" id = "txt_pas" value="<?php echo $pas?>" size="20" maxlength="16"></td>
     </tr>
-    <?php }?>
+<!--    --><?php //}?>
     <tr>
       <td align="right">&nbsp;</td>
       <td>&nbsp;</td>

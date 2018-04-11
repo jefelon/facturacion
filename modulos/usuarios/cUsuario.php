@@ -44,10 +44,10 @@ class cUsuario{
 	}
 	
 	function mostrarUno($id){
-	$sql="SELECT * 
+	$sql="SELECT *
 	FROM  tb_usuario u
 	INNER JOIN tb_usuariogrupo ug ON u.tb_usuariogrupo_id = ug.tb_usuariogrupo_id	
-	WHERE tb_usuario_id =$id;";
+	WHERE tb_usuario_id =$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		  
@@ -142,9 +142,10 @@ class cUsuario{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		  
 	}
-	function modificar_sup($id,$apepat,$apemat,$nom,$ema,$usugru,$emp){
+	function modificar_sup($id,$pas,$apepat,$apemat,$nom,$ema,$usugru,$emp){
 	$sql="UPDATE tb_usuario SET
 	`tb_usuario_mod` = NOW( ) ,
+	`tb_usuario_pas` =  MD5('$pas'),
 	`tb_usuario_apepat` =  '$apepat',
 	`tb_usuario_apemat` =  '$apemat',
 	`tb_usuario_nom` =  '$nom',
@@ -156,9 +157,10 @@ class cUsuario{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		  
 	}
-	function modificar_usu_ven($id,$apepat,$apemat,$nom,$ema,$usugru,$emp){
+	function modificar_usu_ven($id,$pas,$apepat,$apemat,$nom,$ema,$usugru,$emp){
 	$sql="UPDATE tb_usuario SET
 	`tb_usuario_mod` = NOW( ) ,
+	`tb_usuario_pas` =  MD5('$pas'),
 	`tb_usuario_apepat` =  '$apepat',
 	`tb_usuario_apemat` =  '$apemat',
 	`tb_usuario_nom` =  '$nom',

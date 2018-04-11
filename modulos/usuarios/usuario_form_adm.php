@@ -24,6 +24,7 @@ if($_POST['action']=="editar")
 		$apepat		=$dt['tb_usuario_apepat'];
 		$apemat		=$dt['tb_usuario_apemat'];
 		$use		=$dt['tb_usuario_use'];
+        $pas		=$dt['tb_usuario_pas'];
 		$ema		=$dt['tb_usuario_ema'];
 		
 		$emp_id		=$dt['tb_empresa_id'];
@@ -75,7 +76,7 @@ function tabsUsuario()
 		case 'editar':
 			 $("#tabs").tabs({disabled:[]});
 			 $("#txt_use").attr('readonly',true);
-			 $("#txt_pas").attr('readonly',true);
+			 // $("#txt_pas").attr('readonly',true);
 			 break 
 		//default: 
 			 //Sentencias a ejecutar si el valor no es ninguno de los anteriores 
@@ -437,7 +438,7 @@ $(function() {
 	<?php }?>
 	
 	$("#txt_use").attr('readonly',true);
-	$("#txt_pas").attr('readonly',true);
+	// $("#txt_pas").attr('readonly',true);
 	
 
 //formulario
@@ -614,8 +615,9 @@ $(function() {
     </label></td>
     </tr>
     <tr>
-    <td align="right"><!--Contrase&ntilde;a:--></td>
-    <td><input name="txt_pas" type="hidden" id = "txt_pas" value="<?php if($_POST['action']=="insertar") { echo GeneraPassword(6);}else { echo '*******';}?>" size="20" maxlength="16"></td>
+    <td align="right">Contraseña:</td>
+        <td><input name="txt_pas" id="txt_pas" value="<?php echo $pas?>"
+                   size="20" maxlength="16"></td>
     </tr>
     <tr>
       <td align="right">&nbsp;</td>
