@@ -189,6 +189,11 @@ $( "#txt_venpag_fec" ).datepicker({
 	buttonImageOnly: true
 });*/
 
+// Validators
+jQuery.validator.addMethod("equalOr", function(value, element, parameter) {
+           return $(parameter).val() === value || $(parameter).val() === '15';
+      }, "Tipo de cliente no concuerda con tipo de documento.");
+
 function cmb_cuecor_id(ids)
 {
 	$.ajax({
@@ -270,6 +275,10 @@ function txt_ven_numdoc(){
 			{
 				$('#hdd_val_cli_tip').val('1');
 			}
+            if($('#cmb_ven_doc').val()*1==15)//nota de salida
+            {
+                $('#hdd_val_cli_tip').val('15');
+            }
         },
 		success: function(data){
 			$('#txt_ven_numdoc').val(data.numero);
@@ -1144,7 +1153,7 @@ $(function() {
 				equalTo: "#txt_ven_tot"
 			},
 			hdd_ven_cli_tip: {
-				equalTo: "#hdd_val_cli_tip"
+				equalOr: "#hdd_val_cli_tip"
 			},
 			hdd_ven_doc: {
 				required: true
@@ -1174,9 +1183,6 @@ $(function() {
 			},
 			hdd_venpag_tot: {
 				equalTo: "No es igual a Monto Total de Venta."
-			},
-			hdd_ven_cli_tip: {
-				equalTo: "Tipo de cliente no concuerda con tipo de documento."
 			},
 			hdd_ven_doc: {
 				required: "Existe registro con mismo N° Documento."
