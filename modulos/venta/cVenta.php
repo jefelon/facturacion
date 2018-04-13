@@ -156,7 +156,7 @@ class cVenta{
 	return $rst;
 	}
 
-    function mostrar_filtro_doc($doc_id,$numdoc){
+    function mostrar_filtro_comp($doc_id,$numdoc){
         $sql="SELECT * 
               FROM tb_venta v
               LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
@@ -168,16 +168,14 @@ class cVenta{
         return $rst;
     }
 
-    function mostrar_filtro_serial($serial)
-    {
-        $sql = "SELECT * 
-                FROM tb_venta v
-                LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
-                INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-                WHERE tb_venta_id IN 
-                (SELECT tb_venta_id FROM tb_ventadetalle WHERE tb_ventadetalle_serie='$serial' GROUP BY tb_venta_id);";
+    function mostrar_filtro_doc($cliete_doc){
+        $sql="SELECT * 
+              FROM tb_venta v
+              LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+              INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+              WHERE c.tb_cliente_doc = '$cliete_doc'";
         $oCado = new Cado();
-        $rst = $oCado->ejecute_sql($sql);
+        $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
 

@@ -71,18 +71,13 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
-function venta_filtro(er,doc,numdoc)
+function venta_filtro()
 {
 	$.ajax({
 		type: "POST",
-		url: "venta_filtro_serial.php",
+		url: "venta_filtro_garantia.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			error: er,
-			doc: doc,
-			numdoc: numdoc
-		}),
+		dataType: "html",
 		beforeSend: function() {
 			$('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
@@ -242,7 +237,7 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">CONSULTA DE DOCUMENTOS POR SERIE</td>
+                    <td class="caption_cont">CONSULTA DE DOCUMENTOS DE GARANTÍAS</td>
                   </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $razon ?></td>
