@@ -5,10 +5,10 @@ require_once ("cVenta.php");
 $oVenta = new cVenta();
 require_once ("../../modulos/formatos/formato.php");
 
-if ($_POST['hdd_action']=='filtro_doc'){
-    $dts1=$oVenta->mostrar_filtro_doc($_POST['cmb_fil_ven_doc'],$_POST['txt_fil_numdoc']);
-}elseif ($_POST['hdd_action']=='filtro_serial') {
-    $dts1=$oVenta->mostrar_filtro_serial($_POST['txt_fil_serial']);
+if ($_POST['hdd_action']=='filter_comp'){
+    $dts1=$oVenta->mostrar_filtro_comp($_POST['cmb_fil_ven_doc'],$_POST['txt_fil_compdoc']);
+}elseif ($_POST['hdd_action']=='filter_doc') {
+    $dts1=$oVenta->mostrar_filtro_doc($_POST['txt_fil_numdni']);
 }
 
 $num_rows= mysql_num_rows($dts1);
