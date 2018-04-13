@@ -184,7 +184,7 @@ $(function() {
   	  </tr>
         <tr>
             <td nowrap="nowrap"><label for="txt_item_serie">Serie:</label></td>
-            <td><input name="txt_item_serie" id="txt_item_serie" type="text" value="<?php echo formato_money($serie)?>" size="10" maxlength="11" style="text-align:right; font-size:11px; font-weight:bold;"></td>
+            <td><input name="txt_item_serie" id="txt_item_serie" type="text" value="<?php echo $serie?>" size="10" maxlength="250" style="text-align:right; font-size:11px; font-weight:bold;"></td>
         </tr>
     	<!-- <tr>
     	  <td valign="top"><label for="txt_item_des">Descuento:</label></td>

@@ -124,7 +124,7 @@ $menu_administrador=
 	  <li class="separator">_________________________</li>
 	  <li><a href="../venta_cst/">Ventas - Artículos</a></li>
 	  <li><a href="../venta/venta_vista_reparto.php">Venta Reparto</a></li>
-	  <li><a href="../venta/venta_vista_serial.php">Buscar Serial</a></li>
+	 <!-- <li><a href="../venta/venta_vista_serial.php">Buscar</a></li>-->
 	</ul>
   </li>
 	<li class="topmenu"><a href="#" >Gráficos</a>
