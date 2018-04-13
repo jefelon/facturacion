@@ -49,10 +49,10 @@ $sucursales='
         <td width="80">PRINCIPAL:</td>
         <td width="580">'.$dt['tb_empresa_dir'] .'</td>
     </tr>
-    <tr>
+    <!--<tr>
         <td width="80">SUCURSAL:</td>
         <td width="580">CAR.AREQUIPA KM. 9 (CC AREQUIPA NORTE GO 15 Y GO 16)<br> AREQUIPA - AREQUIPA - CERRO COLORADO</td>
-    </tr>
+    </tr>-->
     <tr>
         <td>TELEFONO:</td>
         <td>' .$dt['tb_empresa_tel'] .'</td>
@@ -379,10 +379,10 @@ if($estado=="ANULADA"){
     
         <tr class="header_row">
             <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 49%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 50%;"><b>DESCRIPCION</b></th>
             <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
             <th style="text-align: center; width: 6%;"><b>CANT.</b></th>
-            <th style="text-align: center; width: 8%;"><b>VALOR U.</b></th>
+            <th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>
             <th style="text-align: center; width: 8%;"><b>PRECIO U.</b></th>
             <th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>
             <th style="text-align: center; width: 8%;"><b>PRECIO VENTA</b></th>
