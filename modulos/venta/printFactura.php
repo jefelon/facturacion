@@ -178,7 +178,7 @@
                 <td style="text-align: left"><?php echo $cont; ?></td>
                 <?php /*<td style="text-align: left"><?php echo "P".str_pad($dt["tb_catalogo_id"], 4, "0", STR_PAD_LEFT); ?></td>*/ ?>
                 <td style="text-align: left"><?php echo $dt["tb_producto_nom"]; ?></td>
-                <td style="text-align: center">UNIDAD</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: right"><?php echo $dt["tb_ventadetalle_can"]; ?></td>
                 <td style="text-align: right"><?php echo $dt["tb_ventadetalle_preuni"]; ?></td>
                 <td style="text-align: right"><?php echo $dt["tb_ventadetalle_des"]; ?></td>
@@ -188,7 +188,7 @@
                 <td style="text-align: left"><?php echo $cont; ?></td>
                 <?php /*<td style="text-align: left"><?php echo "S".str_pad($dt["tb_servicio_id"], 4, "0", STR_PAD_LEFT); ?></td>*/ ?>
                 <td style="text-align: left"><?php echo $dt["tb_servicio_nom"]; ?></td>
-                <td style="text-align: center">UNIDAD</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: right"><?php echo $dt["tb_ventadetalle_can"]; ?></td>
                 <td style="text-align: right"><?php echo $dt["tb_ventadetalle_preuni"]; ?></td>
                 <td style="text-align: right"><?php echo $dt["tb_ventadetalle_des"]; ?></td>
