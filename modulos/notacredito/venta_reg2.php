@@ -27,7 +27,7 @@ if($_POST['action_venta']=="insertar")
 		{
 
 			$serie= $_POST['txt_ven_ser'];
-			$correlativo= str_pad($_POST['txt_ven_num']*1,8, "0", STR_PAD_LEFT);
+			$correlativo= $_POST['txt_ven_num'];
 
 			$dts= $oNotacredito->verificar_venta($serie,$correlativo);
 			$dt = mysql_fetch_array($dts);
