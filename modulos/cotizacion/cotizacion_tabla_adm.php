@@ -111,9 +111,15 @@ $num_rows= mysql_num_rows($dts1);
 
                 <td align="left" nowrap="nowrap">
                     <a class="btn_editar" href="#update" onClick="cotizacion_form('editar','<?php echo $dt1['tb_cotizacion_id']?>')">Editar</a>
-                    <button class="btn_generar" id="btn_accion" title="Generar Venta" onClick="venta_form('insertar_cot',
-                            '<?php echo $dt1['tb_cotizacion_id']?>'
-                            )">Generar Factura</button>
+                    <?php
+                    if($dt1['tb_cotizacion_est']=='COTIZADA'){
+                        ?>
+                        <button class="btn_generar" id="btn_accion" title="Generar Venta" onClick="venta_form('insertar_cot',
+                                '<?php echo $dt1['tb_cotizacion_id']?>'
+                                )">Generar Factura</button>
+                        <?php
+                    }
+                    ?>
                     <button class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="cotizacion_impresion('<?php echo $dt1['tb_cotizacion_id']?>')">PDF</button>
                 </td>
             </tr>

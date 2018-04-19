@@ -299,7 +299,7 @@ if($impresion=='pdf')ob_start();
                         	<td style="text-align: left; width: 115mm; font-size: 11pt;">
 							<?php
 							//echo $dt1['tb_unidad_abr'].' | ';
-							echo ''.$dt1['tb_producto_nom'].'';
+							echo ''.$dt1['tb_producto_nom'].' - '.$dt1['tb_marca_nom'].'';
                             if ($dt1['tb_ventadetalle_serie']!=''){
                                 echo ' - '.$dt1['tb_ventadetalle_serie'];
                             }
