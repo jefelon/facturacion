@@ -375,6 +375,15 @@ class cCotizacion{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function modificar_est($id, $est){
+        $sql = "UPDATE tb_cotizacion SET
+	`tb_cotizacion_est` =  '$est'
+	WHERE  tb_cotizacion_id =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
     function modificar_adm($id,$may,$lab1){
         $sql = "UPDATE tb_cotizacion SET  
 	`tb_cotizacion_may` =  '$may',

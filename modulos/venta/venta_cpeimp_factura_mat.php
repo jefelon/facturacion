@@ -393,11 +393,11 @@ $html.='<tr class="row">';
 
                 $ven_det_serie= '';
                 if ($dt['tb_ventadetalle_serie']!=''){
-                    $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
+                    $ven_det_serie= ' S/N '.$dt['tb_ventadetalle_serie'];
                 }
 
                 $html.='<td style="text-align: left">'.$cont.'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].$ven_det_serie.'</td>
+                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
@@ -406,7 +406,7 @@ $html.='<tr class="row">';
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
             }else{
                 $html.='<td style="text-align: left">'.$cont.'</td>
-                <td style="text-align: left">'.$dt["tb_servicio_nom"].'</td>
+                <td style="text-align: left">'.$dt["tb_servicio_nom"].' - '.$dt['tb_marca_nom'].'</td>
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>

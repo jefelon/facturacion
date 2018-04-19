@@ -420,8 +420,6 @@ function venta_car(act,cat_id){
                     cot_id: cot_id
 				}),
 				beforeSend: function() {
-				    console.log('aqui va cot');
-                    console.log($('#hdd_cot_id').val());
 					$("#txt_fil_pro_nom").val(''); $("#txt_fil_pro_nom").focus();
 					$('#div_venta_car_tabla').addClass("ui-state-disabled");
 		    	},
