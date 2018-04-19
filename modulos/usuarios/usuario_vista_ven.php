@@ -138,6 +138,25 @@ function editar_usuario(id,nt)
 	});
 }
 
+function editar_usuario_pass(id){
+    $.ajax({
+        type: "POST",
+        url: "usuario_adm_pass_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            id:		id
+        }),
+        beforeSend: function() {
+            $( "#div_usuario_pass_form" ).dialog( "open" );
+            $('#div_usuario_pass_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_usuario_pass_form').html(html);
+        }
+    });
+}
+
 function eliminar_usuario(id)
 {     
 	if(confirm("Realmente desea eliminar?")){
@@ -220,6 +239,23 @@ $(function() {
 			blok_usuario_form();
 		}
 	});
+    $( "#div_usuario_pass_form" ).dialog({
+        title:'Cambiar Contraseña',
+        autoOpen: false,
+        resizable: false,
+        height: 200,
+        width: 450,
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_usu_pas").submit();
+            },
+            Cancelar: function() {
+                $('#for_usu_pas').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        }
+    });
 	
 });
 
@@ -266,6 +302,8 @@ $(function() {
 			</div>
         	<div id="div_usuario_tabla" class="contenido_tabla">
       		</div>
+            <div id="div_usuario_pass_form">
+            </div>
       	</div>
     </article>
 </div>

@@ -30,6 +30,11 @@ $(function() {
 		text: false
 	});
 
+    $('.btn_editar_pas').button({
+        icons: {primary: "ui-icon-key"},
+        text: false
+    });
+
 });
 </script>
 
@@ -75,7 +80,7 @@ $(document).ready(function() {
         <td><?php echo $dt1['tb_horario_nom']?></td>
         <td><?php echo mostrar_siigual($dt1['tb_usuario_blo'],1,'SI')?></td>
         <td><?php echo mostrarFechaHora($dt1['tb_usuario_ultvis'])?></td>
-        <td align="center" nowrap="nowrap"><a class="btn_editar" href="#" onClick="editar_usuario('<?php echo $dt1['tb_usuario_id']?>')">Editar</a> <a class="btn_eliminar" href="#" onClick="eliminar_usuario('<?php echo $dt1['tb_usuario_id']?>')">Eliminar</a></td>
+        <td align="center" nowrap="nowrap"><a class="btn_editar_pas" href="#" onClick="editar_usuario_pass('<?php echo $dt1['tb_usuario_id']?>')">Cambiar Contraseña</a><a class="btn_editar" href="#" onClick="editar_usuario('<?php echo $dt1['tb_usuario_id']?>')">Editar</a> <a class="btn_eliminar" href="#" onClick="eliminar_usuario('<?php echo $dt1['tb_usuario_id']?>')">Eliminar</a></td>
       </tr>
          <?php
          }
