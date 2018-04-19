@@ -148,7 +148,7 @@ $(document).ready(function() {
 						?>
                         <tr>
                           <td align="right"><?php echo $dt2['tb_ventadetalle_can'];?></td>
-                          <td>UN</td>
+                          <td><?php echo $dt['tb_unidad_abr'];?></td>
                           <td>Servicio</td>
                         	<td><?php
                           if($dt2['tb_ventadetalle_nom']!="")

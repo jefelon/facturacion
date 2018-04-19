@@ -364,7 +364,7 @@ $html.='<tr class="row">';
             if($dt["tb_ventadetalle_tipven"]==1){
                 $html.='<td style="text-align: left">'.$cont.'</td>
                 <td style="text-align: left">'.$dt["tb_producto_nom"].'</td>
-                <td style="text-align: center">UNIDAD</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>
@@ -373,7 +373,7 @@ $html.='<tr class="row">';
             }else{
                 $html.='<td style="text-align: left">'.$cont.'</td>
                 <td style="text-align: left">'.$dt["tb_servicio_nom"].'</td>
-                <td style="text-align: center">UNIDAD</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>

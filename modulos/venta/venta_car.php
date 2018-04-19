@@ -904,7 +904,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             <td>Gravado</td>
             <td>&nbsp;</td>
             <td><?php echo $_SESSION['servicio_nom'][$unico_id][$indice] ?></td>
-            <td>UN</td>
+            <td><?php echo $dt['tb_unidad_abr'];?></td>
             <td align="right"><?php echo $cantidad?></td>
             <td align="right"><?php echo formato_money($precio_unitario)?></td>
             <td align="right">
