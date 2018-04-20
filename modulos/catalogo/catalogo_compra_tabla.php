@@ -14,13 +14,13 @@ $igv_dato=0.18;
 if($_POST['tippre']==1)
 {
 	$mul1=1;
-	$texto_precio='VALOR VENTA';	
+	$texto_precio='VALOR COMPRA';
 }
 
 if($_POST['tippre']==2)
 {
 	$mul1=1+$igv_dato;
-	$texto_precio='PRECIO VENTA';
+	$texto_precio='PRECIO COMPRA';
 }
 //TIPO DE MONEDA
 if($_POST['mon']==1)
