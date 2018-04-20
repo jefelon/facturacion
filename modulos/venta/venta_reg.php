@@ -60,6 +60,9 @@ $oCuentacorriente = new cCuentacorriente();
 require_once ("../tarjeta/cTarjeta.php");
 $oTarjeta = new cTarjeta();
 
+require_once("../cotizacion/cCotizacion.php");
+$oCotizacion = new cCotizacion();
+
 require_once("../formatos/formato.php");
 
 $unico_id=$_POST['unico_id'];
@@ -142,6 +145,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			0,//cs_documentosrelacionados_id
             $usu_id
 		);
+
+         $oCotizacion->modificar_est($_POST['hdd_cot_id'],'VENDIDA');
 		//ultima venta
 			$dts=$oVenta->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
