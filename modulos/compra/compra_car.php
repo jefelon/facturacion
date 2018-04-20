@@ -250,17 +250,17 @@ $(function() {
         <table cellspacing="1" id="tabla_compra_car" class="tablesorter">
             <thead>
                 <tr>
+                    <th align="right" title="CANTIDAD">CANT</th>
+                    <th title="UNIDAD">UNID</th>
                   	<th>CODIGO</th>
                     <th>PRODUCTO</th>
                     <!--<th>PRESENTACION</th>-->
-                    <th title="UNIDAD">UNID</th>
-                  	<th align="right" title="CANTIDAD">CANT</th>
-                    <th align="right" title="PRECIO UNITARIO">PRECIO UNIT</th>
+                    <th align="right" title="PRECIO UNITARIO">VALOR UNIT</th>
+                    <th align="right" title="COSTO UNITARIO EN SOLES">COSTO UN S/.</th>
                     <th align="right" title="DESCUENTO %">DSCTO %</th>
-                    <th align="right">IMPORTE</th>
                     <!--<th align="right">IGV</th>-->
                     <th align="right">FLETE</th>
-                    <th align="right" title="COSTO UNITARIO EN SOLES">COSTO UN S/.</th>
+                    <th align="right">IMPORTE</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -393,18 +393,21 @@ if($num_rows>0){
 				?>
                         <tr>
                           	<!--<td><a class="btn_preven" href="#" onClick="precioventa_form('<?php //echo $dt1['tb_presentacion_id']?>','<?php //echo $dt1['tb_producto_nom']?>')">Actualizar Precios de Venta</a></td>-->
-                            
+
+                            <td align="right"><?php echo $linea_cantidad?></td>
+                            <td title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
                           	<td><?php echo $dt1['tb_presentacion_cod']?></td>
                             <td><?php echo $dt1['tb_producto_nom']?></td>
                             <!--<td><?php //echo $dt1['tb_presentacion_nom']?></td>-->
-                            <td title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
-                          	<td align="right"><?php echo $linea_cantidad?></td>
+
                             <td align="right"><?php echo formato_money($linea_preuni)?></td>
+                            <td align="right"><?php echo formato_money($linea_calculo_cos)?></td>
                             <td align="right"><?php echo formato_money($linea_des)?></td>
-                            <td align="right"><?php echo formato_money($linea_importe)?></td>
+
                             <!--<td align="right"><?php //echo formato_money($linea_igv)?></td>-->
                             <td align="right"><?php echo formato_money($linea_fle)?></td>
-                            <td align="right"><?php echo formato_money($linea_calculo_cos)?></td>
+                            <td align="right"><?php echo formato_money($linea_importe*1.18)?></td>
+
                             <?php /*?><td align="right"><?php echo $linea_prorrateo_des.'|'.$linea_calculo_importe.'|'.$linea_calculo_igv.'|'.$linea_calculo_fle?></td><?php */?>
                             <td align="center" nowrap="nowrap">
                             <a class="btn_item" href="#" onClick="editar_datos_item('<?php echo $dt1['tb_catalogo_id']?>','<?php echo $dt1['tb_producto_nom']?>')">Actualizar Datos de Item</a>
