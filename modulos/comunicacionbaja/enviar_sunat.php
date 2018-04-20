@@ -2,27 +2,25 @@
 require_once('../../cpegeneracion/sunat/funciones.php');
 require_once('../../cpegeneracion/sunat/toarray.php');
 require_once('../../cpegeneracion/sunat/toxml.php');
-
+require_once('../../config/datos.php');
 //EMPRESA
 //$empresa[] = array();
-$empresa[0]['certificado']			="MPS20161024377100.pfx";
-$empresa[0]['clave_certificado']	="9c96HxNhqRq0";
-
-$empresa[0]['usuario_sunat']		="20479676861MODDATOS";
-$empresa[0]['clave_sunat']			="moddatos";
-
-$empresa[0]['idempresa']			="20479676861";
-$empresa[0]['signature_id']			="SignGRANADOS_20479676861";
-$empresa[0]['signature_id2']		="IdSignGRANADOS_20479676861";
-$empresa[0]['razon']				="IMPORTACIONES Y DISTRIBUCIONES GRANADOS SRL";
-$empresa[0]['idtipodni']			="6";
-$empresa[0]['nomcomercial']			="IDIGRA SRL";
-$empresa[0]['iddistrito']			="140105";
-$empresa[0]['direccion']			="AV. AUGUSTO B. LEGUIA NRO. 1160";
-$empresa[0]['subdivision']			="URB. SAN LORENZO";
-$empresa[0]['departamento']			="LAMBAYEQUE";
-$empresa[0]['provincia']			="CHICLAYO";
-$empresa[0]['distrito']				="JOSE LEONARDO ORTIZ";
+$empresa[0]['certificado']			= $certificado;
+$empresa[0]['clave_certificado']	= $clave_certificado;
+$empresa[0]['usuario_sunat']		= $usuario_sunat;
+$empresa[0]['clave_sunat']			= $clave_sunat;
+$empresa[0]['idempresa']			= $idempresa;
+$empresa[0]['signature_id']			= $signature_id;
+$empresa[0]['signature_id2']		= $signature_id2;
+$empresa[0]['razon']				= $razon;
+$empresa[0]['idtipodni']			= $idtipodni;
+$empresa[0]['nomcomercial']			= $nomcomercial;
+$empresa[0]['iddistrito']			= $iddistrito;
+$empresa[0]['direccion']			= $direccion;
+$empresa[0]['subdivision']			= $subdivision;
+$empresa[0]['departamento']			= $departamento;
+$empresa[0]['provincia']			= $provincia;
+$empresa[0]['distrito']				= $distrito;
 
 $empresa = json_decode(json_encode($empresa));
 
