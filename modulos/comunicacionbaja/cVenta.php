@@ -5,7 +5,7 @@ class cVenta{
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE tb_empresa_id = $emp_id
+	WHERE v.tb_empresa_id = $emp_id
 	AND tb_venta_fec = '$fec1' ";
 	//AND tb_venta_estsun = 1
 	$sql.=" AND d.tb_documento_ele = 1 ";
