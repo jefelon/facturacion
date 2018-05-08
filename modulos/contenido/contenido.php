@@ -143,6 +143,13 @@ $menu_administrador=
 
 	</ul>
   </li>
+   <li class="topmenu"><a href="#">Contable</a>
+	<ul>
+      <li class="topmenu"><a href="../contable/contable_vista_ple.php">PLE - 5.1.0.0 (Actualizado el 01.03.2018)</a></li>
+	  <li><a href="../contable/registro_compras.php">Contable1</a></li>
+	  <li><a href="../contable/registro_compras.php">Contable2</a></li>
+	</ul>
+  </li>
   <li class="topmenu"><a href="#">Opciones</a>
 	<ul>
 	  <li><a href="../usuarios/usuario_datos_vista.php">Modificar Mis Datos</a></li>

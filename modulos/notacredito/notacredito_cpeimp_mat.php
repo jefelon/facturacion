@@ -333,7 +333,7 @@ $html.='<tr class="row">';
         $html.='<tr>
             <td width="80%" style="text-align: right;" colspan="2">Anticipos: </td>
             <td width="20%" style="text-align: right;">'.$mon . $totanti.'</td>
-        </tr';
+        </tr>';
     }
     $html.='<tr>
         <td width="80%" style="text-align: right;" colspan="2">Descuentos: </td>
