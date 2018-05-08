@@ -194,6 +194,14 @@ jQuery.validator.addMethod("equalOr", function(value, element, parameter) {
            return $(parameter).val() === value || $(parameter).val() === '15';
       }, "Tipo de cliente no concuerda con tipo de documento.");
 
+jQuery.validator.addMethod("totalDoc", function(value, element, parameter) {
+    if ($(parameter).val() === '12' && value==='1'){
+        return parseFloat($('#txt_ven_tot').val()) <= parseFloat('700.00');
+    }else{
+        return true;
+    }
+}, "Selecccione otro cliente, monto menor a 700");
+
 function cmb_cuecor_id(ids)
 {
 	$.ajax({
@@ -834,6 +842,8 @@ $(function() {
 	cmb_tar_id(<?php echo $tar_id?>);
 	cmb_cuecor_id(<?php echo $cuecor_id?>);
 
+
+
 	$( "#txt_ven_cli_doc" ).autocomplete({
    		minLength: 1,
    		source: "../clientes/cliente_complete_doc.php",
@@ -871,6 +881,11 @@ $(function() {
 	?>
 	$('#cmb_ven_doc').change( function() {
 		txt_ven_numdoc();
+        if ((this).value=== '12') {
+            cliente_cargar_datos(1);
+        }else{
+            $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #txt_ven_cli_est').val('');
+        }
 	});
 
 	venta_car();
@@ -1136,7 +1151,8 @@ $(function() {
 				required: true
 			},
 			hdd_ven_cli_id: {
-				required: true
+				required: true,
+                totalDoc: "#cmb_ven_doc"
 			},
 			hdd_ven_numite: {
 				required: true
