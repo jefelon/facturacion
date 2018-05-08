@@ -200,7 +200,7 @@ jQuery.validator.addMethod("totalDoc", function(value, element, parameter) {
     }else{
         return true;
     }
-}, "Selecccione otro cliente, monto menor a 700");
+}, "Selecccione otro cliente, monto mayor a 700");
 
 function cmb_cuecor_id(ids)
 {
