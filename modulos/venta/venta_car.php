@@ -25,7 +25,7 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
     while($dtcot1 = mysql_fetch_array($dtscot1)) {
             if($dtcot1['tb_cotizaciondetalle_can']>0){
                 //producto por catalogo y stock y almacen
-                $dts= $oCatalogoProducto->presentacion_catalogo_stock_almacen($dtcot1['tb_producto_id'],$almacen_venta);
+                $dts= $oCatalogoProducto->presentacion_catalogo_stock_almacen($dtcot1['tb_catalogo_id'],$almacen_venta);
                 $dt = mysql_fetch_array($dts);
                 $pro_nom=$dt['tb_producto_nom'];
                 $pre_nom=$dt['tb_presentacion_nom'];
@@ -38,7 +38,7 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                 $num=0;
                 if(isset($_SESSION['venta_car'][$unico_id])){
                     foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad){
-                        if(($dtcot1['tb_producto_id']!=$indice) and ($pre_id==$_SESSION['presentacion_id'][$unico_id][$indice])){
+                        if(($dtcot1['tb_catalogo_id']!=$indice) and ($pre_id==$_SESSION['presentacion_id'][$unico_id][$indice])){
                             $num++;
                         }
                     }
@@ -46,19 +46,19 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
 
                 if($num==0){
                     //IDENTIFICADOR CATALOGO Y CANTIDAD
-                    $_SESSION['venta_car'][$unico_id][$dtcot1['tb_producto_id']]=$dtcot1['tb_cotizaciondetalle_can'];
+                    $_SESSION['venta_car'][$unico_id][$dtcot1['tb_catalogo_id']]=$dtcot1['tb_cotizaciondetalle_can'];
 
                     //PRECIO DE VENTA
-                    $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_producto_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_preuni']);
+                    $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_catalogo_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_preuni']);
 
                     //TIPO DE DESCUENTO  1 PORCENTAJE	2 SOLES
-                    $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_producto_id']]=$dtcot1['tb_cotizaciondetalle_des'];
+                    $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_catalogo_id']]=$dtcot1['tb_cotizaciondetalle_des'];
 
                     //DESCUENTO
-                    $_SESSION['venta_des'][$unico_id][$dtcot1['tb_producto_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_des']*$dtcot1['tb_cotizaciondetalle_can']);
+                    $_SESSION['venta_des'][$unico_id][$dtcot1['tb_catalogo_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_des']*$dtcot1['tb_cotizaciondetalle_can']);
 
                     //GRAVADO/EXONERADO/INAFECTO
-                    $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_producto_id']]=$_POST['cat_tip'];
+                    $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tip'];
 
                     //NOM
                     switch ($_POST['cat_tip']) {
@@ -84,22 +84,22 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                             $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
                             break;
                     }
-                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_producto_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom . ' ' . $tipo_item_txt;
 
                     //IGV
                     //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];
 
                     ////PRESENTACION para verificar si ingresa otra unidad de la misma presentacion
-                    $_SESSION['presentacion_id'][$unico_id][$dtcot1['tb_producto_id']]=$pre_id;
+                    $_SESSION['presentacion_id'][$unico_id][$dtcot1['tb_catalogo_id']]=$pre_id;
 
                     //CATALOGO MULTIPLO para calculo de cantidades
-                    $_SESSION['catalogo_mul'][$unico_id][$dtcot1['tb_producto_id']]=$cat_mul;
+                    $_SESSION['catalogo_mul'][$unico_id][$dtcot1['tb_catalogo_id']]=$cat_mul;
                 }
 
                 if($num==1){
                     foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad){
                         // diferente unidad y misma presentacion
-                        if(($dtcot1['tb_producto_id']!=$indice) and ($pre_id==$_SESSION['presentacion_id'][$unico_id][$indice])){
+                        if(($dtcot1['tb_catalogo_id']!=$indice) and ($pre_id==$_SESSION['presentacion_id'][$unico_id][$indice])){
                             $t1=$cat_mul*$dtcot1['tb_cotizaciondetalle_can'];//cantidad que ingresa
                             $t2=$_SESSION['catalogo_mul'][$unico_id][$indice]*$_SESSION['venta_car'][$unico_id][$indice];//cantidad q hay en carrito
                             //echo 'N='.$_POST['cat_id'].' nN='.$t1.'<br>';
@@ -127,9 +127,9 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
 
                                 //unidad nueva agregar a carrito
 
-                                $_SESSION['venta_car'][$unico_id][$dtcot1['tb_producto_id']]=$st_uni;//id cat - cantidad
-                                $_SESSION['venta_des'][$unico_id][$dtcot1['tb_producto_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_des']);//id cat - descuento
-                                $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_producto_id']]=$_POST['cat_tip'];
+                                $_SESSION['venta_car'][$unico_id][$dtcot1['tb_catalogo_id']]=$st_uni;//id cat - cantidad
+                                $_SESSION['venta_des'][$unico_id][$dtcot1['tb_catalogo_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_des']);//id cat - descuento
+                                $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tip'];
 
                                 switch ($_POST['cat_tip']) {
                                     case '1':
@@ -154,12 +154,12 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                                         $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
                                         break;
                                 }
-                                $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_producto_id']]=$pro_nom . ' ' . $tipo_item_txt;
-                                $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_producto_id']]=$_POST['cat_tipdes'];
+                                $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                                $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tipdes'];
                                 //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
-                                $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_producto_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_preuni']);//id cat - precio venta
-                                $_SESSION['presentacion_id'][$unico_id][$dtcot1['tb_producto_id']]=$pre_id;//id cat-presentacion - pre_id
-                                $_SESSION['catalogo_mul'][$unico_id][$dtcot1['tb_producto_id']]=$cat_mul;//id cat-presentacion - mul
+                                $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_catalogo_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_preuni']);//id cat - precio venta
+                                $_SESSION['presentacion_id'][$unico_id][$dtcot1['tb_catalogo_id']]=$pre_id;//id cat-presentacion - pre_id
+                                $_SESSION['catalogo_mul'][$unico_id][$dtcot1['tb_catalogo_id']]=$cat_mul;//id cat-presentacion - mul
 
                                 //unidad en sesion.... agregar o eliminar del carrito
                                 if($st_res>0)
@@ -199,10 +199,10 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                                 if($st_res>0)
                                 {
                                     //unidad nueva
-                                    $_SESSION['venta_car'][$unico_id][$dtcot1['tb_producto_id']]=$st_res;//id cat - cantidad
-                                    $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_producto_id']]=$_POST['cat_tipdes'];//id cat - tipodescuento
-                                    $_SESSION['venta_des'][$unico_id][$dtcot1['tb_producto_id']]=$dtcot1['tb_cotizaciondetalle_des'];//id cat - descuento
-                                    $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_producto_id']]=$_POST['cat_tip'];//id cat - descuento
+                                    $_SESSION['venta_car'][$unico_id][$dtcot1['tb_catalogo_id']]=$st_res;//id cat - cantidad
+                                    $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tipdes'];//id cat - tipodescuento
+                                    $_SESSION['venta_des'][$unico_id][$dtcot1['tb_catalogo_id']]=$dtcot1['tb_cotizaciondetalle_des'];//id cat - descuento
+                                    $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tip'];//id cat - descuento
                                     switch ($_POST['cat_tip']) {
                                         case '1':
                                             $tipo_item_txt = "";
@@ -226,11 +226,11 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                                             $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
                                             break;
                                     }
-                                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_producto_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom . ' ' . $tipo_item_txt;
                                     //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
-                                    $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_producto_id']]=$dtcot1['tb_cotizaciondetalle_preuni'];//id cat - precio venta
-                                    $_SESSION['presentacion_id'][$unico_id][$dtcot1['tb_producto_id']]=$pre_id;//id cat-presentacion - pre_id
-                                    $_SESSION['catalogo_mul'][$unico_id][$dtcot1['tb_producto_id']]=$cat_mul;//id cat-presentacion - mul
+                                    $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_catalogo_id']]=$dtcot1['tb_cotizaciondetalle_preuni'];//id cat - precio venta
+                                    $_SESSION['presentacion_id'][$unico_id][$dtcot1['tb_catalogo_id']]=$pre_id;//id cat-presentacion - pre_id
+                                    $_SESSION['catalogo_mul'][$unico_id][$dtcot1['tb_catalogo_id']]=$cat_mul;//id cat-presentacion - mul
                                 }
 
                                 $_SESSION['venta_car'][$unico_id][$indice]=$st_uni;
