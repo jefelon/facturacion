@@ -146,7 +146,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $usu_id
 		);
 
+        if ($_POST['hdd_cot_id']!=''){
          $oCotizacion->modificar_est($_POST['hdd_cot_id'],'VENDIDA');
+        }
 		//ultima venta
 			$dts=$oVenta->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
