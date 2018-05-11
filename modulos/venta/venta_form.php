@@ -275,6 +275,10 @@ function txt_ven_numdoc(){
 		beforeSend: function() {
 			$('#txt_ven_numdoc').val('Cargando...');
 
+            if ($('#cmb_ven_doc').val()==12){
+                cliente_cargar_datos(1);
+            }
+
 			if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
 			{
 				$('#hdd_val_cli_tip').val('2');
