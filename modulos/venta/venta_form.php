@@ -1240,7 +1240,6 @@ $(function() {
             $("#txt_bus_pro_nom").val(ui.item.label);
             $("#hdd_bus_pro_nom").val(ui.item.value);
             catalogo_buscar();
-
         }
     });
 
@@ -1249,6 +1248,16 @@ $(function() {
         if(e.which == 13){
             catalogo_buscar();
             venta_car('agregar');
+            $("#txt_bus_pro_nom").val('');
+            $("#hdd_bus_pro_nom").val('');
+            $('#hdd_bus_cat_id').val('');
+            $('#hdd_bus_cat_stouni').val('');
+            $('#hdd_bus_cat_cospro').val('');
+            $('#txt_bus_pro_codbar').val('');;
+            $('#txt_bus_cat_preven').val('');
+            $('#txt_bus_cat_can').val('');
+            $('#txt_precio_min').val('');
+            $('#txt_precio_may').val('');
             $("#txt_bus_pro_codbar").focus();
         }
     });
@@ -1311,16 +1320,16 @@ function catalogo_buscar() {
                     $('#hdd_bus_cat_stouni').val('');
                     $('#hdd_bus_cat_cospro').val('');
                     $('#txt_bus_pro_codbar').val('');
-                    $('#txt_bus_pro_nom').val('');
                     $('#txt_bus_cat_preven').val('');
                     $('#txt_bus_cat_can').val('');
-
                     $('#txt_precio_min').val('');
                     $('#txt_precio_may').val('');
-
-                    $('#txt_bus_pro_codbar').focus();
+                    $('#hdd_bus_pro_nom').val('');
+                    $('#txt_bus_pro_nom').val('');
+                    $('#txt_bus_pro_nom').focus();
                 } else {
                     $('#txt_bus_pro_codbar').val(data.pro_codbar);
+                    $('#hdd_bus_pro_nom').val('');
                     $('#txt_bus_cat_can').focus();
                 }
                 //precios_min_may($('#hdd_bus_cat_id').val());
