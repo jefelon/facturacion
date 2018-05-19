@@ -63,7 +63,7 @@ class cClientecuenta{
 	FROM tb_clientecuenta cc
 	INNER JOIN tb_cliente c ON cc.tb_cliente_id=c.tb_cliente_id
 	WHERE tb_clientecuenta_xac=1
-	AND tb_empresa_id = $emp_id
+	AND cc.tb_empresa_id = $emp_id
 	AND tb_clientecuenta_fec BETWEEN '$fec1' AND '$fec2'
 	AND tb_clientecuenta_est IN ($est) ";
 	

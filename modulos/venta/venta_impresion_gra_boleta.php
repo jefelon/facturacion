@@ -291,7 +291,7 @@ if($impresion=='pdf')ob_start();
                 <?php
 					while($dt1 = mysql_fetch_array($dts1)){
 						$importe=$dt1['tb_ventadetalle_valven']+$dt1['tb_ventadetalle_igv'];
-						$precio_uni=$importe/$dt1['tb_ventadetalle_can'];
+						$precio_uni=$dt1['tb_ventadetalle_preunilin'];
 				?>
                         <tr class="even">
                           	<td style="text-align: right; width: 11mm; font-size: 11pt;"><?php echo $dt1['tb_ventadetalle_can']?></td>

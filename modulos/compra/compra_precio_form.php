@@ -288,11 +288,11 @@ if($num_rows>0){
                             <td align="right"><?php echo formato_money($dt2['tb_catalogo_preven'])?>
                             </td>
                             <td align="right" nowrap="nowrap">
-							<input name="txt_cat_uti_<?php echo $dt2['tb_catalogo_id']?>" type="text" id="txt_cat_uti_<?php echo $dt2['tb_catalogo_id']?>" class="porcentaje" value="<?php echo $dt2['tb_catalogo_uti']?>" size="7" maxlength="5" style="text-align:right" onChange="calculo_precioventa_uti('<?php echo $dt2['tb_catalogo_id']?>')">
+							<input name="txt_cat_uti_<?php echo $dt2['tb_catalogo_id']?>" type="text" id="txt_cat_uti_<?php echo $dt2['tb_catalogo_id']?>" class="porcentaje" value="<?php echo $dt2['tb_catalogo_uti']?>" size="7" maxlength="6" style="text-align:right" onChange="calculo_precioventa_uti('<?php echo $dt2['tb_catalogo_id']?>')">
                             <input name="txt_cat_preven_<?php echo $dt2['tb_catalogo_id']?>" type="text" id="txt_cat_preven_<?php echo $dt2['tb_catalogo_id']?>" class="moneda_cp" value="<?php echo number_format(moneda_mysql($precio_venta),1).'0'?>" size="10" maxlength="8" style="text-align:right" onChange="calculo_precioventa_preven('<?php echo $dt2['tb_catalogo_id']?>')">
                             </td>
                             <td align ="right" nowrap>
-							<input name="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($uti1!=0) echo formato_money($uti1)?>" size="4" maxlength="5" style="text-align:right" onChange="calculo_precioventa_uti2('<?php echo $dt1['tb_catalogo_id']?>')">
+							<input name="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($uti1!=0) echo formato_money($uti1)?>" size="4" maxlength="6" style="text-align:right" onChange="calculo_precioventa_uti2('<?php echo $dt1['tb_catalogo_id']?>')">
 							<input name="txt_predet_val1_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_predet_val1_<?php echo $dt1['tb_catalogo_id']?>" class="moneda_cp" value="<?php if($predet_val1!=0)echo formato_money($predet_val1)?>" size="10" maxlength="8" style="text-align:right" onChange="calculo_precioventa_preven2('<?php echo $dt1['tb_catalogo_id']?>')">
 							</td>
 							<td align="right" nowrap>

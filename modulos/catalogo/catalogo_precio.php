@@ -94,7 +94,7 @@ $('.porcentaje').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99.99'
+	vMax: '999.99'
 });
 
 function calculo_precioventa_tipcam(idf)
@@ -644,7 +644,7 @@ $(document).ready(function() {
 							?>
 						</td>
 						<td align ="right">
-							<input name="txt_cat_uti_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($utilidad!=0) echo formato_money($utilidad)?>" size="4" maxlength="5" style="text-align:right" onChange="calculo_precioventa_uti('<?php echo $dt1['tb_catalogo_id']?>')">
+							<input name="txt_cat_uti_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($utilidad!=0) echo formato_money($utilidad)?>" size="4" maxlength="6" style="text-align:right" onChange="calculo_precioventa_uti('<?php echo $dt1['tb_catalogo_id']?>')">
 							<!--<input name="hdd_cat_uti_<?php //echo $dt1['tb_catalogo_id']?>" type="hidden" id="hdd_cat_uti_<?php //echo $dt1['tb_catalogo_id']?>" value="<?php //if($utilidad!=0) echo formato_money($utilidad)?>">-->
 							<br>
 							<?php if($dt1['tb_catalogo_uti']!=0) echo formato_money($dt1['tb_catalogo_uti']).'&nbsp'?>
@@ -655,7 +655,7 @@ $(document).ready(function() {
 							<?php if($dt1['tb_catalogo_preven']!=0) echo formato_money($dt1['tb_catalogo_preven']).'&nbsp'?>
 						</td>
 						<td align ="right" nowrap>
-							<input name="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($uti1!=0) echo formato_money($uti1)?>" size="4" maxlength="5" style="text-align:right" onChange="calculo_precioventa_uti2('<?php echo $dt1['tb_catalogo_id']?>')">
+							<input name="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti2_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($uti1!=0) echo formato_money($uti1)?>" size="4" maxlength="6" style="text-align:right" onChange="calculo_precioventa_uti2('<?php echo $dt1['tb_catalogo_id']?>')">
 							<input name="txt_predet_val1_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_predet_val1_<?php echo $dt1['tb_catalogo_id']?>" class="moneda_cp" value="<?php if($predet_val1!=0)echo formato_money($predet_val1)?>" size="7" maxlength="8" style="text-align:right" onChange="calculo_precioventa_preven2('<?php echo $dt1['tb_catalogo_id']?>')">
 							<br>
 							<?php if($uti1!=0) echo formato_money($uti1)?>
@@ -663,7 +663,7 @@ $(document).ready(function() {
 							<?php if($m_predet_val1!=0)echo formato_money($m_predet_val1).'&nbsp'?>
 						</td>
 						<td align ="right" nowrap>
-							<input name="txt_cat_uti3_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti3_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($uti2!=0) echo formato_money($uti2)?>" size="4" maxlength="5" style="text-align:right" onChange="calculo_precioventa_uti3('<?php echo $dt1['tb_catalogo_id']?>')">
+							<input name="txt_cat_uti3_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_uti3_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php if($uti2!=0) echo formato_money($uti2)?>" size="4" maxlength="6" style="text-align:right" onChange="calculo_precioventa_uti3('<?php echo $dt1['tb_catalogo_id']?>')">
 							<input name="txt_predet_val2_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_predet_val2_<?php echo $dt1['tb_catalogo_id']?>" class="moneda_cp" value="<?php if($predet_val2!=0)echo formato_money($predet_val2)?>" size="7" maxlength="8" style="text-align:right" onChange="calculo_precioventa_preven3('<?php echo $dt1['tb_catalogo_id']?>')">
 							<br>
 							<?php if($uti2!=0) echo formato_money($uti2)?>
