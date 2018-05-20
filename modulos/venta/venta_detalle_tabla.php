@@ -82,10 +82,10 @@ $(document).ready(function() {
                   <th>TIPO</th>
                   <th>ARTICULO</th>
                   <th>CATEGORIA | MARCA</th>
-                  <th align="right" nowrap="nowrap">VALOR UNIT</th>
+<!--                  <th align="right" nowrap="nowrap">VALOR UNIT</th>-->
                     <th align="right" title="PRECIO UNITARIO">PRECIO UNIT</th>
                   <th align="right" title="DESCUENTO">DSCTO</th>
-                  <th align="right" nowrap="nowrap" title="VALOR VENTA">VALOR VEN</th>
+<!--                  <th align="right" nowrap="nowrap" title="VALOR VENTA">VALOR VEN</th>-->
                   <th align="right" nowrap="nowrap" title="PRECIO VENTA">PREC VENTA</th>
                 </tr>
             </thead>
@@ -123,8 +123,8 @@ $(document).ready(function() {
 							echo $dt1['tb_categoria_nom'];
 							echo ' | '.$dt1['tb_marca_nom'];
 							?></td>
-                            <td align="right"><?php echo $dt1['tb_ventadetalle_preuni']?></td>
-                            <td align="right"><?php echo $dt1['tb_ventadetalle_preuni']*1.18 ?></td>
+<!--                            <td align="right">--><?php //echo $dt1['tb_ventadetalle_preuni']?><!--</td>-->
+                            <td align="right"><?php echo $dt1['tb_ventadetalle_preunilin'] ?></td>
                             <td align="right"><?php
 							$tipdes			=$dt1['tb_ventadetalle_tipdes'];
 							$descuento_linea=$dt1['tb_ventadetalle_des']; 
@@ -135,7 +135,7 @@ $(document).ready(function() {
 										echo "S/. ".$descuento_linea;
 									}									
 								?></td>
-                            <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_valven'])?></td>
+<!--                            <td align="right">--><?php //echo formato_money($dt1['tb_ventadetalle_valven'])?><!--</td>-->
                             <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
                         </tr>
                         <?php						

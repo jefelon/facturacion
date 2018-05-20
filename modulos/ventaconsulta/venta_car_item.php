@@ -80,7 +80,7 @@ $('.porcentaje3').autoNumeric({
 $('.cantidad3').autoNumeric({
 	aSep: ',',
 	aDec: '.',
-	vMin: '1',
+	vMin: '0.00',
 	vMax: '<?php echo $sto_num?>'
 });
 

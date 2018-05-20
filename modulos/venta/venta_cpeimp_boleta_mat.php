@@ -378,14 +378,14 @@ if($estado=="ANULADA"){
 <table style="width: 100%; border: 0.5px solid #01a2e6; border-collapse:collapse;">
     
         <tr class="header_row">
-            <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 50%;"><b>DESCRIPCION</b></th>
-            <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
+            <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
             <th style="text-align: center; width: 6%;"><b>CANT.</b></th>
-            <th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>
-            <th style="text-align: center; width: 8%;"><b>PRECIO U.</b></th>
-            <th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>
-            <th style="text-align: center; width: 8%;"><b>PRECIO VENTA</b></th>
+             <th style="text-align: center; width: 10%;"><b>UNIDAD</b></th>
+            <th style="text-align: center; width: 50%;"><b>DESCRIPCION</b></th>
+            <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
+            <th style="text-align: right; width: 14%;"><b>PRECIO UNIT.</b></th>
+            <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
+            <th style="text-align: right; width: 14%;"><b>PRECIO VENTA</b></th>
         </tr>';
             $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
             $cont = 1;
@@ -399,14 +399,12 @@ $html.='<tr class="row">';
                     $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
                 }
 
-                $html.='<td style="text-align: left">'.$cont.'</td>
-
-                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>
+                $html.='<td style="text-align:center">'.$cont.'</td>
+                <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preuni"]*1.18).'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
+                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>                   
+                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]).'</td>';
+
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
             }else{
                 $html.='<td style="text-align: left">'.$cont.'</td>
