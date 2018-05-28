@@ -445,7 +445,7 @@ $(function() {
                     <td align="center" nowrap="nowrap">
                     <?php if($stock_unidad!=0){?>
                     
-                    <a class="btn_agregar" href="#" onClick="venta_car('agregar','<?php echo $dt1['tb_catalogo_id']?>')">Agregar</a>
+                    <a class="btn_agregar" href="#" onClick="venta_car_form('agregar','<?php echo $dt1['tb_catalogo_id']?>')">Agregar</a>
                     <?php }?>
                     <?php /*?>
                     <a class="btn_stock" href="#" onClick="consulta_stock('<?php echo $dt1['tb_catalogo_id']?>')">Consultar Stock</a><?php */?>
