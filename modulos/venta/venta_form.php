@@ -458,6 +458,60 @@ function venta_car(act,cat_id){
 	}
 }
 
+function venta_car_form(act,idf){
+    if(act=='agregar')
+    {
+        var stouni=$('#hdd_cat_stouni_'+idf).val();
+        var cantidad=$('#txt_cat_can_'+idf).val();
+
+        var dif=$('#hdd_cat_stouni_'+idf).val()-$('#txt_cat_can_'+idf).val();
+    }
+
+
+    if(act=='agregar' & (dif < 0))
+    {
+        alert('Stock insuficiente. Diferencia en '+(cantidad-stouni)+'.');
+        $('#txt_cat_can_'+idf).val(stouni);
+    }
+    else
+    {
+        /*if($('#chk_cat_igv_'+idf).is(':checked')) {
+            var chk=1;
+        } else {
+            var chk=0;
+        }*/
+
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_car.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action:	 act,
+                cat_id:	 idf,
+                unico_id: $('#unico_id').val(),
+                cat_can: $('#txt_cat_can_'+idf).val(),
+                cat_des: $('#txt_detven_des_'+idf).val(),//Descuento
+                cat_nom: $('#txt_detven_nom_'+idf).val(),//Descuento
+                cat_tip: $('#cmb_detven_tip_'+idf).val(),//Tipo Gravado/Exonerado/Inafecto
+                cat_tipdes: $("input[name='rad_cat_tip_des_"+idf+"']:checked").val(),//Radio Button
+                cat_preven: $('#txt_cat_preven_'+idf).val()
+            }),
+            beforeSend: function() {
+                $("#txt_fil_pro_nom").val(''); $("#txt_fil_pro_nom").focus();
+                $('#div_venta_car_tabla').addClass("ui-state-disabled");
+            },
+            success: function(html){
+                $('#div_venta_car_tabla').html(html);
+            },
+            complete: function(){
+                $('#div_venta_car_tabla').removeClass("ui-state-disabled");
+            }
+        });
+    }
+}
+
+
 function venta_car_servicio(act,idf){
 	$.ajax({
 		type: "POST",
@@ -833,15 +887,6 @@ $(function() {
 	$('#txt_ven_cli_nom').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-
-    $('#hdd_usu_id').change(function(){
-        if($(this).val()=='') {
-            $('#msj_hdd_ven').show();
-        }else{
-            $('#msj_hdd_ven').hide();
-        }
-
-    });
 
 	cmb_tar_id(<?php echo $tar_id?>);
 	cmb_cuecor_id(<?php echo $cuecor_id?>);
@@ -1540,9 +1585,7 @@ function bus_cantidad(act)
                 <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                 </select>
 	    <?php if($_POST['action']=='insertar'||$_POST['action']=='insertar_cot') { ?>
-                <div id="msj_hdd_ven" class="ui-state-highlight ui-corner-all"
-                     style="width: auto; display: inline-block; padding: 2px;">No ha seleccionado vendedor.
-                </div>
+
                 <?php
             	}
         }
@@ -1594,7 +1637,6 @@ function bus_cantidad(act)
 		</tr>
 	</table>
 </fieldset>
-
     <fieldset><legend>Agregar Producto</legend>
 
         <label for="txt_ven_fec" style="display: none;">Fecha:</label>
@@ -1642,7 +1684,6 @@ function bus_cantidad(act)
         <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
 
     </fieldset>
-
 <?php
 if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
 ?>
