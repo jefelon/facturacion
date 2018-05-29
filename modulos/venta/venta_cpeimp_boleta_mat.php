@@ -47,7 +47,7 @@ $sucursales='
 <table style="font-size:7pt" border="0">
     <tr>
         <td width="80">PRINCIPAL:</td>
-        <td width="580">'.$dt['tb_empresa_dir'] .'</td>
+        <td width="580">'.$dt['tb_empresa_dir'].'</td>
     </tr>
     <!--<tr>
         <td width="80">SUCURSAL:</td>
@@ -402,20 +402,16 @@ $html.='<tr class="row">';
                 $html.='<td style="text-align:center">'.$cont.'</td>
                 <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>                   
-                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]).'</td>';
-
-                $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
+                <td style="text-align: left">'.$dt["tb_ventadetalle_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>
+                <td style="text-align: right">'.$dt["tb_ventadetalle_preunilin"].'</td>                   
+                <td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
             }else{
-                $html.='<td style="text-align: left">'.$cont.'</td>
-
-                <td style="text-align: left">'.$dt["tb_servicio_nom"].' - '.$dt['tb_marca_nom'].'</td>
+                $html.='<td style="text-align: center">'.$cont.'</td>
+                <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
-                $html.='<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
+                <td style="text-align: left">'.$dt["tb_ventadetalle_nom"].' - '.$dt['tb_marca_nom'].'</td>
+                <td style="text-align: right">'.$dt["tb_ventadetalle_preunilin"].'</td>
+                <td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
             }
             $html.='</tr>';
         $cont++;

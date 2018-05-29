@@ -294,7 +294,7 @@ if($impresion=='pdf')ob_start();
                         	<td style="text-align: left; width: 115mm; font-size: 11pt;">
 							<?php 
 							//echo $dt1['tb_unidad_abr'].' | ';
-							echo ''.$dt1['tb_producto_nom'].' - '.$dt1['tb_marca_nom'].'';
+							echo ''.$dt1['tb_ventadetalle_nom'].' - '.$dt1['tb_marca_nom'].'';
                             if ($dt1['tb_ventadetalle_serie']!=''){
                                 echo ' - '.$dt1['tb_ventadetalle_serie'];
                             }
@@ -318,7 +318,7 @@ if($impresion=='pdf')ob_start();
                           <td style="text-align: right; width: 5mm; font-size: 11pt;">&nbsp;</td>
                         	<td style="text-align: left; width: 115mm; font-size: 11pt;">
 							<?php 
-							echo ''.$dt2['tb_servicio_nom'].'';
+							echo ''.$dt2['tb_ventadetalle_nom'].'';
 							//echo ' | '.$dt2['tb_categoria_nom'];?></td>
                           <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
                           <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_ventadetalle_valven'])?></td>                                                        
