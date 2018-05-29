@@ -54,6 +54,9 @@ $menu_administrador=
 		  <li><a href="../marca/">Marcas</a></li>
 		  <li><a href="../unidad/">Unidades de Medida</a></li>
 		  <li><a href="../producto/">Productos</a></li>
+		  <li><a href="../servicio/">Servicios</a></li>
+		  <li><a href="../transporte/">Transporte</a></li>
+		  <li><a href="../conductor/">Condutor</a></li>
 	    </ul>
 	  </li>
 	  <li class="topmenu"><span><a href="#" >Ventas</a></span>
@@ -94,6 +97,7 @@ $menu_administrador=
 	  <li class="separator">_____________________</li>
 	  <li><a href="../venta/venta_vista_adm.php">Ventas</a></li>
 	  <li><a href="../venta/venta_vista.php">Registrar Venta</a></li>
+	  <li><a href="../guia/guia_vista_adm.php">Guia</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../notacredito/">Nota de Crédito</a></li>
 	  <li class="separator">----------------------</li>
