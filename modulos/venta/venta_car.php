@@ -664,7 +664,7 @@ else
     });
 </script>
 <input name="hdd_ven_numite" id="hdd_ven_numite" type="hidden" value="<?php echo $filas?>">
-<!--fieldset><legend>Detalle de Venta</legend>
+<fieldset><legend>Agregar Servicios</legend>
 <?php if($_POST['vista']!='cange'){?>
 <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
 <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
@@ -673,7 +673,7 @@ else
 <div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:<?php if($msj!=""){echo 'block';} else{ echo 'none';}?>"><?php echo $msj?></div>
 <div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
 
-</fieldset-->
+</fieldset>
 
 <?php
 if($filas=="" or $filas==0) echo 'Ningún ítem agregados.';
@@ -695,7 +695,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <!--        <th align="right" title="VALOR UNITARIO">VALOR UNIT</th>-->
         <th align="right" title="PRECIO UNITARIO">PRECIO UNIT</th>
         <th align="right" title="DESCUENTO">DSCTO</th>
-<!--        <th align="right" nowrap="nowrap" title="VALOR VENTA">VALOR VEN</th>-->
+        <th align="right" nowrap="nowrap" title="VALOR VENTA">VALOR VEN</th>
         <th align="right" nowrap="nowrap" title="PRECIO VENTA">PREC VENTA</th>
         <!--<th align="right">IGV</th>-->
         <th width="25">&nbsp;</th>
@@ -806,7 +806,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 }
                 ?>
             </td>
-<!--            <td align="right">--><?php //echo formato_money($valor_venta)?><!--</td>-->
+            <td align="right"><?php echo formato_money($valor_venta)?></td>
             <td align="right"><?php echo formato_money($precio_venta)?></td>
             <!--<td align="right"><?php //echo formato_money($igv)?></td>-->
             <td align="center" nowrap="nowrap">
