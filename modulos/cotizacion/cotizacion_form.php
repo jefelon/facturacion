@@ -182,7 +182,7 @@ function cmb_ven_doc()
 		async:true,
 		dataType: "html",                      
 		data: ({
-			doc_tip:	'10',
+			doc_tip:	'11',
 			doc_id: '<?php echo $doc_id?>',
 			vista:	'<?php echo $_POST['action']?>'
 		}),

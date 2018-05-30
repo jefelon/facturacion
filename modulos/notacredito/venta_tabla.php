@@ -7,6 +7,12 @@ require_once ("../notacredito/cNotacreditocorreo.php");
 $oNotacreditocorreo = new cNotacreditocorreo();
 require_once ("../formatos/formato.php");
 
+require_once ("../empresa/cEmpresa.php");
+$oEmpresa = new cEmpresa();
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt = mysql_fetch_array($dts);
+$ruc_empresa = $dt['tb_empresa_ruc'];
+
 $dts1=$oNotacredito->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may']);
 $num_rows= mysql_num_rows($dts1);
 ?>
@@ -84,9 +90,9 @@ $(function() {
           }
           
           $xml="";
-          $xml="20479676861-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+          $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
           $cdr="";
-          $cdr="R-20479676861-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+          $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
         ?>
                     <tr>
                       <td nowrap="nowrap"><?php echo $dt1['tb_documento_nom'];?></td>
