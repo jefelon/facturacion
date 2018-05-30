@@ -1,49 +1,39 @@
 <?php
+session_start();
 require_once('../../libreriasphp/html2pdf/_tcpdf_5.9.206/tcpdf.php');
 
 require_once ("../../config/Cado.php");
+require_once ("../../config/datos.php");
 require_once ("../notacredito/cNotacredito.php");
 $oNotacredito = new cNotacredito();
 
 require_once ("../formatos/numletras.php");
 require_once ("../formatos/formato.php");
 
-$razon_defecto = "IMPORTACIONES Y DISTRIBUCIONES GRANADOS SRL";
-$direccion_defecto = "AV. AUGUSTO B. LEGUIA NRO. 1160 URB. SAN LORENZO";
-$direccion_defecto .= "<br/>" . "JOSE LEONARDO ORTIZ - CHICLAYO - LAMBAYEQUE";
-$ruc_empresa = "20479676861";
+require_once ("../empresa/cEmpresa.php");
+$oEmpresa = new cEmpresa();
 
-$contacto_empresa = "Teléfono:  Correo: idigrasrl@hotmail.com";
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt = mysql_fetch_array($dts);
+$ruc_empresa = $dt['tb_empresa_ruc'];
+$razon_defecto = $dt['tb_empresa_razsoc'];
+$direccion_defecto = $dt['tb_empresa_dir'];
+$contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
+$empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 
 $sucursales='
-<table style="font-size:10pt" border="0">
+<table style="font-size:7pt;" border="0">
     <tr>
         <td width="80">PRINCIPAL:</td>
-        <td width="580">AV. AUGUSTO B. LEGUÍA N° 1160 URB. SAN LORENZO J. L. ORTIZ - CHICLAYO - LAMBAYEQUE</td>
+        <td width="580">'.$direccion_defecto.'</td>
     </tr>
     <tr>
-        <td></td>
-        <td>TELÉFONO: 979532359 / 074 256797</td>
-    </tr>
-    <tr>
-        <td>SUCURSAL:</td>
-        <td>CALLE VIRGILIO D\'ALLORSO N° 177 CERCADO - CHICLAYO - CHICLAYO - LAMBAYEQUE</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>TELÉFONO: 954673888 / 074 236159</td>
-    </tr>
-    <tr>
-        <td>SUCURSAL:</td>
-        <td>AV. MIGUEL GRAU N° 470 URB. SANTA VICTORIA - CHICLAYO - CHICLAYO - LAMBAYEQUE</td>
-    </tr>
-    <tr>
-        <td></td>
-        <td>TELÉFONO: 979532353 / 074 227320</td>
+        <td>TELÉFONO: </td>
+        <td>'.$dt['tb_empresa_tel'].'</td>
     </tr>
     <tr>
         <td>CORREO:</td>
-        <td>idigrasrl@hotmail.com</td>
+        <td>'.$dt['tb_empresa_ema'].'</td>
     </tr>
 </table>';
 
@@ -200,29 +190,32 @@ $html = '
         font-family: Sans Serif, Arial, Consolas;
         margin: 0px;
         padding-top: 0px;
-        font-size: 11pt;
+        font-size: 7.5pt;
     }
     .header_row th {
-        border-bottom: 0.9px solid #ddd;
-        border-right: 0.9px solid #ddd;
-        border-left: 0.9px solid #ddd;
+        border-bottom: 0.9px solid #01a2e6;
+        border-right: 0.9px solid #01a2e6;
+        border-left: 0.9px solid #01a2e6;
+        background-color: #01a2e6
     }
     .odd_row td {
         background-color: transparent;
-        border-bottom: 0.9px solid #ddd;
+        border-bottom: 0.9px solid #01a2e6;
         padding-top: 5px;
         padding-bottom: 5px;
     }
     .even_row td {
         padding-top: 5px;
         padding-bottom: 5px;
-        background-color: #f6f6f6;
-        border-bottom: 0.9px solid #ddd;
+        background-color: #01a2e6;
+        border-bottom: 0.9px solid #01a2e6;
     }
     .row td{
-        border-right: 0.9px solid #ddd;
-        border-left: 0.9px solid #ddd;
+        border-right: 0.9px solid #01a2e6;
+        border-left: 0.9px solid #01a2e6;
     }
+    
+    
 </style>
 
 <style media="print">
@@ -236,14 +229,20 @@ if($estado=="ANULADA"){
 	$html.='<tr>
 	    <td width="50%"></td>
 	    <td width="10%"></td>
-	    <td td width="40%" style="text-align: center"><strong>ANULADO</strong></td>
+	    <td width="40%" style="text-align: center"><strong>ANULADO</strong></td>
 	    </tr>';
 }
     $html.='<tr>
-        <td style="text-align: left" width="60%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
+        <td style="text-align: left" width="15%" align="left">
+            <img src="'.$empresa_logo.'" alt="" width: "100%">
+        </td>    
+        <td style="text-align: left" width="55%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
         </td>
-        <td style="text-align: center;" width="40%" border="1">
-            <strong style="font-size: 15pt">'.$tipodoc.'<br>
+        <!-- <td width="20%" style="text-align: center">
+            <img src="../../images/banderas.jpg" alt="" style="max-width: 50%" height="40px" align="left">
+        </td> -->
+        <td style="text-align: center;" width="30%" border="1">
+            <strong style="font-size: 11pt">'.$tipodoc.'<br>
             RUC: '.$ruc_empresa.'<br>
             '.$serie.'-'.$numero.'</strong>
         </td>
@@ -281,10 +280,10 @@ if($estado=="ANULADA"){
 <br/>
 <br/>
 <br/>
-<table style="width: 100%; border: 0.5px solid #eeeeee; border-collapse:collapse;">
+<table style="width: 100%; border: 0.5px solid #01a2e6; border-collapse:collapse;">
     <tbody>
         <tr class="header_row">
-            <th style="text-align: right; width: 7%;"><b>CANT</b></th>
+            <th style="text-align: center; width: 7%;"><b>CANT</b></th>
             <th style="text-align: center; width: 53%;"><b>DESCRIPCIÓN</b></th>
             <th style="text-align: center; width: 10%;"><b>UNIDAD</b></th>
             <th style="text-align: right; width: 15%;"><b>PRECIO UNITARIO</b></th>
@@ -409,10 +408,10 @@ $html.='
 <table>
 <tr>
 <td style="width:78%">
-<p style="font-size:11pt">
+<p style="font-size:7pt">
 Código de Seguridad (Hash): '.$digval.'<br>
-Representación Impresa de la '.$tipodoc.'.<br>Esta puede ser consultada en: www.granadosllantas.com<br>
-Autorizado mediante Resolución de Intendencia N° 0720050000067/SUNAT
+Representación Impresa de la '.$tipodoc.'.<br>Esta puede ser consultada en: '.$d_documentos_app.'<br>
+'.$d_resolucion.'
 </p>
 </td>
 <td>

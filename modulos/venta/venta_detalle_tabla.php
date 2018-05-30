@@ -174,8 +174,7 @@ $(document).ready(function() {
 									if($tipdes == 2 and $descuento_linea!=0){
 										echo "S/. ".$descuento_linea;
 									}									
-								?></td>                                                        
-                            <td align="right"><?php echo $dt2['tb_ventadetalle_valven']?></td>
+								?></td>
                             <td align="right"><?php echo formato_money($precio_venta)?></td>
               </tr>
               <?php						
