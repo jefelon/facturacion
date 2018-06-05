@@ -98,14 +98,14 @@ function calculo_precioventa_uti(idf)
 	{
 		var utilidad=uti/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	else
 	{
 		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -127,7 +127,7 @@ function calculo_precioventa_preven(idf)
 		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$("#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$("#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }

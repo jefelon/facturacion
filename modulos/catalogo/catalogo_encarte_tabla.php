@@ -102,7 +102,7 @@ function calculo_precioventa_uti2(idf)
 	{
 		var utilidad=uti2/100;
 		var preven2=precos/(1-utilidad);
-		$( "#txt_cat_preven2_"+idf).autoNumericSet(preven2.toFixed(1));
+		$( "#txt_cat_preven2_"+idf).autoNumericSet(preven2.toFixed(2));
 		
 		//porcentaje
 		var descuento=(1-preven2/preven1)*100;
@@ -114,7 +114,7 @@ function calculo_precioventa_uti2(idf)
 		$( "#txt_cat_uti2_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven2_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_cat_preven2_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -143,7 +143,7 @@ function calculo_precioventa_preven2(idf)
 		var utilidad=0/100;
 		
 		var preven2=precos/(1-utilidad);
-		$("#txt_cat_preven2_"+idf).autoNumericSet(preven2.toFixed(1));
+		$("#txt_cat_preven2_"+idf).autoNumericSet(preven2.toFixed(2));
 		
 		//porcentaje
 		var descuento=(1-preven2/preven1)*100;
@@ -178,7 +178,7 @@ function calculo_precioventa_despor(idf)
 		var utilidad=0/100;
 		
 		var preven2=precos/(1-utilidad);
-		$("#txt_cat_preven2_"+idf).autoNumericSet(preven2.toFixed(1));
+		$("#txt_cat_preven2_"+idf).autoNumericSet(preven2.toFixed(2));
 		
 		//porcentaje
 		var descuento=(1-preven2/preven1)*100;

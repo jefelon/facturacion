@@ -406,18 +406,19 @@ $(function() {
 			{
 				var calculo=precos+(precos*uti/100);
 				//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
+				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
 			}
 		}
 	});
 	
-	$("#txt_cat_precosdol" ).change(function() {
+	$("#txt_cat_precosdol" ).keyup(function() {
 		var tipcam		=parseFloat($("#txt_cat_tipcam" ).autoNumericGet());
 		var precosdol	=parseFloat($("#txt_cat_precosdol" ).autoNumericGet());
 		
 		if(tipcam>0 & precosdol>0)
 		{
-			var calculo=tipcam*precosdol+(tipcam*precosdol)*0.18;
+			// var calculo=tipcam*precosdol+(tipcam*precosdol)0.18;
+            var calculo=tipcam*precosdol;
 			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
 			$( "#txt_cat_precos" ).autoNumericSet(calculo.toFixed(2));
 			
@@ -429,13 +430,13 @@ $(function() {
 			{
 				var calculo=precos+(precos*uti/100);
 				//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
+				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
 			}
 			
 		}
 	});
 	
-	$("#txt_cat_precos" ).change(function() {
+	$("#txt_cat_precos" ).keyup(function() {
 		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
 		var uti		=parseFloat($("#txt_cat_uti" ).val());
 		
@@ -443,11 +444,11 @@ $(function() {
 		{
 			var calculo=precom+(precom*uti/100);
 			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
+			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
 		}
 	});
 	
-	$("#txt_cat_uti" ).change(function() {
+	$("#txt_cat_uti" ).keyup(function() {
 		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
 		var uti		=parseFloat($("#txt_cat_uti" ).val());
 		
@@ -455,11 +456,11 @@ $(function() {
 		{
 			var calculo=precom+(precom*uti/100);
 			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(1));
+			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
 		}
 	});
 	
-	$("#txt_cat_preven" ).change(function(){
+	$("#txt_cat_preven" ).keyup(function(){
 		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
 		var preven	=parseFloat($("#txt_cat_preven" ).autoNumericGet());
 		

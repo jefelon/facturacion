@@ -109,16 +109,16 @@ function calculo_precioventa_tipcam(idf)
 	{
 		var utilidad=uti/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
 	}
 	else
 	{
 		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
 	}
 	
 }
@@ -135,16 +135,16 @@ function calculo_precioventa_precosdol(idf)
 	{
 		var utilidad=uti/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
 	}
 	else
 	{
 		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
 	}
 	
 }
@@ -161,14 +161,14 @@ function calculo_precioventa_precos(idf)
 	{
 		var utilidad=uti/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	else
 	{
 		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -182,14 +182,14 @@ function calculo_precioventa_uti(idf)
 	{
 		var utilidad=uti/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	else
 	{
 		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -211,7 +211,7 @@ function calculo_precioventa_preven(idf)
 		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$("#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(1));
+		$("#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -226,14 +226,14 @@ function calculo_precioventa_uti2(idf)
 	{
 		var utilidad=uti/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	else
 	{
 		$( "#txt_cat_uti2_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -255,7 +255,7 @@ function calculo_precioventa_preven2(idf)
 		$( "#txt_cat_uti2_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$("#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(1));
+		$("#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -270,14 +270,14 @@ function calculo_precioventa_uti3(idf)
 	{
 		var utilidad=uti/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	else
 	{
 		$( "#txt_cat_uti3_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(1));
+		$( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }
@@ -299,7 +299,7 @@ function calculo_precioventa_preven3(idf)
 		$( "#txt_cat_uti3_"+idf).autoNumericSet(0);
 		var utilidad=0/100;
 		var calculo=precos/(1-utilidad);
-		$("#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(1));
+		$("#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
 	}
 	
 }

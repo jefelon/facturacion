@@ -256,7 +256,35 @@ $(function() {
 	$('#txt_ser_nom').keyup(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-	
+    <?php if($_POST['action']=="insertar"){?>
+        $("#txt_ser_valor" ).keyup(function() {
+            var prevalor	=parseFloat($("#txt_ser_valor" ).autoNumericGet());
+            var igv		=prevalor*0.18;
+            $( "#txt_ser_igv" ).autoNumericSet(igv.toFixed(2));
+
+            if(prevalor>=0)
+            {
+                var calculo=prevalor+igv;
+                //$( "#txt_cat_preven" ).val(calculo.toFixed(2));
+                $( "#txt_ser_pre" ).autoNumericSet(calculo.toFixed(2));
+            }
+        });
+    <?php }?>
+    <?php if($_POST['action']=="editar"){?>
+        $(document ).ready(function() {
+            var ser_pre	=parseFloat($("#txt_ser_pre" ).autoNumericGet());
+
+            if(ser_pre>=0)
+            {
+                var valor=ser_pre/1.18;
+                var igv		=ser_pre-(ser_pre/1.18);
+                //$( "#txt_cat_preven" ).val(calculo.toFixed(2));
+                $( "#txt_ser_valor" ).autoNumericSet(valor.toFixed(2));
+                $( "#txt_ser_igv" ).autoNumericSet(igv.toFixed(2));
+            }
+        });
+    <?php }?>
+
 	/*$( "#txt_pre_nom" ).autocomplete({
    		minLength: 1,
    		source: "dao/presentacion_complete_nom.php"
@@ -388,7 +416,15 @@ $(function() {
         <tr>
           <td valign="top"><label for="txt_ser_des">Descripción:</label></td>
           <td><textarea name="txt_ser_des" cols="40" id="txt_ser_des"><?php echo $des?></textarea></td>
-        </tr>        
+        </tr>
+        <tr>
+            <td><label for="txt_ser_valor" title="Valor del servicio">Valor sin IGV.:</label></td>
+            <td><input type="text" name="txt_ser_valor" size='10' rows="4" id="txt_ser_valor" value="<?php echo $pre/1.18?>" class="moneda" style="text-align:right" /></td>
+        </tr>
+        <tr>
+            <td><label for="txt_ser_igv" title="IGV">IGV:</label></td>
+            <td><input type="text" name="txt_ser_igv" size='10' rows="4" id="txt_ser_igv" value="<?php echo $pre-($pre/1.18)?>" class="moneda" style="text-align:right" /></td>
+        </tr>
         <tr>
           <td><label for="txt_ser_pre" title="Precio Referencial">Precio Ref.:</label></td>
           <td><input type="text" name="txt_ser_pre" size='10' rows="4" id="txt_ser_pre" value="<?php echo $pre?>" class="moneda" style="text-align:right" /></td>
