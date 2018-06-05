@@ -136,7 +136,7 @@ while($dt = mysql_fetch_array($dts))
 	$detalle[$autoin]['cantidad']				=$dt["tb_ventadetalle_can"];
 	$detalle[$autoin]['idproducto']				=$codigo;
 	$detalle[$autoin]['codigo']					=$codigo;
-	$detalle[$autoin]['detalle']				=null;
+	$detalle[$autoin]['detalle']				=$dt["tb_ventadetalle_nom"];
 	$detalle[$autoin]['cdsc']					=$dt["tb_ventadetalle_nom"];
 
 	//$igv 										=$dt["tb_ventadetalle_igv"] / $dt["tb_ventadetalle_can"];

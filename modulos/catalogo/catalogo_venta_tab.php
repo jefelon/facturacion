@@ -14,7 +14,7 @@
 <div id="div_venta_tab">
     <ul>
         <li><a id="productos" href="#div_tab_producto">Productos</a></li>
-        <li><a id="servicios" href="#div_tab_servicio">Servicios</a></li>        
+        <li class="ui-state-default ui-corner-top ui-state-hover ui-tabs-selected ui-state-active"><a id="servicios" href="#div_tab_servicio">Servicios</a></li>
     </ul>
     <div id="div_tab_producto">
         Productos

@@ -174,12 +174,12 @@ $(function() {
                             <td align="left">
 		                    	<select id="cmb_detven_tip_<?php echo $dt1['tb_servicio_id']?>" style="width:43px">
 		                    		<option value="1" selected>Gravado</option>
-		                    		<option value="2">Premio</option>
-		                    		<option value="3">Donación</option>
-		                    		<option value="4">Retiro</option>
-		                    		<option value="5">Publicidad</option>
-		                    		<option value="6">Bonificación</option>
-		                    		<option value="7">Entrega a trabajadores</option>
+<!--		                    		<option value="2">Premio</option>-->
+<!--		                    		<option value="3">Donación</option>-->
+<!--		                    		<option value="4">Retiro</option>-->
+<!--		                    		<option value="5">Publicidad</option>-->
+<!--		                    		<option value="6">Bonificación</option>-->
+<!--		                    		<option value="7">Entrega a trabajadores</option>-->
 		                    	</select>
 		                    </td>
 

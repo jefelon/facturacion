@@ -703,7 +703,7 @@ function arr_SummaryDocumentsLine($header, $detalle, $empresa, $tipodoc){
                 //sac:SummaryDocumentsLine/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID
                 $arr['SummaryDocumentsLine'][$row+1]['BillingReference']['InvoiceDocumentReference']['ID']  = $item->invoicedocumentreference;
                 //sac:SummaryDocumentsLine/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentTypeCode
-                $arr['SummaryDocumentsLine'][$row+1]['BillingReference']['InvoiceDocumentReference']['documenttypecode']  = $item->documenttypecode;
+                $arr['SummaryDocumentsLine'][$row+1]['BillingReference']['InvoiceDocumentReference']['Documenttypecode']  = $item->documenttypecode;
             }
 
             $arr['SummaryDocumentsLine'][$row+1]['Status']['ConditionCode'] = $item->conditioncode;
