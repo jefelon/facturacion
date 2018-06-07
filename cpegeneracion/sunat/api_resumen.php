@@ -82,7 +82,7 @@ $detalle = json_decode(json_encode($detalle));
 $r = run(datatoarray($header, $detalle, $empresa, 'SummaryDocuments'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "SummaryDocuments", true);
 
 
-if ($r['faultcode']==0){
+if ($r['faultcode']=='0'){
     $data['aceptado_por_sunat'] = true;
 }else{
     $data['aceptado_por_sunat'] = false;

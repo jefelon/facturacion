@@ -2,11 +2,11 @@
 $d_dominio="www.a-zetasoft.com";
 //$d_dominio_app="www.ssdhosting.com.pe/facturacion/";
 //$d_documentos_app="www.ssdhosting.com.pe/facturacion/recursos/venta/";
-$d_dominio_app="localhost/facturacion/";
-$d_documentos_app="localhost/facturacion/recursos/venta/";
+$d_dominio_app="http://localhost/facturacionapi/";
+$d_documentos_app="http://localhost/facturacion/recursos/venta/";
 $d_email_emp="ventas@eycimportaciones.com.pe";
 $d_email_soporte="soporte@a-zetasoft.com";
-$d_resolucion="";
+$d_resolucion="Autorizado mediante Resolución de Intendencia No.034-005-0005315";
 
 $certificado = "20601411076.pfx";
 $clave_certificado = "20agosto2011";

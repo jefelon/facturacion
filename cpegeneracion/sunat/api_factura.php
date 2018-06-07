@@ -459,7 +459,7 @@ $pdf->Output('../../cperepositorio/pdf/'.$nombre_archivo, 'F');
 $data['tipo_de_comprobante'] = $_POST['tipo_de_comprobante'];
 $data['serie'] = $_POST['serie'];
 $data['numero'] = $_POST['numero'];
-if ($r['faultcode']==0){
+if ($r['faultcode']=='0'){
     $data['aceptado_por_sunat'] = true;
 }else{
     $data['aceptado_por_sunat'] = false;

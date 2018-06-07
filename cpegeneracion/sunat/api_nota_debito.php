@@ -76,7 +76,7 @@ $header[0]['issuedate']				=$_POST['fecha_de_generacion'];//fecha nota credito
 $header[0]['referencedocumenttypecode']=$_POST['código_de_tipo_de_documento_de_referencia'];//ID DOCUMENT
 $header[0]['referenceid']			=$_POST['referenceid'];//factura
 
-$header[0]['idtiponotacredito']		=$_POST['tipo_de_nota_de_credito'];;//cat 09
+$header[0]['idtiponotacredito']		=$_POST['tipo_de_nota_de_debito'];//cat 09
 $header[0]['description']			=$_POST['descripcion_motivo'];
 
 $header = json_decode(json_encode($header));
@@ -94,7 +94,7 @@ $detalle[$autoin]['cantidad']				=$_POST["cantidad"];
 $detalle[$autoin]['idproducto']				=$_POST["idproducto"];
 $detalle[$autoin]['codigo']					=$_POST["codigo"];;
 $detalle[$autoin]['detalle']				=$_POST["descripcion"];
-$detalle[$autoin]['cdsc']					=$_POST["impuesto_selectivo_al_consumo"];
+$detalle[$autoin]['cdsc']					=$_POST["cdsc"];
 
 //$igv 										=$dt["tb_ventadetalle_igv"] / $dt["tb_ventadetalle_can"];
 $detalle[$autoin]['precio']					=$_POST["valor_unitario"];
@@ -112,7 +112,7 @@ $detalle[$autoin]['isc']					=$_POST["impuesto_selectivo_al_consumo"];
 $detalle = json_decode(json_encode($detalle));
 //===============================================================================================
 
-$r = run(datatoarray($header, $detalle, $empresa, 'CreditNote'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "CreditNote", false);
+$r = run(datatoarray($header, $detalle, $empresa, 'DebitNote'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "DebitNote", true);
 
 $data['tipo_de_comprobante'] = $_POST['tipo_de_comprobante'];
 $data['serie'] = $_POST['serie'];
