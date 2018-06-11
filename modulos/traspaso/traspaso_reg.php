@@ -68,7 +68,7 @@ if($_POST['action_traspaso']=="insertar")
 			$cod,
 			$_POST['cmb_tra_alm_ori'],
 			$_POST['cmb_tra_alm_des'],
-			$_POST['txt_tra_ref'],
+			strip_tags($_POST['txt_tra_ref']),
 			$_POST['hdd_usu_id'],
 			$_POST['hdd_emp_id'],
 			$act
@@ -282,7 +282,7 @@ if($_POST['action_traspaso']=="editar")
 		$oTraspaso->modificar(
 			$_POST['hdd_tra_id'],
 			fecha_mysql($_POST['txt_tra_fec']),
-			$_POST['txt_tra_ref']
+			strip_tags($_POST['txt_tra_ref'])
 		);
 
 		$data['tra_msj']='Se registró traspaso correctamente.';

@@ -17,7 +17,7 @@ if($_POST['action_encarte']=="insertar")
 		$oEncarte->insertar(
 			fecha_mysql($_POST['txt_enc_fecini']),
 			fecha_mysql($_POST['txt_enc_fecfin']),
-			$_POST['txt_enc_des'],
+			strip_tags($_POST['txt_enc_des']),
 			$_POST['txt_enc_despor'],
 			$_POST['cmb_enc_est'],
 			$_POST['hdd_usu_id'],
@@ -88,7 +88,7 @@ if($_POST['action_encarte']=="editar")
 	{
 		$oEncarte->modificar(
 			$_POST['hdd_enc_id'],
-			$_POST['txt_enc_des']
+            strip_tags($_POST['txt_enc_des'])
 		);
 		
 		$data['enc_msj']='Se registró encarte correctamente.';

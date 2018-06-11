@@ -116,7 +116,7 @@ if($_POST['action_venta']=="insertar")
 					$total,
 					$est,
 					$_POST['cmb_ven_tip'],
-					$_POST['txt_ven_mot'],
+					strip_tags($_POST['txt_ven_mot']),
 					$ven_tipdoc,
 					$ven_numdoc,
 					$_POST['hdd_usu_id'],
@@ -185,7 +185,7 @@ if($_POST['action_venta']=="insertar")
 				// while($dt1 = mysql_fetch_array($dts1))
 				// {
 					$tipven=2;
-					$detalle=$_POST['txt_ven_det'];
+					$detalle=strip_tags($_POST['txt_ven_det']);
 					$can=1;
 					$tipdes=0;
 					$tipoafectacionigv_id=1;

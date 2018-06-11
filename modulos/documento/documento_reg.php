@@ -8,7 +8,7 @@ if($_POST['action_documento']=="insertar")
 	if(!empty($_POST['txt_doc_nom']))
 	{
 		$xac=1;
-		$oDocumento->insertar($xac,$_POST['txt_doc_abr'], $_POST['txt_doc_nom'], $_POST['cmb_doc_tip'],$_POST['chk_doc_def']);
+		$oDocumento->insertar($xac,strip_tags($_POST['txt_doc_abr']), strip_tags($_POST['txt_doc_nom']), $_POST['cmb_doc_tip'],$_POST['chk_doc_def']);
 		echo 'Se registró documento correctamente.';
 	}
 	else
@@ -21,7 +21,7 @@ if($_POST['action_documento']=="editar")
 {
 	if(!empty($_POST['txt_doc_nom']))
 	{
-		$oDocumento->modificar($_POST['hdd_doc_id'],$_POST['txt_doc_abr'],$_POST['txt_doc_nom'], $_POST['cmb_doc_tip'],$_POST['chk_doc_def'],$_POST['chk_doc_mos']);
+		$oDocumento->modificar($_POST['hdd_doc_id'],strip_tags($_POST['txt_doc_abr']),strip_tags($_POST['txt_doc_nom']), $_POST['cmb_doc_tip'],$_POST['chk_doc_def'],$_POST['chk_doc_mos']);
 		echo 'Se registró documento correctamente.';
 	}
 	else

@@ -23,11 +23,11 @@ if($_POST['action_cliente']=="insertar")
 		else
 		{
 			$oCliente->insertar(
-				$_POST['rad_cli_tip'], 
-				limpia_espacios($_POST['txt_cli_nom']), 
-				$_POST['txt_cli_doc'], 
-				$_POST['txt_cli_dir'], 
-				limpia_espacios($_POST['txt_cli_con']), 
+				$_POST['rad_cli_tip'],
+                strip_tags(limpia_espacios($_POST['txt_cli_nom'])),
+				$_POST['txt_cli_doc'],
+                strip_tags($_POST['txt_cli_dir']),
+                strip_tags(limpia_espacios($_POST['txt_cli_con'])),
 				$_POST['txt_cli_tel'], 
 				$_POST['txt_cli_ema'],
 				$_POST['txt_cli_est']
@@ -69,11 +69,11 @@ if($_POST['action_cliente']=="editar")
 		{
 			$oCliente->modificar(
 				$_POST['hdd_cli_id'], 
-				$_POST['rad_cli_tip'], 
-				limpia_espacios($_POST['txt_cli_nom']), 
-				$_POST['txt_cli_doc'], 
-				$_POST['txt_cli_dir'], 
-				limpia_espacios($_POST['txt_cli_con']), 
+				$_POST['rad_cli_tip'],
+                strip_tags(limpia_espacios($_POST['txt_cli_nom'])),
+				$_POST['txt_cli_doc'],
+                strip_tags($_POST['txt_cli_dir']),
+                strip_tags(limpia_espacios($_POST['txt_cli_con'])),
 				$_POST['txt_cli_tel'], 
 				$_POST['txt_cli_ema'],
 				$_POST['txt_cli_est']
@@ -110,11 +110,11 @@ if($_POST['action_cliente']=="editarSunat")
 		{
 			$oCliente->modificar(
 				$_POST['hdd_cli_id'], 
-				$_POST['rad_cli_tip'], 
-				limpia_espacios($_POST['txt_cli_nom']), 
-				$_POST['txt_cli_doc'], 
-				$_POST['txt_cli_dir'], 
-				limpia_espacios($_POST['txt_cli_con']), 
+				$_POST['rad_cli_tip'],
+                strip_tags(limpia_espacios($_POST['txt_cli_nom'])),
+				$_POST['txt_cli_doc'],
+                strip_tags($_POST['txt_cli_dir']),
+                strip_tags(limpia_espacios($_POST['txt_cli_con'])),
 				$_POST['txt_cli_tel'], 
 				$_POST['txt_cli_ema'],
 				$_POST['txt_cli_est']

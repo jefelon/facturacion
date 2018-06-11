@@ -9,9 +9,9 @@ if ($_POST['action_catalogoimagen']=="insertar") {
 
 	if (!empty($_POST['txt_catimg_tit'])) 
 	{		
-		$oCatalogoimg->insertar(		
-			$_POST['txt_catimg_tit'],
-			$_POST['txt_catimg_des']
+		$oCatalogoimg->insertar(
+            strip_tags($_POST['txt_catimg_tit']),
+            strip_tags($_POST['txt_catimg_des'])
 		);
 
 			//ultimo insert

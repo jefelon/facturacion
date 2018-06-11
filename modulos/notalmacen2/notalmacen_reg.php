@@ -53,7 +53,7 @@ if($_POST['action_notalmacen']=="insertar")
 			$_POST['cmb_doc_id'],
 			$_POST['txt_notalm_numdoc'],
 			$_POST['cmb_tipope_id'],
-			$_POST['txt_notalm_des'],
+			strip_tags($_POST['txt_notalm_des']),
 			$operacion_id,
 			$_POST['cmb_alm_id'],
 			$_POST['hdd_usu_id'],

@@ -63,7 +63,7 @@ if($num>0)
 	    	$idcom	=$dt['cs_tipodocumento_id'];
 			$ser 	=$dt['tb_venta_ser'];
 			$numdoc =$dt['tb_venta_num'];
-			$mot 	=$_POST['txt_combaj_mot'];
+			$mot 	=strip_tags($_POST['txt_combaj_mot']);
 			$ven_id =$dt['tb_venta_id'];
 
 			$oVenta->guardar_combaja_detalle($baja_id,$item,$idcom,$ser,$numdoc,$mot,$ven_id);

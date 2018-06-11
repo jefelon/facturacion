@@ -7,7 +7,7 @@ if($_POST['action_cuentacorriente']=="insertar")
 {
 	if(!empty($_POST['txt_cuecor_nom']))
 	{
-		$oCuentacorriente->insertar($_POST['txt_cuecor_nom'],$_POST['cmb_caj_id']);
+		$oCuentacorriente->insertar(strip_tags($_POST['txt_cuecor_nom']),$_POST['cmb_caj_id']);
 		
 			$dts=$oCuentacorriente->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
@@ -28,7 +28,7 @@ if($_POST['action_cuentacorriente']=="editar")
 {
 	if(!empty($_POST['txt_cuecor_nom']))
 	{
-		$oCuentacorriente->modificar($_POST['hdd_cuecor_id'],$_POST['txt_cuecor_nom'],$_POST['cmb_caj_id']);
+		$oCuentacorriente->modificar($_POST['hdd_cuecor_id'],strip_tags($_POST['txt_cuecor_nom']),$_POST['cmb_caj_id']);
 		
 		$data['cuecor_msj']='Se registró cuenta corriente correctamente.';
 		echo json_encode($data);

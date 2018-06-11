@@ -30,7 +30,7 @@ if($_POST['action_usuario'] == 'insertar'){
 			
 			if($dato2==0)//no hay cliente con este correo
 			{
-				$oVale->insertar_cliente(trim($_POST['txt_nom']),$_POST['txt_dni'],trim($_POST['txt_ema']));
+				$oVale->insertar_cliente(strip_tags(trim($_POST['txt_nom'])),$_POST['txt_dni'],trim($_POST['txt_ema']));
 				
 					$dts=$oVale->ultimoInsert();
 					$dt = mysql_fetch_array($dts);
@@ -54,7 +54,7 @@ if($_POST['action_usuario'] == 'insertar'){
 				
 				$vista=1;
 				
-				$aviso1=$_POST['txt_nom'].", DNI: ".$_POST['txt_dni'].".";
+				$aviso1=strip_tags($_POST['txt_nom']).", DNI: ".$_POST['txt_dni'].".";
 				
 				//email
 				//$aviso2 = "";
@@ -67,7 +67,7 @@ if($_POST['action_usuario'] == 'insertar'){
 					$subject = "Vale de descuento | ".$url_web;
 					 
 					// Cuerpo del mensaje
-					$mensaje = "Hola ".$_POST['txt_nom'].", gracias por registrarte.\n";
+					$mensaje = "Hola ".strip_tags($_POST['txt_nom']).", gracias por registrarte.\n";
 					$mensaje.= "                               \n";
 					$mensaje.= "Tu vale de descuento se ha generado correctamente.\n";
 					$mensaje.= "                               \n";

@@ -9,7 +9,7 @@ if($_POST['action_tipoperacion']=="insertar")
 	if(!empty($_POST['txt_tipope_nom']))
 	{
 		$man=1;
-		$oTipoperacion->insertar($_POST['txt_tipope_nom'],$_POST['cmb_tip'],$man);
+		$oTipoperacion->insertar(strip_tags($_POST['txt_tipope_nom']),$_POST['cmb_tip'],$man);
 		echo 'Se registró tipo de operación correctamente.';
 	}
 	else
@@ -22,7 +22,7 @@ if($_POST['action_tipoperacion']=="editar")
 {
 	if(!empty($_POST['txt_tipope_nom']))
 	{
-		$oTipoperacion->modificar($_POST['hdd_tipope_id'],$_POST['txt_tipope_nom'],$_POST['cmb_tip']);
+		$oTipoperacion->modificar($_POST['hdd_tipope_id'],strip_tags($_POST['txt_tipope_nom']),$_POST['cmb_tip']);
 		echo 'Se registró tipo de operación correctamente.';
 	}
 	else
