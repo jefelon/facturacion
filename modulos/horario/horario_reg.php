@@ -9,7 +9,7 @@ if($_POST['action_horario']=="insertar")
 	if(!empty($_POST['txt_hor_nom']))
 	{
 		$oHorario->insertar(
-			$_POST['txt_hor_nom'],
+			strip_tags($_POST['txt_hor_nom']),
 			fecha_mysql($_POST['txt_hor_fecini']),
 			fecha_mysql($_POST['txt_hor_fecfin']),
 			$_POST['chk_hor_lun'],
@@ -39,7 +39,7 @@ if($_POST['action_horario']=="editar")
 	{
 		$oHorario->modificar(
 			$_POST['hdd_hor_id'],
-			$_POST['txt_hor_nom'],
+            strip_tags($_POST['txt_hor_nom']),
 			fecha_mysql($_POST['txt_hor_fecini']),
 			fecha_mysql($_POST['txt_hor_fecfin']),
 			$_POST['chk_hor_lun'],

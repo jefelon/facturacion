@@ -25,7 +25,7 @@ if($_POST['action_transferencia']=="insertar")
 		$oTransferencia->insertar(
 			fecha_mysql($_POST['txt_tra_fec']),
 			$cod,
-			$_POST['txt_tra_des'],
+            strip_tags($_POST['txt_tra_des']),
 			$_POST['cmb_ref_id'],
 			$_POST['cmb_entfin_id'],
 			$_POST['cmb_tra_modpag'],
@@ -45,7 +45,7 @@ if($_POST['action_transferencia']=="insertar")
 		$tra_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
 		
-		$glosa_salida	='TRANSFERENCIA A CAJA TERCEROS: '.$_POST['txt_tra_des'];
+		$glosa_salida	='TRANSFERENCIA A CAJA TERCEROS: '.strip_tags($_POST['txt_tra_des']);
 		$doc_salida		='TCT '.$cod;
 		$cue_salida		=33;//PAGO PROVEEDORES
 		
@@ -71,7 +71,7 @@ if($_POST['action_transferencia']=="insertar")
 			$_POST['hdd_usu_id_mod']
 		);
 		
-		$glosa_entrada	='TRANSFERENCIA DESDE CAJA GENERAL: '.$_POST['txt_tra_des'];
+		$glosa_entrada	='TRANSFERENCIA DESDE CAJA GENERAL: '.strip_tags($_POST['txt_tra_des']);
 		$doc_entrada	='TCT '.$cod;
 		$cue_entrada	=3;//INGRESO POR TRANSFERENCIA
 	

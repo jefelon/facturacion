@@ -7,7 +7,7 @@ if($_POST['action_formula']=="insertar")
 {
 	if(!empty($_POST['txt_for_ele']))
 	{
-		$oFormula->insertar($_POST['txt_for_ele'], $_POST['txt_for_ide'], $_POST['txt_for_dat'], $_POST['txt_for_des']);
+		$oFormula->insertar(strip_tags($_POST['txt_for_ele']), strip_tags($_POST['txt_for_ide']), strip_tags($_POST['txt_for_dat']), strip_tags($_POST['txt_for_des']));
 		
 			$dts=$oFormula->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
@@ -28,7 +28,7 @@ if($_POST['action_formula']=="editar")
 {
 	if(!empty($_POST['txt_for_ele']))
 	{
-		$oFormula->modificar($_POST['hdd_for_id'],$_POST['txt_for_ele'], $_POST['txt_for_ide'], $_POST['txt_for_dat'], $_POST['txt_for_des']);
+		$oFormula->modificar($_POST['hdd_for_id'],strip_tags($_POST['txt_for_ele']), strip_tags($_POST['txt_for_ide']), strip_tags($_POST['txt_for_dat']), strip_tags($_POST['txt_for_des']));
 		
 		$data['for_msj']='Se registró formula correctamente.';
 		echo json_encode($data);

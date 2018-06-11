@@ -10,7 +10,7 @@ if($_POST['action_unidad']=="insertar")
 		$uni_tip=$_POST['cmb_uni_tip'];
 		if($_POST['cmb_uni_tip']=="")$uni_tip=$_POST['hdd_uni_tip'];
 		
-		$oUnidad->insertar($_POST['txt_uni_abr'], $_POST['txt_uni_nom'], $uni_tip);
+		$oUnidad->insertar(strip_tags($_POST['txt_uni_abr']), strip_tags($_POST['txt_uni_nom']), $uni_tip);
 		
 			$dts=$oUnidad->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
@@ -31,7 +31,7 @@ if($_POST['action_unidad']=="editar")
 {
 	if(!empty($_POST['txt_uni_nom']))
 	{
-		$oUnidad->modificar($_POST['hdd_uni_id'],$_POST['txt_uni_abr'],$_POST['txt_uni_nom'], $_POST['cmb_uni_tip']);
+		$oUnidad->modificar($_POST['hdd_uni_id'],strip_tags($_POST['txt_uni_abr']),strip_tags($_POST['txt_uni_nom']), $_POST['cmb_uni_tip']);
 		
 		$data['uni_msj']='Se registró unidad correctamente.';
 		echo json_encode($data);

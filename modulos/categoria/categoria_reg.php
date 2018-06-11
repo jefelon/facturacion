@@ -7,7 +7,7 @@ if($_POST['action_categoria']=="insertar")
 {
 	if(!empty($_POST['txt_cat_nom']))
 	{
-		$oCategoria->insertar($_POST['txt_cat_nom'],$_POST['cmb_cat_idp']);
+		$oCategoria->insertar(strip_tags($_POST['txt_cat_nom']),$_POST['cmb_cat_idp']);
 		
 			$dts=$oCategoria->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
@@ -26,10 +26,11 @@ if($_POST['action_categoria']=="insertar")
 
 if($_POST['action_categoria']=="editar")
 {
-	if(!empty($_POST['txt_cat_nom']))
+
+    if(!empty($_POST['txt_cat_nom']))
 	{
-		$oCategoria->modificar($_POST['hdd_cat_id'],$_POST['txt_cat_nom'],$_POST['cmb_cat_idp']);
-		
+		$oCategoria->modificar($_POST['hdd_cat_id'], strip_tags($_POST['txt_cat_nom']), $_POST['cmb_cat_idp']);
+
 		$data['cat_msj']='Se registró categoria correctamente.';
 		echo json_encode($data);
 	}

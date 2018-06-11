@@ -24,10 +24,10 @@ if($_POST['action_proveedor']=="insertar")
 		{
 			$oProveedor->insertar(
 				$_POST['rad_pro_tip'], 
-				limpia_espacios($_POST['txt_pro_nom']), 
-				$_POST['txt_pro_doc'], 
-				$_POST['txt_pro_dir'], 
-				limpia_espacios($_POST['txt_pro_con']), 
+				strip_tags(limpia_espacios($_POST['txt_pro_nom'])),
+				$_POST['txt_pro_doc'],
+                strip_tags($_POST['txt_pro_dir']),
+                strip_tags(limpia_espacios($_POST['txt_pro_con'])),
 				$_POST['txt_pro_tel'], 
 				$_POST['txt_pro_ema']);
 			
@@ -67,11 +67,11 @@ if($_POST['action_proveedor']=="editar")
 		{
 			$oProveedor->modificar(
 				$_POST['hdd_pro_id'], 
-				$_POST['rad_pro_tip'], 
-				limpia_espacios($_POST['txt_pro_nom']), 
-				$_POST['txt_pro_doc'], 
-				$_POST['txt_pro_dir'], 
-				limpia_espacios($_POST['txt_pro_con']), 
+				$_POST['rad_pro_tip'],
+				strip_tags(limpia_espacios($_POST['txt_pro_nom'])),
+				$_POST['txt_pro_doc'],
+                strip_tags($_POST['txt_pro_dir']),
+                strip_tags(limpia_espacios($_POST['txt_pro_con'])),
 				$_POST['txt_pro_tel'], 
 				$_POST['txt_pro_ema']);
 			

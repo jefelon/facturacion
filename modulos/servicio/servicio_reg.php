@@ -14,8 +14,8 @@ if($_POST['action_servicio']=="insertar")
 		if($num_rows==0){
 			//insertamos servicio
 			$oServicio->insertar(
-				$_POST['txt_ser_nom'],
-				$_POST['txt_ser_des'],
+                strip_tags($_POST['txt_ser_nom']),
+                strip_tags($_POST['txt_ser_des']),
 				moneda_mysql($_POST['txt_ser_pre']),
 				$_POST['cmb_ser_est'],
 				$_POST['cmb_cat_id'],
@@ -47,8 +47,8 @@ if($_POST['action_servicio']=="editar")
 	{
 		$oServicio->modificar(
 			$_POST['hdd_ser_id'],
-			$_POST['txt_ser_nom'],
-			$_POST['txt_ser_des'],
+			strip_tags($_POST['txt_ser_nom']),
+            strip_tags($_POST['txt_ser_des']),
 			moneda_mysql($_POST['txt_ser_pre']),
 			$_POST['cmb_ser_est'],
 			$_POST['cmb_cat_id']			

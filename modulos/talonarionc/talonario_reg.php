@@ -38,7 +38,7 @@ if($_POST['action_talonario']=="insertar")
 	{
 		if(!empty($_POST['cmb_doc_id']))
 		{
-			$oTalonario->insertar($_POST['txt_tal_ser'], $_POST['txt_tal_ini'],$_POST['txt_tal_fin'],$_POST['txt_tal_num'],$_POST['cmb_punven_id'],$_POST['cmb_doc_id'],$_POST['cmb_tal_est'],$_SESSION['empresa_id']);
+			$oTalonario->insertar(strip_tags($_POST['txt_tal_ser']), $_POST['txt_tal_ini'],$_POST['txt_tal_fin'],$_POST['txt_tal_num'],$_POST['cmb_punven_id'],$_POST['cmb_doc_id'],$_POST['cmb_tal_est'],$_SESSION['empresa_id']);
 			echo 'Se registró talonario correctamente.';
 		}
 		else
@@ -77,7 +77,7 @@ if($_POST['action_talonario']=="editar")
 	{
 		if(!empty($_POST['cmb_doc_id']))
 		{
-			$oTalonario->modificar($_POST['hdd_tal_id'],$_POST['txt_tal_ser'], $_POST['txt_tal_ini'],$_POST['txt_tal_fin'],$_POST['txt_tal_num'],$_POST['cmb_punven_id'],$_POST['cmb_doc_id'],$_POST['cmb_tal_est']);
+			$oTalonario->modificar($_POST['hdd_tal_id'],strip_tags($_POST['txt_tal_ser']), $_POST['txt_tal_ini'],$_POST['txt_tal_fin'],$_POST['txt_tal_num'],$_POST['cmb_punven_id'],$_POST['cmb_doc_id'],$_POST['cmb_tal_est']);
 			echo 'Se registró talonario correctamente.';
 		}
 		else

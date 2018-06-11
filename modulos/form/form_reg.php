@@ -7,7 +7,7 @@ if($_POST['action_form']=="insertar")
 {
 	if(!empty($_POST['txt_for_ele']))
 	{
-		$oForm->insertar($_POST['txt_for_ele'], $_POST['txt_for_cat'], $_POST['txt_for_des'], $_POST['txt_for_ord']);
+		$oForm->insertar(strip_tags($_POST['txt_for_ele']), strip_tags($_POST['txt_for_cat']), strip_tags($_POST['txt_for_des']), strip_tags($_POST['txt_for_ord']));
 		
 			$dts=$oForm->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
@@ -28,7 +28,7 @@ if($_POST['action_form']=="editar")
 {
 	if(!empty($_POST['txt_for_ele']))
 	{
-		$oForm->modificar($_POST['hdd_for_id'],$_POST['txt_for_ele'], $_POST['txt_for_cat'], $_POST['txt_for_des'], $_POST['txt_for_ord']);
+		$oForm->modificar($_POST['hdd_for_id'],strip_tags($_POST['txt_for_ele']), strip_tags($_POST['txt_for_cat']), strip_tags($_POST['txt_for_des']), strip_tags($_POST['txt_for_ord']));
 		
 		$data['for_msj']='Se registró formulario correctamente.';
 		echo json_encode($data);

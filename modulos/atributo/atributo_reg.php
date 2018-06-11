@@ -16,7 +16,7 @@ if($_POST['action_atributo']=="insertar")
 		}
 		else
 		{
-			$oAtributo->insertar($_POST['txt_atr_nom'],$_POST['cmb_atr_idp'], $_POST['cmb_cat_id']);
+			$oAtributo->insertar(strip_tags($_POST['txt_atr_nom']),$_POST['cmb_atr_idp'], $_POST['cmb_cat_id']);
 			
 				$dts=$oAtributo->ultimoInsert();
 				$dt = mysql_fetch_array($dts);
@@ -47,7 +47,7 @@ if($_POST['action_atributo']=="editar")
 		}
 		else
 		{
-			$oAtributo->modificar($_POST['hdd_atr_id'],$_POST['txt_atr_nom'],$_POST['cmb_atr_idp'], $_POST['cmb_cat_id']);
+			$oAtributo->modificar($_POST['hdd_atr_id'],strip_tags($_POST['txt_atr_nom']),$_POST['cmb_atr_idp'], $_POST['cmb_cat_id']);
 			
 			$data['atr_msj']='Se registró atributo correctamente.';
 		}

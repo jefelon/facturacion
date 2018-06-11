@@ -15,8 +15,8 @@ if($_POST['action_presentacion']=="insertar"){
 	if(!empty($_POST['txt_pre_nom']))
 	{
 		$oPresentacion->insertar(
-			limpia_espacios($_POST['txt_pre_nom']),
-			$_POST['txt_pre_cod'],
+			strip_tags(limpia_espacios($_POST['txt_pre_nom'])),
+            strip_tags($_POST['txt_pre_cod']),
 			$_POST['txt_pre_stomin'],
 			$_POST['cmb_pre_est'],
 			$_POST['hdd_pre_pro_id']
@@ -76,8 +76,8 @@ if($_POST['action_presentacion']=="editar")
 	{
 		$oPresentacion->modificar(
 			$_POST['hdd_pre_id'],
-			limpia_espacios($_POST['txt_pre_nom']),
-			$_POST['txt_pre_cod'],
+			strip_tags(limpia_espacios($_POST['txt_pre_nom'])),
+            strip_tags($_POST['txt_pre_cod']),
 			$_POST['txt_pre_stomin'],
 			$_POST['cmb_pre_est'],
 			$_POST['hdd_pre_pro_id']
