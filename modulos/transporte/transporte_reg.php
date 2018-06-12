@@ -7,7 +7,7 @@ if($_POST['action_transporte']=="insertar")
 {
 	if(!empty($_POST['txt_tra_ruc']))
 	{
-		$oTransporte->insertar($_POST['txt_tra_razsoc'], $_POST['txt_tra_ruc'], $_POST['txt_tra_dir'], $_POST['txt_tra_tel'], $_POST['txt_tra_ema']);
+		$oTransporte->insertar(strip_tags($_POST['txt_tra_razsoc']), $_POST['txt_tra_ruc'], strip_tags($_POST['txt_tra_dir']), $_POST['txt_tra_tel'], $_POST['txt_tra_ema']);
 		
 			$dts=$oTransporte->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
@@ -28,7 +28,7 @@ if($_POST['action_transporte']=="editar")
 {
 	if(!empty($_POST['txt_tra_ruc']))
 	{
-		$oTransporte->modificar($_POST['hdd_tra_id'], $_POST['txt_tra_razsoc'], $_POST['txt_tra_ruc'], $_POST['txt_tra_dir'], $_POST['txt_tra_tel'], $_POST['txt_tra_ema']);
+		$oTransporte->modificar($_POST['hdd_tra_id'], strip_tags($_POST['txt_tra_razsoc']), $_POST['txt_tra_ruc'], strip_tags($_POST['txt_tra_dir']), $_POST['txt_tra_tel'], $_POST['txt_tra_ema']);
 		
 		$data['tra_msj']='Se registró transporte correctamente.';
 		echo json_encode($data);

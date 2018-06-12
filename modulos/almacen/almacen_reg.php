@@ -8,7 +8,7 @@ if($_POST['action_almacen']=="insertar")
 {
 	if(!empty($_POST['txt_alm_nom']))
 	{
-		$oAlmacen->insertar($_POST['txt_alm_nom'],$_POST['chk_alm_ven'],$_SESSION['empresa_id']);
+		$oAlmacen->insertar(strip_tags($_POST['txt_alm_nom']),$_POST['chk_alm_ven'],$_SESSION['empresa_id']);
 		echo 'Se registró almacén correctamente.';
 	}
 	else
@@ -21,7 +21,7 @@ if($_POST['action_almacen']=="editar")
 {
 	if(!empty($_POST['txt_alm_nom']))
 	{
-		$oAlmacen->modificar($_POST['hdd_alm_id'],$_POST['txt_alm_nom'],$_POST['chk_alm_ven']);
+		$oAlmacen->modificar($_POST['hdd_alm_id'],strip_tags($_POST['txt_alm_nom']),$_POST['chk_alm_ven']);
 		echo 'Se registró almacén correctamente.';
 	}
 	else

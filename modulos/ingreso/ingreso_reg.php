@@ -34,7 +34,7 @@ if($_POST['action_ingreso']=="insertar")
 			$numero=$talnum+1;
 			$oTalonario->actualizar_correlativo($tal_id,$numero,$estado);*/
 
-			$numdoc=$_POST['txt_ing_numdoc'];
+			$numdoc=strip_tags($_POST['txt_ing_numdoc']);
 
 		$xac=1;
 		$mon_id=1;
@@ -46,7 +46,7 @@ if($_POST['action_ingreso']=="insertar")
 			fecha_mysql($_POST['txt_ing_fec']),
 			$_POST['cmb_doc_id'],
 			$numdoc,
-			$_POST['txt_ing_det'],
+            strip_tags($_POST['txt_ing_det']),
 			moneda_mysql($_POST['txt_ing_imp']),
 			$_POST['cmb_ing_est'],
 			$_POST['cmb_cue_id'],
@@ -116,7 +116,7 @@ if($_POST['action_ingreso']=="editar")
 			$_POST['hdd_ing_id'],
 			$_POST['hdd_ing_usumod'],
 			fecha_mysql($_POST['txt_ing_fec']),
-			$_POST['txt_ing_det'],
+            strip_tags($_POST['txt_ing_det']),
 			moneda_mysql($_POST['txt_ing_imp']),
 			$_POST['cmb_ing_est'],
 			$_POST['cmb_cue_id'],

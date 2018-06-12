@@ -31,7 +31,7 @@ if($_POST['action_cajaobs']=="insertar")
 				$_POST['hdd_cajobs_usumod'],
 				$xac,
 				fecha_mysql($_POST['txt_cajobs_fec']),
-				$_POST['txt_cajobs_det'],
+                strip_tags($_POST['txt_cajobs_det']),
 				$_POST['cmb_cajobs_est'],
 				$_POST['cmb_caj_id'],
 				$_POST['hdd_emp_id']
@@ -56,7 +56,7 @@ if($_POST['action_cajaobs']=="editar")
 			$_POST['hdd_cajobs_id'],
 			$_POST['hdd_cajobs_usumod'],
 			fecha_mysql($_POST['txt_cajobs_fec']),
-			$_POST['txt_cajobs_det'],
+            strip_tags($_POST['txt_cajobs_det']),
 			$_POST['cmb_cajobs_est'],
 			$_POST['cmb_caj_id']
 		);

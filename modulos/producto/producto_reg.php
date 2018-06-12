@@ -17,8 +17,8 @@ if($_POST['action_producto']=="insertar")
 	{
 		//insertamos producto
 		$oProducto->insertar(
-			limpia_espacios($_POST['txt_pro_nom']),
-			limpia_espacios($_POST['txt_pro_des']),
+			strip_tags(limpia_espacios($_POST['txt_pro_nom'])),
+            strip_tags(limpia_espacios($_POST['txt_pro_des'])),
 			$_POST['cmb_pro_est'],
 			$_POST['cmb_cat_id'],
 			$_POST['cmb_mar_id'],
@@ -40,8 +40,8 @@ if($_POST['action_producto']=="insertar")
 		
 		//insertamos presentacion
 		$oPresentacion->insertar(
-			limpia_espacios($_POST['txt_pre_nom']),
-			$_POST['txt_pre_cod'],
+			strip_tags(limpia_espacios($_POST['txt_pre_nom'])),
+            strip_tags($_POST['txt_pre_cod']),
 			$_POST['txt_pre_stomin'],
 			$_POST['cmb_pre_est'],
 			$pro_id

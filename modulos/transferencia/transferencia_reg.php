@@ -24,7 +24,7 @@ if($_POST['action_transferencia']=="insertar")
 			$_POST['hdd_tra_usumod'],
 			$xac,
 			fecha_mysql($_POST['txt_tra_fec']),
-			$_POST['txt_tra_det'],
+			strip_tags($_POST['txt_tra_det']),
 			moneda_mysql($_POST['txt_tra_imp']),
 			$estado,
 			$_POST['cmb_caj_id_ori'],
@@ -39,7 +39,7 @@ if($_POST['action_transferencia']=="insertar")
 		$tra_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
 		
-		$egr_det	='TRANSFERENCIA SALIDA: '.$_POST['txt_tra_det'];
+		$egr_det	='TRANSFERENCIA SALIDA: '.strip_tags($_POST['txt_tra_det']);
 		$cue_salida		=8;
 		$doc_id=10;
 		$numdoc=$tra_id;
@@ -68,7 +68,7 @@ if($_POST['action_transferencia']=="insertar")
 			$_POST['hdd_emp_id']
 		);
 		
-		$ing_det	='TRANSFERENCIA ENTRADA: '.$_POST['txt_tra_det'];
+		$ing_det	='TRANSFERENCIA ENTRADA: '.strip_tags($_POST['txt_tra_det']);
 		$doc_id= 10;
 		$numdoc	=$tra_id;
 		$cue_entrada	=30;

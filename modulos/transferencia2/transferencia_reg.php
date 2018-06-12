@@ -25,7 +25,7 @@ if($_POST['action_transferencia']=="insertar")
 		$oTransferencia->insertar(
 			fecha_mysql($_POST['txt_tra_fec']),
 			$cod,
-			$_POST['txt_tra_des'],
+			strip_tags($_POST['txt_tra_des']),
 			moneda_mysql($_POST['txt_tra_mon']),
 			$estado,
 			$_POST['cmb_caj_id_ori'],
@@ -42,7 +42,7 @@ if($_POST['action_transferencia']=="insertar")
 		$tra_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
 		
-		$glosa_salida	='TRANSFERENCIA SALIDA: '.$_POST['txt_tra_des'];
+		$glosa_salida	='TRANSFERENCIA SALIDA: '.strip_tags($_POST['txt_tra_des']);
 		$doc_salida		='T '.$cod;
 		$cue_salida		=8;
 		$ref_id=1;
@@ -69,7 +69,7 @@ if($_POST['action_transferencia']=="insertar")
 			$_POST['hdd_usu_id_mod']
 		);
 		
-		$glosa_entrada	='TRANSFERENCIA ENTRADA: '.$_POST['txt_tra_des'];
+		$glosa_entrada	='TRANSFERENCIA ENTRADA: '.strip_tags($_POST['txt_tra_des']);
 		$doc_entrada	='T '.$cod;
 		$cue_entrada	=30;
 		$ref_id=1;		

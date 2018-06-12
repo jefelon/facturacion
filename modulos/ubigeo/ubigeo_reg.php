@@ -16,7 +16,7 @@ if($_POST['action']=="insertar")
 		}
 		else
 		{
-			$oUbigeo->insertar($_POST['txt_ubigeo_coddep'],$_POST['txt_ubigeo_codpro'],$_POST['txt_ubigeo_coddis'],$_POST['txt_ubigeo_nom'],$_POST['cmb_ubigeo_tip']);
+			$oUbigeo->insertar($_POST['txt_ubigeo_coddep'],$_POST['txt_ubigeo_codpro'],$_POST['txt_ubigeo_coddis'],strip_tags($_POST['txt_ubigeo_nom']),$_POST['cmb_ubigeo_tip']);
 		echo 'Se registró correctamente.';
 		}
 	}
@@ -30,7 +30,7 @@ if($_POST['action']=="editar")
 {
 	if(!empty($_POST['txt_ubigeo_nom']))
 	{
-		$oUbigeo->modificar($_POST['hdd_ubigeo_id'],$_POST['txt_ubigeo_coddep'],$_POST['txt_ubigeo_codpro'],$_POST['txt_ubigeo_coddis'],$_POST['txt_ubigeo_nom'],$_POST['cmb_ubigeo_tip']);
+		$oUbigeo->modificar($_POST['hdd_ubigeo_id'],$_POST['txt_ubigeo_coddep'],$_POST['txt_ubigeo_codpro'],$_POST['txt_ubigeo_coddis'],strip_tags($_POST['txt_ubigeo_nom']),$_POST['cmb_ubigeo_tip']);
 		echo 'Se registró correctamente.';
 	}
 	else

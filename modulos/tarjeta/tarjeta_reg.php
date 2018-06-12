@@ -7,7 +7,7 @@ if($_POST['action_tarjeta']=="insertar")
 {
 	if(!empty($_POST['txt_tar_nom']))
 	{
-		$oTarjeta->insertar($_POST['txt_tar_nom'],$_POST['cmb_caj_id']);
+		$oTarjeta->insertar(strip_tags($_POST['txt_tar_nom']),$_POST['cmb_caj_id']);
 		
 			$dts=$oTarjeta->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
@@ -28,7 +28,7 @@ if($_POST['action_tarjeta']=="editar")
 {
 	if(!empty($_POST['txt_tar_nom']))
 	{
-		$oTarjeta->modificar($_POST['hdd_tar_id'],$_POST['txt_tar_nom'],$_POST['cmb_caj_id']);
+		$oTarjeta->modificar($_POST['hdd_tar_id'],strip_tags($_POST['txt_tar_nom']),$_POST['cmb_caj_id']);
 		
 		$data['tar_msj']='Se registró tarjeta correctamente.';
 		echo json_encode($data);
