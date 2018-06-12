@@ -66,6 +66,8 @@ $(document).ready(function() {
 		icons: {primary: "ui-icon-info"},
 		text: false
 	});
+    $('.btn_bar').button({
+    });
 	
 	$("#tabla_producto").tablesorter({
 		widgets: ['zebra', 'zebraHover'] ,
@@ -93,9 +95,10 @@ $(document).ready(function() {
                     <th align="right" nowrap>P. COSTO S/.</th>
                     <th align="right" nowrap>UTI %</th>
                     <th align="right" nowrap>P.  VENTA S/.</th>
-                  <th align="right">STOCK</th>
-                  <th align="right">VALORIZADO US$</th>
-                  <th align="right">VALORIZADO S/.</th>
+                    <th align="right">STOCK</th>
+                    <th align="right">VALORIZADO US$</th>
+                    <th align="right">VALORIZADO S/.</th>
+                    <th align="right"></th>
                 </tr>
             </thead>
 			<?php
@@ -155,8 +158,15 @@ $(document).ready(function() {
                             <input name="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $stock_unidad?>">
                             </td>
                             <td align="right"><?php echo formato_money($valorizado_dol)?></td>
-                            <td align="right"><?php echo formato_money($valorizado)?></td>
-                       </tr>
+                            <td align="right"><?php echo formato_money($valorizado)?>
+                            <td align="center">
+                                <form action="catalogo_imprimir_codbarras.php" target="_blank" method="post">
+                                    <input name="barcode" type="hidden" value="<?php echo $dt1['tb_presentacion_cod']?>">
+                                    <button class="btn_bar" id="btn_bar" type="submit" title="Descargar codigo">Imprimir Código</button>
+                                </form>
+                            </td>
+
+                        </tr>
                 <?php
                 	}
                 mysql_free_result($dts1);
@@ -166,11 +176,12 @@ $(document).ready(function() {
 				}
 				?>
                 <tr class="even">
-                  <td colspan="8">TOTAL</td>
-                  <td align="right"><?php echo formato_money($total_valorizado_dol)?></td>
-                  <td align="right"><?php echo formato_money($total_valorizado)?></td>
+                    <td colspan="8">TOTAL</td>
+                    <td align="right"><?php echo formato_money($total_valorizado_dol)?></td>
+                    <td align="right"><?php echo formato_money($total_valorizado)?></td>
+                    <td align="right"></td>
                 </tr>
                 <tr class="even">
-                  <td colspan="12"><?php echo $num_rows.' registros'?></td>
+                    <td colspan="12"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>
