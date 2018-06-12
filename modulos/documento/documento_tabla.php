@@ -77,8 +77,8 @@ $(function() {
                         case 10:
                             echo "NOTA DE DEBITO";
                             break;
-                        case 11:
-                            echo "COTIZACIÓN";
+//                        case 11:
+//                            echo "COTIZACIÓN";
 					}
 				  ?></strong></th>
       		  </tr>
