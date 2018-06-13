@@ -161,6 +161,7 @@ $(document).ready(function() {
                             <td align="right"><?php echo formato_money($valorizado)?>
                             <td align="center">
                                 <form action="catalogo_imprimir_codbarras.php" target="_blank" method="post">
+                                    <input name="precio_prod" type="hidden" value="<?php echo $dt1['tb_catalogo_preven']?>">
                                     <input name="barcode" type="hidden" value="<?php echo $dt1['tb_presentacion_cod']?>">
                                     <button class="btn_bar" id="btn_bar" type="submit" title="Descargar codigo">Imprimir Código</button>
                                 </form>
