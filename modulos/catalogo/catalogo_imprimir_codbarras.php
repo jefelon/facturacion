@@ -143,11 +143,21 @@ $style = array(
     'module_height' => 1 // height of a single module in points
 );
 
-//$pdf->Text(80, 85, 'PDF417 (ISO/IEC 15438:2006)');
-$pdf->write1DBarcode($_POST['barcode'], 'C128', 0, 7, 36, 18, 0.4, $style, 'N');
-$pdf->write1DBarcode($_POST['barcode'], 'C128', 34, 7, 36, 18, 0.4, $style, 'N');
-$pdf->write1DBarcode($_POST['barcode'], 'C128', 68, 7, 36, 18, 0.4, $style, 'N');
+$font_size = $pdf->pixelsToUnits('25');
+$pdf->SetFont ('helvetica', '', $font_size , '', 'default', true );
+$pdf->Rotate(90);
 
+$pdf->MultiCell(30, 14, $_POST['precio_prod'], 0, 'C', 0, 0, -6,6, true, 0, false);
+$pdf->write1DBarcode($_POST['barcode'], 'C128', -6, 10, 30, 14, 0.4, $style, 'N');
+$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -8, 25, true, 0, false);
+
+$pdf->MultiCell(30, 14, $_POST['precio_prod'], 0, 'C', 0, 0, -40,6, true, 0, false);
+$pdf->write1DBarcode($_POST['barcode'], 'C128', -40, 10, 30, 14, 0.4, $style, 'N');
+$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -42, 25, true, 0, false);
+
+$pdf->MultiCell(30, 14, $_POST['precio_prod'], 0, 'C', 0, 0, -74,6, true, 0, false);
+$pdf->write1DBarcode($_POST['barcode'], 'C128', -74, 10, 30, 14, 0.4, $style, 'N');
+$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -76, 25, true, 0, false);
 
 $html .= '
 </td>
