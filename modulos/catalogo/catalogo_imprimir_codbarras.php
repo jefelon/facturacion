@@ -147,17 +147,17 @@ $font_size = $pdf->pixelsToUnits('25');
 $pdf->SetFont ('helvetica', '', $font_size , '', 'default', true );
 $pdf->Rotate(90);
 
-$pdf->MultiCell(30, 14, ' S/. '.$_POST['precio_prod'], 0, 'C', 0, 0, -6,9, true, 0, false);
-$pdf->write1DBarcode($_POST['barcode'], 'C128', -6, 10, 30, 14, 0.4, $style, 'N');
-$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -8, 22, true, 0, false);
+$pdf->MultiCell(30, 14, ' S/. '.$_POST['precio_prod'], 0, 'C', 0, 0, -6,8, true, 0, false);
+$pdf->write1DBarcode($_POST['barcode'], 'C128', -6, 10, 28, 12, 0.4, $style, 'N');
+$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -10, 21, true, 0, false);
 
-$pdf->MultiCell(30, 14, ' S/. '.$_POST['precio_prod'], 0, 'C', 0, 0, -40,9, true, 0, false);
-$pdf->write1DBarcode($_POST['barcode'], 'C128', -40, 10, 30, 14, 0.4, $style, 'N');
-$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -42, 22, true, 0, false);
+$pdf->MultiCell(30, 14, ' S/. '.$_POST['precio_prod'], 0, 'C', 0, 0, -40,8, true, 0, false);
+$pdf->write1DBarcode($_POST['barcode'], 'C128', -38, 10, 28, 12, 0.4, $style, 'N');
+$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -42, 21, true, 0, false);
 
-$pdf->MultiCell(30, 14, ' S/. '.$_POST['precio_prod'], 0, 'C', 0, 0, -74,9, true, 0, false);
-$pdf->write1DBarcode($_POST['barcode'], 'C128', -74, 10, 30, 14, 0.4, $style, 'N');
-$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -76, 22, true, 0, false);
+$pdf->MultiCell(30, 14, ' S/. '.$_POST['precio_prod'], 0, 'C', 0, 0, -74,8, true, 0, false);
+$pdf->write1DBarcode($_POST['barcode'], 'C128', -70, 10, 28, 12, 0.4, $style, 'N');
+$pdf->MultiCell(34, 14, $_POST['barcode'], 0, 'C', 0, 0, -76, 21, true, 0, false);
 
 $html .= '
 </td>
