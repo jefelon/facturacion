@@ -78,7 +78,7 @@ $(document).ready(function() {
 		},
 		//sortForce: [[0,0]],
 		<?php if($num_rows>0){?>
-		sortList: [[2,0],[1,0],[0,0]]
+		sortList: [[3,0],[2,0],[1,0]]
 		<?php }?>
     });
 
@@ -88,9 +88,10 @@ $(document).ready(function() {
         <table cellspacing="1" id="tabla_producto" class="tablesorter">
             <thead>
                 <tr>
+                    <th>CÓDIGO</th>
                     <th>NOMBRE</th>
                     <th>MARCA</th>
-                    <th>CATEGORIA</th>
+                    <th >CATEGORIA</th>
                     <th align="right" nowrap>P. COSTO US$</th>
                     <th align="right" nowrap>P. COSTO S/.</th>
                     <th align="right" nowrap>UTI %</th>
@@ -140,6 +141,7 @@ $(document).ready(function() {
 					?>
                         <tr>
                           <?php /*?><td><?php echo $dt1['tb_presentacion_cod']?></td><?php */?>
+                            <td><?php echo $dt1['tb_presentacion_cod']?></td>
                             <td>
                             <span style="">
 							<?php echo $dt1['tb_producto_nom']?>
