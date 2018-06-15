@@ -27,7 +27,7 @@ if($_POST['action']=="editar"){
         $('#msj_busqueda_sunat_2').html("Buscando en Sunat...");
         $('#msj_busqueda_sunat_2').show(100);
         $.post('../../libreriasphp/consultaruc/index.php', {
-                vruc: $('#txt_cli_doc').val(),
+                vruc: $('#txt_pro_doc').val(),
                 vtipod: 6
             },
             function(data, textStatus){
@@ -38,20 +38,20 @@ if($_POST['action']=="editar"){
                     alert(data[0]);
                     $('#msj_busqueda_sunat_2').hide();
                 }else{
-                    $('#txt_cli_nom').val(data['RazonSocial']);
-                    $('#txt_cli_dir').val(data['Direccion']);
+                    $('#txt_pro_nom').val(data['RazonSocial']);
+                    $('#txt_pro_dir').val(data['Direccion']);
                     if( typeof data['Contacto'] != 'undefined'){
-                        $('#txt_cli_con').val(data['Contacto']);
+                        $('#txt_pro_con').val(data['Contacto']);
                     }else{
-                        $('#txt_cli_con').val(data['RazonSocial']);
+                        $('#txt_pro_con').val(data['RazonSocial']);
                     }
 
                     var telefono = data['Telefonos'];
                     telefono = telefono.replace(/ \/ /g, "/");
                     telefono = telefono.replace("/ ", "");
                     telefono = telefono.replace(/\//g, " / ");
-                    $('#txt_cli_tel').val(telefono);
-                    $('#txt_cli_est').val(data['Estado']);
+                    $('#txt_pro_tel').val(telefono);
+                    $('#txt_pro_est').val(data['Estado']);
                     $('#msj_busqueda_sunat_2').hide();
                 }
             },"json");
