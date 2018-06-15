@@ -213,7 +213,7 @@ $(function() {
                   </tr>
               </table>
 			</div>
-            <div id="div_catalogo_kardex" style="OVERFLOW: auto; WIDTH: 980px; HEIGHT: 188px; text-align:center">
+            <div id="div_catalogo_kardex" style="OVERFLOW: auto; WIDTH: 980px; text-align:center">
       		</div> 
             
             <div id="div_kardex">
