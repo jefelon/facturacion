@@ -117,8 +117,27 @@ function kardex_tabla(cat_id,alm_id){
 	});     
 }
 
+function catalogo_kardex_tabla_total(){
+    $.ajax({
+        type: "POST",
+        url: "../kardex/kardex_producto_tabla_total.php",
+        async:true,
+        dataType: "html",
+        beforeSend: function() {
+            $('#div_catalogo_kardex_tabla').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('#div_catalogo_kardex_tabla').html(html);
+        },
+        complete: function(){
+            $('#div_catalogo_kardex_tabla').removeClass("ui-state-disabled");
+        }
+    });
+}
+
 $(function() {
 	catalogo_kardex();
+    catalogo_kardex_tabla_total();
 	
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},

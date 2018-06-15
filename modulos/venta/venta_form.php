@@ -1,6 +1,10 @@
 <?php
 session_start();
 require_once ("../../config/Cado.php");
+
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
+
 require_once("../venta/cVenta.php");
 $oVenta = new cVenta();
 
@@ -9,6 +13,11 @@ $oCotizacion = new cCotizacion();
 
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
+
+$rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
+$dt = mysql_fetch_array($rs);
+$stock_negativo = $dt['tb_formula_dat'];
+
 
 $cot_id = $_POST['cot_id'];
 
@@ -387,6 +396,30 @@ function txt_venpag_fecven(){
 	});
 }
 
+
+function producto_form(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "../producto/producto_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            pro_id:		idf,
+            pro_nom: $('#txt_bus_pro_nom').val(),
+            vista:	'venta_tabla'
+        }),
+        beforeSend: function() {
+            $('#msj_producto').hide();
+            $('#div_producto_form').dialog("open");
+            $('#div_producto_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_producto_form').html(html);
+        }
+    });
+}
+
 function venta_car(act,cat_id){
 	if(act=='agregar') {
 		var stouni=$('#hdd_bus_cat_stouni').val();
@@ -404,8 +437,11 @@ function venta_car(act,cat_id){
 		cat_id =  $('#hdd_bus_cat_id').val();
 	}
 
-	if(act=='agregar' & (dif < 0))
+
+
+    if(act=='agregar' & (dif < 0) && $('#hdd_stock_neg').val()!=='1')
 	{
+	    console.log($('#hdd_stock_neg').val());
 		alert('Stock insuficiente. Diferencia en '+(cantidad-stouni)+'.');
 		$('#txt_bus_cat_can').val(stouni);
 	} else {
@@ -1282,9 +1318,40 @@ $(function() {
         delay: 10,
         source: "../venta/catalogo_buscar_nom.php",
         select: function( event, ui ) {
-            $("#txt_bus_pro_nom").val(ui.item.label);
-            $("#hdd_bus_pro_nom").val(ui.item.value);
-            catalogo_buscar();
+            if (ui.item.value===""){
+                producto_form('insertar',"nuevo producto");
+                $("#txt_bus_pro_nom").val();
+                $("#txt_pro_nom").val("nuevo producto");
+
+
+            }else{
+                $("#txt_bus_pro_nom").val(ui.item.label);
+                $("#hdd_bus_pro_nom").val(ui.item.value);
+                catalogo_buscar();
+            }
+        }
+    });
+
+    $( "#div_producto_form" ).dialog({
+        title:'Información de Producto',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 990,
+        modal: true,
+        position: 'top',
+        buttons: {
+            Guardar: function() {
+                $("#for_pro").submit();
+            },
+            Cancelar: function() {
+                $('#for_pro').each (function(){this.reset();});
+                $( this ).dialog("close");
+            }
+        },
+        close: function()
+        {
+            $("#div_producto_form").html('Cargando...');
         }
     });
 
@@ -1437,6 +1504,7 @@ function bus_cantidad(act)
 <input name="hdd_punven_id" id="hdd_punven_id" type="hidden" value="<?php echo $_SESSION['puntoventa_id']?>">
 <input name="hdd_emp_id" id="hdd_emp_id" type="hidden" value="<?php echo $_SESSION['empresa_id']?>">
 <input name="hdd_ven_est" id="hdd_ven_est" type="hidden" value="<?php echo $est?>">
+    <input name="hdd_stock_neg" id="hdd_stock_neg" type="hidden" value="<?php echo $stock_negativo?>">
 
 <input name="unico_id" id="unico_id" type="hidden" value="<?php echo $unico_id?>">
 
@@ -1711,6 +1779,9 @@ if($_POST['action']=="editar"){
 </div>
 
 <?php }?>
+<div id="div_producto_form">
+
+</div>
 <script type="text/javascript">
 //catalogo_venta_tab();
 </script>

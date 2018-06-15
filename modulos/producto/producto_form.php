@@ -11,6 +11,12 @@ if($_POST['action']=="insertar"){
 	unset($_SESSION['atributo_car']);
 }
 
+if($_POST['vista']=="venta_tabla")
+{
+    $nom=$_POST['pro_nom'];
+}
+
+
 if($_POST['action']=="editar"){
 	$dts= $oProducto->mostrarUno($_POST['pro_id']);
 	$dt = mysql_fetch_array($dts);

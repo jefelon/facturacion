@@ -6,6 +6,8 @@ $oPresentacion = new cPresentacion();
 require_once ("../producto/cCatalogoproducto.php");
 $oCatalogoProducto = new cCatalogoProducto();
 require_once("../formatos/formato.php");
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
 
 $almacen_venta=$_SESSION['almacen_id'];
 
@@ -77,7 +79,11 @@ if(isset($_SESSION['venta_car'][$unico_id]))
 }
 ?>
 <?php
-if($error1==1){
+$rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
+$dt = mysql_fetch_array($rs);
+$stock_negativo = $dt['tb_formula_dat'];
+
+if($error1==1 && $stock_negativo!=1){
 ?>
 <script type="text/javascript">
 $('.btn_arre_car').button({

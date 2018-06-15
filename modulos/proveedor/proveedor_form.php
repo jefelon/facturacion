@@ -18,7 +18,47 @@ if($_POST['action']=="editar"){
 ?>
 
 <script type="text/javascript">
+    function buscar() {
+        /*if($("#txt_cli_doc").val().substr(0,2)=='20'){
+            $('#radio2').prop( "checked", true );
+        }else if($("#txt_cli_doc").val().substr(0,2)=='10'){
+            $('#radio1').prop( "checked", true );
+        }*/
+        $('#msj_busqueda_sunat_2').html("Buscando en Sunat...");
+        $('#msj_busqueda_sunat_2').show(100);
+        $.post('../../libreriasphp/consultaruc/index.php', {
+                vruc: $('#txt_cli_doc').val(),
+                vtipod: 6
+            },
+            function(data, textStatus){
+                if(data == null){
+                    alert('Intente nuevamente...Sunat');
+                }
+                if(data.length==1){
+                    alert(data[0]);
+                    $('#msj_busqueda_sunat_2').hide();
+                }else{
+                    $('#txt_cli_nom').val(data['RazonSocial']);
+                    $('#txt_cli_dir').val(data['Direccion']);
+                    if( typeof data['Contacto'] != 'undefined'){
+                        $('#txt_cli_con').val(data['Contacto']);
+                    }else{
+                        $('#txt_cli_con').val(data['RazonSocial']);
+                    }
 
+                    var telefono = data['Telefonos'];
+                    telefono = telefono.replace(/ \/ /g, "/");
+                    telefono = telefono.replace("/ ", "");
+                    telefono = telefono.replace(/\//g, " / ");
+                    $('#txt_cli_tel').val(telefono);
+                    $('#txt_cli_est').val(data['Estado']);
+                    $('#msj_busqueda_sunat_2').hide();
+                }
+            },"json");
+    }
+    $('#validar_ruc').button({
+        text: true
+    });
 $(function() {
 	
 	$( "#radio" ).buttonset();
@@ -109,14 +149,18 @@ $(function() {
             </div>
     	  </td>
   	  </tr>
+        <tr>
+            <td align="right"><label for="txt_pro_doc">RUC/DNI:</label></td>
+            <td><input name="txt_pro_doc" id="txt_pro_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
+                <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
+                <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
+            </td>
+
+        </tr>
     	<tr>
     	  <td align="right" valign="top"><label for="txt_pro_nom">Proveedor:</label></td>
     	  <td><textarea name="txt_pro_nom" cols="50" rows="2" id="txt_pro_nom"><?php echo $nom?></textarea></td>
   	  </tr>
-    	<tr>
-            <td align="right"><label for="txt_pro_doc">RUC/DNI:</label></td>
-            <td><input name="txt_pro_doc" id="txt_pro_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11"></td>
-        </tr>
         <tr>
           <td align="right" valign="top"><label for="txt_pro_dir">Dirección:</label></td>
           <td><textarea name="txt_pro_dir" cols="50" rows="2" id="txt_pro_dir" ><?php echo $dir?></textarea>            
