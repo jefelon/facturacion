@@ -75,12 +75,12 @@ function catalogo_filtro()
 }
 
 function catalogo_tabla(){
-	/*var c = 1;	
-	var atributos = "-1";	
-    $('.casilla_verificacion').each( function(){		
+	/*var c = 1;
+	var atributos = "-1";
+    $('.casilla_verificacion').each( function(){
 		if($(this).is(':checked')){
-			atributos += ", "+$(this).val();		
-		}		
+			atributos += ", "+$(this).val();
+		}
 	});*/
 
 	if($('#chk_fil_catven').is(':checked')) {  
@@ -215,6 +215,7 @@ function modo(url){
 		$("#div_modo").html("Modo: Inventario Valorizado Costo Prom Gen");
 		$("#div_fecha").show(100);
 	}
+
 	catalogo_tabla();
 };
 
