@@ -782,8 +782,15 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
         ?>
         <tr>
-            <td>Producto</td>
-            <td>Gravado</td>
+            <td>Producto </td>
+            <?php $type_cat =  'cmb_detven_tip_'.$dt1['tb_catalogo_id'] ?>
+
+            <?php if ($_POST[$type_cat]==8){
+                echo '<td>Exonerado</td>';
+            } else{
+                echo '<td>Gravado</td>';
+            }  ?>
+
             <td><?php echo $dt1['tb_presentacion_cod']?></td>
             <td><?php echo $_SESSION['venta_nom'][$unico_id][$indice];
                 if ($_SESSION['venta_serial'][$unico_id][$indice]!=''){
