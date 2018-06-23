@@ -29,7 +29,7 @@ require_once("../formatos/formato.php");
 	//if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura.php';
 	//if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta.php';
 
-	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura_mat.php';
+	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_facturaexo_mat.php';
 	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta_mat.php';
     if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../venta/venta_cpeimp_nota_mat.php';
 
