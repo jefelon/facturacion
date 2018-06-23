@@ -127,7 +127,6 @@ while($dt = mysql_fetch_array($dts))
 		$codigo=$dt["tb_servicio_id"];
 	}
 
-
 	$detalle[$autoin]['idafectaciond']			=$dt["cs_tipoafectacionigv_cod"]; //10AFECTO 20EXONERADO 31BONO
 	$detalle[$autoin]['nro']					=$dt["tb_ventadetalle_nro"];
 
@@ -140,12 +139,21 @@ while($dt = mysql_fetch_array($dts))
 	$detalle[$autoin]['cdsc']					=$dt["tb_ventadetalle_nom"];
 
 	//$igv 										=$dt["tb_ventadetalle_igv"] / $dt["tb_ventadetalle_can"];
-	$detalle[$autoin]['precio']					=$dt["tb_ventadetalle_preuni"];
+    if ($dt["cs_tipoafectacionigv_cod"] == 10){
+        $detalle[$autoin]['precio']					=$dt["tb_ventadetalle_preuni"];
+        $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
+    }
+    elseif ($dt["cs_tipoafectacionigv_cod"] == 20){
+        $detalle[$autoin]['precio']					=$dt["tb_ventadetalle_preunilin"];
+        $detalle[$autoin]['igv']					=0.00;//sumatoria con cantidad
+    }else{
+        $detalle[$autoin]['precio']					=$dt["tb_ventadetalle_preuni"];
+        $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
+    }
 	//oculto ya se calcula en base datos
-	//$detalle[$autoin]['valorref']				=($dt["tb_ventadetalle_valven"]+$dt["tb_ventadetalle_igv"])/$dt["tb_ventadetalle_can"];// precio de venta	
+	//$detalle[$autoin]['valorref']				=($dt["tb_ventadetalle_valven"]+$dt["tb_ventadetalle_igv"])/$dt["tb_ventadetalle_can"];// precio de venta
 	$detalle[$autoin]['valorref']				=$dt["tb_ventadetalle_preunilin"];
 
-	$detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
 	$detalle[$autoin]['valorventa']				=$dt["tb_ventadetalle_valven"];//sumatoria con cantidad
 	$detalle[$autoin]['descto']					=$dt["tb_ventadetalle_des"];
 

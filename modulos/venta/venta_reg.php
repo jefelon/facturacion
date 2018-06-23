@@ -135,7 +135,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			1,//cs_tipomoneda_id
 			moneda_mysql($_POST['txt_ven_subtot']),//tb_venta_gra
 			0,//tb_venta_ina
-			0,//tb_venta_exo
+            moneda_mysql($_POST['txt_ven_opeexo']),//tb_venta_exo
 			moneda_mysql($_POST['txt_ven_opegra']),//tb_venta_grat
 			0,//tb_venta_isc
 			moneda_mysql($_POST['txt_ven_otrtri']),
@@ -664,7 +664,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			
 			$tipo_venta=1;
 			$ser_id=0;
-			$afeigv_id=1;
+			$afeigv_id=$_SESSION['venta_tip'][$unico_id][$indice];
 			$unimed_id=12;//NIU
 
 			//////////////////////
