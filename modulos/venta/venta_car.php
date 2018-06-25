@@ -765,7 +765,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         if($tipo_item==1){
             $precio_total_linea+=$precio_unitario*$cantidad;
         }else if ($tipo_item==9){
-            $ope_exoneradas += $precio_unitario*$cantidad;
+            $ope_exoneradas += $precio_venta*$cantidad;
         }else{
             $ope_gratuitas+=$precio_unitario*$cantidad;
         }
@@ -825,7 +825,15 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 }
                 ?>
             </td>
-            <td align="right"><?php echo formato_money($valor_venta)?></td>
+            <td align="right">
+            <?php if ($tipo_item==9){
+            	 echo formato_money($precio_venta*$cantidad);
+            } 
+            else {
+            	echo formato_money($valor_venta);
+            }
+            ?>
+            </td>
             <td align="right"><?php echo formato_money($precio_venta)?></td>
             <!--<td align="right"><?php //echo formato_money($igv)?></td>-->
             <td align="center" nowrap="nowrap">
