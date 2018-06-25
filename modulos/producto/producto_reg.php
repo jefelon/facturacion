@@ -88,8 +88,10 @@ if($_POST['action_producto']=="insertar")
 			$unibas,
 			$pre_id
 		);
-		
+
 		$data['pro_id']=$pro_id;
+        $data['pre_id']=$pre_id;
+        $data['tipo_accion']=$_POST['tipo_accion'];
 		if($_POST['editar_presentacion']==1)$data['pro_act']='editar_presentacion';
 		$data['pro_msj']='Se registró producto correctamente.';
 		echo json_encode($data);

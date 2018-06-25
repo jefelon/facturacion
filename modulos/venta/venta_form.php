@@ -406,6 +406,7 @@ function producto_form(act,idf){
         data: ({
             action: act,
             pro_id:		idf,
+            tipo:		'insertar_venta',
             pro_nom: $('#txt_bus_pro_nom').val(),
             vista:	'venta_tabla'
         }),

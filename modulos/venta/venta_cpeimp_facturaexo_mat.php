@@ -421,18 +421,19 @@ while($dt = mysql_fetch_array($dts)){
                 <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: left">'.$dt["tb_ventadetalle_nom"].' - '.$dt['tb_marca_nom'].'</td>';
-//                 if ($dt["cs_tipoafectacionigv_cod"] == 10) {
-//                        $html .= '
-//                    <td style="text-align: right">' . $dt["cs_tipoafectacionigv_cod"] . '</td>
-//                    <td style="text-align: right"></td>';
-//                    } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
-//                        $html .= '<td style="text-align: right"></td>;
-//                    <td style="text-align: right">' . $dt["cs_tipoafectacionigv_cod"] . '</td>';
-//                    } else {
-                        $html .= '
-                    <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>   
-                    <td style="text-align: right"></td>';
-//                    }
+                if ($dt["cs_tipoafectacionigv_cod"] == 10) {
+                    $html .= '
+                                <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
+                                <td style="text-align: right"></td>';
+                } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
+                    $html .= '
+                                <td style="text-align: right"></td>
+                                <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>';
+                } else {
+                    $html .= '
+                                <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
+                                <td style="text-align: right"></td>';
+                }
                 $html .= '<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
     }
     $html.='</tr>';
@@ -590,7 +591,7 @@ $style = array(
 );
 
 
-$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 40, 40, $style, 'N'));
+$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
 $html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
 </td>
 </tr>

@@ -358,7 +358,32 @@ function chk_cat_ven()
 	}
 }
 */
+function actualizar_stock(preid,almid,stoid)
+{
+        $.ajax({
+            type: "POST",
+            url: "../producto/stock_reg.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action:	'actualizar_stock',
+                tipo:	'insertar',
+                alm_id: almid,
+                pre_id: preid,
+                sto_id: stoid,
+                sto_num: 0
+            }),
+            beforeSend: function() {
+                //$('#div_catalogo_filtro').html('Cargando <img src="images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
 
+            },
+            complete: function(){
+
+            }
+        });
+}
 $(function() {
 	
 	<?php 
@@ -598,11 +623,15 @@ $(function() {
 				},
 				success: function(data){
 				    console.log('succes');
+
 					$('#msj_producto').html(data.pro_msj);
 					if(data.pro_act=='editar_presentacion')
 					{
 						producto_form('editar',data.pro_id);
 					}
+                    if(data.tipo_accion=='insertar_venta'){
+                        actualizar_stock(data.pre_id,<?php echo $_SESSION['almacen_id']?>,'');
+                    }
 				},
 				complete: function(){
 					<?php
@@ -708,6 +737,7 @@ $(function() {
 <input name="hdd_pro_id" id="hdd_pro_id" type="hidden" value="<?php echo $_POST['pro_id']?>">
 <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="num_alm" id="num_alm" type="hidden" value="<?php echo $num_rows?>">
+    <input name="tipo_accion" id="tipo_accion" type="hidden" value="<?php echo $_POST['tipo']?>">
 <div style="float:left">
   <fieldset>
     <legend>Producto</legend>
