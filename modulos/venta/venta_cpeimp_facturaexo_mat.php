@@ -448,40 +448,42 @@ $html.='</tbody>
     </tr>';
 if($totopgrat > 0){
     $html.='<tr>
-        <td width="80%" style="text-align: right;" colspan="2">Vtas. Gratuitas: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $totopgrat.'</td>
+        <td width="78%" style="text-align: right;" colspan="2">Vtas. Gratuitas: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $totopgrat.'</td>
     </tr>';
 }
-$html.='<tr>
-        <td width="80%" style="text-align: right;" colspan="2">Sub Total: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $subtotal.'</td>
+$html.='
+    <tr>
+        <td width="78%" style="text-align: right;" colspan="2">Ope Exo: </td>
+        <td width="11%" style="text-align: right;">'.$totopexo.'</td>
+    </tr>
+    <tr>
+        <td width="78%" style="text-align: right;" colspan="2">Sub Total: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $subtotal.'</td>
     </tr>';
 if($totanti > 0){
     $html.='<tr>
-            <td width="80%" style="text-align: right;" colspan="2">Anticipos: </td>
-            <td width="20%" style="text-align: right;">'.$mon . $totanti.'</td>
+            <td width="78%" style="text-align: right;" colspan="2">Anticipos: </td>
+            <td width="23%" style="text-align: right;">'.$mon . $totanti.'</td>
         </tr>';
 }
 $subgrav = $subtotal+$toigv;
-$html.='<tr>
-        <td width="80%" style="text-align: right;" colspan="2">Descuentos: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $totdes.'</td>
+$html.='
+    <tr>
+        <td width="78%" style="text-align: right;" colspan="2">Descuentos: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $totdes.'</td>
     </tr>
     <tr>
-        <td width="80%" style="text-align: right;" colspan="2">Valor Venta: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $valorventa.'</td>
+        <td width="78%" style="text-align: right;" colspan="2">Valor Venta: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $valorventa.'</td>
     </tr>
     <tr>
-        <td  width="80%" style="text-align: right;" colspan="2">IGV: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $toigv.'</td>
+        <td  width="78%" style="text-align: right;" colspan="2">IGV: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $toigv.'</td>
     </tr>
     <tr>
-        <td  width="80%" style="text-align: right;" colspan="2">Ope Grav: </td>
-        <td width="20%" style="text-align: right;">'.formato_money($subgrav).'</td>
-    </tr>
-    <tr>
-        <td  width="80%" style="text-align: right;" colspan="2">Ope Exo: </td>
-        <td width="20%" style="text-align: right;">'.$totopexo.'</td>
+        <td  width="78%" style="text-align: right;" colspan="3">Ope Grav: </td>
+        <td width="23%" style="text-align: right;">'.formato_money($subgrav).'</td>
     </tr>
    
         <tr>
@@ -492,8 +494,8 @@ if($importetotal>0){
     $html.='Leyenda TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE';
 }
 $html.='</td>
-            <td width="20%" style="text-align: right;">Importe Total: </td>
-            <td width="20%" style="text-align: right;">'.$mon . $importetotal.'</td>
+            <td width="18%" style="text-align: right;">Importe Total: </td>
+            <td width="23%" style="text-align: right;">'.$mon . $importetotal.'</td>
         </tr>
 
 </table>

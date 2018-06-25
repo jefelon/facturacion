@@ -685,7 +685,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <table cellspacing="1" id="tabla_venta_car" class="tablesorter">
     <thead>
     <tr>
-        <th>TIPO</th>
+        <th>TIPOs</th>
         <th>G/E/I</th>
         <th>CODIGO</th>
         <th>ARTICULO</th>
@@ -768,11 +768,10 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $ope_exoneradas += $precio_venta*$cantidad;
         }else{
             $ope_gratuitas+=$precio_unitario*$cantidad;
+            //valor venta
         }
 
-        //valor venta
-        $valor_venta=moneda_mysql($precio_unitario_linea);
-
+        $valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));
         //igv
         $igv=$valor_venta*$igv_dato;
 
@@ -826,15 +825,18 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 ?>
             </td>
             <td align="right">
-            <?php if ($tipo_item==9){
-            	 echo formato_money($precio_venta*$cantidad);
-            } 
-            else {
-            	echo formato_money($valor_venta);
-            }
+            <?php
+                if ($tipo_item==9) {
+                    echo formato_money($precio_venta);
+                }else{
+                    echo formato_money($valor_venta);
+                }
             ?>
             </td>
-            <td align="right"><?php echo formato_money($precio_venta)?></td>
+            <td align="right">
+                <?php echo formato_money($precio_venta)?>
+
+            </td>
             <!--<td align="right"><?php //echo formato_money($igv)?></td>-->
             <td align="center" nowrap="nowrap">
                 <?php if($_POST['vista']!='cange'){?>
@@ -905,16 +907,20 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $precio_unitario_linea=$precio_unitario-$descuento_calculo;
         if($tipo_item==1){
             $precio_total_linea+=$precio_unitario*$cantidad;
+            //valor venta
+            $valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));
         }
         else if($tipo_item==9){
             $ope_exoneradas += $precio_unitario*$cantidad;
+            $valor_venta=$precio_venta;
         }
         else{
             $ope_gratuitas+=$precio_unitario*$cantidad;
+            //valor venta
+            $valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));
         }
 
-        //valor venta
-        $valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));
+
 
         //igv
         $igv=$valor_venta*$igv_dato;
@@ -950,7 +956,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 ?>
             </td>
 
-            <td align="right"><?php echo formato_money($valor_venta)?></td>
+            <td align="right"><?php echo formato_money($precio_venta)?></td>
             <td align="right"><?php echo formato_money($precio_venta)?></td>
             <td align="center" nowrap="nowrap">
                 <?php if($_POST['vista']!='cange'){?>
