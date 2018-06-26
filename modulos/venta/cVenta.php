@@ -202,6 +202,34 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+
+    function mostrar_filtro_por_mes_anio($mes_id,$anio_id,$doc_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay){
+        $sql="SELECT * 
+	FROM tb_venta v
+	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
+	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id	
+	WHERE v.tb_empresa_id = $emp_id 
+	AND MONTH(v.tb_venta_fec) =$mes_id AND YEAR(v.tb_venta_fec) = $anio_id";
+
+
+        if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
+        if($cli_id>0)$sql.=" AND v.tb_cliente_id = $cli_id ";
+        if($usu_id>0)$sql.=" AND u.tb_usuario_id = $usu_id ";
+        if($punven_id>0)$sql.=" AND v.tb_puntoventa_id = $punven_id ";
+        if($venmay>0)$sql.=" AND v.tb_venta_may = $venmay ";
+        if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
+
+        $sql.=" ORDER BY tb_venta_fec, tb_documento_nom, tb_venta_numdoc ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+
 	function mostrar_filtro_detalle_adm($fec1,$fec2,$doc_id,$art,$cat_ids,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay){
 	$sql="SELECT * 
 	FROM tb_venta v
