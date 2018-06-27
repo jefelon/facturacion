@@ -205,18 +205,18 @@ RUC:'.$ruc_empresa.'<br>
             <th rowspan="2" style="text-align: center;"><br><br><b>Spot Numero</b></th>
         </tr>
         <tr class="header_minor_row">
-            <th style="text-align: center;"><b>T/D</b></th>
-            <th style="text-align: center;"><b>Serie</b></th>
-            <th style="text-align: center;"><b>Número</b></th>
+            <th style="text-align: center;"><br><br><b>T/D</b></th>
+            <th style="text-align: center;"><br><br><b>Serie</b></th>
+            <th style="text-align: center;"><br><br><b>Número</b></th>
             
-            <th style="text-align: center;"><b>Fecha</b></th>
-            <th style="text-align: center;"><b>T/D</b></th>
-            <th style="text-align: center;;"><b>Serie</b></th>
-            <th style="text-align: center;;"><b>Número</b></th>
+            <th style="text-align: center;"><br><br><b>Fecha</b></th>
+            <th style="text-align: center;"><br><br><b>T/D</b></th>
+            <th style="text-align: center;;"><br><br><b>Serie</b></th>
+            <th style="text-align: center;;"><br><br><b>Número</b></th>
             
-            <th style="text-align: center;"><b>Doc</b></th>
-            <th style="text-align: center;"><b>Número</b></th>
-            <th style="text-align: center;"><b>Razón Social</b></th>  
+            <th style="text-align: center;"><br><br><b>Doc</b></th>
+            <th style="text-align: center;"><br><br><b>Número</b></th>
+            <th style="text-align: center;"><br><br><b>Razón Social</b></th>  
         </tr><thead>';
 
         $dts1=$oCompra->mostrar_filtro_por_mes_anio($_POST['cmb_fil_mes'],$_POST['cmb_fil_anio'],$_SESSION['empresa_id']);
@@ -227,7 +227,7 @@ RUC:'.$ruc_empresa.'<br>
 
         $html .= '<tbody>
         <tr><td colspan="20"></td></tr><tr><td colspan="22"></td></tr>
-        <tr style="font-size: 25px; font-weight: bold"><td colspan="20">Tipo Doc.: 01 Factura</td></tr><tr><td colspan="20"></td></tr>';
+        <tr><td colspan="20"></td></tr><tr><td colspan="20"></td></tr>';
         while ($dt = mysql_fetch_array($dts1)) {
             $base+=$dt['tb_compra_valven'];
             $igv+=$dt['tb_compra_igv'];
@@ -276,8 +276,8 @@ RUC:'.$ruc_empresa.'<br>
                     <td class="total">0.00</td>
                     <td class="total">'.$igv.'</td>
                     <td class="total">0.00</td>
-                    <td class="total_general">0.00</td>
-                    <td class="total_general">0.00</td>
+                    <td class="total">0.00</td>
+                    <td class="total">0.00</td>
                     <td class="total">'.$total.'</td>
                  </tr>';
         $html .= '<tr class="row_total_general">
