@@ -4,9 +4,14 @@ session_start();
 
 ?>
 <script type="text/javascript">
-	$('#btn_descargar_excel, #btn_descargar_pdf,').button({
+	$('#btn_descargar_excel, #btn_descargar_pdf, #filtrar_consulta').button({
 		icons: {primary: "ui-icon-print"},
 	});
+
+    $('#filtrar_consulta').button({
+        icons: {primary: "ui-icon-arrowrefresh-1-w"},
+    });
+
 	$('#btn_resfil').button({
         icons: {primary: "ui-icon-arrowrefresh-1-w"},
 
@@ -29,29 +34,10 @@ session_start();
         venta_tabla();
     }
 
-function cmb_ven_doc(ids)
-{	
-	$.ajax({
-		type: "POST",
-		url: "../../modulos/documento/cmb_doc_id.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			doc_tip:	'2',
-			doc_id: ids,
-			vista:	'<?php echo $_POST['action']?>'
-		}),
-		beforeSend: function() {
-			$('#cmb_fil_ven_doc').html('<option value="">Cargando...</option>');
-        },
-		success: function(html){			
-			$('#cmb_fil_ven_doc').html(html);
-		}
-	});
-}
 $(function() {
 
 	cmb_ven_doc('<?php echo $_POST['doc']?>');
+    registro_filtro();
 
 });
 </script>
@@ -59,7 +45,9 @@ $(function() {
 <style>
     #for_fil_contable{
         width: 60%;
+        height: 100px;
         margin: 0 auto;
+
     }
     .center{
         width: 40%;
@@ -79,22 +67,23 @@ $(function() {
     }
 </style>
 
-<form name="for_fil_contable" id="for_fil_contable" target="_blank" action="contable_reporte_registro.php" method="post">
+<form name="for_fil_contable" id="for_fil_contable" target="_blank" action="" method="post"">
 <input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla_garantia.php">
 
     <input name="hdd_action" id="hdd_action" type="hidden" value="">
+<input type="hidden" id="hdd_tabla" name="hdd_tabla" />
 
 <div style="width: 100%;margin: 0 auto">
 
-    <fieldset style="width: 100%;float: left"><legend>Descargar PLE</legend>
-        <label for="cmb_fil_ven_doc" align="right">Año:</label>
-        <select name="cmb_fil_anio" id="cmb_fil_anio">
+    <fieldset style="width: 100%;float: left; text-align: center;"><legend>Descargar Registro</legend>
+        <label for="cmb_fil_ven_doc" align="right" style="font-size: 12px;">Año:</label>
+        <select name="cmb_fil_anio" id="cmb_fil_anio" required>
             <option value="2018">2018</option>
             <option value="2018">2017</option>
         </select>
 
-        <label for="cmb_fil_mes" align="right">Mes:</label>
-        <select name="cmb_fil_mes" id="cmb_fil_mes">
+        <label for="cmb_fil_mes" align="right" style="font-size: 12px;">Mes:</label>
+        <select name="cmb_fil_mes" id="cmb_fil_mes" required>
             <option value="01">Enero</option>
             <option value="02">Febrero</option>
             <option value="03">Marzo</option>
@@ -111,18 +100,21 @@ $(function() {
 
         <br/>
 
-        <label for="cmb_fil_tipo_doc" align="right">Registro:</label>
-        <select name="cmb_fil_tipo_doc" id="cmb_fil_tipo_doc">
-            <option value="-">Seleccionar Venta</option>
-            <option value="11">Registro de Compra</option>
-            <option value="12">Registro de Venta</option>
+        <label for="cmb_fil_tipo_doc" align="right" style="font-size: 12px;">Registro:</label>
+        <select name="cmb_fil_tipo_doc" id="cmb_fil_tipo_doc" required>
+            <option value="3">Registro de Venta</option>
+            <option value="1">Registro de Compra</option>
         </select>
         <br/>
 
-        <button id="btn_descargar_excel" class="center">DESCARGAR EXCEL</button>
-        <button id="btn_descargar_pdf" type="submit" class="center">DESCARGAR PDF</button>
+        <a class="btn_descargar_excel" id="btn_descargar_excel" href="#" onClick="registro_reporte_xls()" title="Imprimir en Excel">DESCARGAR EXCEL</a>
+        <a class="btn_descargar_pdf" id="btn_descargar_pdf" href="#" onClick="registro_reporte_pdf()" title="Imprimir en PDF">DESCARGAR PDF</a>
+        <a class="filtrar_consulta" id="filtrar_consulta" href="#" onClick="registro_filtro()" title="Filtrar">FILTRAR</a>
     </fieldset>
 </div>
 
 
 </form>
+
+<div id="div_registro_venta_tabla" class="registro_venta_tabla">
+</div>

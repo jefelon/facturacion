@@ -72,59 +72,125 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 
 <script type="text/javascript">
 
-    function venta_filtro()
-    {
+    function cmb_ven_doc(ids) {
         $.ajax({
             type: "POST",
-            url: "contable_filtro_registro.php",
-            async:true,
+            url: "../../modulos/documento/cmb_doc_id.php",
+            async: true,
             dataType: "html",
-            beforeSend: function() {
-                $('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            data: ({
+                doc_tip: '2',
+                doc_id: ids,
+                vista: '<?php echo $_POST['action']?>'
+            }),
+            beforeSend: function () {
+                $('#cmb_fil_ven_doc').html('<option value="">Cargando...</option>');
             },
-            success: function(html){
-                $('#div_venta_filtro').html(html);
-            },
-            complete: function(){
-                venta_tabla();
+            success: function (html) {
+                $('#cmb_fil_ven_doc').html(html);
             }
         });
     }
-function venta_form(act,idf){
-	$.ajax({
-		type: "POST",
-		url: "venta_form.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			action: act,
-			ven_id:	idf
-		}),
-		beforeSend: function() {
-			$('#msj_venta').hide();
-			$('#div_venta_form').dialog("open");
-			$('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-		success: function(html){
-			$('#div_venta_form').html(html);				
-		},
-		complete: function(){
-			if(act=='editar')
-			{
-				$( "#div_venta_form" ).dialog({
-					title:'Información de Venta | <?php echo $razon ?> | Editar',
-					buttons: {
-						Cancelar: function() {
-							$('#for_ven').each (function(){this.reset();});
-							$( this ).dialog( "close" );
-						}
-					}
-				});
-			}
-		}
-	});
-}
 
+    function venta_filtro() {
+        $.ajax({
+            type: "POST",
+            url: "contable_registro_filtro.php",
+            async: true,
+            dataType: "html",
+            beforeSend: function () {
+                $('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function (html) {
+                $('#div_venta_filtro').html(html);
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function venta_form(act, idf) {
+        $.ajax({
+            type: "POST",
+            url: "venta_form.php",
+            async: true,
+            dataType: "html",
+            data: ({
+                action: act,
+                ven_id: idf
+            }),
+            beforeSend: function () {
+                $('#msj_venta').hide();
+                $('#div_venta_form').dialog("open");
+                $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function (html) {
+                $('#div_venta_form').html(html);
+            },
+            complete: function () {
+                if (act == 'editar') {
+                    $("#div_venta_form").dialog({
+                        title: 'Información de Venta | <?php echo $razon ?> | Editar',
+                        buttons: {
+                            Cancelar: function () {
+                                $('#for_ven').each(function () {
+                                    this.reset();
+                                });
+                                $(this).dialog("close");
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    function registro_filtro()
+    {
+        var url;
+        if (document.getElementById("cmb_fil_tipo_doc").value==='1'){
+            url = "contable_registro_compra_tabla.php";
+        }else if(document.getElementById("cmb_fil_tipo_doc").value==='3'){
+            url = "contable_registro_venta_tabla.php";
+        }else {
+            url = "contable_registro_venta_tabla.php";
+        }
+
+        $.ajax({
+            type: "POST",
+            url: url,
+            async:true,
+            dataType: "html",
+            data: $("#for_fil_contable").serialize(),
+            beforeSend: function() {
+                $('#div_registro_venta_tabla').addClass("ui-state-disabled");
+            },
+            success: function(html){
+                $('#div_registro_venta_tabla').html(html);
+            },
+            complete: function(){
+                $('#div_registro_venta_tabla').removeClass("ui-state-disabled");
+            }
+        });
+    }
+
+
+    function registro_reporte_xls() {
+        $("#hdd_tabla").val($("<div>").append($("#tabla_producto").eq(0).clone()).html());
+        document.for_fil_contable.action = 'contable_registro_xls.php';
+        $("#for_fil_contable").submit();
+    }
+
+    function registro_reporte_pdf() {
+        console.log(document.getElementById("cmb_fil_tipo_doc").value);
+        if (document.getElementById("cmb_fil_tipo_doc").value==='1'){
+            document.for_fil_contable.action = "contable_registro_reporte_compra.php";
+        }else if(document.getElementById("cmb_fil_tipo_doc").value==='3'){
+            document.for_fil_contable.action = "contable_registro_reporte_venta.php";
+        }
+
+        $("#for_fil_contable").submit();
+    }
 
 function modo(url){
 	$('#hdd_modo').val(url);
