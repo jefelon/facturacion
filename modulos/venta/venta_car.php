@@ -825,13 +825,13 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 ?>
             </td>
             <td align="right">
-            <?php
+                <?php
                 if ($tipo_item==9) {
                     echo formato_money($precio_venta);
                 }else{
-                    echo formato_money($valor_venta);
+                    echo formato_money($precio_unitario_linea);
                 }
-            ?>
+                ?>
             </td>
             <td align="right">
                 <?php echo formato_money($precio_venta)?>
@@ -944,7 +944,8 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <!--            <td>--><?php //echo $dt['tb_unidad_abr'];?><!--</td>-->
             <td>ZZ</td>
             <td align="right"><?php echo $cantidad?></td>
-            <td align="right"><?php echo formato_money($precio_unitario)?></td>
+            <td align="right"><?php echo formato_money($precio_unitario*(1+$igv_dato))?></td>
+            <td align="right"></td>
             <td align="right">
                 <?php
                 if($tipdes == 1 and $descuento_linea!=0){
@@ -956,8 +957,16 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 ?>
             </td>
 
-            <td align="right"><?php echo formato_money($precio_venta)?></td>
-            <td align="right"><?php echo formato_money($precio_venta)?></td>
+            <td align="right">
+                <?php
+                if ($tipo_item==9) {
+                    echo formato_money($precio_venta);
+                }else{
+                    echo formato_money($valor_venta);
+                }
+                ?>
+            </td>
+            <td align="right"><?php echo formato_money($precio_venta*$cantidad)?></td>
             <td align="center" nowrap="nowrap">
                 <?php if($_POST['vista']!='cange'){?>
                     <a class="btn_item" href="#" onClick="editar_datos_item('editar_servicio','<?php echo $dt1['tb_servicio_id']?>')">Actualizar Datos de Item</a><a class="btn_quitar" href="#" onClick="venta_car_servicio('quitar_servicio','<?php echo $dt1['tb_servicio_id']?>')">Quitar</a>
