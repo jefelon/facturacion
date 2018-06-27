@@ -4,8 +4,8 @@ require_once ("../../config/Cado.php");
 require_once('../../libreriasphp/html2pdf/_tcpdf_5.9.206/tcpdf.php');
 require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
-require_once ("../venta/cVenta.php");
-$oVenta = new cVenta();
+require_once ("../compra/cCompra.php");
+$oCompra = new cCompra();
 require_once ("../clientes/cCliente.php");
 $oCliente = new cCliente();
 require_once ("../usuarios/cUsuario.php");
@@ -13,6 +13,7 @@ $oUsuario = new cUsuario();
 require_once ("../puntoventa/cPuntoventa.php");
 $oPuntoventa = new cPuntoventa();
 require_once("../formatos/formato.php");
+require_once("../formatos/fechas.php");
 
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
@@ -20,12 +21,10 @@ $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
 
+$mes = strtoupper(nombre_mes($_POST['cmb_fil_mes']));
 
 $fecha_actual=$d=date('d/m/Y');
 $titulo='REPORTE DE VENTAS';
-
-$dts1=$oVenta->mostrar_filtro_por_mes_anio($_POST['cmb_fil_mes'],$_POST['cmb_fil_anio'],$_POST['cmb_fil_tipo_doc'],$_POST['cmb_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_POST['cmb_fil_ven_ven'],$_POST['cmb_fil_ven_punven'],$_SESSION['empresa_id'],$_POST['chk_fil_ven_may']);
-$num_rows= mysql_num_rows($dts1);
 
 class MYPDF extends TCPDF
 {
@@ -139,6 +138,24 @@ $html = '
         color: black;
         text-transform:uppercase;
     }
+    .total{
+        text-align: center; 
+        border-top: 1px black solid; 
+        padding-top: 10px; 
+        padding-bottom: 10px;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+    .total_general{
+        text-align: center; 
+        border-top: 2px black solid;
+        border-bottom: 2px black solid;  
+        padding-top: 10px; 
+        padding-bottom: 10px;
+        margin-bottom: 40px;
+        margin-top: 40px;
+    }
+    
 </style>
 
 <style media="print">
@@ -154,7 +171,7 @@ $html = '
 RUC:'.$ruc_empresa.'<br>
 </div>
 <div style="font-size: 30px; text-align: center">
-<b>*** REGISTRO DE VENTAS  DEL MES DE MAYO *** </b><br>
+<b>*** REGISTRO DE COMPRAS DEL MES DE '.$mes.' DEL '.$_POST['cmb_fil_anio'].'*** </b><br>
 <b>SOLES</b>
 </div>
 <div style="font-size: 25px; text-align: right">
@@ -166,21 +183,26 @@ RUC:'.$ruc_empresa.'<br>
 <table style="width: 100%; border-collapse:collapse;">
         <thead>
             <tr class="header_major_row">
-            <th rowspan="2" style="text-align: center;"><br><br><b>O.</b></th>
-            <th rowspan="2" style="text-align: center;"><br><br><b>N° VOU</b></th>
-            <th rowspan="2" style="text-align: center;"><br><br><b>F. Emisión</b></th>
-            <th rowspan="2" style="text-align: center;"><br><br><b>F. Venc.</b></th>
-            <th colspan="3" scope="colgroup"  style="text-align: center;"><br><br>Datos del Comprobante</th>
-            <th colspan="4" scope="colgroup"  style="text-align: center;"><br><br>Referencia del Comprobante</th>
-            <th colspan="3" scope="colgroup"  style="text-align: center; width: 15%"><br><br>Informacion del cliente</th>
-            <th rowspan="2" style="text-align: center;"><b>Valor Facturado de la Exportación</b></th>
-            <th rowspan="2" style="text-align: center;"><b>Base Imp. de la Ope. Gravada</b></th>
-            <th colspan="2" scope="colgroup"  style="text-align: center;"><br><br>Imp.Total de la Operación</th>
+            <th rowspan="2" style="text-align: center; width: 2%;"><br><br><b>O.</b></th>
+            <th rowspan="2" style="text-align: center; width: 3%;"><br><br><b>N° VOU</b></th>
+            <th rowspan="2" style="text-align: center; width: 5%;"><br><br><b>F. Emisión</b></th>
+            <th rowspan="2" style="text-align: center; width: 5%;"><br><br><b>F. Venc.</b></th>
+            <th colspan="3" scope="colgroup"  style="text-align: center;"><br><br>Datos del Documento</th>
+            <th colspan="4" scope="colgroup"  style="text-align: center;"><br><br>Referencia del Documento</th>
+            <th colspan="3" scope="colgroup"  style="text-align: center; width: 15%"><br><br>Datos del Proveedor</th>
+            <th rowspan="2" style="text-align: center;"><b>Base Imp. Adq Grav. y de Exp. A</b></th>
+            <th rowspan="2" style="text-align: center;"><b>Base Imp. Adq Grav.  y de Exp. y no Grav. B</b></th>
+            <th rowspan="2" style="text-align: center;"><b>Base Imp. Adq Grav. sin Der. Credito Fiscal C</b></th>
+            <th rowspan="2" style="text-align: center;"><br><br><b>Adq. no Gravadas</b></th>
             <th rowspan="2" style="text-align: center;"><br><br><b>I.S.C.</b></th>
-            <th rowspan="2" style="text-align: center;"><br><br><b>I.G.V.</b></th>
+            <th rowspan="2" style="text-align: center;"><br><br><b>I.G.V. A</b></th>
+            <th rowspan="2" style="text-align: center;"><br><br><b>I.G.V. B</b></th>
+            <th rowspan="2" style="text-align: center;"><br><br><b>I.G.V. C</b></th>
             <th rowspan="2" style="text-align: center;"><br><br><b>Otros Tributos</b></th>
             <th rowspan="2" style="text-align: center;"><br><br><b>Total</b></th>
             <th rowspan="2" style="text-align: center;"><br><br><b>T/C</b></th>
+            <th rowspan="2" style="text-align: center;"><br><br><b>Spot Fecha</b></th>
+            <th rowspan="2" style="text-align: center;"><br><br><b>Spot Numero</b></th>
         </tr>
         <tr class="header_minor_row">
             <th style="text-align: center;"><b>T/D</b></th>
@@ -194,70 +216,99 @@ RUC:'.$ruc_empresa.'<br>
             
             <th style="text-align: center;"><b>Doc</b></th>
             <th style="text-align: center;"><b>Número</b></th>
-            <th style="text-align: center;"><b>Razón Social</b></th>
-            
-           
-            <th style="text-align: center;"><b>Exonerado</b></th>
-            <th style="text-align: center;"><b>Inafecto</b></th>
-            
+            <th style="text-align: center;"><b>Razón Social</b></th>  
         </tr><thead>';
-        $cont = 1;
+
+        $dts1=$oCompra->mostrar_filtro_por_mes_anio($_POST['cmb_fil_mes'],$_POST['cmb_fil_anio'],$_SESSION['empresa_id']);
+        $num_rows= mysql_num_rows($dts1);
         $base = 0;
         $igv = 0;
         $total = 0;
-        $html .= '<tbody><tr><td colspan="20"></td></tr><tr><td colspan="20"></td></tr>';
+
+        $html .= '<tbody>
+        <tr><td colspan="20"></td></tr><tr><td colspan="22"></td></tr>
+        <tr style="font-size: 25px; font-weight: bold"><td colspan="20">Tipo Doc.: 01 Factura</td></tr><tr><td colspan="20"></td></tr>';
         while ($dt = mysql_fetch_array($dts1)) {
-            $codigo = $cont;
-            $base+=$dt['tb_venta_valven'];
-            $igv+=$dt['tb_venta_igv'];
-            $total+=$dt['tb_venta_tot'];
+            $base+=$dt['tb_compra_valven'];
+            $igv+=$dt['tb_compra_igv'];
+            $total+=$dt['tb_compra_tot'];
+            $numdoc = split('-', $dt['tb_compra_numdoc']);
             $html .= '<tr>';
             $html .= '
-                        <td style="text-align: center">' . $dt["tb_documento_id"] . '</td>
-                        <td style="text-align: center">' . $dt['tb_venta_id'] . '</td>
-                        <td style="text-align: center">' . $dt['tb_venta_fec'] . '</td>
-                        <td style="text-align: center">' . $dt['tb_venta_fec'] . '</td>
+                        <td style="text-align: center">1</td>
+                        <td style="text-align: center">' . $dt['tb_compra_id'] . '</td>
+                        <td style="text-align: center">' . $dt['tb_compra_fec'] . '</td>
+                        <td style="text-align: center">' . $dt['tb_compra_fec'] . '</td>
                         <td style="text-align: center">' . $dt["tb_documento_id"] . '</td>               
-                        <td style="text-align: center">' . $dt['tb_venta_ser'] . '</td>
-                        <td style="text-align: center">' . $dt['tb_venta_num'] . '</td>
+                        <td style="text-align: center">' . $numdoc[0] . '</td>
+                        <td style="text-align: center">' . $numdoc[1] . '</td>
                         <td style="text-align: center"></td>
                         <td style="text-align: center"></td>
                         <td style="text-align: center"></td>
                         <td style="text-align: center"></td>
-                        <td style="text-align: center">' . $dt['tb_cliente_tip'] . '</td>
-                        <td style="text-align: center">' . $dt['tb_cliente_doc'] . '</td>
+                        <td style="text-align: center">' . $dt['tb_proveedor_tip'] . '</td>
+                        <td style="text-align: center">' . $dt['tb_proveedor_doc'] . '</td>
                         <td style="text-align: center"></td>
-                        <td style="text-align: center">0.00</td>
-                        <td style="text-align: center">' . $dt['tb_venta_valven'] . '</td>
-                        <td style="text-align: center">0.00</td>
+                        <td style="text-align: center">' . $dt['tb_compra_valven'] . '</td>
                         <td style="text-align: center">0.00</td>
                         <td style="text-align: center">0.00</td>
-                        <td style="text-align: center">' . $dt['tb_venta_igv'] . '</td>
                         <td style="text-align: center">0.00</td>
-                        <td style="text-align: center">' . $dt['tb_venta_tot'] . '</td>
-                        <td style="text-align: center"></td>' .
-                '';
+                        <td style="text-align: center">0.00</td>
+                        <td style="text-align: center">' . $dt['tb_compra_igv'] . '</td>
+                        <td style="text-align: center">0.00</td>
+                        <td style="text-align: center">0.00</td>
+                        <td style="text-align: center">0.00</td>
+                        <td style="text-align: center">' . $dt['tb_compra_tot'] . '</td>
+                        <td style="text-align: center"></td>
+                        <td style="text-align: center"></td>
+                        ';
             $html .= '</tr>';
             $cont++;
         }
-        $html .= '<tr><td colspan="20"></td></tr><tr><td colspan="20"></td></tr>';
-        $html .= '<tr class="row_total"><td colspan="13" style="text-align: right">TOTALES:</td>        <td style="text-align: center"></td><td style="text-align: center">0.00</td><td style="text-align: center">'.$base.'</td><td style="text-align: center">0.00</td><td style="text-align: center">0.00</td><td style="text-align: center">0.00</td><td style="text-align: center">'.$igv.'</td><td style="text-align: center">0.00</td><td style="text-align: center">'.$total.'</td></tr>';
-        $html .= '<tr class="row_total"><td colspan="13" style="text-align: right">TOTAL GENERAL:</td><td style="text-align: center"></td><td style="text-align: center">0.00</td><td style="text-align: center">'.$base.'</td><td style="text-align: center">0.00</td><td style="text-align: center">0.00</td><td style="text-align: center">0.00</td><td style="text-align: center">'.$igv.'</td><td style="text-align: center">0.00</td><td style="text-align: center">'.$total.'</td></tr>';
+        $html .= '<tr><td colspan="22"></td></tr><tr><td colspan="22"></td></tr>';
+        $html .= '<tr class="row_total">
+                    <td colspan="13" style="text-align: right;">TOTALES:</td>       
+                    <td class="total"></td>
+                    <td class="total">'.$base.'</td>
+                    <td class="total">0.00</td>
+                    <td class="total">0.00</td>
+                    <td class="total">0.00</td>
+                    <td class="total">0.00</td>
+                    <td class="total">'.$igv.'</td>
+                    <td class="total">0.00</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total">'.$total.'</td>
+                 </tr>';
+        $html .= '<tr class="row_total_general">
+                    <td colspan="13" style="text-align: right;">TOTAL GENERAL:</td> 
+                    <td class="total_general"></td>
+                    <td class="total_general">'.$base.'</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">'.$igv.'</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">0.00</td>
+                    <td class="total_general">'.$total.'</td>
+                 </tr>';
         $html .= '</tbody></table>;
-<br/>
-<br/>
-';
+        <br/>
+        <br/>
+        ';
 
 
-$style = array(
-	'border' => 2,
-	'vpadding' => 'auto',
-	'hpadding' => 'auto',
-	'fgcolor' => array(0,0,0),
-	'bgcolor' => false, //array(255,255,255)
-	'module_width' => 1, // width of a single module in points
-	'module_height' => 1 // height of a single module in points
-);
+        $style = array(
+            'border' => 2,
+            'vpadding' => 'auto',
+            'hpadding' => 'auto',
+            'fgcolor' => array(0,0,0),
+            'bgcolor' => false, //array(255,255,255)
+            'module_width' => 1, // width of a single module in points
+            'module_height' => 1 // height of a single module in points
+        );
 
 
 

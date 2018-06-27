@@ -54,6 +54,10 @@ $(function() {
 	cmb_ven_doc('<?php echo $_POST['doc']?>');
 
 });
+    function onSubmitForm() {
+        document.for_fil_contable.action = document.getElementById("cmb_fil_tipo_doc").value;
+        return true;
+    }
 </script>
 
 <style>
@@ -79,7 +83,7 @@ $(function() {
     }
 </style>
 
-<form name="for_fil_contable" id="for_fil_contable" target="_blank" action="contable_reporte_registro.php" method="post">
+<form name="for_fil_contable" id="for_fil_contable" target="_blank" action="" method="post" onsubmit="return onSubmitForm();">
 <input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla_garantia.php">
 
     <input name="hdd_action" id="hdd_action" type="hidden" value="">
@@ -88,13 +92,13 @@ $(function() {
 
     <fieldset style="width: 100%;float: left"><legend>Descargar PLE</legend>
         <label for="cmb_fil_ven_doc" align="right">Año:</label>
-        <select name="cmb_fil_anio" id="cmb_fil_anio">
+        <select name="cmb_fil_anio" id="cmb_fil_anio" required>
             <option value="2018">2018</option>
             <option value="2018">2017</option>
         </select>
 
         <label for="cmb_fil_mes" align="right">Mes:</label>
-        <select name="cmb_fil_mes" id="cmb_fil_mes">
+        <select name="cmb_fil_mes" id="cmb_fil_mes" required>
             <option value="01">Enero</option>
             <option value="02">Febrero</option>
             <option value="03">Marzo</option>
@@ -112,10 +116,10 @@ $(function() {
         <br/>
 
         <label for="cmb_fil_tipo_doc" align="right">Registro:</label>
-        <select name="cmb_fil_tipo_doc" id="cmb_fil_tipo_doc">
+        <select name="cmb_fil_tipo_doc" id="cmb_fil_tipo_doc" required>
             <option value="-">Seleccionar Venta</option>
-            <option value="11">Registro de Compra</option>
-            <option value="12">Registro de Venta</option>
+            <option value="contable_reporte_registro_compra.php">Registro de Compra</option>
+            <option value="contable_reporte_registro_venta.php">Registro de Venta</option>
         </select>
         <br/>
 

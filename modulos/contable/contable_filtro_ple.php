@@ -87,14 +87,14 @@ $(function() {
 <div style="width: 100%;margin: 0 auto">
 
     <fieldset style="width: 100%;float: left"><legend>Descargar PLE</legend>
-        <label for="cmb_fil_ven_doc" align="right">Año:</label>
+        <label for="cmb_fil_anio" align="right">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio">
             <option value="2018">2018</option>
             <option value="2018">2017</option>
         </select>
 
-        <label for="cmb_fil_ven_doc" align="right">Mes:</label>
-        <select name="cmb_fil_anio" id="cmb_fil_anio">
+        <label for="cmb_fil_mes" align="right">Mes:</label>
+        <select name="cmb_fil_mes" id="cmb_fil_mes">
             <option value="01">Enero</option>
             <option value="02">Febrero</option>
             <option value="03">Marzo</option>
