@@ -704,21 +704,20 @@ if($filas>=2)echo $filas.' ítems agregados.';
     </thead>
     <tbody>
     <?php
+    $sub_total = 0;
+    $valor_venta_total = 0;
+    $ope_exoneradas_total = 0;
+    $ope_gravadas_total = 0;
+    $ope_gratuitas_total = 0;
     if($num_rows>0)foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad){
         $dts1=$oCatalogoProducto->presentacion_catalogo_stock_almacen($indice,$almacen_venta);
         $dt1 = mysql_fetch_array($dts1);
 
         //precio de venta ingresado
-        $precio_venta	=$_SESSION['venta_preven'][$unico_id][$indice];
+        $precio_unitario = $_SESSION['venta_preven'][$unico_id][$indice];
 
         //tipo g/e/i ingresado
         $tipo_item	=$_SESSION['venta_tip'][$unico_id][$indice];
-
-        if ($tipo_item==9){
-            $tipo_pro='Exonerado';
-        }else{
-            $tipo_pro='Gravado';
-        }
 
         switch ($tipo_item) {
             case '1':
@@ -744,51 +743,39 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 break;
         }
 
-        //precio unitario de venta
-        $precio_unitario=$precio_venta/(1+$igv_dato);
+        if ($tipo_item==9){
+            $tipo_pro='Exonerado';
+            $valor_venta_unitario = $precio_unitario;
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_exoneradas_total += $valor_venta;
+
+        }else if($tipo_item==1){
+            $tipo_pro='Gravado';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gravadas_total += $valor_venta;
+        }else{
+            $tipo_pro='Gravado';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gratuitas_total += $valor_venta;
+        }
+
+
+
 
 
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];
-        $descuento_linea=$_SESSION['venta_des'][$unico_id][$indice];
-        //descuento en porcentaje
-        /*if($tipdes == 1){
-            $descuento_calculo = ($descuento_linea/100)*$precio_unitario;
-        }*/
-        //descuento en soles
-        if($tipdes == 2){
-            $descuento_calculo = ($descuento_linea/1.18);
-        }
 
-        //precio unitario linea al que se vende
-        $precio_unitario_linea=($precio_unitario*$cantidad)-$descuento_calculo;
-        if($tipo_item==1){
-            $precio_total_linea+=$precio_unitario*$cantidad;
-        }else if ($tipo_item==9){
-            $ope_exoneradas += $precio_venta*$cantidad;
-        }else{
-            $ope_gratuitas+=$precio_unitario*$cantidad;
-            //valor venta
-        }
-
-        $valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));
-        //igv
-        $igv=$valor_venta*$igv_dato;
-
-
-        //sumatoria linea
-        $importe=$sub_total+$igv_total;
 
         //sumatoria factura
-        if($tipo_item==1){
-            $igv_total+=$igv;
-            $sub_total+=$valor_venta;
-            $des_total+=$descuento_calculo;
+        if($tipo_item==1 || $tipo_item==9){
+            $sub_total += $valor_venta;
         }
-
-
-        $precio_venta = $precio_venta * $cantidad;
-
 
         ?>
         <tr>
@@ -808,29 +795,18 @@ if($filas>=2)echo $filas.' ítems agregados.';
             <td align="right"><?php echo $cantidad?></td>
 <!--            <td align="right">--><?php //echo formato_money($precio_unitario)?><!--</td>-->
             <?php if ($tipo_item==9){ ?>
-            <td align="right"></td>
-            <td align="right"><?php echo formato_money($precio_unitario*(1+$igv_dato))?></td>
+                <td align="right"></td>
+                <td align="right"><?php echo formato_money($precio_unitario)?></td>
             <?php } else{ ?>
-            <td align="right"><?php echo formato_money($precio_unitario*(1+$igv_dato))?></td>
-            <td align="right"></td>
+                <td align="right"><?php echo formato_money($precio_unitario)?></td>
+                <td align="right"></td>
             <?php } ?>
             <td align="right">
-                <?php
-                if($tipdes == 1 and $descuento_linea!=0){
-                    echo $descuento_linea."%";
-                }
-                if($tipdes == 2 and $descuento_linea!=0){
-                    echo "S/. ".formato_money($descuento_calculo);
-                }
-                ?>
+
             </td>
             <td align="right">
                 <?php
-                if ($tipo_item==9) {
-                    echo formato_money($precio_venta);
-                }else{
-                    echo formato_money($precio_unitario_linea);
-                }
+                    echo formato_money($valor_venta);
                 ?>
             </td>
             <td align="right">
@@ -854,7 +830,8 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $dts1=$oServicio->mostrarUno($indice);
         $dt1 = mysql_fetch_array($dts1);
 
-        $precio_venta	=$_SESSION['venta_preven'][$unico_id][$indice];
+        $precio_unitario	=$_SESSION['servicio_preven'][$unico_id][$indice];
+
 
         //tipo g/e/i ingresado
         $tipo_item	=$_SESSION['servicio_tip'][$unico_id][$indice];
@@ -882,58 +859,25 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 break;
         }
 
-        //precio de venta ingresado
-        $precio_venta = $_SESSION['servicio_preven'][$unico_id][$indice];
+        $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+        $precio_venta = $precio_unitario * $cantidad;
+        $valor_venta = $valor_venta_unitario * $cantidad;
 
-        //precio unitario de venta
-        $precio_unitario=$precio_venta/(1+$igv_dato);
-
+        if ($tipo_item==1){
+            $ope_gravadas_total += $valor_venta;
+        } else if ($tipo_item==9){
+            $ope_exoneradas_total += $valor_venta;
+        }else{
+            $ope_gratuitas_total += $valor_venta;
+        }
 
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];
         $descuento_linea = $_SESSION['servicio_des'][$unico_id][$indice];
 
-        //descuento en porcentaje
-        if($tipdes == 1){
-            $descuento_calculo = ($descuento_linea/100)*$precio_unitario;
-        }
-        //descuento en soles
-        if($tipdes == 2){
-            $descuento_calculo = $descuento_linea;
-        }
-
-
-        //precio unitario linea al que se vende
-        $precio_unitario_linea=$precio_unitario-$descuento_calculo;
-        if($tipo_item==1){
-            $precio_total_linea+=$precio_unitario*$cantidad;
-            //valor venta
-            $valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));
-        }
-        else if($tipo_item==9){
-            $ope_exoneradas += $precio_unitario*$cantidad;
-            $valor_venta=$precio_venta;
-        }
-        else{
-            $ope_gratuitas+=$precio_unitario*$cantidad;
-            //valor venta
-            $valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));
-        }
-
-
-
-        //igv
-        $igv=$valor_venta*$igv_dato;
-
-
-        //sumatoria linea
-        $importe=$sub_total+$igv_total;
-
         //sumatoria factura
         if($tipo_item==1){
-            $igv_total+=$igv;
-            $sub_total+=$valor_venta;
-            $des_total+=$descuento_calculo;
+            $sub_total += $valor_venta;
         }
         ?>
         <tr>
@@ -944,29 +888,16 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <!--            <td>--><?php //echo $dt['tb_unidad_abr'];?><!--</td>-->
             <td>ZZ</td>
             <td align="right"><?php echo $cantidad?></td>
-            <td align="right"><?php echo formato_money($precio_unitario*(1+$igv_dato))?></td>
+            <td align="right"><?php echo formato_money($precio_unitario)?></td>
             <td align="right"></td>
             <td align="right">
-                <?php
-                if($tipdes == 1 and $descuento_linea!=0){
-                    echo $descuento_linea."%";
-                }
-                if($tipdes == 2 and $descuento_linea!=0){
-                    echo "S/. ".$descuento_linea;
-                }
-                ?>
             </td>
-
             <td align="right">
                 <?php
-                if ($tipo_item==9) {
-                    echo formato_money($precio_venta);
-                }else{
                     echo formato_money($valor_venta);
-                }
                 ?>
             </td>
-            <td align="right"><?php echo formato_money($precio_venta*$cantidad)?></td>
+            <td align="right"><?php echo formato_money($precio_venta)?></td>
             <td align="center" nowrap="nowrap">
                 <?php if($_POST['vista']!='cange'){?>
                     <a class="btn_item" href="#" onClick="editar_datos_item('editar_servicio','<?php echo $dt1['tb_servicio_id']?>')">Actualizar Datos de Item</a><a class="btn_quitar" href="#" onClick="venta_car_servicio('quitar_servicio','<?php echo $dt1['tb_servicio_id']?>')">Quitar</a>
@@ -980,7 +911,8 @@ if($filas>=2)echo $filas.' ítems agregados.';
     </tbody>
 </table>
 <?php
-$total_factura=$sub_total+$igv_total+$ope_exoneradas;
+$igv_total = $ope_gravadas_total*0.18;
+$importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
 ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -1008,14 +940,7 @@ $total_factura=$sub_total+$igv_total+$ope_exoneradas;
                 <table border="0" align="right" cellpadding="0" cellspacing="0">
                     <tr>
                         <td nowrap="nowrap"><strong>OPERACIONES GRATUITAS:</strong></td>
-                        <td align="right"><input name="txt_ven_opegra" type="text" id="txt_ven_opegra" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gratuitas)?>" size="15" readonly>
-                        </td>
-                    </tr>
-                </table>
-                <table border="0" align="right" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td nowrap="nowrap"><strong>OPERACIONES EXONERADAS:</strong></td>
-                        <td align="right"><input name="txt_ven_opeexo" type="text" id="txt_ven_opeexo" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_exoneradas)?>" size="15" readonly>
+                        <td align="right"><input name="txt_ven_opegra" type="text" id="txt_ven_opegra" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gratuitas_total)?>" size="15" readonly>
                         </td>
                     </tr>
                 </table>
@@ -1026,16 +951,26 @@ $total_factura=$sub_total+$igv_total+$ope_exoneradas;
                 <table border="0" align="right" cellpadding="0" cellspacing="0">
                     <tr>
                         <td nowrap="nowrap"><label for="txt_ven_subtot" style="font-size:12px;margin-right: 10px;"><strong>SUB TOTAL VENTAS:</strong></label></td>
-                        <td align="right"><input name="txt_ven_subtot" type="text" id="txt_ven_subtot" style="text-align:right; font-size:14px" value="<?php echo formato_money($precio_total_linea)?>" size="15" readonly></td>
+                        <td align="right"><input name="txt_ven_subtot" type="text" id="txt_ven_subtot" style="text-align:right; font-size:14px" value="<?php echo formato_money($sub_total)?>" size="15" readonly></td>
                     </tr>
                     <tr>
                         <td><label for="txt_ven_des" style="font-size:12px"><strong>DESCUENTOS:</strong></label></td>
-                        <td align="right"><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right; font-size:14px" value="<?php echo formato_money($des_total)?>" size="15" readonly></td>
+                        <td align="right"><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right; font-size:14px" value="<?php echo formato_money(0)?>" size="15" readonly></td>
                     </tr>
                     <tr>
                         <td width="120"><label for="txt_ven_valven" style="font-size:12px"><strong>VALOR VENTA:</strong></label></td>
                         <td width="140" align="right">
                             <input name="txt_ven_valven" type="text" id="txt_ven_valven" style="text-align:right; font-size:14px" value="<?php echo formato_money($sub_total)?>" size="15" readonly></td>
+                    </tr>
+                    <tr>
+                        <td nowrap="nowrap"><strong>OPERACIONES EXONERADAS:</strong></td>
+                        <td align="right"><input name="txt_ven_opeexo" type="text" id="txt_ven_opeexo" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_exoneradas_total)?>" size="15" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td nowrap="nowrap"><strong>OPERACIONES GRAVADAS:</strong></td>
+                        <td align="right"><input name="txt_ven_opeexo" type="text" id="txt_ven_opeexo" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gravadas_total)?>" size="15" readonly>
+                        </td>
                     </tr>
                     <tr>
                         <td><label for="txt_ven_igv" style="font-size:12px"><strong>IGV (18%):</strong></label>
@@ -1053,7 +988,7 @@ $total_factura=$sub_total+$igv_total+$ope_exoneradas;
 		  </tr><?php */?>
                     <tr>
                         <td><label for="txt_ven_tot" style="font-size:12px"><strong>IMPORTE TOTAL:</strong></label></td>
-                        <td align="right"><input name="txt_ven_tot" type="text" id="txt_ven_tot" style="text-align:right; font-size:14px; font-weight:bold;" value="<?php echo formato_money($total_factura)?>" size="13" readonly></td>
+                        <td align="right"><input name="txt_ven_tot" type="text" id="txt_ven_tot" style="text-align:right; font-size:14px; font-weight:bold;" value="<?php echo formato_money($importe_total)?>" size="13" readonly></td>
 
                     </tr>
                 </table>

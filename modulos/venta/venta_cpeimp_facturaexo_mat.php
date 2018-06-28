@@ -91,7 +91,7 @@ while($dt = mysql_fetch_array($dts))
     $importetotal=$dt["tb_venta_tot"];
     $totopgrat=$dt["tb_venta_grat"];
     $totopexo=$dt["tb_venta_exo"];
-    $subtotal=$dt["tb_venta_gra"];
+    $totopgrav=$dt["tb_venta_gra"];
     $valorventa=$dt["tb_venta_valven"];
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
@@ -455,21 +455,9 @@ if($totopgrat > 0){
 }
 $html.='
     <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Ope Exo: </td>
-        <td width="11%" style="text-align: right;">'.$totopexo.'</td>
-    </tr>
-    <tr>
         <td width="78%" style="text-align: right;" colspan="2">Sub Total: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $subtotal.'</td>
-    </tr>';
-if($totanti > 0){
-    $html.='<tr>
-            <td width="78%" style="text-align: right;" colspan="2">Anticipos: </td>
-            <td width="23%" style="text-align: right;">'.$mon . $totanti.'</td>
-        </tr>';
-}
-$subgrav = $subtotal+$toigv;
-$html.='
+        <td width="23%" style="text-align: right;">'.$mon . $valorventa.'</td>
+    </tr>
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Descuentos: </td>
         <td width="23%" style="text-align: right;">'.$mon . $totdes.'</td>
@@ -479,14 +467,24 @@ $html.='
         <td width="23%" style="text-align: right;">'.$mon . $valorventa.'</td>
     </tr>
     <tr>
-        <td  width="78%" style="text-align: right;" colspan="2">IGV: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $toigv.'</td>
+        <td width="78%" style="text-align: right;" colspan="2">Ope Exo: </td>
+        <td width="11%" style="text-align: right;">'.$mon . $totopexo.'</td>
     </tr>
     <tr>
         <td  width="78%" style="text-align: right;" colspan="3">Ope Grav: </td>
-        <td width="23%" style="text-align: right;">'.formato_money($subgrav).'</td>
+        <td width="23%" style="text-align: right;">'.$mon . formato_money($totopgrav).'</td>
+    </tr>';
+if($totanti > 0){
+    $html.='<tr>
+            <td width="78%" style="text-align: right;" colspan="2">Anticipos: </td>
+            <td width="23%" style="text-align: right;">'.$mon . $totanti.'</td>
+        </tr>';
+}
+$html.='
+    <tr>
+        <td  width="78%" style="text-align: right;" colspan="2">IGV: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $toigv.'</td>
     </tr>
-   
         <tr>
             <td width="60%" style="text-align: left;">';
 if($importetotal>0){
