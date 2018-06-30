@@ -363,7 +363,7 @@ $(function() {
 		autoOpen: false,
 		resizable: false,
 		height: 550,
-		width: 940,
+		width: 980,
 		modal: true,
 		position: "top",
 		closeOnEscape: false,
