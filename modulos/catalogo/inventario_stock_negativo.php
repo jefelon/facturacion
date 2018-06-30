@@ -87,7 +87,6 @@ $(document).ready(function() {
 			//4: {sorter: 'shortDate' }
 		},
 		//sortForce: [[0,0]],
-		sortList: [[1,0],[0,0]]
     });
 
 
@@ -110,11 +109,11 @@ $(document).ready(function() {
 						$num_filas1=mysql_num_rows($rws);
 						mysql_free_result($rws);
 
-						$stock=stock_kardex($dt1['tb_catalogo_id'],'1',fecha_mysql($fecini),fecha_mysql($fecfin),$_SESSION['empresa_id']);
+						$stock=stock_kardex($dt1['tb_catalogo_id'],$_POST['alm_id'],fecha_mysql($fecini),fecha_mysql($fecfin),$_SESSION['empresa_id']);
 
 					?>
-                        <?php if ($stock>0){
-                            $num_rows+=$num_rows;
+                        <?php if ($stock<0){
+                            $num_rows+=1;
                             ?>
                         <tr>
                             <td>
@@ -133,5 +132,4 @@ $(document).ready(function() {
             <tr class="even">
                 <td colspan="2"><?php echo $num_rows.' registros'?></td>
             </tr>
-
         </table>
