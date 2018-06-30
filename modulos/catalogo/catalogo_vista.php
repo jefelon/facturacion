@@ -239,6 +239,12 @@ function modo(url){
 		$("#div_modo").html("Modo: Reporte");
 		$("#div_fecha").show(100);
 	}
+    if(url=='inventario_stock_negativo.php')
+    {
+        $('#chk_fil_unibas').attr("checked",true);
+        $("#div_modo").html("Modo: Reporte");
+        $("#div_fecha").show(100);
+    }
 	catalogo_tabla();
 };
 
@@ -460,6 +466,7 @@ $(function() {
                         <li><a href="#" onClick="modo('inventario_valor_emp.php')" title="Inventario valorizado por empresa. (Promedio)">Invent. Valorizado: Prom x empresa</a></li>-->
                         <li><a href="#" onClick="modo('inventario_valor_general.php')">Invent. Valorizado - Costo Prom Gen</a></li>
                         <li><a href="#" onClick="modo('inventario_stock_emp.php')">Costo Prom. Stock Almacenes Fecha</a></li>
+                        <li><a href="#" onClick="modo('inventario_stock_negativo.php')">Stock Negativo</a></li>
                        <!-- <li><a href="#" onClick="modo('catalogo_tabla_si.php')">Stock Valorizado - Saldo Inicial</a></li>-->
                        <?php /*?>
                        <li>----------------------------</li>

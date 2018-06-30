@@ -7,6 +7,31 @@
 		icons: {primary: "ui-icon-arrowrefresh-1-w"},
 		text: false
 	});
+
+    function producto_form(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../producto/producto_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act,
+                pro_id:		idf,
+                tipo:		'',
+                pro_nom: $('#txt_fil_pro_nom').val(),
+                vista:	'compra_filtro'
+            }),
+            beforeSend: function() {
+                $('#msj_producto').hide();
+                $('#div_producto_form').dialog("open");
+                $('#div_producto_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_producto_form').html(html);
+            }
+        });
+    }
+
 function cmb_fil_pro_cat()
 {	
 	$.ajax({
@@ -68,9 +93,37 @@ $(function() {
    		minLength: 2,
    		source: "../producto/producto_complete_nom.php",
 		select: function( event, ui ) {
-			$("#txt_fil_pro_nom").val(ui.item.label)
-			catalogo_compra_tabla();
+            if (ui.item.value===""){
+                producto_form('insertar',"nuevo producto");
+                $("#txt_bus_pro_nom").val();
+            }else{
+                $("#txt_fil_pro_nom").val(ui.item.label);
+                catalogo_compra_tabla();
+            }
 		}
+    });
+
+    $( "#div_producto_form" ).dialog({
+        title:'Información de Producto',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 990,
+        modal: true,
+        position: 'top',
+        buttons: {
+            Guardar: function() {
+                $("#for_pro").submit();
+            },
+            Cancelar: function() {
+                $('#for_pro').each (function(){this.reset();});
+                $( this ).dialog("close");
+            }
+        },
+        close: function()
+        {
+            $("#div_producto_form").html('Cargando...');
+        }
     });
 	
 	$( "#txt_fil_pro_cod" ).autocomplete({
@@ -137,3 +190,7 @@ $(function() {
   <div id="msj_catalogo" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
   <a target="_blank" href="../producto/">Agregar Nuevo Producto</a>
 </fieldset>
+
+<div id="div_producto_form">
+
+</div>
