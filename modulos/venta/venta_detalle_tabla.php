@@ -13,7 +13,8 @@ $dt = mysql_fetch_array($dts);
 	$numdoc	=$dt['tb_venta_numdoc'];
 
 	$cli_id	=$dt['tb_cliente_id'];
-  $subtotal=$dt["tb_venta_gra"];
+	$ope_gravadas=$dt["tb_venta_gra"];
+    $ope_exoneradas=$dt["tb_venta_exo"];
 	$valven	=$dt['tb_venta_valven'];
 	$igv	=$dt['tb_venta_igv'];
 	$des	=$dt['tb_venta_des'];
@@ -84,6 +85,7 @@ $(document).ready(function() {
                   <th>CATEGORIA | MARCA</th>
 <!--                  <th align="right" nowrap="nowrap">VALOR UNIT</th>-->
                     <th align="right" title="PRECIO UNITARIO">PRECIO UNIT</th>
+                    <th align="right" title="PRECIO EXONERADO">PRECIO EXO.</th>
                   <th align="right" title="DESCUENTO">DSCTO</th>
 <!--                  <th align="right" nowrap="nowrap" title="VALOR VENTA">VALOR VEN</th>-->
                   <th align="right" nowrap="nowrap" title="PRECIO VENTA">PREC VENTA</th>
@@ -124,7 +126,16 @@ $(document).ready(function() {
 							echo ' | '.$dt1['tb_marca_nom'];
 							?></td>
 <!--                            <td align="right">--><?php //echo $dt1['tb_ventadetalle_preuni']?><!--</td>-->
-                            <td align="right"><?php echo $dt1['tb_ventadetalle_preunilin'] ?></td>
+                            <td align="right"><?php
+                                if ($dt1['cs_tipoafectacionigv_id']!=9) {
+                                    echo $dt1['tb_ventadetalle_preunilin'];
+                                }
+                                ?></td>
+                            <td align="right"><?php
+                                if ($dt1['cs_tipoafectacionigv_id']==9){
+                                    echo $dt1['tb_ventadetalle_preunilin'];
+                                }
+                                ?></td>
                             <td align="right"><?php
 							$tipdes			=$dt1['tb_ventadetalle_tipdes'];
 							$descuento_linea=$dt1['tb_ventadetalle_des']; 
@@ -234,7 +245,7 @@ $(document).ready(function() {
       <table border="0" align="right" cellpadding="0" cellspacing="0">
         <tr>
           <td nowrap="nowrap"><label for="txt_ven_subtot" style="font-size:12px;margin-right: 10px;"><strong>SUB TOTAL VENTAS:</strong></label></td>
-          <td align="right"><input name="txt_ven_subtot" type="text" id="txt_ven_subtot" style="text-align:right; font-size:14px" value="<?php echo formato_money($subtotal)?>" size="15" readonly></td>
+          <td align="right"><input name="txt_ven_subtot" type="text" id="txt_ven_subtot" style="text-align:right; font-size:14px" value="<?php echo formato_money($valven)?>" size="15" readonly></td>
         </tr>
         <tr>
           <td><label for="txt_ven_des" style="font-size:12px"><strong>DESCUENTOS:</strong></label></td>
@@ -245,6 +256,20 @@ $(document).ready(function() {
           <td width="140" align="right">
             <input name="txt_ven_valven" type="text" id="txt_ven_valven" style="text-align:right; font-size:14px" value="<?php echo formato_money($valven)?>" size="15" readonly></td>
         </tr>
+          <tr>
+              <td nowrap="nowrap"><strong>OPERACIONES EXONERADAS:</strong></td>
+              <td align="right"><input name="txt_ven_opeexo" type="text" id="txt_ven_opeexo"
+                                       style="text-align:right; font-size:14px"
+                                       value="<?php echo formato_money($ope_exoneradas) ?>" size="15" readonly>
+              </td>
+          </tr>
+          <tr>
+              <td nowrap="nowrap"><strong>OPERACIONES GRAVADAS:</strong></td>
+              <td align="right"><input name="txt_ven_opegrav" type="text" id="txt_ven_opegrav"
+                                       style="text-align:right; font-size:14px"
+                                       value="<?php echo formato_money($ope_gravadas) ?>" size="15" readonly>
+              </td>
+          </tr>
         <tr>
           <td><label for="txt_ven_igv" style="font-size:12px"><strong>IGV:</strong></label>
         </td>
