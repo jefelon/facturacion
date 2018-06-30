@@ -11,7 +11,9 @@ if($_POST['action']=="insertar"){
 	unset($_SESSION['atributo_car']);
 }
 
-if($_POST['vista']=="venta_tabla")
+
+
+if($_POST['vista']=="venta_tabla" || $_POST['vista']=="compra_filtro"  )
 {
     $nom=$_POST['pro_nom'];
 }

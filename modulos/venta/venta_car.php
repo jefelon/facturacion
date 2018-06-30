@@ -969,7 +969,7 @@ $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
                     </tr>
                     <tr>
                         <td nowrap="nowrap"><strong>OPERACIONES GRAVADAS:</strong></td>
-                        <td align="right"><input name="txt_ven_opeexo" type="text" id="txt_ven_opeexo" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gravadas_total)?>" size="15" readonly>
+                        <td align="right"><input name="txt_ven_opegrav" type="text" id="txt_ven_opegrav" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gravadas_total)?>" size="15" readonly>
                         </td>
                     </tr>
                     <tr>
