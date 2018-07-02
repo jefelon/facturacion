@@ -158,9 +158,21 @@ $num_rows= mysql_num_rows($dts1);
                                     )">Enviar Correo</a>
                             <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="venta_impresion('<?php echo $dt1['tb_venta_id']?>')">PDF</a>
                             <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>
-                            <?php if($tipodoc!=3):?>
+                        <?php
+                        if($dt1['cs_tipodocumento_cod']==1){
+                            if(file_exists("../../cperepositorio/cdr/$cdr.xml")){
+                                ?>
                                 <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/cdr/$cdr.zip";?>" title="Descargar CDR">CDR</a>
-                            <?php endif;?>
+                                <?php
+                            }
+                            else
+                            {
+                                ?>
+                                <a class="btn" href="#getcdr" onClick="cpe_cdr('<?php echo $dt1['tb_venta_id']?>')">Obt. CDR</a>
+                                <?php
+                            }
+                        }
+                        ?>
                     <?php endif;?>
                     <?php //if($dt1['tb_documento_ele']==0):?>
                     <?php if($dt1['tb_venta_est']!='ANULADA' and $_POST['chk_ven_anu']==1){?>

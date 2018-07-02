@@ -45,6 +45,17 @@
         return $faultcode;
     }
 
+    function send_sunat2($ruccomprobante, $tipocomprobante, $seriecomprobante, $numerocomprobante, $arr, $dircdr, $nomfuncion="getStatusCdr"){
+        global $name_rec;
+        $faultcode = '0';
+        require_once('wslSunat.php');
+        $wsdlURL = 'https://e-factura.sunat.gob.pe/ol-it-wsconscpegem/billConsultService';
+
+        $XMLString = getSopMessageCdr($ruccomprobante, $tipocomprobante, $seriecomprobante, $numerocomprobante, $arr['usuario_sunat'], $arr['clave_sunat'], $nomfuncion);
+        $faultcode = soapCall($wsdlURL, $nomfuncion, $XMLString, 'file_name', $dircdr);
+        return $faultcode;
+    }
+
     function consultar_sunat($file_name, $dircdr, $ruc, $tipo, $serie, $numero){
         global $name_rec;
 

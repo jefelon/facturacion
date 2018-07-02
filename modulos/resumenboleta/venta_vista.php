@@ -187,6 +187,36 @@ function venta_reporte(url)
 	$("#for_fil_ven").submit();
 }
 
+function cpe_ticket(id,tick)
+{
+    $.ajax({
+        type: "POST",
+        url: "cpe_ticket.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            id:			id,
+            ticket:		tick
+        }),
+        beforeSend: function() {
+            $('#msj_venta_sunat2').html("Consultando...");
+            $('#msj_venta_sunat2').show(100);
+            showAlert('Consultando Ticket...');
+        },
+        success: function(data){
+            $('#msj_venta_sunat2').html(data.msj);
+            $('#msj_venta_sunat2').show();
+            showAlert(data.msj,data.est);
+
+        },
+        complete: function(){
+            resumenboleta_tabla();
+        }
+    });
+}
+
+
+
 $(function() {
 	
 	$('#btn_actualizar').button({
