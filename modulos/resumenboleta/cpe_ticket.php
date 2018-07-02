@@ -26,7 +26,7 @@ $oVenta = new cVenta();
 
 
 	$file = "none";
-	$arr = array('usuario_sunat' => $cpe_usuario_sunat, 'clave_sunat' => $cpe_clave_sunat);
+	$arr = array('usuario_sunat' => $usuario_sunat, 'clave_sunat' => $clave_sunat);
 
 	$res = send_sunat($file, $ticket, $arr, "../../cperepositorio/cdr/", "getStatus","");
 	
