@@ -150,5 +150,17 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function actualizar_sunat2($id,$faucod2,$est2){
+        $sql = "UPDATE tb_resumenboleta SET
+		`tb_resumenboleta_faucod2` =  '$faucod2',
+		`tb_resumenboleta_fecenvsun2` =  NOW(),
+		`tb_resumenboleta_estsun2` =  '$est2'
+		WHERE tb_resumenboleta_id =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 }
 ?>
