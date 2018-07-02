@@ -199,12 +199,12 @@ function cpe_ticket(id,tick)
             ticket:		tick
         }),
         beforeSend: function() {
-            $('#msj_venta_sunat2').html("Consultando Ticket...");
-            $('#msj_venta_sunat2').show(100);
+            $('#msj_venta_sunat').html("Consultando Ticket...");
+            $('#msj_venta_sunat').show(100);
         },
         success: function(data){
-            $('#msj_venta_sunat2').html(data.msj+': '+data.est);
-            $('#msj_venta_sunat2').show();
+            $('#msj_venta_sunat').html(data.msj+': '+data.est);
+            $('#msj_venta_sunat').show();
         },
         complete: function(){
             resumenboleta_tabla();
