@@ -85,7 +85,7 @@ RESUMEN DIARIO
             <td><?php echo $dt['tb_resumenboleta_tic']?></td>
             <td align="center">
                 <?php if($mostrar_envio_sunat==1):?>
-                      <a class="btn_sunat" href="#sunat" onClick="enviar_sunat('<?php echo $dt['tb_resumenboleta_id']?>')">E. Sunat</a>
+                    <a class="btn_sunat" href="#sunat" onClick="enviar_sunat('<?php echo $dt['tb_resumenboleta_id']?>')">E. Sunat</a>
                 <?php endif;?>
             </td>
             </tr>

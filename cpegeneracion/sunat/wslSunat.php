@@ -56,6 +56,29 @@ function getSopMessage($file, $file_name, $user, $pass, $nomfuncion="sendBill"){
     return $XMLString;
 }
 
+function getSopMessageCdr($ruccomprobante, $tipocomprobante, $seriecomprobante, $numerocomprobante, $user, $pass, $nomfuncion="getStatusCdr"){
+    $XMLString= '<?xml version="1.0" encoding="UTF-8"?>
+    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://service.sunat.gob.pe" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd">
+     <soapenv:Header>
+         <wsse:Security>
+             <wsse:UsernameToken>
+                 <wsse:Username>' .$user. '</wsse:Username>
+                 <wsse:Password>' .$pass. '</wsse:Password>
+             </wsse:UsernameToken>
+         </wsse:Security>
+     </soapenv:Header>
+     <soapenv:Body>
+      <m:' .$nomfuncion. ' xmlns:m="http://service.sunat.gob.pe">
+         <rucComprobante>' .$ruccomprobante. '</rucComprobante>
+         <tipoComprobante>' .$tipocomprobante. '</tipoComprobante>
+         <serieComprobante>' .$seriecomprobante. '</serieComprobante>
+         <numeroComprobante>' .$numerocomprobante. '</numeroComprobante>
+      </m:'. $nomfuncion. '>
+     </soapenv:Body>
+    </soapenv:Envelope>';
+    return $XMLString;
+}
+
 function soapCall($wsdlURL, $callFunction="SendBill", $XMLString, $file_name, $dircdr)
 {
     $faultcode = '0';
@@ -84,6 +107,8 @@ function soapCall($wsdlURL, $callFunction="SendBill", $XMLString, $file_name, $d
         }else{
             if($f->faultcode=='WSDL'){
                 $faultcode = '-1';
+            }elseif($f->faultcode=='ns0:Server'){
+                $faultcode =  'soap-env:Server.200';
             }else{
                 $faultcode =  $f->faultcode;
             }
@@ -100,6 +125,7 @@ function soapCall($wsdlURL, $callFunction="SendBill", $XMLString, $file_name, $d
         $doc->loadXML($result);
         $doc->save('mirespuesta.xml');
         $data = $doc->getElementsByTagName('ticket');
+        $databin = '';
         if($data->length>0){
             $ticket = $data->item(0)->nodeValue;
             $faultcode = array('faultcode' => '0' ,'ticket'=> $ticket);
@@ -114,18 +140,37 @@ function soapCall($wsdlURL, $callFunction="SendBill", $XMLString, $file_name, $d
                     $databin = $data->item(0)->nodeValue;
                 }
             }
-            if(isNotData($databin)){
+            if(isNotData($databin) && strlen($databin)>0){
 
                 $zip= base64_decode($databin);
                 if(strrpos($file_name, '.zip')===false){
-                    $head = unpack("Vsig/vver/vflag/vmeth/vmodt/vmodd/Vcrc/Vcsize/Vsize/vnamelen/vexlen", substr($zip,0,30));
-                    $filename = substr($zip,30,$head['namelen']);
+
+                    $pos1 = strpos($zip, 'R-');
+                    $pos2 = strpos($zip, '.xml');
+
+                    $filename = substr($zip, $pos1, ($pos2-$pos1) + 4);
+
+                    //$head = unpack("Vsig/vver/vflag/vmeth/vmodt/vmodd/Vcrc/Vcsize/Vsize/vnamelen/vexlen", substr($zip,0,30));
+                    //$filename = substr($zip,30,$head['namelen']);
+
+                    //$head = unpack("Vsig/vver/vflag/vmeth/vmodt/vmodd/Vcrc/Vcsize/Vsize/vnamelen/vexlen", $zip);
+                    //print_r($head);
+                    //echo substr($zip,0,300);
+                    //$filename = substr($zip,30,$head['namelen']);
+
                     $newfile_name = str_replace(".xml", "", $filename). ".zip";
-                    $file_name_xml = substr($zip,30,$head['namelen']);
+                    //$file_name_xml = substr($zip,30,$head['namelen']);
+
+                    $file_name_xml = $filename;
+
+                    @unlink($dircdr .$file_name_xml);
+                    @unlink($dircdr .$newfile_name);
+
                 }else{
                     $newfile_name = 'R-' .$file_name;
                     $file_name_xml = 'R-' .str_replace(".zip", "", $file_name). ".xml";
                 }
+
                 $file = fopen($dircdr .$newfile_name,"w");
                 fwrite($file,$zip);
                 fclose($file);
