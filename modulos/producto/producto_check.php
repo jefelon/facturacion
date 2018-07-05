@@ -6,7 +6,7 @@ $oProducto = new cProducto();
 require_once("../formatos/formato.php");
 
 
-	if(!empty($_POST['pro_nom']) and !empty($_POST['cat_id']) and !empty($_POST['mar_id']))
+	if(!empty($_POST['pro_nom']) and !empty($_POST['cat_id']) and !empty($_POST['mar_id']) and !empty($_POST['afec_id']))
 	{
 		if($_POST['action']=='insertar')
 		{

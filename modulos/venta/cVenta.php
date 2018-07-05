@@ -495,5 +495,15 @@ WHERE tb_software_id =$id";
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function actualizar_sunat_cdr($id,$faucod,$est){
+        $sql = "UPDATE tb_venta SET  
+	`tb_venta_faucod` =  '$faucod',
+	`tb_venta_fecenvsun` =  NOW(),
+	`tb_venta_estsun` =  '$est'
+	WHERE  tb_venta_id =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

@@ -60,31 +60,7 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                     //GRAVADO/EXONERADO/INAFECTO
                     $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tip'];
 
-                    //NOM
-                    switch ($_POST['cat_tip']) {
-                        case '1':
-                            $tipo_item_txt = "";
-                            break;
-                        case '2':
-                            $tipo_item_txt = "***PREMIO***";
-                            break;
-                        case '3':
-                            $tipo_item_txt = "***DONACIÓN***";
-                            break;
-                        case '4':
-                            $tipo_item_txt = "***RETIRO***";
-                            break;
-                        case '5':
-                            $tipo_item_txt = "***PUBLICIDAD***";
-                            break;
-                        case '6':
-                            $tipo_item_txt = "***BONIFICACIÓN***";
-                            break;
-                        case '7':
-                            $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                            break;
-                    }
-                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom;
 
                     //IGV
                     //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];
@@ -131,30 +107,7 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                                 $_SESSION['venta_des'][$unico_id][$dtcot1['tb_catalogo_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_des']);//id cat - descuento
                                 $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tip'];
 
-                                switch ($_POST['cat_tip']) {
-                                    case '1':
-                                        $tipo_item_txt = "";
-                                        break;
-                                    case '2':
-                                        $tipo_item_txt = "***PREMIO***";
-                                        break;
-                                    case '3':
-                                        $tipo_item_txt = "***DONACIÓN***";
-                                        break;
-                                    case '4':
-                                        $tipo_item_txt = "***RETIRO***";
-                                        break;
-                                    case '5':
-                                        $tipo_item_txt = "***PUBLICIDAD***";
-                                        break;
-                                    case '6':
-                                        $tipo_item_txt = "***BONIFICACIÓN***";
-                                        break;
-                                    case '7':
-                                        $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                                        break;
-                                }
-                                $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                                $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom;
                                 $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tipdes'];
                                 //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
                                 $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_catalogo_id']]=moneda_mysql($dtcot1['tb_cotizaciondetalle_preuni']);//id cat - precio venta
@@ -203,30 +156,8 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
                                     $_SESSION['venta_tipdes'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tipdes'];//id cat - tipodescuento
                                     $_SESSION['venta_des'][$unico_id][$dtcot1['tb_catalogo_id']]=$dtcot1['tb_cotizaciondetalle_des'];//id cat - descuento
                                     $_SESSION['venta_tip'][$unico_id][$dtcot1['tb_catalogo_id']]=$_POST['cat_tip'];//id cat - descuento
-                                    switch ($_POST['cat_tip']) {
-                                        case '1':
-                                            $tipo_item_txt = "";
-                                            break;
-                                        case '2':
-                                            $tipo_item_txt = "***PREMIO***";
-                                            break;
-                                        case '3':
-                                            $tipo_item_txt = "***DONACIÓN***";
-                                            break;
-                                        case '4':
-                                            $tipo_item_txt = "***RETIRO***";
-                                            break;
-                                        case '5':
-                                            $tipo_item_txt = "***PUBLICIDAD***";
-                                            break;
-                                        case '6':
-                                            $tipo_item_txt = "***BONIFICACIÓN***";
-                                            break;
-                                        case '7':
-                                            $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                                            break;
-                                    }
-                                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom . ' ' . $tipo_item_txt;
+
+                                    $_SESSION['venta_nom'][$unico_id][$dtcot1['tb_catalogo_id']]=$pro_nom;
                                     //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
                                     $_SESSION['venta_preven'][$unico_id][$dtcot1['tb_catalogo_id']]=$dtcot1['tb_cotizaciondetalle_preuni'];//id cat - precio venta
                                     $_SESSION['presentacion_id'][$unico_id][$dtcot1['tb_catalogo_id']]=$pre_id;//id cat-presentacion - pre_id
@@ -295,31 +226,7 @@ if($_POST['action']=='agregar'){
             //GRAVADO/EXONERADO/INAFECTO
             $_SESSION['venta_tip'][$unico_id][$_POST['cat_id']]=$_POST['cat_tip'];
 
-            //NOM
-            switch ($_POST['cat_tip']) {
-                case '1':
-                    $tipo_item_txt = "";
-                    break;
-                case '2':
-                    $tipo_item_txt = "***PREMIO***";
-                    break;
-                case '3':
-                    $tipo_item_txt = "***DONACIÓN***";
-                    break;
-                case '4':
-                    $tipo_item_txt = "***RETIRO***";
-                    break;
-                case '5':
-                    $tipo_item_txt = "***PUBLICIDAD***";
-                    break;
-                case '6':
-                    $tipo_item_txt = "***BONIFICACIÓN***";
-                    break;
-                case '7':
-                    $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                    break;
-            }
-            $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom . ' ' . $tipo_item_txt;
+            $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom;
 
             $_SESSION['venta_serial'][$unico_id][$_POST['cat_id']] = '';
 
@@ -368,30 +275,7 @@ if($_POST['action']=='agregar'){
                         $_SESSION['venta_des'][$unico_id][$_POST['cat_id']]=moneda_mysql($_POST['cat_des']);//id cat - descuento
                         $_SESSION['venta_tip'][$unico_id][$_POST['cat_id']]=$_POST['cat_tip'];
 
-                        switch ($_POST['cat_tip']) {
-                            case '1':
-                                $tipo_item_txt = "";
-                                break;
-                            case '2':
-                                $tipo_item_txt = "***PREMIO***";
-                                break;
-                            case '3':
-                                $tipo_item_txt = "***DONACIÓN***";
-                                break;
-                            case '4':
-                                $tipo_item_txt = "***RETIRO***";
-                                break;
-                            case '5':
-                                $tipo_item_txt = "***PUBLICIDAD***";
-                                break;
-                            case '6':
-                                $tipo_item_txt = "***BONIFICACIÓN***";
-                                break;
-                            case '7':
-                                $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                                break;
-                        }
-                        $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom . ' ' . $tipo_item_txt;
+                        $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom;
                         $_SESSION['venta_serial'][$unico_id][$_POST['cat_id']] = '';
                         $_SESSION['venta_tipdes'][$unico_id][$_POST['cat_id']]=$_POST['cat_tipdes'];
                         //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
@@ -442,30 +326,8 @@ if($_POST['action']=='agregar'){
                             $_SESSION['venta_tipdes'][$unico_id][$_POST['cat_id']]=$_POST['cat_tipdes'];//id cat - tipodescuento
                             $_SESSION['venta_des'][$unico_id][$_POST['cat_id']]=$_POST['cat_des'];//id cat - descuento
                             $_SESSION['venta_tip'][$unico_id][$_POST['cat_id']]=$_POST['cat_tip'];//id cat - descuento
-                            switch ($_POST['cat_tip']) {
-                                case '1':
-                                    $tipo_item_txt = "";
-                                    break;
-                                case '2':
-                                    $tipo_item_txt = "***PREMIO***";
-                                    break;
-                                case '3':
-                                    $tipo_item_txt = "***DONACIÓN***";
-                                    break;
-                                case '4':
-                                    $tipo_item_txt = "***RETIRO***";
-                                    break;
-                                case '5':
-                                    $tipo_item_txt = "***PUBLICIDAD***";
-                                    break;
-                                case '6':
-                                    $tipo_item_txt = "***BONIFICACIÓN***";
-                                    break;
-                                case '7':
-                                    $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                                    break;
-                            }
-                            $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom . ' ' . $tipo_item_txt;
+
+                            $_SESSION['venta_nom'][$unico_id][$_POST['cat_id']]=$pro_nom;
                             $_SESSION['venta_serial'][$unico_id][$_POST['cat_id']] = '';
                             //$_SESSION['venta_igv'][$unico_id][$_POST['cat_id']]=$_POST['cat_igv'];//id cat - igv
                             $_SESSION['venta_preven'][$unico_id][$_POST['cat_id']]=$_POST['cat_preven'];//id cat - precio venta
@@ -717,31 +579,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $precio_unitario = $_SESSION['venta_preven'][$unico_id][$indice];
 
         //tipo g/e/i ingresado
-        $tipo_item	=$_SESSION['venta_tip'][$unico_id][$indice];
-
-        switch ($tipo_item) {
-            case '1':
-                $tipo_item_txt = "";
-                break;
-            case '2':
-                $tipo_item_txt = "***PREMIO***";
-                break;
-            case '3':
-                $tipo_item_txt = "***DONACIÓN***";
-                break;
-            case '4':
-                $tipo_item_txt = "***RETIRO***";
-                break;
-            case '5':
-                $tipo_item_txt = "***PUBLICIDAD***";
-                break;
-            case '6':
-                $tipo_item_txt = "***BONIFICACIÓN***";
-                break;
-            case '7':
-                $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                break;
-        }
+        $tipo_item	=$dt1['tb_afectacion_id'];
 
         if ($tipo_item==9){
             $tipo_pro='Exonerado';
@@ -756,17 +594,13 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gravadas_total += $valor_venta;
-        }else{
-            $tipo_pro='Gravado';
+        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7){
+            $tipo_pro='Gratuito';
             $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gratuitas_total += $valor_venta;
         }
-
-
-
-
 
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];
@@ -834,29 +668,27 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
 
         //tipo g/e/i ingresado
-        $tipo_item	=$_SESSION['servicio_tip'][$unico_id][$indice];
-        switch ($tipo_item) {
-            case '1':
-                $tipo_item_txt = "";
-                break;
-            case '2':
-                $tipo_item_txt = "***PREMIO***";
-                break;
-            case '3':
-                $tipo_item_txt = "***DONACIÓN***";
-                break;
-            case '4':
-                $tipo_item_txt = "***RETIRO***";
-                break;
-            case '5':
-                $tipo_item_txt = "***PUBLICIDAD***";
-                break;
-            case '6':
-                $tipo_item_txt = "***BONIFICACIÓN***";
-                break;
-            case '7':
-                $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
-                break;
+        $tipo_item	=$dt1['tb_afectacion_id'];
+
+        if ($tipo_item==9){
+            $tipo_pro='Exonerado';
+            $valor_venta_unitario = $precio_unitario;
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_exoneradas_total += $valor_venta;
+
+        }else if($tipo_item==1){
+            $tipo_pro='Gravado';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gravadas_total += $valor_venta;
+        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7){
+            $tipo_pro='Gratuito';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gratuitas_total += $valor_venta;
         }
 
         $valor_venta_unitario = $precio_unitario/(1+$igv_dato);

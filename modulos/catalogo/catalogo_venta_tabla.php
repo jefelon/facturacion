@@ -276,7 +276,6 @@ $(function() {
           <th align="right">STOCK</th>
           <th width="110" align="center">CANTIDAD</th>
           <?php /*?><th align="center">DESCUENTO</th><?php */?>
-          <th align="center">TIPO</th>
           <th width="50">&nbsp;</th>
           <th>L</th>
           <th>D</th>
@@ -430,18 +429,7 @@ $(function() {
                         <div style="width:30px; float:left;"><input type="text" name="txt_detven_des_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detven_des_<?php echo $dt1['tb_catalogo_id']?>" class="moneda" size="6" maxlength="8" style="text-align:right">
                         </div>
                     </td><?php */?>
-                    <td align="left">
-                    	<select id="cmb_detven_tip_<?php echo $dt1['tb_catalogo_id']?>" style="width:43px">
-                    		<option value="1" selected>Gravado</option>
-                            <option value="9">Exonerados</option>
-                    		<option value="2">Premio</option>
-                    		<option value="3">Donación</option>
-                    		<option value="4">Retiro</option>
-                    		<option value="5">Publicidad</option>
-                    		<option value="6">Bonificación</option>
-                    		<option value="7">Entrega a trabajadores</option>
-                    	</select>
-                    </td>
+
 
                     <td align="center" nowrap="nowrap">
                     <?php if($stock_unidad!=0){?>

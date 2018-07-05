@@ -44,7 +44,7 @@ $num_rows= mysql_num_rows($dts1);
             //icons: {primary: "ui-icon-document"},
             //text: false
         });
-        $('.btn_xml').button({
+        $('.btn_xml,.btn_cdr').button({
             //icons: {primary: "ui-icon-document"},
             //text: false
         });
@@ -168,7 +168,7 @@ $num_rows= mysql_num_rows($dts1);
                             else
                             {
                                 ?>
-                                <a class="btn" href="#getcdr" onClick="cpe_cdr('<?php echo $dt1['tb_venta_id']?>')">Obt. CDR</a>
+                                <a class="btn_cdr" href="#getcdr" onClick="cpe_cdr('<?php echo $dt1['tb_venta_id']?>')">Obt. CDR</a>
                                 <?php
                             }
                         }
