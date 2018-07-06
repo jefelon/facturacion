@@ -256,9 +256,10 @@ $(function() {
                     <th>PRODUCTO</th>
                     <!--<th>PRESENTACION</th>-->
                     <th align="right" title="PRECIO UNITARIO">VALOR UNIT</th>
-                    <th align="right" title="COSTO UNITARIO EN SOLES">COSTO UN S/.</th>
                     <th align="right" title="PRECIO EXONERADO">P. EXO S/.</th>
+                    <th align="right" title="COSTO UNITARIO EN SOLES">COSTO UN S/.</th>
                     <th align="right" title="DESCUENTO %">DSCTO %</th>
+                    <th align="right" title="DESCUENTOS VALOR">VALOR COMPRA</th>
                     <!--<th align="right">IGV</th>-->
                     <th align="right">FLETE</th>
                     <th align="right">IMPORTE</th>
@@ -270,8 +271,6 @@ if($num_rows>0){
 ?>
             <tbody>
             <?php
-            $subtotal = 0;
-            $total_valorventa = 0;
             $total_opegrav = 0;
             $total_opeexo = 0;
 			foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad){
@@ -371,26 +370,19 @@ if($num_rows>0){
 				//COSTO
 				$linea_calculo_cos = ($linea_calculo_importe + $linea_calculo_igv)/$linea_cantidad + $linea_calculo_fle + $linea_prorrateo_fle+$linea_calculo_percepcion;
 
+                $_SESSION['compra_linea_cos'][$indice] = $linea_calculo_cos;
+
 				if($tipo_item==9){
                     $linea_preuni=$linea_preuni*1.18;
-                    $total_opeexo +=$linea_preuni*$linea_cantidad;
-                }elseif ($tipo_item){
-                    $linea_calculo_cos = ($linea_calculo_importe + $linea_calculo_igv)/$linea_cantidad + $linea_calculo_fle + $linea_prorrateo_fle+$linea_calculo_percepcion;
-                    $total_opegrav +=$linea_preuni*$linea_cantidad;
+                    $valor_venta = $linea_preuni*$linea_cantidad;
+                    $total_opeexo = $total_opeexo+$valor_venta-($valor_venta*($general_des/100));
+                    $linea_importe=($linea_calculo_cos*$linea_cantidad)/1.18;
+                }elseif ($tipo_item==1){
+                    $valor_venta = $linea_preuni*$linea_cantidad;
+                    $total_opegrav =$total_opegrav+$valor_venta-($valor_venta*($general_des/100));
                 }
 
-                $subtotal+=$linea_preuni/1.18*$linea_cantidad*$linea_calculo_des;
 
-				$_SESSION['compra_linea_cos'][$indice] = $linea_calculo_cos;
-				
-				
-				//TOTALES	
-				
-				//$total_igv+=$linea_igv;
-//                $subtotal+=$linea_importe;
-				//$total=$total_importe+$total_igv;
-				
-				$total_descuento	=$subtotal*($general_des/100);
 				//ajustes
 				$ajuste_positivo=$_SESSION['compra_ajupos'];
 				$ajuste_negativo=$_SESSION['compra_ajuneg'];
@@ -399,14 +391,30 @@ if($num_rows>0){
 				{
 					$incluir_flete=$general_fle_uni;
 				}
-				
-				$total_valorventa	=formato_moneda($subtotal-$total_descuento+$incluir_flete+$ajuste_positivo-$ajuste_negativo);
+
 				$total_igv			=formato_moneda($total_opegrav*$igv_dato);
 				
 				$total_percepcion+=$linea_percepcion;
-				
-				$total				=$total_valorventa+$total_igv+$total_percepcion;
-				
+
+
+				$valor_venta_bruto = $valor_venta;
+                $desc_x_item=$valor_venta-$valor_venta*$linea_calculo_des;
+                $valor_venta_x_item=$valor_venta*$linea_calculo_des;
+                $valor_venta_x_item_total+=$valor_venta_x_item;
+                $desc_x_item_total+=$desc_x_item;
+
+                if($tipo_item==9) {
+                    $igv_linea=0;
+                    $total_operaciones_exoneradas += $valor_venta_x_item;
+
+                }elseif ($tipo_item==1){
+                    $igv_linea = ($valor_venta * $linea_calculo_des) * 0.18;
+                    $total_operaciones_gravadas += $valor_venta_x_item;
+                }
+
+                $total_igv_grav+=$igv_linea;
+
+
 				?>
                         <tr>
                           	<!--<td><a class="btn_preven" href="#" onClick="precioventa_form('<?php //echo $dt1['tb_presentacion_id']?>','<?php //echo $dt1['tb_producto_nom']?>')">Actualizar Precios de Venta</a></td>-->
@@ -418,18 +426,20 @@ if($num_rows>0){
                             <!--<td><?php //echo $dt1['tb_presentacion_nom']?></td>-->
 
                             <td align="right"><?php echo formato_money($linea_preuni)?></td>
+
                             <?php if ($tipo_item==9){ ?>
-                                <td align="right"></td>
                                 <td align="right"><?php echo formato_money($linea_calculo_cos)?></td>
+                                <td align="right"></td>
                             <?php } else{ ?>
-                                <td align="right"><?php echo formato_money($linea_calculo_cos)?></td>
                                 <td align="right"></td>
+                                <td align="right"><?php echo formato_money($linea_calculo_cos)?></td>
                             <?php } ?>
                             <td align="right"><?php echo formato_money($linea_des)?></td>
+                            <td align="right"><?php echo formato_money($valor_venta_x_item)?></td>
 
                             <!--<td align="right"><?php //echo formato_money($linea_igv)?></td>-->
                             <td align="right"><?php echo formato_money($linea_fle)?></td>
-                            <td align="right"><?php echo $linea_calculo_des.'----'.formato_money($linea_importe*1.18)?></td>
+                            <td align="right"><?php echo formato_money($linea_importe*1.18)?></td>
 
                             <?php /*?><td align="right"><?php echo $linea_prorrateo_des.'|'.$linea_calculo_importe.'|'.$linea_calculo_igv.'|'.$linea_calculo_fle?></td><?php */?>
                             <td align="center" nowrap="nowrap">
@@ -452,6 +462,14 @@ else
             </tr>
 <?php
 }
+
+$total_operaciones_exoneradas = $total_operaciones_exoneradas-$total_operaciones_exoneradas*($general_des/100);
+$total_operaciones_gravadas=$total_operaciones_gravadas-$total_operaciones_gravadas*($general_des/100);
+$igv_total_gravados=$total_operaciones_gravadas*18/100;
+$importe_total_venta = $total_operaciones_exoneradas + $total_operaciones_gravadas + $igv_total_gravados;
+$descuento_global = $valor_venta_x_item_total*($general_des/100);
+$descuento_total=$descuento_global+$desc_x_item_total;
+
 ?>
         </table>
         <br>
@@ -485,12 +503,16 @@ else
     <table border="0" align="right" cellpadding="0" cellspacing="0">
       <tr>
         <td width="110"><label for="txt_com_subtot">SUB TOTAL</label></td>
-        <td width="190"><input name="txt_com_subtot" type="text" id="txt_com_subtot" value="<?php echo formato_money($subtotal)?>" readonly style="text-align:right"></td>
+        <td width="190"><input name="txt_com_subtot" type="text" id="txt_com_subtot" value="<?php echo formato_money($valor_venta_x_item_total)?>" readonly style="text-align:right"></td>
       </tr>
       <tr>
-        <td><label for="txt_com_descal">DESCUENTO</label></td>
-        <td><input type="text" name="txt_com_descal" id="txt_com_descal" value="<?php echo formato_money($total_descuento)?>" readonly style="text-align:right"></td>
+        <td><label for="txt_com_descal">DESCUENTO GLOBAL</label></td>
+        <td><input type="text" name="txt_com_descal" id="txt_com_descal" value="<?php echo formato_money($descuento_global)?>" readonly style="text-align:right"></td>
       </tr>
+        <tr>
+            <td><label for="txt_com_destotal">TOTAL DESCUENTOS</label></td>
+            <td><input type="text" name="txt_com_destotal" id="txt_com_destotal" value="<?php echo formato_money($descuento_total)?>" readonly style="text-align:right"></td>
+        </tr>
       <tr>
         <td title="AJUSTE APLICADO AL VALOR VENTA">AJUSTE*</td>
         <td>
@@ -507,20 +529,16 @@ else
 <table border="0" align="right" cellpadding="0" cellspacing="0">
   <tr>
     <td width="110">VALOR VENTA</td>
-    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_money($total_valorventa)?>" readonly style="text-align:right"></td>
+    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_money($total_operaciones_gravadas)?>" readonly style="text-align:right"></td>
+  </tr>
+  <tr>
+    <td><label for="txt_com_igv">IGV</label></td>
+    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_money($igv_total_gravados)?>" readonly style="text-align:right"></td>
   </tr>
     <tr>
         <td width="110">OPE. EXO.</td>
-        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_money($total_opeexo)?>" readonly style="text-align:right"></td>
+        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_money($total_operaciones_exoneradas)?>" readonly style="text-align:right"></td>
     </tr>
-    <tr>
-        <td width="110">OPE. GRAV.</td>
-        <td width="140" align="right"><input type="text" name="txt_com_opegrav" id="txt_com_opegrav" value="<?php echo formato_money($total_opegrav)?>" readonly style="text-align:right"></td>
-    </tr>
-  <tr>
-    <td><label for="txt_com_igv">IGV</label></td>
-    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_money($total_igv)?>" readonly style="text-align:right"></td>
-  </tr>
   <tr>
   <?php if($_POST['com_tipper']==1){?>
     <td><label for="txt_com_per">PERCEPCION(2%)</label></td>
@@ -529,7 +547,7 @@ else
   <?php }?>
   <tr>
     <td><label for="txt_com_tot"><strong>TOTAL</strong></label></td>
-    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" value="<?php echo formato_money($total)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" value="<?php echo formato_money($importe_total_venta)?>" readonly style="text-align:right"></td>
   </tr>
 </table>
 </div>

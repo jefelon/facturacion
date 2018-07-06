@@ -1,6 +1,6 @@
 <?php
 class cCompra{
-	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id){
+	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id){
 	$sql = "INSERT INTO tb_compra(
 	`tb_compra_reg` ,
 	`tb_compra_mod` ,
@@ -20,6 +20,8 @@ class cCompra{
 	`tb_compra_ajupos` ,
 	`tb_compra_ajuneg` ,
 	`tb_compra_valven` ,
+	`tb_compra_exo` ,
+	`tb_compra_gra` ,
 	`tb_compra_igv` ,
 	`tb_compra_tot` ,
 	`tb_compra_tipper` ,
@@ -30,19 +32,20 @@ class cCompra{
 	`tb_empresa_id`
 	)
 	VALUES (
-	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id',  '$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven',  '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id'
+	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id',  '$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function insertar_detalle($cat_id,$can,$preuni,$des, $imp, $igv, $fle, $per, $cosuni, $com_id){
+	function insertar_detalle($cat_id,$can,$preuni,$des, $imp, $igv,$tipo_afec, $fle, $per, $cosuni, $com_id){
 	$sql = "INSERT INTO tb_compradetalle(
 	`tb_catalogo_id` ,
 	`tb_compradetalle_can` ,
 	`tb_compradetalle_preuni` ,
 	`tb_compradetalle_des` ,
 	`tb_compradetalle_imp` ,
+	`cs_tipoafectacionigv_id` ,
 	`tb_compradetalle_igv` ,
 	`tb_compradetalle_fle` ,
 	`tb_compradetalle_per` ,
@@ -50,7 +53,7 @@ class cCompra{
 	`tb_compra_id`
 	)
 	VALUES (
-	'$cat_id',  '$can',  '$preuni', '$des',  '$imp',  '$igv',  '$fle', '$per',  '$cosuni', '$com_id'
+	'$cat_id',  '$can',  '$preuni', '$des',  '$imp',  '$igv', '$tipo_afec', '$fle', '$per',  '$cosuni', '$com_id'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

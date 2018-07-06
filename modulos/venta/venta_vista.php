@@ -420,6 +420,29 @@ function venta_correo_email(ven_id){
 	});
 }
 
+function venta_car_prorrateo()
+{
+    $.ajax({
+        type: "POST",
+        url: "venta_car_prorrateo.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            ven_des: 	$('#txt_ven_des').val(),
+        }),
+        beforeSend: function(){
+            $('#msj_venta_car_item').html("Cargando...");
+            $('#msj_venta_car_item').show(100);
+        },
+        success: function(data){
+            $('#msj_venta_car_item').html(data.msj);
+        },
+        complete: function(){
+            venta_car('actualizar');
+        }
+    });
+}
+
 function cpe_cdr(ecomid)
 {
     //if(confirm("Desea generar comprobante electrónico?"))

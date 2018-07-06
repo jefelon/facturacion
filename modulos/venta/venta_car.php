@@ -509,6 +509,10 @@ else
         });
     }
 
+    $('#txt_com_des').change(function(e) {
+        venta_car_prorrateo()
+    });
+
     $(function() {
         $("#txt_importe_cliente").keyup(function() {
             calcular_vuelto();
@@ -571,6 +575,14 @@ if($filas>=2)echo $filas.' ítems agregados.';
     $ope_exoneradas_total = 0;
     $ope_gravadas_total = 0;
     $ope_gratuitas_total = 0;
+    if($_SESSION['venta_general_des']=="")
+    {
+        $general_des=0;
+    }
+    else
+    {
+        $general_des=moneda_mysql($_SESSION['venta_general_des']);
+    }
     if($num_rows>0)foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad){
         $dts1=$oCatalogoProducto->presentacion_catalogo_stock_almacen($indice,$almacen_venta);
         $dt1 = mysql_fetch_array($dts1);
@@ -768,14 +780,22 @@ $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
             </div>
         </td>
         <td valign="top">
-            <div style="margin-left:20px; margin-top:10px; float:right">
-                <table border="0" align="right" cellpadding="0" cellspacing="0">
+            <div style="margin-right:53px; margin-top:10px;">
+                <table>
                     <tr>
                         <td nowrap="nowrap"><strong>OPERACIONES GRATUITAS:</strong></td>
                         <td align="right"><input name="txt_ven_opegra" type="text" id="txt_ven_opegra" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gratuitas_total)?>" size="15" readonly>
                         </td>
                     </tr>
                 </table>
+
+                        <fieldset><legend>Aplicar a filas</legend>
+                            <table><tr>
+                                    <td width="80"><label for="txt_com_des">DSCTO %</label></td>
+                                    <td><input name="txt_com_des" type="text" id="txt_com_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
+
+                            </table>
+                        </fieldset>
             </div>
         </td>
         <td valign="top">
