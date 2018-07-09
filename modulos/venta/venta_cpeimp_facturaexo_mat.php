@@ -453,10 +453,11 @@ if($totopgrat > 0){
         <td width="23%" style="text-align: right;">'.$mon . $totopgrat.'</td>
     </tr>';
 }
+$subtotal = $valorventa + $totdes + $totopexo;
 $html.='
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Sub Total: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $valorventa.'</td>
+        <td width="23%" style="text-align: right;">'.$mon . $subtotal.'</td>
     </tr>
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Descuentos: </td>
@@ -469,10 +470,6 @@ $html.='
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Ope Exo: </td>
         <td width="11%" style="text-align: right;">'.$mon . $totopexo.'</td>
-    </tr>
-    <tr>
-        <td  width="78%" style="text-align: right;" colspan="3">Ope Grav: </td>
-        <td width="23%" style="text-align: right;">'.$mon . formato_money($totopgrav).'</td>
     </tr>';
 if($totanti > 0){
     $html.='<tr>

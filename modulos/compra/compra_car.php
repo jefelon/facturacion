@@ -232,6 +232,7 @@ $(function() {
 <input name="hdd_com_numite" id="hdd_com_numite" type="hidden" value="<?php echo $num_rows?>">
 <fieldset><legend>Detalle de Compra</legend>
 <a class="btn_agregar_producto" title="Agregar Producto" href="#" onClick="catalogo_compra()">Agregar</a>
+<!--    <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_compra_tab()">Agregar</a>-->
 <a class="btn_rest_car" href="#" onClick="compra_car('restablecer')">Vaciar</a>
 <a class="btn_rest_act" href="#" onClick="compra_car('actualizar')">Actualizar</a>
 

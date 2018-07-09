@@ -265,6 +265,71 @@ function compra_detalle_tabla()
 	});     
 }
 
+function catalogo_compra_tab(){
+    $.ajax({
+        type: "POST",
+        url: "../catalogo/catalogo_venta_tab.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            //action: act,
+            //ven_id:	idf
+        }),
+        beforeSend: function() {
+            $('#msj_venta').hide();
+            $('#div_catalogo_compra').dialog("open");
+            $('#div_catalogo_compra').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_catalogo_compra').html(html);
+        },
+        complete: function(){
+            catalogo_venta();
+            catalogo_servicio();
+        }
+    });
+}
+
+function catalogo_venta(){
+    $.ajax({
+        type: "POST",
+        url: "../catalogo/catalogo_venta.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            //action: act,
+            //ven_id:	idf
+        }),
+        beforeSend: function() {
+            //$('#msj_venta').hide();
+            //$('#div_catalogo_venta').dialog("open");
+            $('#div_tab_producto').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_tab_producto').html(html);
+        }
+    });
+}
+function catalogo_servicio(){
+    $.ajax({
+        type: "POST",
+        url: "../catalogo/catalogo_servicio.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            //action: act,
+            //ven_id:	idf
+        }),
+        beforeSend: function() {
+            //$('#msj_venta').hide();
+            //$('#div_catalogo_venta').dialog("open");
+            $('#div_tab_servicio').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_tab_servicio').html(html);
+        }
+    });
+}
 //adicionales
 
 function proveedor_cargar_datos(idf){

@@ -570,6 +570,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
     </thead>
     <tbody>
     <?php
+    $total_descuentos=0;
     $sub_total = 0;
     $valor_venta_total = 0;
     $ope_exoneradas_total = 0;
