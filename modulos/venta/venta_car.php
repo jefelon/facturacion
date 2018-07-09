@@ -509,7 +509,7 @@ else
         });
     }
 
-    $('#txt_com_des').change(function(e) {
+    $('#txt_ven_des').change(function(e) {
         venta_car_prorrateo()
     });
 
@@ -558,7 +558,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         <!--<th>PRESENTACION</th>-->
         <th align="left" title="UNIDAD">UNID</th>
         <th align="right" title="CANTIDAD">CANT</th>
-<!--        <th align="right" title="VALOR UNITARIO">VALOR UNIT</th>-->
+        <th align="right" title="VALOR UNITARIO">VALOR UNIT</th>
         <th align="right" title="PRECIO UNITARIO">PRECIO UNIT</th>
         <th align="right" title="PRECIO EXONERADO">P. EXONERADO</th>
         <th align="right" title="DESCUENTO">DSCTO</th>
@@ -590,8 +590,23 @@ if($filas>=2)echo $filas.' ítems agregados.';
         //precio de venta ingresado
         $precio_unitario = $_SESSION['venta_preven'][$unico_id][$indice];
 
-        //tipo g/e/i ingresado
         $tipo_item	=$dt1['tb_afectacion_id'];
+
+        if ($tipo_item==9) {
+            $linea_valor_unitario = $precio_unitario;
+        }else{
+            $linea_valor_unitario = $precio_unitario / 1.18;
+        }
+
+        $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
+        $linea_desc_x_item_percent=0;
+        $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
+        $linea_valor_venta_x_item = $linea_valor_venta_bruto-$linea_desc_x_item;
+        $linea_igv=$linea_valor_venta_x_item*0.18;
+
+
+        //tipo g/e/i ingresado
+        $precio_unitario=$precio_unitario-$precio_unitario*($general_des/100);
 
         if ($tipo_item==9){
             $tipo_pro='Exonerado';
@@ -620,7 +635,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
         //sumatoria factura
         if($tipo_item==1 || $tipo_item==9){
-            $sub_total += $valor_venta;
+            $sub_total = $sub_total + $linea_valor_venta_x_item;
         }
 
         ?>
@@ -639,7 +654,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             <!--<td><?php //echo $dt1['tb_presentacion_nom']?></td>-->
             <td align="left" title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
             <td align="right"><?php echo $cantidad?></td>
-<!--            <td align="right">--><?php //echo formato_money($precio_unitario)?><!--</td>-->
+            <td align="right"><?php echo formato_money($linea_valor_unitario)?></td>
             <?php if ($tipo_item==9){ ?>
                 <td align="right"></td>
                 <td align="right"><?php echo formato_money($precio_unitario)?></td>
@@ -652,7 +667,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             </td>
             <td align="right">
                 <?php
-                    echo formato_money($valor_venta);
+                    echo formato_money($linea_valor_venta_x_item);
                 ?>
             </td>
             <td align="right">
@@ -680,40 +695,29 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
 
         //tipo g/e/i ingresado
-        $tipo_item	=$dt1['tb_afectacion_id'];
+        $tipo_item	= 1;
+        $linea_valor_unitario = $precio_unitario / 1.18;
 
-        if ($tipo_item==9){
-            $tipo_pro='Exonerado';
-            $valor_venta_unitario = $precio_unitario;
-            $valor_venta = $valor_venta_unitario * $cantidad;
-            $precio_venta = $precio_unitario * $cantidad;
-            $ope_exoneradas_total += $valor_venta;
+        $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
+        $linea_desc_x_item_percent=0;
+        $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
+        $linea_valor_venta_x_item = $linea_valor_venta_bruto-$linea_desc_x_item;
+        $linea_igv=$linea_valor_venta_x_item*0.18;
 
-        }else if($tipo_item==1){
-            $tipo_pro='Gravado';
-            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-            $valor_venta = $valor_venta_unitario * $cantidad;
-            $precio_venta = $precio_unitario * $cantidad;
-            $ope_gravadas_total += $valor_venta;
-        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7){
-            $tipo_pro='Gratuito';
-            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-            $valor_venta = $valor_venta_unitario * $cantidad;
-            $precio_venta = $precio_unitario * $cantidad;
-            $ope_gratuitas_total += $valor_venta;
-        }
+
+        //tipo g/e/i ingresado
+        $precio_unitario=$precio_unitario-$precio_unitario*($general_des/100);
+
+        $tipo_pro='Gravado';
+        $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+        $valor_venta = $valor_venta_unitario * $cantidad;
+        $precio_venta = $precio_unitario * $cantidad;
+        $ope_gravadas_total += $valor_venta;
 
         $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
         $precio_venta = $precio_unitario * $cantidad;
         $valor_venta = $valor_venta_unitario * $cantidad;
 
-        if ($tipo_item==1){
-            $ope_gravadas_total += $valor_venta;
-        } else if ($tipo_item==9){
-            $ope_exoneradas_total += $valor_venta;
-        }else{
-            $ope_gratuitas_total += $valor_venta;
-        }
 
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];
@@ -721,7 +725,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
         //sumatoria factura
         if($tipo_item==1){
-            $sub_total += $valor_venta;
+            $sub_total = $sub_total + $linea_valor_venta_x_item;
         }
         ?>
         <tr>
@@ -732,13 +736,15 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <!--            <td>--><?php //echo $dt['tb_unidad_abr'];?><!--</td>-->
             <td>ZZ</td>
             <td align="right"><?php echo $cantidad?></td>
+            <td align="right"><?php echo formato_money($linea_valor_unitario)?></td>
             <td align="right"><?php echo formato_money($precio_unitario)?></td>
-            <td align="right"></td>
+            <td align="right">
+            </td>
             <td align="right">
             </td>
             <td align="right">
                 <?php
-                    echo formato_money($valor_venta);
+                    echo formato_money($linea_valor_venta_x_item);
                 ?>
             </td>
             <td align="right"><?php echo formato_money($precio_venta)?></td>
@@ -757,6 +763,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <?php
 $igv_total = $ope_gravadas_total*0.18;
 $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
+$total_descuentos=$sub_total*($general_des/100);
 ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
@@ -791,8 +798,8 @@ $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
 
                         <fieldset><legend>Aplicar a filas</legend>
                             <table><tr>
-                                    <td width="80"><label for="txt_com_des">DSCTO %</label></td>
-                                    <td><input name="txt_com_des" type="text" id="txt_com_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
+                                    <td width="80"><label for="txt_ven_des">DSCTO %</label></td>
+                                    <td><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
 
                             </table>
                         </fieldset>
@@ -807,21 +814,16 @@ $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
                     </tr>
                     <tr>
                         <td><label for="txt_ven_des" style="font-size:12px"><strong>DESCUENTOS:</strong></label></td>
-                        <td align="right"><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right; font-size:14px" value="<?php echo formato_money(0)?>" size="15" readonly></td>
+                        <td align="right"><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right; font-size:14px" value="<?php echo formato_money($total_descuentos)?>" size="15" readonly></td>
                     </tr>
                     <tr>
                         <td width="120"><label for="txt_ven_valven" style="font-size:12px"><strong>VALOR VENTA:</strong></label></td>
                         <td width="140" align="right">
-                            <input name="txt_ven_valven" type="text" id="txt_ven_valven" style="text-align:right; font-size:14px" value="<?php echo formato_money($sub_total)?>" size="15" readonly></td>
+                            <input name="txt_ven_valven" type="text" id="txt_ven_valven" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gravadas_total)?>" size="15" readonly></td>
                     </tr>
                     <tr>
                         <td nowrap="nowrap"><strong>OPERACIONES EXONERADAS:</strong></td>
                         <td align="right"><input name="txt_ven_opeexo" type="text" id="txt_ven_opeexo" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_exoneradas_total)?>" size="15" readonly>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td nowrap="nowrap"><strong>OPERACIONES GRAVADAS:</strong></td>
-                        <td align="right"><input name="txt_ven_opegrav" type="text" id="txt_ven_opegrav" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gravadas_total)?>" size="15" readonly>
                         </td>
                     </tr>
                     <tr>

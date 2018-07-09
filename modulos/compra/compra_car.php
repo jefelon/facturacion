@@ -372,11 +372,12 @@ if($num_rows>0){
 
                 $_SESSION['compra_linea_cos'][$indice] = $linea_calculo_cos;
 
+
 				if($tipo_item==9){
                     $linea_preuni=$linea_preuni*1.18;
                     $valor_venta = $linea_preuni*$linea_cantidad;
                     $total_opeexo = $total_opeexo+$valor_venta-($valor_venta*($general_des/100));
-                    $linea_importe=($linea_calculo_cos*$linea_cantidad)/1.18;
+
                 }elseif ($tipo_item==1){
                     $valor_venta = $linea_preuni*$linea_cantidad;
                     $total_opegrav =$total_opegrav+$valor_venta-($valor_venta*($general_des/100));
@@ -403,6 +404,7 @@ if($num_rows>0){
                 $valor_venta_x_item_total+=$valor_venta_x_item;
                 $desc_x_item_total+=$desc_x_item;
 
+
                 if($tipo_item==9) {
                     $igv_linea=0;
                     $total_operaciones_exoneradas += $valor_venta_x_item;
@@ -411,6 +413,8 @@ if($num_rows>0){
                     $igv_linea = ($valor_venta * $linea_calculo_des) * 0.18;
                     $total_operaciones_gravadas += $valor_venta_x_item;
                 }
+                $linea_importe= $linea_calculo_cos * $linea_cantidad;
+
 
                 $total_igv_grav+=$igv_linea;
 
@@ -439,7 +443,7 @@ if($num_rows>0){
 
                             <!--<td align="right"><?php //echo formato_money($linea_igv)?></td>-->
                             <td align="right"><?php echo formato_money($linea_fle)?></td>
-                            <td align="right"><?php echo formato_money($linea_importe*1.18)?></td>
+                            <td align="right"><?php echo formato_money($linea_importe)?></td>
 
                             <?php /*?><td align="right"><?php echo $linea_prorrateo_des.'|'.$linea_calculo_importe.'|'.$linea_calculo_igv.'|'.$linea_calculo_fle?></td><?php */?>
                             <td align="center" nowrap="nowrap">
