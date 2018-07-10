@@ -110,6 +110,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         }else{
             $usu_id= $_POST['hdd_usu_id'];
         }
+
+
 		//insertamos venta
 		$oVenta->insertar( 
 			fecha_mysql($_POST['txt_ven_fec']),
@@ -120,7 +122,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$_POST['hdd_ven_cli_id'],
 			moneda_mysql($_POST['txt_ven_valven']),
 			moneda_mysql($_POST['txt_ven_igv']),
-			moneda_mysql($_POST['txt_ven_des']),
+			moneda_mysql($_POST['txt_ven_desglob']),
 			moneda_mysql($_POST['txt_ven_tot']),
 			$_POST['cmb_ven_est'],
 			$_POST['txt_ven_lab1'],
@@ -667,6 +669,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$afeigv_id=$_SESSION['venta_tip'][$unico_id][$indice];
 			$unimed_id=12;//NIU
 
+            $desc_percentage = $_POST['txt_ven_des'];
+            $precio_unitario_linea = $precio_unitario_linea-($precio_unitario_linea* $desc_percentage/100);
+
 			//////////////////////
 			$oVenta->insertar_detalle(
 				$tipo_venta,
@@ -791,6 +796,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			//////////////////////
 			//registro detalle de venta de servicio
+
+            $desc_percentage = $_POST['txt_ven_des'];
+            $precio_unitario_linea = $precio_unitario_linea-($precio_unitario_linea* $desc_percentage/100);
 			$oVenta->insertar_detalle( 
 				$tipo_venta,
 				$cat_id,  
