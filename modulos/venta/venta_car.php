@@ -814,8 +814,8 @@ $total_descuentos=$sub_total*($general_des/100);
                         <td align="right"><input name="txt_ven_subtot" type="text" id="txt_ven_subtot" style="text-align:right; font-size:14px" value="<?php echo formato_money($sub_total)?>" size="15" readonly></td>
                     </tr>
                     <tr>
-                        <td><label for="txt_ven_des" style="font-size:12px"><strong>DESCUENTOS:</strong></label></td>
-                        <td align="right"><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right; font-size:14px" value="<?php echo formato_money($total_descuentos)?>" size="15" readonly></td>
+                        <td><label for="txt_ven_desglob" style="font-size:12px"><strong>DESCUENTOS:</strong></label></td>
+                        <td align="right"><input name="txt_ven_desglob" type="text" id="txt_ven_desglob" style="text-align:right; font-size:14px" value="<?php echo formato_money($total_descuentos)?>" size="15" readonly></td>
                     </tr>
                     <tr>
                         <td width="120"><label for="txt_ven_valven" style="font-size:12px"><strong>VALOR VENTA:</strong></label></td>

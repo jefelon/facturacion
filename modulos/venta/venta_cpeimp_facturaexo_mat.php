@@ -415,7 +415,7 @@ while($dt = mysql_fetch_array($dts)){
                         <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
                         <td style="text-align: right"></td>';
                 }
-                $html .= '<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
+                $html .= '<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_preunilin']*$dt['tb_ventadetalle_can']).'</td>';
     }else{
         $html.='<td style="text-align: center">'.$cont.'</td>
                 <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
@@ -434,7 +434,7 @@ while($dt = mysql_fetch_array($dts)){
                                 <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
                                 <td style="text-align: right"></td>';
                 }
-                $html .= '<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
+                $html .= '<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_preunilin']*$dt['tb_ventadetalle_can']).'</td>';
     }
     $html.='</tr>';
     $cont++;
@@ -469,7 +469,7 @@ $html.='
     </tr>
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Ope Exo: </td>
-        <td width="11%" style="text-align: right;">'.$mon . $totopexo.'</td>
+        <td width="23%" style="text-align: right;">'.$mon . $totopexo.'</td>
     </tr>';
 if($totanti > 0){
     $html.='<tr>
