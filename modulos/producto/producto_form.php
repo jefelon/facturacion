@@ -26,6 +26,7 @@ if($_POST['action']=="editar"){
 		$des	=$dt['tb_producto_des'];
 		$cat_id	=$dt['tb_categoria_id'];
 		$mar_id	=$dt['tb_marca_id'];
+        $afec_id=$dt['tb_afectacion_id'];
 		$est	=$dt['tb_producto_est'];
         $img    =$dt['tb_producto_imagen'];
 	mysql_free_result($dts);
@@ -119,6 +120,8 @@ function cmb_mar_id(ids)
 		}
 	});
 }
+
+
 
 function cmb_cat_uni_bas(ids)
 {	
@@ -665,6 +668,9 @@ $(function() {
 			cmb_mar_id: {
 				required: true
 			},
+            cmb_afec_id: {
+                required: true
+            },
 			cmb_pro_est: {
 				required: true
 			}
@@ -702,6 +708,9 @@ $(function() {
 			cmb_mar_id: {
 				required: '*'
 			},
+            cmb_afec_id: {
+                required: '*'
+            },
 			cmb_pro_est: {
 				required: '*'
 			}
@@ -780,6 +789,17 @@ $(function() {
           <div id="div_categoria_form">
 			</div>
           </td>
+        </tr>
+        <tr>
+            <td><label for="cmb_afec_id">Tipo Afecto IGV:</label>
+                <div id="div_afecto_form">
+                    <select name="cmb_afec_id" id="cmb_afec_id">	<option value="">-</option>
+                        <option value="1" <?php if($afec_id=='1')echo 'selected'?>>GRAVADO</option>
+                        <option value="9" <?php if($afec_id=='9')echo 'selected'?>>EXONERADO</option>
+                        <option value="11"<?php if($afec_id=='11')echo 'selected'?>>INAFECTO</option>
+                    </select>
+                </div>
+            </td>
         </tr>
         <tr>
           <td><label for="cmb_pro_est">Estado:</label></td>

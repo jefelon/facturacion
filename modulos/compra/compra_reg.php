@@ -58,6 +58,8 @@ if($_POST['action_compra']=="insertar")
 			moneda_mysql($_POST['txt_com_ajupos']),
 			moneda_mysql($_POST['txt_com_ajuneg']),
 			moneda_mysql($_POST['txt_com_valven']),
+            moneda_mysql($_POST['txt_com_opexo']),
+            moneda_mysql($_POST['txt_com_valven']),
 			moneda_mysql($_POST['txt_com_igv']),
 			moneda_mysql($_POST['txt_com_tot']),
 			$_POST['chk_com_tipper'],
@@ -139,21 +141,10 @@ if($_POST['action_compra']=="insertar")
 			$linea_calculo_cos=$_SESSION['compra_linea_cos'][$indice];
 			
 			$linea_calculo_cos_dolar=formato_money($linea_calculo_cos/$_POST['txt_com_tipcam']);
+
+
 				
-			//___________________________________________________
-			//registro detalle de compra
-			$oCompra->insertar_detalle(
-				$indice,
-				$linea_cantidad,
-				$linea_preuni,
-				$linea_des,
-				$linea_importe,
-				$linea_igv,
-				$linea_fle,
-				$linea_per,
-				$linea_calculo_cos,
-				$com_id
-			);
+
 			
 			///-----------------------------------
 			
@@ -164,6 +155,24 @@ if($_POST['action_compra']=="insertar")
 				$sto_id		=$dt['tb_stock_id'];
 				$sto_num	=$dt['tb_stock_num'];
 				$mul		=$dt['tb_catalogo_mul'];
+                $tipo_item  =$dt['tb_afectacion_id'];
+
+            //___________________________________________________
+            //registro detalle de compra
+            $oCompra->insertar_detalle(
+                $indice,
+                $linea_cantidad,
+                $linea_preuni,
+                $linea_des,
+                $linea_importe,
+                $tipo_item,
+                $linea_igv,
+                $linea_fle,
+                $linea_per,
+                $linea_calculo_cos,
+                $com_id
+            );
+
 			mysql_free_result($dts);
 			
 			//conversion a la minima unidad

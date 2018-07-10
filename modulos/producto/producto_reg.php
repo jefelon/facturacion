@@ -22,6 +22,7 @@ if($_POST['action_producto']=="insertar")
 			$_POST['cmb_pro_est'],
 			$_POST['cmb_cat_id'],
 			$_POST['cmb_mar_id'],
+            $_POST['cmb_afec_id'],
 			$_POST['hdd_usu_id'],
             $_POST['hdd_prod_img']
 		);
@@ -113,6 +114,7 @@ if($_POST['action_producto']=="editar")
 			$_POST['cmb_pro_est'],
 			$_POST['cmb_cat_id'],
 			$_POST['cmb_mar_id'],
+            $_POST['cmb_afec_id'],
 			$_POST['hdd_usu_id'],
             $_POST['hdd_prod_img']
 		);

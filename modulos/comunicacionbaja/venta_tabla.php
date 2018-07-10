@@ -13,7 +13,7 @@ $num_rows= mysql_num_rows($dts1);
 
 <script type="text/javascript">
 $(function() {	
-	$('.btn_sunat').button({
+	$('.btn_sunat, .btn_ticket').button({
     text: true
   });
 

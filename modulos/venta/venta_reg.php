@@ -133,7 +133,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			$documento_tipdoc,//cs_tipodocumento_id
 			1,//cs_tipomoneda_id
-			moneda_mysql($_POST['txt_ven_opegrav']),//tb_venta_gra
+			moneda_mysql($_POST['txt_ven_valven']),//tb_venta_gra
 			0,//tb_venta_ina
             moneda_mysql($_POST['txt_ven_opeexo']),//tb_venta_exo
 			moneda_mysql($_POST['txt_ven_opegra']),//tb_venta_grat

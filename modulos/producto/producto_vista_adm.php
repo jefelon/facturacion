@@ -115,7 +115,8 @@ function producto_check(){
 			pro_id:		$('#hdd_pro_id').val(),
 			pro_nom:	$('#txt_pro_nom').val(),
 			cat_id:		$('#cmb_cat_id').val(),
-			mar_id:		$('#cmb_mar_id').val()
+			mar_id:		$('#cmb_mar_id').val(),
+            afec_id:	$('#cmb_afec_id').val()
 		}),
 		beforeSend: function(){
 			$('#msj_producto_check').html("Verificando...");

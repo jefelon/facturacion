@@ -420,6 +420,29 @@ function venta_correo_email(ven_id){
 	});
 }
 
+function venta_car_prorrateo()
+{
+    $.ajax({
+        type: "POST",
+        url: "venta_car_prorrateo.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            ven_des: 	$('#txt_ven_des').val(),
+        }),
+        beforeSend: function(){
+            $('#msj_venta_car_item').html("Cargando...");
+            $('#msj_venta_car_item').show(100);
+        },
+        success: function(data){
+            $('#msj_venta_car_item').html(data.msj);
+        },
+        complete: function(){
+            venta_car('actualizar');
+        }
+    });
+}
+
 function cpe_cdr(ecomid)
 {
     //if(confirm("Desea generar comprobante electrónico?"))
@@ -435,12 +458,12 @@ function cpe_cdr(ecomid)
         beforeSend: function() {
             $('#msj_venta_sunat').html("Obteniendo CDR de SUNAT...");
             $('#msj_venta_sunat').show(100);
-            showAlert('Consultando CDR de SUNAT...');
+            $('#msj_venta_sunat').html('Consultando CDR de SUNAT...');
         },
         success: function(data){
             $('#msj_venta_sunat').html(data.msj);
             $('#msj_venta_sunat').show();
-            showAlert(data.msj,data.est,10000);
+            $('#msj_venta_sunat').html(data.msj+': '+data.est);
         },
         complete: function(){
             venta_tabla();
