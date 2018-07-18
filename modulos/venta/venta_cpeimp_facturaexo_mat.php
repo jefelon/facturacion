@@ -457,7 +457,7 @@ $subtotal = $valorventa + $totdes + $totopexo;
 $html.='
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Sub Total: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $subtotal.'</td>
+        <td width="23%" style="text-align: right;">'.$mon . formato_moneda($subtotal).'</td>
     </tr>
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Descuentos: </td>
