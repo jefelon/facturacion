@@ -64,8 +64,8 @@ $('.moneda').autoNumeric({
 $('.cantidad_cat_ven').autoNumeric({
 	aSep: ',',
 	aDec: '.',
-	vMin: '1',
-	vMax: '999'
+    vMin: '0.00',
+    vMax: '99999.99'
 });
 
 function cantidad(act,idf)
@@ -409,6 +409,7 @@ $(function() {
                     <input name="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $stock_unidad?>">
 
                     <input name="hdd_cat_cospro_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_cospro_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $costo_ponderado?>">
+                        <input name="hdd_detven_tip_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_detven_tip_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $dt1['tb_afectacion_id']?>">
                     </td>
                     <td align="center">
                     <input name="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" class="cantidad_cat_ven" value="1" size="5" maxlength="6" style="text-align:right">
@@ -416,7 +417,7 @@ $(function() {
                     <a class="btn_menos" href="#menos" onClick="cantidad('menos','<?php echo $dt1['tb_catalogo_id']?>')">Disminuir</a>
                     </td>
 <?php /*?>
-                    <td align="left" style="width:100px">
+                    <td align="left" style="width:100px">x
                             <!--Descuento del producto (este valor va en el Detalle Venta)-->
                             
                         <div id="rad_cat_tip_des_<?php echo $dt1['tb_catalogo_id']?>" class="rad_tip_des" style="float:left">

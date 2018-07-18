@@ -50,6 +50,7 @@ function catalogo_compra_tabla()
 		complete: function(){			
 			$('#div_catalogo_compra_tabla').removeClass("ui-state-disabled");
 			$('#msj_catalogo').hide();
+            $('#tabla_producto tbody tr.:first-child .focus_precom').focus();
 		}
 	});     
 }

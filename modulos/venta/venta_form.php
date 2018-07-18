@@ -530,7 +530,7 @@ function venta_car_form(act,idf){
                 cat_can: $('#txt_cat_can_'+idf).val(),
                 cat_des: $('#txt_detven_des_'+idf).val(),//Descuento
                 cat_nom: $('#txt_detven_nom_'+idf).val(),//Descuento
-                cat_tip: $('#cmb_detven_tip_'+idf).val(),//Tipo Gravado/Exonerado/Inafecto
+                cat_tip: $('#hdd_detven_tip_'+idf).val(),//Tipo Gravado/Exonerado/Inafecto
                 cat_tipdes: $("input[name='rad_cat_tip_des_"+idf+"']:checked").val(),//Radio Button
                 cat_preven: $('#txt_cat_preven_'+idf).val()
             }),

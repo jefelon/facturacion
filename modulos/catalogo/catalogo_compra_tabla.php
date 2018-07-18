@@ -87,8 +87,8 @@ $('.porcentaje').autoNumeric({
 $('.cantidad').autoNumeric({
 	aSep: ',',
 	aDec: '.',
-	vMin: '1',
-	vMax: '99999'
+    vMin: '0.00',
+    vMax: '99999.99'
 });
 
 function cantidad(act,idf)
@@ -189,7 +189,7 @@ $(function() {
                             <td><?php echo $dt1['tb_unidad_abr']?></td>                           
                             <td align="right">
                             <?php echo $texto_moneda?>
-							<input name="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" class="moneda" value="<?php echo $precio_unitario_compra?>" size="10" maxlength="8" style="text-align:right">
+							<input class="focus_precom" name="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" class="moneda" value="<?php echo $precio_unitario_compra?>" size="10" maxlength="8" style="text-align:right">
 							</td>                            
                             <td align="center">
                             <input name="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" class="cantidad" value="1" size="5" maxlength="6" style="text-align:right">
@@ -217,3 +217,6 @@ $(function() {
                   <td colspan="8"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>
+<script>
+    $('#txt_cat_precom_6').focus()
+</script>
