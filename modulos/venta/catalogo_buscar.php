@@ -32,6 +32,7 @@ if($num_rows>0)
 
 			$data['pro_id']		=$dt1['tb_producto_id'];
 			$data['cat_id']		=$dt1['tb_catalogo_id'];
+            $data['ven_tip']	=$dt1['tb_afectacion_id'];
 
 			$data['pro_codbar'] =$dt1['tb_presentacion_cod'];
 			$data['pro_nom']	=$dt1['tb_producto_nom'];
@@ -113,6 +114,7 @@ if($num_rows>0)
 
 				$data['pro_id']		=$dt1['tb_producto_id'];
 				$data['cat_id']		=$dt1['tb_catalogo_id'];
+                $data['ven_tip']	=$dt1['tb_afectacion_id'];
 
 				$data['pro_codbar'] =$dt1['tb_presentacion_codbar'];
 				$data['pro_nom']	=$dt1['tb_producto_nom'];

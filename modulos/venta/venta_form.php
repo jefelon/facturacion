@@ -464,7 +464,7 @@ function venta_car(act,cat_id){
 					unico_id: $('#unico_id').val(),
 					cat_id:	 cat_id,
 					cat_can: $('#txt_bus_cat_can').val(),
-					cat_tip: 1,//Tipo Gravado/Exonerado/Inafecto/premio...  1=grabada
+					cat_tip: $('#hdd_detven_tip').val(),
 					cat_preven: $('#txt_bus_cat_preven').val(),
                     cot_id: cot_id
 				}),
@@ -1412,6 +1412,7 @@ function catalogo_buscar() {
 
                 $('#txt_precio_min').val('');
                 $('#txt_precio_may').val('');
+                $('#hdd_detven_tip').val('');
             }
 
             if (data.accion == 1) {
@@ -1428,6 +1429,7 @@ function catalogo_buscar() {
 
                 $('#txt_precio_min').val(data.cat_premin);
                 $('#txt_precio_may').val(data.cat_premay);
+                $('#hdd_detven_tip').val(data.ven_tip);
 
                 if ($('#chk_modo').is(':checked')) {
                     venta_car('agregar');
@@ -1715,6 +1717,7 @@ function bus_cantidad(act)
         <input name="txt_ven_fec" type="hidden" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
 
         <input name="hdd_bus_cat_id" id="hdd_bus_cat_id"  type="hidden" value="">
+        <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
         <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
 
