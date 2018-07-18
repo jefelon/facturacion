@@ -64,8 +64,8 @@ $('.moneda').autoNumeric({
 $('.cantidad_cat_ven').autoNumeric({
 	aSep: ',',
 	aDec: '.',
-	vMin: '1',
-	vMax: '999'
+    vMin: '0.00',
+    vMax: '99999.99'
 });
 
 function cantidad(act,idf)
