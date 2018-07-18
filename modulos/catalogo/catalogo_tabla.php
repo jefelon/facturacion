@@ -1,18 +1,12 @@
 <?php
-session_start();
 require_once ("../../config/Cado.php");
 require_once ("../catalogo/cCatalogo.php");
 $oCatalogo = new cCatalogo();
+
 require_once ("../categoria/cCategoria.php");
 $oCategoria = new cCategoria();
 
-require_once ("../kardex/cKardex.php");
-$oKardex = new cKardex();
-//require_once ("../kardex/cHistorial.php");
-//$oHistorial = new cHistorial();
-
 require_once ("../formatos/formato.php");
-require_once ("../catalogo/cst_producto.php");
 
 //seleccion de las categorias
 if(isset($_POST['pro_cat']) and $_POST['pro_cat']>0)
@@ -48,10 +42,6 @@ if(is_array($atr_array)){
     $cadena_atr = implode(',',$atr_array);
 }
 
-//fecha inventario
-
-$fecini='01-01-2013';
-$fecfin=$_POST['inv_fec'];
 
 if($_POST['alm_id']>0)
 {
@@ -76,6 +66,8 @@ else
             icons: {primary: "ui-icon-info"},
             text: false
         });
+        $('.btn_bar').button({
+        });
 
         $("#tabla_producto").tablesorter({
             widgets: ['zebra', 'zebraHover'] ,
@@ -86,7 +78,7 @@ else
             },
             //sortForce: [[0,0]],
             <?php if($num_rows>0){?>
-            sortList: [[2,0],[1,0],[0,0]]
+            sortList: [[3,0],[2,0],[1,0]]
             <?php }?>
         });
 
@@ -96,16 +88,18 @@ else
 <table cellspacing="1" id="tabla_producto" class="tablesorter">
     <thead>
     <tr>
+        <th>CÓDIGO</th>
         <th>NOMBRE</th>
         <th>MARCA</th>
-        <th>CATEGORIA</th>
+        <th >CATEGORIA</th>
         <th align="right" nowrap>P. COSTO US$</th>
         <th align="right" nowrap>P. COSTO S/.</th>
-        <?php /*?><th align="right" nowrap>UTI %</th><?php */?>
-        <?php /*?><th align="right" nowrap>P.  VENTA S/.</th><?php */?>
+        <th align="right" nowrap>UTI %</th>
+        <th align="right" nowrap>P.  VENTA S/.</th>
         <th align="right">STOCK</th>
         <th align="right">VALORIZADO US$</th>
         <th align="right">VALORIZADO S/.</th>
+        <th align="right"></th>
     </tr>
     </thead>
     <?php
@@ -114,8 +108,7 @@ else
         <tbody>
         <?php
         while($dt1 = mysql_fetch_array($dts1)){
-
-            /*$stock=$dt1['tb_stock_num'];
+            $stock=$dt1['tb_stock_num'];
 
             $st_uni=floor($stock/$dt1['tb_catalogo_mul']);
             $st_res=$stock%$dt1['tb_catalogo_mul'];
@@ -125,20 +118,8 @@ else
                 $stock_unidad="$st_uni";
             } else{
                 $stock_unidad="$st_uni";
-            }*/
+            }
 
-
-            //STOCK
-            $stock_kardex=stock_kardex($dt1['tb_catalogo_id'],$_POST['alm_id'],fecha_mysql($fecini),fecha_mysql($fecfin),$_SESSION['empresa_id']);
-
-            //COSTOS
-
-            $costo_ponderado_array=costo_ponderado($dt1['tb_catalogo_id'],$_POST['alm_id'],fecha_mysql($fecini),fecha_mysql($fecfin),$stock_kardex,$dt1['tb_catalogo_precos'],$dt1['tb_catalogo_precosdol'],$_SESSION['empresa_id']);
-
-            $costo_ponderado_soles=$costo_ponderado_array['soles'];
-            $costo_ponderado_dolares=$costo_ponderado_array['dolares'];
-
-            //VALORIZADO
             $valorizado_dol=0;
             $valorizado=0;
 
@@ -146,20 +127,20 @@ else
             {
                 if($dt1['tb_catalogo_precosdol']>0)
                 {
-                    $valorizado_dol=$stock_kardex*$costo_ponderado_dolares;
+                    $valorizado_dol=$stock_unidad*$dt1['tb_catalogo_precosdol'];
 
                     $total_valorizado_dol+=$valorizado_dol;
                 }
                 else
                 {
-                    $valorizado=$stock_kardex*$costo_ponderado_soles;
+                    $valorizado=$stock_unidad*$dt1['tb_catalogo_precos'];
                     $total_valorizado+=$valorizado;
                 }
             }
 
             ?>
             <tr>
-                <?php /*?><td><?php echo $dt1['tb_presentacion_cod']?></td><?php */?>
+                <td><?php echo $dt1['tb_presentacion_cod']?></td>
                 <td>
                             <span style="">
 							<?php echo $dt1['tb_producto_nom']?>
@@ -167,15 +148,26 @@ else
                 </td>
                 <td><?php echo $dt1['tb_marca_nom']?></td>
                 <td><?php echo $dt1['tb_categoria_nom']?></td>
-                <td align="right"><?php echo formato_money($costo_ponderado_dolares)?></td>
-                <td align="right"><?php echo formato_money($costo_ponderado_soles)?></td>
-                <?php /*?><td align="right"><?php echo $dt1['tb_catalogo_uti']?></td><?php */?>
-                <?php /*?><td align="right"><?php if($dt1['tb_catalogo_preven']!=0)echo formato_money($dt1['tb_catalogo_preven'])?></td><?php */?>
+                <td align="right"><?php if($dt1['tb_catalogo_precosdol']!=0)echo formato_money($dt1['tb_catalogo_precosdol'])?></td>
+                <td align="right"><?php if($dt1['tb_catalogo_precos']!=0)echo formato_money($dt1['tb_catalogo_precos'])?></td>
+                <td align="right"><?php echo $dt1['tb_catalogo_uti']?></td>
+                <td align="right"><?php if($dt1['tb_catalogo_preven']!=0)echo formato_money($dt1['tb_catalogo_preven'])?></td>
                 <td align="right">
-                    <?php echo $stock_kardex?>
+                            <span <?php if($dt1['tb_catalogo_unibas']==1 and $stock_unidad<=$dt1['tb_presentacion_stomin']){?> style="color:#F00; font-weight: bold;"<?php }?>>
+							<?php echo $stock_unidad?>
+                            </span>
+                    <input name="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $stock_unidad?>">
                 </td>
                 <td align="right"><?php echo formato_money($valorizado_dol)?></td>
-                <td align="right"><?php echo formato_money($valorizado)?></td>
+                <td align="right"><?php echo formato_money($valorizado)?>
+                <td align="center">
+                    <form action="catalogo_imprimir_codbarras.php" target="_blank" method="post">
+                        <input name="precio_prod" type="hidden" value="<?php echo $dt1['tb_catalogo_preven']?>">
+                        <input name="barcode" type="hidden" value="<?php echo $dt1['tb_presentacion_cod']?>">
+                        <button class="btn_bar" id="btn_bar" type="submit" title="Descargar codigo">Imprimir Código</button>
+                    </form>
+                </td>
+
             </tr>
             <?php
         }
@@ -186,11 +178,12 @@ else
     }
     ?>
     <tr class="even">
-        <td colspan="6">TOTAL</td>
+        <td colspan="8">TOTAL</td>
         <td align="right"><?php echo formato_money($total_valorizado_dol)?></td>
         <td align="right"><?php echo formato_money($total_valorizado)?></td>
+        <td align="right"></td>
     </tr>
     <tr class="even">
-        <td colspan="8"><?php echo $num_rows.' registros'?></td>
+        <td colspan="12"><?php echo $num_rows.' registros'?></td>
     </tr>
 </table>
