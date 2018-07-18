@@ -276,7 +276,7 @@ class cCatalogo{
 	
 	if($atr_ids!="")$sql.=" GROUP BY ct.tb_catalogo_id ";
 	
-	$sql.=" ORDER BY c.tb_categoria_nom, m.tb_marca_nom ";
+	$sql.=" GROUP BY p.tb_producto_id ORDER BY c.tb_categoria_nom, m.tb_marca_nom";
 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
