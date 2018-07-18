@@ -111,7 +111,7 @@ $(document).ready(function() {
             ?>
             <tbody>
                 <?php
-								$i=0;
+                $i=0;
 					while($dt1 = mysql_fetch_array($dts1)){
 						
 						//$stock=$dt1['tb_stock_num'];

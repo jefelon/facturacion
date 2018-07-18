@@ -116,6 +116,13 @@ function atributo_lista(cat_id){
 	});*/
 }
 
+
+function mensaje()
+{
+    $( "#txt_fil_pro_nom" ).focus(function() {
+        alert( "Handler for .focus() called." );
+    });
+}
 $(function() {
 	
 	//$("#txt_fil_pro_nom").focus();

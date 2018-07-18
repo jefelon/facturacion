@@ -967,7 +967,7 @@ $(function() {
 	?>
 	$('#cmb_ven_doc').change( function() {
 		txt_ven_numdoc();
-        if ((this).value=== '12') {
+        if ((this).value=== '12' || (this).value=== '15') {
             cliente_cargar_datos(1);
         }else{
             $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #txt_ven_cli_est').val('');
