@@ -405,15 +405,15 @@ while($dt = mysql_fetch_array($dts)){
                 <td style="text-align: left">'.$dt["tb_ventadetalle_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>';
                 if ($dt["cs_tipoafectacionigv_cod"] == 10) {
                         $html .= '
-                        <td style="text-align: right">' . $precio_unitario . '</td>
+                        <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
                         <td style="text-align: right"></td>';
                 } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
                         $html .= '
                         <td style="text-align: right"></td>
-                        <td style="text-align: right">' . $precio_unitario. '</td>';
+                        <td style="text-align: right">' . formato_moneda($precio_unitario). '</td>';
                 }else{
                         $html .= '
-                        <td style="text-align: right">' . $precio_unitario . '</td>
+                        <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
                         <td style="text-align: right"></td>';
                 }
                 $html .= '<td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
