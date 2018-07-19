@@ -458,7 +458,7 @@ if($totopgrat > 0){
         <td width="23%" style="text-align: right;">'.$mon . $totopgrat.'</td>
     </tr>';
 }
-$subtotal = $valorventa + $totdes + $totopexo;
+$subtotal = $valorventa + $toigv;
 $html.='
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Sub Total: </td>
