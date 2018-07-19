@@ -390,6 +390,7 @@ $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
 while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
+    $precio_unitario = $dt["tb_ventadetalle_preunilin"]-$dt["tb_ventadetalle_preunilin"]*($dt["tb_ventadetalle_des"]/100);
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
 
@@ -404,18 +405,18 @@ while($dt = mysql_fetch_array($dts)){
                 <td style="text-align: left">'.$dt["tb_ventadetalle_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>';
                 if ($dt["cs_tipoafectacionigv_cod"] == 10) {
                         $html .= '
-                        <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
+                        <td style="text-align: right">' . $precio_unitario . '</td>
                         <td style="text-align: right"></td>';
                 } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
                         $html .= '
                         <td style="text-align: right"></td>
-                        <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>';
+                        <td style="text-align: right">' . $precio_unitario. '</td>';
                 }else{
                         $html .= '
-                        <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
+                        <td style="text-align: right">' . $precio_unitario . '</td>
                         <td style="text-align: right"></td>';
                 }
-                $html .= '<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_preunilin']*$dt['tb_ventadetalle_can']).'</td>';
+                $html .= '<td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
     }else{
         $html.='<td style="text-align: center">'.$cont.'</td>
                 <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
@@ -460,7 +461,7 @@ $html.='
         <td width="23%" style="text-align: right;">'.$mon . formato_moneda($subtotal).'</td>
     </tr>
     <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Descuentos: </td>
+        <td width="78%" style="text-align: right;" colspan="2">Descuento Global: </td>
         <td width="23%" style="text-align: right;">'.$mon . $totdes.'</td>
     </tr>
     <tr>

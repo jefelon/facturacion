@@ -221,7 +221,7 @@ if($_POST['action']=='agregar'){
             $_SESSION['venta_tipdes'][$unico_id][$_POST['cat_id']]=$_POST['cat_tipdes'];
 
             //DESCUENTO
-            $_SESSION['venta_des'][$unico_id][$_POST['cat_id']]=moneda_mysql($_POST['cat_des']*$_POST['cat_can']);
+            $_SESSION['venta_des'][$unico_id][$_POST['cat_id']]=moneda_mysql($_POST['cat_des']);
 
             //GRAVADO/EXONERADO/INAFECTO
             $_SESSION['venta_tip'][$unico_id][$_POST['cat_id']]=$_POST['cat_tip'];
@@ -422,6 +422,7 @@ if($_POST['action']=='restablecer')
     unset($_SESSION['presentacion_id'][$unico_id]);
     unset($_SESSION['catalogo_mul'][$unico_id]);
     unset($_SESSION['venta_descuento'][$unico_id]);
+    unset($_SESSION['venta_general_des']);
 
     unset($_SESSION['servicio_car'][$unico_id]);
     unset($_SESSION['servicio_preven'][$unico_id]);
@@ -487,6 +488,8 @@ else
         vMin: '0.00',
         vMax: '9999.99'
     });
+
+
 
     function calcular_vuelto(){
         var importe = $("#txt_importe_cliente").val();
@@ -570,12 +573,12 @@ if($filas>=2)echo $filas.' ítems agregados.';
     </thead>
     <tbody>
     <?php
-    $total_descuentos=0;
     $sub_total = 0;
     $valor_venta_total = 0;
     $ope_exoneradas_total = 0;
     $ope_gravadas_total = 0;
     $ope_gratuitas_total = 0;
+    $desc_x_item_total=0;
     if($_SESSION['venta_general_des']=="")
     {
         $general_des=0;
@@ -590,6 +593,15 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
         //precio de venta ingresado
         $precio_unitario = $_SESSION['venta_preven'][$unico_id][$indice];
+        if($_SESSION['venta_des'][$unico_id][$indice]=="")
+        {
+            $linea_desc_x_item_percent=0;
+        }
+        else
+        {
+            $linea_desc_x_item_percent = $_SESSION['venta_des'][$unico_id][$indice];
+        }
+
 
         $tipo_item	=$dt1['tb_afectacion_id'];
 
@@ -600,14 +612,17 @@ if($filas>=2)echo $filas.' ítems agregados.';
         }
 
         $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
-        $linea_desc_x_item_percent=0;
+
         $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
         $linea_valor_venta_x_item = $linea_valor_venta_bruto-$linea_desc_x_item;
+        $desc_x_item_total+=$linea_desc_x_item;
         $linea_igv=$linea_valor_venta_x_item*0.18;
 
 
         //tipo g/e/i ingresado
-        $precio_unitario=$precio_unitario-$precio_unitario*($general_des/100);
+        $precio_unitario = $precio_unitario-$precio_unitario*($linea_desc_x_item_percent/100);
+        $precio_unitario= $precio_unitario-$precio_unitario*($general_des/100);
+
 
         if ($tipo_item==9){
             $tipo_pro='Exonerado';
@@ -664,7 +679,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 <td align="right"></td>
             <?php } ?>
             <td align="right">
-
+                <?php echo formato_money($linea_desc_x_item_percent)?>
             </td>
             <td align="right">
                 <?php
@@ -764,12 +779,20 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <?php
 $igv_total = $ope_gravadas_total*0.18;
 $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
-$total_descuentos=$sub_total*($general_des/100);
+$descuento_global=$sub_total*($general_des/100);
+$descuento_total= $descuento_global + $desc_x_item_total;
 ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td>
             <div id="div_calcular_vuelto">
+                <fieldset><legend>Aplicar a filas</legend>
+                    <table><tr>
+                            <td width="80"><label for="txt_ven_des">DSCTO %</label></td>
+                            <td><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
+
+                    </table>
+                </fieldset>
                 <fieldset style="width:200px">
                     <legend>Calcular Vuelto</legend>
                     <table>
@@ -777,8 +800,6 @@ $total_descuentos=$sub_total*($general_des/100);
                             <td align="right"><label style="font-size:12px">Paga con:</label></td>
                             <td align="right"><input type="text" name="txt_importe_cliente" id="txt_importe_cliente" size="10" style="text-align:right; font-size:14px" class="moneda2" /></td>
                         </tr>
-
-
                         <tr>
                             <td align="right"><label for="lbl_ven_vuelto" style="font-size:12px">Vuelto:</label></td>
                             <td align="right"><input type="text" name="lbl_ven_vuelto" id="lbl_ven_vuelto" readonly size="10" style="text-align:right; font-size:14px" class="moneda2" /></td>
@@ -791,32 +812,29 @@ $total_descuentos=$sub_total*($general_des/100);
             <div style="margin-right:53px; margin-top:10px;">
                 <table>
                     <tr>
+                        <td nowrap="nowrap"><label for="txt_ven_subtot" style="font-size:12px;margin-right: 10px;"><strong>SUB TOTAL VENTAS:</strong></label></td>
+                        <td align="right"><input name="txt_ven_subtot" type="text" id="txt_ven_subtot" style="text-align:right; font-size:14px" value="<?php echo formato_money($sub_total)?>" size="15" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="txt_ven_desglob" style="font-size:12px"><strong>DESCUENTO GLOBAL:</strong></label></td>
+                        <td align="right"><input name="txt_ven_desglob" type="text" id="txt_ven_desglob" style="text-align:right; font-size:14px;" value="<?php echo formato_money($descuento_global)?>" size="15" readonly></td>
+                    </tr>
+                    <tr>
+                        <td><label for="txt_com_destotal" style="font-size:12px"><strong>TOTAL DESCUENTOS</strong></label></td>
+                        <td align="right"><input name="txt_com_destotal" type="text" id="txt_com_destotal" style="text-align:right; font-size:14px;" value="<?php echo formato_money($descuento_total)?>" size="15" readonly></td>
+                    </tr>
+                    <tr>
                         <td nowrap="nowrap"><strong>OPERACIONES GRATUITAS:</strong></td>
                         <td align="right"><input name="txt_ven_opegra" type="text" id="txt_ven_opegra" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gratuitas_total)?>" size="15" readonly>
                         </td>
                     </tr>
                 </table>
-
-                        <fieldset><legend>Aplicar a filas</legend>
-                            <table><tr>
-                                    <td width="80"><label for="txt_ven_des">DSCTO %</label></td>
-                                    <td><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
-
-                            </table>
-                        </fieldset>
             </div>
         </td>
         <td valign="top">
             <div style="margin-right:53px; margin-top:10px;">
                 <table border="0" align="right" cellpadding="0" cellspacing="0">
-                    <tr>
-                        <td nowrap="nowrap"><label for="txt_ven_subtot" style="font-size:12px;margin-right: 10px;"><strong>SUB TOTAL VENTAS:</strong></label></td>
-                        <td align="right"><input name="txt_ven_subtot" type="text" id="txt_ven_subtot" style="text-align:right; font-size:14px" value="<?php echo formato_money($sub_total)?>" size="15" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><label for="txt_ven_desglob" style="font-size:12px"><strong>DESCUENTOS:</strong></label></td>
-                        <td align="right"><input name="txt_ven_desglob" type="text" id="txt_ven_desglob" style="text-align:right; font-size:14px" value="<?php echo formato_money($total_descuentos)?>" size="15" readonly></td>
-                    </tr>
+
                     <tr>
                         <td width="120"><label for="txt_ven_valven" style="font-size:12px"><strong>VALOR VENTA:</strong></label></td>
                         <td width="140" align="right">
