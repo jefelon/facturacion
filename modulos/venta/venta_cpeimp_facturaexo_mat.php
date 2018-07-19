@@ -406,17 +406,21 @@ while($dt = mysql_fetch_array($dts)){
                 if ($dt["cs_tipoafectacionigv_cod"] == 10) {
                         $html .= '
                         <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
-                        <td style="text-align: right"></td>';
+                        <td style="text-align: right"></td>
+                        <td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
                 } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
                         $html .= '
                         <td style="text-align: right"></td>
-                        <td style="text-align: right">' . formato_moneda($precio_unitario). '</td>';
+                        <td style="text-align: right">' . formato_moneda($precio_unitario). '</td>
+                        <td style="text-align: right"></td>';
+
                 }else{
                         $html .= '
                         <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
-                        <td style="text-align: right"></td>';
+                        <td style="text-align: right"></td>
+                        <td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
+
                 }
-                $html .= '<td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
     }else{
         $html.='<td style="text-align: center">'.$cont.'</td>
                 <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
