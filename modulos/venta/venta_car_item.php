@@ -178,6 +178,10 @@ $(function() {
     	  <td nowrap="nowrap"><label for="txt_item_preven">Precio Venta:</label></td>
     	  <td><input name="txt_item_preven" id="txt_item_preven" type="text" value="<?php echo formato_money($preven)?>" size="10" maxlength="11"  class="moneda4" style="text-align:right; font-size:11px; font-weight:bold"></td>
   	  </tr>
+        <tr>
+            <td><label for="txt_item_des">Descuento (%):</label></td>
+            <td><input name="txt_item_des" id="txt_item_des" type="text" class="porcentaje2" value="<?php echo formato_money($des)?>" size="10" style="text-align:right"></td>
+        </tr>
   	  <tr>
     	  <td nowrap="nowrap">Promedio:</td>
     	  <td><?php echo formato_money($costo_ponderado1)?></td>
