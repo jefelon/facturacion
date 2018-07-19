@@ -644,7 +644,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $pro_ser = $_SESSION['venta_serial'][$unico_id][$indice];
 			//Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
 			$tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];				
-			$descuento_linea=formato_money($_SESSION['venta_des'][$unico_id][$indice]/1.18);
+			$descuento_linea=formato_money($_SESSION['venta_des'][$unico_id][$indice]);
 			$descuento_global += $descuento_linea*$cantidad;
 			//descuento en porcentaje
 			//if($tipdes == 1){
@@ -749,6 +749,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			unset($_SESSION['presentacion_id'][$unico_id]);
 			unset($_SESSION['catalogo_mul'][$unico_id]);
 			unset($_SESSION['venta_descuento'][$unico_id]);
+            unset($_SESSION['venta_general_des']);
 	  	}
 		
 		//detalle de servicios

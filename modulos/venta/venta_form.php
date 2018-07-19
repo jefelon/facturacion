@@ -466,6 +466,7 @@ function venta_car(act,cat_id){
 					cat_can: $('#txt_bus_cat_can').val(),
 					cat_tip: $('#hdd_detven_tip').val(),
 					cat_preven: $('#txt_bus_cat_preven').val(),
+                    cat_des: $('#txt_detcom_des').val(),
                     cot_id: cot_id
 				}),
 				beforeSend: function() {
@@ -488,6 +489,7 @@ function venta_car(act,cat_id){
                         $('#txt_bus_cat_can').val('');
                         $('#txt_precio_min').val('');
                         $('#txt_precio_may').val('');
+                        $('#txt_detcom_des').val('0.00')
                     }
 				}
 			});
@@ -1722,9 +1724,9 @@ function bus_cantidad(act)
         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
 
         <label for="txt_bus_pro_codbar">COD</label>
-        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="15">
+        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="14">
         <label for="txt_bus_pro_nom">NOM</label>
-        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="35" style="font-size:13px; font-weight:bold">
+        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="30" style="font-size:13px; font-weight:bold">
         <input name="hdd_bus_pro_nom" type="hidden" id="hdd_bus_pro_nom">
 
         <label for="txt_bus_cat_preven">S/.</label>
@@ -1735,7 +1737,8 @@ function bus_cantidad(act)
 
         <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
-
+        <label for="txt_detcom_des">DES</label>
+        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
 
