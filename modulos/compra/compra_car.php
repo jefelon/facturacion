@@ -469,7 +469,7 @@ else
 }
 
 $total_operaciones_exoneradas = $total_operaciones_exoneradas-$total_operaciones_exoneradas*($general_des/100);
-$total_operaciones_gravadas=$total_operaciones_gravadas-$total_operaciones_gravadas*($general_des/100);
+$total_operaciones_gravadas=$total_operaciones_gravadas-$total_operaciones_gravadas*($general_des/100) + $ajuste_positivo-$ajuste_negativo;
 $igv_total_gravados=$total_operaciones_gravadas*18/100;
 $importe_total_venta = $total_operaciones_exoneradas + $total_operaciones_gravadas + $igv_total_gravados;
 $descuento_global = $valor_venta_x_item_total*($general_des/100);
