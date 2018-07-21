@@ -68,7 +68,7 @@ $('#btn_compra_precio_form').button({
 });
 
 $( "#txt_com_fec" ).datepicker({
-	//minDate: "-1M", 
+	minDate: "-1Y",
 	maxDate:"+0D",
 	yearRange: 'c-0:c+0',
 	changeMonth: true,

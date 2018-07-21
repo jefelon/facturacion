@@ -410,8 +410,8 @@ while($dt = mysql_fetch_array($dts)){
                         <td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
                 } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
                         $html .= '
-                        <td style="text-align: right"></td>
-                        <td style="text-align: right">' . formato_moneda($precio_unitario). '</td>
+                        <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
+                        <td style="text-align: right">' . formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']). '</td>
                         <td style="text-align: right"></td>';
 
                 }else{
@@ -462,7 +462,11 @@ $subtotal = $valorventa + $toigv;
 $html.='
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Sub Total: </td>
-        <td width="23%" style="text-align: right;">'.$mon . formato_moneda($subtotal).'</td>
+        <td width="11%" style="text-align: right;">'.$mon . formato_moneda($totopexo).'</td>
+        <td width="12%" style="text-align: right;">'.$mon . formato_moneda($subtotal).'</td>
+    </tr>
+    <tr>
+    <td></td>
     </tr>
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Descuento Global: </td>
@@ -496,7 +500,7 @@ if($importetotal>0){
 }
 $html.='</td>
             <td width="18%" style="text-align: right;">Importe Total: </td>
-            <td width="23%" style="text-align: right;">'.$mon . $importetotal.'</td>
+            <td width="23%" style="text-align: right;  border-top: 1px solid black;">'.$mon . $importetotal.'</td>
         </tr>
 
 </table>
