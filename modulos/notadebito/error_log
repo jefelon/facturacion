@@ -1,0 +1,2 @@
+[25-Jan-2018 23:19:39 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/yfmhytrg/public_html/facturacion/config/Cado.php on line 21
+[30-Jan-2018 01:40:28 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/yfmhytrg/public_html/facturacion/config/Cado.php on line 21

@@ -1,0 +1,1 @@
+[19-Mar-2015 16:32:22 America/Lima] PHP Parse error:  syntax error, unexpected '$mail' (T_VARIABLE) in /home/estudiov/public_html/app/modulos/procedimientocontrol/procedimientocontrol_correo_reg.php on line 46
