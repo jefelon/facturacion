@@ -120,7 +120,7 @@ while($dt = mysql_fetch_array($dts))
 
 	if($dt["tb_ventadetalle_tipven"]==1)
 	{
-		$codigo=$dt["tb_catalogo_id"];
+		$codigo=$dt["tb_presentacion_cod"];
 	}
 	if($dt["tb_ventadetalle_tipven"]==2)
 	{

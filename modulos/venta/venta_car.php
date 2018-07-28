@@ -620,9 +620,12 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
 
         //tipo g/e/i ingresado
-        $precio_unitario = $precio_unitario-$precio_unitario*($linea_desc_x_item_percent/100);
-        $precio_unitario= $precio_unitario-$precio_unitario*($general_des/100);
-
+//    if ($tipo_item==9) {
+        $precio_unitario = $precio_unitario - $precio_unitario * ($linea_desc_x_item_percent / 100);
+//    }
+//    else if($tipo_item==1){
+        $precio_unitario = $precio_unitario - $precio_unitario * ($general_des / 100);
+//    }
 
         if ($tipo_item==9){
             $tipo_pro='Exonerado';
@@ -679,7 +682,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
                 <td align="right"></td>
             <?php } ?>
             <td align="right">
-                <?php echo formato_money($linea_desc_x_item_percent)?>
+                <?php echo formato_money($linea_desc_x_item_percent/100*($linea_valor_unitario*$cantidad))?>
             </td>
             <td align="right">
                 <?php

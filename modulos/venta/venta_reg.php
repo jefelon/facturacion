@@ -122,7 +122,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$_POST['hdd_ven_cli_id'],
 			moneda_mysql($_POST['txt_ven_valven']),
 			moneda_mysql($_POST['txt_ven_igv']),
-			moneda_mysql($_POST['txt_ven_desglob']),
+			moneda_mysql($_POST['txt_com_destotal']),
 			moneda_mysql($_POST['txt_ven_tot']),
 			$_POST['cmb_ven_est'],
 			$_POST['txt_ven_lab1'],
@@ -631,7 +631,11 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		
 		//detalle de productos
 		if(isset($_SESSION['venta_car'][$unico_id]))foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad)
-		{			
+		{
+//            $dts1 = $oCatalogoProducto->presentacion_catalogo_stock_almacen($_POST['tb_catalogo_id'],$almacen_venta);
+//            $dt1 = mysql_fetch_array($dts1);
+//            $tipo_item	=$dt1['tb_afectacion_id'];
+
 			$autoin++;
 
 			//precio de venta ingresado
@@ -647,9 +651,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$descuento_linea=formato_money($_SESSION['venta_des'][$unico_id][$indice]);
 			$descuento_global += $descuento_linea*$cantidad;
 			//descuento en porcentaje
-			//if($tipdes == 1){
-			//	$descuento_calculo = ($descuento_linea/100)*$precio_unitario;
-			//}
+			if($tipdes == 1){
+				$descuento_calculo = ($descuento_linea/100)*$precio_unitario;
+			}
 			//descuento en soles
 			if($tipdes == 2){
 				$descuento_calculo = $descuento_linea;	
@@ -657,12 +661,18 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			
 			//precio unitario linea al que se vende
 			$precio_unitario_linea=$_SESSION['venta_preven'][$unico_id][$indice];
-			
-			//valor venta
-			$valor_venta=moneda_mysql(($precio_unitario*$cantidad)-$descuento_calculo);
+
+//            if ($tipo_item==9) {
+//                //valor venta
+//                $valor_venta=moneda_mysql(($precio_venta*$cantidad)-$descuento_calculo);
+//            }else{
+//                //valor venta
+                $valor_venta=moneda_mysql(($precio_unitario*$cantidad)-$descuento_calculo);
+//            }
+
 			
 			//igv
-			$igv=$valor_venta*$igv_dato;
+			$igv=($valor_venta*$igv_dato)-$descuento_linea;
 			
 			$tipo_venta=1;
 			$ser_id=0;
@@ -770,9 +780,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$descuento_linea = $_SESSION['servicio_des'][$unico_id][$indice];
 			
 			//descuento en porcentaje
-			// if($tipdes == 1){
-			// 	$descuento_calculo = ($descuento_linea/100)*$precio_unitario;
-			// }
+//			 if($tipdes == 1){
+//			 	$descuento_calculo = ($descuento_linea/100)*$precio_unitario;
+//			 }
 			//descuento en soles
 			if($tipdes == 2){
 				$descuento_calculo = $descuento_linea;	
