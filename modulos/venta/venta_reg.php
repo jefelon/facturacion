@@ -672,6 +672,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			
 			//igv
+            $valor_venta_x_item_linea = $valor_venta-($valor_venta*$descuento_linea/100);
+            $desccuento_x_item_linea = $valor_venta*$descuento_linea/100;
 			$igv=($valor_venta*$igv_dato)-$descuento_linea;
 			
 			$tipo_venta=1;
@@ -688,12 +690,12 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 				$indice,
 				$ser_id,
 				$nom,
-				$precio_unitario,
+                $precio_venta,
 				$cantidad,
 				$tipdes,
-				$descuento_linea,
-				$precio_unitario_linea,
-				$valor_venta,
+                $desccuento_x_item_linea,
+				$precio_unitario,
+                $valor_venta_x_item_linea,
 				$igv,
 				$ven_id,
 				$afeigv_id,

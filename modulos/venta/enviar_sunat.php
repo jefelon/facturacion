@@ -139,15 +139,14 @@ while($dt = mysql_fetch_array($dts))
 	$detalle[$autoin]['cdsc']					=$dt["tb_ventadetalle_nom"];
 
 	//$igv 										=$dt["tb_ventadetalle_igv"] / $dt["tb_ventadetalle_can"];
+    $detalle[$autoin]['preciounitario']					=$dt["tb_ventadetalle_preuni"];
+    $detalle[$autoin]['valorrefunitario']					=$dt["tb_ventadetalle_preuni"];
     if ($dt["cs_tipoafectacionigv_cod"] == 10){
-        $detalle[$autoin]['precio']					=$dt["tb_ventadetalle_preuni"];
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
     elseif ($dt["cs_tipoafectacionigv_cod"] == 20){
-        $detalle[$autoin]['precio']					=$dt["tb_ventadetalle_preunilin"];
         $detalle[$autoin]['igv']					=0.00;//sumatoria con cantidad
     }else{
-        $detalle[$autoin]['precio']					=$dt["tb_ventadetalle_preuni"];
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
 	//oculto ya se calcula en base datos
