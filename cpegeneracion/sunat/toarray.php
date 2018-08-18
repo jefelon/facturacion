@@ -392,8 +392,15 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
 
             //$arr['InvoiceLine'][$row+1]['Item']['Description'] = format_description((($item->detalle==null) ? $item->cdsc : $item->detalle));
             $arr['InvoiceLine'][$row+1]['Item']['Description'] = format_description($item->detalle);
-            
-            $arr['InvoiceLine'][$row+1]['Price']['PriceAmount']['Price'] = round($item->valorunitario, 2);
+
+            if($item->idafectaciond == 10)//gravado
+            {
+                $arr['InvoiceLine'][$row + 1]['Price']['PriceAmount']['Price'] = round($item->valorref, 2);
+            }
+            elseif ($item->idafectaciond==20 ||$item->idafectaciond==30)//exonerado - inafecto
+            {
+                $arr['InvoiceLine'][$row + 1]['Price']['PriceAmount']['Price'] = round($item->preciounitario, 2);
+            }
             $arr['InvoiceLine'][$row+1]['Price']['PriceAmount']['currencyID'] = $header[0]->isomoneda;
             
             if($item->idafectaciond == 10)//gravado
