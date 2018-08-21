@@ -4,7 +4,6 @@ require_once ("cMarca.php");
 $oMarca = new cMarca();
 ?>
 	<option value="">-</option>
-
 <?php
 	$dts1=$oMarca->mostrarTodos();
 	while($dt1 = mysql_fetch_array($dts1))

@@ -79,6 +79,7 @@ $(document).ready(function() {
         <table cellspacing="1" id="tabla_producto" class="tablesorter">
             <thead>
                 <tr>
+                    <th>CODIGO</th>
                     <th>NOMBRE</th>
                     <th>DESCRIPCION</th>
                     <th>MARCA</th>
@@ -97,6 +98,7 @@ $(document).ready(function() {
                 <?php
 					while($dt1 = mysql_fetch_array($dts1)){?>
                         <tr>
+                            <td><?php echo $dt1['tb_presentacion_cod']?></td>
                             <td><?php echo $dt1['tb_producto_nom']?></td>
                             <td><?php echo $dt1['tb_producto_des']?></td>
                             <td><?php echo $dt1['tb_marca_nom']?></td>

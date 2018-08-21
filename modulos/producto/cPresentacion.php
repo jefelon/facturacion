@@ -110,6 +110,15 @@ class cPresentacion{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+    function modificar2($id,$nom){
+        $sql = "UPDATE  tb_presentacion SET  
+	`tb_presentacion_mod` = NOW( ) ,
+	`tb_presentacion_nom` =  '$nom'
+	 WHERE tb_presentacion_id =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function actualizar_stock($id,$sto){
 	$sql = "UPDATE  tb_presentacion SET  
 	`tb_presentacion_mod` = NOW( ) ,

@@ -41,7 +41,7 @@ if($_POST['action_producto']=="insertar")
 		
 		//insertamos presentacion
 		$oPresentacion->insertar(
-			strip_tags(limpia_espacios($_POST['txt_pre_nom'])),
+            strip_tags(limpia_espacios($_POST['txt_pro_nom'])),
             strip_tags($_POST['txt_pre_cod']),
 			$_POST['txt_pre_stomin'],
 			$_POST['cmb_pre_est'],
@@ -117,7 +117,12 @@ if($_POST['action_producto']=="editar")
             $_POST['cmb_afec_id'],
 			$_POST['hdd_usu_id'],
             $_POST['hdd_prod_img']
+
 		);
+        $oPresentacion->modificar2(
+            $_POST['hdd_pro_id'],
+            limpia_espacios($_POST['txt_pro_nom'])
+        );
 
         if (!file_exists('img_products')) {
             mkdir('img_products', 0777);

@@ -327,7 +327,10 @@ if($estado=="ANULADA"){
 }
 $html.='<tr>
         <td style="text-align: left" width="15%" align="left">
-            <img src="'.$empresa_logo.'" alt="" width: "100%">
+        <?php   if(file_exists($empresa_logo)){
+        echo "<img src="'.$empresa_logo.'" alt="" width: "100%">";
+            }
+        ?>
         </td>    
         <td style="text-align: left" width="55%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
         </td>

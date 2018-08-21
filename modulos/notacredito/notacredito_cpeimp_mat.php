@@ -20,7 +20,9 @@ $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
 $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
-
+if(!is_file($empresa_logo)){
+    $empresa_logo='../../images/logo.jpg';
+}
 $sucursales='
 <table style="font-size:7pt;" border="0">
     <tr>

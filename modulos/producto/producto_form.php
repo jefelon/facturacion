@@ -119,6 +119,10 @@ function cmb_mar_id(ids)
 			$('#cmb_mar_id').html(html);
 		}
 	});
+
+    if($_POST['action']=="insertar") {
+        $('#cmb_mar_id > option[value="3"]').attr('selected', 'selected');
+    }
 }
 
 
@@ -395,6 +399,7 @@ $(function() {
 	if($_POST['action']=="insertar")
 	{
 	?>
+    $('#cmb_afec_id > option[value="1"]').attr('selected', 'selected');
 	$('#txt_pro_nom').focus();
 	<?php }?>
 	
@@ -793,7 +798,8 @@ $(function() {
         <tr>
             <td><label for="cmb_afec_id">Tipo Afecto IGV:</label>
                 <div id="div_afecto_form">
-                    <select name="cmb_afec_id" id="cmb_afec_id">	<option value="">-</option>
+                    <select name="cmb_afec_id" id="cmb_afec_id">
+                        <option value="">-</option>
                         <option value="1" <?php if($afec_id=='1')echo 'selected'?>>GRAVADO</option>
                         <option value="9" <?php if($afec_id=='9')echo 'selected'?>>EXONERADO</option>
                         <option value="11"<?php if($afec_id=='11')echo 'selected'?>>INAFECTO</option>
@@ -831,10 +837,10 @@ $(function() {
 <div style="float:left; margin-left:15px">
   <fieldset><legend>Presentación de producto</legend>
     <table>                
-        <tr>
-          <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>
-          <td colspan="5"><input name="txt_pre_nom" type="text" id="txt_pre_nom" value="<?php echo $nom?>" size="55" maxlength="50"></td>
-        </tr>
+<!--        <tr>-->
+<!--          <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>-->
+<!--          <td colspan="5"><input name="txt_pre_nom" type="text" id="txt_pre_nom" value="--><?php //echo $nom?><!--" size="55" maxlength="50"></td>-->
+<!--        </tr>-->
         <tr>
           <td><label for="txt_pre_cod">Código:</label></td>
           <td><input type="text" name="txt_pre_cod" id="txt_pre_cod"></td>

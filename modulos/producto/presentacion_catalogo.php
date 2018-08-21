@@ -40,7 +40,7 @@ $(function() {
             <thead>
                 <tr>
                     <th>NOMBRE</th>
-                    <th>PRESENTACION</th>
+<!--                    <th>PRESENTACION</th>-->
                     <th title="UNIDAD">UND</th>
                     <th align="right" title="PRECIO UNITARIO DE COMPRA">PRECIO UNIT COMPRA</th>
                     <th align="right" title="PRECIO COSTO">PRECIO COSTO</th>
@@ -75,11 +75,11 @@ $(function() {
 							<?php echo $dt1['tb_producto_nom']?>
                             </span>
                             </td>
-                            <td>
-							<span style="">
-							<?php echo $dt1['tb_presentacion_nom']?>
-                            </span>
-                            </td>
+<!--                            <td>-->
+<!--							<span style="">-->
+<!--							--><?php //echo $dt1['tb_presentacion_nom']?>
+<!--                            </span>-->
+<!--                            </td>-->
                             <td title="<?php echo $dt1['tb_unidad_nom']?>">
 							<span style="">
 							<?php echo $dt1['tb_unidad_abr']?>

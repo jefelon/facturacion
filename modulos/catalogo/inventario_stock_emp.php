@@ -146,7 +146,8 @@ $(document).ready(function() {
         <table cellspacing="1" id="tabla_producto" class="tablesorter">
             <thead>
                 <tr>
-                  <th>NOMBRE</th>
+                    <th>CODIGO</th>
+                    <th>NOMBRE</th>
                     <th>MARCA</th>
                     <th>CATEGORIA</th>
                     <th align="right" nowrap>P. COSTO US$</th>
@@ -301,6 +302,7 @@ $(document).ready(function() {
 
 					?>
                         <tr>
+                            <td><?php echo $dt1['tb_presentacion_cod']?></td>
                           <td>
                             <span style="">
 							<?php echo $dt1['tb_producto_nom']?>

@@ -65,6 +65,9 @@ $emp_tel=$dt['tb_empresa_tel'];
 $emp_ema=$dt['tb_empresa_ema'];
 $emp_fir=$dt['tb_empresa_fir'];
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
+if(!is_file($empresa_logo)){
+    $empresa_logo='../../images/logo.jpg';
+}
 mysql_free_result($dts);
 
 if($emp_tel!="")$texto_telefono='Teléfono: '.$emp_tel;

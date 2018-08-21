@@ -86,7 +86,7 @@ $(document).ready(function() {
         <table cellspacing="1" id="tabla_producto" class="tablesorter">
             <thead>
                 <tr>
-                  <?php /*?><th>CODIGO</th><?php */?>
+                  <th>CODIGO</th>
                     <th>NOMBRE</th>
                     <?php /*?><th>PRES</th><?php */?>
                     <th>MARCA</th>
@@ -141,7 +141,7 @@ $(document).ready(function() {
 
 					?>
                         <tr>
-                          <?php /*?><td><?php echo $dt1['tb_presentacion_cod']?></td><?php */?>
+                            <td><?php echo $dt1['tb_presentacion_cod']?></td>
                             <td>
                             <span style="">
 							<?php echo $dt1['tb_producto_nom']?>

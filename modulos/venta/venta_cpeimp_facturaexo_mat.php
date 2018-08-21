@@ -39,6 +39,9 @@ $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
 $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
+if(!is_file($empresa_logo)){
+    $empresa_logo='../../images/logo.jpg';
+}
 mysql_free_result($dts);
 
 $sucursales='
@@ -328,8 +331,8 @@ if($estado=="ANULADA"){
 }
 $html.='<tr>
         <td style="text-align: left" width="15%" align="left">
-            <img src="'.$empresa_logo.'" alt="" width: "100%">
-        </td>    
+        <img src="'.$empresa_logo.'" alt="" width: "100%">
+        </td>   
         <td style="text-align: left" width="55%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
         </td>
         <!-- <td width="20%" style="text-align: center">

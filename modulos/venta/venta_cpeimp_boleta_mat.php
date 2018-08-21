@@ -42,7 +42,9 @@ $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_em
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 
 mysql_free_result($dts);
-
+if(!is_file($empresa_logo)){
+    $empresa_logo='../../images/logo.jpg';
+}
 $sucursales='
 <table style="font-size:7pt" border="0">
     <tr>

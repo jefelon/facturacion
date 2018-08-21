@@ -365,7 +365,7 @@ $(function() {
     <table>                
         <tr>
           <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>
-          <td colspan="5"><input name="txt_pre_nom" type="text" id="txt_pre_nom" value="<?php echo $nom?>" size="55" maxlength="50"></td>
+          <td colspan="5"><input name="txt_pre_nom" type="text" id="txt_pre_nom" readonly value="<?php echo $nom?>" size="55" maxlength="50"></td>
         </tr>
         <tr>
           <td><label for="txt_pre_cod">Código:</label></td>
