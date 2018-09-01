@@ -95,6 +95,7 @@ while($dt = mysql_fetch_array($dts))
     $totopgrat=$dt["tb_venta_grat"];
     $totopexo=$dt["tb_venta_exo"];
     $totopgrav=$dt["tb_venta_gra"];
+    $totopeina=$dt["tb_venta_ina"];
     $valorventa=$dt["tb_venta_valven"];
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
@@ -386,20 +387,20 @@ $html.='<tr>
     <tbody>
         <tr class="header_row">
             <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 6%;"><b>CANT.</b></th>
+            <th style="text-align: center; width: 7%;"><b>CANT.</b></th>
              <th style="text-align: center; width: 8%;"><b>UNIDAD</b></th>
-            <th style="text-align: center; width: 45%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 40%;"><b>DESCRIPCION</b></th>
             <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
-            <th style="text-align: right; width: 12%;"><b>PRECIO UNIT.</b></th>
-            <th style="text-align: right; width: 12%;"><b>PRECIO EXO.</b></th>
+            <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
+            <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 12%;"><b>PRECIO VENTA</b></th>
+            <th style="text-align: right; width: 13%;"><b>VALOR VENTA</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
 while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
-    $precio_unitario = $dt["tb_ventadetalle_preunilin"]-$dt["tb_ventadetalle_preunilin"]*($dt["tb_ventadetalle_des"]/100);
+    $valor_unitario_linea = $dt["tb_ventadetalle_preunilin"];
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
 
@@ -408,47 +409,24 @@ while($dt = mysql_fetch_array($dts)){
             $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
         }
 
-        $html.='<td style="text-align:center">'.$cont.'</td>
-                <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
-                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: left">'.$dt["tb_ventadetalle_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>';
-                if ($dt["cs_tipoafectacionigv_cod"] == 10) {
-                        $html .= '
-                        <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
-                        <td style="text-align: right"></td>
-                        <td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
-                } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
-                        $html .= '
-                        <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
-                        <td style="text-align: right">' . formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']). '</td>
-                        <td style="text-align: right"></td>';
+        $html .='<td style="text-align:center">' . $cont . '</td>
+                 <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
+                 <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . '</td>';
 
-                }else{
-                        $html .= '
-                        <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
-                        <td style="text-align: right"></td>
-                        <td style="text-align: right">'.formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']).'</td>';
+        $html .= '<td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
+                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
+                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
 
-                }
     }else{
-        $html.='<td style="text-align: center">'.$cont.'</td>
-                <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
-                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: left">'.$dt["tb_ventadetalle_nom"].' - '.$dt['tb_marca_nom'].'</td>';
-                if ($dt["cs_tipoafectacionigv_cod"] == 10) {
-                    $html .= '
-                                <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
-                                <td style="text-align: right"></td>';
-                } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
-                    $html .= '
-                                <td style="text-align: right"></td>
-                                <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>';
-                } else {
-                    $html .= '
-                                <td style="text-align: right">' . $dt["tb_ventadetalle_preunilin"] . '</td>
-                                <td style="text-align: right"></td>';
-                }
-                $html .= '<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_preunilin']*$dt['tb_ventadetalle_can']).'</td>';
+        $html .='<td style="text-align:center">' . $cont . '</td>
+                 <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
+                 <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . '</td>';
+
+        $html .= '<td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
+                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
+                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
     }
     $html.='</tr>';
     $cont++;
@@ -467,27 +445,19 @@ if($totopgrat > 0){
         <td width="23%" style="text-align: right;">'.$mon . $totopgrat.'</td>
     </tr>';
 }
-$subtotal = $valorventa + $toigv;
+
 $html.='
     <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Sub Total: </td>
-        <td width="11%" style="text-align: right;">'.$mon . formato_moneda($totopexo).'</td>
-        <td width="12%" style="text-align: right;">'.$mon . formato_moneda($subtotal).'</td>
-    </tr>
-    <tr>
-    <td></td>
-    </tr>
-    <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Descuento Global: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $totdes.'</td>
-    </tr>
-    <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Valor Venta: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $valorventa.'</td>
+        <td width="78%" style="text-align: right;" colspan="2">Ope Grav: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $totopgrav.'</td>
     </tr>
     <tr>
         <td width="78%" style="text-align: right;" colspan="2">Ope Exo: </td>
         <td width="23%" style="text-align: right;">'.$mon . $totopexo.'</td>
+    </tr>
+    <tr>
+        <td width="78%" style="text-align: right;" colspan="2">Ope Ina: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $totopeina.'</td>
     </tr>';
 if($totanti > 0){
     $html.='<tr>
@@ -496,6 +466,10 @@ if($totanti > 0){
         </tr>';
 }
 $html.='
+    <tr>
+        <td width="78%" style="text-align: right;" colspan="2">Total Descuento: </td>
+        <td width="23%" style="text-align: right;">'.$mon . $totdes.'</td>
+    </tr>
     <tr>
         <td  width="78%" style="text-align: right;" colspan="2">IGV: </td>
         <td width="23%" style="text-align: right;">'.$mon . $toigv.'</td>

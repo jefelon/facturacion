@@ -150,7 +150,7 @@ while($dt = mysql_fetch_array($dts))
 
 	//$igv 										=$dt["tb_ventadetalle_igv"] / $dt["tb_ventadetalle_can"];
     $detalle[$autoin]['preciounitario']					=$dt["tb_ventadetalle_preuni"];
-    $detalle[$autoin]['valorrefunitario']					=$dt["tb_ventadetalle_preuni"];
+    $detalle[$autoin]['valorrefunitario']					=$dt["tb_ventadetalle_preunilin"];
     if ($dt["cs_tipoafectacionigv_cod"] == 10){
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
@@ -176,7 +176,7 @@ mysql_free_result($dts);
 
 $detalle = json_decode(json_encode($detalle));
 //===============================================================================================
-
+echo json_encode($detalle);
 if($idcomprobante==1)//FACTURA
 {
 	$enviar=true;

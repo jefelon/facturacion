@@ -111,7 +111,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $usu_id= $_POST['hdd_usu_id'];
         }
 
-
+        $descuento_numero_global = $_POST['txt_ven_des'];
 		//insertamos venta
 		$oVenta->insertar( 
 			fecha_mysql($_POST['txt_ven_fec']),
@@ -632,58 +632,40 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		//detalle de productos
 		if(isset($_SESSION['venta_car'][$unico_id]))foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad)
 		{
-//            $dts1 = $oCatalogoProducto->presentacion_catalogo_stock_almacen($_POST['tb_catalogo_id'],$almacen_venta);
-//            $dt1 = mysql_fetch_array($dts1);
-//            $tipo_item	=$dt1['tb_afectacion_id'];
-
 			$autoin++;
 
 			//precio de venta ingresado
-			$precio_venta	=$_SESSION['venta_preven'][$unico_id][$indice];
-							
+            $precio_unitario_linea	=$_SESSION['venta_preven'][$unico_id][$indice];
+            $afeigv_id=$_SESSION['venta_tip'][$unico_id][$indice];
 			//precio unitario de venta
-			$precio_unitario=$precio_venta/(1+$igv_dato);
-			
+            if ($afeigv_id == 1) {
+                $valor_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
+            }elseif ($afeigv_id == 9){
+                $valor_unitario_linea = $precio_unitario_linea;
+            }
+
 			$nom = $_SESSION['venta_nom'][$unico_id][$indice];
             $pro_ser = $_SESSION['venta_serial'][$unico_id][$indice];
 			//Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
 			$tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];				
-			$descuento_linea=formato_money($_SESSION['venta_des'][$unico_id][$indice]);
-			$descuento_global += $descuento_linea*$cantidad;
+			$descuento_numero_linea=formato_money($_SESSION['venta_des'][$unico_id][$indice]);
+//			$descuento_global += $descuento_linea*$cantidad;
+
 			//descuento en porcentaje
-			if($tipdes == 1){
-				$descuento_calculo = ($descuento_linea/100)*$precio_unitario;
-			}
-			//descuento en soles
-			if($tipdes == 2){
-				$descuento_calculo = $descuento_linea;	
-			}
-			
-			//precio unitario linea al que se vende
-			$precio_unitario_linea=$_SESSION['venta_preven'][$unico_id][$indice];
 
-//            if ($tipo_item==9) {
-//                //valor venta
-//                $valor_venta=moneda_mysql(($precio_venta*$cantidad)-$descuento_calculo);
-//            }else{
-//                //valor venta
-                $valor_venta=moneda_mysql(($precio_unitario*$cantidad)-$descuento_calculo);
-//            }
+            $descuento_porcentaje_linea = $descuento_numero_linea/100;
 
-			
+            $valor_venta_bruto_linea=$valor_unitario_linea*$cantidad;
+
 			//igv
-            $valor_venta_x_item_linea = $valor_venta-($valor_venta*$descuento_linea/100); //este no descontar el igv en exonerados
-            $desccuento_x_item_linea = $valor_venta*$descuento_linea/100;
-//			$igv=($valor_venta*$igv_dato)-$descuento_linea;
-            $igv=$valor_venta_x_item_linea*$igv_dato;
-			
+            $descuento_x_item_linea = $valor_venta_bruto_linea*$descuento_porcentaje_linea;
+            $valor_venta_x_item_linea = $valor_venta_bruto_linea-$descuento_x_item_linea;
+
+			$igv_linea=$valor_venta_x_item_linea*$igv_dato;
+
 			$tipo_venta=1;
 			$ser_id=0;
-			$afeigv_id=$_SESSION['venta_tip'][$unico_id][$indice];
 			$unimed_id=12;//NIU
-
-            $desc_percentage = $_POST['txt_ven_des'];
-            $precio_unitario_linea = $precio_unitario_linea-($precio_unitario_linea* $desc_percentage/100);
 
 			//////////////////////
 			$oVenta->insertar_detalle(
@@ -691,13 +673,13 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 				$indice,
 				$ser_id,
 				$nom,
-                $precio_venta,
+                $precio_unitario_linea,
 				$cantidad,
 				$tipdes,
-                $desccuento_x_item_linea,
-				$precio_unitario,
+                $descuento_x_item_linea,
+                $valor_unitario_linea,
                 $valor_venta_x_item_linea,
-				$igv,
+                $igv_linea,
 				$ven_id,
 				$afeigv_id,
 				$unimed_id,
@@ -737,7 +719,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			//registro detalle de kardex
 			$costo=0;
-			$precio=moneda_mysql(($valor_venta+$igv)/$cantidad);
+			$precio=moneda_mysql(($valor_venta_x_item_linea+$igv_linea)/$cantidad);
 			$oKardex->insertar_detalle(
 				$cat_id,
 				$cantidad_venta,
@@ -771,37 +753,26 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$autoin++;
 
 			//precio de venta ingresado
-			$precio_venta = $_SESSION['servicio_preven'][$unico_id][$indice];
+            $precio_unitario_linea = $_SESSION['servicio_preven'][$unico_id][$indice];
 			
 			//precio unitario de venta
-			$precio_unitario=$precio_venta/(1+$igv_dato);
+			$valor_unitario_linea=$precio_unitario_linea/(1+$igv_dato);
 			
 			$nom = $_SESSION['servicio_nom'][$unico_id][$indice];
 
 			//Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
-			$tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];				
-			$descuento_linea = $_SESSION['servicio_des'][$unico_id][$indice];
-			
+			$tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];
+            $descuento_numero_linea = formato_money($_SESSION['servicio_des'][$unico_id][$indice]);
+            $descuento_porcentaje_linea = $descuento_numero_linea/100;
 			//descuento en porcentaje
-//			 if($tipdes == 1){
-//			 	$descuento_calculo = ($descuento_linea/100)*$precio_unitario;
-//			 }
-			//descuento en soles
-			if($tipdes == 2){
-				$descuento_calculo = $descuento_linea;	
-			}
-			
-			
-			//precio unitario linea al que se vende
-			$precio_unitario_linea=$_SESSION['servicio_preven'][$unico_id][$indice];
-			//$precio_unitario_linea=$precio_unitario-$descuento_calculo;//correccion
-			
-			//valor venta
-			$valor_venta=moneda_mysql(($precio_unitario*$cantidad)-$descuento_calculo);
-			//$valor_venta=$cantidad*(moneda_mysql($precio_unitario_linea));//correccion
-			
-			//igv
-			$igv=$valor_venta*$igv_dato;
+
+            $valor_venta_bruto_linea=$valor_unitario_linea*$cantidad;
+
+            //igv
+            $descuento_x_item_linea = $valor_venta_bruto_linea*$descuento_porcentaje_linea;
+            $valor_venta_x_item_linea = $valor_venta_bruto_linea-$descuento_x_item_linea;
+
+            $igv_linea=$valor_venta_x_item_linea*$igv_dato;
 			
 			$tipo_venta=2;
 			$cat_id=0;
@@ -812,19 +783,20 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			//registro detalle de venta de servicio
 
             $desc_percentage = $_POST['txt_ven_des'];
-            $precio_unitario_linea = $precio_unitario_linea-($precio_unitario_linea* $desc_percentage/100);
+
+
 			$oVenta->insertar_detalle( 
 				$tipo_venta,
 				$cat_id,  
 				$indice,
-				$nom,				
-				$precio_unitario,
+				$nom,
+                $precio_unitario_linea,
 				$cantidad,
 				$tipdes,
-				$descuento_linea,
-				$precio_unitario_linea,
-				$valor_venta,
-				$igv,			
+                $descuento_x_item_linea,
+				$valor_unitario_linea,
+                $valor_venta_x_item_linea,
+                $igv_linea,
 				$ven_id,
 				$afeigv_id,
 				$unimed_id,
