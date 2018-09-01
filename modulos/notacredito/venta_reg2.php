@@ -57,16 +57,20 @@ if($_POST['action_venta']=="insertar")
 					$des	=$dt['tb_venta_des'];
 					$igv	=$dt['tb_venta_igv'];
 					$tot	=$dt['tb_venta_tot'];
-					$gra	=$dt['tb_venta_gra'];
-
+               		$gra	=$dt['tb_venta_gra'];
+					$exo	=$dt['tb_venta_exo'];
+					$ina	=$dt['tb_venta_ina'];
 					$grat	=$dt['tb_venta_grat'];
+               		$isc	=$dt['tb_venta_isc'];
 					$otrtri	=$dt['tb_venta_otrtri'];
 					$otrcar	=$dt['tb_venta_otrcar'];
+
 
 					$est	=$dt['tb_venta_est'];
 					
 					$punven_id	=$dt['tb_puntoventa_id'];
 					$alm_id	=$dt['tb_almacen_id'];
+                	$monval	=$dt['cs_tipomoneda_id'];
 					
 				mysql_free_result($dts);
 
@@ -120,12 +124,12 @@ if($_POST['action_venta']=="insertar")
 					$_SESSION['empresa_id'],
 
 					$documento_tipdoc,//cs_tipodocumento_id
-					1,//cs_tipomoneda_id
+                    $monval,//cs_tipomoneda_id
 					$gra,//tb_venta_gra
-					0,//tb_venta_ina
-					0,//tb_venta_exo
+					$ina,//tb_venta_ina
+					$exo,//tb_venta_exo
 					$grat,//tb_venta_grat
-					0,//tb_venta_isc
+					$isc,//tb_venta_isc
 					$otrtri,
 					$otrcar,
 					0,//tb_venta_desglo

@@ -67,7 +67,7 @@ while($dt = mysql_fetch_array($dts))
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
-    $moneda=1;
+    $moneda=$dt["cs_tipomoneda_id"];
 
     $estsun=$dt['tb_venta_estsun'];
       $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -86,6 +86,12 @@ while($dt = mysql_fetch_array($dts))
 if($moneda==1){
     $moneda  = "SOLES";
     $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
 }
    
  
@@ -286,10 +292,10 @@ if($estado=="ANULADA"){
     <tbody>
         <tr class="header_row">
             <th style="text-align: center; width: 7%;"><b>CANT</b></th>
-            <th style="text-align: center; width: 53%;"><b>DESCRIPCIÓN</b></th>
             <th style="text-align: center; width: 10%;"><b>UNIDAD</b></th>
-            <th style="text-align: right; width: 15%;"><b>PRECIO UNITARIO</b></th>
-            <th style="text-align: right; width: 15%;"><b>PRECIO VENTA</b></th>
+            <th style="text-align: center; width: 53%;"><b>DESCRIPCIÓN</b></th>
+            <th style="text-align: right; width: 15%;"><b>VALOR UNITARIO</b></th>
+            <th style="text-align: right; width: 15%;"><b>VALOR VENTA</b></th>
         </tr>';
             $dts = $oNotacredito->mostrar_venta_detalle_ps($ven_id);
             $cont = 1;
@@ -298,12 +304,13 @@ if($estado=="ANULADA"){
 $html.='<tr class="row">';
             if($dt["tb_ventadetalle_tipven"]==1){
                 $html.='<td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].'</td>
-                <td style="text-align: center">UNIDAD</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
+                <td style="text-align: left">'.$dt["tb_producto_nom"].'</td>              
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>';
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
             }else{
                 $html.='<td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: left">'.$dt["tb_servicio_nom"].'</td>
                 <td style="text-align: center">UNIDAD</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>';
@@ -351,7 +358,7 @@ $html.='<tr class="row">';
         <tr>
             <td width="60%" style="text-align: left;">';
             if($importetotal>0){
-            	$html.='SON: ' . numtoletras($importetotal);
+            	$html.='SON: ' . numtoletras($importetotal,$monedaval);
             }else{
             	$html.='Leyenda TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE';
             }

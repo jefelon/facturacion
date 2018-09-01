@@ -99,7 +99,7 @@ while($dt = mysql_fetch_array($dts))
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
-    $moneda=1;
+    $moneda=$dt["cs_tipomoneda_id"];
 
     $estsun=$dt['tb_venta_estsun'];
     $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -119,6 +119,12 @@ while($dt = mysql_fetch_array($dts))
 if($moneda==1){
     $moneda  = "SOLES";
     $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
 }
 
 
@@ -179,7 +185,7 @@ if($num_rows_vp>0)
         $pago_mon=formato_money($rw1['tb_ventapago_mon']);
 
         $texto_pago1[]=$forma.' '.$modo;
-        $texto_pago2[]=$forma.' '.$modo.': S/.  '.$pago_mon;
+        $texto_pago2[]=$forma.' '.$modo.':'.$mon.'  '.$pago_mon;
     }
     mysql_free_result($rws1);
 }
@@ -497,7 +503,7 @@ $html.='
         <tr>
             <td width="60%" style="text-align: left;">';
 if($importetotal>0){
-    $html.='SON: ' . numtoletras($importetotal);
+    $html.='SON: ' . numtoletras($importetotal,$monedaval);
 }else{
     $html.='Leyenda TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE';
 }

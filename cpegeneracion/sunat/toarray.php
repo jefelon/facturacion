@@ -478,8 +478,14 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             }
             
             $arr['InvoiceLine'][$row+1]['LineExtensionAmount']['currencyID'] = $header[0]->isomoneda;
-            $arr['InvoiceLine'][$row+1]['LineExtensionAmount']['Amount'] = round($item->valorventa,2);
-            
+            if($item->idafectaciond == 10)//gravado
+            {
+                $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->valorventa, 2);
+            }
+            elseif ($item->idafectaciond==20||$item->idafectaciond==30)//exonerado e inafecto
+            {
+                $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->preciounitario, 2);
+            }
             if($item->descto > 0){
                 $arr['InvoiceLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'false';
                 $arr['InvoiceLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $header[0]->isomoneda;
@@ -586,7 +592,14 @@ function arr_CreditNoteLine($header, $detalle, $empresa, $tipodoc){
                 $arr['CreditNoteLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'EXC';
             }
             $arr['CreditNoteLine'][$row+1]['LineExtensionAmount']['currencyID'] = $header[0]->isomoneda;
-            $arr['CreditNoteLine'][$row+1]['LineExtensionAmount']['Amount'] = round($item->valorventa,2);
+            if($item->idafectaciond == 10)//gravado
+            {
+                $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->valorventa, 2);
+            }
+            elseif ($item->idafectaciond==20||$item->idafectaciond==30)//exonerado e inafecto
+            {
+                $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->preciounitario, 2);
+            }
             if($item->descto > 0){
                 $arr['CreditNoteLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'false';
                 $arr['CreditNoteLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $header[0]->isomoneda;
@@ -665,7 +678,14 @@ function arr_DebitNoteLine($header, $detalle, $empresa, $tipodoc){
                 $arr['DebitNoteLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'EXC';
             }
             $arr['DebitNoteLine'][$row+1]['LineExtensionAmount']['currencyID'] = $header[0]->isomoneda;
-            $arr['DebitNoteLine'][$row+1]['LineExtensionAmount']['Amount'] = round($item->valorventa,2);
+            if($item->idafectaciond == 10)//gravado
+            {
+                $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->valorventa, 2);
+            }
+            elseif ($item->idafectaciond==20||$item->idafectaciond==30)//exonerado e inafecto
+            {
+                $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->preciounitario, 2);
+            }
             if($item->descto > 0){
                 $arr['DebitNoteLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'false';
                 $arr['DebitNoteLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $header[0]->isomoneda;

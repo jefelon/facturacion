@@ -10,7 +10,7 @@
 //------            uramos@gmail.com           ---------------
 //------    10 de junio de 2009. México, D.F.  ---------------
 //------    PHP Version 4.3.1 o mayores (aunque podría funcionar en versiones anteriores, tendrías que probar)
-function numtoletras($xcifra,$mon_id=1)
+function numtoletras($xcifra,$mon_id)
 { 
 
    if($mon_id==1)$moneda="SOLES";

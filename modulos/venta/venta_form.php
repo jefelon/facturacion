@@ -1568,6 +1568,11 @@ function bus_cantidad(act)
         <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
         <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
         <br>
+        <label for="cmb_ven_moneda">Moneda:</label>
+        <select name="cmb_ven_moneda" id="cmb_ven_moneda">
+           <option value="1" selected>SOLES</option>
+           <option value="2" >DOLARES</option>
+        </select>
         <label for="chk_ven_may">Venta al por mayor</label>
         <input name="chk_ven_may" type="checkbox" id="chk_ven_may" value="1"  <?php if($may==1)echo 'checked'?>>
         </td>
