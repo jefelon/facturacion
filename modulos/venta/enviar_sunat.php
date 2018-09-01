@@ -40,7 +40,17 @@ while($dt = mysql_fetch_array($dts)){
 
 	$ser=$dt["tb_venta_ser"];
 	$num=$dt["tb_venta_num"];
-	
+    if($dt["cs_tipomoneda_id"]==1)
+    {
+        $mon="PEN";
+        $monval=1;
+    }
+    if($dt["cs_tipomoneda_id"]==2)
+    {
+        $mon="USD";
+        $monval=2;
+    }
+
 	$fechadoc=$dt["tb_venta_fec"];
 	
 	$identidad=$dt["tb_cliente_doc"];
@@ -71,7 +81,7 @@ while($dt = mysql_fetch_array($dts)){
 }
 mysql_free_result($dts);
 
-$total_letras = numtoletras($tot,0);
+$total_letras = numtoletras($tot,$monval);
 
 
 $header[0]['idcomprobante']		=$idcomprobante;//1FACTURA 3BOLETA 7NCREDITO 8NDEBITO
@@ -84,7 +94,7 @@ $header[0]['identidad']			=$identidad;
 $header[0]['idtipodni']			=$idtipodni;
 $header[0]['razon']				=$razon;
 
-$header[0]['isomoneda']			="PEN";
+$header[0]['isomoneda']			=$mon;
 
 $header[0]['totopgra']			=$gra;
 $header[0]['totopina']			=$ina;
