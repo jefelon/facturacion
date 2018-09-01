@@ -388,7 +388,7 @@ $html.='<tr>
             <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
             <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>PRECIO VENTA</b></th>
+            <th style="text-align: right; width: 13%;"><b>VALOR VENTA</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
