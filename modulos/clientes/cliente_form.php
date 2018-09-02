@@ -240,5 +240,14 @@ $(function() {
           	<td align="right"><label for="txt_cli_est">Estado:</label></td>
             <td><input name="txt_cli_est" type="text" id="txt_cli_est" value="<?php echo $est?>" size="45" readonly></td>
         </tr>
+        <tr>
+            <td align="right"><label for="cmb_cli_retiene">Retiene:</label></td>
+            <td><select name="cmb_cli_retiene" id="cmb_cli_retiene">
+                <option value="">-</option>
+                <option value="1" <?php if($afec_id=='1')echo 'selected'?>>RETIENE</option>
+                <option value="2" <?php if($afec_id=='2')echo 'selected'?>>NO RETIENE</option>
+            </select>
+            </td>
+        </tr>
     </table>
 </form>
