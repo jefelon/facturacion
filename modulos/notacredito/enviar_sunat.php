@@ -142,7 +142,8 @@ while($dt = mysql_fetch_array($dts))
 
 	if($dt["tb_ventadetalle_tipven"]==1)
 	{
-		$codigo=$dt["tb_catalogo_id"];
+		$codigo=$dt["tb_catalogo_codigo"];
+		$idproducto=$dt["tb_catalogo_id"];
 	}
 	if($dt["tb_ventadetalle_tipven"]==2)
 	{
@@ -156,7 +157,7 @@ while($dt = mysql_fetch_array($dts))
 	$detalle[$autoin]['idmedida']				=$dt["cs_tipounidadmedida_cod"];
 
 	$detalle[$autoin]['cantidad']				=$dt["tb_ventadetalle_can"];
-	$detalle[$autoin]['idproducto']				=$codigo;
+	$detalle[$autoin]['idproducto']				=$idproducto;
 	$detalle[$autoin]['codigo']					=$codigo;
 	$detalle[$autoin]['detalle']				=null;
 	$detalle[$autoin]['cdsc']					=$dt["tb_ventadetalle_nom"];
@@ -167,7 +168,14 @@ while($dt = mysql_fetch_array($dts))
 	//$detalle[$autoin]['valorref']				=($dt["tb_ventadetalle_valven"]+$dt["tb_ventadetalle_igv"])/$dt["tb_ventadetalle_can"];// precio de venta	
 	$detalle[$autoin]['valorref']				=$dt["tb_ventadetalle_preunilin"];
 
-	$detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
+    if ($dt["cs_tipoafectacionigv_cod"] == 10){
+        $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
+    }
+    elseif ($dt["cs_tipoafectacionigv_cod"] == 20){
+        $detalle[$autoin]['igv']					=0.00;//sumatoria con cantidad
+    }else{
+        $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
+    }
 	$detalle[$autoin]['valorventa']				=$dt["tb_ventadetalle_valven"];//sumatoria con cantidad
 	$detalle[$autoin]['descto']					=$dt["tb_ventadetalle_des"];
 

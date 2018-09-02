@@ -104,7 +104,11 @@ $(function() {
                       <?php 
                       if($dt1['cs_tipomoneda_id']=='1'){
                         echo 'SOLES';
-                      }?>
+                      }
+                      elseif($dt1['cs_tipomoneda_id']=='2'){
+                          echo 'DOLARES';
+                      }
+                      ?>
                       </td>
                       <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
                       <td nowrap><?php echo $dt1['tb_venta_vennumdoc']?></td>
