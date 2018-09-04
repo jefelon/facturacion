@@ -1,0 +1,2 @@
+se cra la tabla tb_lote
+se crea campo tb_producto_lote en tb_producto

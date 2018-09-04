@@ -119,10 +119,7 @@ function cmb_mar_id(ids)
 			$('#cmb_mar_id').html(html);
 		}
 	});
-
-    if($_POST['action']=="insertar") {
-        $('#cmb_mar_id > option[value="3"]').attr('selected', 'selected');
-    }
+    
 }
 
 
@@ -872,6 +869,13 @@ $(function() {
           </select>
           	<div id="div_unidad_form">
 			</div>
+          </td>
+          <td align="right"><label for="cmb_lote">Lote/Series:</label></td>
+            <td>
+                <select name="cmb_lote" id="cmb_lote">
+                    <option value="1" <?php if($lote=='1')echo 'selected'?>>Sí</option>
+                    <option value="0" <?php if($lote=='0')echo 'selected'?>>No</option>
+                </select>
           </td>
         </tr>        
     </table>
