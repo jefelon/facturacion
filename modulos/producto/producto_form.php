@@ -119,10 +119,6 @@ function cmb_mar_id(ids)
 			$('#cmb_mar_id').html(html);
 		}
 	});
-
-    if($_POST['action']=="insertar") {
-        $('#cmb_mar_id > option[value="3"]').attr('selected', 'selected');
-    }
 }
 
 
