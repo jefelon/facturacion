@@ -67,7 +67,8 @@ if($_POST['action_compra']=="insertar")
 			$_POST['cmb_com_alm_id'],
 			$_POST['cmb_com_est'],
 			$_POST['hdd_usu_id'],
-			$_POST['hdd_emp_id']
+			$_POST['hdd_emp_id'],
+            $_POST['txt_com_numorden']
 		);
 		//ultima compra
 			$dts=$oCompra->ultimoInsert();
@@ -275,7 +276,8 @@ if($_POST['action_compra']=="editar")
 			$_POST['cmb_com_doc'],
 			$_POST['txt_com_numdoc'],
 			$_POST['hdd_com_pro_id'],
-			$_POST['cmb_com_est']
+			$_POST['cmb_com_est'],
+            $_POST['txt_com_numorden']
 		);
 		
 		$data['com_msj']='Se registró compra correctamente.';

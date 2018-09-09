@@ -53,7 +53,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.99'
+	vMax: '99999.9999'
 });
 $('.cantidad').autoNumeric({
 	aSep: ',',

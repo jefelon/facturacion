@@ -1,6 +1,6 @@
 <?php
 class cCliente{
-	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est){
+	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$retiene,$precio){
 	$sql = "INSERT tb_cliente(
 	`tb_cliente_tip` ,
 	`tb_cliente_nom` ,
@@ -9,10 +9,14 @@ class cCliente{
 	`tb_cliente_con` ,
 	`tb_cliente_tel` ,
 	`tb_cliente_ema` ,
-	`tb_cliente_est`
+	`tb_cliente_est`,
+	`tb_empresa_id`,
+	`tb_cliente_retiene`,
+	`tb_precio_id`
+
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est'
+	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio', '$retiene'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -24,8 +28,12 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
-	$sql="SELECT * FROM tb_cliente ORDER BY tb_cliente_nom";
+	function mostrarTodos($fil){
+	$sql="SELECT * FROM tb_cliente c
+	INNER JOIN tb_precio p ON c.tb_precio_id=p.tb_precio_id
+	ORDER BY c.tb_cliente_nom
+	";
+	if($fil!="")$sql.=" LIMIT 0,$fil ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -34,7 +42,6 @@ class cCliente{
 		$sql="SELECT * 
 		FROM tb_cliente	";	
 		if($cli_id>0)$sql.=" WHERE tb_cliente_id = $cli_id";
-				
 		$oCado = new Cado();
 		$rst=$oCado->ejecute_sql($sql);
 		return $rst;
@@ -47,7 +54,7 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est){
+	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$retiene,$precio){
 	$sql = "UPDATE tb_cliente SET  
 	`tb_cliente_tip` =  '$tip',
 	`tb_cliente_nom` =  '$nom',
@@ -56,7 +63,10 @@ class cCliente{
 	`tb_cliente_con` =  '$con',
 	`tb_cliente_tel` =  '$tel',
 	`tb_cliente_ema` =  '$ema',
-	`tb_cliente_est` =  '$est'
+	`tb_cliente_est` =  '$est',
+	`tb_empresa_id` =  '$empresa',
+	`tb_cliente_retiene` =  '$retiene',
+	`tb_precio_id` =  '$precio'
 	WHERE tb_cliente_id =$id"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

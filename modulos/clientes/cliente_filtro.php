@@ -39,6 +39,16 @@
     <input type="text" id="txt_fil_cli_doc" name="txt_fil_cli_doc" size="20" /> 
     <label for="txt_fil_cli_nom">Cliente:</label>
     <input type="text" id="txt_fil_cli_nom" name="txt_fil_cli_nom" size="40" />
+
+    <label for="cmb_fil_lim">N° Filas:</label>
+    <select name="cmb_fil_lim" id="cmb_fil_lim">
+        <option value="">-Todos-</option>
+        <option value="10">10</option>
+        <option value="20" selected="selected">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+    </select>
+
     <?php /*?><label for="txt_fil_cli_dir">Dirección:</label>
     <input type="text" id="txt_fil_cli_dir" name="txt_fil_cli_dir" size="40" readonly /><?php */?>
     <a href="#" onClick="cliente_tabla()" id="btn_cliente_filtrar">Filtrar</a>

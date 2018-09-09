@@ -4,7 +4,7 @@ session_start();
 
 ?>
 <script type="text/javascript">
-	$('#btn_descargar_excel, #btn_descargar_pdf, #filtrar_consulta').button({
+	$('#btn_descargar_excel, #btn_descargar_pdf,#btn_descargar_txt, #filtrar_consulta').button({
 		icons: {primary: "ui-icon-print"},
 	});
 
@@ -109,6 +109,7 @@ $(function() {
 
         <a class="btn_descargar_excel" id="btn_descargar_excel" href="#" onClick="registro_reporte_xls()" title="Imprimir en Excel">DESCARGAR EXCEL</a>
         <a class="btn_descargar_pdf" id="btn_descargar_pdf" href="#" onClick="registro_reporte_pdf()" title="Imprimir en PDF">DESCARGAR PDF</a>
+        <a class="btn_descargar_txt" id="btn_descargar_txt" href="#" onClick="registro_reporte_txt()" title="Descargar PLE TXT">DESCARGAR PLE TXT</a>
         <a class="filtrar_consulta" id="filtrar_consulta" href="#" onClick="registro_filtro()" title="Filtrar">FILTRAR</a>
     </fieldset>
 </div>

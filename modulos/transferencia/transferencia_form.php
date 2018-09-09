@@ -99,7 +99,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '9999999.99'
+	vMax: '9999999.9999'
 });
 
 $( "#txt_tra_fec" ).datepicker({

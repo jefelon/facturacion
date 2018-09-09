@@ -72,11 +72,11 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 
 <script type="text/javascript">
 
-    function venta_filtro()
+    function libro_filtro()
     {
         $.ajax({
             type: "POST",
-            url: "contable_filtro_ple.php",
+            url: "ple_filtro.php",
             async:true,
             dataType: "html",
             beforeSend: function() {
@@ -86,51 +86,39 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                 $('#div_venta_filtro').html(html);
             },
             complete: function(){
-                venta_tabla();
+                ple_tabla();
             }
         });
     }
-function venta_form(act,idf){
-	$.ajax({
-		type: "POST",
-		url: "venta_form.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			action: act,
-			ven_id:	idf
-		}),
-		beforeSend: function() {
-			$('#msj_venta').hide();
-			$('#div_venta_form').dialog("open");
-			$('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-		success: function(html){
-			$('#div_venta_form').html(html);				
-		},
-		complete: function(){
-			if(act=='editar')
-			{
-				$( "#div_venta_form" ).dialog({
-					title:'Información de Venta | <?php echo $razon ?> | Editar',
-					buttons: {
-						Cancelar: function() {
-							$('#for_ven').each (function(){this.reset();});
-							$( this ).dialog( "close" );
-						}
-					}
-				});
-			}
-		}
-	});
+    function ple_tabla(){
+        $.ajax({
+            type: "POST",
+            url: "ple_tabla.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                anio:   $('#cmb_fil_anio').val(),
+                libro: $("#cmb_fil_librople").val()
+
+                // mes:	$('#cmb_fil_mes').val()
+            }),
+            beforeSend: function() {
+                $('#div_ple_tabla').addClass("ui-state-disabled");
+            },
+            success: function(html){
+                $('#div_ple_tabla').html(html);
+            },
+            complete: function(){
+                $('#div_ple_tabla').removeClass("ui-state-disabled");
+            }
+        });
 }
 
-
-function modo(url){
-	$('#hdd_modo').val(url);
-	venta_tabla();
-};
-
+    function descargar_txt() {
+        $("#hdd_tabla").val($("<div>").append($("#tabla_ple").eq(0).clone()).html());
+        document.for_fil_ple.action = 'contable_registro_txt.php';
+        $("#for_fil_ple").submit();
+    }
 $(function() {
 	
 	$('#btn_actualizar').button({
@@ -139,43 +127,21 @@ $(function() {
 		}).click(function() {
 		location.reload();
 	});
-	
-	$('#btn_imprimir_pdf').button({
-		icons: {primary: "ui-icon-print"},
-		text: true
-	});
+
 	
 	$('.btn_modo').button({
 		icons: {primary: "ui-icon-document"},
 		text: true
-	});
-		
-	venta_filtro();		
-	
-	$( "#div_venta_form" ).dialog({
-		title:'Información de Venta | <?php echo $razon ?>',
-		autoOpen: false,
-		resizable: false,
-		height: 600,
-		width: 980,
-		zIndex: 1,
-		modal: true,
-		position: "top",
-		closeOnEscape: false,
-		close: function(event, ui) {
-			$('#div_catalogo_venta').dialog( "close" );
-			$('#div_venta_form').html('venta_form');
-		}
-	});
-	
-	$( "#div_venta_impresion" ).dialog({
-		title:'Desea Imprimir Documento?',
-		autoOpen: false,
-		resizable: false,
-		height: 'auto',
-		width: 370,
-		modal: true
-	});
+	})
+
+    $('#cmb_fil_librople').change(function(e) {
+        ple_tabla();
+    });
+    $('#btn_descargar_txt').click(function(e) {
+        descargar_txt();
+    });
+	libro_filtro();
+	ple_tabla();
 	
 });
 </script>
@@ -201,11 +167,7 @@ $(function() {
 			</div>
         	<div id="div_venta_filtro" class="contenido_tabla">
       		</div>
-            <div id="div_venta_form">
-			</div>
-            <div id="div_venta_impresion">
-			</div>
-            <div id="div_venta_tabla" class="contenido_tabla">
+            <div id="div_ple_tabla" class="div_ple_tabla">
       		</div>
       	</div>
     </article>

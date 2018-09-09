@@ -4,20 +4,14 @@ session_start();
 
 ?>
 <script type="text/javascript">
-	$('#btn_filtrar').button({
+	$('#btn_descargar_txt').button({
 		icons: {primary: "ui-icon-search"},
 	});
 	$('#btn_resfil').button({
         icons: {primary: "ui-icon-arrowrefresh-1-w"},
 
     });
-    $('#btn_filtrardni').button({
-        icons: {primary: "ui-icon-search"},
-    });
-    $('#btn_resfildni').button({
-        icons: {primary: "ui-icon-arrowrefresh-1-w"},
 
-    });
 
     function test_comp() {
         $('#hdd_action').val('filter_comp');
@@ -57,7 +51,7 @@ $(function() {
 </script>
 
 <style>
-    #for_fil_contable{
+    #for_fil_ple{
         width: 60%;
         margin: 0 auto;
     }
@@ -66,31 +60,31 @@ $(function() {
         text-align: center;
         margin: 0 auto;
     }
-    #for_fil_contable label {
+    #for_fil_ple label {
         display:inline-block;
         width: 140px;
         padding: 5px;
     }
-    #for_fil_contable input[type="text"]{
+    #for_fil_ple input[type="text"]{
         width: 180px;
     }
-    #for_fil_contable select{
+    #for_fil_ple select{
         width: 180px;
     }
 </style>
 
-<form name="for_fil_contable" id="for_fil_contable" target="_blank" action="venta_reporte.php" method="post">
+<form name="for_fil_ple" id="for_fil_ple" target="_blank" action="" method="post">
 <input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla_garantia.php">
 
     <input name="hdd_action" id="hdd_action" type="hidden" value="">
-
+    <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
 <div style="width: 100%;margin: 0 auto">
 
     <fieldset style="width: 100%;float: left"><legend>Descargar PLE</legend>
         <label for="cmb_fil_anio" align="right">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio">
             <option value="2018">2018</option>
-            <option value="2018">2017</option>
+            <option value="2017">2017</option>
         </select>
 
         <label for="cmb_fil_mes" align="right">Mes:</label>
@@ -115,14 +109,14 @@ $(function() {
         <select name="cmb_fil_librople" id="cmb_fil_librople">
             <option value="-">Seleccionar Libro</option>
             <option value="1">PLE Registro de Compras 080100 - COMPLETO</option>
-            <option value="1">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
-            <option value="1">PLE Registro de Ventas 140100 - COMPLETO</option>
-            <option value="1">PLE Diario de Formato Simplificado 050200</option>
-            <option value="1">PLE Diario de Formato Simplificado - PLAN CONTABLE</option>
+            <option value="2">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
+            <option value="3">PLE Registro de Ventas 140100 - COMPLETO</option>
+            <option value="4">PLE Diario de Formato Simplificado 050200</option>
+            <option value="5">PLE Diario de Formato Simplificado - PLAN CONTABLE</option>
         </select>
         <br/>
 
-        <a href="#" onClick="test_txt()" id="btn_filtrar" class="center">DESCARGAR</a>
+        <a href="#" onClick="descargar_txt()" id="btn_descargar_txt" class="center">DESCARGAR</a>
     </fieldset>
 </div>
 

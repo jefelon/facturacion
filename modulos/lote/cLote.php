@@ -1,8 +1,8 @@
 <?php
-class cMarca{
+class clote{
 	function insertar($nom){
-	$sql = "INSERT tb_marca (
-		`tb_marca_nom`
+	$sql = "INSERT tb_lote (
+		`tb_lote_nom`
 		)
 		VALUES (
 		 '$nom'
@@ -19,38 +19,38 @@ class cMarca{
 	}
 	function mostrarTodos(){
 	$sql="SELECT * 
-	FROM tb_marca
-	ORDER BY tb_marca_nom";
+	FROM tb_lote
+	ORDER BY tb_lote_numero";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function mostrarUno($id){
 	$sql="SELECT * 
-	FROM tb_marca
-	WHERE tb_marca_id=$id";
+	FROM tb_lote
+	WHERE tb_lote_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function modificar($id,$nom){ 
-	$sql = "UPDATE tb_marca SET  
-	`tb_marca_nom` =  '$nom'
-	WHERE  tb_marca_id =$id;"; 
+	$sql = "UPDATE tb_lote SET  
+	`tb_lote_nom` =  '$nom'
+	WHERE  tb_lote_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function verifica_marca_tabla($id,$tabla){
+	function verifica_lote_tabla($id,$tabla){
 	$sql = "SELECT * 
 		FROM  $tabla 
-		WHERE tb_marca_id =$id";
+		WHERE tb_lote_id =$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_marca WHERE tb_marca_id=$id";
+	$sql="DELETE FROM tb_lote WHERE tb_lote_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

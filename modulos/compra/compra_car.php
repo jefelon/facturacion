@@ -144,16 +144,16 @@ $('.moneda2').autoNumeric({
 	aDec: '.',
 	//aSign: 'S/. ',
 	//pSign: 's',
-	vMin: '0.00',
-	vMax: '9999.99'
+	vMin: '0.0000',
+	vMax: '9999.9999'
 });
 $('.porcentaje_car').autoNumeric({
 	aSep: ',',
 	aDec: '.',
 	//aSign: 'S/. ',
 	//pSign: 's',
-	vMin: '0.00',
-	vMax: '99.99'
+	vMin: '0.0000',
+	vMax: '99.9999'
 });
 $('.btn_rest_car').button({
 	icons: {

@@ -188,7 +188,7 @@ $(document).ready(function() {
 				}
 				?>
                 <tr class="even">
-                  <td colspan="6">TOTAL</td>
+                  <td colspan="7">TOTAL</td>
                   <td align="right"><?php echo formato_money($total_valorizado_dol)?></td>
                   <td align="right"><?php echo formato_money($total_valorizado)?></td>
                 </tr>

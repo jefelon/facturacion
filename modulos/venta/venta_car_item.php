@@ -83,7 +83,7 @@ $('.moneda4').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '999999.99'
+	vMax: '999999.9999'
 });
 $('.porcentaje3').autoNumeric({
 	aSep: ',',

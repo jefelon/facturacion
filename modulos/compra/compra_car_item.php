@@ -31,7 +31,7 @@ $('.moneda2').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '9999.99'
+	vMax: '9999.9999'
 });
 $('.porcentaje2').autoNumeric({
 	aSep: ',',
@@ -39,7 +39,7 @@ $('.porcentaje2').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99.99'
+	vMax: '99.9999'
 });
 $('.cantidad2').autoNumeric({
 	aSep: ',',

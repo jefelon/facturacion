@@ -52,7 +52,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.99'
+	vMax: '99999.9999'
 });
 $('.moneda_cambio').autoNumeric({
 	aSep: ',',
@@ -144,6 +144,25 @@ function cmb_cat_uni_bas(ids)
 	});
 }
 
+function cmb_precio_id(ids)
+{
+    $.ajax({
+        type: "POST",
+        url: "../listaprecio/cmb_precio_id.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            precio_id: ids
+        }),
+        beforeSend: function() {
+            $('#cmb_precio_id').html('<option value="">Cargando...</option>');
+        },
+        success: function(html){
+            $('#cmb_precio_id').html(html);
+        }
+    });
+
+}
 function presentacion_tag_car(act,idf){
 	$.ajax({
 		type: "POST",
@@ -329,37 +348,37 @@ function unidad_form(act,idf,vis)
 var datven;
 
 function chk_cat_com()
-{   
-	if($('#chk_cat_vercom').is(':checked')) {  
+{
+	if($('#chk_cat_vercom').is(':checked')) {
 		$('#txt_cat_precos').removeAttr('disabled');
 		$("#txt_cat_precos").removeClass("ui-state-disabled");
 		datcom=true;
-		
+
 		$('#chk_cat_igvcom').removeAttr('disabled');
 	}
 	else
-	{  
+	{
 		$('#txt_cat_precos').attr('disabled', 'disabled');
 		$("#txt_cat_precos").addClass("ui-state-disabled");
 		datcom=false;
-		
+
 		$('#chk_cat_igvcom').attr('disabled', 'disabled');
 	}
 }
 
 function chk_cat_ven()
-{   
-	if($('#chk_cat_verven').is(':checked')) {  
+{
+	if($('#chk_cat_verven').is(':checked')) {
 		$('#txt_cat_preven').removeAttr('disabled');
 		$("#txt_cat_preven").removeClass("ui-state-disabled");
 		datven=true;
-		
-		$('#chk_cat_igvven').removeAttr('disabled');  
-	} else {  
+
+		$('#chk_cat_igvven').removeAttr('disabled');
+	} else {
 		$('#txt_cat_preven').attr('disabled', 'disabled');
 		$("#txt_cat_preven").addClass("ui-state-disabled");
 		datven=false;
-		
+
 		$('#chk_cat_igvven').attr('disabled', 'disabled');
 	}
 }
@@ -390,6 +409,74 @@ function actualizar_stock(preid,almid,stoid)
             }
         });
 }
+
+function producto_proveedor_form(act,idp,otro){
+    $.ajax({
+        type: "POST",
+        url: "producto_proveedor_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            pro_id: idp
+        }),
+        beforeSend: function() {
+            $('#msj_producto_proveedor').hide();
+            $('#div_producto_proveedor_form').dialog("open");
+            $('#div_producto_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_producto_proveedor_form').html(html);
+        }
+    });
+}
+function unidad_form(act,idf,vis)
+{
+    $.ajax({
+        type: "POST",
+        url: "../unidad/unidad_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            uni_id:	idf,
+            vista:	vis
+        }),
+        beforeSend: function() {
+            //$('#msj_unidad').hide();
+            $("#btn_cmb_cat_uni_bas").click(function(e){
+                x=e.pageX+5;
+                y=e.pageY+15;
+                $('#div_unidad_form').dialog({ position: [x,y] });
+                $('#div_unidad_form').dialog("open");
+            });
+            $('#div_unidad_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_unidad_form').html(html);
+        }
+    });
+}
+function producto_proveedor(){
+    $.ajax({
+        type: "POST",
+        url: "producto_proveedor.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            pro_id:	6
+        }),
+        beforeSend: function() {
+            $('#div_producto_proveedor').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('#div_producto_proveedor').html(html);
+        },
+        complete: function(){
+            $('#div_producto_proveedor').removeClass("ui-state-disabled");
+        }
+    });
+}
 $(function() {
 	
 	<?php 
@@ -413,16 +500,16 @@ $(function() {
 	$('#txt_pro_nom, #txt_pre_nom').keyup(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-	
 	cmb_cat_id(<?php echo $cat_id?>);
 	cmb_mar_id(<?php echo $mar_id?>);
 	
 	<?php if($_POST['action']=="insertar"){?>
-	
+    producto_proveedor();
+
 	cmb_cat_uni_bas();
 	
 	presentacion_tag_car();
-	
+    cmb_precio_id();
 	//chk_cat_com();
 	//chk_cat_ven();
 	<?php }?>
@@ -608,8 +695,38 @@ $(function() {
 			}
 		}
 	});
-	
-	
+
+    $( "#div_producto_proveedor_form" ).dialog({
+        title:'Información de Proveedor para el producto',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 600,
+        position: 'top',
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_cat").submit();
+            },
+            Cancelar: function() {
+                $('#for_cat').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_catalogo_form").html('Cargando...');
+        }
+    });
+
+    $(function() {
+        $( "#div_precios_tab" ).tabs();
+        $("#precio_base").click(function(){
+           // catalogo_venta();
+        });
+        $("#precio_lista").click(function(){
+            //catalogo_servicio();
+        });
+    });
 //formulario			
 	$("#for_pro").validate({
 		submitHandler: function() {
@@ -781,13 +898,14 @@ $(function() {
         <tr>
           <td><label for="cmb_mar_id">Marca:</label>
           <div id="div_marca_form">
-			</div>
+          </div>
           </td>
         </tr>
         <tr>
           <td>
-            <a id="btn_cmb_mar_id" class="btn_ir" href="#" onClick="marca_form('insertar')">Agregar Marca</a><select name="cmb_mar_id" id="cmb_mar_id">
-          </select>
+            <a id="btn_cmb_mar_id" class="btn_ir" href="#" onClick="marca_form('insertar')">Agregar Marca</a>
+                <select name="cmb_mar_id" id="cmb_mar_id">
+                </select>
           <div id="div_categoria_form">
 			</div>
           </td>
@@ -832,6 +950,17 @@ $(function() {
 </div>
 <?php if($_POST['action']=="insertar"){?>
 <div style="float:left; margin-left:15px">
+    <fieldset>
+        <legend>Proveedores</legend>
+        <div>
+            <div id="msj_producto_proveedor" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+            </div>
+            <div id="div_producto_proveedor_form">
+            </div>
+            <div id="div_producto_proveedor">
+            </div>
+        </div>
+    </fieldset>
   <fieldset><legend>Presentación de producto</legend>
     <table>                
 <!--        <tr>-->
@@ -880,49 +1009,84 @@ $(function() {
         </tr>        
     </table>
     </br>
-    <div id="cuadro-contain" class="ui-widget">
-    <table class="ui-widget ui-widget-content">
-        <tr class="ui-widget-header">
-          <th align="center" nowrap="nowrap">Cambio US$</th>
-          <th align="center" nowrap="nowrap">Precio Costo US$</th>
-        </tr>
-        <tr>
-          <td align="center"><input name="txt_cat_tipcam" type="text" id="txt_cat_tipcam" class="moneda_cambio" style="text-align:right" size="10" maxlength="9" value="<?php echo $tipcam?>"></td>
-          <td align="center"><input name="txt_cat_precosdol" type="text" id="txt_cat_precosdol" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precosdol?>"></td>
-        </tr>        
-    </table>
+    <div id="div_precios_tab">
+          <ul>
+              <!--        Habilita Productos-->
+              <li><a id="precio_base" href="#div_precios_base">Precio Base</a></li>
+              <li><a id="precio_lista" href="#div_precios_lista">Precio Lista</a></li>
+          </ul>
+        <div id="div_precios_base">
+            <div id="cuadro-contain" class="ui-widget">
+              <table class="ui-widget ui-widget-content">
+                  <tr class="ui-widget-header">
+                      <th align="center" nowrap="nowrap">Cambio US$</th>
+                      <th align="center" nowrap="nowrap">Precio Costo US$</th>
+                  </tr>
+                  <tr>
+                      <td align="center"><input name="txt_cat_tipcam" type="text" id="txt_cat_tipcam" class="moneda_cambio" style="text-align:right" size="10" maxlength="9" value="<?php echo $tipcam?>"></td>
+                      <td align="center"><input name="txt_cat_precosdol" type="text" id="txt_cat_precosdol" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precosdol?>"></td>
+                  </tr>
+              </table>
+          </div>
+            </br>
+            <div id="cuadro-contain" class="ui-widget">
+                <table class="ui-widget ui-widget-content">
+                    <tr class="ui-widget-header">
+                        <th align="center">Precio Costo</th>
+                        <!--<th align="center">IGV</th>-->
+                        <th align="center">Utilidad (%)</th>
+                        <th align="center">Precio Venta</th>
+                        <!--<th align="center"> IGV</th>-->
+                    </tr>
+                    <tr>
+                        <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
+                        <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
+                        <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
+                        <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
+                        <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
+                    </tr>
+                </table>
+            </div>
+        </div>
+        </br>
+        <div id="div_precios_lista">
+            <div id="cuadro-contain" class="ui-widget">
+                <table class="ui-widget ui-widget-content">
+                    <tr class="ui-widget-header">
+                        <th align="center">Lista Precios:</th>
+                        <th align="center">Precio Costo</th>
+                        <!--<th align="center">IGV</th>-->
+                        <th align="center">Utilidad (%)</th>
+                        <th align="center">Precio Venta</th>
+                        <!--<th align="center"> IGV</th>-->
+                    </tr>
+                    <tr>
+                        <td>
+                            <select name="cmb_precio_id" id="cmb_precio_id">
+                            </select>
+                        </td>
+                        <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
+                        <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
+                        <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
+                        <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
+                        <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-    </br>
-    <div id="cuadro-contain" class="ui-widget">
-    <table class="ui-widget ui-widget-content">
-        <tr class="ui-widget-header">
-          <th align="center">Precio Costo</th>
-          <!--<th align="center">IGV</th>-->
-          <th align="center">Utilidad (%)</th>
-          <th align="center">Precio Venta</th>
-          <!--<th align="center"> IGV</th>-->
-        </tr>
-        <tr>
-          <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
-          <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
-          <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
-          <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
-          <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
-        </tr>        
-    </table>
-    </br>
-    <table class="ui-widget ui-widget-content">
-        <tr class="ui-widget-header">
-          <th title="Mostrar en Catálogo">Catálogo</th>
+      <br>
+      <table class="ui-widget ui-widget-content">
+          <tr class="ui-widget-header">
+              <th title="Mostrar en Catálogo">Catálogo</th>
           </tr>
-        <tr>
-          <td><input name="chk_cat_vercom" id="chk_cat_vercom" type="checkbox" value="1" <?php if($_POST['action']=="insertar" or $vercom=="1") echo 'checked'?>> <label for="chk_cat_vercom">Compras</label>          </td>
+          <tr>
+              <td><input name="chk_cat_vercom" id="chk_cat_vercom" type="checkbox" value="1" <?php if($_POST['action']=="insertar" or $vercom=="1") echo 'checked'?>> <label for="chk_cat_vercom">Compras</label>          </td>
           </tr>
-        <tr>
-          <td><input type="checkbox" name="chk_cat_verven" id="chk_cat_verven" value="1" <?php if($_POST['action']=="insertar" or $verven=="1") echo 'checked'?>> <label for="chk_cat_verven">Ventas</label>          </td>
-          </tr>        
-    </table>
-</div>
+          <tr>
+              <td><input type="checkbox" name="chk_cat_verven" id="chk_cat_verven" value="1" <?php if($_POST['action']=="insertar" or $verven=="1") echo 'checked'?>> <label for="chk_cat_verven">Ventas</label>          </td>
+          </tr>
+      </table>
     </fieldset>
   <label for="editar_presentacion">Guardar y Seguir Editando</label>
   <input name="editar_presentacion" id="editar_presentacion" type="checkbox" value="1">

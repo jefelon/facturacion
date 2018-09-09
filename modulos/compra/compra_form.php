@@ -42,6 +42,7 @@ if($_POST['action']=="editar"){
 		
 		$alm_id	=$dt['tb_almacen_id'];
 		$est	=$dt['tb_compra_est'];
+        $numorden	=$dt['tb_compra_orden'];
 	mysql_free_result($dts);
 }
 ?>
@@ -441,13 +442,13 @@ function tipo_cambio(mon){
 		success: function(data){
 			$('#txt_com_tipcam').val(data.tipcam);	
 		},
-		complete: function(){			
-			catalogo_compra_tabla();
+		complete: function(){
+		    //catalogo_compra_tab(); //NI IDEA
 		}
 	});		
 }
 
-function verificar_duplicidad_compra(com_doc,com_numdoc){
+function verificar_duplicidad_compra(com_doc,com_numdoc,com_numruc){
 	$.ajax({
 		type: "POST",
 		url: "../compra/compra_duplicidad.php",
@@ -455,7 +456,8 @@ function verificar_duplicidad_compra(com_doc,com_numdoc){
 		dataType: "html",                      
 		data: ({
 			doc: com_doc,				
-			numdoc:	com_numdoc
+			numdoc:	com_numdoc,
+            numruc:	com_numruc
 		}),
 		beforeSend: function(){				
 
@@ -463,7 +465,7 @@ function verificar_duplicidad_compra(com_doc,com_numdoc){
 		success: function(html){
 			$('#div_duplicidad').dialog("open");	
 			$('#div_duplicidad').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-			$('#div_duplicidad').html(html);	
+			$('#div_duplicidad').html(html);
 		}
 	});	
 }
@@ -494,8 +496,14 @@ $(function() {
 		compra_car('actualizar');
 	});
 	
-	$("#txt_com_numdoc").change(function() {		
-		verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val());
+	$("#txt_com_numdoc").change(function() {
+
+	    if($('#hdd_com_pro_id').val()>0 && $('#txt_com_numdoc').val()>0)
+        {
+            verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#hdd_com_pro_id').val());
+
+        }
+
 	});
 		
 	<?php
@@ -510,14 +518,19 @@ $(function() {
 	$('#chk_com_tipper').attr('disabled', 'disabled');
 	<?php }?>
 	
-	$( "#txt_com_pro_nom" ).autocomplete({
+	$( "#txt_com_pro_nom").autocomplete({
    		minLength: 1,
    		source: "../proveedor/proveedor_complete_nom.php",
 		select: function(event, ui){			
 			$("#hdd_com_pro_id").val(ui.item.id);							
 			$("#txt_com_pro_doc").val(ui.item.documento);
-			$("#txt_com_pro_dir").val(ui.item.direccion);		
+			$("#txt_com_pro_dir").val(ui.item.direccion);
+            if($('#txt_com_numdoc').val.length>0)
+            {
+                verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#hdd_com_pro_id').val());
+            }
 		}
+
     });
 	
 	$( "#txt_com_pro_doc" ).autocomplete({
@@ -526,8 +539,13 @@ $(function() {
 		select: function(event, ui){			
 			$("#hdd_com_pro_id").val(ui.item.id);							
 			$("#txt_com_pro_nom").val(ui.item.nombre);
-			$("#txt_com_pro_dir").val(ui.item.direccion);		
+			$("#txt_com_pro_dir").val(ui.item.direccion);
+            if($('#txt_com_numdoc').val()>0)
+            {
+                verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#hdd_com_pro_id').val());
+            }
 		}
+
     });
 	
 	$( "#div_proveedor_form" ).dialog({
@@ -590,12 +608,22 @@ $(function() {
 		height: 'auto',
 		width: 850,
 		modal: true,
+        open: function(event, ui) { $(this).parent().find(".ui-dialog-titlebar-close").remove(); },
 		buttons: {
 			OK: function() {
 				$( this ).dialog( "close" );
+                $('#txt_com_numdoc').val('');
+                $('#txt_com_numdoc').focus();
 			}
 		}
 	});
+
+    $(function() {
+        $( "#dialog" ).dialog({
+            open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
+        });
+    });
+
 	
 //formulario			
 	$("#for_com").validate({
@@ -725,17 +753,18 @@ $(function() {
 <input name="hdd_emp_id" id="hdd_emp_id" type="hidden" value="<?php echo $_SESSION['empresa_id']?>">
 <fieldset>
   <legend>Datos Principales</legend>
-<label for="txt_com_fec">Fecha:</label>
-          <input name="txt_com_fec" type="text" class="fecha" id="txt_com_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
-    
+    <label for="txt_com_fec">Fecha:</label>
+    <input name="txt_com_fec" type="text" class="fecha" id="txt_com_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
     <label for="txt_com_fecven" title="Fecha de Vencimiento">Fecha Vcto:</label>
     <input name="txt_com_fecven" type="text" class="fecha" id="txt_com_fecven" value="<?php echo $fecven?>" size="10" maxlength="10" readonly>
-    
+
     <label for="cmb_com_doc">Documento:</label>
     <select name="cmb_com_doc" id="cmb_com_doc">
     </select>
        <label for="txt_com_numdoc">N° Doc:</label>
-       <input type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
+       <input style="width:90px" type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
+    <label for="txt_com_numorden">N° Orden:</label>
+    <input style="width:90px" type="text" name="txt_com_numorden" id="txt_com_numorden"  value="<?php echo $numorden?>">
     <?php /*?>
     <label for="chk_com_tipper">Percepción(2%)</label><input name="chk_com_tipper" type="checkbox" id="chk_com_tipper" value="1" <?php if($tipper==1)echo 'checked'?>><?php */?>
     <?php
@@ -749,14 +778,14 @@ $(function() {
          <option value="2" <?php if($mon==2)echo 'selected'?>>DOLAR AME | US$</option>
        </select>
        <?php if($_POST['action']=='insertar'){?>
-     <a class="btn_newwin" target="_blank" title="Tipo de Cambio" href="../tipocambio">Tipo de Cambio</a>  
+     <a class="btn_newwin" target="_blank" title="Tipo de Cambio" href="../tipocambio">Tipo de Cambio</a>
      <?php }?>
 	   <label for="txt_com_tipcam">Cambio:</label>
 	   <input name="txt_com_tipcam" type="text" value="<?php echo $tipcam?>" id="txt_com_tipcam" size="5" maxlength="5" style="text-align:right" readonly>
 	   <label for="cmb_com_alm_id">Colocar producto en:</label>
       <select name="cmb_com_alm_id" id="cmb_com_alm_id">
           </select>
-  
+
           <label for="cmb_com_est">Estado:</label>
     <select name="cmb_com_est" id="cmb_com_est">
             <option value="">-</option>
@@ -764,16 +793,18 @@ $(function() {
             <option value="CANCELADA" <?php if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
           </select>
         <?php if($_POST['action']=='insertar'){?>
-        <label for="cmb_com_tippre">Mostrar  con:</label>  
+        <label for="cmb_com_tippre">Mostrar  con:</label>
             <select name="cmb_com_tippre" id="cmb_com_tippre">
             <option value="1" selected="selected">Valor Venta(sin IGV)</option>
             <option value="2">Precio Venta(con IGV)</option>
-        </select> 
-  		<?php }?>    
+        </select>
+  		<?php }?>
     <?php //if($_POST['action']=='editar') echo 'COMPRA: '.$est?>
     <?php if($_POST['action']=='editar'){?>
     <a id="btn_compra_precio_form" href="#precio" onClick="compra_precio_form('insertar','<?php echo $_POST['com_id']?>')">Actualizar Precios</a>
 		<?php }?>
+
+    </table>
 </fieldset>
 <input type="hidden" id="hdd_com_pro_id" name="hdd_com_pro_id" value="<?php echo $pro_id?>" />
 <fieldset>

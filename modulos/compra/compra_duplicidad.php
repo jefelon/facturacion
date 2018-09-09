@@ -7,7 +7,7 @@ $oCompra = new cCompra();
 
 $estado="'EMITIDA','CANCELADA'";
 
-$dts1=$oCompra->mostrar_duplicidad($_POST['doc'],$_POST['numdoc'],$pro_id,$estado,$_SESSION['empresa_id']);
+$dts1=$oCompra->mostrar_duplicidad($_POST['doc'],$_POST['numdoc'],$_POST['numruc'],$estado,$_SESSION['empresa_id']);
 $num_rows= mysql_num_rows($dts1);
 
 $num_doc=$_POST['numdoc'];
@@ -78,8 +78,8 @@ else
 	echo "VERIFICANDO...";
 ?>
 <script type="text/javascript">
-$(function() {	
+$(function() {
 	$('#div_duplicidad').dialog("close");
-}); 
+});
 </script>
 <?php }?>

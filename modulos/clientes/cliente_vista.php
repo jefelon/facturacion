@@ -75,7 +75,8 @@ function cliente_tabla(){
 		async:true,
 		dataType: "html",                      
 		data: ({
-			cli_id: $("#hdd_fil_cli_id").val()
+			cli_id: $("#hdd_fil_cli_id").val(),
+            limit:		$('#cmb_fil_lim').val()
 		}),
 		beforeSend: function() {
 			$('#div_cliente_tabla').addClass("ui-state-disabled");

@@ -88,6 +88,7 @@ if($_POST['action']=="editar"){
  		$igv	=$dt['tb_venta_igv'];
 		$tot	=$dt['tb_venta_tot'];
 		$est	=$dt['tb_venta_est'];
+        $monval	=$dt['cs_tipomoneda_id'];
 
 		$punven_nom	=$dt['tb_puntoventa_nom'];
 		$alm_nom	=$dt['tb_almacen_nom'];
@@ -145,7 +146,7 @@ $('.venpag_moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.99'
+	vMax: '99999.9999'
 });
 $('.dias').autoNumeric({
 	aSep: ',',
@@ -157,7 +158,7 @@ $('.dias').autoNumeric({
 });
 
 $( "#txt_ven_fec" ).datepicker({
-	minDate: "-6D",
+	minDate: "-7D",
 	maxDate:"+0D",
 	yearRange: 'c-0:c+0',
 	changeMonth: true,
@@ -211,6 +212,25 @@ jQuery.validator.addMethod("totalDoc", function(value, element, parameter) {
     }
 }, "Selecccione otro cliente, monto mayor a 700");
 
+function cmb_listaprecio_id(ids)
+{
+    $.ajax({
+        type: "POST",
+        url: "../listaprecio/cmb_listaprecio_id.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            mar_id: ids
+        }),
+        beforeSend: function() {
+            $('#cmb_listaprecio_id').html('<option value="">Cargando...</option>');
+        },
+        success: function(html){
+            $('#cmb_listaprecio_id').html(html);
+        }
+    });
+
+}
 function cmb_cuecor_id(ids)
 {
 	$.ajax({
@@ -917,6 +937,7 @@ function compararSunat(doc, nom, dir, id) {
 $(function() {
 	cmb_ven_doc();
     cmb_ven_id();
+    cmb_listaprecio_id();
 	$("#txt_ven_numdoc").addClass("ui-state-active");
 
 	$('#txt_ven_lab1').change(function(){
@@ -929,7 +950,6 @@ $(function() {
 
 	cmb_tar_id(<?php echo $tar_id?>);
 	cmb_cuecor_id(<?php echo $cuecor_id?>);
-
 
 
 	$( "#txt_ven_cli_doc" ).autocomplete({
@@ -1026,11 +1046,14 @@ $(function() {
 		$("#div_cuentacorriente").hide(100);
 		$("#div_tarjeta").hide(100);
 		$("#div_operacion").hide(100);
+        $(".div_fechaletras").hide(100);
 
 		//contado
 		if(tipo == 1){
 			$("#div_dia").hide(100);
 			$("#div_fecven").hide(100);
+            $("#div_numeroletras").hide(100);
+            $(".div_fechaletras").hide(100);
 			//ocultar deposito y tarjeta
 			$("#cmb_modpag_id option[value='2']").attr("disabled",false);
 			$("#cmb_modpag_id option[value='3']").attr("disabled",false);
@@ -1039,10 +1062,21 @@ $(function() {
 		if(tipo == 2){
 			$("#div_dia").show(100);
 			$("#div_fecven").show(100);
+            $("#div_numeroletras").hide(100);
+            $(".div_fechaletras").hide(100);
 			//ocultar deposito y tarjeta
 			$("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
 			$("#cmb_modpag_id option[value='3']").attr("disabled","disabled");
 		}
+        //LETRAS
+        if(tipo == 3){
+            $("#div_dia").hide(100);
+            $("#div_fecven").hide(100);
+            $("#div_numeroletras").show(100);
+            $(".div_fechaletras").hide(100);
+            //ocultar deposito y tarjeta
+            $("#cmb_modpag_id").hide(100);
+        }
 	});
 
 	$("#cmb_modpag_id").change(function(){
@@ -1084,6 +1118,17 @@ $(function() {
 			$('#txt_venpag_fecven').val('');
 		}
 	});
+    $('#txt_numletras').keyup( function() {
+        if($('#txt_numletras').val()!="")
+        {
+            $(".div_fechaletras").show(100);
+            //implementar inputs de acuerdo a la cantidad de letras txt_venumletras();
+        }
+        else
+        {
+            $(".div_fechaletras").hide(100);
+        }
+    });
 
 	cmb_tar_id();
 
@@ -1533,6 +1578,12 @@ function bus_cantidad(act)
         <input name="chk_imprimir" type="checkbox" id="chk_imprimir" value="1" checked="CHECKED">
         <?php }?>
         </td>
+        <td>
+            <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
+                <label for="chk_imprimir_guia"> Imprimir Guia</label>
+                <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" title="Registrar guia? ">
+            <?php }?>
+        </td>
       <td align="right">
       <?php
       if($_POST['action']=="editar")
@@ -1569,9 +1620,9 @@ function bus_cantidad(act)
         <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
         <br>
         <label for="cmb_ven_moneda">Moneda:</label>
-        <select name="cmb_ven_moneda" id="cmb_ven_moneda">
-           <option value="1" selected>SOLES</option>
-           <option value="2" >DOLARES</option>
+        <select name="cmb_ven_moneda" id="cmb_ven_moneda" <?php if($_POST['action']=='editar')echo 'disabled'?>>
+           <option value="1" <?php if($monval=='1')echo 'selected'?>>SOLES</option>
+           <option value="2" <?php if($monval=='2')echo 'selected'?>>DOLARES</option>
         </select>
         <label for="chk_ven_may">Venta al por mayor</label>
         <input name="chk_ven_may" type="checkbox" id="chk_ven_may" value="1"  <?php if($may==1)echo 'checked'?>>
@@ -1613,6 +1664,7 @@ function bus_cantidad(act)
       <select name="cmb_forpag_id" id="cmb_forpag_id">
         <option value="1" selected="selected">CONTADO</option>
         <option value="2">CREDITO</option>
+        <option value="3">LETRAS</option>
         </select>
     </td>
     <td valign="top"><!--<label for="cmb_modpaf_id">Modo Pago:</label>--></br>
@@ -1639,18 +1691,45 @@ function bus_cantidad(act)
       <input type="text" name="txt_venpag_numope" id="txt_venpag_numope" size="15">
     </div>
     </td>
+
     <td valign="top">
     <div id="div_dia" style="display:none">
     <label for="txt_venpag_numdia">N° Días:</label></br>
     <input name="txt_venpag_numdia" id="txt_venpag_numdia" type="text" class="dias" size="5" maxlength="3">
     </div>
     </td>
+
     <td valign="top">
     <div id="div_fecven" style="display:none">
     <label for="txt_venpag_fecven">Fec Vencto:</label></br>
       <input type="text" name="txt_venpag_fecven" id="txt_venpag_fecven" size="10" maxlength="10" readonly>
     </div>
     </td>
+
+      <td valign="top">
+          <div id="div_numeroletras" style="display:none">
+              <label for="txt_numletras">N° Letras:</label></br>
+              <input name="txt_numletras" id="txt_numletras" type="text" class="numero" size="5" maxlength="3">
+          </div>
+      </td>
+      <td valign="top">
+          <div class="div_fechaletras" style="display:none">
+              <label for="txt_letras_fecven1">Fec Vencto 1:</label></br>
+              <input type="text" name="txt_letras_fecven1" id="txt_letras_fecven1" size="10" maxlength="10" readonly>
+          </div>
+      </td>
+      <td valign="top">
+              <div class="div_fechaletras" style="display:none">
+              <label for="txt_letras_fecven2">Fec Vencto 2:</label></br>
+              <input type="text" name="txt_letras_fecven2" id="txt_letras_fecven2" size="10" maxlength="10" readonly>
+              </div>
+      </td>
+      <td valign="top">
+                  <div class="div_fechaletras" style="display:none">
+              <label for="txt_letras_fecven3">Fec Vencto 3:</label></br>
+              <input type="text" name="txt_letras_fecven3" id="txt_letras_fecven3" size="10" maxlength="10" readonly>
+          </div>
+      </td>
     </tr>
 </table>
 <div id="div_venta_pago_car">
@@ -1718,6 +1797,7 @@ function bus_cantidad(act)
 		</tr>
 	</table>
 </fieldset>
+    <?php if($_POST['action']=='insertar'){?>
     <fieldset><legend>Agregar Producto</legend>
 
         <label for="txt_ven_fec" style="display: none;">Fecha:</label>
@@ -1764,9 +1844,15 @@ function bus_cantidad(act)
         <label for="che_mayorista">Precio Mayorista</label>
         <input type="checkbox" id="che_mayorista" style="margin-top: 5px;">
 
+        <label for="cmb_listaprecio_id">Lista Precios:</label>
+        <select name="cmb_listaprecio_id" id="cmb_listaprecio_id">
+        </select>
+        <div id="div_listaprecio_form">
+        </div>
         <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
 
     </fieldset>
+    <?php } ?>
 <?php
 if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
 ?>

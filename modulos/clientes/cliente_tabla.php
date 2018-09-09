@@ -5,8 +5,12 @@ $oCliente = new cCliente();
 
 if($_POST['cli_id']!="")
 {
-$dts1=$oCliente->mostrar_filtro($_POST['cli_id']);
-$num_rows= mysql_num_rows($dts1);
+    $dts1=$oCliente->mostrar_filtro($_POST['cli_id']);
+    $num_rows= mysql_num_rows($dts1);
+}
+else{
+    $dts1=$oCliente->mostrarTodos($_POST['limit']);
+    $num_rows= mysql_num_rows($dts1);
 }
 ?>
 <script type="text/javascript">
@@ -45,6 +49,8 @@ $(function() {
                     <th>CONTACTO</th>
                     <th>TELEFONO</th>
                     <th>EMAIL</th>
+                    <th>LISTA PRECIO</th>
+                    <th>RETIENE</th>
                     <th align="center">INFO</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -62,6 +68,16 @@ $(function() {
                             <td><?php echo $dt1['tb_cliente_con']?></td>                     
                             <td><?php echo $dt1['tb_cliente_tel']?></td>
                             <td><?php echo $dt1['tb_cliente_ema']?></td>
+                            <td><?php echo $dt1['tb_precio_nom']?></td>
+                            <td>
+                                <?php
+                                if($dt1['tb_cliente_retiene']==1){
+                                    echo "Sí";
+                                }elseif($dt1['tb_cliente_retiene']==2){
+                                    echo "No";
+                                }
+                                ?>
+                            </td>
                             <td align="center" nowrap="nowrap"><a class="btn_info" href="#" onClick="ventas_por_cliente('<?php echo $dt1['tb_cliente_id']?>')">Información</a></td>
                             <td align="center" nowrap="nowrap"><a class="btn_editar" href="#editar" onClick="cliente_form('editar','<?php echo $dt1['tb_cliente_id']?>')">Editar</a> <a class="btn_eliminar" href="#eliminar" onClick="eliminar_cliente('<?php echo $dt1['tb_cliente_id']?>')">Eliminar</a></td>
                         </tr>

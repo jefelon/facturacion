@@ -1,6 +1,6 @@
 <?php
 class cCompra{
-	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id){
+	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden){
 	$sql = "INSERT INTO tb_compra(
 	`tb_compra_reg` ,
 	`tb_compra_mod` ,
@@ -29,10 +29,11 @@ class cCompra{
 	`tb_almacen_id` ,
 	`tb_compra_est` ,
 	`tb_usuario_id` ,
-	`tb_empresa_id`
+	`tb_empresa_id`,
+	`tb_compra_orden`
 	)
 	VALUES (
-	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id',  '$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id'
+	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id',  '$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -157,9 +158,10 @@ class cCompra{
 	INNER JOIN tb_documento d ON c.tb_documento_id=d.tb_documento_id
 	WHERE c.tb_empresa_id = $emp_id 
 	AND c.tb_documento_id=$doc
-	AND tb_compra_numdoc= '$numdoc' ";
+	AND c.tb_proveedor_id = $pro_id
+	AND tb_compra_numdoc= '$numdoc'";
 	
-	if($pro_id>0)$sql.=" AND c.tb_proveedor_id = $pro_id ";
+//	if($pro_id>0)$sql.=" AND c.tb_proveedor_id = $pro_id ";
 	if($est!="")$sql.=" AND tb_compra_est IN ($est) ";
 	
 	$sql.=" ORDER BY tb_compra_fec ";
@@ -167,15 +169,16 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id, $fec, $fecven, $doc_id, $numdoc, $pro_id, $est){
+	function modificar($id, $fec, $fecven, $doc_id, $numdoc, $pro_id, $est,$orden){
 	$sql = "UPDATE tb_compra SET  
 	`tb_compra_fec` =  '$fec',
 	`tb_compra_fecven` =  '$fecven',
 	`tb_documento_id` =  '$doc_id',
 	`tb_compra_numdoc` =  '$numdoc',
 	`tb_proveedor_id` =  '$pro_id' ,
-	`tb_compra_est` =  '$est' 
-	WHERE tb_compra_id =$id;"; 
+	`tb_compra_est` =  '$est' ,
+	`tb_compra_orden` =  '$orden'
+	WHERE tb_compra_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	

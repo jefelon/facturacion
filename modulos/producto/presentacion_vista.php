@@ -480,14 +480,14 @@ if($_POST['vista']=='Presentacion'){
     </div><?php */?>
     <br>
     <h3><a href="#">Unidad - Precios - Catálogo</a></h3>
-	<div>
-    	<div id="msj_presentacion_unidad" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+    <div>
+        <div id="msj_presentacion_unidad" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
         </div>
-    	<div id="div_catalogo_form">
-		</div>
-    	<div id="div_presentacion_unidad">
+        <div id="div_catalogo_form">
         </div>
-	</div>
+        <div id="div_presentacion_unidad">
+        </div>
+    </div>
 	<h3><a href="#">Stock</a></h3>
 	<div>
     	<div id="msj_presentacion_stock" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">

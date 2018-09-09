@@ -59,13 +59,13 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.99'
+	vMax: '99999.999999'
 });
 $('.cantidad_cat_ven').autoNumeric({
 	aSep: ',',
 	aDec: '.',
     vMin: '0.00',
-    vMax: '99999.99'
+    vMax: '99999.999999'
 });
 
 function cantidad(act,idf)

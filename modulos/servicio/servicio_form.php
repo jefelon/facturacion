@@ -28,7 +28,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.99'
+	vMax: '99999.9999'
 });
 
 $('.btn_ir').button({
@@ -55,65 +55,6 @@ function cmb_cat_id(ids)
 		}
 	});
 }
-
-/*function cmb_mar_id(ids)
-{	
-	$.ajax({
-		type: "POST",
-		url: "../marca/cmb_mar_id.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			mar_id: ids
-		}),
-		beforeSend: function() {
-			$('#cmb_mar_id').html('<option value="">Cargando...</option>');
-        },
-		success: function(html){
-			$('#cmb_mar_id').html(html);
-		}
-	});
-}*/
-
-/*function cmb_cat_uni_bas(ids)
-{	
-	$.ajax({
-		type: "POST",
-		url: "dao/cmb_cat_uni_bas.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			uni_id_tip: '1',
-			uni_id:	ids
-		}),
-		beforeSend: function() {
-			$('#cmb_cat_uni_bas').html('<option value="">Cargando...</option>');
-        },
-		success: function(html){
-			$('#cmb_cat_uni_bas').html(html);
-		}
-	});
-}
-
-function servicio_presentacion_vista(){
-	$.ajax({
-		type: "POST",
-		url: "presentacion_vista.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			pro_id:	'<?php //echo $_POST['pro_id']?>'
-		}),
-		beforeSend: function() {
-			$('#div_servicio_presentacion_vista').html('Cargando <img src="images/loadingf11.gif" align="absmiddle"/>');
-        },
-		success: function(html){
-			$('#div_servicio_presentacion_vista').html(html);				
-		}
-	});
-}*/
-
-//adicionales
 
 function categoria_form(act,idf)
 {

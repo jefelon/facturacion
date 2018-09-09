@@ -73,7 +73,7 @@ $('.moneda').autoNumeric({
 	aDec: '.',
 	//aSign: 'S/. ',
 	//pSign: 's',
-	vMin: '0.00',
+	vMin: '0.0000',
 	vMax: '9999.99'
 });
 $('.porcentaje').autoNumeric({
@@ -88,7 +88,7 @@ $('.cantidad').autoNumeric({
 	aSep: ',',
 	aDec: '.',
     vMin: '0.00',
-    vMax: '99999.99'
+    vMax: '99999.9999'
 });
 
 function cantidad(act,idf)

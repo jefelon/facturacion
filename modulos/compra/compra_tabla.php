@@ -45,7 +45,8 @@ $(function() {
                   <th>FECHA</th>
                   <th title="FECHA DE VENCIMIENTO">FECHA VCTO</th>
                   <th title="DOCUMENTO">DOC</th>
-                  <th title="NUMERO DE DOCUMENTO">NUM DOC</th>                    
+                  <th title="NUMERO DE DOCUMENTO">NUM DOC</th>
+                  <th title="NUMERO DE ORDEN DE COMPRA">NUM ORDEN C.</th>
                   <th>PROVEEDOR</th>
                   <th>RUC/DNI</th>
                   <th>ALMACEN</th>
@@ -95,6 +96,7 @@ $(function() {
                       </td>
                       <td title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_documento_abr']?></td>
                       <td><?php echo $dt1['tb_compra_numdoc']?></td>
+                      <td><?php echo $dt1['tb_compra_orden']?></td>
                       <td><?php echo $dt1['tb_proveedor_nom']?></td>
                       <td><?php echo $dt1['tb_proveedor_doc']?></td>
                       <td><?php echo $dt1['tb_almacen_nom']?></td>

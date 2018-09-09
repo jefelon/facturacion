@@ -106,6 +106,9 @@ $num_rows= mysql_num_rows($dts1);
                     if($dt1['cs_tipomoneda_id']=='1'){
                         echo 'SOLES';
                     }
+                    if($dt1['cs_tipomoneda_id']=='2'){
+                        echo 'DOLARES';
+                    }
                     ?>
                 </td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>

@@ -30,7 +30,10 @@ if($_POST['action_cliente']=="insertar")
                 strip_tags(limpia_espacios($_POST['txt_cli_con'])),
 				$_POST['txt_cli_tel'], 
 				$_POST['txt_cli_ema'],
-				$_POST['txt_cli_est']
+				$_POST['txt_cli_est'],
+                $_SESSION['empresa_id'],
+                $_POST['cmb_cli_retiene'],
+                $_POST['cmb_precio_id']
 				);
 			
 				$dts=$oCliente->ultimoInsert();
@@ -76,7 +79,10 @@ if($_POST['action_cliente']=="editar")
                 strip_tags(limpia_espacios($_POST['txt_cli_con'])),
 				$_POST['txt_cli_tel'], 
 				$_POST['txt_cli_ema'],
-				$_POST['txt_cli_est']
+				$_POST['txt_cli_est'],
+                $_SESSION['empresa_id'],
+                $_POST['cmb_cli_retiene'],
+                $_POST['cmb_precio_id']
 				);
 			
 			$data['cli_msj']='Se registró cliente correctamente.';

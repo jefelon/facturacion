@@ -72,7 +72,33 @@ $('.cantidad').autoNumeric({
 	vMin: '0',
 	vMax: '99999'
 });
-
+function categoria_form(act,idf)
+{
+    $.ajax({
+        type: "POST",
+        url: "../categoria/categoria_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            cat_id:	idf,
+            vista:	'cmb_cat_id'
+        }),
+        beforeSend: function() {
+            $("#btn_cmb_cat_id").click(function(e){
+                x=e.pageX+5;
+                y=e.pageY+15;
+                $('#div_categoria_form').dialog({ position: [x,y] });
+                $('#div_categoria_form').dialog("open");
+            });
+            //$('#msj_categoria').hide();
+            $('#div_categoria_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_categoria_form').html(html);
+        }
+    });
+}
 function actualizar_stock(act,idf,preid,almid,stoid)
 {
 	$('#lbl_sto_'+idf).hide();
@@ -104,6 +130,9 @@ function actualizar_stock(act,idf,preid,almid,stoid)
 			complete: function(){
 				//$('#lbl_sto_'+idf).hide();
 				//catalogo_tabla();
+
+                //Aquí cargar para registrar lotes
+                categoria_form('insertar');
 			}
 		});
 	}
@@ -141,7 +170,7 @@ $(document).ready(function() {
             <thead>
                 <tr>
                     <th>NOMBRE</th>
-                    <th>PRESENTACION</th>
+                    <th>LOTE/SERIE</th>
                     <th>MARCA</th>
                     <th>CATEGORIA</th>
                     <th>UNIDAD</th>
@@ -250,7 +279,14 @@ $(document).ready(function() {
                             </td>
                             <td>
 							<span style="">
-							<?php echo $dt1['tb_presentacion_nom']?>
+							<?php
+                            if($dt1['tb_producto_lote']==1) {
+                                echo 'L';
+                            }
+                            elseif($dt1['tb_producto_lote']==0) {
+                                echo '';
+                            }
+                            ?>
                             </span>
                             </td>
                             <td><?php echo $dt1['tb_marca_nom']?></td>
@@ -302,3 +338,5 @@ $(document).ready(function() {
                   <td colspan="7"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>
+<div id="div_categoria_form">
+</div>

@@ -191,6 +191,12 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 
         $("#for_fil_contable").submit();
     }
+    function registro_reporte_txt() {
+        $("#hdd_tabla").val($("<div>").append($("#tabla_producto").eq(0).clone()).html());
+        document.for_fil_contable.action = 'contable_registro_txt.php';
+        $("#for_fil_contable").submit();
+    }
+
 
 function modo(url){
 	$('#hdd_modo').val(url);

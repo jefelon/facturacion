@@ -16,6 +16,11 @@ if($_POST['action']=="editar"){
 		$tel=$dt['tb_cliente_tel'];
 		$ema=$dt['tb_cliente_ema'];
 		$est=$dt['tb_cliente_est'];
+        $est=$dt['tb_cliente_est'];
+        $cliente_retiene=$dt['tb_cliente_retiene'];
+        $precio_id=$dt['tb_precio_id'];
+
+
 	mysql_free_result($dts);
 }
 
@@ -87,12 +92,33 @@ if($_POST['action']=="editarSunat"){
 	},"json");
 }
 
+
+    function cmb_precio_id(ids)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../listaprecio/cmb_precio_id.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                precio_id: ids
+            }),
+            beforeSend: function() {
+                $('#cmb_precio_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_precio_id').html(html);
+            }
+        });
+
+    }
+
 $('#validar_ruc').button({
     text: true
   });
 
 $(function() {
-
+    cmb_precio_id(<?php echo $precio_id ?>);
 	// $("input[id=radio1]").change(function(){
 	// 	if($("input[id=radio1]").is(":checked")){
 	// 		$('#lbl_cli_doc').html("DNI:");
@@ -119,7 +145,7 @@ $(function() {
 	$('#txt_cli_nom, #txt_cli_dir, #txt_cli_con').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-	
+
 	$("#for_cli").validate({
 		submitHandler: function() {
 			$.ajax({
@@ -244,10 +270,16 @@ $(function() {
             <td align="right"><label for="cmb_cli_retiene">Retiene:</label></td>
             <td><select name="cmb_cli_retiene" id="cmb_cli_retiene">
                 <option value="">-</option>
-                <option value="1" <?php if($afec_id=='1')echo 'selected'?>>RETIENE</option>
-                <option value="2" <?php if($afec_id=='2')echo 'selected'?>>NO RETIENE</option>
+                <option value="1" <?php if($cliente_retiene=='1')echo 'selected'?>>RETIENE</option>
+                <option value="2" <?php if($cliente_retiene=='2')echo 'selected'?>>NO RETIENE</option>
             </select>
+                <label for="cmb_precio_id">Lista Precios:</label>
+                <select name="cmb_precio_id" id="cmb_precio_id">
+                </select>
+                <div id="div_precio_form">
+                </div>
             </td>
         </tr>
+
     </table>
 </form>
