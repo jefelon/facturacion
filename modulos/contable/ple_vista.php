@@ -115,9 +115,20 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 }
 
     function descargar_txt() {
-        $("#hdd_tabla").val($("<div>").append($("#tabla_ple").eq(0).clone()).html());
-        document.for_fil_ple.action = 'contable_registro_txt.php';
-        $("#for_fil_ple").submit();
+        userDetails = '';
+        $('#tabla_ple tbody:first tr').each(function () {
+            var detail = '';
+            $(this).find('td').each(function () {
+                detail += $(this).html() + '|';
+            });
+            detail = detail.substring(0, detail.length - 1);
+            detail += '';
+            userDetails += detail + "\r\n";
+        });
+        var a = document.getElementById("btn_descargar_txt");
+        var file = new Blob([userDetails], {type: 'text/plain'});
+        a.href = URL.createObjectURL(file);
+        a.download = "data.txt";
     }
 $(function() {
 	
@@ -128,7 +139,7 @@ $(function() {
 		location.reload();
 	});
 
-	
+
 	$('.btn_modo').button({
 		icons: {primary: "ui-icon-document"},
 		text: true
@@ -142,7 +153,7 @@ $(function() {
     });
 	libro_filtro();
 	ple_tabla();
-	
+
 });
 </script>
 </head>
