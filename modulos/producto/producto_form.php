@@ -3,12 +3,18 @@ session_start();
 require_once ("../../config/Cado.php");
 require_once ("cProducto.php");
 $oProducto = new cProducto();
-
+require_once("cProductoproveedor.php");
+$oProductoproveedor = new cProductoproveedor();
 require_once("../formatos/formato.php");
 
 if($_POST['action']=="insertar"){
 	$est	='Activo';
 	unset($_SESSION['atributo_car']);
+    $dts=$oProducto->ultimoIdProducto();
+    $dt = mysql_fetch_array($dts);
+    $prod_id=$dt['tb_producto_id']+1;
+
+    $oProductoproveedor->eliminar_por_productoID($prod_id);
 }
 
 
@@ -410,7 +416,35 @@ function actualizar_stock(preid,almid,stoid)
         });
 }
 
-function producto_proveedor_form(act,idp,otro){
+function eliminar_producto_proveedor(id)
+{
+    $('#msj_producto_proveedor').hide();
+    if(confirm("Realmente desea eliminar?")){
+        $.ajax({
+            type: "POST",
+            url: "../producto/proveedor_producto_reg.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action_proveedor_producto: "eliminar",
+                id:		id
+            }),
+            beforeSend: function() {
+                $('#msj_producto_proveedor').html("Cargando...");
+                $('#msj_producto_proveedor').show(100);
+            },
+            success: function(html){
+                $('#msj_producto_proveedor').html(html);
+            },
+            complete: function(){
+                producto_proveedor()
+            }
+        });
+    }
+}
+
+
+function producto_proveedor_form(act,idp){
     $.ajax({
         type: "POST",
         url: "producto_proveedor_form.php",
@@ -418,7 +452,7 @@ function producto_proveedor_form(act,idp,otro){
         dataType: "html",
         data: ({
             action: act,
-            pro_id: idp
+            prod_id: idp
         }),
         beforeSend: function() {
             $('#msj_producto_proveedor').hide();
@@ -430,42 +464,16 @@ function producto_proveedor_form(act,idp,otro){
         }
     });
 }
-function unidad_form(act,idf,vis)
-{
-    $.ajax({
-        type: "POST",
-        url: "../unidad/unidad_form.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            action: act,
-            uni_id:	idf,
-            vista:	vis
-        }),
-        beforeSend: function() {
-            //$('#msj_unidad').hide();
-            $("#btn_cmb_cat_uni_bas").click(function(e){
-                x=e.pageX+5;
-                y=e.pageY+15;
-                $('#div_unidad_form').dialog({ position: [x,y] });
-                $('#div_unidad_form').dialog("open");
-            });
-            $('#div_unidad_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-        success: function(html){
-            $('#div_unidad_form').html(html);
-        }
-    });
-}
+
 function producto_proveedor(){
     $.ajax({
         type: "POST",
         url: "producto_proveedor.php",
         async:true,
         dataType: "html",
-        data: ({
-            pro_id:	6
-        }),
+        // data: ({
+        //     pro_id:	6
+        // }),
         beforeSend: function() {
             $('#div_producto_proveedor').addClass("ui-state-disabled");
         },
@@ -706,15 +714,12 @@ $(function() {
         modal: true,
         buttons: {
             Guardar: function() {
-                $("#for_cat").submit();
+                $("#for_prodprov").submit();
             },
             Cancelar: function() {
-                $('#for_cat').each (function(){this.reset();});
+                $('#for_prodprov').each (function(){this.reset();});
                 $( this ).dialog( "close" );
             }
-        },
-        close: function() {
-            $("#div_catalogo_form").html('Cargando...');
         }
     });
 
@@ -727,6 +732,10 @@ $(function() {
             //catalogo_servicio();
         });
     });
+
+
+
+
 //formulario			
 	$("#for_pro").validate({
 		submitHandler: function() {
@@ -854,7 +863,7 @@ $(function() {
 
 		}
 	});
-	
+
 });
 </script>
 <style>

@@ -26,6 +26,15 @@ class cProducto{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+
+    function ultimoIdProducto(){
+        $sql = "SELECT * FROM tb_producto WHERE tb_producto_id = (SELECT MAX(tb_producto_id) FROM tb_producto)";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+
 	function mostrar_filtro($nom,$cat,$mar,$est,$fil,$ordby){
 	$sql="SELECT * 
 	FROM tb_producto p
@@ -80,8 +89,7 @@ class cProducto{
     function mostrar_por_proveedor($id){
         $sql="SELECT * 
 	FROM tb_productoproveedor pp
-	INNER JOIN tb_producto p ON pp.tb_producto_id=p.tb_producto_id
-    RIGHT JOIN tb_proveedor pr ON pp.tb_proveedor_id=pr.tb_proveedor_id
+    INNER JOIN tb_proveedor pr ON pp.tb_proveedor_id=pr.tb_proveedor_id
 	WHERE pp.tb_producto_id=$id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

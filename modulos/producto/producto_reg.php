@@ -38,7 +38,9 @@ if($_POST['action_producto']=="insertar")
 			$dt = mysql_fetch_array($dts);
 		$pro_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
-		
+
+
+
 		//insertamos presentacion
 		$oPresentacion->insertar(
             strip_tags(limpia_espacios($_POST['txt_pro_nom'])),

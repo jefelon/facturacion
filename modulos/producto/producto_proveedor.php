@@ -6,6 +6,10 @@ require_once("cProducto.php");
 $oProducto = new cProducto();
 
 require_once("../formatos/formato.php");
+$dts=$oProducto->ultimoIdProducto();
+$dt = mysql_fetch_array($dts);
+$prod_id=$dt['tb_producto_id']+1;
+
 
 ?>
 
@@ -50,9 +54,8 @@ require_once("../formatos/formato.php");
 </style>
 <table cellspacing="0">
     <?php
-    $dts1 = $oProducto->mostrar_por_proveedor($_POST['pro_id']);
+    $dts1 = $oProducto->mostrar_por_proveedor($prod_id);
     $num_rows = mysql_num_rows($dts1);
-    if ($num_rows >= 1) {
         $num_pre = 0;
         ?>
         <tbody>
@@ -60,7 +63,7 @@ require_once("../formatos/formato.php");
         <tr>
             <td valign="top">
                 <div id="tabla_pre_unidad" class="ui-widget">
-                    <table class="ui-widget ui-widget-content">
+                    <table id="tabla_prov_pro" class="ui-widget ui-widget-content">
                         <thead>
                         <tr class="ui-widget-header">
                             <th>PROVEEDOR</th>
@@ -72,38 +75,25 @@ require_once("../formatos/formato.php");
                         </tr>
                         </thead>
                         <tbody>
-                        <tr class="even">
-                            <?php
-                            while ($dt1 = mysql_fetch_array($dts1)){
-                            $num_pre++;
-                            ?>
-                            <td><?php echo $num_pre . '.- ' . $dt1['tb_proveedor_nom'] ?></td>
-                            <td><?php echo $dt1['tb_productoproveedor_cantmin'] ?></td>
-                            <td><?php echo $dt1['tb_productoproveedor_desc'] ?></td>
-                            <td><?php echo $dt1['tb_productoproveedor_fechaini'] ?></td>
-                            <td><?php echo $dt1['tb_productoproveedor_fechafin'] ?></td>
-                            <td>
-                                <a class="btn_editar"
-                                   onClick="producto_proveedor_form('editar','<?php echo $dt1['tb_productoproveedor_id'] ?>')">Editar
-                                    Unidad</a>
-                                <?php if ($dt1['tb_productoproveedor_id'] != 1) { ?>
-                                    <a class="btn_eliminar"
-                                       onClick="eliminar_catalogo(<?php echo $dt1['tb_productoproveedor_id'] ?>)">Eliminar
-                                        Unidad</a>
-                                <?php } ?>
-                            </td>
-
-                        </tr>
                         <?php
+                        while ($dt1 = mysql_fetch_array($dts1)) {
+                            ?>
+                            <tr>
+                                <td><?php echo $dt1['tb_proveedor_nom']?></td>
+                                <td><?php echo $dt1['tb_productoproveedor_cantmin']?></td>
+                                <td><?php echo $dt1['tb_productoproveedor_desc']?></td>
+                                <td><?php echo $dt1['tb_productoproveedor_fechaini']?></td>
+                                <td><?php echo $dt1['tb_productoproveedor_fechafin']?></td>
+                                <td><a class="btn_eliminar" onClick="eliminar_producto_proveedor(<?php echo $dt1['tb_productoproveedor_id']?>)"> Eliminar Proveedor</a></td>
+                            </tr><?php
                         }
-                        mysql_free_result($dts1);
                         ?>
                         </tbody>
                     </table>
                 </div>
             </td>
             <td valign="top">
-                <a class="btn_agregar_proveedor" onClick="producto_proveedor_form('insertar',6)">Agregar Proveedor
+                <a class="btn_agregar_proveedor" onClick="producto_proveedor_form('insertar',<?php echo $prod_id?>)">Agregar Proveedor
                 </a>
             </td>
         </tr>
@@ -111,7 +101,4 @@ require_once("../formatos/formato.php");
             <td colspan="2">&nbsp;</td>
         </tr>
         </tbody>
-        <?php
-    }
-    ?>
 </table>
