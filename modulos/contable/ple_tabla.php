@@ -50,8 +50,20 @@ $(function() {
         <table cellspacing="1" id="tabla_ple" class="tablesorter">
             <thead>
                 <tr>
+                  <th>PERIODO</th>
+                  <th>CUO</th>
+                  <th>CUO AMC</th>
                   <th>FECHA</th>
-                    <th>N° DOC</th>
+                  <th>FECHA VENCE</th>
+                  <th>COD DOC</th>
+                  <th>SERIE</th>
+                  <th>NUMERO</th>
+                  <th>CAMPO 10</th>
+                  <th>TIPO DOC PROV</th>
+                  <th>RUC PROV</th>
+                  <th>PROVEEDOR</th>
+                  <th>OP GRAVADA</th>
+                  <th>IGV</th>
                 </tr>
             </thead>
             <?php
@@ -59,10 +71,52 @@ $(function() {
 			?>
             <tbody>
                 <?php
-					while($dt1 = mysql_fetch_array($dts1)){?>
+                    $lineas=0;
+					while($dt1 = mysql_fetch_array($dts1)){ $lineas++;?>
                         <tr>
-                            <td><?php echo $dt1['tb_compra_reg'] ?></td>
-                            <td><?php echo $dt1['tb_compra_numdoc'] ?></td>
+                            <td>
+                                <?php
+                                $fecha=$dt1['tb_venta_fec'];
+                                $periodo=explode("-",$fecha);
+                                echo $periodo[0].$periodo[1];
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $fecha=$dt1['tb_venta_fec'];
+                                $periodo=explode("-",$fecha);
+                                echo $periodo[0].$periodo[1].$lineas;
+                                ?>
+                            </td>
+                            <td>
+                                <?php
+                                $amc="";
+                                $fecha=$dt1['tb_venta_fec'];
+                                $periodo=explode("-",$fecha);
+                                if($periodo[2]=="01"){$amc="A";}
+                                if($periodo[2]=="13"){$amc="C";}
+                                else{$amc="M";}
+                                echo $periodo[0].$periodo[1].$lineas.$amc;
+                                ?>
+                            </td>
+                            <td><?php echo $dt1['tb_venta_fec'] ?></td>
+                            <td><?php echo $dt1['tb_venta_fec'] ?></td>
+                            <td> <?php echo $dt1['cs_tipodocumento_cod']; ?></td>
+                            <td><?php echo $dt1['tb_venta_ser']; ?></td>
+                            <td><?php echo $dt1['tb_venta_num']; ?></td>
+                            <td></td>
+                            <td><?php
+                               if($dt1['tb_cliente_tip']==1){
+                                   echo "1";
+                               } elseif($dt1['tb_cliente_tip']==2){
+                                   echo "6";
+                               }
+                                ?>
+                            </td>
+                            <td><?php echo $dt1['tb_cliente_doc']; ?></td>
+                            <td><?php echo $dt1['tb_cliente_nom']; ?></td>
+                            <td><?php echo $dt1['tb_venta_gra']; ?></td>
+                            <td><?php echo $dt1['tb_venta_igv']; ?></td>
                         </tr>
                 <?php
 				}

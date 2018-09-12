@@ -447,7 +447,7 @@ $precio_sugerido=moneda_mysql(number_format($precio_sugerido,1));
 <tbody>
   <tr>
     <td align="right"><?php echo $stock_kardex?></td>
-    <?php /?><td align="right"><?php echo $datos.'---'.$datos2.'---'.$datos3.'---'.$datos4;?></td><?php ?>
+    <?php ?><td align="right"><?php echo $datos.'---'.$datos2.'---'.$datos3.'---'.$datos4;?></td><?php ?>
     <td align="right"><?php echo formato_money($costo_ponderado_dolares)?></td>
     <td align="right"><?php echo formato_money($costo_ponderado_soles)?></td>
     <td align="right"><?php echo formato_money($utilidad)?></td>

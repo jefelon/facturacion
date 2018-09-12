@@ -99,5 +99,3 @@ responder($estado, $msj,[
 		'ecom_id' => $comprobante_id,
 		'enviar' => $enviar_doble
 		]);	
-
-/*
