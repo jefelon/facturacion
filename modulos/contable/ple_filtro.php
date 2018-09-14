@@ -47,6 +47,9 @@ $(function() {
 
 	cmb_ven_doc('<?php echo $_POST['doc']?>');
 
+    $('#cmb_fil_librople').change(function(e) {
+        ple_tabla();
+    });
 });
 </script>
 
