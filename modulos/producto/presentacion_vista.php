@@ -283,6 +283,28 @@ function presentacion_unidad(){
 	});     
 }
 
+
+function producto_proveedor_tabla(){
+    $.ajax({
+        type: "POST",
+        url: "../producto/producto_proveedor_tabla.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            pro_id:	<?php echo $_POST['pro_id']?>
+        }),
+        beforeSend: function() {
+            $('#div_proveedores_form').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('#div_proveedores_form').html(html);
+        },
+        complete: function(){
+            $('#div_proveedores_form').removeClass("ui-state-disabled");
+        }
+    });
+}
+
 function presentacion_stock(){			
 	$.ajax({
 		type: "POST",
@@ -338,6 +360,7 @@ $(function() {
 	presentacion_unidad();
 	presentacion_stock();
 	presentacion_catalogo();
+    producto_proveedor_tabla();
 	
 	$( "#div_presentacion_form" ).dialog({
 		title:'Información de Presentación de Producto',
@@ -497,6 +520,13 @@ if($_POST['vista']=='Presentacion'){
 		<div id="div_presentacion_stock" style="clear:both">
         </div>
 	</div>
+    <h3><a href="#">Proveedores</a></h3>
+    <div>
+        <div id="msj_presentacion_proveedores" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+        </div>
+        <div id="div_proveedores_form">
+        </div>
+    </div>
     <h3><a href="#">Como se muestra en catálogo</a></h3>
 	<div>
     	<div id="msj_presentacion_catalogo" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">

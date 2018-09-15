@@ -739,6 +739,13 @@ $(function() {
 //formulario			
 	$("#for_pro").validate({
 		submitHandler: function() {
+            var form_data=new FormData($('#for_pro')[0]);
+            var toServer = {};
+            var data = $('#tabla_prov_pro tbody tr td').each(function(key, value) {
+                toServer[$(this).attr('id')] = $(this).text();
+            });
+            form_data.append('toserver',toServer);
+
 			$.ajax({
 				type: "POST",
 				url: "../producto/producto_reg.php",
@@ -747,7 +754,8 @@ $(function() {
                 contentType: false,
                 processData: false,
 				dataType: "json",
-                data: new FormData($('#for_pro')[0]),
+                data: form_data,
+
 				beforeSend: function(){
 					$('#div_producto_form').dialog("close");
 					$('#msj_producto').html("Guardando...");

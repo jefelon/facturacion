@@ -22,8 +22,9 @@ if ($_POST['action'] == "editar") {
 }
 ?>
 <script type="text/javascript">
-
-
+    function eliminar_fila_producto_proveedor(btn_delete) {
+        btn_delete.closest('tr').remove();
+    }
 
     $(function() {
 
@@ -64,7 +65,7 @@ if ($_POST['action'] == "editar") {
             submitHandler: function() {
                 $.ajax({
                     type: "POST",
-                    url: "../producto/proveedor_producto_reg.php",
+                    url: "../producto/proveedor_producto_fila.php",
                     async:true,
                     dataType: "html",
                     data: $("#for_prodprov").serialize(),
@@ -74,9 +75,12 @@ if ($_POST['action'] == "editar") {
                         $('#msj_producto_proveedor').show(100);
                     },
                     success: function(html){
-                        $('#msj_producto_proveedor').html(html);
-                        producto_proveedor();
-
+                        $('#tabla_prov_pro tbody').append(html);
+                        $('#msj_producto_proveedor').html("Guardado");
+                        $('.btn_eliminar').button({
+                            icons: {primary: "ui-icon-trash"},
+                            text: false
+                        });
                     },
                     complete: function(){
                         // $('#msj_producto').html("Agregado");
@@ -158,12 +162,13 @@ if ($_POST['action'] == "editar") {
             }
 
         });
+        
+
     });
 </script>
 <form id="for_prodprov">
     <input name="action_proveedor_producto" id="action_proveedor_producto" type="hidden" value="<?php echo $_POST['action'] ?>">
     <input name="hdd_com_prov_id" id="hdd_com_prov_id" type="hidden">
-    <input name="hdd_com_prod_id" id="hdd_com_prod_id" type="hidden" value="<?php echo $_POST['prod_id'] ?>">
     <table>
         <tr>
             <td><label for="txt_com_prov_nom">Nombre:</label></td>

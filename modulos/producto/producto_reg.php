@@ -9,6 +9,8 @@ require_once("cCatalogoproducto.php");
 $oCatalogoproducto = new cCatalogoproducto();
 require_once("cTag.php");
 $oTag = new cTag();
+require_once("cProductoproveedor.php");
+$oProductoproveedor = new cProductoproveedor();
 require_once("../formatos/formato.php");
 
 if($_POST['action_producto']=="insertar")
@@ -40,6 +42,12 @@ if($_POST['action_producto']=="insertar")
 			mysql_free_result($dts);
 
 
+        $provedores = $_POST['proveedor'];
+        $cont=0;
+        foreach ($provedores as $proveedor) {
+            $oProductoproveedor->insertar_producto_proveedor($pro_id, $_POST['hdd_com_prov_id'][$cont],  moneda_mysql($_POST['catmin'][$cont]),  moneda_mysql($_POST['desc'][$cont]), fecha_mysql($_POST['desde'][$cont]), fecha_mysql($_POST['hasta'][$cont]));
+            $cont++;
+        }
 
 		//insertamos presentacion
 		$oPresentacion->insertar(
@@ -96,6 +104,8 @@ if($_POST['action_producto']=="insertar")
         $data['pre_id']=$pre_id;
         $data['tipo_accion']=$_POST['tipo_accion'];
 		if($_POST['editar_presentacion']==1)$data['pro_act']='editar_presentacion';
+
+
 		$data['pro_msj']='Se registró producto correctamente.';
 		echo json_encode($data);
 	}
@@ -131,6 +141,7 @@ if($_POST['action_producto']=="editar")
         }
 
         move_uploaded_file($_FILES['file']['tmp_name'], 'img_products/' . $_POST['hdd_pro_id'] . '_'. $_FILES['file']['name'] );
+
 
 		$data['pro_msj']='Se registró producto correctamente.';
 		echo json_encode($data);
