@@ -89,7 +89,7 @@ $('.cantidad').autoNumeric({
 	aSep: ',',
 	aDec: '.',
     vMin: '0.00',
-    vMax: '99999.9999'
+    vMax: '99999.99'
 });
 
 function cantidad(act,idf)
@@ -132,6 +132,8 @@ $('.btn_menos').button({
 	},
 	text: false
 });
+
+
 
 $(".btn_mas").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 $(".btn_menos").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
