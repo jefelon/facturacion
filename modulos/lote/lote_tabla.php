@@ -1,9 +1,9 @@
 <?php
 require_once ("../../config/Cado.php");
-require_once ("cMarca.php");
-$oMarca = new cMarca();
+require_once ("cLote.php");
+$oLote = new cLote();
 
-$dts=$oMarca->mostrarTodos();
+$dts=$oLote->mostrarTodos();
 $num_rows= mysql_num_rows($dts);
 
 ?>

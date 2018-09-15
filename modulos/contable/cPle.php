@@ -17,6 +17,7 @@ class cPle
             LEFT JOIN cs_tipodocumento td ON c.cs_tipodocumento_id=td.cs_tipodocumento_id
             LEFT JOIN tb_proveedor p ON c.tb_proveedor_id=p.tb_proveedor_id
             INNER JOIN cs_tipomoneda m ON c.tb_compra_mon=m.cs_tipomoneda_id
+            ORDER BY tb_compra_fec ASC 
         ";
 //            if($documento_id>0)$sql.= " WHERE tb_documento_id = $documento_id ";
             $oCado = new Cado();

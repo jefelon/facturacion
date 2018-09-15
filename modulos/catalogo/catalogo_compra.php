@@ -37,8 +37,9 @@ function catalogo_compra_tabla()
 			limit: 		$("#cmb_fil_pro_lim").val(),
 			tippre:		$('#cmb_com_tippre').val(),
 			mon:		$('#cmb_com_mon').val(),
-			tipcam:		$('#txt_com_tipcam').val()	
-		}),
+			tipcam:		$('#txt_com_tipcam').val(),
+            prov_id:	$('#hdd_com_pro_id').val()
+        }),
 		beforeSend: function() {
 			$('#msj_catalogo').html("Cargando...");
 			$('#msj_catalogo').show(100);

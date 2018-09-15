@@ -99,8 +99,8 @@ $(function() {
                 1<td><?php echo $periodo[0].$periodo[1]; ?></td>
                 2<td><?php echo $periodo[0].$periodo[1].$lineas;?></td>
                     <?php
-                    if($periodo[2]=="01"){$amc="A";}
-                    if($periodo[2]=="13"){$amc="C";}
+                    if($periodo[1]=="01"){$amc="A";}
+                    if($periodo[1]=="13"){$amc="C";}
                     else{$amc="M";}
                     ?>
                 3<td><?php echo $periodo[0].$periodo[1].$lineas.$amc;?></td>
