@@ -145,9 +145,9 @@ $(function() {
 		text: true
 	})
 
-    $('#cmb_fil_librople').change(function(e) {
-        ple_tabla();
-    });
+    // $('#cmb_fil_librople').change(function(e) {
+    //     ple_tabla();
+    // });
     $('#btn_descargar_txt').click(function(e) {
         descargar_txt();
     });

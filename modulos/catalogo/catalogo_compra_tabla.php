@@ -62,9 +62,10 @@ if(isset($_POST['pro_cat']) and $_POST['pro_cat']>0)
 //echo $dc;			
 }
 
-$dts1=$oCatalogo->catalogo_compra_filtro($_POST['pro_nom'],$_POST['pro_cod'],$dc,$_POST['pro_mar'],$_POST['pro_est'], $_POST['limit']);
+$dts1=$oCatalogo->catalogo_compra_filtro($_POST['pro_nom'],$_POST['pro_cod'],$dc,$_POST['pro_mar'],$_POST['pro_est'], $_POST['limit'],$_POST['prov_id']);
 
 $num_rows= mysql_num_rows($dts1);
+
 ?>
 <script type="text/javascript">
 
@@ -198,7 +199,18 @@ $(function() {
                             </td>
                             <td align="right">
                             <!--Descuento del producto (este valor va en el Detalle compra)-->
-                            <input type="text" name="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php //echo $dt1['tb_compradetalle_des']?>" size="6" maxlength="5" style="text-align:right"></td>
+                                <?php
+
+                                $dts22=$oCatalogo->catalogo_compra_filtro_descuento($dt1['tb_producto_id'],$_POST['prov_id']);
+                                $dt33 = mysql_fetch_array($dts22);
+                                $descuento=  $dt33['tb_productoproveedor_desc'];
+
+                               mysql_free_result($dts22);
+
+                                ?>
+
+
+                            <input type="text" name="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php echo $descuento ?>" size="6" maxlength="5" style="text-align:right"></td>
                             <td align="right">
 							<input type="text" name="txt_detcom_fle_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_fle_<?php echo $dt1['tb_catalogo_id']?>" class="moneda" value="<?php //echo $dt1['tb_compradetalle_fle']?>" size="8" maxlength="8" style="text-align:right">
                             </td>

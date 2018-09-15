@@ -176,6 +176,29 @@ function stock_form(act,preid,almid,stoid){
 		}
 	});
 }
+function lote_form(act,preid,almid,stoid){
+    $.ajax({
+        type: "POST",
+        url: "../producto/lote_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            pre_id: preid,
+            alm_id: almid,
+            sto_id: stoid,
+            pro_id: <?php echo $_POST['pro_id']?>
+        }),
+        beforeSend: function() {
+            $('#msj_presentacion_lote').hide();
+            $('#div_lote_form').dialog("open");
+            $('#div_lote_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_lote_form').html(html);
+        }
+    });
+}
 
 function presentacion_tag(){			
 	$.ajax({
@@ -354,7 +377,7 @@ $(function() {
 		navigation: true,
 		collapsible: true
 	});*/
-	
+
 	presentacion_tabla();
 	//presentacion_tag();
 	presentacion_unidad();
@@ -446,8 +469,28 @@ $(function() {
 		close: function() {
 			$("#div_stock_form").html('Cargando...');
 		}
-	});		
-			
+	});
+    $( "#div_lote_form" ).dialog({
+        title:'Información de Lotes',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 550,
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_lot").submit();
+            },
+            Cancelar: function() {
+                $('#for_lot').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_lote_form").html('Cargando...');
+        }
+    });
+
 });
 </script>
 <?php 
@@ -518,6 +561,11 @@ if($_POST['vista']=='Presentacion'){
     	<div id="div_stock_form">
 		</div>
 		<div id="div_presentacion_stock" style="clear:both">
+        </div>
+
+        <div id="msj_presentacion_lote" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+        </div>
+        <div id="div_lote_form">
         </div>
 	</div>
     <h3><a href="#">Proveedores</a></h3>

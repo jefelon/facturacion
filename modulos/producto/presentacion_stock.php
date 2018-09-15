@@ -24,6 +24,11 @@ $(function() {
 		icons: {primary: "ui-icon-pencil"},
 		text: false
 	});
+    $('.btn_ir').button({
+        icons: {primary: "ui-icon-newwin"},
+        text: false
+    });
+    $(".btn_ir").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 });
 </script>
 <style>
@@ -60,6 +65,7 @@ $(function() {
                                   <th>STOCK MIN.</th>
                                   <th>ALMACEN</th>
                                   <th align="center">STOCK</th>
+                                  <th align="center">LOTES</th>
                                   <th align="center">&nbsp;</th>
                                 </tr>
 						<?php
@@ -72,7 +78,7 @@ $(function() {
 							$rws= $oStock->stock_por_presentacion($dt1['tb_presentacion_id'],$dt['tb_almacen_id']);
 							$rw = mysql_fetch_array($rws);
 								$stock_num=$rw['tb_stock_num'];
-								
+								$lote_num=$rw['tb_lote_exisact'];
 								if($stock_num==""){
 									$stock_texto='<span title="Sin Dato">S/D</span>';
 									$action_stock='insertar';
@@ -91,20 +97,25 @@ $(function() {
                                   <td><?php echo $dt1['tb_presentacion_stomin'].' '.$unidad_base_nombre?></td>
                                   <td><?php echo $dt['tb_almacen_nom']?></td>
                                   <td align="right"><?php echo $stock_texto?></td>
+                                  <td><?php echo $lote_num ?>
+                                      <?php if($lote_num !=""){?>
+                                      <a id="btn_cmb_lot_id" class="btn_ir" href="#" onClick="lote_form('',<?php echo $dt1['tb_presentacion_id'] ?>,<?php echo $dt['tb_almacen_id']?>)">Ver Lotes</a>
+                                     <?php }?>
+                                  </td>
                                   <td align="right">
                                   <?php if($conf_stock==1){
-									$pre_id = $dt1['tb_presentacion_id'];
-								   $alm_id = $dt['tb_almacen_id'];
-								   //Consultar catalogo_Id
-								   $rs2 = $oCatalogoproducto->presentacion_unidad_base($pre_id);
-								   $dt2 = mysql_fetch_array($rs2);
-								   $cat_id = $dt2['tb_catalogo_id'];
-								   mysql_free_result($rs2);
-								   
-								   $rs1 = $oNotaAlmacen->consultar_existencia_saldo_inicial($cat_id,$alm_id);
-								   $num_rows1 = mysql_num_rows($rs1);
-								   mysql_free_result($rs1);                                                                                        
-								   if($num_rows1>0){
+									   $pre_id = $dt1['tb_presentacion_id'];
+                                       $alm_id = $dt['tb_almacen_id'];
+                                       //Consultar catalogo_Id
+                                       $rs2 = $oCatalogoproducto->presentacion_unidad_base($pre_id);
+                                       $dt2 = mysql_fetch_array($rs2);
+                                       $cat_id = $dt2['tb_catalogo_id'];
+                                       mysql_free_result($rs2);
+
+                                       $rs1 = $oNotaAlmacen->consultar_existencia_saldo_inicial($cat_id,$alm_id);
+                                       $num_rows1 = mysql_num_rows($rs1);
+                                       mysql_free_result($rs1);
+                                       if($num_rows1>0){
 																		   
 								   }else{
 								   	/*

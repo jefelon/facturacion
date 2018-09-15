@@ -1,6 +1,6 @@
 <?php
 class cCompra{
-	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden){
+	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento){
 	$sql = "INSERT INTO tb_compra(
 	`tb_compra_reg` ,
 	`tb_compra_mod` ,
@@ -30,10 +30,11 @@ class cCompra{
 	`tb_compra_est` ,
 	`tb_usuario_id` ,
 	`tb_empresa_id`,
-	`tb_compra_orden`
+	`tb_compra_orden`,
+	`cs_tipodocumento_id`
 	)
 	VALUES (
-	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id',  '$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden'
+	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id',  '$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -169,7 +170,7 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id, $fec, $fecven, $doc_id, $numdoc, $pro_id, $est,$orden){
+	function modificar($id, $fec, $fecven, $doc_id, $numdoc, $pro_id, $est,$orden,$tipodocumento){
 	$sql = "UPDATE tb_compra SET  
 	`tb_compra_fec` =  '$fec',
 	`tb_compra_fecven` =  '$fecven',
@@ -177,7 +178,9 @@ class cCompra{
 	`tb_compra_numdoc` =  '$numdoc',
 	`tb_proveedor_id` =  '$pro_id' ,
 	`tb_compra_est` =  '$est' ,
-	`tb_compra_orden` =  '$orden'
+	`tb_compra_orden` =  '$orden',
+	`cs_tipodocumento_id` =  '$tipodocumento'
+	
 	WHERE tb_compra_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

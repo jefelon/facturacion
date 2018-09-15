@@ -85,6 +85,7 @@ $(document).ready(function() {
                     <th>MARCA</th>
                     <th>CATEGORIA</th>
                     <th>TIPO AFECT.</th>
+                    <th>LOTE</th>
                     <th>MODIFICACION</th>
                     <th>ESTADO</th>
                     <th align="center" title="N° PRESENTACIONES">PRES</th>
@@ -104,6 +105,7 @@ $(document).ready(function() {
                             <td><?php echo $dt1['tb_marca_nom']?></td>
                             <td><?php echo $dt1['tb_categoria_nom']?></td>
                             <td><?php if ($dt1['tb_afectacion_id']=='1') echo 'Gravado'; if ($dt1['tb_afectacion_id']=='9') echo 'Exonerado'; if ($dt1['tb_afectacion_id']=='11') echo 'Inafecto'?></td>
+                            <td><?php echo $dt1['tb_producto_lote']?></td>
                             <td><?php echo mostrarFechaHora($dt1['tb_producto_mod'])?></td>
                             <td><?php echo $dt1['tb_producto_est']?></td>
                             <td align="center"><?php

@@ -25,6 +25,26 @@ class clote{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrarLoteProducto($idPresentacion,$alm_id){
+	$sql="SELECT * 
+	FROM tb_lote l
+	INNER JOIN  tb_almacen a on l.tb_almacen_id=a.tb_almacen_id
+	WHERE tb_presentacion_id=$idPresentacion AND l.tb_almacen_id=$alm_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+//    function mostrar_por_producto_cmb($pro_id){
+//	$sql="SELECT *
+//	FROM tb_presentacion
+//	WHERE tb_producto_id=$pro_id
+//	ORDER BY tb_presentacion_reg DESC";
+//        $oCado = new Cado();
+//        $rst=$oCado->ejecute_sql($sql);
+//        return $rst;
+//    }
+
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_lote

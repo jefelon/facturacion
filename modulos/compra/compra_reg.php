@@ -31,6 +31,8 @@ $oStock = new cStock();
 require_once("../kardex/cKardex.php");
 $oKardex = new cKardex();
 require_once("../formatos/formato.php");
+require_once ("../documento/cDocumento.php");
+$oDocumento= new cDocumento();
 
 $igv_dato=0.18;
 
@@ -38,6 +40,14 @@ if($_POST['action_compra']=="insertar")
 {
 	if(!empty($_POST['txt_com_fec']))
 	{
+        //documento
+        $dts= $oDocumento->mostrarUno($_POST['cmb_com_doc']);
+        $dt = mysql_fetch_array($dts);
+        $documento=$dt['tb_documento_abr'];
+        $documento_ele=$dt['tb_documento_ele'];
+        $documento_tipdoc=$dt['cs_tipodocumento_id'];
+        $documento_cod=$dt['cs_tipodocumento_cod'];
+        mysql_free_result($dts);
 		//$estado='CANCELADA';
 		
 		//insertamos compra
@@ -68,7 +78,8 @@ if($_POST['action_compra']=="insertar")
 			$_POST['cmb_com_est'],
 			$_POST['hdd_usu_id'],
 			$_POST['hdd_emp_id'],
-            $_POST['txt_com_numorden']
+            $_POST['txt_com_numorden'],
+            $documento_tipdoc
 		);
 		//ultima compra
 			$dts=$oCompra->ultimoInsert();
@@ -269,6 +280,15 @@ if($_POST['action_compra']=="editar")
 {
 	if(!empty($_POST['txt_com_fec']))
 	{
+        //documento
+        $dts= $oDocumento->mostrarUno($_POST['cmb_com_doc']);
+        $dt = mysql_fetch_array($dts);
+        $documento=$dt['tb_documento_abr'];
+        $documento_ele=$dt['tb_documento_ele'];
+        $documento_tipdoc=$dt['cs_tipodocumento_id'];
+        $documento_cod=$dt['cs_tipodocumento_cod'];
+        mysql_free_result($dts);
+
 		$oCompra->modificar(
 			$_POST['hdd_com_id'],
 			fecha_mysql($_POST['txt_com_fec']),
@@ -277,7 +297,8 @@ if($_POST['action_compra']=="editar")
 			$_POST['txt_com_numdoc'],
 			$_POST['hdd_com_pro_id'],
 			$_POST['cmb_com_est'],
-            $_POST['txt_com_numorden']
+            $_POST['txt_com_numorden'],
+            $documento_tipdoc
 		);
 		
 		$data['com_msj']='Se registró compra correctamente.';

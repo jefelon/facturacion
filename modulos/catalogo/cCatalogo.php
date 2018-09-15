@@ -37,6 +37,15 @@ class cCatalogo{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function catalogo_compra_filtro_descuento($proid,$proveid){
+        $sql="SELECT * 
+        FROM tb_producto p
+        INNER JOIN tb_productoproveedor pp ON p.tb_producto_id=pp.tb_producto_id
+        WHERE p.tb_producto_id=$proid AND pp.tb_proveedor_id=$proveid";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	
 	function catalogo_guia_filtro($nom,$cod,$cat,$mar,$est){
 	$sql="SELECT * 
