@@ -79,6 +79,7 @@ $(function() {
 							$rw = mysql_fetch_array($rws);
 								$stock_num=$rw['tb_stock_num'];
 								$lote_num=$rw['tb_lote_exisact'];
+								$idstock=$rw['tb_stock_id'];
 								if($stock_num==""){
 									$stock_texto='<span title="Sin Dato">S/D</span>';
 									$action_stock='insertar';
@@ -97,8 +98,8 @@ $(function() {
                                   <td><?php echo $dt1['tb_presentacion_stomin'].' '.$unidad_base_nombre?></td>
                                   <td><?php echo $dt['tb_almacen_nom']?></td>
                                   <td align="right"><?php echo $stock_texto?></td>
-                                  <td><?php echo $lote_num ?>
-                                      <?php if($lote_num !=""){?>
+                                  <td align="center">
+                                      <?php if($stock_num !=""){?>
                                       <a id="btn_cmb_lot_id" class="btn_ir" href="#" onClick="lote_form('',<?php echo $dt1['tb_presentacion_id'] ?>,<?php echo $dt['tb_almacen_id']?>)">Ver Lotes</a>
                                      <?php }?>
                                   </td>

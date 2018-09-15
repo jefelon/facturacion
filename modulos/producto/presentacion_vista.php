@@ -531,8 +531,9 @@ if($_POST['vista']=='Presentacion'){
         <div id="div_presentacion_unidad">
         </div>
     </div>
-	<h3><a href="#">Stock</a></h3>
-	<div>
+
+	<div style="width: 50%;float: left">
+        <h3><a href="#">Stock</a></h3>
     	<div id="msj_presentacion_stock" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
         </div>
     	<div id="div_stock_form">
@@ -545,6 +546,11 @@ if($_POST['vista']=='Presentacion'){
         <div id="div_lote_form">
         </div>
 	</div>
+
+    <div style="width: 50%;float: right">
+<!--        libre-->
+    </div>
+    <div style="clear: both"></div>
     <h3><a href="#">Como se muestra en catálogo</a></h3>
 	<div>
     	<div id="msj_presentacion_catalogo" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">

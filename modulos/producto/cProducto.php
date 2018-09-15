@@ -1,6 +1,6 @@
 <?php
 class cProducto{
-	function insertar($nom, $des, $est, $cat_id, $mar_id, $afec_id, $usu_id, $prod_img){
+	function insertar($nom, $des, $est, $cat_id, $mar_id, $afec_id, $usu_id, $prod_img,$lote){
 	$sql = "INSERT INTO tb_producto(
 		`tb_producto_reg` ,
 		`tb_producto_mod` ,
@@ -11,10 +11,11 @@ class cProducto{
 		`tb_marca_id` ,
 		`tb_afectacion_id` ,
 		`tb_usuario_id`,
-		`tb_producto_imagen`
+		`tb_producto_imagen`,
+		`tb_producto_lote`
 		)
 		VALUES (
-		NOW( ) , NOW( ) ,  '$nom',  '$des',  '$est',  '$cat_id', '$mar_id', '$afec_id', '$usu_id', '$prod_img'
+		NOW( ) , NOW( ) ,  '$nom',  '$des',  '$est',  '$cat_id', '$mar_id', '$afec_id', '$usu_id', '$prod_img','$lote'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -119,7 +120,7 @@ class cProducto{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id, $nom, $des, $est, $cat_id, $mar_id, $afec_id, $usu_id, $prod_img){
+	function modificar($id, $nom, $des, $est, $cat_id, $mar_id, $afec_id, $usu_id, $prod_img,$lote){
 	$sql = "UPDATE tb_producto SET  
 	`tb_producto_mod` = NOW( ) ,
 	`tb_producto_nom` =  '$nom',
@@ -129,7 +130,8 @@ class cProducto{
 	`tb_marca_id` =  '$mar_id',
 	`tb_afectacion_id` =  '$afec_id',
 	`tb_usuario_id` =  '$usu_id',
-	`tb_producto_imagen` =  '$prod_img' 
+	`tb_producto_imagen` =  '$prod_img' ,
+	`tb_producto_lote` =  '$lote' 
 	WHERE  tb_producto_id =$id;"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

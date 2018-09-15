@@ -25,11 +25,14 @@ class clote{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-    function mostrarLoteProducto($idPresentacion,$alm_id){
+    function mostrarLoteProducto($idPresentacion,$alm_id,$stock_id){
 	$sql="SELECT * 
 	FROM tb_lote l
 	INNER JOIN  tb_almacen a on l.tb_almacen_id=a.tb_almacen_id
-	WHERE tb_presentacion_id=$idPresentacion AND l.tb_almacen_id=$alm_id";
+	INNER JOIN  tb_stock s on l.tb_stock_id=s.tb_stock_id
+	INNER JOIN  tb_presentacion p on l.tb_presentacion_id=p.tb_presentacion_id
+
+	WHERE p.tb_presentacion_id=$idPresentacion AND a.tb_almacen_id=$alm_id AND s.tb_stock_id=$stock_id ";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

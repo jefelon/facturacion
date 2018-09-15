@@ -49,7 +49,7 @@ if($_POST['action']=="editar")
         </tr>
         </thead>
         <?php
-        $dts1=$oLote->mostrarLoteProducto($_POST['pre_id'],$_POST['alm_id']);
+        $dts1=$oLote->mostrarLoteProducto($_POST['pre_id'],$_POST['alm_id'],$_POST['sto_id']);
         $num_rows= mysql_num_rows($dts1);
         if($num_rows>=1)
         {

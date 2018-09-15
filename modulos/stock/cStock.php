@@ -18,9 +18,8 @@ class cStock{
 	$sql="SELECT * 
 	FROM tb_presentacion p
 	LEFT JOIN tb_stock s ON p.tb_presentacion_id=s.tb_presentacion_id
-	--LEFT JOIN tb_lote l ON p.tb_presentacion_id=l.tb_presentacion_id
 	WHERE p.tb_presentacion_id=$pre_id
-	AND s.tb_almacen_id=$alm_id --AND s.tb_almacen_id=" ;
+	AND s.tb_almacen_id=$alm_id" ;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

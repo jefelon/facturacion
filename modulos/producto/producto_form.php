@@ -35,6 +35,7 @@ if($_POST['action']=="editar"){
         $afec_id=$dt['tb_afectacion_id'];
 		$est	=$dt['tb_producto_est'];
         $img    =$dt['tb_producto_imagen'];
+        $lote	=$dt['tb_producto_lote'];
 	mysql_free_result($dts);
 }
 ?>
@@ -58,7 +59,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.9999'
+	vMax: '99999.99'
 });
 $('.moneda_cambio').autoNumeric({
 	aSep: ',',
@@ -195,7 +196,8 @@ function producto_presentacion_vista(){
 		async:true,
 		dataType: "html",                      
 		data: ({
-			pro_id:	'<?php echo $_POST['pro_id']?>'
+			pro_id:	'<?php echo $_POST['pro_id']?>',
+            lote:	'<?php echo $_POST['lote']?>'
 		}),
 		beforeSend: function() {
 			$('#div_producto_presentacion_vista').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
@@ -931,6 +933,21 @@ $(function() {
                 </div>
             </td>
         </tr>
+
+        <tr>
+            <td><label for="cmb_lote">Lote:</label></td>
+        </tr>
+        <tr>
+            <td>
+            <div id="cmb_lote_form-">
+                <select name="cmb_lote" id="cmb_lote">
+                    <option value="1" <?php if($lote=='1')echo 'selected'?>>Sí</option>
+                    <option value="0" <?php if($lote=='0')echo 'selected'?>>No</option>
+                </select>
+            </div>
+            </td>
+        </tr>
+
         <tr>
           <td><label for="cmb_pro_est">Estado:</label></td>
         </tr>
@@ -1008,13 +1025,13 @@ $(function() {
           	<div id="div_unidad_form">
 			</div>
           </td>
-          <td align="right"><label for="cmb_lote">Lote/Series:</label></td>
-            <td>
-                <select name="cmb_lote" id="cmb_lote">
-                    <option value="1" <?php if($lote=='1')echo 'selected'?>>Sí</option>
-                    <option value="0" <?php if($lote=='0')echo 'selected'?>>No</option>
-                </select>
-          </td>
+<!--          <td align="right"><label for="cmb_lote">Lote/Series:</label></td>-->
+<!--          <td>-->
+<!--              <select name="cmb_lote" id="cmb_lote">-->
+<!--                 <option value="1" --><?php //if($lote=='1')echo 'selected'?><!-->Sí</option>-->
+<!--                 <option value="0" --><?php //if($lote=='0')echo 'selected'?><!-->No</option>-->
+<!--              </select>-->
+<!--          </td>-->
         </tr>        
     </table>
     </br>

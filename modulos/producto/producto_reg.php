@@ -24,7 +24,8 @@ if($_POST['action_producto']=="insertar")
 			$_POST['cmb_mar_id'],
             $_POST['cmb_afec_id'],
 			$_POST['hdd_usu_id'],
-            $_POST['hdd_prod_img']
+            $_POST['hdd_prod_img'],
+            $_POST['cmb_lote']
 		);
 
         if (!file_exists('img_products')) {
@@ -118,7 +119,8 @@ if($_POST['action_producto']=="editar")
 			$_POST['cmb_mar_id'],
             $_POST['cmb_afec_id'],
 			$_POST['hdd_usu_id'],
-            $_POST['hdd_prod_img']
+            $_POST['hdd_prod_img'],
+            $_POST['cmb_lote']
 
 		);
         $oPresentacion->modificar2(
