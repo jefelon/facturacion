@@ -100,7 +100,7 @@ $(function() {
                                   <td align="right"><?php echo $stock_texto?></td>
                                   <td align="center">
                                       <?php if($stock_num !=""){?>
-                                      <a id="btn_cmb_lot_id" class="btn_ir" href="#" onClick="lote_form('',<?php echo $dt1['tb_presentacion_id'] ?>,<?php echo $dt['tb_almacen_id']?>)">Ver Lotes</a>
+                                      <a id="btn_cmb_lot_id" class="btn_ir" href="#" onClick="lote_form('',<?php echo $dt1['tb_presentacion_id'] ?>,<?php echo $dt['tb_almacen_id']?>,<?php echo $idstock?>)">Ver Lotes</a>
                                      <?php }?>
                                   </td>
                                   <td align="right">
