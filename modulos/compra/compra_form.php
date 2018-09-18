@@ -181,6 +181,7 @@ function compra_car(act,idf,pre)
 			cat_fle:	 	$('#txt_detcom_fle_'+idf).val(),
 			tipo_cambio: 	$('#txt_com_tipcam').val(),
 			tipo_precio:	pre,
+            cmb_afec_id: 	$('#cmb_afec_id_'+idf).val(),
 			com_tipper:	tipper
 		}),
 		beforeSend: function() {

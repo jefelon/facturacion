@@ -56,10 +56,17 @@ if($_POST['action']=='agregar')
 			//-------------------------PRECIO----------------------------------------
 			//PRECIO DE COMPRA INGRESADO
 			$_SESSION['compra_linea_precom'][$_POST['cat_id']]=moneda_mysql($_POST['cat_precom']);
+
+
 			
 			//TIPO DE PRECIO: VALOR VENTA=1 PRECIO VENTA=2
 			$_SESSION['compra_linea_tippre'][$_POST['cat_id']]=$_POST['tipo_precio'];
-			
+
+
+            //TIPO BONIFICACIón
+            $_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=$_POST['cmb_afec_id'];
+
+
 			//PRECIO UNITRIO DE COMPRA SIN IGV
 			if($_POST['tipo_precio']==1)
 			{
@@ -93,6 +100,7 @@ if($_POST['action']=='quitar')
 	//unset($_SESSION['compra_igv'][$_POST['cat_id']]);
 	unset($_SESSION['compra_linea_precom'][$_POST['cat_id']]);
 	unset($_SESSION['compra_linea_tippre'][$_POST['cat_id']]);
+    unset($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]);
 	unset($_SESSION['compra_linea_preuni'][$_POST['cat_id']]);
 	unset($_SESSION['compra_linea_des'][$_POST['cat_id']]);
 	unset($_SESSION['compra_linea_fle'][$_POST['cat_id']]);
@@ -108,6 +116,7 @@ if($_POST['action']=='restablecer')
 	//unset($_SESSION['compra_igv']);
 	unset($_SESSION['compra_linea_precom']);
 	unset($_SESSION['compra_linea_tippre']);
+    unset($_SESSION['compra_linea_tip_bon']);
 	unset($_SESSION['compra_linea_preuni']);
 	unset($_SESSION['compra_linea_des']);
 	unset($_SESSION['compra_linea_fle']);
@@ -373,12 +382,16 @@ if($num_rows>0){
 
                 $_SESSION['compra_linea_cos'][$indice] = $linea_calculo_cos;
 
+                if($_SESSION['compra_linea_tip_bon'][$indice]){
+                    $tipo_item=6;
+                }
 
 				if($tipo_item==9){
                     $linea_preuni=$linea_preuni*1.18;
                     $valor_venta = $linea_preuni*$linea_cantidad;
                     $total_opeexo = $total_opeexo+$valor_venta-($valor_venta*($general_des/100));
-
+                }elseif ($tipo_item==6){
+                    $valor_venta = $linea_preuni*$linea_cantidad;
                 }elseif ($tipo_item==1){
                     $valor_venta = $linea_preuni*$linea_cantidad;
                     $total_opegrav =$total_opegrav+$valor_venta-($valor_venta*($general_des/100));
@@ -401,8 +414,11 @@ if($num_rows>0){
 
 				$valor_venta_bruto = $valor_venta;
                 $desc_x_item=$valor_venta-$valor_venta*$linea_calculo_des;
-                $valor_venta_x_item=$valor_venta*$linea_calculo_des;
-                $valor_venta_x_item_total+=$valor_venta_x_item;
+
+                $valor_venta_x_item = $valor_venta * $linea_calculo_des;
+                if(!$tipo_item==6) {
+                    $valor_venta_x_item_total += $valor_venta_x_item;
+                }
                 $desc_x_item_total+=$desc_x_item;
 
 
@@ -415,7 +431,6 @@ if($num_rows>0){
                     $total_operaciones_gravadas += $valor_venta_x_item;
                 }
                 $linea_importe= $linea_calculo_cos * $linea_cantidad;
-
 
                 $total_igv_grav+=$igv_linea;
 
@@ -430,21 +445,21 @@ if($num_rows>0){
                             <td><?php echo $dt1['tb_producto_nom']?></td>
                             <!--<td><?php //echo $dt1['tb_presentacion_nom']?></td>-->
 
-                            <td align="right"><?php echo formato_money($linea_preuni)?></td>
+                            <td align="right"><?php echo formato_decimal($linea_preuni,3)?></td>
 
                             <?php if ($tipo_item==9){ ?>
-                                <td align="right"><?php echo formato_money($linea_calculo_cos)?></td>
+                                <td align="right"><?php echo formato_decimal($linea_calculo_cos, 3)?></td>
                                 <td align="right"></td>
                             <?php } else{ ?>
                                 <td align="right"></td>
-                                <td align="right"><?php echo formato_money($linea_calculo_cos)?></td>
+                                <td align="right"><?php echo formato_decimal($linea_calculo_cos, 3)?></td>
                             <?php } ?>
-                            <td align="right"><?php echo formato_money($linea_des)?></td>
-                            <td align="right"><?php echo formato_money($valor_venta_x_item)?></td>
+                            <td align="right"><?php echo formato_decimal($linea_des, 3)?></td>
+                            <td align="right"><?php echo formato_decimal($valor_venta_x_item, 3)?></td>
 
                             <!--<td align="right"><?php //echo formato_money($linea_igv)?></td>-->
-                            <td align="right"><?php echo formato_money($linea_fle)?></td>
-                            <td align="right"><?php echo formato_money($linea_importe)?></td>
+                            <td align="right"><?php echo formato_decimal($linea_fle, 3)?></td>
+                            <td align="right"><?php echo formato_decimal($linea_importe, 3)?></td>
 
                             <?php /*?><td align="right"><?php echo $linea_prorrateo_des.'|'.$linea_calculo_importe.'|'.$linea_calculo_igv.'|'.$linea_calculo_fle?></td><?php */?>
                             <td align="center" nowrap="nowrap">
@@ -486,11 +501,11 @@ $descuento_total=$descuento_global+$desc_x_item_total;
     <table border="0" cellpadding="0" cellspacing="0">
       <tr>
         <td width="80"><label for="txt_com_des">DSCTO %</label></td>
-        <td><input name="txt_com_des" type="text" id="txt_com_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
+        <td><input name="txt_com_des" type="text" id="txt_com_des" style="text-align:right" value="<?php echo formato_decimal($general_des, 3)?>" size="10" maxlength="5" class="porcentaje_car"></td>
       </tr>
       <tr>
         <td><label for="txt_com_fle">FLETE S/.</label></td>
-        <td nowrap="nowrap"><input name="txt_com_fle" type="text" id="txt_com_fle" style="text-align:right" value="<?php echo formato_money($_SESSION['compra_general_fle'])?>" size="10" maxlength="8" class="moneda2">
+        <td nowrap="nowrap"><input name="txt_com_fle" type="text" id="txt_com_fle" style="text-align:right" value="<?php echo formato_decimal($_SESSION['compra_general_fle'], 3)?>" size="10" maxlength="8" class="moneda2">
           <label for="cmb_com_tipfle"></label>
           <select name="cmb_com_tipfle" id="cmb_com_tipfle">
             <option value="1"<?php if($_SESSION['compra_general_tipfle']==1)echo 'selected'?>>Con IGV</option>
@@ -508,15 +523,15 @@ $descuento_total=$descuento_global+$desc_x_item_total;
     <table border="0" align="right" cellpadding="0" cellspacing="0">
       <tr>
         <td width="110"><label for="txt_com_subtot">SUB TOTAL</label></td>
-        <td width="190"><input name="txt_com_subtot" type="text" id="txt_com_subtot" value="<?php echo formato_money($valor_venta_x_item_total)?>" readonly style="text-align:right"></td>
+        <td width="190"><input name="txt_com_subtot" type="text" id="txt_com_subtot" value="<?php echo formato_decimal($valor_venta_x_item_total,3)?>" readonly style="text-align:right"></td>
       </tr>
       <tr>
         <td><label for="txt_com_descal">DESCUENTO GLOBAL</label></td>
-        <td><input type="text" name="txt_com_descal" id="txt_com_descal" value="<?php echo formato_money($descuento_global)?>" readonly style="text-align:right"></td>
+        <td><input type="text" name="txt_com_descal" id="txt_com_descal" value="<?php echo formato_decimal($descuento_global, 3)?>" readonly style="text-align:right"></td>
       </tr>
         <tr>
             <td><label for="txt_com_destotal">TOTAL DESCUENTOS</label></td>
-            <td><input type="text" name="txt_com_destotal" id="txt_com_destotal" value="<?php echo formato_money($descuento_total)?>" readonly style="text-align:right"></td>
+            <td><input type="text" name="txt_com_destotal" id="txt_com_destotal" value="<?php echo formato_decimal($descuento_total,3)?>" readonly style="text-align:right"></td>
         </tr>
       <tr>
         <td title="AJUSTE APLICADO AL VALOR VENTA">AJUSTE*</td>
@@ -534,25 +549,25 @@ $descuento_total=$descuento_global+$desc_x_item_total;
 <table border="0" align="right" cellpadding="0" cellspacing="0">
   <tr>
     <td width="110">VALOR VENTA</td>
-    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_money($total_operaciones_gravadas)?>" readonly style="text-align:right"></td>
+    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_decimal($total_operaciones_gravadas, 3)?>" readonly style="text-align:right"></td>
   </tr>
   <tr>
     <td><label for="txt_com_igv">IGV</label></td>
-    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_money($igv_total_gravados)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_decimal($igv_total_gravados,3)?>" readonly style="text-align:right"></td>
   </tr>
     <tr>
         <td width="110">OPE. EXO.</td>
-        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_money($total_operaciones_exoneradas)?>" readonly style="text-align:right"></td>
+        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_decimal($total_operaciones_exoneradas,3)?>" readonly style="text-align:right"></td>
     </tr>
   <tr>
   <?php if($_POST['com_tipper']==1){?>
     <td><label for="txt_com_per">PERCEPCION(2%)</label></td>
-    <td align="right"><input type="text" name="txt_com_per" id="txt_com_per" value="<?php echo formato_money($total_percepcion)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_per" id="txt_com_per" value="<?php echo formato_decimal($total_percepcion, 3)?>" readonly style="text-align:right"></td>
   </tr>
   <?php }?>
   <tr>
     <td><label for="txt_com_tot"><strong>TOTAL</strong></label></td>
-    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" value="<?php echo formato_money($importe_total_venta)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" value="<?php echo formato_decimal($importe_total_venta, 3)?>" readonly style="text-align:right"></td>
   </tr>
 </table>
 </div>

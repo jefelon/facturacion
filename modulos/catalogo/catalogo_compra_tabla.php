@@ -74,7 +74,7 @@ $('.moneda').autoNumeric({
 	aDec: '.',
 	//aSign: 'S/. ',
 	//pSign: 's',
-	vMin: '0.0000',
+	vMin: '0.000',
 	vMax: '9999.99'
 });
 $('.porcentaje').autoNumeric({
@@ -165,7 +165,8 @@ $(function() {
                     <th align="right" nowrap="nowrap"><?php echo $texto_precio?></th>
                   	<th align="center">CANTIDAD</th>
                	  <th align="right" nowrap="nowrap" title="DESCUENTO %">DSCTO %</th>
-               	  <th align="right">FLETE S/.</th>                  
+               	  <th align="right">FLETE S/.</th>
+                    <th>TIPO</th>
                	  <th >&nbsp;</th>
                 </tr>
             </thead>
@@ -192,7 +193,7 @@ $(function() {
                             <td><?php echo $dt1['tb_unidad_abr']?></td>                           
                             <td align="right">
                             <?php echo $texto_moneda?>
-							<input class="focus_precom" name="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" class="moneda" value="<?php echo $precio_unitario_compra?>" size="10" maxlength="8" style="text-align:right">
+							<input class="focus_precom moneda" name="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" value="<?php echo formato_decimal($precio_unitario_compra, 3)?>" size="10" maxlength="8" style="text-align:right">
 							</td>                            
                             <td align="center">
                             <input name="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" class="cantidad" value="1" size="5" maxlength="6" style="text-align:right">
@@ -202,19 +203,24 @@ $(function() {
                             <td align="right">
                             <!--Descuento del producto (este valor va en el Detalle compra)-->
                                 <?php
-
-                                $dts22=$oCatalogo->catalogo_compra_filtro_descuento($dt1['tb_producto_id'],$_POST['prov_id']);
-                                $dt33 = mysql_fetch_array($dts22);
-                                $descuento=  $dt33['tb_productoproveedor_desc'];
-
-                               mysql_free_result($dts22);
-
+                                if($_POST['prov_id']){
+                                    $dts22=$oCatalogo->catalogo_compra_filtro_descuento($dt1['tb_producto_id'],$_POST['prov_id']);
+                                    $dt33 = mysql_fetch_array($dts22);
+                                    $descuento=  $dt33['tb_productoproveedor_desc'];
+                                    mysql_free_result($dts22);
+                                }
                                 ?>
 
 
-                            <input type="text" name="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php echo $descuento ?>" size="6" maxlength="5" style="text-align:right"></td>
+                            <input type="text" name="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php echo formato_decimal($descuento,3) ?>" size="6" maxlength="5" style="text-align:right"></td>
                             <td align="right">
 							<input type="text" name="txt_detcom_fle_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_fle_<?php echo $dt1['tb_catalogo_id']?>" class="moneda" value="<?php //echo $dt1['tb_compradetalle_fle']?>" size="8" maxlength="8" style="text-align:right">
+                            </td>
+                            <td>
+                                <select name="cmb_afec_id" id="cmb_afec_id_<?php echo $dt1['tb_catalogo_id']?>">
+                                    <option value="">-</option>
+                                    <option value="6">BONIFICACION</option>
+                                </select>
                             </td>
                          
                             <td align="center"><a class="btn_agregar" href="#" onClick="compra_car('agregar','<?php echo $dt1['tb_catalogo_id']?>','<?php echo $_POST['tippre']?>')">Agregar</a></td>
