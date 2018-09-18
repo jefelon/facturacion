@@ -81,7 +81,7 @@ function venta_tabla()
 		async:true,
 		dataType: "html",
 		data: $("#for_fil_ven").serialize(),                     
-		/*data: ({
+		data: ({
 			ven_fec1:	$('#txt_fil_ven_fec1').val(),
 			ven_fec2:	$('#txt_fil_ven_fec2').val(),
 			ven_doc:	$('#cmb_fil_ven_doc').val(),
@@ -90,7 +90,7 @@ function venta_tabla()
 			punven_id:	$('#cmb_fil_ven_punven').val(),
 			ven_est:	$('#cmb_fil_ven_est').val()
 			
-		}),*/
+		}),
 		beforeSend: function() {
 			$('#div_venta_tabla').addClass("ui-state-disabled");
         },

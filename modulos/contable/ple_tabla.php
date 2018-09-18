@@ -81,6 +81,22 @@ $(function() {
         <th>23 TOTAL</th>
         <th>24 MON</th>
         <th>25 TC</th>
+        <th>26 FECHA DOC MOD</th>
+        <th>27 TIPO DOC MOD</th>
+        <th>28 N SERIE DOC MD</th>
+        <th>29 DUA </th>
+        <th>30 N DOC</th>
+        <th>31 FECHA DETRACCION</th>
+        <th>32 N DETRACCION</th>
+        <th>33 MARCA COMP RET</th>
+        <th>34 CLAS BIENES > 1500UIT</th>
+        <th>35 ID CONTRA</th>
+        <th>36 ERROR 1</th>
+        <th>37 ERROR 2</th>
+        <th>38 ERROR 3</th>
+        <th>39 ERROR 4</th>
+        <th>40 MEDIO PAGO</th>
+        <th>41 ESTADO</th>
     </tr>
     </thead>
     <?php
@@ -144,6 +160,18 @@ $(function() {
                 23<td><?php echo $dt1['tb_compra_tot']; ?></td>
                 24<td><?php echo $dt1['cs_tipomoneda_cod']; ?></td>
                 25<td><?php echo $dt1['tb_compra_tipcam']; ?></td>
+
+                <?php
+                if($coddoc =="07"||$coddoc =="08"||$coddoc =="87"||$coddoc =="88"||$coddoc =="97"||$coddoc =="98")
+                {
+
+                }
+                else
+                {
+
+                }
+                ?>
+                26<td><?php echo $dt1['tb_compra_tipcam']; ?></td>
             </tr>
             <?php
         }

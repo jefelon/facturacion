@@ -190,7 +190,7 @@ function traspaso_detalle_car(tra_id){
 function venta_detalle_car(ven_id){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_reg.php",
+		url: "../guia/guia_numdoc_venta.php",
 		async:true,
 		dataType: "json",                      
 		data: ({
@@ -198,15 +198,16 @@ function venta_detalle_car(ven_id){
 			ven_id:	ven_id
 		}),
 		beforeSend: function() {
-			/*$('#msj_guia').hide();
-			$('#div_catalogo_traspaso').dialog("open");
-			$('#div_catalogo_traspaso').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');*/
+            $('#txt_gui_tipope_num').val('Cargando...');
+			// $('#msj_guia').hide();
+			// $('#div_catalogo_traspaso').dialog("open");
+			// $('#div_catalogo_traspaso').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(data){			
 			$("#hdd_gui_ven_id").val(data.ven_id);			
-			$('#txt_gui_tipope_num').val(""+data.ven_numdoc+"");				
+			$('#txt_gui_tipope_num').val(""+data.ven_numdoc+"");
 		},
-		complete: function(){			
+		complete: function(){
 			guia_car("consultar_detalle_venta", ven_id);
 		}
 	});

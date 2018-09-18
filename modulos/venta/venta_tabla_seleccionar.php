@@ -1,10 +1,12 @@
 <?php
+session_start();
 require_once ("../../config/Cado.php");
 require_once ("../venta/cVenta.php");
 $oVenta = new cVenta();
 require_once ("../formatos/formato.php");
 
-$dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['ven_fec1']),fecha_mysql($_POST['ven_fec2']),$_POST['cli_id'],$_POST['ven_est'],$_POST['usu_id'],$_POST['punven_id']);
+echo $_SESSION['empresa_id']. "hula -";
+$dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['ven_fec1']),fecha_mysql($_POST['ven_fec2']),$_POST['doc_id'],$_POST['cli_id'],$_POST['ven_est'],$_POST['usu_id'],$_POST['punven_id'],1);
 
 $num_rows= mysql_num_rows($dts1);
 ?>

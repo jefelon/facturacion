@@ -46,7 +46,7 @@
 <script type="text/javascript" src="../../js/tablesorter/jquery.tablesorter.js"></script>
 
 <script type="text/javascript" src="../../js/jquery-shortkeys/shortkeys.js"></script>
-<script type="text/javascript" src="../../js/autofocus/autofocus.js"></script>
+<!--<script type="text/javascript" src="../../js/autofocus/autofocus.js"></script>-->
 
 <script type="text/javascript">
 function guia_filtro()
