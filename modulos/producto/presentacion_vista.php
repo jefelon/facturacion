@@ -285,6 +285,53 @@ function eliminar_tag(id)
 	}
 }
 
+function cmb_precio_id(ids)
+{
+    $.ajax({
+        type: "POST",
+        url: "../listaprecio/cmb_precio_id.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            precio_id: ids
+        }),
+        beforeSend: function() {
+            $('#cmb_precio_id').html('<option value="">Cargando...</option>');
+        },
+        success: function(html){
+            $('#cmb_precio_id').html(html);
+        }
+    });
+
+}
+
+function guardar_lista_precio() {
+    $.ajax({
+        type: "POST",
+        url: "../listaprecio/lista_precio_reg.php",
+        async: true,
+        dataType: "html",
+        data: ({
+            action: "insertar",
+            prod_id: $('#hdd_pro_id').val(),
+            precos_alt: $('#txt_cat_precos_alt').val(),
+            precio_id: $('#cmb_precio_id').val(),
+            preven_alt: $('#txt_cat_preven_alt').val(),
+            cat_uti_alt: $('#txt_cat_uti_alt').val()
+        }),
+        beforeSend: function () {
+            $('#msj_lista_precio').html("Cargando...");
+            $('#msj_lista_precio').show(100);
+        },
+        success: function (html) {
+            $('#msj_lista_precio').html(html);
+        },
+        complete: function () {
+
+        }
+    });
+}
+
 function presentacion_unidad(){			
 	$.ajax({
 		type: "POST",
@@ -369,6 +416,30 @@ function presentacion_catalogo(){
 		}
 	});     
 }
+
+function lista_precio_detalle(){
+    $.ajax({
+        type: "POST",
+        url: "../listaprecio/lista_precio_detalle.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            prod_id:	<?php echo $_POST['pro_id']?>,
+            precio_id:  $("#cmb_precio_id").val()
+        }),
+        beforeSend: function() {
+            $('#div_precios_lista').addClass("ui-state-disabled");
+        },
+        success: function(data){
+            $('#txt_cat_precos_alt').val(data.precos);
+            $('#txt_cat_preven_alt').val(data.preven);
+            $('#txt_cat_uti_alt').val(data.uti);
+        },
+        complete: function(){
+            $('#div_precios_lista').removeClass("ui-state-disabled");
+        }
+    });
+}
 		
 $(function() {
 	
@@ -384,6 +455,7 @@ $(function() {
 	presentacion_stock();
 	presentacion_catalogo();
     producto_proveedor_tabla();
+    cmb_precio_id();
 	
 	$( "#div_presentacion_form" ).dialog({
 		title:'Información de Presentación de Producto',
@@ -491,7 +563,36 @@ $(function() {
         }
     });
 
+    $('#cmb_precio_id').change( function() {
+        lista_precio_detalle();
+    });
+
 });
+
+$('.btn_guardar_lista_precio').button({
+    icons: {primary: "ui-icon-disk"},
+    text: false
+});
+
+$('.moneda').autoNumeric({
+    aSep: ',',
+    aDec: '.',
+    //aSign: 'S/. ',
+    //pSign: 's',
+    vMin: '0.00',
+    vMax: '9999.99'
+});
+
+$('.porcentaje').autoNumeric({
+    aSep: ',',
+    aDec: '.',
+    //aSign: 'S/. ',
+    //pSign: 's',
+    vMin: '0.00',
+    vMax: '99.99'
+});
+
+
 </script>
 <?php 
 if($_POST['vista']=='Presentacion'){
@@ -552,6 +653,36 @@ if($_POST['vista']=='Presentacion'){
         <div id="div_catalogo_form">
         </div>
         <div id="div_presentacion_unidad">
+        </div>
+    </div>
+
+    <br>
+    <h3><a href="#">Unidad - Precios - Catálogo</a></h3>
+    <div id="div_precios_lista">
+        <div id="cuadro-contain" class="ui-widget">
+            <table class="ui-widget ui-widget-content">
+                <tr class="ui-widget-header">
+                    <th align="center">Lista Precios:</th>
+                    <th align="center">Precio Costo</th>
+                    <!--<th align="center">IGV</th>-->
+                    <th align="center">Utilidad (%)</th>
+                    <th align="center">Precio Venta</th>
+                    <!--<th align="center"> IGV</th>-->
+                </tr>
+                <tr>
+                    <td>
+                        <select name="cmb_precio_id" id="cmb_precio_id">
+                        </select>
+                    </td>
+                    <td align="center"><input name="txt_cat_precos_alt" type="text" id="txt_cat_precos_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
+                    <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
+                    <td align="center"><input name="txt_cat_uti_alt" type="text" id="txt_cat_uti_alt" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
+                    <td align="center"><input name="txt_cat_preven_alt" type="text" id="txt_cat_preven_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
+                    <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
+                    <td align="center"><a onclick="guardar_lista_precio()" class="btn_guardar_lista_precio" id=""></a></td>
+                    <div id="msj_lista_precio" style="display: none" class="ui-state-highlight ui-corner-all"></div>
+                </tr>
+            </table>
         </div>
     </div>
 

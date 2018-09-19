@@ -151,25 +151,7 @@ function cmb_cat_uni_bas(ids)
 	});
 }
 
-function cmb_precio_id(ids)
-{
-    $.ajax({
-        type: "POST",
-        url: "../listaprecio/cmb_precio_id.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            precio_id: ids
-        }),
-        beforeSend: function() {
-            $('#cmb_precio_id').html('<option value="">Cargando...</option>');
-        },
-        success: function(html){
-            $('#cmb_precio_id').html(html);
-        }
-    });
 
-}
 function presentacion_tag_car(act,idf){
 	$.ajax({
 		type: "POST",
@@ -519,7 +501,7 @@ $(function() {
 	cmb_cat_uni_bas();
 	
 	presentacion_tag_car();
-    cmb_precio_id();
+
 	//chk_cat_com();
 	//chk_cat_ven();
 	<?php }?>
@@ -733,6 +715,11 @@ $(function() {
         $("#precio_lista").click(function(){
             //catalogo_servicio();
         });
+        $("#cmb_precio_id").change(function(){
+            // var txt_cat_precos_alt $("#cmb_precio_id").val()+
+        });
+
+
     });
 
 
@@ -1040,7 +1027,6 @@ $(function() {
           <ul>
               <!--        Habilita Productos-->
               <li><a id="precio_base" href="#div_precios_base">Precio Base</a></li>
-              <li><a id="precio_lista" href="#div_precios_lista">Precio Lista</a></li>
           </ul>
         <div id="div_precios_base">
             <div id="cuadro-contain" class="ui-widget">
@@ -1065,7 +1051,7 @@ $(function() {
                         <th align="center">Precio Venta</th>
                         <!--<th align="center"> IGV</th>-->
                     </tr>
-                    <tr>
+                    <tr class="">
                         <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
                         <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
                         <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
@@ -1076,31 +1062,7 @@ $(function() {
             </div>
         </div>
         </br>
-        <div id="div_precios_lista">
-            <div id="cuadro-contain" class="ui-widget">
-                <table class="ui-widget ui-widget-content">
-                    <tr class="ui-widget-header">
-                        <th align="center">Lista Precios:</th>
-                        <th align="center">Precio Costo</th>
-                        <!--<th align="center">IGV</th>-->
-                        <th align="center">Utilidad (%)</th>
-                        <th align="center">Precio Venta</th>
-                        <!--<th align="center"> IGV</th>-->
-                    </tr>
-                    <tr>
-                        <td>
-                            <select name="cmb_precio_id" id="cmb_precio_id">
-                            </select>
-                        </td>
-                        <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
-                        <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
-                        <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
-                        <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
-                        <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
-                    </tr>
-                </table>
-            </div>
-        </div>
+
     </div>
       <br>
       <table class="ui-widget ui-widget-content">

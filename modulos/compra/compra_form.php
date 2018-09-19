@@ -68,6 +68,8 @@ $('#btn_compra_precio_form').button({
 	text: true
 });
 
+
+
 $( "#txt_com_fec" ).datepicker({
 	minDate: "-1Y",
 	maxDate:"+0D",
@@ -496,7 +498,22 @@ $(function() {
 	$('#chk_com_tipper').change( function() {
 		compra_car('actualizar');
 	});
-	
+
+    $("#cmb_com_doc").change(function() {
+        if ($(this).val()=='20' || $(this).val()=='21'){
+            $('#nota-debito-credito').show();
+            $("#txt_com_ser_nota").attr('disabled', false);
+            $("#txt_com_num_nota").attr('disabled', false);
+            $("#cmb_com_tip").attr('disabled', false);
+
+        }else{
+            $('#nota-debito-credito').hide();
+            $("#txt_com_ser_nota").attr('disabled', true);
+            $("#txt_com_num_nota").attr('disabled', true);
+            $("#cmb_com_tip").attr('disabled', true);
+        }
+    });
+
 	$("#txt_com_numdoc").change(function() {
 
 	    if($('#hdd_com_pro_id').val()>0 && $('#txt_com_numdoc').val()>0)
@@ -506,7 +523,7 @@ $(function() {
         }
 
 	});
-		
+
 	<?php
 	}
 	if($_POST['action']=="editar"){
@@ -623,7 +640,9 @@ $(function() {
         $( "#dialog" ).dialog({
             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).hide(); }
         });
+
     });
+
 
 	
 //formulario			
@@ -650,7 +669,9 @@ $(function() {
 					$('#msj_compra').html(data.com_msj);
 					
 					<?php if($_POST['action']=='insertar'){?>
-					compra_precio_form('insertar',data.com_id);
+                    if (data.com_id){
+                        compra_precio_form('insertar',data.com_id);
+                    }
 					<?php }?>
 				},
 				complete: function(){
@@ -799,6 +820,22 @@ $(function() {
             <option value="1" selected="selected">Valor Venta(sin IGV)</option>
             <option value="2">Precio Venta(con IGV)</option>
         </select>
+            <div id="nota-debito-credito" style="display:none;">
+                <label for="cmb_com_tip">Tipo:</label>
+                <select name="cmb_com_tip" id="cmb_com_tip">
+                    <option value="1" selected="selected">ANULACIÓN DE LA OPERACIÓN</option>
+                    <option value="6" selected="selected">DEVOLUCIÓN TOTAL</option>
+                    <option value="9" selected="selected">DISMINUICIÓN EN EL VALOR</option>
+                </select>
+                <label for="txt_com_ser_nota">Serie:</label>
+                <input name="txt_com_ser_nota" type="text" id="txt_com_ser_nota" disabled
+                       style="text-align:right; font-size:14px" value=""
+                       maxlength="4" size="6">
+                <label for="txt_com_num_nota">Número:</label>
+                <input name="txt_com_num_nota" type="text" id="txt_com_num_nota" disabled
+                       style="text-align:right; font-size:14px" value=""
+                       maxlength="8" size="10">
+            </div>
   		<?php }?>
     <?php //if($_POST['action']=='editar') echo 'COMPRA: '.$est?>
     <?php if($_POST['action']=='editar'){?>

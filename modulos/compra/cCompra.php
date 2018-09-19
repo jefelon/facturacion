@@ -1,6 +1,6 @@
 <?php
 class cCompra{
-	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento){
+	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento,$fec_nota,$ser_nota, $num_nota,$tip_nota){
 	$sql = "INSERT INTO tb_compra(
 	`tb_compra_reg` ,
 	`tb_compra_mod` ,
@@ -31,10 +31,14 @@ class cCompra{
 	`tb_usuario_id` ,
 	`tb_empresa_id`,
 	`tb_compra_orden`,
-	`cs_tipodocumento_id`
+	`cs_tipodocumento_id`,
+	`tb_compra_fec_nota`,
+	`tb_compra_ser_nota` ,
+	`tb_compra_num_nota`,
+	`tb_compra_tip_nota`
 	)
 	VALUES (
-	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id',  '$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento'
+	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id','$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento','$fec_nota', '$ser_nota','$num_nota','$tip_nota'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -164,7 +168,7 @@ class cCompra{
 	
 //	if($pro_id>0)$sql.=" AND c.tb_proveedor_id = $pro_id ";
 	if($est!="")$sql.=" AND tb_compra_est IN ($est) ";
-	
+
 	$sql.=" ORDER BY tb_compra_fec ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -234,5 +238,14 @@ WHERE tb_software_id =$id";
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function verificar_compra($numdoc){
+        $sql="SELECT * 
+	FROM tb_compra c
+	WHERE c.tb_compra_numdoc='$numdoc'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 }
 ?>
