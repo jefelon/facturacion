@@ -10,9 +10,9 @@ require_once ("../../config/Cado.php");
 require_once ("cPle.php");
 $oPle = new cPle();
 //
-if($_POST['libro']=1)//compras
+if($_POST['libro']='080100')//compras
 {
-    $dts1=$oPle->mostrar_compras($_POST['anio']);
+    $dts1=$oPle->mostrar_compras($_POST['anio'],$_POST['mes']);
     $num_rows= mysql_num_rows($dts1);
 }
 elseif($_POST['libro']=3)//ventas
@@ -52,7 +52,7 @@ $(function() {
 });
 </script>
 
-<?php if($_POST['libro']==1) {//REGISTRO COMPRAS?>
+<?php if($_POST['libro']=='080100') {//REGISTRO COMPRAS?>
 <table cellspacing="1" id="tabla_ple" class="tablesorter">
     <thead>
     <tr>
@@ -85,7 +85,7 @@ $(function() {
         <th>27 TIPO DOC MOD</th>
         <th>28 N SERIE DOC MD</th>
         <th>29 DUA </th>
-        <th>30 N DOC</th>
+        <th>30 N DOC MOD</th>
         <th>31 FECHA DETRACCION</th>
         <th>32 N DETRACCION</th>
         <th>33 MARCA COMP RET</th>
@@ -97,6 +97,7 @@ $(function() {
         <th>39 ERROR 4</th>
         <th>40 MEDIO PAGO</th>
         <th>41 ESTADO</th>
+        <th></th>
     </tr>
     </thead>
     <?php
@@ -110,33 +111,33 @@ $(function() {
                     <?php
                     $amc="";
                     $fecha=$dt1['tb_compra_fec'];
-                    $periodo=explode("-",$fecha);
+                    $periodo=explode("/",$fecha);
                     ?>
-                1<td><?php echo $periodo[0].$periodo[1]; ?></td>
-                2<td><?php echo $periodo[0].$periodo[1].$lineas;?></td>
+                <!--1--><td><?php echo $periodo[2].$periodo[1]."00"; ?></td>
+                <!--2--><td><?php echo $periodo[2].$periodo[1].$lineas;?></td>
                     <?php
                     if($periodo[1]=="01"){$amc="A";}
                     if($periodo[1]=="13"){$amc="C";}
                     else{$amc="M";}
                     ?>
-                3<td><?php echo $periodo[0].$periodo[1].$lineas.$amc;?></td>
-                4<td><?php echo $dt1['tb_compra_fec'] ?></td>
-                5<td><?php echo $dt1['tb_compra_fec'] ?></td>
+                <!--3--><td><?php echo $amc.$periodo[2].$periodo[1].$lineas;?></td>
+                <!--4--><td><?php echo $fecha ?></td>
+               <!-- 5--><td><?php echo $fecha ?></td>
 
                     <?php if(strlen($dt1['cs_tipodocumento_cod'])==1)
                     {$coddoc = '0' . $dt1['cs_tipodocumento_cod'];}
                     else{$coddoc=$dt1['cs_tipodocumento_cod'];}
                     ?>
-                6<td><?php echo $coddoc; ?></td>
+                <!--6--><td><?php echo $coddoc; ?></td>
 
                 <?php
                     $numero =$dt1['tb_compra_numdoc'];
                     $serie_numero=explode("-",$numero);
                 ?>
-                7<td><?php echo $serie_numero[0]; ?></td>
-                8<td></td>
-                9<td><?php echo $serie_numero[1]; ?></td>
-                10<td></td>
+                <!--7--><td><?php echo $serie_numero[0]; ?></td>
+                <!--8--><td></td>
+                <!--9--><td><?php echo $serie_numero[1]; ?></td>
+                <!--10--><td></td>
                     <?php
                     $ctipo="";
                     if($dt1['tb_proveedor_tip']==1){
@@ -145,25 +146,38 @@ $(function() {
                         $ctipo=6;
                     }
                     ?>
-                11<td><?php echo $ctipo ?></td>
-                12<td><?php echo $dt1['tb_proveedor_doc']; ?></td>
-                13<td><?php echo $dt1['tb_proveedor_nom']; ?></td>
-                14<td><?php echo $dt1['tb_compra_gra']; ?></td>
-                15<td><?php echo $dt1['tb_compra_igv']; ?></td>
-                16<td></td>
-                17<td></td>
-                18<td></td>
-                19<td></td>
-                20<td><?php echo $dt1['tb_compra_exo']; ?></td>
-                21<td><?php echo $dt1['tb_compra_isc']; ?></td>
-                22<td></td>
-                23<td><?php echo $dt1['tb_compra_tot']; ?></td>
-                24<td><?php echo $dt1['cs_tipomoneda_cod']; ?></td>
-                25<td><?php echo $dt1['tb_compra_tipcam']; ?></td>
+                <!--11--><td><?php echo $ctipo ?></td>
+                <!--12--><td><?php echo $dt1['tb_proveedor_doc']; ?></td>
+                <!--13--><td><?php echo $dt1['tb_proveedor_nom']; ?></td>
+                <!--14--><td><?php echo $dt1['tb_compra_gra']; ?></td>
+                <!--15--><td><?php echo $dt1['tb_compra_igv']; ?></td>
+                <!--16--><td></td>
+                <!--17--><td></td>
+                <!--18--><td></td>
+                <!--19--><td></td>
+                <!--20--><td><?php echo $dt1['tb_compra_exo']; ?></td>
+                <!--21--><td><?php echo $dt1['tb_compra_isc']; ?></td>
+                <!--22--><td></td>
+                <!--23--><td><?php echo $dt1['tb_compra_tot']; ?></td>
+                <!--24--><td><?php echo $dt1['cs_tipomoneda_cod']; ?></td>
+                <!--25--><td><?php echo $dt1['tb_compra_tipcam']; ?></td>
 
                 <?php
+                $fec_nota="";
+                $tip_doc_mod="";
+                $tip_doc_modserie="";
+                $tip_doc_modnum="";
                 if($coddoc =="07"||$coddoc =="08"||$coddoc =="87"||$coddoc =="88"||$coddoc =="97"||$coddoc =="98")
                 {
+                    $fec_nota= $dt1['tb_compra_fec_nota'];
+                    $tip_doc_modserie= $dt1['tb_compra_ser_nota'];
+                    $tip_doc_modnum= $dt1['tb_compra_num_nota'];
+                    $dtst=$oPle->mostrar_tipo_doc($tip_doc_modserie."-".$tip_doc_modnum);
+                    $dtt = mysql_fetch_array($dtst);
+
+                    if(strlen($dtt['cs_tipodocumento_cod'])==1)
+                    {$tip_doc_mod = '0' . $dtt['cs_tipodocumento_cod'];}
+                    else{$tip_doc_mod=$dtt['cs_tipodocumento_cod'];}
 
                 }
                 else
@@ -171,7 +185,23 @@ $(function() {
 
                 }
                 ?>
-                26<td><?php echo $dt1['tb_compra_tipcam']; ?></td>
+                <!--26--><td><?php echo $fec_nota; ?></td>
+                <!--27--><td><?php echo $tip_doc_mod; ?></td>
+                <!--28--><td><?php echo $tip_doc_modserie; ?></td>
+                <!--29--><td></td>
+                <!--30--><td><?php echo $tip_doc_modnum; ?></td>
+                <!--31--><td></td>
+                <!--32--><td></td>
+                <!--33--><td></td>
+                <!--34--><td></td>
+                <!--35--><td></td>
+                <!--36--><td></td>
+                <!--37--><td></td>
+                <!--38--><td></td>
+                <!--39--><td></td>
+                <!--40--><td></td>
+                <!--41--><td>1</td>
+                <td></td>
             </tr>
             <?php
         }
@@ -180,7 +210,7 @@ $(function() {
         </tbody>
     <?php }?>
     <tr class="even">
-        <td colspan="8"><?php echo $num_rows.' registros'?></td>
+        <td colspan="41"><?php echo $num_rows.' registros'?></td>
     </tr>
 </table>
 <?php } elseif($_POST['libro']==3) { // REGISTRO VENTAS?>
@@ -273,7 +303,7 @@ $(function() {
             </tbody>
         <?php }?>
         <tr class="even">
-            <td colspan="8"><?php echo $num_rows.' registros'?></td>
+            <td colspan="41"><?php echo $num_rows.' registros'?></td>
         </tr>
     </table>
 <?php } //fin ventas?>

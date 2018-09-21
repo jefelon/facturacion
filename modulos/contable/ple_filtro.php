@@ -50,6 +50,12 @@ $(function() {
     $('#cmb_fil_librople').change(function(e) {
         ple_tabla();
     });
+    $('#cmb_fil_anio').change(function(e) {
+        ple_tabla();
+    });
+    $('#cmb_fil_mes').change(function(e) {
+        ple_tabla();
+    });
 });
 </script>
 
@@ -111,7 +117,7 @@ $(function() {
         <label for="cmb_fil_ven_doc" align="right">Libro o Registro:</label>
         <select name="cmb_fil_librople" id="cmb_fil_librople">
             <option value="-">Seleccionar Libro</option>
-            <option value="1">PLE Registro de Compras 080100 - COMPLETO</option>
+            <option value="080100">PLE Registro de Compras 080100 - COMPLETO</option>
             <option value="2">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
             <option value="3">PLE Registro de Ventas 140100 - COMPLETO</option>
             <option value="4">PLE Diario de Formato Simplificado 050200</option>

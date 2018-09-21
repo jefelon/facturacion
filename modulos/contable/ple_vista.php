@@ -98,6 +98,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
             dataType: "html",
             data: ({
                 anio:   $('#cmb_fil_anio').val(),
+                mes:   $('#cmb_fil_mes').val(),
                 libro: $("#cmb_fil_librople").val()
 
                 // mes:	$('#cmb_fil_mes').val()
@@ -128,7 +129,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         var a = document.getElementById("btn_descargar_txt");
         var file = new Blob([userDetails], {type: 'text/plain'});
         a.href = URL.createObjectURL(file);
-        a.download = "data.txt";
+        a.download = "LE20601411076"+$('#cmb_fil_anio').val()+$('#cmb_fil_mes').val()+"00"+$("#cmb_fil_librople").val()+"00"+"1111.txt"
     }
 $(function() {
 	
