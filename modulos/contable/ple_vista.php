@@ -86,33 +86,59 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                 $('#div_venta_filtro').html(html);
             },
             complete: function(){
-                ple_tabla();
+                if($("#cmb_fil_librople").val()!="-") {
+                    ple_tabla();
+                }
             }
         });
     }
     function ple_tabla(){
-        $.ajax({
-            type: "POST",
-            url: "ple_tabla.php",
-            async:true,
-            dataType: "html",
-            data: ({
-                anio:   $('#cmb_fil_anio').val(),
-                mes:   $('#cmb_fil_mes').val(),
-                libro: $("#cmb_fil_librople").val()
-
-                // mes:	$('#cmb_fil_mes').val()
-            }),
-            beforeSend: function() {
-                $('#div_ple_tabla').addClass("ui-state-disabled");
-            },
-            success: function(html){
-                $('#div_ple_tabla').html(html);
-            },
-            complete: function(){
-                $('#div_ple_tabla').removeClass("ui-state-disabled");
-            }
-        });
+       if( $("#cmb_fil_librople").val()=='080100')
+        {
+            $.ajax({
+                type: "POST",
+                url: "ple_tabla_compras.php",
+                async: true,
+                dataType: "html",
+                data: ({
+                    anio: $('#cmb_fil_anio').val(),
+                    mes: $('#cmb_fil_mes').val(),
+                    libro: $("#cmb_fil_librople").val()
+                }),
+                beforeSend: function () {
+                    $('#div_ple_tabla').addClass("ui-state-disabled");
+                },
+                success: function (html) {
+                    $('#div_ple_tabla').html(html);
+                },
+                complete: function () {
+                    $('#div_ple_tabla').removeClass("ui-state-disabled");
+                }
+            });
+        }
+        if( $("#cmb_fil_librople").val()=='140100')
+        {
+            $.ajax({
+                type: "POST",
+                url: "ple_tabla_ventas.php",
+                async: true,
+                dataType: "html",
+                data: ({
+                    anio: $('#cmb_fil_anio').val(),
+                    mes: $('#cmb_fil_mes').val(),
+                    libro: $("#cmb_fil_librople").val()
+                }),
+                beforeSend: function () {
+                    $('#div_ple_tabla').addClass("ui-state-disabled");
+                },
+                success: function (html) {
+                    $('#div_ple_tabla').html(html);
+                },
+                complete: function () {
+                    $('#div_ple_tabla').removeClass("ui-state-disabled");
+                }
+            });
+        }
 }
 
     function descargar_txt() {
@@ -153,7 +179,7 @@ $(function() {
         descargar_txt();
     });
 	libro_filtro();
-	ple_tabla();
+	//ple_tabla();
 
 });
 </script>

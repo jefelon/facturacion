@@ -26,7 +26,7 @@ class cPle
             $rst=$oCado->ejecute_sql($sql);
             return $rst;
     }
-    function mostrar_ventas($anio){
+    function mostrar_ventas($anio,$mes){
         $sql="SELECT tb_venta_fec, td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_venta_ser,tb_venta_num,c.tb_cliente_tip,
               tb_cliente_doc,tb_cliente_nom,tb_venta_gra,tb_venta_igv,tb_venta_exo,tb_venta_isc,tb_venta_otrcar,tb_venta_tot,
               m.cs_tipomoneda_cod, (SELECT tb_tipocambio_dolsun FROM tb_tipocambio tc WHERE tc.tb_tipocambio_fec = tb_venta_fec) as tc
@@ -35,6 +35,7 @@ class cPle
             LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
             LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
             INNER JOIN cs_tipomoneda m ON v.cs_tipomoneda_id=m.cs_tipomoneda_id
+            WHERE YEAR(v.tb_venta_fec) = '$anio' AND MONTH(v.tb_venta_fec) ='$mes'
             
         UNION ALL 
         
@@ -46,6 +47,7 @@ class cPle
             LEFT JOIN cs_tipodocumento td ON nc.cs_tipodocumento_id=td.cs_tipodocumento_id
             LEFT JOIN tb_cliente c ON nc.tb_cliente_id=c.tb_cliente_id
             INNER JOIN cs_tipomoneda m ON nc.cs_tipomoneda_id=m.cs_tipomoneda_id
+            WHERE YEAR(nc.tb_venta_fec) = '$anio' AND MONTH(nc.tb_venta_fec) ='$mes'
             ORDER BY tb_venta_fec ASC 
         ";
 //            if($documento_id>0)$sql.= " WHERE tb_documento_id = $documento_id ";
