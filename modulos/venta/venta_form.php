@@ -51,6 +51,7 @@ if($_POST['action']=="insertar_cot"){
     $cli_doc = $dt['tb_cliente_doc'];
     $cli_dir = $dt['tb_cliente_dir'];
     $cli_tip = $dt['tb_cliente_tip'];
+    $cli_ret = $dt['tb_cliente_retiene'];
 
     $subtot	=$dt['tb_venta_subtot'];
     $igv	=$dt['tb_cotizacion_igv'];
@@ -83,6 +84,7 @@ if($_POST['action']=="editar"){
 		$cli_doc = $dt['tb_cliente_doc'];
 		$cli_dir = $dt['tb_cliente_dir'];
 		$cli_tip = $dt['tb_cliente_tip'];
+        $cli_ret = $dt['tb_cliente_retiene'];
 
 		$subtot	=$dt['tb_venta_subtot'];
  		$igv	=$dt['tb_venta_igv'];
@@ -183,6 +185,27 @@ $( "#txt_venpag_fec" ).datepicker({
 	showOn: "button",
 	buttonImage: "../../images/calendar.gif",
 	buttonImageOnly: true
+});
+
+$("#txt_letras_fecven1,#txt_letras_fecven2,#txt_letras_fecven3,#txt_letras_fecven4,#txt_letras_fecven5").datepicker({
+    //minDate: "-1M",
+    maxDate:"+0D",
+    yearRange: 'c-0:c+0',
+    changeMonth: true,
+    changeYear: false,
+    dateFormat: 'dd-mm-yy',
+    //altField: fecha,
+    //altFormat: 'yy-mm-dd',
+    showOn: "button",
+    buttonImage: "../../images/calendar.gif",
+    buttonImageOnly: true
+});
+
+
+$('.cantidad_letras').autoNumeric({
+    aSep : '',
+    vMax : '5',
+    vMin : '0'
 });
 
 /*$( "#txt_venpag_fecven" ).datepicker({
@@ -412,8 +435,38 @@ function txt_venpag_fecven(){
 		success: function(data){
 			//alert(data.fecha);
 			$('#txt_venpag_fecven').val(data.fecha);
-		}
+		},
+
 	});
+}
+
+function txt_venpag_fecletras(id){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_txt_fecletras.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            ven_fec: 		$('#txt_ven_fec').val(),
+            ven_mes: 	id
+        }),
+        beforeSend: function() {
+            //$('#txt_ven_numdoc').val('Cargando...');
+        },
+        success: function(data){
+            $('#txt_letras_fecven'+id).val(data.fecha);
+            console.log('aqui llego nuevo11');
+            if ($('#hdd_ven_cli_ret').val()==='1'){
+                console.log('aqui llego nuevo');
+                var nuevo_monto = parseFloat($('#txt_venpag_mon').val())/1.03;
+                console.log(nuevo_monto);
+                $('#txt_letras_mon'+id).val((parseFloat(nuevo_monto)/parseFloat($('#txt_numletras').val())).toFixed(2));
+            }else {
+                $('#txt_letras_mon'+id).val((parseFloat($('#txt_venpag_mon').val())/parseFloat($('#txt_numletras').val())).toFixed(2));
+            }
+
+        }
+    });
 }
 
 
@@ -845,6 +898,7 @@ function cliente_cargar_datos(idf){
 			$('#txt_ven_cli_dir').val(data.direccion);
 			$("#hdd_ven_cli_tip").val(data.tipo);
 			$('#txt_ven_cli_est').val(data.estado);
+            $('#hdd_ven_cli_ret').val(data.retiene);
 		}
 	});
 }
@@ -948,6 +1002,16 @@ $(function() {
 		$(this).val($(this).val().toUpperCase());
 	});
 
+    $("#txt_venpag_mon").change(function() {
+        var num_letras = $('#txt_numletras').val();
+        if(num_letras!=="") {
+            for (var i = 1; i <= num_letras; i++) {
+                $(".letras_fecven" + i).show(100);
+                txt_venpag_fecletras(i);
+            }
+        }
+    });
+
 	cmb_tar_id(<?php echo $tar_id?>);
 	cmb_cuecor_id(<?php echo $cuecor_id?>);
 
@@ -960,6 +1024,7 @@ $(function() {
 			$("#txt_ven_cli_nom").val(ui.item.nombre);
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
 			$("#hdd_ven_cli_tip").val(ui.item.tipo);
+            $("#hdd_ven_cli_ret").val(ui.item.retiene);
 			clientecuenta_detalle(ui.item.id);
 			//alert(ui.item.value);
 			$('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -976,6 +1041,7 @@ $(function() {
 			$("#txt_ven_cli_doc").val(ui.item.documento);
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
 			$("#hdd_ven_cli_tip").val(ui.item.tipo);
+            $("#hdd_ven_cli_ret").val(ui.item.retiene);
 			clientecuenta_detalle(ui.item.id);
 			//alert(ui.item.value);
 			$('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -992,7 +1058,7 @@ $(function() {
         if ((this).value=== '12' || (this).value=== '15') {
             cliente_cargar_datos(1);
         }else{
-            $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #txt_ven_cli_est').val('');
+            $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
         }
 	});
 
@@ -1053,7 +1119,8 @@ $(function() {
 			$("#div_dia").hide(100);
 			$("#div_fecven").hide(100);
             $("#div_numeroletras").hide(100);
-            $(".div_fechaletras").hide(100);
+            $(".letras_fecven").hide(100);
+
 			//ocultar deposito y tarjeta
 			$("#cmb_modpag_id option[value='2']").attr("disabled",false);
 			$("#cmb_modpag_id option[value='3']").attr("disabled",false);
@@ -1063,7 +1130,7 @@ $(function() {
 			$("#div_dia").show(100);
 			$("#div_fecven").show(100);
             $("#div_numeroletras").hide(100);
-            $(".div_fechaletras").hide(100);
+            $(".letras_fecven").hide(100);
 			//ocultar deposito y tarjeta
 			$("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
 			$("#cmb_modpag_id option[value='3']").attr("disabled","disabled");
@@ -1073,7 +1140,7 @@ $(function() {
             $("#div_dia").hide(100);
             $("#div_fecven").hide(100);
             $("#div_numeroletras").show(100);
-            $(".div_fechaletras").hide(100);
+            $(".letras_fecven").show(100);
             //ocultar deposito y tarjeta
             $("#cmb_modpag_id").hide(100);
         }
@@ -1119,14 +1186,23 @@ $(function() {
 		}
 	});
     $('#txt_numletras').keyup( function() {
-        if($('#txt_numletras').val()!="")
+
+        var num_letras = $('#txt_numletras').val();
+        if(num_letras!=="")
         {
-            $(".div_fechaletras").show(100);
+            for(var i=1;i<=num_letras;i++){
+                $(".letras_fecven"+i).show(100);
+                txt_venpag_fecletras(i);
+            }
+
+
             //implementar inputs de acuerdo a la cantidad de letras txt_venumletras();
         }
         else
         {
-            $(".div_fechaletras").hide(100);
+            for(var i=1;i<=5;i++){
+            $(".letras_fecven"+i).hide(100);
+        }
         }
     });
 
@@ -1705,31 +1781,56 @@ function bus_cantidad(act)
       <input type="text" name="txt_venpag_fecven" id="txt_venpag_fecven" size="10" maxlength="10" readonly>
     </div>
     </td>
-
       <td valign="top">
           <div id="div_numeroletras" style="display:none">
               <label for="txt_numletras">N° Letras:</label></br>
-              <input name="txt_numletras" id="txt_numletras" type="text" class="numero" size="5" maxlength="3">
+              <input name="txt_numletras" id="txt_numletras" type="text" class="cantidad_letras" size="10" maxlength="1">
           </div>
       </td>
-      <td valign="top">
-          <div class="div_fechaletras" style="display:none">
-              <label for="txt_letras_fecven1">Fec Vencto 1:</label></br>
-              <input type="text" name="txt_letras_fecven1" id="txt_letras_fecven1" size="10" maxlength="10" readonly>
-          </div>
-      </td>
-      <td valign="top">
-              <div class="div_fechaletras" style="display:none">
-              <label for="txt_letras_fecven2">Fec Vencto 2:</label></br>
-              <input type="text" name="txt_letras_fecven2" id="txt_letras_fecven2" size="10" maxlength="10" readonly>
-              </div>
-      </td>
-      <td valign="top">
-                  <div class="div_fechaletras" style="display:none">
-              <label for="txt_letras_fecven3">Fec Vencto 3:</label></br>
-              <input type="text" name="txt_letras_fecven3" id="txt_letras_fecven3" size="10" maxlength="10" readonly>
-          </div>
-      </td>
+    </tr>
+    <tr style="width:100%;" class="letras_fecven">
+        <td colspan="3" style="display:none;" class="letras_fecven1">
+                <label for="txt_letras_fecven1">Fec Vencto 1:</label><br>
+                <input type="text" name="txt_letras_fecven1" id="txt_letras_fecven1" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven2">
+            <label for="txt_letras_fecven2">Fec Vencto 2:</label><br>
+            <input type="text" name="txt_letras_fecven2" id="txt_letras_fecven2" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven3">
+            <label for="txt_letras_fecven3">Fec Vencto 3:</label><br>
+            <input type="text" name="txt_letras_fecven3" id="txt_letras_fecven3" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven4">
+            <label for="txt_letras_fecven4">Fec Vencto 4:</label><br>
+            <input type="text" name="txt_letras_fecven4" id="txt_letras_fecven4" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven5">
+            <label for="txt_letras_fecven5">Fec Vencto 5:</label><br>
+            <input type="text" name="txt_letras_fecven5" id="txt_letras_fecven5" size="10" maxlength="10" readonly>
+        </td>
+    </tr>
+    <tr style="width:100%;" class="letras_fecven">
+        <td colspan="3" style="display:none;" class="letras_fecven1">
+                <label for="txt_letras_mon1">Monto 1:</label><br>
+                <input type="text" name="txt_letras_mon1" id="txt_letras_mon1" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven2">
+            <label for="txt_letras_mon2">Monto 2:</label><br>
+            <input type="text" name="txt_letras_mon2" id="txt_letras_mon2" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven3">
+            <label for="txt_letras_mon3">Monto 3:</label><br>
+            <input type="text" name="txt_letras_mon3" id="txt_letras_mon3" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven4">
+            <label for="txt_letras_mon4">Monto 4:</label><br>
+            <input type="text" name="txt_letras_mon4" id="txt_letras_mon4" size="10" maxlength="10" readonly>
+        </td>
+        <td colspan="3" style="display:none;" class="letras_fecven5">
+            <label for="txt_letras_mon5">Monto 5:</label><br>
+            <input type="text" name="txt_letras_mon5" id="txt_letras_mon5" size="10" maxlength="10" readonly>
+        </td>
     </tr>
 </table>
 <div id="div_venta_pago_car">
@@ -1760,7 +1861,8 @@ function bus_cantidad(act)
     </div>
 </fieldset>
 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
-<input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_tip?>" />
+<input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
+    <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
 <input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
 <fieldset>
 	<legend>Datos Cliente</legend>

@@ -1,11 +1,27 @@
 <?php
 class clote{
-	function insertar($nom){
+	function insertar($num, $pres_id, $fechafab, $fechaven, $st_act, $st_ini, $est, $alm_id, $stock_id){
 	$sql = "INSERT tb_lote (
-		`tb_lote_nom`
+		`tb_lote_numero`,
+		`tb_presentacion_id`,
+		`tb_lote_fechafab`,
+		`tb_lote_fechavence`,
+		`tb_lote_exisini`,
+		`tb_lote_exisact`,
+		`tb_lote_estado`,
+		`tb_almacen_id`,
+		`tb_stock_id`
 		)
 		VALUES (
-		 '$nom'
+		 '$num',
+		 '$pres_id',
+		 '$fechafab',
+		 '$fechaven',
+		 '$st_act',
+		 '$st_ini',
+		 '$est',
+		 '$alm_id',
+		 '$stock_id'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

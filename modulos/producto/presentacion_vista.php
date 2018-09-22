@@ -563,6 +563,7 @@ $(function() {
         }
     });
 
+
     $('#cmb_precio_id').change( function() {
         lista_precio_detalle();
     });
