@@ -32,11 +32,19 @@ class cLetras{
 	return $rst;
 	}
 
+    function mostrar_letras($ven_id){
+        $sql="SELECT * 
+	FROM tb_letras
+	WHERE tb_venta_id=$ven_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
 	function mostrarUno($id){
 	$sql="SELECT * 
-	FROM tb_lote
-	WHERE tb_lote_id=$id";
+	FROM tb_letras
+	WHERE tb_letras_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

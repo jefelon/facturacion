@@ -15,6 +15,9 @@ $oEmpresa = new cEmpresa();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
+require_once ("../letras/cLetras.php");
+$cLetras = new cLetras();
+
 $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
 $dt = mysql_fetch_array($dts);
@@ -180,6 +183,14 @@ if($num_rows_vp>0)
                 $forma='CDT ';
                 $modo=''.$rw1['tb_tarjeta_nom'].' OP: '.$rw1['tb_ventapago_numope'];
                 $suma_pago6+=$rw1['tb_ventapago_mon'];
+            }
+        }
+
+        if($dt1['tb_formapago_id']==3){
+            $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+            echo 'LETRAS ';
+            while($ltr= mysql_fetch_array($ltrs1)){
+                echo ' L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
             }
         }
 
