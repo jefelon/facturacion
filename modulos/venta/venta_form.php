@@ -455,11 +455,8 @@ function txt_venpag_fecletras(id){
         },
         success: function(data){
             $('#txt_letras_fecven'+id).val(data.fecha);
-            console.log('aqui llego nuevo11');
             if ($('#hdd_ven_cli_ret').val()==='1'){
-                console.log('aqui llego nuevo');
                 var nuevo_monto = parseFloat($('#txt_venpag_mon').val())/1.03;
-                console.log(nuevo_monto);
                 $('#txt_letras_mon'+id).val((parseFloat(nuevo_monto)/parseFloat($('#txt_numletras').val())).toFixed(2));
             }else {
                 $('#txt_letras_mon'+id).val((parseFloat($('#txt_venpag_mon').val())/parseFloat($('#txt_numletras').val())).toFixed(2));
@@ -893,6 +890,7 @@ function cliente_cargar_datos(idf){
         },
 		success: function(data){
 			$('#hdd_ven_cli_id').val(idf);
+            $('#hdd_ven_cli_id').change();
 			$('#txt_ven_cli_nom').val(data.nombre);
 			$('#txt_ven_cli_doc').val(data.documento);
 			$('#txt_ven_cli_dir').val(data.direccion);
@@ -1002,6 +1000,10 @@ $(function() {
 		$(this).val($(this).val().toUpperCase());
 	});
 
+    $('#hdd_ven_cli_id').change(function(){
+        $('#txt_venpag_mon').change();
+    });
+
     $("#txt_venpag_mon").change(function() {
         var num_letras = $('#txt_numletras').val();
         if(num_letras!=="") {
@@ -1025,6 +1027,7 @@ $(function() {
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
 			$("#hdd_ven_cli_tip").val(ui.item.tipo);
             $("#hdd_ven_cli_ret").val(ui.item.retiene);
+            $('#hdd_ven_cli_id').change()
 			clientecuenta_detalle(ui.item.id);
 			//alert(ui.item.value);
 			$('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1042,6 +1045,7 @@ $(function() {
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
 			$("#hdd_ven_cli_tip").val(ui.item.tipo);
             $("#hdd_ven_cli_ret").val(ui.item.retiene);
+            $('#hdd_ven_cli_id').change();
 			clientecuenta_detalle(ui.item.id);
 			//alert(ui.item.value);
 			$('#msj_busqueda_sunat').html("Buscando en Sunat...");

@@ -370,30 +370,14 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             if($_POST['cmb_forpag_id']==3)
             {
                 //registro entrada
-                $xac=1;
-                $cuecli_tipreg=1;
-                $cuecli_tip=1;
-                $cuecli_est=2;
-                $verif=2;
-                $ventip=1;//venta
-                $cLetras->insertar(
-                    $ven_id,
-                    moneda_mysql($_POST['txt_venpag_mon']),
-                    $ven_id,
-                    $_POST['cmb_forpag_id'],
-                    $_POST['cmb_modpag_id'],
-                    $_POST['cmb_cuecor_id'],
-                    $_POST['cmb_tar_id'],
-                    $_POST['txt_venpag_numope'],
-                    $_POST['txt_venpag_numdia'],
-                    fecha_mysql($_POST['txt_venpag_fecven']),
-                    $_POST['hdd_ven_cli_id'],
-                    $verif,
-                    $clicue_idp,
-                    $_SESSION['usuario_id'],
-                    $_SESSION['empresa_id']
-                );
-                //no existe salida, se espera registre pago
+                for ($i = 1; $i <= $_POST['txt_numletras']; $i++) {
+                    $cLetras->insertar(
+                        $ven_id,
+                        fecha_mysql($_POST['txt_letras_fecven'.$i]),
+                        moneda_mysql($_POST['txt_letras_mon'.$i]),
+                        $i
+                    );
+                }
             }
 
 		}
