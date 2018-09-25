@@ -142,6 +142,30 @@ $('#btn_cli_form_modificar').button({
 });
 $("#btn_cli_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
+$('#btn_con_form_agregar').button({
+    icons: {primary: "ui-icon-plus"},
+    text: false
+});
+$("#btn_con_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+
+$('#btn_con_form_modificar').button({
+    icons: {primary: "ui-icon-pencil"},
+    text: false
+});
+$("#btn_con_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+
+$('#btn_tra_form_agregar').button({
+    icons: {primary: "ui-icon-plus"},
+    text: false
+});
+$("#btn_tra_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+
+$('#btn_tra_form_modificar').button({
+    icons: {primary: "ui-icon-pencil"},
+    text: false
+});
+$("#btn_tra_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+
 $('.venpag_moneda').autoNumeric({
 	aSep: ',',
 	aDec: '.',
@@ -650,6 +674,8 @@ function venta_car_servicio(act,idf){
 		}
 	});
 }
+
+
 
 function catalogo_venta(){
 	$.ajax({
@@ -1501,6 +1527,86 @@ $(function() {
             $("#txt_bus_pro_codbar").focus();
         }
     });
+
+    $( "#txt_fil_gui_con_nom" ).autocomplete({
+        minLength: 1,
+        //source: "../conductor/conductor_complete_nom.php",
+        source: function(request, response){
+            $.ajax({
+                url: "../conductor/conductor_complete_nom.php",
+                dataType: "json",
+                data:{
+                    term: request.term,
+                    tra_id: $("#txt_fil_gui_tra_id").val()
+                },
+                success: function(data){
+                    response(data);
+                }
+            });
+        },
+        select: function(event, ui){
+            $("#txt_fil_gui_con_id").val(ui.item.id);
+            $("#txt_fil_gui_con_doc").val(ui.item.documento);
+            $("#txt_fil_gui_con_dir").val(ui.item.direccion);
+        }
+    });
+
+    $( "#txt_fil_gui_con_doc" ).autocomplete({
+        minLength: 1,
+        //source: "../conductor/conductor_complete_doc.php?tra_id="+$("#txt_fil_gui_tra_id").val()+"",
+        source: function(request, response){
+            $.ajax({
+                url: "../conductor/conductor_complete_doc.php",
+                dataType: "json",
+                data:{
+                    term: request.term,
+                    tra_id: $("#txt_fil_gui_tra_id").val()
+                },
+                success: function(data){
+                    response(data);
+                }
+            });
+        },
+        select: function(event, ui){
+            $("#txt_fil_gui_con_id").val(ui.item.id);
+            $("#txt_fil_gui_con_nom").val(ui.item.nombre);
+            $("#txt_fil_gui_con_dir").val(ui.item.direccion);
+        }
+    });
+
+
+    $( "#txt_fil_gui_tra_razsoc" ).autocomplete({
+        minLength: 1,
+        source: "../transporte/transporte_complete_razsoc.php",
+        select: function(event, ui){
+            $("#txt_fil_gui_tra_id").val(ui.item.id);
+            $( "#txt_fil_gui_tra_razsoc" ).val(ui.item.razsoc);
+            $("#txt_fil_gui_tra_ruc").val(ui.item.ruc);
+            $("#txt_fil_gui_tra_dir").val(ui.item.direccion);
+            limpiar_cajas_conductor();
+            $("#fset_conductor").removeAttr("disabled");//Habilito Fielset conductor
+        }
+    });
+
+    $( "#txt_fil_gui_tra_ruc" ).autocomplete({
+        minLength: 1,
+        source: "../transporte/transporte_complete_ruc.php",
+        select: function(event, ui){
+            $("#txt_fil_gui_tra_id").val(ui.item.id);
+            $("#txt_fil_gui_tra_ruc").val(ui.item.ruc);
+            $("#txt_fil_gui_tra_razsoc").val(ui.item.razonsocial);
+            $("#txt_fil_gui_tra_dir").val(ui.item.direccion);
+            limpiar_cajas_conductor();
+            $("#fset_conductor").removeAttr("disabled");//Habilito Fielset conductor
+        }
+    });
+
+    function limpiar_cajas_conductor(){
+        $("#txt_fil_gui_con_id").val("");
+        $("#txt_fil_gui_con_doc").val("");
+        $("#txt_fil_gui_con_nom").val("");
+        $("#txt_fil_gui_con_dir").val("");
+    }
 });
 
 
@@ -1721,6 +1827,7 @@ function bus_cantidad(act)
     </tr>
   </table>
 </fieldset>
+    <div style="float: left; width: 75%;">
 <fieldset><legend>Registro de Pagos</legend>
 <?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
 <table border="0" cellspacing="2" cellpadding="0">
@@ -1837,6 +1944,7 @@ function bus_cantidad(act)
         </td>
     </tr>
 </table>
+
 <div id="div_venta_pago_car">
 </div>
 <?php }?>
@@ -1864,6 +1972,56 @@ function bus_cantidad(act)
         ?>
     </div>
 </fieldset>
+    </div>
+    <div style="float: left; width: 25%;">
+        <fieldset>
+            <legend>Datos Vehículo</legend>
+            <label for="txt_gui_mar">Marca:</label><br>
+            <input type="text" id="txt_gui_mar" name="txt_gui_mar" value="<?php echo $mar?>" /><br>
+            <label for="txt_gui_pla">Placa:</label><br>
+            <input type="text" name="txt_gui_pla" id="txt_gui_pla"  value="<?php echo $pla?>">
+        </fieldset>
+    </div>
+    <div style="float: left; width: 50%;">
+        <fieldset id="fset_conductor" disabled="disabled">
+            <legend>Datos Conductor</legend>
+            <?php if($_POST['action']=='insertar'){?>
+                <!--Boton Editar/Registrar Conductor-->
+                <a id="btn_con_form_agregar" href="#" onClick="conductor_form('insertar')">Agregar Conductor</a>
+                <a id="btn_con_form_modificar" href="#" onClick='conductor_form("editar", $("#txt_fil_gui_con_id").val())'>Modificar Conductor</a>
+            <?php }?>
+            <input type="hidden" id="txt_fil_gui_con_id" name="txt_fil_gui_con_id" value="<?php echo $con_id?>" />
+            <label for="txt_fil_gui_con_doc">RUC/DNI:</label>
+            <input type="text" id="txt_fil_gui_con_doc" name="txt_fil_gui_con_doc" size="15" value="<?php echo $con_doc?>" /><br>
+            <!--<a id="btn_cmb_con_id" class="btn_ir" href="#" onClick="verificarAccionConductor()">Agregar Conductor</a>-->
+            <label for="txt_fil_gui_con_nom">Conductor:</label>
+            <input type="text" id="txt_fil_gui_con_nom" name="txt_fil_gui_con_nom" size="40" value="<?php echo $con_nom?>" /><br>
+            <label for="txt_fil_gui_con_dir">Direcci&oacute;n:</label>
+            <input type="text" id="txt_fil_gui_con_dir" name="txt_fil_gui_con_dir" size="40" value="<?php echo $con_dir?>" readonly="readonly"/><br>
+            <label for="txt_fil_gui_con_lic">Licencia:</label>
+            <input type="text" id="txt_fil_gui_con_lic" name="txt_fil_gui_con_lic" size="15" value="<?php echo $con_lic?>" readonly="readonly"/>
+            <label for="txt_fil_gui_con_cat">Categoría:</label>
+            <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>
+        </fieldset>
+    </div>
+    <div style="float: left; width: 50%;">
+        <fieldset>
+            <legend>Datos Transporte</legend>
+            <?php if($_POST['action']=='insertar'){?>
+                <!--Boton Editar/Registrar Conductor-->
+                <a id="btn_tra_form_agregar" href="#" onClick="transporte_form('insertar')">Agregar Transporte</a>
+                <a id="btn_tra_form_modificar" href="#" onClick='transporte_form("editar", $("#txt_fil_gui_tra_id").val())'>Modificar Transporte</a>
+            <?php }?>
+            <input type="hidden" id="txt_fil_gui_tra_id" name="txt_fil_gui_tra_id" value="<?php echo $tra_id?>" />
+            <label for="txt_fil_gui_tra_ruc">RUC:</label>
+            <input type="text" id="txt_fil_gui_tra_ruc" name="txt_fil_gui_tra_ruc" size="15" value="<?php echo $tra_ruc?>" /><br>
+            <!--<a id="btn_cmb_tra_id" class="btn_ir" href="#" onClick="verificarAccionTransporte()">Agregar Transporte</a>-->
+            <label for="txt_fil_gui_tra_razsoc">Transporte:</label>
+            <input type="text" id="txt_fil_gui_tra_razsoc" name="txt_fil_gui_tra_razsoc" size="40" value="<?php echo $tra_razsoc?>" /><br>
+            <label for="txt_fil_gui_tra_dir">Direcci&oacute;n:</label>
+            <input type="text" id="txt_fil_gui_tra_dir" name="txt_fil_gui_tra_dir" size="40" value="<?php echo $tra_dir?>" disabled="disabled"/>
+        </fieldset>
+    </div>
 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
     <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
@@ -1892,7 +2050,7 @@ function bus_cantidad(act)
 		</tr>
 		<tr>
 			<td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-			<td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:616px" value="<?php echo $cli_dir?>" disabled="disabled"/></td>
+			<td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:616px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
 		</tr>
 		<tr>
 			<td align="right"><label for="txt_ven_cli_est">Estado:</label></td>

@@ -832,8 +832,10 @@ $(function() {
     <label for="txt_fil_gui_con_dir">Direcci&oacute;n:</label>
     <input type="text" id="txt_fil_gui_con_dir" name="txt_fil_gui_con_dir" size="40" value="<?php echo $con_dir?>" readonly="readonly"/>
     <label for="txt_fil_gui_con_lic">Licencia:</label>
-    <input type="text" id="txt_fil_gui_con_lic" name="txt_fil_gui_con_lic" size="15" value="<?php echo $con_lic?>" readonly="readonly"/>					    <label for="txt_fil_gui_con_cat">Categoría:</label>
-    <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>					</fieldset>
+    <input type="text" id="txt_fil_gui_con_lic" name="txt_fil_gui_con_lic" size="15" value="<?php echo $con_lic?>" readonly="readonly"/>
+    <label for="txt_fil_gui_con_cat">Categoría:</label>
+    <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>
+</fieldset>
 
 <fieldset>
 	<legend>Datos Vehículo</legend>

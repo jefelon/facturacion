@@ -68,6 +68,17 @@ $oCotizacion = new cCotizacion();
 
 require_once("../formatos/formato.php");
 
+require_once("../guia/cGuia.php");
+$oGuia = new cGuia();
+
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt = mysql_fetch_array($dts);
+$emp_razsoc=$dt['tb_empresa_razsoc'];
+$emp_dir=$dt['tb_empresa_dir'];
+mysql_free_result($dts);
+
+
+
 $unico_id=$_POST['unico_id'];
 
 $igv_dato=0.18;
@@ -857,12 +868,53 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		//	if($documento_cod==1)$data['ven_sun']='enviar';
 		//	if($documento_cod==3)$oVenta->modificar_campo($ven_id,'estsun','10'//);
 		//}
-		
+
 		if($documento_ele==1)
 		{
 			if($documento_cod==1 or $documento_cod==3)$data['ven_sun']='enviar';
 			if($documento_cod==3)$oVenta->modificar_campo($ven_id,'estsun','10');
 		}
+
+        if($_POST['chk_imprimir_guia']==1){
+            $estado='CONCLUIDA';
+            $cbo_gui_tip_ope=1;
+            //insertamos guia
+            $oGuia->insertar(
+                fecha_mysql($_POST['txt_ven_fec']),
+                $emp_razsoc,
+                strip_tags($_POST['txt_ven_cli_nom']),
+                $emp_dir,
+                strip_tags($_POST['txt_ven_cli_dir']),
+                strip_tags($_POST['txt_gui_num']),
+                strip_tags($_POST['txt_gui_obs']),
+                strip_tags($_POST['txt_gui_pla']),
+                strip_tags($_POST['txt_gui_mar']),
+                $estado,
+                $cbo_gui_tip_ope,
+                $ven_id,
+                $_POST['hdd_gui_tra_id'],
+                $_POST['txt_ven_numdoc'],
+                $_POST['txt_fil_gui_con_id'],
+                $_POST['txt_fil_gui_tra_id'],
+                $usu_id,
+                $_SESSION['empresa_id']
+            );
+            //ultima guia
+            $dts=$oGuia->ultimoInsert();
+            $dt = mysql_fetch_array($dts);
+            $gui_id=$dt['last_insert_id()'];
+            mysql_free_result($dts);
+
+            //detalle productos
+            foreach($_SESSION['guia_car'] as $indice=>$cantidad){
+                //registro detalle de guia
+                $oGuia->insertar_detalle(
+                    $indice,
+                    $cantidad,
+                    $gui_id
+                );
+            }
+        }
 
 		$data['ven_msj']='Se registró venta correctamente.';
 		echo json_encode($data);

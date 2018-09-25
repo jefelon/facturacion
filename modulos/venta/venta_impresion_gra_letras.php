@@ -20,64 +20,7 @@ $cLetras = new cLetras();
 
 $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
-$dt = mysql_fetch_array($dts);
 
-$dts=$oUsuario->mostrarUno($dt['tb_vendedor_id']);
-$dt = mysql_fetch_array($dts);
-$usugru		=$dt['tb_usuariogrupo_id'];
-$usugru_nom	=$dt['tb_usuariogrupo_nom'];
-$usu_nom	=$dt['tb_usuario_nom'];
-$apepat		=$dt['tb_usuario_apepat'];
-$apemat		=$dt['tb_usuario_apemat'];
-$ema		=$dt['tb_usuario_ema'];
-
-mysql_free_result($dts);
-
-$texto_vendedor="$usu_nom $apepat $apemat";
-
-$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
-$dt = mysql_fetch_array($dts);
-$ruc_empresa=$dt['tb_empresa_ruc'];
-$razon_defecto = $dt['tb_empresa_razsoc'];
-$direccion_defecto = $dt['tb_empresa_dir'];
-$contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
-$empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
-if(!is_file($empresa_logo)){
-    $empresa_logo='../../images/logo.jpg';
-}
-mysql_free_result($dts);
-
-$sucursales='
-<table style="font-size:7pt" border="0">
-    <tr>
-        <td width="80">PRINCIPAL:</td>
-        <td width="580">'.$dt['tb_empresa_dir'] .'</td>
-    </tr>
-    <!--<tr>
-        <td width="80">SUCURSAL:</td>
-        <td width="580">CAR.AREQUIPA KM. 9 (CC AREQUIPA NORTE GO 15 Y GO 16)<br> AREQUIPA - AREQUIPA - CERRO COLORADO</td>
-    </tr>-->
-    <tr>
-        <td>TELEFONO: </td>
-        <td>'.$dt['tb_empresa_tel'] .'</td>
-    </tr>
-
-    <tr>
-        <td>CORREO:</td>
-        <td>'.$dt['tb_empresa_ema'].'</td>
-    </tr>
-    <tr>
-        <td>VENDEDOR:</td>
-        <td>'.$texto_vendedor.'</td>
-    </tr>
-    
-</table>';
-
-$tipodoc = 'FACTURA ELECTRONICA';
-
-$ven_id=$_POST['ven_id'];
-
-$dts = $oVenta->mostrarUno($ven_id);
 while($dt = mysql_fetch_array($dts))
 {
     $idcomprobante=$dt["cs_tipodocumento_cod"];
@@ -274,10 +217,6 @@ $html = '
 
 </style>
 <body><table style="width: 100%; margin-bottom: 50mm" border="0">';
-
-
-
-//    $modo = $modo .' L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
 $html.='
 <table style="width: 100%;" border="0">
     <tr>
@@ -362,9 +301,5 @@ $html .= '
 </html>';
 $pdf->writeHTML($html, true, 0, true, true);
 }
-
-
-
-//$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
 
 $pdf->Output($nombre_archivo, 'I');
