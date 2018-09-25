@@ -1,16 +1,16 @@
 <?php
 	function fechaActual($tipo){
-	// Obtenemos y traducimos el nombre del día
+	// Obtenemos y traducimos el nombre del dï¿½a
 		$dia=date("l");
 		if ($dia=="Monday") $dia="Lunes";
 		if ($dia=="Tuesday") $dia="Martes";
-		if ($dia=="Wednesday") $dia=utf8_encode("Miércoles");
+		if ($dia=="Wednesday") $dia=utf8_encode("Miï¿½rcoles");
 		if ($dia=="Thursday") $dia="Jueves";
 		if ($dia=="Friday") $dia="Viernes";
-		if ($dia=="Saturday") $dia=utf8_encode("Sábado");
+		if ($dia=="Saturday") $dia=utf8_encode("Sï¿½bado");
 		if ($dia=="Sunday") $dia="Domingo";
 		
-		// Obtenemos el número del día
+		// Obtenemos el nï¿½mero del dï¿½a
 		$dia2=date("d");
 		
 		// Obtenemos y traducimos el nombre del mes
@@ -28,7 +28,7 @@
 		if ($mes=="November") $mes="Noviembre";
 		if ($mes=="December") $mes="Diciembre";
 		
-		// Obtenemos el año
+		// Obtenemos el aï¿½o
 		$ano=date("Y");
 		
 		switch ($tipo) {

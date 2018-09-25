@@ -35,8 +35,7 @@ class clote{
 	}
 	function mostrarTodos(){
 	$sql="SELECT * 
-	FROM tb_lote
-	ORDER BY tb_lote_numero";
+	FROM tb_lote ORDER BY tb_lote_id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -48,7 +47,7 @@ class clote{
 	INNER JOIN  tb_stock s on l.tb_stock_id=s.tb_stock_id
 	INNER JOIN  tb_presentacion p on l.tb_presentacion_id=p.tb_presentacion_id
 
-	WHERE p.tb_presentacion_id=$idPresentacion AND a.tb_almacen_id=$alm_id AND s.tb_stock_id=$stock_id ";
+	WHERE p.tb_presentacion_id=$idPresentacion AND a.tb_almacen_id=$alm_id AND s.tb_stock_id=$stock_id ORDER BY tb_lote_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -72,9 +71,23 @@ class clote{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$nom){ 
+
+    function mostrarUnoLoteNumero($numero, $alm_id){
+        $sql="SELECT * 
+        FROM tb_lote
+        WHERE tb_lote_numero='$numero' AND tb_almacen_id='$alm_id';";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+	function modificar($id,$num, $fab, $vence, $stock){
 	$sql = "UPDATE tb_lote SET  
-	`tb_lote_nom` =  '$nom'
+        `tb_lote_numero` =  '$num',
+        `tb_lote_fechafab` = '$fab',
+		`tb_lote_fechavence` = '$vence',
+		`tb_lote_exisini` = '$stock',
+		`tb_lote_exisact` = '$stock'
 	WHERE  tb_lote_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

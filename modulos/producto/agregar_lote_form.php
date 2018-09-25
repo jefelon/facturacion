@@ -5,10 +5,13 @@ $oLote = new cLote();
 
 if($_POST['action']=="editar")
 {
-//	$dts=$oMarca->mostrarUno($_POST['lot_id']);
-//	$dt = mysql_fetch_array($dts);
-//		$mar_nom=$dt['tb_lote_nom'];
-//	mysql_free_result($dts);
+	$dts=$oLote->mostrarUno($_POST['lote_id']);
+	$dt = mysql_fetch_array($dts);
+    $lote_num=$dt['tb_lote_numero'];
+    $lote_fecfab=$dt['tb_lote_fechafab'];
+    $lote_fecven=$dt['tb_lote_fechavence'];
+    $stock_num=$dt['tb_lote_exisini'];
+    mysql_free_result($dts);
 }
 ?>
 <script type="text/javascript">
@@ -64,7 +67,7 @@ if($_POST['action']=="editar")
                     $('#msj_lote').html(data.lote_msj);
                 },
                 complete: function(){
-                    lote_form('',<?php echo $_POST['pre_id'] ?>,<?php echo $_POST['alm_id']?>,<?php echo $_POST['sto_id']?>)
+                    lote_form('',<?php echo $_POST['pre_id'] ?>,<?php echo $_POST['alm_id']?>,<?php echo $_POST['sto_id']?>,$('#msj_lote').html() )
                 }
             });
         },
@@ -82,16 +85,17 @@ if($_POST['action']=="editar")
 
 </script>
 <form id="for_agregar_lote">
-    <input name="action_lote" id="action_lote" type="hidden" value="<?php echo $_POST['action']?>">
+    <input name="action" id="action_lote" type="hidden" value="<?php echo $_POST['action']?>">
     <input name="hdd_alm_id" id="hdd_alm_id" type="hidden" value="<?php echo $_POST['alm_id']?>">
     <input name="hdd_pre_id" id="hdd_pre_id" type="hidden" value="<?php echo $_POST['pre_id']?>">
+    <input name="lote_id" id="lote_id" type="hidden" value="<?php echo $_POST['lote_id']?>">
     <input name="sto_id" id="sto_id" type="hidden" value="<?php echo $_POST['sto_id']?>">
     <label for="txt_lote_num">Lote Num:</label>
-    <input name="txt_lote_num" type="text" class="cantidad" id="txt_lote_num" style="text-align:right" size="10" maxlength="6" value="<?php echo $stock_num?>">
+    <input name="txt_lote_num" type="text" class="cantidad" id="txt_lote_num" style="text-align:right" size="10" maxlength="10" value="<?php echo $lote_num?>">
     <label for="txt_lote_fecfab">Fecha Fab.:</label>
-    <input name="txt_lote_fecfab" type="text" class="fecha" id="txt_lote_fecfab" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
+    <input name="txt_lote_fecfab" type="text" class="fecha" id="txt_lote_fecfab" value="<?php echo $lote_fecfab?>" size="10" maxlength="10" readonly>
     <label for="txt_lote_fecven">Fecha Ven.:</label>
-    <input name="txt_lote_fecven" type="text" class="fecha" id="txt_lote_fecven" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
+    <input name="txt_lote_fecven" type="text" class="fecha" id="txt_lote_fecven" value="<?php echo $lote_fecven?>" size="10" maxlength="10" readonly>
     <label for="txt_lote_sto_num">Stock:</label>
     <input name="txt_lote_sto_num" type="text" class="cantidad" id="txt_lote_sto_num" style="text-align:right" size="10" maxlength="6" value="<?php echo $stock_num?>">
 </form>

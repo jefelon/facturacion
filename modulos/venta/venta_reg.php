@@ -369,13 +369,25 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             //LETRAS
             if($_POST['cmb_forpag_id']==3)
             {
+                $ltrs = $cLetras->mostrarTodos();
+                $nro_rows = mysql_numrows($ltrs);
+
+                if($nro_rows==0){
+                    $numero_letra=0;
+                }else{
+                    $maxs = $cLetras->actual_numero_letra();
+                    $max = mysql_fetch_array($maxs);
+                    $numero_letra = $max['max_letras'];
+                }
                 //registro entrada
+
                 for ($i = 1; $i <= $_POST['txt_numletras']; $i++) {
                     $cLetras->insertar(
                         $ven_id,
                         fecha_mysql($_POST['txt_letras_fecven'.$i]),
                         moneda_mysql($_POST['txt_letras_mon'.$i]),
-                        $i
+                        $i,
+                        $numero_letra+$i
                     );
                 }
             }

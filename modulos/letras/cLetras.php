@@ -1,17 +1,19 @@
 <?php
 class cLetras{
-	function insertar($ven_id, $fec, $monto, $orden){
+	function insertar($ven_id, $fec, $monto, $orden,  $numero){
 	$sql = "INSERT tb_letras (
 		`tb_venta_id`,
 		`tb_letras_fecha`,
 		`tb_letras_monto`,
-		`tb_letras_orden`
+		`tb_letras_orden`,
+		`tb_letras_numero`
 		)
 		VALUES (
 		 '$ven_id',
 		 '$fec',
 		 '$monto',
-		 '$orden'
+		 '$orden',
+		 '$numero'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -71,5 +73,12 @@ class cLetras{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function actual_numero_letra(){
+        $sql="SELECT max(tb_letras_numero) as max_letras FROM tb_letras";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>
