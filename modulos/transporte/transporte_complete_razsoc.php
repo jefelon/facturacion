@@ -10,12 +10,14 @@ class ElementoAutocompletar {
    var $label;
    var $direccion;
    var $ruc;
-   function __construct($id, $label, $value, $direccion, $ruc){
+   var $razsoc;
+   function __construct($id, $label, $value, $direccion, $ruc, $razsoc){
 	  $this->id = $id;
       $this->label = $label;
       $this->value = $value;
 	  $this->direccion = $direccion;	
-	  $this->ruc = $ruc;  
+	  $this->ruc = $ruc;
+	  $this->razsoc = $razsoc;
    }
 }
 
@@ -30,7 +32,7 @@ $arrayElementos = array();
 
 //bucle para meter todas las sugerencias de autocompletar en el array
 while ($fila = mysql_fetch_array($rs)){
-   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_transporte_id"], $fila["tb_transporte_ruc"].'-'.$fila["tb_transporte_razsoc"],$fila["tb_transporte_razsoc"], $fila['tb_transporte_dir'], $fila['tb_transporte_ruc']));
+   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_transporte_id"], $fila["tb_transporte_ruc"].'-'.$fila["tb_transporte_razsoc"],$fila["tb_transporte_razsoc"], $fila['tb_transporte_dir'], $fila['tb_transporte_ruc'], $fila['tb_transporte_razsoc']));
 }
 
 print_r(json_encode($arrayElementos));

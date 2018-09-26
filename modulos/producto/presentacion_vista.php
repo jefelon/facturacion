@@ -176,7 +176,7 @@ function stock_form(act,preid,almid,stoid){
 		}
 	});
 }
-function lote_form(act,preid,almid,stoid){
+function lote_form(act,preid,almid,stoid, msj){
     $.ajax({
         type: "POST",
         url: "../producto/lote_form.php",
@@ -187,7 +187,8 @@ function lote_form(act,preid,almid,stoid){
             pre_id: preid,
             alm_id: almid,
             sto_id: stoid,
-            pro_id: <?php echo $_POST['pro_id']?>
+            pro_id: <?php echo $_POST['pro_id']?>,
+            msj_lote: msj
         }),
         beforeSend: function() {
             $('#msj_presentacion_lote').hide();
@@ -547,7 +548,7 @@ $(function() {
         autoOpen: false,
         resizable: false,
         height: 'auto',
-        width: 550,
+        width: 650,
         modal: true,
         buttons: {
             Guardar: function() {
@@ -562,6 +563,7 @@ $(function() {
             $("#div_lote_form").html('Cargando...');
         }
     });
+
 
     $('#cmb_precio_id').change( function() {
         lista_precio_detalle();

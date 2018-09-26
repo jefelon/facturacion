@@ -877,5 +877,6 @@ $descuento_total= $descuento_global + $desc_x_item_total;
         //lenar monto de pagos
         var total= $('#txt_ven_tot').autoNumericGet();
         $('#txt_venpag_mon').autoNumericSet(total);
+        $('#txt_venpag_mon').change();
     });
 </script>

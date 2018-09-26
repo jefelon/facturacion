@@ -3,6 +3,9 @@ require_once ("../../config/Cado.php");
 require_once ("../venta/cVentapago.php");
 $oVentapago = new cVentapago();
 
+require_once ("../letras/cLetras.php");
+$cLetras = new cLetras();
+
 require_once ("../formatos/formato.php");
 
 /*$dts= $oVenta->mostrarUno($_POST['ven_id']);
@@ -73,6 +76,14 @@ if($num_rows>0){
                           <td><?php 
 						  	if($dt1['tb_formapago_id']==1)echo 'CONTADO ';
 							if($dt1['tb_formapago_id']==2)echo 'CREDITO '.$dt1['tb_ventapago_numdia'].'D | FV: '.mostrarFecha($dt1['tb_ventapago_fecven']);
+							if($dt1['tb_formapago_id']==3){
+                                $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+                                echo 'LETRAS ';
+                                while($ltr= mysql_fetch_array($ltrs1)){
+                                    echo ' L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
+                                }
+                            }
+
 							
 							/*if($dt1['tb_modopago_id']==1)echo 'EFECTIVO';
 							if($dt1['tb_modopago_id']==2)echo 'DEPOSITO';
@@ -83,7 +94,15 @@ if($num_rows>0){
 							if($dt1['tb_modopago_id']==2)echo 'DEPOSITO '.$dt1['tb_cuentacorriente_nom'].' N° Oper: '.$dt1['tb_ventapago_numope'];
 							if($dt1['tb_modopago_id']==3)echo 'TARJETA '.$dt1['tb_tarjeta_nom'].' N° Oper: '.$dt1['tb_ventapago_numope'];
 							?></td>
-                            <td align="right"><?php echo formato_money($dt1['tb_ventapago_mon'])?></td>
+                            <td align="right">
+                                <?php if ($dt1['tb_formapago_id'] == 3) {
+                                    echo formato_money($dt1['tb_ventapago_mon']/1.03);
+                                }else{
+                                    echo formato_money($dt1['tb_ventapago_mon']);
+                                }
+                                ?>
+                            </td>
+
                         </tr>
                         <?php						
                 	}

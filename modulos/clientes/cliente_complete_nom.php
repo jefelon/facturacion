@@ -11,13 +11,14 @@ class ElementoAutocompletar {
    var $direccion;
    var $documento;
    var $tipo;
-   function __construct($id, $label, $value, $direccion, $documento,$tipo){
+   function __construct($id, $label, $value, $direccion, $documento,$tipo,$retiene){
 	  $this->id = $id;
     $this->label = $label;
     $this->value = $value;
 	  $this->direccion = $direccion;	
 	  $this->documento = $documento;
-	  $this->tipo = $tipo;  
+	  $this->tipo = $tipo;
+       $this->retiene = $retiene;
    }
 }
 
@@ -32,7 +33,7 @@ $arrayElementos = array();
 
 //bucle para meter todas las sugerencias de autocompletar en el array
 while ($fila = mysql_fetch_array($rs)){
-   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_cliente_id"], $fila["tb_cliente_doc"].'-'.$fila["tb_cliente_nom"],$fila["tb_cliente_nom"], $fila['tb_cliente_dir'], $fila['tb_cliente_doc'],$fila['tb_cliente_tip']));
+   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_cliente_id"], $fila["tb_cliente_doc"].'-'.$fila["tb_cliente_nom"],$fila["tb_cliente_nom"], $fila['tb_cliente_dir'], $fila['tb_cliente_doc'],$fila['tb_cliente_tip'], $fila['tb_cliente_retiene']));
 }
 
 print_r(json_encode($arrayElementos));

@@ -226,4 +226,31 @@
 
 		return $cadena;
 	}
+
+function mostrarDiaMesAnio($tipo, $fec)
+{
+    $resultado = '';
+    if ($tipo==1) {
+        $dia = date("d", strtotime($fec));
+        return $dia;
+    }elseif ($tipo==2){
+        $mes = date("F", strtotime($fec));
+        if ($mes == "January") $mes = "Enero";
+        if ($mes == "February") $mes = "Febrero";
+        if ($mes == "March") $mes = "Marzo";
+        if ($mes == "April") $mes = "Abril";
+        if ($mes == "May") $mes = "Mayo";
+        if ($mes == "June") $mes = "Junio";
+        if ($mes == "July") $mes = "Julio";
+        if ($mes == "August") $mes = "Agosto";
+        if ($mes == "September") $mes = "Setiembre";
+        if ($mes == "October") $mes = "Octubre";
+        if ($mes == "November") $mes = "Noviembre";
+        if ($mes == "December") $mes = "Diciembre";
+        return$mes;
+    } elseif ($tipo == 3){
+        $anio = date("Y", strtotime($fec));
+        return $anio;
+    }
+}
 ?>

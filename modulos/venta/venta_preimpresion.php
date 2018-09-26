@@ -48,6 +48,13 @@ function imprimir()
 	$("#for_preimp").submit();
 	$('#div_venta_impresion').dialog('close');
 }
+
+function imprimir_letras()
+{
+    $('#for_preimp').attr('action', 'venta_impresion_gra_letras.php');
+    $("#for_preimp").submit();
+    $('#div_venta_impresion').dialog('close');
+}
 /*function consultar_impresion_rapida(){
 	$.ajax({
 		type: "POST",
@@ -97,6 +104,7 @@ $(function() {
 <br>
 	<div style="text-align:center">
         <a id="imprimir" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir()">Imprimir</a>
+        <a id="imprimir_letras" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir_letras()">Imprimir Letras</a>
         <a class="btn_canimp" href="#printc" onClick="$('#div_venta_impresion').dialog('close');">Cancelar</a>
     </div>
 </form>
