@@ -49,7 +49,7 @@ function actualizarTabla()
 		async:true,
 		dataType: "html",                      
 		/*data: ({
-			usugru: "<?php //echo $usugru?>"
+			usugru: "//echo $usugru?>"
 		})*/
 		success: function(html){
 			//$( "#i_loader" ).dialog( "open" );

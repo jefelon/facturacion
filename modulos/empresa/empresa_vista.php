@@ -128,8 +128,8 @@ $(function() {
 		title:'Información de Empresa',
 		autoOpen: false,
 		resizable: false,
-		height: 320,
-		width: 600,
+		height: 360,
+		width: 520,
 		modal: true,
 		buttons: {
 			Guardar: function() {

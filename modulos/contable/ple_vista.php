@@ -116,6 +116,29 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                 }
             });
         }
+        if( $("#cmb_fil_librople").val()=='080200')
+        {
+            $.ajax({
+                type: "POST",
+                url: "ple_tabla_comprasnd.php",
+                async: true,
+                dataType: "html",
+                data: ({
+                    anio: $('#cmb_fil_anio').val(),
+                    mes: $('#cmb_fil_mes').val(),
+                    libro: $("#cmb_fil_librople").val()
+                }),
+                beforeSend: function () {
+                    $('#div_ple_tabla').addClass("ui-state-disabled");
+                },
+                success: function (html) {
+                    $('#div_ple_tabla').html(html);
+                },
+                complete: function () {
+                    $('#div_ple_tabla').removeClass("ui-state-disabled");
+                }
+            });
+        }
         if( $("#cmb_fil_librople").val()=='140100')
         {
             $.ajax({
@@ -205,7 +228,7 @@ $(function() {
 			</div>
         	<div id="div_venta_filtro" class="contenido_tabla">
       		</div>
-            <div id="div_ple_tabla" class="div_ple_tabla">
+            <div id="div_ple_tabla" class="div_ple_tabla"  style="width:1200px;overflow-x:scroll;">
       		</div>
       	</div>
     </article>

@@ -182,10 +182,9 @@ class cCompra{
 	`tb_compra_numdoc` =  '$numdoc',
 	`tb_proveedor_id` =  '$pro_id' ,
 	`tb_compra_est` =  '$est' ,
-	`tb_compra_orden` =  '$orden',
-	`cs_tipodocumento_id` =  '$tipodocumento'
-	
-	WHERE tb_compra_id =$id;";
+	`tb_compra_orden` =  '$orden'";
+	if($tipodocumento!="")$sql.=", cs_tipodocumento_id= $tipodocumento ";
+	$sql.="WHERE tb_compra_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	

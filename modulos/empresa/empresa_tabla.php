@@ -38,6 +38,7 @@ $(function() {
                     <th>TELEFONO</th>
                     <th>EMAIL</th>
                     <th>REPRESENTANTE</th>
+                    <th>REGIMEN</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -53,6 +54,28 @@ $(function() {
                             <td><?php echo $dt1['tb_empresa_tel']?></td>
                             <td><?php echo $dt1['tb_empresa_ema']?></td>
                             <td><?php echo $dt1['tb_empresa_rep']?></td>
+                            <td>
+                                <?php
+                                    $regimen="NA";
+                                    if($dt1['tb_empresa_regimen']==1)
+                                    {
+                                        $regimen= "REGIMEN GENERAL";
+                                    }
+                                    elseif($dt1['tb_empresa_regimen']==2)
+                                    {
+                                        $regimen= "REGIMEN MYPE TRIBUTARIO";
+                                    }
+                                    elseif($dt1['tb_empresa_regimen']==3)
+                                    {
+                                        $regimen= "REGIMEN ESPECIAL";
+                                    }
+                                    elseif($dt1['tb_empresa_regimen']==4)
+                                    {
+                                        $regimen= "NUEVO RUS";
+                                    }
+                                    echo $regimen;
+                                ?>
+                            </td>
                             <td align="center" nowrap="nowrap"><a class="btn_editar" href="#" onClick="empresa_form('editar','<?php echo $dt1['tb_empresa_id']?>')">Editar</a> <a class="btn_eliminar" href="#" onClick="eliminar_empresa('<?php echo $dt1['tb_empresa_id']?>')">Eliminar</a></td>
                         </tr>
                 <?php
