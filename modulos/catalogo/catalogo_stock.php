@@ -132,7 +132,7 @@ function actualizar_stock(act,idf,preid,almid,stoid)
 				//catalogo_tabla();
 
                 //Aquí cargar para registrar lotes
-                categoria_form('insertar');
+                //categoria_form('insertar');
 			}
 		});
 	}
