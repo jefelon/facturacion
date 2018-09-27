@@ -13,11 +13,11 @@ $oPle = new cPle();
 require_once("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
 //
-if($_POST['libro']="080100")//compras
+if($_POST['libro']="080200")//compras
 {
-    $dts1=$oPle->mostrar_compras($_POST['anio'],$_POST['mes']);
+    $dts1=$oPle->mostrar_comprasnd($_POST['anio'],$_POST['mes']);
     $num_rows= mysql_num_rows($dts1);
-    $libro="080100";
+    $libro="080200";
 }
 
 //empresa
@@ -61,7 +61,7 @@ $(function() {
             13: {sorter: false}, 14: {sorter: false}, 15: {sorter: false}, 16: {sorter: false}, 17: {sorter: false}, 18: {sorter: false},
             19: {sorter: false}, 20: {sorter: false}, 21: {sorter: false}, 22: {sorter: false}, 23: {sorter: false}, 24: {sorter: false},
             25: {sorter: false}, 26: {sorter: false}, 27: {sorter: false}, 28: {sorter: false}, 29: {sorter: false}, 30: {sorter: false},
-            31: {sorter: false}, 32: {sorter: false}, 33: {sorter: false}, 34: {sorter: false}, 35: {sorter: false}
+            31: {sorter: false}, 32: {sorter: false}, 33: {sorter: false}, 34: {sorter: false}, 35: {sorter: false,36: {sorter: false}
         }
     });
 });
@@ -73,12 +73,10 @@ $(function() {
         <th>2 CUO</th>
         <th>3 CUO AMC</th>
         <th>4 FECHA</th>
-        <th>5 FECHA VENCE</th>
-        <th>6 TIPO COMPROBANTE</th>
-        <th>7 SERIE</th>
-        <th>8 AÑO DUA</th>
-        <th>9 NUM COMPROBANTE</th>
-        <th>10 N FINAL CONSOLID</th>
+        <th>5 TIPO COMPROBANTE</th>
+        <th>6 SERIE</th>
+        <th>7 NUM COMPROBANTE</th>
+        <th>8 VALOR ADQUISICIONES</th>
         <th>11 TIPO DOC PROVEE</th>
         <th>12 RUC PROV</th>
         <th>13 PROVEEDOR</th>
@@ -93,23 +91,20 @@ $(function() {
         <th>22 OTROS CARGOS</th>
         <th>23 TOTAL</th>
         <th>24 MON</th>
-        <th>25 TC</th>
-        <th>26 FECHA DOC MOD</th>
-        <th>27 TIPO DOC MOD</th>
-        <th>28 N SERIE DOC MD</th>
-        <th>29 DUA </th>
-        <th>30 N DOC MOD</th>
-        <th>31 FECHA DETRACCION</th>
-        <th>32 N DETRACCION</th>
-        <th>33 MARCA COMP RET</th>
-        <th>34 CLAS BIENES > 1500UIT</th>
-        <th>35 ID CONTRA</th>
-        <th>36 ERROR 1</th>
-        <th>37 ERROR 2</th>
-        <th>38 ERROR 3</th>
-        <th>39 ERROR 4</th>
-        <th>40 MEDIO PAGO</th>
-        <th>41 ESTADO</th>
+
+        <th>24 PAIS PROV</th>
+        <th>25 VINCULO</th>
+        <th>26 RENTA BRUTA</th>
+        <th>27 DEDUCC C/E BC</th>
+        <th>28 RENTA NETA</th>
+        <th>29 TASA RET </th>
+        <th>30 IMP RET</th>
+        <th>31 CONV DOBLE IMP</th>
+        <th>32 EXO APL</th>
+        <th>33 TIPO RENTA</th>
+        <th>34 MOD</th>
+        <th>35 ART 76</th>
+        <th>36 ESTADO</th>
         <th></th>
     </tr>
     </thead>
@@ -148,22 +143,20 @@ $(function() {
                     ?>
                 <!--3--><td><?php echo $cuoamc ?></td>
                 <!--4--><td><?php echo $fecha ?></td>
-               <!-- 5--><td><?php echo $fechavence ?></td>
 
                     <?php if(strlen($dt1['cs_tipodocumento_cod'])==1)
                     {$coddoc = '0' . $dt1['cs_tipodocumento_cod'];}
                     else{$coddoc=$dt1['cs_tipodocumento_cod'];}
                     ?>
-                <!--6--><td><?php echo $coddoc; ?></td>
+                <!--5--><td><?php echo $coddoc; ?></td>
 
                 <?php
                     $numero =$dt1['tb_compra_numdoc'];
                     $serie_numero=explode("-",$numero);
                 ?>
-                <!--7--><td><?php echo $serie_numero[0]; ?></td>
+                <!--6--><td><?php echo $serie_numero[0]; ?></td>
+                <!--7--><td><?php echo $serie_numero[1]; ?></td>
                 <!--8--><td></td>
-                <!--9--><td><?php echo $serie_numero[1]; ?></td>
-                <!--10--><td></td>
                     <?php
                     $ctipo="";
                     $prov_doc=$dt1['tb_proveedor_doc'];
@@ -195,54 +188,29 @@ $(function() {
                 <!--22--><td></td>
                 <!--23--><td><?php echo $tot; ?></td>
                 <!--24--><td><?php echo $moneda; ?></td>
-                <!--25--><td><?php echo $tipocambio; ?></td>
 
-                <?php
-                $fec_nota="";
-                $tip_doc_mod="";
-                $tip_doc_modserie="";
-                $tip_doc_modnum="";
-                if($coddoc =="07"||$coddoc =="08"||$coddoc =="87"||$coddoc =="88"||$coddoc =="97"||$coddoc =="98")
-                {
-                    $fec_nota= $dt1['tb_compra_fec_nota'];
-                    $tip_doc_modserie= $dt1['tb_compra_ser_nota'];
-                    $tip_doc_modnum= $dt1['tb_compra_num_nota'];
-                    $dtst=$oPle->mostrar_tipo_doc($tip_doc_modserie."-".$tip_doc_modnum);
-                    $dtt = mysql_fetch_array($dtst);
+                <!--24--><td><?php echo $paisprov; ?></td>
+                <!--25--><td><?php echo $vinculo; ?></td>
+                <!--26--><td><?php echo $renta_bruta; ?></td>
+                <!--27--><td><?php echo $deduccion; ?></td>
 
-                    if(strlen($dtt['cs_tipodocumento_cod'])==1)
-                    {$tip_doc_mod = '0' . $dtt['cs_tipodocumento_cod'];}
-                    else{$tip_doc_mod=$dtt['cs_tipodocumento_cod'];}
-
-                }
-                ?>
-                <!--26--><td><?php echo $fec_nota; ?></td>
-                <!--27--><td><?php echo $tip_doc_mod; ?></td>
-                <!--28--><td><?php echo $tip_doc_modserie; ?></td>
-                <!--29--><td></td>
-                <!--30--><td><?php echo $tip_doc_modnum; ?></td>
-                <!--31--><td></td>
+                <?php $rentaneta=0;?>
+                <!--28--><td><?php echo $rentaneta; ?></td>
+                <?php $tasaret=0;?>
+                <!--29--><td><?php echo $tasaret; ?></td>
+                <?php $impretenido=0; ?>
+                <!--30--><td><?php echo $impretenido; ?></td>
+                <?php $convenio=0;?>
+                <!--31--><td><?php echo $convenio; ?></td>
                 <!--32--><td></td>
-                <!--33--><td></td>
+                <?php
+                $tiporenta=0;
+                ?>
+                <!--33--><td><?php echo $tiporenta; ?></td>
                 <!--34--><td></td>
                 <!--35--><td></td>
-                <!--36--><td></td>
-                <!--37--><td></td>
-                <!--38--><td></td>
-                <!--39--><td></td>
-                <!--40--><td></td>
-                            <?php
-                            $estado=1;
-                            $fechastring=explode("/",$fecha);
-                            $fechadoc=$fechastring[2].$fechastring[1];
-                            if($fechadoc<$periodo){
-                                $estado=6;
-                            }
-                            if($fechadoc<$periodo && $fechastring[2]<$periodoarray[2]){
-                                $estado=7;
-                            }
-                            ?>
-                <!--41--><td><?php echo $estado; ?></td>
+                <?php $estado=0;?>
+                <!--36--><td><?php echo $estado;?></td>
                 <td></td>
             </tr>
             <?php
