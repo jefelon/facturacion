@@ -811,8 +811,8 @@ $(function() {
           <label for="cmb_com_est">Estado:</label>
     <select name="cmb_com_est" id="cmb_com_est">
             <option value="">-</option>
-            <option value="EMITIDA" <?php if($est=='EMITIDA')echo 'selected'?>>EMITIDA</option>
-            <option value="CANCELADA" <?php if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
+            <option value="CREDITO" <?php if($est=='EMITIDA')echo 'selected'?>>CREDITO</option>
+            <option value="CONTADO" <?php if($est=='CANCELADA')echo 'selected'?>>CONTADO</option>
           </select>
         <?php if($_POST['action']=='insertar'){?>
         <label for="cmb_com_tippre">Mostrar  con:</label>

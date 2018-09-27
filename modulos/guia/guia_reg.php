@@ -19,13 +19,22 @@ if($_POST['action_guia']=="insertar")
 		$num_doc = $_POST['txt_gui_tipope_num'];		
 		$estado='CONCLUIDA';
 		//insertamos guia
+
+        $maxs = $oGuia->actual_numero_guia();
+        $max = mysql_fetch_array($maxs);
+        $numero_guia = $max['max_guia'];
+
+        if(!$numero_guia){
+            $numero_guia=0;
+        }
+
 		$oGuia->insertar(
 			fecha_mysql($_POST['txt_gui_fec']),
             strip_tags($_POST['txt_gui_rem']),
             strip_tags($_POST['txt_gui_des']),
             strip_tags($_POST['txt_gui_punpar']),
             strip_tags($_POST['txt_gui_punlle']),
-			strip_tags($_POST['txt_gui_num']),
+            $numero_guia,
             strip_tags($_POST['txt_gui_obs']),
             strip_tags($_POST['txt_gui_pla']),
             strip_tags($_POST['txt_gui_mar']),
@@ -44,17 +53,13 @@ if($_POST['action_guia']=="insertar")
 			$dt = mysql_fetch_array($dts);
 		$gui_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
-		
+
 		//detalle productos
-		foreach($_SESSION['guia_car'] as $indice=>$cantidad){			
+		foreach($_SESSION['guia_car'] as $indice=>$cantidad){
 			//registro detalle de guia
-			$oGuia->insertar_detalle(
-				$indice,				
-				$cantidad,				
-				$gui_id
-			);		
+
         }
-		
+
 		unset($_SESSION['guia_car']);		
 		echo 'Se registró guia correctamente.';
 	}

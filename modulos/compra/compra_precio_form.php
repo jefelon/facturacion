@@ -298,6 +298,7 @@ if($num_rows>0){
 							<td align="right" nowrap>
 	                        <label id="lbl_sto_<?php echo $dt1['tb_catalogo_id']?>" style="display:none"></label>
 	                        <a class="btn_guardar" href="#editar" onClick="actualizar_precio('<?php echo $dt1['tb_catalogo_id']?>')">Guardar</a>
+                                <a class="btn_guardar" href="#editar" onClick="lote_form('',<?php echo $dt1['tb_presentacion_id'] ?>,<?php echo $alm_id?>)">Agregar Lote</a>
 	                        </td>
                         </tr>
             <?php

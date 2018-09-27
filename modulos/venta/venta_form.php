@@ -1090,6 +1090,14 @@ $(function() {
         }else{
             $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
         }
+
+        if ((this).value=== '2' || (this).value=== '11') {
+            $('.imprimir_guia').show();
+            $('.insertar-guia').show();
+        }else{
+            $('.imprimir_guia').hide();
+            $('.insertar-guia').hide();
+        }
 	});
 
 	venta_car();
@@ -1215,6 +1223,21 @@ $(function() {
 			$('#txt_venpag_fecven').val('');
 		}
 	});
+
+    $('#chk_imprimir_guia').change( function() {
+        if(this.checked)
+        {
+            $('.insertar-guia').show();
+        }
+        else
+        {
+            $('.insertar-guia').hide();
+        }
+    });
+
+
+
+
     $('#txt_numletras').keyup( function() {
 
         var num_letras = $('#txt_numletras').val();
@@ -1764,10 +1787,10 @@ function bus_cantidad(act)
         <input name="chk_imprimir" type="checkbox" id="chk_imprimir" value="1" checked="CHECKED">
         <?php }?>
         </td>
-        <td>
+        <td class="imprimir_guia" style="display: none">
             <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
                 <label for="chk_imprimir_guia"> Imprimir Guia</label>
-                <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" title="Registrar guia? ">
+                <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" value="1" checked="CHECKED" title="Registrar guia? ">
             <?php }?>
         </td>
       <td align="right">
@@ -1973,7 +1996,7 @@ function bus_cantidad(act)
     </div>
 </fieldset>
     </div>
-    <div style="float: left; width: 25%;">
+    <div style="float: left; width: 25%; display: none;" class="insertar-guia">
         <fieldset>
             <legend>Datos Vehículo</legend>
             <label for="txt_gui_mar">Marca:</label><br>
@@ -1982,7 +2005,25 @@ function bus_cantidad(act)
             <input type="text" name="txt_gui_pla" id="txt_gui_pla"  value="<?php echo $pla?>">
         </fieldset>
     </div>
-    <div style="float: left; width: 50%;">
+    <div style="float: left; width: 50%; display: none;" class="insertar-guia">
+        <fieldset>
+            <legend>Datos Transporte</legend>
+            <?php if($_POST['action']=='insertar'){?>
+                <!--Boton Editar/Registrar Conductor-->
+                <a id="btn_tra_form_agregar" href="#" onClick="transporte_form('insertar')">Agregar Transporte</a>
+                <a id="btn_tra_form_modificar" href="#" onClick='transporte_form("editar", $("#txt_fil_gui_tra_id").val())'>Modificar Transporte</a>
+            <?php }?>
+            <input type="hidden" id="txt_fil_gui_tra_id" name="txt_fil_gui_tra_id" value="<?php echo $tra_id?>" />
+            <label for="txt_fil_gui_tra_ruc">RUC:</label>
+            <input type="text" id="txt_fil_gui_tra_ruc" name="txt_fil_gui_tra_ruc" size="15" value="<?php echo $tra_ruc?>" /><br>
+            <!--<a id="btn_cmb_tra_id" class="btn_ir" href="#" onClick="verificarAccionTransporte()">Agregar Transporte</a>-->
+            <label for="txt_fil_gui_tra_razsoc">Transporte:</label>
+            <input type="text" id="txt_fil_gui_tra_razsoc" name="txt_fil_gui_tra_razsoc" size="40" value="<?php echo $tra_razsoc?>" /><br>
+            <label for="txt_fil_gui_tra_dir">Direcci&oacute;n:</label>
+            <input type="text" id="txt_fil_gui_tra_dir" name="txt_fil_gui_tra_dir" size="40" value="<?php echo $tra_dir?>" disabled="disabled"/>
+        </fieldset>
+    </div>
+    <div style="float: left; width: 50%; display: none;" class="insertar-guia" >
         <fieldset id="fset_conductor" disabled="disabled">
             <legend>Datos Conductor</legend>
             <?php if($_POST['action']=='insertar'){?>
@@ -2004,24 +2045,7 @@ function bus_cantidad(act)
             <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>
         </fieldset>
     </div>
-    <div style="float: left; width: 50%;">
-        <fieldset>
-            <legend>Datos Transporte</legend>
-            <?php if($_POST['action']=='insertar'){?>
-                <!--Boton Editar/Registrar Conductor-->
-                <a id="btn_tra_form_agregar" href="#" onClick="transporte_form('insertar')">Agregar Transporte</a>
-                <a id="btn_tra_form_modificar" href="#" onClick='transporte_form("editar", $("#txt_fil_gui_tra_id").val())'>Modificar Transporte</a>
-            <?php }?>
-            <input type="hidden" id="txt_fil_gui_tra_id" name="txt_fil_gui_tra_id" value="<?php echo $tra_id?>" />
-            <label for="txt_fil_gui_tra_ruc">RUC:</label>
-            <input type="text" id="txt_fil_gui_tra_ruc" name="txt_fil_gui_tra_ruc" size="15" value="<?php echo $tra_ruc?>" /><br>
-            <!--<a id="btn_cmb_tra_id" class="btn_ir" href="#" onClick="verificarAccionTransporte()">Agregar Transporte</a>-->
-            <label for="txt_fil_gui_tra_razsoc">Transporte:</label>
-            <input type="text" id="txt_fil_gui_tra_razsoc" name="txt_fil_gui_tra_razsoc" size="40" value="<?php echo $tra_razsoc?>" /><br>
-            <label for="txt_fil_gui_tra_dir">Direcci&oacute;n:</label>
-            <input type="text" id="txt_fil_gui_tra_dir" name="txt_fil_gui_tra_dir" size="40" value="<?php echo $tra_dir?>" disabled="disabled"/>
-        </fieldset>
-    </div>
+
 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
     <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />

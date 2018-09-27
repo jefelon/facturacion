@@ -71,6 +71,9 @@ require_once("../formatos/formato.php");
 require_once("../guia/cGuia.php");
 $oGuia = new cGuia();
 
+require_once ("../empresa/cEmpresa.php");
+$oEmpresa = new cEmpresa();
+
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
 $emp_razsoc=$dt['tb_empresa_razsoc'];
@@ -170,7 +173,47 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$dt = mysql_fetch_array($dts);
 		$ven_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
-		
+
+        if($_POST['chk_imprimir_guia']==1){
+            $estado='CONCLUIDA';
+            $cbo_gui_tip_ope=2;
+            //insertamos guia
+
+            $maxs = $oGuia->actual_numero_guia();
+            $max = mysql_fetch_array($maxs);
+            $numero_guia = $max['max_guia'];
+
+            if(!$numero_guia){
+                $numero_guia=0;
+            }
+
+            $oGuia->insertar(
+                fecha_mysql($_POST['txt_ven_fec']),
+                $emp_razsoc,
+                strip_tags($_POST['txt_ven_cli_nom']),
+                $emp_dir,
+                strip_tags($_POST['txt_ven_cli_dir']),
+                $numero_guia+1,
+                strip_tags($_POST['txt_gui_obs']),
+                strip_tags($_POST['txt_gui_pla']),
+                strip_tags($_POST['txt_gui_mar']),
+                $estado,
+                $cbo_gui_tip_ope,
+                $ven_id,
+                $_POST['hdd_gui_tra_id'],
+                $_POST['txt_ven_numdoc'],
+                $_POST['txt_fil_gui_con_id'],
+                $_POST['txt_fil_gui_tra_id'],
+                $usu_id,
+                $_SESSION['empresa_id']
+            );
+            //ultima guia
+            $dts=$oGuia->ultimoInsert();
+            $dt = mysql_fetch_array($dts);
+            $gui_id=$dt['last_insert_id()'];
+            mysql_free_result($dts);
+
+        }
 		//REGISTRO DE PAGOS
 		//PAGO AUTOMATICO
 		
@@ -729,6 +772,12 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 				$autoin,
                 $pro_ser
 			);
+
+            $oGuia->insertar_detalle(
+                $indice,
+                $cantidad,
+                $gui_id
+            );
 			
 			///-----------------------------------
 			
@@ -875,46 +924,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			if($documento_cod==3)$oVenta->modificar_campo($ven_id,'estsun','10');
 		}
 
-        if($_POST['chk_imprimir_guia']==1){
-            $estado='CONCLUIDA';
-            $cbo_gui_tip_ope=1;
-            //insertamos guia
-            $oGuia->insertar(
-                fecha_mysql($_POST['txt_ven_fec']),
-                $emp_razsoc,
-                strip_tags($_POST['txt_ven_cli_nom']),
-                $emp_dir,
-                strip_tags($_POST['txt_ven_cli_dir']),
-                strip_tags($_POST['txt_gui_num']),
-                strip_tags($_POST['txt_gui_obs']),
-                strip_tags($_POST['txt_gui_pla']),
-                strip_tags($_POST['txt_gui_mar']),
-                $estado,
-                $cbo_gui_tip_ope,
-                $ven_id,
-                $_POST['hdd_gui_tra_id'],
-                $_POST['txt_ven_numdoc'],
-                $_POST['txt_fil_gui_con_id'],
-                $_POST['txt_fil_gui_tra_id'],
-                $usu_id,
-                $_SESSION['empresa_id']
-            );
-            //ultima guia
-            $dts=$oGuia->ultimoInsert();
-            $dt = mysql_fetch_array($dts);
-            $gui_id=$dt['last_insert_id()'];
-            mysql_free_result($dts);
 
-            //detalle productos
-            foreach($_SESSION['guia_car'] as $indice=>$cantidad){
-                //registro detalle de guia
-                $oGuia->insertar_detalle(
-                    $indice,
-                    $cantidad,
-                    $gui_id
-                );
-            }
-        }
 
 		$data['ven_msj']='Se registró venta correctamente.';
 		echo json_encode($data);

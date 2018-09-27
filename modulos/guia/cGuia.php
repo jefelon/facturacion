@@ -78,6 +78,17 @@ class cGuia{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrarGuiaUno($ven_id){
+        $sql="SELECT * 
+	FROM tb_guia c
+	INNER JOIN tb_conductor p ON c.tb_conductor_id=p.tb_conductor_id
+	INNER JOIN tb_transporte t ON t.tb_transporte_id=t.tb_transporte_id
+	WHERE tb_venta_id=$ven_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_guia_detalle($gui_id){
 	$sql="SELECT * 
 	FROM tb_producto p
@@ -135,5 +146,12 @@ WHERE tb_software_id =$id";
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function actual_numero_guia(){
+        $sql="SELECT max(tb_guia_num) as max_guia FROM tb_guia";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>
