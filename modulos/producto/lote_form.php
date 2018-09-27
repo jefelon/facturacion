@@ -117,6 +117,12 @@ if($_POST['action']=="editar")
 <input name="action_marca" id="action_marca" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_mar_id" id="hdd_mar_id" type="hidden" value="<?php echo $_POST['mar_id']?>">
     <input name="hdd_sto_id" id="hdd_sto_id" type="hidden" value="<?php echo $_POST['sto_id']?>">
+    <?php
+    $dts1=$oLote->mostrarLoteProducto($_POST['pre_id'],$_POST['alm_id'],$_POST['sto_id']);
+    $num_rows= mysql_num_rows($dts1);
+    if($num_rows>=1)
+    {
+    ?>
     <table cellspacing="1" id="tabla_lote" class="tablesorter">
         <thead>
         <tr>
@@ -129,12 +135,7 @@ if($_POST['action']=="editar")
             <th align="center">&nbsp;</th>
         </tr>
         </thead>
-        <?php
-        $dts1=$oLote->mostrarLoteProducto($_POST['pre_id'],$_POST['alm_id'],$_POST['sto_id']);
-        $num_rows= mysql_num_rows($dts1);
-        if($num_rows>=1)
-        {
-            ?>
+
             <tbody>
             <?php while($dt1 = mysql_fetch_array($dts1)){?>
                 <tr>
@@ -157,19 +158,10 @@ if($_POST['action']=="editar")
             mysql_free_result($dts1);
             ?>
             </tbody>
+    </table>
             <?php
         }
-        else
-        {
-            ?>
-            <tr>
-                <!--<td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>-->
-            </tr>
-        <?php }?>
-    </table>
+        ?>
     <br>
     <div style="text-align: center;">
         <a class="btn_agregar_lote" onClick="agregar_lote_form('insertar', <?php echo $_POST['pre_id'] ?>, <?php echo $_POST['alm_id'] ?>, <?php echo $_POST['sto_id'] ?>)">

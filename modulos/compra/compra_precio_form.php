@@ -52,7 +52,7 @@ $('.porcentaje').autoNumeric({
 	vMax: '99.9999'
 });
 
-$('.btn_guardar').button({
+$('.btn_guardar, .btn_lote_form').button({
 	icons: {primary: "ui-icon-disk"},
 	text: false
 });
@@ -176,6 +176,54 @@ function actualizar_precio(idf)
 		});
 }
 
+function lote_form(act,preid,almid,stoid, msj){
+    $.ajax({
+        type: "POST",
+        url: "../producto/lote_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            pre_id: preid,
+            alm_id: almid,
+            sto_id: stoid,
+            pro_id: preid,
+            msj_lote: msj
+        }),
+        beforeSend: function() {
+            $('#msj_presentacion_lote').hide();
+            $('#div_lote_form').dialog("open");
+            $('#div_lote_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_lote_form').html(html);
+        }
+    });
+}
+
+$( "#div_lote_form" ).dialog({
+    title:'Información de Lotes',
+    autoOpen: false,
+    resizable: false,
+    height: 'auto',
+    width: 650,
+    modal: true,
+    buttons: {
+        Guardar: function() {
+            $("#for_lot").submit();
+        },
+        Cancelar: function() {
+            $('#for_lot').each (function(){this.reset();});
+            $( this ).dialog( "close" );
+        }
+    },
+    close: function() {
+        $("#div_lote_form").html('Cargando...');
+    }
+});
+
+
+
 $(function() {
 	$("#tabla_compra_precio").tablesorter({
 		widgets: ['zebra', 'zebraHover'] ,
@@ -230,6 +278,7 @@ Por favor ingrese el porcentaje de utilidad o el precio de venta a cada ítem, l
 ?>
 </div>
 </fieldset>
+
         <table cellspacing="1" id="tabla_compra_precio" class="tablesorter">
             <thead>
                 <tr>
@@ -298,7 +347,6 @@ if($num_rows>0){
 							<td align="right" nowrap>
 	                        <label id="lbl_sto_<?php echo $dt1['tb_catalogo_id']?>" style="display:none"></label>
 	                        <a class="btn_guardar" href="#editar" onClick="actualizar_precio('<?php echo $dt1['tb_catalogo_id']?>')">Guardar</a>
-                                <a class="btn_guardar" href="#editar" onClick="lote_form('',<?php echo $dt1['tb_presentacion_id'] ?>,<?php echo $alm_id?>)">Agregar Lote</a>
 	                        </td>
                         </tr>
             <?php
@@ -320,4 +368,5 @@ else
 }
 ?>
         </table>
+
 </form>

@@ -564,6 +564,26 @@ $(function() {
         }
     });
 
+    $( "#div_agregar_lote_form" ).dialog({
+        title:'Lote',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 550,
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_agregar_lote").submit();
+            },
+            Cancelar: function() {
+                $('#for_agregar_lote').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_agregar_lote_form").html('Cargando...');
+        }
+    });
 
     $('#cmb_precio_id').change( function() {
         lista_precio_detalle();
