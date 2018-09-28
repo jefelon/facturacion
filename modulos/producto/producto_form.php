@@ -936,6 +936,7 @@ $(function() {
             <td>
             <div id="cmb_lote_form-">
                 <select name="cmb_lote" id="cmb_lote">
+                    <option value="">-</option>
                     <option value="1" <?php if($lote=='1')echo 'selected'?>>Sí</option>
                     <option value="0" <?php if($lote=='0')echo 'selected'?>>No</option>
                 </select>
@@ -1026,7 +1027,7 @@ $(function() {
     <div id="div_precios_tab">
           <ul>
               <!--        Habilita Productos-->
-              <li><a id="precio_base" href="#div_precios_base">Precio Base</a></li>
+              <li><a id="precio_base" href="#div_precios_base">Lista 1 - Precio General</a></li>
           </ul>
         <div id="div_precios_base">
             <div id="cuadro-contain" class="ui-widget">
