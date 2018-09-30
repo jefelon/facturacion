@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/modulos/kardex/kardex_reporte_total_xls.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/libreriasphp/consultaruc/cookies.txt" afterPath="$PROJECT_DIR$/libreriasphp/consultaruc/cookies.txt" />
-      <change beforePath="$PROJECT_DIR$/modulos/clientes/cCliente.php" afterPath="$PROJECT_DIR$/modulos/clientes/cCliente.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/clientes/cliente_reg.php" afterPath="$PROJECT_DIR$/modulos/clientes/cliente_reg.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/clientes/cliente_tabla.php" afterPath="$PROJECT_DIR$/modulos/clientes/cliente_tabla.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/kardex/cKardex.php" afterPath="$PROJECT_DIR$/modulos/kardex/cKardex.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/kardex/kardex_producto_tabla_total.php" afterPath="$PROJECT_DIR$/modulos/kardex/kardex_producto_tabla_total.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/kardex/kardex_vista.php" afterPath="$PROJECT_DIR$/modulos/kardex/kardex_vista.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/producto/presentacion_vista.php" afterPath="$PROJECT_DIR$/modulos/producto/presentacion_vista.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/producto/producto_form.php" afterPath="$PROJECT_DIR$/modulos/producto/producto_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/producto/producto_proveedor_form.php" afterPath="$PROJECT_DIR$/modulos/producto/producto_proveedor_form.php" />
       <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_car.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_car.php" />
       <change beforePath="$PROJECT_DIR$/modulos/venta/venta_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_letras.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_letras.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,17 +19,38 @@
       <file leaf-file-name="venta_form.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="1893" column="38" lean-forward="false" selection-start-line="1893" selection-start-column="38" selection-end-line="1893" selection-end-column="38" />
+            <state relative-caret-position="308">
+              <caret line="1806" column="13" lean-forward="true" selection-start-line="1806" selection-start-column="13" selection-end-line="1806" selection-end-column="13" />
               <folding>
+                <element signature="e#25149#25904#0#HTML" expanded="false" />
+                <element signature="e#28220#28761#0#HTML" expanded="false" />
+                <element signature="e#28816#29144#0#HTML" expanded="false" />
+                <element signature="e#29198#29707#0#HTML" expanded="false" />
+                <element signature="e#29749#31198#0#HTML" expanded="false" />
+                <element signature="e#31240#31869#0#HTML" expanded="false" />
+                <element signature="e#31917#32044#0#HTML" expanded="false" />
+                <element signature="e#32095#32260#0#HTML" expanded="false" />
+                <element signature="e#32309#32777#0#HTML" expanded="false" />
+                <element signature="e#34686#36895#0#HTML" expanded="false" />
+                <element signature="e#36965#37102#0#HTML" expanded="false" />
+                <element signature="e#37135#37226#0#HTML" expanded="false" />
+                <element signature="e#41954#42132#0#HTML" expanded="false" />
+                <element signature="e#42330#45556#0#HTML" expanded="false" />
+                <element signature="e#45575#45717#0#HTML" expanded="false" />
+                <element signature="e#45746#46206#0#HTML" expanded="false" />
                 <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#td#1;n#tr#2;n#table#0;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#div#1;n#form#0;n#div#0;n#!!top" expanded="false" />
                 <element signature="n#style#0;n#div#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#55109#55117#0#HTML" expanded="true" />
+                <element signature="n#div#2;n#form#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="e#55233#55241#0#HTML" expanded="true" />
                 <element signature="n#style#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="e#56559#56567#0#HTML" expanded="true" />
+                <element signature="n#div#3;n#form#0;n#div#0;n#!!top" expanded="false" />
+                <element signature="e#56683#56691#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#td#2;n#tr#0;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#td#5;n#tr#0;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
@@ -61,7 +71,28 @@
                 <element signature="n#style#0;n#td#2;n#tr#2;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#3;n#tr#2;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#td#4;n#tr#2;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#6;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#8;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#9;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#10;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#8;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#14;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_vista.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="201">
+              <caret line="508" column="16" lean-forward="true" selection-start-line="508" selection-start-column="16" selection-end-line="508" selection-end-column="19" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -70,17 +101,11 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>txt_com_numdoc</find>
-      <find>proveedor_cargar_datos</find>
-      <find>txt_com_pro_nom</find>
-      <find>div_duplicidad</find>
-      <find>duplicidad</find>
       <find>val</find>
       <find>verificar_duplicidad_compra</find>
       <find>open</find>
       <find>Información de Proveedor para el producto</find>
       <find>val()</find>
-      <find>dialog</find>
       <find>for_prodprov</find>
       <find>div_producto_proveedor_form</find>
       <find>proveedor_producto_</find>
@@ -97,9 +122,15 @@
       <find>PRECIO DE COS</find>
       <find>tabla_kardex_total</find>
       <find>title=&quot;PRECIO DE COSTO&quot;&gt;DESC %&lt;/th&gt;</find>
-      <find>div_precios_tab</find>
-      <find>precio_base</find>
       <find>div_precios_base</find>
+      <find>catalogo_venta_tab</find>
+      <find>precio_base</find>
+      <find>cmb_precio_id</find>
+      <find>div_precios_tab</find>
+      <find>div_productos_servicios_tab</find>
+      <find>txt_bus_pro_codbar</find>
+      <find>dialog</find>
+      <find>venta_form</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -131,7 +162,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modulos/compra/compra_reg.php" />
         <option value="$PROJECT_DIR$/modulos/lote/lote_tabla.php" />
         <option value="$PROJECT_DIR$/modulos/producto/presentacion_lote.php" />
         <option value="$PROJECT_DIR$/modulos/catalogo/cCatalogo.php" />
@@ -179,8 +209,9 @@
         <option value="$PROJECT_DIR$/modulos/producto/producto_proveedor_tabla.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_letras.php" />
         <option value="$PROJECT_DIR$/modulos/clientes/cliente_tabla.php" />
-        <option value="$PROJECT_DIR$/modulos/producto/presentacion_vista.php" />
         <option value="$PROJECT_DIR$/modulos/producto/producto_form.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_car.php" />
+        <option value="$PROJECT_DIR$/modulos/producto/presentacion_vista.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_form.php" />
       </list>
     </option>
@@ -305,12 +336,12 @@
       <workItem from="1537924039636" duration="24569000" />
       <workItem from="1538014623898" duration="3671000" />
       <workItem from="1538071443128" duration="2447000" />
-      <workItem from="1538152558731" duration="30606000" />
+      <workItem from="1538152558731" duration="34016000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="302581000" />
+    <option name="totallyTimeSpent" value="305991000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -378,27 +409,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/empresa/cEmpresa.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="32" column="13" lean-forward="false" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/guia/guia_reporte.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="3" column="18" lean-forward="false" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/empresa/empresa_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="16" lean-forward="false" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/cClientecuenta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -895,30 +905,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/producto/presentacion_vista.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="421">
-          <caret line="759" column="50" lean-forward="true" selection-start-line="759" selection-start-column="33" selection-end-line="759" selection-end-column="50" />
-          <folding>
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="false" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#fieldset#0;n#div#1;n#!!top" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/producto/producto_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-73">
-          <caret line="969" column="13" lean-forward="true" selection-start-line="969" selection-start-column="13" selection-end-line="969" selection-end-column="13" />
-          <folding>
-            <element signature="e#21563#21595#0#HTML" expanded="true" />
-            <element signature="e#21609#21633#0#HTML" expanded="true" />
-            <element signature="e#21688#21716#0#HTML" expanded="true" />
-            <element signature="e#25350#25387#0#HTML" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/catalogo/catalogo_vista.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6732">
@@ -943,19 +929,82 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="544" column="18" lean-forward="true" selection-start-line="544" selection-start-column="18" selection-end-line="544" selection-end-column="18" />
+          <folding>
+            <marker date="1538269519263" expanded="false" signature="25430:25480" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/producto/producto_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="969" column="13" lean-forward="true" selection-start-line="969" selection-start-column="13" selection-end-line="969" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/producto/presentacion_vista.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="591" column="4" lean-forward="true" selection-start-line="591" selection-start-column="4" selection-end-line="591" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/catalogo_buscar1.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="123" lean-forward="false" selection-start-line="11" selection-start-column="123" selection-end-line="11" selection-end-column="123" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="508" column="16" lean-forward="true" selection-start-line="508" selection-start-column="16" selection-end-line="508" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="1893" column="38" lean-forward="false" selection-start-line="1893" selection-start-column="38" selection-end-line="1893" selection-end-column="38" />
+        <state relative-caret-position="308">
+          <caret line="1806" column="13" lean-forward="true" selection-start-line="1806" selection-start-column="13" selection-end-line="1806" selection-end-column="13" />
           <folding>
+            <element signature="e#25149#25904#0#HTML" expanded="false" />
+            <element signature="e#28220#28761#0#HTML" expanded="false" />
+            <element signature="e#28816#29144#0#HTML" expanded="false" />
+            <element signature="e#29198#29707#0#HTML" expanded="false" />
+            <element signature="e#29749#31198#0#HTML" expanded="false" />
+            <element signature="e#31240#31869#0#HTML" expanded="false" />
+            <element signature="e#31917#32044#0#HTML" expanded="false" />
+            <element signature="e#32095#32260#0#HTML" expanded="false" />
+            <element signature="e#32309#32777#0#HTML" expanded="false" />
+            <element signature="e#34686#36895#0#HTML" expanded="false" />
+            <element signature="e#36965#37102#0#HTML" expanded="false" />
+            <element signature="e#37135#37226#0#HTML" expanded="false" />
+            <element signature="e#41954#42132#0#HTML" expanded="false" />
+            <element signature="e#42330#45556#0#HTML" expanded="false" />
+            <element signature="e#45575#45717#0#HTML" expanded="false" />
+            <element signature="e#45746#46206#0#HTML" expanded="false" />
             <element signature="n#style#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#td#1;n#tr#2;n#table#0;n#fieldset#0;n#div#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#div#1;n#form#0;n#div#0;n#!!top" expanded="false" />
             <element signature="n#style#0;n#div#2;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#55109#55117#0#HTML" expanded="true" />
+            <element signature="n#div#2;n#form#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="e#55233#55241#0#HTML" expanded="true" />
             <element signature="n#style#0;n#div#3;n#form#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#56559#56567#0#HTML" expanded="true" />
+            <element signature="n#div#3;n#form#0;n#div#0;n#!!top" expanded="false" />
+            <element signature="e#56683#56691#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#td#2;n#tr#0;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#td#5;n#tr#0;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
@@ -976,6 +1025,17 @@
             <element signature="n#style#0;n#td#2;n#tr#2;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#3;n#tr#2;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#td#4;n#tr#2;n#table#0;n#fieldset#0;n#div#4;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#5;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#6;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#8;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#9;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#10;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#8;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#14;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#1;n#div#6;n#form#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
