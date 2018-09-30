@@ -28,6 +28,7 @@ while($dt = mysql_fetch_array($dts))
     $serie=$dt["tb_venta_ser"];
     $numero=$dt["tb_venta_num"];
 
+    $clicodigo=$dt["tb_cliente_id"];
     $ruc=$dt["tb_cliente_doc"];
     $razon=$dt["tb_cliente_nom"];
     $direccion=$dt["tb_cliente_dir"];
@@ -236,7 +237,7 @@ $html.='
     <tr>
         <td style="text-align: left" width="15%"></td>
         <td style="text-align: left" width="72%">'.$razon.'</td>
-        <td style="text-align: left" width="13%">786422</td>
+        <td style="text-align: left" width="13%">'.str_pad($clicodigo, 7, "0", STR_PAD_LEFT).'</td>
     </tr>
     <tr>
         <td style="text-align: left" width="100%"></td>
