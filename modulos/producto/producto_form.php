@@ -564,15 +564,31 @@ $(function() {
 			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
 		}
 	});
-	
+    $("#txt_cat_descprov" ).keyup(function() {
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+        var uti		=parseFloat($("#txt_cat_uti" ).val());
+
+        if(precom>=0 && precom!="")
+        {
+            var descuento=desc/100;
+            var utilidad=uti/100;
+            var costoneto=precom-(precom*descuento)
+            var calculo=costoneto+(costoneto*utilidad);
+            $( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
+        }
+    });
 	$("#txt_cat_uti" ).keyup(function() {
-		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
-		var uti		=parseFloat($("#txt_cat_uti" ).val());
-		
-		if(precom>=0 && precom!="")
-		{
-			var calculo=precom+(precom*uti/100);
-			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+        var uti		=parseFloat($("#txt_cat_uti" ).val());
+
+        if(precom>=0 && precom!="")
+        {
+            var descuento=desc/100;
+            var utilidad=uti/100;
+            var costoneto=precom-(precom*descuento)
+            var calculo=costoneto+(costoneto*utilidad);
 			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
 		}
 	});
@@ -867,6 +883,9 @@ $(function() {
 	div#cuadro-contain { width: 330px; margin: 0 0; }
 	div#cuadro-contain table { margin: 0.3em 0; border-collapse: collapse; width: 100%; }
 	div#cuadro-contain table td, div#cuadro-contain table th { border: 1px solid #eee; padding: 3px 5px; }
+    .atributos tbody tr>td{
+       padding: 10px 0 0 10px;
+    }
 </style>
 <form id="for_pro">
 <input name="action_producto" id="action_producto" type="hidden" value="<?php echo $_POST['action']?>">
@@ -874,51 +893,49 @@ $(function() {
 <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="num_alm" id="num_alm" type="hidden" value="<?php echo $num_rows?>">
     <input name="tipo_accion" id="tipo_accion" type="hidden" value="<?php echo $_POST['tipo']?>">
-<div style="float:left">
-  <fieldset>
+<div style="float:left;width: 350px;">
+  <fieldset style="min-width: 300px">
     <legend>Producto</legend>
-    <table>
+    <table width="330" style=" table-layout: fixed" class="atributos">
         <tr>
-          <td><label for="txt_pro_nom">Nombre:</label></td>
+          <td><label for="txt_pro_nom"><b>Nombre:</b></label></td>
         </tr>
         <tr>
             <td><textarea name="txt_pro_nom" cols="40" rows="2" id="txt_pro_nom"><?php echo $nom?></textarea>
           </td>
         </tr>
+        <br>
         <tr>
-          <td><label for="txt_pro_des">Descripción:</label></td>
+          <td><label for="txt_pro_des"><b>Descripción:</b></label></td>
         </tr>
         <tr>
           <td><textarea name="txt_pro_des" cols="40" rows="4" id="txt_pro_des"><?php echo $des?></textarea></td>
         </tr>
         <tr>
-          <td><label for="cmb_cat_id">Categoría:</label></td>
+          <td width="34"><label for="cmb_cat_id"><b>Categoría:</b></label></td>
+          <td width="34">
+              <select name="cmb_cat_id" id="cmb_cat_id">
+              </select>
+              <a id="btn_cmb_cat_id" class="btn_ir" href="#" onClick="categoria_form('insertar')">Agregar Categoría</a>
+              <div id="div_categoria_form">
+              </div>
+          </td>
         </tr>
+
         <tr>
-          <td>
-          <a id="btn_cmb_cat_id" class="btn_ir" href="#" onClick="categoria_form('insertar')">Agregar Categoría</a><select name="cmb_cat_id" id="cmb_cat_id">
-          </select>
-            
+          <td width="34"><label for="cmb_mar_id"><b>Marca:</b></label>
+              <div id="div_marca_form">
+              </div>
+          </td>
+          <td width="34">
+             <select name="cmb_mar_id" id="cmb_mar_id">
+             </select>
+             <a id="btn_cmb_mar_id" class="btn_ir" href="#" onClick="marca_form('insertar')">Agregar Marca</a>
           </td>
         </tr>
         <tr>
-          <td><label for="cmb_mar_id">Marca:</label>
-          <div id="div_marca_form">
-          </div>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <a id="btn_cmb_mar_id" class="btn_ir" href="#" onClick="marca_form('insertar')">Agregar Marca</a>
-                <select name="cmb_mar_id" id="cmb_mar_id">
-                </select>
-          <div id="div_categoria_form">
-			</div>
-          </td>
-        </tr>
-        <tr>
-            <td><label for="cmb_afec_id">Tipo Afecto IGV:</label>
-                <div id="div_afecto_form">
+            <td><label for="cmb_afec_id"><b>Tipo Afecto IGV:</b></label></td>
+            <td><div id="div_afecto_form">
                     <select name="cmb_afec_id" id="cmb_afec_id">
                         <option value="">-</option>
                         <option value="1" <?php if($afec_id=='1')echo 'selected'?>>GRAVADO</option>
@@ -930,24 +947,21 @@ $(function() {
         </tr>
 
         <tr>
-            <td><label for="cmb_lote">Lote:</label></td>
-        </tr>
-        <tr>
+            <td><label for="cmb_lote"><b>Lote:</b></label></td>
             <td>
-            <div id="cmb_lote_form-">
-                <select name="cmb_lote" id="cmb_lote">
-                    <option value="">-</option>
-                    <option value="1" <?php if($lote=='1')echo 'selected'?>>Sí</option>
-                    <option value="0" <?php if($lote=='0')echo 'selected'?>>No</option>
-                </select>
-            </div>
+                <div id="cmb_lote_form-">
+                    <select name="cmb_lote" id="cmb_lote">
+                        <option value="">-</option>
+                        <option value="1" <?php if($lote=='1')echo 'selected'?>>Sí</option>
+                        <option value="0" <?php if($lote=='0')echo 'selected'?>>No</option>
+                    </select>
+                </div>
             </td>
         </tr>
 
         <tr>
-          <td><label for="cmb_pro_est">Estado:</label></td>
-        </tr>
-        <tr>
+          <td><label for="cmb_pro_est"><b>Estado:</b></label></td>
+
           <td><select name="cmb_pro_est" id="cmb_pro_est">
           		<option value="">-</option>
               	<option value="Activo" <?php if($est=='Activo')echo 'selected'?>>Activo</option>
@@ -955,14 +969,14 @@ $(function() {
           </select></td>
         </tr>
         <tr>
-            <td><label for="ctxt_prod_img">Imagen:</label></td>
+            <td><label for="ctxt_prod_img"><b>Imagen:</b></label></td>
         </tr>
         <tr>
             <td><input id="file" name="file" size="12" type="file" /></td>
+            <td><input name="hdd_prod_img" id="hdd_prod_img" type="hidden" value=""></td>
         </tr>
         <tr>
-            <td><input name="prod_img" id="prod_img" type="image" src="<?php echo $img?>" width="80px" height="auto" alt="Imagen"></td>
-            <input name="hdd_prod_img" id="hdd_prod_img" type="hidden" value="">
+            <td colspan="2"><input name="prod_img" id="prod_img" type="image" src="<?php echo $img?>" width="80px" height="auto" alt="Imagen"></td>
         </tr>
     </table>
     <div id="div_atributo_form">
@@ -971,7 +985,7 @@ $(function() {
 <div id="msj_producto_check" class="ui-state-error ui-corner-all" style="width:auto; float:left; padding:4px; display:none"></div>
 </div>
 <?php if($_POST['action']=="insertar"){?>
-<div style="float:left; margin-left:15px">
+<div style="float:left; margin-left:15px;">
     <fieldset>
         <legend>Proveedores</legend>
         <div>
@@ -1047,13 +1061,15 @@ $(function() {
                 <table class="ui-widget ui-widget-content">
                     <tr class="ui-widget-header">
                         <th align="center">Precio Costo</th>
+                        <th align="center">Desc. Prov</th>
                         <!--<th align="center">IGV</th>-->
                         <th align="center">Utilidad (%)</th>
-                        <th align="center">Precio Venta</th>
+                        <th align="center">Valor Venta</th>
                         <!--<th align="center"> IGV</th>-->
                     </tr>
                     <tr class="">
                         <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
+                        <td align="center"><input name="txt_cat_descprov" type="text" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $descprov?>"></td>
                         <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
                         <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
                         <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>

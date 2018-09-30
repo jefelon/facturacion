@@ -1,6 +1,6 @@
 <?php
 class cCliente{
-	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$retiene,$precio){
+	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene){
 	$sql = "INSERT tb_cliente(
 	`tb_cliente_tip` ,
 	`tb_cliente_nom` ,
@@ -16,7 +16,7 @@ class cCliente{
 
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio', '$retiene'
+	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio','$retiene'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -30,7 +30,7 @@ class cCliente{
 	}
 	function mostrarTodos($fil){
 	$sql="SELECT * FROM tb_cliente c
-	INNER JOIN tb_precio p ON c.tb_precio_id=p.tb_precio_id
+	LEFT JOIN tb_precio p ON c.tb_precio_id=p.tb_precio_id
 	ORDER BY c.tb_cliente_nom
 	";
 	if($fil!="")$sql.=" LIMIT 0,$fil ";
@@ -54,7 +54,7 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$retiene,$precio){
+	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene){
 	$sql = "UPDATE tb_cliente SET  
 	`tb_cliente_tip` =  '$tip',
 	`tb_cliente_nom` =  '$nom',
@@ -65,8 +65,9 @@ class cCliente{
 	`tb_cliente_ema` =  '$ema',
 	`tb_cliente_est` =  '$est',
 	`tb_empresa_id` =  '$empresa',
-	`tb_cliente_retiene` =  '$retiene',
-	`tb_precio_id` =  '$precio'
+	`tb_precio_id` =  '$precio',
+	`tb_cliente_retiene` =  '$retiene'
+	
 	WHERE tb_cliente_id =$id"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
