@@ -11,6 +11,9 @@ $oVenta = new cVenta();
 require_once("../cotizacion/cCotizacion.php");
 $oCotizacion = new cCotizacion();
 
+require_once ("../formatos/mysql.php");
+$oMysql= new cMysql();
+
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 
@@ -1008,7 +1011,23 @@ function compararSunat(doc, nom, dir, id) {
 	},"json");
 }
 
-
+function sumaFecha(d, fecha)
+{
+    var Fecha = new Date();
+    var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() +1) + "/" + Fecha.getFullYear());
+    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
+    var aFecha = sFecha.split(sep);
+    var fecha = aFecha[2]+'/'+aFecha[1]+'/'+aFecha[0];
+    fecha= new Date(fecha);
+    fecha.setDate(fecha.getDate()+parseInt(d));
+    var anno=fecha.getFullYear();
+    var mes= fecha.getMonth()+1;
+    var dia= fecha.getDate();
+    mes = (mes < 10) ? ("0" + mes) : mes;
+    dia = (dia < 10) ? ("0" + dia) : dia;
+    var fechaFinal = dia+sep+mes+sep+anno;
+    return (fechaFinal);
+}
 
 
 
@@ -1260,6 +1279,20 @@ $(function() {
         }
         }
     });
+
+    $('#dias1').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias1").val(),fechadoc);
+        $('#txt_letras_fecven1').val(fechaVence);
+
+        if($("#dias1").val()=="")
+        {
+            var sumames=sumaFecha(30,fechadoc);
+            $('#txt_letras_fecven1').val(sumames);
+            $('#dias1').val(30);
+        }
+    });
+
 
 	cmb_tar_id();
 
@@ -1832,7 +1865,7 @@ function bus_cantidad(act)
         <input type="text" name="txt_ven_lab1" id="txt_ven_lab1" value="<?php echo $lab1?>" size="9" maxlength="8">
         <label for="txt_ven_lab2">Kilometraje:</label>
         <input type="text" name="txt_ven_lab2" id="txt_ven_lab2" value="<?php echo $lab2?>" size="9" maxlength="8">
-        <label for="txt_ven_lab3">Ord. Servicio:</label>
+        <label for="txt_ven_lab3">Ord. Compra:</label>
         <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
         <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
         <br>
@@ -2023,23 +2056,23 @@ function bus_cantidad(act)
                     </tr>
                     <tr style="width:100%;" class="letras_fecven">
                         <td colspan="3" style="display:none;" class="letras_fecven1">
-                            <label for="txt_letras_fecven1">Fec Vencto 1:</label><br>
+                            <input type="text" id="dias1" for="txt_letras_fecven1" value="30"><br>
                             <input type="text" name="txt_letras_fecven1" id="txt_letras_fecven1" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven2">
-                            <label for="txt_letras_fecven2">Fec Vencto 2:</label><br>
+                            <input type="text" for="txt_letras_fecven2" value="60"><br>
                             <input type="text" name="txt_letras_fecven2" id="txt_letras_fecven2" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven3">
-                            <label for="txt_letras_fecven3">Fec Vencto 3:</label><br>
+                            <input type="text" for="txt_letras_fecven3" value="90"><br>
                             <input type="text" name="txt_letras_fecven3" id="txt_letras_fecven3" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven4">
-                            <label for="txt_letras_fecven4">Fec Vencto 4:</label><br>
+                            <input type="text" for="txt_letras_fecven4" value="120"><br>
                             <input type="text" name="txt_letras_fecven4" id="txt_letras_fecven4" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven5">
-                            <label for="txt_letras_fecven5">Fec Vencto 5:</label><br>
+                            <input type="text" for="txt_letras_fecven5" value="150"><br>
                             <input type="text" name="txt_letras_fecven5" id="txt_letras_fecven5" size="10" maxlength="10" readonly>
                         </td>
                     </tr>
