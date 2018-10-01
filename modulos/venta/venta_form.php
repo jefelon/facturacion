@@ -213,20 +213,20 @@ $( "#txt_venpag_fec" ).datepicker({
 	buttonImage: "../../images/calendar.gif",
 	buttonImageOnly: true
 });
-
-$("#txt_letras_fecven1,#txt_letras_fecven2,#txt_letras_fecven3,#txt_letras_fecven4,#txt_letras_fecven5").datepicker({
-    //minDate: "-1M",
-    maxDate:"+0D",
-    yearRange: 'c-0:c+0',
-    changeMonth: true,
-    changeYear: false,
-    dateFormat: 'dd-mm-yy',
-    //altField: fecha,
-    //altFormat: 'yy-mm-dd',
-    showOn: "button",
-    buttonImage: "../../images/calendar.gif",
-    buttonImageOnly: true
-});
+//
+// $("#txt_letras_fecven1,#txt_letras_fecven2,#txt_letras_fecven3,#txt_letras_fecven4,#txt_letras_fecven5").datepicker({
+//     //minDate: "-1M",
+//     maxDate:"+0D",
+//     yearRange: 'c-0:c+0',
+//     changeMonth: true,
+//     changeYear: false,
+//     dateFormat: 'dd-mm-yy',
+//     //altField: fecha,
+//     //altFormat: 'yy-mm-dd',
+//     showOn: "button",
+//     buttonImage: "../../images/calendar.gif",
+//     buttonImageOnly: true
+// });
 
 
 $('.cantidad_letras').autoNumeric({
@@ -1179,10 +1179,13 @@ $(function() {
 			$("#div_fecven").hide(100);
             $("#div_numeroletras").hide(100);
             $(".letras_fecven").hide(100);
-
+            $("#cmb_modpag_id").show(100);
 			//ocultar deposito y tarjeta
+            $("#cmb_modpag_id").val(1);
+            $("#cmb_modpag_id option[value='1']").attr("disabled",false);
 			$("#cmb_modpag_id option[value='2']").attr("disabled",false);
 			$("#cmb_modpag_id option[value='3']").attr("disabled",false);
+            $("#cmb_modpag_id option[value='4']").attr("disabled","disabled");
 		}
 		//credito
 		if(tipo == 2){
@@ -1190,9 +1193,14 @@ $(function() {
 			$("#div_fecven").show(100);
             $("#div_numeroletras").hide(100);
             $(".letras_fecven").hide(100);
+            $("#cmb_modpag_id").show(100);
+            $("#cmb_modpag_id").val(1);
 			//ocultar deposito y tarjeta
 			$("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
 			$("#cmb_modpag_id option[value='3']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='4']").attr("disabled","disabled");
+
+            $("#txt_venpag_numdia").focus();
 		}
         //LETRAS
         if(tipo == 3){
@@ -1201,7 +1209,14 @@ $(function() {
             $("#div_numeroletras").show(100);
             $(".letras_fecven").show(100);
             //ocultar deposito y tarjeta
-            $("#cmb_modpag_id").hide(100);
+            //$("#cmb_modpag_id").hide(100);
+            $("#cmb_modpag_id").val(4);
+            $("#cmb_modpag_id option[value='1']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='3']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='4']").attr("disabled",false);
+
+            $("#txt_numletras").focus();
         }
 	});
 
@@ -1292,8 +1307,55 @@ $(function() {
             $('#dias1').val(30);
         }
     });
+    $('#dias2').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias2").val(),fechadoc);
+        $('#txt_letras_fecven2').val(fechaVence);
 
+        if($("#dias2").val()=="")
+        {
+            var sumames=sumaFecha(60,fechadoc);
+            $('#txt_letras_fecven2').val(sumames);
+            $('#dias2').val(60);
+        }
+    });
+    $('#dias3').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias3").val(),fechadoc);
+        $('#txt_letras_fecven3').val(fechaVence);
 
+        if($("#dias3").val()=="")
+        {
+            var sumames=sumaFecha(90,fechadoc);
+            $('#txt_letras_fecven3').val(sumames);
+            $('#dias3').val(90);
+        }
+    });
+
+    $('#dias4').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias4").val(),fechadoc);
+        $('#txt_letras_fecven4').val(fechaVence);
+
+        if($("#dias4").val()=="")
+        {
+            var sumames=sumaFecha(120,fechadoc);
+            $('#txt_letras_fecven4').val(sumames);
+            $('#dias4').val(120);
+        }
+    });
+    $('#dias5').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias5").val(),fechadoc);
+        $('#txt_letras_fecven5').val(fechaVence);
+
+        if($("#dias5").val()=="")
+        {
+            var sumames=sumaFecha(150,fechadoc);
+            $('#txt_letras_fecven5').val(sumames);
+            $('#dias5').val(150);
+        }
+    });
 	cmb_tar_id();
 
 	<?php
@@ -2014,6 +2076,7 @@ function bus_cantidad(act)
                                 <option value="1" selected="selected">EFECTIVO</option>
                                 <option value="2">DEPOSITO</option>
                                 <option value="3">TARJETA</option>
+                                <option value="4">CANJE</option>
                             </select></td>
                         <td valign="top">
                             <div id="div_tarjeta" style="display:none">
@@ -2060,19 +2123,19 @@ function bus_cantidad(act)
                             <input type="text" name="txt_letras_fecven1" id="txt_letras_fecven1" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven2">
-                            <input type="text" for="txt_letras_fecven2" value="60"><br>
+                            <input type="text" id="dias2" for="txt_letras_fecven2" value="60"><br>
                             <input type="text" name="txt_letras_fecven2" id="txt_letras_fecven2" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven3">
-                            <input type="text" for="txt_letras_fecven3" value="90"><br>
+                            <input type="text" id="dias3" for="txt_letras_fecven3" value="90"><br>
                             <input type="text" name="txt_letras_fecven3" id="txt_letras_fecven3" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven4">
-                            <input type="text" for="txt_letras_fecven4" value="120"><br>
+                            <input type="text" id="dias4" for="txt_letras_fecven4" value="120"><br>
                             <input type="text" name="txt_letras_fecven4" id="txt_letras_fecven4" size="10" maxlength="10" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven5">
-                            <input type="text" for="txt_letras_fecven5" value="150"><br>
+                            <input type="text" id="dias5" for="txt_letras_fecven5" value="150"><br>
                             <input type="text" name="txt_letras_fecven5" id="txt_letras_fecven5" size="10" maxlength="10" readonly>
                         </td>
                     </tr>

@@ -186,13 +186,26 @@ if($num_rows_vp>0)
             }
         }
 
-        if($dt1['tb_formapago_id']==3){
-            $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
-            echo 'LETRAS ';
-            while($ltr= mysql_fetch_array($ltrs1)){
-                echo ' L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
-            }
+        if($rw1['tb_formapago_id']==3)
+        {
+
+            //modo
+
+//            if($rw1['tb_modopago_id']==4)
+//            {
+                $forma='LETRAS ';
+                $suma_pago7+=$rw1['tb_ventapago_mon'];
+
+                $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+                while($ltr= mysql_fetch_array($ltrs1)){
+                    $modo.= '<br>L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
+
+                }
+
+                //$modo='CANJE'.$vence_letras;
+//            }
         }
+
 
         $pago_mon=formato_money($rw1['tb_ventapago_mon']);
 

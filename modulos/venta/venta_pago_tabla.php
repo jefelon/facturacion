@@ -93,6 +93,7 @@ if($num_rows>0){
 							if($dt1['tb_modopago_id']==1)echo 'EFECTIVO';
 							if($dt1['tb_modopago_id']==2)echo 'DEPOSITO '.$dt1['tb_cuentacorriente_nom'].' N° Oper: '.$dt1['tb_ventapago_numope'];
 							if($dt1['tb_modopago_id']==3)echo 'TARJETA '.$dt1['tb_tarjeta_nom'].' N° Oper: '.$dt1['tb_ventapago_numope'];
+                            if($dt1['tb_modopago_id']==4)echo 'CANJE';
 							?></td>
                             <td align="right">
                                 <?php if ($dt1['tb_formapago_id'] == 3) {
