@@ -1,42 +1,45 @@
 <?php
-class clote{
-	function insertar($num, $cat_id, $fechafab, $fechaven, $st_act, $est, $alm_id){
-	$sql = "INSERT tb_lote (
-		`tb_lote_numero`,
-		`tb_catalogo_id`,
-		`tb_lote_fechafab`,
-		`tb_lote_fechavence`,
-		`tb_lote_exisact`,
-		`tb_lote_estado`,
-		`tb_almacen_id`
+class cVentaDetalleLote{
+	function insertar($ven_det_id,$fechafab, $fechaven, $st_act, $lotenum){
+	$sql = "INSERT tb_ventadetalle_lote (
+		`tb_ventadetalle_id`,
+		`tb_fecha_fab`,
+		`tb_fecha_ven`,
+		`tb_ventadetalle_exisact`,
+		`tb_ventadetalle_lotenum`
 		)
 		VALUES (
-		 '$num',
-		 '$cat_id',
+		 '$ven_det_id',
 		 '$fechafab',
 		 '$fechaven',
 		 '$st_act',
-		 '$est',
-		 '$alm_id'
-		);";
+		 '$lotenum'
+		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
+	return $rst;	
 	}
 	function ultimoInsert(){
-	$sql = "SELECT last_insert_id()";
+	$sql = "SELECT last_insert_id()"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
+	return $rst;	
 	}
 	function mostrarTodos(){
 	$sql="SELECT * 
-	FROM tb_lote ORDER BY tb_lote_id";
+	FROM tb_ventadetalle_lote";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 
+    function mostrar_filtro_venta_detalle($vendet_id){
+        $sql="SELECT * 
+	FROM tb_ventadetalle_lote WHERE tb_ventadetalle_id=$vendet_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function mostrarLoteProducto($idPresentacion,$alm_id,$stock_id){
 	$sql="SELECT * 
@@ -46,27 +49,6 @@ class clote{
 	INNER JOIN  tb_presentacion p on l.tb_presentacion_id=p.tb_presentacion_id
 
 	WHERE p.tb_presentacion_id=$idPresentacion AND a.tb_almacen_id=$alm_id AND s.tb_stock_id=$stock_id ORDER BY tb_lote_id";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
-
-    function mostrarLoteCatalogo($cat_id,$alm_id){
-        $sql="SELECT * 
-	FROM tb_lote l
-	INNER JOIN  tb_almacen a on l.tb_almacen_id=a.tb_almacen_id
-	WHERE l.tb_catalogo_id='$cat_id' AND l.tb_almacen_id='$alm_id'";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
-
-    function complete_nom($dato, $alm_id, $cat_id){
-        $sql="SELECT *
-		FROM tb_lote
-		WHERE tb_lote_num LIKE '%$dato%' AND tb_almacen_id='$alm_id' AND tb_catalogo_id= '$cat_id'
-		LIMIT 0,12
-		";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -104,10 +86,10 @@ class clote{
 	return $rst;
 	}
 
-    function mostrarUnoLoteNumero($cat_id, $numero, $alm_id){
+    function mostrarUnoLoteNumero($numero, $alm_id){
         $sql="SELECT * 
         FROM tb_lote
-        WHERE tb_catalogo_id ='$cat_id' AND tb_lote_numero='$numero' AND tb_almacen_id='$alm_id';";
+        WHERE tb_lote_numero='$numero' AND tb_almacen_id='$alm_id';";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -122,18 +104,8 @@ class clote{
 	WHERE  tb_lote_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
+	return $rst;	
 	}
-
-    function modificar_stock($cat_id, $lote_num,$alm_id, $stock){
-        $sql = "UPDATE tb_lote SET  
-		`tb_lote_exisact` = '$stock'
-	WHERE tb_catalogo_id ='$cat_id' AND tb_lote_numero ='$lote_num' AND tb_almacen_id = '$alm_id';";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
-
 	function verifica_lote_tabla($id,$tabla){
 	$sql = "SELECT * 
 		FROM  $tabla 

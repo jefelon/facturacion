@@ -19,7 +19,7 @@ if($_POST['action']=="insertar"){
 
 
 
-if($_POST['vista']=="venta_tabla" || $_POST['vista']=="compra_filtro"  )
+if($_POST['vista']=="venta_tabla" || $_POST['vista']=="compra_filtro")
 {
     $nom=$_POST['pro_nom'];
 }
