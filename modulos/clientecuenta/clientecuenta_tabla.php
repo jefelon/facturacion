@@ -72,6 +72,17 @@ $(function() {
 		//sortForce: [[0,0]],
 		sortList: [[0,0]]
     });
+
+    $('#chk_cobrar_varios_linea_').change( function() {
+        if($(this).attr('checked')){
+            $(this).val('1');
+            alert('encendido');
+        }else{
+            $(this).val('0');
+            alert('apagado');
+        }
+
+    });
 }); 
 </script>
         <table cellspacing="1" id="tabla_clientecuenta" class="tablesorter">
@@ -136,10 +147,19 @@ $(function() {
 				{
 				?><a class="btn_pagar" href="#pagar" onClick="clientecuenta_form_pago('insertar_pago','pago_insertar','<?php echo $dt['tb_clientecuenta_id']?>')">Pagar</a>
                 <?php }?>
+
                 <?php if($dt['tb_clientecuenta_tipreg']==2){?>
                 <a class="btn_editar" href="#editar" onClick="clientecuenta_form_pago('editar_pago','pago_editar','<?php echo $dt['tb_clientecuenta_id']?>')">Editar</a>
                 <?php /*?><a class="btn_eliminar" href="#" onClick="eliminar_clientecuenta('<?php echo $dt['tb_clientecuenta_id']?>')">Eliminar</a><?php */?>
                 <?php }?>
+
+                <?php if($dt1['tb_venta_est']!='ANULADA' and $_POST['chk_ven_anu']==1){?>
+                    <a class="btn_anular" href="#anular" onClick="venta_anular('<?php echo $dt1['tb_venta_id']?>','<?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_venta_numdoc']?>')">Anular</a>
+                <?php } ?>
+
+                    <?php if (($_POST['cli_cobrar_varios']==1) && ($dt['tb_clientecuenta_tip']==1 || $dt['tb_clientecuenta_est']==3 && $dt['tb_clientecuenta_tip']!==1)){?>
+                        <input name="cuenta_linea[]" chk_cobrar_varios_linea_<?php echo $dt['tb_clientecuenta_id']?>" id="chk_cobrar_varios_linea" type="checkbox" value="0">
+                    <?php } ?>
                 </td>
                 </tr>
 			<?php

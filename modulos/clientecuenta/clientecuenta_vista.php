@@ -183,7 +183,8 @@ function seleccionar_cliente(cli_id){
 		async:true,
 		dataType: "html",                      
 		data: ({
-			cli_id:	$("#hdd_fil_cli_id").val()
+			cli_id:	$("#hdd_fil_cli_id").val(),
+            cli_cobrar_varios:	$("#chk_cobrar_varios").val()
 		}),
 		beforeSend: function() {
 			$('#div_clientecuenta_tabla').addClass("ui-state-disabled");
