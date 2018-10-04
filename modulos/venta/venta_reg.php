@@ -74,6 +74,11 @@ $oGuia = new cGuia();
 require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
 
+require_once ("../lote/cLote.php");
+$oLote = new cLote();
+require_once ("../lote/cVentaDetalleLote.php");
+$oVentaDetalleLote = new cVentaDetalleLote();
+
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
 $emp_razsoc=$dt['tb_empresa_razsoc'];
@@ -773,6 +778,26 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $pro_ser
 			);
 
+            $dts = $oVenta->ultimoInsert();
+            $dt = mysql_fetch_array($dts);
+            $vendet_id = $dt['last_insert_id()'];
+            mysql_free_result($dts);
+
+            foreach($_SESSION['lote_car'][$indice] as $indice_lote) {
+                $lts=$oLote->mostrarUnoLoteNumero($indice,$_SESSION['lote_car'][$indice][$indice_lote], $almacen_venta);
+                $lt = mysql_fetch_array($lts);
+                $nro_rows = mysql_num_rows($lts);
+
+                if ($nro_rows>0){
+                    $nuevo_stock = $lt['tb_lote_exisact']-$_SESSION['lote_sto_num'][$indice][$indice_lote];
+                    $oLote->modificar_stock($indice, $_SESSION['lote_car'][$indice][$indice_lote],$almacen_venta, $nuevo_stock);
+                }elseif ($nro_rows==0){
+                    $oLote->insertar($_SESSION['lote_car'][$indice][$indice_lote],$indice,fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]),fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote],$_SESSION['lote_estado'][$indice][$indice_lote],$almacen_venta);
+                }
+
+                $oVentaDetalleLote->insertar($vendet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote], $_SESSION['lote_car'][$indice][$indice_lote]);
+            }
+
             $oGuia->insertar_detalle(
                 $indice,
                 $cantidad,
@@ -894,7 +919,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 				$det_isc,
 				$autoin,
                 $pro_ser
-			);		
+			);
+
+
         }
 		
 		if(isset($_SESSION['servicio_car'][$unico_id])){

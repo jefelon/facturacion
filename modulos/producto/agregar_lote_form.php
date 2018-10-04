@@ -13,6 +13,8 @@ if($_POST['action']=="editar")
     $stock_num=$dt['tb_lote_exisini'];
     mysql_free_result($dts);
 }
+
+
 ?>
 <script type="text/javascript">
     $(function() {
@@ -37,8 +39,6 @@ if($_POST['action']=="editar")
     });
 
     $( "#txt_lote_fecfab, #txt_lote_fecven" ).datepicker({
-        minDate: "-7D",
-        maxDate:"+0D",
         yearRange: 'c-0:c+0',
         changeMonth: true,
         changeYear: false,
@@ -54,7 +54,7 @@ if($_POST['action']=="editar")
         submitHandler: function() {
             $.ajax({
                 type: "POST",
-                url: "../producto/lote_reg.php",
+                url: "../producto/lote_compradetalle_fila.php",
                 async:true,
                 dataType: "json",
                 data: $("#for_agregar_lote").serialize(),
@@ -64,10 +64,15 @@ if($_POST['action']=="editar")
                     $('#msj_lote').show(100);
                 },
                 success: function(data){
-                    $('#msj_lote').html(data.lote_msj);
+                    $('#tabla_prov_pro tbody').append(html);
+                    $('#msj_lote').html("Guardado");
+                    $('.btn_eliminar').button({
+                        icons: {primary: "ui-icon-trash"},
+                        text: false
+                    });
                 },
                 complete: function(){
-                    lote_form('',<?php echo $_POST['pre_id'] ?>,<?php echo $_POST['alm_id']?>,<?php echo $_POST['sto_id']?>,$('#msj_lote').html() )
+
                 }
             });
         },

@@ -33,6 +33,13 @@ $oKardex = new cKardex();
 require_once("../formatos/formato.php");
 require_once ("../documento/cDocumento.php");
 $oDocumento= new cDocumento();
+require_once ("../lote/cLote.php");
+$oLote = new cLote();
+require_once ("../lote/cCompraDetalleLote.php");
+$oCompraDetalleLote = new cCompraDetalleLote();
+
+require_once ("../lote/cLote.php");
+$oLote = new cLote();
 
 $igv_dato=0.18;
 
@@ -105,8 +112,43 @@ if ($_POST['action_compra'] == "insertar") {
             $com_id = $dt['last_insert_id()'];
             mysql_free_result($dts);
 
+            if($_POST['cmb_com_doc']=='20' or $_POST['cmb_com_doc']=='21'){
+                if ($_POST['cmb_com_tip'] == '9' ) {
+                }elseif ($_POST['cmb_com_tip'] == '6'){
+                    //registro de kardex
+                    $xac = 1;
+                    $tipo_registro = 1;//1 automatico 2 manual
+                    $kar_tip = 2;//1 entrada 2 salida
+                    $tipope_id = 2;//2 compra
+                    $kar_des = 'COMPRA';
+                    $operacion_id = $com_id;//id de la operacion(modulo compras, ventas, etc)
+                    $emp_id = $_SESSION['empresa_id'];
 
-            if ($_POST['cmb_com_tip'] == '' or $_POST['cmb_com_tip'] == '1' ) {
+                    //insertamos kardex
+                    $oKardex->insertar(
+                        $xac,
+                        $tipo_registro,
+                        $codigo,
+                        fecha_mysql($_POST['txt_com_fec']),
+                        $kar_tip,
+                        $_POST['cmb_com_doc'],
+                        $_POST['txt_com_numdoc'],
+                        $tipope_id,
+                        $kar_des,
+                        $operacion_id,
+                        $_POST['cmb_com_alm_id'],
+                        $_POST['hdd_usu_id'],
+                        $_POST['hdd_emp_id']
+                    );
+                    //ultimo kardex
+                    $dts = $oKardex->ultimoInsert();
+                    $dt = mysql_fetch_array($dts);
+                    $kar_id = $dt['last_insert_id()'];
+                    mysql_free_result($dts);
+
+                    $oKardex->modificar_codigo($kar_id, $kar_id);
+                }
+            }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19'){
                 //registro de kardex
                 $xac = 1;
                 $tipo_registro = 1;//1 automatico 2 manual
@@ -139,41 +181,8 @@ if ($_POST['action_compra'] == "insertar") {
                 mysql_free_result($dts);
 
                 $oKardex->modificar_codigo($kar_id, $kar_id);
-
-            }elseif ($_POST['cmb_com_tip'] == '9'){
-                //registro de kardex
-                $xac = 1;
-                $tipo_registro = 1;//1 automatico 2 manual
-                $kar_tip = 2;//1 entrada 2 salida
-                $tipope_id = 2;//2 compra
-                $kar_des = 'COMPRA';
-                $operacion_id = $com_id;//id de la operacion(modulo compras, ventas, etc)
-                $emp_id = $_SESSION['empresa_id'];
-
-                //insertamos kardex
-                $oKardex->insertar(
-                    $xac,
-                    $tipo_registro,
-                    $codigo,
-                    fecha_mysql($_POST['txt_com_fec']),
-                    $kar_tip,
-                    $_POST['cmb_com_doc'],
-                    $_POST['txt_com_numdoc'],
-                    $tipope_id,
-                    $kar_des,
-                    $operacion_id,
-                    $_POST['cmb_com_alm_id'],
-                    $_POST['hdd_usu_id'],
-                    $_POST['hdd_emp_id']
-                );
-                //ultimo kardex
-                $dts = $oKardex->ultimoInsert();
-                $dt = mysql_fetch_array($dts);
-                $kar_id = $dt['last_insert_id()'];
-                mysql_free_result($dts);
-
-                $oKardex->modificar_codigo($kar_id, $kar_id);
             }
+
 
             //___________________________________________________________________
 
@@ -236,93 +245,117 @@ if ($_POST['action_compra'] == "insertar") {
                     $linea_calculo_cos,
                     $com_id
                 );
-
                 mysql_free_result($dts);
 
 
-                if ($_POST['cmb_com_tip'] == '' or $_POST['cmb_com_tip'] == '1' ) {
+                $dts = $oCompra->ultimoInsert();
+                $dt = mysql_fetch_array($dts);
+                $comdet_id = $dt['last_insert_id()'];
+                mysql_free_result($dts);
 
-                    //conversion a la minima unidad
-                    $cantidad_compra = $linea_cantidad * $mul;
+                foreach($_SESSION['lote_car'][$indice] as $indice_lote) {
+                    $lts=$oLote->mostrarUnoLoteNumero($indice, $_SESSION['lote_car'][$indice][$indice_lote], $_POST['cmb_com_alm_id']);
+                    $lt = mysql_fetch_array($lts);
+                    $nro_rows = mysql_num_rows($lts);
 
-                    //actualizacion de stock
-                    $stock_nuevo = $sto_num + $cantidad_compra;
-
-                    if (isset($sto_id) and $sto_id > 0) {
-                        $oStock->modificar($sto_id, $stock_nuevo);
-                    } else {
-                        $dts = $oCatalogoproducto->presentacion_catalogo($indice);
-                        $dt = mysql_fetch_array($dts);
-                        $pre_id = $dt['tb_presentacion_id'];
-                        $sto_num = 0;
-                        $mul = $dt['tb_catalogo_mul'];
-                        mysql_free_result($dts);
-
-                        //conversion a la minima unidad
-                        $cantidad_compra = $linea_cantidad * $mul;
-
-                        //actualizacion de stock
-                        $stock_nuevo = $sto_num + $cantidad_compra;
-
-                        $oStock->insertar($_POST['cmb_com_alm_id'], $pre_id, $stock_nuevo);
-
-
+                    if ($nro_rows>0){
+                        $nuevo_stock = $_SESSION['lote_sto_num'][$indice][$indice_lote]+$lt['tb_lote_exisact'];
+                        $oLote->modificar_stock($indice, $_SESSION['lote_car'][$indice][$indice_lote],$_POST['cmb_com_alm_id'], $nuevo_stock);
+                    }elseif ($nro_rows==0){
+                        $oLote->insertar($_SESSION['lote_car'][$indice][$indice_lote],$indice,fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]),fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote],$_SESSION['lote_estado'][$indice][$indice_lote],$_POST['cmb_com_alm_id']);
                     }
 
-                    //unidad base
-                    $dts = $oKardex->presentacion_buscar_unidad_base($pre_id);
-                    $dt = mysql_fetch_array($dts);
-                    $cat_id = $dt['tb_catalogo_id'];
-                    mysql_free_result($dts);
+                    $oCompraDetalleLote->insertar($comdet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote], $_SESSION['lote_car'][$indice][$indice_lote]);
+                }
 
-                    //registro detalle de kardex
-                    $precio = 0;
-                    $oKardex->insertar_detalle(
-                        $cat_id,
-                        $cantidad_compra,
-                        $costo,
-                        $precio,
-                        $kar_id
-                    );
+                if($_POST['cmb_com_doc']=='20' or $_POST['cmb_com_doc']=='21'){
+                    if ($_POST['cmb_com_tip'] == '9' ) {
 
                     //------------------------------------
-                }elseif ($_POST['cmb_com_tip'] == '9'){
-
-                    //conversion a la minima unidad
-                    $cantidad_compra = $linea_cantidad * $mul;
-
-                    //actualizacion de stock
-                    $stock_nuevo = $sto_num - $cantidad_compra;
-
-                    if (isset($sto_id) and $sto_id > 0) {
-                        $oStock->modificar($sto_id, $stock_nuevo);
-                    } else {
-                        $dts = $oCatalogoproducto->presentacion_catalogo($indice);
-                        $dt = mysql_fetch_array($dts);
-                        $pre_id = $dt['tb_presentacion_id'];
-                        $sto_num = 0;
-                        $mul = $dt['tb_catalogo_mul'];
-                        mysql_free_result($dts);
+                    }elseif ($_POST['cmb_com_tip'] == '6') {
 
                         //conversion a la minima unidad
                         $cantidad_compra = $linea_cantidad * $mul;
 
                         //actualizacion de stock
-                        $stock_nuevo = $sto_num + $cantidad_compra;
+                        $stock_nuevo = $sto_num - $cantidad_compra;
 
-                        $oStock->insertar($_POST['cmb_com_alm_id'], $pre_id, $stock_nuevo);
+                        if (isset($sto_id) and $sto_id > 0) {
+                            $oStock->modificar($sto_id, $stock_nuevo);
+                        } else {
+                            $dts = $oCatalogoproducto->presentacion_catalogo($indice);
+                            $dt = mysql_fetch_array($dts);
+                            $pre_id = $dt['tb_presentacion_id'];
+                            $sto_num = 0;
+                            $mul = $dt['tb_catalogo_mul'];
+                            mysql_free_result($dts);
+
+                            //conversion a la minima unidad
+                            $cantidad_compra = $linea_cantidad * $mul;
+
+                            //actualizacion de stock
+                            $stock_nuevo = $sto_num + $cantidad_compra;
+
+                            $oStock->insertar($_POST['cmb_com_alm_id'], $pre_id, $stock_nuevo);
+
+
+                        }
+
+                        //unidad base
+                        $dts = $oKardex->presentacion_buscar_unidad_base($pre_id);
+                        $dt = mysql_fetch_array($dts);
+                        $cat_id = $dt['tb_catalogo_id'];
+                        mysql_free_result($dts);
+
+                        //registro detalle de kardex
+                        $precio = 0;
+                        $oKardex->insertar_detalle(
+                            $cat_id,
+                            $cantidad_compra,
+                            $costo,
+                            $precio,
+                            $kar_id
+                        );
+                    }
+                }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19') {
+                    //conversion a la minima unidad
+                    $cantidad_compra=$linea_cantidad*$mul;
+
+                    //actualizacion de stock
+                    $stock_nuevo=$sto_num+$cantidad_compra;
+
+                    if(isset($sto_id) and $sto_id>0)
+                    {
+                        $oStock->modificar($sto_id,$stock_nuevo);
+                    }
+                    else
+                    {
+                        $dts=$oCatalogoproducto->presentacion_catalogo($indice);
+                        $dt = mysql_fetch_array($dts);
+                        $pre_id=	$dt['tb_presentacion_id'];
+                        $sto_num	=0;
+                        $mul		=$dt['tb_catalogo_mul'];
+                        mysql_free_result($dts);
+
+                        //conversion a la minima unidad
+                        $cantidad_compra=$linea_cantidad*$mul;
+
+                        //actualizacion de stock
+                        $stock_nuevo=$sto_num+$cantidad_compra;
+
+                        $oStock->insertar($_POST['cmb_com_alm_id'],$pre_id,$stock_nuevo);
 
 
                     }
 
                     //unidad base
-                    $dts = $oKardex->presentacion_buscar_unidad_base($pre_id);
+                    $dts=$oKardex->presentacion_buscar_unidad_base($pre_id);
                     $dt = mysql_fetch_array($dts);
-                    $cat_id = $dt['tb_catalogo_id'];
+                    $cat_id		=$dt['tb_catalogo_id'];
                     mysql_free_result($dts);
 
                     //registro detalle de kardex
-                    $precio = 0;
+                    $precio=0;
                     $oKardex->insertar_detalle(
                         $cat_id,
                         $cantidad_compra,

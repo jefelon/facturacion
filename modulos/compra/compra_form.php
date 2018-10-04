@@ -157,6 +157,55 @@ function cmb_com_alm_id()
 	});
 }
 
+
+function lote_form(act,cat_id, lote_num){
+    $.ajax({
+        type: "POST",
+        url: "../lote/lote_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            cat_id: cat_id,
+            lote_num: lote_num
+        }),
+        beforeSend: function() {
+            $('#msj_presentacion_lote').hide();
+            $('#div_lote_form').dialog("open");
+            $('#div_lote_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_lote_form').html(html);
+        }
+    });
+}
+
+function lote_car(act,idf,cant,lote_num)
+{
+
+    $.ajax({
+        type: "POST",
+        url: "../lote/lote_car.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action:	 act,
+            cat_id:	 idf,
+            txt_cant: cant,
+            txt_lote_num: lote_num
+        }),
+        beforeSend: function() {
+            $('#div_tabla_lote_car').dialog("open");
+            $('#div_tabla_lote_car').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_tabla_lote_car').html(html);
+        },
+        complete: function(){
+        }
+    });
+}
+
 function compra_car(act,idf,pre)
 {
     /*if($('#chk_cat_igv_'+idf).is(':checked')) {  
@@ -193,7 +242,7 @@ function compra_car(act,idf,pre)
 		success: function(html){
 			$('#div_compra_car_tabla').html(html);
 		},
-		complete: function(){			
+		complete: function(){
 			$('#div_compra_car_tabla').removeClass("ui-state-disabled");
 		}
 	});   
@@ -401,6 +450,9 @@ function proveedor_form_i(act,idf){
 	});
 }
 
+
+
+
 function editar_datos_item(idf, nom){	
 	$.ajax({
 		type: "POST",
@@ -473,6 +525,9 @@ function verificar_duplicidad_compra(com_doc,com_numdoc,com_numruc){
 	});	
 }
 
+
+
+
 $(function() {
 	
 	cmb_com_doc();
@@ -483,6 +538,7 @@ $(function() {
 	?>
 	compra_car('restablecer');
 	compra_car();
+    lote_car('restablecer');
 	
 	tipo_cambio($('#cmb_com_mon').val());
 	
@@ -583,6 +639,27 @@ $(function() {
 			}
 		}
 	});
+
+    $( "#div_lote_form" ).dialog({
+        title:'Lote',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 550,
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_lote_form").submit();
+            },
+            Cancelar: function() {
+                $('#for_lote_form').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_lote_form").html('Cargando...');
+        }
+    });
 	
 	$( "#div_catalogo_compra" ).dialog({
 		title:'Catálogo de Compra',
@@ -639,6 +716,23 @@ $(function() {
 			}
 		}
 	});
+
+    $( "#div_tabla_lote_car" ).dialog({
+        title:'Información de Lotes',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 650,
+        modal: true,
+        buttons: {
+            Cerrar: function() {
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_tabla_lote_car").html('Cargando...');
+        }
+    });
 
     $(function() {
         $( "#dialog" ).dialog({
@@ -827,7 +921,6 @@ $(function() {
             <div id="nota-debito-credito" style="display:none;">
                 <label for="cmb_com_tip">Tipo:</label>
                 <select name="cmb_com_tip" id="cmb_com_tip">
-                    <option value="1" selected="selected">ANULACIÓN DE LA OPERACIÓN</option>
                     <option value="6" selected="selected">DEVOLUCIÓN TOTAL</option>
                     <option value="9" selected="selected">DISMINUICIÓN EN EL VALOR</option>
                 </select>
@@ -887,3 +980,10 @@ if($_POST['action']=="editar"){
 <div id="div_compra_detalle_tabla">
 </div>
 <?php }?>
+
+<div id="div_tabla_lote_car">
+
+</div>
+
+<div id="div_lote_form">
+</div>

@@ -197,6 +197,11 @@ $('.btn_item').button({
 });
 $(".btn_preven").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
+$('.btn_tabla_lote').button({
+    icons: {primary: "ui-icon-newwin"},
+    text: false
+});
+
 $(function() {
 	
 	/*if($('#hdd_com_numite').val()>0)
@@ -463,8 +468,10 @@ if($num_rows>0){
 
                             <?php /*?><td align="right"><?php echo $linea_prorrateo_des.'|'.$linea_calculo_importe.'|'.$linea_calculo_igv.'|'.$linea_calculo_fle?></td><?php */?>
                             <td align="center" nowrap="nowrap">
-                            <a class="btn_item" href="#" onClick="editar_datos_item('<?php echo $dt1['tb_catalogo_id']?>','<?php echo $dt1['tb_producto_nom']?>')">Actualizar Datos de Item</a>
-                            <a class="btn_quitar" href="#" onClick="compra_car('quitar','<?php echo $dt1['tb_catalogo_id']?>')">Quitar</a></td>
+                                <a class="btn_item" href="#" onClick="editar_datos_item('<?php echo $dt1['tb_catalogo_id']?>','<?php echo $dt1['tb_producto_nom']?>')">Actualizar Datos de Item</a>
+                                <a class="btn_quitar" href="#" onClick="compra_car('quitar','<?php echo $dt1['tb_catalogo_id']?>')">Quitar</a>
+                                <a class="btn_tabla_lote" onClick="lote_car('',<?php echo $dt1['tb_catalogo_id'] ?>,<?php echo $linea_cantidad?>)">Ver Lote</a>
+                            </td>
                         </tr>
             <?php
                 mysql_free_result($dts1);
@@ -575,3 +582,4 @@ $descuento_total=$descuento_global+$desc_x_item_total;
   </tr>
 </table>
 </div>
+

@@ -324,6 +324,8 @@ $(function() {
 			}
 		}
 	});
+
+
 	
 	$(document).shortkeys({
 	  'a+g':       function () { compra_form('insertar') }

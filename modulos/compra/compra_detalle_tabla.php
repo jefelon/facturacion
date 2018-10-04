@@ -3,6 +3,7 @@ require_once ("../../config/Cado.php");
 require_once ("cCompra.php");
 $oCompra = new cCompra();
 
+
 require_once ("../formatos/formato.php");
 
 	$dts= $oCompra->mostrarUno($_POST['com_id']);
@@ -46,7 +47,54 @@ $(function() {
 		//sortList: [[2,0]]
     });
 
-}); 
+    $('.btn_tabla_lote').button({
+        icons: {primary: "ui-icon-newwin"},
+        text: false
+    });
+
+
+
+});
+
+$( "#div_lote_tabla" ).dialog({
+    title:'Lotes',
+    autoOpen: false,
+    resizable: false,
+    height: 'auto',
+    width: 550,
+    modal: true,
+    buttons: {
+        Cerrar: function() {
+            $( this ).dialog( "close" );
+        }
+    },
+    close: function() {
+        $("#div_lote_tabla").html('Cargando...');
+    }
+});
+
+function lote_tabla(idf)
+{
+
+    $.ajax({
+        type: "POST",
+        url: "../lote/lote_compradetalle_tabla.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            comdet_id:	 idf
+        }),
+        beforeSend: function() {
+            $('#div_lote_tabla').dialog("open");
+            $('#div_lote_tabla').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_lote_tabla').html(html);
+        },
+        complete: function(){
+        }
+    });
+}
 </script>
         <table cellspacing="1" id="tabla_compra_detalle" class="tablesorter">
             <thead>
@@ -60,7 +108,8 @@ $(function() {
                   <th align="right">IMPORTE</th>
                   <th align="right">FLETE S/.</th>                   
                   <!--<th align="right">FLETE</th> --> 
-                  <th align="right" title="COSTO UNITARIO">COSTO UNIT S/.</th>                 
+                  <th align="right" title="COSTO UNITARIO">COSTO UNIT S/.</th>
+                    <th align="center"></th>
                 </tr>
             </thead>
 			<?php
@@ -102,6 +151,7 @@ $(function() {
                             <td align="right"><?php 
 							echo formato_money($dt1['tb_compradetalle_cosuni']);
 							?></td>
+                            <td align="center"><a class="btn_tabla_lote" onClick="lote_tabla(<?php echo $dt1['tb_compradetalle_id'] ?>)">Ver Lote</a></td>
                         </tr>
                 <?php
                 	}
@@ -112,7 +162,7 @@ $(function() {
 				}
 				?>
         </table>
-        
+        <div id="div_lote_tabla"></div>
         <?php 
 	if($num_rows=="" or $num_rows==0)echo $num_rows.' Ningún registro.';
 	if($num_rows==1)echo $num_rows.' registro.';

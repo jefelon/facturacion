@@ -518,6 +518,52 @@ function producto_form(act,idf){
     });
 }
 
+
+function lote_venta_car(act,cat_id, lote_num){
+    $.ajax({
+        type: "POST",
+        url: "../lote/lote_venta_car.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            cat_id: cat_id
+        }),
+        beforeSend: function() {
+            $('#msj_presentacion_lote').hide();
+            $('#div_tabla_lote_venta').dialog("open");
+            $('#div_tabla_lote_venta').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_tabla_lote_venta').html(html);
+        }
+    });
+}
+
+function lote_venta_form(act,cat_id, lote_num){
+    $.ajax({
+        type: "POST",
+        url: "../lote/lote_venta_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            cat_id: cat_id,
+            lote_num: lote_num
+        }),
+        beforeSend: function() {
+            $('#msj_presentacion_lote').hide();
+            $('#div_lote_venta_form').dialog("open");
+            $('#div_lote_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_lote_venta_form').html(html);
+        }
+    });
+}
+
+
+
 function venta_car(act,cat_id){
 	if(act=='agregar') {
 		var stouni=$('#hdd_bus_cat_stouni').val();
@@ -1037,6 +1083,8 @@ $(function() {
 	cmb_ven_doc();
     cmb_ven_id();
     cmb_listaprecio_id();
+    lote_venta_car('restablecer');
+
 	$("#txt_ven_numdoc").addClass("ui-state-active");
 
 	$('#txt_ven_lab1').change(function(){
@@ -1415,6 +1463,48 @@ $(function() {
 			}
 		}
 	});
+
+    $( "#div_tabla_lote_venta" ).dialog({
+        title:'Lote',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 550,
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_lote_form").submit();
+            },
+            Cancelar: function() {
+                $('#for_lote_form').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_tabla_lote_venta").html('Cargando...');
+        }
+    });
+
+    $( "#div_lote_venta_form" ).dialog({
+        title:'Lote',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 550,
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_lote_form").submit();
+            },
+            Cancelar: function() {
+                $('#for_lote_form').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_lote_form").html('Cargando...');
+        }
+    });
 
 	//Formulario para actualizar Item de Detalle de Venta
 	$( "#div_item_form" ).dialog({
@@ -2297,6 +2387,12 @@ if($_POST['action']=="editar"){
 <?php }?>
 <div id="div_producto_form">
 
+</div>
+
+<div id="div_tabla_lote_venta">
+</div>
+
+<div id="div_lote_venta_form">
 </div>
 <script type="text/javascript">
 //catalogo_venta_tab();

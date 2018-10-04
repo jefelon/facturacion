@@ -176,52 +176,6 @@ function actualizar_precio(idf)
 		});
 }
 
-function lote_form(act,preid,almid,stoid, msj){
-    $.ajax({
-        type: "POST",
-        url: "../producto/lote_form.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            action: act,
-            pre_id: preid,
-            alm_id: almid,
-            sto_id: stoid,
-            pro_id: preid,
-            msj_lote: msj
-        }),
-        beforeSend: function() {
-            $('#msj_presentacion_lote').hide();
-            $('#div_lote_form').dialog("open");
-            $('#div_lote_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-        success: function(html){
-            $('#div_lote_form').html(html);
-        }
-    });
-}
-
-$( "#div_lote_form" ).dialog({
-    title:'Información de Lotes',
-    autoOpen: false,
-    resizable: false,
-    height: 'auto',
-    width: 650,
-    modal: true,
-    buttons: {
-        Guardar: function() {
-            $("#for_lot").submit();
-        },
-        Cancelar: function() {
-            $('#for_lot').each (function(){this.reset();});
-            $( this ).dialog( "close" );
-        }
-    },
-    close: function() {
-        $("#div_lote_form").html('Cargando...');
-    }
-});
-
 
 
 $(function() {

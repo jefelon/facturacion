@@ -44,32 +44,21 @@ foreach ($_SESSION['lote_car'][$_POST['cat_id']] as $indice => $linea_cantidad) 
         buttonImageOnly: true
     });
 
-
-    $( "#txt_lote_num").autocomplete({
-        minLength: 1,
-        source: "../lote/lote_complete_nom.php",
-        select: function(event, ui){
-            $("#txt_lote_fecfab").val(ui.item.id);
-            $("#txt_lote_fecven").val(ui.item.documento);
-            $("#txt_lote_sto_num").val(ui.item.nombre);
-        }
-    });
-
     $("#for_lote_form").validate({
         submitHandler: function() {
             $.ajax({
                 type: "POST",
-                url: "../lote/lote_car.php",
+                url: "../lote/lote_venta_car.php",
                 async:true,
                 dataType: "html",
                 data: $("#for_lote_form").serialize(),
                 beforeSend: function() {
-                    $("#div_lote_form" ).dialog( "close" );
+                    $("#div_lote_venta_form" ).dialog( "close" );
                     $('#msj_lote').html("Guardando...");
                     $('#msj_lote').show(100);
                 },
                 success: function(html){
-                    $('#div_tabla_lote_car').html(html);
+                    $('#div_tabla_lote_venta').html(html);
                 },
                 complete: function(){
 
@@ -102,10 +91,10 @@ foreach ($_SESSION['lote_car'][$_POST['cat_id']] as $indice => $linea_cantidad) 
     <label for="txt_lote_num">Lote Num:</label>
     <input name="txt_lote_num" type="text" class="cantidad" id="txt_lote_num" style="text-align:right" size="10" maxlength="10" value="<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$_POST['lote_num']] ?>">
     <label for="txt_lote_fecfab">Fecha Fab.:</label>
-    <input name="txt_lote_fecfab" type="text" class="fecha" id="txt_lote_fecfab" value="<?php echo $_SESSION['lote_fecfab'][$_POST['cat_id']][$_POST['lote_num']]?>" size="10" maxlength="10" readonly>
+    <input name="txt_lote_fecfab" type="text" id="txt_lote_fecfab" value="<?php echo $_SESSION['lote_fecfab'][$_POST['cat_id']][$_POST['lote_num']]?>" size="10" maxlength="10" readonly>
     <label for="txt_lote_fecven">Fecha Ven.:</label>
-    <input name="txt_lote_fecven" type="text" class="fecha" id="txt_lote_fecven" value="<?php echo $_SESSION['lote_fecven'][$_POST['cat_id']][$_POST['lote_num']]?>" size="10" maxlength="10" readonly>
-    <label for="txt_lote_sto_num">Stock:</label>
+    <input name="txt_lote_fecven" type="text" id="txt_lote_fecven" value="<?php echo $_SESSION['lote_fecven'][$_POST['cat_id']][$_POST['lote_num']]?>" size="10" maxlength="10" readonly>
+    <label for="txt_lote_sto_num">Stock Actual:</label>
     <input name="txt_lote_sto_num" type="text" class="cantidad" id="txt_lote_sto_num" style="text-align:right" size="10" maxlength="6" value="<?php echo $_SESSION['lote_sto_num'][$_POST['cat_id']][$_POST['lote_num']]?>">
     <input name="hdd_stock_total" id="hdd_stock_total" type="hidden" value="<?php echo $stock_total?>">
 </form>
