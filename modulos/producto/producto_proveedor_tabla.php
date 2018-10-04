@@ -25,6 +25,24 @@ $prod_id=$dt['tb_producto_id'];
             text: false
         });
 
+        $( "#div_producto_proveedor_form" ).dialog({
+            title:'Información de Proveedor para el producto',
+            autoOpen: false,
+            resizable: false,
+            height: 'auto',
+            width: 600,
+            position: 'top',
+            modal: true,
+            buttons: {
+                Guardar: function() {
+                    $("#for_prodprov").submit();
+                },
+                Cancelar: function() {
+                    $('#for_prodprov').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
 
     });
 </script>
@@ -58,6 +76,10 @@ $prod_id=$dt['tb_producto_id'];
             <th align="right" nowrap title="PRECIO DE COSTO">DESC %</th>
             <th align="right" nowrap title="PRECIO DE COSTO">DESDE</th>
             <th align="right" nowrap title="PRECIO DE COSTO">HASTA</th>
+            <th align="right" nowrap title="Agregar"> <a class="btn_agregar_proveedor" onClick="producto_proveedor_form('insertar',<?php echo $prod_id?>)">Agregar Proveedor
+                </a></th>
+            <div id="div_producto_proveedor_form">
+            </div>
         </tr>
         </thead>
         <?php
@@ -81,4 +103,5 @@ $prod_id=$dt['tb_producto_id'];
         ?>
         </tbody>
     </table>
+
 </div>

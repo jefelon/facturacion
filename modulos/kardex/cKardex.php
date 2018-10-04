@@ -238,6 +238,23 @@ WHERE tb_software_id =$id";
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		
 	}
+    function mostrar_kardex_por_producto_total($cat_id, $emp_id,$fecini,$fecfin){
+        $sql="SELECT *
+	FROM tb_kardex k
+	INNER JOIN tb_kardexdetalle kd ON k.tb_kardex_id = kd.tb_kardex_id
+	LEFT JOIN tb_documento d ON k.tb_documento_id = d.tb_documento_id
+	WHERE tb_kardex_xac = 1
+	AND kd.tb_catalogo_id = $cat_id 
+	AND k.tb_empresa_id = $emp_id ";
+
+        if($fecini!="")$sql.=" AND tb_kardex_fec>='$fecini' ";
+        if($fecfin!="")$sql.=" AND tb_kardex_fec<='$fecfin' ";
+
+        $sql.=" ORDER BY tb_kardex_fec";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_kardex_tipoperacion_por_producto($cat_id, $alm_id, $tipope_id){
 	$sql="SELECT *
 	FROM tb_kardex n

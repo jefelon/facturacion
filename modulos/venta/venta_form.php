@@ -11,6 +11,9 @@ $oVenta = new cVenta();
 require_once("../cotizacion/cCotizacion.php");
 $oCotizacion = new cCotizacion();
 
+require_once ("../formatos/mysql.php");
+$oMysql= new cMysql();
+
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 
@@ -210,20 +213,20 @@ $( "#txt_venpag_fec" ).datepicker({
 	buttonImage: "../../images/calendar.gif",
 	buttonImageOnly: true
 });
-
-$("#txt_letras_fecven1,#txt_letras_fecven2,#txt_letras_fecven3,#txt_letras_fecven4,#txt_letras_fecven5").datepicker({
-    //minDate: "-1M",
-    maxDate:"+0D",
-    yearRange: 'c-0:c+0',
-    changeMonth: true,
-    changeYear: false,
-    dateFormat: 'dd-mm-yy',
-    //altField: fecha,
-    //altFormat: 'yy-mm-dd',
-    showOn: "button",
-    buttonImage: "../../images/calendar.gif",
-    buttonImageOnly: true
-});
+//
+// $("#txt_letras_fecven1,#txt_letras_fecven2,#txt_letras_fecven3,#txt_letras_fecven4,#txt_letras_fecven5").datepicker({
+//     //minDate: "-1M",
+//     maxDate:"+0D",
+//     yearRange: 'c-0:c+0',
+//     changeMonth: true,
+//     changeYear: false,
+//     dateFormat: 'dd-mm-yy',
+//     //altField: fecha,
+//     //altFormat: 'yy-mm-dd',
+//     showOn: "button",
+//     buttonImage: "../../images/calendar.gif",
+//     buttonImageOnly: true
+// });
 
 
 $('.cantidad_letras').autoNumeric({
@@ -1054,11 +1057,29 @@ function compararSunat(doc, nom, dir, id) {
 	},"json");
 }
 
-
+function sumaFecha(d, fecha)
+{
+    var Fecha = new Date();
+    var sFecha = fecha || (Fecha.getDate() + "/" + (Fecha.getMonth() +1) + "/" + Fecha.getFullYear());
+    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
+    var aFecha = sFecha.split(sep);
+    var fecha = aFecha[2]+'/'+aFecha[1]+'/'+aFecha[0];
+    fecha= new Date(fecha);
+    fecha.setDate(fecha.getDate()+parseInt(d));
+    var anno=fecha.getFullYear();
+    var mes= fecha.getMonth()+1;
+    var dia= fecha.getDate();
+    mes = (mes < 10) ? ("0" + mes) : mes;
+    dia = (dia < 10) ? ("0" + dia) : dia;
+    var fechaFinal = dia+sep+mes+sep+anno;
+    return (fechaFinal);
+}
 
 
 
 $(function() {
+    $( "#div_productos_servicios_tab" ).tabs();
+
 	cmb_ven_doc();
     cmb_ven_id();
     cmb_listaprecio_id();
@@ -1206,10 +1227,13 @@ $(function() {
 			$("#div_fecven").hide(100);
             $("#div_numeroletras").hide(100);
             $(".letras_fecven").hide(100);
-
+            $("#cmb_modpag_id").show(100);
 			//ocultar deposito y tarjeta
+            $("#cmb_modpag_id").val(1);
+            $("#cmb_modpag_id option[value='1']").attr("disabled",false);
 			$("#cmb_modpag_id option[value='2']").attr("disabled",false);
 			$("#cmb_modpag_id option[value='3']").attr("disabled",false);
+            $("#cmb_modpag_id option[value='4']").attr("disabled","disabled");
 		}
 		//credito
 		if(tipo == 2){
@@ -1217,9 +1241,14 @@ $(function() {
 			$("#div_fecven").show(100);
             $("#div_numeroletras").hide(100);
             $(".letras_fecven").hide(100);
+            $("#cmb_modpag_id").show(100);
+            $("#cmb_modpag_id").val(1);
 			//ocultar deposito y tarjeta
 			$("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
 			$("#cmb_modpag_id option[value='3']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='4']").attr("disabled","disabled");
+
+            $("#txt_venpag_numdia").focus();
 		}
         //LETRAS
         if(tipo == 3){
@@ -1228,7 +1257,14 @@ $(function() {
             $("#div_numeroletras").show(100);
             $(".letras_fecven").show(100);
             //ocultar deposito y tarjeta
-            $("#cmb_modpag_id").hide(100);
+            //$("#cmb_modpag_id").hide(100);
+            $("#cmb_modpag_id").val(4);
+            $("#cmb_modpag_id option[value='1']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='3']").attr("disabled","disabled");
+            $("#cmb_modpag_id option[value='4']").attr("disabled",false);
+
+            $("#txt_numletras").focus();
         }
 	});
 
@@ -1307,6 +1343,67 @@ $(function() {
         }
     });
 
+    $('#dias1').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias1").val(),fechadoc);
+        $('#txt_letras_fecven1').val(fechaVence);
+
+        if($("#dias1").val()=="")
+        {
+            var sumames=sumaFecha(30,fechadoc);
+            $('#txt_letras_fecven1').val(sumames);
+            $('#dias1').val(30);
+        }
+    });
+    $('#dias2').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias2").val(),fechadoc);
+        $('#txt_letras_fecven2').val(fechaVence);
+
+        if($("#dias2").val()=="")
+        {
+            var sumames=sumaFecha(60,fechadoc);
+            $('#txt_letras_fecven2').val(sumames);
+            $('#dias2').val(60);
+        }
+    });
+    $('#dias3').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias3").val(),fechadoc);
+        $('#txt_letras_fecven3').val(fechaVence);
+
+        if($("#dias3").val()=="")
+        {
+            var sumames=sumaFecha(90,fechadoc);
+            $('#txt_letras_fecven3').val(sumames);
+            $('#dias3').val(90);
+        }
+    });
+
+    $('#dias4').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias4").val(),fechadoc);
+        $('#txt_letras_fecven4').val(fechaVence);
+
+        if($("#dias4").val()=="")
+        {
+            var sumames=sumaFecha(120,fechadoc);
+            $('#txt_letras_fecven4').val(sumames);
+            $('#dias4').val(120);
+        }
+    });
+    $('#dias5').change( function() {
+        var fechadoc = $("#txt_ven_fec").val();
+        var fechaVence = sumaFecha($("#dias5").val(),fechadoc);
+        $('#txt_letras_fecven5').val(fechaVence);
+
+        if($("#dias5").val()=="")
+        {
+            var sumames=sumaFecha(150,fechadoc);
+            $('#txt_letras_fecven5').val(sumames);
+            $('#dias5').val(150);
+        }
+    });
 	cmb_tar_id();
 
 	<?php
@@ -1848,7 +1945,13 @@ function bus_cantidad(act)
 }
 
 </script>
-<div>
+
+<style>
+   .carro{
+       overflow-x: hidden;
+   }
+</style>
+<div class="carro">
 <form id="for_ven">
 <input name="action_venta" id="action_venta" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_ven_id" id="hdd_ven_id" type="hidden" value="<?php echo $_POST['ven_id']?>">
@@ -1914,7 +2017,7 @@ function bus_cantidad(act)
         <input type="text" name="txt_ven_lab1" id="txt_ven_lab1" value="<?php echo $lab1?>" size="9" maxlength="8">
         <label for="txt_ven_lab2">Kilometraje:</label>
         <input type="text" name="txt_ven_lab2" id="txt_ven_lab2" value="<?php echo $lab2?>" size="9" maxlength="8">
-        <label for="txt_ven_lab3">Ord. Servicio:</label>
+        <label for="txt_ven_lab3">Ord. Compra:</label>
         <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
         <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
         <br>
@@ -1940,153 +2043,48 @@ function bus_cantidad(act)
     </tr>
   </table>
 </fieldset>
-    <div style="float: left; width: 75%;">
-<fieldset><legend>Registro de Pagos</legend>
-<?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
-<table border="0" cellspacing="2" cellpadding="0">
-  <tr>
-    <td width="70" valign="top"><label for="chk_venpag_aut" title="Registrar Pago Automaticamente">Reg Auto</label></br>
-    <input name="chk_venpag_aut" type="checkbox" id="chk_venpag_aut" value="1" checked="CHECKED">
-    </td>
-    <td width="40" valign="middle">
-    <div id="div_pago_agregar" style="display:none">
-    <a class="btn_venpag_agregar" href="#" onClick="venta_pago_car('agregar')">Agregar</a>
+    <div style="float: left; width: 80%;">
+    <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
+    <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
+    <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
+    <input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
+    <fieldset>
+        <legend>Datos Cliente</legend>
+        <div id="div_cliente_form">
+        </div>
+        <table>
+            <tr>
+                <td align="right"><?php if($_POST['action']=='insertar'){?>
+                        <a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
+                        <a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                    <?php }?>
+                    <label for="txt_ven_cli_doc">RUC/DNI:</label>
+                </td>
+                <td>
+                    <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
+                    <label for="txt_ven_cli_nom">Cliente:</label>
+                    <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="64" value='<?php echo $cli_nom?>' />
+                </td>
+                <td rowspan="2" valign="top">
+                    <div id="div_clientecuenta_detalle">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
+                <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:616px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
+                <td>
+                    <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                    <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                </td>
+            </tr>
+        </table>
+    </fieldset>
     </div>
-    </td>
-    <?php /*?><td>
-    <label for="txt_venpag_fec">Fecha:</label>
-      <input type="text" name="txt_venpag_fec" id="txt_venpag_fec" size="10" maxlength="10" value="<?php echo $venpag_fec?>" readonly>
-    </td><?php */?>
-    <td valign="top"><label for="txt_venpag_mon">Monto:</label></br>
-      <input name="txt_venpag_mon" type="text" class="venpag_moneda" id="txt_venpag_mon" style="text-align:right;" size="10" maxlength="10"></td>
-    <td valign="top">
-    <label for="cmb_forpaf_id">Forma<!-- Pago-->:</label></br>
-      <select name="cmb_forpag_id" id="cmb_forpag_id">
-        <option value="1" selected="selected">CONTADO</option>
-        <option value="2">CREDITO</option>
-        <option value="3">LETRAS</option>
-        </select>
-    </td>
-    <td valign="top"><!--<label for="cmb_modpaf_id">Modo Pago:</label>--></br>
-      <select name="cmb_modpag_id" id="cmb_modpag_id">
-        <option value="1" selected="selected">EFECTIVO</option>
-        <option value="2">DEPOSITO</option>
-        <option value="3">TARJETA</option>
-        </select></td>
-    <td valign="top">
-    <div id="div_tarjeta" style="display:none">
-    <label for="cmb_tar_id">Tarjeta:</label></br>
-      <select name="cmb_tar_id" id="cmb_tar_id">
-      </select>
-    </div>
-    <div id="div_cuentacorriente" style="display:none">
-    <label for="cmb_cuecor_id">Cuenta Corriente:</label></br>
-      <select name="cmb_cuecor_id" id="cmb_cuecor_id">
-      </select>
-    </div>
-    </td>
-    <td valign="top">
-    <div id="div_operacion" style="display:none">
-    <label for="txt_venpag_numope">N° Operación:</label></br>
-      <input type="text" name="txt_venpag_numope" id="txt_venpag_numope" size="15">
-    </div>
-    </td>
-
-    <td valign="top">
-    <div id="div_dia" style="display:none">
-    <label for="txt_venpag_numdia">N° Días:</label></br>
-    <input name="txt_venpag_numdia" id="txt_venpag_numdia" type="text" class="dias" size="5" maxlength="3">
-    </div>
-    </td>
-
-    <td valign="top">
-    <div id="div_fecven" style="display:none">
-    <label for="txt_venpag_fecven">Fec Vencto:</label></br>
-      <input type="text" name="txt_venpag_fecven" id="txt_venpag_fecven" size="10" maxlength="10" readonly>
-    </div>
-    </td>
-      <td valign="top">
-          <div id="div_numeroletras" style="display:none">
-              <label for="txt_numletras">N° Letras:</label></br>
-              <input name="txt_numletras" id="txt_numletras" type="text" class="cantidad_letras" size="10" maxlength="1">
-          </div>
-      </td>
-    </tr>
-    <tr style="width:100%;" class="letras_fecven">
-        <td colspan="3" style="display:none;" class="letras_fecven1">
-                <label for="txt_letras_fecven1">Fec Vencto 1:</label><br>
-                <input type="text" name="txt_letras_fecven1" id="txt_letras_fecven1" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven2">
-            <label for="txt_letras_fecven2">Fec Vencto 2:</label><br>
-            <input type="text" name="txt_letras_fecven2" id="txt_letras_fecven2" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven3">
-            <label for="txt_letras_fecven3">Fec Vencto 3:</label><br>
-            <input type="text" name="txt_letras_fecven3" id="txt_letras_fecven3" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven4">
-            <label for="txt_letras_fecven4">Fec Vencto 4:</label><br>
-            <input type="text" name="txt_letras_fecven4" id="txt_letras_fecven4" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven5">
-            <label for="txt_letras_fecven5">Fec Vencto 5:</label><br>
-            <input type="text" name="txt_letras_fecven5" id="txt_letras_fecven5" size="10" maxlength="10" readonly>
-        </td>
-    </tr>
-    <tr style="width:100%;" class="letras_fecven">
-        <td colspan="3" style="display:none;" class="letras_fecven1">
-                <label for="txt_letras_mon1">Monto 1:</label><br>
-                <input type="text" name="txt_letras_mon1" id="txt_letras_mon1" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven2">
-            <label for="txt_letras_mon2">Monto 2:</label><br>
-            <input type="text" name="txt_letras_mon2" id="txt_letras_mon2" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven3">
-            <label for="txt_letras_mon3">Monto 3:</label><br>
-            <input type="text" name="txt_letras_mon3" id="txt_letras_mon3" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven4">
-            <label for="txt_letras_mon4">Monto 4:</label><br>
-            <input type="text" name="txt_letras_mon4" id="txt_letras_mon4" size="10" maxlength="10" readonly>
-        </td>
-        <td colspan="3" style="display:none;" class="letras_fecven5">
-            <label for="txt_letras_mon5">Monto 5:</label><br>
-            <input type="text" name="txt_letras_mon5" id="txt_letras_mon5" size="10" maxlength="10" readonly>
-        </td>
-    </tr>
-</table>
-
-<div id="div_venta_pago_car">
-</div>
-<?php }?>
-<div id="div_venta_pago_tabla">
-</div>
-    <div>
-        <?php
-        if($_SESSION['usuariogrupo_id']==2){
-            ?>
-                <label for="hdd_usu_id">Vendedor:</label>
-                <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
-                </select>
-	    <?php if($_POST['action']=='insertar'||$_POST['action']=='insertar_cot') { ?>
-
-                <?php
-            	}
-        }
-        ?>
-        <?php
-        if($_SESSION['usuariogrupo_id']==3){
-            ?>
-            <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
-            <?php
-        }
-        ?>
-    </div>
-</fieldset>
-    </div>
-    <div style="float: left; width: 25%; display: none;" class="insertar-guia">
+    <div style="float: left; width: 20%; display: none;" class="insertar-guia">
         <fieldset>
             <legend>Datos Vehículo</legend>
             <label for="txt_gui_mar">Marca:</label><br>
@@ -2136,100 +2134,229 @@ function bus_cantidad(act)
         </fieldset>
     </div>
 
-<input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
-<input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
-    <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
-<input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
-<fieldset>
-	<legend>Datos Cliente</legend>
-	<div id="div_cliente_form">
-	</div>
-	<table>
-		<tr>
-			<td align="right"><?php if($_POST['action']=='insertar'){?>
-				<a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
-				<a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
-				<?php }?>
-				<label for="txt_ven_cli_doc">RUC/DNI:</label>
-			</td>
-			<td>
-				<input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
-				<label for="txt_ven_cli_nom">Cliente:</label>
-				<input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="64" value='<?php echo $cli_nom?>' />
-			</td>
-			<td rowspan="2" valign="top">
-				<div id="div_clientecuenta_detalle">
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-			<td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:616px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
-		</tr>
-		<tr>
-			<td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
-			<td>
-				<input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
-				<div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-			</td>
-		</tr>
-	</table>
-</fieldset>
+    <div style="float: left; width: 80%;">
+        <fieldset><legend>Registro de Pagos</legend>
+            <?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
+                <table border="0" cellspacing="2" cellpadding="0">
+                    <tr>
+                        <td width="70" valign="top"><label for="chk_venpag_aut" title="Registrar Pago Automaticamente">Reg Auto</label></br>
+                            <input name="chk_venpag_aut" type="checkbox" id="chk_venpag_aut" value="1" checked="CHECKED">
+                        </td>
+                        <td width="40" valign="middle">
+                            <div id="div_pago_agregar" style="display:none">
+                                <a class="btn_venpag_agregar" href="#" onClick="venta_pago_car('agregar')">Agregar</a>
+                            </div>
+                        </td>
+                        <?php /*?><td>
+    <label for="txt_venpag_fec">Fecha:</label>
+      <input type="text" name="txt_venpag_fec" id="txt_venpag_fec" size="10" maxlength="10" value="<?php echo $venpag_fec?>" readonly>
+    </td><?php */?>
+                        <td valign="top"><label for="txt_venpag_mon">Monto:</label></br>
+                            <input name="txt_venpag_mon" type="text" class="venpag_moneda" id="txt_venpag_mon" style="text-align:right;" size="10" maxlength="10"></td>
+                        <td valign="top">
+                            <label for="cmb_forpaf_id">Forma<!-- Pago-->:</label></br>
+                            <select name="cmb_forpag_id" id="cmb_forpag_id">
+                                <option value="1" selected="selected">CONTADO</option>
+                                <option value="2">CREDITO</option>
+                                <option value="3">LETRAS</option>
+                            </select>
+                        </td>
+                        <td valign="top"><!--<label for="cmb_modpaf_id">Modo Pago:</label>--></br>
+                            <select name="cmb_modpag_id" id="cmb_modpag_id">
+                                <option value="1" selected="selected">EFECTIVO</option>
+                                <option value="2">DEPOSITO</option>
+                                <option value="3">TARJETA</option>
+                                <option value="4">CANJE</option>
+                            </select></td>
+                        <td valign="top">
+                            <div id="div_tarjeta" style="display:none">
+                                <label for="cmb_tar_id">Tarjeta:</label></br>
+                                <select name="cmb_tar_id" id="cmb_tar_id">
+                                </select>
+                            </div>
+                            <div id="div_cuentacorriente" style="display:none">
+                                <label for="cmb_cuecor_id">Cuenta Corriente:</label></br>
+                                <select name="cmb_cuecor_id" id="cmb_cuecor_id">
+                                </select>
+                            </div>
+                        </td>
+                        <td valign="top">
+                            <div id="div_operacion" style="display:none">
+                                <label for="txt_venpag_numope">N° Operación:</label></br>
+                                <input type="text" name="txt_venpag_numope" id="txt_venpag_numope" size="15">
+                            </div>
+                        </td>
+
+                        <td valign="top">
+                            <div id="div_dia" style="display:none">
+                                <label for="txt_venpag_numdia">N° Días:</label></br>
+                                <input name="txt_venpag_numdia" id="txt_venpag_numdia" type="text" class="dias" size="5" maxlength="3">
+                            </div>
+                        </td>
+
+                        <td valign="top">
+                            <div id="div_fecven" style="display:none">
+                                <label for="txt_venpag_fecven">Fec Vencto:</label></br>
+                                <input type="text" name="txt_venpag_fecven" id="txt_venpag_fecven" size="10" maxlength="10" readonly>
+                            </div>
+                        </td>
+                        <td valign="top">
+                            <div id="div_numeroletras" style="display:none">
+                                <label for="txt_numletras">N° Letras:</label></br>
+                                <input name="txt_numletras" id="txt_numletras" type="text" class="cantidad_letras" size="10" maxlength="1">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="width:100%;" class="letras_fecven">
+                        <td colspan="3" style="display:none;" class="letras_fecven1">
+                            <input type="text" id="dias1" for="txt_letras_fecven1" value="30"><br>
+                            <input type="text" name="txt_letras_fecven1" id="txt_letras_fecven1" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven2">
+                            <input type="text" id="dias2" for="txt_letras_fecven2" value="60"><br>
+                            <input type="text" name="txt_letras_fecven2" id="txt_letras_fecven2" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven3">
+                            <input type="text" id="dias3" for="txt_letras_fecven3" value="90"><br>
+                            <input type="text" name="txt_letras_fecven3" id="txt_letras_fecven3" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven4">
+                            <input type="text" id="dias4" for="txt_letras_fecven4" value="120"><br>
+                            <input type="text" name="txt_letras_fecven4" id="txt_letras_fecven4" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven5">
+                            <input type="text" id="dias5" for="txt_letras_fecven5" value="150"><br>
+                            <input type="text" name="txt_letras_fecven5" id="txt_letras_fecven5" size="10" maxlength="10" readonly>
+                        </td>
+                    </tr>
+                    <tr style="width:100%;" class="letras_fecven">
+                        <td colspan="3" style="display:none;" class="letras_fecven1">
+                            <label for="txt_letras_mon1">Monto 1:</label><br>
+                            <input type="text" name="txt_letras_mon1" id="txt_letras_mon1" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven2">
+                            <label for="txt_letras_mon2">Monto 2:</label><br>
+                            <input type="text" name="txt_letras_mon2" id="txt_letras_mon2" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven3">
+                            <label for="txt_letras_mon3">Monto 3:</label><br>
+                            <input type="text" name="txt_letras_mon3" id="txt_letras_mon3" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven4">
+                            <label for="txt_letras_mon4">Monto 4:</label><br>
+                            <input type="text" name="txt_letras_mon4" id="txt_letras_mon4" size="10" maxlength="10" readonly>
+                        </td>
+                        <td colspan="3" style="display:none;" class="letras_fecven5">
+                            <label for="txt_letras_mon5">Monto 5:</label><br>
+                            <input type="text" name="txt_letras_mon5" id="txt_letras_mon5" size="10" maxlength="10" readonly>
+                        </td>
+                    </tr>
+                </table>
+
+                <div id="div_venta_pago_car">
+                </div>
+            <?php }?>
+            <div id="div_venta_pago_tabla">
+            </div>
+            <div>
+                <?php
+                if($_SESSION['usuariogrupo_id']==2){
+                    ?>
+                    <label for="hdd_usu_id">Vendedor:</label>
+                    <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
+                    </select>
+                    <?php if($_POST['action']=='insertar'||$_POST['action']=='insertar_cot') { ?>
+
+                        <?php
+                    }
+                }
+                ?>
+                <?php
+                if($_SESSION['usuariogrupo_id']==3){
+                    ?>
+                    <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
+                    <?php
+                }
+                ?>
+            </div>
+        </fieldset>
+    </div>
+    <div style="clear: both;"></div>
     <?php if($_POST['action']=='insertar'){?>
-    <fieldset><legend>Agregar Producto</legend>
+    <div id="div_productos_servicios_tab">
+       <ul>
+          <li><a id="carga_productos" href="#div_productos">Agregar Productos</a></li>
+          <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
+       </ul>
+       <div id="div_productos">
+          <div id="cuadro-contain" class="ui-widget">
+<!--              <legend>Agregar Producto</legend>-->
+                  <label for="txt_ven_fec" style="display: none;">Fecha:</label>
+                  <input name="txt_ven_fec" type="hidden" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
 
-        <label for="txt_ven_fec" style="display: none;">Fecha:</label>
-        <input name="txt_ven_fec" type="hidden" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
+                  <input name="hdd_bus_cat_id" id="hdd_bus_cat_id"  type="hidden" value="">
+                  <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
+                  <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
+                  <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
 
-        <input name="hdd_bus_cat_id" id="hdd_bus_cat_id"  type="hidden" value="">
-        <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
-        <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
-        <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
+                  <label for="txt_bus_pro_codbar">COD</label>
+                  <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="10">
+                  <label for="txt_bus_pro_nom">NOM</label>
+                  <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="28" style="font-size:13px; font-weight:bold">
+                  <input name="hdd_bus_pro_nom" type="hidden" id="hdd_bus_pro_nom">
 
-        <label for="txt_bus_pro_codbar">COD</label>
-        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="14">
-        <label for="txt_bus_pro_nom">NOM</label>
-        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="30" style="font-size:13px; font-weight:bold">
-        <input name="hdd_bus_pro_nom" type="hidden" id="hdd_bus_pro_nom">
+                  <label for="txt_bus_cat_preven">S/.</label>
+                  <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="8" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
-        <label for="txt_bus_cat_preven">S/.</label>
-        <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="8" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
+                  <label for="txt_bus_cat_can">CAN</label>
+                  <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="5" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
 
-        <label for="txt_bus_cat_can">CAN</label>
-        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="5" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
-
-        <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
-        <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
-        <label for="txt_detcom_des">DES</label>
-        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
-        <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
+                  <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
+                  <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
+                  <label for="txt_detcom_des">DES</label>
+                  <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
+                  <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
 
-        <br>
-        <!--a class="btn_agregar_producto" title="Abrir Catálogo" href="#" onClick="catalogo_venta_tab1()">Catálogo</a -->
-        <a class="btn_rest_act" href="#" onClick="foco(); venta_car('actualizar')">Actualizar</a>
-        <a class="btn_rest_car" href="#" onClick="foco(); venta_car('restablecer')">Vaciar</a>
+                  <br>
+                  <!--a class="btn_agregar_producto" title="Abrir Catálogo" href="#" onClick="catalogo_venta_tab1()">Catálogo</a -->
+                  <a class="btn_rest_act" href="#" onClick="foco(); venta_car('actualizar')">Actualizar</a>
+                  <a class="btn_rest_car" href="#" onClick="foco(); venta_car('restablecer')">Vaciar</a>
 
-        <label for="chk_modo">Automático</label>
-        <input name="chk_modo" type="checkbox" id="chk_modo" value="1" <?php if($modo_automatico==1)echo "checked"?>>
+                  <label for="chk_modo">Automático</label>
+                  <input name="chk_modo" type="checkbox" id="chk_modo" value="1" <?php if($modo_automatico==1)echo "checked"?>>
 
-        <label for="txt_precio_min">P.MIN.</label>
-        <input type="text" name="txt_precio_min" id="txt_precio_min" size="10" readonly>
+                  <label for="txt_precio_min">P.MIN.</label>
+                  <input type="text" name="txt_precio_min" id="txt_precio_min" size="10" readonly>
 
-        <label for="txt_precio_min" style="color: red;">P.MAY.</label>
-        <input type="text" name="txt_precio_may" id="txt_precio_may" size="10" readonly>
+                  <label for="txt_precio_min" style="color: red;">P.MAY.</label>
+                  <input type="text" name="txt_precio_may" id="txt_precio_may" size="10" readonly>
 
-        <label for="che_mayorista">Precio Mayorista</label>
-        <input type="checkbox" id="che_mayorista" style="margin-top: 5px;">
+                  <label for="che_mayorista">Precio Mayorista</label>
+                  <input type="checkbox" id="che_mayorista" style="margin-top: 5px;">
 
-        <label for="cmb_listaprecio_id">Lista Precios:</label>
-        <select name="cmb_listaprecio_id" id="cmb_listaprecio_id">
-        </select>
-        <div id="div_listaprecio_form">
-        </div>
-        <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                  <label for="cmb_listaprecio_id">Lista Precios:</label>
+                  <select name="cmb_listaprecio_id" id="cmb_listaprecio_id">
+                  </select>
+                  <div id="div_listaprecio_form">
+                  </div>
+                  <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+          </div>
+       </div>
 
-    </fieldset>
+       <div id="div_servicios">
+          <div id="cuadro-contain" class="ui-widget">
+ <!--             <legend>Agregar Servicios</legend>-->
+                  <?php if($_POST['vista']!='cange'){?>
+                      <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
+                      <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
+                  <?php }?>
+                  <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>
+                  <div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:<?php if($msj!=""){echo 'block';} else{ echo 'none';}?>"><?php echo $msj?></div>
+                  <div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+          </div>
+       </div>
+    </div>
     <?php } ?>
 <?php
 if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){

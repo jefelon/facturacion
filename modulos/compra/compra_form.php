@@ -572,9 +572,9 @@ $(function() {
 
 	$("#txt_com_numdoc").change(function() {
 
-	    if($('#hdd_com_pro_id').val()>0 && $('#txt_com_numdoc').val()>0)
+        if($('#txt_com_pro_doc').val()>0 && $('#txt_com_numdoc').val()!="")
         {
-            verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#hdd_com_pro_id').val());
+            verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#txt_com_pro_doc').val());
 
         }
 
@@ -599,9 +599,9 @@ $(function() {
 			$("#hdd_com_pro_id").val(ui.item.id);							
 			$("#txt_com_pro_doc").val(ui.item.documento);
 			$("#txt_com_pro_dir").val(ui.item.direccion);
-            if($('#txt_com_numdoc').val.length>0)
+            if($('#txt_com_pro_doc').val()>0 && $('#txt_com_numdoc').val()!="")
             {
-                verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#hdd_com_pro_id').val());
+                verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#txt_com_pro_doc').val());
             }
 		}
 
@@ -614,9 +614,9 @@ $(function() {
 			$("#hdd_com_pro_id").val(ui.item.id);							
 			$("#txt_com_pro_nom").val(ui.item.nombre);
 			$("#txt_com_pro_dir").val(ui.item.direccion);
-            if($('#txt_com_numdoc').val()>0)
+            if($('#txt_com_pro_doc').val()>0 && $('#txt_com_numdoc').val()!="")
             {
-                verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#hdd_com_pro_id').val());
+                verificar_duplicidad_compra($('#cmb_com_doc').val(),$('#txt_com_numdoc').val(),$('#txt_com_pro_doc').val());
             }
 		}
 
@@ -708,6 +708,10 @@ $(function() {
 			OK: function() {
 				$( this ).dialog( "close" );
                 $('#txt_com_numdoc').val('');
+                $('#hdd_com_pro_id').val('');
+                $('#txt_com_pro_doc').val('');
+                $('#txt_com_pro_nom').val('');
+                $('#txt_com_pro_dir').val('');
                 $('#txt_com_numdoc').focus();
 			}
 		}

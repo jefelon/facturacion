@@ -134,6 +134,10 @@ function catalogo_kardex_tabla_total(){
         }
     });
 }
+function karde_total_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_kardex_total").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
 
 $(function() {
 	catalogo_kardex();
@@ -149,7 +153,12 @@ $(function() {
 	$('#btn_seleccionar').button({
 		icons: {primary: "ui-icon-plus"},
 		text: true
-	});		
+	});
+
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
 		
 	
 	/*$( "#div_catalogo_kardex" ).dialog({
@@ -199,6 +208,12 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_seleccionar" href="#" onClick="catalogo_kardex()">Seleccionar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
+                      <td width="6%" align="left" valign="middle">
+                            <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="karde_total_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="kardex_reporte_total_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form>
+                      </td>
                       <td align="left" valign="middle">&nbsp;</td>
                       <td align="right">
                       <div id="msj_kardex" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>

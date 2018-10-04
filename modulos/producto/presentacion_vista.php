@@ -589,6 +589,17 @@ $(function() {
         lista_precio_detalle();
     });
 
+    $( "#div_precios_tab" ).tabs();
+    $("#precio_base").click(function(){
+        // catalogo_venta();
+    });
+    $("#precio_lista").click(function(){
+        //catalogo_servicio();
+    });
+    $("#cmb_precio_id").change(function(){
+        // var txt_cat_precos_alt $("#cmb_precio_id").val()+
+    });
+
 });
 
 $('.btn_guardar_lista_precio').button({
@@ -647,16 +658,27 @@ if($_POST['vista']=='Presentacion'){
 </div>
 <?php }?>
 <div id="accordion" style="width:<?php echo $ancho_acordion?>;">
-	<h3><a href="#">Presentación</a></h3>
-	<div>
-    	<div id="msj_presentacion" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+    <fieldset class = "ui-widget ui-widget-content">
+        <h3><a href="#">Proveedores</a></h3>
+        <div>
+            <div id="msj_presentacion_proveedores" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+            </div>
+            <div id="div_proveedores_form">
+            </div>
         </div>
-        <div id="div_presentacion_form">
+    </fieldset>
+    <br>
+    <fieldset class = "ui-widget ui-widget-content">
+        <h3><a href="#">Presentación</a></h3>
+        <div>
+            <div id="msj_presentacion" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+            </div>
+            <div id="div_presentacion_form">
+            </div>
+            <div id="div_presentacion_tabla">
+            </div>
         </div>
-        <div id="div_presentacion_tabla">
-        </div>
-    </div>
-    
+    </fieldset>
     <?php /*?>
     <h3><a href="#">Atributos</a></h3>
 	<div>
@@ -668,72 +690,80 @@ if($_POST['vista']=='Presentacion'){
         </div>
     </div><?php */?>
     <br>
-    <h3><a href="#">Unidad - Precios - Catálogo</a></h3>
-    <div>
-        <div id="msj_presentacion_unidad" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
-        </div>
-        <div id="div_catalogo_form">
-        </div>
-        <div id="div_presentacion_unidad">
-        </div>
-    </div>
 
+    <div id="div_precios_tab">
+        <ul>
+            <li><a id="precio_base" href="#div_precios_base">Lista 1 - Precio General</a></li>
+            <li><a id="precio_lista" href="#div_precios_lista">Lista 2,3,4... - Precios Varios</a></li>
+        </ul>
+        <div id="div_precios_base">
+            <div id="cuadro-contain" class="ui-widget">
+                <div>
+                    <div id="msj_presentacion_unidad" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+                    </div>
+                    <div id="div_catalogo_form">
+                    </div>
+                    <div id="div_presentacion_unidad">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="div_precios_lista">
+                <div id="cuadro-contain" class="ui-widget">
+                    <table class="ui-widget ui-widget-content">
+                        <tr class="ui-widget-header">
+                            <th align="center">Lista Precios:</th>
+                            <th align="center">Precio Costo</th>
+                            <!--<th align="center">IGV</th>-->
+                            <th align="center">Utilidad (%)</th>
+                            <th align="center">Precio Venta</th>
+                            <!--<th align="center"> IGV</th>-->
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="cmb_precio_id" id="cmb_precio_id">
+                                </select>
+                            </td>
+                            <td align="center"><input name="txt_cat_precos_alt" type="text" id="txt_cat_precos_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
+                            <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
+                            <td align="center"><input name="txt_cat_uti_alt" type="text" id="txt_cat_uti_alt" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
+                            <td align="center"><input name="txt_cat_preven_alt" type="text" id="txt_cat_preven_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
+                            <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
+                            <td align="center"><a onclick="guardar_lista_precio()" class="btn_guardar_lista_precio" id=""></a></td>
+                            <div id="msj_lista_precio" style="display: none" class="ui-state-highlight ui-corner-all"></div>
+                        </tr>
+                    </table>
+                </div>
+        </div>
+
+    </div>
     <br>
-    <h3><a href="#">Unidad - Precios - Catálogo</a></h3>
-    <div id="div_precios_lista">
-        <div id="cuadro-contain" class="ui-widget">
-            <table class="ui-widget ui-widget-content">
-                <tr class="ui-widget-header">
-                    <th align="center">Lista Precios:</th>
-                    <th align="center">Precio Costo</th>
-                    <!--<th align="center">IGV</th>-->
-                    <th align="center">Utilidad (%)</th>
-                    <th align="center">Precio Venta</th>
-                    <!--<th align="center"> IGV</th>-->
-                </tr>
-                <tr>
-                    <td>
-                        <select name="cmb_precio_id" id="cmb_precio_id">
-                        </select>
-                    </td>
-                    <td align="center"><input name="txt_cat_precos_alt" type="text" id="txt_cat_precos_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
-                    <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
-                    <td align="center"><input name="txt_cat_uti_alt" type="text" id="txt_cat_uti_alt" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
-                    <td align="center"><input name="txt_cat_preven_alt" type="text" id="txt_cat_preven_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
-                    <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
-                    <td align="center"><a onclick="guardar_lista_precio()" class="btn_guardar_lista_precio" id=""></a></td>
-                    <div id="msj_lista_precio" style="display: none" class="ui-state-highlight ui-corner-all"></div>
-                </tr>
-            </table>
-        </div>
-    </div>
+    <fieldset class = "ui-widget ui-widget-content">
+        <div>
+            <h3><a href="#">Stock</a></h3>
+            <div id="msj_presentacion_stock" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+            </div>
+            <div id="div_stock_form">
+            </div>
+            <div id="div_presentacion_stock" style="clear:both">
+            </div>
 
-	<div style="width: 50%;float: left">
-        <h3><a href="#">Stock</a></h3>
-    	<div id="msj_presentacion_stock" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+            <div id="msj_presentacion_lote" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+            </div>
+            <div id="div_lote_form">
+            </div>
         </div>
-    	<div id="div_stock_form">
-		</div>
-		<div id="div_presentacion_stock" style="clear:both">
-        </div>
+    </fieldset>
 
-        <div id="msj_presentacion_lote" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+    <fieldset class = "ui-widget ui-widget-content">
+        <h3><a href="#">Como se muestra en catálogo</a></h3>
+        <div>
+            <div id="msj_presentacion_catalogo" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
+            </div>
+            <div id="div_presentacion_catalogo" style="clear:both">
+            </div>
         </div>
-        <div id="div_lote_form">
-        </div>
-	</div>
-    <h3><a href="#">Proveedores</a></h3>
-    <div>
-        <div id="msj_presentacion_proveedores" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
-        </div>
-        <div id="div_proveedores_form">
-        </div>
-    </div>
-    <h3><a href="#">Como se muestra en catálogo</a></h3>
-	<div>
-    	<div id="msj_presentacion_catalogo" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
-        </div>
-		<div id="div_presentacion_catalogo" style="clear:both">
-        </div>
-	</div>
+    </fieldset>
 </div>

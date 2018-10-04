@@ -26,11 +26,13 @@ $(function() {
 	div#div_tabla_kardex table td { height:17px }
 </style>
 <div id="div_tabla_kardex" class="ui-widget">
-<table border="0" cellspacing="2" cellpadding="2" class="ui-widget ui-widget-content">
+    <h4>MOVIMIENTO GENERAL, TODOS LOS ALMACENES</h4>
+<table border="0" cellspacing="2" cellpadding="2" class="ui-widget ui-widget-content" id="tabla_kardex_total">
     <thead>
         <tr class="ui-widget-header">
+            <th>ORDEN</th>
             <th>CÓDIGO</th>
-            <th>DESCRIPCIÓN</th>
+            <th>DESCRIPCIÓN </th>
             <th>TOTAL INGRESOS</th>
             <th>TOTAL SALIDAS</th>
             <th>TOTAL SALDO</th>
@@ -39,9 +41,11 @@ $(function() {
     <tbody>
     <?php
     $dts1 = $oCatalogo->catalogo_compra_filtro('', '', '', '', '', '');
+    $linea=1;
     while ($dt1 = mysql_fetch_array($dts1)) {
         ?>
         <tr>
+        <td><?php echo $linea++ ?></td>
         <td><?php echo $dt1['tb_presentacion_cod'] ?></td>
         <td><?php echo $dt1['tb_producto_nom'] ?></td>
         <?php
@@ -49,7 +53,7 @@ $(function() {
         $fecini = '01-01-2013';
         $fecfin = '';
 
-        $dts2 = $oKardex->mostrar_kardex_por_producto($dt1['tb_catalogo_id'], $_SESSION['almacen_id'], fecha_mysql($fecini), fecha_mysql($fecfin));
+        $dts2 = $oKardex->mostrar_kardex_por_producto_total($dt1['tb_catalogo_id'], $_SESSION['empresa_id'], fecha_mysql($fecini), fecha_mysql($fecfin));
         $cantidad_total = 0;
         $precio_promedio = 0;
         $costo_total = 0;

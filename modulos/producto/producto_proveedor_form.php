@@ -81,6 +81,30 @@ if ($_POST['action'] == "editar") {
                             icons: {primary: "ui-icon-trash"},
                             text: false
                         });
+
+                        $('#tabla_prov_pro').each(function () {
+
+                            var filas = $("#tabla_prov_pro").find("tr");
+                            var celdas = $(filas).find("td");
+                            codigo = $(celdas[0]).text();
+                            descuento = $($(celdas[2]).children("input")[0]).val();
+                            $('#txt_cat_descprov').val(descuento);
+
+                            var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+                            var desc =parseFloat($("#txt_cat_descprov" ).val());
+                            var uti		=parseFloat($("#txt_cat_uti" ).val());
+
+                            if(precom>=0 && precom!="")
+                            {
+                                var descuento=desc/100;
+                                var utilidad=uti/100;
+                                var costoneto=precom-(precom*descuento)
+                                var calculo=costoneto+(costoneto*utilidad);
+                                $( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
+                            }
+                        });
+
+
                     },
                     complete: function(){
                         // $('#msj_producto').html("Agregado");

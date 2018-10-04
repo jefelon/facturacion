@@ -43,7 +43,8 @@ $(function() {
         <table cellspacing="1" id="tabla_cliente" class="tablesorter">
             <thead>
                 <tr>
-                  <th>CLIENTE</th>               
+                    <th>CODIGO</th>
+                    <th>CLIENTE</th>
                     <th>RUC/DNI</th>
                     <th>DIRECCION</th>
                     <th>CONTACTO</th>
@@ -62,7 +63,8 @@ $(function() {
                 <?php
 					while($dt1 = mysql_fetch_array($dts1)){?>
                         <tr>
-                          <td><?php echo $dt1['tb_cliente_nom']?></td>                            
+                            <td><?php echo $dt1['tb_cliente_id']?></td>
+                            <td><?php echo $dt1['tb_cliente_nom']?></td>
                             <td><?php echo $dt1['tb_cliente_doc']?></td>
                             <td><?php echo $dt1['tb_cliente_dir']?></td>
                             <td><?php echo $dt1['tb_cliente_con']?></td>                     

@@ -156,20 +156,18 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function mostrar_duplicidad($doc,$numdoc,$pro_id,$est,$emp_id){
+	function mostrar_duplicidad($doc,$numdoc,$num_ruc,$est,$emp_id){
 	$sql="SELECT * 
 	FROM tb_compra c
 	INNER JOIN tb_proveedor p ON c.tb_proveedor_id=p.tb_proveedor_id
 	INNER JOIN tb_documento d ON c.tb_documento_id=d.tb_documento_id
 	WHERE c.tb_empresa_id = $emp_id 
-	AND c.tb_documento_id=$doc
-	AND c.tb_proveedor_id = $pro_id
-	AND tb_compra_numdoc= '$numdoc'";
-	
-//	if($pro_id>0)$sql.=" AND c.tb_proveedor_id = $pro_id ";
-	if($est!="")$sql.=" AND tb_compra_est IN ($est) ";
+	AND c.tb_documento_id=$doc";
+    if($numdoc!="")$sql.=" AND c.tb_compra_numdoc = '$numdoc' ";
+	if($num_ruc!="")$sql.=" AND p.tb_proveedor_doc = '$num_ruc' ";
+	if($est!="")$sql.=" AND c.tb_compra_est IN ($est) ";
 
-	$sql.=" ORDER BY tb_compra_fec ";
+	$sql.=" ORDER BY c.tb_compra_fec ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

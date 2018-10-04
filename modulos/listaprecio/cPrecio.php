@@ -19,7 +19,7 @@ class cPrecio{
 	}
 	function mostrarTodos(){
 	$sql="SELECT * 
-	FROM tb_precio
+	FROM tb_precio WHERE tb_precio_id  NOT IN (1,2,3)
 	ORDER BY tb_precio_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

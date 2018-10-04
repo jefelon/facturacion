@@ -92,7 +92,6 @@ while($dt = mysql_fetch_array($dts))
     if($dt["tb_cliente_tip"]==2)$idtipodni=6;
 
     $fecha=mostrarFecha($dt["tb_venta_fec"]);
-
     $toigv=$dt["tb_venta_igv"];
     $importetotal=$dt["tb_venta_tot"];
     $totopgrat=$dt["tb_venta_grat"];
@@ -186,18 +185,35 @@ if($num_rows_vp>0)
             }
         }
 
-        if($dt1['tb_formapago_id']==3){
-            $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
-            echo 'LETRAS ';
+        if($rw1['tb_formapago_id']==3)
+        {
+
+                $forma='LETRAS ';
+                $suma_pago7+=$rw1['tb_ventapago_mon'];
+
+                $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+
+            $date1 = new  DateTime($fecha);
+
+            $cont=1;
             while($ltr= mysql_fetch_array($ltrs1)){
-                echo ' L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
-            }
+                $date2 = new DateTime($ltr['tb_letras_fecha']);
+                $interval = $date1->diff( $date2 );
+                $diferencia=$interval->format('%a dias');
+
+                    $modo.= '<br>L'.$ltr['tb_letras_orden'].' '.$diferencia.' '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
+
+                }
+
+                //$modo.='CANJE'.$vence_letras;
+//            }
         }
+
 
         $pago_mon=formato_money($rw1['tb_ventapago_mon']);
 
         $texto_pago1[]=$forma.' '.$modo;
-        $texto_pago2[]=$forma.' '.$modo.':'.$mon.'  '.$pago_mon;
+        $texto_pago2[]=$forma.' '.$modo.':'.$diff.$mon.'  '.$pago_mon;
     }
     mysql_free_result($rws1);
 }
