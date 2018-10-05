@@ -81,11 +81,11 @@ if($_POST['action']=="editarSunat"){
 				$('#txt_cli_con').val(data['RazonSocial']);
 			}
 			
-			var telefono = data['Telefonos'];
-			telefono = telefono.replace(/ \/ /g, "/");
-			telefono = telefono.replace("/ ", "");
-			telefono = telefono.replace(/\//g, " / ");
-			$('#txt_cli_tel').val(telefono);
+			// var telefono = data['Telefonos'];
+			// telefono = telefono.replace(/ \/ /g, "/");
+			// telefono = telefono.replace("/ ", "");
+			// telefono = telefono.replace(/\//g, " / ");
+			// $('#txt_cli_tel').val(telefono);
 			$('#txt_cli_est').val(data['Estado']);
 			$('#msj_busqueda_sunat_2').hide();
 		}
