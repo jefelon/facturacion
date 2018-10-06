@@ -43,12 +43,13 @@ $(function() {
         <table cellspacing="1" id="tabla_cliente" class="tablesorter">
             <thead>
                 <tr>
-                  <th>CLIENTE</th>               
+                    <th>CODIGO</th>
+                    <th>CLIENTE</th>
                     <th>RUC/DNI</th>
                     <th>DIRECCION</th>
-                    <th>CONTACTO</th>
-                    <th>TELEFONO</th>
-                    <th>EMAIL</th>
+<!--                    <th>CONTACTO</th>-->
+<!--                    <th>TELEFONO</th>-->
+<!--                    <th>EMAIL</th>-->
                     <th align="center">INFO</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -60,12 +61,13 @@ $(function() {
                 <?php
 					while($dt1 = mysql_fetch_array($dts1)){?>
                         <tr>
-                          <td><?php echo $dt1['tb_cliente_nom']?></td>                            
+                           <td><?php echo $dt1['tb_cliente_cod']?></td>
+                            <td><?php echo $dt1['tb_cliente_nom']?></td>
                             <td><?php echo $dt1['tb_cliente_doc']?></td>
                             <td><?php echo $dt1['tb_cliente_dir']?></td>
-                            <td><?php echo $dt1['tb_cliente_con']?></td>                     
-                            <td><?php echo $dt1['tb_cliente_tel']?></td>
-                            <td><?php echo $dt1['tb_cliente_ema']?></td>
+<!--                            <td>--><?php //echo $dt1['tb_cliente_con']?><!--</td>                     -->
+<!--                            <td>--><?php //echo $dt1['tb_cliente_tel']?><!--</td>-->
+<!--                            <td>--><?php //echo $dt1['tb_cliente_ema']?><!--</td>-->
                             <td align="center" nowrap="nowrap"><a class="btn_info" href="#" onClick="ventas_por_cliente('<?php echo $dt1['tb_cliente_id']?>')">Información</a></td>
                             <td align="center" nowrap="nowrap"><a class="btn_editar" href="#editar" onClick="cliente_form('editar','<?php echo $dt1['tb_cliente_id']?>')">Editar</a> <a class="btn_eliminar" href="#eliminar" onClick="eliminar_cliente('<?php echo $dt1['tb_cliente_id']?>')">Eliminar</a></td>
                         </tr>

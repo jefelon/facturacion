@@ -95,7 +95,7 @@ if($_POST['action']=="editarSunat"){
             async:false,
             dataType: "json",
             data: ({
-                txt_cli_doc: $('#txt_cli_doc').val()
+                txt_cli_cod: $('#txt_cli_cod').val()
             }),
             beforeSend: function() {
 
@@ -103,11 +103,28 @@ if($_POST['action']=="editarSunat"){
             success: function(data){
                 if(data.msj!="")
                 {
-                    $('#txt_cli_nom').html(data.cli_nombre);
-                    $.each(data,function(key, registro) {
-                        $("#cmb_cli_dir").append('<option value='+data.cli_id+'>'+data.cli_nombre+'</option>');
-                    });
+                    $('#hdd_cli_id').val(data.cli_id);
+                    $('#txt_cli_doc').val(data.cli_doc);
+                    if(data.cli_tip==1){
 
+                        $("#radio1").prop("checked", true);
+                    }
+                    else{
+                        $("#radio2").prop("checked", true);
+                        $('#lbl_cli_doc').html('RUC');
+                    }
+
+                    $('#txt_cli_nom').html(data.cli_nombre);
+                    $('#txt_cli_dir').html(data.cli_dir);
+
+                    $(data).each(function () {
+                        var option = $(document.createElement('option'));
+
+                        option.val(data.cli_id);
+                        option.text(data.cli_nombre);
+
+                        $("#cmb_cli_suc").append(option);
+                    });
 
                     $('#msj_cliente').html(data.msj);
                 }
@@ -147,20 +164,32 @@ $(function() {
 	// 	$( "#txt_cli_doc" ).attr('maxlength','11');
 	// }
 
-	$( "#txt_cli_doc" ).focus();
-	
+	// $( "#txt_cli_doc" ).focus();
+    $( "#txt_cli_cod" ).focus();
+
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
+
 	$('#txt_cli_nom, #txt_cli_dir, #txt_cli_con').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
 
 
-    $( "#txt_cli_doc" ).keydown(function( event ) {
+    $( "#txt_cli_cod" ).keydown(function( event ) {
         if ( event.which == 13 ) {
 
             buscar_cliente();
         }
 
 
+    });
+
+    $( "#btn_agregar" ).click(function( event ) {
+
+        var id_cliente=$( "#hdd_cli_id" ).val();
+        direccion_form('insertar',id_cliente);
     });
 
 
@@ -236,13 +265,18 @@ $(function() {
 				required: '*'
 			}
 		}
-	});		
+	});
 });
 </script>
 <form id="for_cli">
 <input name="action_cliente" id="action_cliente" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_cli_id" id="hdd_cli_id" type="hidden" value="<?php echo $_POST['cli_id']?>">
     <table>
+        <tr>
+            <td align="right">Código:</td>
+            <td><input name="txt_cli_cod" id="txt_cli_cod" type="text" value="<?php echo $cod?>" size="15" maxlength="11">
+            </td>
+        </tr>
     	<tr>
     	  <td align="right">Documento:</td>
     	  <td>
@@ -255,7 +289,7 @@ $(function() {
     	<tr>
             <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
             <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
-            <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
+<!--            <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>-->
             <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
             </td>
         </tr>
@@ -268,26 +302,32 @@ $(function() {
           <td>
               <textarea name="txt_cli_dir" cols="50" rows="3" id="txt_cli_dir" ><?php echo $dir?></textarea>
 
-              <select name="cmb_cli_dir" id="cmb_cli_dir">
-
-              </select>
           </td>
       	</tr>
         <tr>
-          <td align="right"><label for="txt_cli_con">Contacto:</label></td>
-          <td><input name="txt_cli_con" id="txt_cli_con" type="text" value="<?php echo $con?>" size="50" tabindex="1"></td>
+            <td align="right" valign="top"><label for="txt_cli_suc">Sucursales:</label></td>
+            <td>
+                <select name="cmb_cli_suc" id="cmb_cli_suc">
+
+                </select>
+                <a id="btn_agregar" href="#">Agregar Direccion</a>
+            </td>
         </tr>
-        <tr>
-          	<td align="right"><label for="txt_cli_tel">Teléfono:</label></td>
-            <td><input name="txt_cli_tel" type="text" id="txt_cli_tel" value="<?php echo $tel?>" size="45" maxlength="100"></td>
-        </tr>
-        <tr>
-          	<td align="right"><label for="txt_cli_ema">Email:</label></td>
-            <td><input name="txt_cli_ema" type="text" id="txt_cli_ema" value="<?php echo $ema?>" size="45" maxlength="100"></td>
-        </tr>
-        <tr>
-          	<td align="right"><label for="txt_cli_est">Estado:</label></td>
-            <td><input name="txt_cli_est" type="text" id="txt_cli_est" value="<?php echo $est?>" size="45" readonly></td>
-        </tr>
+<!--        <tr>-->
+<!--          <td align="right"><label for="txt_cli_con">Contacto:</label></td>-->
+<!--          <td><input name="txt_cli_con" id="txt_cli_con" type="text" value="--><?php //echo $con?><!--" size="50" tabindex="1"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          	<td align="right"><label for="txt_cli_tel">Teléfono:</label></td>-->
+<!--            <td><input name="txt_cli_tel" type="text" id="txt_cli_tel" value="--><?php //echo $tel?><!--" size="45" maxlength="100"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          	<td align="right"><label for="txt_cli_ema">Email:</label></td>-->
+<!--            <td><input name="txt_cli_ema" type="text" id="txt_cli_ema" value="--><?php //echo $ema?><!--" size="45" maxlength="100"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          	<td align="right"><label for="txt_cli_est">Estado:</label></td>-->
+<!--            <td><input name="txt_cli_est" type="text" id="txt_cli_est" value="--><?php //echo $est?><!--" size="45" readonly></td>-->
+<!--        </tr>-->
     </table>
 </form>

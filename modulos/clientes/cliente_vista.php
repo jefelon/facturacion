@@ -297,7 +297,10 @@ $(function() {
 		modal: true
 	});
 
-    cliente_form('insertar');
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
 	
 });
 </script>

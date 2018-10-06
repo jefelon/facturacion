@@ -1,23 +1,36 @@
 <?php
 class cCliente{
-	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est){
-	$sql = "INSERT tb_cliente(
-	`tb_cliente_tip` ,
-	`tb_cliente_nom` ,
-	`tb_cliente_doc` ,
-	`tb_cliente_dir` ,
-	`tb_cliente_con` ,
-	`tb_cliente_tel` ,
-	`tb_cliente_ema` ,
-	`tb_cliente_est`
-	)
-	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est'
-	);"; 
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;	
+	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$cod){
+        $sql = "INSERT tb_cliente(
+        `tb_cliente_tip` ,
+        `tb_cliente_nom` ,
+        `tb_cliente_doc` ,
+        `tb_cliente_dir` ,
+        `tb_cliente_con` ,
+        `tb_cliente_tel` ,
+        `tb_cliente_ema` ,
+        `tb_cliente_est`,
+        `tb_cliente_cod`
+        )
+        VALUES (
+        '$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est','$cod'
+        );";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
 	}
+    function insertar_direccion($dir,$id_cliente){
+        $sql = "INSERT tb_clientedireccion(
+        `tb_clientedireccion_dir` ,
+        `tb_cliente_id` 
+        )
+        VALUES (
+        '$dir',  '$id_cliente'
+        );";
+            $oCado = new Cado();
+            $rst=$oCado->ejecute_sql($sql);
+            return $rst;
+    }
 	function ultimoInsert(){
 	$sql = "SELECT last_insert_id()"; 
 	$oCado = new Cado();
@@ -50,7 +63,7 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est){
+	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$cod){
 	$sql = "UPDATE tb_cliente SET  
 	`tb_cliente_tip` =  '$tip',
 	`tb_cliente_nom` =  '$nom',
@@ -59,7 +72,8 @@ class cCliente{
 	`tb_cliente_con` =  '$con',
 	`tb_cliente_tel` =  '$tel',
 	`tb_cliente_ema` =  '$ema',
-	`tb_cliente_est` =  '$est'
+	`tb_cliente_est` =  '$est',
+	`tb_cliente_cod` =  '$cod'
 	WHERE tb_cliente_id =$id"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -73,6 +87,14 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function busca_cliente_cod($cod){
+        $sql="SELECT * 
+	FROM tb_cliente 
+	WHERE tb_cliente_cod = '$cod' ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function verifica_cliente_doc($doc,$cli_id){
 	$sql="SELECT * 
 	FROM tb_cliente 
