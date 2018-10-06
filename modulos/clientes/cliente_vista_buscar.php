@@ -217,12 +217,12 @@ $(function() {
 	
 	cliente_filtro();
    	$( "#div_cliente_form" ).dialog({
-		title:'Información de Cliente',
+		title:'Busqueda del cliente',
 		autoOpen: false,
 		resizable: false,
 		height: 'auto',
 		width: 530,
-		modal: true,
+		modal: false,
 		position: 'center',
 		buttons: {
 			Guardar: function() {
@@ -262,7 +262,7 @@ $(function() {
 		resizable: false,
 		height: 550,
 		width: 940,
-		modal: true,
+		modal: false,
 		position: "top",
 		closeOnEscape: false,
 		buttons: {
@@ -312,43 +312,43 @@ $(function() {
     <article class="content">
     	<div class="contenido">
             <div class="contenido_des">
-            <table align="center" class="tabla_cont">
-                  <tr>
-                    <td class="caption_cont">CLIENTES</td>
-                  </tr>
-                  <tr>
-                    <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
-                  </tr>
-                  <tr>
-                    <td>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="cliente_form('insertar')">Agregar</a></td>
-                      <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
-                      <td align="right"><div id="msj_cliente" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
-                    </tr>
-                  </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                    </td>
-                  </tr>
-              </table>
+<!--            <table align="center" class="tabla_cont">-->
+<!--                  <tr>-->
+<!--                    <td class="caption_cont">CLIENTES</td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                    <td align="right" class="cont_emp">--><?php //echo $_SESSION['empresa_nombre']?><!--</td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                    <td>-->
+<!--                    <table width="100%" border="0" cellspacing="0" cellpadding="0">-->
+<!--                    <tr>-->
+<!--                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="cliente_form('insertar')">Agregar</a></td>-->
+<!--                      <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>-->
+<!--                      <td align="left" valign="middle">&nbsp;</td>-->
+<!--                      <td align="right"><div id="msj_cliente" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>-->
+<!--                    </tr>-->
+<!--                  </table>-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--                  <tr>-->
+<!--                    <td>-->
+<!--                    </td>-->
+<!--                  </tr>-->
+<!--              </table>-->
 			</div>
-      	<div id="div_cliente_filtro">
-        </div>
+<!--      	<div id="div_cliente_filtro">-->
+<!--        </div>-->
         <div id="div_cliente_form">
         </div>
-        <div id="div_venta_por_cliente">
-        </div> 
+<!--        <div id="div_venta_por_cliente">-->
+<!--        </div> -->
         <div id="div_venta_form">
         </div>
         <div id="div_venta_impresion">
         </div>
-        <div id="div_cliente_tabla" class="contenido_tabla">
-        </div>
+<!--        <div id="div_cliente_tabla" class="contenido_tabla">-->
+<!--        </div>-->
       	</div>
     </article>
 </div>

@@ -36,6 +36,7 @@ if($_POST['action']=="editarSunat"){
 	$tel=$_POST['cli_tel'];
 	$est=$_POST['cli_est'];
 }
+
 ?>
 
 <script type="text/javascript">
@@ -76,16 +77,48 @@ if($_POST['action']=="editarSunat"){
 				$('#txt_cli_con').val(data['RazonSocial']);
 			}
 			
-			var telefono = data['Telefonos'];
-			telefono = telefono.replace(/ \/ /g, "/");
-			telefono = telefono.replace("/ ", "");
-			telefono = telefono.replace(/\//g, " / ");
-			$('#txt_cli_tel').val(telefono);
+			// var telefono = data['Telefonos'];
+			// telefono = telefono.replace(/ \/ /g, "/");
+			// telefono = telefono.replace("/ ", "");
+			// telefono = telefono.replace(/\//g, " / ");
+			// $('#txt_cli_tel').val(telefono);
 			$('#txt_cli_est').val(data['Estado']);
 			$('#msj_busqueda_sunat_2').hide();
 		}
 	},"json");
 }
+
+    function buscar_cliente(){
+        $.ajax({
+            type: "POST",
+            url: "cliente_buscar.php",
+            async:false,
+            dataType: "json",
+            data: ({
+                txt_cli_doc: $('#txt_cli_doc').val()
+            }),
+            beforeSend: function() {
+
+            },
+            success: function(data){
+                if(data.msj!="")
+                {
+                    $('#txt_cli_nom').html(data.cli_nombre);
+                    $.each(data,function(key, registro) {
+                        $("#cmb_cli_dir").append('<option value='+data.cli_id+'>'+data.cli_nombre+'</option>');
+                    });
+
+
+                    $('#msj_cliente').html(data.msj);
+                }
+                else
+                {
+                    //$('#msj_venta_form').hide();
+                }
+            }
+        });
+    }
+
 
 $('#validar_ruc').button({
     text: true
@@ -119,7 +152,18 @@ $(function() {
 	$('#txt_cli_nom, #txt_cli_dir, #txt_cli_con').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-	
+
+
+    $( "#txt_cli_doc" ).keydown(function( event ) {
+        if ( event.which == 13 ) {
+
+            buscar_cliente();
+        }
+
+
+    });
+
+
 	$("#for_cli").validate({
 		submitHandler: function() {
 			$.ajax({
@@ -221,7 +265,12 @@ $(function() {
   	  </tr>
         <tr>
           <td align="right" valign="top"><label for="txt_cli_dir">Dirección:</label></td>
-          <td><textarea name="txt_cli_dir" cols="50" rows="3" id="txt_cli_dir" ><?php echo $dir?></textarea>            
+          <td>
+              <textarea name="txt_cli_dir" cols="50" rows="3" id="txt_cli_dir" ><?php echo $dir?></textarea>
+
+              <select name="cmb_cli_dir" id="cmb_cli_dir">
+
+              </select>
           </td>
       	</tr>
         <tr>

@@ -8,6 +8,10 @@ if($_POST['cli_id']!="")
 $dts1=$oCliente->mostrar_filtro($_POST['cli_id']);
 $num_rows= mysql_num_rows($dts1);
 }
+else{
+    $dts1=$oCliente->mostrarTodos($_POST['limit']);
+    $num_rows= mysql_num_rows($dts1);
+}
 ?>
 <script type="text/javascript">
 $(function() {	

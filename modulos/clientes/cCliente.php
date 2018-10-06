@@ -24,12 +24,15 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
-	$sql="SELECT * FROM tb_cliente ORDER BY tb_cliente_nom";
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
-	}
+    function mostrarTodos($fil){
+        $sql="SELECT * FROM tb_cliente c
+	ORDER BY c.tb_cliente_nom
+	";
+        if($fil!="")$sql.=" LIMIT 0,$fil ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_filtro($cli_id){
 		$sql="SELECT * 
 		FROM tb_cliente	";	

@@ -10,10 +10,10 @@ class Cado{
 	var $rsql;
 
     function Cado(){
-        $this->Servidor = 'ns1.ssdhosting.com.pe'; $this->Usuario = 'yfmhytrg_userfactura'; $this->Clave = 'eM=!hvSN(aLR';
+        $this->Servidor = 'localhost'; $this->Usuario = 'root'; $this->Clave = '';
 
         //$this->Servidor = 'localhost'; $this->Usuario = ''; $this->Clave = '';
-        $this->BaseDatos ="yfmhytrg_dbfactura";
+        $this->BaseDatos ="romina";
     }
 	
 	function conectar()
