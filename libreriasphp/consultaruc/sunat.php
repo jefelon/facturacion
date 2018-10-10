@@ -83,7 +83,7 @@
 					//"ActividadEconomica" 	=> "Actividad\(es\) Econ&oacute;mica\(s\)",
 					"EmisionElectronica" 	=> "Emisor electr&oacute;nico desde",
 					"PLE" 					=> "Afiliado al PLE desde",
-					"Telefonos"				=> "Tel&eacute;fono\(s\)"
+//					"Telefonos"				=> "Tel&eacute;fono\(s\)"
 				);
 
 				$rtn = array();
