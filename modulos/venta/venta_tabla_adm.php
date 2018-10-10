@@ -69,11 +69,11 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">FECHA EMISIÓN</th>
         <th align="center">CLIENTE</th>
         <th align="center">RUC/DNI</th>
-        <th align="center">MONEDA</th>
+<!--        <th align="center">MONEDA</th>-->
         <th align="center">VALOR VENTA</th>
         <th align="center">IGV</th>
         <th align="center">IMPORTE TOTAL</th>
-        <th align="center">ESTADO DOC.</th>
+<!--        <th align="center">ESTADO DOC.</th>-->
         <th align="center">ESTADO SUNAT</th>
         <th align="center">FECHA DE ENVIO SUNAT</th>
         <th align="center">CORREO</th>
@@ -101,17 +101,17 @@ $num_rows= mysql_num_rows($dts1);
                 <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                 <td><?php echo $dt1['tb_cliente_nom']?></td>
                 <td><?php echo $dt1['tb_cliente_doc']?></td>
-                <td align="center">
-                    <?php
-                    if($dt1['cs_tipomoneda_id']=='1'){
-                        echo 'SOLES';
-                    }
-                    ?>
-                </td>
+<!--                <td align="center">-->
+<!--                    --><?php
+//                    if($dt1['cs_tipomoneda_id']=='1'){
+//                        echo 'SOLES';
+//                    }
+//                    ?>
+<!--                </td>-->
                 <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
-                <td><?php echo $dt1['tb_venta_est']?></td>
+<!--                <td>--><?php //echo $dt1['tb_venta_est']?><!--</td>-->
                 <td>
                     <?php
                     $mostrar_envio_sunat=0;

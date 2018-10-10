@@ -48,10 +48,10 @@ if($num_rows>1)echo $num_rows.' Presentaciones.';*/
 	  <table cellspacing="1" id="tabla_presentacion_fila" class="tablesorter">
        	  <thead>
                 <tr>
-                <th>NOMBRE</th>
+<!--                <th>NOMBRE</th>-->
                 <th>CODIGO</th>
-                <th align="right">STOCK MIN.</th>
-                <th align="center">ESTADO</th>
+<!--                <th align="right">STOCK MIN.</th>-->
+<!--                <th align="center">ESTADO</th>-->
                 <th align="center">&nbsp;</th>
                 </tr>
       </thead>
@@ -71,10 +71,10 @@ if($num_rows>1)echo $num_rows.' Presentaciones.';*/
 					mysql_free_result($rws);
 				?>
                         <tr>
-                          <td><strong><?php echo $pre_nom=$dt1['tb_presentacion_nom']?></strong></td>
+<!--                          <td><strong>--><?php //echo $pre_nom=$dt1['tb_presentacion_nom']?><!--</strong></td>-->
                           <td><strong><?php echo $dt1['tb_presentacion_cod']?></strong></td>
-                            <td align="right"><?php echo $dt1['tb_presentacion_stomin'].' '.$unidad_base_nombre?></td>
-                            <td align="center"><?php echo $dt1['tb_presentacion_est']?></td>
+<!--                            <td align="right">--><?php //echo $dt1['tb_presentacion_stomin'].' '.$unidad_base_nombre?><!--</td>-->
+<!--                            <td align="center">--><?php //echo $dt1['tb_presentacion_est']?><!--</td>-->
                             <td align="center"><a class="btn_editar" onClick="presentacion_form('editar','<?php echo $dt1['tb_presentacion_id']?>')">Editar Presentación</a><a class="btn_eliminar" onClick="eliminar_presentacion('<?php echo $dt1['tb_presentacion_id']?>')"> Eliminar Presentación</a></td>
                         </tr>
                 <?php

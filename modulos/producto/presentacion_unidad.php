@@ -111,7 +111,6 @@ $(function() {
                             </table>
                             </div>
                           </td>
-                          <td valign="top"><a class="btn_agregar_unidad" onClick="catalogo_form('insertar','','<?php echo $dt1['tb_presentacion_id']?>','<?php echo $unidad_base?>')">Agregar Unidad</a></td>
                         </tr>
                         <tr>
                           <td colspan="2">&nbsp;</td>

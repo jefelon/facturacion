@@ -109,5 +109,14 @@ class cProveedor{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function busca_proveedor_cod($cod){
+        $sql="SELECT * 
+	FROM tb_proveedor
+	WHERE tb_proveedor_cod = '$cod' ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

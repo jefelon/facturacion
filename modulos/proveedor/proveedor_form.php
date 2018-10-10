@@ -2,7 +2,7 @@
 require_once ("../../config/Cado.php");
 require_once ("cProveedor.php");
 $oProveedor = new cProveedor();
-
+$tip = 1;
 if($_POST['action']=="editar"){
 	$dts=$oProveedor->mostrarUno($_POST['pro_id']);
 	$dt = mysql_fetch_array($dts);
@@ -56,6 +56,52 @@ if($_POST['action']=="editar"){
                 }
             },"json");
     }
+
+    function buscar_proveedor(){
+        $.ajax({
+            type: "POST",
+            url: "proveedor_buscar.php",
+            async:false,
+            dataType: "json",
+            data: ({
+                txt_prov_cod: $('#txt_prov_cod').val()
+            }),
+            beforeSend: function() {
+
+            },
+            success: function(data){
+                if(data.msj!="")
+                {
+                    $('#hdd_pro_id').val(data.prov_id);
+                    $('#txt_pro_doc').val(data.prov_doc);
+                    if(data.prov_tip==1){
+
+                        $("#radio1").prop("checked", true);
+                    }
+                    else{
+                        $("#radio2").prop("checked", true);
+                    }
+
+                    $('#txt_pro_nom').html(data.prov_nombre);
+                    $('#txt_pro_dir').html(data.prov_dir);
+                    $('#txt_pro_con').val(data.prov_con);
+                    $('#txt_pro_tel').val(data.prov_tel);
+                    $('#txt_pro_ema').val(data.prov_ema);
+
+                    // if($( "#hdd_cli_id" ).val()>0){
+                    //     cmb_dir_id($( "#hdd_cli_id" ).val());
+                    //     //$('#cmb_cli_suc > option[value="1"]').attr('selected', 'selected');
+                    // }
+                    $('#msj_proveedor').html(data.msj);
+                }
+                else
+                {
+                    alert("No registrado.");
+                }
+            }
+        });
+    }
+
     $('#validar_ruc').button({
         text: true
     });
@@ -66,7 +112,16 @@ $(function() {
 	$('#txt_pro_nom, #txt_pro_dir, #txt_pro_con').keyup(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-	
+
+    $( "#txt_prov_cod" ).keydown(function( event ) {
+        if ( event.which == 13 ) {
+
+            buscar_proveedor();
+        }
+
+
+    });
+
 	$("#for_pro").validate({
 		submitHandler: function() {
 			$.ajax({
@@ -140,6 +195,11 @@ $(function() {
 <input name="action_proveedor" id="action_proveedor" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_pro_id" id="hdd_pro_id" type="hidden" value="<?php echo $_POST['pro_id']?>">
     <table>
+        <tr>
+            <td align="right">Código:</td>
+            <td><input name="txt_prov_cod" id="txt_prov_cod" type="text" value="<?php echo $cod?>" size="15" maxlength="11">
+            </td>
+        </tr>
     	<tr>
     	  <td align="right">Persona:</td>
     	  <td>
@@ -166,17 +226,17 @@ $(function() {
           <td><textarea name="txt_pro_dir" cols="50" rows="2" id="txt_pro_dir" ><?php echo $dir?></textarea>            
           </td>
       	</tr>
-        <tr>
-          <td align="right"><label for="txt_pro_con">Contacto:</label></td>
-          <td><input name="txt_pro_con" id="txt_pro_con" type="text" value="<?php echo $con?>" size="50" tabindex="1"></td>
-        </tr>
-        <tr>
-          	<td align="right"><label for="txt_pro_tel">Teléfono:</label></td>
-            <td><input name="txt_pro_tel" type="text" id="txt_pro_tel" value="<?php echo $tel?>" size="15" maxlength="13"></td>
-        </tr>
-        <tr>
-          	<td align="right"><label for="txt_pro_ema">Email:</label></td>
-            <td><input name="txt_pro_ema" type="text" id="txt_pro_ema" value="<?php echo $ema?>" size="45" maxlength="100"></td>
-        </tr>  
+<!--        <tr>-->
+<!--          <td align="right"><label for="txt_pro_con">Contacto:</label></td>-->
+<!--          <td><input name="txt_pro_con" id="txt_pro_con" type="text" value="--><?php //echo $con?><!--" size="50" tabindex="1"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          	<td align="right"><label for="txt_pro_tel">Teléfono:</label></td>-->
+<!--            <td><input name="txt_pro_tel" type="text" id="txt_pro_tel" value="--><?php //echo $tel?><!--" size="15" maxlength="13"></td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          	<td align="right"><label for="txt_pro_ema">Email:</label></td>-->
+<!--            <td><input name="txt_pro_ema" type="text" id="txt_pro_ema" value="--><?php //echo $ema?><!--" size="45" maxlength="100"></td>-->
+<!--        </tr>  -->
     </table>
 </form>

@@ -803,10 +803,10 @@ $(function() {
                 </div>
             </td>
         </tr>
-        <tr>
+        <tr style="display: none">
           <td><label for="cmb_pro_est">Estado:</label></td>
         </tr>
-        <tr>
+        <tr style="display: none">
           <td><select name="cmb_pro_est" id="cmb_pro_est">
           		<option value="">-</option>
               	<option value="Activo" <?php if($est=='Activo')echo 'selected'?>>Activo</option>
@@ -831,7 +831,7 @@ $(function() {
 </div>
 <?php if($_POST['action']=="insertar"){?>
 <div style="float:left; margin-left:15px">
-  <fieldset><legend>Presentación de producto</legend>
+  <fieldset><legend>Código del producto</legend>
     <table>                
 <!--        <tr>-->
 <!--          <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>-->
@@ -840,10 +840,10 @@ $(function() {
         <tr>
           <td><label for="txt_pre_cod">Código:</label></td>
           <td><input type="text" name="txt_pre_cod" id="txt_pre_cod"></td>
-          <td align="right"><label for="txt_pre_stomin">Stock Mínimo:</label></td>
-          <td><input name="txt_pre_stomin" type="text" class="cantidad" id="txt_pre_stomin" style="text-align:right" size="10" maxlength="6" value="<?php echo $stomin?>"></td>
-          <td align="right"><label for="cmb_pre_est">Estado:</label></td>
-          <td><select name="cmb_pre_est" id="cmb_pre_est">
+<!--          <td align="right"><label for="txt_pre_stomin">Stock Mínimo:</label></td>-->
+          <td style="display: none"><input name="txt_pre_stomin" type="text" class="cantidad" id="txt_pre_stomin" style="text-align:right" size="10" maxlength="6" value="<?php echo $stomin?>"></td>
+<!--          <td align="right"><label for="cmb_pre_est">Estado:</label></td>-->
+          <td style="display: none"><select name="cmb_pre_est" id="cmb_pre_est">
             <option value="">-</option>
             <option value="Activo" <?php if($est=='Activo')echo 'selected'?>>Activo</option>
             <option value="Inactivo" <?php if($est=='Inactivo')echo 'selected'?>>Inactivo</option>
@@ -872,7 +872,7 @@ $(function() {
         </tr>        
     </table>
     </br>
-    <div id="cuadro-contain" class="ui-widget">
+    <div id="cuadro-contain" class="ui-widget" style="display: none">
     <table class="ui-widget ui-widget-content">
         <tr class="ui-widget-header">
           <th align="center" nowrap="nowrap">Cambio US$</th>
@@ -903,7 +903,7 @@ $(function() {
         </tr>        
     </table>
     </br>
-    <table class="ui-widget ui-widget-content">
+    <table class="ui-widget ui-widget-content" style="display: none">
         <tr class="ui-widget-header">
           <th title="Mostrar en Catálogo">Catálogo</th>
           </tr>
@@ -916,8 +916,11 @@ $(function() {
     </table>
 </div>
     </fieldset>
+    <div style="display: none">
   <label for="editar_presentacion">Guardar y Seguir Editando</label>
   <input name="editar_presentacion" id="editar_presentacion" type="checkbox" value="1">
+    </div>
+
 </div>
 <?php }?>
 </form>

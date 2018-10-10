@@ -46,6 +46,14 @@ class cCliente{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function mostrarDireccionesTodos(){
+        $sql="SELECT * FROM tb_clientedireccion d
+        ORDER BY d.tb_clientedireccion_id
+        ";
+            $oCado = new Cado();
+            $rst=$oCado->ejecute_sql($sql);
+            return $rst;
+    }
 	function mostrar_filtro($cli_id){
 		$sql="SELECT * 
 		FROM tb_cliente	";	

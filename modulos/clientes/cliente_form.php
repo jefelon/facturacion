@@ -117,26 +117,38 @@ if($_POST['action']=="editarSunat"){
                     $('#txt_cli_nom').html(data.cli_nombre);
                     $('#txt_cli_dir').html(data.cli_dir);
 
-                    $(data).each(function () {
-                        var option = $(document.createElement('option'));
-
-                        option.val(data.cli_id);
-                        option.text(data.cli_nombre);
-
-                        $("#cmb_cli_suc").append(option);
-                    });
-
+                    if($( "#hdd_cli_id" ).val()>0){
+                        cmb_dir_id($( "#hdd_cli_id" ).val());
+                        //$('#cmb_cli_suc > option[value="1"]').attr('selected', 'selected');
+                    }
                     $('#msj_cliente').html(data.msj);
                 }
                 else
                 {
-                    //$('#msj_venta_form').hide();
+                    alert("No registrado.");
                 }
             }
         });
     }
 
-
+    function cmb_dir_id(ids)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cmb_cli_dir.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                cli_id: ids
+            }),
+            beforeSend: function() {
+                $('#cmb_cli_suc').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_cli_suc').html(html);
+            }
+        });
+    }
 $('#validar_ruc').button({
     text: true
   });
@@ -165,6 +177,14 @@ $(function() {
 	// }
 
 	// $( "#txt_cli_doc" ).focus();
+    <?php if($_POST['action']=="editar"){ ?>
+        if($( "#hdd_cli_id" ).val()>0){
+            cmb_dir_id($( "#hdd_cli_id" ).val());
+        }
+
+    <?php  } ?>
+
+
     $( "#txt_cli_cod" ).focus();
 
     $('#btn_agregar').button({

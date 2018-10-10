@@ -364,16 +364,16 @@ $(function() {
     <legend>Presentación de producto</legend>
     <table>                
         <tr>
-          <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>
+<!--          <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>-->
           <td colspan="5"><input name="txt_pre_nom" type="text" id="txt_pre_nom" readonly value="<?php echo $nom?>" size="55" maxlength="50"></td>
         </tr>
         <tr>
           <td><label for="txt_pre_cod">Código:</label></td>
           <td><input type="text" name="txt_pre_cod" id="txt_pre_cod" value="<?php echo $pre_cod?>"></td>
-          <td align="right"><label for="txt_pre_stomin">Stock Mínimo:</label></td>
-          <td><input name="txt_pre_stomin" type="text" class="cantidad" id="txt_pre_stomin" style="text-align:right" size="10" maxlength="6" value="<?php echo $stomin?>"></td>
-          <td align="right"><label for="cmb_pre_est">Estado:</label></td>
-          <td><select name="cmb_pre_est" id="cmb_pre_est">
+<!--          <td align="right"><label for="txt_pre_stomin">Stock Mínimo:</label></td>-->
+<!--          <td><input name="txt_pre_stomin" type="text" class="cantidad" id="txt_pre_stomin" style="text-align:right" size="10" maxlength="6" value="--><?php //echo $stomin?><!--"></td>-->
+<!--          <td align="right"><label for="cmb_pre_est">Estado:</label></td>-->
+          <td style="display: none"><select name="cmb_pre_est" id="cmb_pre_est">
             <option value="">-</option>
             <option value="Activo" <?php if($est=='Activo')echo 'selected'?>>Activo</option>
             <option value="Inactivo" <?php if($est=='Inactivo')echo 'selected'?>>Inactivo</option>

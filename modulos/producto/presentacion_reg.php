@@ -78,8 +78,8 @@ if($_POST['action_presentacion']=="editar")
 			$_POST['hdd_pre_id'],
 			strip_tags(limpia_espacios($_POST['txt_pre_nom'])),
             strip_tags($_POST['txt_pre_cod']),
-			$_POST['txt_pre_stomin'],
-			$_POST['cmb_pre_est'],
+			10,
+			1,
 			$_POST['hdd_pre_pro_id']
 		);
 		

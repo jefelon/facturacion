@@ -458,7 +458,7 @@ if($_POST['vista']=='Presentacion'){
 </div>
 <?php }?>
 <div id="accordion" style="width:<?php echo $ancho_acordion?>;">
-	<h3><a href="#">Presentación</a></h3>
+	<h3><a href="#">Código</a></h3>
 	<div>
     	<div id="msj_presentacion" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
         </div>
@@ -497,11 +497,11 @@ if($_POST['vista']=='Presentacion'){
 		<div id="div_presentacion_stock" style="clear:both">
         </div>
 	</div>
-    <h3><a href="#">Como se muestra en catálogo</a></h3>
-	<div>
-    	<div id="msj_presentacion_catalogo" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
-        </div>
-		<div id="div_presentacion_catalogo" style="clear:both">
-        </div>
-	</div>
+<!--    <h3><a href="#">Como se muestra en catálogo</a></h3>-->
+<!--	<div>-->
+<!--    	<div id="msj_presentacion_catalogo" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">-->
+<!--        </div>-->
+<!--		<div id="div_presentacion_catalogo" style="clear:both">-->
+<!--        </div>-->
+<!--	</div>-->
 </div>

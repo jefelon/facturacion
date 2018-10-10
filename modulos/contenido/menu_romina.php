@@ -38,7 +38,8 @@ $menu_administrador=
   <li class="topfirst"><a href="../administrador/">Principal</a></li>
   <li class="topmenu"><span><a href="#" >Tablas</a></span>
 	 <ul>
-		<li><a href="../categoria/">Clientes</a></li>
+		<li><a href="../categoria/cliente_vista_buscar.php">Clientes</a></li>
+		<li><a href="../proveedor/proveedor_vista_buscar.php">Proveedores</a></li>
 		<li><a href="../marca/">Marcas</a></li>
 		<li><a href="../unidad/">Unidades de Medida</a></li>
 		<li><a href="../producto/">Productos</a></li>

@@ -37,6 +37,11 @@ if(!empty($_POST['txt_cli_cod']))
 
         echo json_encode($data);
     }
+    else
+    {
+        $data['msj']="";
+        echo json_encode($data);
+    }
 
 }
 else

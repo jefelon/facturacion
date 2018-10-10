@@ -120,20 +120,16 @@ $(function() {
                 dataType: "json",
                 data: $("#for_dir").serialize(),
                 beforeSend: function() {
-                    // $("#div_marca_form" ).dialog( "close" );
+                    $("#div_direccion_form" ).dialog( "close" );
                     // $('#msj_marca').html("Guardando...");
                     // $('#msj_marca').show(100);
                 },
                 success: function(data){
-
+                   // $( "#cmb_cli_suc" ).html('venta');
                 },
                 complete: function(){
-                    <?php
-                    if($_POST['vista']=="cliente_form")
-                    {
-                        echo $_POST['vista'].'()';
-                    }
-                    ?>
+
+                    cmb_dir_id($( "#hdd_cli_id" ).val());
                     
                 }
             });

@@ -433,7 +433,7 @@ $(function() {
 			</div>
           </td>
         </tr>
-        <tr>
+        <tr style="display: none">
           <td><label for="cmb_cat_est">Estado:</label>            
           <select name="cmb_cat_est" id="cmb_cat_est">
             <option value="">-</option>
@@ -446,7 +446,7 @@ $(function() {
   <fieldset><legend>Información de Precio y Catálogo</legend>
     <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td valign="top"><div id="cuadro_cat_form" class="ui-widget">
+    <td valign="top"><div id="cuadro_cat_form" class="ui-widget" style="display: none">
     <table class="ui-widget ui-widget-content">
         <tr class="ui-widget-header">
           <th align="center" nowrap="nowrap">Cambio US$</th>
@@ -482,7 +482,7 @@ $(function() {
     </div>
     </td>
     <td valign="top">
-    <div id="cuadro_cat_form" class="ui-widget" style="margin-left:30px">
+    <div id="cuadro_cat_form" class="ui-widget" style="margin-left:30px; display: none">
     <table class="ui-widget ui-widget-content">
         <tr class="ui-widget-header">
           <th title="Mostrar en Catálogo">Catálogo</th>
