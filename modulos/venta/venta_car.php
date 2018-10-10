@@ -533,16 +533,16 @@ else
     });
 </script>
 <input name="hdd_ven_numite" id="hdd_ven_numite" type="hidden" value="<?php echo $filas?>">
-<fieldset><legend>Agregar Servicios</legend>
-<?php if($_POST['vista']!='cange'){?>
-<a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
-<a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
-<?php }?>
-<a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>
-<div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:<?php if($msj!=""){echo 'block';} else{ echo 'none';}?>"><?php echo $msj?></div>
-<div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-
-</fieldset>
+<!--<fieldset><legend>Agregar Servicios</legend>-->
+<?php //if($_POST['vista']!='cange'){?>
+<!--<a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>-->
+<!--<a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>-->
+<?php //}?>
+<!--<a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>-->
+<!--<div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:--><?php //if($msj!=""){echo 'block';} else{ echo 'none';}?><!--">--><?php //echo $msj?><!--</div>-->
+<!--<div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>-->
+<!---->
+<!--</fieldset>-->
 
 <?php
 if($filas=="" or $filas==0) echo 'Ningún ítem agregados.';

@@ -1553,28 +1553,22 @@ function bus_cantidad(act)
     </tr>
     <tr>
       <td height="27">
-        <label for="cmb_ven_est">Estado:</label>
-        <select name="cmb_ven_est" id="cmb_ven_est">
-          <option value="">-</option>
-          <option value="CANCELADA" <?php if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
-          <option value="ANULADA" <?php if($est=='ANULADA')echo 'selected'?>>ANULADA</option>
-        </select>
         <div id="msj_venta_form" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-        <label for="txt_ven_lab1">Nro. Placa:</label>
-        <input type="text" name="txt_ven_lab1" id="txt_ven_lab1" value="<?php echo $lab1?>" size="9" maxlength="8">
-        <label for="txt_ven_lab2">Kilometraje:</label>
-        <input type="text" name="txt_ven_lab2" id="txt_ven_lab2" value="<?php echo $lab2?>" size="9" maxlength="8">
-        <label for="txt_ven_lab3">Ord. Servicio:</label>
-        <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
-        <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
+<!--        <label for="txt_ven_lab1">Nro. Placa:</label>-->
+<!--        <input type="text" name="txt_ven_lab1" id="txt_ven_lab1" value="--><?php //echo $lab1?><!--" size="9" maxlength="8">-->
+<!--        <label for="txt_ven_lab2">Kilometraje:</label>-->
+<!--        <input type="text" name="txt_ven_lab2" id="txt_ven_lab2" value="--><?php //echo $lab2?><!--" size="9" maxlength="8">-->
+<!--        <label for="txt_ven_lab3">Ord. Servicio:</label>-->
+<!--        <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="--><?php //echo $lab3?><!--" size="20" maxlength="20">-->
+<!--        <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">-->
         <br>
-        <label for="cmb_ven_moneda">Moneda:</label>
-        <select name="cmb_ven_moneda" id="cmb_ven_moneda">
-           <option value="1" selected>SOLES</option>
-           <option value="2" >DOLARES</option>
-        </select>
-        <label for="chk_ven_may">Venta al por mayor</label>
-        <input name="chk_ven_may" type="checkbox" id="chk_ven_may" value="1"  <?php if($may==1)echo 'checked'?>>
+<!--        <label for="cmb_ven_moneda">Moneda:</label>-->
+<!--        <select name="cmb_ven_moneda" id="cmb_ven_moneda">-->
+<!--           <option value="1" selected>SOLES</option>-->
+<!--           <option value="2" >DOLARES</option>-->
+<!--        </select>-->
+<!--        <label for="chk_ven_may">Venta al por mayor</label>-->
+<!--        <input name="chk_ven_may" type="checkbox" id="chk_ven_may" value="1"  --><?php //if($may==1)echo 'checked'?><!-->
         </td>
       <td align="right">
       <?php
@@ -1590,7 +1584,48 @@ function bus_cantidad(act)
     </tr>
   </table>
 </fieldset>
-<fieldset><legend>Registro de Pagos</legend>
+<div style="width: 60%; float: left">
+        <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
+        <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_tip?>" />
+        <input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
+        <fieldset>
+            <legend>Datos Cliente</legend>
+            <div id="div_cliente_form">
+            </div>
+            <table>
+                <tr>
+                    <td align="right"><?php if($_POST['action']=='insertar'){?>
+                            <a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
+                            <a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                        <?php }?>
+                        <label for="txt_ven_cli_doc">RUC/DNI:</label>
+                    </td>
+                    <td>
+                        <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="8" maxlength="11" />
+                        <label for="txt_ven_cli_nom">Cliente:</label>
+                        <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="43" value='<?php echo $cli_nom?>' />
+                    </td>
+                    <td rowspan="2" valign="top">
+                        <div id="div_clientecuenta_detalle">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
+                    <td><input type="text" id="txt_ven_cli_dir" size="60" name="txt_ven_cli_dir" value="<?php echo $cli_dir?>" disabled="disabled"/></td>
+                </tr>
+                <tr>
+                    <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
+                    <td>
+                        <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                        <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+</div>
+<div style="width: 40%; float: right;">
+<fieldset><legend>Condiciones de venta</legend>
 <?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
 <table border="0" cellspacing="2" cellpadding="0">
   <tr>
@@ -1662,9 +1697,9 @@ function bus_cantidad(act)
         <?php
         if($_SESSION['usuariogrupo_id']==2){
             ?>
-                <label for="hdd_usu_id">Vendedor:</label>
-                <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
-                </select>
+<!--                <label for="hdd_usu_id">Vendedor:</label>-->
+<!--                <select name="hdd_usu_id" id="hdd_usu_id" --><?php //if($_POST['action']=='editar')echo 'disabled'?><!-->
+<!--                </select>-->
 	    <?php if($_POST['action']=='insertar'||$_POST['action']=='insertar_cot') { ?>
 
                 <?php
@@ -1680,45 +1715,9 @@ function bus_cantidad(act)
         ?>
     </div>
 </fieldset>
-<input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
-<input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_tip?>" />
-<input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
-<fieldset>
-	<legend>Datos Cliente</legend>
-	<div id="div_cliente_form">
-	</div>
-	<table>
-		<tr>
-			<td align="right"><?php if($_POST['action']=='insertar'){?>
-				<a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
-				<a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
-				<?php }?>
-				<label for="txt_ven_cli_doc">RUC/DNI:</label>
-			</td>
-			<td>
-				<input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
-				<label for="txt_ven_cli_nom">Cliente:</label>
-				<input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="64" value='<?php echo $cli_nom?>' />
-			</td>
-			<td rowspan="2" valign="top">
-				<div id="div_clientecuenta_detalle">
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-			<td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:616px" value="<?php echo $cli_dir?>" disabled="disabled"/></td>
-		</tr>
-		<tr>
-			<td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
-			<td>
-				<input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
-				<div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-			</td>
-		</tr>
-	</table>
-</fieldset>
-    <fieldset><legend>Agregar Producto</legend>
+</div>
+
+    <fieldset style="clear: both"><legend>Agregar Producto</legend>
 
         <label for="txt_ven_fec" style="display: none;">Fecha:</label>
         <input name="txt_ven_fec" type="hidden" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
@@ -1752,17 +1751,17 @@ function bus_cantidad(act)
         <a class="btn_rest_act" href="#" onClick="foco(); venta_car('actualizar')">Actualizar</a>
         <a class="btn_rest_car" href="#" onClick="foco(); venta_car('restablecer')">Vaciar</a>
 
-        <label for="chk_modo">Automático</label>
-        <input name="chk_modo" type="checkbox" id="chk_modo" value="1" <?php if($modo_automatico==1)echo "checked"?>>
-
-        <label for="txt_precio_min">P.MIN.</label>
-        <input type="text" name="txt_precio_min" id="txt_precio_min" size="10" readonly>
-
-        <label for="txt_precio_min" style="color: red;">P.MAY.</label>
-        <input type="text" name="txt_precio_may" id="txt_precio_may" size="10" readonly>
-
-        <label for="che_mayorista">Precio Mayorista</label>
-        <input type="checkbox" id="che_mayorista" style="margin-top: 5px;">
+<!--        <label for="chk_modo">Automático</label>-->
+<!--        <input name="chk_modo" type="checkbox" id="chk_modo" value="1" --><?php //if($modo_automatico==1)echo "checked"?><!-->
+<!---->
+<!--        <label for="txt_precio_min">P.MIN.</label>-->
+<!--        <input type="text" name="txt_precio_min" id="txt_precio_min" size="10" readonly>-->
+<!---->
+<!--        <label for="txt_precio_min" style="color: red;">P.MAY.</label>-->
+<!--        <input type="text" name="txt_precio_may" id="txt_precio_may" size="10" readonly>-->
+<!---->
+<!--        <label for="che_mayorista">Precio Mayorista</label>-->
+<!--        <input type="checkbox" id="che_mayorista" style="margin-top: 5px;">-->
 
         <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
 

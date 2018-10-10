@@ -83,7 +83,6 @@ $menu_administrador=
 	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
 	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
 	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
-	  <li class="separator">_____________________</li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Consultas</a>
