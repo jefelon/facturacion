@@ -1,6 +1,6 @@
 <?php
 class cProducto{
-	function insertar($nom, $des, $est, $cat_id, $mar_id, $afec_id, $usu_id, $prod_img,$lote){
+	function insertar($nom, $des, $est, $cat_id, $mar_id, $afec_id, $usu_id, $prod_img,$lote,$emp_id){
 	$sql = "INSERT INTO tb_producto(
 		`tb_producto_reg` ,
 		`tb_producto_mod` ,
@@ -12,10 +12,11 @@ class cProducto{
 		`tb_afectacion_id` ,
 		`tb_usuario_id`,
 		`tb_producto_imagen`,
-		`tb_producto_lote`
+		`tb_producto_lote`,
+		`tb_empresa_id`
 		)
 		VALUES (
-		NOW( ) , NOW( ) ,  '$nom',  '$des',  '$est',  '$cat_id', '$mar_id', '$afec_id', '$usu_id', '$prod_img','$lote'
+		NOW( ) , NOW( ) ,  '$nom',  '$des',  '$est',  '$cat_id', '$mar_id', '$afec_id', '$usu_id', '$prod_img','$lote','$emp_id'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

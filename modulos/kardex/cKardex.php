@@ -1,6 +1,18 @@
 <?php
+require_once ("../formatos/formato.php");
+
 class cKardex{
 	function insertar($xac,$tipreg,$cod,$fec,$tip,$doc_id,$numdoc,$tipope_id,$des,$ope_id,$alm_id,$usu_id,$emp_id){
+        if ($tipope_id==9){
+            $resultado_fechora = date('Y-m-d H:i:s', strtotime('first day of January '.date('Y') ));
+            $resultado_fec = date('Y-m-d H:i:s', strtotime('first day of January '.date('Y') ));
+        }else{
+            $duration = time() - strtotime("today");
+            $resultado_fechora = date('Y-m-d H:i:s', strtotime("+$duration seconds", strtotime($fec)));
+            $resultado_fec = date('Y-m-d H:i:s', strtotime("+$duration seconds", strtotime($fec)));
+        }
+
+
 	$sql = "INSERT INTO tb_kardex(
 	`tb_kardex_xac` ,
 	`tb_kardex_reg` ,
@@ -18,8 +30,9 @@ class cKardex{
 	`tb_empresa_id`
 	)
 	VALUES (
-	'$xac', NOW( ) ,  '$tipreg',  '$cod',  '$fec',  '$tip',  '$doc_id',  '$numdoc',  '$tipope_id',  '$des', '$ope_id',  '$alm_id',  '$usu_id',  '$emp_id'
-	);"; 
+	'$xac','$resultado_fechora' ,  '$tipreg',  '$cod',  '$resultado_fec',  '$tip',  '$doc_id',  '$numdoc',  '$tipope_id',  '$des', '$ope_id',  '$alm_id',  '$usu_id',  '$emp_id'
+	);";
+
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -271,6 +284,41 @@ WHERE tb_software_id =$id";
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		
 	}
+
+
+    function mostrar_kardex_tipoperacion_por_producto_fechas($cat_id, $alm_id, $tipope_id, $fecini, $fecfin)
+    {
+        $sql = "SELECT *
+        FROM tb_kardex n
+        INNER JOIN tb_kardexdetalle nd ON n.tb_kardex_id = nd.tb_kardex_id
+        WHERE nd.tb_catalogo_id = $cat_id 
+        AND n.tb_tipoperacion_id = $tipope_id";
+
+        if ($alm_id > 0) $sql .= " AND n.tb_almacen_id = $alm_id ";
+        if ($fecini != "") $sql .= " AND tb_kardex_fec>='$fecini' ";
+        if ($fecfin != "") $sql .= " AND tb_kardex_fec<='$fecfin' ";
+        $sql .= "ORDER BY n.tb_kardex_fec";
+        $oCado = new Cado();
+        $rst = $oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrar_kardex_tipoperacion_por_producto_fechas_reg($cat_id, $alm_id, $tipope_id, $fecini, $fecfin)
+    {
+        $sql = "SELECT *
+        FROM tb_kardex n
+        INNER JOIN tb_kardexdetalle nd ON n.tb_kardex_id = nd.tb_kardex_id
+        WHERE nd.tb_catalogo_id = $cat_id 
+        AND n.tb_tipoperacion_id = $tipope_id";
+
+        if ($alm_id > 0) $sql .= " AND n.tb_almacen_id = $alm_id ";
+        if ($fecini != "") $sql .= " AND tb_kardex_reg>='$fecini' ";
+        if ($fecfin != "") $sql .= " AND tb_kardex_reg<='$fecfin' ";
+        $sql .= "ORDER BY n.tb_kardex_reg";
+        $oCado = new Cado();
+        $rst = $oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	
 	function inventario_tipo_por_producto($cat_id,$alm_id,$tip,$fecini,$fecfin,$emp_id){
 		$sql="SELECT SUM( tb_kardexdetalle_can ) AS cantidad
@@ -289,7 +337,25 @@ WHERE tb_software_id =$id";
 		$rst=$oCado->ejecute_sql($sql);
 		return $rst;		
 		}
-	
+
+    function inventario_tipo_por_producto_fecha_reg($cat_id,$alm_id,$tip,$fecini,$fecfin,$emp_id){
+        $sql="SELECT SUM( tb_kardexdetalle_can ) AS cantidad
+		FROM tb_kardex n
+		INNER JOIN tb_kardexdetalle nd ON n.tb_kardex_id = nd.tb_kardex_id
+
+		WHERE tb_kardex_xac=1
+		AND n.tb_empresa_id = $emp_id
+		AND nd.tb_catalogo_id = $cat_id 
+		AND n.tb_kardex_tip = $tip ";
+
+        if($alm_id>0)$sql.=" AND n.tb_almacen_id = $alm_id ";
+        if($fecini!="")$sql.=" AND n.tb_kardex_reg>='$fecini' ";
+        if($fecfin!="")$sql.=" AND n.tb_kardex_reg<='$fecfin' ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function mostrar_datos_producto($id){
 	$sql="SELECT * 
 	FROM tb_producto p

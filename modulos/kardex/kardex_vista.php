@@ -94,7 +94,29 @@ function kardex_car(idf){
 	});	
 }
 
-function kardex_tabla(cat_id,alm_id){	
+function kardex_valorado_car(idf){
+    $.ajax({
+        type: "POST",
+        url: "../kardex/kardex_valorado_producto.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            cat_id:	 idf
+        }),
+        beforeSend: function() {
+            $('#div_kardex').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('#div_kardex').html(html);
+        },
+        complete: function(){
+            $('#div_kardex').removeClass("ui-state-disabled");
+            $( "#div_catalogo_kardex" ).dialog("close");
+        }
+    });
+}
+
+function kardex_tabla(cat_id,alm_id){
 	$.ajax({
 		type: "POST",
 		url: "../kardex/kardex_producto_tabla.php",
@@ -115,6 +137,30 @@ function kardex_tabla(cat_id,alm_id){
 			//$('#div_catalogo_venta_tabla').removeClass("ui-state-disabled");
 		}
 	});     
+}
+
+
+function kardex_valorado_tabla(cat_id,alm_id){
+    $.ajax({
+        type: "POST",
+        url: "../kardex/kardex_valorado_producto_tabla.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            cat_id: cat_id,
+            alm_id: alm_id
+        }),
+        beforeSend: function() {
+            $('#div_producto_kardex_tabla').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            //$('#div_catalogo_venta_tabla').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('#div_producto_kardex_tabla').html(html);
+        },
+        complete: function(){
+            //$('#div_catalogo_venta_tabla').removeClass("ui-state-disabled");
+        }
+    });
 }
 
 function catalogo_kardex_tabla_total(){

@@ -9,18 +9,43 @@ class cHistorial{
 	INNER JOIN tb_compra c ON c.tb_compra_id = cd.tb_compra_id
 	INNER JOIN tb_documento d ON c.tb_documento_id = d.tb_documento_id
 	WHERE ct.tb_catalogo_id = $cat_id 
-	AND c.tb_compra_est IN ('CANCELADA', 'EMITIDA') ";
-	
+	AND c.tb_compra_est IN ('CONTADO', 'CREDITO') ";
+
+
 	if($emp_id>0)$sql.=" AND c.tb_empresa_id = $emp_id ";
 	if($alm_id>0)$sql.=" AND c.tb_almacen_id = $alm_id ";
 	if($fecini!="")$sql.=" AND tb_compra_fec>='$fecini' ";
 	if($fecfin!="")$sql.=" AND tb_compra_fec<='$fecfin' ";
 	
 	$sql.=" ORDER BY c.tb_compra_fec $ord_fec, c.tb_compra_reg $ord_fec ";
+
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		
 	}
+
+    function consultar_historial_compras_por_producto_reg($cat_id,$alm_id,$fecini,$fecfin,$ord_fec,$emp_id){
+        $sql="SELECT *
+	FROM tb_catalogo ct
+	INNER JOIN tb_presentacion pr ON ct.tb_presentacion_id=pr.tb_presentacion_id
+	INNER JOIN tb_producto p ON pr.tb_producto_id=p.tb_producto_id
+	INNER JOIN tb_compradetalle cd ON ct.tb_catalogo_id = cd.tb_catalogo_id
+	INNER JOIN tb_compra c ON c.tb_compra_id = cd.tb_compra_id
+	INNER JOIN tb_documento d ON c.tb_documento_id = d.tb_documento_id
+	WHERE ct.tb_catalogo_id = $cat_id 
+	AND c.tb_compra_est IN ('CONTADO', 'CREDITO') ";
+
+
+        if($emp_id>0)$sql.=" AND c.tb_empresa_id = $emp_id ";
+        if($alm_id>0)$sql.=" AND c.tb_almacen_id = $alm_id ";
+        if($fecini!="")$sql.=" AND tb_compra_reg>='$fecini' ";
+        if($fecfin!="")$sql.=" AND tb_compra_reg<='$fecfin' ";
+
+        $sql.=" ORDER BY c.tb_compra_fec $ord_fec, c.tb_compra_reg $ord_fec ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	
 	function consultar_historial_ventas_por_producto($cat_id,$alm_id,$fecini,$fecfin){		
 	$sql="SELECT *

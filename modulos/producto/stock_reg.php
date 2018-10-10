@@ -209,14 +209,16 @@ if($_POST['action']=="actualizar_stock")
 		    $rs = $oCatalogoproducto->presentacion_unidad_base($_POST['pre_id']);
 		    $dt = mysql_fetch_array($rs);
 		    $cat_id = $dt['tb_catalogo_id'];
+		    $precos = $dt['tb_catalogo_precos'];
+            $preuni = $dt['tb_catalogo_preunicom'];
 		    mysql_free_result($rs);
 		   
 		    //4. registro detalle de notalmacen
 		    $oNotalmacen->insertar_detalle(
 						   $cat_id,
 						   $_POST["sto_num"],
-						   0,
-						   0,
+                           $precos,
+                            $preuni,
 						   $notalm_id                                
 		   );
    		   //Fin Registro del Stock Inicial en las Notas de Almacen
@@ -230,13 +232,15 @@ if($_POST['action']=="actualizar_stock")
 			$kar_des='NOTA DE ALMACEN - STOCK INICIAL';
 			$operacion_id=$notalm_id;//id de la operacion(modulo compras, ventas, etc)
 			$emp_id=$_SESSION['empresa_id'];
-			
+
+
+
 			//insertamos kardex
 			$oKardex->insertar(
 				$xac,
 				$tipo_registro,
 				$cod,
-				$fec,
+                $fec,
 				$kar_tip,
 				$doc_id,
 				$numdoc,
@@ -259,8 +263,8 @@ if($_POST['action']=="actualizar_stock")
 			$oKardex->insertar_detalle(
 				$cat_id,
 				$_POST["sto_num"],
-				$costo,
-				$precio,
+                $precos,
+                $preuni,
 				$kar_id
 			);
 

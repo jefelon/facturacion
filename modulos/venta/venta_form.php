@@ -187,7 +187,7 @@ $('.dias').autoNumeric({
 });
 
 $( "#txt_ven_fec" ).datepicker({
-	minDate: "-7D",
+	// minDate: new Date((new Date()).getFullYear() 0, 1),
 	maxDate:"+0D",
 	yearRange: 'c-0:c+0',
 	changeMonth: true,

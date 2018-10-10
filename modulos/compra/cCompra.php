@@ -44,7 +44,7 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function insertar_detalle($cat_id,$can,$preuni,$des, $imp, $igv,$tipo_afec, $fle, $per, $cosuni, $com_id){
+	function insertar_detalle($cat_id,$can,$preuni,$des, $imp, $tipo_afec, $igv, $fle, $per, $cosuni, $com_id){
 	$sql = "INSERT INTO tb_compradetalle(
 	`tb_catalogo_id` ,
 	`tb_compradetalle_can` ,
@@ -59,7 +59,7 @@ class cCompra{
 	`tb_compra_id`
 	)
 	VALUES (
-	'$cat_id',  '$can',  '$preuni', '$des',  '$imp',  '$igv', '$tipo_afec', '$fle', '$per',  '$cosuni', '$com_id'
+	'$cat_id',  '$can',  '$preuni', '$des',  '$imp', '$tipo_afec', '$igv', '$fle', '$per',  '$cosuni', '$com_id'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -229,7 +229,7 @@ WHERE tb_software_id =$id";
 	function mostrar_todos(){
 	$sql="SELECT * 
 	FROM tb_compra 
-	WHERE tb_compra_est IN ('CANCELADA', 'EMITIDA')     
+	WHERE tb_compra_est IN ('CONTADO', 'CREDITO')     
 	ORDER BY tb_compra_fec";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

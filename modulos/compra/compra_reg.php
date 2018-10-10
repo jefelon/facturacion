@@ -230,6 +230,9 @@ if ($_POST['action_compra'] == "insertar") {
                 $mul = $dt['tb_catalogo_mul'];
                 $tipo_item = $dt['tb_afectacion_id'];
 
+
+
+                $costo = $linea_preuni;
                 //___________________________________________________
                 //registro detalle de compra
                 $oCompra->insertar_detalle(
@@ -238,8 +241,8 @@ if ($_POST['action_compra'] == "insertar") {
                     $linea_preuni,
                     $linea_des,
                     $linea_importe,
-                    $tipo_item,
                     $linea_igv,
+                    $tipo_item,
                     $linea_fle,
                     $linea_per,
                     $linea_calculo_cos,
@@ -366,11 +369,11 @@ if ($_POST['action_compra'] == "insertar") {
                 }
                 //actualizacion de /precio unitario de compra/ y precio costo /
                 $precio_unitario = $linea_preuni * $_POST['txt_com_tipcam'];
-                $dts = $oCatalogoproducto->actualizar_precio_compra($indice, $precio_unitario, $linea_calculo_cos);
+                $dts = $oCatalogoproducto->actualizar_precio_compra($indice, $precio_unitario, $costo);
 
                 //actualizacion en dolares
                 if ($_POST['cmb_com_mon'] == 2) {
-                    $dts = $oCatalogoproducto->actualizar_precio_compra_dolar($indice, $_POST['txt_com_tipcam'], $linea_calculo_cos_dolar);
+                    $dts = $oCatalogoproducto->actualizar_precio_compra_dolar($indice, $_POST['txt_com_tipcam'], $costo);
                 }
 
             }

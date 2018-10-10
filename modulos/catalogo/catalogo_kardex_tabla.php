@@ -67,6 +67,7 @@ $(function() {
                   <th>NOMBRE</th>                    
                     <th align="right" nowrap>PRECIO S/.</th>                   
                   <th width="50">&nbsp;</th>
+                    <th width="50">&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
@@ -84,8 +85,10 @@ $(function() {
                             
                          
                            <td> 
-                            <a class="btn_agregar" href="#sel" onClick="kardex_car(<?php echo $dt1['tb_catalogo_id']?>)">Seleccionar</a>
-                           
+                                <a class="btn_agregar" href="#sel" onClick="kardex_car(<?php echo $dt1['tb_catalogo_id']?>)">Kardex</a>
+                            </td>
+                            <td>
+                                <a class="btn_agregar" href="#sel" onClick="kardex_valorado_car(<?php echo $dt1['tb_catalogo_id']?>)">Kardex Valorado</a>
                             </td>
                         </tr>
                 <?php

@@ -164,7 +164,7 @@ WHERE tb_software_id =$id";
 	function mostrar_todos(){
 	$sql="SELECT * 
 	FROM tb_compra 
-	WHERE tb_compra_est IN ('CANCELADA', 'EMITIDA')     
+	WHERE tb_compra_est IN ('CONTADO', 'CREDITO')     
 	ORDER BY tb_compra_fec";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

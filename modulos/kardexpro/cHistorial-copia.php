@@ -10,7 +10,7 @@ class cHistorial{
 	INNER JOIN tb_documento d ON c.tb_documento_id = d.tb_documento_id
 	WHERE c.tb_empresa_id = $emp_id
 	AND ct.tb_catalogo_id = $cat_id 
-	AND c.tb_compra_est IN ('CANCELADA', 'EMITIDA') ";
+	AND c.tb_compra_est IN ('CONTADO', 'CREDITO') ";
 	
 	if($alm_id>0)$sql.=" AND c.tb_almacen_id = $alm_id ";
 	if($fecini!="")$sql.=" AND tb_compra_fec>='$fecini' ";

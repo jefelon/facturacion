@@ -27,7 +27,8 @@ if($_POST['action_producto']=="insertar")
             $_POST['cmb_afec_id'],
 			$_POST['hdd_usu_id'],
             $_POST['hdd_prod_img'],
-            $_POST['cmb_lote']
+            $_POST['cmb_lote'],
+            $_POST['emp_id']
 		);
 
         if (!file_exists('img_products')) {

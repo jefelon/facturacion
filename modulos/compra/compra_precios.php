@@ -163,6 +163,8 @@ if($num_rows>0){
 				$costo_ponderado_array=costo_ponderado_empresa($dt1['tb_catalogo_id'],$_SESSION['almacen_id'],'',date('Y-m-d'),$stock_kardex,$dt1['tb_catalogo_precos'],$dt1['tb_catalogo_precosdol'],$_SESSION['empresa_id']);
 				
 				$costo_promedio=$costo_ponderado_array['soles'];
+
+
 				
 				//$precio_venta=formato_money($dt1['tb_compradetalle_cosuni']/(1-$utilidad));
 			$precio_venta=formato_money($costo_promedio/(1-$utilidad));
