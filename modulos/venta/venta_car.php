@@ -554,7 +554,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 <table cellspacing="1" id="tabla_venta_car" class="tablesorter">
     <thead>
     <tr>
-        <th>TIPOs</th>
+<!--        <th>TIPOs</th>-->
         <th>G/E/I</th>
         <th>CODIGO</th>
         <th>ARTICULO</th>
@@ -659,7 +659,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
         ?>
         <tr>
-            <td>Producto </td>
+<!--            <td>Producto </td>-->
             <td>
             <?php echo $tipo_pro?>
             </td>
@@ -789,7 +789,7 @@ $descuento_total= $descuento_global + $desc_x_item_total;
     <tr>
         <td>
             <div id="div_calcular_vuelto">
-                <fieldset><legend>Aplicar a filas</legend>
+                <fieldset style="display: none"><legend>Aplicar a filas</legend>
                     <table><tr>
                             <td width="80"><label for="txt_ven_des">DSCTO %</label></td>
                             <td><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
@@ -812,7 +812,7 @@ $descuento_total= $descuento_global + $desc_x_item_total;
             </div>
         </td>
         <td valign="top">
-            <div style="margin-right:53px; margin-top:10px;">
+            <div style="margin-right:53px; margin-top:10px;    display: none;">
                 <table>
                     <tr>
                         <td nowrap="nowrap"><label for="txt_ven_subtot" style="font-size:12px;margin-right: 10px;"><strong>SUB TOTAL VENTAS:</strong></label></td>

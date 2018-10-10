@@ -1529,7 +1529,7 @@ function bus_cantidad(act)
         <input name="txt_ven_numdoc" type="text" id="txt_ven_numdoc" style="text-align:right; font-size:14px"  value="<?php echo $ser.'-'.$num?>" size="10" readonly>
         <?php //if($_POST['action']=="editar")echo $est?>
         <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
-        <label for="chk_imprimir"> Imprimir Documento</label>
+        <label for="chk_imprimir"> Imprimir</label>
         <input name="chk_imprimir" type="checkbox" id="chk_imprimir" value="1" checked="CHECKED">
         <?php }?>
         </td>
@@ -1603,7 +1603,7 @@ function bus_cantidad(act)
                     <td>
                         <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="8" maxlength="11" />
                         <label for="txt_ven_cli_nom">Cliente:</label>
-                        <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="43" value='<?php echo $cli_nom?>' />
+                        <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="33" value='<?php echo $cli_nom?>' />
                     </td>
                     <td rowspan="2" valign="top">
                         <div id="div_clientecuenta_detalle">
@@ -1612,7 +1612,7 @@ function bus_cantidad(act)
                 </tr>
                 <tr>
                     <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                    <td><input type="text" id="txt_ven_cli_dir" size="60" name="txt_ven_cli_dir" value="<?php echo $cli_dir?>" disabled="disabled"/></td>
+                    <td><input type="text" id="txt_ven_cli_dir" size="50" name="txt_ven_cli_dir" value="<?php echo $cli_dir?>" disabled="disabled"/></td>
                 </tr>
                 <tr>
                     <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
@@ -1728,7 +1728,7 @@ function bus_cantidad(act)
         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
 
         <label for="txt_bus_pro_codbar">COD</label>
-        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="14">
+        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="8">
         <label for="txt_bus_pro_nom">NOM</label>
         <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="30" style="font-size:13px; font-weight:bold">
         <input name="hdd_bus_pro_nom" type="hidden" id="hdd_bus_pro_nom">
@@ -1741,8 +1741,8 @@ function bus_cantidad(act)
 
         <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
-        <label for="txt_detcom_des">DES</label>
-        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
+<!--        <label for="txt_detcom_des">DES</label>-->
+<!--        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="--><?php //echo formato_money(0.00)?><!--" size="6" maxlength="5" style="text-align:right" >-->
         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
 

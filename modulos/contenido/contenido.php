@@ -36,53 +36,40 @@ $menu_administrador=
 '
 <ul id="menu1" class="topmenu">
   <li class="topfirst"><a href="../administrador/">Principal</a></li>
-  <li class="topmenu"><a href="#">Mantenimiento</a>
+  <li class="topmenu"><a href="#" >Mantenimiento</a>
 	<ul>
-	  <li class="topmenu"><span><a href="#" >Catálogo</a></span>
-	    <ul>
-		  <li><a href="../categoria/">Categorías</a></li>
-		  <li><a href="../marca/">Marcas</a></li>
-		  <li><a href="../unidad/">Unidades de Medida</a></li>
-		  <li><a href="../producto/">Productos</a></li>
-	    </ul>
-	  </li>
-	  <li class="topmenu"><span><a href="#" >Ventas</a></span>
-	    <ul>
-		  <li><a href="../usuarios/usuario_vista_ven.php" >Vendedores</a></li>
-		  <li><a href="../clientes/">Clientes</a></li>
-	    </ul>
-	  </li>
-	  <li class="topmenu"><span><a href="#" >Compras</a></span>
-	    <ul>
-	  		<li><a href="../proveedor/">Proveedores</a></li>
-	 		<li><a href="../almacen/">Almacenes</a></li>
-	    </ul>
-	  </li>
-	  <li class="topmenu"><span><a href="#" >Configuración</a></span>
-	    <ul>
-		  <li><a href="../empresa/">Empresa</a></li>
-		  <li><a href="../usuarios/usuario_vista_adm.php" >Administrador</a></li>
-		</ul>
-	  </li>
+	  <li><a href="../producto/producto_vista_buscar.php">Productos</a></li>
+	  <li><a href="../proveedor/proveedor_vista_buscar.php">Proveedores</a></li>
+	  <li><a href="../clientes/cliente_vista_buscar.php">Clientes</a></li>
 	</ul>
   </li>
-  <li class="topmenu"><a href="#" >Operaciones</a>
+  </li>
+  <li class="topmenu"><a href="#" >Listados</a>
 	<ul>
-	  <li><a href="../compra/">Compras</a></li>
-	  <li class="separator">_____________________</li>
+	  <li><a href="../compra/compra_vista_adm.php">Compras</a></li>
 	  <li><a href="../venta/venta_vista_adm.php">Ventas</a></li>
-	  <li><a href="../venta/venta_vista.php">Registrar Venta</a></li>
-	  <li class="separator">----------------------</li>
 	  <li><a href="../notacredito/">Nota de Crédito</a></li>
-	  <li class="separator">----------------------</li>
 	  <li><a href="../notadebito/">Nota de Débito</a></li>
-	  <li class="separator">----------------------</li>
 	  <li><a href="../resumenboleta/">Resumen Diario de Boletas</a></li>
 	  <li><a href="../comunicacionbaja/">Comunicación de Baja</a></li>
-	  <li class="separator">----------------------</li>
-	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
-	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
-	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
+
+	</ul>
+  </li>
+  <li class="topmenu"><a href="#" >Registro</a>
+	<ul>
+	  <li><a href="../compra/">Registrar Compras</a></li>
+	  <li><a href="../venta/venta_vista.php">Registrar Venta</a></li>
+	  <li><a href="../notacredito/">Registrar Nota de Crédito</a></li>
+	  <li><a href="../notadebito/">Registrar Nota de Débito</a></li>
+
+	  <li><a href="../resumenboleta/">Resumen Diario de Boletas</a></li>
+	  <li><a href="../comunicacionbaja/">Comunicación de Baja</a></li>
+	</ul>
+  </li>
+  <li class="topmenu"><a href="#" >Sunat</a>
+	<ul>
+	  <li><a href="../resumenboleta/">Enviar Resumen Diario de Boletas</a></li>
+	  <li><a href="../comunicacionbaja/">Enviar Comunicación de Baja</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Consultas</a>
@@ -104,6 +91,7 @@ $menu_administrador=
   <li class="topmenu"><a href="#">Opciones</a>
 	<ul>
 	  <li><a href="../usuarios/usuario_datos_vista.php">Modificar Mis Datos</a></li>
+	  <li><a href="../empresa/">Empresa</a></li>
 	</ul>
   </li>
 </ul>

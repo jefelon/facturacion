@@ -24,13 +24,13 @@ body {
 	color: #1d2129;
 	/*font-family: Helvetica, Arial, sans-serif;*/
 	font-family: Verdana, Geneva, sans-serif;
-	font-size: 11px;
+	font-size: 16px;
 }
 
 td,th {
 	/*font-family: Helvetica, Arial, sans-serif;*/
 	font-family: Helvetica, Arial, sans-serif;
-	font-size: 12px;
+	font-size: 13px;
 }
 ul, ol, dl { /* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD) que contienen. Recuerde que lo que haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
 	padding: 0;
