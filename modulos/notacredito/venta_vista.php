@@ -422,6 +422,8 @@ $(function() {
 			}
 		}
 	});
+
+    venta_form2('insertar');
 	
 });
 </script>

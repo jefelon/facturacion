@@ -48,22 +48,14 @@ $menu_administrador=
 	<ul>
 	  <li><a href="../compra/compra_vista_adm.php">Compras</a></li>
 	  <li><a href="../venta/venta_vista_adm.php">Ventas</a></li>
-	  <li><a href="../notacredito/">Nota de Crédito</a></li>
-	  <li><a href="../notadebito/">Nota de Débito</a></li>
-	  <li><a href="../resumenboleta/">Resumen Diario de Boletas</a></li>
-	  <li><a href="../comunicacionbaja/">Comunicación de Baja</a></li>
-
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Registro</a>
 	<ul>
-	  <li><a href="../compra/">Registrar Compras</a></li>
+	  <li><a href="../compra/compra_vista_adm_registro.php">Registrar Compras</a></li>
 	  <li><a href="../venta/venta_vista.php">Registrar Venta</a></li>
 	  <li><a href="../notacredito/">Registrar Nota de Crédito</a></li>
 	  <li><a href="../notadebito/">Registrar Nota de Débito</a></li>
-
-	  <li><a href="../resumenboleta/">Resumen Diario de Boletas</a></li>
-	  <li><a href="../comunicacionbaja/">Comunicación de Baja</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Sunat</a>

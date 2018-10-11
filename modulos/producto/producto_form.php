@@ -396,7 +396,7 @@ $(function() {
 	{
 	?>
     $('#cmb_afec_id > option[value="1"]').attr('selected', 'selected');
-	$('#txt_pro_nom').focus();
+	$('#txt_pre_cod').focus();
 	<?php }?>
 	
 	$( "#txt_pro_nom" ).autocomplete({
@@ -750,7 +750,7 @@ $(function() {
 <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="num_alm" id="num_alm" type="hidden" value="<?php echo $num_rows?>">
     <input name="tipo_accion" id="tipo_accion" type="hidden" value="<?php echo $_POST['tipo']?>">
-<div style="float:left">
+<div style="float:right">
   <fieldset>
     <legend>Producto</legend>
     <table>
@@ -774,7 +774,7 @@ $(function() {
           <td>
           <a id="btn_cmb_cat_id" class="btn_ir" href="#" onClick="categoria_form('insertar')">Agregar Categoría</a><select name="cmb_cat_id" id="cmb_cat_id">
           </select>
-            
+
           </td>
         </tr>
         <tr>
@@ -859,7 +859,7 @@ $(function() {
     <div id="div_presentacion_tag_car">
 	</div>
   </fieldset><?php */?>
-  
+
   <fieldset><legend>Unidad Base, Precios y Catálogo</legend>
     <table>
         <tr>
@@ -869,7 +869,7 @@ $(function() {
           	<div id="div_unidad_form">
 			</div>
           </td>
-        </tr>        
+        </tr>
     </table>
     </br>
     <div id="cuadro-contain" class="ui-widget" style="display: none">
@@ -881,7 +881,7 @@ $(function() {
         <tr>
           <td align="center"><input name="txt_cat_tipcam" type="text" id="txt_cat_tipcam" class="moneda_cambio" style="text-align:right" size="10" maxlength="9" value="<?php echo $tipcam?>"></td>
           <td align="center"><input name="txt_cat_precosdol" type="text" id="txt_cat_precosdol" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precosdol?>"></td>
-        </tr>        
+        </tr>
     </table>
     </div>
     </br>
@@ -900,7 +900,7 @@ $(function() {
           <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
           <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
           <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
-        </tr>        
+        </tr>
     </table>
     </br>
     <table class="ui-widget ui-widget-content" style="display: none">
@@ -912,7 +912,7 @@ $(function() {
           </tr>
         <tr>
           <td><input type="checkbox" name="chk_cat_verven" id="chk_cat_verven" value="1" <?php if($_POST['action']=="insertar" or $verven=="1") echo 'checked'?>> <label for="chk_cat_verven">Ventas</label>          </td>
-          </tr>        
+          </tr>
     </table>
 </div>
     </fieldset>

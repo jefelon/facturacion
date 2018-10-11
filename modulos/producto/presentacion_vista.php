@@ -21,7 +21,7 @@ if($_POST['vista']=='Presentacion')
 }
 else
 {
-	$ancho_acordion='620px';
+	$ancho_acordion='auto';
 }
 
 ?>

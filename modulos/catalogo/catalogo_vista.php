@@ -338,7 +338,7 @@ $(function() {
 		autoOpen: false,
 		resizable: false,
 		height: 'auto',
-		width: 990,
+		width: 800,
 		modal: true,
 		position: 'top',
 		buttons: {

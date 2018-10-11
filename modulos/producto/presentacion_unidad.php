@@ -64,8 +64,8 @@ $(function() {
                                 <tr class="ui-widget-header">
                                   <th>PRESENTACION</th>
                                   <th title="UNIDAD">UND</th>
-                                  <th align="right" nowrap title="PRECIO DE COSTO">CAMBIO</th>
-                                  <th align="right" nowrap title="PRECIO DE COSTO">P. COSTO US$</th>
+<!--                                  <th align="right" nowrap title="PRECIO DE COSTO">CAMBIO</th>-->
+<!--                                  <th align="right" nowrap title="PRECIO DE COSTO">P. COSTO US$</th>-->
                                     <th align="right" nowrap title="PRECIO DE COSTO">P. COSTO S/.</th>
                                     <th align="right" nowrap>UTILIDAD</th>                    
                                   <th align="right" nowrap title="PRECIO DE VENTA">P. VENTA S/.</th>
@@ -82,8 +82,8 @@ $(function() {
                               <tr class="even">
                                 <td><?php echo $pre_nom=$dt1['tb_presentacion_nom']?></td>
                                 <td title="<?php echo $dt2['ue_nom']?>"><?php echo $dt2['ue_abr']?></td>
-                                <td align="right"><?php if($dt2['tb_catalogo_tipcam']!="0.00") echo $dt2['tb_catalogo_tipcam']?></td>
-                                <td align="right"><?php if($dt2['tb_catalogo_precosdol']!="0.00") echo ' US$ '.$dt2['tb_catalogo_precosdol']?></td>
+<!--                                <td align="right">--><?php //if($dt2['tb_catalogo_tipcam']!="0.00") echo $dt2['tb_catalogo_tipcam']?><!--</td>-->
+<!--                                <td align="right">--><?php //if($dt2['tb_catalogo_precosdol']!="0.00") echo ' US$ '.$dt2['tb_catalogo_precosdol']?><!--</td>-->
                                 <td align="right"><?php if($dt2['precos']!="0.00") echo ' S/. '.$dt2['precos'].mostrar_siigual($dt2['igvcom'],1,'*')?></td>
                                 <td align="right"><?php echo $dt2['uti'].'%'?></td>
                                 <td align="right"><?php if($dt2['preven']!="0.00") echo ' S/. '.$dt2['preven'].mostrar_siigual($dt2['igvven'],1,'*')?></td>

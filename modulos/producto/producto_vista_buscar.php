@@ -273,6 +273,8 @@ $(function() {
 			$("#div_presentacion_vista").html('Cargando...');
 		}
 	});
+
+    producto_form('insertar');
 		
 });
 </script>
@@ -288,39 +290,9 @@ $(function() {
     <article class="content">
     	<div class="contenido">
             <div class="contenido_des">
-            <table align="center" class="tabla_cont">
-                  <tr>
-                    <td class="caption_cont">PRODUCTOS</td>
-                  </tr>
-                  <tr>
-                    <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
-                  </tr>
-                  <tr>
-                    <td>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="producto_form('insertar')">Agregar</a></td>
-                      <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
-                      <td align="right">
-                      <div id="msj_producto" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-                      </td>
-                    </tr>
-                  </table>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                    </td>
-                  </tr>
-              </table>
 			</div>
-        	<div id="div_producto_filtro" class="contenido_tabla">
-      		</div>
             <div id="div_producto_form">
 			</div>
-            <div id="div_producto_tabla" class="contenido_tabla">
-      		</div>
 			<div id="div_presentacion_vista">
       		</div>
       	</div>

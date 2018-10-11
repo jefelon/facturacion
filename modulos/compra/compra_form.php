@@ -735,7 +735,7 @@ $(function() {
     <select name="cmb_com_doc" id="cmb_com_doc">
     </select>
        <label for="txt_com_numdoc">N° Doc:</label>
-       <input type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
+       <input type="text" name="txt_com_numdoc" id="txt_com_numdoc"  size="10" value="<?php echo $numdoc?>">
     <?php /*?>
     <label for="chk_com_tipper">Percepción(2%)</label><input name="chk_com_tipper" type="checkbox" id="chk_com_tipper" value="1" <?php if($tipper==1)echo 'checked'?>><?php */?>
     <?php

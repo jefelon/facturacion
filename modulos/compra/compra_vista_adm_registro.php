@@ -328,6 +328,8 @@ $(function() {
 	$(document).shortkeys({
 	  'a+g':       function () { compra_form('insertar') }
 	});
+
+    compra_form('insertar');
 		
 });
 </script>
@@ -352,28 +354,6 @@ $(function() {
                   </tr>
                   <tr>
                     <td>
-                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
-                    <tr>
-                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar (A+G)" href="#" onClick="compra_form('insertar')">Agregar</a></td>
-                      <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td width="6%" align="left" valign="middle" nowrap>
-                      <a href="#" onClick="modo('compra_tabla.php')" class="btn_modo" title="Modo Vista Compras">Compras</a>
-                      </td>
-                      <td width="8%" align="left" valign="middle" nowrap>
-                      <a href="#" onClick="modo('compra_tabla_detalle.php')" class="btn_modo" title="Modo Vista Detalle de Compras">Detalle compras</a>
-                      </td>
-                      <td align="left" valign="middle"><a class="btn_imprimir_pdf" id="btn_imprimir_pdf" href="#" onClick="compra_reporte()" title="Imprimir en Pdf">Pdf</a></td>
-                      <td width="6%" align="left" valign="middle">
-                      <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="compra_reporte_xls()" title="Imprimir en Excel">Excel</a>
-                      <form action="compra_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
-						<input type="hidden" id="hdd_tabla" name="hdd_tabla" /> 
-						</form> 
-                      </td>
-                      <td align="right" width="72%">
-                      <div id="msj_compra" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-                      </td>
-                    </tr>
-                  </table>
                     </td>
                   </tr>
                   <tr>
@@ -382,16 +362,12 @@ $(function() {
                   </tr>
               </table>
 			</div>
-        	<div id="div_compra_filtro" class="contenido_tabla">
-      		</div>
             <div id="div_compra_form">
 			</div>
             <div id="div_compra_precios">
 			</div>
             <div id="div_compra_anular">
 			</div>
-            <div id="div_compra_tabla" class="contenido_tabla">
-      		</div>
       	</div>
     </article>
 </div>
