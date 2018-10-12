@@ -20,6 +20,7 @@ html {
 body {
 	margin: 0;
 	padding: 0;
+	background: url(../../images/fondo_sistema2.jpg);
 	background-color: #e9ebee;
 	color: #1d2129;
 	/*font-family: Helvetica, Arial, sans-serif;*/
@@ -73,7 +74,6 @@ a img { /* este selector elimina el borde azul predeterminado que se muestra en 
 	/* [disabled]max-width:1300px; */
 	min-height:600px;
 	/*height:100%;*/
-	background: #FFFFFF;
 	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño  */
 	padding: 5px 0;
 	border-radius: 10px;
@@ -98,7 +98,6 @@ header {
 	padding-bottom: 10px;
 }
 .content {
-	background:#FFF;
 	/*padding: 1px 0;*/
 	width: 100%;
 	float: left;

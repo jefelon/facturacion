@@ -53,7 +53,7 @@ $menu_administrador=
   <li class="topmenu"><a href="#" >Registro</a>
 	<ul>
 	  <li><a href="../compra/compra_vista_adm_registro.php">Registrar Compras</a></li>
-	  <li><a href="../venta/venta_vista.php">Registrar Venta</a></li>
+	  <li><a href="../venta/venta_vista_registro.php">Registrar Venta</a></li>
 	  <li><a href="../notacredito/">Registrar Nota de Crédito</a></li>
 	  <li><a href="../notadebito/">Registrar Nota de Débito</a></li>
 	</ul>

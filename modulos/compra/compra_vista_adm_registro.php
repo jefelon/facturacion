@@ -299,6 +299,9 @@ $(function() {
 		modal: true,
 		position: "top",
 		closeOnEscape: false,
+        open: function(event, ui) {
+            $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+        },
 		buttons: {
 			//Guardar: function() {
 			//	$("#for_com_pre").submit();
@@ -306,6 +309,8 @@ $(function() {
 			Terminar: function() {
 				$('#for_com_pre').each (function(){this.reset();});
 				$( this ).dialog( "close" );
+
+                $(location).attr('href',"compra_vista_adm_registro.php");
 			}
 		}
 	});

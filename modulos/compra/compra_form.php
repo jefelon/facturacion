@@ -625,7 +625,7 @@ $(function() {
 					<?php }?>
 				},
 				complete: function(){
-					compra_tabla();
+					// compra_tabla();
 				}
 			});			
 		},

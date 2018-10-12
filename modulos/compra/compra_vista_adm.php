@@ -354,7 +354,6 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar (A+G)" href="#" onClick="compra_form('insertar')">Agregar</a></td>
                       <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>
                       <a href="#" onClick="modo('compra_tabla.php')" class="btn_modo" title="Modo Vista Compras">Compras</a>

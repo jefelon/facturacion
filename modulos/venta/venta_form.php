@@ -1223,7 +1223,8 @@ $(function() {
 
 				},
 				complete: function(){
-					venta_tabla();
+					// venta_tabla();
+                    venta_form('insertar');
 				}
 			});
 		},
@@ -1552,7 +1553,7 @@ function bus_cantidad(act)
       </td>
     </tr>
     <tr>
-      <td height="27">
+<!--      <td height="27">-->
         <div id="msj_venta_form" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
 <!--        <label for="txt_ven_lab1">Nro. Placa:</label>-->
 <!--        <input type="text" name="txt_ven_lab1" id="txt_ven_lab1" value="--><?php //echo $lab1?><!--" size="9" maxlength="8">-->
@@ -1561,7 +1562,7 @@ function bus_cantidad(act)
 <!--        <label for="txt_ven_lab3">Ord. Servicio:</label>-->
 <!--        <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="--><?php //echo $lab3?><!--" size="20" maxlength="20">-->
 <!--        <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">-->
-        <br>
+<!--        <br>-->
 <!--        <label for="cmb_ven_moneda">Moneda:</label>-->
 <!--        <select name="cmb_ven_moneda" id="cmb_ven_moneda">-->
 <!--           <option value="1" selected>SOLES</option>-->
@@ -1569,13 +1570,13 @@ function bus_cantidad(act)
 <!--        </select>-->
 <!--        <label for="chk_ven_may">Venta al por mayor</label>-->
 <!--        <input name="chk_ven_may" type="checkbox" id="chk_ven_may" value="1"  --><?php //if($may==1)echo 'checked'?><!-->
-        </td>
+<!--        </td>-->
       <td align="right">
       <?php
-      if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
-	  	echo "PV: ".$_SESSION['puntoventa_nom'];
-		echo " | A: ".$_SESSION['almacen_nom'];
-	  }
+//      if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){
+//	  	echo "PV: ".$_SESSION['puntoventa_nom'];
+//		echo " | A: ".$_SESSION['almacen_nom'];
+//	  }
 	  if($_POST['action']=="editar"){
 	  	echo "Registro: $reg";
 	  }
