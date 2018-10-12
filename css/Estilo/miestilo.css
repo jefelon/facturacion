@@ -109,6 +109,7 @@ header {
 .contenido{
 	width: 100%;
 	/*padding:3px 0;*/
+	background: #fff;
 	border-radius: 7px;  
     -moz-border-radius: 7px;  
     -webkit-border-radius: 7px;
@@ -205,12 +206,14 @@ form {
 
 fieldset {
 	margin-bottom: 5px;
-	border: 1px #ccc solid;
+	border: 1px #f5f2f2 solid;
 	padding: 5px 5px 5px 5px;
 	text-align: left;
 	-moz-border-radius:5px;   
-  	border-radius: 20px;   
-  	-webkit-border-radius: 5px; //edit :D 
+  	border-radius: 20px;
+	/*background:#b9d1ea;*/
+  	-webkit-border-radius: 5px; //edit :D
+
 }
 
 legend {
@@ -666,3 +669,13 @@ div.m {
 
 .loading_16 { background: url(../../images/ui-anim_basic_16x16.gif) right center no-repeat; }
 .ui-autocomplete-loading { background: white url('../../images/ui-anim_basic_16x16.gif') right center no-repeat; }
+
+.ui-autocomplete{
+	background: #fff !important;
+}
+
+.ui-autocomplete li a {
+
+	padding: .1em 0.4em !important;
+	font-size: 9pt !important;
+}

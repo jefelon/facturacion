@@ -835,7 +835,7 @@ $descuento_total= $descuento_global + $desc_x_item_total;
             </div>
         </td>
         <td valign="top">
-            <div style="margin-right:53px; margin-top:10px;">
+            <div style="margin-right:0px; margin-top:10px;">
                 <table border="0" align="right" cellpadding="0" cellspacing="0">
 
                     <tr>

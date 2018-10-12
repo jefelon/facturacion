@@ -1,4 +1,7 @@
 /*Div del menu*/
+
+@import url("https://use.fontawesome.com/releases/v5.4.1/css/all.css");
+
 #divmenu {
 	background: #F6F6F6;
 	background-color:#c1c1c1;
@@ -106,7 +109,7 @@ ul#menu1 a{
 	color:#000000;
 	/*text-shadow:#FFF 0 0 1px;*/
 	cursor:pointer;
-	padding:10px;
+	padding:5px;
 	background-color:#c1c1c1;
 	/*background-color:#EAEAEA;*/
 	background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADICAYAAAAp8ov1AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJGA41KpTYroIAAACASURBVCjP7ZE7DsJADESfJiL37znNXoJLUNARa7Ni6Bw5AtFEqXAx8vj/wfZNwBBAakPAWukQEJUu1RGVLt9su4yo9eJ3t0FrDWyTg58HezlujFPE9lXAQ8BdQM93R9LtM2ve/vnB22tcF/DaTpItJwHKVWcBk4BLwlw1/nAUvAGm30u0udPq+QAAAABJRU5ErkJggg==");
@@ -115,6 +118,8 @@ ul#menu1 a{
 	border-width:0 0 0 0px;
 	border-style:solid;
 	border-color:#C0C0C0;
+
+	padding-right: 16px;
 	}
 ul#menu1 ul li{
 	display:block;
@@ -200,18 +205,18 @@ ul#menu1 li.topfirst>a{
 	-webkit-border-bottom-left-radius:3px;
 	}
 ul#menu1 li.topfirst:hover>a{
-	line-height:5px;
+	line-height:10px;
 	}
 ul#menu1 li.topmenu>a{
-	height:5px;
-	line-height:5px;
+	height:10px;
+	line-height:10px;
 }
 ul#menu1 li.topmenu:hover>a{
-	line-height:5px;
+	line-height:10px;
 	background-color:#0c97e2;
 }
 ul#menu1 li.toplast>a{
-	height:5px;
+	height:10px;
 	line-height:5px;
 	border-radius:0 0px 0px 0;
 	-moz-border-radius:0 0px 0px 0;
@@ -220,14 +225,12 @@ ul#menu1 li.toplast>a{
 	-webkit-border-bottom-right-radius:3px;
 	}
 ul#menu1 li.toplast:hover>a{
-	line-height:5px;
+	line-height:10px;
 	}
 
 ul#menu1 ul li.separator:hover{
 	background-color:#ffffff;
 }
-
-
 
 /*****panel formulario*****/
 /* tamaño y forma del panel principal */

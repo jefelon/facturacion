@@ -52,7 +52,7 @@ $(function() {
 <style>
 	div#div_tabla_kardex { margin: 0 0; }
 	div#div_tabla_kardex table { margin: 0 0; border-collapse: collapse; width: 100%; }
-	div#div_tabla_kardex table td, div#div_tabla_kardex table th { border: 1px solid #eee; padding: 2px 3px; font-size:10px; }
+	div#div_tabla_kardex table td, div#div_tabla_kardex table th { border: 1px solid #eee; padding: 2px 3px; font-size:14px; }
 	div#div_tabla_kardex table th { height:18px }
 	div#div_tabla_kardex table td { height:17px }
 </style>

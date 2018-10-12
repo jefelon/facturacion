@@ -36,7 +36,7 @@ $menu_administrador=
 '
 <ul id="menu1" class="topmenu">
   <li class="topfirst"><a href="../administrador/">Principal</a></li>
-  <li class="topmenu"><a href="#" >Mantenimiento</a>
+  <li class="topmenu"><a href="#" ><i class="fas fa-pen-square" style="color:green;margin-right: 5px"></i>Mantenimiento</a>
 	<ul>
 	  <li><a href="../producto/producto_vista_buscar.php">Productos</a></li>
 	  <li><a href="../proveedor/proveedor_vista_buscar.php">Proveedores</a></li>
@@ -44,10 +44,10 @@ $menu_administrador=
 	</ul>
   </li>
   </li>
-  <li class="topmenu"><a href="#" >Listados</a>
+  <li class="topmenu"><a href="#" ><i class="fas fa-list-ol" style="color:deepskyblue;margin-right: 5px"></i>Listados</a>
 	<ul>
-	  <li><a href="../compra/compra_vista_adm.php">Compras</a></li>
-	  <li><a href="../venta/venta_vista_adm.php">Ventas</a></li>
+	  <li><a href="../compra/compra_vista_adm.php"><i class="fas fa-truck" style="color:orange;margin-right: 5px"></i>Compras</a></li>
+	  <li><a href="../venta/venta_vista_adm.php"><i class="fas fa-cart-plus"style="color:green;margin-right: 5px"></i> Ventas</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Registro</a>

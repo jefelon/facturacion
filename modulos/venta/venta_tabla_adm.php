@@ -112,7 +112,9 @@ $num_rows= mysql_num_rows($dts1);
                 <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
 <!--                <td>--><?php //echo $dt1['tb_venta_est']?><!--</td>-->
-                <td>
+                <td <?php if($dt1['tb_venta_estsun']=='0'){?>
+                        style="background: red;color:#fff"
+                <?php }?>>
                     <?php
                     $mostrar_envio_sunat=0;
                     if($dt1['tb_documento_ele']==1)
