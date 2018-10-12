@@ -16,7 +16,7 @@ if($_POST['action']=='agregar')
 	if($_POST['cat_can']>0)
 	{
 		//producto por catalogo y stock y almacen
-		$dts= $oCatalogoproducto->presentacion_catalogo($_POST['cat_id']);
+		$dts= $oCatalogoproducto->presentacion_catalogo($_POST['catalog_id']);
 		$dt = mysql_fetch_array($dts);
 			$pro_nom=$dt['tb_producto_nom'];
 			$pre_nom=$dt['tb_presentacion_nom'];
@@ -42,7 +42,7 @@ if($_POST['action']=='agregar')
 		{
 			//IDENTIFICADOR CATALOGO Y CANTIDAD			
 			$_SESSION['compra_car'][$_POST['cat_id']]=moneda_mysql($_POST['cat_can']);
-			
+
 			//$_SESSION['compra_igv'][$_POST['cat_id']]=$_POST['cat_igv'];
 			
 			//DESCUENTO 0.00 - 99.99
@@ -203,7 +203,7 @@ $('.btn_tabla_lote').button({
 });
 
 $(function() {
-	
+    $('#hdd_cant_filas').val($('#tabla_compra_car>tbody>tr').length);
 	/*if($('#hdd_com_numite').val()>0)
 	{
 		$('#cmb_com_mon').attr('disabled', 'disabled');
@@ -576,6 +576,7 @@ $descuento_total=$descuento_global+$desc_x_item_total;
     <td><label for="txt_com_tot"><strong>TOTAL</strong></label></td>
     <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" value="<?php echo formato_decimal($importe_total_venta, 3)?>" readonly style="text-align:right"></td>
   </tr>
+    <input type="hidden" name="hdd_cant_filas" id="hdd_cant_filas" value="<?php echo $num_rows ?>">
 </table>
 </div>
     </td>

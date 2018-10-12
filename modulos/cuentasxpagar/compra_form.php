@@ -333,7 +333,7 @@ function compra_obs()
 	//alert(gas_tot);
 	//alert(com_tot);
 	
-	if(com_est=='EMITIDA')
+	if(com_est=='CREDITO')
 	{
 		if(gas_tot!='n')
 		{
@@ -631,7 +631,7 @@ $(function() {
           <label for="cmb_com_est" style="background:#EBEBEB">Estado:
     <select name="cmb_com_est" id="cmb_com_est">
             <option value="">-</option>
-            <option value="EMITIDA" <?php if($est=='EMITIDA')echo 'selected'?>>EMITIDA</option>
+            <option value="EMITIDA" <?php if($est=='CREDITO')echo 'selected'?>>EMITIDA</option>
             <option value="CANCELADA" <?php if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
           </select></label>
         <?php if($_POST['action']=='insertar'){?>

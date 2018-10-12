@@ -66,7 +66,7 @@ $(function() {
                 <?php
 				while($dt1 = mysql_fetch_array($dts1)){
 					
-					if($dt1['tb_compra_est']=='CANCELADA' or $dt1['tb_compra_est']=='EMITIDA'){
+					if($dt1['tb_compra_est']=='CONTADO' or $dt1['tb_compra_est']=='CREDITO'){
 						$total_valven+=$dt1['tb_compra_valven'];
 						$total_igv+=$dt1['tb_compra_igv'];
 						$total_per+=$dt1['tb_compra_per'];
@@ -77,12 +77,12 @@ $(function() {
 					//dia vencimiento - dia actual
 					if(mostrarFecha($dt1['tb_compra_fecven'])!="")$diferencia_días=restaFechas(date('d-m-Y'),mostrarFecha($dt1['tb_compra_fecven']));
 					
-					if($diferencia_días>0 and $dt1['tb_compra_est']=='EMITIDA')
+					if($diferencia_días>0 and $dt1['tb_compra_est']=='CREDITO')
 					{
 						$estilo='style="color:#298A08; font-weight:bold;"';
 					}
 					
-					if($diferencia_días<=0 and $dt1['tb_compra_est']=='EMITIDA')
+					if($diferencia_días<=0 and $dt1['tb_compra_est']=='CREDITO')
 					{
 						$estilo='style="color:#F00; font-weight:normal;"';
 					}

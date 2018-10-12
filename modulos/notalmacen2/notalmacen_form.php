@@ -472,7 +472,7 @@ $(function() {
   <!--<label for="cmb_notalm_est">Estado:</label>
           <select name="cmb_notalm_est" id="cmb_notalm_est">
             <option value="">-</option>
-            <option value="EMITIDA" <?php //if($est=='EMITIDA')echo 'selected'?>>EMITIDA</option>
+            <option value="EMITIDA" <?php //if($est=='CREDITO')echo 'selected'?>>EMITIDA</option>
             <option value="CANCELADA" <?php //if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
           </select>-->
       <table border="0" cellspacing="2" cellpadding="0">

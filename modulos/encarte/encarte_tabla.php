@@ -61,12 +61,12 @@ $(function() {
 //					//dia vencimiento - dia actual
 //					if(mostrarFecha($dt1['tb_encarte_fecven'])!="")$diferencia_días=restaFechas(date('d-m-Y'),mostrarFecha($dt1['tb_encarte_fecven']));
 //					
-//					if($diferencia_días>0 and $dt1['tb_encarte_est']=='EMITIDA')
+//					if($diferencia_días>0 and $dt1['tb_encarte_est']=='CREDITO')
 //					{
 //						$estilo='style="color:#298A08; font-weight:bold;"';
 //					}
 //					
-//					if($diferencia_días<=0 and $dt1['tb_encarte_est']=='EMITIDA')
+//					if($diferencia_días<=0 and $dt1['tb_encarte_est']=='CREDITO')
 //					{
 //						$estilo='style="color:#F00; font-weight:normal;"';
 //					}

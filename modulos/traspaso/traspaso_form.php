@@ -458,7 +458,7 @@ $(function() {
           <!--<label for="cmb_tra_est">Estado:</label>
           <select name="cmb_tra_est" id="cmb_tra_est">
             <option value="">-</option>
-            <option value="EMITIDA" <?php //if($est=='EMITIDA')echo 'selected'?>>EMITIDA</option>
+            <option value="EMITIDA" <?php //if($est=='CREDITO')echo 'selected'?>>EMITIDA</option>
             <option value="CANCELADA" <?php //if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
           </select>-->
       <label for="cmb_tra_alm_ori">Origen:</label>

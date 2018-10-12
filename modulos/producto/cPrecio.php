@@ -25,6 +25,17 @@ class cPrecio{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function consultar_precio_por_producto($precio_id,$pro_id){
+        $sql="SELECT * 
+	FROM tb_detallelistaprecio pd
+	WHERE tb_producto_id=$pro_id";
+        if($precio_id!="") $sql .= " AND pd.tb_precio_id=$precio_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function modificar_preciodetalle($id,$val){
 	$sql = "UPDATE tb_preciodetalle SET  
 	`tb_preciodetalle_mod` = NOW( ) ,

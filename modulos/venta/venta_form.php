@@ -187,7 +187,7 @@ $('.dias').autoNumeric({
 });
 
 $( "#txt_ven_fec" ).datepicker({
-	// minDate: new Date((new Date()).getFullYear() 0, 1),
+	minDate: new Date((new Date()).getFullYear(), 0, 1),
 	maxDate:"+0D",
 	yearRange: 'c-0:c+0',
 	changeMonth: true,
@@ -262,15 +262,16 @@ jQuery.validator.addMethod("totalDoc", function(value, element, parameter) {
     }
 }, "Selecccione otro cliente, monto mayor a 700");
 
-function cmb_listaprecio_id(ids)
+function cmb_listaprecio_id(ids,cliente_id)
 {
     $.ajax({
         type: "POST",
-        url: "../listaprecio/cmb_listaprecio_id.php",
+        url: "../listaprecio/cmb_precio_id.php",
         async:true,
         dataType: "html",
         data: ({
-            mar_id: ids
+            precio_id: ids,
+            cliente_id: cliente_id
         }),
         beforeSend: function() {
             $('#cmb_listaprecio_id').html('<option value="">Cargando...</option>');
@@ -1082,7 +1083,7 @@ $(function() {
 
 	cmb_ven_doc();
     cmb_ven_id();
-    cmb_listaprecio_id();
+    cmb_listaprecio_id('',$('#hdd_ven_cli_id').val());
     lote_venta_car('restablecer');
 
 	$("#txt_ven_numdoc").addClass("ui-state-active");
@@ -1090,6 +1091,23 @@ $(function() {
 	$('#txt_ven_lab1').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
+
+    $('#cmb_listaprecio_id').change(function(){
+        if($(this).val()){
+            $('#che_mayorista').prop('disabled',true);
+        }else{
+            $('#che_mayorista').prop('disabled',false);
+        }
+    });
+
+    $('#hdd_ven_cli_id').change(function(){
+        if ($('#hdd_ven_cli_id').val()!=''){
+            cmb_listaprecio_id('',$('#hdd_ven_cli_id').val());
+            $('#cmb_listaprecio_id').change();
+        }
+    });
+
+
 
 	$('#txt_ven_cli_nom').change(function(){
 		$(this).val($(this).val().toUpperCase());
@@ -1156,6 +1174,7 @@ $(function() {
 		txt_ven_numdoc();
         if ((this).value=== '12' || (this).value=== '15') {
             cliente_cargar_datos(1);
+
         }else{
             $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
         }
@@ -1834,7 +1853,8 @@ function catalogo_buscar() {
             action:	 'dato',
             unico_id: $('#unico_id').val(),
             txt_bus_pro_codbar: $('#txt_bus_pro_codbar').val(),
-            txt_bus_pro_nom: $('#hdd_bus_pro_nom').val()
+            txt_bus_pro_nom: $('#hdd_bus_pro_nom').val(),
+            cmb_listaprecio_id: $('#cmb_listaprecio_id').val()
         }),
         beforeSend: function() {
             //$('#div_venta_pago_car').addClass("ui-state-disabled");
@@ -1861,7 +1881,14 @@ function catalogo_buscar() {
             if (data.accion == 1) {
                 if ($('#che_mayorista').is(':checked')) {
                     data.cat_preven = data.cat_premay;
+                }else{
+                    if ($('#cmb_listaprecio_id').val()!='') {
+                        data.cat_preven = data.cat_prelista;
+                    }
                 }
+
+
+
 
                 $('#hdd_bus_cat_id').val(data.cat_id);
                 $('#hdd_bus_cat_stouni').val(data.cat_stouni);
@@ -1896,6 +1923,11 @@ function catalogo_buscar() {
                 //precios_min_may($('#hdd_bus_cat_id').val());
             }
             if (data.accion == 2) {
+
+                if ($('#cmb_listaprecio_id').val()) {
+                    data.cat_preven = data.cat_prelista;
+                }
+
                 //$('#txt_bus_pro_codbar').val(data.pro_codbar);
 
                 ///catalogo_venta_tab1();

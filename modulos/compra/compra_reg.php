@@ -53,7 +53,7 @@ if ($_POST['action_compra'] == "insertar") {
         $documento_tipdoc = $dt['cs_tipodocumento_id'];
         $documento_cod = $dt['cs_tipodocumento_cod'];
         mysql_free_result($dts);
-        //$estado='CANCELADA';
+        //$estado='CONTADO';
 
         if ($_POST['cmb_com_doc'] == '20' || $_POST['cmb_com_doc'] == '21') {
             if ($_POST['cmb_com_tip'] == '1'){

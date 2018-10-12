@@ -776,7 +776,7 @@ $(function() {
           <!--<label for="cmb_gui_est">Estado:</label>
           <select name="cmb_gui_est" id="cmb_gui_est">
             <option value="">-</option>
-            <option value="EMITIDA" <?php //if($est=='EMITIDA')echo 'selected'?>>EMITIDA</option>
+            <option value="EMITIDA" <?php //if($est=='CREDITO')echo 'selected'?>>EMITIDA</option>
             <option value="CANCELADA" <?php //if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
           </select>-->
 </fieldset>

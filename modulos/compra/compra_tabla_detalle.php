@@ -66,7 +66,7 @@ $(function() {
                 <?php
 				while($dt1 = mysql_fetch_array($dts1)){
 					
-					if($dt1['tb_compra_est']=='CANCELADA' or $dt1['tb_compra_est']=='EMITIDA'){
+					if($dt1['tb_compra_est']=='CONTADO' or $dt1['tb_compra_est']=='CREDITO'){
 					//$total_subtot+=$dt1['tb_compra_subtot'];
 					//$total_igv+=$dt1['tb_compra_igv'];
 					$total_compras+=$dt1['tb_compradetalle_imp'];

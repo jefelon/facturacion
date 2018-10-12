@@ -54,6 +54,12 @@ if($num_rows>0)
             $data['cat_premay']=$rw['tb_preciodetalle_val'];
 			mysql_free_result($rws);
 
+            //precio lista
+            $rws = $oPrecio->consultar_precio_por_producto($_POST['cmb_listaprecio_id'], $dt1['tb_producto_id']);
+            $rw = mysql_fetch_array($rws);
+            $data['cat_prelista'] = $rw['tb_detallelistaprecio_preven'];
+            mysql_free_result($rws);
+
             //stock
             $stock = mysql_fetch_array($oStock->stock_por_presentacion($dt1["tb_presentacion_id"],$_SESSION['almacen_id']))['tb_stock_num'];
             $data['cat_stouni']=$stock*1;
@@ -136,6 +142,8 @@ if($num_rows>0)
                 $data['cat_premay']=$rw['tb_preciodetalle_val'];
 				mysql_free_result($rws);
 
+
+
 				//stock
                 $stock = mysql_fetch_array($oStock->stock_por_presentacion($dt1["tb_presentacion_id"],$_SESSION['almacen_id']))['tb_stock_num'];
                 $data['cat_stouni']=$stock*1;
@@ -184,12 +192,14 @@ if($num_rows>0)
 			mysql_free_result($rws);
 
 			//precio mayorista
-			$premay="";
-			$precio=2;
-			$rws = $oPrecio->consultar_precio_por_catalogo($precio,$dt2['tb_catalogo_id']);
-			$rw = mysql_fetch_array($rws);
+            $premay="";
+            $precio=2;
+            $rws = $oPrecio->consultar_precio_por_catalogo($precio,$dt2['tb_catalogo_id']);
+            $rw = mysql_fetch_array($rws);
             $premay=$rw['tb_preciodetalle_val'];
-			mysql_free_result($rws);
+            mysql_free_result($rws);
+
+
 
 			//cantidad
 			$cat_can="";	

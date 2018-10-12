@@ -206,7 +206,7 @@ function lote_car(act,idf,cant,lote_num)
     });
 }
 
-function compra_car(act,idf,pre)
+function compra_car(act,idf,pre,cata_id)
 {
     /*if($('#chk_cat_igv_'+idf).is(':checked')) {  
 		var chk=1;  
@@ -225,15 +225,16 @@ function compra_car(act,idf,pre)
 		dataType: "html",                      
 		data: ({
 			action:	 act,
-			cat_id:	 idf,
-			cat_can: 		$('#txt_cat_can_'+idf).val(),
-			cat_precom: 	$('#txt_cat_precom_'+idf).val(),
-			cat_des: 		$('#txt_detcom_des_'+idf).val(),
-			cat_fle:	 	$('#txt_detcom_fle_'+idf).val(),
+			cat_id:	 parseInt($('#hdd_cant_filas').val())+1,
+			cat_can: 		$('#txt_cat_can_'+cata_id).val(),
+			cat_precom: 	$('#txt_cat_precom_'+cata_id).val(),
+			cat_des: 		$('#txt_detcom_des_'+cata_id).val(),
+			cat_fle:	 	$('#txt_detcom_fle_'+cata_id).val(),
 			tipo_cambio: 	$('#txt_com_tipcam').val(),
 			tipo_precio:	pre,
-            cmb_afec_id: 	$('#cmb_afec_id_'+idf).val(),
-			com_tipper:	tipper
+            cmb_afec_id: 	$('#cmb_afec_id_'+cata_id).val(),
+			com_tipper:	tipper,
+            catalog_id: 	cata_id
 		}),
 		beforeSend: function() {
 			//$("#txt_fil_pro_nom").val(''); $("#txt_fil_pro_nom").focus();
@@ -909,8 +910,8 @@ $(function() {
           <label for="cmb_com_est">Estado:</label>
     <select name="cmb_com_est" id="cmb_com_est">
             <option value="">-</option>
-            <option value="CREDITO" <?php if($est=='EMITIDA')echo 'selected'?>>CREDITO</option>
-            <option value="CONTADO" <?php if($est=='CANCELADA')echo 'selected'?>>CONTADO</option>
+            <option value="CREDITO" <?php if($est=='CREDITO')echo 'selected'?>>CREDITO</option>
+            <option value="CONTADO" <?php if($est=='CONTADO')echo 'selected'?>>CONTADO</option>
           </select>
         <?php if($_POST['action']=='insertar'){?>
         <label for="cmb_com_tippre">Mostrar  con:</label>

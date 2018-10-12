@@ -223,7 +223,7 @@ $(function() {
                                 </select>
                             </td>
                          
-                            <td align="center"><a class="btn_agregar" href="#" onClick="compra_car('agregar','<?php echo $dt1['tb_catalogo_id']?>','<?php echo $_POST['tippre']?>')">Agregar</a></td>
+                            <td align="center"><a class="btn_agregar" href="#" onClick="compra_car('agregar','','<?php echo $_POST['tippre']?>', '<?php echo $dt1['tb_catalogo_id']?>')">Agregar</a></td>
                         </tr>
                 <?php
                 	}

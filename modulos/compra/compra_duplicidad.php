@@ -5,7 +5,7 @@ require_once ("../formatos/formato.php");
 require_once ("cCompra.php");
 $oCompra = new cCompra();
 
-$estado="'EMITIDA','CANCELADA'";
+$estado="'CREDITO','CONTADO'";
 
 $dts1=$oCompra->mostrar_duplicidad($_POST['doc'],$_POST['numdoc'],$_POST['numruc'],$estado,$_SESSION['empresa_id']);
 $num_rows= mysql_num_rows($dts1);
