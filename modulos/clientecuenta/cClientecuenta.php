@@ -58,6 +58,10 @@ class cClientecuenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		
 	}
+
+
+
+
 	function mostrar_cuenta_por_cobrar($emp_id,$fec1,$fec2,$cli_doc,$cli_nom,$est){
 	$sql="SELECT * 
 	FROM tb_clientecuenta cc
@@ -151,6 +155,16 @@ class cClientecuenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+
+    function modificar_estado($id,$est){
+        $sql = "UPDATE tb_clientecuenta SET
+	`tb_clientecuenta_est` =  '$est' 
+	WHERE tb_clientecuenta_id =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function verifica_clientecuenta_tabla($id,$tabla){
 	$sql = "SELECT * 
 		FROM  $tabla 

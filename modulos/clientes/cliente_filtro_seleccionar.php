@@ -67,5 +67,5 @@
 	<a href="#" onClick="cliente_filtro_seleccionar()" id="btn_cliente_resfil">Restablecer</a>
     <label for="txt_fil_cli_dir">Cobrar Varios Documentos:</label>
     <input name="chk_cobrar_varios" id="chk_cobrar_varios" type="checkbox" value="0">
-    <a class="btn_pagar" id="cuentas_marcados" href="#pagar" onClick="clientecuenta_form_pago('insertar_pago','pago_insertar','<?php echo $dt['tb_clientecuenta_id']?>')">Pagar</a>
+    <a class="btn_pagar" id="cuentas_marcados" href="#pagar" onClick="clientecuenta_form_pago_todos('insertar_pago','pago_insertar','<?php echo $dt['tb_clientecuenta_id']?>')">Pagar</a>
 </fieldset>

@@ -1,8 +1,6 @@
 <?php
 session_start();
 require_once ("../../config/Cado.php");
-require_once ("cClientecuenta.php");
-$oClienteCuenta = new cClienteCuenta();
 require_once ("../formatos/formato.php");
 require_once ("../clientes/cCliente.php");
 $oCliente = new cCliente();
@@ -10,6 +8,9 @@ require_once ("../venta/cVenta.php");
 $oVenta = new cVenta();
 require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
+
+require_once ("cClientecuenta.php");
+$oClienteCuenta = new cClienteCuenta();
 
 //$dts=$oClienteCuenta->mostrarTodos();
 $cli_id = $_POST['cli_id'];

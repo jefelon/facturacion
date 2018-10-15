@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once ("../../config/Cado.php");
-require_once ("cClientecuenta.php");
 require_once ("../formatos/formato.php");
+require_once ("cClientecuenta.php");
 $oClienteCuenta = new cClienteCuenta();
 
 //$dts=$oClienteCuenta->mostrarTodos();

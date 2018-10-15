@@ -66,7 +66,7 @@ $(function() {
                 <?php
 				while($dt1 = mysql_fetch_array($dts1)){
 					
-					if($dt1['tb_encarte_est']=='CANCELADA' or $dt1['tb_encarte_est']=='EMITIDA'){
+					if($dt1['tb_encarte_est']=='CANCELADA' or $dt1['tb_encarte_est']=='CREDITO'){
 					//$total_subtot+=$dt1['tb_encarte_subtot'];
 					//$total_igv+=$dt1['tb_encarte_igv'];
 					$total_encartes+=$dt1['tb_encartedetalle_imp'];

@@ -176,6 +176,38 @@ function clientecuenta_form_pago(act,act2,idf){
 	}
 }
 
+function clientecuenta_form_pago_todos(act,act2,idf){
+    if($("#hdd_fil_cli_id").val()>0)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../clientecuenta/clientecuenta_form_pago_todos.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act,
+                action2: act2,
+                clicue_id:	idf,
+                cli_id:	$("#hdd_fil_cli_id").val(),
+                vista:	'clientecuenta_tabla'
+            }),
+            beforeSend: function() {
+                $('#msj_clientecuenta').hide();
+                $('#div_clientecuenta_form').dialog("open");
+                $('#div_clientecuenta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_clientecuenta_form').html(html);
+                $('#hdd_cli_id').val($('#hdd_fil_cli_id').val());
+            }
+        });
+    }
+    else
+    {
+        alert('Seleccione cliente');
+    }
+}
+
 function seleccionar_cliente(cli_id){
 	$.ajax({
 		type: "POST",
