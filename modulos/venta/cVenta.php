@@ -1,6 +1,6 @@
 <?php
 class cVenta{
-	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$valven,$igv,$des,$tot,$est,$lab1,$lab2,$lab3,$may,$usu_id,$punven_id,$emp_id,
+	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$cli_dir_id,$valven,$igv,$des,$tot,$est,$lab1,$lab2,$lab3,$may,$usu_id,$punven_id,$emp_id,
 		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id){
 	$sql = "INSERT INTO tb_venta(
 	`tb_venta_reg` ,
@@ -10,6 +10,7 @@ class cVenta{
 	`tb_venta_ser` ,
 	`tb_venta_num` ,
 	`tb_cliente_id` ,
+	`tb_clientedireccion_id` ,
 	`tb_venta_valven` ,
 	`tb_venta_igv` ,
 	`tb_venta_des` ,
@@ -38,7 +39,7 @@ class cVenta{
 	`tb_vendedor_id`
 	)
 	VALUES (
-	NOW( ) ,  '$fec',  '$doc_id',  '$numdoc', '$ser',  '$num',  '$cli_id',  '$valven',  '$igv', '$des',  '$tot',  '$est', '$lab1', '$lab2', '$lab3', '$may',  '$usu_id', '$punven_id', '$emp_id',
+	NOW( ) ,  '$fec',  '$doc_id',  '$numdoc', '$ser',  '$num',  '$cli_id','$cli_dir_id',  '$valven',  '$igv', '$des',  '$tot',  '$est', '$lab1', '$lab2', '$lab3', '$may',  '$usu_id', '$punven_id', '$emp_id',
 	'$tipdoc', '$tipmon', '$gra', '$ina', '$exp', '$grat', '$isc', '$otrtri', '$otrcar', '$desglo', '$tipope','$docrel','$use_id'
 	);"; 
 	$oCado = new Cado();
@@ -334,6 +335,7 @@ class cVenta{
 	$sql="SELECT * 
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+	LEFT JOIN tb_clientedireccion cd ON v.tb_clientedireccion_id=cd.tb_clientedireccion_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id

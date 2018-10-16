@@ -85,6 +85,11 @@ while($dt = mysql_fetch_array($dts))
     $ruc=$dt["tb_cliente_doc"];
     $razon=$dt["tb_cliente_nom"];
     $direccion=$dt["tb_cliente_dir"];
+    if($dt["tb_clientedireccion_id"]>0)
+    {
+        $direccion=$dt["tb_clientedireccion_dir"];
+    }
+
     if($dt["tb_cliente_tip"]==1)$idtipodni=1;
     if($dt["tb_cliente_tip"]==2)$idtipodni=6;
 

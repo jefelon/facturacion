@@ -46,9 +46,10 @@ class cCliente{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
-    function mostrarDireccionesTodos(){
-        $sql="SELECT * FROM tb_clientedireccion d
-        ORDER BY d.tb_clientedireccion_id
+    function mostrarDireccionesTodos($cli_id){
+        $sql="SELECT * FROM tb_clientedireccion d";
+        if($cli_id>0)$sql.=" WHERE tb_cliente_id = $cli_id";
+        "ORDER BY d.tb_clientedireccion_id
         ";
             $oCado = new Cado();
             $rst=$oCado->ejecute_sql($sql);

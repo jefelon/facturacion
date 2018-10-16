@@ -909,6 +909,60 @@ function compararSunat(doc, nom, dir, id) {
 		}
 	},"json");
 }
+function buscar_cliente(){
+    $.ajax({
+        type: "POST",
+        url: "../clientes/cliente_buscar.php",
+        async:false,
+        dataType: "json",
+        data: ({
+            txt_cli_cod: $('#txt_ven_cli_doc').val()
+        }),
+        beforeSend: function() {
+
+        },
+        success: function(data){
+            if(data.msj!="")
+            {
+                $('#hdd_ven_cli_id').val(data.cli_id);
+                $('#hdd_ven_cli_tip').val(data.cli_tip);
+                $('#txt_ven_cli_doc').val(data.cli_doc);
+
+
+                $('#txt_ven_cli_nom').val(data.cli_nombre);
+                $('#txt_ven_cli_dir').val(data.cli_dir);
+
+                if($("#hdd_ven_cli_id" ).val()>0){
+                   cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+                    $('#cmb_cli_suc > option[value="1"]').attr('selected', 'selected');
+                }
+                $('#msj_cliente').html(data.msj);
+            }
+            else
+            {
+                alert("No registrado.");
+            }
+        }
+    });
+}
+function cmb_dir_id(ids)
+{
+    $.ajax({
+        type: "POST",
+        url: "../clientes/cmb_cli_dir.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            cli_id: ids
+        }),
+        beforeSend: function() {
+            $('#cmb_cli_suc').html('<option value="">Cargando...</option>');
+        },
+        success: function(html){
+            $('#cmb_cli_suc').html(html);
+        }
+    });
+}
 
 
 
@@ -932,37 +986,37 @@ $(function() {
 
 
 
-	$( "#txt_ven_cli_doc" ).autocomplete({
-   		minLength: 1,
-   		source: "../clientes/cliente_complete_doc.php",
-		select: function(event, ui){
-			$("#hdd_ven_cli_id").val(ui.item.id);
-			$("#txt_ven_cli_nom").val(ui.item.nombre);
-			$("#txt_ven_cli_dir").val(ui.item.direccion);
-			$("#hdd_ven_cli_tip").val(ui.item.tipo);
-			clientecuenta_detalle(ui.item.id);
-			//alert(ui.item.value);
-			$('#msj_busqueda_sunat').html("Buscando en Sunat...");
-			$('#msj_busqueda_sunat').show(100);
-			compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
-		}
-    });
-
-	$( "#txt_ven_cli_nom" ).autocomplete({
-   		minLength: 1,
-   		source: "../clientes/cliente_complete_nom.php",
-		select: function(event, ui){
-			$("#hdd_ven_cli_id").val(ui.item.id);
-			$("#txt_ven_cli_doc").val(ui.item.documento);
-			$("#txt_ven_cli_dir").val(ui.item.direccion);
-			$("#hdd_ven_cli_tip").val(ui.item.tipo);
-			clientecuenta_detalle(ui.item.id);
-			//alert(ui.item.value);
-			$('#msj_busqueda_sunat').html("Buscando en Sunat...");
-			$('#msj_busqueda_sunat').show(100);
-			compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
-		}
-    });
+    // $( "#txt_ven_cli_doc" ).autocomplete({
+   	// 	minLength: 1,
+   	// 	source: "../clientes/cliente_complete_doc.php",
+		// select: function(event, ui){
+		// 	$("#hdd_ven_cli_id").val(ui.item.id);
+		// 	$("#txt_ven_cli_nom").val(ui.item.nombre);
+		// 	$("#txt_ven_cli_dir").val(ui.item.direccion);
+		// 	$("#hdd_ven_cli_tip").val(ui.item.tipo);
+		// 	clientecuenta_detalle(ui.item.id);
+		// 	//alert(ui.item.value);
+		// 	$('#msj_busqueda_sunat').html("Buscando en Sunat...");
+		// 	$('#msj_busqueda_sunat').show(100);
+		// 	compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+		// }
+    // });
+    //
+    // $( "#txt_ven_cli_nom" ).autocomplete({
+   	// 	minLength: 1,
+   	// 	source: "../clientes/cliente_complete_nom.php",
+		// select: function(event, ui){
+		// 	$("#hdd_ven_cli_id").val(ui.item.id);
+		// 	$("#txt_ven_cli_doc").val(ui.item.documento);
+		// 	$("#txt_ven_cli_dir").val(ui.item.direccion);
+		// 	$("#hdd_ven_cli_tip").val(ui.item.tipo);
+		// 	clientecuenta_detalle(ui.item.id);
+		// 	//alert(ui.item.value);
+		// 	$('#msj_busqueda_sunat').html("Buscando en Sunat...");
+		// 	$('#msj_busqueda_sunat').show(100);
+		// 	compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
+		// }
+    // });
 
 	<?php
 	if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
@@ -1084,6 +1138,15 @@ $(function() {
 			$('#txt_venpag_fecven').val('');
 		}
 	});
+
+    $( "#txt_ven_cli_doc" ).keydown(function( event ) {
+        if ( event.which == 13 ) {
+
+            buscar_cliente();
+        }
+
+
+    });
 
 	cmb_tar_id();
 
@@ -1615,13 +1678,22 @@ function bus_cantidad(act)
                     <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
                     <td><input type="text" id="txt_ven_cli_dir" size="50" name="txt_ven_cli_dir" value="<?php echo $cli_dir?>" disabled="disabled"/></td>
                 </tr>
+<!--                <tr>-->
+<!--                    <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
+<!--                    <td>-->
+<!--                        <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>-->
+<!--                        <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>-->
+<!--                    </td>-->
+<!--                </tr>-->
                 <tr>
-                    <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
+                    <td align="right"><label for="txt_ven_cli_suc">Sucursales:</label></td>
                     <td>
-                        <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
-                        <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                      <select name="cmb_cli_suc" id="cmb_cli_suc">
+
+                      </select>
                     </td>
                 </tr>
+
             </table>
         </fieldset>
 </div>

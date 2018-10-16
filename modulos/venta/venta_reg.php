@@ -120,6 +120,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$tal_ser,
 			$numero,
 			$_POST['hdd_ven_cli_id'],
+            $_POST['cmb_cli_suc'],
 			moneda_mysql($_POST['txt_ven_valven']),
 			moneda_mysql($_POST['txt_ven_igv']),
 			moneda_mysql($_POST['txt_com_destotal']),
