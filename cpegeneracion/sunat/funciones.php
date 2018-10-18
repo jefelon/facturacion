@@ -141,32 +141,71 @@
     	}
     }
 
-    function valida($tipodoc) {
-        global $xml, $texto;
-        //$xml->formatOutput=true;
-        $paso = new DOMDocument("1.0","ISO-8859-1");
-        $texto = $xml->saveXML();
-        $paso->loadXML($texto);
-        libxml_use_internal_errors(true);
-        libxml_clear_errors();
-        $ruta = "../../cpegeneracion/sunat/ubl/20/maindoc/";
-        $ruta2= "../../cpegeneracion/sunat/ubl/21/maindoc/";
-        if($tipodoc == 'VoidedDocuments'){
-            $file=$ruta."UBLPE-VoidedDocuments-1.0.xsd";
-        }elseif($tipodoc == 'CreditNote'){
-            $file=$ruta."UBLPE-CreditNote-1.0.xsd";
-        }elseif($tipodoc == 'DebitNote'){
-            $file=$ruta."UBLPE-DebitNote-1.0.xsd";
-        }elseif($tipodoc == 'SummaryDocuments'){
-            $file=$ruta."UBLPE-SummaryDocuments-1.0.xsd";
-        }elseif($tipodoc == 'DespatchAdvice'){
-            $file=$ruta2."UBL-DespatchAdvice-2.1.xsd";
-        }else{
-            $file=$ruta."UBLPE-Invoice-1.0.xsd";
-        }
-        $ok = $paso->schemaValidate($file);
-        return $ok;
+function get_UBLVersionID($xml){
+    $ublversion = null;
+    $etiqueta = $xml->getElementsByTagName('UBLVersionID');
+    if($etiqueta->length>0){
+        $ublversion = $etiqueta->item(0)->nodeValue;
     }
+    return $ublversion;
+}
+
+function valida($tipodoc) {
+    global $xml, $texto;
+    //$xml->formatOutput=true;
+    $paso = new DOMDocument("1.0","ISO-8859-1");
+    $texto = $xml->saveXML();
+    $paso->loadXML($texto);
+    libxml_use_internal_errors(true);
+    libxml_clear_errors();
+    $version = get_UBLVersionID($paso);
+    //echo $version;
+    //die($version);
+
+    $ruta = "../../cpegeneracion/sunat/ubl/20/maindoc/";
+    $ruta2= "../../cpegeneracion/sunat/ubl/21/maindoc/";
+
+    switch ($version) {
+        case '2.0':
+            //$ruta = $_SERVER['DOCUMENT_ROOT'] ."/sunat/ubl/20/maindoc/";
+            if($tipodoc == 'VoidedDocuments'){
+                $file=$ruta."UBLPE-VoidedDocuments-1.0.xsd";
+            }elseif($tipodoc == 'CreditNote'){
+                $file=$ruta."UBLPE-CreditNote-1.0.xsd";
+            }elseif($tipodoc == 'DebitNote'){
+                $file=$ruta."UBLPE-DebitNote-1.0.xsd";
+            }elseif($tipodoc == 'SummaryDocuments'){
+                $file=$ruta."UBLPE-SummaryDocuments-1.0.xsd";
+            }elseif($tipodoc == 'DespatchAdvice'){
+                //$ruta = $_SERVER['DOCUMENT_ROOT'] ."/sunat/ubl/21/maindoc/";
+                $file=$ruta2."UBL-DespatchAdvice-2.1.xsd";
+            }else{
+                $file=$ruta."UBLPE-Invoice-1.0.xsd";
+            }
+            break;
+        case '2.1':
+            //$ruta = $_SERVER['DOCUMENT_ROOT'] ."/sunat/ubl/21/maindoc/";
+            if($tipodoc == 'VoidedDocuments'){
+                $file=$ruta2."UBLPE-VoidedDocuments-1.0.xsd";
+            }elseif($tipodoc == 'CreditNote'){
+                $file=$ruta2."UBLPE-CreditNote-1.0.xsd";
+            }elseif($tipodoc == 'DebitNote'){
+                $file=$ruta2."UBLPE-DebitNote-1.0.xsd";
+            }elseif($tipodoc == 'SummaryDocuments'){
+                $file=$ruta."UBLPE-SummaryDocuments-1.0.xsd";
+            }elseif($tipodoc == 'DespatchAdvice'){
+                //$ruta = $_SERVER['DOCUMENT_ROOT'] ."/sunat/ubl/21/maindoc/";
+                $file=$ruta2."UBL-DespatchAdvice-2.1.xsd";
+            }else{
+                $file=$ruta2."UBL-Invoice-2.1.xsd";
+            }
+            break;
+    }
+
+    $ok = $paso->schemaValidate($file);
+
+    return $ok;
+}
     function display_xml_errors() {
         global $texto;
         $lineas = explode("\n", $texto);

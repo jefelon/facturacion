@@ -502,84 +502,84 @@ function arr_DespatchLine($header, $detalle, $empresa, $tipodoc){
     global $arr;
     if(count($detalle)>0){
         foreach ($detalle as $row => $item) {
-            $arr['DespatchLine'][$row+1]['ID'] = $item->nro;
-            $arr['DespatchLine'][$row+1]['OrderLineReference']['LineID'] = $item->nro;
-            $arr['DespatchLine'][$row+1]['DeliveredQuantity']['unitCode'] = $item->idmedida;
-            $arr['DespatchLine'][$row+1]['DeliveredQuantity']['Quantity'] = $item->cantidad;
-            $arr['DespatchLine'][$row+1]['Item']['Name'] = $item->cdsc;
-            $arr['DespatchLine'][$row+1]['Item']['SellersItemIdentification']['ID'] = (($item->idproducto=='0') ? $item->nro : $item->codigo);
+            $arr['doc'][$tipodoc]['child']['DespatchLine'][$row+1]['ID'] = $item->nro;
+            $arr['doc'][$tipodoc]['child']['DespatchLine'][$row+1]['OrderLineReference']['LineID'] = $item->nro;
+            $arr['doc'][$tipodoc]['child']['DespatchLine'][$row+1]['DeliveredQuantity']['unitCode'] = $item->idmedida;
+            $arr['doc'][$tipodoc]['child']['DespatchLine'][$row+1]['DeliveredQuantity']['Quantity'] = round($item->cantidad,10);
+            $arr['doc'][$tipodoc]['child']['DespatchLine'][$row+1]['Item']['Name'] = $item->cdsc;
+            $arr['doc'][$tipodoc]['child']['DespatchLine'][$row+1]['Item']['SellersItemIdentification']['ID'] = (($item->idproducto=='0') ? $item->nro : $item->codigo);
         }
     }
 }
 function arr_DiscrepancyResponse($header, $detalle, $empresa, $tipodoc){
     global $arr;
-    $arr['DiscrepancyResponse']['ReferenceID'] = $header[0]->referenceid;
-    $arr['DiscrepancyResponse']['ResponseCode'] = str_pad($header[0]->idtiponotacredito, 2, '0', STR_PAD_LEFT);
-    $arr['DiscrepancyResponse']['Description'] = $header[0]->description;
+    $arr['doc'][$tipodoc]['child']['DiscrepancyResponse']['ReferenceID'] = $header[0]->referenceid;
+    $arr['doc'][$tipodoc]['child']['DiscrepancyResponse']['ResponseCode'] = str_pad($header[0]->idtiponotacredito, 2, '0', STR_PAD_LEFT);
+    $arr['doc'][$tipodoc]['child']['DiscrepancyResponse']['Description'] = $header[0]->description;
 }
 function arr_BillingReference($header, $detalle, $empresa, $tipodoc){
     global $arr;
-    $arr['BillingReference']['InvoiceDocumentReference']['ID'] = $header[0]->referenceid;
-    $arr['BillingReference']['InvoiceDocumentReference']['DocumentTypeCode'] = str_pad($header[0]->referencedocumenttypecode, 2, '0', STR_PAD_LEFT);
+    $arr['doc'][$tipodoc]['child']['BillingReference']['InvoiceDocumentReference']['ID'] = $header[0]->referenceid;
+    $arr['doc'][$tipodoc]['child']['BillingReference']['InvoiceDocumentReference']['DocumentTypeCode'] = str_pad($header[0]->referencedocumenttypecode, 2, '0', STR_PAD_LEFT);
 }
 function arr_CreditNoteLine($header, $detalle, $empresa, $tipodoc){
     global $arr;
     if(count($detalle)>0){
         foreach ($detalle as $row => $item) {
-            $arr['CreditNoteLine'][$row+1]['ID'] = $item->nro;
-            $arr['CreditNoteLine'][$row+1]['CreditedQuantity']['unitCode'] = $item->idmedida;
-            $arr['CreditNoteLine'][$row+1]['CreditedQuantity']['Quantity'] = $item->cantidad;
-            $arr['CreditNoteLine'][$row+1]['Item']['SellersItemIdentification']['ID'] = (($item->idproducto=='0') ? $item->nro : $item->codigo);
-            $arr['CreditNoteLine'][$row+1]['Item']['Description'] = format_description((($item->detalle==null) ? $item->cdsc : $item->detalle));
-            $arr['CreditNoteLine'][$row+1]['Price']['PriceAmount']['Price'] = round($item->precio, 2);
-            $arr['CreditNoteLine'][$row+1]['Price']['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['ID'] = $item->nro;
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['CreditedQuantity']['unitCode'] = $item->idmedida;
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['CreditedQuantity']['Quantity'] = round($item->cantidad,10);
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['Item']['SellersItemIdentification']['ID'] = (($item->idproducto=='0') ? $item->nro : $item->codigo);
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['Item']['Description'] = format_description((($item->detalle==null) ? $item->cdsc : $item->detalle));
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['Price']['PriceAmount']['Price'] = round($item->precio, 2);
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['Price']['PriceAmount']['currencyID'] = $header[0]->isomoneda;
             if($item->idafectaciond == 10){
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
             }elseif ($item->idafectaciond>=11 && $item->idafectaciond<=17) {
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
 
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
 
             }elseif ($item->idafectaciond==20) {
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
             }elseif ($item->idafectaciond==21) {
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
 
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
             }elseif ($item->idafectaciond==30) {
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
             }elseif ($item->idafectaciond>=31 && $item->idafectaciond<=36) {
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
 
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
             }
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['currencyID'] = $header[0]->isomoneda;
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['Amount'] = round($item->igv,2);
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['currencyID'] = $header[0]->isomoneda;
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->igv,2);;
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['currencyID'] = $header[0]->isomoneda;
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['Amount'] = round($item->igv,2);
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['currencyID'] = $header[0]->isomoneda;
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->igv,2);;
 
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxExemptionReasonCode'] = $item->idafectaciond;
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '1000';
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'IGV';
-            $arr['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'VAT';
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxExemptionReasonCode'] = $item->idafectaciond;
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '1000';
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'IGV';
+            $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'VAT';
 
             if($item->idtiposcisc !=0){
                 $arr['CreditNoteLine'][$row+1]['TaxTotal'][2]['TaxAmount']['currencyID'] = $header[0]->isomoneda;
@@ -601,9 +601,9 @@ function arr_CreditNoteLine($header, $detalle, $empresa, $tipodoc){
                 $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->preciounitario, 2);
             }
             if($item->descto > 0){
-                $arr['CreditNoteLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'false';
-                $arr['CreditNoteLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $header[0]->isomoneda;
-                $arr['CreditNoteLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->descto,2);
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'false';
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['CreditNoteLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->descto,2);
             }
         }
     }
@@ -612,60 +612,60 @@ function arr_DebitNoteLine($header, $detalle, $empresa, $tipodoc){
     global $arr;
     if(count($detalle)>0){
         foreach ($detalle as $row => $item) {
-            $arr['DebitNoteLine'][$row+1]['ID'] = $item->nro;
-            $arr['DebitNoteLine'][$row+1]['DebitedQuantity']['unitCode'] = $item->idmedida;
-            $arr['DebitNoteLine'][$row+1]['DebitedQuantity']['Quantity'] = $item->cantidad;
-            $arr['DebitNoteLine'][$row+1]['Item']['SellersItemIdentification']['ID'] = (($item->idproducto=='0') ? $item->nro : $item->codigo);
-            $arr['DebitNoteLine'][$row+1]['Item']['Description'] = format_description((($item->detalle==null) ? $item->cdsc : $item->detalle));
-            $arr['DebitNoteLine'][$row+1]['Price']['PriceAmount']['Price'] = round($item->precio, 2);
-            $arr['DebitNoteLine'][$row+1]['Price']['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['ID'] = $item->nro;
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['DebitedQuantity']['unitCode'] = $item->idmedida;
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['DebitedQuantity']['Quantity'] = round($item->cantidad,10);
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['Item']['SellersItemIdentification']['ID'] = (($item->idproducto=='0') ? $item->nro : $item->codigo);
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['Item']['Description'] = format_description((($item->detalle==null) ? $item->cdsc : $item->detalle));
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['Price']['PriceAmount']['Price'] = round($item->precio, 2);
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['Price']['PriceAmount']['currencyID'] = $header[0]->isomoneda;
             if($item->idafectaciond == 10){
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
             }elseif ($item->idafectaciond>=11 && $item->idafectaciond<=17) {
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
 
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
 
             }elseif ($item->idafectaciond==20) {
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
             }elseif ($item->idafectaciond==21) {
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
 
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
             }elseif ($item->idafectaciond==30) {
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
             }elseif ($item->idafectaciond>=31 && $item->idafectaciond<=36) {
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceAmount']['Price'] = '0.00';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][1]['PriceTypeCode'] = '01';
 
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
-                $arr['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceAmount']['Price'] = round($item->valorref,2);
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['PricingReference']['AlternativeConditionPrice'][2]['PriceTypeCode'] = '02';
             }
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['currencyID'] = $header[0]->isomoneda;
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['Amount'] = round($item->igv,2);
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['currencyID'] = $header[0]->isomoneda;
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->igv,2);;
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['currencyID'] = $header[0]->isomoneda;
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxAmount']['Amount'] = round($item->igv,2);
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['currencyID'] = $header[0]->isomoneda;
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->igv,2);;
 
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxExemptionReasonCode'] = $item->idafectaciond;
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '1000';
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'IGV';
-            $arr['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'VAT';
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxExemptionReasonCode'] = $item->idafectaciond;
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '1000';
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'IGV';
+            $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'VAT';
 
             if($item->idtiposcisc !=0){
                 $arr['DebitNoteLine'][$row+1]['TaxTotal'][2]['TaxAmount']['currencyID'] = $header[0]->isomoneda;
@@ -687,9 +687,9 @@ function arr_DebitNoteLine($header, $detalle, $empresa, $tipodoc){
                 $arr['InvoiceLine'][$row + 1]['LineExtensionAmount']['Amount'] = round($item->preciounitario, 2);
             }
             if($item->descto > 0){
-                $arr['DebitNoteLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'false';
-                $arr['DebitNoteLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $header[0]->isomoneda;
-                $arr['DebitNoteLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->descto,2);
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'false';
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['DebitNoteLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->descto,2);
             }
         }
     }
@@ -697,88 +697,87 @@ function arr_DebitNoteLine($header, $detalle, $empresa, $tipodoc){
 function arr_RequestedMonetaryTotal($header, $detalle, $empresa, $tipodoc){
     global $arr;
     if($header[0]->desctoglobal>0){
-        $arr['RequestedMonetaryTotal']['AllowanceTotalAmount']['currencyID'] = $header[0]->isomoneda;
-        $arr['RequestedMonetaryTotal']['AllowanceTotalAmount']['TotalAmount'] = round($header[0]->desctoglobal,2);
+        $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['AllowanceTotalAmount']['currencyID'] = $header[0]->isomoneda;
+        $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['AllowanceTotalAmount']['TotalAmount'] = round($header[0]->desctoglobal,2);
     }
     if($header[0]->tototroca>0){
-        $arr['RequestedMonetaryTotal']['ChargeTotalAmount']['currencyID'] = $header[0]->isomoneda;
-        $arr['RequestedMonetaryTotal']['ChargeTotalAmount']['TotalAmount'] = round($header[0]->tototroca,2);
+        $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['ChargeTotalAmount']['currencyID'] = $header[0]->isomoneda;
+        $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['ChargeTotalAmount']['TotalAmount'] = round($header[0]->tototroca,2);
     }
 
-    $arr['RequestedMonetaryTotal']['PayableAmount']['currencyID'] = $header[0]->isomoneda;
-    $arr['RequestedMonetaryTotal']['PayableAmount']['TotalAmount'] = round($header[0]->importetotal,2);
+    $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['PayableAmount']['currencyID'] = $header[0]->isomoneda;
+    $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['PayableAmount']['TotalAmount'] = round($header[0]->importetotal,2);
 
     if($header[0]->totanti>0){
-        $arr['RequestedMonetaryTotal']['PrepaidAmount']['currencyID'] = $header[0]->isomoneda;
-        $arr['RequestedMonetaryTotal']['PrepaidAmount']['Amount'] = round($header[0]->totanti,2);
+        $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['PrepaidAmount']['currencyID'] = $header[0]->isomoneda;
+        $arr['doc'][$tipodoc]['child']['RequestedMonetaryTotal']['PrepaidAmount']['Amount'] = round($header[0]->totanti,2);
     }
 }
 function arr_SummaryDocumentsLine($header, $detalle, $empresa, $tipodoc){
     global $arr;
     if(count($detalle)>0){
         foreach ($detalle as $row => $item) {
-            $arr['SummaryDocumentsLine'][$row+1]['LineID'] = $item->nro;
-            $arr['SummaryDocumentsLine'][$row+1]['DocumentTypeCode'] = str_pad($item->idcomprobante, 2, '0', STR_PAD_LEFT);
-            $arr['SummaryDocumentsLine'][$row+1]['ID'] = $item->serie.'-'.$item->numero;
-            //$arr['SummaryDocumentsLine'][$row+1]['DocumentSerialID'] = $item->serie;
-            //$arr['SummaryDocumentsLine'][$row+1]['StartDocumentNumberID'] = $item->startdocumentnumberid;
-            //$arr['SummaryDocumentsLine'][$row+1]['EndDocumentNumberID'] = $item->enddocumentnumberid;
-            $arr['SummaryDocumentsLine'][$row+1]['AccountingCustomerParty']['CustomerAssignedAccountID'] = $item->identidad;
-            $arr['SummaryDocumentsLine'][$row+1]['AccountingCustomerParty']['AdditionalAccountID'] = $item->idtipodni;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['LineID'] = $item->nro;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['DocumentTypeCode'] = str_pad($item->idcomprobante, 2, '0', STR_PAD_LEFT);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['ID'] = $item->serie.'-'.$item->numero;
+            /*$arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['DocumentSerialID'] = $item->serie;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['StartDocumentNumberID'] = $item->startdocumentnumberid;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['EndDocumentNumberID'] = $item->enddocumentnumberid;*/
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AccountingCustomerParty']['CustomerAssignedAccountID'] = $item->identidad;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AccountingCustomerParty']['AdditionalAccountID'] = $item->idtipodni;
 
             if($item->idcomprobante == '7' || $item->idcomprobante == '8' ){
                 //sac:SummaryDocumentsLine/cac:BillingReference/cac:InvoiceDocumentReference/cbc:ID
-                $arr['SummaryDocumentsLine'][$row+1]['BillingReference']['InvoiceDocumentReference']['ID']  = $item->invoicedocumentreference;
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingReference']['InvoiceDocumentReference']['ID']  = $item->invoicedocumentreference;
                 //sac:SummaryDocumentsLine/cac:BillingReference/cac:InvoiceDocumentReference/cbc:DocumentTypeCode
-                $arr['SummaryDocumentsLine'][$row+1]['BillingReference']['InvoiceDocumentReference']['Documenttypecode']  = $item->documenttypecode;
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingReference']['InvoiceDocumentReference']['documenttypecode']  = $item->documenttypecode;
             }
 
-            $arr['SummaryDocumentsLine'][$row+1]['Status']['ConditionCode'] = $item->conditioncode;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['Status']['ConditionCode'] = $item->conditioncode;
 
-            $arr['SummaryDocumentsLine'][$row+1]['TotalAmount']['Amount'] = round($item->importetotal,2);
-            $arr['SummaryDocumentsLine'][$row+1]['TotalAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TotalAmount']['Amount'] = round($item->importetotal,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TotalAmount']['currencyID'] = $item->isomoneda;
             $nBi=0;
             if($item->totopgra>0){
             $nBi++;
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopgra,2);
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '01';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopgra,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '01';
             }
             if($item->totopexo>0){
                 $nBi++;
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopexo,2);
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '02';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopexo,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '02';
             }
             if($item->totopina>0){
                 $nBi++;
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopina,2);
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
-            $arr['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '03';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopina,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '03';
             }
             if($item->tototroca>0){
-            $arr['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'true';
-            $arr['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->tototroca,2);
-            $arr['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'true';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->tototroca,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $item->isomoneda;
             }
-            
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxAmount']['currencyID'] = $item->isomoneda;
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxAmount']['Amount'] = round($item->totisc,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxAmount']['Amount'] = round($item->totisc,2);
 
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['currencyID'] = $item->isomoneda;
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->totisc,2);
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '2000';
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'ISC';
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'EXC';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->totisc,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '2000';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'ISC';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'EXC';
 
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxAmount']['currencyID'] = $item->isomoneda;
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxAmount']['Amount'] = round($item->totigv,2);
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxAmount']['currencyID'] = $item->isomoneda;
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->totigv,2);;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxAmount']['Amount'] = round($item->totigv,2);
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxAmount']['currencyID'] = $item->isomoneda;
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxAmount']['Amount'] = round($item->totigv,2);;
 
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '1000';
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'IGV';
-            $arr['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'VAT';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['ID'] = '1000';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['Name'] = 'IGV';
+            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][2]['TaxSubtotal']['TaxCategory']['TaxScheme']['TaxTypeCode'] = 'VAT';
         }
     }
 }
