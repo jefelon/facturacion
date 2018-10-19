@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_car.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_car.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_form.php" />
+      <change beforePath="$PROJECT_DIR$/cpegeneracion/sunat/funciones.php" afterPath="$PROJECT_DIR$/cpegeneracion/sunat/funciones.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,11 +59,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="funciones.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="funciones.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/funciones.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1853">
-              <caret line="151" column="0" lean-forward="false" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
+            <state relative-caret-position="958">
+              <caret line="198" column="1" lean-forward="false" selection-start-line="198" selection-start-column="1" selection-end-line="198" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -81,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="enviar_sunat.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="enviar_sunat.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/enviar_sunat.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="218">
-              <caret line="154" column="40" lean-forward="false" selection-start-line="154" selection-start-column="40" selection-end-line="154" selection-end-column="40" />
+            <state relative-caret-position="184">
+              <caret line="152" column="94" lean-forward="true" selection-start-line="152" selection-start-column="94" selection-end-line="152" selection-end-column="94" />
               <folding />
             </state>
           </provider>
@@ -120,7 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>val</find>
       <find>verificar_duplicidad_compra</find>
       <find>open</find>
       <find>Información de Proveedor para el producto</find>
@@ -150,6 +147,7 @@
       <find>txt_bus_pro_codbar</find>
       <find>dialog</find>
       <find>venta_form</find>
+      <find>valorrefunitario</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -181,7 +179,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modulos/lote/lote_tabla.php" />
         <option value="$PROJECT_DIR$/modulos/producto/presentacion_lote.php" />
         <option value="$PROJECT_DIR$/modulos/catalogo/cCatalogo.php" />
         <option value="$PROJECT_DIR$/modulos/producto/lote_form.php" />
@@ -232,6 +229,7 @@
         <option value="$PROJECT_DIR$/modulos/venta/venta_car.php" />
         <option value="$PROJECT_DIR$/modulos/producto/presentacion_vista.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_form.php" />
+        <option value="$PROJECT_DIR$/cpegeneracion/sunat/funciones.php" />
       </list>
     </option>
   </component>
@@ -376,7 +374,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="305992000" />
+    <option name="totallyTimeSpent" value="306157000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -457,20 +455,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/cClientecuenta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="60" column="13" lean-forward="false" selection-start-line="60" selection-start-column="13" selection-end-line="60" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="40" lean-forward="true" selection-start-line="10" selection-start-column="40" selection-end-line="10" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_filtro_reparto.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -818,6 +802,22 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="35343">
           <caret line="2079" column="8" lean-forward="false" selection-start-line="2079" selection-start-column="8" selection-end-line="2079" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/enviar_sunat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="152" column="94" lean-forward="true" selection-start-line="152" selection-start-column="94" selection-end-line="152" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/funciones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="958">
+          <caret line="198" column="1" lean-forward="false" selection-start-line="198" selection-start-column="1" selection-end-line="198" selection-end-column="1" />
           <folding />
         </state>
       </provider>
