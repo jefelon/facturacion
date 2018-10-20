@@ -441,8 +441,8 @@ function arr_TaxTotal($header, $detalle, $empresa, $tipodoc){
     }
     if($header[0]->totopexo>0){
         $xnr++;
-        if($xnr<2)
-            $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['tag'] = 'cac';
+//        if($xnr<2)
+        $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['tag'] = 'cac';
 
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount'][0] = round($header[0]->totopexo,2);
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount']['tag'] = 'cbc';
@@ -609,7 +609,7 @@ function arr_LegalMonetaryTotal($header, $detalle, $empresa, $tipodoc){
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['tag'] = 'cbc';
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount'][0] = round($header[0]->importetotal - $header[0]->totdescto + $header[0]->tototroca,2);
+    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount'][0] = round($header[0]->importetotal,2);
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['tag'] = 'cbc';
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 }
@@ -662,23 +662,23 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             //     $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][2]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listURI'] = 'urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16';
             // }
             if($item->descto>0){
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['tag'] = 'cac';
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['ChargeIndicator'][0] = 'false';
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['ChargeIndicator']['tag'] = 'cbc';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['tag'] = 'cac';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['ChargeIndicator'][0] = 'false';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['ChargeIndicator']['tag'] = 'cbc';
 
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['AllowanceChargeReasonCode'][0] = '00';
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['AllowanceChargeReasonCode']['tag'] = 'cbc';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['AllowanceChargeReasonCode'][0] = '00';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['AllowanceChargeReasonCode']['tag'] = 'cbc';
 
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['MultiplierFactorNumeric'][0] = round($item->descto / $item->valorventa, 2);
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['MultiplierFactorNumeric']['tag'] = 'cbc';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['MultiplierFactorNumeric'][0] = round($item->descto / $item->valorventa, 2);
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['MultiplierFactorNumeric']['tag'] = 'cbc';
 
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['Amount'][0] = round($item->descto,2);
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['Amount']['tag'] = 'cbc';
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['Amount']['atr']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['Amount'][0] = round($item->descto,2);
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['Amount']['tag'] = 'cbc';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['Amount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['BaseAmount'][0] = round($item->valorventa,2);
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['BaseAmount']['tag'] = 'cbc';
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Allowancecharge']['child']['BaseAmount']['atr']['currencyID'] = $header[0]->isomoneda;
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount'][0] = round($item->valorventa,2);
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount']['tag'] = 'cbc';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount']['atr']['currencyID'] = $header[0]->isomoneda;
             }
             $TaxExemptionReasonCode = $item->idafectaciond;
             if($item->idafectaciond == 10){
