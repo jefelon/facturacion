@@ -1,7 +1,7 @@
 <?php
 require_once('../../cpegeneracion/sunat/funciones.php');
-require_once('../../cpegeneracion/sunat/toarray.php');
-require_once('../../cpegeneracion/sunat/toxml.php');
+require_once('../../cpegeneracion/sunat/toarray21.php');
+require_once('../../cpegeneracion/sunat/toxml21.php');
 require_once('../../config/datos.php');
 
 //EMPRESA
@@ -63,7 +63,6 @@ while($dt = mysql_fetch_array($dts)){
 	$des=$dt["tb_venta_des"];
 	$igv=$dt["tb_venta_igv"];
 	$tot=$dt["tb_venta_tot"];
-
 	$gra=$dt["tb_venta_gra"];
 	$ina=$dt["tb_venta_ina"];
 	$exo=$dt["tb_venta_exo"];
@@ -150,12 +149,12 @@ while($dt = mysql_fetch_array($dts))
 
 	//$igv 										=$dt["tb_ventadetalle_igv"] / $dt["tb_ventadetalle_can"];
     $detalle[$autoin]['preciounitario']					=$dt["tb_ventadetalle_preuni"];
-    $detalle[$autoin]['valorrefunitario']					=$dt["tb_ventadetalle_preunilin"];
+    $detalle[$autoin]['valorunitario']					=$dt["tb_ventadetalle_preunilin"];
     if ($dt["cs_tipoafectacionigv_cod"] == 10){
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
-    elseif ($dt["cs_tipoafectacionigv_cod"] == 20){
-        $detalle[$autoin]['igv']					=0.00;//sumatoria con cantidad
+    if ($dt["cs_tipoafectacionigv_cod"] == 20){
+      $detalle[$autoin]['igv']					='0.00';//sumatoria con cantidad
     }else{
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
