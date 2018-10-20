@@ -32,6 +32,10 @@ require_once ("../formatos/formato.php");
 
 $dts1=$oCompra->mostrar_compra_detalle($_POST['com_id']);
 $num_rows= mysql_num_rows($dts1);
+$dts2=$oCompra->mostrar_compra_detalle_servicio($_POST['com_id']);
+$num_rows2= mysql_num_rows($dts2);
+
+
 ?>
 <script type="text/javascript">
 $(function() {
@@ -96,6 +100,14 @@ function lote_tabla(idf)
     });
 }
 </script>
+
+<?php
+$num_rows_total = ($num_rows + $num_rows2);
+if($num_rows_total =="" or $num_rows_total==0)echo $num_rows_total.' Ningún registro.';
+if($num_rows_total==1)echo $num_rows_total.' registro.';
+if($num_rows_total>=2)echo ($num_rows_total).' registros.';
+
+?>
         <table cellspacing="1" id="tabla_compra_detalle" class="tablesorter">
             <thead>
                 <tr>
@@ -113,7 +125,7 @@ function lote_tabla(idf)
                 </tr>
             </thead>
 			<?php
-            if($num_rows>=1){
+            if($num_rows_total>=1){
             ?>
             <tbody>
                 <?php
@@ -157,17 +169,52 @@ function lote_tabla(idf)
                 	}
                 mysql_free_result($dts1);
                 ?>
+                <?php
+                while($dt2 = mysql_fetch_array($dts2)){
+                ?>
+                <tr>
+                    <td align="right"><?php
+                        echo $dt2['tb_compradetalle_can'];
+                        ?></td>
+                    <td title="ZZ">ZZ</td>
+                    <td>
+                        <?php
+                        echo '<strong>'.$dt2['tb_servicio_nom'].'</strong>';
+                        ?></td>
+                    <td><?php
+                        echo $dt2['tb_categoria_nom'];
+                        ?></td>
+                    <td align="right"><?php
+                        echo $dt2['tb_compradetalle_preuni'];
+                        ?></td>
+                    <td align="right"><?php
+                        echo $dt2['tb_compradetalle_des'];
+                        ?></td>
+                    <td align="right"><?php
+                        echo formato_money($dt2['tb_compradetalle_imp']);
+                        ?></td>
+                    <td align="right"><?php
+                        echo formato_money($dt2['tb_compradetalle_fle']);
+                        ?></td>
+                    <!--<td align="right"><?php
+                    //echo $dt1['tb_compradetalle_fle'];
+                    ?></td>-->
+                    <td align="right"><?php
+                        echo formato_money($dt2['tb_compradetalle_cosuni']);
+                        ?></td>
+                    <td align="center"><a class="btn_tabla_lote" onClick="lote_tabla(<?php echo $dt2['tb_compradetalle_id'] ?>)">Ver Lote</a></td>
+                </tr>
+                <?php
+                	}
+                mysql_free_result($dts2);
+                ?>
                 </tbody>
                 <?php
 				}
 				?>
         </table>
         <div id="div_lote_tabla"></div>
-        <?php 
-	if($num_rows=="" or $num_rows==0)echo $num_rows.' Ningún registro.';
-	if($num_rows==1)echo $num_rows.' registro.';
-	if($num_rows>=2)echo $num_rows.' registros.';
-?>
+
 <br>
         <hr>
 <div>

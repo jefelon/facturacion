@@ -44,7 +44,7 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function insertar_detalle($cat_id,$can,$preuni,$des, $imp, $tipo_afec, $igv, $fle, $per, $cosuni, $com_id){
+	function insertar_detalle($cat_id,$can,$preuni,$des, $imp, $tipo_afec, $igv, $fle, $per, $cosuni, $com_id, $ser_id){
 	$sql = "INSERT INTO tb_compradetalle(
 	`tb_catalogo_id` ,
 	`tb_compradetalle_can` ,
@@ -56,15 +56,40 @@ class cCompra{
 	`tb_compradetalle_fle` ,
 	`tb_compradetalle_per` ,
 	`tb_compradetalle_cosuni` ,
-	`tb_compra_id`
+	`tb_compra_id`,
+	`tb_servicio_id`
 	)
 	VALUES (
-	'$cat_id',  '$can',  '$preuni', '$des',  '$imp', '$tipo_afec', '$igv', '$fle', '$per',  '$cosuni', '$com_id'
-	);"; 
+	'$cat_id',  '$can',  '$preuni', '$des',  '$imp', '$tipo_afec', '$igv', '$fle', '$per',  '$cosuni', '$com_id', '$ser_id'
+	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+
+    function insertar_compra_costo($com_id,$com_rel){
+        $sql = "INSERT INTO tb_compracosto(
+	`tb_compra_id` ,
+	`tb_compra_relacionada` 
+	)
+	VALUES (
+	'$com_id',  '$com_rel'
+	);";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrar_compra_relacionadas($com_id){
+        $sql = "SELECT * 
+	FROM tb_compracosto cc
+	WHERE cc.tb_compra_id = $com_id";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function ultimoInsert(){
 	$sql = "SELECT last_insert_id()"; 
 	$oCado = new Cado();
@@ -156,6 +181,17 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrar_compra_detalle_servicio($com_id){
+        $sql="SELECT * 
+	FROM tb_servicio s
+	INNER JOIN tb_categoria c ON s.tb_categoria_id = c.tb_categoria_id
+	INNER JOIN tb_compradetalle cd ON s.tb_servicio_id = cd.tb_servicio_id
+	WHERE cd.tb_compra_id=$com_id ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_duplicidad($doc,$numdoc,$num_ruc,$est,$emp_id){
 	$sql="SELECT * 
 	FROM tb_compra c

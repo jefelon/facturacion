@@ -43,6 +43,8 @@ $oLote = new cLote();
 
 $igv_dato=0.18;
 
+$unico_id=$_POST['unico_id'];
+
 if ($_POST['action_compra'] == "insertar") {
     if (!empty($_POST['txt_com_fec'])) {
         //documento
@@ -111,6 +113,73 @@ if ($_POST['action_compra'] == "insertar") {
             $dt = mysql_fetch_array($dts);
             $com_id = $dt['last_insert_id()'];
             mysql_free_result($dts);
+
+
+
+
+            $duas = $_POST['dua'];
+            $cont=0;
+            foreach ($duas as $dua) {
+                $oCompra->insertar(
+                    fecha_mysql($_POST['fec_ser'][$cont]),
+                    fecha_mysql($_POST['txt_com_fecven']),
+                    19,
+                    $dua,
+                    $_POST['cmb_com_mon'],
+                    $_POST['txt_com_tipcam'],
+                    $_POST['txt_com_tipcam'],
+                    $_POST['proveedor'][$cont],
+                    moneda_mysql(0),
+                    moneda_mysql(0),
+                    moneda_mysql(0),
+                    moneda_mysql(0),
+                    $_POST['cmb_com_tipfle'],
+                    moneda_mysql(0),
+                    moneda_mysql(0),
+                    moneda_mysql($_POST['imp_sol'][$cont]/1.18),
+                    moneda_mysql($_POST['txt_com_opexo']),
+                    moneda_mysql($_POST['imp_sol'][$cont]/1.18),
+                    moneda_mysql($_POST['txt_com_igv']),
+                    moneda_mysql($_POST['imp_sol'][$cont]),
+                    $_POST['chk_com_tipper'],
+                    moneda_mysql($_POST['txt_com_per']),
+                    $_POST['cmb_com_alm_id'],
+                    $_POST['cmb_com_est'],
+                    $_POST['hdd_usu_id'],
+                    $_POST['hdd_emp_id'],
+                    $_POST['txt_com_numorden'],
+                    $documento_tipdoc,
+                    $fec_mod,
+                    $_POST['txt_com_ser_nota'],
+                    $_POST['txt_com_num_nota'],
+                    $_POST['cmb_com_tip']
+                );
+                //ultima compra
+                $dts = $oCompra->ultimoInsert();
+                $dt = mysql_fetch_array($dts);
+                $comcosto_id = $dt['last_insert_id()'];
+                $cont++;
+
+
+                $oCompra->insertar_detalle(
+                    $_POST['producto'][$cont],
+                    1,
+                    $dua/1.18,
+                    0,
+                    $dua,
+                    1,
+                    $dua*0.18,
+                    0,
+                    0,
+                    $dua,
+                    $comcosto_id,
+                    0
+                );
+
+                $oCompra->insertar_compra_costo($com_id,$comcosto_id);
+
+            }
+
 
             if($_POST['cmb_com_doc']=='20' or $_POST['cmb_com_doc']=='21'){
                 if ($_POST['cmb_com_tip'] == '9' ) {
@@ -241,8 +310,8 @@ if ($_POST['action_compra'] == "insertar") {
                     $linea_preuni,
                     $linea_des,
                     $linea_importe,
-                    $linea_igv,
                     $tipo_item,
+                    $linea_igv,
                     $linea_fle,
                     $linea_per,
                     $linea_calculo_cos,
@@ -378,6 +447,10 @@ if ($_POST['action_compra'] == "insertar") {
 
             }
 
+
+
+
+
             unset($_SESSION['compra_car']);
             //unset($_SESSION['compra_igv']);
             unset($_SESSION['compra_linea_precom']);
@@ -395,6 +468,75 @@ if ($_POST['action_compra'] == "insertar") {
 
             unset($_SESSION['compra_ajupos']);
             unset($_SESSION['compra_ajuneg']);
+
+            //detalle de servicios
+            if(isset($_SESSION['servicio_car'][$unico_id]))foreach($_SESSION['servicio_car'][$unico_id] as $indice=>$cantidad)
+            {
+                $autoin++;
+
+                //precio de venta ingresado
+                $precio_unitario_linea = $_SESSION['servicio_preven'][$unico_id][$indice];
+
+                //precio unitario de venta
+                $valor_unitario_linea=$precio_unitario_linea/(1+$igv_dato);
+
+                $nom = $_SESSION['servicio_nom'][$unico_id][$indice];
+
+                //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
+                $tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];
+                $descuento_numero_linea = formato_money($_SESSION['servicio_des'][$unico_id][$indice]);
+                $descuento_porcentaje_linea = $descuento_numero_linea/100;
+                //descuento en porcentaje
+
+                $valor_venta_bruto_linea=$valor_unitario_linea*$cantidad;
+
+                //igv
+                $descuento_x_item_linea = $valor_venta_bruto_linea*$descuento_porcentaje_linea;
+                $valor_venta_x_item_linea = $valor_venta_bruto_linea-$descuento_x_item_linea;
+
+                $igv_linea=$valor_venta_x_item_linea*$igv_dato;
+
+                $tipo_venta=2;
+                $cat_id=0;
+                $afeigv_id=1;
+                $unimed_id=13;//ZZ
+
+                $linea_fle=0;
+                $linea_per=0;
+
+                //////////////////////
+                //registro detalle de venta de servicio
+
+                $desc_percentage = $_POST['txt_ven_des'];
+
+                $linea_importe = $precio_unitario_linea * $cantidad;
+
+                //registro detalle de compra
+                $oCompra->insertar_detalle(
+                    $indice,
+                    $cantidad,
+                    $valor_unitario_linea,
+                    $descuento_x_item_linea,
+                    $linea_importe,
+                    $afeigv_id,
+                    $igv_linea,
+                    $linea_fle,
+                    $linea_per,
+                    $precio_unitario_linea,
+                    $com_id,
+                    $_SESSION['servicio_car'][$unico_id]
+                );
+                mysql_free_result($dts);
+            }
+
+            if(isset($_SESSION['servicio_car'][$unico_id])){
+                unset($_SESSION['servicio_car'][$unico_id]);
+                unset($_SESSION['servicio_preven'][$unico_id]);
+                unset($_SESSION['servicio_tipdes'][$unico_id]);
+                unset($_SESSION['servicio_des'][$unico_id]);
+                unset($_SESSION['servicio_nom'][$unico_id]);
+            }
+
 
             $data['com_id'] = $com_id;
             $data['com_msj'] = 'Se registró compra correctamente.';

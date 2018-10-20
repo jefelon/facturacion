@@ -4,11 +4,15 @@ require_once ("../../config/Cado.php");
 require_once ("../producto/cCatalogoproducto.php");
 $oCatalogoproducto = new cCatalogoproducto();
 require_once ("../formatos/formato.php");
+require_once ("../servicio/cServicio.php");
+$oServicio = new cServicio();
 
 $igv_dato=0.18;
 
 if($_POST['com_tipper']==1)$percepcion_dato=0.02;
 if($_POST['com_tipper']==0)$percepcion_dato=0;
+
+$unico_id=$_POST['unico_id'];
 
 //agregar a cesta
 if($_POST['action']=='agregar')
@@ -16,7 +20,7 @@ if($_POST['action']=='agregar')
 	if($_POST['cat_can']>0)
 	{
 		//producto por catalogo y stock y almacen
-		$dts= $oCatalogoproducto->presentacion_catalogo($_POST['catalog_id']);
+		$dts= $oCatalogoproducto->presentacion_catalogo($_POST['cat_id']);
 		$dt = mysql_fetch_array($dts);
 			$pro_nom=$dt['tb_producto_nom'];
 			$pre_nom=$dt['tb_presentacion_nom'];
@@ -93,6 +97,39 @@ if($_POST['action']=='agregar')
 	}
 }
 
+//agregar servicio
+if($_POST['action']=='agregar_servicio'){
+    $_SESSION['servicio_car'][$unico_id][$_POST['ser_id']]		= $_POST['ser_can'];//id servicio - cantidad
+    $_SESSION['servicio_preven'][$unico_id][$_POST['ser_id']]	= moneda_mysql($_POST['ser_pre']);//id servicio - precio
+    $_SESSION['servicio_tipdes'][$unico_id][$_POST['ser_id']]	= $_POST['ser_rad_tipdes'];//id servicio - tipodescuento (1 ó 2)
+    $_SESSION['servicio_des'][$unico_id][$_POST['ser_id']]		= moneda_mysql($_POST['ser_des']);//id servicio - descuento
+    $_SESSION['servicio_tip'][$unico_id][$_POST['ser_id']]		= $_POST['ser_tip'];
+    switch ($_POST['ser_tip']) {
+        case '1':
+            $tipo_item_txt = "";
+            break;
+        case '2':
+            $tipo_item_txt = "***PREMIO***";
+            break;
+        case '3':
+            $tipo_item_txt = "***DONACIÓN***";
+            break;
+        case '4':
+            $tipo_item_txt = "***RETIRO***";
+            break;
+        case '5':
+            $tipo_item_txt = "***PUBLICIDAD***";
+            break;
+        case '6':
+            $tipo_item_txt = "***BONIFICACIÓN***";
+            break;
+        case '7':
+            $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
+            break;
+    }
+    $_SESSION['servicio_nom'][$unico_id][$_POST['ser_id']]		= $_POST['ser_nom'] . ' ' . $tipo_item_txt;
+}
+
 //quitar valores del array
 if($_POST['action']=='quitar')
 {
@@ -107,6 +144,15 @@ if($_POST['action']=='quitar')
 	unset($_SESSION['compra_linea_per'][$_POST['cat_id']]);
 	unset($_SESSION['compra_linea_cos'][$_POST['cat_id']]);
 	unset($_SESSION['presentacion_id'][$_POST['cat_id']]);
+}
+
+if($_POST['action']=='quitar_servicio'){
+    unset($_SESSION['servicio_car'][$unico_id][$_POST['ser_id']]);
+    unset($_SESSION['servicio_preven'][$unico_id][$_POST['ser_id']]);
+    unset($_SESSION['servicio_tipdes'][$unico_id][$_POST['ser_id']]);
+    unset($_SESSION['servicio_des'][$unico_id][$_POST['ser_id']]);
+    unset($_SESSION['servicio_tip'][$unico_id][$_POST['ser_id']]);
+    unset($_SESSION['servicio_nom'][$unico_id][$_POST['ser_id']]);
 }
 
 //restablecer o eliminar array
@@ -130,21 +176,37 @@ if($_POST['action']=='restablecer')
 	
 	unset($_SESSION['compra_ajupos']);
 	unset($_SESSION['compra_ajuneg']);
+
+    unset($_SESSION['servicio_car']);
+    unset($_SESSION['servicio_preven']);
+    unset($_SESSION['servicio_tipdes']);
+    unset($_SESSION['servicio_des']);
+    unset($_SESSION['servicio_tip']);
 }
 
-if(isset($_SESSION['compra_car']))
+if(isset($_SESSION['compra_car']) or isset($_SESSION['servicio_car'][$unico_id]))
 {
-	$num_rows=count($_SESSION['compra_car']);
-	if($num_rows==0)$num_rows="";
-	
-	//total de las cantidades
-	foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad){
-		$total_cantidad+=$linea_cantidad;
-	}
+    if(isset($_SESSION['compra_car'])){
+        $num_rows=count($_SESSION['compra_car']);
+        //total de las cantidades
+        foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad){
+            $total_cantidad+=$linea_cantidad;
+        }
+    }else{
+        $num_rows=0;
+    }
+    if(isset($_SESSION['servicio_car'])){
+        $num_rows2=count($_SESSION['servicio_car']);
+    }else{
+        $num_rows2=0;
+    }
+
+
+    $filas=$num_rows+$num_rows2;
 }
 else
 {
-	$num_rows="";
+    $filas="";
 }
 ?>
 <script type="text/javascript">
@@ -241,11 +303,15 @@ $(function() {
 			compra_car_prorrateo()
 	});
 
-}); 
+});
+
+function cambiar_costo_unitario(cost_uni,n) {
+    $("#cost_uni"+n).html(cost_uni);
+}
 </script>
-<input name="hdd_com_numite" id="hdd_com_numite" type="hidden" value="<?php echo $num_rows?>">
+<input name="hdd_com_numite" id="hdd_com_numite" type="hidden" value="<?php echo $filas?>">
 <fieldset><legend>Detalle de Compra</legend>
-<a class="btn_agregar_producto" title="Agregar Producto" href="#" onClick="catalogo_compra()">Agregar</a>
+<a class="btn_agregar_producto" title="Agregar Producto" href="#" onClick="catalogo_compra_tab()">Agregar</a>
 <!--    <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_compra_tab()">Agregar</a>-->
 <a class="btn_rest_car" href="#" onClick="compra_car('restablecer')">Vaciar</a>
 <a class="btn_rest_act" href="#" onClick="compra_car('actualizar')">Actualizar</a>
@@ -256,9 +322,9 @@ $(function() {
 
 <div style="width:auto; float:right;">
 <?php 
-	if($num_rows=="" or $num_rows==0)echo 'Ningún ítem agregado.';
-	if($num_rows==1)echo $num_rows.' ítem agregado.';
-	if($num_rows>=2)echo $num_rows.' ítems agregados.';
+	if($filas=="" or $filas==0)echo 'Ningún ítem agregado.';
+	if($filas==1)echo $filas.' ítem agregado.';
+	if($filas>=2)echo $filas.' ítems agregados.';
 ?>
 </div>
 </fieldset>
@@ -288,6 +354,8 @@ if($num_rows>0){
             <?php
             $total_opegrav = 0;
             $total_opeexo = 0;
+
+            $cont_prod=0;
 			foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad){
 				
 				//consulta de datos			
@@ -345,7 +413,7 @@ if($num_rows>0){
 				$linea_calculo_des=1-($linea_des)/100;
 				
 				//importe por linea
-				$linea_importe=$linea_preuni*$linea_cantidad*$linea_calculo_des;
+				$linea_importe=$linea_preuni*$linea_cantidad;
 			
 				//igv por linea
 				$linea_igv=$linea_importe*$igv_dato;
@@ -453,11 +521,11 @@ if($num_rows>0){
                             <td align="right"><?php echo formato_decimal($linea_preuni,3)?></td>
 
                             <?php if ($tipo_item==9){ ?>
-                                <td align="right"><?php echo formato_decimal($linea_calculo_cos, 3)?></td>
+                                <td align="right" id="cost_uni<?php echo $cont_prod ?>"><?php echo formato_decimal($linea_calculo_cos, 3)?></td>
                                 <td align="right"></td>
                             <?php } else{ ?>
                                 <td align="right"></td>
-                                <td align="right"><?php echo formato_decimal($linea_calculo_cos, 3)?></td>
+                                <td align="right" id="cost_uni<?php echo $cont_prod ?>"><?php echo formato_decimal($linea_calculo_cos, 3)?></td>
                             <?php } ?>
                             <td align="right"><?php echo formato_decimal($linea_des, 3)?></td>
                             <td align="right"><?php echo formato_decimal($valor_venta_x_item, 3)?></td>
@@ -475,31 +543,146 @@ if($num_rows>0){
                         </tr>
             <?php
                 mysql_free_result($dts1);
+                $cont_prod++;
 			}	
             ?>
-            </tbody>
 <?php
 }
 else
 {
 ?>
-            <tr>
-              <td colspan="12">&nbsp;</td>
-              <!--<td>&nbsp;</td>-->
-            </tr>
+
 <?php
 }
 
+
+?>
+<?php
+if($num_rows2>0)foreach($_SESSION['servicio_car'][$unico_id] as $indice=>$cantidad){
+    $dts1=$oServicio->mostrarUno($indice);
+    $dt1 = mysql_fetch_array($dts1);
+
+    $precio_unitario	=$_SESSION['servicio_preven'][$unico_id][$indice];
+
+
+    //tipo g/e/i ingresado
+    $tipo_item	= 1;
+    $linea_valor_unitario = $precio_unitario / 1.18;
+
+    $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
+    $linea_desc_x_item_percent=0;
+    $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
+    $linea_valor_venta_x_item = $linea_valor_venta_bruto-$linea_desc_x_item;
+    $linea_igv=$linea_valor_venta_x_item*0.18;
+
+
+    //tipo g/e/i ingresado
+    $precio_unitario=$precio_unitario-$precio_unitario*($general_des/100);
+
+    $tipo_pro='Gravado';
+    $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+    $valor_venta = $valor_venta_unitario * $cantidad;
+    $precio_venta = $precio_unitario * $cantidad;
+    $ope_gravadas_total += $valor_venta;
+
+    $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+    $precio_venta = $precio_unitario * $cantidad;
+    $valor_venta = $valor_venta_unitario * $cantidad;
+
+
+    //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
+    $tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];
+    $descuento_linea = $_SESSION['servicio_des'][$unico_id][$indice];
+
+    //sumatoria factura
+    if($tipo_item==1){
+        $sub_total = $sub_total + $linea_valor_venta_x_item;
+    }
+    ?>
+    <tr>
+        <td align="right"><?php echo $cantidad?></td>
+        <td>ZZ</td>
+        <td>Servicio Gravado</td>
+        <td><?php echo $_SESSION['servicio_nom'][$unico_id][$indice] ?></td>
+        <!--            <td>--><?php //echo $dt['tb_unidad_abr'];?><!--</td>-->
+        <td align="right"><?php echo formato_decimal($linea_valor_unitario,3)?></td>
+        <td></td>
+        <td align="right"><?php echo formato_decimal($precio_unitario,3)?></td>
+        <td align="right">
+            0.000
+        </td>
+        <td align="right">
+            <?php
+            echo formato_decimal($linea_valor_venta_x_item,3);
+            ?>
+        </td>
+        <td align="right">
+            0.000
+        </td>
+        <td align="right"><?php echo formato_decimal($precio_venta,3)?></td>
+        <td align="center" nowrap="nowrap">
+            <?php if($_POST['vista']!='cange'){?>
+                <a class="btn_item" href="#" onClick="editar_datos_item('editar_servicio','<?php echo $dt1['tb_servicio_id']?>')">Actualizar Datos de Item</a><a class="btn_quitar" href="#" onClick="compra_car_servicio('quitar_servicio','<?php echo $dt1['tb_servicio_id']?>')">Quitar</a>
+            <?php }?>
+        </td>
+    </tr>
+    <?php
+    mysql_free_result($dts1);
+}
+?>
+            <tr>
+                <td colspan="12">&nbsp;</td>
+                <!--<td>&nbsp;</td>-->
+            </tr>
+</tbody>
+</table>
+
+<?php
+$igv_total = $ope_gravadas_total*0.18;
+$importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
+
 $total_operaciones_exoneradas = $total_operaciones_exoneradas-$total_operaciones_exoneradas*($general_des/100);
 $total_operaciones_gravadas=$total_operaciones_gravadas-$total_operaciones_gravadas*($general_des/100) + $ajuste_positivo-$ajuste_negativo;
+$total_operaciones_gravadas_productos=$total_operaciones_gravadas;
 $igv_total_gravados=$total_operaciones_gravadas*18/100;
 $importe_total_venta = $total_operaciones_exoneradas + $total_operaciones_gravadas + $igv_total_gravados;
 $descuento_global = $valor_venta_x_item_total*($general_des/100);
 $descuento_total=$descuento_global+$desc_x_item_total;
 
+//servicios + productos
+$total_operaciones_gravadas+=$ope_gravadas_total;
+$importe_total_venta += $importe_total;
+$igv_total_gravados += $igv_total;
+
+$total_operaciones_gravadas_productos = $total_operaciones_gravadas_productos * 1.18;
+$cont=0;
+foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad) {
+    $linea_preuni = $_SESSION['compra_linea_preuni'][$indice];
+    $linea_importe = ($linea_preuni * $linea_cantidad) * 1.18;
+    $factor = $linea_importe / $total_operaciones_gravadas_productos;
+
+    $costo = 0;
+    if ($num_rows2 > 0) foreach ($_SESSION['servicio_car'][$unico_id] as $indice2 => $cantidad) {
+        $precio_unitario = $_SESSION['servicio_preven'][$unico_id][$indice2];
+        $linea_importe_servicio = $precio_unitario * $cantidad;
+        $costo += $linea_importe_servicio * $factor;
+    }
+    $imp_dols = $_POST['imp_dol'];
+    foreach ($imp_dols as $imp_dol) {
+        $costo += $imp_dol * $factor;
+    }
+    $costo_total=$costo+$linea_importe;
+    $costo_unitario=$costo_total/$linea_cantidad;
+    ?>
+    <script>
+        cambiar_costo_unitario(<?php echo  formato_decimal($costo_unitario,3);?>, <?php echo  $cont;?>);
+    </script>
+    <?php
+    $cont++;
+}
+
+
 ?>
-        </table>
-        <br>
 <div>
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
   <tr>
