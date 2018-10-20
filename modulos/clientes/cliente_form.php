@@ -45,7 +45,7 @@ if($_POST['action']=="editarSunat"){
 
 <script type="text/javascript">
     jQuery.validator.addMethod("tip_doc", function(value, element, parameter) {
-        if (($('input[name="rad_cli_tip"]:checked').val()==1 && $('#txt_cli_doc').val().length==8)||($('input[name="rad_cli_tip"]:checked').val()==2 && $('#txt_cli_doc').val().length==11)){
+        if (($('input[name="rad_cli_tip"]:checked').val()==1 && $('#txt_cli_doc').val().length==8)||($('input[name="rad_cli_tip"]:checked').val()==2 && $('#txt_cli_doc').val().length==11) ||($('input[name="rad_cli_tip"]:checked').val()==3 && $('#txt_cli_doc').val().length>1)){
             return true;
         }else{
             return false;
@@ -146,6 +146,16 @@ $(function() {
 		$(this).val($(this).val().toUpperCase());
 	});
 
+    if($('#radio1').checked(true)) {
+        $('#lbl_cli_doc').html('DNI');
+    }
+    if($('#radio2').checked(true)) {
+        $('#lbl_cli_doc').html('RUC');
+    }
+    if($('#radio3').checked(true)) {
+        $('#lbl_cli_doc').html('DOC');
+    }
+
 	$("#for_cli").validate({
 		submitHandler: function() {
 			$.ajax({
@@ -231,6 +241,7 @@ $(function() {
           	<div id="radio">
               <input name="rad_cli_tip" type="radio" id="radio1" value="1" <?php if($tip==1)echo 'checked="checked"'?>/><label for="radio1">DNI</label>
               <input name="rad_cli_tip" type="radio" id="radio2" value="2" <?php if($tip==2)echo 'checked="checked"'?>/><label for="radio2">RUC</label>
+              <input name="rad_cli_tip" type="radio" id="radio3" value="3" <?php if($tip==3)echo 'checked="checked"'?>/><label for="radio3">OTROS</label>
             </div>
     	  </td>
   	  </tr>
