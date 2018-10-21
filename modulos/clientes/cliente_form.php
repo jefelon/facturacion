@@ -119,26 +119,34 @@ $('#validar_ruc').button({
 
 $(function() {
     cmb_precio_id(<?php echo $precio_id ?>);
-	// $("input[id=radio1]").change(function(){
-	// 	if($("input[id=radio1]").is(":checked")){
-	// 		$('#lbl_cli_doc').html("DNI:");
-	// 		$( "#txt_cli_doc" ).attr('maxlength','8');
-	// 	}
-	// });
-	// if($("input[id=radio1]").is(":checked")){
-	// 	$('#lbl_cli_doc').html("DNI:");
-	// 	$( "#txt_cli_doc" ).attr('maxlength','8');
-	// }
-	// $("input[id=radio2]").change(function(){
-	// 	if($("input[id=radio2]").is(":checked")){
-	// 		$('#lbl_cli_doc').html("RUC:");
-	// 		$( "#txt_cli_doc" ).attr('maxlength','11');
-	// 	}
-	// });
-	// if($("input[id=radio2]").is(":checked")){
-	// 	$('#lbl_cli_doc').html("RUC:");
-	// 	$( "#txt_cli_doc" ).attr('maxlength','11');
-	// }
+	$("input[id=radio1]").change(function(){
+		if($("input[id=radio1]").is(":checked")){
+			$('#lbl_cli_doc').html("DNI:");
+			$( "#txt_cli_doc" ).attr('maxlength','8');
+		}
+	});
+	if($("input[id=radio1]").is(":checked")){
+		$('#lbl_cli_doc').html("DNI:");
+		$( "#txt_cli_doc" ).attr('maxlength','8');
+        $( "#validar_ruc span").html("Valida DNI");
+        $( "#validar_ruc").show(200);
+	}
+	$("input[id=radio2]").change(function(){
+        if($("input[id=radio2]").is(":checked")){
+            $('#lbl_cli_doc').html("RUC:");
+            $( "#txt_cli_doc" ).attr('maxlength','11');
+            $( "#validar_ruc span").html("Valida RUC");
+            $( "#validar_ruc").show(200);
+        }
+    });
+    $("input[id=radio3]").change(function(){
+        if($("input[id=radio3]").is(":checked")){
+            $('#lbl_cli_doc').html("DOC:");
+            $( "#txt_cli_doc").attr('maxlength','11');
+            $( "#validar_ruc").hide(200);
+        }
+    });
+
 
 	$( "#txt_cli_doc" ).focus();
 	
@@ -146,17 +154,17 @@ $(function() {
 		$(this).val($(this).val().toUpperCase());
 	});
 
-    if($('#radio1').checked(true)) {
-        $('#lbl_cli_doc').html('DNI');
-    }
-    if($('#radio2').checked(true)) {
-        $('#lbl_cli_doc').html('RUC');
-    }
-    if($('#radio3').checked(true)) {
-        $('#lbl_cli_doc').html('DOC');
-    }
+    // if($("#radio1").is(":checked")){
+    //     $("#lbl_cli_doc").html('DNI');
+    // }
+    // if($("#radio2").is(":checked")){
+    //     $("#lbl_cli_doc").html('RUC');
+    // }
+    // if($("#radio3").is(":checked")) {
+    //     alert('hola');
+    // }
 
-	$("#for_cli").validate({
+        $("#for_cli").validate({
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",

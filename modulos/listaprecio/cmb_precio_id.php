@@ -13,7 +13,7 @@ $oPrecio = new cPrecio();
 	while($dt1 = mysql_fetch_array($dts1))
 	{
 ?>
-	<option value="<?php echo $dt1['tb_precio_id']?>" <?php if($dt1['tb_precio_id']==$dt2['tb_precio_id'])echo 'selected'?>><?php echo $dt1['tb_precio_nom']?></option>
+	<option value="<?php echo $dt1['tb_precio_id']?>" <?php if($dt1['tb_precio_id']==$_POST['precio_id'])echo 'selected'?>><?php echo $dt1['tb_precio_nom']?></option>
 <?php
 	}
 	mysql_free_result($dts1);

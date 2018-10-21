@@ -1044,11 +1044,11 @@ function compararSunat(doc, nom, dir, id) {
 		if(data.length==1){
 			alert(data[0]);
 		}else{
-			var telefono = data['Telefonos'];
-			telefono = telefono.replace(/ \/ /g, "/");
-			telefono = telefono.replace("/ ", "");
-			telefono = telefono.replace(/\//g, " / ");
-			$('#txt_cli_tel').val(telefono);
+			// var telefono = data['Telefonos'];
+			// telefono = telefono.replace(/ \/ /g, "/");
+			// telefono = telefono.replace("/ ", "");
+			// telefono = telefono.replace(/\//g, " / ");
+			// $('#txt_cli_tel').val(telefono);
 			$("#txt_ven_cli_est").val(data['Estado']);
 			if(data['RazonSocial'] != nom || data['Direccion'] != dir){
 				cliente_form_i('editarSunat',id,data['RazonSocial'],data['Direccion'],data['Contacto'],telefono,data['Estado']);
@@ -2104,7 +2104,7 @@ function bus_cantidad(act)
             </tr>
             <tr>
                 <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:616px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:600px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
             </tr>
             <tr>
                 <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>

@@ -13,7 +13,7 @@ function datatoarray($header, $detalle, $empresa, $tipodoc){
         arr_UBLExtensions($header, $detalle, $empresa, $tipodoc);
         arr_UBLVersionID($header, $detalle, $empresa, $tipodoc);
         arr_CustomizationID($header, $detalle, $empresa, $tipodoc);
-        //arr_ProfileID($header, $detalle, $empresa, $tipodoc);
+        arr_ProfileID($header, $detalle, $empresa, $tipodoc);
         arr_ID($header, $detalle, $empresa, $tipodoc);
         arr_IssueDate($header, $detalle, $empresa, $tipodoc);
         arr_IssueTime($header, $detalle, $empresa, $tipodoc);
@@ -448,7 +448,7 @@ function arr_TaxTotal($header, $detalle, $empresa, $tipodoc){
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount']['tag'] = 'cbc';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-        $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxAmount'][0] = 0.00;
+        $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxAmount'][0] = '0.00';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxAmount']['tag'] = 'cbc';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
@@ -686,56 +686,56 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $basecalculo = round(($item->igv / 0.18), 2);
                 $impuesto = round($item->igv,2);
                 $TaxCategoryID = 'S';
-                $Percent = 18.00;
+                $Percent = '18.00';
                 $TaxSchemeID = 1000;
                 $TaxSchemeName = 'IGV';
                 $TaxSchemeTaxTypeCode = 'VAT';
             }elseif ($item->idafectaciond>=11 && $item->idafectaciond<=17) {
-                $impuestos = 0.00;
-                $impuesto = 0.00;
-                $basecalculo = 0.00;
+                $impuestos = '0.00';
+                $impuesto = '0.00';
+                $basecalculo = '0.00';
                 $TaxCategoryID = 'Z';
-                $Percent = 18.00;
+                $Percent = '18.00';
                 $TaxSchemeID = 9996;
                 $TaxSchemeName = 'GRA';
                 $TaxSchemeTaxTypeCode = 'FRE';
 
             }elseif ($item->idafectaciond==20) {
-                $impuestos = 0.00;
-                $basecalculo = 0.00;
+                $impuestos = "0.00";
+                $basecalculo = "0.00";
                 $impuesto = round($item->valorventa,2);
                 $TaxCategoryID = 'E';
-                $Percent = 18.00;
+                $Percent = '18.00';
                 $TaxSchemeID = 9997;
                 $TaxSchemeName = 'EXO';
                 $TaxSchemeTaxTypeCode = 'VAT';
 
             }elseif ($item->idafectaciond==21) {
-                $impuestos = 0.00;
-                $basecalculo = 0.00;
-                $impuesto = 0.00;
+                $impuestos = '0.00';
+                $basecalculo = '0.00';
+                $impuesto = '0.00';
                 $TaxCategoryID = 'E';
-                $Percent = 18.00;
+                $Percent = '18.00';
                 $TaxSchemeID = 9996;
                 $TaxSchemeName = 'GRA';
                 $TaxSchemeTaxTypeCode = 'FRE';
 
             }elseif ($item->idafectaciond==30) {
-                $impuestos = 0.00;
-                $basecalculo = 0.00;
+                $impuestos = '0.00';
+                $basecalculo = '0.00';
                 $impuesto = round($item->valorventa,2);
                 $TaxCategoryID = 'O';
-                $Percent = 18.00;
+                $Percent = '18.00';
                 $TaxSchemeID = 9998;
                 $TaxSchemeName = 'INA';
                 $TaxSchemeTaxTypeCode = 'FRE';
 
             }elseif ($item->idafectaciond>=31 && $item->idafectaciond<=36) {
-                $impuestos = 0.00;
-                $basecalculo = 0.00;
-                $impuesto = 0.00;
+                $impuestos = '0.00';
+                $basecalculo = '0.00';
+                $impuesto = '0.00';
                 $TaxCategoryID = 'E';
-                $Percent = 18.00;
+                $Percent = '18.00';
                 $TaxSchemeID = 9996;
                 $TaxSchemeName = 'GRA';
                 $TaxSchemeTaxTypeCode = 'FRE';
