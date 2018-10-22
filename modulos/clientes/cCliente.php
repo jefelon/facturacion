@@ -11,8 +11,8 @@ class cCliente{
 	`tb_cliente_ema` ,
 	`tb_cliente_est`,
 	`tb_empresa_id`,
-	`tb_cliente_retiene`,
-	`tb_precio_id`
+	`tb_precio_id`,
+	`tb_cliente_retiene`
 
 	)
 	VALUES (

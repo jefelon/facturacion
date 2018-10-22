@@ -71,9 +71,8 @@ while($dt = mysql_fetch_array($dts)){
 	$otrtri=$dt["tb_venta_otrtri"];
 	$otrcar=$dt["tb_venta_otrcar"];
 	$desglo=$dt["tb_venta_desglo"];
-	
 
-	$idtoperacion=$dt["cs_tipooperacion_id"];
+    if($dt["cs_tipooperacion_id"]==1)$idtoperacion="0101";
 
 	$numpla=$dt["tb_venta_lab1"];
 

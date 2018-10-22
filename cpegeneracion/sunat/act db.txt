@@ -1,0 +1,3 @@
+cs_tipooperacion
+
+cambiar codigo d eoperacion a string

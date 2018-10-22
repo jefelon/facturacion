@@ -1,8 +1,8 @@
 <?php 
 //require_once($_SERVER['DOCUMENT_ROOT'] ."granadosllantas/facturacion/cpegeneracion/sunat/".'funciones.php');
 require_once('../../cpegeneracion/sunat/funciones.php');
-require_once('../../cpegeneracion/sunat/toarray.php');
-require_once('../../cpegeneracion/sunat/toxml.php');
+require_once('../../cpegeneracion/sunat/toarray21.php');
+require_once('../../cpegeneracion/sunat/toxml21.php');
 require_once('../../config/datos.php');
 
 //EMPRESA
