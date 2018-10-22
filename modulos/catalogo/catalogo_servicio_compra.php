@@ -31,7 +31,9 @@ function catalogo_servicio_tabla(){
 			ser_nom:	$('#txt_fil_ser_nom').val(),			
 			ser_cat:	$('#cmb_fil_ser_cat').val(),			
 			ser_est:	$('#cmb_fil_ser_est').val(),
-			limit: 		$("#cmb_fil_ser_lim").val()	
+			limit: 		$("#cmb_fil_ser_lim").val(),
+            tippre: 	$("#cmb_com_tippre").val()
+
 		}),
 		beforeSend: function() {
 			$('#msj_catalogo_servicio').html("Cargando...");

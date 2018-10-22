@@ -91,12 +91,12 @@ $('.btn_ir').button({
 $(".btn_ir").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
 function cmb_cat_id(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../categoria/cmb_cat_id.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			cat_id: ids
 		}),
@@ -110,12 +110,12 @@ function cmb_cat_id(ids)
 }
 
 function cmb_mar_id(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../marca/cmb_mar_id.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			mar_id: ids
 		}),
@@ -126,18 +126,18 @@ function cmb_mar_id(ids)
 			$('#cmb_mar_id').html(html);
 		}
 	});
-    
+
 }
 
 
 
 function cmb_cat_uni_bas(ids)
-{	
+{
 	$.ajax({
 		type: "POST",
 		url: "../unidad/cmb_cat_uni_bas.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			uni_id_tip: '1',
 			uni_id:	ids
@@ -157,7 +157,7 @@ function presentacion_tag_car(act,idf){
 		type: "POST",
 		url: "../producto/presentacion_tag_car.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action:	act,
 			cmb_atr_id: idf
@@ -166,7 +166,7 @@ function presentacion_tag_car(act,idf){
 			$('#div_presentacion_tag_car').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_presentacion_tag_car').html(html);				
+			$('#div_presentacion_tag_car').html(html);
 		}
 	});
 }
@@ -176,7 +176,7 @@ function producto_presentacion_vista(){
 		type: "POST",
 		url: "../producto/presentacion_vista.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			pro_id:	'<?php echo $_POST['pro_id']?>',
             lote:	'<?php echo $_POST['lote']?>'
@@ -185,7 +185,7 @@ function producto_presentacion_vista(){
 			$('#div_producto_presentacion_vista').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_producto_presentacion_vista').html(html);				
+			$('#div_producto_presentacion_vista').html(html);
 		}
 	});
 }
@@ -198,7 +198,7 @@ function categoria_form(act,idf)
 		type: "POST",
 		url: "../categoria/categoria_form.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: act,
 			cat_id:	idf,
@@ -215,7 +215,7 @@ function categoria_form(act,idf)
 			$('#div_categoria_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_categoria_form').html(html);				
+			$('#div_categoria_form').html(html);
 		}
 	});
 }
@@ -226,7 +226,7 @@ function marca_form(act,idf)
 		type: "POST",
 		url: "../marca/marca_form.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: act,
 			mar_id:	idf,
@@ -243,7 +243,7 @@ function marca_form(act,idf)
 			$('#div_marca_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_marca_form').html(html);				
+			$('#div_marca_form').html(html);
 		}
 	});
 }
@@ -256,7 +256,7 @@ function tag_car_form(act)
 			type: "POST",
 			url: "../producto/tag_car_form.php",
 			async:true,
-			dataType: "html",                      
+			dataType: "html",
 			data: ({
 				action: act,
 				cat_id:	$('#cmb_cat_id').val()
@@ -272,7 +272,7 @@ function tag_car_form(act)
 				$('#div_tag_car_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
 			},
 			success: function(html){
-				$('#div_tag_car_form').html(html);				
+				$('#div_tag_car_form').html(html);
 			}
 		});
 	}
@@ -288,7 +288,7 @@ function atributo_val_form(act,idf,catid)
 		type: "POST",
 		url: "../atributo/atributo_val_form.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: act,
 			atr_id:	idf,
@@ -301,7 +301,7 @@ function atributo_val_form(act,idf,catid)
 			$('#div_atributo_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_atributo_form').html(html);				
+			$('#div_atributo_form').html(html);
 		}
 	});
 }
@@ -312,7 +312,7 @@ function unidad_form(act,idf,vis)
 		type: "POST",
 		url: "../unidad/unidad_form.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: act,
 			uni_id:	idf,
@@ -329,7 +329,7 @@ function unidad_form(act,idf,vis)
 			$('#div_unidad_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_unidad_form').html(html);				
+			$('#div_unidad_form').html(html);
 		}
 	});
 }
@@ -359,14 +359,14 @@ function chk_cat_com()
 function chk_cat_ven()
 {
 	if($('#chk_cat_verven').is(':checked')) {
-		$('#txt_cat_preven').removeAttr('disabled');
-		$("#txt_cat_preven").removeClass("ui-state-disabled");
+		$('#txt_cat_valven').removeAttr('disabled');
+		$("#txt_cat_valven").removeClass("ui-state-disabled");
 		datven=true;
 
 		$('#chk_cat_igvven').removeAttr('disabled');
 	} else {
-		$('#txt_cat_preven').attr('disabled', 'disabled');
-		$("#txt_cat_preven").addClass("ui-state-disabled");
+		$('#txt_cat_valven').attr('disabled', 'disabled');
+		$("#txt_cat_valven").addClass("ui-state-disabled");
 		datven=false;
 
 		$('#chk_cat_igvven').attr('disabled', 'disabled');
@@ -470,98 +470,101 @@ function producto_proveedor(){
     });
 }
 $(function() {
-	
-	<?php 
+
+	<?php
 	if($_POST['action']=="insertar")
 	{
 	?>
     $('#cmb_afec_id > option[value="1"]').attr('selected', 'selected');
 	$('#txt_pro_nom').focus();
 	<?php }?>
-	
+
 	$( "#txt_pro_nom" ).autocomplete({
    		minLength: 2,
    		source: "../producto/producto_complete_nom.php"
     });
-	
+
 	$( "#txt_pre_nom" ).autocomplete({
    		minLength: 1,
    		source: "../producto/presentacion_complete_nom.php"
     });
-	
+
 	$('#txt_pro_nom, #txt_pre_nom').keyup(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
 	cmb_cat_id(<?php echo $cat_id?>);
 	cmb_mar_id(<?php echo $mar_id?>);
-	
+
 	<?php if($_POST['action']=="insertar"){?>
     producto_proveedor();
 
 	cmb_cat_uni_bas();
-	
+
 	presentacion_tag_car();
 
 	//chk_cat_com();
 	//chk_cat_ven();
 	<?php }?>
-	
+
 	$("#txt_cat_tipcam" ).change(function() {
 		var tipcam		=parseFloat($("#txt_cat_tipcam" ).autoNumericGet());
 		var precosdol	=parseFloat($("#txt_cat_precosdol" ).autoNumericGet());
-		
+
 		if(tipcam>0 & precosdol>0)
 		{
 			var calculo=(tipcam*precosdol)+(tipcam*precosdol)*0.18;
-			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
+			//$( "#txt_cat_valven" ).val(calculo.toFixed(2));
 			$( "#txt_cat_precos" ).autoNumericSet(calculo.toFixed(2));
-			
+
 			var precos	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
 			var uti		=parseFloat($("#txt_cat_uti" ).val());
-			
+
 			if(uti>=0)
 			{
 				var calculo=precos+(precos*uti/100);
-				//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
+				//$( "#txt_cat_valven" ).val(calculo.toFixed(2));
+				$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+                $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
 			}
 		}
 	});
-	
+
 	$("#txt_cat_precosdol" ).keyup(function() {
 		var tipcam		=parseFloat($("#txt_cat_tipcam" ).autoNumericGet());
 		var precosdol	=parseFloat($("#txt_cat_precosdol" ).autoNumericGet());
-		
+
 		if(tipcam>0 & precosdol>0)
 		{
 			// var calculo=tipcam*precosdol+(tipcam*precosdol)0.18;
             var calculo=tipcam*precosdol;
-			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
+			//$( "#txt_cat_valven" ).val(calculo.toFixed(2));
 			$( "#txt_cat_precos" ).autoNumericSet(calculo.toFixed(2));
-			
-			
+
+
 			var precos	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
 			var uti		=parseFloat($("#txt_cat_uti" ).val());
-			
+
 			if(uti>=0)
 			{
 				var calculo=precos+(precos*uti/100);
-				//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-				$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
+				//$( "#txt_cat_valven" ).val(calculo.toFixed(2));
+				$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+                $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
 			}
-			
+
 		}
 	});
-	
+
 	$("#txt_cat_precos" ).keyup(function() {
 		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
 		var uti		=parseFloat($("#txt_cat_uti" ).val());
-		
+
 		if(uti>=0)
 		{
 			var calculo=precom+(precom*uti/100);
-			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
+			//$( "#txt_cat_valven" ).val(calculo.toFixed(2));
+			$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
 		}
 	});
     $("#txt_cat_descprov" ).keyup(function() {
@@ -575,7 +578,8 @@ $(function() {
             var utilidad=uti/100;
             var costoneto=precom-(precom*descuento)
             var calculo=costoneto+(costoneto*utilidad);
-            $( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
         }
     });
 	$("#txt_cat_uti" ).keyup(function() {
@@ -589,28 +593,49 @@ $(function() {
             var utilidad=uti/100;
             var costoneto=precom-(precom*descuento)
             var calculo=costoneto+(costoneto*utilidad);
-			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
+			$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
 		}
 	});
-	
-	$("#txt_cat_preven" ).keyup(function(){
-		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
-		var preven	=parseFloat($("#txt_cat_preven" ).autoNumericGet());
-		
-		if(precom!="" && preven>0)
-		{
-			var calculo=(1-precom/preven)*100;
-			$( "#txt_cat_uti" ).val(calculo.toFixed(2));
-		}
+
+	$("#txt_cat_valven" ).keyup(function(){
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var preven		=parseFloat($("#txt_cat_preven" ).val());
+        var prevalven	=parseFloat($("#txt_cat_valven" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+
+        if(precom-desc>=0 && precom!="" && precom-desc>prevalven)
+        {
+            var descuento=desc/100;
+            var costoneto=precom-(precom*descuento);
+            var utilidad = (prevalven/costoneto)-1;
+
+            $( "#txt_cat_uti" ).autoNumericSet((utilidad*100).toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((prevalven*1.18).toFixed(2));
+        }
+
 	});
-	
+
+    $("#txt_cat_valven" ).change(function() {
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var preven		=parseFloat($("#txt_cat_preven" ).val());
+        var prevalven	=parseFloat($("#txt_cat_valven" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+        if (precom != "" && preven != "" && desc != "" && preven != "") {
+            if (precom - desc > prevalven) {
+                alert('Valor de Venta Mayor al Costo');
+                $("#txt_cat_valven").focus();
+            }
+        }
+    });
+
 	<?php if($_POST['action']=="editar"){?>
 	producto_presentacion_vista();
 	<?php }?>
-	
+
 	//adicionales
-	
-	
+
+
 	$( "#div_categoria_form" ).dialog({
 		title:'Información de Categoría',
 		autoOpen: false,
@@ -628,7 +653,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	$( "#div_marca_form" ).dialog({
 		title:'Información de Marca',
 		autoOpen: false,
@@ -646,7 +671,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	$( "#div_tag_car_form" ).dialog({
 		title:'Agregar Atributo',
 		autoOpen: false,
@@ -667,7 +692,7 @@ $(function() {
 			$("#div_tag_car_form").html('Cargando...');
 		}
 	});
-	
+
 	$( "#div_atributo_form" ).dialog({
 		title:'Información de Atributo',
 		autoOpen: false,
@@ -685,7 +710,7 @@ $(function() {
 			}
 		}
 	});
-	
+
 	$( "#div_unidad_form" ).dialog({
 		title:'Información de Unidad',
 		autoOpen: false,
@@ -741,7 +766,7 @@ $(function() {
 
 
 
-//formulario			
+//formulario
 	$("#for_pro").validate({
 		submitHandler: function() {
             var form_data=new FormData($('#for_pro')[0]);
@@ -785,14 +810,14 @@ $(function() {
 					{
 						echo $_POST['vista'].'()';
 					}
-					
+
 					if($_POST['vista']=="catalogo_tabla")
 					{
 						echo $_POST['vista'].'()';
 					}
 					?>
 				}
-			});			
+			});
 		},
 		rules: {
 			txt_pro_nom: {
@@ -834,7 +859,7 @@ $(function() {
 			txt_cat_precos: {
 				required: true
 			},
-			txt_cat_preven: {
+			txt_cat_valven: {
 				required: true
 			}*/
 			<?php }?>
@@ -869,7 +894,7 @@ $(function() {
 			txt_cat_precos: {
 				required: '*'
 			},
-			txt_cat_preven: {
+			txt_cat_valven: {
 				required: '*'
 			}*/
 			<?php }?>
@@ -998,7 +1023,7 @@ $(function() {
         </div>
     </fieldset>
   <fieldset><legend>Presentación de producto</legend>
-    <table>                
+    <table>
 <!--        <tr>-->
 <!--          <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>-->
 <!--          <td colspan="5"><input name="txt_pre_nom" type="text" id="txt_pre_nom" value="--><?php //echo $nom?><!--" size="55" maxlength="50"></td>-->
@@ -1014,10 +1039,10 @@ $(function() {
             <option value="Activo" <?php if($est=='Activo')echo 'selected'?>>Activo</option>
             <option value="Inactivo" <?php if($est=='Inactivo')echo 'selected'?>>Inactivo</option>
           </select></td>
-        </tr>        
+        </tr>
     </table>
   </fieldset>
-  
+
   <?php /*?><fieldset><legend>Atributos</legend>
   <!--<a id="btn_tag_car_form" class="btn_ir" href="#" onClick="tag_car_form()">Agregar Atributo</a>-->
   	<div id="div_tag_car_form">
@@ -1025,7 +1050,7 @@ $(function() {
     <div id="div_presentacion_tag_car">
 	</div>
   </fieldset><?php */?>
-  
+
   <fieldset><legend>Unidad Base, Precios y Catálogo</legend>
     <table>
         <tr>
@@ -1035,7 +1060,7 @@ $(function() {
           	<div id="div_unidad_form">
 			</div>
           </td>
-        </tr>        
+        </tr>
     </table>
     </br>
     <div id="div_precios_tab">
@@ -1065,6 +1090,7 @@ $(function() {
                         <!--<th align="center">IGV</th>-->
                         <th align="center">Utilidad (%)</th>
                         <th align="center">Valor Venta</th>
+                        <th align="center">Precio Venta</th>
                         <!--<th align="center"> IGV</th>-->
                     </tr>
                     <tr class="">
@@ -1072,6 +1098,7 @@ $(function() {
                         <td align="center"><input name="txt_cat_descprov" type="text" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $descprov?>"></td>
                         <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
                         <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
+                        <td align="center"><input name="txt_cat_valven" type="text" id="txt_cat_valven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $valven?>"></td>
                         <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
                         <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
                     </tr>

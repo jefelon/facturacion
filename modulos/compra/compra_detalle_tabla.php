@@ -202,7 +202,7 @@ if($num_rows_total>=2)echo ($num_rows_total).' registros.';
                     <td align="right"><?php
                         echo formato_money($dt2['tb_compradetalle_cosuni']);
                         ?></td>
-                    <td align="center"><a class="btn_tabla_lote" onClick="lote_tabla(<?php echo $dt2['tb_compradetalle_id'] ?>)">Ver Lote</a></td>
+                    <td align="center"></td>
                 </tr>
                 <?php
                 	}

@@ -158,11 +158,11 @@ if ($_POST['action_compra'] == "insertar") {
                 $dts = $oCompra->ultimoInsert();
                 $dt = mysql_fetch_array($dts);
                 $comcosto_id = $dt['last_insert_id()'];
-                $cont++;
+
 
 
                 $oCompra->insertar_detalle(
-                    $_POST['producto'][$cont],
+                    0,
                     1,
                     $dua/1.18,
                     0,
@@ -173,10 +173,12 @@ if ($_POST['action_compra'] == "insertar") {
                     0,
                     $dua,
                     $comcosto_id,
-                    0
+                    $_POST['servicio'][$cont]
                 );
 
                 $oCompra->insertar_compra_costo($com_id,$comcosto_id);
+
+                $cont++;
 
             }
 
@@ -513,7 +515,7 @@ if ($_POST['action_compra'] == "insertar") {
 
                 //registro detalle de compra
                 $oCompra->insertar_detalle(
-                    $indice,
+                    0,
                     $cantidad,
                     $valor_unitario_linea,
                     $descuento_x_item_linea,
@@ -524,7 +526,7 @@ if ($_POST['action_compra'] == "insertar") {
                     $linea_per,
                     $precio_unitario_linea,
                     $com_id,
-                    $_SESSION['servicio_car'][$unico_id]
+                    $_SESSION['servicio_car'][$unico_id][$indice]
                 );
                 mysql_free_result($dts);
             }

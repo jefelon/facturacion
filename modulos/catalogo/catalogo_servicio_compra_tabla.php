@@ -185,7 +185,7 @@ $(function() {
 
 	                        <td align="center">                         
                             
-                            <a class="btn_agregar2" href="#" onClick="compra_car_servicio('agregar_servicio','<?php echo $dt1['tb_servicio_id']?>')">Agregar</a>
+                            <a class="btn_agregar2" href="#" onClick="compra_car_servicio('agregar_servicio','<?php echo $dt1['tb_servicio_id']?>','<?php echo $_POST['tippre']?>')">Agregar</a>
                             
                             </td>                                                        
                         </tr>

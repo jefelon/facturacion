@@ -350,7 +350,9 @@ if($_POST['action']=="editar"){
         });
     }
 
-    function compra_car_servicio(act,idf){
+    function compra_car_servicio(act,idf,pre){
+        console.log('pre');
+        console.log(pre);
         var imp_dol = [];
         for (var i=1;i<=5;i++){
             imp_dol.push($('#imp_dol'+i).val())
@@ -370,7 +372,9 @@ if($_POST['action']=="editar"){
                 ser_des: $('#txt_ser_detven_des_'+idf).val(),//Descuento
                 ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
                 ser_pre: $('#txt_servicio_pre_'+idf).val(),
-                imp_dol: imp_dol
+                imp_dol: imp_dol,
+                tipo_precio: pre,
+                tipo_cambio: 	$('#txt_com_tipcam').val(),
             }),
             beforeSend: function() {
                 $("#txt_fil_ser_nom").val(''); $("#txt_fil_ser_nom").focus();
@@ -1060,25 +1064,6 @@ if($_POST['action']=="editar"){
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <!--                                <tr>-->
-                                    <!--                                    <td title="Fecha"><input type="text" name="fec_ser[]" readonly></td>-->
-                                    <!--                                    <td title="Detalle de Dua"><input type="text" name="dua[]" readonly></td>-->
-                                    <!--                                    <input type="hidden" name="proveedor[]" value="0">-->
-                                    <!--                                    <td></td>-->
-                                    <!--                                    <td align="right" nowrap="" title="Producto" name="producto[]">SEGURO</td>-->
-                                    <!--                                    <td align="right" nowrap="" title="Importe Dolares"> <input type="text" class="moneda" name="imp_dol[]" value="-"> </td>-->
-                                    <!--                                    <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="0"></td>-->
-                                    <!--                                </tr>-->
-                                    <!--                                <tr>-->
-                                    <!--                                    <td title="Fecha"><input type="text" name="fec_ser[]" readonly></td>-->
-                                    <!--                                    <td title="Detalle de Dua"><input type="text" value="F066-35053" name="dua[]"></td>-->
-                                    <!--                                    <input type="hidden" name="proveedor[]" value="0">-->
-                                    <!--                                    <td></td>-->
-                                    <!--                                    <input type="hidden" name="producto[]" value="11">-->
-                                    <!--                                    <td align="right" nowrap="" title="Producto">ADVALOREM</td>-->
-                                    <!--                                    <td align="right" nowrap="" title="Importe Dolares"> <input type="text" class="moneda" name="imp_dol[]" value="5.89"> </td>-->
-                                    <!--                                    <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="19.00"></td>-->
-                                    <!--                                </tr>-->
                                     <?php if($_POST['action']=="editar"){
                                         $dts= $oCompra->mostrar_compra_relacionadas($_POST['com_id']);
                                         while($dt = mysql_fetch_array($dts)){
@@ -1086,37 +1071,45 @@ if($_POST['action']=="editar"){
                                             $dt2 = mysql_fetch_array($dt2s);
                                             $provs= $oProveedor->mostrarUno($dt2['tb_proveedor_id']);
                                             $prov = mysql_fetch_array($provs);
-                                            $comp_dets= $oCompra->mostrar_compra_detalle($dt['tb_compra_relacionada']);
+                                            $comp_dets= $oCompra->mostrar_compra_detalle_servicio($dt['tb_compra_relacionada']);
                                             $comp_det = mysql_fetch_array($comp_dets);
                                             ?>
 
                                             <tr>
-                                                <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" value="<?php echo $dt2['tb_compra_fec']?>" readonly></td>
+                                                <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $dt2['tb_compra_fec']?>" readonly></td>
                                                 <td title="Detalle de Dua"><input type="text" value="<?php echo $dt2['tb_compra_numdoc']?>" name="dua[]"></td>
                                                 <td align="right" nowrap="" title="Proveedor"><?php echo $prov['tb_proveedor_nom']?></td>
-                                                <td align="right" nowrap="" title="Producto"><?php echo $comp_det['tb_producto_nom']?></td>
+                                                <td align="right" nowrap="" title="Servicio"><?php echo $comp_det['tb_servicio_nom']?></td>
                                                 <td align="right" nowrap="" title="Importe Dolares"> <input type="text" class="moneda" name="imp_dol[]" value="<?php echo $dt2['tb_compra_tot']?>"> </td>
                                                 <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="<?php echo $dt2['tb_compra_tot']* $dt2['tb_compra_tipcam']?>"></td>
                                             </tr>
                                         <?php }?>
                                     <?php }else{?>
-                                        <!--                                <tr>-->
-                                        <!--                                    <td title="Fecha"><input type="text" name="fec_ser[]" readonly></td>-->
-                                        <!--                                    <td title="Detalle de Dua"><input type="text" name="dua[]" readonly></td>-->
-                                        <!--                                    <input type="hidden" name="proveedor[]" value="0">-->
-                                        <!--                                    <td></td>-->
-                                        <!--                                    <td align="right" nowrap="" title="Producto" name="producto[]">SEGURO</td>-->
-                                        <!--                                    <td align="right" nowrap="" title="Importe Dolares"> <input type="text" class="moneda" name="imp_dol[]" value="-"> </td>-->
-                                        <!--                                    <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="0"></td>-->
-                                        <!--                                </tr>-->
                                         <tr>
-                                            <td title="Fecha"><input type="text"  name="fec_ser[]" class="txt_com_fec fecha"  value="<?php echo $fec?>" readonly></td>
+                                            <td title="Fecha"><input type="text" name="fec_ser[]" class="txt_com_fec fecha" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
+                                            <td title="Detalle de Dua"><input type="text" name="dua[]" readonly></td>
+                                            <input type="hidden" name="proveedor[]" value="1">
+                                            <td></td>
+                                            <input type="hidden" name="servicio[]" value="1">
+                                            <td align="right" nowrap="" title="Servicio">SEGURO</td>
+
+                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text"
+                                                                                                       class="moneda"
+                                                                                                       name="imp_dol[]"
+                                                                                                       value="0.00"></td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text"
+                                                                                                     class="moneda"
+                                                                                                     name="imp_sol[]"
+                                                                                                     value="0.00"></td>
+                                        </tr>
+                                        <tr>
+                                            <td title="Fecha"><input type="text"  name="fec_ser[]" class="txt_com_fec fecha" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
                                             <td title="Detalle de Dua"><input type="text" value="F066-35053"
                                                                                name="dua[]"></td>
-                                            <input type="hidden" name="proveedor[]" value="0" >
-                                            <td></td>
-                                            <input type="hidden" name="producto[]" value="11">
-                                            <td align="right" nowrap="" title="Producto">ADVALOREM</td>
+                                            <input type="hidden" name="proveedor[]" value="10" >
+                                            <td align="right">ADVALOREM ADUANAS</td>
+                                            <input type="hidden" name="servicio[]" value="10">
+                                            <td align="right" nowrap="" title="Servicio">ADVALOREM</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input id="imp_dol1"
                                                                                                         type="text"
                                                                                                        class="moneda"
@@ -1129,42 +1122,42 @@ if($_POST['action']=="editar"){
                                                                                                      value="19.00"></td>
                                         </tr>
                                         <tr>
-                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" value="<?php echo $fec?>" readonly></td>
+                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
                                             <td title="Detalle de Dua"><input type="text" value="F066-35053" name="dua[]"></td>
-                                            <input type="hidden" name="proveedor[]" value="10">
+                                            <input type="hidden" name="proveedor[]" value="11">
                                             <td align="right" nowrap="" title="Proveedor">TALMA SERVICIOS AEROPORTUARIOS</td>
-                                            <input type="hidden" name="producto[]" value="20">
-                                            <td align="right" nowrap="" title="Producto">ALMACENAJE, ESTIBA</td>
+                                            <input type="hidden" name="servicio[]" value="11">
+                                            <td align="right" nowrap="" title="Servicio">ALMACENAJE, ESTIBA</td>
                                             <td align="right" nowrap="" title="Importe Dolares"> <input id="imp_dol2" type="text" class="moneda" name="imp_dol[]" value="150.60"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="485.68"></td>
                                         </tr>
                                         <tr>
-                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" value="<?php echo $fec?>" readonly></td>
+                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
                                             <td title="Detalle de Dua"><input type="text" value="F003-7747" name="dua[]"></td>
-                                            <input type="hidden" name="proveedor[]" value="11">
+                                            <input type="hidden" name="proveedor[]" value="12">
                                             <td align="right" nowrap="" title="Proveedor">SCHENKER PERU SRL</td>
-                                            <input type="hidden" name="producto[]" value="21">
-                                            <td align="right" nowrap="" title="Producto">TRAMITE DOCUMENTARIO</td>
+                                            <input type="hidden" name="servicio[]" value="12">
+                                            <td align="right" nowrap="" title="Servicio">TRAMITE DOCUMENTARIO</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text" id="imp_dol3" class="moneda" name="imp_dol[]" value="110.00"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="354.75"></td>
                                         </tr>
                                         <tr>
-                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" value="<?php echo $fec?>" readonly></td>
+                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
                                             <td title="Detalle de Dua"><input type="text" value="F001-10637" name="dua[]"></td>
-                                            <input type="hidden" name="proveedor[]" value="12">
+                                            <input type="hidden" name="proveedor[]" value="13">
                                             <td align="right" nowrap="" title="Proveedor">MILLENNIUM AGENES DE ADUANA SAC</td>
-                                            <input type="hidden" name="producto[]" value="22">
-                                            <td align="right" nowrap="" title="Producto">GASTOS OPERATIVOS</td>
+                                            <input type="hidden" name="servicio[]" value="13">
+                                            <td align="right" nowrap="" title="Servicio">GASTOS OPERATIVOS</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" id="imp_dol4" name="imp_dol[]" value="247.93"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="806.02"></td>
                                         </tr>
                                         <tr>
-                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" value="<?php echo $fec?>" readonly></td>
+                                            <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
                                             <td title="Detalle de Dua"><input type="text" value="001-13376" name="dua[]"></td>
-                                            <input type="hidden" name="proveedor[]" value="13">
+                                            <input type="hidden" name="proveedor[]" value="14">
                                             <td align="right" nowrap="" title="Proveedor">PACIFICO DEL SUR SAC</td>
-                                            <input type="hidden" name="producto[]" value="23">
-                                            <td align="right" nowrap="" title="Producto">TRANSPORTE LM-AQP</td>
+                                            <input type="hidden" name="servicio[]" value="14">
+                                            <td align="right" nowrap="" title="Servicio">TRANSPORTE LM-AQP</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" name="imp_dol[]" id="imp_dol5" value="15.80"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="50.85"></td>
                                         </tr>

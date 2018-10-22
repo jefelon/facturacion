@@ -433,8 +433,11 @@ if($num_rows>0){
 				
 				//COSTO
 				//calculo de descuento para costo con prorrateo
-				$linea_prorrateo_des=(1-$linea_des/100)*(1-$general_des/100);
-				
+
+                $linea_prorrateo_des=(1-$linea_des/100)*(1-$general_des/100);
+
+
+
 				//calculo de importe PARA COSTO multiplicado por el tipo de cambio para soles
 				//(se necesita dato en soles)
 				$linea_calculo_importe=($linea_preuni*$linea_cantidad*$linea_prorrateo_des)*$mul_tipo_cambio;
