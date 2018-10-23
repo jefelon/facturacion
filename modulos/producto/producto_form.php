@@ -604,7 +604,7 @@ $(function() {
         var prevalven	=parseFloat($("#txt_cat_valven" ).autoNumericGet());
         var desc =parseFloat($("#txt_cat_descprov" ).val());
 
-        if(precom-desc>=0 && precom!="" && precom-desc>prevalven)
+        if(precom-desc>=0 && precom!="" && precom-desc<prevalven)
         {
             var descuento=desc/100;
             var costoneto=precom-(precom*descuento);
@@ -613,17 +613,16 @@ $(function() {
             $( "#txt_cat_uti" ).autoNumericSet((utilidad*100).toFixed(2));
             $( "#txt_cat_preven" ).autoNumericSet((prevalven*1.18).toFixed(2));
         }
-
 	});
 
-    $("#txt_cat_valven" ).change(function() {
+    $("#txt_cat_valven" ).blur(function() {
         var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
         var preven		=parseFloat($("#txt_cat_preven" ).val());
         var prevalven	=parseFloat($("#txt_cat_valven" ).autoNumericGet());
         var desc =parseFloat($("#txt_cat_descprov" ).val());
         if (precom != "" && preven != "" && desc != "" && preven != "") {
-            if (precom - desc > prevalven) {
-                alert('Valor de Venta Mayor al Costo');
+            if (prevalven < (precom - desc) ) {
+                $("#txt_cat_valven").val('');
                 $("#txt_cat_valven").focus();
             }
         }
