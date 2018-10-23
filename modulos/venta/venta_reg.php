@@ -164,7 +164,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			0,//tb_venta_isc
 			moneda_mysql($_POST['txt_ven_otrtri']),
 			moneda_mysql($_POST['txt_ven_otrcar']),
-			0,//tb_venta_desglo
+            moneda_mysql($_POST['txt_ven_desglob']),//tb_venta_desglo
 			1,//cs_tipooperacion_id
 			0,//cs_documentosrelacionados_id
             $usu_id

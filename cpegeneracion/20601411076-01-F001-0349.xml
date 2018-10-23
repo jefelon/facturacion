@@ -19,11 +19,11 @@
                                 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
                             </ds:Transforms>
                             <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-                            <ds:DigestValue>J2TehtnQmugQ9zO9VHnvFKyqcTk=</ds:DigestValue>
+                            <ds:DigestValue>EjQNJaNhoTT0sjSFH4AVsF2sFe8=</ds:DigestValue>
                         </ds:Reference>
                     </ds:SignedInfo>
                     <ds:SignatureValue>
-                        wcEECm5rVJpjIdObtx1KBUVxy7W2PLCaSVfivnKRugICzBtccq6CWufPby7fW10SwEdQhs1diCVZSw6YaivdbZz3LMxdvGN6LHO+bzGbAGQAbowASeTB1WNMPL7a+nEm/6m2q5sJEbETLrpPYzcTwqGGPJkKRc5m6SJ53lWTC/o9TnCx5QbwnrkfQsx83jMFGFS+qgXJBX44LIEmyhhrPrKU7YHCdpplEP6mABIyqQpbOdYJ47xouu4g8XUMRv8HoLfxZYD6JP6hsqlUVjS9I3VPFT4ovMDcGLZeBxH28q10LaIfn8pQXroSQXM9qVDm7TYW6B0uYgQzC+debuKlXA==
+                        Dh9Nx+cyiDHpkCjtbjA/Am5o7dGWnSNiuBddb9FIAcPi9rozHxVfQ12hemBPj4IK6yh8H3nR2U2rAfLeEWUbZEiGrQLLXKXnu9NDqo/PFmfblNbE6qV4xzOI3xN6SMWr4zFd2sjMDC/r6g2gEdkj9TV9/N2vk37hEkVw5HtH+JpB7F2lKZrbI4Lm4SPI2+7zPzSMMHhOzoxK1fysqea+Hf4BPuM7PMjKOZgwAUPtShIRNzcCI+B9R7F/vjXEXPIEWLrL+wRGs6trRL8EQgG3EVlHJQ4Y13dNGdX+QTcRpHqotHK8A3evXSRUSvvw4aIcWINZ5I1/713IVqhx4L5tbg==
                     </ds:SignatureValue>
                     <ds:KeyInfo>
                         <ds:X509Data>
@@ -48,7 +48,7 @@
     <cbc:ID>F001-0349</cbc:ID>
     <cbc:IssueDate>2018-10-19</cbc:IssueDate>
     <cbc:IssueTime>00:00:00</cbc:IssueTime>
-    <cbc:DueDate>2018-10-20</cbc:DueDate>
+    <cbc:DueDate>2018-10-22</cbc:DueDate>
     <cbc:InvoiceTypeCode listID="0101" listAgencyName="PE:SUNAT" listName="SUNAT:Identificador de Tipo de Documento"
                          listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01">01
     </cbc:InvoiceTypeCode>
@@ -159,9 +159,9 @@
         <cac:AllowanceCharge>
             <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
             <cbc:AllowanceChargeReasonCode>00</cbc:AllowanceChargeReasonCode>
-            <cbc:MultiplierFactorNumeric>0.11</cbc:MultiplierFactorNumeric>
+            <cbc:MultiplierFactorNumeric>0.1</cbc:MultiplierFactorNumeric>
             <cbc:Amount currencyID="PEN">16610.17</cbc:Amount>
-            <cbc:BaseAmount currencyID="PEN">149491.53</cbc:BaseAmount>
+            <cbc:BaseAmount currencyID="PEN">166101.7</cbc:BaseAmount>
         </cac:AllowanceCharge>
         <cac:TaxTotal>
             <cbc:TaxAmount currencyID="PEN">26908.47</cbc:TaxAmount>
@@ -212,9 +212,9 @@
         <cac:AllowanceCharge>
             <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
             <cbc:AllowanceChargeReasonCode>00</cbc:AllowanceChargeReasonCode>
-            <cbc:MultiplierFactorNumeric>0.18</cbc:MultiplierFactorNumeric>
+            <cbc:MultiplierFactorNumeric>0.15</cbc:MultiplierFactorNumeric>
             <cbc:Amount currencyID="PEN">23644.07</cbc:Amount>
-            <cbc:BaseAmount currencyID="PEN">133983.05</cbc:BaseAmount>
+            <cbc:BaseAmount currencyID="PEN">157627.12</cbc:BaseAmount>
         </cac:AllowanceCharge>
         <cac:TaxTotal>
             <cbc:TaxAmount currencyID="PEN">24116.95</cbc:TaxAmount>
@@ -263,9 +263,9 @@
             </cac:AlternativeConditionPrice>
         </cac:PricingReference>
         <cac:TaxTotal>
-            <cbc:TaxAmount currencyID="PEN">444444</cbc:TaxAmount>
+            <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
             <cac:TaxSubtotal>
-                <cbc:TaxableAmount currencyID="PEN">333333</cbc:TaxableAmount>
+                <cbc:TaxableAmount currencyID="PEN">0.00</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="PEN">13000</cbc:TaxAmount>
                 <cac:TaxCategory>
                     <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
@@ -278,7 +278,7 @@
                     </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
                         <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">9997</cbc:ID>
-                        <cbc:Name>EXO</cbc:Name>
+                        <cbc:Name>EXONERADO</cbc:Name>
                         <cbc:TaxTypeCode>VAT</cbc:TaxTypeCode>
                     </cac:TaxScheme>
                 </cac:TaxCategory>
