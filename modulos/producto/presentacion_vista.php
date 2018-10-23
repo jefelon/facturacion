@@ -676,30 +676,24 @@ else
             var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
             var preven		=parseFloat($("#txt_cat_preven_alt" ).val());
             var prevalven	=parseFloat($("#txt_cat_valven_alt" ).autoNumericGet());
-            var desc =parseFloat($("#txt_cat_descprov_alt" ).val());
-
-            if(precom-desc>=0 && precom!="" && precom-desc>prevalven)
+            var desc = parseFloat($("#txt_cat_descprov_alt" ).val());
+            console.log(prevalven);
+            if(precom-desc>=0 && precom!="" && precom-desc<prevalven)
             {
-                var descuento=desc/100;
-                var costoneto=precom-(precom*descuento);
-                var utilidad = (prevalven/costoneto)-1;
-                console.log('aqui');
-                console.log(utilidad);
-
-                $( "#txt_cat_uti_alt" ).autoNumericSet((utilidad*100).toFixed(2));
+                $( "#txt_cat_uti_alt" ).val((utilidad*100).toFixed(2));
                 $( "#txt_cat_preven_alt" ).autoNumericSet((prevalven*1.18).toFixed(2));
             }
 
         });
 
-        $("#txt_cat_valven_alt" ).change(function() {
+        $("#txt_cat_valven_alt" ).blur(function() {
             var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
             var preven		=parseFloat($("#txt_cat_preven_alt" ).val());
             var prevalven	=parseFloat($("#txt_cat_valven_alt" ).autoNumericGet());
             var desc =parseFloat($("#txt_cat_descprov_alt" ).val());
             if (precom != "" && preven != "" && desc != "" && preven != "") {
-                if (precom - desc > prevalven) {
-                    alert('Valor de Venta Mayor al Costo');
+                if (prevalven < (precom - desc) ) {
+                    $("#txt_cat_valven_alt").val('');
                     $("#txt_cat_valven_alt").focus();
                 }
             }
