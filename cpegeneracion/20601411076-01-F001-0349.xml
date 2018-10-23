@@ -1,5 +1,12 @@
-This XML file does not appear to have any style information associated with it. The document tree is shown below.
-<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2" xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2" xmlns:sac="urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1" xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
+         xmlns:ccts="urn:un:unece:uncefact:documentation:2" xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+         xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2"
+         xmlns:qdt="urn:oasis:names:specification:ubl:schema:xsd:QualifiedDatatypes-2"
+         xmlns:sac="urn:sunat:names:specification:ubl:peru:schema:xsd:SunatAggregateComponents-1"
+         xmlns:udt="urn:un:unece:uncefact:data:specification:UnqualifiedDataTypesSchemaModule:2"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <ext:UBLExtensions>
         <ext:UBLExtension>
             <ext:ExtensionContent>
@@ -12,16 +19,17 @@ This XML file does not appear to have any style information associated with it. 
                                 <ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
                             </ds:Transforms>
                             <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
-                            <ds:DigestValue>90nfJ6bVFPoulPilBbirPxTK3TE=</ds:DigestValue>
+                            <ds:DigestValue>J2TehtnQmugQ9zO9VHnvFKyqcTk=</ds:DigestValue>
                         </ds:Reference>
                     </ds:SignedInfo>
                     <ds:SignatureValue>
-                        CMlVFQl4w1RCnZSzh61fXYeOOn7Li1RQdGDDqBCuCyOS2UERZjvxAJDAe8QbGm74im5qSDK/AoKyaz6f0AEMxjy5djSdR9va8LBCwToYWejJRt8BPIMp9Loo/8SIrT21s03a2bMMmr95RmiS/0pkyMQ+QMw7G1ThDPeP11KsG/qG39HpCE9Gt/h8AQapLHUE6q+t7R9c4erbEds1J2Hcbghm2cQWMQ2tA7qPFjifzkatCFARone8dh0AGWzTK2H1/UE/oaNjIZFVzzv3cZ+QZyAhQn86H5Lu2XjYtPFKvYbb95eXiRzXTVP/ndkUWwpvPs6uCoMtEjnPyIO3nXJ1rw==
+                        wcEECm5rVJpjIdObtx1KBUVxy7W2PLCaSVfivnKRugICzBtccq6CWufPby7fW10SwEdQhs1diCVZSw6YaivdbZz3LMxdvGN6LHO+bzGbAGQAbowASeTB1WNMPL7a+nEm/6m2q5sJEbETLrpPYzcTwqGGPJkKRc5m6SJ53lWTC/o9TnCx5QbwnrkfQsx83jMFGFS+qgXJBX44LIEmyhhrPrKU7YHCdpplEP6mABIyqQpbOdYJ47xouu4g8XUMRv8HoLfxZYD6JP6hsqlUVjS9I3VPFT4ovMDcGLZeBxH28q10LaIfn8pQXroSQXM9qVDm7TYW6B0uYgQzC+debuKlXA==
                     </ds:SignatureValue>
                     <ds:KeyInfo>
                         <ds:X509Data>
-                            <ds:X509SubjectName>
-                                emailAddress=demo@llama.pe,CN=NOMBRE REPRESENTANTE LEGAL - CERTIFICADO PARA DEMOSTRACIÓN,OU=DNI 9999999 RUC 20601411076 - CERTIFICADO PARA DEMOSTRACIÓN,O=TU EMPRESA S.A.,L=LIMA,ST=LIMA,C=PE,DC=LLAMA.PE SA
+                            <ds:X509SubjectName>emailAddress=demo@llama.pe,CN=NOMBRE REPRESENTANTE LEGAL - CERTIFICADO
+                                PARA DEMOSTRACIÓN,OU=DNI 9999999 RUC 20601411076 - CERTIFICADO PARA DEMOSTRACIÓN,O=TU
+                                EMPRESA S.A.,L=LIMA,ST=LIMA,C=PE,DC=LLAMA.PE SA
                             </ds:X509SubjectName>
                             <ds:X509Certificate>
                                 MIIE8jCCA9qgAwIBAgIDAIjFMA0GCSqGSIb3DQEBBQUAMIIBDTEbMBkGCgmSJomT8ixkARkWC0xMQU1BLlBFIFNBMQswCQYDVQQGEwJQRTENMAsGA1UECAwETElNQTENMAsGA1UEBwwETElNQTEYMBYGA1UECgwPVFUgRU1QUkVTQSBTLkEuMUUwQwYDVQQLDDxETkkgOTk5OTk5OSBSVUMgMjA2MDE0MTEwNzYgLSBDRVJUSUZJQ0FETyBQQVJBIERFTU9TVFJBQ0nDk04xRDBCBgNVBAMMO05PTUJSRSBSRVBSRVNFTlRBTlRFIExFR0FMIC0gQ0VSVElGSUNBRE8gUEFSQSBERU1PU1RSQUNJw5NOMRwwGgYJKoZIhvcNAQkBFg1kZW1vQGxsYW1hLnBlMB4XDTE4MDEyNTIzNTk0NVoXDTIwMDEyNTIzNTk0NVowggENMRswGQYKCZImiZPyLGQBGRYLTExBTUEuUEUgU0ExCzAJBgNVBAYTAlBFMQ0wCwYDVQQIDARMSU1BMQ0wCwYDVQQHDARMSU1BMRgwFgYDVQQKDA9UVSBFTVBSRVNBIFMuQS4xRTBDBgNVBAsMPEROSSA5OTk5OTk5IFJVQyAyMDYwMTQxMTA3NiAtIENFUlRJRklDQURPIFBBUkEgREVNT1NUUkFDScOTTjFEMEIGA1UEAww7Tk9NQlJFIFJFUFJFU0VOVEFOVEUgTEVHQUwgLSBDRVJUSUZJQ0FETyBQQVJBIERFTU9TVFJBQ0nDk04xHDAaBgkqhkiG9w0BCQEWDWRlbW9AbGxhbWEucGUwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDJwzlanNjRR6OTZCansVei755VBxZ1y5SBz3/iA+pGmR8pZEiOBoDSvhrot4Ql4ou8Z7yvZn6Br1xeqAbQd5i13e/IvkEBmABTcyFlrt4Fb5BivG3ucoXuW2lb4iBpAeQfs/I1K/KW917gqcM+CqEbYOijDzq3CwavlYblLEwssQfTRc8e9gXl4d3Wor/GFIyB0vGRCIbWQwqNy9jc33r3QJmLlkKzuxZM8djNbyrBr7GlNofefRxnMDjEf8K/nh3DED9gR0w30yJx7vdlTyogsArS8cTSHooItcz3OgrM0sUuKdOCPIoXK/zwI1YGq8cMQEB15iGkvWCRNPkDKnkdAgMBAAGjVzBVMB0GA1UdDgQWBBR4XMetRoiGZuhAGsdK2etaSGX2wjAfBgNVHSMEGDAWgBR4XMetRoiGZuhAGsdK2etaSGX2wjATBgNVHSUEDDAKBggrBgEFBQcDATANBgkqhkiG9w0BAQUFAAOCAQEAFCSRYaP04w+ID+hHicKGUFX+DXZ3mieVhM9fgdC+dsA32m329gmo9C/viOs7okfFcH8Fb4+PVeDLlREYQ++ZasjvQoTeGDC1AhVPR8XpwMQSelKfjq1mqLgalQdRCFB0BTQqXueoSdTI/N9BWqXGwUqsXxxcZASzYIWjEfBt77hlFAb1JBLw3ucXss19JwfMuIjIUflj8034zRaiAlskecdyIXQkkv/TlB2nMvWINcXzpFMXMed8O1qDueuZejhwQLQn3RVDxCEwB1I2z9yg5brZeV4Dihc8W4NPK3J9Sof0j/VX3pkiCiiE+TEPynQvjn5ii3BO3HEmPdLjOPMLng==
@@ -34,13 +42,19 @@ This XML file does not appear to have any style information associated with it. 
     </ext:UBLExtensions>
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
     <cbc:CustomizationID>2.0</cbc:CustomizationID>
-    <cbc:ProfileID schemeName="SUNAT:Identificador de Tipo de Operación" schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo17">0101</cbc:ProfileID>
+    <cbc:ProfileID schemeName="SUNAT:Identificador de Tipo de Operación" schemeAgencyName="PE:SUNAT"
+                   schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo17">0101
+    </cbc:ProfileID>
     <cbc:ID>F001-0349</cbc:ID>
     <cbc:IssueDate>2018-10-19</cbc:IssueDate>
     <cbc:IssueTime>00:00:00</cbc:IssueTime>
-    <cbc:DueDate>2018-10-22</cbc:DueDate>
-    <cbc:InvoiceTypeCode listID="0101" listAgencyName="PE:SUNAT" listName="SUNAT:Identificador de Tipo de Documento" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01">01</cbc:InvoiceTypeCode>
-    <cbc:DocumentCurrencyCode listID="ISO 4217 Alpha" listName="Currency" listAgencyName="United Nations Economic Commission for Europe">PEN</cbc:DocumentCurrencyCode>
+    <cbc:DueDate>2018-10-20</cbc:DueDate>
+    <cbc:InvoiceTypeCode listID="0101" listAgencyName="PE:SUNAT" listName="SUNAT:Identificador de Tipo de Documento"
+                         listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01">01
+    </cbc:InvoiceTypeCode>
+    <cbc:DocumentCurrencyCode listID="ISO 4217 Alpha" listName="Currency"
+                              listAgencyName="United Nations Economic Commission for Europe">PEN
+    </cbc:DocumentCurrencyCode>
     <cbc:LineCountNumeric>4</cbc:LineCountNumeric>
     <cac:Signature>
         <cbc:ID>SignAZETADEMO_20434814953</cbc:ID>
@@ -61,17 +75,16 @@ This XML file does not appear to have any style information associated with it. 
     <cac:AccountingSupplierParty>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="6" schemeName="SUNAT:Identificador de Documento de Identidad" schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">20601411076</cbc:ID>
+                <cbc:ID schemeID="6" schemeName="SUNAT:Identificador de Documento de Identidad"
+                        schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">
+                    20601411076
+                </cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyName>
-                <cbc:Name>
-                    <![CDATA[ - ]]>
-                </cbc:Name>
+                <cbc:Name><![CDATA[ - ]]></cbc:Name>
             </cac:PartyName>
             <cac:PartyLegalEntity>
-                <cbc:RegistrationName>
-                    <![CDATA[ AQPFACT S.A.C. ]]>
-                </cbc:RegistrationName>
+                <cbc:RegistrationName><![CDATA[ AQPFACT S.A.C. ]]></cbc:RegistrationName>
                 <cac:RegistrationAddress>
                     <cbc:AddressTypeCode>0000</cbc:AddressTypeCode>
                 </cac:RegistrationAddress>
@@ -81,29 +94,25 @@ This XML file does not appear to have any style information associated with it. 
     <cac:AccountingCustomerParty>
         <cac:Party>
             <cac:PartyIdentification>
-                <cbc:ID schemeID="6" schemeName="SUNAT:Identificador de Documento de Identidad" schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">20587896411</cbc:ID>
+                <cbc:ID schemeID="6" schemeName="SUNAT:Identificador de Documento de Identidad"
+                        schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">
+                    20587896411
+                </cbc:ID>
             </cac:PartyIdentification>
             <cac:PartyLegalEntity>
-                <cbc:RegistrationName>
-                    <![CDATA[ SERVICABINAS S.A. ]]>
-                </cbc:RegistrationName>
+                <cbc:RegistrationName><![CDATA[ SERVICABINAS S.A. ]]></cbc:RegistrationName>
             </cac:PartyLegalEntity>
         </cac:Party>
     </cac:AccountingCustomerParty>
-    <cac:AllowanceCharge>
-        <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
-        <cbc:AllowanceChargeReasonCode>00</cbc:AllowanceChargeReasonCode>
-        <cbc:MultiplierFactorNumeric>0.05</cbc:MultiplierFactorNumeric>
-        <cbc:Amount currencyID="PEN">18976.27</cbc:Amount>
-        <cbc:BaseAmount currencyID="PEN">379,525.42</cbc:BaseAmount>
-    </cac:AllowanceCharge>
     <cac:TaxTotal>
-        <cbc:TaxAmount currencyID="PEN">62,675.85</cbc:TaxAmount>
+        <cbc:TaxAmount currencyID="PEN">62675.85</cbc:TaxAmount>
         <cac:TaxSubtotal>
-            <cbc:TaxableAmount currencyID="PEN">348,199.15</cbc:TaxableAmount>
-            <cbc:TaxAmount currencyID="PEN">62,675.85</cbc:TaxAmount>
+            <cbc:TaxableAmount currencyID="PEN">348199.15</cbc:TaxableAmount>
+            <cbc:TaxAmount currencyID="PEN">62675.85</cbc:TaxAmount>
             <cac:TaxCategory>
-                <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier" schemeAgencyName="United Nations Economic Commission for Europe">S</cbc:ID>
+                <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
+                        schemeAgencyName="United Nations Economic Commission for Europe">S
+                </cbc:ID>
                 <cac:TaxScheme>
                     <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">1000</cbc:ID>
                     <cbc:Name>IGV</cbc:Name>
@@ -112,10 +121,12 @@ This XML file does not appear to have any style information associated with it. 
             </cac:TaxCategory>
         </cac:TaxSubtotal>
         <cac:TaxSubtotal>
-            <cbc:TaxableAmount currencyID="PEN">12,350.00</cbc:TaxableAmount>
+            <cbc:TaxableAmount currencyID="PEN">12350</cbc:TaxableAmount>
             <cbc:TaxAmount currencyID="PEN">0.00</cbc:TaxAmount>
             <cac:TaxCategory>
-                <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier" schemeAgencyName="United Nations Economic Commission for Europe">E</cbc:ID>
+                <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
+                        schemeAgencyName="United Nations Economic Commission for Europe">E
+                </cbc:ID>
                 <cac:TaxScheme>
                     <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">9997</cbc:ID>
                     <cbc:Name>EXONERADO</cbc:Name>
@@ -133,20 +144,24 @@ This XML file does not appear to have any style information associated with it. 
     </cac:LegalMonetaryTotal>
     <cac:InvoiceLine>
         <cbc:ID>1</cbc:ID>
-        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20" unitCodeListAgencyName="United Nations Economic Commission for Europe">2000</cbc:InvoicedQuantity>
+        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20"
+                              unitCodeListAgencyName="United Nations Economic Commission for Europe">2000
+        </cbc:InvoicedQuantity>
         <cbc:LineExtensionAmount currencyID="PEN">149491.53</cbc:LineExtensionAmount>
         <cac:PricingReference>
             <cac:AlternativeConditionPrice>
-                <cbc:PriceAmount currencyID="PEN">98.00</cbc:PriceAmount>
-                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01</cbc:PriceTypeCode>
+                <cbc:PriceAmount currencyID="PEN">98</cbc:PriceAmount>
+                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT"
+                                   listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01
+                </cbc:PriceTypeCode>
             </cac:AlternativeConditionPrice>
         </cac:PricingReference>
         <cac:AllowanceCharge>
             <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
             <cbc:AllowanceChargeReasonCode>00</cbc:AllowanceChargeReasonCode>
-            <cbc:MultiplierFactorNumeric>0.10</cbc:MultiplierFactorNumeric>
-            <cbc:Amount currencyID="PEN">16,610.17</cbc:Amount>
-            <cbc:BaseAmount currencyID="PEN">166,101.70</cbc:BaseAmount>
+            <cbc:MultiplierFactorNumeric>0.11</cbc:MultiplierFactorNumeric>
+            <cbc:Amount currencyID="PEN">16610.17</cbc:Amount>
+            <cbc:BaseAmount currencyID="PEN">149491.53</cbc:BaseAmount>
         </cac:AllowanceCharge>
         <cac:TaxTotal>
             <cbc:TaxAmount currencyID="PEN">26908.47</cbc:TaxAmount>
@@ -154,9 +169,14 @@ This XML file does not appear to have any style information associated with it. 
                 <cbc:TaxableAmount currencyID="PEN">149491.5</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="PEN">26908.47</cbc:TaxAmount>
                 <cac:TaxCategory>
-                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier" schemeAgencyName="United Nations Economic Commission for Europe">S</cbc:ID>
+                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
+                            schemeAgencyName="United Nations Economic Commission for Europe">S
+                    </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
-                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT" listName="SUNAT:Codigo de Tipo de Afectación del IGV" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10</cbc:TaxExemptionReasonCode>
+                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
+                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10
+                    </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
                         <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">1000</cbc:ID>
                         <cbc:Name>IGV</cbc:Name>
@@ -166,9 +186,7 @@ This XML file does not appear to have any style information associated with it. 
             </cac:TaxSubtotal>
         </cac:TaxTotal>
         <cac:Item>
-            <cbc:Description>
-                <![CDATA[ GRABADORA LG EXTERNO MODELO: GE20LU10 ]]>
-            </cbc:Description>
+            <cbc:Description><![CDATA[ GRABADORA LG EXTERNO MODELO: GE20LU10 ]]></cbc:Description>
             <cac:SellersItemIdentification>
                 <cbc:ID>GLG199</cbc:ID>
             </cac:SellersItemIdentification>
@@ -179,20 +197,24 @@ This XML file does not appear to have any style information associated with it. 
     </cac:InvoiceLine>
     <cac:InvoiceLine>
         <cbc:ID>2</cbc:ID>
-        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20" unitCodeListAgencyName="United Nations Economic Commission for Europe">300</cbc:InvoicedQuantity>
+        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20"
+                              unitCodeListAgencyName="United Nations Economic Commission for Europe">300
+        </cbc:InvoicedQuantity>
         <cbc:LineExtensionAmount currencyID="PEN">133983.05</cbc:LineExtensionAmount>
         <cac:PricingReference>
             <cac:AlternativeConditionPrice>
-                <cbc:PriceAmount currencyID="PEN">620.00</cbc:PriceAmount>
-                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01</cbc:PriceTypeCode>
+                <cbc:PriceAmount currencyID="PEN">620</cbc:PriceAmount>
+                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT"
+                                   listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01
+                </cbc:PriceTypeCode>
             </cac:AlternativeConditionPrice>
         </cac:PricingReference>
         <cac:AllowanceCharge>
             <cbc:ChargeIndicator>false</cbc:ChargeIndicator>
             <cbc:AllowanceChargeReasonCode>00</cbc:AllowanceChargeReasonCode>
-            <cbc:MultiplierFactorNumeric>0.15</cbc:MultiplierFactorNumeric>
-            <cbc:Amount currencyID="PEN">23,644.07</cbc:Amount>
-            <cbc:BaseAmount currencyID="PEN">157,627.12</cbc:BaseAmount>
+            <cbc:MultiplierFactorNumeric>0.18</cbc:MultiplierFactorNumeric>
+            <cbc:Amount currencyID="PEN">23644.07</cbc:Amount>
+            <cbc:BaseAmount currencyID="PEN">133983.05</cbc:BaseAmount>
         </cac:AllowanceCharge>
         <cac:TaxTotal>
             <cbc:TaxAmount currencyID="PEN">24116.95</cbc:TaxAmount>
@@ -200,9 +222,14 @@ This XML file does not appear to have any style information associated with it. 
                 <cbc:TaxableAmount currencyID="PEN">133983.06</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="PEN">24116.95</cbc:TaxAmount>
                 <cac:TaxCategory>
-                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier" schemeAgencyName="United Nations Economic Commission for Europe">S</cbc:ID>
+                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
+                            schemeAgencyName="United Nations Economic Commission for Europe">S
+                    </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
-                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT" listName="SUNAT:Codigo de Tipo de Afectación del IGV" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10</cbc:TaxExemptionReasonCode>
+                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
+                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10
+                    </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
                         <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">1000</cbc:ID>
                         <cbc:Name>IGV</cbc:Name>
@@ -212,9 +239,7 @@ This XML file does not appear to have any style information associated with it. 
             </cac:TaxSubtotal>
         </cac:TaxTotal>
         <cac:Item>
-            <cbc:Description>
-                <![CDATA[ MONITOR LCD VIEWSONIC VG2028WM 20" ]]>
-            </cbc:Description>
+            <cbc:Description><![CDATA[ MONITOR LCD VIEWSONIC VG2028WM 20" ]]></cbc:Description>
             <cac:SellersItemIdentification>
                 <cbc:ID>MVS546</cbc:ID>
             </cac:SellersItemIdentification>
@@ -225,23 +250,32 @@ This XML file does not appear to have any style information associated with it. 
     </cac:InvoiceLine>
     <cac:InvoiceLine>
         <cbc:ID>3</cbc:ID>
-        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20" unitCodeListAgencyName="United Nations Economic Commission for Europe">250</cbc:InvoicedQuantity>
+        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20"
+                              unitCodeListAgencyName="United Nations Economic Commission for Europe">250
+        </cbc:InvoicedQuantity>
         <cbc:LineExtensionAmount currencyID="PEN">13000</cbc:LineExtensionAmount>
         <cac:PricingReference>
             <cac:AlternativeConditionPrice>
-                <cbc:PriceAmount currencyID="PEN">52.00</cbc:PriceAmount>
-                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01</cbc:PriceTypeCode>
+                <cbc:PriceAmount currencyID="PEN">52</cbc:PriceAmount>
+                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT"
+                                   listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01
+                </cbc:PriceTypeCode>
             </cac:AlternativeConditionPrice>
         </cac:PricingReference>
         <cac:TaxTotal>
-            <cbc:TaxAmount currencyID="PEN">0</cbc:TaxAmount>
+            <cbc:TaxAmount currencyID="PEN">444444</cbc:TaxAmount>
             <cac:TaxSubtotal>
-                <cbc:TaxableAmount currencyID="PEN">0</cbc:TaxableAmount>
+                <cbc:TaxableAmount currencyID="PEN">333333</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="PEN">13000</cbc:TaxAmount>
                 <cac:TaxCategory>
-                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier" schemeAgencyName="United Nations Economic Commission for Europe">E</cbc:ID>
+                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
+                            schemeAgencyName="United Nations Economic Commission for Europe">E
+                    </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
-                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT" listName="SUNAT:Codigo de Tipo de Afectación del IGV" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">20</cbc:TaxExemptionReasonCode>
+                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
+                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">20
+                    </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
                         <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">9997</cbc:ID>
                         <cbc:Name>EXO</cbc:Name>
@@ -251,9 +285,7 @@ This XML file does not appear to have any style information associated with it. 
             </cac:TaxSubtotal>
         </cac:TaxTotal>
         <cac:Item>
-            <cbc:Description>
-                <![CDATA[ MEMORIA DDR-3 B1333 KINGSTON ]]>
-            </cbc:Description>
+            <cbc:Description><![CDATA[ MEMORIA DDR-3 B1333 KINGSTON ]]></cbc:Description>
             <cac:SellersItemIdentification>
                 <cbc:ID>MPC35</cbc:ID>
             </cac:SellersItemIdentification>
@@ -264,12 +296,16 @@ This XML file does not appear to have any style information associated with it. 
     </cac:InvoiceLine>
     <cac:InvoiceLine>
         <cbc:ID>4</cbc:ID>
-        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20" unitCodeListAgencyName="United Nations Economic Commission for Europe">500</cbc:InvoicedQuantity>
+        <cbc:InvoicedQuantity unitCode="NIU" unitCodeListID="UN/ECE rec 20"
+                              unitCodeListAgencyName="United Nations Economic Commission for Europe">500
+        </cbc:InvoicedQuantity>
         <cbc:LineExtensionAmount currencyID="PEN">83050.85</cbc:LineExtensionAmount>
         <cac:PricingReference>
             <cac:AlternativeConditionPrice>
-                <cbc:PriceAmount currencyID="PEN">196.00</cbc:PriceAmount>
-                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01</cbc:PriceTypeCode>
+                <cbc:PriceAmount currencyID="PEN">196</cbc:PriceAmount>
+                <cbc:PriceTypeCode listName="SUNAT:Indicador de Tipo de Precio" listAgencyName="PE:SUNAT"
+                                   listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16">01
+                </cbc:PriceTypeCode>
             </cac:AlternativeConditionPrice>
         </cac:PricingReference>
         <cac:TaxTotal>
@@ -278,9 +314,14 @@ This XML file does not appear to have any style information associated with it. 
                 <cbc:TaxableAmount currencyID="PEN">83050.83</cbc:TaxableAmount>
                 <cbc:TaxAmount currencyID="PEN">14949.15</cbc:TaxAmount>
                 <cac:TaxCategory>
-                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier" schemeAgencyName="United Nations Economic Commission for Europe">S</cbc:ID>
+                    <cbc:ID schemeID="UN/ECE 5305" schemeName="Tax Category Identifier"
+                            schemeAgencyName="United Nations Economic Commission for Europe">S
+                    </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
-                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT" listName="SUNAT:Codigo de Tipo de Afectación del IGV" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10</cbc:TaxExemptionReasonCode>
+                    <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
+                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10
+                    </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
                         <cbc:ID schemeID="UN/ECE 5153" schemeAgencyID="6">1000</cbc:ID>
                         <cbc:Name>IGV</cbc:Name>
@@ -290,9 +331,7 @@ This XML file does not appear to have any style information associated with it. 
             </cac:TaxSubtotal>
         </cac:TaxTotal>
         <cac:Item>
-            <cbc:Description>
-                <![CDATA[ Teclado Microsoft SideWinder X6 ]]>
-            </cbc:Description>
+            <cbc:Description><![CDATA[ Teclado Microsoft SideWinder X6 ]]></cbc:Description>
             <cac:SellersItemIdentification>
                 <cbc:ID>TMS22</cbc:ID>
             </cac:SellersItemIdentification>
