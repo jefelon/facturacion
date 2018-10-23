@@ -88,7 +88,9 @@ if ($_POST['action'] == "editar") {
                             var celdas = $(filas).find("td");
                             codigo = $(celdas[0]).text();
                             descuento = $($(celdas[2]).children("input")[0]).val();
+                            var cat_min = $($(celdas[1]).children("input")[0]).val();
                             $('#txt_cat_descprov').val(descuento);
+                            $('#txt_cat_precos').val(cat_min);
 
                             var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
                             var desc =parseFloat($("#txt_cat_descprov" ).val());
@@ -203,7 +205,7 @@ if ($_POST['action'] == "editar") {
             <td><input type="text" id="txt_com_prov_doc" name="txt_com_prov_doc" size="11"></td>
         </tr>
         <tr>
-            <td><label for="txt_cat_min">Cantidad Minima:</label></td>
+            <td><label for="txt_cat_min">Costo:</label></td>
             <td><input type="text" id="txt_cat_min" name="txt_cat_min" class="venpag_moneda" size="40"/></td>
         </tr>
         <tr>

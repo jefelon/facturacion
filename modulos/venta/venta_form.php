@@ -468,7 +468,7 @@ function txt_venpag_fecven(){
 	});
 }
 
-function txt_venpag_fecletras(id){
+function txt_venpag_fecletras(id, dias){
     $.ajax({
         type: "POST",
         url: "../venta/venta_txt_fecletras.php",
@@ -476,7 +476,7 @@ function txt_venpag_fecletras(id){
         dataType: "json",
         data: ({
             ven_fec: 		$('#txt_ven_fec').val(),
-            ven_mes: 	id
+            ven_dia: 	dias
         }),
         beforeSend: function() {
             //$('#txt_ven_numdoc').val('Cargando...');
@@ -973,6 +973,7 @@ function cliente_cargar_datos(idf){
 			$("#hdd_ven_cli_tip").val(data.tipo);
 			$('#txt_ven_cli_est').val(data.estado);
             $('#hdd_ven_cli_ret').val(data.retiene);
+            $('#hdd_cli_precio_id').val(data.precio_id);
 		}
 	});
 }
@@ -1083,7 +1084,7 @@ $(function() {
 
 	cmb_ven_doc();
     cmb_ven_id();
-    cmb_listaprecio_id('',$('#hdd_ven_cli_id').val());
+    cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
     lote_venta_car('restablecer');
 
 	$("#txt_ven_numdoc").addClass("ui-state-active");
@@ -1102,11 +1103,10 @@ $(function() {
 
     $('#hdd_ven_cli_id').change(function(){
         if ($('#hdd_ven_cli_id').val()!=''){
-            cmb_listaprecio_id('',$('#hdd_ven_cli_id').val());
+            cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
             $('#cmb_listaprecio_id').change();
         }
     });
-
 
 
 	$('#txt_ven_cli_nom').change(function(){
@@ -1120,9 +1120,11 @@ $(function() {
     $("#txt_venpag_mon").change(function() {
         var num_letras = $('#txt_numletras').val();
         if(num_letras!=="") {
+            var k = 30;
             for (var i = 1; i <= num_letras; i++) {
                 $(".letras_fecven" + i).show(100);
-                txt_venpag_fecletras(i);
+                txt_venpag_fecletras(i,k);
+                k=k+30;
             }
         }
     });
@@ -1140,6 +1142,7 @@ $(function() {
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
 			$("#hdd_ven_cli_tip").val(ui.item.tipo);
             $("#hdd_ven_cli_ret").val(ui.item.retiene);
+            $("#hdd_cli_precio_id").val(ui.item.precio_id);
             $('#hdd_ven_cli_id').change()
 			clientecuenta_detalle(ui.item.id);
 			//alert(ui.item.value);
@@ -1158,6 +1161,7 @@ $(function() {
 			$("#txt_ven_cli_dir").val(ui.item.direccion);
 			$("#hdd_ven_cli_tip").val(ui.item.tipo);
             $("#hdd_ven_cli_ret").val(ui.item.retiene);
+            $("#hdd_cli_precio_id").val(ui.item.precio_id);
             $('#hdd_ven_cli_id').change();
 			clientecuenta_detalle(ui.item.id);
 			//alert(ui.item.value);
@@ -1346,9 +1350,11 @@ $(function() {
         var num_letras = $('#txt_numletras').val();
         if(num_letras!=="")
         {
+            var k = 30;
             for(var i=1;i<=num_letras;i++){
                 $(".letras_fecven"+i).show(100);
-                txt_venpag_fecletras(i);
+                txt_venpag_fecletras(i,k);
+                k=k+30;
             }
 
 
@@ -2079,7 +2085,9 @@ function bus_cantidad(act)
     <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
     <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
     <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
+        <input type="hidden" id="hdd_cli_precio_id" name="hdd_cli_precio_id" value="<?php echo $cli_prec_id?>" />
     <input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
+
     <fieldset>
         <legend>Datos Cliente</legend>
         <div id="div_cliente_form">
@@ -2105,6 +2113,10 @@ function bus_cantidad(act)
             <tr>
                 <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
                 <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:600px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+            </tr>
+            <tr>
+                <td align="right"><label for="txt_ven_guia_dir">Punto de Llegada:</label></td>
+                <td><input type="text" id="txt_ven_guia_dir" name="txt_ven_guia_dir" style="width:600px" value="<?php echo $cli_dir?>"/></td>
             </tr>
             <tr>
                 <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>

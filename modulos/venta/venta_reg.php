@@ -197,7 +197,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $emp_razsoc,
                 strip_tags($_POST['txt_ven_cli_nom']),
                 $emp_dir,
-                strip_tags($_POST['txt_ven_cli_dir']),
+                strip_tags($_POST['txt_ven_guia_dir']),
                 $numero_guia+1,
                 strip_tags($_POST['txt_gui_obs']),
                 strip_tags($_POST['txt_gui_pla']),

@@ -210,10 +210,10 @@ $(function() {
                     <td align="right"><?php if($tip == 2)echo $can?></td>
 
                     <td align="right" nowrap="nowrap"><?php
-                        if($tip == 2){if (9!=$dt1['tb_tipoperacion_id']){echo formato_decimal($precos,2);} }?>
+                        if($tip == 2){if (9!=$dt1['tb_tipoperacion_id']){echo formato_decimal($costo_promedio,2);} }?>
                     </td>
                     <td align="right" nowrap="nowrap"><?php
-                        if($tip == 2){if (9!=$dt1['tb_tipoperacion_id']){echo formato_decimal($precos*$can,2);} }?>
+                        if($tip == 2){if (9!=$dt1['tb_tipoperacion_id']){echo formato_decimal($costo_promedio*$can,2);} }?>
                     </td>
                     <?php
 

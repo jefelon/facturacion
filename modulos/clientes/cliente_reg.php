@@ -174,6 +174,7 @@ if($_POST['action'] == "obtener_datos"){
 			$data['tipo'] = $fila['tb_cliente_tip'];
 			$data['estado'] = $fila['tb_cliente_est'];
 			$data['retiene'] = $fila['tb_cliente_retiene'];
+            $data['precio_id'] = $fila['tb_precio_id'];
 		mysql_free_result($rs);
 	}
 	else
