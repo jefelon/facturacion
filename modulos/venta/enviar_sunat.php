@@ -33,7 +33,14 @@ require_once ("../formatos/numletras.php");
 
 $ven_id=$_POST['ven_id'];
 
+$dts2 = $oVenta->mostrarValorBruto($ven_id);
+while($dt = mysql_fetch_array($dts2)) {
+    $bruto=$dt["ValorBruto"];
+}
+mysql_free_result($dts2);
+
 $dts = $oVenta->mostrarUno($ven_id);
+
 while($dt = mysql_fetch_array($dts)){
 	
 	$idcomprobante=$dt["cs_tipodocumento_cod"];
@@ -123,6 +130,7 @@ $header = json_decode(json_encode($header));
 //===============================================================================================
 $autoin=0;
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
+$bruto=0;
 while($dt = mysql_fetch_array($dts))
 {
 
@@ -153,7 +161,7 @@ while($dt = mysql_fetch_array($dts))
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
     if ($dt["cs_tipoafectacionigv_cod"] == 20){
-      $detalle[$autoin]['igv']					='0.00';//sumatoria con cantidad
+      $detalle[$autoin]['igv']					='00.00';//sumatoria con cantidad
     }else{
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
@@ -168,8 +176,8 @@ while($dt = mysql_fetch_array($dts))
 	$detalle[$autoin]['isc']					=$dt["tb_ventadetalle_isc"];
 
 	$autoin++;
-
 }
+
 mysql_free_result($dts);
 
 $detalle = json_decode(json_encode($detalle));

@@ -19,6 +19,7 @@ function datatoarray($header, $detalle, $empresa, $tipodoc){
         arr_IssueTime($header, $detalle, $empresa, $tipodoc);
         arr_DueDate($header, $detalle, $empresa, $tipodoc);
         arr_InvoiceTypeCode($header, $detalle, $empresa, $tipodoc);
+        arr_Note($header, $detalle, $empresa, $tipodoc);
         arr_DocumentCurrencyCode($header, $detalle, $empresa, $tipodoc);
         arr_LineCountNumeric($header, $detalle, $empresa, $tipodoc);
         arr_DespatchDocumentReference($header, $detalle, $empresa, $tipodoc);
@@ -669,14 +670,14 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['AllowanceChargeReasonCode'][0] = '00';
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['AllowanceChargeReasonCode']['tag'] = 'cbc';
 
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['MultiplierFactorNumeric'][0] = round($item->descto / $item->valorventa, 2);
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['MultiplierFactorNumeric'][0] = number_format(round($item->descto / ($item->valorventa+$item->descto),2), 2);
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['MultiplierFactorNumeric']['tag'] = 'cbc';
 
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['Amount'][0] = round($item->descto,2);
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['Amount']['tag'] = 'cbc';
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['Amount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount'][0] = round($item->valorventa,2);
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount'][0] = round($item->valorventa+$item->descto,2);
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount']['tag'] = 'cbc';
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount']['atr']['currencyID'] = $header[0]->isomoneda;
             }
@@ -707,7 +708,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxCategoryID = 'E';
                 $Percent = '18.00';
                 $TaxSchemeID = 9997;
-                $TaxSchemeName = 'EXO';
+                $TaxSchemeName = 'EXONERADO';
                 $TaxSchemeTaxTypeCode = 'VAT';
 
             }elseif ($item->idafectaciond==21) {
@@ -743,16 +744,16 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
 
 
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['tag'] = 'cac';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['TaxAmount'][0] = round($impuestos,2);
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['TaxAmount'][0] = $impuestos;
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['TaxAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['TaxAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['tag'] = 'cac';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxableAmount'][0] = round($basecalculo, 2);
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxableAmount'][0] = $basecalculo;
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxableAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxableAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxAmount'][0] = round($impuesto,2);
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxAmount'][0] = $impuesto;
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['TaxTotal']['child']['childs'][1]['TaxSubtotal']['child']['TaxAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 

@@ -344,6 +344,16 @@ class cVenta{
 	return $rst;
 	}
 
+    function mostrarValorBruto($id){
+        $sql="SELECT sum(tb_ventadetalle_can*tb_ventadetalle_preuni) as ValorBruto
+	FROM tb_ventadetalle
+	
+	WHERE tb_venta_id=$id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function convertir_hash($id){
 	$key = 'RqvMXL87JGXZIfG9GCrR';
 	$sql="SELECT * FROM tb_venta
