@@ -15,6 +15,11 @@ $oEmpresa = new cEmpresa();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
+
+require_once ("../lote/cLote.php");
+$oLote = new cLote();
+
+
 $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
 $dt = mysql_fetch_array($dts);
@@ -385,7 +390,8 @@ $html.='<tr>
             <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
             <th style="text-align: right; width: 14%;"><b>PRECIO UNIT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 14%;"><b>PRECIO VENTA</b></th>
+            <th style="text-align: right; width: 10%;"><b>PRECIO VENTA</b></th>
+            <th style="text-align: right; width: 4%;"><b>Lotes</b></th>
         </tr>';
             $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
             $cont = 1;
@@ -413,6 +419,12 @@ $html.='<tr class="row">';
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preunilin"].'</td>
                 <td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
                 }
+
+                $lotes=$oLote->mostrarLoteCatalogo($dt["tb_catalogo_id"],$_SESSION['almacen_id']);
+                while($lote = mysql_fetch_array($lotes)) {
+                    $html.=$lote["tb_lote_numero"].',';
+                }
+
             $html.='</tr>';
         $cont++;
     	}

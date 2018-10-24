@@ -18,6 +18,9 @@ $oUsuario = new cUsuario();
 require_once ("../letras/cLetras.php");
 $cLetras = new cLetras();
 
+require_once ("../lote/cLote.php");
+$oLote = new cLote();
+
 $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
 $dt = mysql_fetch_array($dts);
@@ -421,7 +424,8 @@ $html.='<tr>
             <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
             <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: right; width: 12%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: right; width: 6%;"><b>Lotes</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
@@ -455,7 +459,12 @@ while($dt = mysql_fetch_array($dts)){
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
     }
-    $html.='</tr>';
+    $html .= '<td style="text-align: right">';
+    $lotes=$oLote->mostrarLoteCatalogo($dt["tb_catalogo_id"],$_SESSION['almacen_id']);
+    while($lote = mysql_fetch_array($lotes)) {
+        $html.=$lote["tb_lote_numero"].', ';
+    }
+    $html.='</td></tr>';
     $cont++;
 }
 $html.='</tbody>
