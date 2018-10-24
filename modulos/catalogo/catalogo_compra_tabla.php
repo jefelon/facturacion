@@ -193,7 +193,23 @@ $(function() {
                             <td><?php echo $dt1['tb_unidad_abr']?></td>                           
                             <td align="right">
                             <?php echo $texto_moneda?>
-							<input class="focus_precom moneda" name="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" value="<?php echo formato_decimal($precio_unitario_compra, 3)?>" size="10" maxlength="8" style="text-align:right">
+
+                                <!--Descuento del producto (este valor va en el Detalle compra)-->
+                                <?php
+                                if($_POST['prov_id']){
+                                    $dts22=$oCatalogo->catalogo_compra_filtro_descuento($dt1['tb_producto_id'],$_POST['prov_id']);
+                                    $dt33 = mysql_fetch_array($dts22);
+
+                                    $costoPactado=$precio_unitario_compra;
+                                    if($dt33['tb_productoproveedor_cantmin']>0){
+                                        $costoPactado=  $dt33['tb_productoproveedor_cantmin'];
+                                    }
+                                    $descuento=  $dt33['tb_productoproveedor_desc'];
+                                    mysql_free_result($dts22);
+                                }
+                                ?>
+
+                            <input class="focus_precom moneda" name="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_precom_<?php echo $dt1['tb_catalogo_id']?>" value="<?php echo formato_decimal($costoPactado, 3)?>" size="10" maxlength="8" style="text-align:right">
 							</td>                            
                             <td align="center">
                             <input name="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" class="cantidad" value="1" size="5" maxlength="6" style="text-align:right">
@@ -201,17 +217,6 @@ $(function() {
                             <a class="btn_menos" href="#menos" onClick="cantidad('menos','<?php echo $dt1['tb_catalogo_id']?>')">Disminuir</a>
                             </td>
                             <td align="right">
-                            <!--Descuento del producto (este valor va en el Detalle compra)-->
-                                <?php
-                                if($_POST['prov_id']){
-                                    $dts22=$oCatalogo->catalogo_compra_filtro_descuento($dt1['tb_producto_id'],$_POST['prov_id']);
-                                    $dt33 = mysql_fetch_array($dts22);
-                                    $descuento=  $dt33['tb_productoproveedor_desc'];
-                                    mysql_free_result($dts22);
-                                }
-                                ?>
-
-
                             <input type="text" name="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_des_<?php echo $dt1['tb_catalogo_id']?>" class="porcentaje" value="<?php echo formato_decimal($descuento,3) ?>" size="6" maxlength="5" style="text-align:right"></td>
                             <td align="right">
 							<input type="text" name="txt_detcom_fle_<?php echo $dt1['tb_catalogo_id']?>" id="txt_detcom_fle_<?php echo $dt1['tb_catalogo_id']?>" class="moneda" value="<?php //echo $dt1['tb_compradetalle_fle']?>" size="8" maxlength="8" style="text-align:right">
