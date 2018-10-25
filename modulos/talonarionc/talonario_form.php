@@ -30,7 +30,7 @@ $('.cantidad').autoNumeric({
 	aSep: '',
 	aDec: '.',
 	vMin: '0',
-	vMax: '99999.9999'
+	vMax: '9999999999'
 });
 
 function cmb_punven_id()
@@ -176,7 +176,7 @@ $(function() {
         </tr>
         <tr>
           <td align="right"><label for="txt_tal_num" title="Último utilizado">Número:</label></td>
-          <td><input type="text" name="txt_tal_num" id="txt_tal_num" class="cantidad" style="text-align:right" size="10" maxlength="8" value="<?php echo $num?>"></td>
+          <td><input type="text" name="txt_tal_num" id="txt_tal_num" " style="text-align:right" size="10" maxlength="8" value="<?php echo $num?>"></td>
           <td align="right"><label for="cmb_tal_est">Estado:</label></td>
           <td><select name="cmb_tal_est" id="cmb_tal_est">
             <option value="">-</option>

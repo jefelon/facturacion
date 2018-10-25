@@ -140,23 +140,28 @@ $(function() {
 <input name="action_proveedor" id="action_proveedor" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_pro_id" id="hdd_pro_id" type="hidden" value="<?php echo $_POST['pro_id']?>">
     <table>
-    	<tr>
-    	  <td align="right">Persona:</td>
-    	  <td>
-          	<div id="radio">
-              <input name="rad_pro_tip" type="radio" id="radio1" value="1" <?php if($tip==1)echo 'checked="checked"'?>/><label for="radio1">Natural</label>
-              <input name="rad_pro_tip" type="radio" id="radio2" value="2" <?php if($tip==2)echo 'checked="checked"'?>/><label for="radio2">Jurídica</label>
-            </div>
-    	  </td>
-  	  </tr>
         <tr>
-            <td align="right"><label for="txt_pro_doc">RUC/DNI:</label></td>
+            <td align="right">Persona:</td>
+            <td>
+                <div id="radio">
+                    <input name="rad_pro_tip" type="radio" id="radio1" value="1" <?php if($tip==1)echo 'checked="checked"'?>/><label for="radio1">Natural</label>
+                    <input name="rad_pro_tip" type="radio" id="radio2" value="2" <?php if($tip==2)echo 'checked="checked"'?>/><label for="radio2">Jurídica</label>
+                    <input name="rad_pro_tip" type="radio" id="radio3" value="3" <?php if($tip==3)echo 'checked="checked"'?>/><label for="radio3">OTROS</label>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td align="right"><label for="txt_pro_doc">DNI:</label></td>
             <td><input name="txt_pro_doc" id="txt_pro_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
-                <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
+                <a id="validar_ruc" href="#validar" onClick="buscar()">Validar DNI</a>
                 <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
             </td>
 
         </tr>
+
+
+
+
     	<tr>
     	  <td align="right" valign="top"><label for="txt_pro_nom">Proveedor:</label></td>
     	  <td><textarea name="txt_pro_nom" cols="50" rows="2" id="txt_pro_nom"><?php echo $nom?></textarea></td>

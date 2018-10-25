@@ -106,7 +106,7 @@ $(function() {
     <thead>
     <tr>
         <th>LOTE</th>
-        <th>FECHA FABRICACION</th>
+<!--        <th>FECHA FABRICACION</th>-->
         <th>FECHA VENCIMIENTO</th>
         <th>STOCK</th>
         <th align="center">ESTADO</th>
@@ -122,7 +122,7 @@ if($num_rows>0){
 				?>
                         <tr>
                             <td align="right"><?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice]?></td>
-                            <td><?php echo mostrarFecha($_SESSION['lote_fecfab'][$_POST['cat_id']][$indice])?></td>
+<!--                            <td>--><?php //echo mostrarFecha($_SESSION['lote_fecfab'][$_POST['cat_id']][$indice])?><!--</td>-->
                           	<td><?php echo mostrarFecha($_SESSION['lote_fecven'][$_POST['cat_id']][$indice])?></td>
                             <td><?php echo $_SESSION['lote_sto_num'][$_POST['cat_id']][$indice]?></td>
                             <td align="right"><?php echo $_SESSION['lote_estado'][$_POST['cat_id']][$indice]?></td>

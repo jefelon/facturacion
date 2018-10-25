@@ -11,6 +11,7 @@ $oProveedor = new cProveedor();
 
 if($_POST['action']=="insertar"){
     $fec=date('d-m-Y');
+    $dias=0;
     $fecven=date('d-m-Y');
     $unico_id=uniqid();
     unset($_SESSION['precio_car']);
@@ -476,7 +477,26 @@ if($_POST['action']=="editar"){
         });
     }
 
+    function txt_venpag_fecven_compra(){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_txt_fecven.php",
+            async:true,
+            dataType: "json",
+            data: ({
+                ven_fec: 		$('#txt_com_fec').val(),
+                venpag_numdia: 	$('#txt_fecven_dias').val()
+            }),
+            beforeSend: function() {
+                //$('#txt_ven_numdoc').val('Cargando...');
+            },
+            success: function(data){
+                //alert(data.fecha);
+                $('#txt_com_fecven').val(data.fecha);
+            },
 
+        });
+    }
 
 
     function editar_datos_item(idf, nom){
@@ -580,7 +600,13 @@ if($_POST['action']=="editar"){
         $('#chk_com_tipper').change( function() {
             compra_car('actualizar');
         });
+        $("#txt_fecven_dias").keyup(function() {
+            txt_venpag_fecven_compra();
+        });
 
+        $("#txt_com_fec").keyup(function() {
+            txt_venpag_fecven_compra();
+        });
         $("#cmb_com_doc").change(function() {
             if ($(this).val()=='20' || $(this).val()=='21'){
                 $('#nota-debito-credito').show();
@@ -593,6 +619,11 @@ if($_POST['action']=="editar"){
                 $("#txt_com_ser_nota").attr('disabled', true);
                 $("#txt_com_num_nota").attr('disabled', true);
                 $("#cmb_com_tip").attr('disabled', true);
+            }
+            if ($(this).val()=='19') {
+                $('#doc_compra_serv').css('display', 'block');
+            }else{
+                $('#doc_compra_serv').css('display', 'none');
             }
         });
 
@@ -903,6 +934,8 @@ if($_POST['action']=="editar"){
         <legend>Datos Principales</legend>
         <label for="txt_com_fec">Fecha:</label>
         <input name="txt_com_fec" type="text" class="fecha" id="txt_com_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
+        <label for="txt_fecven_dias">Dias:</label>
+        <input name="txt_fecven_dias" type="text" class="dias" id="txt_fecven_dias" value="<?php echo $dias?>" size="2" maxlength="5">
         <label for="txt_com_fecven" title="Fecha de Vencimiento">Fecha Vcto:</label>
         <input name="txt_com_fecven" type="text" class="fecha" id="txt_com_fecven" value="<?php echo $fecven?>" size="10" maxlength="10" readonly>
 
@@ -911,6 +944,7 @@ if($_POST['action']=="editar"){
         </select>
         <label for="txt_com_numdoc">N° Doc:</label>
         <input style="width:90px" type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
+        <br>
         <label for="txt_com_numorden">N° Orden:</label>
         <input style="width:90px" type="text" name="txt_com_numorden" id="txt_com_numorden"  value="<?php echo $numorden?>">
         <?php /*?>
@@ -1016,7 +1050,7 @@ if($_POST['action']=="editar"){
     <div id="div_lote_form">
     </div>
 
-    <fieldset>
+    <fieldset id="doc_compra_serv" style="display: none;">
         <legend>Documentos</legend>
         <div>
             <div id="msj_producto_proveedor" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">

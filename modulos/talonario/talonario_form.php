@@ -27,10 +27,9 @@ if($_POST['action']=="editar")
 
 <script type="text/javascript">
 $('.cantidad').autoNumeric({
-	aSep: '',
-	aDec: '.',
+    aSep: '',
 	vMin: '0',
-	vMax: '99999.9999'
+	vMax: '99999999'
 });
 
 function cmb_punven_id()
