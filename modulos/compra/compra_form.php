@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once ("../../config/Cado.php");
 require_once ("cCompra.php");
@@ -69,6 +69,11 @@ if($_POST['action']=="editar"){
     $('#btn_compra_precio_form').button({
         icons: {primary: "ui-icon-newwin"},
         text: true
+    }).keyup(function(e){
+        if(e.keyCode != '8'){
+            if (e.target.value.length == 2) e.target.value = e.target.value + "-";
+            if (e.target.value.length == 5) e.target.value = e.target.value + "-";
+        }
     });
 
 
@@ -84,7 +89,13 @@ if($_POST['action']=="editar"){
         //altFormat: 'yy-mm-dd',
         showOn: "button",
         buttonImage: "../../images/calendar.gif",
-        buttonImageOnly: true
+        buttonImageOnly: true,
+
+    }).keyup(function(e){
+        if(e.keyCode != '8'){
+            if (e.target.value.length == 2) e.target.value = e.target.value + "-";
+            if (e.target.value.length == 5) e.target.value = e.target.value + "-";
+        }
     });
 
     $( "#txt_com_fecven" ).datepicker({
@@ -932,19 +943,19 @@ if($_POST['action']=="editar"){
 
     <fieldset>
         <legend>Datos Principales</legend>
-        <label for="txt_com_fec">Fecha:</label>
-        <input name="txt_com_fec" type="text" class="fecha" id="txt_com_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
+        <label for="txt_com_fec">Fecha(dd-mm-aaaa):</label>
+        <input name="txt_com_fec" type="text" class="fecha" id="txt_com_fec" pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fec?>" size="10" maxlength="10">
         <label for="txt_fecven_dias">Dias:</label>
         <input name="txt_fecven_dias" type="text" class="dias" id="txt_fecven_dias" value="<?php echo $dias?>" size="2" maxlength="5">
-        <label for="txt_com_fecven" title="Fecha de Vencimiento">Fecha Vcto:</label>
-        <input name="txt_com_fecven" type="text" class="fecha" id="txt_com_fecven" value="<?php echo $fecven?>" size="10" maxlength="10" readonly>
+        <label for="txt_com_fecven" title="Fecha de Vencimiento">Fecha Vcto(dd-mm-aaaa):</label>
+        <input name="txt_com_fecven" type="text" class="fecha" id="txt_com_fecven" pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fecven?>" size="10" maxlength="10">
 
         <label for="cmb_com_doc">Documento:</label>
         <select name="cmb_com_doc" id="cmb_com_doc">
         </select>
+        <br>
         <label for="txt_com_numdoc">N° Doc:</label>
         <input style="width:90px" type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
-        <br>
         <label for="txt_com_numorden">N° Orden:</label>
         <input style="width:90px" type="text" name="txt_com_numorden" id="txt_com_numorden"  value="<?php echo $numorden?>">
         <?php /*?>
