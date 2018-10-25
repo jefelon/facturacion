@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 require_once ("../../config/Cado.php");
@@ -133,7 +133,9 @@ $('.btn_menos').button({
 	text: false
 });
 
-
+$(".focus_precom, .cantidad, .porcentaje ").one("keypress", function (e) {
+    e.target.value = e.target.value[0];
+});
 
 $(".btn_mas").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 $(".btn_menos").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
