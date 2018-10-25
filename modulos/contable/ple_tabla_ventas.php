@@ -102,48 +102,58 @@ $(function() {
                     $fecha=$dt1['tb_venta_fec'];
                     $periodo=explode("/",$fecha);
                     ?>
-                    1<td><?php echo $periodo[2].$periodo[1].'00'; ?></td>
-                    2<td><?php echo $periodo[2].$periodo[1].$lineas;?></td>
+                    <!--1--><td><?php echo $periodo[2].$periodo[1].'00'; ?></td>
+                   <!-- 2--><td><?php echo $periodo[2].$periodo[1].$lineas;?></td>
                     <?php
                         if($periodo[1]=="01"){$amc="A";}
                         if($periodo[1]=="13"){$amc="C";}
                          else{$amc="M";}
                      ?>
-                    3<td><?php echo $amc.$periodo[2].$periodo[1].$lineas;?></td>
-                    4<td><?php echo $dt1['tb_venta_fec'] ?></td>
-                    5<td><?php echo $dt1['tb_venta_fec'] ?></td>
+                   <!-- 3--><td><?php echo $amc.$periodo[2].$periodo[1].$lineas;?></td>
+                   <!-- 4--><td><?php echo $dt1['tb_venta_fec'] ?></td>
+                   <!-- 5--><td><?php echo $dt1['tb_venta_fec'] ?></td>
                     <?php if(strlen($dt1['cs_tipodocumento_cod'])==1)
                     {$coddoc = '0' . $dt1['cs_tipodocumento_cod'];}
                     else{$coddoc=$dt1['cs_tipodocumento_cod'];}
                     ?>
-                    6<td><?php echo $coddoc; ?></td>
-                    7<td><?php echo $dt1['tb_venta_ser']; ?></td>
-                    8<td><?php echo $dt1['tb_venta_num']; ?></td>
-                    9<td></td>
+                   <!-- 6--><td><?php echo $coddoc; ?></td>
+                   <!-- 7--><td><?php echo $dt1['tb_venta_ser']; ?></td>
+                   <!-- 8--><td><?php echo $dt1['tb_venta_num']; ?></td>
+                   <!-- 9--><td></td>
                     <?php
                     $ctipo="";
+                    $cliente_doc="";
+                    $cliente_nom="";
                     if($dt1['tb_cliente_tip']==1){
                         $ctipo=1;
+                        if($dt1['tb_cliente_doc']="00")
+                        {
+                            $cliente_doc="";
+                            $ctipo="";
+                            $cliente_nom="";
+                        }
                     } elseif($dt1['tb_cliente_tip']==2){
                         $ctipo=6;
+                        $cliente_doc=$dt1['tb_cliente_doc'];
+                        $cliente_nom=$dt1['tb_cliente_nom'];
                     }
                     ?>
-                    10<td><?php echo $ctipo ?></td>
-                    11<td><?php echo $dt1['tb_cliente_doc']; ?></td>
-                    12<td><?php echo $dt1['tb_cliente_nom']; ?></td>
-                    13<td></td>
-                    14<td><?php echo $dt1['tb_venta_gra']; ?></td>
-                    15<td><?php echo $dt1['tb_venta_des']; ?></td>
-                    16<td><?php echo $dt1['tb_venta_igv']; ?></td>
-                    17<td></td>
-                    18<td><?php echo $dt1['tb_venta_exo']; ?></td>
-                    19<td><?php echo $dt1['tb_venta_ina']; ?></td>
-                    20<td><?php echo $dt1['tb_venta_isc']; ?></td>
-                    21<td></td>
-                    22<td></td>
-                    23<td><?php echo $dt1['tb_venta_otrcar']; ?></td>
-                    24<td><?php echo $dt1['tb_venta_tot']; ?></td>
-                    25<td><?php echo $dt1['cs_tipomoneda_cod']; ?></td>
+                    <!--10--><td><?php echo $ctipo ?></td>
+                    <!--11--><td><?php echo $cliente_doc; ?></td>
+                    <!--12--><td><?php echo $cliente_nom; ?></td>
+                    <!--13--><td></td>
+                    <!--14--><td><?php echo $dt1['tb_venta_gra']; ?></td>
+                    <!--15--><td><?php echo $dt1['tb_venta_des']; ?></td>
+                    <!--16--><td><?php echo $dt1['tb_venta_igv']; ?></td>
+                    <!--17--><td></td>
+                    <!--18--><td><?php echo $dt1['tb_venta_exo']; ?></td>
+                    <!--19--><td><?php echo $dt1['tb_venta_ina']; ?></td>
+                    <!--20--><td><?php echo $dt1['tb_venta_isc']; ?></td>
+                    <!--21--><td></td>
+                    <!--22--><td></td>
+                    <!--23--><td><?php echo $dt1['tb_venta_otrcar']; ?></td>
+                    <!--24--><td><?php echo $dt1['tb_venta_tot']; ?></td>
+                    <!--25--><td><?php echo $dt1['cs_tipomoneda_cod']; ?></td>
 
                     <?php
                     $fec_ventanota="";
@@ -172,15 +182,15 @@ $(function() {
                         $tc="1.000";
                     }
                     ?>
-                    26<td><?php echo $tc; ?></td>
-                    27<td><?php echo $fec_ventanota; ?></td>
-                    28<td><?php echo $tip_doc_mod; ?></td>
-                    29<td><?php echo $tip_doc_modserie; ?></td>
-                    30<td><?php echo $tip_doc_modnum; ?></td>
-                    31<td></td>
-                    32<td></td>
-                    33<td></td>
-                    34<td>1</td>
+                    <!--26--><td><?php echo $tc; ?></td>
+                    <!--27--><td><?php echo $fec_ventanota; ?></td>
+                    <!--28--><td><?php echo $tip_doc_mod; ?></td>
+                    <!--29--><td><?php echo $tip_doc_modserie; ?></td>
+                    <!--30--><td><?php echo $tip_doc_modnum; ?></td>
+                    <!--31--><td></td>
+                    <!--32--><td></td>
+                    <!--33--><td></td>
+                    <!--34--><td>1</td>
                     <td></td>
                 </tr>
                 <?php
@@ -192,5 +202,6 @@ $(function() {
         <tr class="even">
             <td colspan="41"><?php echo $num_rows.' registros'?></td>
         </tr>
+
     </table>
 

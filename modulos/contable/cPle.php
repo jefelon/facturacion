@@ -69,7 +69,7 @@ class cPle
         return $rst;
     }
     function mostrar_fec_doc($numdoc,$tipo){
-        $sql="SELECT *
+        $sql="SELECT DATE_FORMAT(tb_venta_fec,'%d/%m/%Y') AS tb_venta_fec,cs_tipodocumento_cod
         FROM tb_venta v
         LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
         WHERE v.tb_venta_numdoc = '$numdoc' AND td.cs_tipodocumento_cod = '$tipo' ";
