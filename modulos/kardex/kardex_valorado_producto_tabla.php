@@ -34,7 +34,7 @@ require_once ("../catalogo/cst_producto.php");
 		mysql_free_result($rs);
 
 
-	$fecini=$_POST['fec_ini'];
+	$fecini='01-01-2013';;
 	$fecfin=$_POST['fec_fin'];
 	
 	$dts1 = $oKardex->mostrar_kardex_por_producto($_POST['cat_id'],$_POST['alm_id'],fecha_mysql($fecini),fecha_mysql($fecfin));
@@ -100,8 +100,14 @@ $(function() {
 			$costo_total_entradas = 0;
 			$costo_total_salidas = 0;
             $mes_anterior='';
-			
+
+
+            $d_ini = strtotime($_POST['fec_ini']);
             while($dt1 = mysql_fetch_array($dts1)){
+
+                $d_kar_fec = strtotime($dt1['tb_kardex_fec']);
+
+                if ($d_kar_fec>=$d_ini){
             	if($dt1['tb_tipoperacion_id']=='1')$operacion='STOCK INICIAL';
             	if($dt1['tb_tipoperacion_id']=='2')$operacion='COMPRA';
             	if($dt1['tb_tipoperacion_id']=='3')$operacion='VENTA';
@@ -142,7 +148,6 @@ $(function() {
                 </tr>
                 <?php }
                     $mes_anterior = date("m",strtotime($dt1['tb_kardex_reg']));
-
                 ?>
                 <tr>
                     <td nowrap="nowrap" title="<?php echo 'Registrado: '.mostrarFechaHoraH($dt1['tb_kardex_reg'])?>"><?php echo mostrarFecha($dt1['tb_kardex_fec'])?></td>
@@ -225,7 +230,39 @@ $(function() {
 
                 </tr>
                 <?php
+                }else{
+                    if ($mes_anterior!=date("m",strtotime($dt1['tb_kardex_reg'])) and $mes_anterior) {
 
+                    }
+                    $mes_anterior = date("m",strtotime($dt1['tb_kardex_reg']));
+                    $can = $dt1['tb_kardexdetalle_can'];
+                    $tip = $dt1['tb_kardex_tip'];//Verificando si es Entrada o Salida (1: ENTRADA | 2: SALIDA)
+
+                    if($tip == 1){
+
+                        $stock_kardex=stock_kardex_reg($dt1['tb_catalogo_id'],0,$firstrow['tb_kardex_reg'],$dt1['tb_kardex_reg'],$_SESSION['empresa_id']);
+
+                        $costo_ponderado_array=costo_ponderado_empresa_fechas_reg($dt1['tb_catalogo_id'],$_SESSION['almacen_id'],$firstrow['tb_kardex_reg'],$dt1['tb_kardex_reg'],$stock_kardex,$dt1['tb_kardexdetalle_cos'],$dt1['tb_catalogo_precosdol'],$_SESSION['empresa_id']);
+
+                        $costo_promedio=$costo_ponderado_array['soles'];
+
+
+
+                        if($dt1['tb_tipoperacion_id']==1)$precos=$cat_precos;
+
+                        $subtotal = $can*$precos;
+                        $cantidad_total += $can;
+                        $cantidad_total_entradas += $can;
+                        $costo_total_entradas += $subtotal;
+                    }
+
+                    if($tip == 2){
+                        $precos = $dt1['tb_kardexdetalle_pre'];
+                        $subtotal = $can*$precos;
+                        $cantidad_total -= $can;
+                        $cantidad_total_salidas += $can;
+                        $costo_total_salidas += $subtotal;}
+                }
             }
 			mysql_free_result($dts1);
 			?>

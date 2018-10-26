@@ -1,6 +1,9 @@
 <?php
 session_start();
 $alm_id=$_SESSION['almacen_id'];
+$fec_ini = date('01-01-Y');
+$fec_fin= date('d-m-Y');
+
 ?>
 <script type="text/javascript">
     $( "#txt_kar_fecini, #txt_kar_fecfin" ).datepicker({
@@ -16,7 +19,10 @@ $alm_id=$_SESSION['almacen_id'];
         buttonImage: "../../images/calendar.gif",
         buttonImageOnly: true
     });
-
+    $('#btn_filtrar').button({
+        icons: {primary: "ui-icon-search"},
+        text: true
+    });
 function kardex_datos(){	
 	$.ajax({
 		type: "POST",
@@ -86,9 +92,9 @@ $(function(){
             <option value="">-</option>              
         </select>
         <label for="txt_kar_fecini">Fecha Inicio:</label>
-        <input name="txt_kar_fecini" type="text" class="fecha" id="txt_kar_fecini" value="<?php echo $fec?>" size="10" maxlength="10">
+        <input name="txt_kar_fecini" type="text" class="fecha" id="txt_kar_fecini" value="<?php echo $fec_ini?>" size="10" maxlength="10">
         <label for="txt_kar_fecfin">Fecha Fin:</label>
-        <input name="txt_kar_fecfin" type="text" class="fecha" id="txt_kar_fecfin" value="<?php echo $fec?>" size="10" maxlength="10">
-
+        <input name="txt_kar_fecfin" type="text" class="fecha" id="txt_kar_fecfin" value="<?php echo $fec_fin?>" size="10" maxlength="10">
+        <a href="#" onClick="kardex_valorado_tabla($('#hdd_cat_sel_id').val(), $('#cmb_almacen').val(), $('#txt_kar_fecini').val(), $('#txt_kar_fecfin').val());" id="btn_filtrar">Filtrar</a>
     </fieldset>
 </div>
