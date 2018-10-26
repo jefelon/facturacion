@@ -89,7 +89,7 @@ if($_POST['action']=="editar"){
         //altFormat: 'yy-mm-dd',
         showOn: "button",
         buttonImage: "../../images/calendar.gif",
-        buttonImageOnly: true,
+        buttonImageOnly: true
 
     }).keyup(function(e){
         if(e.keyCode != '8'){

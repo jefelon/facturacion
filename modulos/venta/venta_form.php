@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 session_start();
 require_once ("../../config/Cado.php");
 
@@ -26,7 +26,7 @@ $cot_id = $_POST['cot_id'];
 
 if($_POST['action']=="insertar"){
 	//$cli_id=1;
-	$fec=date('d-m-Y');
+    $fec=date('d-m-Y');
 	$est='CANCELADA';
 	$venpag_fec=date('d-m-Y');
 
@@ -2006,7 +2006,7 @@ function bus_cantidad(act)
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
       <td style="width:80%;"><label for="txt_ven_fec">Fecha:</label>
-        <input name="txt_ven_fec" type="text" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
+        <input name="txt_ven_fec" type="text" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10">
         <label for="cmb_ven_doc">Documento:</label>
         <select name="cmb_ven_doc" id="cmb_ven_doc" <?php if($_POST['action']=='editar')echo 'disabled'?>>
         </select>
@@ -2335,9 +2335,6 @@ function bus_cantidad(act)
        <div id="div_productos">
           <div id="cuadro-contain" class="ui-widget">
 <!--              <legend>Agregar Producto</legend>-->
-                  <label for="txt_ven_fec" style="display: none;">Fecha:</label>
-                  <input name="txt_ven_fec" type="hidden" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10" readonly>
-
                   <input name="hdd_bus_cat_id" id="hdd_bus_cat_id"  type="hidden" value="">
                   <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
                   <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
