@@ -34,8 +34,8 @@ require_once ("../catalogo/cst_producto.php");
 		mysql_free_result($rs);
 
 
-	$fecini='01-01-2013';
-	$fecfin='';
+	$fecini=$_POST['fec_ini'];
+	$fecfin=$_POST['fec_fin'];
 	
 	$dts1 = $oKardex->mostrar_kardex_por_producto($_POST['cat_id'],$_POST['alm_id'],fecha_mysql($fecini),fecha_mysql($fecfin));
 

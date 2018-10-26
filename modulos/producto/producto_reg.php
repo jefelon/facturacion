@@ -139,6 +139,13 @@ if($_POST['action_producto']=="editar")
             limpia_espacios($_POST['txt_pro_nom'])
         );
 
+        $provedores = $_POST['proveedor'];
+        $cont=0;
+        foreach ($provedores as $proveedor) {
+            $oProductoproveedor->insertar_producto_proveedor($_POST['hdd_pro_id'], $_POST['hdd_com_prov_id'][$cont],  moneda_mysql($_POST['catmin'][$cont]),  moneda_mysql($_POST['desc'][$cont]), fecha_mysql($_POST['desde'][$cont]), fecha_mysql($_POST['hasta'][$cont]));
+            $cont++;
+        }
+
         if (!file_exists('img_products')) {
             mkdir('img_products', 0777);
         }

@@ -3,6 +3,20 @@ session_start();
 $alm_id=$_SESSION['almacen_id'];
 ?>
 <script type="text/javascript">
+    $( "#txt_kar_fecini, #txt_kar_fecfin" ).datepicker({
+        minDate: new Date((new Date()).getFullYear(), 0, 1),
+        maxDate:"+0D",
+        yearRange: 'c-0:c+0',
+        changeMonth: true,
+        changeYear: false,
+        dateFormat: 'dd-mm-yy',
+        //altField: fecha,
+        //altFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: "../../images/calendar.gif",
+        buttonImageOnly: true
+    });
+
 function kardex_datos(){	
 	$.ajax({
 		type: "POST",
@@ -42,15 +56,19 @@ function cmb_seleccionar_alm(){
 		complete: function(){
 			var alm_id = $("#cmb_almacen").val();
 			var cat_id = $("#hdd_cat_sel_id").val();
-            kardex_valorado_tabla(cat_id, alm_id);
+            var fec_ini = $("#txt_kar_fecini").val();
+            var fec_fin = $("#txt_kar_fecfin").val();
+            kardex_valorado_tabla(cat_id, alm_id, fec_ini, fec_fin);
 		}
 	});
 }
 
 $("#cmb_almacen").change(function(){
 	var alm_id = $("#cmb_almacen").val();
-	var cat_id = $("#hdd_cat_sel_id").val();		
-	kardex_valorado_tabla(cat_id, alm_id);
+	var cat_id = $("#hdd_cat_sel_id").val();
+    var fec_ini = $("#txt_kar_fecini").val();
+    var fec_fin = $("#txt_kar_fecfin").val();
+	kardex_valorado_tabla(cat_id, alm_id, fec_ini, fec_fin);
 });
 
 
@@ -67,5 +85,10 @@ $(function(){
         <select name="cmb_almacen" id="cmb_almacen">
             <option value="">-</option>              
         </select>
+        <label for="txt_kar_fecini">Fecha Inicio:</label>
+        <input name="txt_kar_fecini" type="text" class="fecha" id="txt_kar_fecini" value="<?php echo $fec?>" size="10" maxlength="10">
+        <label for="txt_kar_fecfin">Fecha Fin:</label>
+        <input name="txt_kar_fecfin" type="text" class="fecha" id="txt_kar_fecfin" value="<?php echo $fec?>" size="10" maxlength="10">
+
     </fieldset>
 </div>

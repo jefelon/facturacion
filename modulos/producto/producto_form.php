@@ -1123,9 +1123,11 @@ $(function() {
   <label for="editar_presentacion">Guardar y Seguir Editando</label>
   <input name="editar_presentacion" id="editar_presentacion" type="checkbox" value="1">
 </div>
-<?php }?>
 </form>
+<?php }?>
+
 <?php if($_POST['action']=="editar"){?>
 <div id="div_producto_presentacion_vista" style="float:left; margin-left:5px; width:300px">
 </div>
+</form>
 <?php }?>

@@ -140,7 +140,7 @@ function kardex_tabla(cat_id,alm_id){
 }
 
 
-function kardex_valorado_tabla(cat_id,alm_id){
+function kardex_valorado_tabla(cat_id,alm_id, fec_ini, fec_fin){
     $.ajax({
         type: "POST",
         url: "../kardex/kardex_valorado_producto_tabla.php",
@@ -148,7 +148,9 @@ function kardex_valorado_tabla(cat_id,alm_id){
         dataType: "html",
         data: ({
             cat_id: cat_id,
-            alm_id: alm_id
+            alm_id: alm_id,
+            fec_ini: fec_ini,
+            fec_fin: fec_fin
         }),
         beforeSend: function() {
             $('#div_producto_kardex_tabla').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');

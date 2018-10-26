@@ -66,6 +66,11 @@ if($_POST['action']=="editar"){
 		
 		$est		=$dt['tb_catalogo_est'];
 
+		$valven = $dt['tb_catalogo_preven']/1.18;
+
+        $costo_neto = $valven/($uti/100+1);
+        $descprov = $precos -$costo_neto;
+
 	mysql_free_result($dts);
 }
 ?>
@@ -276,43 +281,79 @@ $(function() {
 			
 		}
 	});
-	
-	$("#txt_cat_precos" ).keyup(function() {
-		var precos	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
-		var uti		=parseFloat($("#txt_cat_uti" ).val());
-		
-		if(uti>=0)
-		{
-			var utilidad=uti/100;
-			var calculo=precos/(1-utilidad);
-			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
-		}
-	});
-	
-	$("#txt_cat_uti" ).keyup(function() {
-		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
-		var uti		=parseFloat($("#txt_cat_uti" ).val());
-		
-		if(precom>=0 && precom!="")
-		{
-			var utilidad=uti/100;
-			var calculo=precom/(1-utilidad);
-			//$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-			$( "#txt_cat_preven" ).autoNumericSet(calculo.toFixed(2));
-		}
-	});
-	
-	$("#txt_cat_preven" ).keyup(function(){
-		var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
-		var preven	=parseFloat($("#txt_cat_preven" ).autoNumericGet());
-		
-		if(precom!="" && preven>0)
-		{
-			var calculo=(1-precom/preven)*100;
-			$( "#txt_cat_uti" ).val(calculo.toFixed(2));
-		}
-	});
+
+    $("#txt_cat_precos" ).keyup(function() {
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var uti		=parseFloat($("#txt_cat_uti" ).val());
+
+        if(uti>=0)
+        {
+            var calculo=precom+(precom*uti/100);
+            //$( "#txt_cat_valven" ).val(calculo.toFixed(2));
+            $( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
+        }
+    });
+    $("#txt_cat_descprov" ).keyup(function() {
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+        var uti		=parseFloat($("#txt_cat_uti" ).val());
+
+        if(precom>=0 && precom!="")
+        {
+            var descuento=desc/100;
+            var utilidad=uti/100;
+            var costoneto=precom-(precom*descuento)
+            var calculo=costoneto+(costoneto*utilidad);
+            $( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
+        }
+    });
+    $("#txt_cat_uti" ).keyup(function() {
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+        var uti		=parseFloat($("#txt_cat_uti" ).val());
+
+        if(precom>=0 && precom!="")
+        {
+            var descuento=desc/100;
+            var utilidad=uti/100;
+            var costoneto=precom-(precom*descuento)
+            var calculo=costoneto+(costoneto*utilidad);
+            $( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
+        }
+    });
+
+    $("#txt_cat_valven" ).keyup(function(){
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var preven		=parseFloat($("#txt_cat_preven" ).val());
+        var prevalven	=parseFloat($("#txt_cat_valven" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+
+        if(precom-desc>=0 && precom!="" && precom-desc<prevalven)
+        {
+            var descuento=desc/100;
+            var costoneto=precom-(precom*descuento);
+            var utilidad = (prevalven/costoneto)-1;
+
+            $( "#txt_cat_uti" ).autoNumericSet((utilidad*100).toFixed(2));
+            $( "#txt_cat_preven" ).autoNumericSet((prevalven*1.18).toFixed(2));
+        }
+    });
+
+    $("#txt_cat_valven" ).blur(function() {
+        var precom	=parseFloat($("#txt_cat_precos" ).autoNumericGet());
+        var preven		=parseFloat($("#txt_cat_preven" ).val());
+        var prevalven	=parseFloat($("#txt_cat_valven" ).autoNumericGet());
+        var desc =parseFloat($("#txt_cat_descprov" ).val());
+        if (precom != "" && preven != "" && desc != "" && preven != "") {
+            if (prevalven < (precom - desc) ) {
+                $("#txt_cat_valven").val('');
+                $("#txt_cat_valven").focus();
+            }
+        }
+    });
 	
 //adicionales
 	$( "#div_unidad_form" ).dialog({
@@ -465,16 +506,19 @@ $(function() {
     <div id="cuadro_cat_form" class="ui-widget">
     <table class="ui-widget ui-widget-content">
         <tr class="ui-widget-header">
-          <th align="center" nowrap="nowrap">Precio Costo S/.</th>
-          <!--<th align="center">IGV</th>-->
-          <th align="center" nowrap="nowrap">Utilidad (%)</th>
-          <th align="center" nowrap="nowrap">Precio Venta S/.</th>
-          <!--<th align="center"> IGV</th>-->
+            <th align="center">Precio Costo</th>
+            <th align="center">Desc. Prov</th>
+            <!--<th align="center">IGV</th>-->
+            <th align="center">Utilidad (%)</th>
+            <th align="center">Valor Venta</th>
+            <th align="center">Precio Venta</th>
         </tr>
         <tr>
           <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precos?>"></td>
+            <td align="center"><input name="txt_cat_descprov" type="text" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo formato_decimal($descprov,2)?>"></td>
           <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
           <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
+            <td align="center"><input name="txt_cat_valven" type="text" id="txt_cat_valven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo formato_decimal($valven, 2)?>"></td>
           <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
           <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
         </tr>        
