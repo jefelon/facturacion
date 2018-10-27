@@ -18,6 +18,7 @@ if($_POST['action']=='agregar')
             $_SESSION['lote_fecven'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_fecven'];
             $_SESSION['lote_sto_num'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_sto_num'];
             $_SESSION['lote_estado'][$_POST['cat_id']][$_POST['txt_lote_num']]=1;
+            $_SESSION['lote_can'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_cant'];
 //	}
 }
 
@@ -31,6 +32,7 @@ if($_POST['action']=='editar')
     $_SESSION['lote_fecven'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_fecven'];
     $_SESSION['lote_sto_num'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_sto_num'];
     $_SESSION['lote_estado'][$_POST['cat_id']][$_POST['txt_lote_num']]=1;
+    $_SESSION['lote_can'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_cant'];
 //	}
 }
 
@@ -42,6 +44,7 @@ if($_POST['action']=='quitar')
     unset($_SESSION['lote_fecven'][$_POST['cat_id']][$_POST['txt_lote_num']]);
     unset($_SESSION['lote_sto_num'][$_POST['cat_id']][$_POST['txt_lote_num']]);
     unset($_SESSION['lote_estado'][$_POST['cat_id']][$_POST['txt_lote_num']]);
+    unset($_SESSION['lote_can'][$_POST['cat_id']][$_POST['txt_lote_num']]);
 }
 
 //restablecer o eliminar array
@@ -52,6 +55,7 @@ if($_POST['action']=='restablecer')
     unset($_SESSION['lote_fecven']);
     unset($_SESSION['lote_sto_num']);
     unset($_SESSION['lote_estado']);
+    unset($_SESSION['lote_can']);
 }
 
 if(isset($_SESSION['lote_car']))
@@ -109,6 +113,7 @@ $(function() {
         <th>FECHA FABRICACION</th>
         <th>FECHA VENCIMIENTO</th>
         <th>STOCK</th>
+        <th>CANTIDAD</th>
         <th align="center">ESTADO</th>
         <th align="center">&nbsp;</th>
     </tr>
@@ -125,10 +130,11 @@ if($num_rows>0){
                             <td><?php echo mostrarFecha($_SESSION['lote_fecfab'][$_POST['cat_id']][$indice])?></td>
                           	<td><?php echo mostrarFecha($_SESSION['lote_fecven'][$_POST['cat_id']][$indice])?></td>
                             <td><?php echo $_SESSION['lote_sto_num'][$_POST['cat_id']][$indice]?></td>
+                            <td align="right"><?php echo $_SESSION['lote_can'][$_POST['cat_id']][$indice]?></td>
                             <td align="right"><?php echo $_SESSION['lote_estado'][$_POST['cat_id']][$indice]?></td>
                             <td align="center" nowrap="nowrap">
-                                <a class="btn_item" href="#" onClick="lote_form('editar','<?php echo $_POST['cat_id']?>','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice]?>')">Editar Lote</a>
-                                <a class="btn_quitar" href="#" onClick="lote_car('quitar','<?php echo $_POST['cat_id']?>','','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice]?>')">Quitar</a>
+                                <a class="btn_item" href="#" onClick="lote_venta_form('editar','<?php echo $_POST['cat_id']?>','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice]?>')">Editar Lote</a>
+                                <a class="btn_quitar" href="#" onClick="lote_venta_car('quitar','<?php echo $_POST['cat_id']?>','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice] ?>')">Quitar</a>
                             </td>
                         </tr>
             <?php

@@ -50,15 +50,8 @@ foreach ($_SESSION['lote_car'][$_POST['cat_id']] as $indice => $linea_cantidad) 
     });
 
 
-    $( "#txt_lote_num").autocomplete({
-        minLength: 1,
-        source: "../lote/lote_complete_nom.php",
-        select: function(event, ui){
-            $("#txt_lote_fecfab").val(ui.item.id);
-            $("#txt_lote_fecven").val(ui.item.documento);
-            $("#txt_lote_sto_num").val(ui.item.nombre);
-        }
-    });
+
+
 
     $("#for_lote_form").validate({
         submitHandler: function() {

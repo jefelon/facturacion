@@ -38,8 +38,6 @@ $oLote = new cLote();
 require_once ("../lote/cCompraDetalleLote.php");
 $oCompraDetalleLote = new cCompraDetalleLote();
 
-require_once ("../lote/cLote.php");
-$oLote = new cLote();
 
 $igv_dato=0.18;
 

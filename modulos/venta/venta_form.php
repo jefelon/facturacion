@@ -528,7 +528,8 @@ function lote_venta_car(act,cat_id, lote_num){
         dataType: "html",
         data: ({
             action: act,
-            cat_id: cat_id
+            cat_id: cat_id,
+            txt_lote_num: lote_num,
         }),
         beforeSend: function() {
             $('#msj_presentacion_lote').hide();
