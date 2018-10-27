@@ -6,9 +6,12 @@
  * Time: 19:17
  */
 //
+session_start();
 require_once ("../../config/Cado.php");
 require_once ("cPle.php");
 $oPle = new cPle();
+require_once("../empresa/cEmpresa.php");
+$oEmpresa = new cEmpresa();
 //
 if($_POST['libro']="080100")//compras
 {
@@ -17,8 +20,20 @@ if($_POST['libro']="080100")//compras
     $libro="080100";
 }
 
+//empresa
+$dts8=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt8 = mysql_fetch_array($dts8);
+//$emp_ruc=$dt8['tb_empresa_ruc'];
+//$emp_nomcom=$dt8['tb_empresa_nomcom'];
+//$emp_razsoc=$dt8['tb_empresa_razsoc'];
+//$emp_dir=$dt8['tb_empresa_dir'];
+//$emp_dir2=$dt8['tb_empresa_dir2'];
+//$emp_tel=$dt8['tb_empresa_tel'];
+//$emp_ema=$dt8['tb_empresa_ema'];
+//$emp_fir=$dt8['tb_empresa_fir'];
+$regimen=$dt8['tb_empresa_regimen'];
+mysql_free_result($dts8);
 
-echo $libro;
 ?>
 <script type="text/javascript">
 
@@ -105,19 +120,32 @@ $(function() {
             <tr>
                     <?php
                     $amc="";
+                    $peridostring=$dt1['tb_compra_reg'];
                     $fecha=$dt1['tb_compra_fec'];
-                    $periodo=explode("/",$fecha);
+                    $fechavence=$dt1['tb_compra_fecven'];
+                    $periodoarray=explode("/",$peridostring);
+                    $periodo=$periodoarray[2].$periodoarray[1];
                     ?>
-                <!--1--><td><?php echo $periodo[2].$periodo[1]."00"; ?></td>
-                <!--2--><td><?php echo $periodo[2].$periodo[1].$lineas;?></td>
+                <!--1--><td><?php echo $periodo."00"; ?></td>
+                <!--2--><td><?php echo $periodo.$dt1['tb_compra_id'].$lineas;?></td>
                     <?php
-                    if($periodo[1]=="01"){$amc="A";}
-                    if($periodo[1]=="13"){$amc="C";}
-                    else{$amc="M";}
+                        if ($periodoarray[1] == "01") {
+                            $amc = "A";
+                        }
+                        if ($periodoarray[1] == "13") {
+                            $amc = "C";
+                        } else {
+                            $amc = "M";
+                        }
+                        $cuoamc=$amc.$periodo.$lineas;
+
+                        if($regimen==3){
+                            $cuoamc="M-RER";
+                        }
                     ?>
-                <!--3--><td><?php echo $amc.$periodo[2].$periodo[1].$lineas;?></td>
+                <!--3--><td><?php echo $cuoamc ?></td>
                 <!--4--><td><?php echo $fecha ?></td>
-               <!-- 5--><td><?php echo $fecha ?></td>
+               <!-- 5--><td><?php echo $fechavence ?></td>
 
                     <?php if(strlen($dt1['cs_tipodocumento_cod'])==1)
                     {$coddoc = '0' . $dt1['cs_tipodocumento_cod'];}
@@ -135,6 +163,8 @@ $(function() {
                 <!--10--><td></td>
                     <?php
                     $ctipo="";
+                    $prov_doc=$dt1['tb_proveedor_doc'];
+                    $prov_nom=$dt1['tb_proveedor_nom'];
                     if($dt1['tb_proveedor_tip']==1){
                         $ctipo=1;
                     } elseif($dt1['tb_proveedor_tip']==2){
@@ -142,20 +172,27 @@ $(function() {
                     }
                     ?>
                 <!--11--><td><?php echo $ctipo ?></td>
-                <!--12--><td><?php echo $dt1['tb_proveedor_doc']; ?></td>
-                <!--13--><td><?php echo $dt1['tb_proveedor_nom']; ?></td>
-                <!--14--><td><?php echo $dt1['tb_compra_gra']; ?></td>
-                <!--15--><td><?php echo $dt1['tb_compra_igv']; ?></td>
+                <!--12--><td><?php echo $prov_doc; ?></td>
+                <!--13--><td><?php echo $prov_nom; ?></td>
+                <?php
+                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_venta_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
+                $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
+                $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_compra_tipcam'];
+                if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
+                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambio="";}
+                ?>
+                <!--14--><td><?php echo $gravado; ?></td>
+                <!--15--><td><?php echo $igv; ?></td>
                 <!--16--><td></td>
                 <!--17--><td></td>
                 <!--18--><td></td>
                 <!--19--><td></td>
-                <!--20--><td><?php echo $dt1['tb_compra_exo']; ?></td>
-                <!--21--><td><?php echo $dt1['tb_compra_isc']; ?></td>
+                <!--20--><td><?php echo $exo; ?></td>
+                <!--21--><td><?php echo $isc; ?></td>
                 <!--22--><td></td>
-                <!--23--><td><?php echo $dt1['tb_compra_tot']; ?></td>
-                <!--24--><td><?php echo $dt1['cs_tipomoneda_cod']; ?></td>
-                <!--25--><td><?php echo $dt1['tb_compra_tipcam']; ?></td>
+                <!--23--><td><?php echo $tot; ?></td>
+                <!--24--><td><?php echo $moneda; ?></td>
+                <!--25--><td><?php echo $tipocambio; ?></td>
 
                 <?php
                 $fec_nota="";
@@ -191,7 +228,18 @@ $(function() {
                 <!--38--><td></td>
                 <!--39--><td></td>
                 <!--40--><td></td>
-                <!--41--><td>1</td>
+                            <?php
+                            $estado=1;
+                            $fechastring=explode("/",$fecha);
+                            $fechadoc=$fechastring[2].$fechastring[1];
+                            if($fechadoc<$periodo){
+                                $estado=6;
+                            }
+                            if($fechadoc<$periodo && $fechastring[2]<$periodoarray[2]){
+                                $estado=7;
+                            }
+                            ?>
+                <!--41--><td><?php echo $estado; ?></td>
                 <td></td>
             </tr>
             <?php
@@ -201,8 +249,7 @@ $(function() {
         </tbody>
     <?php }?>
     <tr class="even">
-        <td colspan="41"><?php echo $num_rows.' registros'?></td>
+        <td colspan="41"><?php echo $num_rows.' registros'; ?></td>
     </tr>
 </table>
-?>
 

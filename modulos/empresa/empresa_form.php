@@ -15,7 +15,8 @@ if($_POST['action']=="editar"){
 		$ema=$dt['tb_empresa_ema'];
 		$fir=$dt['tb_empresa_fir'];
 		$rep=$dt['tb_empresa_rep'];	
-		$logo=$dt['tb_empresa_logo'];	
+		$logo=$dt['tb_empresa_logo'];
+        $regimen=$dt['tb_empresa_regimen'];
 	mysql_free_result($dts);
 }
 ?>
@@ -142,11 +143,23 @@ $(function() {
         </tr>  
         <tr>
           <td align="right"><label for="txt_emp_logo">Logo:</label></td>
-          <td><input name="txt_emp_logo" id="txt_emp_logo" type="text" value="<?php echo $logo?>" size="40" ></td>
-          <td><input id="file" name="file" size="12" type="file" /><input name="txt_emp_logoimg" id="txt_emp_logoimg" type="image" src="<?php echo $logo?>" width="100" height="30" alt="Logo" ></td>
-        </tr> 
+          <td>
+              <input name="txt_emp_logo" id="txt_emp_logo" type="text" value="<?php echo $logo?>" size="40" >
+              <input id="file" name="file" size="12" type="file" /><input name="txt_emp_logoimg" id="txt_emp_logoimg" type="image" src="<?php echo $logo?>" width="100" height="30" alt="Logo" >
+          </td>
+
+        </tr>
         <tr>
-        	
+            <td align="right"><label for="txt_emp_rep">Regimen:</label></td>
+            <td>
+                <select name="cmb_regimen_id" id="cmb_regimen_id">
+                    <option value="">-</option>
+                    <option value="1" <?php if($regimen=='1')echo 'selected'?>>REGIMEN GENERAL</option>
+                    <option value="2" <?php if($regimen=='2')echo 'selected'?>>REGIMEN MYPE TRIBUTARIO</option>
+                    <option value="3"<?php if($regimen=='3')echo 'selected'?>>REGIMEN ESPECIAL</option>
+                    <option value="4"<?php if($regimen=='4')echo 'selected'?>>NUEVO RUS</option>
+                </select>
+            </td>
         </tr>
     </table>
 </form>

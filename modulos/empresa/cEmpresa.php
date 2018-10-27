@@ -1,6 +1,6 @@
 <?php
 class cEmpresa{
-	function insertar($ruc,$nomcom,$razsoc,$dir,$dir2,$tel,$ema,$rep,$fir,$logo){
+	function insertar($ruc,$nomcom,$razsoc,$dir,$dir2,$tel,$ema,$rep,$fir,$logo,$regimen){
 	$sql = "INSERT tb_empresa(
 	`tb_empresa_ruc` ,
 	`tb_empresa_nomcom` ,
@@ -11,10 +11,12 @@ class cEmpresa{
 	`tb_empresa_ema` ,
 	`tb_empresa_rep` ,
 	`tb_empresa_fir` ,
-	`tb_empresa_logo`
+	`tb_empresa_logo`,
+	`tb_empresa_regimen`,
+	
 	)
 	VALUES (
-	'$ruc',  '$nomcom',  '$razsoc',  '$dir',  '$dir2',  '$tel', '$ema','$rep', '$fir', '$logo'
+	'$ruc',  '$nomcom',  '$razsoc',  '$dir',  '$dir2',  '$tel', '$ema','$rep', '$fir', '$logo','$regimen'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -35,7 +37,7 @@ class cEmpresa{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$ruc,$nomcom,$razsoc,$dir,$dir2,$tel,$ema,$rep,$fir,$logo){
+	function modificar($id,$ruc,$nomcom,$razsoc,$dir,$dir2,$tel,$ema,$rep,$fir,$logo,$regimen){
 	$sql = "UPDATE tb_empresa SET  
 	`tb_empresa_ruc` =  '$ruc',
 	`tb_empresa_nomcom` =  '$nomcom',
@@ -46,7 +48,8 @@ class cEmpresa{
 	`tb_empresa_ema` =  '$ema',
 	`tb_empresa_rep` =  '$rep',
 	`tb_empresa_fir` =  '$fir',
-	`tb_empresa_logo` =  '$logo'
+	`tb_empresa_logo` =  '$logo',
+	`tb_empresa_regimen` =  $regimen
 	WHERE tb_empresa_id =$id"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

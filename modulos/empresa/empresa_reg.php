@@ -7,7 +7,7 @@ if($_POST['action']=="insertar")
 {
 	if(!empty($_POST['txt_emp_nomcom']))
 	{
-		$oEmpresa->insertar($_POST['txt_emp_ruc'], strip_tags($_POST['txt_emp_nomcom']), strip_tags($_POST['txt_emp_razsoc']), strip_tags($_POST['txt_emp_dir']), strip_tags($_POST['txt_emp_dir2']), $_POST['txt_emp_tel'], $_POST['txt_emp_ema'], strip_tags($_POST['txt_emp_rep']), $_POST['txt_emp_fir'], $_POST['txt_emp_logo']);
+		$oEmpresa->insertar($_POST['txt_emp_ruc'], strip_tags($_POST['txt_emp_nomcom']), strip_tags($_POST['txt_emp_razsoc']), strip_tags($_POST['txt_emp_dir']), strip_tags($_POST['txt_emp_dir2']), $_POST['txt_emp_tel'], $_POST['txt_emp_ema'], strip_tags($_POST['txt_emp_rep']), $_POST['txt_emp_fir'], $_POST['txt_emp_logo'],$_POST['cmb_regimen_id']);
         if (!file_exists('logos')) {
             mkdir('logos', 0777);
         }
@@ -25,7 +25,7 @@ if($_POST['action']=="editar")
 {
 	if(!empty($_POST['txt_emp_nomcom']))
 	{
-		$oEmpresa->modificar($_POST['hdd_emp_id'], $_POST['txt_emp_ruc'], strip_tags($_POST['txt_emp_nomcom']), strip_tags($_POST['txt_emp_razsoc']), strip_tags($_POST['txt_emp_dir']), strip_tags($_POST['txt_emp_dir2']), $_POST['txt_emp_tel'], $_POST['txt_emp_ema'], strip_tags($_POST['txt_emp_rep']), $_POST['txt_emp_fir'], $_POST['txt_emp_logo']);
+		$oEmpresa->modificar($_POST['hdd_emp_id'], $_POST['txt_emp_ruc'], strip_tags($_POST['txt_emp_nomcom']), strip_tags($_POST['txt_emp_razsoc']), strip_tags($_POST['txt_emp_dir']), strip_tags($_POST['txt_emp_dir2']), $_POST['txt_emp_tel'], $_POST['txt_emp_ema'], strip_tags($_POST['txt_emp_rep']), $_POST['txt_emp_fir'], $_POST['txt_emp_logo'],$_POST['cmb_regimen_id']);
 		if (!file_exists('logos')) {
             mkdir('logos', 0777);
         }
