@@ -77,28 +77,7 @@ $( "#div_lote_tabla" ).dialog({
     }
 });
 
-function lote_tabla(idf)
-{
 
-    $.ajax({
-        type: "POST",
-        url: "../lote/lote_compradetalle_tabla.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            comdet_id:	 idf
-        }),
-        beforeSend: function() {
-            $('#div_lote_tabla').dialog("open");
-            $('#div_lote_tabla').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-        success: function(html){
-            $('#div_lote_tabla').html(html);
-        },
-        complete: function(){
-        }
-    });
-}
 </script>
 
 <?php

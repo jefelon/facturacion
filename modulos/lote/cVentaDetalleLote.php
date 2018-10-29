@@ -36,6 +36,7 @@ class cVentaDetalleLote{
     function mostrar_filtro_venta_detalle($vendet_id){
         $sql="SELECT * 
 	FROM tb_ventadetalle_lote WHERE tb_ventadetalle_id=$vendet_id";
+
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

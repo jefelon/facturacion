@@ -17,6 +17,9 @@ $oFormula = new cFormula();
 require_once("../formatos/formato.php");
 require_once("../formatos/numletras.php");
 
+require_once ("../lote/cVentaDetalleLote.php");
+$oVentaDetalleLote = new cVentaDetalleLote();
+
 //$tipo_de_letra="DejaVuSansCondensed";
 //$tipo_de_letra="DejaVuSans";
 //$tipo_de_letra="DejaVuSansMono";
@@ -307,7 +310,17 @@ if($impresion=='pdf')ob_start();
 							//echo ' | '.$dt1['tb_categoria_nom'];
 							//echo ' | '.$dt1['tb_marca_nom'];
 							//echo ' | '.$dt1['tb_unidad_abr'];
-							?></td>
+
+                            $html_lotes.=' - ';
+                            $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt1["tb_ventadetalle_id"]);
+                            while($lote = mysql_fetch_array($lotes)) {
+                                $html_lotes.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
+                            }
+							?>
+                                <?php echo $html_lotes ?>
+                            </td>
+
+
                             <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($precio_uni)?></td>
                             <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($importe)?></td>
                         </tr>

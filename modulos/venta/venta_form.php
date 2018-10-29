@@ -1215,7 +1215,8 @@ $(function() {
 	});
 
     $("#txt_bus_cat_preven_noigv").keypress(function(){
-        $("#txt_bus_cat_preven").val(parseFloat($("#txt_bus_cat_preven_noigv").val()*1.18).toFixed(2));
+        $("#txt_bus_cat_preven").val(((parseFloat($("#txt_bus_cat_preven_noigv").val())).toFixed(2)*parseFloat(1.18).toFixed(2)).toFixed(2));
+        console.log(parseFloat($("#txt_bus_cat_preven_noigv").val()*1.18));
     });
 	<?php }?>
 
@@ -1507,10 +1508,7 @@ $(function() {
         width: 550,
         modal: true,
         buttons: {
-            Guardar: function() {
-                $("#for_lote_form").submit();
-            },
-            Cancelar: function() {
+            Cerrar: function() {
                 $('#for_lote_form').each (function(){this.reset();});
                 $( this ).dialog( "close" );
             }
@@ -1764,7 +1762,7 @@ $(function() {
             $('#hdd_bus_cat_id').val('');
             $('#hdd_bus_cat_stouni').val('');
             $('#hdd_bus_cat_cospro').val('');
-            $('#txt_bus_pro_codbar').val('');;
+            $('#txt_bus_pro_codbar').val('');
             $('#txt_bus_cat_preven').val('');
             $('#txt_bus_cat_preven_noigv').val('');
             $('#txt_bus_cat_can').val('');
@@ -1967,6 +1965,29 @@ function catalogo_buscar() {
     });
 }
 
+
+function lote_tabla(idf)
+{
+
+    $.ajax({
+        type: "POST",
+        url: "../lote/lote_ventadetalle_tabla.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            vendet_id:	 idf
+        }),
+        beforeSend: function() {
+            $('#div_lote_tabla').dialog("open");
+            $('#div_lote_tabla').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_lote_tabla').html(html);
+        },
+        complete: function(){
+        }
+    });
+}
 
 function foco() {
     if($('#chk_modo').is(':checked')) {

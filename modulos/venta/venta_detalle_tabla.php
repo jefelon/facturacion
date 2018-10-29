@@ -46,8 +46,15 @@ $(document).ready(function() {
 		icons: {primary: "ui-icon-trash"},
 		text: false
 	});
-	
-	$.tablesorter.defaults.widgets = ['zebra'];
+
+
+    $('.btn_tabla_lote').button({
+        icons: {primary: "ui-icon-newwin"},
+        text: false
+    });
+
+
+    $.tablesorter.defaults.widgets = ['zebra'];
 	$("#tabla_venta_detalle").tablesorter({ 
 		headers: {
 			//4: {sorter: 'shortDate' },
@@ -65,6 +72,46 @@ $(document).ready(function() {
 		//sortForce: [[0,0]],
 		//sortList: [[2,0]]
     });
+
+    $( "#div_lote_tabla" ).dialog({
+        title:'Lotes',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 550,
+        modal: true,
+        buttons: {
+            Cerrar: function() {
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            $("#div_lote_tabla").html('Cargando...');
+        }
+    });
+
+    function lote_tabla(idf)
+    {
+
+        $.ajax({
+            type: "POST",
+            url: "../lote/lote_compradetalle_tabla.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                comdet_id:	 idf
+            }),
+            beforeSend: function() {
+                $('#div_lote_tabla').dialog("open");
+                $('#div_lote_tabla').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_lote_tabla').html(html);
+            },
+            complete: function(){
+            }
+        });
+    }
 
 }); 
 </script>
@@ -89,6 +136,7 @@ $(document).ready(function() {
                   <th align="right" title="DESCUENTO">DSCTO</th>
 <!--                  <th align="right" nowrap="nowrap" title="VALOR VENTA">VALOR VEN</th>-->
                   <th align="right" nowrap="nowrap" title="PRECIO VENTA">PREC VENTA</th>
+                    <th align="right" nowrap="nowrap" title="Lote"></th>
                 </tr>
             </thead>
             <tbody>
@@ -148,6 +196,7 @@ $(document).ready(function() {
 								?></td>
 <!--                            <td align="right">--><?php //echo formato_money($dt1['tb_ventadetalle_valven'])?><!--</td>-->
                             <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                            <td align="center"><a class="btn_tabla_lote" onClick="lote_tabla(<?php echo $dt1['tb_ventadetalle_id'] ?>)">Ver Lote</a></td>
                         </tr>
                         <?php						
                 	}
@@ -187,6 +236,7 @@ $(document).ready(function() {
 									}									
 								?></td>
                             <td align="right"><?php echo formato_money($precio_venta)?></td>
+                            <td align="center"><a class="btn_tabla_lote" onClick="lote_tabla(<?php echo $dt2['tb_compradetalle_id'] ?>)">Ver Lote</a></td>
               </tr>
               <?php						
                 	}
@@ -195,6 +245,7 @@ $(document).ready(function() {
                         
                 </tbody>
         </table>
+<div id="div_lote_tabla"></div>
         <br />
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
