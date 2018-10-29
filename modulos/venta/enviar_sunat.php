@@ -34,9 +34,21 @@ require_once ("../formatos/numletras.php");
 $ven_id=$_POST['ven_id'];
 
 $dts2 = $oVenta->mostrarValorBruto($ven_id);
+$tsub_total_bruto=0;
+$tvalorventa=0;
+$tdesc_linea=0;
 while($dt = mysql_fetch_array($dts2)) {
-    $bruto=$dt["ValorBruto"];
+    if ($dt["cs_tipoafectacionigv_cod"] == 10){
+        $tsub_total_bruto+=$dt["tb_ventadetalle_can"]*($dt["tb_ventadetalle_preuni"]/1.18);
+    }
+    if ($dt["cs_tipoafectacionigv_cod"] == 20 ||$dt["cs_tipoafectacionigv_cod"] == 30) {
+        $tsub_total_bruto += $dt["tb_ventadetalle_can"] * $dt["tb_ventadetalle_preuni"];
+    }
+
+    $tdesc_linea+=$dt["tb_ventadetalle_des"];
 }
+$tvalorventa=$tsub_total_bruto-$tdesc_linea;
+
 mysql_free_result($dts2);
 
 $dts = $oVenta->mostrarUno($ven_id);
@@ -65,7 +77,7 @@ while($dt = mysql_fetch_array($dts)){
 	if($dt["tb_cliente_tip"]==2)$idtipodni=6;
 	$razon=$dt["tb_cliente_nom"];
 
-
+    $sub_total=0;
 	$valven=$dt["tb_venta_valven"];
 	$des=$dt["tb_venta_des"];
 	$igv=$dt["tb_venta_igv"];
@@ -87,7 +99,6 @@ while($dt = mysql_fetch_array($dts)){
 mysql_free_result($dts);
 
 $total_letras = numtoletras($tot,$monval);
-
 
 $header[0]['idcomprobante']		=$idcomprobante;//1FACTURA 3BOLETA 7NCREDITO 8NDEBITO
 $header[0]['serie']				=$ser;
@@ -123,6 +134,8 @@ $header[0]['iddoctriref']		="";
 $header[0]['nroplaca']			=$numpla;//placa
 
 $header[0]['AdditionalProperty_Value']=$total_letras;
+$header[0]['tvalorventa_bruto']			=$tsub_total_bruto;//total valor venta bruto
+$header[0]['tvalorventa']			=$tvalorventa;//total valor  venta
 
 $header = json_decode(json_encode($header));
 
@@ -168,10 +181,8 @@ while($dt = mysql_fetch_array($dts))
 	//oculto ya se calcula en base datos
 	//$detalle[$autoin]['valorref']				=($dt["tb_ventadetalle_valven"]+$dt["tb_ventadetalle_igv"])/$dt["tb_ventadetalle_can"];// precio de venta
 	$detalle[$autoin]['valorref']				=$dt["tb_ventadetalle_preunilin"];
-
 	$detalle[$autoin]['valorventa']				=$dt["tb_ventadetalle_valven"];//sumatoria con cantidad
 	$detalle[$autoin]['descto']					=$dt["tb_ventadetalle_des"];
-
 	$detalle[$autoin]['idtiposcisc']			=$dt["cs_tiposistemacalculoisc_id"];
 	$detalle[$autoin]['isc']					=$dt["tb_ventadetalle_isc"];
 

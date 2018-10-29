@@ -345,9 +345,9 @@ class cVenta{
 	}
 
     function mostrarValorBruto($id){
-        $sql="SELECT sum(tb_ventadetalle_can*tb_ventadetalle_preuni) as ValorBruto
-	FROM tb_ventadetalle
-	
+        $sql="SELECT cs_tipoafectacionigv_cod,tb_ventadetalle_can,tb_ventadetalle_preuni ,tb_ventadetalle_des
+	FROM tb_ventadetalle vd
+	LEFT JOIN cs_tipoafectacionigv ai ON vd.cs_tipoafectacionigv_id=ai.cs_tipoafectacionigv_id
 	WHERE tb_venta_id=$id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

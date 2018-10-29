@@ -789,13 +789,13 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $nro_rows = mysql_num_rows($lts);
 
                 if ($nro_rows>0){
-                    $nuevo_stock = $lt['tb_lote_exisact']-$_SESSION['lote_sto_num'][$indice][$indice_lote];
+                    $nuevo_stock = $lt['tb_lote_exisact']-$_SESSION['lote_can'][$indice][$indice_lote];
                     $oLote->modificar_stock($indice, $_SESSION['lote_car'][$indice][$indice_lote],$almacen_venta, $nuevo_stock);
                 }elseif ($nro_rows==0){
                     $oLote->insertar($_SESSION['lote_car'][$indice][$indice_lote],$indice,fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]),fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote],$_SESSION['lote_estado'][$indice][$indice_lote],$almacen_venta);
                 }
 
-                $oVentaDetalleLote->insertar($vendet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote], $_SESSION['lote_car'][$indice][$indice_lote]);
+                $oVentaDetalleLote->insertar($vendet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_can'][$indice][$indice_lote], $_SESSION['lote_car'][$indice][$indice_lote]);
             }
 
             $oGuia->insertar_detalle(

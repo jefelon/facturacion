@@ -27,6 +27,7 @@ function datatoarray($header, $detalle, $empresa, $tipodoc){
         arr_AccountingSupplierParty($header, $detalle, $empresa, $tipodoc);
         arr_AccountingCustomerParty($header, $detalle, $empresa, $tipodoc);
         arr_PrepaidPayment($header, $detalle, $empresa, $tipodoc);
+        arr_AllowanceCharge($header, $detalle, $empresa, $tipodoc);
         arr_TaxTotal($header, $detalle, $empresa, $tipodoc);
         arr_LegalMonetaryTotal($header, $detalle, $empresa, $tipodoc);
         arr_InvoiceLine($header, $detalle, $empresa, $tipodoc);
@@ -591,28 +592,32 @@ function arr_TaxTotal($header, $detalle, $empresa, $tipodoc){
     }
 }
 
-function arr_LegalMonetaryTotal($header, $detalle, $empresa, $tipodoc){
+function arr_LegalMonetaryTotal($header, $detalle, $empresa, $tipodoc)
+{
     global $arr;
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['tag'] = 'cac';
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['LineExtensionAmount'][0] = round($header[0]->tvalorventa,2);
+    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['LineExtensionAmount'][0] = round($header[0]->tvalorventa_bruto, 2);
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['LineExtensionAmount']['tag'] = 'cbc';
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['LineExtensionAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['TaxInclusiveAmount'][0] = round($header[0]->importetotal,2);
+    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['TaxInclusiveAmount'][0] = round($header[0]->importetotal, 2);
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['TaxInclusiveAmount']['tag'] = 'cbc';
     $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['TaxInclusiveAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['AllowanceTotalAmount'][0] = round($header[0]->totdescto,2);
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['AllowanceTotalAmount']['tag'] = 'cbc';
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['AllowanceTotalAmount']['atr']['currencyID'] = $header[0]->isomoneda;
+    if ($header[0]->totdescto > 0) {
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['AllowanceTotalAmount'][0] = round($header[0]->totdescto, 2);
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['AllowanceTotalAmount']['tag'] = 'cbc';
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['AllowanceTotalAmount']['atr']['currencyID'] = $header[0]->isomoneda;
+    }
+    if ($header[0]->tototroca > 0) {
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount'][0] = round($header[0]->tototroca, 2);
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['tag'] = 'cbc';
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['atr']['currencyID'] = $header[0]->isomoneda;
+    }
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount'][0] = round($header[0]->importetotal, 2);
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['tag'] = 'cbc';
+        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount'][0] = round($header[0]->tototroca,2);
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['tag'] = 'cbc';
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['atr']['currencyID'] = $header[0]->isomoneda;
-
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount'][0] = round($header[0]->importetotal,2);
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['tag'] = 'cbc';
-    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 }
 
 function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){

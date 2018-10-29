@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <Invoice xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2"
          xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2"
          xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2"
@@ -32,16 +31,7 @@
                                 .840.113549.1.9.1=#161a4253554c434140534f55544845524e504552552e434f4d2e5045,C N=Juan
                                 Robles,OU=20100454523,O=SOPORTE TECNOLOGICOS EIRL,L=LIMA,ST=LIMA, C=PE
                             </ds:X509SubjectName>
-                            <ds:X509Certificate>MIIESTCCAzGgAwIBAgIKWOC
-                                RzgAAAAAAIjANBgkqhkiG9w0BAQUFADAnMRUwEwYKCZImiZPyLGQB
-                                GRYFU1VOQVQxDjAMBgNVBAMTBVNVTkFUMB4XDTEwMTIyODE5NTExMFoXDTExMTIyODIwMDExMFow
-                                gZUxCzAJBgNVBAYTAlBFMQ0wCwYDVQQIEwRMSU1BMQ0wCwYDVQQHEwRMSU1BMREwDwYDVQQKEwhT
-                                T1VUSEVSTjEUMBIGA1UECxMLMjAxMDAxNDc1MTQxFDASBgNVBAMTC0JvcmlzIFN1bGNhMSkwJwYJ
-                                Q2VydEVucm9sbC9wY2IyMjZfU1VOQVQuY3J0MDcGCCsGAQUFBzAChitmaWxlOi8vXFxwY2IyMjZc
-                                Q2VydEVucm9sbFxwY2IyMjZfU1VOQVQuY3J0MA0GCSqGSIb3DQEBBQUAA4IBAQBI6wJ/QmRpz3C3
-                                rorBflOvA9DOa3GNiiB7rtPIjF4mPmtgfo2pK9gvnxmV2pST3ovfu0nbG2kpjzzaaelRjEodHvkc
-                                M3abGsOE53wfxqQF5uf/jkzZA9hbLHtE1aLKBD0Mhzc6cvI072alnE6QU3RZ16ie9CYsHmMrs+sP
-                                HMy8DJU5YrdnqHdSn2D3nhKBi4QfT/WURPOuo6DF4iWgrCyMf3eJgmGKSUN3At5fK4HSpfyURT0k
+                            <ds:X509Certificate>QfT/WURPOuo6DF4iWgrCyMf3eJgmGKSUN3At5fK4HSpfyURT0k
                                 boaJKNBgQwy0HhGh5BLM7DsTi/KwfdUYkoFgrY71Pm23+ra+xTow1Vk9gj5NqrlpMY5gAVQXEIo1
                                 ++GxDtaK/5EiVKSqzJ6geIfz
                             </ds:X509Certificate>
@@ -53,7 +43,7 @@
     </ext:UBLExtensions>
     <cbc:UBLVersionID>2.1</cbc:UBLVersionID>
     <cbc:CustomizationID>2.0</cbc:CustomizationID>
-    <cbc:ProfileID schemeName="SUNAT:Identificador de Tipo de Operación" schemeAgencyName="PE:SUNAT"
+    <cbc:ProfileID schemeName="SUNAT:Identificador de Tipo de OperaciÃ³n" schemeAgencyName="PE:SUNAT"
                    schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo17">0101
     </cbc:ProfileID>
     <cbc:ID>F001-4355</cbc:ID>
@@ -93,7 +83,7 @@
                 <cbc:Name>Tu Soporte</cbc:Name>
             </cac:PartyName>
             <cac:PartyTaxScheme>
-                <cbc:RegistrationName><![CDATA[Soporte Tecnológicos EIRL]]></cbc:RegistrationName>
+                <cbc:RegistrationName><![CDATA[Soporte TecnolÃ³gicos EIRL]]></cbc:RegistrationName>
                 <CompanyID schemeID="6" schemeName="SUNAT:Identificador de Documento de Identidad"
                            schemeAgencyName="PE:SUNAT" schemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo06">
                     20100454523
@@ -210,7 +200,7 @@
                     </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
                     <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
-                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listName="SUNAT:Codigo de Tipo de AfectaciÃ³n del IGV"
                                                 listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10
                     </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
@@ -270,7 +260,7 @@
                     </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
                     <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
-                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listName="SUNAT:Codigo de Tipo de AfectaciÃ³n del IGV"
                                                 listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10
                     </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
@@ -323,7 +313,7 @@
                     </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
                     <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
-                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listName="SUNAT:Codigo de Tipo de AfectaciÃ³n del IGV"
                                                 listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">20
                     </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
@@ -376,7 +366,7 @@
                     </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
                     <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
-                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listName="SUNAT:Codigo de Tipo de AfectaciÃ³n del IGV"
                                                 listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">10
                     </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
@@ -429,7 +419,7 @@
                     </cbc:ID>
                     <cbc:Percent>18.00</cbc:Percent>
                     <cbc:TaxExemptionReasonCode listAgencyName="PE:SUNAT"
-                                                listName="SUNAT:Codigo de Tipo de Afectación del IGV"
+                                                listName="SUNAT:Codigo de Tipo de AfectaciÃ³n del IGV"
                                                 listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo07">31
                     </cbc:TaxExemptionReasonCode>
                     <cac:TaxScheme>
