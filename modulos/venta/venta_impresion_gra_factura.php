@@ -303,8 +303,9 @@ if($impresion=='pdf')ob_start();
 							//echo ' | '.$dt1['tb_marca_nom'];
 							//echo ' | '.$dt1['tb_unidad_abr'];
 							?></td>
-                            <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*1.18)?></td>
-                            <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_ventadetalle_valven']*1.18)?></td>
+                            <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?></td>
+                            <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt1['tb_ventadetalle_valven'])?></td>
+
                         </tr>
                         <?php
                 	}
