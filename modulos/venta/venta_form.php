@@ -1213,6 +1213,10 @@ $(function() {
 			$("#hdd_ven_cli_id").attr('disabled', false);
 		}
 	});
+
+    $("#txt_bus_cat_preven_noigv").keypress(function(){
+        $("#txt_bus_cat_preven").val(parseFloat($("#txt_bus_cat_preven_noigv").val()*1.18).toFixed(2));
+    });
 	<?php }?>
 
 	$("#chk_venpag_aut").change(function(){

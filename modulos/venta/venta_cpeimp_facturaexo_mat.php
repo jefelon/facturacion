@@ -18,8 +18,8 @@ $oUsuario = new cUsuario();
 require_once ("../letras/cLetras.php");
 $cLetras = new cLetras();
 
-require_once ("../lote/cLote.php");
-$oLote = new cLote();
+require_once ("../lote/cVentaDetalleLote.php");
+$oVentaDetalleLote = new cVentaDetalleLote();
 
 $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
@@ -419,13 +419,12 @@ $html.='<tr>
             <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
             <th style="text-align: center; width: 7%;"><b>CANT.</b></th>
              <th style="text-align: center; width: 8%;"><b>UNIDAD</b></th>
-            <th style="text-align: center; width: 40%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
             <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
             <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
             <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
             <th style="text-align: right; width: 12%;"><b>VALOR VENTA</b></th>
-            <th style="text-align: right; width: 6%;"><b>Lotes</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
@@ -443,9 +442,13 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . '</td>';
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
+                $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
+                while($lote = mysql_fetch_array($lotes)) {
+                    $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
+                }
 
-        $html .= '<td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
+        $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
 
@@ -453,18 +456,18 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . '</td>';
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie;
+        $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
+        while($lote = mysql_fetch_array($lotes)) {
+            $html.=$lote["tb_ventadetalle_lotenum"].', ';
+        }
 
-        $html .= '<td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
+        $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
     }
-    $html .= '<td style="text-align: right">';
-    $lotes=$oLote->mostrarLoteCatalogo($dt["tb_catalogo_id"],$_SESSION['almacen_id']);
-    while($lote = mysql_fetch_array($lotes)) {
-        $html.=$lote["tb_lote_numero"].', ';
-    }
-    $html.='</td></tr>';
+
+    $html.='</tr>';
     $cont++;
 }
 $html.='</tbody>
