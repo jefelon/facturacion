@@ -631,6 +631,7 @@ function venta_car(act,cat_id){
                         $('#txt_bus_pro_codbar').val('');
                         $('#txt_bus_pro_nom').val('');
                         $('#txt_bus_cat_preven').val('');
+                        $('#txt_bus_cat_preven_noigv').val('');
                         $('#txt_bus_cat_can').val('');
                         $('#txt_precio_min').val('');
                         $('#txt_precio_may').val('');
@@ -1187,9 +1188,13 @@ $(function() {
         if ((this).value=== '2' || (this).value=== '11') {
             $('.imprimir_guia').show();
             $('.insertar-guia').show();
+            $('#txt_bus_cat_preven_noigv').show();
+            $('#txt_bus_cat_preven').hide();
         }else{
             $('.imprimir_guia').hide();
             $('.insertar-guia').hide();
+            $('#txt_bus_cat_preven_noigv').hide();
+            $('#txt_bus_cat_preven').show();
         }
 	});
 
@@ -1571,7 +1576,7 @@ $(function() {
 		}
 	});
 
-//formulario			
+//formulario
 	$("#for_ven").validate({
 		submitHandler: function(){
 
@@ -1757,6 +1762,7 @@ $(function() {
             $('#hdd_bus_cat_cospro').val('');
             $('#txt_bus_pro_codbar').val('');;
             $('#txt_bus_cat_preven').val('');
+            $('#txt_bus_cat_preven_noigv').val('');
             $('#txt_bus_cat_can').val('');
             $('#txt_precio_min').val('');
             $('#txt_precio_may').val('');
@@ -1878,6 +1884,7 @@ function catalogo_buscar() {
                 //$('#txt_bus_pro_codbar').val('');
                 $('#txt_bus_pro_nom').val('');
                 $('#txt_bus_cat_preven').val('');
+                $('#txt_bus_cat_preven_noigv').val('');
                 $('#txt_bus_cat_can').val('');
 
                 $('#txt_precio_min').val('');
@@ -1902,6 +1909,7 @@ function catalogo_buscar() {
                 $('#hdd_bus_cat_cospro').val(data.cat_cospro);
                 $('#txt_bus_pro_nom').val(data.pro_nom);
                 $('#txt_bus_cat_preven').val(data.cat_preven);
+                $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18).toFixed(2));
                 $('#txt_bus_cat_can').val(data.cat_can);
 
                 $('#txt_precio_min').val(data.cat_premin);
@@ -1916,6 +1924,7 @@ function catalogo_buscar() {
                     $('#hdd_bus_cat_cospro').val('');
                     $('#txt_bus_pro_codbar').val('');
                     $('#txt_bus_cat_preven').val('');
+                    $('#txt_bus_cat_preven_noigv').val('');
                     $('#txt_bus_cat_can').val('');
                     $('#txt_precio_min').val('');
                     $('#txt_precio_may').val('');
@@ -1925,7 +1934,12 @@ function catalogo_buscar() {
                 } else {
                     $('#txt_bus_pro_codbar').val(data.pro_codbar);
                     $('#hdd_bus_pro_nom').val('');
-                    $('#txt_bus_cat_can').focus();
+
+                    if ((this).value=== '2' || (this).value=== '11') {
+                        $('#txt_bus_cat_preven_noigv').focus();
+                    }else{
+                        $('#txt_bus_cat_preven').focus();
+                    }
                 }
                 //precios_min_may($('#hdd_bus_cat_id').val());
             }
@@ -2045,17 +2059,14 @@ function bus_cantidad(act)
     </tr>
     <tr>
       <td height="27">
-        <label for="cmb_ven_est">Estado:</label>
-        <select name="cmb_ven_est" id="cmb_ven_est">
+        <select name="cmb_ven_est" id="cmb_ven_est" hidden>
           <option value="">-</option>
           <option value="CANCELADA" <?php if($est=='CANCELADA')echo 'selected'?>>CANCELADA</option>
           <option value="ANULADA" <?php if($est=='ANULADA')echo 'selected'?>>ANULADA</option>
         </select>
         <div id="msj_venta_form" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-        <label for="txt_ven_lab1">Nro. Placa:</label>
-        <input type="text" name="txt_ven_lab1" id="txt_ven_lab1" value="<?php echo $lab1?>" size="9" maxlength="8">
-        <label for="txt_ven_lab2">Kilometraje:</label>
-        <input type="text" name="txt_ven_lab2" id="txt_ven_lab2" value="<?php echo $lab2?>" size="9" maxlength="8">
+        <input type="hidden" name="txt_ven_lab1" id="txt_ven_lab1" value="<?php echo $lab1?>" size="9" maxlength="8">
+        <input type="hidden" name="txt_ven_lab2" id="txt_ven_lab2" value="<?php echo $lab2?>" size="9" maxlength="8">
         <label for="txt_ven_lab3">Ord. Compra:</label>
         <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
         <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
@@ -2115,10 +2126,7 @@ function bus_cantidad(act)
                 <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
                 <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:600px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
             </tr>
-            <tr>
-                <td align="right"><label for="txt_ven_guia_dir">Punto de Llegada:</label></td>
-                <td><input type="text" id="txt_ven_guia_dir" name="txt_ven_guia_dir" style="width:600px" value="<?php echo $cli_dir?>"/></td>
-            </tr>
+
             <tr>
                 <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
                 <td>
@@ -2155,6 +2163,8 @@ function bus_cantidad(act)
             <label for="txt_fil_gui_tra_dir">Direcci&oacute;n:</label>
             <input type="text" id="txt_fil_gui_tra_dir" name="txt_fil_gui_tra_dir" size="40" value="<?php echo $tra_dir?>" disabled="disabled"/>
         </fieldset>
+        <label for="txt_ven_guia_dir">Punto de Llegada:</label>
+        <input type="text" id="txt_ven_guia_dir" name="txt_ven_guia_dir" size="40" value="<?php echo $cli_dir?>"/>
     </div>
     <div style="float: left; width: 50%; display: none;" class="insertar-guia" >
         <fieldset id="fset_conductor" disabled="disabled">
@@ -2349,6 +2359,8 @@ function bus_cantidad(act)
 
                   <label for="txt_bus_cat_preven">S/.</label>
                   <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="8" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
+
+                  <input name="txt_bus_cat_preven_noigv" type="text" id="txt_bus_cat_preven_noigv" value="" size="8" maxlength="9" style="display:none; text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
                   <label for="txt_bus_cat_can">CAN</label>
                   <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="5" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
