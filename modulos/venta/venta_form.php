@@ -1939,7 +1939,7 @@ function catalogo_buscar() {
                     $('#txt_bus_pro_codbar').val(data.pro_codbar);
                     $('#hdd_bus_pro_nom').val('');
 
-                    if ((this).value=== '2' || (this).value=== '11') {
+                    if ($("#cmb_ven_doc").val()== '2' || ($("#cmb_ven_doc")).val()== '11') {
                         $('#txt_bus_cat_preven_noigv').focus();
                     }else{
                         $('#txt_bus_cat_preven').focus();

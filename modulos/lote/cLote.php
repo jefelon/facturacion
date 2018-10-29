@@ -65,6 +65,7 @@ class clote{
         $sql="SELECT *
 		FROM tb_lote
 		WHERE tb_lote_numero LIKE '%$dato%' AND tb_almacen_id='$alm_id' AND tb_catalogo_id= '$cat_id'
+		ORDER BY tb_lote_fechavence ASC 
 		LIMIT 0,12
 		";
         $oCado = new Cado();
