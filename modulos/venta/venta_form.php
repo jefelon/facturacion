@@ -520,7 +520,7 @@ function producto_form(act,idf){
 }
 
 
-function lote_venta_car(act,cat_id, lote_num){
+function lote_venta_car(act,cat_id, lote_num, unico_id){
     $.ajax({
         type: "POST",
         url: "../lote/lote_venta_car.php",
@@ -530,6 +530,7 @@ function lote_venta_car(act,cat_id, lote_num){
             action: act,
             cat_id: cat_id,
             txt_lote_num: lote_num,
+            unico_id: unico_id
         }),
         beforeSend: function() {
             $('#msj_presentacion_lote').hide();
@@ -542,7 +543,7 @@ function lote_venta_car(act,cat_id, lote_num){
     });
 }
 
-function lote_venta_form(act,cat_id, lote_num){
+function lote_venta_form(act,cat_id, lote_num, unico_id, cant_act){
     $.ajax({
         type: "POST",
         url: "../lote/lote_venta_form.php",
@@ -551,7 +552,9 @@ function lote_venta_form(act,cat_id, lote_num){
         data: ({
             action: act,
             cat_id: cat_id,
-            lote_num: lote_num
+            lote_num: lote_num,
+            unico_id: unico_id,
+            cant_act: cant_act
         }),
         beforeSend: function() {
             $('#msj_presentacion_lote').hide();
@@ -1054,7 +1057,7 @@ function compararSunat(doc, nom, dir, id) {
 			// $('#txt_cli_tel').val(telefono);
 			$("#txt_ven_cli_est").val(data['Estado']);
 			if(data['RazonSocial'] != nom || data['Direccion'] != dir){
-				cliente_form_i('editarSunat',id,data['RazonSocial'],data['Direccion'],data['Contacto'],telefono,data['Estado']);
+				cliente_form_i('editarSunat',id,data['RazonSocial'],data['Direccion'],data['Contacto'],'',data['Estado']);
 			}
 			$('#msj_busqueda_sunat').hide();
 		}
@@ -1214,9 +1217,8 @@ $(function() {
 		}
 	});
 
-    $("#txt_bus_cat_preven_noigv").keypress(function(){
-        $("#txt_bus_cat_preven").val(((parseFloat($("#txt_bus_cat_preven_noigv").val())).toFixed(2)*parseFloat(1.18).toFixed(2)).toFixed(2));
-        console.log(parseFloat($("#txt_bus_cat_preven_noigv").val()*1.18));
+    $("#txt_bus_cat_preven_noigv").keyup(function(){
+        $("#txt_bus_cat_preven").val(($("#txt_bus_cat_preven_noigv").val() * 1.18).toFixed(2));
     });
 	<?php }?>
 

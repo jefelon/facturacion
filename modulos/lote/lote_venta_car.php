@@ -7,12 +7,13 @@ require_once ("../formatos/formato.php");
 
 $igv_dato=0.18;
 
+
 //agregar a cesta
 if($_POST['action']=='agregar')
 {
 //	if($_POST['cat_can']>0)
 //	{
-			//IDENTIFICADOR CATALOGO Y CANTIDAD			
+			//IDENTIFICADOR CATALOGO Y CANTIDAD
 			$_SESSION['lote_car'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_num'];
             $_SESSION['lote_fecfab'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_fecfab'];
             $_SESSION['lote_fecven'][$_POST['cat_id']][$_POST['txt_lote_num']]=$_POST['txt_lote_fecven'];
@@ -22,8 +23,7 @@ if($_POST['action']=='agregar')
 //	}
 }
 
-if($_POST['action']=='editar')
-{
+if ($_POST['action'] == 'editar') {
 //	if($_POST['cat_can']>0)
 //	{
     //IDENTIFICADOR CATALOGO Y CANTIDAD
@@ -110,15 +110,16 @@ $(function() {
     <thead>
     <tr>
         <th>LOTE</th>
-        <th>FECHA FABRICACION</th>
         <th>FECHA VENCIMIENTO</th>
-        <th>STOCK</th>
         <th>CANTIDAD</th>
-        <th align="center">ESTADO</th>
         <th align="center">&nbsp;</th>
     </tr>
     </thead>
 <?php
+$lote_can_total = 0;
+foreach ($_SESSION['lote_car'][$_POST['cat_id']] as $indice => $linea_cantidad) {
+    $lote_can_total += $_SESSION['lote_can'][$_POST['cat_id']][$indice];
+}
 if($num_rows>0){
 ?>
             <tbody>
@@ -127,21 +128,17 @@ if($num_rows>0){
 				?>
                         <tr>
                             <td align="right"><?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice]?></td>
-                            <td><?php echo mostrarFecha($_SESSION['lote_fecfab'][$_POST['cat_id']][$indice])?></td>
                           	<td><?php echo mostrarFecha($_SESSION['lote_fecven'][$_POST['cat_id']][$indice])?></td>
-                            <td><?php echo $_SESSION['lote_sto_num'][$_POST['cat_id']][$indice]?></td>
                             <td align="right"><?php echo $_SESSION['lote_can'][$_POST['cat_id']][$indice]?></td>
-                            <td align="right"><?php echo $_SESSION['lote_estado'][$_POST['cat_id']][$indice]?></td>
                             <td align="center" nowrap="nowrap">
-                                <a class="btn_item" href="#" onClick="lote_venta_form('editar','<?php echo $_POST['cat_id']?>','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice]?>')">Editar Lote</a>
-                                <a class="btn_quitar" href="#" onClick="lote_venta_car('quitar','<?php echo $_POST['cat_id']?>','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice] ?>')">Quitar</a>
+                                <a class="btn_item" href="#" onClick="lote_venta_form('editar','<?php echo $_POST['cat_id']?>','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice]?>', '<?php echo $_POST['unico_id']?>', '<?php echo $lote_can_total ?>')">Editar Lote</a>
+                                <a class="btn_quitar" href="#" onClick="lote_venta_car('quitar','<?php echo $_POST['cat_id']?>','<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$indice] ?>', '<?php echo $_POST['unico_id']?>')">Quitar</a>
                             </td>
                         </tr>
             <?php
-			}	
-            ?>
+            }?>
             </tbody>
-<?php
+    <?php
 }
 else
 {
@@ -157,9 +154,14 @@ else
 <input name="hdd_txt_cant" id="hdd_txt_cant" type="hidden" value="<?php echo $_POST['txt_cant']?>">
 <br>
 <div style="text-align: center;">
-    <a class="btn_agregar_lote" onClick="lote_venta_form('agregar', <?php echo $_POST['cat_id'] ?>)">
-        Agregar Lote
-    </a>
+    Cantidad Maxima:  <?php echo $_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']] ?>,
+    Te quedan:  <?php echo $_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']] - $lote_can_total?>
+    <br>
+    <br>
+    <?php if ($lote_can_total<=$_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']]){ ?>
+        <a class="btn_agregar_lote" onClick="lote_venta_form('agregar', <?php echo $_POST['cat_id'] ?>,'','<?php echo $_POST['unico_id'] ?>', '<?php echo $lote_can_total ?>')">
+            Agregar Lote
+        </a>
+    <?php } ?>
 </div>
 <div id="msj_lote" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; <?php echo ($_POST['msj_lote']) ? 'display:block' : 'display:none';  ?> "><?php echo $_POST['msj_lote'] ?></div>
-

@@ -64,7 +64,7 @@ class clote{
     function complete_nom($dato, $alm_id, $cat_id){
         $sql="SELECT *
 		FROM tb_lote
-		WHERE tb_lote_numero LIKE '%$dato%' AND tb_almacen_id='$alm_id' AND tb_catalogo_id= '$cat_id'
+		WHERE tb_lote_numero LIKE '%$dato%' AND tb_almacen_id='$alm_id' AND tb_catalogo_id= '$cat_id' AND tb_lote_exisact>0
 		ORDER BY tb_lote_fechavence ASC 
 		LIMIT 0,12
 		";

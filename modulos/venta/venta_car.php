@@ -702,7 +702,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             <td align="center" nowrap="nowrap">
                 <?php if($_POST['vista']!='cange'){?>
                     <a class="btn_item" href="#" onClick="editar_datos_item('editar_producto','<?php echo $dt1['tb_catalogo_id']?>')">Actualizar Datos de Item</a><a class="btn_quitar" href="#" onClick="venta_car('quitar','<?php echo $dt1['tb_catalogo_id']?>')">Quitar</a>
-                    <a class="btn_tabla_lote" onClick="lote_venta_car('',<?php echo $dt1['tb_catalogo_id'] ?>)">Ver Lotes</a>
+                    <a class="btn_tabla_lote" onClick="lote_venta_car('',<?php echo $dt1['tb_catalogo_id'] ?>,'','<?php echo $unico_id ?>')">Ver Lotes</a>
                 <?php }?>
             </td>
         </tr>
