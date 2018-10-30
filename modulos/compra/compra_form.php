@@ -581,11 +581,62 @@ if($_POST['action']=="editar"){
             }
         });
     }
-
+    function mascara(d, sep, pat, nums) {
+        if (d.valant != d.value) {
+            val = d.value
+            largo = val.length
+            val = val.split(sep)
+            val2 = ''
+            for (r = 0; r < val.length; r++) {
+                val2 += val[r]
+            }
+            if (nums) {
+                for (z = 0; z < val2.length; z++) {
+                    if (isNaN(val2.charAt(z))) {
+                        letra = new RegExp(val2.charAt(z), "g")
+                        val2 = val2.replace(letra, "")
+                    }
+                }
+            }
+            val = ''
+            val3 = new Array()
+            for (s = 0; s < pat.length; s++) {
+                val3[s] = val2.substring(0, pat[s])
+                val2 = val2.substr(pat[s])
+            }
+            for (q = 0; q < val3.length; q++) {
+                if (q == 0) {
+                    val = val3[q]
+                }
+                else {
+                    if (val3[q] != "") {
+                        val += sep + val3[q]
+                    }
+                }
+            }
+            d.value = val
+            d.valant = val
+        }
+    }
 
 
 
     $(function() {
+
+        $('#txt_com_fec').keyup(function(e) {
+            var patron = new Array(2, 2, 4);
+            mascara(this,'-',patron,false);
+        });
+        $('#txt_com_fecven').keyup(function(e) {
+            var patron = new Array(2, 2, 4);
+                mascara(this,'-',patron,false);
+        });
+
+        $('#cmb_com_doc').change(function(e) {
+            $('#txt_com_numdoc').focus();
+        });
+
+
 
         cmb_com_doc();
         cmb_com_alm_id();
@@ -921,6 +972,7 @@ if($_POST['action']=="editar"){
         });
 
     });
+
 </script>
 <style>
     .ui-cmb_pro_id {
@@ -943,19 +995,19 @@ if($_POST['action']=="editar"){
 
     <fieldset>
         <legend>Datos Principales</legend>
-        <label for="txt_com_fec">Fecha(dd-mm-aaaa):</label>
-        <input name="txt_com_fec" type="text" class="fecha" id="txt_com_fec" pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fec?>" size="10" maxlength="10">
+        <label for="txt_com_fec">Fecha:</label>
+        <input name="txt_com_fec" placeholder="dd-mm-aaaa" class="fecha" id="txt_com_fec"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fec?>" size="10" maxlength="10">
         <label for="txt_fecven_dias">Dias:</label>
         <input name="txt_fecven_dias" type="text" class="dias" id="txt_fecven_dias" value="<?php echo $dias?>" size="2" maxlength="5">
-        <label for="txt_com_fecven" title="Fecha de Vencimiento">Fecha Vcto(dd-mm-aaaa):</label>
-        <input name="txt_com_fecven" type="text" class="fecha" id="txt_com_fecven" pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fecven?>" size="10" maxlength="10">
+        <label for="txt_com_fecven" title="Fecha de Vencimiento">Fecha Vcto:</label>
+        <input name="txt_com_fecven" placeholder="dd-mm-aaaa"  type="text" class="fecha" id="txt_com_fecven"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fecven?>" size="10" maxlength="10">
 
         <label for="cmb_com_doc">Documento:</label>
         <select name="cmb_com_doc" id="cmb_com_doc">
         </select>
-        <br>
         <label for="txt_com_numdoc">N° Doc:</label>
         <input style="width:90px" type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
+        <br />
         <label for="txt_com_numorden">N° Orden:</label>
         <input style="width:90px" type="text" name="txt_com_numorden" id="txt_com_numorden"  value="<?php echo $numorden?>">
         <?php /*?>
