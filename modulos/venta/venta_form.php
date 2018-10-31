@@ -361,6 +361,7 @@ function txt_ven_numdoc(){
 
 			if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
 			{
+                txt_ven_numdocguia();
 				$('#hdd_val_cli_tip').val('2');
 			}
 			if($('#cmb_ven_doc').val()*1==3 || $('#cmb_ven_doc').val()*1==12)//boleta
@@ -390,6 +391,51 @@ function txt_ven_numdoc(){
 			<?php }?>
 		}
 	});
+}
+function txt_ven_numdocguia(){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_txt_numdocguia.php",
+        async:false,
+        dataType: "json",
+        data: ({
+            doc_id: 22
+        }),
+        beforeSend: function() {
+            $('#txt_ven_numdocguia').val('Cargando...');
+
+            //
+            // if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
+            // {
+            //     $('#hdd_val_cli_tip').val('2');
+            // }
+            // if($('#cmb_ven_doc').val()*1==3 || $('#cmb_ven_doc').val()*1==12)//boleta
+            // {
+            //     $('#hdd_val_cli_tip').val('1');
+            // }
+            // if($('#cmb_ven_doc').val()*1==15)//nota de salida
+            // {
+            //     $('#hdd_val_cli_tip').val('15');
+            // }
+        },
+        success: function(data){
+            $('#txt_ven_numdocguia').val(data.numero);
+            if(data.msj!="")
+            {
+                $('#msj_venta_form').html(data.msj);
+                $('#msj_venta_form').show(100);
+            }
+            else
+            {
+                $('#msj_venta_form').hide();
+            }
+        },
+        complete: function(){
+            <?php if($_POST['action']=="insertar"){?>
+           // verificar_numdoc();
+            <?php }?>
+        }
+    });
 }
 function verificar_numdoc(){
 	$.ajax({
@@ -1144,6 +1190,7 @@ $(function() {
     lote_venta_car('restablecer');
 
 	$("#txt_ven_numdoc").addClass("ui-state-active");
+    $("#txt_ven_numdocguia").addClass("ui-state-active");
 
 	$('#txt_ven_lab1').change(function(){
 		$(this).val($(this).val().toUpperCase());
@@ -2115,6 +2162,7 @@ function bus_cantidad(act)
             <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
                 <label for="chk_imprimir_guia"> Imprimir Guia</label>
                 <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" value="1" checked="CHECKED" title="Registrar guia? ">
+                <input name="txt_ven_numdocguia" type="text" id="txt_ven_numdocguia" class="insertar-guia" style="text-align:right; font-size:14px"  value="<?php echo $serguia.'-'.$numguia?>" size="10" readonly>
             <?php }?>
         </td>
       <td align="right">

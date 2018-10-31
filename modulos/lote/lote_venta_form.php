@@ -114,7 +114,7 @@ foreach ($_SESSION['lote_car'][$_POST['cat_id']] as $indice => $linea_cantidad) 
     <input name="action" id="action_lote" type="hidden" value="<?php echo $_POST['action']?>">
     <input name="cat_id" id="cat_id" type="hidden" value="<?php echo $_POST['cat_id']?>">
     <label for="txt_lote_num">Lote Num:</label>
-    <input name="txt_lote_num" type="text" class="cantidad" id="txt_lote_num" style="text-align:right" size="35" maxlength="45" value="<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$_POST['lote_num']] ?>">
+    <input name="txt_lote_num" type="text" class="cantidad" id="txt_lote_num" style="text-align:right" size="40" maxlength="100" value="<?php echo $_SESSION['lote_car'][$_POST['cat_id']][$_POST['lote_num']] ?>">
     <input name="txt_lote_fecfab" type="hidden" id="txt_lote_fecfab" value="<?php echo $_SESSION['lote_fecfab'][$_POST['cat_id']][$_POST['lote_num']]?>" size="10" maxlength="10">
     <input name="txt_lote_fecven" type="hidden" id="txt_lote_fecven" value="<?php echo $_SESSION['lote_fecven'][$_POST['cat_id']][$_POST['lote_num']]?>" size="10" maxlength="10">
     <input name="txt_lote_sto_num" type="hidden" class="cantidad" id="txt_lote_sto_num" readonly style="text-align:right" size="10" maxlength="6" value="<?php echo $_SESSION['lote_sto_num'][$_POST['cat_id']][$_POST['lote_num']]?>">

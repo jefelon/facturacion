@@ -180,17 +180,33 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			mysql_free_result($dts);
 
         if($_POST['chk_imprimir_guia']==1){
+
+            //consultamos talonario
+            $dts= $oTalonario->correlativo($_SESSION['puntoventa_id'],22);
+            $dt = mysql_fetch_array($dts);
+            $tal_id=$dt['tb_talonario_id'];
+            $tal_ser=$dt['tb_talonario_ser'];
+            $tal_fin=$dt['tb_talonario_fin'];
+            $tal_num=$dt['tb_talonario_num'];
+            mysql_free_result($dts);
+
+            $numero=$tal_num+1;
+            $largo=strlen($tal_fin);
+            $numero=str_pad($numero,$largo, "0", STR_PAD_LEFT);
+            $numdoc=$tal_ser.'-'.$numero;
+            //===========================
+
             $estado='CONCLUIDA';
             $cbo_gui_tip_ope=2;
             //insertamos guia
 
             $maxs = $oGuia->actual_numero_guia();
-            $max = mysql_fetch_array($maxs);
-            $numero_guia = $max['max_guia'];
-
-            if(!$numero_guia){
-                $numero_guia=0;
-            }
+//            $max = mysql_fetch_array($maxs);
+//            $numero_guia = $max['max_guia'];
+//
+//            if(!$numero_guia){
+//                $numero_guia=0;
+//            }
 
             $oGuia->insertar(
                 fecha_mysql($_POST['txt_ven_fec']),
@@ -198,7 +214,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 strip_tags($_POST['txt_ven_cli_nom']),
                 $emp_dir,
                 strip_tags($_POST['txt_ven_guia_dir']),
-                $numero_guia+1,
+                $tal_ser,
+                $numero,
                 strip_tags($_POST['txt_gui_obs']),
                 strip_tags($_POST['txt_gui_pla']),
                 strip_tags($_POST['txt_gui_mar']),
@@ -217,6 +234,11 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $dt = mysql_fetch_array($dts);
             $gui_id=$dt['last_insert_id()'];
             mysql_free_result($dts);
+
+            //actualizamos talonario guia
+            $estado='ACTIVO';
+            if($numero==$tal_fin)$estado='INACTIVO';
+            $rs= $oTalonario->actualizar_correlativo($tal_id,$numero,$estado);
 
         }
 		//REGISTRO DE PAGOS

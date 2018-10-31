@@ -3,7 +3,7 @@ class cGuia{
 	//$num ->numero de guia
 	//$com ->numero de comprobante
 	//$est ->estado de la guia
-	function insertar($fec, $rem, $des, $punpar, $punlle, $num, $obs, $pla, $mar, $est, $tipope, $ven_id, $tras_id, $num_doc, $con_id, $tra_id, $usu_id, $emp_id){
+	function insertar($fec, $rem, $des, $punpar, $punlle,$serie, $num, $obs, $pla, $mar, $est, $tipope, $ven_id, $tras_id, $num_doc, $con_id, $tra_id, $usu_id, $emp_id){
 	$sql = "INSERT INTO tb_guia(
 	`tb_guia_reg` ,
 	`tb_guia_mod` ,
@@ -12,6 +12,7 @@ class cGuia{
 	`tb_guia_des` ,
 	`tb_guia_punpar` ,
 	`tb_guia_punlle` ,
+	`tb_guia_serie` ,	
 	`tb_guia_num` ,	
 	`tb_guia_obs` ,
 	`tb_guia_pla` ,
@@ -27,7 +28,7 @@ class cGuia{
 	`tb_empresa_id`
 	)
 	VALUES (
-	NOW( ) ,  NOW( ) , '$fec', '$rem', '$des', '$punpar', '$punlle', '$num', '$obs', '$pla', '$mar', '$est', '$tipope', '$ven_id', '$tras_id', '$num_doc', '$con_id', '$tra_id', '$usu_id', '$emp_id'
+	NOW( ) ,  NOW( ) , '$fec', '$rem', '$des', '$punpar', '$punlle', '$serie', '$num', '$obs', '$pla', '$mar', '$est', '$tipope', '$ven_id', '$tras_id', '$num_doc', '$con_id', '$tra_id', '$usu_id', '$emp_id'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -103,7 +104,7 @@ class cGuia{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id, $fec, $rem, $des, $punpar, $punlle, $num, $obs, $pla, $mar, $est, $con_id, $tra_id){
+	function modificar($id, $fec, $rem, $des, $punpar, $punlle, $serie,$num, $obs, $pla, $mar, $est, $con_id, $tra_id){
 	$sql = "UPDATE tb_guia SET  
 	`tb_guia_mod` =  NOW(),
 	`tb_guia_fec` =  '$fec',
@@ -111,6 +112,7 @@ class cGuia{
 	`tb_guia_des` =  '$des',
 	`tb_guia_punpar` =  '$punpar',
 	`tb_guia_punlle` =  '$punlle',
+	`tb_guia_serie` =  '$serie',
 	`tb_guia_num` =  '$num',
 	`tb_guia_obs` =  '$obs',
 	`tb_guia_pla` =  '$pla',
