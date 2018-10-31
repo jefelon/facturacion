@@ -175,7 +175,7 @@ $('.venpag_moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.99'
+	vMax: '999999999999.99'
 });
 $('.dias').autoNumeric({
 	aSep: ',',
@@ -484,12 +484,11 @@ function txt_venpag_fecletras(id, dias){
         success: function(data){
             $('#txt_letras_fecven'+id).val(data.fecha);
             if ($('#hdd_ven_cli_ret').val()==='1'){
-                var nuevo_monto = parseFloat($('#txt_venpag_mon').val())/1.03;
+                var nuevo_monto = parseFloat($('#txt_venpag_mon').autoNumericGet())/1.03;
                 $('#txt_letras_mon'+id).val((parseFloat(nuevo_monto)/parseFloat($('#txt_numletras').val())).toFixed(2));
             }else {
-                $('#txt_letras_mon'+id).val((parseFloat($('#txt_venpag_mon').val())/parseFloat($('#txt_numletras').val())).toFixed(2));
+                $('#txt_letras_mon'+id).val((parseFloat($('#txt_venpag_mon').autoNumericGet())/parseFloat($('#txt_numletras').val())).toFixed(2));
             }
-
         }
     });
 }
@@ -1038,27 +1037,34 @@ function venta_pago_car(act,idf){
 }
 
 function compararSunat(doc, nom, dir, id) {
+    console.log("aca8");
 	$.post('../../libreriasphp/consultaruc/index.php', {
 		vruc: doc,
 		vtipod: 6
 	},
 	function(data, textStatus){
+        console.log("aca10");
 		if(data == null){
 			alert('Intente nuevamente...Sunat');
 			$('#msj_busqueda_sunat').hide();
+			console.log("aca1");
 		}
 		if(data.length==1){
+            console.log("aca2");
 			alert(data[0]);
 		}else{
+            console.log("aca3");
 			// var telefono = data['Telefonos'];
 			// telefono = telefono.replace(/ \/ /g, "/");
 			// telefono = telefono.replace("/ ", "");
 			// telefono = telefono.replace(/\//g, " / ");
 			// $('#txt_cli_tel').val(telefono);
 			$("#txt_ven_cli_est").val(data['Estado']);
+            console.log("aca4");
 			if(data['RazonSocial'] != nom || data['Direccion'] != dir){
 				cliente_form_i('editarSunat',id,data['RazonSocial'],data['Direccion'],data['Contacto'],'',data['Estado']);
 			}
+            console.log("aca5");
 			$('#msj_busqueda_sunat').hide();
 		}
 	},"json");
@@ -2359,15 +2365,15 @@ function bus_cantidad(act)
                     <tr style="width:100%;" class="letras_fecven">
                         <td colspan="3" style="display:none;" class="letras_fecven1">
                             <label for="txt_letras_mon1">Monto 1:</label><br>
-                            <input type="text" name="txt_letras_mon1" id="txt_letras_mon1" size="10" maxlength="10" readonly>
+                            <input type="text" name="txt_letras_mon1" id="txt_letras_mon1" size="10" maxlength="120" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven2">
                             <label for="txt_letras_mon2">Monto 2:</label><br>
-                            <input type="text" name="txt_letras_mon2" id="txt_letras_mon2" size="10" maxlength="10" readonly>
+                            <input type="text" name="txt_letras_mon2" id="txt_letras_mon2" size="10" maxlength="20" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven3">
                             <label for="txt_letras_mon3">Monto 3:</label><br>
-                            <input type="text" name="txt_letras_mon3" id="txt_letras_mon3" size="10" maxlength="10" readonly>
+                            <input type="text" name="txt_letras_mon3" id="txt_letras_mon3" size="10" maxlength="20" readonly>
                         </td>
                         <td colspan="3" style="display:none;" class="letras_fecven4">
                             <label for="txt_letras_mon4">Monto 4:</label><br>

@@ -77,10 +77,13 @@ class cCompraDetalleLote{
 //        return $rst;
 //    }
 
-	function mostrarUno($id){
-	$sql="SELECT * 
-	FROM tb_lote
-	WHERE tb_lote_id=$id";
+	function mostrarFiltroCompraDetalleLote($lote_num){
+	$sql="SELECT c.*,min(c.tb_compra_reg) 
+    FROM tb_compradetalle_lote cl 
+    INNER JOIN tb_compradetalle cd ON cl.tb_compradetalle_id = cd.tb_compradetalle_id 
+    INNER JOIN tb_compra c ON c.tb_compra_id = cd.tb_compra_id
+	WHERE cl.tb_compradetalle_lotenum='$lote_num'
+	";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

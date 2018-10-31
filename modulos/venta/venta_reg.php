@@ -784,14 +784,13 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             mysql_free_result($dts);
 
             foreach($_SESSION['lote_car'][$indice] as $indice_lote) {
-                $lts=$oLote->mostrarUnoLoteNumero($indice,$_SESSION['lote_car'][$indice][$indice_lote], $almacen_venta);
+                $lote_num = split(' ', $_SESSION['lote_car'][$indice][$indice_lote]);
+                $lts=$oLote->mostrarUnoLoteNumero($indice,$lote_num[0], $almacen_venta);
                 $lt = mysql_fetch_array($lts);
                 $nro_rows = mysql_num_rows($lts);
-
-                $lote_num = split(' ', $_SESSION['lote_car'][$indice][$indice_lote]);
                 if ($nro_rows>0){
                     $nuevo_stock = $lt['tb_lote_exisact']-$_SESSION['lote_can'][$indice][$indice_lote];
-                    $oLote->modificar_stock($indice, $lote_num,$almacen_venta, $nuevo_stock);
+                    $oLote->modificar_stock($indice, $lote_num[0],$almacen_venta, $nuevo_stock);
                 }
 
                 $oVentaDetalleLote->insertar($vendet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_can'][$indice][$indice_lote], $lote_num[0]);
