@@ -635,15 +635,14 @@ function venta_car(act,cat_id){
 
     if(act=='agregar' & (dif < 0) && $('#hdd_stock_neg').val()!=='1')
 	{
-	    console.log($('#hdd_stock_neg').val());
 		alert('Stock insuficiente. Diferencia en '+(cantidad-stouni)+'.');
 		$('#txt_bus_cat_can').val(stouni);
 	} else {
 
 		if(precio<0) {
 			precio=precio.toFixed(2);
-			alert('Precio debe ser mayor al costo. Diferencia en '+(precio)+'.');
-			$('#txt_bus_cat_preven').autoNumericSet($('#hdd_bus_cat_cospro').autoNumericGet());
+			// alert('Precio debe ser mayor al costo. Diferencia en '+(precio)+'.');
+			// $('#txt_bus_cat_preven').autoNumericSet($('#hdd_bus_cat_cospro').autoNumericGet());
 		} else {
             var cot_id = '';
             cot_id = $('#hdd_cot_id').val();

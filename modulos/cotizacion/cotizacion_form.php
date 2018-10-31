@@ -316,8 +316,6 @@ function venta_car(act,cat_id){
 
 		if(precio<0) {
 			precio=precio.toFixed(2);
-			alert('Precio debe ser mayor al costo. Diferencia en '+(precio)+'.');
-			$('#txt_bus_cat_preven').autoNumericSet($('#hdd_bus_cat_cospro').autoNumericGet());
 		} else {
 			$.ajax({
 				type: "POST",

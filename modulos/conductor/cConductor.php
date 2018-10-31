@@ -38,7 +38,9 @@ class cConductor{
 	$sql="SELECT * 
 	FROM tb_conductor c
 	INNER JOIN tb_transporte t ON c.tb_transporte_id = t.tb_transporte_id
+	
 	WHERE tb_conductor_id=$id";
+
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

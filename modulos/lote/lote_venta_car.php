@@ -154,8 +154,8 @@ else
 <input name="hdd_txt_cant" id="hdd_txt_cant" type="hidden" value="<?php echo $_POST['txt_cant']?>">
 <br>
 <div style="text-align: center;">
-    Cantidad Maxima:  <?php echo $_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']] ?>,
-    Te quedan:  <?php echo $_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']] - $lote_can_total?>
+    Cantidad:  <?php echo $_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']] ?>,
+    Diferencia:  <?php echo $_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']] - $lote_can_total?>
     <br>
     <br>
     <?php if ($lote_can_total<=$_SESSION['venta_car'][$_POST['unico_id']][$_POST['cat_id']]){ ?>
