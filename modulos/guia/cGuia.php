@@ -82,8 +82,8 @@ class cGuia{
     function mostrarGuiaUno($ven_id){
         $sql="SELECT * 
 	FROM tb_guia c
-	INNER JOIN tb_conductor p ON c.tb_conductor_id=p.tb_conductor_id
-	INNER JOIN tb_transporte t ON t.tb_transporte_id=t.tb_transporte_id
+	LEFT JOIN tb_conductor p ON c.tb_conductor_id=p.tb_conductor_id
+	LEFT JOIN tb_transporte t ON t.tb_transporte_id=t.tb_transporte_id
 	WHERE tb_venta_id=$ven_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

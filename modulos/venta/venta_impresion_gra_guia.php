@@ -42,7 +42,12 @@ if($guia['tb_guia_tipope'] == 1){
 $serie='G001';
 $numero=$guia["tb_guia_num"];
 
-$dts=$oConductor->mostrarUno($guia["tb_conductor_id"]);
+
+$cond_id=0;
+if ($guia["tb_conductor_id"]){
+    $cond_id = $guia["tb_conductor_id"];
+}
+$dts=$oConductor->mostrarUno($cond_id);
 $dt = mysql_fetch_array($dts);
 $cond_nombre=$dt['tb_conductor_nom'];
 mysql_free_result($dts);
