@@ -78,7 +78,7 @@ class cCompraDetalleLote{
 //    }
 
 	function mostrarFiltroCompraDetalleLote($lote_num){
-	$sql="SELECT c.*,min(c.tb_compra_reg) 
+	$sql="SELECT c.*,min(c.tb_compra_fec) 
     FROM tb_compradetalle_lote cl 
     INNER JOIN tb_compradetalle cd ON cl.tb_compradetalle_id = cd.tb_compradetalle_id 
     INNER JOIN tb_compra c ON c.tb_compra_id = cd.tb_compra_id

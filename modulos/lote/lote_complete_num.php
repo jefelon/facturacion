@@ -44,7 +44,7 @@ $arrayElementos = array();
 while ($fila = mysql_fetch_array($rs)){
     $lts=$oCompraDetalleLote->mostrarFiltroCompraDetalleLote($fila["tb_lote_numero"]);
     $lt= mysql_fetch_array($lts);
-    array_push($arrayElementos, new ElementoAutocompletar($fila["tb_lote_id"], $fila["tb_lote_numero"].' - FV: '.$fila["tb_lote_fechavence"] .' - Stock: '.$fila['tb_lote_exisact']  .' - FCompra:'. mostrarFecha($lt["tb_compra_reg"]),$fila["tb_lote_numero"], $fila["tb_lote_fechafab"],$fila["tb_lote_fechavence"], $fila['tb_lote_exisact']));
+    array_push($arrayElementos, new ElementoAutocompletar($fila["tb_lote_id"], $fila["tb_lote_numero"].' - FV: '.$fila["tb_lote_fechavence"] .' - Stock: '.$fila['tb_lote_exisact']  .' - FCompra:'. mostrarFecha($lt["tb_compra_fec"]),$fila["tb_lote_numero"], $fila["tb_lote_fechafab"],$fila["tb_lote_fechavence"], $fila['tb_lote_exisact']));
 }
 
 print_r(json_encode($arrayElementos));
