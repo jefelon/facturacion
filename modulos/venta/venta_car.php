@@ -621,7 +621,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $linea_valor_unitario = $precio_unitario / 1.18;
         }
 
-        $linea_valor_venta_bruto=formato_decimal($linea_valor_unitario,2)*$cantidad;
+        $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
 
         $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
         $linea_valor_venta_x_item = $linea_valor_venta_bruto-$linea_desc_x_item;
@@ -728,7 +728,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $tipo_item	= 1;
         $linea_valor_unitario = $precio_unitario / 1.18;
 
-        $linea_valor_venta_bruto=formato_decimal($linea_valor_unitario,2)*$cantidad;
+        $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
         $linea_desc_x_item_percent=0;
         $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
         $linea_valor_venta_x_item = $linea_valor_venta_bruto-$linea_desc_x_item;
