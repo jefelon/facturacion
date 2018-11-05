@@ -128,7 +128,7 @@ $(function() {
 			},
 			txt_item_preven: {
 				required: true,
-				min: '<?php echo $costo_ponderado2?>'
+				min: '<?php echo "0"//$costo_ponderado2  aumentar IGV ?>'
 			},
             txt_item_serie: {
                 required: false

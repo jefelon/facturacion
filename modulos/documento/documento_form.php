@@ -95,7 +95,7 @@ $(function() {
         </tr>
         <tr>
         <td align="right" valign="top">Nombre:</td>
-        <td><input name="txt_doc_nom" type="text" id="txt_doc_nom" value="<?php echo $doc_nom?>" size="35" maxlength="25"></td>
+        <td><input name="txt_doc_nom" type="text" id="txt_doc_nom" value="<?php echo $doc_nom?>" size="35" maxlength="30"></td>
         </tr>
         <tr>
           <td align="right" valign="top">&nbsp;</td>

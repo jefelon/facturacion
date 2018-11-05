@@ -180,17 +180,33 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			mysql_free_result($dts);
 
         if($_POST['chk_imprimir_guia']==1){
-            $estado='CONCLUIDA';
-            $cbo_gui_tip_ope=2;
+
+            //consultamos talonario
+            $dtsg= $oTalonario->correlativo($_SESSION['puntoventa_id'],22);
+            $dtg = mysql_fetch_array($dtsg);
+            $tal_idg=$dtg['tb_talonario_id'];
+            $tal_serg=$dtg['tb_talonario_ser'];
+            $tal_fing=$dtg['tb_talonario_fin'];
+            $tal_numg=$dtg['tb_talonario_num'];
+            mysql_free_result($dtsg);
+
+            $numerog=$tal_numg+1;
+            $largog=strlen($tal_fing);
+            $numerog=str_pad($numerog,$largog, "0", STR_PAD_LEFT);
+            $numdocg=$tal_serg.'-'.$numerog;
+            //===========================
+
+            $estadog='CONCLUIDA';
+            $cbo_gui_tip_opeg=2;
             //insertamos guia
 
-            $maxs = $oGuia->actual_numero_guia();
-            $max = mysql_fetch_array($maxs);
-            $numero_guia = $max['max_guia'];
-
-            if(!$numero_guia){
-                $numero_guia=0;
-            }
+ //           $maxs = $oGuia->actual_numero_guia();
+//            $max = mysql_fetch_array($maxs);
+//            $numero_guia = $max['max_guia'];
+//
+//            if(!$numero_guia){
+//                $numero_guia=0;
+//            }
 
             $oGuia->insertar(
                 fecha_mysql($_POST['txt_ven_fec']),
@@ -198,12 +214,13 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 strip_tags($_POST['txt_ven_cli_nom']),
                 $emp_dir,
                 strip_tags($_POST['txt_ven_guia_dir']),
-                $numero_guia+1,
+                $tal_serg,
+                $numerog,
                 strip_tags($_POST['txt_gui_obs']),
                 strip_tags($_POST['txt_gui_pla']),
                 strip_tags($_POST['txt_gui_mar']),
-                $estado,
-                $cbo_gui_tip_ope,
+                $estadog,
+                $cbo_gui_tip_opeg,
                 $ven_id,
                 $_POST['hdd_gui_tra_id'],
                 $_POST['txt_ven_numdoc'],
@@ -217,6 +234,11 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $dt = mysql_fetch_array($dts);
             $gui_id=$dt['last_insert_id()'];
             mysql_free_result($dts);
+
+            //actualizamos talonario guia
+            $estadog='ACTIVO';
+            if($numerog==$tal_fing)$estadog='INACTIVO';
+            $rs= $oTalonario->actualizar_correlativo($tal_idg,$numerog,$estadog);
 
         }
 		//REGISTRO DE PAGOS

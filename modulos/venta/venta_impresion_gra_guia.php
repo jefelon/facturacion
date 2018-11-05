@@ -39,7 +39,7 @@ if($guia['tb_guia_tipope'] == 1){
 }elseif ($guia['tb_guia_tipope'] == 2) {
     $guia_ope = "Venta";
 }
-$serie='G001';
+$serie=$guia['tb_guia_serie'];
 $numero=$guia["tb_guia_num"];
 
 

@@ -148,7 +148,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 //set margins
-$pdf->SetMargins(12, 15, 12);// left top right
+$pdf->SetMargins(12, 12, 12);// left top right
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 //$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -183,9 +183,22 @@ $html = '
         font-family: Verdana, Arial, Consolas;
         margin: 0px;
         padding-top: 0px;
-        font-size: 7.5pt;
+        font-size: 8pt;
     }
 
+    th, td {
+
+      padding: 0px;
+      white-space: pre; /* CSS 2.0 */
+      white-space: pre-wrap; /* CSS 2.1 */
+      white-space: pre-line; /* CSS 3.0 */
+      white-space: -pre-wrap; /* Opera 4-6 */
+      white-space: -o-pre-wrap; /* Opera 7 */
+      white-space: -moz-pre-wrap; /* Mozilla */
+      white-space: -hp-pre-wrap; /* HP */
+      word-wrap: break-word; /* IE 5+ */
+     }
+      
     .header_row th {
         border-bottom: 0.9px solid #01a2e6;
         border-right: 0.9px solid #01a2e6;
@@ -217,65 +230,53 @@ $html = '
     }
 
 </style>
-<body><table style="width: 100%; margin-bottom: 50mm" border="0">';
+<body><table style="width: 168mm; margin-bottom: 50mm" border="0">';
 $html.='
-<table style="width: 100%;" border="0">
+<table style="width: 168mm;" border="1">
+    <tr style="font-size: 10pt">
+        <td style="text-align: left" width="43mm"></td>
+        <td style="text-align: center" width="22mm">'.str_pad($ltr['tb_letras_numero'], 4, "0", STR_PAD_LEFT).'</td>
+        <td style="text-align: center" width="30mm"> '.$serie.'-'.$numero.'</td>
+        <td style="text-align: center" width="22mm">'.mostrarFecha($fecha).'</td>
+        <td style="text-align: center" width="30mm">'.mostrarFecha($ltr['tb_letras_fecha']).'</td>
+        <td style="text-align: center" width="48mm">'.$ltr['tb_letras_monto'].'</td>
+    </tr>
     <tr>
-        <td style="text-align: left" width="15%"></td>
-        <td style="text-align: left" width="8%">'.$ltr['tb_letras_numero'].'</td>
-        <td style="text-align: left" width="20%"> '.$serie.'-'.$numero.'</td>
-        <td style="text-align: left" width="18.5%">'.mostrarFecha($fecha).'</td>
-        <td style="text-align: left" width="18.5%">'.mostrarFecha($ltr['tb_letras_fecha']).'</td>
-        <td style="text-align: left" width="20%">'.$ltr['tb_letras_monto'].'</td>
+        <td style="text-align: left;height: 10mm" width="100%"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left" width="55mm"></td>
+        <td style="text-align: left" width="113mm">'.$razon.'</td>
+        <td style="text-align: center" width="24mm">'.str_pad($clicodigo, 7, "0", STR_PAD_LEFT).'</td>
     </tr>
     <tr>
         <td style="text-align: left" width="100%"></td>
     </tr>
     <tr>
-        <td style="text-align: left" width="100%"></td>
+        <td style="text-align: left" width="55mm"></td>
+        <td style="text-align: left" width="113mm">'.$direccion.'</td>
     </tr>
     <tr>
-        <td style="text-align: left" width="15%"></td>
-        <td style="text-align: left" width="72%">'.$razon.'</td>
-        <td style="text-align: left" width="13%">'.str_pad($clicodigo, 7, "0", STR_PAD_LEFT).'</td>
+        <td style="text-align: left;height:7mm" width="100%"></td>
     </tr>
     <tr>
-        <td style="text-align: left" width="100%"></td>
+        <td style="text-align: left" width="40mm"></td>
+        <td style="text-align: center" width="27mm">'.mostrarDiaMesAnio(1, $ltr['tb_letras_fecha']).'</td>
+        <td style="text-align: center" width="22mm">'.mostrarDiaMesAnio(2, $ltr['tb_letras_fecha']).'</td>
+        <td style="text-align: center" width="20mm">'.mostrarDiaMesAnio(3, $ltr['tb_letras_fecha']).'</td>
     </tr>
     <tr>
-        <td style="text-align: left" width="15%"></td>
-        <td style="text-align: left" width="85%">'.$direccion.'</td>
+        <td style="text-align: left;height:10mm" width="100%"></td>
     </tr>
     <tr>
-        <td style="text-align: left" width="100%"></td>
+        <td style="text-align: left" width="45mm"></td>
+        <td style="text-align: left" width="147mm">'.$letras_monto.'</td>
     </tr>
     <tr>
-        <td style="text-align: left" width="15%"></td>
-        <td style="text-align: left" width="3%"></td>
-        <td style="text-align: left" width="3%">'.mostrarDiaMesAnio(1, $ltr['tb_letras_fecha']).'</td>
-        <td style="text-align: left" width="3%"></td>
-        <td style="text-align: left" width="10%">'.mostrarDiaMesAnio(2, $ltr['tb_letras_fecha']).'</td>
-        <td style="text-align: left" width="3%"></td>
-        <td style="text-align: left" width="5%">'.mostrarDiaMesAnio(3, $ltr['tb_letras_fecha']).'</td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="100%"></td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="15%"></td>
-        <td style="text-align: left" width="85%">'.$letras_monto.'</td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="100%"></td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="100%"></td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="100%"></td>
+        <td style="text-align: left;height:4mm" width="100%"></td>
     </tr>
      <tr>
-        <td style="text-align: justify" width="70%">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual 
+        <td style="text-align: justify;font-size: 8pt" width="78%">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual 
         Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual.
         Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual
         </td>

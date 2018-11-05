@@ -361,6 +361,7 @@ function txt_ven_numdoc(){
 
 			if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
 			{
+                txt_ven_numdocguia();
 				$('#hdd_val_cli_tip').val('2');
 			}
 			if($('#cmb_ven_doc').val()*1==3 || $('#cmb_ven_doc').val()*1==12)//boleta
@@ -390,6 +391,51 @@ function txt_ven_numdoc(){
 			<?php }?>
 		}
 	});
+}
+function txt_ven_numdocguia(){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_txt_numdocguia.php",
+        async:false,
+        dataType: "json",
+        data: ({
+            doc_id: 22
+        }),
+        beforeSend: function() {
+            $('#txt_ven_numdocguia').val('Cargando...');
+
+            //
+            // if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
+            // {
+            //     $('#hdd_val_cli_tip').val('2');
+            // }
+            // if($('#cmb_ven_doc').val()*1==3 || $('#cmb_ven_doc').val()*1==12)//boleta
+            // {
+            //     $('#hdd_val_cli_tip').val('1');
+            // }
+            // if($('#cmb_ven_doc').val()*1==15)//nota de salida
+            // {
+            //     $('#hdd_val_cli_tip').val('15');
+            // }
+        },
+        success: function(data){
+            $('#txt_ven_numdocguia').val(data.numero);
+            if(data.msj!="")
+            {
+                $('#msj_venta_form').html(data.msj);
+                $('#msj_venta_form').show(100);
+            }
+            else
+            {
+                $('#msj_venta_form').hide();
+            }
+        },
+        complete: function(){
+            <?php if($_POST['action']=="insertar"){?>
+           // verificar_numdoc();
+            <?php }?>
+        }
+    });
 }
 function verificar_numdoc(){
 	$.ajax({
@@ -484,7 +530,9 @@ function txt_venpag_fecletras(id, dias){
         success: function(data){
             $('#txt_letras_fecven'+id).val(data.fecha);
             if ($('#hdd_ven_cli_ret').val()==='1'){
-                var nuevo_monto = parseFloat($('#txt_venpag_mon').autoNumericGet())/1.03;
+                var monto_original = parseFloat($('#txt_venpag_mon').autoNumericGet());
+                var retencion = parseFloat($('#txt_venpag_mon').autoNumericGet())*0.03;
+                var nuevo_monto =monto_original-retencion;
                 $('#txt_letras_mon'+id).val((parseFloat(nuevo_monto)/parseFloat($('#txt_numletras').val())).toFixed(2));
             }else {
                 $('#txt_letras_mon'+id).val((parseFloat($('#txt_venpag_mon').autoNumericGet())/parseFloat($('#txt_numletras').val())).toFixed(2));
@@ -569,79 +617,80 @@ function lote_venta_form(act,cat_id, lote_num, unico_id, cant_act){
 
 
 function venta_car(act,cat_id){
-	if(act=='agregar') {
-		var stouni=$('#hdd_bus_cat_stouni').val();
-		var cantidad=$('#txt_bus_cat_can').val();
+    if(act=='agregar') {
+        var stouni=$('#hdd_bus_cat_stouni').val();
+        var cantidad=$('#txt_bus_cat_can').val();
 
-		var dif = stouni-$('#txt_bus_cat_can').val();
+        var dif = stouni-$('#txt_bus_cat_can').val();
 
-		// if($('#txt_bus_cat_preven').autoNumericGet()>0) {
-			var precio=$('#txt_bus_cat_preven').autoNumericGet()-$('#hdd_bus_cat_cospro').autoNumericGet();
-		// } else {
-		// 	var precio=0;
-		// }
-	}
-	if(act!='quitar'){
-		cat_id =  $('#hdd_bus_cat_id').val();
-	}
+        // if($('#txt_bus_cat_preven').autoNumericGet()>0) {
+        var precio=$('#txt_bus_cat_preven').autoNumericGet()-$('#hdd_bus_cat_cospro').autoNumericGet();
+        // } else {
+        // 	var precio=0;
+        // }
+    }
+    if(act!='quitar'){
+        cat_id =  $('#hdd_bus_cat_id').val();
+    }
 
 
 
     if(act=='agregar' & (dif < 0) && $('#hdd_stock_neg').val()!=='1')
-	{
-		alert('Stock insuficiente. Diferencia en '+(cantidad-stouni)+'.');
-		$('#txt_bus_cat_can').val(stouni);
-	} else {
+    {
+        alert('Stock insuficiente. Diferencia en '+(cantidad-stouni)+'.');
+        $('#txt_bus_cat_can').val(stouni);
+    } else {
 
-		if(precio<0) {
-			precio=precio.toFixed(2);
-			// alert('Precio debe ser mayor al costo. Diferencia en '+(precio)+'.');
-			// $('#txt_bus_cat_preven').autoNumericSet($('#hdd_bus_cat_cospro').autoNumericGet());
-		} else {
-            var cot_id = '';
-            cot_id = $('#hdd_cot_id').val();
-			$.ajax({
-				type: "POST",
-				url: "../venta/venta_car.php",
-				async:false,
-				dataType: "html",
-				data: ({
-					action:	 act,
-					unico_id: $('#unico_id').val(),
-					cat_id:	 cat_id,
-					cat_can: $('#txt_bus_cat_can').val(),
-					cat_tip: $('#hdd_detven_tip').val(),
-					cat_preven: $('#txt_bus_cat_preven').val(),
-                    cat_des: $('#txt_detcom_des').val(),
-                    cot_id: cot_id
-				}),
-				beforeSend: function() {
-					$("#txt_fil_pro_nom").val(''); $("#txt_fil_pro_nom").focus();
-					$('#div_venta_car_tabla').addClass("ui-state-disabled");
-		    	},
-				success: function(html){
+        //if(precio<0) {
+        //	precio=precio.toFixed(2);
+        //	alert('Precio debe ser mayor al costo. Diferencia en '+(precio)+'.');
+        //	$('#txt_bus_cat_preven').autoNumericSet($('#hdd_bus_cat_cospro').autoNumericGet());
+        //}
+        //else {
+        var cot_id = '';
+        cot_id = $('#hdd_cot_id').val();
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_car.php",
+            async:false,
+            dataType: "html",
+            data: ({
+                action:	 act,
+                unico_id: $('#unico_id').val(),
+                cat_id:	 cat_id,
+                cat_can: $('#txt_bus_cat_can').val(),
+                cat_tip: $('#hdd_detven_tip').val(),
+                cat_preven: $('#txt_bus_cat_preven').val(),
+                cat_des: $('#txt_detcom_des').val(),
+                cot_id: cot_id
+            }),
+            beforeSend: function() {
+                $("#txt_fil_pro_nom").val(''); $("#txt_fil_pro_nom").focus();
+                $('#div_venta_car_tabla').addClass("ui-state-disabled");
+            },
+            success: function(html){
 
-					$('#div_venta_car_tabla').html(html);
-				},
-				complete: function(){
-					$('#div_venta_car_tabla').removeClass("ui-state-disabled");
-                    if(!($('#chk_modo').is(':checked'))) {
-                        $('#hdd_bus_cat_id').val('');
-                        $('#hdd_bus_cat_stouni').val('');
-                        $('#hdd_bus_cat_cospro').val('');
-                        $('#txt_bus_pro_codbar').val('');
-                        $('#txt_bus_pro_nom').val('');
-                        $('#txt_bus_cat_preven').val('');
-                        $('#txt_bus_cat_preven_noigv').val('');
-                        $('#txt_bus_cat_can').val('');
-                        $('#txt_precio_min').val('');
-                        $('#txt_precio_may').val('');
-                        $('#txt_detcom_des').val('0.00')
-                    }
-				}
-			});
-		}
-	}
+                $('#div_venta_car_tabla').html(html);
+            },
+            complete: function(){
+                $('#div_venta_car_tabla').removeClass("ui-state-disabled");
+                if(!($('#chk_modo').is(':checked'))) {
+                    $('#hdd_bus_cat_id').val('');
+                    $('#hdd_bus_cat_stouni').val('');
+                    $('#hdd_bus_cat_cospro').val('');
+                    $('#txt_bus_pro_codbar').val('');
+                    $('#txt_bus_pro_nom').val('');
+                    $('#txt_bus_cat_preven').val('');
+                    $('#txt_bus_cat_preven_noigv').val('');
+                    $('#txt_bus_cat_can').val('');
+                    $('#txt_precio_min').val('');
+                    $('#txt_precio_may').val('');
+                    $('#txt_detcom_des').val('0.00')
+                }
+            }
+        });
+        //}
+    }
 }
 
 function venta_car_form(act,idf){
@@ -1143,6 +1192,7 @@ $(function() {
     lote_venta_car('restablecer');
 
 	$("#txt_ven_numdoc").addClass("ui-state-active");
+    $("#txt_ven_numdocguia").addClass("ui-state-active");
 
 	$('#txt_ven_lab1').change(function(){
 		$(this).val($(this).val().toUpperCase());
@@ -2112,8 +2162,9 @@ function bus_cantidad(act)
         </td>
         <td class="imprimir_guia" style="display: none">
             <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
-                <label for="chk_imprimir_guia"> Imprimir Guia</label>
+                <label for="chk_imprimir_guia"> Registrar e Imprimir Guia</label>
                 <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" value="1" checked="CHECKED" title="Registrar guia? ">
+                <input name="txt_ven_numdocguia" type="text" id="txt_ven_numdocguia" class="insertar-guia" style="text-align:right; font-size:14px"  value="<?php echo $serguia.'-'.$numguia?>" size="10" readonly>
             <?php }?>
         </td>
       <td align="right">
