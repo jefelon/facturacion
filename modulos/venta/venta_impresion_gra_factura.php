@@ -308,7 +308,7 @@ if($impresion=='pdf')ob_start();
                             <td style="text-align: center; width: 10mm;"><?php echo $dt1['tb_ventadetalle_can']?></td>
                             <td style="text-align: center; width: 7mm;">0</td>
                             <td style="text-align: center; width: 10mm;">0.00</td>
-                            <td style="text-align: right; width: 20mm;"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*1.18)?>&nbsp;</td>
+                            <td style="text-align: right; width: 20mm;"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?>&nbsp;</td>
                             <td style="text-align: right; width: 23mm;"><?php echo formato_money($dt1['tb_ventadetalle_valven']*1.18)?>&nbsp;</td>
                         </tr>
                         <?php
