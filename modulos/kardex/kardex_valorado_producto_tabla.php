@@ -119,7 +119,9 @@ $(function() {
                 if ($mes_anterior!=date("m",strtotime($dt1['tb_kardex_reg'])) and $mes_anterior){
                     ?>
                     <tr>
-                    <td nowrap="nowrap" title="<?php echo 'Registrado: '.mostrarFechaHoraH($dt1['tb_kardex_reg'])?>"><?php echo mostrarFecha($dt1['tb_kardex_fec'])?></td>
+
+
+                    <td nowrap="nowrap" title="<?php echo 'Registrado: '.mostrarFechaHoraH($dt1['tb_kardex_reg'])?>"><?php echo "01-".date('m-Y', strtotime($dt1['tb_kardex_fec'])); ?></td>
                     <td nowrap="nowrap"></td>
                     <td></td>
                     <td nowrap="nowrap"></td>
@@ -225,7 +227,13 @@ $(function() {
                     if($cantidad_total>0)$precio_promedio = ($subtotal+$costo_total)/$cantidad_total;
                     ?>
                     <td align="right"><?php echo $cantidad_total ?></td>
-                    <td align="right"><?php echo formato_decimal($costo_promedio,2) ?></td>
+                    <td align="right">
+                        <?php if($cantidad_total == 0){
+                            echo formato_decimal(0.000, 2);
+                        }else{
+                            echo formato_decimal($costo_promedio,2);
+                        } ?>
+                    </td>
                     <td align="right"><?php echo formato_decimal($costo_promedio*$cantidad_total,2) ?></td>
 
                 </tr>
