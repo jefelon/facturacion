@@ -17,6 +17,9 @@ $oMysql= new cMysql();
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 
+require_once("../guia/cGuia.php");
+$oGuia = new cGuia();
+
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
@@ -104,7 +107,16 @@ if($_POST['action']=="editar"){
 
 		$may	= $dt['tb_venta_may'];
         $use_id = $dt['tb_vendedor_id'];
+
 	mysql_free_result($dts);
+
+    $guias = $oGuia->mostrarGuiaUno($_POST['ven_id']);
+    $guia = mysql_fetch_array($guias);
+    $guia_id = $guia['tb_guia_id'];
+
+    $serguia	=$guia['tb_guia_serie'];
+    $numguia	=$guia['tb_guia_num'];
+    mysql_free_result($guias);
 }
 ?>
 <script type="text/javascript">
@@ -1283,6 +1295,7 @@ $(function() {
 		txt_ven_numdoc();
         if ((this).value=== '12' || (this).value=== '15') {
             cliente_cargar_datos(1);
+            $("#chk_imprimir_guia").attr('checked', false);
 
         }else{
             $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
@@ -1293,11 +1306,13 @@ $(function() {
             $('.insertar-guia').show();
             $('#txt_bus_cat_preven_noigv').show();
             $('#txt_bus_cat_preven').hide();
+            $("#chk_imprimir_guia").attr('checked', true);
         }else{
             $('.imprimir_guia').hide();
             $('.insertar-guia').hide();
             $('#txt_bus_cat_preven_noigv').hide();
             $('#txt_bus_cat_preven').show();
+            $("#chk_imprimir_guia").attr('checked', false);
         }
 	});
 
@@ -1318,7 +1333,7 @@ $(function() {
 	});
 
     $("#txt_bus_cat_preven_noigv").keyup(function(){
-        $("#txt_bus_cat_preven").val(($("#txt_bus_cat_preven_noigv").val() * 1.18).toFixed(2));
+        $("#txt_bus_cat_preven").val(($("#txt_bus_cat_preven_noigv").val() * 1.18));
     });
 	<?php }?>
 
@@ -2013,7 +2028,7 @@ function catalogo_buscar() {
                 $('#hdd_bus_cat_cospro').val(data.cat_cospro);
                 $('#txt_bus_pro_nom').val(data.pro_nom);
                 $('#txt_bus_cat_preven').val(data.cat_preven);
-                $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18).toFixed(2));
+                $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18));
                 $('#txt_bus_cat_can').val(data.cat_can);
 
                 $('#txt_precio_min').val(data.cat_premin);
@@ -2163,10 +2178,17 @@ function bus_cantidad(act)
         <td class="imprimir_guia" style="display: none">
             <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
                 <label for="chk_imprimir_guia"> Registrar e Imprimir Guia</label>
-                <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" value="1" checked="CHECKED" title="Registrar guia? ">
+                <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" value="1"  title="Registrar guia? ">
                 <input name="txt_ven_numdocguia" type="text" id="txt_ven_numdocguia" class="insertar-guia" style="text-align:right; font-size:14px"  value="<?php echo $serguia.'-'.$numguia?>" size="10" readonly>
             <?php }?>
         </td>
+        <?php if($_POST['action']=="editar") {?>
+        <td>
+                <label for="chk_imprimir_guia"> Numero Guia</label>
+                <input name="txt_ven_numdocguia" type="text" id="txt_ven_numdocguia" style="text-align:right; font-size:14px"  value="<?php echo $serguia.'-'.$numguia?>" size="10" readonly>
+        </td>
+    <?php }?>
+
       <td align="right">
       <?php
       if($_POST['action']=="editar")

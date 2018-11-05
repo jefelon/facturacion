@@ -17,9 +17,20 @@ $oFormula = new cFormula();
 require_once("../formatos/formato.php");
 require_once("../formatos/numletras.php");
 
+require_once ("../letras/cLetras.php");
+$cLetras = new cLetras();
+
 require_once ("../lote/cVentaDetalleLote.php");
 $oVentaDetalleLote = new cVentaDetalleLote();
 
+require_once("../guia/cGuia.php");
+$oGuia = new cGuia();
+
+$guias = $oGuia->mostrarGuiaUno($_POST['ven_id']);
+$guia = mysql_fetch_array($guias);
+$guia_id = $guia['tb_guia_id'];
+
+$numguia=$guia['tb_guia_serie'].'-'.$guia["tb_guia_num"];
 //$tipo_de_letra="DejaVuSansCondensed";
 //$tipo_de_letra="DejaVuSans";
 //$tipo_de_letra="DejaVuSansMono";
@@ -81,21 +92,40 @@ $dt = mysql_fetch_array($dts);
 	$doc_id	=$dt['tb_documento_id'];
 	$doc_nom=$dt['tb_documento_nom'];
 	$numdoc	=$dt['tb_venta_numdoc'];
-    $numguia	=$dt['tb_guia_serie'].'-'.$dt['tb_guia_num'];
-	
 	$cli_id	=$dt['tb_cliente_id'];
 	$cli_nom=$dt['tb_cliente_nom'];
 	$cli_doc=$dt['tb_cliente_doc'];
 	$cli_dir=$dt['tb_cliente_dir'];
-	
+
+    $moneda=$dt["cs_tipomoneda_id"];
 	$valven	=$dt['tb_venta_valven'];
 	$igv	=$dt['tb_venta_igv'];
 	$tot	=$dt['tb_venta_tot'];
-	
-	$lab1	=$dt['tb_venta_lab1'];
+
+    $lab1=$dt['tb_venta_lab1'];
+    $lab2=$dt['tb_venta_lab2'];
+    $lab3=$dt['tb_venta_lab3'];
 	
 	$usu_id	=$dt['tb_usuario_id'];
 mysql_free_result($dts);
+
+if($moneda==1){
+    $moneda  = "SOLES";
+    $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
+}
+
+$guias = $oGuia->mostrarGuiaUno($ven_id);
+$guia = mysql_fetch_array($guias);
+$guia_id = $guia['tb_guia_id'];
+
+$serie=$guia['tb_guia_serie'];
+$numero=$guia["tb_guia_num"];
 
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
@@ -115,7 +145,7 @@ if($num_rows_vp>0){
 			}
 			if($rw1['tb_modopago_id']==2)
 			{
-				$modo=' DEPOSITO OP: '.$rw1['tb_ventapago_numope'];
+				$modo=' DEP. OP: '.$rw1['tb_ventapago_numope'];
 				$suma_pago2+=$rw1['tb_ventapago_mon'];
 			}
 			if($rw1['tb_modopago_id']==3)
@@ -127,12 +157,12 @@ if($num_rows_vp>0){
 		
 		if($rw1['tb_formapago_id']==2)
 		{
-			$forma='CREDITO '.$rw1['tb_ventapago_numdia'].'D, FV: '.mostrarFecha($rw1['tb_ventapago_fecven']);
+			$forma='CRED.'.$rw1['tb_ventapago_numdia'].'D';
 		
 			//modo
 			if($rw1['tb_modopago_id']==1)
 			{
-				$forma='CREDITO '.$rw1['tb_ventapago_numdia'].'D, FV: '.mostrarFecha($rw1['tb_ventapago_fecven']);
+				$forma='CRED. '.$rw1['tb_ventapago_numdia'].'D';
 				$modo=' ';
 				$suma_pago4+=$rw1['tb_ventapago_mon'];
 			}
@@ -148,6 +178,28 @@ if($num_rows_vp>0){
 				$suma_pago6+=$rw1['tb_ventapago_mon'];
 			}
 		}
+        if($rw1['tb_formapago_id']==3)
+        {
+
+            $forma='L.';
+            $suma_pago7+=$rw1['tb_ventapago_mon'];
+
+            $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+
+            $date1 = new  DateTime($fec);
+
+            $cont=1;
+            while($ltr= mysql_fetch_array($ltrs1)){
+                $date2 = new DateTime($ltr['tb_letras_fecha']);
+               $interval = $date1->diff($date2 );
+                $diferencia=$interval->format('%a');
+                $modo.=' '.$diferencia;
+
+            }
+
+            //$modo.='CANJE'.$vence_letras;
+//            }
+        }
 	
 		$pago_mon=formato_money($rw1['tb_ventapago_mon']);
 		
@@ -241,19 +293,28 @@ if($impresion=='pdf')ob_start();
   <tr>
       <td><span style=""><!--DIRECCION.:--></span></td>
       <td  colspan="2" style="height:4mm;width: 100mm;"><?php echo $cli_dir?></td>
-      <td></td>
+      <td>
+          <table border="<?php echo $borde_tablas?>">
+              <tr>
+                  <td style="width: 13mm;"></td>
+                  <td style="width: 20mm; text-align:center;"><?php if($num_rows_vp==1)echo $texto_pago1[0]?></td>
+                  <td style="width: 15mm; text-align:center;"></td>
+                  <td style="width: 16mm; text-align:right;"><?php echo $lab3 ?></td>
+              </tr>
+          </table>
+      </td>
   </tr>
   <tr>
       <td><span style=""><!--DOC. IDENT.:--></span></td>
       <td><?php echo $cli_doc?></td>
-      <td style="text-align: right"><?php echo $numguia?></td>
+      <td style="text-align: center"><?php echo $numguia?> </td>
       <td>
           <table border="<?php echo $borde_tablas?>">
               <tr>
                   <td style="width: 5mm;"></td>
                   <td style="width: 15mm; text-align:center;"><?php echo mostrarDiaMesAnio(1, $fec)?></td>
                   <td style="width: 20mm; text-align:center;"><?php echo mostrarDiaMesAnio(2, $fec)?></td>
-                  <td style="width: 20mm; text-align:right;"><?php echo substr(mostrarDiaMesAnio(3, $fec),2)?></td>
+                  <td style="width: 24mm; text-align:right;"><?php echo substr(mostrarDiaMesAnio(3, $fec),2)?></td>
               </tr>
           </table>
       </td>
@@ -306,9 +367,25 @@ if($impresion=='pdf')ob_start();
 
                             <td style="text-align: center; width: 7mm;"><?php echo $dt1['tb_unidad_abr']?></td>
                             <td style="text-align: center; width: 10mm;"><?php echo $dt1['tb_ventadetalle_can']?></td>
-                            <td style="text-align: center; width: 7mm;">0</td>
-                            <td style="text-align: center; width: 10mm;">0.00</td>
-                            <td style="text-align: right; width: 20mm;"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*1.18)?>&nbsp;</td>
+                            <td style="text-align: center; width: 7mm;">
+                                <?php
+                                if($dt1['tb_ventadetalle_preunilin']<=0){
+                                    echo "SI";
+                                }else{
+                                    echo "NO";
+                                }
+                                ?>
+                            </td>
+                            <td style="text-align: center; width: 10mm;">
+                                <?php
+                                if($dt['tb_ventadetalle_des']<=0){
+                                    echo "0.00";
+                                }else{
+                                    echo formato_money($dt['tb_ventadetalle_des']);
+                                }
+                                ?>
+                            </td>
+                            <td style="text-align: right; width: 20mm;"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?>&nbsp;</td>
                             <td style="text-align: right; width: 23mm;"><?php echo formato_money($dt1['tb_ventadetalle_valven']*1.18)?>&nbsp;</td>
                         </tr>
                         <?php
@@ -319,15 +396,36 @@ if($impresion=='pdf')ob_start();
 					while($dt2 = mysql_fetch_array($dts2)){
 						?>
                         <tr>
-                          <td style="text-align: right; width: 11mm; font-size: 11pt;"><?php echo $dt2['tb_ventadetalle_can'];?></td>
                           <td style="text-align: right; width: 5mm; font-size: 11pt;">&nbsp;</td>
-                        	<td style="text-align: left; width: 115mm; font-size: 11pt;">
+                          <td style="text-align: left; width: 115mm; font-size: 11pt;">
 							<?php 
 							echo ''.$dt2['tb_ventadetalle_nom'].'';
-							//echo ' | '.$dt2['tb_categoria_nom'];?></td>
-                          <td style="text-align: right; width: 20mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
-                          <td style="text-align: right; width: 22mm; font-size: 11pt;"><?php echo formato_money($dt2['tb_ventadetalle_valven'])?></td>                                                        
-              </tr><?php						
+							//echo ' | '.$dt2['tb_categoria_nom'];?>
+                          </td>
+                            <td style="text-align: center; width: 7mm;"><?php echo $dt1['tb_unidad_abr']?></td>
+                            <td style="text-align: center; width: 10mm;"><?php echo $dt1['tb_ventadetalle_can']?></td>
+                            <td style="text-align: center; width: 7mm;">
+                                <?php
+                                if($dt1['tb_ventadetalle_preunilin']<=0){
+                                    echo "SI";
+                                }else{
+                                    echo "NO";
+                                }
+                                ?>
+                            </td>
+                            <td style="text-align: center; width: 10mm;">
+                                <?php
+                                if($dt['tb_ventadetalle_des']<=0){
+                                    echo "0.00";
+                                }else{
+                                    echo formato_money($dt['tb_ventadetalle_des']);
+                                }
+                                ?>
+                            </td>
+                            <td style="text-align: right; width: 20mm;"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?>&nbsp;</td>
+                            <td style="text-align: right; width: 23mm;"><?php echo formato_money($dt1['tb_ventadetalle_valven']*1.18)?>&nbsp;</td>
+                        </tr>
+                        <?php
                 	}
                 mysql_free_result($dts2);
                 ?>
@@ -346,23 +444,23 @@ if($impresion=='pdf')ob_start();
 <table border="<?php echo $borde_tablas?>" cellpadding="0" cellspacing="0" style="font-family:Arial;" class="total">
   <tr>
     <td style="text-align: right; width: 13mm; height:4mm;">&nbsp;</td>
-    <td style="text-align: left; width: 140mm;"><?php echo numtoletras($tot)?></td>
+    <td  valign="bottom" style="text-align: left; width: 140mm;"><?php echo numtoletras($tot,$monedaval)?></td>
     <td style="text-align: left; width: 10mm;"><!--SUB TOTAL--></td>
-    <td style="text-align: right; width: 5mm;">S/.</td>
+    <td style="text-align: right; width: 5mm;"><?php echo $mon?></td>
     <td style="text-align: right; width: 20mm;"><?php echo formato_money($valven)?>&nbsp;</td>
   </tr>
   <tr>
     <td style="height:4mm;">&nbsp;</td>
     <td>&nbsp;</td>
     <td style="text-align: right;">18%<!--IGV--></td>
-    <td style="text-align: right;">S/.</td>
+    <td style="text-align: right;"><?php echo $mon?></td>
     <td style="text-align: right;"><?php echo formato_money($igv)?>&nbsp;</td>
   </tr>
   <tr>
     <td style="height:4mm;">&nbsp;</td>
     <td>&nbsp;</td>
     <td style="text-align: left;"><!--TOTAL--></td>
-    <td style="text-align: right;">S/.</td>
+    <td style="text-align: right;"><?php echo $mon?></td>
     <td style="text-align: right;"><?php echo formato_money($tot)?>&nbsp;</td>
   </tr>
 </table>

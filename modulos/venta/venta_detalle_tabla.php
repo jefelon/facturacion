@@ -174,16 +174,25 @@ $(document).ready(function() {
 							echo ' | '.$dt1['tb_marca_nom'];
 							?></td>
 <!--                            <td align="right">--><?php //echo $dt1['tb_ventadetalle_preuni']?><!--</td>-->
-                            <td align="right"><?php
+                            <td align="right">
+                                <?php
+
                                 if ($dt1['cs_tipoafectacionigv_id']!=9) {
-                                    echo $dt1['tb_ventadetalle_preunilin'];
+                                    if($doc_id==3 ||$doc_id==12){
+                                        echo $dt1['tb_ventadetalle_preuni'];
+                                    }else {
+                                        echo $dt1['tb_ventadetalle_preunilin'];
+                                    }
                                 }
-                                ?></td>
-                            <td align="right"><?php
-                                if ($dt1['cs_tipoafectacionigv_id']==9){
-                                    echo $dt1['tb_ventadetalle_preunilin'];
-                                }
-                                ?></td>
+                                ?>
+                            </td>
+                            <td align="right">
+                                <?php
+                                    if ($dt1['cs_tipoafectacionigv_id']==9){
+                                        echo $dt1['tb_ventadetalle_preunilin'];
+                                    }
+                                ?>
+                            </td>
                             <td align="right"><?php
 							$tipdes			=$dt1['tb_ventadetalle_tipdes'];
 							$descuento_linea=$dt1['tb_ventadetalle_des']; 
@@ -193,9 +202,10 @@ $(document).ready(function() {
 									if($tipdes == 2 and $descuento_linea!=0){
 										echo "S/. ".$descuento_linea;
 									}									
-								?></td>
+								?>
+                            </td>
 <!--                            <td align="right">--><?php //echo formato_money($dt1['tb_ventadetalle_valven'])?><!--</td>-->
-                            <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                            <td align="right"><?php echo formato_money($dt1['tb_ventadetalle_valven']+$dt1['tb_ventadetalle_igv']) ?></td>
                             <td align="center"><a class="btn_tabla_lote" onClick="lote_tabla(<?php echo $dt1['tb_ventadetalle_id'] ?>)">Ver Lote</a></td>
                         </tr>
                         <?php						

@@ -333,7 +333,6 @@ class cVenta{
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_venta v
-	LEFT JOIN tb_guia g ON v.tb_venta_id=g.tb_venta_id
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id

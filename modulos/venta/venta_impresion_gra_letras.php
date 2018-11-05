@@ -163,7 +163,7 @@ $pdf->setLanguageArray($l);
 
 // ---------------------------------------------------------
 while($ltr= mysql_fetch_array($ltrs1)){
-    $letras_monto =numtoletras($ltr['tb_letras_monto'],1);
+    $letras_monto =numtoletras($ltr['tb_letras_monto'],$monedaval);
 // add a page
 $pdf->AddPage('P', 'A4');
 
@@ -232,7 +232,7 @@ $html = '
 </style>
 <body><table style="width: 168mm; margin-bottom: 50mm" border="0">';
 $html.='
-<table style="width: 168mm;" border="1">
+<table style="width: 168mm;" border="0">
     <tr style="font-size: 10pt">
         <td style="text-align: left" width="43mm"></td>
         <td style="text-align: center" width="22mm">'.str_pad($ltr['tb_letras_numero'], 4, "0", STR_PAD_LEFT).'</td>
@@ -276,9 +276,12 @@ $html.='
         <td style="text-align: left;height:4mm" width="100%"></td>
     </tr>
      <tr>
-        <td style="text-align: justify;font-size: 8pt" width="78%">Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual 
-        Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual.
-        Lorem ipsum es el texto que se usa habitualmente en diseño gráfico en demostraciones de tipografías o de borradores de diseño para probar el diseño visual
+        <td style="text-align: justify;font-size: 6.5pt" width="80%">
+        (1)DE NO SER PAGADO A SU VENCIMIENTO, ESTE DOCUMENTO GENERARÁ EL INTERES COMPENSATORIO Y MORATORIO A LAS TASAS MAXIMAS QUE FIJA LA LEY<br>
+        (2)EL PLAZO DE SU VENCIMIENTO PODRÁ SER PRORROGADO POR EL TENEDOR, POR EL PLAZO QUE ESTE SEÑALE SIN QUE SEA<br>                                  
+        (3)NECESARIA LA INTERVENCIÓN DEL OBLIGADO PRINCIPAL NI DE LOS SOLIDARIOS. <br>                                                                   
+        (4)SU IMPORTE DEBE SER PAGADO SÓLO EN LA MISMA MONDEA QUE EXPRESA ESTE TÍTULO VALOR.<br>                                                         
+        ESTA LETRA DE CAMBIO NO SE REQUIERE SER PROTESTADA POR FALTA DE PAGO <br> 
         </td>
     </tr>
 </table>
@@ -305,3 +308,6 @@ $pdf->writeHTML($html, true, 0, true, true);
 }
 
 $pdf->Output($nombre_archivo, 'I');
+?>
+
+
