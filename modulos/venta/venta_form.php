@@ -2028,7 +2028,7 @@ if($_POST['action']=="editar"){
                     $('#hdd_bus_cat_cospro').val(data.cat_cospro);
                     $('#txt_bus_pro_nom').val(data.pro_nom);
                     $('#txt_bus_cat_preven').val(data.cat_preven);
-                    $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18));
+                    $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18).toFixed(2));
                     $('#txt_bus_cat_can').val(data.cat_can);
 
                     $('#txt_precio_min').val(data.cat_premin);
