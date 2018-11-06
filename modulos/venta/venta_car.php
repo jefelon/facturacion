@@ -215,7 +215,12 @@ if($_POST['action']=='agregar'){
             $_SESSION['venta_car'][$unico_id][$_POST['cat_id']]=$_POST['cat_can'];
 
             //PRECIO DE VENTA
-            $_SESSION['venta_preven'][$unico_id][$_POST['cat_id']]=moneda_mysql($_POST['cat_preven']);
+            if ($_POST['ven_doc']==2 || $_POST['ven_doc']==11)
+                $preven=$_POST['cat_preven']*1.18;
+            else{
+                $preven=$_POST['cat_preven'];
+            }
+            $_SESSION['venta_preven'][$unico_id][$_POST['cat_id']]=moneda_mysql($preven);
 
             //TIPO DE DESCUENTO  1 PORCENTAJE	2 SOLES
             $_SESSION['venta_tipdes'][$unico_id][$_POST['cat_id']]=$_POST['cat_tipdes'];
