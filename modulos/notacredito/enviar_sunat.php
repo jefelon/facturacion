@@ -84,7 +84,7 @@ while($dt = mysql_fetch_array($dts)){
 }
 mysql_free_result($dts);
 
-$total_letras = numtoletras($tot,0);
+$total_letras = numtoletras($tot,$monval);
 
 
 $header[0]['idcomprobante']		=$idcomprobante;//1FACTURA 3BOLETA 7NCREDITO 8NDEBITO
