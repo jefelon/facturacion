@@ -62,7 +62,7 @@ $formato_impresion='A4';
 $margen_array=array(10, 10, 10, 10);
 //$margen_array=0;
 
-$borde_tablas=0;
+$borde_tablas=1;
 
 $ven_id=$_POST['ven_id'];
 

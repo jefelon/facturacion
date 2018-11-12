@@ -167,7 +167,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 //set margins
-$pdf->SetMargins(12, 15, 12);// left top right
+$pdf->SetMargins(10, 10, 10);// left top right
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 //$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -196,6 +196,9 @@ $html = '
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 </head>
 <style type="text/css">
+    table{
+        border:1px solid #000;
+    }
     body {
         color: black;
         font-family: Verdana, Arial, Consolas;
@@ -205,15 +208,11 @@ $html = '
     }
 
     .header_row th {
-        border-bottom: 0.9px solid #01a2e6;
-        border-right: 0.9px solid #01a2e6;
-        border-left: 0.9px solid #01a2e6;
-        background-color: #01a2e6;
+      
         text-transform:uppercase;
     }
     .odd_row td {
         background-color: transparent;
-        border-bottom: 0.9px solid #01a2e6;
         padding-top: 5px;
         padding-bottom: 5px;
     }
@@ -221,11 +220,9 @@ $html = '
         padding-top: 5px;
         padding-bottom: 5px;
         background-color: #f6f6f6;
-        border-bottom: 0.9px solid #01a2e6;
     }
     .row td{
-        border-right: 0.9px solid #01a2e6;
-        border-left: 0.9px solid #01a2e6;
+    
     }
 </style>
 
@@ -235,7 +232,7 @@ $html = '
     }
 
 </style>
-<body><table style="width: 100%; margin-bottom: 50mm" border="0">';
+<body><table style="width: 190mm;" border="1">';
 if($estado=="ANULADA"){
     $html.='<tr>
 	    <td width="50%"></td>
@@ -243,142 +240,122 @@ if($estado=="ANULADA"){
 	    <td width="40%" style="text-align: center"><strong>ANULADO</strong></td>
 	    </tr>';
 }
-$html.='<tr>
-        <td style="text-align: left" width="15%" align="left">
-        <img src="'.$empresa_logo.'" alt="" width: "100%">
-        </td>   
-        <td style="text-align: left" width="55%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
-        </td>
-        <!-- <td width="20%" style="text-align: center">
-            <img src="../../images/banderas.jpg" alt="" style="max-width: 50%" height="40px" align="left">
-        </td> -->
-        <td style="text-align: center;" width="30%" border="1">
-            <strong style="font-size: 11pt">'.$tipodoc.'<br>
-            RUC: '.$ruc_empresa.'<br>
-            '.$serie.'-'.$numero.'</strong>
-        </td>
+$html.='
+    <tr>
+        <td colspan="5" style="text-align: left; height:46mm;">hula</td>
     </tr>
 </table>
-<br/>
-<br/>
-<br/>
-<table style="width: 100%;" border="0">
-    <tr>
-        <td style="text-align: left" width="20%">FECHA DE EMISIÓN</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="18%">'.$fecha.'</td>
+<table style="190mm" border="1">
+    <tr><!--punto de partida -->
+        <td style="text-align: left;" width="25mm">&nbsp;</td>
+        <td style="text-align: left;" width="70mm">'.$guia['tb_guia_punpar'].'</td>
+        <td style="text-align: left;" width="23mm"></td>
+        <td style="text-align: left;" width="72mm">-'.$guia['tb_guia_punlle'].'</td>
+    </tr>
+     <tr>
+        <td colspan="4" style="text-align: left;height: 4mm"></td>
     </tr>
     <tr>
-        <td style="text-align: left" width="20%">PUNTO DE PARTIDA</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="58%">'.$guia['tb_guia_punpar'].'</td>
+        <!--razon social destinatario -->
+        <td style="text-align: left;" width="30mm"></td>
+        <td style="text-align: left;" width="50mm">RAZON SOCIAL DESTINATARIO</td>
+        <td style="text-align: left;" width="20mm"></td>
+        <td style="text-align: left;" width="50mm">N° RUC</td>
     </tr>
     <tr>
-     <td style="text-align: left" width="20%">DESTINATARIO</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="58%">'.$guia['tb_guia_des'].'</td>
-       </tr>
+        <!--fecha inicio traslado -->
+        <td style="text-align: left;" width="30mm"></td>
+        <td style="text-align: left;" width="50mm">FECHA INICIO TRASLADO</td>
+        <td style="text-align: left;" width="20mm"></td>
+        <td style="text-align: left;" width="45mm">FAC.002-4667</td>
+        <td style="text-align: left;" width="45mm">COSTO MINIMO</td>
+    </tr>
+ </table>
+ 
+ <table style="190mm" border="1"> 
+    <tr> <!--ESPACIO UNIDAD TRASNSPORTE Y CONDUCTOR-->
+        <td colspan="4" style="text-align: left;height: 5mm"></td>
+    </tr>
+    <tr>
+        <!--marca y placa -->
+        <td style="text-align: left;" width="25mm"></td>
+        <td style="text-align: left;" width="60mm">MARCA PLACA</td>
+        <td style="text-align: left;" width="20mm"></td>
+        <td style="text-align: left;" width="85mm">RAZON SOCIAL EMPRESA</td>
+    </tr>
+    <tr>
+        <!--constancia inscripcion-->
+        <td style="text-align: left; width:30mm"></td>
+        <td style="text-align: left;width:50mm">CONSTANCIA INSCRIPCION</td>
+        <td style="text-align: left;width:25mm"></td>
+        <td style="text-align: left;width:85mm"></td>
+    </tr>
+    <tr>
+        <!--n licencia de conducir-->
+        <td style="text-align: left;width:35mm"></td>
+        <td style="text-align: left;width:70mm">LICENCIA</td>
+        <td style="text-align: left;width:35mm">RUC TRANSPORTE</td>
+        <td style="text-align: right;width:50mm">CERTIFICADO</td>
+    </tr>
+    <tr>
+        <td style="text-align: left" width="100%">&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="text-align: left" width="100%">&nbsp;</td>
+    </tr>
+    <tr>
+        <td style="text-align: left; height:4mm;" width="18%">&nbsp;</td>
+        <td width="40%" style="text-align: left;">' . $guia['tb_guia_pla'] / $guia['tb_guia_mar'] . '</td>
+        <td style="text-align: left;" width="14%">&nbsp;</td>
+        <td width="40%" style="text-align: left;">' . $trans_razsoc . '</td>
+    </tr>
+    <tr>
+        <td style="text-align: left; height:4mm;" width="27%">&nbsp;</td>
+        <td width="80%" style="text-align: left; "> ' . $guia['tb_guia_pla'] / $guia['tb_guia_mar'] . '</td>
     
-    <tr>
-        <td style="text-align: left" width="20%">RUC</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="58%">'.$ruc_empresa.'</td>
     </tr>
     <tr>
-        <td style="text-align: left; vertical-align:top;" width="20%">PUNTO DE LLEGADA</td>
-        <td style="text-align: left; vertical-align:top;" width="2%">:</td>
-        <td style="text-align: left" width="58%">'.$guia['tb_guia_punlle'].'</td>
+        <td style="text-align: left;  height:4mm;" width="27%">&nbsp;</td>
+        <td width="31%" style="text-align: left; ">' . $cond_nombre . '</td>
+        <td style="text-align: left;" width="11%">&nbsp;</td>
+        <td width="18%" style="text-align: left; ">' . $trans_ruc . '</td>
+        <td style="text-align: left;" width="10%">&nbsp;</td>
+        <td width="40%" style="text-align: left;">' . $trans_ruc . '</td>
     </tr>
-</table>
-<br/>
-<br/>
-<br/>
-<table border="0.5" style="border-color: #00aa00;">
-    <thead>
-        <tr>
-        <th width="40%" style="text-align: left; background-color: #00aa00; color: white;">
-           Unidad de Transporte y Conductor
-        </th>
-         <th width="40%" style="text-align: left; background-color: #00aa00; color: white;">
-           Empresa de Transportes
-        </th>
-         <th width="20%" style="text-align: left; background-color: #00aa00; color: white;">
-           Motivo de Traslado
-        </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td width="40%" style="text-align: left;"><b>MARCA Y N° DE PLACA: </b> ' . $guia['tb_guia_pla'] / $guia['tb_guia_mar'] . '</td>
-            <td width="40%" style="text-align: left;"><b>NOMBRE O RAZON SOCIAL: </b> ' . $trans_razsoc . '</td>
-            <td width="20%" style="text-align: left;" rowspan="2"><b>MOTIVO: </b>' . $guia_ope . '</td>
-        </tr>
-        <tr>
-            <td width="40%" style="text-align: left;"><b>CONDUCTOR: </b>' . $cond_nombre . '</td>
-            <td width="40%" style="text-align: left;"><b>RUC: </b>' . $trans_ruc . '</td>
-        </tr>
-    </tbody>
 </table>
 <br>
 <br>
-<table style="width: 100%; border: 0.5px solid #01a2e6; border-collapse:collapse;">
+
+
+ <!--DETALLES-->
+<table border="1" style="width: 190mm;">
     <tbody>
         <tr class="header_row">
-            <th style="text-align: center; width: 20%;"><b>CANT.</b></th>
-            <th style="text-align: center; width: 60%;"><b>NOMBRE/PRESENTACIÓN</b></th>
-            
-            <th style="text-align: center; width: 20%;"><b>CATEGORIA/MARCA</b></th>
+            <th style="text-align: center; width: 17mm;"></th>
+            <th style="text-align: center; width: 113mm;"></th>
+            <th style="text-align: center; width: 17mm;"></th>
+            <th style="text-align: center; width: 23mm;"></th>
+            <th style="text-align: center; width: 20mm;"></th>
         </tr>';
 $dts = $oGuia->mostrar_guia_detalle($guia_id);
 $cont = 1;
 while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
-    $html.='<tr class="row">';
+    $html.='<tr>';
 
-    $html .= '<td style="text-align:center">' . $dt["tb_guiadetalle_can"] . '</td>
-                 <td style="text-align: center">' . $dt["tb_producto_nom"] . ' / '.$dt['tb_presentacion_nom'].'</td>
-                 <td style="text-align: left">' . $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] . '</td>';
+    $html .= '<td style="text-align:center; width: 20mm">-</td>
+                <td style="text-align:center;width: 17mm">00530033</td>
+                 <td style="text-align: center; width: 113mm; font-size; 10pt;">' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
+                 <td style="text-align:center; width: 17mm">' . $dt["tb_guiadetalle_can"] . '</td>
+                 <td style="text-align:center; width: 23mm">NIU</td>
+                 <td style="text-align:center; width: 20mm">-</td>';
     $html.='</tr>';
     $cont++;
 }
 $html.='</tbody>
-</table>
-<br>
-<br>';
+</table>';
 
 $html.='
-<br>
-<br>
-<table>
-<tr>
-<td style="width:78%">';
-$html.='<br/>
-<p style="font-size:7pt">
-Código de Seguridad (Hash): '.$digval.'<br>
-Representación Impresa de la '.$tipodoc.'.<br>Esta puede ser consultada en: '.$d_documentos_app.'<br>
-'.$d_resolucion.'
-</p>
-</td>
-<td>
-';
-
-
-$style = array(
-    'border' => 2,
-    'vpadding' => 'auto',
-    'hpadding' => 'auto',
-    'fgcolor' => array(0,0,0),
-    'bgcolor' => false, //array(255,255,255)
-    'module_width' => 1, // width of a single module in points
-    'module_height' => 1 // height of a single module in points
-);
-
-
-$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$serie.'|'.$numero.'|'.mostrarfecha($fecha).'|'.$ruc.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
-$html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
-</td>
-</tr>
-</table>
 </body>
 </html>';
 

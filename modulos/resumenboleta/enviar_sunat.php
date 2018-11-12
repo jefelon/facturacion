@@ -80,7 +80,6 @@ while($dt = mysql_fetch_array($dts))
 	
 	$detalle[$autoin]['invoicedocumentreference']		=$dt["tb_resumenboletadetalle_docrelser"].'-'.$dt["tb_resumenboletadetalle_docrelcor"];
 	$detalle[$autoin]['documenttypecode']				=$dt["tb_resumenboletadetalle_tipdocrel"];
-
 	$autoin++;
 }
 mysql_free_result($dts);

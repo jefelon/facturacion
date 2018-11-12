@@ -8,7 +8,24 @@
 	require_once ("../../modulos/empresa/cEmpresa.php");
 	$oVenta = new cVenta();
 
-    $id = $_GET['id_doc'];
+function decrypt($string, $key) {
+    $result = '';
+    $string = base64_decode($string);
+    for($i=0; $i<strlen($string); $i++) {
+        $char = substr($string, $i, 1);
+        $keychar = substr($key, ($i % strlen($key))-1, 1);
+        $char = chr(ord($char)-ord($keychar));
+        $result.=$char;
+    }
+    return $result;
+}
+
+$cadena_recibida =$_GET['action'];
+$cadena_desencriptada = decrypt($cadena_recibida,'l09=4di_-T==');
+
+$array=explode('=',$cadena_desencriptada);
+
+    $id = $array[1];
 
     $dts = $oVenta->mostrarUno($id);
     while($dt = mysql_fetch_array($dts)){

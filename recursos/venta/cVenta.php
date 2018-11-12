@@ -21,11 +21,10 @@ class cVenta{
 	$sql="SELECT * 
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
-	LEFT JOIN tb_guia g ON v.tb_venta_id=g.tb_venta_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
 	INNER JOIN tb_almacen a ON pv.tb_almacen_id=a.tb_almacen_id
-	WHERE tb_venta_id=$id";
+	WHERE v.tb_venta_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

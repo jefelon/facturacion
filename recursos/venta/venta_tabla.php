@@ -81,9 +81,36 @@ $(function() {
                       <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                       <td><?php echo $dt1['tb_venta_est']?></td>
                       <td align="center" nowrap="nowrap">
+                          <?php
+                          function encrypt($string, $key) {
+                              $result = '';
+                              for($i=0; $i<strlen($string); $i++) {
+                                  $char = substr($string, $i, 1);
+                                  $keychar = substr($key, ($i % strlen($key))-1, 1);
+                                  $char = chr(ord($char)+ord($keychar));
+                                  $result.=$char;
+                              }
+                              return base64_encode($result);
+                          }
+                          function decrypt($string, $key) {
+                              $result = '';
+                              $string = base64_decode($string);
+                              for($i=0; $i<strlen($string); $i++) {
+                                  $char = substr($string, $i, 1);
+                                  $keychar = substr($key, ($i % strlen($key))-1, 1);
+                                  $char = chr(ord($char)-ord($keychar));
+                                  $result.=$char;
+                              }
+                              return $result;
+                          }
+
+                          $cadena_a_codificar="PIO)/((454546fgffg?¡paraDescargar&ven_id=".$dt1['tb_venta_id'];
+                          $key="l09=4di_-T==";
+                          $cadena_codificada=encrypt($cadena_a_codificar, $key);
+                          ?>
                       <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
-                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="venta_cpeimp.php?action=paraDescargar&ven_id=<?php echo $dt1['tb_venta_id'] ?>" title="Descargar pdf">PDF</a>
-                      <a class="btn_xml" id="btn_xml" target="_blank" href="../venta/pre_cargarXML.php?action=paraDescargar&id_factura=<?php echo $dt1['tb_venta_id'] ?>" title="Descargar XML">XML</a>
+                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="venta_cpeimp.php?action=<?php echo $cadena_codificada; ?>" title="Descargar pdf">PDF</a>
+                      <a class="btn_xml" id="btn_xml" target="_blank" href="../venta/descargar_xml.php?action=<?php echo $cadena_codificada; ?>" title="Descargar XML">XML</a>
                       </td>
                     </tr>
                 <?php

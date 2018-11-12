@@ -391,8 +391,9 @@ function add_AccountingSupplierParty($arr,$nodo,$tipodoc){
             $PartyLegalEntity = $xml->createElement("cac:PartyLegalEntity");
             $PartyLegalEntity = $Party->appendChild($PartyLegalEntity);
 
-                $RegistrationName = $xml->createElement("cbc:RegistrationName", $arr['AccountingSupplierParty']['Party']['PartyLegalEntity']['RegistrationName']);
-                $RegistrationName = $PartyLegalEntity->appendChild($RegistrationName);
+            $RegistrationName = $xml->createElement("cbc:RegistrationName");
+            $RegistrationName = $PartyLegalEntity->appendChild($RegistrationName);
+            $texto = $RegistrationName->appendChild(new DOMCdataSection($arr['AccountingSupplierParty']['Party']['PartyLegalEntity']['RegistrationName']));
 }
 //cac:DespatchSupplierParty/
 function add_DespatchSupplierParty($arr,$nodo,$tipodoc){

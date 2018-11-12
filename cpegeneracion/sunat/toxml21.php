@@ -918,7 +918,7 @@ function add_Signature($arr,$nodo,$tipodoc){
                 //<cbc:Name>
                 $Name = $xml->createElement("cbc:Name");
                 $Name = $PartyName->appendChild($Name);
-                $textto = $Name->appendChild(new DOMCdataSection($arr['Signature']['SignatoryParty']['PartyName']['Name']));
+                $texto = $Name->appendChild(new DOMCdataSection($arr['Signature']['SignatoryParty']['PartyName']['Name']));
         //<cac:DigitalSignatureAttachment>
         $DigitalSignatureAttachment = $xml->createElement("cac:DigitalSignatureAttachment");
         $DigitalSignatureAttachment = $Signature->appendChild($DigitalSignatureAttachment);

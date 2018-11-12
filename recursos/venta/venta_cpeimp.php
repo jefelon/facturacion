@@ -15,7 +15,26 @@ $oEmpresa = new cEmpresa();
 require_once ("../../modulos/usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
-$ven_id=$_GET['ven_id'];
+function decrypt($string, $key) {
+    $result = '';
+    $string = base64_decode($string);
+    for($i=0; $i<strlen($string); $i++) {
+        $char = substr($string, $i, 1);
+        $keychar = substr($key, ($i % strlen($key))-1, 1);
+        $char = chr(ord($char)-ord($keychar));
+        $result.=$char;
+    }
+    return $result;
+}
+
+$cadena_recibida =$_GET['action'];
+$cadena_desencriptada = decrypt($cadena_recibida,'l09=4di_-T==');
+
+$array=explode('=',$cadena_desencriptada);
+
+$ven_id=$array[1];
+
+
 $dts = $oVenta->mostrarUno($ven_id);
 $dt = mysql_fetch_array($dts);
 $tipodoc = $dt['tb_documento_nom'];
@@ -372,47 +391,49 @@ $html.='<tr>
 <table style="width: 100%; border: 0.5px solid #01a2e6; border-collapse:collapse;">
     <tbody>
         <tr class="header_row">
-            <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 50%;"><b>DESCRIPCION</b></th>
-            <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
+            <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
             <th style="text-align: center; width: 6%;"><b>CANT.</b></th>
-            <th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>
-            <th style="text-align: center; width: 8%;"><b>PRECIO U.</b></th>
-            <th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>
-            <th style="text-align: center; width: 8%;"><b>PRECIO VENTA</b></th>
+             <th style="text-align: center; width: 10%;"><b>UNIDAD</b></th>
+            <th style="text-align: center; width: 50%;"><b>DESCRIPCION</b></th>
+            <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
+            <th style="text-align: right; width: 14%;"><b>PRECIO UNIT.</b></th>
+            <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
+            <th style="text-align: right; width: 14%;"><b>PRECIO VENTA</b></th>
         </tr>';
-$dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
-$cont = 1;
-while($dt = mysql_fetch_array($dts)){
-    $codigo = $cont;
-    $html.='<tr class="row">';
-    if($dt["tb_ventadetalle_tipven"]==1){
-        $ven_det_serie= '';
-        if ($dt['tb_ventadetalle_serie']!=''){
-            $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
-        }
-                $html.='<td style="text-align: left">'.$cont.'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].$ven_det_serie.'</td>
-                <td style="text-align: center">UNIDAD</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preuni"]*1.18).'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
-                $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
-    }else{
-        $html.='<td style="text-align: left">'.$cont.'</td>
-                <td style="text-align: left">'.$dt["tb_servicio_nom"].'</td>
-                <td style="text-align: center">UNIDAD</td>
+            $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
+            $cont = 1;
+            while($dt = mysql_fetch_array($dts)){
+            	$codigo = $cont;
+$html.='<tr class="row">';
+                if($dt["tb_ventadetalle_tipven"]==1){
+
+                    $ven_det_serie= '';
+                    if ($dt['tb_ventadetalle_serie']!=''){
+                        $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
+                    }
+
+                    $html.='<td style="text-align:center">'.$cont.'</td>
+                <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
+                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>                   
+                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]).'</td>';
+
+                    $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
+                }else{
+                    $html.='<td style="text-align: left">'.$cont.'</td>
+
+                <td style="text-align: left">'.$dt["tb_servicio_nom"].' - '.$dt['tb_marca_nom'].'</td>
+                <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>
                 <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
-        $html.='<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
-    }
-    $html.='</tr>';
-    $cont++;
-}
-$html.='</tbody>
+                    $html.='<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
+                }
+            $html.='</tr>';
+        $cont++;
+    	}
+    $html.='</tbody>
 </table>
 <br/>
 <br/>

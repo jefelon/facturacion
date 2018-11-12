@@ -26,6 +26,35 @@ class cVenta{
 		return $rst;
 	}
 
+    function mostrar_filtro_nc($emp_id,$fec1){
+        $sql="SELECT * 
+        FROM tb_notacredito v
+        LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+        LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        LEFT JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+        WHERE v.tb_empresa_id = $emp_id 
+        AND v.tb_venta_fec = '$fec1'
+        AND v.tb_venta_ventipdoc=3
+        
+        UNION ALL 
+        
+        SELECT * 
+        FROM tb_notadebito v
+        LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+        LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        LEFT JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+        WHERE v.tb_empresa_id = $emp_id 
+        AND v.tb_venta_fec = '$fec1'
+        AND v.tb_venta_ventipdoc=3
+        
+        ";
+
+        $sql.=" ORDER BY tb_venta_fec, tb_venta_ser, tb_venta_num ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function ultimo_numero($fec){
 		$sql="SELECT IFNULL (max(tb_resumenboleta_num),0) as ultimo_numero FROM `tb_resumenboleta`
 		WHERE tb_resumenboleta_fec='$fec'; ";
@@ -100,31 +129,42 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
 	function listar_resumenboleta_detalle($id){
-	$sql="SELECT * 
-	FROM tb_resumenboletadetalle rbd
-	LEFT JOIN cs_tipodocumento td ON rbd.cs_tipodocumento_id=td.cs_tipodocumento_id
-	LEFT JOIN tb_cliente c ON rbd.tb_cliente_id=c.tb_cliente_id
-	WHERE tb_resumenboleta_id = '$id'";
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
+        $sql="SELECT * 
+        FROM tb_resumenboletadetalle rbd
+        LEFT JOIN cs_tipodocumento td ON rbd.cs_tipodocumento_id=td.cs_tipodocumento_id
+        LEFT JOIN tb_cliente c ON rbd.tb_cliente_id=c.tb_cliente_id
+        WHERE tb_resumenboleta_id = '$id'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
 	}
-	function comparar_resumenboleta_detalle($ven_id){
-	$sql="SELECT tb_resumenboletadetalle_id
-	FROM tb_resumenboletadetalle
-	WHERE tb_venta_id = '$ven_id'";
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
+
+	function comparar_resumenboleta_detalle($ven_id,$tipodoc){
+        $sql="SELECT tb_resumenboletadetalle_id
+        FROM tb_resumenboletadetalle
+        WHERE tb_venta_id = '$ven_id' AND cs_tipodocumento_id='$tipodoc'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
 	}
+    function comparar_resumenboleta_detalle_notas($ven_id,$tipodoc){
+        $sql="SELECT tb_resumenboletadetalle_id
+        FROM tb_resumenboletadetalle
+        WHERE tb_venta_id = '$ven_id' AND cs_tipodocumento_id='$tipodoc'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function verificar($fecref){
-	$sql="SELECT * 
-	FROM tb_resumenboleta
-	WHERE tb_resumenboleta_fecref='$fecref'";
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
+        $sql="SELECT * 
+        FROM tb_resumenboleta
+        WHERE tb_resumenboleta_fecref='$fecref'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
 	}
 	
 	function modificar_campo($id,$campo,$valor){
