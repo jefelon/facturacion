@@ -292,7 +292,7 @@ if($impresion=='pdf')ob_start();
 
                 <tr>
                     <td><span style=""><!--DIRECCION.:--></span></td>
-                    <td  colspan="2" style="height:4mm;width: 100mm;"><?php echo $cli_dir?></td>
+                    <td  colspan="2" style="height:5mm;width: 100mm;"><?php echo $cli_dir?></td>
                     <td>
                         <table border="<?php echo $borde_tablas?>">
                             <tr>
@@ -323,7 +323,7 @@ if($impresion=='pdf')ob_start();
             </table>
             <table width="100%" border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td style="height:4mm;"></td>
+                    <td style="height:5mm;"></td>
                 </tr>
                 <tr>
                     <td style="height:47mm; vertical-align:top">

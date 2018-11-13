@@ -4,7 +4,8 @@ if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit
 require_once ("../../config/Cado.php");
 require_once ("../venta/cVenta.php");
 $oVenta = new cVenta();
-
+require_once ("../letras/cLetras.php");
+$cLetras = new cLetras();
 require_once ("../guia/cGuia.php");
 $oGuia = new cGuia();
 $dts= $oGuia->mostrarGuiaUno($_POST['ven_id']);
@@ -28,6 +29,10 @@ require_once("../formatos/formato.php");
 		$igv	=$dt['tb_venta_igv'];
 		$tot	=$dt['tb_venta_tot'];*/
 	mysql_free_result($dts);
+	
+	$letras = $cLetras->mostrar_letras($_POST['ven_id']);
+	
+	$nro_letras = mysql_num_rows($letras);
 
 	if($doc_nom=='FACTURA')$archivo_destino='../venta/venta_impresion_gra_factura.php';
 	if($doc_nom=='BOLETA')$archivo_destino='../venta/venta_impresion_gra_boleta.php';
@@ -52,21 +57,18 @@ $('.btn_canimp').button({
 function imprimir()
 {	
 	$("#for_preimp").submit();
-	$('#div_venta_impresion').dialog('close');
 }
 
 function imprimir_letras()
 {
     $('#for_preimp').attr('action', 'venta_impresion_gra_letras.php');
     $("#for_preimp").submit();
-    $('#div_venta_impresion').dialog('close');
 }
 
 function imprimir_guia()
 {
     $('#for_preimp').attr('action', 'venta_impresion_gra_guia.php');
     $("#for_preimp").submit();
-    $('#div_venta_impresion').dialog('close');
 }
 /*function consultar_impresion_rapida(){
 	$.ajax({
@@ -117,7 +119,9 @@ $(function() {
 <br>
 	<div style="text-align:center">
         <a id="imprimir" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir()">Imprimir</a>
-        <a id="imprimir_letras" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir_letras()">Imprimir Letras</a>
+        <?php if ($nro_letras>0){ ?>
+            <a id="imprimir_letras" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir_letras()">Imprimir Letras</a>
+        <?php } ?>
         <?php if ($chk_guia){ ?>
             <a id="imprimir_letras" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir_guia()">Imprimir Guia</a>
         <?php } ?>

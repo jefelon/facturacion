@@ -167,7 +167,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 //set margins
-$pdf->SetMargins(10, 10, 10);// left top right
+$pdf->SetMargins(7, 10, 10);// left top right
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 //$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -196,9 +196,6 @@ $html = '
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 </head>
 <style type="text/css">
-    table{
-        border:1px solid #000;
-    }
     body {
         color: black;
         font-family: Verdana, Arial, Consolas;
@@ -232,7 +229,8 @@ $html = '
     }
 
 </style>
-<body><table style="width: 190mm;" border="1">';
+<body>
+<table style="width: 194mm;" border="0">';
 if($estado=="ANULADA"){
     $html.='<tr>
 	    <td width="50%"></td>
@@ -242,100 +240,65 @@ if($estado=="ANULADA"){
 }
 $html.='
     <tr>
-        <td colspan="5" style="text-align: left; height:46mm;">hula</td>
+        <td colspan="4" style="text-align: left; height:48mm;"></td>
     </tr>
 </table>
-<table style="190mm" border="1">
+<table style="width: 194mm;" border="0">
     <tr><!--punto de partida -->
-        <td style="text-align: left;" width="25mm">&nbsp;</td>
-        <td style="text-align: left;" width="70mm">'.$guia['tb_guia_punpar'].'</td>
-        <td style="text-align: left;" width="23mm"></td>
-        <td style="text-align: left;" width="72mm">-'.$guia['tb_guia_punlle'].'</td>
+        <td style="text-align: left;width:26mm; height:11mm;">&nbsp;</td>
+        <td style="text-align: left;width:74mm;">'.$guia['tb_guia_punpar'].'</td>
+        <td style="text-align: left;width:23mm;"></td>
+        <td style="text-align: left;width:74mm;">-'.$guia['tb_guia_punlle'].'</td>
     </tr>
-     <tr>
-        <td colspan="4" style="text-align: left;height: 4mm"></td>
-    </tr>
+
     <tr>
         <!--razon social destinatario -->
-        <td style="text-align: left;" width="30mm"></td>
-        <td style="text-align: left;" width="50mm">RAZON SOCIAL DESTINATARIO</td>
-        <td style="text-align: left;" width="20mm"></td>
-        <td style="text-align: left;" width="50mm">N° RUC</td>
+        <td style="text-align: left; width:38mm; height:4mm;">&nbsp;</td>
+        <td style="text-align: left; width:108mm">'.$guia['tb_guia_des'].'</td>
+        <td style="text-align: left; width:20mm"></td>
+        <td style="text-align: left; width:40mm">'.$ruc_empresa.'</td>
     </tr>
     <tr>
         <!--fecha inicio traslado -->
-        <td style="text-align: left;" width="30mm"></td>
-        <td style="text-align: left;" width="50mm">FECHA INICIO TRASLADO</td>
-        <td style="text-align: left;" width="20mm"></td>
-        <td style="text-align: left;" width="45mm">FAC.002-4667</td>
-        <td style="text-align: left;" width="45mm">COSTO MINIMO</td>
+        <td style="text-align: left; width:33mm; height:4mm;">&nbsp;</td>
+        <td style="text-align: left; width:46mm;">'.mostrarFecha($guia['tb_guia_fec']).'</td>
+        <td style="text-align: left; width:18mm;"></td>
+        <td style="text-align: left; width:30mm;">'.$guia['tb_guia_numdoc'].'</td>
+        <td style="text-align: left; width:25mm;"></td>
+        <td style="text-align: left; width:30mm;">-</td>
     </tr>
  </table>
  
- <table style="190mm" border="1"> 
+ <table style="width: 194mm;" border="0"> 
     <tr> <!--ESPACIO UNIDAD TRASNSPORTE Y CONDUCTOR-->
-        <td colspan="4" style="text-align: left;height: 5mm"></td>
+        <td colspan="4" style="text-align: left;width:190mm;height: 6mm"></td>
     </tr>
     <tr>
         <!--marca y placa -->
-        <td style="text-align: left;" width="25mm"></td>
-        <td style="text-align: left;" width="60mm">MARCA PLACA</td>
-        <td style="text-align: left;" width="20mm"></td>
-        <td style="text-align: left;" width="85mm">RAZON SOCIAL EMPRESA</td>
+        <td style="text-align: left;width:30mm;height: 4mm"></td>
+        <td style="text-align: left;width:72mm">' . $guia['tb_guia_pla'] / $guia['tb_guia_mar'] . '</td>
+        <td style="text-align: left;width:20mm;"></td>
+        <td style="text-align: left;width:85mm;">' . $trans_razsoc . '</td>
     </tr>
     <tr>
         <!--constancia inscripcion-->
-        <td style="text-align: left; width:30mm"></td>
-        <td style="text-align: left;width:50mm">CONSTANCIA INSCRIPCION</td>
-        <td style="text-align: left;width:25mm"></td>
-        <td style="text-align: left;width:85mm"></td>
+        <td style="text-align: left; width:55mm;height: 4mm;"></td>
+        <td style="text-align: left;width:140mm;">-</td>
     </tr>
     <tr>
         <!--n licencia de conducir-->
-        <td style="text-align: left;width:35mm"></td>
-        <td style="text-align: left;width:70mm">LICENCIA</td>
-        <td style="text-align: left;width:35mm">RUC TRANSPORTE</td>
-        <td style="text-align: right;width:50mm">CERTIFICADO</td>
+        <td style="text-align: left;width:43mm;height: 4mm;"></td>
+        <td style="text-align: left;width:55mm;">-</td>
+        <td style="text-align: left;width:20mm;"></td>
+        <td style="text-align: left;width:43mm;">' . $trans_ruc . '</td>
+        <td style="text-align: right;width:27mm;">-</td>
     </tr>
-    <tr>
-        <td style="text-align: left" width="100%">&nbsp;</td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="100%">&nbsp;</td>
-    </tr>
-    <tr>
-        <td style="text-align: left; height:4mm;" width="18%">&nbsp;</td>
-        <td width="40%" style="text-align: left;">' . $guia['tb_guia_pla'] / $guia['tb_guia_mar'] . '</td>
-        <td style="text-align: left;" width="14%">&nbsp;</td>
-        <td width="40%" style="text-align: left;">' . $trans_razsoc . '</td>
-    </tr>
-    <tr>
-        <td style="text-align: left; height:4mm;" width="27%">&nbsp;</td>
-        <td width="80%" style="text-align: left; "> ' . $guia['tb_guia_pla'] / $guia['tb_guia_mar'] . '</td>
-    
-    </tr>
-    <tr>
-        <td style="text-align: left;  height:4mm;" width="27%">&nbsp;</td>
-        <td width="31%" style="text-align: left; ">' . $cond_nombre . '</td>
-        <td style="text-align: left;" width="11%">&nbsp;</td>
-        <td width="18%" style="text-align: left; ">' . $trans_ruc . '</td>
-        <td style="text-align: left;" width="10%">&nbsp;</td>
-        <td width="40%" style="text-align: left;">' . $trans_ruc . '</td>
-    </tr>
-</table>
-<br>
-<br>
+ </table>
 
-
- <!--DETALLES-->
-<table border="1" style="width: 190mm;">
+<table border="0" style="width: 194mm;">
     <tbody>
-        <tr class="header_row">
-            <th style="text-align: center; width: 17mm;"></th>
-            <th style="text-align: center; width: 113mm;"></th>
-            <th style="text-align: center; width: 17mm;"></th>
-            <th style="text-align: center; width: 23mm;"></th>
-            <th style="text-align: center; width: 20mm;"></th>
+        <tr>
+            <td colspan="5" style="height: 6mm;"></td>
         </tr>';
 $dts = $oGuia->mostrar_guia_detalle($guia_id);
 $cont = 1;
@@ -343,19 +306,17 @@ while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
     $html.='<tr>';
 
-    $html .= '<td style="text-align:center; width: 20mm">-</td>
-                <td style="text-align:center;width: 17mm">00530033</td>
-                 <td style="text-align: center; width: 113mm; font-size; 10pt;">' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
-                 <td style="text-align:center; width: 17mm">' . $dt["tb_guiadetalle_can"] . '</td>
-                 <td style="text-align:center; width: 23mm">NIU</td>
+    $html .= '   <td style="text-align:center;width: 15mm">00530033</td>
+                 <td style="text-align: center; width: 119mm; font-size; 10pt;">' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
+                 <td style="text-align:center; width: 16mm">' . $dt["tb_guiadetalle_can"] . '</td>
+                 <td style="text-align:center; width: 24mm">NIU</td>
                  <td style="text-align:center; width: 20mm">-</td>';
     $html.='</tr>';
     $cont++;
 }
-$html.='</tbody>
-</table>';
-
 $html.='
+</tbody>
+</table>
 </body>
 </html>';
 

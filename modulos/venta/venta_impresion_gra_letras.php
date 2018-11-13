@@ -242,7 +242,7 @@ $html.='
         <td style="text-align: center" width="48mm">'.$ltr['tb_letras_monto'].'</td>
     </tr>
     <tr>
-        <td style="text-align: left;height: 10mm" width="100%"></td>
+        <td style="text-align: left;height: 12mm" width="100%"></td>
     </tr>
     <tr>
         <td style="text-align: left" width="55mm"></td>
@@ -257,7 +257,7 @@ $html.='
         <td style="text-align: left" width="113mm">'.$direccion.'</td>
     </tr>
     <tr>
-        <td style="text-align: left;height:7mm" width="100%"></td>
+        <td style="text-align: left;height:5mm" width="100%"></td>
     </tr>
     <tr>
         <td style="text-align: left" width="40mm"></td>
@@ -273,7 +273,7 @@ $html.='
         <td style="text-align: left" width="147mm">'.$letras_monto.'</td>
     </tr>
     <tr>
-        <td style="text-align: left;height:4mm" width="100%"></td>
+        <td style="text-align: left;height:6mm" width="100%"></td>
     </tr>
      <tr>
         <td style="text-align: justify;font-size: 6.5pt" width="80%">

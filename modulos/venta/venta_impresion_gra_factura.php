@@ -62,7 +62,7 @@ $formato_impresion='A4';
 $margen_array=array(10, 10, 10, 10);
 //$margen_array=0;
 
-$borde_tablas=1;
+$borde_tablas=0;
 
 $ven_id=$_POST['ven_id'];
 
@@ -280,7 +280,7 @@ if($impresion=='pdf')ob_start();
 <table border="<?php echo $borde_tablas?>" class="cliente">
   <tbody>
   <tr>
-    <td style="width: 17mm; height:43mm"></td>
+    <td style="width: 17mm; height:45mm"></td>
     <td colspan="2" style="width: 100mm;"></td>
     <td style="width: 73mm;"></td>
   </tr>
@@ -450,14 +450,14 @@ if($impresion=='pdf')ob_start();
     <td style="text-align: right; width: 20mm;"><?php echo formato_money($valven)?>&nbsp;</td>
   </tr>
   <tr>
-    <td style="height:4mm;">&nbsp;</td>
+    <td style="height:5mm;">&nbsp;</td>
     <td>&nbsp;</td>
     <td style="text-align: right;">18%<!--IGV--></td>
     <td style="text-align: right;"><?php echo $mon?></td>
     <td style="text-align: right;"><?php echo formato_money($igv)?>&nbsp;</td>
   </tr>
   <tr>
-    <td style="height:4mm;">&nbsp;</td>
+    <td style="height:5mm;">&nbsp;</td>
     <td>&nbsp;</td>
     <td style="text-align: left;"><!--TOTAL--></td>
     <td style="text-align: right;"><?php echo $mon?></td>
