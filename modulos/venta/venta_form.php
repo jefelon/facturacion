@@ -1121,9 +1121,9 @@ if($_POST['action']=="editar"){
                     // $('#txt_cli_tel').val(telefono);
                     $("#txt_ven_cli_est").val(data['Estado']);
                     console.log("aca4");
-                    if(data['RazonSocial'] != nom || data['Direccion'] != dir){
-                        cliente_form_i('editarSunat',id,data['RazonSocial'],data['Direccion'],data['Contacto'],'',data['Estado']);
-                    }
+                    // if(data['RazonSocial'] != nom || data['Direccion'] != dir){
+                    //     cliente_form_i('editarSunat',id,data['RazonSocial'],data['Direccion'],data['Contacto'],'',data['Estado']);
+                    // }
                     console.log("aca5");
                     $('#msj_busqueda_sunat').hide();
                 }
