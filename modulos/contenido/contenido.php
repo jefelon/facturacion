@@ -131,6 +131,7 @@ $menu_administrador=
 	  <li><a href="../kardex/">Kardex de Productos</a></li>
 	  <li><a href="../historial/">Historial de Productos</a></li>
 	  <li class="separator">_________________________</li>
+	  <li><a href="../letras/">Letras</a></li>
 	  <li><a href="../venta_cst/">Ventas - Artículos</a></li>
 	  <li><a href="../venta/venta_vista_reparto.php">Venta Reparto</a></li>
 	 <li><a href="../venta/venta_vista_garantia.php">Buscar Garantía</a></li>

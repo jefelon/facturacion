@@ -64,7 +64,6 @@ $(function() {
                 <th>VENCE</th>
                 <th>CLIENTE</th>
                 <th>&nbsp;</th>
-                <th>&nbsp;</th>
                 </tr>
             </thead>
         <?php
@@ -87,9 +86,6 @@ $(function() {
                 </td>
                 <td><?php echo $dt['tb_letras_fecha']?></td>
                 <td><?php echo $dt['tb_cliente_nom']?></td>
-                <td align="center">
-                    <a class="btn_editar" href="#" onClick="letra_form('editar','<?php echo $dt['tb_letra_id']?>')">Editar</a>
-                </td>
                 <td align="center">
                     <a id="imprimir" class="btn_imprimir" target="_blank" title="Imprimir" href="#print">
                         <form id="for_preimp"  method="post" action="../venta/venta_impresion_gra_letras.php">
