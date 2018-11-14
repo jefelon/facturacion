@@ -1051,7 +1051,7 @@ if($_POST['action']=="editar"){
             dataType: "html",
             data: ({
                 cli_id: ids,
-                emp_id: '<?php echo $_SESSION[empresa_id]?>',
+                emp_id: '<?php echo $_SESSION['empresa_id']?>',
                 vista: 0
             }),
             beforeSend: function() {
@@ -1236,12 +1236,15 @@ if($_POST['action']=="editar"){
 
         $("#txt_venpag_mon").change(function() {
             var num_letras = $('#txt_numletras').val();
+
+            var ndias = $('#dias1').val();
+
             if(num_letras!=="") {
                 var k = 30;
                 for (var i = 1; i <= num_letras; i++) {
+                    k=$('#dias'+i).val();
                     $(".letras_fecven" + i).show(100);
                     txt_venpag_fecletras(i,k);
-                    k=k+30;
                 }
             }
         });
@@ -1314,6 +1317,8 @@ if($_POST['action']=="editar"){
                 $('#txt_bus_cat_preven').show();
                 $("#chk_imprimir_guia").attr('checked', false);
             }
+
+            $('#txt_ven_cli_doc').focus();
         });
 
         venta_car();
@@ -1480,9 +1485,9 @@ if($_POST['action']=="editar"){
             {
                 var k = 30;
                 for(var i=1;i<=num_letras;i++){
+                    k=$('#dias'+i).val();
                     $(".letras_fecven"+i).show(100);
                     txt_venpag_fecletras(i,k);
-                    k=k+30;
                 }
 
 
@@ -1909,6 +1914,9 @@ if($_POST['action']=="editar"){
                 $("#txt_fil_gui_con_id").val(ui.item.id);
                 $("#txt_fil_gui_con_doc").val(ui.item.documento);
                 $("#txt_fil_gui_con_dir").val(ui.item.direccion);
+                $("#txt_fil_gui_con_lic").val(ui.item.licencia);
+                $("#txt_fil_gui_con_cat").val(ui.item.categoria);
+
             }
         });
 
@@ -1932,6 +1940,8 @@ if($_POST['action']=="editar"){
                 $("#txt_fil_gui_con_id").val(ui.item.id);
                 $("#txt_fil_gui_con_nom").val(ui.item.nombre);
                 $("#txt_fil_gui_con_dir").val(ui.item.direccion);
+                $("#txt_fil_gui_con_lic").val(ui.item.licencia);
+                $("#txt_fil_gui_con_cat").val(ui.item.categoria);
             }
         });
 
@@ -1946,6 +1956,7 @@ if($_POST['action']=="editar"){
                 $("#txt_fil_gui_tra_dir").val(ui.item.direccion);
                 limpiar_cajas_conductor();
                 $("#fset_conductor").removeAttr("disabled");//Habilito Fielset conductor
+                $("#txt_fil_gui_con_doc").focus();
             }
         });
 
@@ -1959,6 +1970,7 @@ if($_POST['action']=="editar"){
                 $("#txt_fil_gui_tra_dir").val(ui.item.direccion);
                 limpiar_cajas_conductor();
                 $("#fset_conductor").removeAttr("disabled");//Habilito Fielset conductor
+                $("#txt_fil_gui_con_doc").focus();
             }
         });
 
@@ -2274,7 +2286,7 @@ if($_POST['action']=="editar"){
                     </tr>
                     <tr>
                         <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" style="width:600px" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="64" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
                     </tr>
 
                     <tr>

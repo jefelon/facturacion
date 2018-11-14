@@ -10,12 +10,16 @@ class ElementoAutocompletar {
    var $label;
    var $direccion;
    var $nombre;
-   function __construct($id, $label, $value, $direccion, $nombre){
+   var $licencia;
+   var $categoria;
+   function __construct($id, $label, $value, $direccion, $nombre,$licencia,$categoria){
 	  $this->id = $id;
       $this->label = $label;
       $this->value = $value;
 	  $this->direccion = $direccion;	
-	  $this->nombre = $nombre;  
+	  $this->nombre = $nombre;
+      $this->licencia = $licencia;
+      $this->categoria = $categoria;
    }
 }
 
@@ -31,7 +35,7 @@ $arrayElementos = array();
 
 //bucle para meter todas las sugerencias de autocompletar en el array
 while ($fila = mysql_fetch_array($rs)){
-   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_conductor_id"], $fila["tb_conductor_doc"].'-'.$fila["tb_conductor_nom"],$fila["tb_conductor_doc"], $fila['tb_conductor_dir'], $fila['tb_conductor_nom']));
+   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_conductor_id"], $fila["tb_conductor_doc"].'-'.$fila["tb_conductor_nom"],$fila["tb_conductor_doc"], $fila['tb_conductor_dir'], $fila['tb_conductor_nom'], $fila['tb_conductor_lic'], $fila['tb_conductor_cat']));
 }
 
 print_r(json_encode($arrayElementos));

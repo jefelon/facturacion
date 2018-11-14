@@ -31,7 +31,7 @@ $(function() {
         <table cellspacing="1" id="tabla_conductor" class="tablesorter">
             <thead>
                 <tr>
-                  <th>CLIENTE</th>               
+                    <th>NOMBRE</th>
                     <th>RUC/DNI</th>
                     <th>DIRECCION</th>                    
                     <th>TELEFONO</th>

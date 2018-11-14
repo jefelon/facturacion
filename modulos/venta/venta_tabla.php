@@ -9,6 +9,8 @@ require_once ("../formatos/formato.php");
 
 require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
 $ruc_empresa = $dt['tb_empresa_ruc'];

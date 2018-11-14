@@ -1,16 +1,17 @@
 <?php
-	session_start();
-	if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
-	require_once ("../../config/Cado.php");
-	
-	require_once ("../contenido/contenido.php");
-	$oContenido = new cContenido();
+session_start();
+if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
+require_once ("../../config/Cado.php");
+
+require_once ("../contenido/contenido.php");
+$oContenido = new cContenido();
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Conductores</title>
+<title>Letrass</title>
 <link href="../../css/Estilo/miestilo.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -30,6 +31,10 @@
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.dialog.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.effects.core.js"></script>
 
+<script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.autocomplete.js"></script>
+<script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.datepicker.js"></script>
+<script src="../../js/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-es.js"></script>
+
 <script src="../../js/jquery-validation/jquery.validate.js" type="text/javascript"></script>
 <script src="../../js/jquery-validation/additional-methods.js" type="text/javascript"></script>
 <script src="../../js/jquery-validation/localization/messages_es.js" type="text/javascript"></script>
@@ -38,74 +43,107 @@
 <script type="text/javascript" src="../../js/tablesorter/jquery.tablesorter.js"></script>
 
 <script type="text/javascript">
-function conductor_tabla(){			
-	$.ajax({						
-		url: "conductor_tabla.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-		}),
-		beforeSend: function() {
-			$('#div_conductor_tabla').addClass("ui-state-disabled");
-        },
-		success: function(html){
-			$('#div_conductor_tabla').html(html);
-		},
-		complete: function(){			
-			$('#div_conductor_tabla').removeClass("ui-state-disabled");
-		}
-	});        
-}
-	
-function conductor_form(act,idf){
+    function letra_filtro()
+    {
+        $.ajax({
+            type: "POST",
+            url: "letra_filtro.php",
+            async:true,
+            dataType: "html",
+            //data: ({
+            //venta: $('#txt_fil_pro').val()
+            //}),
+            beforeSend: function() {
+                $('#div_letra_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_letra_filtro').html(html);
+            },
+            complete: function(){
+                letra_tabla();
+            }
+        });
+    }
+
+    function letra_tabla()
+    {
+        $.ajax({
+            type: "POST",
+            url: $('#hdd_modo').val(),
+            async:true,
+            dataType: "html",
+            data: $("#for_fil_let").serialize(),
+            /*data: ({
+                ven_fec1:	$('#txt_fil_ven_fec1').val(),
+                ven_fec2:	$('#txt_fil_ven_fec2').val(),
+                cli_id:		$('#txt_fil_cli_id').val(),
+                ven_est:	$('#cmb_fil_ven_est').val(),
+                ven_doc:	$('#cmb_fil_ven_doc').val()
+            }),*/
+            beforeSend: function() {
+                $('#div_letra_tabla').addClass("ui-state-disabled");
+            },
+            success: function(html){
+                $('#div_letra_tabla').html(html);
+            },
+            complete: function(){
+                $('#div_letra_tabla').removeClass("ui-state-disabled");
+            }
+        });
+    }
+
+function letra_form(act,idf)
+{
 	$.ajax({
 		type: "POST",
-		url: "conductor_form.php",
+		url: "letra_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			action: act,
-			con_id:	idf,
-			vista:	'conductor_tabla'
+			mar_id:	idf,
+			vista:	'letra_tabla'
 		}),
 		beforeSend: function() {
-			$('#msj_conductor').hide();
-			$('#div_conductor_form').dialog("open");
-			$('#div_conductor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+			$('#msj_letra').hide();
+			$('#div_letra_form').dialog("open");
+			$('#div_letra_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_conductor_form').html(html);				
+			$('#div_letra_form').html(html);
 		}
 	});
 }
 
-function eliminar_conductor(id)
-{      
+function eliminar_letra(id)
+{   
+	$('#msj_letra').hide();
 	if(confirm("Realmente desea eliminar?")){
 		$.ajax({
 			type: "POST",
-			url: "conductor_reg.php",
+			url: "letra_reg.php",
 			async:true,
 			dataType: "html",
 			data: ({
 				action: "eliminar",
-				con_id:		id
+				id:		id
 			}),
 			beforeSend: function() {
-				$('#msj_conductor').html("Cargando...");
-				$('#msj_conductor').show(100);
+				$('#msj_letra').html("Cargando...");
+				$('#msj_letra').show(100);
 			},
 			success: function(html){
-				$('#msj_conductor').html(html);
-				$('#msj_conductor').show();
+				$('#msj_letra').html(html);
 			},
 			complete: function(){
-				conductor_tabla();
+				letra_tabla();
 			}
 		});
 	}
 }
-		
+
+
+//
 $(function() {
 	
 	$('#btn_actualizar').button({
@@ -119,30 +157,30 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
-	
-	conductor_tabla();
-		
-	$( "#div_conductor_form" ).dialog({
-		title:'Información de Conductor',
+
+    letra_filtro();
+
+    $( "#div_letra_form" ).dialog({
+		title:'Información de Letras',
 		autoOpen: false,
 		resizable: false,
-		height: 350,
-		width: 530,
+		height: 180,
+		width: 500,
 		modal: true,
 		buttons: {
 			Guardar: function() {
-				$("#for_con").submit();
+				$("#for_mar").submit();
 			},
 			Cancelar: function() {
-				$('#for_con').each (function(){this.reset();});
+				$('#for_mar').each (function(){this.reset();});
 				$( this ).dialog( "close" );
 			}
 		}
 	});
 	
 });
-</script>
 
+</script>
 </head>
 
 <body>
@@ -155,7 +193,7 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">CONDUCTORES</td>
+                    <td class="caption_cont">LETRAS</td>
                   </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
@@ -164,10 +202,10 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="conductor_form('insertar')">Agregar</a></td>
+                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="letra_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
-                      <td align="right"><div id="msj_conductor" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
+                      <td align="right"><div id="msj_letra" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
                     </td>
@@ -178,9 +216,11 @@ $(function() {
                   </tr>
               </table>
 			</div>
-            <div id="div_conductor_form">
+            <div id="div_letra_filtro" class="contenido_tabla">
             </div>
-        	<div id="div_conductor_tabla" class="contenido_tabla">
+        	<div id="div_letra_form">
+			</div>
+        	<div id="div_letra_tabla" class="contenido_tabla">
       		</div>
       	</div>
     </article>

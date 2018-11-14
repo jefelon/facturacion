@@ -33,6 +33,8 @@ $guias = $oGuia->mostrarGuiaUno($ven_id);
 $guia = mysql_fetch_array($guias);
 $guia_id = $guia['tb_guia_id'];
 $fecha  = mostrarFecha($guia['tb_guia_fec']);
+$marca= $guia['tb_guia_mar'];
+$placa= $guia['tb_guia_pla'];
 
 if($guia['tb_guia_tipope'] == 1){
     $guia_ope = "Transferencia";
@@ -50,6 +52,7 @@ if ($guia["tb_conductor_id"]){
 $dts=$oConductor->mostrarUno($cond_id);
 $dt = mysql_fetch_array($dts);
 $cond_nombre=$dt['tb_conductor_nom'];
+$cond_lic=$dt['tb_conductor_lic'];
 mysql_free_result($dts);
 
 $dts=$oTransporte->mostrarUno($guia["tb_transporte_id"]);
@@ -248,7 +251,7 @@ $html.='
         <td style="text-align: left;width:26mm; height:11mm;">&nbsp;</td>
         <td style="text-align: left;width:74mm;">'.$guia['tb_guia_punpar'].'</td>
         <td style="text-align: left;width:23mm;"></td>
-        <td style="text-align: left;width:74mm;">-'.$guia['tb_guia_punlle'].'</td>
+        <td style="text-align: left;width:74mm;">'.$guia['tb_guia_punlle'].'</td>
     </tr>
 
     <tr>
@@ -265,7 +268,7 @@ $html.='
         <td style="text-align: left; width:18mm;"></td>
         <td style="text-align: left; width:30mm;">'.$guia['tb_guia_numdoc'].'</td>
         <td style="text-align: left; width:25mm;"></td>
-        <td style="text-align: left; width:30mm;">-</td>
+        <td style="text-align: right; width:30mm;">-</td>
     </tr>
  </table>
  
@@ -276,7 +279,7 @@ $html.='
     <tr>
         <!--marca y placa -->
         <td style="text-align: left;width:30mm;height: 4mm"></td>
-        <td style="text-align: left;width:72mm">' . $guia['tb_guia_pla'] / $guia['tb_guia_mar'] . '</td>
+        <td style="text-align: left;width:72mm">'. $marca.' / '.$placa .'</td>
         <td style="text-align: left;width:20mm;"></td>
         <td style="text-align: left;width:85mm;">' . $trans_razsoc . '</td>
     </tr>
@@ -288,7 +291,7 @@ $html.='
     <tr>
         <!--n licencia de conducir-->
         <td style="text-align: left;width:43mm;height: 4mm;"></td>
-        <td style="text-align: left;width:55mm;">-</td>
+        <td style="text-align: left;width:55mm;">'.$cond_lic.'</td>
         <td style="text-align: left;width:20mm;"></td>
         <td style="text-align: left;width:43mm;">' . $trans_ruc . '</td>
         <td style="text-align: right;width:27mm;">-</td>
@@ -306,7 +309,7 @@ while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
     $html.='<tr>';
 
-    $html .= '   <td style="text-align:center;width: 15mm">00530033</td>
+    $html .= '   <td style="text-align:center;width: 15mm">' . $dt["tb_presentacion_cod"] .'</td>
                  <td style="text-align: center; width: 119mm; font-size; 10pt;">' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
                  <td style="text-align:center; width: 16mm">' . $dt["tb_guiadetalle_can"] . '</td>
                  <td style="text-align:center; width: 24mm">NIU</td>

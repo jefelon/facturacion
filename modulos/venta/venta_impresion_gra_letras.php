@@ -75,8 +75,12 @@ if($moneda==2){
     $monedaval=2;
 }
 
-
 $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+
+if($_POST['letra_id'])
+{
+    $ltrs1=$cLetras->mostrar_letra($_POST['ven_id'],$_POST['letra_id']);
+}
 
 
 $nombre_archivo = ''.$serie.'-'.$numero.'.pdf';
