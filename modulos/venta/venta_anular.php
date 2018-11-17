@@ -15,6 +15,10 @@ require_once("../clientecuenta/cClientecuenta.php");
 $oClientecuenta = new cClientecuenta();
 require_once ("../ingreso/cIngreso.php");
 $oIngreso = new cIngreso();
+require_once ("../lote/cLote.php");
+$oLote = new cLote();
+require_once ("../lote/cVentaDetalleLote.php");
+$oVentaDetalleLote = new cVentaDetalleLote();
 
 
 $dts= $oVenta->mostrarUno($_POST['ven_id']);
@@ -50,13 +54,16 @@ if($est!='ANULADA')
 	
 	$dts1=$oVenta->mostrar_venta_detalle($_POST['ven_id']);
 	$num_rows= mysql_num_rows($dts1);
+
+
 	//detalle de productos
 		while($dt1 = mysql_fetch_array($dts1))
 		{
 			$cat_id=$dt1['tb_catalogo_id'];
-			$cantidad=$dt1['tb_ventadetalle_can'];			
-		
-			//datos presentacion catalogo almacen
+			$cantidad=$dt1['tb_ventadetalle_can'];
+            $ven_det_id=$dt1['tb_ventadetalle_id'];
+
+            //datos presentacion catalogo almacen
 			$dts=$oCatalogoproducto->presentacion_catalogo_stock_almacen($cat_id,$alm_id);
 			$dt = mysql_fetch_array($dts);
 				$sto_id_ori		=$dt['tb_stock_id'];
@@ -67,9 +74,26 @@ if($est!='ANULADA')
 			//conversion a la minima unidad
 			$cantidad_ori=$cantidad*$mul_ori;
 			
-			//actualizacion de stock
+			//actualizacion de stock producto
 			$stock_nuevo_ori=$sto_num_ori+$cantidad_ori;
 			$dts=$oStock->modificar($sto_id_ori,$stock_nuevo_ori);
+
+			//actualizacion stock lote
+            $dts22=$oVentaDetalleLote->mostrar_filtro_venta_detalle($ven_det_id);
+            $num_rows22= mysql_num_rows($dts22);
+
+            while($dt22 = mysql_fetch_array($dts22)) {
+                $lote_num=$dt22['tb_ventadetalle_lotenum'];
+                $lote_cant=$dt22['tb_ventadetalle_exisact'];
+                //actualizamos lotes
+                $lts = $oLote->mostrarUnoLoteNumero($cat_id, $lote_num, $alm_id);
+                $lt = mysql_fetch_array($lts);
+                $nro_rows = mysql_num_rows($lts);
+                if ($nro_rows > 0) {
+                    $nuevo_stock = $lt['tb_lote_exisact'] + $lote_cant;
+                    $oLote->modificar_stock($cat_id, $lote_num, $alm_id, $nuevo_stock);
+                }
+            }
         }
 	
 	mysql_free_result($dts1);

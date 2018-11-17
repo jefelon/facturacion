@@ -113,6 +113,25 @@ if($_POST['action']=="editarSunat"){
 
     }
 
+    function cmb_dir_id(ids)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cmb_cli_dir.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                cli_id: ids
+            }),
+            beforeSend: function() {
+                $('#cmb_cli_suc').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_cli_suc').html(html);
+            }
+        });
+    }
+
 $('#validar_ruc').button({
     text: true
   });
@@ -147,9 +166,16 @@ $(function() {
         }
     });
 
+    if($( "#hdd_cli_id" ).val()>0){
+        cmb_dir_id($( "#hdd_cli_id" ).val());
+    }
 
 	$( "#txt_cli_doc" ).focus();
-	
+
+    $('#btn_agregar2').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
 	$('#txt_cli_nom, #txt_cli_dir, #txt_cli_con').change(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
@@ -163,6 +189,12 @@ $(function() {
     // if($("#radio3").is(":checked")) {
     //     alert('hola');
     // }
+
+    $( "#btn_agregar2" ).click(function( event ) {
+
+        var id_cliente=$( "#hdd_cli_id" ).val();
+        direccion_form('insertar',id_cliente);
+    });
 
         $("#for_cli").validate({
 		submitHandler: function() {
@@ -270,6 +302,17 @@ $(function() {
           </td>
       	</tr>
         <tr>
+        <?php if($_POST['dir']=="ok") { ?>
+        <tr>
+          <td align="right" valign="top"><label for="txt_cli_suc">Sucursales:</label></td>
+          <td>
+                <select name="cmb_cli_suc" id="cmb_cli_suc">
+
+                </select>
+                <a id="btn_agregar2" href="#">Agregar Direccion</a>
+          </td>
+        </tr>
+        <?php } ?>
           <td align="right"><label for="txt_cli_con">Contacto:</label></td>
           <td><input name="txt_cli_con" id="txt_cli_con" type="text" value="<?php echo $con?>" size="50" tabindex="1"></td>
         </tr>

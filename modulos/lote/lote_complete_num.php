@@ -11,15 +11,16 @@ $oCompraDetalleLote = new cCompraDetalleLote();
 //defino una clase que voy a utilizar para generar los elementos sugeridos en autocompletar
 class ElementoAutocompletar {
     var $id;
+    var $value;
     var $label;
     var $fecfab;
     var $fecven;
     var $stock;
 
-    function __construct($id, $label, $num, $fecfab, $fecven,$stock ){
+    function __construct($id, $label,$value, $fecfab, $fecven,$stock ){
         $this->id = $id;
         $this->label = $label;
-        $this->num = $num;
+        $this->value = $value;
         $this->fecfab = $fecfab;
         $this->fecven = $fecven;
         $this->stock = $stock;

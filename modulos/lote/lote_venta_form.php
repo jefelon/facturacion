@@ -60,6 +60,8 @@ foreach ($_SESSION['lote_car'][$_POST['cat_id']] as $indice => $linea_cantidad) 
             $("#txt_lote_fecfab").val(ui.item.fecfab);
             $("#txt_lote_fecven").val(ui.item.fecven);
             $("#txt_lote_sto_num").val(ui.item.stock);
+
+
             $("#txt_lote_cant").focus();
         }
     }).click(function () {

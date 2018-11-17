@@ -17,16 +17,28 @@ class cCliente{
 	)
 	VALUES (
 	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio','$retiene'
-	);"; 
+	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
-	return $rst;	
+	return $rst;
 	}
+    function insertar_direccion($dir,$id_cliente){
+        $sql = "INSERT tb_clientedireccion(
+        `tb_clientedireccion_dir` ,
+        `tb_cliente_id` 
+        )
+        VALUES (
+        '$dir',  '$id_cliente'
+        );";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function ultimoInsert(){
-	$sql = "SELECT last_insert_id()"; 
+	$sql = "SELECT last_insert_id()";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
-	return $rst;	
+	return $rst;
 	}
 	function mostrarTodos($fil){
 	$sql="SELECT * FROM tb_cliente c
@@ -38,6 +50,15 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrarDireccionesTodos($cli_id){
+        $sql="SELECT * FROM tb_clientedireccion d";
+        if($cli_id>0)$sql.=" WHERE tb_cliente_id = $cli_id";
+        "ORDER BY d.tb_clientedireccion_id
+        ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_filtro($cli_id){
 		$sql="SELECT * 
 		FROM tb_cliente	";	
@@ -68,10 +89,10 @@ class cCliente{
 	`tb_precio_id` =  '$precio',
 	`tb_cliente_retiene` =  '$retiene'
 	
-	WHERE tb_cliente_id =$id"; 
+	WHERE tb_cliente_id =$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
-	return $rst;	
+	return $rst;
 	}
 	function verifica_cliente_tabla($id,$tabla){
 	$sql = "SELECT * 

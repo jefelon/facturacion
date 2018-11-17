@@ -99,7 +99,8 @@ function cliente_form(act,idf){
 		data: ({
 			action: act,
 			cli_id:	idf,
-			vista:	'cliente_tabla'
+			vista:	'cliente_tabla',
+            dir:'ok'
 		}),
 		beforeSend: function() {
 			$('#msj_cliente').hide();
@@ -160,6 +161,27 @@ function venta_form(act,idf){
 		}
 	});
 }
+function direccion_form(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "../clientes/cliente_direccion_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            cli_id:	idf,
+            vista:	'cliente_form'
+        }),
+        beforeSend: function() {
+            $('#msj_venta').hide();
+            $('#div_direccion_form').dialog("open");
+            $('#div_direccion_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_direccion_form').html(html);
+        }
+    });
+}
 
 function ventas_por_cliente(cli_id){		
 	$.ajax({		
@@ -213,18 +235,12 @@ $(function() {
 		}).click(function() {
 		location.reload();
 	});
-	
-	$('#btn_agregar').button({
-		icons: {primary: "ui-icon-plus"},
-		text: true
-	});
 
     $('#btn_imprimir_xls').button({
         icons: {primary: "ui-icon-print"},
         text: true
     });
 
-	
 	cliente_filtro();
 		
 	$( "#div_cliente_form" ).dialog({
@@ -307,6 +323,28 @@ $(function() {
 		width: 370,
 		modal: true
 	});
+
+
+    $( "#div_direccion_form").dialog({
+        title:'Información de dirección cliente',
+        autoOpen: false,
+        resizable: false,
+        height: 200,
+        width: 410,
+        modal: true,
+        position: 'top',
+        buttons: {
+            Guardar: function() {
+                $("#for_dir").submit();
+            },
+            Cerrar: function() {
+                $( this ).dialog( "close" );
+            }
+        },
+        close: function() {
+            //$( "#div_venta_por_cliente" ).html('venta_cliente');
+        }
+    });
 	
 });
 </script>
@@ -363,6 +401,9 @@ $(function() {
         </div>
         <div id="div_cliente_tabla" class="contenido_tabla">
         </div>
+        <div id="div_direccion_form">
+        </div>
+
       	</div>
     </article>
 </div>

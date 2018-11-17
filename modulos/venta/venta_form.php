@@ -1185,6 +1185,36 @@ if($_POST['action']=="editar"){
             d.valant = val
         }
     }
+
+    function cmb_dir_id(ids)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cmb_cli_dir.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                cli_id: ids
+            }),
+            beforeSend: function() {
+                $('#cmb_cli_suc').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_cli_suc').html(html);
+
+                var direccionPrincipal=  $('#txt_ven_cli_dir').val();
+                if($("#hdd_ven_cli_id" ).val()>0){
+                    $('#cmb_cli_suc').append($('<option>', {
+                        value: 0,
+                        text : direccionPrincipal
+                    }));
+                    $("#cmb_cli_suc option[value='0']").attr("selected", true);
+                }
+
+            }
+        });
+    }
+
     $(function() {
 
         $('#txt_ven_fec').keyup(function(e) {
@@ -1265,6 +1295,10 @@ if($_POST['action']=="editar"){
                 $("#hdd_cli_precio_id").val(ui.item.precio_id);
                 $('#hdd_ven_cli_id').change()
                 clientecuenta_detalle(ui.item.id);
+                if($("#hdd_ven_cli_id" ).val()>0){
+                    cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+                    $('#txt_ven_guia_dir').val($("#txt_ven_cli_dir").val());
+                }
                 //alert(ui.item.value);
                 $('#msj_busqueda_sunat').html("Buscando en Sunat...");
                 $('#msj_busqueda_sunat').show(100);
@@ -1284,11 +1318,18 @@ if($_POST['action']=="editar"){
                 $("#hdd_cli_precio_id").val(ui.item.precio_id);
                 $('#hdd_ven_cli_id').change();
                 clientecuenta_detalle(ui.item.id);
+                if($("#hdd_ven_cli_id" ).val()>0){
+                    cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+                    $('#txt_ven_guia_dir').val($("#txt_ven_cli_dir").val());
+                }
                 //alert(ui.item.value);
                 $('#msj_busqueda_sunat').html("Buscando en Sunat...");
                 $('#msj_busqueda_sunat').show(100);
                 compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
             }
+        });
+        $('#cmb_cli_suc').change(function(){
+            $('#txt_ven_guia_dir').val($("#cmb_cli_suc option:selected").text());
         });
 
         <?php
@@ -2277,7 +2318,7 @@ if($_POST['action']=="editar"){
                         <td>
                             <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
                             <label for="txt_ven_cli_nom">Cliente:</label>
-                            <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="64" value='<?php echo $cli_nom?>' />
+                            <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="40" value='<?php echo $cli_nom?>' />
                         </td>
                         <td rowspan="2" valign="top">
                             <div id="div_clientecuenta_detalle">
@@ -2286,9 +2327,8 @@ if($_POST['action']=="editar"){
                     </tr>
                     <tr>
                         <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="64" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
                     </tr>
-
                     <tr>
                         <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
                         <td>
@@ -2326,7 +2366,12 @@ if($_POST['action']=="editar"){
                 <input type="text" id="txt_fil_gui_tra_dir" name="txt_fil_gui_tra_dir" size="40" value="<?php echo $tra_dir?>" disabled="disabled"/>
             </fieldset>
             <label for="txt_ven_guia_dir">Punto de Llegada:</label>
-            <input type="text" id="txt_ven_guia_dir" name="txt_ven_guia_dir" size="40" value="<?php echo $cli_dir?>"/>
+            <input type="hidden" id="txt_ven_guia_dir" name="txt_ven_guia_dir" size="40" value="<?php echo $cli_dir?>"/>
+            <select name="cmb_cli_suc" id="cmb_cli_suc">
+
+            </select>
+
+
         </div>
         <div style="float: left; width: 50%; display: none;" class="insertar-guia" >
             <fieldset id="fset_conductor" disabled="disabled">
