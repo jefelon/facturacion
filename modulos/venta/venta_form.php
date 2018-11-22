@@ -659,6 +659,8 @@ if($_POST['action']=="editar"){
 
     function venta_car(act,cat_id){
 
+        var cat_tip=$('#hdd_detven_tip').val();
+
         if(act=='agregar') {
             var stouni=$('#hdd_bus_cat_stouni').val();
             var cantidad=$('#txt_bus_cat_can').val();
@@ -694,6 +696,7 @@ if($_POST['action']=="editar"){
 
             if(!cat_id && $('#txt_bus_cat_can').val() && $('#txt_bus_cat_preven').val()){
                 cat_id = producto_reg();
+                cat_tip = 1;
             }
 
             $.ajax({
@@ -706,7 +709,7 @@ if($_POST['action']=="editar"){
                     unico_id: $('#unico_id').val(),
                     cat_id:	 cat_id,
                     cat_can: $('#txt_bus_cat_can').val(),
-                    cat_tip: $('#hdd_detven_tip').val(),
+                    cat_tip: cat_tip,
                     cat_preven: $('#txt_bus_cat_preven').val(),
                     cat_des: $('#txt_detcom_des').val(),
                     cot_id: cot_id
