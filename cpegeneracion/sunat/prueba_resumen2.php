@@ -135,6 +135,4 @@ echo $r['signvalue'].'<br>';
 echo $r['valid'].'<br>';
 echo $r['ticket'].'<br>';
 
-/*
-
 ?>
