@@ -17,8 +17,7 @@ $oMysql= new cMysql();
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 
-require_once("../guia/cGuia.php");
-$oGuia = new cGuia();
+
 
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
@@ -110,13 +109,7 @@ if($_POST['action']=="editar"){
 
     mysql_free_result($dts);
 
-    $guias = $oGuia->mostrarGuiaUno($_POST['ven_id']);
-    $guia = mysql_fetch_array($guias);
-    $guia_id = $guia['tb_guia_id'];
 
-    $serguia	=$guia['tb_guia_serie'];
-    $numguia	=$guia['tb_guia_num'];
-    mysql_free_result($guias);
 }
 ?>
 <script type="text/javascript">
@@ -373,7 +366,6 @@ if($_POST['action']=="editar"){
 
                 if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
                 {
-                    txt_ven_numdocguia();
                     $('#hdd_val_cli_tip').val('2');
                 }
                 if($('#cmb_ven_doc').val()*1==3 || $('#cmb_ven_doc').val()*1==12)//boleta
@@ -404,51 +396,7 @@ if($_POST['action']=="editar"){
             }
         });
     }
-    function txt_ven_numdocguia(){
-        $.ajax({
-            type: "POST",
-            url: "../venta/venta_txt_numdocguia.php",
-            async:false,
-            dataType: "json",
-            data: ({
-                doc_id: 22
-            }),
-            beforeSend: function() {
-                $('#txt_ven_numdocguia').val('Cargando...');
 
-                //
-                // if($('#cmb_ven_doc').val()*1==2 || $('#cmb_ven_doc').val()*1==11)//factura
-                // {
-                //     $('#hdd_val_cli_tip').val('2');
-                // }
-                // if($('#cmb_ven_doc').val()*1==3 || $('#cmb_ven_doc').val()*1==12)//boleta
-                // {
-                //     $('#hdd_val_cli_tip').val('1');
-                // }
-                // if($('#cmb_ven_doc').val()*1==15)//nota de salida
-                // {
-                //     $('#hdd_val_cli_tip').val('15');
-                // }
-            },
-            success: function(data){
-                $('#txt_ven_numdocguia').val(data.numero);
-                if(data.msj!="")
-                {
-                    $('#msj_venta_form').html(data.msj);
-                    $('#msj_venta_form').show(100);
-                }
-                else
-                {
-                    $('#msj_venta_form').hide();
-                }
-            },
-            complete: function(){
-                <?php if($_POST['action']=="insertar"){?>
-                // verificar_numdoc();
-                <?php }?>
-            }
-        });
-    }
     function verificar_numdoc(){
         $.ajax({
             type: "POST",
@@ -1320,7 +1268,7 @@ if($_POST['action']=="editar"){
         lote_venta_car('restablecer');
 
         $("#txt_ven_numdoc").addClass("ui-state-active");
-        $("#txt_ven_numdocguia").addClass("ui-state-active");
+
 
         $('#txt_ven_lab1').change(function(){
             $(this).val($(this).val().toUpperCase());
@@ -1383,7 +1331,7 @@ if($_POST['action']=="editar"){
                 clientecuenta_detalle(ui.item.id);
                 if($("#hdd_ven_cli_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_cli_id" ).val());
-                    $('#txt_ven_guia_dir').val($("#txt_ven_cli_dir").val());
+
                 }
                 //alert(ui.item.value);
                 $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1406,7 +1354,6 @@ if($_POST['action']=="editar"){
                 clientecuenta_detalle(ui.item.id);
                 if($("#hdd_ven_cli_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_cli_id" ).val());
-                    $('#txt_ven_guia_dir').val($("#txt_ven_cli_dir").val());
                 }
                 //alert(ui.item.value);
                 $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1414,9 +1361,7 @@ if($_POST['action']=="editar"){
                 compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
             }
         });
-        $('#cmb_cli_suc').change(function(){
-            $('#txt_ven_guia_dir').val($("#cmb_cli_suc option:selected").text());
-        });
+
 
         <?php
         if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
@@ -1425,21 +1370,12 @@ if($_POST['action']=="editar"){
             txt_ven_numdoc();
             if ((this).value=== '12' || (this).value=== '15') {
                 cliente_cargar_datos(1);
-                $("#chk_imprimir_guia").attr('checked', false);
 
             }else{
                 $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
             }
 
-            if ((this).value=== '2' || (this).value=== '11') {
-                $('.imprimir_guia').show();
-                $('.insertar-guia').show();
-                $("#chk_imprimir_guia").attr('checked', true);
-            }else{
-                $('.imprimir_guia').hide();
-                $('.insertar-guia').hide();
-                $("#chk_imprimir_guia").attr('checked', false);
-            }
+
 
             $('#txt_ven_cli_doc').focus();
         });
@@ -1584,16 +1520,7 @@ if($_POST['action']=="editar"){
             }
         });
 
-        $('#chk_imprimir_guia').change( function() {
-            if(this.checked)
-            {
-                $('.insertar-guia').show();
-            }
-            else
-            {
-                $('.insertar-guia').hide();
-            }
-        });
+
 
 
 
@@ -2299,19 +2226,7 @@ if($_POST['action']=="editar"){
                             <input name="chk_imprimir" type="checkbox" id="chk_imprimir" value="1" checked="CHECKED">
                         <?php }?>
                     </td>
-                    <td class="imprimir_guia" style="display: none">
-                        <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
-                            <label for="chk_imprimir_guia"> Registrar e Imprimir Guia</label>
-                            <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" value="1"  title="Registrar guia? ">
-                            <input name="txt_ven_numdocguia" type="text" id="txt_ven_numdocguia" class="insertar-guia" style="text-align:right; font-size:14px"  value="<?php echo $serguia.'-'.$numguia?>" size="10" readonly>
-                        <?php }?>
-                    </td>
-                    <?php if($_POST['action']=="editar") {?>
-                        <td>
-                            <label for="chk_imprimir_guia"> Numero Guia</label>
-                            <input name="txt_ven_numdocguia" type="text" id="txt_ven_numdocguia" style="text-align:right; font-size:14px"  value="<?php echo $serguia.'-'.$numguia?>" size="10" readonly>
-                        </td>
-                    <?php }?>
+
 
                     <td align="right">
                         <?php
@@ -2410,62 +2325,7 @@ if($_POST['action']=="editar"){
                 </table>
             </fieldset>
         </div>
-        <div style="float: left; width: 20%; display: none;" class="insertar-guia">
-            <fieldset>
-                <legend>Datos Vehículo</legend>
-                <label for="txt_gui_mar">Marca:</label><br>
-                <input type="text" id="txt_gui_mar" name="txt_gui_mar" value="<?php echo $mar?>" /><br>
-                <label for="txt_gui_pla">Placa:</label><br>
-                <input type="text" name="txt_gui_pla" id="txt_gui_pla"  value="<?php echo $pla?>">
-            </fieldset>
-        </div>
-        <div style="float: left; width: 50%; display: none;" class="insertar-guia">
-            <fieldset>
-                <legend>Datos Transporte</legend>
-                <?php if($_POST['action']=='insertar'){?>
-                    <!--Boton Editar/Registrar Conductor-->
-                    <a id="btn_tra_form_agregar" href="#" onClick="transporte_form('insertar')">Agregar Transporte</a>
-                    <a id="btn_tra_form_modificar" href="#" onClick='transporte_form("editar", $("#txt_fil_gui_tra_id").val())'>Modificar Transporte</a>
-                <?php }?>
-                <input type="hidden" id="txt_fil_gui_tra_id" name="txt_fil_gui_tra_id" value="<?php echo $tra_id?>" />
-                <label for="txt_fil_gui_tra_ruc">RUC:</label>
-                <input type="text" id="txt_fil_gui_tra_ruc" name="txt_fil_gui_tra_ruc" size="15" value="<?php echo $tra_ruc?>" /><br>
-                <!--<a id="btn_cmb_tra_id" class="btn_ir" href="#" onClick="verificarAccionTransporte()">Agregar Transporte</a>-->
-                <label for="txt_fil_gui_tra_razsoc">Transporte:</label>
-                <input type="text" id="txt_fil_gui_tra_razsoc" name="txt_fil_gui_tra_razsoc" size="40" value="<?php echo $tra_razsoc?>" /><br>
-                <label for="txt_fil_gui_tra_dir">Direcci&oacute;n:</label>
-                <input type="text" id="txt_fil_gui_tra_dir" name="txt_fil_gui_tra_dir" size="40" value="<?php echo $tra_dir?>" disabled="disabled"/>
-            </fieldset>
-            <label for="txt_ven_guia_dir">Punto de Llegada:</label>
-            <input type="hidden" id="txt_ven_guia_dir" name="txt_ven_guia_dir" size="40" value="<?php echo $cli_dir?>"/>
-            <select name="cmb_cli_suc" id="cmb_cli_suc">
 
-            </select>
-
-
-        </div>
-        <div style="float: left; width: 50%; display: none;" class="insertar-guia" >
-            <fieldset id="fset_conductor" disabled="disabled">
-                <legend>Datos Conductor</legend>
-                <?php if($_POST['action']=='insertar'){?>
-                    <!--Boton Editar/Registrar Conductor-->
-                    <a id="btn_con_form_agregar" href="#" onClick="conductor_form('insertar')">Agregar Conductor</a>
-                    <a id="btn_con_form_modificar" href="#" onClick='conductor_form("editar", $("#txt_fil_gui_con_id").val())'>Modificar Conductor</a>
-                <?php }?>
-                <input type="hidden" id="txt_fil_gui_con_id" name="txt_fil_gui_con_id" value="<?php echo $con_id?>" />
-                <label for="txt_fil_gui_con_doc">RUC/DNI:</label>
-                <input type="text" id="txt_fil_gui_con_doc" name="txt_fil_gui_con_doc" size="15" value="<?php echo $con_doc?>" /><br>
-                <!--<a id="btn_cmb_con_id" class="btn_ir" href="#" onClick="verificarAccionConductor()">Agregar Conductor</a>-->
-                <label for="txt_fil_gui_con_nom">Conductor:</label>
-                <input type="text" id="txt_fil_gui_con_nom" name="txt_fil_gui_con_nom" size="40" value="<?php echo $con_nom?>" /><br>
-                <label for="txt_fil_gui_con_dir">Direcci&oacute;n:</label>
-                <input type="text" id="txt_fil_gui_con_dir" name="txt_fil_gui_con_dir" size="40" value="<?php echo $con_dir?>" readonly="readonly"/><br>
-                <label for="txt_fil_gui_con_lic">Licencia:</label>
-                <input type="text" id="txt_fil_gui_con_lic" name="txt_fil_gui_con_lic" size="15" value="<?php echo $con_lic?>" readonly="readonly"/>
-                <label for="txt_fil_gui_con_cat">Categoría:</label>
-                <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>
-            </fieldset>
-        </div>
 
         <div style="float: left; width: 80%;">
             <fieldset><legend>Registro de Pagos</legend>

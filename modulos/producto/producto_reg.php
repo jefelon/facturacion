@@ -102,6 +102,9 @@ if($_POST['action_producto']=="insertar")
 			$pre_id
 		);
 
+        $dts=$oCatalogoproducto->ultimoInsert();
+        $dt = mysql_fetch_array($dts);
+
         $cat_id=$dt['last_insert_id()'];
         $data['cat_id']=$cat_id;
 
