@@ -627,8 +627,90 @@ if($_POST['action']=="editar"){
     }
 
 
+    function actualizar_stock(preid,almid,stoid)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../producto/stock_reg.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action:	'actualizar_stock',
+                tipo:	'insertar',
+                alm_id: almid,
+                pre_id: preid,
+                sto_id: stoid,
+                sto_num: 0
+            }),
+            beforeSend: function() {
+                //$('#div_catalogo_filtro').html('Cargando <img src="images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+
+            },
+            complete: function(){
+
+            }
+        });
+    }
+
+    function producto_reg(){
+
+        var result='';
+        $.ajax({
+            type: "POST",
+            url: "../producto/producto_reg.php",
+            async: false,
+            dataType: "json",
+            data: ({
+                action_producto: "insertar",
+                hdd_usu_id: <?php echo $_SESSION['usuario_id']?>,
+                txt_pro_nom: $('#txt_bus_pro_nom').val(),
+                txt_pro_des: $('#txt_bus_pro_nom').val(),
+                num_alm: "",
+                tipo_accion: "insertar_venta",
+                cmb_cat_id: 9,
+                cmb_mar_id: 1,
+                cmb_afec_id: 1,
+                cmb_lote: "",
+                cmb_pro_est: "Activo",
+                hdd_prod_img:"",
+                txt_pre_cod:"",
+                txt_pre_stomin: "",
+                cmb_pre_est: "Activo",
+                cmb_cat_uni_bas: 1,
+                txt_cat_tipcam:"",
+                txt_cat_precosdol:"",
+                txt_cat_precos:"",
+                txt_cat_descprov:"",
+                txt_cat_uti: "",
+                txt_cat_valven: "",
+                txt_cat_preven: $('#txt_bus_cat_preven').val(),
+                chk_cat_vercom: 1,
+                chk_cat_verven: 1
+            }),
+            beforeSend: function(){
+                // $('#msj_producto').html("Guardando...");
+                // $('#msj_producto').show(100);
+            },
+            success: function(data){
+
+                result = data.cat_id;
+                // $('#msj_producto').html(data.pro_msj);
+                if(data.tipo_accion=='insertar_venta'){
+                    actualizar_stock(data.pre_id,<?php echo $_SESSION['almacen_id']?>,'');
+                }
+
+            },
+            complete: function(){
+
+            }
+        });
+        return result
+    }
 
     function venta_car(act,cat_id){
+
         if(act=='agregar') {
             var stouni=$('#hdd_bus_cat_stouni').val();
             var cantidad=$('#txt_bus_cat_can').val();
@@ -661,6 +743,11 @@ if($_POST['action']=="editar"){
             //else {
             var cot_id = '';
             cot_id = $('#hdd_cot_id').val();
+
+            if(!cat_id && $('#txt_bus_cat_can').val() && $('#txt_bus_cat_preven').val()){
+                cat_id = producto_reg();
+            }
+
             $.ajax({
                 type: "POST",
                 url: "../venta/venta_car.php",
@@ -693,7 +780,6 @@ if($_POST['action']=="editar"){
                         $('#txt_bus_pro_codbar').val('');
                         $('#txt_bus_pro_nom').val('');
                         $('#txt_bus_cat_preven').val('');
-                        $('#txt_bus_cat_preven_noigv').val('');
                         $('#txt_bus_cat_can').val('');
                         $('#txt_precio_min').val('');
                         $('#txt_precio_may').val('');
@@ -1348,14 +1434,10 @@ if($_POST['action']=="editar"){
             if ((this).value=== '2' || (this).value=== '11') {
                 $('.imprimir_guia').show();
                 $('.insertar-guia').show();
-                $('#txt_bus_cat_preven_noigv').show();
-                $('#txt_bus_cat_preven').hide();
                 $("#chk_imprimir_guia").attr('checked', true);
             }else{
                 $('.imprimir_guia').hide();
                 $('.insertar-guia').hide();
-                $('#txt_bus_cat_preven_noigv').hide();
-                $('#txt_bus_cat_preven').show();
                 $("#chk_imprimir_guia").attr('checked', false);
             }
 
@@ -1378,9 +1460,6 @@ if($_POST['action']=="editar"){
             }
         });
 
-        $("#txt_bus_cat_preven_noigv").keyup(function(){
-            $("#txt_bus_cat_preven").val(($("#txt_bus_cat_preven_noigv").val() * 1.18));
-        });
         <?php }?>
 
         $("#chk_venpag_aut").change(function(){
@@ -1927,7 +2006,6 @@ if($_POST['action']=="editar"){
                 $('#hdd_bus_cat_cospro').val('');
                 $('#txt_bus_pro_codbar').val('');
                 $('#txt_bus_cat_preven').val('');
-                $('#txt_bus_cat_preven_noigv').val('');
                 $('#txt_bus_cat_can').val('');
                 $('#txt_precio_min').val('');
                 $('#txt_precio_may').val('');
@@ -2056,7 +2134,6 @@ if($_POST['action']=="editar"){
                     //$('#txt_bus_pro_codbar').val('');
                     $('#txt_bus_pro_nom').val('');
                     $('#txt_bus_cat_preven').val('');
-                    $('#txt_bus_cat_preven_noigv').val('');
                     $('#txt_bus_cat_can').val('');
 
                     $('#txt_precio_min').val('');
@@ -2081,7 +2158,6 @@ if($_POST['action']=="editar"){
                     $('#hdd_bus_cat_cospro').val(data.cat_cospro);
                     $('#txt_bus_pro_nom').val(data.pro_nom);
                     $('#txt_bus_cat_preven').val(data.cat_preven);
-                    $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18).toFixed(2));
                     $('#txt_bus_cat_can').val(data.cat_can);
 
                     $('#txt_precio_min').val(data.cat_premin);
@@ -2096,7 +2172,6 @@ if($_POST['action']=="editar"){
                         $('#hdd_bus_cat_cospro').val('');
                         $('#txt_bus_pro_codbar').val('');
                         $('#txt_bus_cat_preven').val('');
-                        $('#txt_bus_cat_preven_noigv').val('');
                         $('#txt_bus_cat_can').val('');
                         $('#txt_precio_min').val('');
                         $('#txt_precio_may').val('');
@@ -2106,12 +2181,8 @@ if($_POST['action']=="editar"){
                     } else {
                         $('#txt_bus_pro_codbar').val(data.pro_codbar);
                         $('#hdd_bus_pro_nom').val('');
-
-                        if ($("#cmb_ven_doc").val()== '2' || ($("#cmb_ven_doc")).val()== '11') {
-                            $('#txt_bus_cat_preven_noigv').focus();
-                        }else{
                             $('#txt_bus_cat_preven').focus();
-                        }
+
                     }
                     //precios_min_may($('#hdd_bus_cat_id').val());
                 }
@@ -2566,8 +2637,6 @@ if($_POST['action']=="editar"){
 
                         <label for="txt_bus_cat_preven">S/.</label>
                         <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="8" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
-
-                        <input name="txt_bus_cat_preven_noigv" type="text" id="txt_bus_cat_preven_noigv" value="" size="8" maxlength="9" style="display:none; text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
                         <label for="txt_bus_cat_can">CAN</label>
                         <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="5" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">

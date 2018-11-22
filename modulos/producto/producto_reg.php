@@ -102,6 +102,9 @@ if($_POST['action_producto']=="insertar")
 			$pre_id
 		);
 
+        $cat_id=$dt['last_insert_id()'];
+        $data['cat_id']=$cat_id;
+
 		$data['pro_id']=$pro_id;
         $data['pre_id']=$pre_id;
         $data['tipo_accion']=$_POST['tipo_accion'];
