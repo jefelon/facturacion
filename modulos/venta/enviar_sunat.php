@@ -174,7 +174,7 @@ while($dt = mysql_fetch_array($dts))
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }
     if ($dt["cs_tipoafectacionigv_cod"] == 20){
-      $detalle[$autoin]['igv']					='00.00';//sumatoria con cantidad
+      $detalle[$autoin]['igv']					=0;//sumatoria con cantidad
     }else{
         $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
     }

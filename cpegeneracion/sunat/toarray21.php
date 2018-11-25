@@ -713,7 +713,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxCategoryID = 'E';
                 $Percent = '18.00';
                 $TaxSchemeID = 9997;
-                $TaxSchemeName = 'EXONERADO';
+                $TaxSchemeName = 'EXO';
                 $TaxSchemeTaxTypeCode = 'VAT';
 
             }elseif ($item->idafectaciond==21) {
