@@ -466,7 +466,7 @@ function arr_TaxTotal($header, $detalle, $empresa, $tipodoc){
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['ID']['tag'] = 'cbc';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['ID']['atr']['schemeID'] = 'UN/ECE 5153';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['ID']['atr']['schemeAgencyID'] = '6';
-        $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['Name'][0] = 'EXONERADO';
+        $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['Name'][0] = 'EXO';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['Name']['tag'] = 'cbc';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['TaxTypeCode'][0] = 'VAT';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['TaxTypeCode']['tag'] = 'cbc';
@@ -708,8 +708,8 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
 
             }elseif ($item->idafectaciond==20) {
                 $impuestos = "0.00";
-                $basecalculo = "0.00";
-                $impuesto = round($item->valorventa,2);
+                $basecalculo = round($item->valorventa,2);
+                $impuesto = "0.00";
                 $TaxCategoryID = 'E';
                 $Percent = '18.00';
                 $TaxSchemeID = 9997;
