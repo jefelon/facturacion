@@ -210,12 +210,12 @@ $(function() {
 		text: true
 	});
 
-    $('#btn_imprimir_xls').button({
+    $('#btn_imprimir_xls' ).button({
         icons: {primary: "ui-icon-print"},
         text: true
     });
-		
-	
+
+
 	/*$( "#div_catalogo_kardex" ).dialog({
 		title:'Lista de Productos',
 		autoOpen: false,
