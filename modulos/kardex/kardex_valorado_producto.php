@@ -96,5 +96,10 @@ $(function(){
         <label for="txt_kar_fecfin">Fecha Fin:</label>
         <input name="txt_kar_fecfin" type="text" class="fecha" id="txt_kar_fecfin" value="<?php echo $fec_fin?>" size="10" maxlength="10">
         <a href="#" onClick="kardex_valorado_tabla($('#hdd_cat_sel_id').val(), $('#cmb_almacen').val(), $('#txt_kar_fecini').val(), $('#txt_kar_fecfin').val());" id="btn_filtrar">Filtrar</a>
+        <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="karde_valorado_reporte_xls()" title="Imprimir en Excel">Excel</a>
+        <form action="kardex_reporte_valorado_xls.php" method="post" target="_blank" id="for_rep_valorado_xls">
+            <input type="hidden" id="hdd_tabla_valorada" name="hdd_tabla_valorada" />
+        </form>
+
     </fieldset>
 </div>

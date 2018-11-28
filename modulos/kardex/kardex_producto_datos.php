@@ -19,7 +19,7 @@
 	}				
 	?>
     <input type="hidden" name="hdd_cat_sel_id" id="hdd_cat_sel_id" value="<?php echo $_POST['cat_id']?>" />
-    <table>
+    <table id="kardex_producto_datos">
        
         <tr>
         	<td align="right"><strong>RAZÓN SOCIAL:</strong></td>

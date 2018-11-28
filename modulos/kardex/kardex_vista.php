@@ -187,6 +187,13 @@ function karde_total_reporte_xls(){
     $("#for_rep_xls").submit();
 }
 
+
+
+function karde_valorado_reporte_xls(){
+    $("#hdd_tabla_valorada").val( $("<div>").append( $("#kardex_producto_datos").eq(0).clone()).append($("#tabla_kardex_valorado").eq(0).clone()).html());
+    $("#for_rep_valorado_xls").submit();
+}
+
 $(function() {
 	catalogo_kardex();
     catalogo_kardex_tabla_total();
