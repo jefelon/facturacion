@@ -14,6 +14,10 @@ require_once ("../producto/cCatalogoproducto.php");
 $oCatalogoproducto = new cCatalogoproducto();
 require_once("../producto/cStock.php");
 $oStock = new cStock();
+require_once ("../lote/cLote.php");
+$oLote = new cLote();
+require_once ("../lote/cVentaDetalleLote.php");
+$oVentaDetalleLote = new cVentaDetalleLote();
 
 
 require_once("../formatos/formato.php");
@@ -238,6 +242,24 @@ if($_POST['action_venta']=="insertar")
 						$precio,
 						$kar_id
 					);
+
+                    //actualizacion stock lote
+                    $dts22=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt1['tb_ventadetalle_id']);
+                    $num_rows22= mysql_num_rows($dts22);
+
+                    while($dt22 = mysql_fetch_array($dts22)) {
+                        $lote_num=$dt22['tb_ventadetalle_lotenum'];
+                        $lote_cant=$dt22['tb_ventadetalle_exisact'];
+                        //actualizamos lotes
+                        $lts = $oLote->mostrarUnoLoteNumero($cat_id, $lote_num, $alm_id);
+                        $lt = mysql_fetch_array($lts);
+                        $nro_rows = mysql_num_rows($lts);
+                        if ($nro_rows > 0) {
+                            $nuevo_stock = $lt['tb_lote_exisact'] + $lote_cant;
+                            $oLote->modificar_stock($cat_id, $lote_num, $alm_id, $nuevo_stock);
+                        }
+                    }
+
 				}
                 mysql_free_result($dts1);
 

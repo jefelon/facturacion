@@ -253,7 +253,8 @@ if($_POST['action']=="editar"){
                 cmb_afec_id: 	$('#cmb_afec_id_'+idf).val(),
                 com_tipper:	tipper,
                 unico_id: $('#unico_id').val(),
-                imp_dol: imp_dol
+                imp_dol: imp_dol,
+                cmb_com_doc: $('#cmb_com_doc').val()
 
             }),
             beforeSend: function() {
@@ -683,8 +684,10 @@ if($_POST['action']=="editar"){
                 $("#cmb_com_tip").attr('disabled', true);
             }
             if ($(this).val()=='19') {
+                $("#cmb_com_tippre").val('2');
                 $('#doc_compra_serv').css('display', 'block');
             }else{
+                $("#cmb_com_tippre").val('1');
                 $('#doc_compra_serv').css('display', 'none');
             }
         });

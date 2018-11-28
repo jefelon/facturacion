@@ -86,8 +86,12 @@ $num_rows= mysql_num_rows($dts1);
         <tbody>
         <?php
         while($dt1 = mysql_fetch_array($dts1)){
-            if($dt1['tb_venta_est']=='CANCELADA'){
-                $total_ventas+=$dt1['tb_venta_tot'];
+            if($dt1['tb_venta_est']=='CANCELADA') {
+                if ($dt1['cs_tipomoneda_id'] == '1') {
+                    $total_ventas_soles += $dt1['tb_venta_tot'];
+                }else{
+                    $total_ventas_dolares += $dt1['tb_venta_tot'];
+                }
             }
             $tipodoc = $dt1['cs_tipodocumento_cod'];
 
@@ -197,8 +201,15 @@ $num_rows= mysql_num_rows($dts1);
     }
     ?>
     <tr class="even">
-        <td colspan="6">TOTAL</td>
-        <td align="right"><strong><?php echo formato_money($total_ventas)?></strong></td>
+        <td colspan="4"></td>
+        <td colspan="2">TOTAL SOLES</td>
+        <td align="right"><strong><?php echo formato_money($total_ventas_soles)?></strong></td>
+        <td colspan="5" align="right">&nbsp;</td>
+    </tr>
+    <tr class="even">
+        <td colspan="4"></td>
+        <td colspan="2">TOTAL DOLARES</td>
+        <td align="right"><strong><?php echo formato_money($total_ventas_dolares)?></strong></td>
         <td colspan="5" align="right">&nbsp;</td>
     </tr>
     <tr class="even">
