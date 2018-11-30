@@ -11,14 +11,25 @@ require_once("../categoria/cCategoria.php");
 $oCategoria = new cCategoria();
 require_once("../marca/cMarca.php");
 $oMarca = new cMarca();
-require_once("../formatos/formato.php");
-
 require_once("../unidad/cUnidad.php");
 $oUnidad = new cUnidad();
+require_once("../stock/cStock.php");
+$oStock = new cStock();
+
+require_once ("../notalmacen/cNotalmacen.php");
+$oNotalmacen = new cNotalmacen();
+require_once ("../talonario/cTalonariointerno.php");
+$oTalonariointerno= new cTalonariointerno();
+require_once("../kardex/cKardex.php");
+$oKardex = new cKardex();
+require_once("../formatos/formato.php");
+require_once ("../catalogo/cst_producto.php");
+
 
 
 require_once('../../libreriasphp/excel/excel_reader2.php');
 require_once('../../libreriasphp/excel/SpreadsheetReader.php');
+
 
 
 if (isset($_FILES["file_xls"])) {
@@ -103,13 +114,13 @@ if (isset($_FILES["file_xls"])) {
                         $cat_pre_ven = $Row[9];
                     }
 
-                    $stock = "";
+                    $stock_num = "";
                     if (isset($Row[10])) {
-                        $stock = $Row[10];
+                        $stock_num = $Row[10];
                     }
 
 
-                    if (!empty($nombre) && !empty($descripcion) && !empty($estado) && !empty($categoria) && !empty($marca) && !empty($afecto) && !empty($lote) && !empty($unidad) && !empty($cat_pre_cos) && !empty($cat_pre_ven) && !empty($stock)) {
+                    if (!empty($nombre) && !empty($descripcion) && !empty($estado) && !empty($categoria) && !empty($marca) && !empty($afecto) && !empty($lote) && !empty($unidad) && !empty($cat_pre_cos) && !empty($cat_pre_ven) && !empty($stock_num)) {
 
                         $cts = $oCategoria->mostrar_filtro_nombre($categoria);
                         $ct_rows = mysql_num_rows($cts);
@@ -118,18 +129,18 @@ if (isset($_FILES["file_xls"])) {
                             $cat_id = $ct['tb_categoria_id'];
                         } else {
                             $data['type'] = "error";
-                            $data['message'] = "No existe categoría";
+                            $data['message'] = "No existe categoría \"".$categoria."\"";
                             break;
                         }
 
                         $mrs = $oMarca->mostrar_filtro_nombre($marca);
-                        $mr_rows = mysql_num_rows($cts);
+                        $mr_rows = mysql_num_rows($mrs);
                         if ($mr_rows > 0) {
-                            $mr = mysql_fetch_array($cts);
-                            $mar_id = $ct['tb_categoria_id'];
+                            $mr = mysql_fetch_array($mrs);
+                            $mar_id = $mr['tb_marca_id'];
                         } else {
                             $data['type'] = "error";
-                            $data['message'] = "No existe marca";
+                            $data['message'] = "No existe marca \"".$marca."\"";
                             break;
                         }
 
@@ -141,7 +152,7 @@ if (isset($_FILES["file_xls"])) {
                             $cmb_afec_id = 11;
                         } else {
                             $data['type'] = "error";
-                            $data['message'] = "No existe tipo de afectación";
+                            $data['message'] = "No existe tipo de afectación \"".$afecto."\"";
                             break;
                         }
 
@@ -151,7 +162,7 @@ if (isset($_FILES["file_xls"])) {
                             $lote_id = 0;
                         } else {
                             $data['type'] = "error";
-                            $data['message'] = "No existe opcion para lote";
+                            $data['message'] = "No existe opcion para lote \"".$lote."\"";
                             break;
                         }
 
@@ -162,9 +173,49 @@ if (isset($_FILES["file_xls"])) {
                             $un_id = $un['tb_unidad_id'];
                         } else {
                             $data['type'] = "error";
-                            $data['message'] = "No existe unidad";
+                            $data['message'] = "No existe unidad \"".$unidad."\"";
                             break;
                         }
+
+                        if (is_numeric($cat_pre_cos)){
+                            $cat_pre_cos = number_format((float)$cat_pre_cos, 2, '.', '');
+                        }
+
+                        if(!preg_match('/^\d+\.\d+$/',$cat_pre_cos)){
+                            $data['type'] = "error";
+                            $data['message'] = "Error en precio de costo \"".$cat_pre_cos."\"";
+                            break;
+                        }
+
+                        if (is_numeric($cat_pre_ven)){
+                            $cat_pre_ven = number_format((float)$cat_pre_ven, 2, '.', '');
+                        }
+
+                        if(!preg_match('/^\d+\.\d+$/',$cat_pre_ven)){
+                            $data['type'] = "error";
+                            $data['message'] = "Error en precio de venta \"".$cat_pre_ven."\"";
+                            break;
+                        }
+
+                        if($cat_pre_cos >= $cat_pre_ven) {
+                            $data['type'] = "error";
+                            $data['message'] = "Error, precio de venta (\"".$cat_pre_ven."\") debe ser menor al costo \"".$cat_pre_cos."\"";
+                            break;
+                        }
+
+                        if(!preg_match('/^\d+$/',$stock_minimo)) {
+                            $data['type'] = "error";
+                            $data['message'] = "Error en stock minimo \"".$stock_minimo."\"";
+                            break;
+                        }
+
+                        if(!preg_match('/^\d+$/',$stock_num)) {
+                            $data['type'] = "error";
+                            $data['message'] = "Error en stock \"".$stock_num."\"";
+                            break;
+                        }
+
+
 
                         $oProducto->insertar(
                             strip_tags(limpia_espacios($nombre)),
@@ -178,6 +229,8 @@ if (isset($_FILES["file_xls"])) {
                             $lote_id,
                             $_SESSION['empresa_id']
                         );
+
+
 
                         //id producto
                         $dts = $oProducto->ultimoInsert();
@@ -205,9 +258,7 @@ if (isset($_FILES["file_xls"])) {
                         $unibas = '1';
                         $preunicom = 0;
 
-
-                        $cat_pre_ven = $cat_pre_ven / 1.18;
-                        $uti = 100 * ($cat_pre_ven - $cat_pre_cos) / ($cat_pre_cos);
+                        $uti = 100 * ($cat_pre_ven / 1.18 - $cat_pre_cos) / ($cat_pre_cos);
 
                         $oCatalogoproducto->insertar(
                             $un_id,
@@ -228,13 +279,170 @@ if (isset($_FILES["file_xls"])) {
                             $pre_id
                         );
 
+
+                        //////Insertat Stock
+                        $rs = $oCatalogoproducto->presentacion_unidad_base($pre_id);
+                        $dt = mysql_fetch_array($rs);
+                        $cat_id = $dt['tb_catalogo_id'];
+                        mysql_free_result($rs);
+
+                        $dts= $oNotalmacen->consultar_existencia_saldo_inicial($cat_id, $_SESSION['almacen_id']);
+                        $dt = mysql_fetch_array($dts);
+                        $notalm_id=$dt['tb_notalmacen_id'];
+                        $notalmdet_id=$dt['tb_notalmacendetalle_id'];
+                        mysql_free_result($dts);
+
+                        if($notalm_id>0)
+                        {
+                            echo "Ya existe Dato.";
+                        }
+                        else
+                        {
+                            $oStock->insertar(
+                                $_SESSION['almacen_id'],
+                                $pre_id,
+                                $stock_num
+                            );
+
+                            //Nota de Almacen
+                            $doc_id=3;//nota de almacen
+
+                            $dts= $oTalonariointerno->correlativo_tra($_SESSION['almacen_id'],$doc_id);
+                            $dt = mysql_fetch_array($dts);
+
+                            $tal_id=$dt['tb_talonario_id'];
+                            $tal_ser=$dt['tb_talonario_ser'];
+                            $tal_num=$dt['tb_talonario_num'];
+                            $tal_fin=$dt['tb_talonario_fin'];
+                            mysql_free_result($dts);
+                            $numero=$tal_num+1;
+                            $largo=strlen($tal_fin);
+                            $correlativo=str_pad($numero,$largo, "0", STR_PAD_LEFT);
+                            $serie=$tal_ser;
+
+                            if($tal_ser!="")$numdoc=$serie.'-'.$correlativo;
+
+                            //Registro del Stock Inicial en las Notas de Almacen
+                            //1. Registro de Nota de Almacen
+                            $fec=date('Y-m-d');
+                            $tipo=1;
+                            $doc_id=5;
+                            $tipope_id=1;//saldo inicial
+                            $des="STOCK INICIAL";
+                            //insertamos nota almacen
+                            $oNotalmacen->insertar(
+                                $fec,
+                                $tipo,
+                                $doc_id,
+                                $numdoc,
+                                $tipope_id,
+                                $des,
+                                $_SESSION['almacen_id'],
+                                $_SESSION['usuario_id'],
+                                $_SESSION['empresa_id']
+                            );
+
+                            //2. ultimo nota de almacen
+                            $rs_na =$oNotalmacen->ultimoInsert();
+                            $dt_na = mysql_fetch_array($rs_na);
+                            $notalm_id=$dt_na['last_insert_id()'];
+                            mysql_free_result($rs_na);
+                            //Fin Nota de Almacen
+
+                            //actualizamos talonario de nota de almacen
+                            $estado='ACTIVO';
+                            if($tal_numero==$tal_fin)$tal_estado='INACTIVO';
+                            $rs= $oTalonariointerno->actualizar_correlativo($tal_id,$numero,$estado);
+
+                            //3. Consultar catalogo_Id
+                            $rs = $oCatalogoproducto->presentacion_unidad_base($pre_id);
+                            $dt = mysql_fetch_array($rs);
+                            $cat_id = $dt['tb_catalogo_id'];
+                            $precos = $dt['tb_catalogo_precos'];
+                            $preuni = $dt['tb_catalogo_preunicom'];
+                            mysql_free_result($rs);
+
+                            //4. registro detalle de notalmacen
+                            $oNotalmacen->insertar_detalle(
+                                $cat_id,
+                                $stock_num,
+                                $precos,
+                                $preuni,
+                                $notalm_id
+                            );
+                            //Fin Registro del Stock Inicial en las Notas de Almacen
+
+                            //KARDEX
+                            //registro de kardex
+                            $xac=1;
+                            $tipo_registro=1;//1 automatico 2 manual
+                            $kar_tip=$tipo;//1 entrada 2 salida
+                            $tipope_id=9;//9 nota de almacen
+                            $kar_des='NOTA DE ALMACEN - STOCK INICIAL';
+                            $operacion_id=$notalm_id;//id de la operacion(modulo compras, ventas, etc)
+                            $emp_id=$_SESSION['empresa_id'];
+
+
+
+                            //insertamos kardex
+                            $oKardex->insertar(
+                                $xac,
+                                $tipo_registro,
+                                $cod,
+                                $fec,
+                                $kar_tip,
+                                $doc_id,
+                                $numdoc,
+                                $tipope_id,
+                                $kar_des,
+                                $operacion_id,
+                                $_SESSION['almacen_id'],
+                                $_SESSION['usuario_id'],
+                                $_SESSION['empresa_id']
+                            );
+                            //ultimo kardex
+                            $dts=$oKardex->ultimoInsert();
+                            $dt = mysql_fetch_array($dts);
+                            $kar_id=$dt['last_insert_id()'];
+                            mysql_free_result($dts);
+
+                            $oKardex->modificar_codigo($kar_id,$kar_id);
+
+                            //registro detalle de kardex
+                            $oKardex->insertar_detalle(
+                                $cat_id,
+                                $stock_num,
+                                $precos,
+                                $preuni,
+                                $kar_id
+                            );
+
+                            //actualizar stock si es necesario con el kardex
+                            $fecini='01-01-2015';
+                            $fecfin=date('d-m-Y');
+                            $stock=stock_kardex($cat_id,$_SESSION['almacen_id'],fecha_mysql($fecini),fecha_mysql($fecfin),$_SESSION['empresa_id']);
+
+                            $dts=$oCatalogoproducto->presentacion_catalogo_stock_almacen($cat_id,$_SESSION['almacen_id']);
+                            $dt = mysql_fetch_array($dts);
+                            $pre_id		=$dt['tb_presentacion_id'];
+                            $sto_id		=$dt['tb_stock_id'];
+                            $sto_num	=$dt['tb_stock_num'];
+                            $mul		=$dt['tb_catalogo_mul'];
+                            mysql_free_result($dts);
+
+                            $oStock->modificar(
+                                $sto_id,
+                                $stock
+                            );
+
+                        }
+
                         $data['type'] = "success";
                         $data['message'] = "Excel importado correctamente";
                     }
                 }
                 $number++;
             }
-
         }
     } else {
         $data['type'] = "error";
