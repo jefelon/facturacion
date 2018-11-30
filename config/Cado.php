@@ -10,7 +10,7 @@ class Cado{
 	var $rsql;
 
     function Cado(){
-        $this->Servidor = 'localhost'; $this->Usuario = 'root'; $this->Clave = '';
+        $this->Servidor = '192.168.1.34'; $this->Usuario = 'red'; $this->Clave = 'red';
 
         //$this->Servidor = 'localhost'; $this->Usuario = ''; $this->Clave = '';
         $this->BaseDatos ="factura";
