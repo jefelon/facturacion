@@ -19,7 +19,7 @@ header("Content-Type: application/vnd.ms-excel; name='excel'"); // This should w
 header('Content-type: application/x-msexcel'); // This should work for the rest
 
 $fecha_actual=$d=date('d-m-Y');
-$nombre_archivo='rep_compras_'.$fecha_actual.'.xls';
+$nombre_archivo='rep_kardex_'.$fecha_actual.'.xls';
 header('Content-Disposition: attachment; filename="'.$nombre_archivo.'"');
 
 echo utf8_decode($_POST['hdd_tabla_valorada']);

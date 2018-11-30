@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
 	if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 	require_once ("../../config/Cado.php");
@@ -168,6 +169,25 @@ function producto_form(act,idf){
 		}
 	});
 }
+
+function producto_importar_form(){
+    $.ajax({
+        type: "POST",
+        url: "producto_importar_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+        }),
+        beforeSend: function() {
+            $('#msj_producto').hide();
+            $('#div_producto_importar').dialog("open");
+            $('#div_producto_importar').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_producto_importar').html(html);
+        }
+    });
+}
 	
 function eliminar_producto(id)
 {      
@@ -229,6 +249,11 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
+
+    $('#btn_importar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
 		
 	producto_filtro();		
 	
@@ -273,6 +298,29 @@ $(function() {
 			$("#div_presentacion_vista").html('Cargando...');
 		}
 	});
+
+    $( "#div_producto_importar" ).dialog({
+        title:'Importar Productos',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 990,
+        modal: true,
+        position: 'top',
+        buttons: {
+            Importar: function() {
+                $("#for_pro_imp").submit();
+            },
+            Cancelar: function() {
+                $('#for_pro').each (function(){this.reset();});
+                $( this ).dialog("close");
+            }
+        },
+        close: function()
+        {
+            $("#div_producto_importar").html('Cargando...');
+        }
+    });
 		
 });
 </script>
@@ -301,6 +349,7 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="producto_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
+                        <td width="25" align="left" valign="middle"><a id="btn_importar" href="#" onClick="producto_importar_form()">Importar</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
                       <td align="right">
                       <div id="msj_producto" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
@@ -319,10 +368,14 @@ $(function() {
       		</div>
             <div id="div_producto_form">
 			</div>
+            <div id="div_producto_importar">
+            </div>
             <div id="div_producto_tabla" class="contenido_tabla">
       		</div>
 			<div id="div_presentacion_vista">
       		</div>
+
+
       	</div>
     </article>
 </div>

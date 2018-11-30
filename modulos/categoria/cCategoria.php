@@ -26,6 +26,16 @@ class cCategoria{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrar_filtro_nombre($nom){
+        $sql="SELECT * 
+	    FROM tb_categoria
+	    WHERE tb_categoria_nom='$nom'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function mostrar_cat_idp(){
 	$sql="SELECT * 
 	FROM tb_categoria
