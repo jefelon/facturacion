@@ -254,6 +254,11 @@ $(function() {
         icons: {primary: "ui-icon-plus"},
         text: true
     });
+
+    $('#btn_descargar_plantilla').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
 		
 	producto_filtro();		
 	
@@ -350,6 +355,7 @@ $(function() {
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="producto_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                         <td width="25" align="left" valign="middle"><a id="btn_importar" href="#" onClick="producto_importar_form()">Importar</a></td>
+                        <td width="180" align="left" valign="middle"><a id="btn_descargar_plantilla" href="http://localhost/facturacion/libreriasphp/excel/ejemplo_productos.xlsx">Descargar Plantilla</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
                       <td align="right">
                       <div id="msj_producto" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
