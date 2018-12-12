@@ -81,6 +81,8 @@ if($_POST['action']=='agregar')
 			{
 				$precio_unitario=moneda_mysql($_POST['cat_precom'])/(1+$igv_dato);
 			}
+
+
 			//PRECIO UNITARIO
 			$_SESSION['compra_linea_preuni'][$_POST['cat_id']]=$precio_unitario;
 			//-----------------------------------------------------------------------
@@ -305,9 +307,9 @@ $(function() {
 
 });
 
-function cambiar_costo_unitario(cost_uni,n) {
-    $("#cost_uni"+n).html(cost_uni);
-}
+// function cambiar_costo_unitario(cost_uni,n) {
+//     $("#cost_uni"+n).html(cost_uni);
+// }
 </script>
 <input name="hdd_com_numite" id="hdd_com_numite" type="hidden" value="<?php echo $filas?>">
 <fieldset><legend>Detalle de Compra</legend>

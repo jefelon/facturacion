@@ -415,25 +415,10 @@ $html.='<tr class="row">';
                     $html.='<td style="text-align:center">'.$cont.'</td>
                 <td style="text-align: center">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>';              
-                    if ($dt["cs_tipoafectacionigv_cod"] == 10) {
-                            $html .= '
-                            <td style="text-align: right">' . formato_moneda($precio_unitario*1.18) . '</td>
-                            <td style="text-align: right"></td>
-                            <td style="text-align: right">'.formato_moneda(($precio_unitario*$dt['tb_ventadetalle_can'])*1.18).'</td>';
-                    } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
-                            $html .= '
-                            <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
-                            <td style="text-align: right">' . formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']). '</td>
-                            <td style="text-align: right"></td>';
-    
-                    }else{
-                            $html .= '
-                            <td style="text-align: right">' . formato_moneda($precio_unitario*1.18) . '</td>
-                            <td style="text-align: right"></td>
-                            <td style="text-align: right">'.formato_moneda(($precio_unitario*$dt['tb_ventadetalle_can'])*1.18).'</td>';
-    
-                    }
+                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].$ven_det_serie.'</td>                   
+                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]).'</td>';
+
+                    $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
                 }else{
                     $html.='<td style="text-align: left">'.$cont.'</td>
 
@@ -441,25 +426,9 @@ $html.='<tr class="row">';
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>
-                <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>';
-                    if ($dt["cs_tipoafectacionigv_cod"] == 10) {
-                            $html .= '
-                            <td style="text-align: right">' . formato_moneda($precio_unitario*1.18) . '</td>
-                            <td style="text-align: right"></td>
-                            <td style="text-align: right">'.formato_moneda(($precio_unitario*$dt['tb_ventadetalle_can'])*1.18).'</td>';
-                    } elseif ($dt["cs_tipoafectacionigv_cod"] == 20) {
-                            $html .= '
-                            <td style="text-align: right">' . formato_moneda($precio_unitario) . '</td>
-                            <td style="text-align: right">' . formato_moneda($precio_unitario*$dt['tb_ventadetalle_can']). '</td>
-                            <td style="text-align: right"></td>';
-    
-                    }else{
-                            $html .= '
-                            <td style="text-align: right">' . formato_moneda($precio_unitario*1.18) . '</td>
-                            <td style="text-align: right"></td>
-                            <td style="text-align: right">'.formato_moneda(($precio_unitario*$dt['tb_ventadetalle_can'])*1.18).'</td>';
-    
-                    }
+                <td style="text-align: right">'.$dt["tb_ventadetalle_des"].'</td>
+                <td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_valven"]).'</td>';
+                    $html.='<td style="text-align: right">'.formato_moneda($dt['tb_ventadetalle_valven']+$dt['tb_ventadetalle_igv']).'</td>';
                 }
             $html.='</tr>';
         $cont++;

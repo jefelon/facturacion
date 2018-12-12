@@ -411,7 +411,7 @@ if($_POST['action']=="editar"){
             async:false,
             dataType: "json",
             data: ({
-                doc_id: 18
+                doc_id: 22
             }),
             beforeSend: function() {
                 $('#txt_ven_numdocguia').val('Cargando...');
@@ -1436,7 +1436,7 @@ if($_POST['action']=="editar"){
                 $('.insertar-guia').show();
                 $('#txt_bus_cat_preven_noigv').show();
                 $('#txt_bus_cat_preven').hide();
-                $("#chk_imprimir_guia").attr('checked', false);
+                $("#chk_imprimir_guia").attr('checked', true);
             }else{
                 $('.imprimir_guia').hide();
                 $('.insertar-guia').hide();
@@ -2266,6 +2266,7 @@ if($_POST['action']=="editar"){
         }
 
     }
+
 </script>
 
 <style>
@@ -2302,7 +2303,7 @@ if($_POST['action']=="editar"){
                             <input name="chk_imprimir" type="checkbox" id="chk_imprimir" value="1" checked="CHECKED">
                         <?php }?>
                     </td>
-                    <td class="imprimir_guia" style="display: block">
+                    <td class="imprimir_guia" style="display: none">
                         <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
                             <label for="chk_imprimir_guia"> Registrar e Imprimir Guia</label>
                             <input name="chk_imprimir_guia" type="checkbox" id="chk_imprimir_guia" value="1"  title="Registrar guia? ">

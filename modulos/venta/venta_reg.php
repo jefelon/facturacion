@@ -182,7 +182,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         if($_POST['chk_imprimir_guia']==1){
 
             //consultamos talonario
-            $dtsg= $oTalonario->correlativo($_SESSION['puntoventa_id'],18);
+            $dtsg= $oTalonario->correlativo($_SESSION['puntoventa_id'],22);
             $dtg = mysql_fetch_array($dtsg);
             $tal_idg=$dtg['tb_talonario_id'];
             $tal_serg=$dtg['tb_talonario_ser'];
