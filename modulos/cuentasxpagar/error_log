@@ -1,0 +1,4 @@
+[28-Nov-2012 21:50:54] PHP Fatal error:  Call to undefined method cCatalogo::presentacion_catalogo() in /home/inticap/public_html/gventas/app/modulos/compra/compra_car.php on line 16
+[28-Nov-2012 21:51:09] PHP Fatal error:  Call to undefined method cCatalogo::presentacion_catalogo() in /home/inticap/public_html/gventas/app/modulos/compra/compra_car.php on line 16
+[28-Nov-2012 21:52:32] PHP Fatal error:  Class 'cCatalogo' not found in /home/inticap/public_html/gventas/app/modulos/compra/compra_car.php on line 5
+[29-Nov-2012 00:31:33] PHP Fatal error:  Call to undefined method cCatalogo::presentacion_catalogo() in /home/inticap/public_html/gventas/app/modulos/compra/compra_car.php on line 175

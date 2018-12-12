@@ -1,0 +1,56 @@
+<script type="text/javascript">
+function venta_filtro(){
+	$.ajax({
+		type: "POST",
+		url: "../venta/cotizacion_filtro_adm.php",
+		async:true,
+		dataType: "html",                      
+		//data: ({
+			//producto: $('#txt_fil_pro').val()
+		//}),
+		beforeSend: function() {
+			$('#div_catalogo_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+		success: function(html){
+			$('#div_catalogo_venta_filtro').html(html);
+		},
+		complete: function(){
+			venta_tabla();
+		}
+	});
+}
+
+function venta_tabla(){
+	$.ajax({
+		type: "POST",
+		url: "../venta/venta_tabla_seleccionar.php",
+		async:true,
+		dataType: "html",                      
+		data: ({
+			ven_fec1:	$('#txt_fil_ven_fec1').val(),
+			ven_fec2:	$('#txt_fil_ven_fec2').val(),
+			cli_id:		$('#txt_fil_cli_id').val(),
+			usu_id:		$('#cmb_fil_ven_ven').val(),
+			punven_id:	$('#cmb_fil_ven_punven').val(),
+			ven_est:	$('#cmb_fil_ven_est').val()
+		}),
+		beforeSend: function() {
+			$('#div_catalogo_venta_tabla').addClass("ui-state-disabled");
+        },
+		success: function(html){
+			$('#div_catalogo_venta_tabla').html(html);
+		},
+		complete: function(){			
+			$('#div_catalogo_venta_tabla').removeClass("ui-state-disabled");
+		}
+	});     
+}
+
+$(function() {
+	venta_filtro();
+});
+</script>
+<div id="div_catalogo_venta_filtro">
+</div>
+<div id="div_catalogo_venta_tabla">
+</div>

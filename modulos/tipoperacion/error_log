@@ -1,0 +1,6 @@
+[25-Jan-2018 23:25:12 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/yfmhytrg/public_html/facturacion/config/Cado.php on line 21
+[25-Jan-2018 23:27:11 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/yfmhytrg/public_html/facturacion/config/Cado.php on line 21
+[31-Jan-2018 00:43:32 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/yfmhytrg/public_html/facturacion/config/Cado.php on line 21
+[15-Feb-2018 16:33:56 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/yfmhytrg/public_html/facturacion/config/Cado.php on line 21
+[12-Mar-2018 20:13:59 UTC] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/yfmhytrg/public_html/facturacion/config/Cado.php on line 21
+[05-Dec-2018 07:29:09 America/Lima] PHP Deprecated:  mysql_connect(): The mysql extension is deprecated and will be removed in the future: use mysqli or PDO instead in /home/aqpfact/verdufrut.aqpfact.pe/config/Cado.php on line 21
