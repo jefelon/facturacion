@@ -29,7 +29,23 @@ require_once("../formatos/formato.php");
 	//if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura.php';
 	//if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta.php';
 
-	if($doc_nom=='NOTA DE CREDITO')$archivo_destino='../notacredito/notacredito_cpeimp_mat.php';
+$tipo_documento=substr($_POST['txt_ven_ser'], 0, 1);
+if($tipo_documento=='F' OR $tipo_documento=='B')
+{
+    if($doc_nom=='NOTA DE CREDITO')
+    {
+        $archivo_destino='../notacredito/notacredito_cpeimp_mat.php';
+    }
+}
+else if($tipo_documento =='0')
+{
+    if($doc_nom=='NOTA DE CREDITO')
+    {
+        $archivo_destino='../notacredito/notacredito_cpeimp.php';
+    }
+
+}
+
 
 ?>
 <script type="text/javascript">

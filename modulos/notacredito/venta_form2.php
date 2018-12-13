@@ -235,10 +235,16 @@ $(function() {
         </select>
       </td>
       <td>
+          <label for="cmb_ven_docRel">Vinculado a:</label>
+          <select name="cmb_ven_docRel" id="cmb_ven_docRel">
+              <option value="2" selected="selected">FACTURA</option>
+              <option value="3" selected="selected">BOLETA</option>
+          </select>
+
       	<label for="txt_ven_ser">Serie:</label>
         <input name="txt_ven_ser" type="text" id="txt_ven_ser" style="text-align:right; font-size:14px"  value="" maxlength="4" size="6">
         <label for="txt_ven_num">Número:</label>
-        <input name="txt_ven_num" type="text" id="txt_ven_num" style="text-align:right; font-size:14px"  value="" maxlength="8" size="10">
+        <input name="txt_ven_num" type="text" id="txt_ven_num" style="text-align:right; font-size:14px"  value="" maxlength="8" size="8">
       </td>
     </tr>
 </table>
