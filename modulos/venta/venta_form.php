@@ -2622,8 +2622,8 @@ if($_POST['action']=="editar"){
         <?php if($_POST['action']=='insertar'){?>
             <div id="div_productos_servicios_tab">
                 <ul>
-                    <li><a id="carga_productos" href="#div_productos">Agregar Productos</a></li>
-                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
+                    <li><a id="carga_productos" href="#div_productos">Agregar Servicios</a></li>
+<!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
                 </ul>
                 <div id="div_productos">
                     <div id="cuadro-contain" class="ui-widget">
