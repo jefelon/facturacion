@@ -23,6 +23,8 @@ $(function() {
     //icons: {primary: "ui-icon-document"},
     //text: false
   });
+  $('.btn_bar').button({
+  });
 
 	$("#tabla_venta").tablesorter({
 		widgets: ['zebra', 'zebraHover'],
@@ -80,14 +82,20 @@ $(function() {
                       <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                       <td><?php echo $dt1['tb_venta_est']?></td>
                       <td align="center" nowrap="nowrap">
-                          <?php
 
-                          $cadena_a_codificar="PIO)/((454546fgffg?¡paraDescargar&ven_id=".$dt1['tb_venta_id'];
-                          $key="l09=4di_-T==";
-                          $cadena_codificada=encrypt($cadena_a_codificar, $key);
-                          ?>
                       <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
-                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="venta_cpeimp.php?action=<?php echo $cadena_codificada; ?>" title="Descargar pdf">PDF</a>
+                      <?php
+                          $doc_nom=$dt1['tb_documento_nom'];
+                          if($doc_nom=='FACTURA')$archivo_destino='../../modulos/venta/venta_impresion_gra_factura.php';
+                          if($doc_nom=='BOLETA')$archivo_destino='../../modulos/venta/venta_impresion_gra_boleta.php';
+                          if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
+                          if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+                          if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
+                      ?>
+                      <form action="<?php echo $archivo_destino?>" target="_blank" method="post">
+                              <input name="ven_id" type="hidden" value="<?php echo $dt1['tb_venta_id']?>">
+                              <button class="btn_bar" id="btn_bar" type="submit" title="PDF">PDF</button>
+                      </form>
                       <a class="btn_xml" id="btn_xml" target="_blank" href="../venta/descargar_xml.php?action=<?php echo $cadena_codificada; ?>" title="Descargar XML">XML</a>
                       </td>
                     </tr>
