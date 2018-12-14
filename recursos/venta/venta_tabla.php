@@ -4,6 +4,28 @@ require_once ("../../config/Cado.php");
 require_once ("cVenta.php");
 $oVenta = new cVenta();
 require_once ("../../modulos/formatos/formato.php");
+require_once ("../../modulos/venta/cVentapago.php");
+$oVentapago = new cVentapago();
+require_once ("../../modulos/formatos/numletras.php");
+require_once ("../../modulos/formatos/formato.php");
+require_once ("../../modulos/empresa/cEmpresa.php");
+$oEmpresa = new cEmpresa();
+require_once ("../../modulos/usuarios/cUsuario.php");
+$oUsuario = new cUsuario();
+
+
+require_once ("../../modulos/lote/cLote.php");
+$oLote = new cLote();
+
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt = mysql_fetch_array($dts);
+$ruc_empresa=$dt['tb_empresa_ruc'];
+$razon_defecto = $dt['tb_empresa_razsoc'];
+$direccion_defecto = $dt['tb_empresa_dir'];
+$contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
+$empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
+mysql_free_result($dts);
+
 $dts1=$oVenta->mostrar_filtro_cui($_POST['txt_fil_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id']);
 $num_rows= mysql_num_rows($dts1);
 
@@ -91,12 +113,17 @@ $(function() {
                           if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
                           if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
                           if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
+
+                          $xml="";
+                          $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+                          $cdr="";
+                          $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
                       ?>
                       <form action="<?php echo $archivo_destino?>" target="_blank" method="post">
                               <input name="ven_id" type="hidden" value="<?php echo $dt1['tb_venta_id']?>">
                               <button class="btn_bar" id="btn_bar" type="submit" title="PDF">PDF</button>
                       </form>
-                      <a class="btn_xml" id="btn_xml" target="_blank" href="../venta/descargar_xml.php?action=<?php echo $cadena_codificada; ?>" title="Descargar XML">XML</a>
+                      <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>
                       </td>
                     </tr>
                 <?php
