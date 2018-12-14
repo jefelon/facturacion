@@ -33,8 +33,8 @@ if($_POST['action_cliente']=="insertar")
 				$_POST['txt_cli_est'],
                 $_SESSION['empresa_id'],
                 $_POST['cmb_precio_id'],
-                $_POST['cmb_cli_retiene']
-
+                $_POST['cmb_cli_retiene'],
+                $_POST['txt_cli_cui']
 				);
 			
 				$dts=$oCliente->ultimoInsert();
@@ -83,7 +83,9 @@ if($_POST['action_cliente']=="editar")
 				$_POST['txt_cli_est'],
                 $_SESSION['empresa_id'],
                 $_POST['cmb_precio_id'],
-                $_POST['cmb_cli_retiene']
+                $_POST['cmb_cli_retiene'],
+                $_POST['txt_cli_cui']
+
 
 				);
 			

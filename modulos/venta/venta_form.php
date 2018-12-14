@@ -671,7 +671,7 @@ if($_POST['action']=="editar"){
                 tipo_accion: "insertar_venta",
                 cmb_cat_id: 9,
                 cmb_mar_id: 1,
-                cmb_afec_id: 1,
+                cmb_afec_id: 9, //EXONERADO
                 cmb_lote: "",
                 cmb_pro_est: "Activo",
                 hdd_prod_img:"",

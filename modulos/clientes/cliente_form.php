@@ -19,6 +19,7 @@ if($_POST['action']=="editar"){
         $est=$dt['tb_cliente_est'];
         $cliente_retiene=$dt['tb_cliente_retiene'];
         $precio_id=$dt['tb_precio_id'];
+        $cui=$dt['tb_cliente_cui'];
 
 
 	mysql_free_result($dts);
@@ -289,6 +290,7 @@ $(function() {
             <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
             <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
             <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
+            <label for="txt_cli_cui">CUI:</label><input name="txt_cli_cui" id="txt_cli_cui" type="text" value="<?php echo $cui?>" size="8">
             <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
             </td>
         </tr>

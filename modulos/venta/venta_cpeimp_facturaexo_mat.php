@@ -89,6 +89,7 @@ $dt = mysql_fetch_array($dts);
   $cli_nom=$dt['tb_cliente_nom'];
   $cli_doc=$dt['tb_cliente_doc'];
   $cli_dir=$dt['tb_cliente_dir'];
+  $cui = $dt['tb_cliente_cui'];
   
   $valven =$dt['tb_venta_valven'];
   $igv  =$dt['tb_venta_igv'];
@@ -319,7 +320,7 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'DNI: ' . $cli_doc ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'COD: ' . $cli_doc ?></td>
+        <td colspan="4"> <?php echo 'COD: ' . $cui ?></td>
     </tr>
     <tr>
         <td colspan="4"> <?php echo $cli_nom ?></td>
@@ -372,7 +373,22 @@ if($impresion=='pdf')ob_start();
       </thead>
       <tbody>
       <tr>
-          <td colspan="2" class="izquierda py-5">TOTAL A PAGAR:</td>
+          <td colspan="2" class="izquierda mt-5 negrita">OP. GRAVADA:</td>
+          <td colspan="2" class="derecha" style="text-align: right;">
+              S/ <?php echo formato_money($valven) ?></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="izquierda">OP. EXONERADA:</td>
+          <td colspan="2" class="derecha" style="text-align: right;">
+              S/ <?php echo formato_money($exo) ?></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="izquierda">IGV:</td>
+          <td colspan="2" class="derecha" style="text-align: right;">
+              S/ <?php echo formato_money($igv) ?></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="izquierda">TOTAL A PAGAR:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
               S/ <?php echo formato_money($tot) ?></td>
       </tr>
