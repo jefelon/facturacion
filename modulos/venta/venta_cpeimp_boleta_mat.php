@@ -92,6 +92,7 @@ $cli_id = $dt['tb_cliente_id'];
 $cli_nom = $dt['tb_cliente_nom'];
 $cli_doc = $dt['tb_cliente_doc'];
 $cli_dir = $dt['tb_cliente_dir'];
+$cui = $dt['tb_cliente_cui'];
 
 $valven = $dt['tb_venta_valven'];
 $exo = $dt['tb_venta_exo'];
@@ -320,7 +321,7 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="4"> <?php echo 'DNI: ' . $cli_doc ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'COD: ' . $cli_doc ?></td>
+                    <td colspan="4"> <?php echo 'COD: ' . $cui ?></td>
                 </tr>
                 <tr>
                     <td colspan="4"> <?php echo $cli_nom ?></td>
