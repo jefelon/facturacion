@@ -372,7 +372,22 @@ if($impresion=='pdf')ob_start();
       </thead>
       <tbody>
       <tr>
-          <td colspan="2" class="izquierda py-5">TOTAL A PAGAR:</td>
+          <td colspan="2" class="izquierda mt-5 negrita">OP. GRAVADA:</td>
+          <td colspan="2" class="derecha" style="text-align: right;">
+              S/ <?php echo formato_money($valven) ?></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="izquierda">OP. EXONERADA:</td>
+          <td colspan="2" class="derecha" style="text-align: right;">
+              S/ <?php echo formato_money($exo) ?></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="izquierda">IGV:</td>
+          <td colspan="2" class="derecha" style="text-align: right;">
+              S/ <?php echo formato_money($igv) ?></td>
+      </tr>
+      <tr>
+          <td colspan="2" class="izquierda">TOTAL A PAGAR:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
               S/ <?php echo formato_money($tot) ?></td>
       </tr>

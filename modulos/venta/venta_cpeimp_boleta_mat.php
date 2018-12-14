@@ -94,6 +94,7 @@ $cli_doc = $dt['tb_cliente_doc'];
 $cli_dir = $dt['tb_cliente_dir'];
 
 $valven = $dt['tb_venta_valven'];
+$exo = $dt['tb_venta_exo'];
 $igv = $dt['tb_venta_igv'];
 $tot = $dt['tb_venta_tot'];
 
@@ -263,6 +264,9 @@ if ($impresion == 'pdf') ob_start();
             padding-top: 2.5mm;
             padding-bottom: 2.5mm;
         }
+        .mt-5{
+            padding-top: 2.5mm;
+        }
 
     </style>
 
@@ -375,7 +379,22 @@ if ($impresion == 'pdf') ob_start();
                             </thead>
                             <tbody>
                             <tr>
-                                <td colspan="2" class="izquierda py-5">TOTAL A PAGAR:</td>
+                                <td colspan="2" class="izquierda mt-5">OP. GRAVADA:</td>
+                                <td colspan="2" class="derecha" style="text-align: right;">
+                                    S/ <?php echo formato_money($valven) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="izquierda">OP. EXONERADA:</td>
+                                <td colspan="2" class="derecha" style="text-align: right;">
+                                    S/ <?php echo formato_money($exo) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="izquierda">IGV:</td>
+                                <td colspan="2" class="derecha" style="text-align: right;">
+                                    S/ <?php echo formato_money($igv) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="izquierda">TOTAL A PAGAR:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     S/ <?php echo formato_money($tot) ?></td>
                             </tr>
