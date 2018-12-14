@@ -65,15 +65,7 @@ function venta_filtro(er,doc,ser,cor,fec,mon)
 		type: "POST",
 		url: "venta_filtro.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			error: er,
-			doc: doc,
-			ser: ser,
-			cor: cor,
-			fec: fec,
-			mon: mon
-		}),
+		dataType: "html",
 		beforeSend: function() {
 			$('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },

@@ -4,8 +4,7 @@ require_once ("../../config/Cado.php");
 require_once ("cVenta.php");
 $oVenta = new cVenta();
 require_once ("../../modulos/formatos/formato.php");
-
-$dts1=$oVenta->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),$_POST['cmb_fil_ven_doc'],$_POST['txt_fil_ser'],$_POST['txt_fil_cor'],$_POST['txt_fil_mon']);
+$dts1=$oVenta->mostrar_filtro_cui($_POST['txt_fil_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id']);
 $num_rows= mysql_num_rows($dts1);
 
 ?>
@@ -35,7 +34,7 @@ $(function() {
 		sortList: [[0,0],[2,1],[1,1]]
     });
 	
-}); 
+});
 </script>
 <?php
       if($num_rows>0){
@@ -82,27 +81,6 @@ $(function() {
                       <td><?php echo $dt1['tb_venta_est']?></td>
                       <td align="center" nowrap="nowrap">
                           <?php
-                          function encrypt($string, $key) {
-                              $result = '';
-                              for($i=0; $i<strlen($string); $i++) {
-                                  $char = substr($string, $i, 1);
-                                  $keychar = substr($key, ($i % strlen($key))-1, 1);
-                                  $char = chr(ord($char)+ord($keychar));
-                                  $result.=$char;
-                              }
-                              return base64_encode($result);
-                          }
-                          function decrypt($string, $key) {
-                              $result = '';
-                              $string = base64_decode($string);
-                              for($i=0; $i<strlen($string); $i++) {
-                                  $char = substr($string, $i, 1);
-                                  $keychar = substr($key, ($i % strlen($key))-1, 1);
-                                  $char = chr(ord($char)-ord($keychar));
-                                  $result.=$char;
-                              }
-                              return $result;
-                          }
 
                           $cadena_a_codificar="PIO)/((454546fgffg?¡paraDescargar&ven_id=".$dt1['tb_venta_id'];
                           $key="l09=4di_-T==";
