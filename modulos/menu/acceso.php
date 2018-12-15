@@ -16,9 +16,13 @@ function ir_principal($usergrupo_id){
 	case 4:
         $url='../ejecutor/';
         break;
+        case 5:
+            $url='../../modulos/recursos/venta/';
+            break;
 	/*default:
        	$url='inicioEjec.php';*/
 	}
+
 	
 	return $url;
 }	

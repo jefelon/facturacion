@@ -1,11 +1,7 @@
 <?php
-	/*session_start();
+	session_start();
 	if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 	require_once ("../../config/Cado.php");
-	
-	require_once ("../../modulos/contenido/contenido.php");
-	$oContenido = new cContenido();*/
-
 	require_once ("../../config/datos.php");
 ?>
 <!DOCTYPE html>
