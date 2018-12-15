@@ -95,7 +95,7 @@ if($num_rows>0){
                     echo $dt1['tb_documento_nom'];
                     ?>
                 </td>
-                <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
+                <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
                 <td>
                     <?php
                     if($dt1['cs_tipomoneda_id']=='1'){
