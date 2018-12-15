@@ -71,27 +71,11 @@ class cUsuario{
 		$use="?invalido?";
 	}
 	//$use=mysql_real_escape_string($use);
-	$sql="SELECT * FROM tb_cliente WHERE tb_cliente_gui='$use' AND tb_cliente_pas=MD5('$pas');";
+	$sql="SELECT * FROM tb_usuario WHERE tb_usuario_use='$use' AND tb_usuario_pas=MD5('$pas');";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-
-    function acceso_recu($use,$pas){
-        if(preg_match("/^[0-9a-zA-Z@.]+$/",$use))
-        {
-            $use=$use;
-        }
-        else
-        {
-            $use="?invalido?";
-        }
-        //$use=mysql_real_escape_string($use);
-        $sql="SELECT * FROM tb_cliente WHERE tb_cliente_gui='$use' AND tb_cliente_pas=MD5('$pas');";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
 	function registroAcceso($id){
 	$sql="SELECT * 
 		FROM tb_usuario u
