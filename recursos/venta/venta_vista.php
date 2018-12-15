@@ -7,7 +7,7 @@
 	require_once ("../../modulos/contenido/contenido.php");
 	$oContenido = new cContenido();*/
 session_start();
-if($_SESSION["autentificado2"]!= "SI"){ header("location: ../../index.php"); exit();}
+if($_SESSION["autentificado2"]!= "SI"){ header("location: ../index.php"); exit();}
 	require_once ("../../config/datos.php");
 ?>
 <!DOCTYPE html>
