@@ -36,7 +36,7 @@ if($usuario!="" and $password!="")
 			
 				$_SESSION['cliente_id']			=$fila['tb_cliente_id'];
                 $_SESSION['cliente_cui']			=$fila['tb_cliente_cui'];
-				$_SESSION['cliente_nombre']		=$fila['tb_cliente_nom'];
+				$_SESSION['cliente_nombre']		='<b>DOC:</b> '.$fila['tb_cliente_doc'].' - '.$fila['tb_cliente_nom'];
 				
 				//datos empresa sesión
                 $_SESSION['empresa_id']=1;

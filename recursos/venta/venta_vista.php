@@ -236,10 +236,10 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">CONSULTA DE DOCUMENTOS</td>
+                    <td class="caption_cont">CONSULTA DE MIS COMPROBANTES</td>
                   </tr>
                 <tr>
-                    <td height="30px" align="center" class=""> CUI: <?php echo $_SESSION['cliente_cui'] .'-'.$_SESSION['autentificado2']; ?>
+                    <td height="30px" align="center" class=""> <b>CUI:</b> <?php echo $_SESSION['cliente_cui'].'   '.$_SESSION['cliente_nombre']; ?>
 
                         <img src="../../images/iconos/shut_down.png" alt="Cerrar Sesion" width="14" height="14" border="0" align="top" />
                         <a href="../usuarios/cerrar_sesion.php" title="Cerrar Sesión" tabindex="9999">FINALIZAR</a>
