@@ -26,7 +26,7 @@ $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_em
 $empresa_logo = '../../modulos/empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
 
-$dts1=$oVenta->mostrar_filtro_cui($_SESSION['cliente_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_SESSION['cliente_id'],$_POST['cmb_fil_ven_est']);
+$dts1=$oVenta->mostrar_filtro_cui($_SESSION['cliente_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['cmb_fil_ven_est']);
 $num_rows= mysql_num_rows($dts1);
 
 ?>
