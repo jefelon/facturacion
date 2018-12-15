@@ -24,7 +24,7 @@ class cVenta{
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE tb_usuario_id = $usu_id
+	WHERE c.tb_cliente_id = 1
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' 
 	
 	";

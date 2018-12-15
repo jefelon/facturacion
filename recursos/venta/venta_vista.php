@@ -5,7 +5,6 @@
 	
 	require_once ("../../modulos/contenido/contenido.php");
 	$oContenido = new cContenido();*/
-
 	require_once ("../../config/datos.php");
 ?>
 <!DOCTYPE html>

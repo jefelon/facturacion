@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require_once ("../../config/Cado.php");
 require_once ("cVenta.php");
 $oVenta = new cVenta();
@@ -17,7 +17,7 @@ $oUsuario = new cUsuario();
 require_once ("../../modulos/lote/cLote.php");
 $oLote = new cLote();
 
-$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dts=$oEmpresa->mostrarUno(1);
 $dt = mysql_fetch_array($dts);
 $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
@@ -26,7 +26,7 @@ $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_em
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
 
-$dts1=$oVenta->mostrar_filtro_cui($_POST['txt_fil_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id']);
+$dts1=$oVenta->mostrar_filtro_cui($_POST['txt_fil_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['cliente_id']);
 $num_rows= mysql_num_rows($dts1);
 
 ?>
