@@ -264,6 +264,7 @@ $(function() {
 </div>
 <footer>
     <?php /*echo $oContenido->print_footer()*/?>
+   <p style="text-align: center"> <a href="https://www.aqpfact.pe" target="_blank">AQPFACT - Facturación electrónica <?php echo date("Y");?></a></p>
 </footer>
 </body>
 </html>
