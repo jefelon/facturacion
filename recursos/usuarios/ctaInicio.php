@@ -3,8 +3,6 @@ require_once ("../../config/Cado.php");
 require_once ("cUsuario.php");
 $oUsuario = new cUsuario();
 
-require_once ("../../modulos/menu/acceso.php");
-
 $usuario="";
 $password="";
 
@@ -41,16 +39,14 @@ if($usuario!="" and $password!="")
 			
 			//datos de usuario
 			session_start();
-				$_SESSION['autentificado']		= "SI";
+				$_SESSION['autentificado2']		= "SI";
 			
-				$_SESSION['usuario_id']			=$dt['tb_cliente_id'];
-				//$_SESSION['usuario_nombre']		=$dt['tb_usuario_apepat']." ".$dt['tb_usuario_apemat']." ".$dt['tb_usuario_nom'];
-				
-				$_SESSION['usuario_empresa_id']	=$dt['tb_empresa_id'];
+				$_SESSION['cliente_id']			=$dt['tb_cliente_id'];
+                $_SESSION['cliente_cui']			=$dt['tb_cliente_cui'];
+				$_SESSION['cliente_nombre']		=$dt['tb_usuario_apepat']." ".$dt['tb_usuario_apemat']." ".$dt['tb_usuario_nom'];
 				
 				//datos empresa sesión
-				$_SESSION['empresa_id']			=$dt['tb_empresa_id'];
-				$_SESSION['empresa_nombre']		=$dt['tb_empresa_razsoc'];
+				$_SESSION['cliente_empresa_id']			=$dt['tb_empresa_id'];
 			
 			$url="../venta/";
 			header("Location: $url");

@@ -18,15 +18,14 @@ class cVenta{
 	return $rst;
 	}
 
-    function mostrar_filtro_cui($cui, $fec1, $fec2,$doc_id,$cli_id,$est,$usu_id){
+    function mostrar_filtro_cui($cui, $fec1, $fec2,$doc_id,$cli_id,$est){
         $sql="SELECT * 
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE c.tb_cliente_id = 1
+	WHERE c.tb_cliente_id = $cli_id
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' 
-	
 	";
         if($cui>0)$sql.="AND c.tb_cliente_cui = $cui";
         if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
