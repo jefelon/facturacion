@@ -1,10 +1,13 @@
 <?php
+
 	/*session_start();
 	if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 	require_once ("../../config/Cado.php");
 	
 	require_once ("../../modulos/contenido/contenido.php");
 	$oContenido = new cContenido();*/
+session_start();
+if($_SESSION["autentificado2"]!= "SI"){ header("location: ../../index.php"); exit();}
 	require_once ("../../config/datos.php");
 ?>
 <!DOCTYPE html>
@@ -227,7 +230,6 @@ $(function() {
 
 <div class="container">
 	<header>
-    	<?php /*echo $oContenido->print_header()*/ ?>
 </header>
     <article class="content">
     	<div class="contenido">
@@ -236,6 +238,13 @@ $(function() {
                   <tr>
                     <td class="caption_cont">CONSULTA DE DOCUMENTOS</td>
                   </tr>
+                <tr>
+                    <td height="30px" align="center" class=""> CUI: <?php echo $_SESSION['cliente_cui'] .'-'.$_SESSION['autentificado2']; ?>
+
+                        <img src="../../images/iconos/shut_down.png" alt="Cerrar Sesion" width="14" height="14" border="0" align="top" />
+                        <a href="../usuarios/cerrar_sesion.php" title="Cerrar Sesión" tabindex="9999">FINALIZAR</a>
+                    </td>
+                </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $razon ?></td>
                   </tr>

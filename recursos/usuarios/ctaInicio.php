@@ -30,23 +30,16 @@ if($usuario!="" and $password!="")
 	if($fila['tb_cliente_id'] !="" and $fila['tb_cliente_id'] !=0)
 	{
 		//datos de usuario autenticado correctamente
-		$dts=$oUsuario->registroAcceso($fila['tb_cliente_id']);
-		$dt = mysql_fetch_array($dts);
-		//verificar si esta bloqueado
-
-			//registro ultima visita
-			$oUsuario->modificarUltimaVisita($fila['tb_cliente_id']);
-			
-			//datos de usuario
+					//datos de usuario
 			session_start();
 				$_SESSION['autentificado2']		= "SI";
 			
-				$_SESSION['cliente_id']			=$dt['tb_cliente_id'];
-                $_SESSION['cliente_cui']			=$dt['tb_cliente_cui'];
-				$_SESSION['cliente_nombre']		=$dt['tb_usuario_apepat']." ".$dt['tb_usuario_apemat']." ".$dt['tb_usuario_nom'];
+				$_SESSION['cliente_id']			=$fila['tb_cliente_id'];
+                $_SESSION['cliente_cui']			=$fila['tb_cliente_cui'];
+				$_SESSION['cliente_nombre']		=$fila['tb_cliente_nom'];
 				
 				//datos empresa sesión
-				$_SESSION['cliente_empresa_id']			=$dt['tb_empresa_id'];
+                $_SESSION['empresa_id']=1;
 			
 			$url="../venta/";
 			header("Location: $url");

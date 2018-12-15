@@ -60,10 +60,10 @@
 
      <div class="container">
        <label><b>Usuario</b></label>
-       <input type="text" name="txt_use" id="txt_use" placeholder="Nombre de Usuario" value="admin" required>
+       <input type="text" name="txt_use" id="txt_use" placeholder="Nombre de Usuario" value="" required>
       <br>
        <label><b>Clave</b></label>
-       <input type="password" placeholder="Contraseña" name="txt_pas" id="txt_pas" required value="admin">
+       <input type="password" placeholder="Contraseña" name="txt_pas" id="txt_pas" required value="">
 
        <button type="submit" id="btn_ingresar">Ingresar</button>
      </div>

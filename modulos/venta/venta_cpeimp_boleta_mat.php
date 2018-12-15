@@ -1,8 +1,13 @@
 <?php
 session_start();
 if ($_SESSION["autentificado"] != "SI") {
-    header("location: ../../index.php");
-    exit();
+    if ($_SESSION["autentificado2"] == "SI") {
+
+    }
+    else{
+        header("location: ../../index.php");
+        exit();
+    }
 }
 require_once("../../config/Cado.php");
 require_once("../../config/datos.php");
