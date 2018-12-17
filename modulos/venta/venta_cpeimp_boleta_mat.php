@@ -48,7 +48,7 @@ $dt = mysql_fetch_array($rs);
 $imprimir_direccion = $dt['tb_formula_dat'];
 mysql_free_result($rs);
 
-$pager_formato = 'format="350x90" orientation="P" style="font-size: 9pt; font-family:' . $tipo_de_letra . '"';
+$pager_formato = 'format="350x90" orientation="P" style="font-size: 14pt; font-family:' . $tipo_de_letra . '"';
 
 $pager_margen = 'backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
 
@@ -317,7 +317,10 @@ if ($impresion == 'pdf') ob_start();
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4">BOLETA ELECTRÓNICA: <?php echo $serie . ' - ' . $numero ?></td>
+                    <td colspan="4">BOLETA ELECTRÓNICA:</td>
+                </tr>
+                <tr>
+                    <td colspan="4"><?php echo $serie . ' - ' . $numero ?></td>
                 </tr>
                 <tr>
                     <td colspan="4">FECHA: <?php echo $fec ?></td>
@@ -384,21 +387,7 @@ if ($impresion == 'pdf') ob_start();
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td colspan="2" class="izquierda mt-5">OP. GRAVADA:</td>
-                                <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($valven) ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="izquierda">OP. EXONERADA:</td>
-                                <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($exo) ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" class="izquierda">IGV:</td>
-                                <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($igv) ?></td>
-                            </tr>
+                          
                             <tr>
                                 <td colspan="2" class="izquierda">TOTAL A PAGAR:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
@@ -416,7 +405,7 @@ if ($impresion == 'pdf') ob_start();
                             <tr>
                                 <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la Boleta
                                     de Venta Electrónica, esta puede ser
-                                    consultada en: <br><?php echo $d_documentos_app ?></td>
+                                    consultada en: <br><?php echo $d_documentos_app ?>venta</td>
                             </tr>
                             <tr>
                                 <td colspan="4" height="10mm">
@@ -424,7 +413,7 @@ if ($impresion == 'pdf') ob_start();
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm;" class="centrado">Todo reclamo es realizado dentro los días
+                                <td colspan="4" style="width: 80mm;" class="centrado">Todo reclamo es realizado dentro los 5 días
                                         hábiles.</td>
                             </tr>
                             </tbody>
