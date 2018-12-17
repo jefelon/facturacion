@@ -58,7 +58,15 @@ if($usuario!="" and $password!="")
 				
 				//datos empresa sesión
 				$_SESSION['empresa_id']			=$dt['tb_empresa_id'];
-				$_SESSION['empresa_nombre']		=$dt['tb_empresa_razsoc'];
+				$_SESSION['empresa_razsoc']		=$dt['tb_empresa_razsoc'];
+                $_SESSION['empresa_tel']		=$dt['tb_empresa_tel'];
+                $_SESSION['empresa_ema']		=$dt['tb_empresa_ema'];
+                $_SESSION['empresa_ruc']		=$dt['tb_empresa_ruc'];
+                $_SESSION['empresa_nomcom']		=$dt['tb_empresa_nomcom'];
+                $_SESSION['empresa_dir']		=$dt['tb_empresa_dir'];
+
+
+
 			
 			$url=ir_principal($dt['tb_usuariogrupo_id']);
 			header("Location: $url");
