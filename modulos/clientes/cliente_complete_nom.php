@@ -12,11 +12,13 @@ class ElementoAutocompletar {
    var $documento;
    var $tipo;
     var $precio_id;
-   function __construct($id, $label, $value, $direccion, $documento,$tipo,$retiene, $precio_id){
+    var $codigo;
+   function __construct($id, $label, $value, $direccion,$codigo, $documento,$tipo,$retiene, $precio_id){
 	  $this->id = $id;
     $this->label = $label;
     $this->value = $value;
-	  $this->direccion = $direccion;	
+	  $this->direccion = $direccion;
+       $this->codigo = $codigo;
 	  $this->documento = $documento;
 	  $this->tipo = $tipo;
        $this->retiene = $retiene;
@@ -35,7 +37,7 @@ $arrayElementos = array();
 
 //bucle para meter todas las sugerencias de autocompletar en el array
 while ($fila = mysql_fetch_array($rs)){
-   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_cliente_id"], $fila["tb_cliente_doc"].'-'.$fila["tb_cliente_nom"],$fila["tb_cliente_nom"], $fila['tb_cliente_dir'], $fila['tb_cliente_doc'],$fila['tb_cliente_tip'], $fila['tb_cliente_retiene'], $fila['tb_precio_id']));
+   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_cliente_id"], $fila["tb_cliente_cui"].'-'.$fila["tb_cliente_doc"].'-'.$fila["tb_cliente_nom"],$fila["tb_cliente_nom"], $fila['tb_cliente_dir'],$fila["tb_cliente_cui"], $fila['tb_cliente_doc'],$fila['tb_cliente_tip'], $fila['tb_cliente_retiene'], $fila['tb_precio_id']));
 }
 
 print_r(json_encode($arrayElementos));

@@ -1371,6 +1371,29 @@ if($_POST['action']=="editar"){
         cmb_tar_id(<?php echo $tar_id?>);
         cmb_cuecor_id(<?php echo $cuecor_id?>);
 
+        $( "#txt_fil_gui_cod" ).autocomplete({
+            minLength: 1,
+            source: "../clientes/cliente_complete_cod.php",
+            select: function(event, ui){
+                $("#hdd_ven_cli_id").val(ui.item.id);
+                $("#txt_ven_cli_doc").val(ui.item.documento);
+                $("#txt_ven_cli_nom").val(ui.item.nombre);
+                $("#txt_ven_cli_dir").val(ui.item.direccion);
+                $("#hdd_ven_cli_tip").val(ui.item.tipo);
+                $("#hdd_ven_cli_ret").val(ui.item.retiene);
+                $("#hdd_cli_precio_id").val(ui.item.precio_id);
+                $('#hdd_ven_cli_id').change()
+                clientecuenta_detalle(ui.item.id);
+                if($("#hdd_ven_cli_id" ).val()>0){
+                    cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+
+                }
+                //alert(ui.item.value);
+                $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                $('#msj_busqueda_sunat').show(100);
+                compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+            }
+        });
 
         $( "#txt_ven_cli_doc" ).autocomplete({
             minLength: 1,
@@ -1379,6 +1402,7 @@ if($_POST['action']=="editar"){
                 $("#hdd_ven_cli_id").val(ui.item.id);
                 $("#txt_ven_cli_nom").val(ui.item.nombre);
                 $("#txt_ven_cli_dir").val(ui.item.direccion);
+                $("#txt_fil_gui_cod").val(ui.item.codigo);
                 $("#hdd_ven_cli_tip").val(ui.item.tipo);
                 $("#hdd_ven_cli_ret").val(ui.item.retiene);
                 $("#hdd_cli_precio_id").val(ui.item.precio_id);
@@ -2388,10 +2412,19 @@ if($_POST['action']=="editar"){
                                 <a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
                                 <a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
                             <?php }?>
+                            <label for="txt_fil_gui_cod">Código:</label>
+                        </td>
+                        <td>
+                            <input type="text" id="txt_fil_gui_cod" name="txt_fil_gui_cod" size="15" value="<?php echo $con_doc?>" /><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
                             <label for="txt_ven_cli_doc">RUC/DNI:</label>
                         </td>
                         <td>
-                            <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
+                            <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="11" maxlength="11" />
+
                             <label for="txt_ven_cli_nom">Cliente:</label>
                             <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="40" value='<?php echo $cli_nom?>' />
                         </td>

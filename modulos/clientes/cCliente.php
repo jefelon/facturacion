@@ -130,6 +130,18 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		  
 	}
+
+    function complete_cod($dato){
+        $sql="SELECT *
+		FROM tb_cliente
+		WHERE tb_cliente_cui LIKE '%$dato%' OR tb_cliente_nom LIKE '%$dato%' OR tb_cliente_doc LIKE '%$dato%'
+		GROUP BY tb_cliente_nom
+		LIMIT 0,12
+		";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_ventas_por_cliente($fec1,$fec2,$cli_id){		
 	$sql="SELECT * 
 	FROM tb_venta v
