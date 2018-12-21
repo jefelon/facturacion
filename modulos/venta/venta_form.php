@@ -1389,9 +1389,9 @@ if($_POST['action']=="editar"){
 
                 }
                 //alert(ui.item.value);
-                $('#msj_busqueda_sunat').html("Buscando en Sunat...");
-                $('#msj_busqueda_sunat').show(100);
-                compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+                // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                // $('#msj_busqueda_sunat').show(100);
+                // compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
             }
         });
 
@@ -1413,9 +1413,9 @@ if($_POST['action']=="editar"){
 
                 }
                 //alert(ui.item.value);
-                $('#msj_busqueda_sunat').html("Buscando en Sunat...");
-                $('#msj_busqueda_sunat').show(100);
-                compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+                // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                // $('#msj_busqueda_sunat').show(100);
+                // compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
             }
         });
 
@@ -1435,9 +1435,9 @@ if($_POST['action']=="editar"){
                     cmb_dir_id($( "#hdd_ven_cli_id" ).val());
                 }
                 //alert(ui.item.value);
-                $('#msj_busqueda_sunat').html("Buscando en Sunat...");
-                $('#msj_busqueda_sunat').show(100);
-                compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
+                // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                // $('#msj_busqueda_sunat').show(100);
+                // compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
             }
         });
 
@@ -2438,9 +2438,9 @@ if($_POST['action']=="editar"){
                         <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
                     </tr>
                     <tr>
-                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
+<!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                         <td>
-                            <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                            <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
                             <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                         </td>
                     </tr>
@@ -2711,18 +2711,18 @@ if($_POST['action']=="editar"){
                     </div>
                 </div>
 
-                <div id="div_servicios">
-                    <div id="cuadro-contain" class="ui-widget">
-                        <!--             <legend>Agregar Servicios</legend>-->
-                        <?php if($_POST['vista']!='cange'){?>
-                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
-                            <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
-                        <?php }?>
-                        <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>
-                        <div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:<?php if($msj!=""){echo 'block';} else{ echo 'none';}?>"><?php echo $msj?></div>
-                        <div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-                    </div>
-                </div>
+<!--                <div id="div_servicios">-->
+<!--                    <div id="cuadro-contain" class="ui-widget">-->
+<!--                        <!--             <legend>Agregar Servicios</legend>-->
+<!--                        --><?php //if($_POST['vista']!='cange'){?>
+<!--                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>-->
+<!--                            <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>-->
+<!--                        --><?php //}?>
+<!--                        <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>-->
+<!--                        <div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:--><?php //if($msj!=""){echo 'block';} else{ echo 'none';}?><!--">--><?php //echo $msj?><!--</div>-->
+<!--                        <div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
         <?php } ?>
         <?php
