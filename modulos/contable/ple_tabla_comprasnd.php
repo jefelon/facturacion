@@ -175,7 +175,7 @@ $(function() {
                 $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
                 $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_compra_tipcam'];
                 if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
-                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambio="";}
+                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov="";}
                 ?>
                 <!--14--><td><?php echo $gravado; ?></td>
                 <!--15--><td><?php echo $igv; ?></td>

@@ -16,8 +16,9 @@ if($_POST['action_tipocambio']=="insertar")
 		if(mysql_num_rows($rs)==0)
 		{
 			$oTipoCambio->insertar(
-				fecha_mysql($_POST['txt_tipcam_fec']), 
-				$_POST['txt_tipcam_dolsun']
+				fecha_mysql($_POST['txt_tipcam_fec']),
+                $_POST['txt_tipcam_dolsunv'],
+                $_POST['txt_tipcam_dolsunc']
 			);
 			$data['tipcam_msj']='Se registró tipo de cambio correctamente.';
 			
@@ -48,7 +49,9 @@ if($_POST['action_tipocambio']=="editar")
 		$oTipoCambio->modificar(
 			$_POST['hdd_tipcam_id'], 
 			fecha_mysql($_POST['txt_tipcam_fec']), 
-			$_POST['txt_tipcam_dolsun']);
+			$_POST['txt_tipcam_dolsunv'],
+            $_POST['txt_tipcam_dolsunc']
+        );
 		
 		$data['tipcam_msj']='Se registró tipo de cambio correctamente.';
 		echo json_encode($data);
@@ -80,16 +83,16 @@ if($_POST['action']=="consultar"){
 	$fechahoy = fecha_mysql($fechahoy);	
 		$rs = $oTipoCambio->consultar($fechahoy);
 		$dt = mysql_fetch_array($rs);
-	$num_tipocambio = $dt['tb_tipocambio_dolsun'];
+	$num_tipocambiov = $dt['tb_tipocambio_dolsunv'];
 		mysql_free_result($rs);
-	echo $num_tipocambio;	
+	echo $num_tipocambiov;
 }
 
 if($_POST['action']=="obtener_dato"){
 	//soles
 	if($_POST['moneda']=='1')
 	{
-		$tipocambio=formato_money(1.00);
+		$tipocambiov=formato_money(1.00);
 	}
 	//dolares
 	if($_POST['moneda']=='2')
@@ -99,12 +102,12 @@ if($_POST['action']=="obtener_dato"){
 		//$fechahoy = fecha_mysql($fechahoy);	
 		$rs = $oTipoCambio->consultar($fecha_buscar);
 		$dt = mysql_fetch_array($rs);
-		$tipocambio = number_format($dt['tb_tipocambio_dolsun'], 3);
-		if($tipocambio=='0.000')$tipocambio = "";
+		$tipocambiov = number_format($dt['tb_tipocambio_dolsunv'], 3);
+		if($tipocambiov=='0.000')$tipocambiov = "";
 		mysql_free_result($rs);
-		//$tipocambio=formato_money(3.00);
+		//$tipocambiov=formato_money(3.00);
 	}
-	$data['tipcam']=$tipocambio;
+	$data['tipcam']=$tipocambiov;
 	echo json_encode($data);
 }	
 ?>

@@ -72,6 +72,8 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">CLIENTE</th>
         <th align="center">RUC/DNI</th>
         <th align="center">MONEDA</th>
+        <th align="center">VALOR VENTA</th>
+        <th align="center">IGV</th>
         <th align="center">IMPORTE TOTAL</th>
         <th align="center">ESTADO DOC.</th>
         <th align="center">ESTADO SUNAT</th>
@@ -116,6 +118,8 @@ $num_rows= mysql_num_rows($dts1);
                     }
                     ?>
                 </td>
+                <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
+                <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
                 <td><?php echo $dt1['tb_venta_est']?></td>
                 <td>
