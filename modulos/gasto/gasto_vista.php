@@ -151,6 +151,7 @@ function factura_form(act,idf){
 		data: ({
 			action: act,
 			fac_id:	idf
+            prov_id: $("#hdd_com_pro_id").val(),
 		}),
 		beforeSend: function() {
 			$('#msj_gasto_factura').hide();

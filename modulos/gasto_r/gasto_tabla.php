@@ -47,6 +47,7 @@ $(function() {
             <thead>
         <tr>
           <th>FECHA</th>
+          <th>PROVEEDOR</th>
           <th>DOCUMENTO</th>
           <th>DESCRIPCION</th>
           <?php /*?><th>PROVEEDOR</th><?php */?>
@@ -69,6 +70,7 @@ while($dt1 = mysql_fetch_array($dts1)){
 ?>
         <tr>
           <td valign="top" nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_gasto_fec'])?></td>
+          <td valign="top"><?php echo $dt1['tb_proveedor_nom']?></td>
           <td valign="top"><?php echo $dt1['tb_gasto_doc']?></td>
           <td valign="top"><?php echo $dt1['tb_gasto_des']?></td>
           <?php /*?><td valign="top"><?php echo $dt1['tb_proveedor_nom']?></td><?php */?>

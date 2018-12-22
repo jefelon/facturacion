@@ -316,5 +316,16 @@ class cClientecuenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function obtener_moneda($emp_id,$venta_id){
+        $sql="SELECT *
+	FROM tb_clientecuenta cc
+	INNER JOIN tb_venta v ON v.tb_venta_id= cc.tb_clientecuenta_ven_id
+    WHERE cc.tb_empresa_id = $emp_id AND v.tb_venta_id=$venta_id
+        ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

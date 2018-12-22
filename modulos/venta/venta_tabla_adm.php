@@ -6,7 +6,12 @@ $oVenta = new cVenta();
 require_once ("../venta/cVentacorreo.php");
 $oVentacorreo = new cVentacorreo();
 require_once ("../formatos/formato.php");
-
+require_once ("../venta/cVentapago.php");
+$oVentapago = new cVentapago();
+require_once ("../clientecuenta/cClientecuenta.php");
+$oClientecuenta = new cClientecuenta();
+require_once ("../letras/cLetras.php");
+$cLetras = new cLetras();
 require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
@@ -90,6 +95,7 @@ $num_rows= mysql_num_rows($dts1);
                 $total_ventas+=$dt1['tb_venta_tot'];
             }
 
+            $simb_moneda="";
             $xml="";
             $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
             $cdr="";
@@ -104,9 +110,11 @@ $num_rows= mysql_num_rows($dts1);
                 <td align="center">
                     <?php
                     if($dt1['cs_tipomoneda_id']=='1'){
+                        $simb_moneda="S/ ";
                         echo 'SOLES';
                     }
                     if($dt1['cs_tipomoneda_id']=='2'){
+                        $simb_moneda= "$ ";
                         echo 'DOLARES';
                     }
                     ?>
@@ -114,7 +122,51 @@ $num_rows= mysql_num_rows($dts1);
                 <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
-                <td><?php echo $dt1['tb_venta_est']?></td>
+                <td>
+
+                    <?php
+                    $dts2=$oVentapago->mostrar_pagos($dt1['tb_venta_id']);
+                    $num_rows2= mysql_num_rows($dts2);
+                    while($dt2 = mysql_fetch_array($dts2)){
+                        if($dt2['tb_formapago_id']==1)echo 'CONTADO ';
+                        if($dt2['tb_formapago_id']==2)echo 'CREDITO '.$dt2['tb_ventapago_numdia'].'D | FV: '.mostrarFecha($dt2['tb_ventapago_fecven']);
+                        if($dt2['tb_formapago_id']==3){
+                            echo 'LETRAS: ';
+                            $ltrs1=$cLetras->mostrar_letras($dt1['tb_venta_id']);
+
+                            $date1 = new  DateTime($fecha);
+
+                            $cont=1;
+                            while($ltr= mysql_fetch_array($ltrs1)){
+                                $date2 = new DateTime($ltr['tb_letras_fecha']);
+                                $interval = $date1->diff( $date2 );
+                                $diferencia=$interval->format('%a dias');
+
+//                                $modo.= '<br>L'.$ltr['tb_letras_orden'].' '.$diferencia.' '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
+                                echo 'L'.$ltr['tb_letras_orden'] . " ";
+
+                            }
+
+                        }
+
+                    }
+                    mysql_free_result($dts2);
+
+                    //Saldo A Cuenta
+                    $ventip=1;
+                    $tipo=2;
+                    $tipo_registro=2;
+                    $total_pagado=0;
+
+                    $dts3=$oClientecuenta->mostrar_por_tipo_venta($ventip, $dt1['tb_venta_id'],$tipo,$tipo_registro);
+                    while($dt3 = mysql_fetch_array($dts3)){
+                        $total_pagado+=$dt3['tb_clientecuenta_mon'];
+                    }
+                    mysql_free_result($dts3);
+                    echo $simb_moneda." " .$total_pagado;
+                    ?>
+
+                </td>
                 <td>
                     <?php
                     $mostrar_envio_sunat=0;

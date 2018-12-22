@@ -374,6 +374,7 @@ $(function() {
 </script>
 <form id="for_gas">
 <input name="action_gasto" id="action_gasto" type="hidden" value="<?php echo $_POST['action']?>">
+<input name="hdd_prov_id" id="hdd_prov_id" type="hidden" value="<?php echo $_POST['prov_id']?>">
 <input name="hdd_gas_id" id="hdd_gas_id" type="hidden" value="<?php echo $_POST['gas_id']?>">
 <input name="hdd_usu_id_reg" id="hdd_usu_id_reg" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="hdd_usu_id_mod" id="hdd_usu_id_mod" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">

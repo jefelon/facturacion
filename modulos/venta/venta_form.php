@@ -1226,8 +1226,11 @@ if($_POST['action']=="editar"){
             mascara(this,'-',patron,false);
         });
 
+        <?php
+        if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
+        ?>
         $( "#div_productos_servicios_tab" ).tabs();
-
+        <?php }?>
         cmb_ven_doc();
         cmb_ven_id();
         cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
@@ -1440,6 +1443,7 @@ if($_POST['action']=="editar"){
                 $(".letras_fecven").hide(100);
                 $("#cmb_modpag_id").show(100);
                 $("#cmb_modpag_id").val(1);
+                $("#cmb_modpag_id").hide(100);// oculto en credito modo pago
                 //ocultar deposito y tarjeta
                 $("#cmb_modpag_id option[value='2']").attr("disabled","disabled");
                 $("#cmb_modpag_id option[value='3']").attr("disabled","disabled");

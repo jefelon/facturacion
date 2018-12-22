@@ -79,7 +79,7 @@ while($dt = mysql_fetch_array($dts))
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
-    $moneda=1;
+    $moneda=$dt["cs_tipomoneda_id"];
 
     $estsun=$dt['tb_venta_estsun'];
       $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -99,6 +99,12 @@ while($dt = mysql_fetch_array($dts))
 if($moneda==1){
     $moneda  = "SOLES";
     $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
 }
 
 
