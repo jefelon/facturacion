@@ -77,7 +77,8 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">MONEDA</th>
         <th align="center">VALOR VENTA</th>
         <th align="center">IGV</th>
-        <th align="center">IMPORTE TOTAL</th>
+        <th align="center">TOT. SOLES</th>
+        <th align="center">TOT. DOLARES</th>
         <th align="center">ESTADO DOC.</th>
         <th align="center">ESTADO SUNAT</th>
         <th align="center">FECHA DE ENVIO SUNAT</th>
@@ -91,8 +92,12 @@ $num_rows= mysql_num_rows($dts1);
         <tbody>
         <?php
         while($dt1 = mysql_fetch_array($dts1)){
-            if($dt1['tb_venta_est']=='CANCELADA'){
-                $total_ventas+=$dt1['tb_venta_tot'];
+            if($dt1['tb_venta_est']=='CANCELADA') {
+                if ($dt1['cs_tipomoneda_id'] == '1') {
+                    $total_ventas_soles += $dt1['tb_venta_tot'];
+                }else{
+                    $total_ventas_dolares += $dt1['tb_venta_tot'];
+                }
             }
 
             $simb_moneda="";
@@ -121,7 +126,20 @@ $num_rows= mysql_num_rows($dts1);
                 </td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
+                <td align="right">
+                    <?php
+                    if($dt1['cs_tipomoneda_id']=='1'){
+                        echo formato_money($dt1['tb_venta_tot']);
+                    }
+                    ?>
+                </td>
+                <td align="right">
+                    <?php
+                    if($dt1['cs_tipomoneda_id']=='2'){
+                        echo formato_money($dt1['tb_venta_tot']);
+                    }
+                    ?>
+                </td>
                 <td>
 
                     <?php
@@ -235,8 +253,15 @@ $num_rows= mysql_num_rows($dts1);
     }
     ?>
     <tr class="even">
-        <td colspan="8">TOTAL</td>
-        <td align="right"><strong><?php echo formato_money($total_ventas)?></strong></td>
+        <td colspan="6"></td>
+        <td colspan="2">TOTAL SOLES</td>
+        <td align="right"><strong><?php echo formato_money($total_ventas_soles)?></strong></td>
+        <td colspan="5" align="right">&nbsp;</td>
+    </tr>
+    <tr class="even">
+        <td colspan="7"></td>
+        <td colspan="2">TOTAL DOLARES</td>
+        <td align="right"><strong><?php echo formato_money($total_ventas_dolares)?></strong></td>
         <td colspan="5" align="right">&nbsp;</td>
     </tr>
     <tr class="even">
