@@ -144,11 +144,11 @@ if (isset($_FILES["file_xls"])) {
                             break;
                         }
 
-                        if ($afecto = 'GRAVADO') {
+                        if ($afecto == 'GRAVADO') {
                             $cmb_afec_id = 1;
-                        } elseif ($afecto = 'EXONERADO') {
+                        } elseif ($afecto == 'EXONERADO') {
                             $cmb_afec_id = 9;
-                        } elseif ($afecto = 'INAFECTO') {
+                        } elseif ($afecto == 'INAFECTO') {
                             $cmb_afec_id = 11;
                         } else {
                             $data['type'] = "error";
@@ -156,9 +156,9 @@ if (isset($_FILES["file_xls"])) {
                             break;
                         }
 
-                        if ($lote = 'SI') {
+                        if ($lote == 'SI') {
                             $lote_id = 1;
-                        } elseif ($lote = 'NO') {
+                        } elseif ($lote == 'NO') {
                             $lote_id = 0;
                         } else {
                             $data['type'] = "error";
@@ -197,7 +197,7 @@ if (isset($_FILES["file_xls"])) {
                             break;
                         }
 
-                        if($cat_pre_cos >= $cat_pre_ven) {
+                        if($cat_pre_cos > $cat_pre_ven) {
                             $data['type'] = "error";
                             $data['message'] = "Error, precio de venta (\"".$cat_pre_ven."\") debe ser menor al costo \"".$cat_pre_cos."\"";
                             break;
