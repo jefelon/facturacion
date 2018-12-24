@@ -14,6 +14,8 @@ require_once ("../producto/cCatalogoproducto.php");
 $oCatalogoproducto = new cCatalogoproducto();
 require_once("../producto/cStock.php");
 $oStock = new cStock();
+require_once ("../documento/cDocumento.php");
+$oDocumento= new cDocumento();
 
 
 require_once("../formatos/formato.php");
@@ -32,6 +34,7 @@ if($_POST['action_venta']=="insertar")
 			$dts= $oNotacredito->verificar_venta($serie,$correlativo);
 			$dt = mysql_fetch_array($dts);
 				$ven_id	=$dt['tb_venta_id'];
+            $ven_id	=$dt['tb_venta_id'];
 			mysql_free_result($dts);
 
 
@@ -45,7 +48,7 @@ if($_POST['action_venta']=="insertar")
 					
 					$fec	=mostrarFecha($dt['tb_venta_fec']);
 					
-					//$doc_id	=$dt['tb_documento_id'];
+					$doc_id	=$dt['tb_documento_id'];
 					$ven_tipdoc =$dt["cs_tipodocumento_cod"];
 					$ven_numdoc	=$dt['tb_venta_numdoc'];
 					$ven_ser	=$dt['tb_venta_ser'];
@@ -140,6 +143,7 @@ if($_POST['action_venta']=="insertar")
 				//ultimo
 					$dts=$oNotacredito->ultimoInsert();
 					$dt = mysql_fetch_array($dts);
+
 				$notcre_id=$dt['last_insert_id()'];
 					mysql_free_result($dts);
 				
@@ -267,13 +271,26 @@ if($_POST['action_venta']=="insertar")
 				}
                 mysql_free_result($dts2);
 
-		
+
 				 
 				
 				$data['ven_id']=$notcre_id;
 				if($_POST['chk_imprimir']==1)$data['ven_act']='imprime';
 
-				$data['ven_sun']='enviar';
+
+                //documento
+                $dts= $oDocumento->mostrarUno($doc_id);
+                $dt = mysql_fetch_array($dts);
+                $documento=$dt['tb_documento_abr'];
+                $documento_ele=$dt['tb_documento_ele'];
+                $documento_cod=$dt['cs_tipodocumento_cod'];
+                mysql_free_result($dts);
+
+                if($documento_ele==1)
+                {
+                    if($documento_cod==1)$data['ven_sun']='enviar';
+                    if($documento_cod==3)$oNotacredito->modificar_campo($notcre_id,'estsun','10');
+                }
 
 				$data['ven_msj']='Se registró Nota de Crédito correctamente.'.$numdoc;
 			}

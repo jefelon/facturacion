@@ -196,7 +196,7 @@ function eliminar_producto(id)
 			type: "POST",
 			url: "producto_reg.php",
 			async:true,
-			dataType: "html",
+            dataType: "json",
 			data: ({
 				action: "eliminar",
 				pro_id:		id
@@ -205,9 +205,9 @@ function eliminar_producto(id)
 				$('#msj_producto').html("Cargando...");
 				$('#msj_producto').show(100);
 			},
-			success: function(html){
-				$('#msj_producto').html(html);
-				$('#msj_producto').show();
+			success: function(data){
+			    console.log(data.pro_msj);
+				$('#msj_producto').html(data.pro_msj);
 			},
 			complete: function(){
 				producto_tabla();

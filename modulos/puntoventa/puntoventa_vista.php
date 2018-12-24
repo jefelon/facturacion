@@ -133,7 +133,7 @@ $(function() {
 		title:'Información de Punto de Venta',
 		autoOpen: false,
 		resizable: false,
-		height: 180,
+		height: 250,
 		width: 450,
 		modal: true,
 		buttons: {

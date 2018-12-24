@@ -168,6 +168,14 @@ class cProducto{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function tablas_relacionadas(){
+        $sql = "SELECT table_schema, table_name, column_name, data_type, ordinal_position 
+                FROM INFORMATION_SCHEMA.COLUMNS 
+                WHERE column_name = 'tb_catalogo_id' AND table_schema = 'factura' AND table_name <> 'tb_catalogo' ORDER BY `table_name` ASC";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+	}
 	function consultar_coincidencia($pro_id,$pro_nom, $cat_id, $mar_id){
 	$sql = "SELECT * 
 		FROM  tb_producto

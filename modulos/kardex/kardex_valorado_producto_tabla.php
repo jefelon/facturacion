@@ -194,14 +194,23 @@ $(function() {
                     <td align="right" nowrap="nowrap"><?php
                         if($tip == 1){
                             if (9!=$dt1['tb_tipoperacion_id']){
-                                echo formato_decimal($dt1['tb_kardexdetalle_cos'],2);
+                                if (11==$dt1['tb_tipoperacion_id']){
+                                    echo formato_decimal($dt1['tb_kardexdetalle_pre'],2);
+                                }else{
+                                    echo formato_decimal($dt1['tb_kardexdetalle_cos'],2);
+                                }
                             }
                         } ?>
                     </td>
                     <td align="right" nowrap="nowrap"><?php
                         if($tip == 1){
                             if (9!=$dt1['tb_tipoperacion_id']) {
-                                echo formato_decimal($dt1['tb_kardexdetalle_cos']*$can,2);
+                                if (11==$dt1['tb_tipoperacion_id']){
+                                    echo formato_decimal($dt1['tb_kardexdetalle_pre']*$can,2);
+                                }else{
+                                    echo formato_decimal($dt1['tb_kardexdetalle_cos']*$can,2);
+                                }
+
                             }
                         } ?>
                     </td>

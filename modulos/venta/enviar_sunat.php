@@ -193,7 +193,6 @@ mysql_free_result($dts);
 
 $detalle = json_decode(json_encode($detalle));
 //===============================================================================================
-echo json_encode($detalle);
 if($idcomprobante==1)//FACTURA
 {
 	$enviar=true;

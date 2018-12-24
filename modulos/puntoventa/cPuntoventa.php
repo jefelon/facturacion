@@ -1,13 +1,14 @@
 <?php
 class cPuntoventa{
-	function insertar($nom,$alm_id,$emp_id){
+	function insertar($nom,$alm_id,$emp_id, $caj_id){
 	$sql = "INSERT tb_puntoventa (
 		`tb_puntoventa_nom`,
 		`tb_almacen_id`,
-		`tb_empresa_id`
+		`tb_empresa_id`,
+		`tb_caja_id`
 		)
 		VALUES (
-		 '$nom', '$alm_id', '$emp_id'
+		 '$nom', '$alm_id', '$emp_id', '$caj_id'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -59,10 +60,11 @@ class cPuntoventa{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$nom,$alm_id){ 
+	function modificar($id,$nom,$alm_id, $caj_id){
 	$sql = "UPDATE tb_puntoventa SET  
 	`tb_puntoventa_nom` =  '$nom',
-	`tb_almacen_id` =  '$alm_id'
+	`tb_almacen_id` =  '$alm_id',
+	`tb_caja_id` =  '$caj_id'
 	WHERE  tb_puntoventa_id =$id;"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

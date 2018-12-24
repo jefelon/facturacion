@@ -9,6 +9,7 @@ if($_POST['action']=="editar")
 	$dt = mysql_fetch_array($dts);
 		$punven_nom=$dt['tb_puntoventa_nom'];
 		$alm_id=$dt['tb_almacen_id'];
+    $caj_id=$dt['tb_caja_id'];
 	mysql_free_result($dts);
 }
 ?>
@@ -34,6 +35,25 @@ function cmb_alm_id()
 	});
 }
 
+function cmb_caj_id(ids)
+{
+    $.ajax({
+        type: "POST",
+        url: "../caja/cmb_caj_id.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            caj_id: ids
+        }),
+        beforeSend: function() {
+            $('#cmb_caj_id').html('<option value="">Cargando...</option>');
+        },
+        success: function(html){
+            $('#cmb_caj_id').html(html);
+        }
+    });
+}
+
 $(function() {
 	
 	$('#txt_punven_nom').keyup(function(){
@@ -41,6 +61,7 @@ $(function() {
 	});
 	
 	cmb_alm_id();
+    cmb_caj_id(<?php echo $caj_id?>);
 
 	$("#for_punven").validate({
 		submitHandler: function() {
@@ -79,7 +100,10 @@ $(function() {
 			},
 			cmb_alm_id: {
 				required: true
-			}
+			},
+            cmb_caj_id: {
+                required: true
+            }
 		},
 		messages: {
 			txt_punven_nom: {
@@ -87,7 +111,10 @@ $(function() {
 			},
 			cmb_alm_id: {
 				required: '*'
-			}
+			},cmb_caj_id: {
+                required: '*'
+            }
+
 		}
 	});
 });
@@ -108,6 +135,13 @@ $(function() {
         <tr>
           <td><select name="cmb_alm_id" id="cmb_alm_id">
           </select></td>
+        </tr>
+        <tr>
+            <td><label for="cmb_caj_id">Caja:</label></td>
+        </tr>
+        <tr>
+            <td><select name="cmb_caj_id" id="cmb_caj_id">
+            </select></td>
         </tr>
     </table>
 </form>

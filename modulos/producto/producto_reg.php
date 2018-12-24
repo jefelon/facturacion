@@ -170,25 +170,38 @@ if($_POST['action_producto']=="editar")
 
 if($_POST['action']=="eliminar")
 {
+    $data['pro_msj'] = '';
 	if(!empty($_POST['pro_id']))
-	{
-		$cst1 = $oProducto->verifica_producto_tabla($_POST['pro_id'],'tb_presentacion');
-		$rst1= mysql_num_rows($cst1);
-		if($rst1>0)$msj1=' Presentación de producto';
-		
-		if($rst1>0)
+	{   $msj1='';
+	    $eliminar = 1;
+	    $tbrs = $oProducto->tablas_relacionadas();
+        while($tbr = mysql_fetch_array($tbrs)){
+            $cps = $oCatalogoproducto->presentacion_catalogo_producto($_POST['pro_id']);
+            $cp =  mysql_fetch_array($cps);
+            $cst1 = $oCatalogoproducto->verifica_catalogo_tabla($cp['tb_catalogo_id'],$tbr['table_name']);
+            $cst_nro= mysql_num_rows($cst1);
+            if($cst_nro>0){
+                $msj1=$msj1.' '.$tbr['table_name'];
+                $eliminar = 0;
+            }
+        }
+
+		if(!$eliminar)
 		{
-			echo "No se puede eliminar, afecta información de: ".$msj1.".";
+            $data['pro_msj'] = "No se puede eliminar, afecta información de: ".$msj1.".";
 		}
 		else
 		{
 			$oProducto->eliminar($_POST['pro_id']);
-			echo 'Se eliminó producto correctamente.';
+            $data['pro_msj'] ="Se eliminó producto correctamente.";
 		}
+
 	}
 	else
 	{
-		echo 'Intentelo nuevamente.';
+        $data['pro_msj'] = "Intentelo nuevamente.";
 	}
+
+	echo json_encode($data);
 }
 ?>

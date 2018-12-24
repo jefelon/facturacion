@@ -789,10 +789,9 @@ $(function() {
 					$('#div_producto_form').dialog("close");
 					$('#msj_producto').html("Guardando...");
 					$('#msj_producto').show(100);
-                    console.log('succes1');
 				},
 				success: function(data){
-				    console.log('succes');
+
 
 					$('#msj_producto').html(data.pro_msj);
 					if(data.pro_act=='editar_presentacion')

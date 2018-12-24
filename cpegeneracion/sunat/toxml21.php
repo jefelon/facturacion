@@ -38,8 +38,8 @@ function run($arr, $dirxml, $dircdr, $nodo="", $tipodoc="", $enviar=false) {
 
     if (!$ok) {
         $arrRe = array('valid' => (($ok) ? '1' : '0'), 'faultcode' => '', 'signvalue' => '', 'digvalue' => '');
-        display_xml_errors();
-        die("Error al validar XSD\n");
+//        display_xml_errors();
+//        die("Error al validar XSD\n");
     }else{
         if($enviar){
             $nomfuncion = "sendBill";
