@@ -83,6 +83,14 @@ $apemat		=$dt['tb_usuario_apemat'];
 $ema		=$dt['tb_usuario_ema'];
 mysql_free_result($dts);
 
+$dts7= $oVenta->mostrarUno($ven_id);
+$dt7 = mysql_fetch_array($dts7);
+
+$cli_id	=$dt7['tb_cliente_id'];
+$cli_doc=$dt7['tb_cliente_doc'];
+
+mysql_free_result($dts7);
+
 $tipodoc = 'GUIA DE REMISIÓN';
 
 $ven_id=$_POST['ven_id'];
@@ -259,7 +267,7 @@ $html.='
         <td style="text-align: left; width:38mm; height:4mm;">&nbsp;</td>
         <td style="text-align: left; width:108mm">'.$guia['tb_guia_des'].'</td>
         <td style="text-align: left; width:20mm"></td>
-        <td style="text-align: left; width:40mm">'.$ruc_empresa.'</td>
+        <td style="text-align: left; width:40mm">'.$cli_doc.'</td>
     </tr>
     <tr>
         <!--fecha inicio traslado -->
