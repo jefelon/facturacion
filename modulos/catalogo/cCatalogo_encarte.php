@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cCatalogo{
 	function catalogo_encarte_filtro($nom,$cod,$cat,$mar,$est,$limit){
 	$sql="SELECT * 
@@ -9,7 +10,7 @@ class cCatalogo{
 	INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
 	WHERE ct.tb_catalogo_vercom=1
-	AND tb_producto_est LIKE '%$est%' ";
+	AND tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($nom!="")$sql.=" AND tb_producto_nom LIKE '%$nom%' ";
 	if($cod!="")$sql.=" AND tb_presentacion_cod LIKE '%$cod%' ";

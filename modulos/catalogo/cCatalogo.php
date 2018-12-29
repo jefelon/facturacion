@@ -8,6 +8,7 @@ class cCatalogo{
        INNER JOIN tb_presentacion pr ON p.tb_producto_id=pr.tb_producto_id
        INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
        INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
+       WHERE p.tb_empresa_id={$_SESSION['empresa_id']}
        ";
        $oCado = new Cado();
        $rst=$oCado->ejecute_sql($sql);
@@ -22,7 +23,7 @@ class cCatalogo{
 	INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
 	WHERE ct.tb_catalogo_vercom=1
-	AND tb_producto_est LIKE '%$est%' ";
+	AND tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($nom!="")$sql.=" AND tb_producto_nom LIKE '%$nom%' ";
 	if($cod!="")$sql.=" AND tb_presentacion_cod LIKE '%$cod%' ";
@@ -56,7 +57,7 @@ class cCatalogo{
 	INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
 	WHERE ct.tb_catalogo_vercom=1
-	AND tb_producto_est LIKE '%$est%' ";
+	AND tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($nom!="")$sql.=" AND tb_producto_nom LIKE '%$nom%' ";
 	if($cod!="")$sql.=" AND tb_presentacion_cod LIKE '%$cod%' ";
@@ -81,7 +82,7 @@ class cCatalogo{
 	INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
 	WHERE ct.tb_catalogo_verven=1
-	AND tb_producto_est LIKE '%$est%' ";
+	AND tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($nom!="")$sql.=" AND tb_producto_nom LIKE '%$nom%' ";
 	if($cod!="")$sql.=" AND tb_presentacion_cod LIKE '%$cod%' ";
@@ -107,7 +108,7 @@ class cCatalogo{
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
 	INNER JOIN tb_stock s ON pr.tb_presentacion_id=s.tb_presentacion_id
 	WHERE s.tb_almacen_id=$alm_id
-	AND tb_producto_est LIKE '%$est%' ";
+	AND tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($verven==1 and $vercom==1)
 	{
@@ -155,7 +156,7 @@ class cCatalogo{
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
 	INNER JOIN tb_stock s ON pr.tb_presentacion_id=s.tb_presentacion_id
 	WHERE s.tb_almacen_id=$alm_id
-	AND tb_producto_est LIKE '%$est%' ";
+	AND tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 	
 	if($verven==1 and $vercom==1)
 	{
@@ -201,7 +202,7 @@ class cCatalogo{
 	INNER JOIN tb_presentacion pr ON p.tb_producto_id=pr.tb_producto_id
 	INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
-	WHERE tb_producto_est LIKE '%$est%' ";
+	WHERE tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 	
 	if($verven==1 and $vercom==1)
 	{
@@ -252,7 +253,7 @@ class cCatalogo{
 	if($atr_ids!="")$sql.=" INNER JOIN tb_tag t ON pr.tb_presentacion_id=t.tb_presentacion_id ";
 	
 	$sql.=" WHERE s.tb_almacen_id=$alm_id
-	AND tb_producto_est LIKE '%$est%' ";
+	AND tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($atr_ids!="")$sql.=" AND tb_atributo_id IN ($atr_ids) ";
 
@@ -356,7 +357,7 @@ class cCatalogo{
 	INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
 	INNER JOIN tb_stock s ON pr.tb_presentacion_id=s.tb_presentacion_id
-	WHERE s.tb_almacen_id=$alm_id ";
+	WHERE s.tb_almacen_id=$alm_id AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 	
 	for($i = 1; $i < sizeof($atributos_array); $i++){
 		$sql .= " AND t.tb_atributo_id = ".trim($atributos_array[$i])." ";

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cCompra{
 	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento,$fec_nota,$ser_nota, $num_nota,$tip_nota){
 	$sql = "INSERT INTO tb_compra(
@@ -265,7 +266,7 @@ WHERE tb_software_id =$id";
 	function mostrar_todos(){
 	$sql="SELECT * 
 	FROM tb_compra 
-	WHERE tb_compra_est IN ('CONTADO', 'CREDITO')     
+	WHERE tb_compra_est IN ('CONTADO', 'CREDITO') AND tb_empresa_id = {$_SESSION['empresa_id']}
 	ORDER BY tb_compra_fec";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -274,7 +275,7 @@ WHERE tb_software_id =$id";
     function verificar_compra($numdoc){
         $sql="SELECT * 
 	FROM tb_compra c
-	WHERE c.tb_compra_numdoc='$numdoc'";
+	WHERE c.tb_compra_numdoc='$numdoc' AND tb_empresa_id = {$_SESSION['empresa_id']}";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

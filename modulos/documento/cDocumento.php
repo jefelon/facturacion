@@ -6,7 +6,7 @@ class cDocumento{
 		`tb_documento_abr`,
 		`tb_documento_nom`,
 		`tb_documento_tip`,
-		`tb_documento_def`
+		`tb_documento_def`,
 		)
 		VALUES (
 		 '$xac','$abr', '$nom', '$tip', '$def'
@@ -61,7 +61,7 @@ class cDocumento{
 	$sql="SELECT * 
 	FROM tb_documento d 
 	LEFT JOIN cs_tipodocumento td ON d.cs_tipodocumento_id=td.cs_tipodocumento_id
-	WHERE tb_documento_id=$id";
+	WHERE tb_documento_id=$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -73,7 +73,7 @@ class cDocumento{
 	`tb_documento_tip` =  '$tip',
 	`tb_documento_def` =  '$def',
 	`tb_documento_mos` =  '$mos'
-	WHERE  tb_documento_id =$id;"; 
+	WHERE  tb_documento_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -81,13 +81,13 @@ class cDocumento{
 	function verifica_documento_tabla($id,$tabla){
 	$sql = "SELECT * 
 		FROM  $tabla 
-		WHERE tb_documento_id =$id";
+		WHERE tb_documento_id =$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_documento WHERE tb_documento_id=$id";
+	$sql="DELETE FROM tb_documento WHERE tb_documento_id=$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

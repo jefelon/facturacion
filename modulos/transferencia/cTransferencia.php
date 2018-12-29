@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cTransferencia{
 	function insertar($usureg,$usumod,$xac,$fec,$det,$imp,$est,$caj_id_ori,$caj_id_des,$mon_id,$emp_id){
 	$sql = "INSERT INTO tb_transferencia(
@@ -52,14 +53,14 @@ class cTransferencia{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_transferencia ORDER BY tb_empresa_id,tb_transferencia_fecemi";
+	$sql="SELECT * FROM tb_transferencia WHERE tb_empresa_id ='{$_SESSION['empresa_id']}' ORDER BY tb_empresa_id,tb_transferencia_fecemi";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function codigo(){
 	$sql="SELECT MAX(tb_transferencia_id) as maximo 
-	FROM tb_transferencia ";
+	FROM tb_transferencia WHERE tb_empresa_id ='{$_SESSION['empresa_id']}'";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cIngreso{
 	function insertar($usureg,$usumod,$xac,$fec,$doc_id,$numdoc,$det,$imp,$est,$cue_id,$subcue_id,$cli_id,$caj_id,$mon_id,$mod_id,$modide,$emp_id){
 	$sql = "INSERT INTO  tb_ingreso(
@@ -53,7 +54,7 @@ class cIngreso{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_ingreso ORDER BY tb_empresa_id,tb_ingreso_fecemi";
+	$sql="SELECT * FROM tb_ingreso WHERE tb_empresa_id = {$_SESSION['empresa_id']} ORDER BY tb_empresa_id,tb_ingreso_fecemi";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -195,7 +196,7 @@ class cIngreso{
 	INNER JOIN tb_cliente cl ON i.tb_cliente_id = cl.tb_cliente_id
 	INNER JOIN tb_documento d ON i.tb_documento_id=d.tb_documento_id
 	LEFT JOIN tb_subcuenta sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
-	WHERE tb_ingreso_xac=1
+	WHERE tb_ingreso_xac=1 AND i.tb_empresa_id = {$_SESSION['empresa_id']}
 	AND tb_modulo_id=$mod_id
 	AND tb_ingreso_modide=$modide ";
 	

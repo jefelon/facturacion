@@ -1,11 +1,13 @@
 <?php
+session_start();
 class cMarca{
 	function insertar($nom){
 	$sql = "INSERT tb_marca (
-		`tb_marca_nom`
+		`tb_marca_nom`,
+		`tb_empresa_id`
 		)
 		VALUES (
-		 '$nom'
+		 '$nom','{$_SESSION['empresa_id']}'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -20,6 +22,7 @@ class cMarca{
 	function mostrarTodos(){
 	$sql="SELECT * 
 	FROM tb_marca
+	WHERE tb_empresa_id={$_SESSION['empresa_id']}
 	ORDER BY tb_marca_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -28,7 +31,7 @@ class cMarca{
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_marca
-	WHERE tb_marca_id=$id";
+	WHERE tb_marca_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -36,7 +39,7 @@ class cMarca{
 	function modificar($id,$nom){ 
 	$sql = "UPDATE tb_marca SET  
 	`tb_marca_nom` =  '$nom'
-	WHERE  tb_marca_id =$id;"; 
+	WHERE  tb_marca_id =$id AND tb_empresa_id={$_SESSION['empresa_id']};";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -50,7 +53,7 @@ class cMarca{
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_marca WHERE tb_marca_id=$id";
+	$sql="DELETE FROM tb_marca WHERE tb_marca_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

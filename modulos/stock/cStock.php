@@ -1,14 +1,16 @@
 <?php
+session_start();
 class cStock{
 	function insertar($alm_id,$pre_id,$sto){
 	$sql = "INSERT INTO tb_stock(
 	`tb_stock_mod` ,
 	`tb_almacen_id` ,
 	`tb_presentacion_id` ,
-	`tb_stock_num`
+	`tb_stock_num`,
+	`tb_empresa_id`
 	)
 	VALUES (
-	NOW( ) ,  '$alm_id',  '$pre_id',  '$sto'
+	NOW( ) ,  '$alm_id',  '$pre_id',  '$sto', '{$_SESSION['empresa_id']}'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -43,7 +45,7 @@ class cStock{
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_stock WHERE tb_presentacion_id=$id";
+	$sql="DELETE FROM tb_stock WHERE tb_presentacion_id=$id AND tb_empresa_id = '{$_SESSION['empresa_id']}'";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

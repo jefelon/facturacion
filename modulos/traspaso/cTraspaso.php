@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cTraspaso{
 	function insertar($fec,$doc_id,$cod,$alm_ori,$alm_des,$ref,$usu_id,$emp_id,$act){
 	$sql = "INSERT INTO tb_traspaso(
@@ -67,7 +68,7 @@ class cTraspaso{
 	}
 	function mostrar_codigo(){
 	$sql="SELECT MAX(tb_traspaso_id) as numero 
-	FROM tb_traspaso;";
+	FROM tb_traspaso WHERE tb_empresa_id = '{$_SESSION['empresa_id']}';";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

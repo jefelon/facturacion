@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cProveedor{
 	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema){
 	$sql = "INSERT tb_proveedor(
@@ -8,10 +9,12 @@ class cProveedor{
 	`tb_proveedor_dir` ,
 	`tb_proveedor_con` ,
 	`tb_proveedor_tel` ,
-	`tb_proveedor_ema`
+	`tb_proveedor_ema` ,
+	`tb_empresa_id`
+	
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema'
+	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '{$_SESSION['empresa_id']}'
 	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -24,7 +27,7 @@ class cProveedor{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_proveedor ORDER BY tb_proveedor_nom";
+	$sql="SELECT * FROM tb_proveedor WHERE tb_empresa_id ='{$_SESSION['empresa_id']}' ORDER BY tb_proveedor_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -62,7 +65,7 @@ class cProveedor{
 	function verifica_proveedor_doc($doc,$pro_id){
 	$sql="SELECT * 
 	FROM tb_proveedor
-	WHERE tb_proveedor_doc LIKE '$doc' ";
+	WHERE tb_proveedor_doc LIKE '$doc' AND tb_empresa_id='{$_SESSION['empresa_id']}'";
 	if($pro_id>0)$sql.= " AND tb_proveedor_id <> $pro_id ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -78,7 +81,7 @@ class cProveedor{
 	function complete_nom($dato){
 	$sql="SELECT *
 		FROM tb_proveedor
-		WHERE tb_proveedor_nom LIKE '%$dato%' OR tb_proveedor_doc LIKE '%$dato%'
+		WHERE tb_proveedor_nom LIKE '%$dato%' OR tb_proveedor_doc LIKE '%$dato%' AND tb_empresa_id='{$_SESSION['empresa_id']}'
 		GROUP BY tb_proveedor_nom
 		LIMIT 0,12
 		";

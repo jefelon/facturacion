@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cNotadebito{
 	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$valven,$igv,$des,$tot,$est,$tip,$mot,$ventipdoc,$vennumdoc,$usu_id,$punven_id,$emp_id,
 		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel){
@@ -81,7 +82,7 @@ class cNotadebito{
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	LEFT JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
+	WHERE tb_venta_fec BETWEEN '$fec1' AND '$fec2' AND v.tb_empresa_id = {$_SESSION['empresa_id']} ";
 	
 	//if($usu_id>0)$sql.=" AND v.tb_usuario_id = $usu_id  ";
 	//if($punven_id>0)$sql.=" AND v.tb_puntoventa_id = $punven_id ";
@@ -114,7 +115,7 @@ class cNotadebito{
 	
 	WHERE v.tb_usuario_id = $usu_id 
 	AND v.tb_puntoventa_id = $punven_id
-	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
+	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' AND v.tb_empresa_id = {$_SESSION['empresa_id']}";
 	
 	if($art=='p' and $cat_ids!="")$sql.=" AND p.tb_categoria_id IN ($cat_ids) ";
 	if($art=='s' and $cat_ids!="")$sql.=" AND s.tb_categoria_id IN ($cat_ids) ";
@@ -138,7 +139,7 @@ class cNotadebito{
 	INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id	
 	WHERE v.tb_empresa_id = $emp_id 
-	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
+	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2'";
 	
 	 if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
 	 if($cli_id>0)$sql.=" AND v.tb_cliente_id = $cli_id ";

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cTransporte{
 	function insertar($razsoc,$ruc,$dir,$tel,$ema){
 	$sql = "INSERT tb_transporte(	
@@ -6,10 +7,11 @@ class cTransporte{
 	`tb_transporte_ruc` ,
 	`tb_transporte_dir` ,	
 	`tb_transporte_tel` ,
-	`tb_transporte_ema`
+	`tb_transporte_ema`,
+	`tb_empresa_id`
 	)
 	VALUES (
-	'$razsoc',  '$ruc',  '$dir', '$tel', '$ema'
+	'$razsoc',  '$ruc',  '$dir', '$tel', '$ema', '{$_SESSION['empresa_id']}'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -22,7 +24,7 @@ class cTransporte{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_transporte ORDER BY tb_transporte_razsoc";
+	$sql="SELECT * FROM tb_transporte WHERE tb_empresa_id = '{$_SESSION['empresa_id']}' ORDER BY tb_transporte_razsoc";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -65,7 +67,7 @@ class cTransporte{
 	function complete_razsoc($dato){
 	$sql="SELECT *
 		FROM tb_transporte
-		WHERE tb_transporte_razsoc LIKE '%$dato%' OR tb_transporte_ruc LIKE '%$dato%'
+		WHERE tb_transporte_razsoc LIKE '%$dato%' OR tb_transporte_ruc LIKE '%$dato%' AND tb_empresa_id = '{$_SESSION['empresa_id']}'
 		GROUP BY tb_transporte_razsoc
 		LIMIT 0,12
 		";

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cTipoCambio{
 	function insertar($fec,$dolsun){
 	$sql = "INSERT tb_tipocambio(
@@ -6,22 +7,24 @@ class cTipoCambio{
 	`tb_tipocambio_mod` ,
 	`tb_tipocambio_fec` ,
 	`tb_tipocambio_dolsun`
+	`tb_empresa_id
 	)
 	VALUES (
-	NOW( ), NOW( ), '$fec','$dolsun'
+	NOW( ), NOW( ), '$fec','$dolsun', '{$_SESSION['empresa_id']}'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
 	function ultimoInsert(){
-	$sql = "SELECT last_insert_id()"; 
+	$sql = "SELECT last_insert_id() WHERE tb_empresa_id='{$_SESSION['empresa_id']}'";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_tipocambio 
+	$sql="SELECT * FROM tb_tipocambio
+    WHERE tb_empresa_id = '{$_SESSION['empresa_id']}'
 	ORDER BY tb_tipocambio_fec DESC";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -63,7 +66,7 @@ class cTipoCambio{
 	function consultar($fec){
 	$sql="SELECT *
 	FROM tb_tipocambio 
-	WHERE tb_tipocambio_fec='$fec'";
+	WHERE tb_tipocambio_fec='$fec' AND tb_empresa_id = '{$_SESSION['empresa_id']}'";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

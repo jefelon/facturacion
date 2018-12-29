@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cUsuario{	
 
 	function nuevo_registro($usugru,$emp){
@@ -47,14 +48,14 @@ class cUsuario{
 	$sql="SELECT * 
 	FROM  tb_usuario u
 	INNER JOIN tb_usuariogrupo ug ON u.tb_usuariogrupo_id = ug.tb_usuariogrupo_id	
-	WHERE tb_usuario_id =$id;";
+	WHERE tb_usuario_id =$id AND u.tb_empresa_id={$_SESSION['empresa_id']};";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		  
 	}
 	//eliminar		
 	function eliminar($id){
-	$sql="delete from tb_usuario where tb_usuario_id=$id;";
+	$sql="delete from tb_usuario where tb_usuario_id=$id AND tb_empresa_id={$_SESSION['empresa_id']};";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

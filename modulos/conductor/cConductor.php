@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cConductor{
 	function insertar($tip,$nom,$doc,$dir,$tel,$ema, $lic, $cat, $tra_id){
 	$sql = "INSERT tb_conductor(
@@ -10,10 +11,11 @@ class cConductor{
 	`tb_conductor_ema` ,
 	`tb_conductor_lic` ,
 	`tb_conductor_cat` ,
-	`tb_transporte_id`
+	`tb_transporte_id`,
+	`tb_empresa_id`
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$tel', '$ema', '$lic', '$cat', '$tra_id'
+	'$tip',  '$nom',  '$doc',  '$dir', '$tel', '$ema', '$lic', '$cat', '$tra_id', '{$_SESSION['empresa_id']}'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -29,6 +31,7 @@ class cConductor{
 	$sql="SELECT * 
 	FROM tb_conductor c
 	INNER JOIN tb_transporte t ON c.tb_transporte_id = t.tb_transporte_id
+	WHERE c.tb_empresa_id = '{$_SESSION['empresa_id']}' AND t.tb_empresa_id = '{$_SESSION['empresa_id']}'
 	ORDER BY tb_conductor_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -79,7 +82,7 @@ class cConductor{
 	function complete_nom($dato){
 	$sql="SELECT *
 		FROM tb_conductor
-		WHERE tb_conductor_nom LIKE '%$dato%' OR tb_conductor_doc LIKE '%$dato%'
+		WHERE tb_conductor_nom LIKE '%$dato%' OR tb_conductor_doc LIKE '%$dato%' AND tb_empresa_id = '{$_SESSION['empresa_id']}'
 		GROUP BY tb_conductor_nom
 		LIMIT 0,12
 		";
@@ -93,6 +96,7 @@ class cConductor{
 		FROM tb_conductor c
 		INNER JOIN tb_transporte t ON c.tb_transporte_id = t.tb_transporte_id
 		WHERE (tb_conductor_nom LIKE '%$dato%' OR tb_conductor_doc LIKE '%$dato%') AND c.tb_transporte_id = $tra_id
+		AND c.tb_empresa_id = '{$_SESSION['empresa_id']}' AND t.tb_empresa_id = '{$_SESSION['empresa_id']}'
 		GROUP BY tb_conductor_nom
 		LIMIT 0,12
 		";

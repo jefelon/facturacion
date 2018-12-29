@@ -1,11 +1,12 @@
 <?php
+session_start();
 class cVenta{
 	function mostrar_filtro($emp_id,$fec1,$est){
 	$sql="SELECT * 
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE v.tb_empresa_id = $emp_id AND d.tb_documento_ele=1 AND v.cs_tipodocumento_id=1
+	WHERE v.tb_empresa_id = $emp_id AND c.tb_empresa_id = $emp_id AND d.tb_documento_ele=1 AND v.cs_tipodocumento_id=1
 	AND tb_venta_fec = '$fec1' ";
 	//AND tb_venta_estsun = 1
 	$sql.=" AND d.tb_documento_ele = 1 ";
@@ -18,7 +19,7 @@ class cVenta{
 	}
 	function ultimo_numero($fec){
 		$sql="SELECT IFNULL (max(tb_combaja_num),0) as ultimo_numero FROM `tb_combaja`
-		WHERE tb_combaja_fec='$fec'; ";
+		WHERE tb_combaja_fec='$fec' c; ";
 		$oCado = new Cado();
 		$rst=$oCado->ejecute_sql($sql);
 		return $rst;
@@ -26,7 +27,7 @@ class cVenta{
 	function listar_combaja($fec){
 	$sql="SELECT * 
 	FROM tb_combaja
-	WHERE tb_combaja_fecref = '$fec'";
+	WHERE tb_combaja_fecref = '$fec' AND tb_empresa_id = {$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

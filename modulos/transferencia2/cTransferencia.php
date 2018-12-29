@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cTransferencia{
 	function insertar($fec,$cod,$des,$mon,$est,$caj_id_ori,$caj_id_des,$mon_id,$emp_id,$usu_id_reg,$usu_id_mod){
 	$sql = "INSERT INTO tb_transferencia(
@@ -52,7 +53,7 @@ class cTransferencia{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_transferencia ORDER BY tb_empresa_id,tb_transferencia_fecemi";
+	$sql="SELECT * FROM tb_transferencia WHERE tb_empresa_id ='{$_SESSION['empresa_id']}' ORDER BY tb_empresa_id,tb_transferencia_fecemi";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -227,6 +228,7 @@ class cTransferencia{
 	$sql="SELECT DISTINCT (
 	YEAR( tb_transferencia_feccon )) AS anio
 	FROM  `tb_transferencia` 
+	WHERE tb_empresa_id ='{$_SESSION['empresa_id']}
 	ORDER BY tb_transferencia_feccon";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

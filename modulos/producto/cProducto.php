@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cProducto{
 	function insertar($nom, $des, $est, $cat_id, $mar_id, $afec_id, $usu_id, $prod_img,$lote,$emp_id){
 	$sql = "INSERT INTO tb_producto(
@@ -43,16 +44,16 @@ class cProducto{
 	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id
 	INNER JOIN tb_marca m ON p.tb_marca_id=m.tb_marca_id
 	INNER JOIN tb_presentacion r ON p.tb_producto_id=r.tb_producto_id
-	WHERE tb_producto_est LIKE '%$est%' ";
+	WHERE tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']} 
+	AND m.tb_empresa_id={$_SESSION['empresa_id']} AND c.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($nom!="")$sql.=" AND tb_producto_nom LIKE '%$nom%' ";
 	if($cat!="")$sql.=" AND p.tb_categoria_id IN ($cat) ";
 	if($mar!="")$sql.=" AND p.tb_marca_id=$mar ";
 	
 	$sql.=" ORDER BY $ordby ";
-	
 	if($fil!="")$sql.=" LIMIT 0,$fil ";
-	
+	print $sql;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -65,7 +66,9 @@ class cProducto{
 	INNER JOIN tb_marca m ON p.tb_marca_id=m.tb_marca_id
 	INNER JOIN tb_presentacion r ON p.tb_producto_id=r.tb_producto_id
 	INNER JOIN tb_unidad u ON r.tb_unidad_id=u.tb_unidad_id
-	WHERE tb_producto_est LIKE '%$est%' ";
+	WHERE tb_producto_est LIKE '%$est%' AND p.tb_empresa_id={$_SESSION['empresa_id']}
+	AND m.tb_empresa_id={$_SESSION['empresa_id']} AND c.tb_empresa_id={$_SESSION['empresa_id']}
+	AND u.tb_empresa_id={$_SESSION['empresa_id']}";
 
 	if($nom!="")$sql.=" AND tb_producto_nom LIKE '%$nom%' ";
 	if($cat!="")$sql.=" AND p.tb_categoria_id=$cat ";
@@ -83,7 +86,8 @@ class cProducto{
 	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id
 	INNER JOIN tb_presentacion r ON p.tb_producto_id=r.tb_producto_id
 	INNER JOIN tb_unidad u ON r.tb_unidad_id=u.tb_unidad_id
-	WHERE tb_presentacion_id=$id ";
+	WHERE tb_presentacion_id=$id AND p.tb_empresa_id={$_SESSION['empresa_id']}
+	AND c.tb_empresa_id={$_SESSION['empresa_id']} AND u.tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -105,7 +109,7 @@ class cProducto{
 	INNER JOIN tb_presentacion pr ON p.tb_producto_id=pr.tb_producto_id
 	INNER JOIN tb_ventadetalle vd ON pr.tb_presentacion_id=vd.tb_presentacion_id
 	INNER JOIN tb_unidad u ON pr.tb_unidad_id=u.tb_unidad_id
-	WHERE vd.tb_venta_id=$ven_id ";
+	WHERE vd.tb_venta_id=$ven_id  AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -116,7 +120,7 @@ class cProducto{
 	FROM tb_producto p
 	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id
 	LEFT JOIN tb_marca m ON p.tb_marca_id=m.tb_marca_id
-	WHERE tb_producto_id=$id";
+	WHERE tb_producto_id=$id AND p.tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -133,7 +137,7 @@ class cProducto{
 	`tb_usuario_id` =  '$usu_id',
 	`tb_producto_imagen` =  '$prod_img' ,
 	`tb_producto_lote` =  '$lote' 
-	WHERE  tb_producto_id =$id;"; 
+	WHERE  tb_producto_id =$id AND tb_empresa_id={$_SESSION['empresa_id']};";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -141,7 +145,7 @@ class cProducto{
     function complete_cod($dato,$limit){
         $sql="SELECT *
 		FROM tb_producto
-		WHERE tb_producto_cod LIKE '%$dato%'
+		WHERE tb_producto_cod LIKE '%$dato%' AND tb_empresa_id={$_SESSION['empresa_id']}
 		GROUP BY tb_producto_cod
 		LIMIT 0,$limit
 		";
@@ -152,7 +156,7 @@ class cProducto{
 	function complete_nom($dato,$limit){
 	$sql="SELECT *
 		FROM tb_producto
-		WHERE tb_producto_nom LIKE '%$dato%'
+		WHERE tb_producto_nom LIKE '%$dato%' AND tb_empresa_id={$_SESSION['empresa_id']}
 		GROUP BY tb_producto_nom
 		LIMIT 0,$limit
 		";
@@ -179,7 +183,7 @@ class cProducto{
 	function consultar_coincidencia($pro_id,$pro_nom, $cat_id, $mar_id){
 	$sql = "SELECT * 
 		FROM  tb_producto
-		WHERE tb_producto_nom LIKE '%$pro_nom%'
+		WHERE tb_producto_nom LIKE '%$pro_nom%' AND tb_empresa_id={$_SESSION['empresa_id']}
 		AND tb_categoria_id = $cat_id
 		AND tb_marca_id = $mar_id ";
 		
@@ -190,7 +194,7 @@ class cProducto{
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_producto WHERE tb_producto_id=$id";
+	$sql="DELETE FROM tb_producto WHERE tb_producto_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

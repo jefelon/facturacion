@@ -1,13 +1,15 @@
 <?php
+session_start();
 class cTipoperacion{
 	function insertar($nom,$tip,$man){
 	$sql = "INSERT tb_tipoperacion (
 		`tb_tipoperacion_nom`,
 		`tb_tipoperacion_tip`,
-		`tb_tipoperacion_man`	
+		`tb_tipoperacion_man`,
+		`tb_empresa_id`	
 		)
 		VALUES (
-		 '$nom','$tip','$man'
+		 '$nom','$tip','$man', '{$_SESSION['empresa_id']}'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -16,7 +18,7 @@ class cTipoperacion{
 	function mostrarTodos(){
 	$sql="SELECT * 
 	FROM tb_tipoperacion
-	WHERE tb_tipoperacion_man=1
+	WHERE tb_tipoperacion_man=1 AND tb_empresa_id = '{$_SESSION['empresa_id']}'
 	ORDER BY tb_tipoperacion_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -25,11 +27,11 @@ class cTipoperacion{
 	function mostrar_por_tipo($tip_id,$man){
 	$sql="SELECT * 
 	FROM tb_tipoperacion
-	WHERE tb_tipoperacion_tip = '$tip_id' ";
+	WHERE tb_tipoperacion_tip = '$tip_id' AND tb_empresa_id = '{$_SESSION['empresa_id']}'";
 	
 	if($man!="")$sql.="	AND tb_tipoperacion_man = $man ";
 	
-	$slq.=" ORDER BY tb_tipoperacion_id ";
+	$sql.=" ORDER BY tb_tipoperacion_id ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

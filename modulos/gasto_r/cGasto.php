@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cGasto{
 	function insertar($fec,$doc,$des,$imp,$modpag,$numope,$est,$cue,$subcue,$pro,$entfin_id,$caj_id,$mon_id,$tra_id,$com_id,$emp_id,$usu_id_reg,$usu_id_mod){
 	$sql = "INSERT INTO tb_gasto_r(
@@ -53,7 +54,7 @@ class cGasto{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT * FROM tb_gasto_r ORDER BY tb_empresa_id,tb_gasto_fec";
+	$sql="SELECT * FROM tb_gasto_r WHERE tb_empresa_id = {$_SESSION['empresa_id']} ORDER BY tb_empresa_id,tb_gasto_fec";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

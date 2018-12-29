@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cVenta{
 	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$valven,$igv,$des,$tot,$est,$lab1,$lab2,$lab3,$may,$usu_id,$punven_id,$emp_id,
 		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id){
@@ -108,7 +109,7 @@ class cVenta{
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE tb_usuario_id = $usu_id 
+	WHERE tb_usuario_id = $usu_id AND v.tb_empresa_id = '{$_SESSION['empresa_id']}'
 	AND tb_puntoventa_id = $punven_id
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
@@ -139,7 +140,7 @@ class cVenta{
 	
 	LEFT JOIN tb_servicio s ON vd.tb_servicio_id = s.tb_servicio_id
 	
-	WHERE v.tb_usuario_id = $usu_id 
+	WHERE v.tb_usuario_id = $usu_id AND v.tb_empresa_id = '{$_SESSION['empresa_id']}'
 	AND v.tb_puntoventa_id = $punven_id
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
@@ -161,7 +162,7 @@ class cVenta{
               FROM tb_venta v
               LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
               INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-              WHERE v.tb_documento_id = '$doc_id'
+              WHERE v.tb_documento_id = '$doc_id' AND v.tb_empresa_id = '{$_SESSION['empresa_id']}'
               AND v.tb_venta_numdoc = '$numdoc'";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -173,7 +174,7 @@ class cVenta{
               FROM tb_venta v
               LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
               INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-              WHERE c.tb_cliente_doc = '$cliete_doc'";
+              WHERE c.tb_cliente_doc = '$cliete_doc' AND v.tb_empresa_id = '{$_SESSION['empresa_id']}'";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

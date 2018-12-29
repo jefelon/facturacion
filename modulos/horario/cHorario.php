@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cHorario{
 	function insertar($nom,$fecini,$fecfin,$lun,$mar,$mie,$jue,$vie,$sab,$dom,$horini1,$horfin1,$horini2,$horfin2,$est){
 	$sql = "INSERT INTO tb_horario(
@@ -18,10 +19,11 @@ class cHorario{
 	`tb_horario_horfin1` ,
 	`tb_horario_horini2` ,
 	`tb_horario_horfin2` ,
-	`tb_horario_est`
+	`tb_horario_est`,
+	`tb_empresa_id`
 	)
 	VALUES (
-	NOW( ) , NOW( ) , '$nom',  '$fecini',  '$fecfin',  '$lun',  '$mar',  '$mie',  '$jue',  '$vie',  '$sab',  '$dom', ";
+	NOW( ) , NOW( ) , '$nom',  '$fecini',  '$fecfin',  '$lun',  '$mar',  '$mie',  '$jue',  '$vie',  '$sab',  '$dom','{$_SESSION['empresa_id']}' ";
 	
 	if($horini1=='NULL'){
 		$sql.=" $horini1, ";
@@ -47,7 +49,7 @@ class cHorario{
 		$sql.=" '$horfin2', ";
 	}
 	$sql.="  
-	    '$est'
+	    '$est','{$_SESSION['empresa_id']}'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -55,7 +57,7 @@ class cHorario{
 	}
 	function mostrarUno($id){
 	$sql="SELECT * FROM tb_horario 
-	WHERE tb_horario_id=$id";
+	WHERE tb_horario_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -63,6 +65,7 @@ class cHorario{
 	function mostrar_todos(){
 	$sql="SELECT * 
 	FROM tb_horario
+	WHERE tb_empresa_id={$_SESSION['empresa_id']}
 	ORDER BY tb_horario_nom
 	";
 	$oCado = new Cado();
@@ -108,7 +111,7 @@ class cHorario{
 	}
 	$sql.="
 	`tb_horario_est` =  '$est' 
-	WHERE tb_horario_id =$id;"; 
+	WHERE tb_horario_id =$id AND tb_empresa_id={$_SESSION['empresa_id']};";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -122,7 +125,7 @@ class cHorario{
 	return $rst;
 	}
 	function eliminar($id){
-	$sql="DELETE FROM tb_horario WHERE tb_horario_id=$id";
+	$sql="DELETE FROM tb_horario WHERE tb_horario_id=$id AND tb_empresa_id={$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

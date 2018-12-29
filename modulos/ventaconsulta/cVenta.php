@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cVenta{
 	function insertar($fec,$doc_id,$ser,$num,$cli_id,$valven,$des,$igv,$tot,$est,$lab1,$may,$usu_id,$punven_id,$emp_id){
 	$sql = "INSERT INTO tb_venta(
@@ -58,7 +59,7 @@ class cVenta{
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE tb_usuario_id = $usu_id 
+	WHERE tb_usuario_id = $usu_id AND v.tb_empresa_id = '{$_SESSION['empresa_id']}'
 	AND tb_puntoventa_id = $punven_id
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
@@ -90,7 +91,7 @@ class cVenta{
 	LEFT JOIN tb_servicio s ON vd.tb_servicio_id = s.tb_servicio_id
 	
 	WHERE v.tb_usuario_id = $usu_id 
-	AND v.tb_puntoventa_id = $punven_id
+	AND v.tb_puntoventa_id = $punven_id AND v.tb_empresa_id = '{$_SESSION['empresa_id']}'
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
 	if($art=='p' and $cat_ids!="")$sql.=" AND p.tb_categoria_id IN ($cat_ids) ";

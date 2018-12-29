@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cServicio{
 	function insertar($nom, $des, $pre, $est, $cat_id, $aut){
 	$sql = "INSERT INTO tb_servicio(		
@@ -7,10 +8,11 @@ class cServicio{
 		`tb_servicio_pre` ,
 		`tb_servicio_est` ,
 		`tb_categoria_id` ,
-		`tb_servicio_aut`
+		`tb_servicio_aut`,
+		`tb_empresa_id`
 		)
 		VALUES (
-		'$nom',  '$des', '$pre', '$est',  '$cat_id',  '$aut'
+		'$nom',  '$des', '$pre', '$est',  '$cat_id',  '$aut', '{$_SESSION['empresa_id']}'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -26,7 +28,7 @@ class cServicio{
 	$sql="SELECT * 
 	FROM tb_servicio p
 	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id	
-	WHERE tb_servicio_est LIKE '%$est%' ";
+	WHERE tb_servicio_est LIKE '%$est%' AND p.tb_empresa_id = {$_SESSION['empresa_id']}";
 
 	if($nom!="")$sql.=" AND tb_servicio_nom LIKE '%$nom%' ";
 	if($cat!="")$sql.=" AND p.tb_categoria_id IN ($cat) ";	
@@ -43,7 +45,7 @@ class cServicio{
 	$sql="SELECT * 
 	FROM tb_servicio p
 	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id	
-	WHERE tb_servicio_est LIKE '$est' AND tb_servicio_nom LIKE '$nom' ";
+	WHERE tb_servicio_est LIKE '$est' AND tb_servicio_nom LIKE '$nom' AND p.tb_empresa_id = {$_SESSION['empresa_id']}";
 	$sql.=" ORDER BY tb_servicio_nom ";
 
 	$oCado = new Cado();
@@ -90,7 +92,7 @@ class cServicio{
 	function complete_nom($dato){
 	$sql="SELECT *
 		FROM tb_servicio
-		WHERE tb_servicio_nom LIKE '%$dato%'
+		WHERE tb_servicio_nom LIKE '%$dato%' AND tb_empresa_id = {$_SESSION['empresa_id']}
 		GROUP BY tb_servicio_nom
 		LIMIT 0,12
 		";

@@ -12,8 +12,7 @@ class cEmpresa{
 	`tb_empresa_rep` ,
 	`tb_empresa_fir` ,
 	`tb_empresa_logo`,
-	`tb_empresa_regimen`,
-	
+	`tb_empresa_regimen`
 	)
 	VALUES (
 	'$ruc',  '$nomcom',  '$razsoc',  '$dir',  '$dir2',  '$tel', '$ema','$rep', '$fir', '$logo','$regimen'

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cVenta{
 	function mostrarUno($id){
 	$sql="SELECT * 
@@ -57,7 +58,7 @@ class cVenta{
 
 	function ultimo_numero($fec){
 		$sql="SELECT IFNULL (max(tb_resumenboleta_num),0) as ultimo_numero FROM `tb_resumenboleta`
-		WHERE tb_resumenboleta_fec='$fec'; ";
+		WHERE tb_resumenboleta_fec='$fec' AND tb_empresa_id = {$_SESSION['empresa_id']}; ";
 		$oCado = new Cado();
 		$rst=$oCado->ejecute_sql($sql);
 		return $rst;
@@ -66,7 +67,7 @@ class cVenta{
 	function listar_resumenboleta($fec){
 	$sql="SELECT * 
 	FROM tb_resumenboleta
-	WHERE tb_resumenboleta_fecref = '$fec'";
+	WHERE tb_resumenboleta_fecref = '$fec' AND tb_empresa_id = {$_SESSION['empresa_id']}";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cClientecuenta{
 	function insertar($tipreg,$fec,$glo,$tip,$mon,$est,$ven_id,$forpag_id,$modpag_id,$cuecor_id,$tar_id,$numope,$numdia,$fecven,$cli_id,$ver,$emp_id){
 	$sql = "INSERT INTO  tb_clientecuenta(
@@ -37,6 +38,7 @@ class cClientecuenta{
 	function mostrarTodos(){
 	$sql="SELECT *
 	FROM tb_clientecuenta
+	WHERE tb_empresa_id = {$_SESSION['empresa_id']}
 	ORDER BY tb_clientecuenta_id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

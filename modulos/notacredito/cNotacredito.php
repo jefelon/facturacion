@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cNotacredito{
 	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$valven,$igv,$des,$tot,$est,$tip,$mot,$ventipdoc,$vennumdoc,$usu_id,$punven_id,$emp_id,
 		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel){

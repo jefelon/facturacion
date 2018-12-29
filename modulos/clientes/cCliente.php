@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cCliente{
 	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene){
 	$sql = "INSERT tb_cliente(
@@ -43,6 +44,7 @@ class cCliente{
 	function mostrarTodos($fil){
 	$sql="SELECT * FROM tb_cliente c
 	LEFT JOIN tb_precio p ON c.tb_precio_id=p.tb_precio_id
+	WHERE c.tb_empresa_id = {$_SESSION['empresa_id']}
 	ORDER BY c.tb_cliente_nom
 	";
 	if($fil!="")$sql.=" LIMIT 0,$fil ";
@@ -121,7 +123,7 @@ class cCliente{
 	function complete_nom($dato){
 	$sql="SELECT *
 		FROM tb_cliente
-		WHERE tb_cliente_nom LIKE '%$dato%' OR tb_cliente_doc LIKE '%$dato%'
+		WHERE tb_cliente_nom LIKE '%$dato%' OR tb_cliente_doc LIKE '%$dato%' AND tb_empresa_id = {$_SESSION['empresa_id']}
 		GROUP BY tb_cliente_nom
 		LIMIT 0,12
 		";
@@ -136,7 +138,9 @@ class cCliente{
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
 	INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
-	WHERE tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";		
+	WHERE tb_venta_fec BETWEEN '$fec1' AND '$fec2' AND v.tb_empresa_id = {$_SESSION['empresa_id']}
+	AND c.tb_empresa_id = {$_SESSION['empresa_id']} AND d.tb_empresa_id = {$_SESSION['empresa_id']}
+	AND pv.tb_empresa_id = {$_SESSION['empresa_id']}";
 	if($cli_id>0)$sql.=" AND v.tb_cliente_id = ".$cli_id;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

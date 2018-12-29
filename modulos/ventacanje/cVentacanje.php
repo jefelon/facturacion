@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cVentacanje{
 	function insertar($vennot_id,$ven_id,$usu_id,$punven_id,$emp_id){
 	$sql = "INSERT INTO tb_ventacanje(
@@ -29,7 +30,7 @@ class cVentacanje{
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
 	WHERE tb_usuario_id = $usu_id 
-	AND tb_puntoventa_id = $punven_id
+	AND tb_puntoventa_id = $punven_id AND v.tb_empresa_id = '{$_SESSION['empresa_id']}'
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
 	if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
