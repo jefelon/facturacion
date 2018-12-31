@@ -177,13 +177,13 @@ function valida($tipodoc) {
         case '2.1':
             //$ruta = $_SERVER['DOCUMENT_ROOT'] ."/sunat/ubl/21/maindoc/";
             if($tipodoc == 'VoidedDocuments'){
-                $file=$ruta2."UBLPE-VoidedDocuments-1.0.xsd";
+                $file=$ruta2."UBL-VoidedDocuments-1.0.xsd";
             }elseif($tipodoc == 'CreditNote'){
-                $file=$ruta2."UBLPE-CreditNote-1.0.xsd";
+                $file=$ruta2."UBL-CreditNote-2.1.xsd";
             }elseif($tipodoc == 'DebitNote'){
-                $file=$ruta2."UBLPE-DebitNote-1.0.xsd";
+                $file=$ruta2."UBL-DebitNote-1.0.xsd";
             }elseif($tipodoc == 'SummaryDocuments'){
-                $file=$ruta."UBLPE-SummaryDocuments-1.0.xsd";
+                $file=$ruta."UBL-SummaryDocuments-1.0.xsd";
             }elseif($tipodoc == 'DespatchAdvice'){
                 //$ruta = $_SERVER['DOCUMENT_ROOT'] ."/sunat/ubl/21/maindoc/";
                 $file=$ruta2."UBL-DespatchAdvice-2.1.xsd";

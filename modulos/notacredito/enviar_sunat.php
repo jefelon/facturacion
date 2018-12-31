@@ -124,6 +124,7 @@ $header[0]['AdditionalProperty_Value']=$total_letras;
 
 //NOTA CREDITO
 $header[0]['issuedate']				=$fechadoc;//fecha nota credito
+$header[0]['issuetime']				='00:00:01';//fecha nota credito
 
 $header[0]['referencedocumenttypecode']=$ventipdoc;//ID DOCUMENT
 $header[0]['referenceid']			=$vennumdoc;//factura
