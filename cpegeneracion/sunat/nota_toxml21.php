@@ -1,5 +1,5 @@
 <?php
-require_once('funciones.php');
+require_once('funciones21.php');
 function run($arr, $dirxml, $dircdr, $nodo="", $tipodoc="", $enviar=false) {
     global $xml, $cadena_original, $sello, $texto, $ret;
     $arrRe = array();
@@ -164,6 +164,94 @@ function genera_xml($arr, $nodo, $tipodoc) {
             // code...
             break;
     }
+    // if ($tipodoc == 'Invoice'){
+    //     foreach ($arr['doc'] as $key => $value) {
+    //         $padre = create_element($xml, $xml, $key, $value);
+    //         if(isset($value['child'])){
+    //             append_child($value['child'], $xml, $padre);
+    //         }
+    //     }
+    //
+    // }elseif ($tipodoc == 'DespatchAdvice'){
+    //     add_generales($arr,$nodo,$tipodoc);
+    //     add_UBLExtensions($arr,$nodo,$tipodoc);
+    //     add_UBLVersionID($arr,$nodo,$tipodoc);
+    //     add_CustomizationID($arr,$nodo,$tipodoc);
+    //     add_ID($arr,$nodo,$tipodoc);
+    //     add_IssueDate($arr,$nodo,$tipodoc);
+    //     add_DespatchAdviceTypeCode($arr,$nodo,$tipodoc);
+    //     add_Note($arr,$nodo,$tipodoc);
+    //     add_DespatchSupplierParty($arr,$nodo,$tipodoc);
+    //     add_DeliveryCustomerParty($arr,$nodo,$tipodoc);
+    //     add_Shipment($arr,$nodo,$tipodoc);
+    //     add_DespatchLine($arr,$nodo,$tipodoc);
+    // }elseif ($tipodoc == 'CreditNote'){
+    //     add_generales($arr,$nodo,$tipodoc);
+    //     add_UBLExtensions($arr,$nodo,$tipodoc);
+    //     add_UBLVersionID($arr,$nodo,$tipodoc);
+    //     add_CustomizationID($arr,$nodo,$tipodoc);
+    //     add_ID($arr,$nodo,$tipodoc);
+    //     add_IssueDate($arr,$nodo,$tipodoc);
+    //     add_DocumentCurrencyCode($arr,$nodo,$tipodoc);
+    //     add_DiscrepancyResponse($arr,$nodo,$tipodoc);
+    //     add_BillingReference($arr,$nodo,$tipodoc);
+    //     /*if (isset($arr['DespatchDocumentReference']['ID'])){
+    //         add_DespatchDocumentReference($arr,$nodo,$tipodoc);
+    //     }
+    //     if (isset($arr['AdditionalDocumentReference']['ID'])){
+    //         add_AdditionalDocumentReference ($arr,$nodo,$tipodoc);
+    //     }*/
+    //     add_Signature($arr,$nodo,$tipodoc);
+    //     add_AccountingSupplierParty($arr,$nodo,$tipodoc);
+    //     add_AccountingCustomerParty($arr,$nodo,$tipodoc);
+    //     add_TaxTotal($arr,$nodo,$tipodoc);
+    //     add_LegalMonetaryTotal($arr,$nodo,$tipodoc);
+    //     add_CreditNoteLine($arr,$nodo,$tipodoc);
+    // }elseif ($tipodoc == 'DebitNote'){
+    //     add_generales($arr,$nodo,$tipodoc);
+    //     add_UBLExtensions($arr,$nodo,$tipodoc);
+    //     add_UBLVersionID($arr,$nodo,$tipodoc);
+    //     add_CustomizationID($arr,$nodo,$tipodoc);
+    //     add_ID($arr,$nodo,$tipodoc);
+    //     add_IssueDate($arr,$nodo,$tipodoc);
+    //     add_DocumentCurrencyCode($arr,$nodo,$tipodoc);
+    //     add_DiscrepancyResponse($arr,$nodo,$tipodoc);
+    //     add_BillingReference($arr,$nodo,$tipodoc);
+    //     /*if (isset($arr['DespatchDocumentReference']['ID'])){
+    //         add_DespatchDocumentReference($arr,$nodo,$tipodoc);
+    //     }
+    //     if (isset($arr['AdditionalDocumentReference']['ID'])){
+    //         add_AdditionalDocumentReference ($arr,$nodo,$tipodoc);
+    //     }*/
+    //     add_Signature($arr,$nodo,$tipodoc);
+    //     add_AccountingSupplierParty($arr,$nodo,$tipodoc);
+    //     add_AccountingCustomerParty($arr,$nodo,$tipodoc);
+    //     add_TaxTotal($arr,$nodo,$tipodoc);
+    //     add_RequestedMonetaryTotal($arr,$nodo,$tipodoc);
+    //     add_DebitNoteLine($arr,$nodo,$tipodoc);
+    // }elseif ($tipodoc == 'SummaryDocuments'){
+    //     add_generales($arr,$nodo,$tipodoc);
+    //     add_UBLExtensions($arr,$nodo,$tipodoc);
+    //     add_UBLVersionID($arr,$nodo,$tipodoc);
+    //     add_CustomizationID($arr,$nodo,$tipodoc);
+    //     add_ID($arr,$nodo,$tipodoc);
+    //     add_ReferenceDate($arr,$nodo,$tipodoc);
+    //     add_IssueDate($arr,$nodo,$tipodoc);
+    //     add_Signature($arr,$nodo,$tipodoc);
+    //     add_AccountingSupplierParty($arr,$nodo,$tipodoc);
+    //     add_SummaryDocumentsLine($arr,$nodo,$tipodoc);
+    // }elseif ($tipodoc == 'VoidedDocuments'){
+    //     add_generales($arr,$nodo,$tipodoc);
+    //     add_UBLExtensions($arr,$nodo,$tipodoc);
+    //     add_UBLVersionID($arr,$nodo,$tipodoc);
+    //     add_CustomizationID($arr,$nodo,$tipodoc);
+    //     add_ID($arr,$nodo,$tipodoc);
+    //     add_ReferenceDate($arr,$nodo,$tipodoc);
+    //     add_IssueDate($arr,$nodo,$tipodoc);
+    //     add_Signature($arr,$nodo,$tipodoc);
+    //     add_AccountingSupplierParty($arr,$nodo,$tipodoc);
+    //     add_VoidedDocumentsLine($arr,$nodo,$tipodoc);
+    // }
 }
 function add_generales($arr, $nodo, $tipodoc) {
     global $root, $xml;
@@ -850,7 +938,7 @@ function add_Signature($arr,$nodo,$tipodoc){
                 //<cbc:Name>
                 $Name = $xml->createElement("cbc:Name");
                 $Name = $PartyName->appendChild($Name);
-                $texto = $Name->appendChild(new DOMCdataSection($arr['Signature']['SignatoryParty']['PartyName']['Name']));
+                $textto = $Name->appendChild(new DOMCdataSection($arr['Signature']['SignatoryParty']['PartyName']['Name']));
         //<cac:DigitalSignatureAttachment>
         $DigitalSignatureAttachment = $xml->createElement("cac:DigitalSignatureAttachment");
         $DigitalSignatureAttachment = $Signature->appendChild($DigitalSignatureAttachment);
