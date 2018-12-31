@@ -71,6 +71,7 @@ while($dt = mysql_fetch_array($dts)){
     }
 
 	$fechadoc=$dt["tb_venta_fec"];
+    $issuetime=$dt["tb_venta_reg"];
 	
 	$identidad=$dt["tb_cliente_doc"];
 	if($dt["tb_cliente_tip"]==1)$idtipodni=1;
@@ -105,6 +106,8 @@ $header[0]['serie']				=$ser;
 $header[0]['numero']			=$num;
 
 $header[0]['fechadoc']			=$fechadoc;
+$header[0]['issuetime']			=$issuetime;
+
 
 $header[0]['identidad']			=$identidad;
 $header[0]['idtipodni']			=$idtipodni;
