@@ -59,15 +59,15 @@ $(function(){
 		cmb_pv_punven_id(empresa_id);
 	});
 
-	$("#for_punven").validate({
+	$("#for_punven_usu").validate({
 		
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
-				url: "usuario_puntoventa_reg.php",
+				url: "../usuarios/usuario_puntoventa_reg.php",
 				async:true,
 				dataType: "html",
-				data: $("#for_punven").serialize(),
+				data: $("#for_punven_usu").serialize(),
 				beforeSend: function() {
 					$('#msj_usuario_form').html("Guardando...");
 					$('#msj_usuario_form').show(100);
@@ -75,7 +75,7 @@ $(function(){
 				},
 				success: function(html){
 					$('#msj_usuario_form').html(html);
-					$('#for_punven').each (function(){this.reset();});
+					$('#for_punven_usu').each (function(){this.reset();});
 				},
 				complete: function(){
 					usuario_puntoventa_tabla();
@@ -102,14 +102,13 @@ $(function(){
 	
 });
 </script>
-<form id="for_punven">
+<form id="for_punven_usu">
 <input name="action_punven" id="action_punven" type="hidden" value="<?php echo $_POST['action']?>">
-<input name="hdd_punven_id" id="hdd_punven_id" type="hidden" value="<?php echo $_POST['id']?>">
 <input name="hdd_pv_usu_id" id="hdd_pv_usu_id" type="hidden" value="<?php echo $_POST['usu_id']?>">
     <table>
         <tr>
           <td align="right"><label for="cmb_pv_emp_id">Empresa:</label></td>
-          <td><select name="cmb_pv_emp_id" id="cmb_pv_emp_id">
+          <td><select name="cmb_pv_emp_id" id="cmb_pv_emp_id" disabled>
           </select></td>
         </tr>
         <tr>

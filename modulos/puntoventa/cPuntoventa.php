@@ -25,11 +25,22 @@ class cPuntoventa{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrarTodosSup(){
+        $sql="SELECT * 
+	FROM tb_puntoventa pv
+	INNER JOIN tb_almacen a ON pv.tb_almacen_id=a.tb_almacen_id
+	ORDER BY tb_puntoventa_nom";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function mostrar_filtro($emp_id){
 	$sql="SELECT * 
 	FROM tb_puntoventa pv
 	INNER JOIN tb_almacen a ON pv.tb_almacen_id=a.tb_almacen_id
-	WHERE pv.tb_empresa_id=$emp_id AND pv.tb_empresa_id={$_SESSION['empresa_id']} AND a.tb_empresa_id={$_SESSION['empresa_id']}
+	WHERE pv.tb_empresa_id=$emp_id AND a.tb_empresa_id=$emp_id
 	ORDER BY tb_puntoventa_nom";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -91,11 +102,10 @@ class cPuntoventa{
 	function insertar_usuariopv($usu_id,$punven_id){
 	$sql = "INSERT INTO  tb_usuariopv(
 	`tb_usuario_id` ,
-	`tb_puntoventa_id`,
-	`tb_empresa_id`,
+	`tb_puntoventa_id`
 	)
 	VALUES (
-	'$usu_id',  '$punven_id', '{$_SESSION['empresa_id']}'
+	'$usu_id',  '$punven_id'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -106,18 +116,17 @@ class cPuntoventa{
 	FROM tb_usuariopv u
 	INNER JOIN tb_puntoventa pv ON u.tb_puntoventa_id=pv.tb_puntoventa_id
 	INNER JOIN tb_empresa e ON pv.tb_empresa_id = e.tb_empresa_id
-	WHERE u.tb_usuario_id= $usu_id AND pv.tb_empresa_id = {$_SESSION['empresa_id']}";
+	WHERE u.tb_usuario_id= $usu_id";
 	
 	if($punven_id>0)$sql.=" AND u.tb_puntoventa_id = $punven_id";
-	
 	$sql.="	ORDER BY e.tb_empresa_razsoc, pv.tb_puntoventa_nom ";
-	print $sql;
+
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function eliminar_usuariopv($id){
-	$sql="DELETE FROM tb_usuariopv WHERE tb_usuariopv_id=$id AND tb_empresa_id = {$_SESSION['empresa_id']}";
+	$sql="DELETE FROM tb_usuariopv WHERE tb_usuariopv_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

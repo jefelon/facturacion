@@ -29,7 +29,6 @@ class cTalonario{
 	WHERE t.tb_empresa_id = $emp_id
 	";
 	if($punven_id>0)$sql.=" AND t.tb_puntoventa_id=$punven_id ";
-	print $sql;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

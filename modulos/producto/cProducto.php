@@ -53,7 +53,6 @@ class cProducto{
 	
 	$sql.=" ORDER BY $ordby ";
 	if($fil!="")$sql.=" LIMIT 0,$fil ";
-	print $sql;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

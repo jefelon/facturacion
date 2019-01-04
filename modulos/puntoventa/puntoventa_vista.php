@@ -29,7 +29,8 @@ $oContenido = new cContenido();
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.position.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.resizable.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.dialog.js"></script>
-<script src="../../js/jquery-ui/development-bundle/ui/jquery.effects.core.js"></script>
+    <script src="../../js/jquery-ui/development-bundle/ui/jquery.effects.core.js"></script>
+    <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.tabs.js"></script>
 
 <script src="../../js/jquery-validation/jquery.validate.js" type="text/javascript"></script>
 <script src="../../js/jquery-validation/additional-methods.js" type="text/javascript"></script>
@@ -84,6 +85,30 @@ function puntoventa_form(act,idf)
 	});
 }
 
+function apuntoventa_form(act,idf)
+{
+    $.ajax({
+        type: "POST",
+        url: "apuntoventa_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            punven_id:	idf,
+            vista:	'puntoventa_tabla',
+            id: "<?php echo $_SESSION['usuario_id'] ?>"
+        }),
+        beforeSend: function() {
+            $('#msj_puntoventa').hide();
+            $('#div_apuntoventa_form').dialog("open");
+            $('#div_apuntoventa_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_apuntoventa_form').html(html);
+        }
+    });
+}
+
 function eliminar_puntoventa(id)
 {   
 	$('#msj_puntoventa').hide();   
@@ -112,6 +137,25 @@ function eliminar_puntoventa(id)
 }
 
 
+
+function tabsPuntoVenta()
+{
+    $("#tab_pv").tabs();
+    // switch ($('#action_usuario').val())
+    // {
+    //     case 'insertar':
+    //         $("#tabs").tabs({disabled:[1,2]});
+    //         break
+    //     case 'editar':
+    //         $("#tabs").tabs({disabled:[]});
+    //         $("#txt_use").attr('readonly',true);
+    //         $("#txt_pas").attr('readonly',true);
+    //         break
+    //     //default:
+    //     //Sentencias a ejecutar si el valor no es ninguno de los anteriores
+    // }
+}
+
 //
 $(function() {
 	
@@ -126,6 +170,12 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
+    $('#btn_agregar_pv').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
+
+
 
 	puntoventa_tabla();
 	
@@ -146,6 +196,20 @@ $(function() {
 			}
 		}
 	});
+    $( "#div_apuntoventa_form" ).dialog({
+        title:'Acceso a punto de venta',
+        autoOpen: false,
+        resizable: false,
+        height: 250,
+        width: 450,
+        modal: true,
+        buttons: {
+            Cerrar: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+    tabsPuntoVenta();
 	
 });
 
@@ -172,6 +236,7 @@ $(function() {
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="puntoventa_form('insertar')">Agregar</a></td>
+                        <td width="160" align="left" valign="middle"><a id="btn_agregar_pv" href="#" onClick="apuntoventa_form('insertar')">Agregar Acceso PV</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
                       <td align="right"><div id="msj_puntoventa" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
@@ -185,10 +250,13 @@ $(function() {
                   </tr>
               </table>
 			</div>
-        	<div id="div_puntoventa_form">
-			</div>
+
         	<div id="div_puntoventa_tabla" class="contenido_tabla">
       		</div>
+            <div id="div_puntoventa_form">
+            </div>
+            <div id="div_apuntoventa_form">
+            </div>
       	</div>
     </article>
 </div>

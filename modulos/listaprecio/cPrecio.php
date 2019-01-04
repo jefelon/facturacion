@@ -36,7 +36,6 @@ class cPrecio{
 
 	$sql.=" ORDER BY tb_precio_nom";
 
-	print $sql;
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

@@ -4,7 +4,13 @@ require_once ("../../config/Cado.php");
 require_once ("cPuntoventa.php");
 $oPuntoventa = new cPuntoventa();
 
-$dts=$oPuntoventa->mostrar_filtro($_SESSION['empresa_id']);
+if($_SESSION['usuariogrupo_id']==1){
+    $dts=$oPuntoventa->mostrarTodosSup();
+}else{
+    $dts=$oPuntoventa->mostrar_filtro($_SESSION['empresa_id']);
+}
+
+
 $num_rows= mysql_num_rows($dts);
 
 ?>

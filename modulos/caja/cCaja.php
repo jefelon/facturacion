@@ -1,4 +1,5 @@
 <?php
+session_start();
 class cCaja{
 	function insertar($nom){
 	$sql = "INSERT tb_caja (
@@ -20,6 +21,7 @@ class cCaja{
 	function mostrarTodos(){
 	$sql="SELECT * 
 	FROM tb_caja
+	WHERE tb_empresa_id={$_SESSION['empresa_id']}
 	ORDER BY tb_caja_id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

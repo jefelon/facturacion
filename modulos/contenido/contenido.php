@@ -17,7 +17,7 @@ $menu_superusuario=
   </li>
   <li class="topmenu"><a href="#">Mantenimiento</a>
 	<ul>
-	  <li><a href="empresa_vista.php">Empresa</a></li>
+	  <li><a href="../empresa/empresa_vista.php">Empresa</a></li>
 	  <li><a href="ubigeo_vista.php">Ubigeo</a></li>
 	  <li><a href="usuarioGrupo_vista.php">Grupo de Usuarios</a></li>
 	</ul>

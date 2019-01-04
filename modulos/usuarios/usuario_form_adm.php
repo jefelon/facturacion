@@ -307,7 +307,7 @@ function eliminar_usuario_puntoventa(id)
 	if(confirm("Realmente desea eliminar?")){
 		$.ajax({
 			type: "POST",
-			url: "usuario_puntoventa_reg.php",
+			url: "../usuarios/usuario_puntoventa_reg.php",
 			async:true,
 			dataType: "html",
 			data: ({
@@ -432,61 +432,62 @@ $(function() {
 	<?php if($_POST['action']=="insertar")
 	{ ?>
 	$("#txt_ema").keyup(function() {
-		$("#txt_use").attr("value", $("#txt_ema").val());
 	});
-	<?php }?>
-	
-	$("#txt_use").attr('readonly',true);
-	$("#txt_pas").attr('readonly',true);
-	
+	<?php }else{?>
+    $("#txt_use").attr("value", $("#txt_ema").val());
+    $("#txt_use").attr('readonly',true);
+    $("#txt_pas").attr('readonly',true);
+        <?php }?>
 
-//formulario
-	$("#for_usu").validate({
-		submitHandler: function() {			
-			$.ajax({
-				type: "POST",
-				url: "usuario_reg_adm.php",
-				async:true,
-				dataType: "html",
-				data: $("#for_usu").serialize(),
-				beforeSend: function() {
-					if($('#action_usuario').val()=='editar')
-					{
-						$("#div_usuario_form" ).dialog( "close" );
-					}
-					else
-					{
-						blok_usuario_form();
-					}
-					$('#msj_usuario').html("Guardando...");
-			        $('#msj_usuario').show(100);
-				},
-				success: function(html){
-					var arrayDatos = html.split("-");
-					
-					if($('#action_usuario').val()=='insertar')
-					{
-						editar_usuario(arrayDatos[0],1);
-					}
-					else
-					{
-						$("#div_usuario_form" ).dialog( "close" );
-					}
-					
-					$('#msj_usuario').html(arrayDatos[1]);
 
-				},
-				complete: function(){
-					cargar_tabla_usuario();
-				}
-			});
-		},
-		rules: {
-			//cmb_usugru: "required",
-			txt_use: {
-				//required: true,
-				//minlength: 3,
-				<?php if($_POST['action']=="insertar")echo 'remote: "../usuarios/users.php"'?>
+
+        //formulario
+            $("#for_usu").validate({
+                submitHandler: function() {
+                    $.ajax({
+                        type: "POST",
+                        url: "usuario_reg_adm.php",
+                        async:true,
+                        dataType: "html",
+                        data: $("#for_usu").serialize(),
+                        beforeSend: function() {
+                            if($('#action_usuario').val()=='editar')
+                            {
+                                $("#div_usuario_form" ).dialog( "close" );
+                            }
+                            else
+                            {
+                                blok_usuario_form();
+                            }
+                            $('#msj_usuario').html("Guardando...");
+                            $('#msj_usuario').show(100);
+                        },
+                        success: function(html){
+                            var arrayDatos = html.split("-");
+
+                            if($('#action_usuario').val()=='insertar')
+                            {
+                                editar_usuario(arrayDatos[0],1);
+                            }
+                            else
+                            {
+                                $("#div_usuario_form" ).dialog( "close" );
+                            }
+
+                            $('#msj_usuario').html(arrayDatos[1]);
+
+                        },
+                        complete: function(){
+                            cargar_tabla_usuario();
+                        }
+                    });
+                },
+                rules: {
+                    //cmb_usugru: "required",
+                    txt_use: {
+                        //required: true,
+                        //minlength: 3,
+                        <?php if($_POST['action']=="insertar")echo 'remote: "../usuarios/users.php"'?>
 			},
 			txt_pas:{
             	//required: true,
@@ -568,7 +569,6 @@ $(function() {
         <ul>
             <li><a href="#tabs-1">Datos Logueo</a></li>
             <li><a href="#tabs-2">Información Personal</a></li>
-            <li><a href="#tabs-3">Punto de Venta</a></li>
         </ul>
     <div id="tabs-1">
     <table>
@@ -613,16 +613,18 @@ $(function() {
     <input name="txt_use" type="text" id="txt_use" value="<?php echo $use?>" size="30">
     </label></td>
     </tr>
-    <tr>
-    <td align="right"><!--Contrase&ntilde;a:--></td>
-    <td><input name="txt_pas" type="hidden" id = "txt_pas" value="<?php if($_POST['action']=="insertar") { echo GeneraPassword(6);}else { echo '*******';}?>" size="20" maxlength="16"></td>
-    </tr>
+        <?php if($_POST['action']=="insertar"){?>
+            <tr>
+                <td align="right">Contraseña:</td>
+                <td><input name="txt_pas" type="password" id = "txt_pas" value="<?php //if($_POST['action']=="insertar") { echo GeneraPassword(6);}else { echo '*******';}?>" size="20" maxlength="16"></td>
+            </tr>
+        <?php }?>
     <tr>
       <td align="right">&nbsp;</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
-    <td align="right"><label for="cmb_emp_id">Mostrar Empresa por Defecto:</label></td>
+    <td align="right"><label for="cmb_emp_id">Empresa:</label></td>
     <td><select name="cmb_emp_id" id="cmb_emp_id">
     </select></td>
     </tr>
@@ -652,26 +654,9 @@ $(function() {
       </div>
     </fieldset>
     </div>
-   	<div id="tabs-3">
-    <div id="div_horario_form">
-	</div>
-    <table border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td><label for="cmb_punven_id">Punto de Venta:</label></td>
-    <td><select name="cmb_punven_id" id="cmb_punven_id">
-    </select></td>
-  </tr>
-</table>
-<fieldset>
-      <legend>Acceso a Puntos de Venta</legend>
-      <a id="btn_agregar_puntoventa" href="#" onClick="usuario_puntoventa_form('insertar')">Agregar Punto de Venta</a>
-      <div id="div_usuario_puntoventa_tabla">
-      </div>
-      <div id="div_usuario_puntoventa_form">
-	  </div>
-    </fieldset>
-
-    </div>
-   	
   </div>
 </form>
+
+
+
+

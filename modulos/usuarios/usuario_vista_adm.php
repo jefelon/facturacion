@@ -33,9 +33,7 @@ $oContenido = new cContenido();
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.effects.core.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.tabs.js"></script>
 
-<script src="../../js/vistaButton.js"></script>
 
-<script src="../../js/formButton.js"></script>
 <script src="../../js/jquery-validation/jquery.validate.js" type="text/javascript"></script>
 <script src="../../js/jquery-validation/additional-methods.js" type="text/javascript"></script>
 <script src="../../js/jquery-validation/localization/messages_es.js" type="text/javascript"></script>
