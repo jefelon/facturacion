@@ -669,8 +669,8 @@ if($_POST['action']=="editar"){
                 txt_pro_des: $('#txt_bus_pro_nom').val(),
                 num_alm: "",
                 tipo_accion: "insertar_venta",
-                cmb_cat_id: 9,
-                cmb_mar_id: 1,
+                cmb_cat_id: 18,
+                cmb_mar_id: 33,
                 cmb_afec_id: 9, //EXONERADO
                 cmb_lote: "",
                 cmb_pro_est: "Activo",
@@ -1455,19 +1455,7 @@ if($_POST['action']=="editar"){
                 $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
             }
 
-            if ((this).value=== '2' || (this).value=== '11') {
-                $('.imprimir_guia').show();
-                $('.insertar-guia').show();
-                $('#txt_bus_cat_preven_noigv').show();
-                $('#txt_bus_cat_preven').hide();
-                $("#chk_imprimir_guia").attr('checked', true);
-            }else{
-                $('.imprimir_guia').hide();
-                $('.insertar-guia').hide();
-                $('#txt_bus_cat_preven_noigv').hide();
-                $('#txt_bus_cat_preven').show();
-                $("#chk_imprimir_guia").attr('checked', false);
-            }
+
 
             $('#txt_ven_cli_doc').focus();
         });
