@@ -172,6 +172,27 @@ function venta_form(act,idf){
 		}
 	});
 }
+function venta_croquis_form(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_croquis_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            ven_id:	idf,
+            vista:	'administrador'
+        }),
+        beforeSend: function() {
+            $('#msj_venta').hide();
+            $('#div_venta_croquis_form').dialog("open");
+            $('#div_venta_croquis_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_croquis_form').html(html);
+        }
+    });
+}
 
 function venta_check(){
 	$.ajax({
@@ -473,7 +494,6 @@ function cpe_cdr(ecomid)
 }
 
 $(function() {
-	
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
 		text: true
@@ -517,6 +537,34 @@ $(function() {
 			$('#div_venta_form').html('venta_form');
 		}
 	});
+    $( "#div_venta_croquis_form" ).dialog({
+        title:'MAPA ASIENTOS | <?php echo $_SESSION['empresa_nombre']?>',
+        autoOpen: false,
+        resizable: false,
+        height: 550,
+        width: 1200,
+        modal: true,
+        position: "center",
+        closeOnEscape: false,
+        buttons: {
+            /*Guardar: function() {
+                if($('#hdd_ven_numite').val()>0)
+                {
+                    venta_check();
+                }
+                else{
+                $("#for_ven").submit();
+                }
+            },
+            Cancelar: function() {
+                $('#for_ven').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }*/
+            Cerrar: function() {
+                $( this ).dialog( "close" );
+            }
+        }
+    });
 	
 	$( "#div_venta_check" ).dialog({
 		title:'Verificando Venta...',
@@ -581,7 +629,7 @@ $(function() {
 			}
 		}
 	});
-	
+    venta_croquis_form('seleccionar');
 });
 </script>
 
@@ -638,6 +686,8 @@ $(function() {
       		</div>
             <div id="div_venta_form">
 			</div>
+            <div id="div_venta_croquis_form">
+            </div>
             <div id="div_venta_check">
 			</div>
             <div id="div_venta_impresion">
