@@ -52,11 +52,23 @@ class cProducto{
 	$sql.=" ORDER BY $ordby ";
 	
 	if($fil!="")$sql.=" LIMIT 0,$fil ";
-	
+
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrar_filtro2($est){
+        $sql="SELECT * 
+	FROM tb_producto p
+	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id
+	INNER JOIN tb_marca m ON p.tb_marca_id=m.tb_marca_id
+	INNER JOIN tb_presentacion r ON p.tb_producto_id=r.tb_producto_id
+	WHERE tb_producto_est LIKE '%$est%' ";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	
 	function mostrar_presentacion_filtro($nom,$cat,$mar,$est){
 	$sql="SELECT * 
