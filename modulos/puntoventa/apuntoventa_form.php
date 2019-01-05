@@ -421,7 +421,7 @@ if($_POST['action']=="editar")
 
     <fieldset>
         <legend>Acceso a Puntos de Venta</legend>
-        <a id="btn_agregar_puntoventa" href="#" onClick="usuario_puntoventa_form('insertar')">Agregars Punto de Venta</a>
+        <a id="btn_agregar_puntoventa" href="#" onClick="usuario_puntoventa_form('insertar')">Agregar Punto de Venta</a>
         <div id="div_usuario_puntoventa_tabla">
         </div>
         <div id="div_usuario_puntoventa_form">

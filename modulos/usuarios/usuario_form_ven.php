@@ -493,10 +493,10 @@ $(function() {
 		modal: true,
 		buttons: {
 			Agregar: function() {
-				$("#for_punven").submit();
+				$("#for_punven_usu").submit();
 			},
 			Cancelar: function() {
-				$('#for_punven').each (function(){this.reset();});
+				$('#for_punven_usu').each (function(){this.reset();});
 				$( this ).dialog( "close" );
 			}
 		}
@@ -546,9 +546,8 @@ $(function() {
 		rules: {
 			//cmb_usugru: "required",
 			txt_use: {
-				required: true,
+				required: true
 				//minlength: 3,
-				<?php if($_POST['action']=="insertar")echo 'remote: "../usuarios/users.php"'?>
 			},
 			txt_pas:{
             	required: true,
@@ -579,7 +578,7 @@ $(function() {
 			txt_use: {
 				required: '*',
 				//remote: jQuery.format("El nombre de usuario: '{0}', no está disponible.")
-				remote: "Este nombre de usuario, no está disponible."
+				// remote: "Este nombre de usuario, no está disponible."
 			},
 			txt_pas: {
 				required: '*'
