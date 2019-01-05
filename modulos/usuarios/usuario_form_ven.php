@@ -572,6 +572,12 @@ $(function() {
             },
 			hdd_emp_id:{
             	required: true
+            },
+            cmb_punven_id:{
+                required: true
+            },
+            cmb_hor_id:{
+			    required: true
             }
 		},
 		messages: {
@@ -608,6 +614,12 @@ $(function() {
             },
 			hdd_emp_id:{
             	required: '*'
+            },
+            cmb_punven_id:{
+                required: '*'
+            },
+            cmb_hor_id:{
+			    required: '*'
             }
 		}
 	});
@@ -729,17 +741,17 @@ $(function() {
 	</div>
     <table border="0" cellspacing="0" cellpadding="0">
   <tr>
-    <td><label for="cmb_punven_id">Punto de Venta:</label></td>
+    <td><label for="cmb_punven_id">Punto de Venta por Defecto:</label></td>
     <td><select name="cmb_punven_id" id="cmb_punven_id">
     </select></td>
   </tr>
   <tr>
-    <td><label for="cmb_hor_id">Horario:</label></td>
+    <td><label for="cmb_hor_id">Horario Vendedor:</label></td>
     <td><select name="cmb_hor_id" id="cmb_hor_id">
     </select><a class="btn_ir" href="#" onClick="horario_form('editar')">Ver horario</a></td>
   </tr>
 </table>
-<fieldset>
+    <fieldset>
       <legend>Acceso a Puntos de Venta</legend>
       <a id="btn_agregar_puntoventa" href="#" onClick="usuario_puntoventa_form('insertar')">Agregar Punto de Venta</a>
       <div id="div_usuario_puntoventa_tabla">
