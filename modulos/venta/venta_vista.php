@@ -29,6 +29,7 @@
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.mouse.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.button.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.draggable.js"></script>
+    <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.droppable.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.position.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.resizable.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.dialog.js"></script>
@@ -176,6 +177,7 @@ function venta_croquis_form(act,idf){
     $.ajax({
         type: "POST",
         url: "../venta/venta_croquis_form.php",
+        // url: "../venta/croquis.php",
         async:true,
         dataType: "html",
         data: ({
@@ -541,8 +543,8 @@ $(function() {
         title:'MAPA ASIENTOS | <?php echo $_SESSION['empresa_nombre']?>',
         autoOpen: false,
         resizable: false,
-        height: 550,
-        width: 1200,
+        height: 640,
+        width: 1300,
         modal: true,
         position: "center",
         closeOnEscape: false,

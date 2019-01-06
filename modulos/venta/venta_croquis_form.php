@@ -9,25 +9,21 @@ $oContenido = new cContenido();
 if($_SESSION['usuariogrupo_id']==2)$titulo='Registrar Ventas - Administrador';
 if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 require_once ("../../config/Cado.php");
-require_once ("../producto/cProducto.php");
-$oProducto = new cProducto();
-
-require_once ("../producto/cPresentacion.php");
-$oPresentacion = new cPresentacion();
-
-require_once ("../categoria/cCategoria.php");
-$oCategoria = new cCategoria();
+require_once ("../asiento/cAsiento.php");
+$oAsiento = new cAsiento();
 
 require_once ("../formatos/formato.php");
 
-
-$dts1=$oProducto->mostrar_filtro2('Activo');
+$dts1=$oAsiento->mostrarFiltroFila(1,14);
+$dts2=$oAsiento->mostrarFiltroFila(15,28);
+$dts3=$oAsiento->mostrarFiltroFila(29,42);
+$dts4=$oAsiento->mostrarFiltroFila(43,56);
 $num_rows= mysql_num_rows($dts1);
 
-//orden
-if($_POST['ordby']=='tb_producto_mod DESC')$sort='[5,1]';
-if($_POST['ordby']=='tb_producto_nom')$sort='[0,0]';
 ?>
+
+
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('.btn_presentacion').button({
@@ -44,46 +40,129 @@ if($_POST['ordby']=='tb_producto_nom')$sort='[0,0]';
             text: false
         });
 
-        $.tablesorter.defaults.widgets = ['zebra'];
-        $("#tabla_producto").tablesorter({
-            headers: {
-                4: {sorter: 'shortDate' },
-                7: {sorter: false },
-                8: { sorter: false}
-            },
-            //sortForce: [[0,0]],
-            <?php if($num_rows>0){?>
-            sortList: [<?php echo $sort?>]
-            <?php }?>
-        });
+
+        $("#sortable1, #sortable2,#sortable3,#sortable4").sortable({
+            placeholder:'placeholder',
+            connectWith: ".connectedSortable",
+            update:function () {
+                //$.post('actualizar_posicion.php',$(this).sortable('serialize'));
+                //alert($(this).sortable('serialize'));
+            }
+        }).disableSelection();
+
     });
 </script>
+<style>
 
-<table cellspacing="1" id="tabla_producto" class="tablesorter">
+
+    #sortable1, #sortable2,#sortable3,#sortable4 {
+        border: 1px solid #eee;
+        min-height: 40px;
+        list-style-type: none;
+        margin: 0;
+        padding: 5px 0 0 0;
+        /*float: left;*/
+        margin-right: 10px;
+    }
+
+    #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento {
+        margin: 0 5px 5px 5px;
+        padding: 5px;
+        font-size: 1.2em;
+        width: 35px;
+        height: 50px;
+        cursor: move;
+        position: relative;
+        float: left;
+    }
+    .clear{
+        clear: both;
+        height: 20px;
+    }
+    #frentera{
+        height: 200px;
+        width: 210px;
+        /*background: #0D8BBD;*/
+        float: left;
+    }
+    #lugares{
+        float: left;
+        height: 200px;
+        margin-top: 80px;
+    }
+    #pasadizo{
+        height: 40px;
+    }
+    #bus{
+        width: 1180px;
+        height: 550px;
+        background: url("../../images/bus_fondo.png");
+        background-size: 95%;
+        background-repeat: no-repeat;
+        background-position-x: -52px;
+    }
+
+</style>
+
     <?php
     if($num_rows>=1){
         ?>
-        <div>
-        <?php
-        while($dt1 = mysql_fetch_array($dts1)){?>
-            <tr>
+        <div id="bus">
+            <div id="frentera"><!--FRENTE--></div>
+            <div id="lugares">
+                <div id="sortable1" class="connectedSortable">
+                    <?php
 
-                <td><?php echo $dt1['tb_producto_nom']?></td>
-                <td><?php echo $dt1['tb_producto_est']?></td>
-                <td align="center"><?php
-                    $dts2=$oPresentacion->mostrar_por_producto($dt1['tb_producto_id']);
-                    echo mysql_num_rows($dts2);
-                    mysql_free_result($dts2);
+                    while($dt1 = mysql_fetch_array($dts1)){?>
+                       <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="ui-state-highlight asiento"><?php echo $dt1['tb_asiento_nom']?></div>
+                     <?php
+                    }
+                    mysql_free_result($dts1);
+
                     ?>
-                </td>
-                <td align="center" nowrap><a class="btn_editar" href="#editar" onClick="producto_form('editar','<?php echo $dt1['tb_producto_id']?>')">Editar</a><a class="btn_eliminar" href="#eliminar" onClick="eliminar_producto('<?php echo $dt1['tb_producto_id']?>')"> Eliminar</a></td>
-            </tr>
-            <?php
-        }
-        mysql_free_result($dts1);
-        ?>
+                </div>
+                <div class="clear"></div>
+                <div id="sortable2" class="connectedSortable">
+                    <?php
+
+                    while($dt1 = mysql_fetch_array($dts2)){?>
+                        <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="ui-state-highlight asiento"><?php echo $dt1['tb_asiento_nom']?></div>
+                        <?php
+                    }
+                    mysql_free_result($dts2);
+
+                    ?>
+                </div>
+                <div class="clear"></div>
+                <div id="pasadizo"></div>
+                <div id="sortable3" class="connectedSortable">
+                    <?php
+
+                    while($dt1 = mysql_fetch_array($dts3)){?>
+                        <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="ui-state-highlight asiento"><?php echo $dt1['tb_asiento_nom']?></div>
+                        <?php
+                    }
+                    mysql_free_result($dts3);
+
+                    ?>
+                </div>
+                <div class="clear"></div>
+                <div id="sortable4" class="connectedSortable">
+                    <?php
+
+                    while($dt2 = mysql_fetch_array($dts4)){?>
+                        <div id="<?php echo 'item_'.$dt2['tb_asiento_id'] ?>" class="ui-state-highlight asiento"><?php echo $dt2['tb_asiento_nom']?></div>
+                        <?php
+                    }
+                    mysql_free_result($dts4);
+
+                    ?>
+                </div>
+            </div>
         </div>
         <?php
+
+
     }
     ?>
-</table>
+
