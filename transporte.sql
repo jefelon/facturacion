@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-01-2019 a las 02:11:49
+-- Tiempo de generación: 07-01-2019 a las 05:54:05
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 5.6.36
 
@@ -3667,6 +3667,28 @@ INSERT INTO `tb_direccion` (`tb_direccion_id`, `tb_direccion_dir`, `tb_ubigeo_co
 (1, 'las casuarinas d-14', '040129', 30),
 (3, 'sdfsdfs', '020508', 30),
 (4, 'saaaaa', '050303', 30);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_distribucionasiento`
+--
+
+CREATE TABLE `tb_distribucionasiento` (
+  `tb_distribucionasiento_id` int(11) NOT NULL,
+  `tb_distribucionasiento_lugar` text COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tb_distribucionasiento`
+--
+
+INSERT INTO `tb_distribucionasiento` (`tb_distribucionasiento_id`, `tb_distribucionasiento_lugar`) VALUES
+(1, 's:130:\"item[]=7&item[]=2&item[]=3&item[]=1&item[]=4&item[]=5&item[]=6&item[]=8&item[]=9&item[]=10&item[]=11&item[]=12&item[]=13&item[]=14\";'),
+(2, 's:139:\"item[]=15&item[]=16&item[]=17&item[]=18&item[]=19&item[]=20&item[]=21&item[]=22&item[]=23&item[]=24&item[]=25&item[]=26&item[]=27&item[]=28\";'),
+(3, 's:139:\"item[]=36&item[]=37&item[]=38&item[]=39&item[]=40&item[]=41&item[]=42&item[]=43&item[]=44&item[]=45&item[]=46&item[]=47&item[]=48&item[]=49\";'),
+(4, 's:139:\"item[]=34&item[]=29&item[]=30&item[]=31&item[]=32&item[]=33&item[]=35&item[]=36&item[]=37&item[]=38&item[]=39&item[]=40&item[]=41&item[]=42\";'),
+(5, 's:139:\"item[]=56&item[]=43&item[]=44&item[]=45&item[]=46&item[]=47&item[]=48&item[]=49&item[]=50&item[]=51&item[]=52&item[]=53&item[]=54&item[]=55\";');
 
 -- --------------------------------------------------------
 
@@ -7340,7 +7362,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`tb_usuario_id`, `tb_usuario_use`, `tb_usuario_pas`, `tb_usuario_apepat`, `tb_usuario_apemat`, `tb_usuario_nom`, `tb_usuario_ema`, `tb_usuario_reg`, `tb_usuario_mod`, `tb_usuario_ultvis`, `tb_usuario_blo`, `tb_usuariogrupo_id`, `tb_empresa_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-01-04 10:18:26', 0, 2, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-01-06 12:42:14', 0, 2, 1),
 (29, 'superusuario', '261a7d80916532797f8735dd198d4ada', 'APELLIDO PATERNO', 'APELIIDO MATERNO', 'SUPER', 'gerencia@a-zetasoft.com', '0000-00-00 00:00:00', '2018-03-03 12:28:53', '2018-12-27 18:54:26', 0, 1, 1),
 (30, 'vendedor', 'a60c36fc7c825e68bb5371a0e08f828a', 'ZIRENA', 'BEJARANO', 'ALFREDO', 'alfredzb@gmail.com', '0000-00-00 00:00:00', '2018-10-26 22:58:22', '2018-04-19 14:23:49', 0, 3, 1),
 (33, 'liquidador', '221b3a9e09a367bb69f7c7c1141c1dd9', 'PALOMINO', 'SANCHEZ', 'JOSE', 'rrpalomino65@hotmail.com', '2018-01-31 11:00:40', '2018-01-31 11:01:05', '2018-03-17 11:24:17', 0, 4, 1),
@@ -8047,6 +8069,12 @@ ALTER TABLE `tb_detallelistaprecio`
 --
 ALTER TABLE `tb_direccion`
   ADD PRIMARY KEY (`tb_direccion_id`);
+
+--
+-- Indices de la tabla `tb_distribucionasiento`
+--
+ALTER TABLE `tb_distribucionasiento`
+  ADD PRIMARY KEY (`tb_distribucionasiento_id`);
 
 --
 -- Indices de la tabla `tb_documento`
@@ -8839,6 +8867,12 @@ ALTER TABLE `tb_detallelistaprecio`
 --
 ALTER TABLE `tb_direccion`
   MODIFY `tb_direccion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `tb_distribucionasiento`
+--
+ALTER TABLE `tb_distribucionasiento`
+  MODIFY `tb_distribucionasiento_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_documento`
