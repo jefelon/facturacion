@@ -228,7 +228,15 @@ function cliente_reporte_xls(){
     $("#for_rep_xls").submit();
 }
 $(function() {
-	
+
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    }).click(function() {
+        location.reload();
+    });
+
+
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
 		text: true
@@ -248,7 +256,6 @@ $(function() {
 		autoOpen: false,
 		resizable: false,
 		height: 'auto',
-		width: 530,
 		modal: true,
 		position: 'top',
 		buttons: {
@@ -346,6 +353,7 @@ $(function() {
         }
     });
 	
+    cliente_form('insertar');
 });
 </script>
 

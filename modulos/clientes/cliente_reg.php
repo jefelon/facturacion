@@ -34,7 +34,16 @@ if($_POST['action_cliente']=="insertar")
                 $_SESSION['empresa_id'],
                 $_POST['cmb_precio_id'],
                 $_POST['cmb_cli_retiene'],
-                $_POST['txt_cli_cui']
+                $_POST['txt_cli_cui'],
+                $_POST['cmb_regimen_id'],
+                $_POST['rad_cli_afp'],
+                $_POST['cmb_regimen_id'],
+                $_POST['rad_cli_planilla'],
+                $_POST['rad_cli_pdt'],
+                $_POST['rad_cli_bienesfizcalizados'],
+                $_POST['rad_cli_balancea'],
+                $_POST['rad_cli_clientefijo'],
+                $_POST['txt_clie_foto']
 				);
 			
 				$dts=$oCliente->ultimoInsert();
@@ -84,9 +93,15 @@ if($_POST['action_cliente']=="editar")
                 $_SESSION['empresa_id'],
                 $_POST['cmb_precio_id'],
                 $_POST['cmb_cli_retiene'],
-                $_POST['txt_cli_cui']
-
-
+                $_POST['txt_cli_cui'],
+                $_POST['cmb_regimen_id'],
+                $_POST['rad_cli_afp'],
+                $_POST['rad_cli_planilla'],
+                $_POST['rad_cli_pdt'],
+                $_POST['rad_cli_bienesfizcalizados'],
+                $_POST['rad_cli_balancea'],
+                $_POST['rad_cli_clientefijo'],
+                $_POST['txt_clie_foto']
 				);
 			
 			$data['cli_msj']='Se registró cliente correctamente.';

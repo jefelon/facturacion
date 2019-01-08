@@ -3,7 +3,10 @@ require_once ("../../config/Cado.php");
 require_once ("../clientes/cCliente.php");
 $oCliente = new cCliente();
 
-$tip = 1;
+$tip = 0;
+
+$dts1=$oCliente->mostrarLibrosContables();
+$num_rows= mysql_num_rows($dts1);
 
 if($_POST['action']=="editar"){
 	$dts=$oCliente->mostrarUno($_POST['cli_id']);
@@ -20,6 +23,14 @@ if($_POST['action']=="editar"){
         $cliente_retiene=$dt['tb_cliente_retiene'];
         $precio_id=$dt['tb_precio_id'];
         $cui=$dt['tb_cliente_cui'];
+        $regimen=$dt['tb_clienteregimen_id'];
+        $afp= $dt['tb_cliente_afp'];
+        $planilla= $dt['tb_cliente_planilla'];
+        $pdt= $dt['tb_cliente_pdt'];
+        $bienfizca=$dt['tb_cliente_bienfizc'];
+        $balanceanual=$dt['tb_cliente_balanceanual'];
+        $clientefijo=    $dt['tb_cliente_clientefijo'];
+        $foto=    $dt['tb_cliente_foto'];
 
 
 	mysql_free_result($dts);
@@ -171,7 +182,7 @@ $(function() {
         cmb_dir_id($( "#hdd_cli_id" ).val());
     }
 
-	$( "#txt_cli_doc" ).focus();
+	$( "#txt_cli_cui" ).focus();
 
     $('#btn_agregar2').button({
         icons: {primary: "ui-icon-plus"},
@@ -272,78 +283,248 @@ $(function() {
 	});		
 });
 </script>
+<style>
+    .cuadro{
+        border: 1px solid #c3c1c1;
+        text-align: center;
+        border-radius: 10px;
+        padding: 3px;
+    }
+</style>
 <form id="for_cli">
-<input name="action_cliente" id="action_cliente" type="hidden" value="<?php echo $_POST['action']?>">
-<input name="hdd_cli_id" id="hdd_cli_id" type="hidden" value="<?php echo $_POST['cli_id']?>">
-    <table>
-    	<tr>
-    	  <td align="right">Documento:</td>
-    	  <td>
-          	<div id="radio">
-              <input name="rad_cli_tip" type="radio" id="radio1" value="1" <?php if($tip==1)echo 'checked="checked"'?>/><label for="radio1">DNI</label>
-              <input name="rad_cli_tip" type="radio" id="radio2" value="2" <?php if($tip==2)echo 'checked="checked"'?>/><label for="radio2">RUC</label>
-              <input name="rad_cli_tip" type="radio" id="radio3" value="3" <?php if($tip==3)echo 'checked="checked"'?>/><label for="radio3">OTROS</label>
-            </div>
-    	  </td>
-  	  </tr>
-    	<tr>
-            <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
-            <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
-            <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
-            <label for="txt_cli_cui">CUI:</label><input name="txt_cli_cui" id="txt_cli_cui" type="text" value="<?php echo $cui?>" size="8">
-            <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
-            </td>
-        </tr>
-        <tr>
-    	  <td align="right" valign="top"><label for="txt_cli_nom">Cliente:</label></td>
-    	  <td><textarea name="txt_cli_nom" cols="50" rows="2" id="txt_cli_nom"><?php echo $nom?></textarea></td>
-  	  </tr>
-        <tr>
-          <td align="right" valign="top"><label for="txt_cli_dir">Dirección:</label></td>
-          <td><textarea name="txt_cli_dir" cols="50" rows="3" id="txt_cli_dir" ><?php echo $dir?></textarea>            
-          </td>
-      	</tr>
-        <tr>
-        <?php if($_POST['dir']=="ok") { ?>
-        <tr>
-          <td align="right" valign="top"><label for="txt_cli_suc">Sucursales:</label></td>
-          <td>
-                <select name="cmb_cli_suc" id="cmb_cli_suc">
+    <div style="width: 45%;float: left">
+        <input name="action_cliente" id="action_cliente" type="hidden" value="<?php echo $_POST['action']?>">
+        <input name="hdd_cli_id" id="hdd_cli_id" type="hidden" value="<?php echo $_POST['cli_id']?>">
+            <fieldset style="min-width: 300px;width: 450px">
+                <legend>DATOS DE LA EMPRESA</legend>
+                <table>
+                  <tr>
+                      <td align="right">Documento:</td>
+                      <td>
+                        <div id="radio">
+                          <input name="rad_cli_tip" type="radio" id="radio1" value="1" <?php if($tip==1)echo 'checked="checked"'?>/><label for="radio1">DNI</label>
+                          <input name="rad_cli_tip" type="radio" id="radio2" value="2" <?php if($tip==2)echo 'checked="checked"'?>/><label for="radio2">RUC</label>
+                          <input name="rad_cli_tip" type="radio" id="radio3" value="3" <?php if($tip==3)echo 'checked="checked"'?>/><label for="radio3">OTROS</label>
+                        </div>
+                      </td>
+                  </tr>
+                    <tr>
+                        <td align="right" valign="top"><label for="txt_cli_cui">CODIGO:</label></td>
+                        <td><input name="txt_cli_cui" id="txt_cli_cui" type="text" value="<?php echo $cui?>" size="8"></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
+                        <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
+                        <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
+                        <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td align="right" valign="top"><label for="txt_cli_nom">RAZ. SOCIAL:</label></td>
+                      <td><textarea name="txt_cli_nom" cols="50" rows="2" id="txt_cli_nom"><?php echo $nom?></textarea></td>
+                  </tr>
+                    <tr>
+                      <td align="right" valign="top"><label for="txt_cli_dir">DIRECCIÓN:</label></td>
+                      <td><textarea name="txt_cli_dir" cols="50" rows="3" id="txt_cli_dir" ><?php echo $dir?></textarea>
+                      </td>
+                    </tr>
 
-                </select>
-                <a id="btn_agregar2" href="#">Agregar Direccion</a>
-          </td>
-        </tr>
-        <?php } ?>
-          <td align="right"><label for="txt_cli_con">Contacto:</label></td>
-          <td><input name="txt_cli_con" id="txt_cli_con" type="text" value="<?php echo $con?>" size="50" tabindex="1"></td>
-        </tr>
-        <tr>
-          	<td align="right"><label for="txt_cli_tel">Teléfono:</label></td>
-            <td><input name="txt_cli_tel" type="text" id="txt_cli_tel" value="<?php echo $tel?>" size="45" maxlength="100"></td>
-        </tr>
-        <tr>
-          	<td align="right"><label for="txt_cli_ema">Email:</label></td>
-            <td><input name="txt_cli_ema" type="text" id="txt_cli_ema" value="<?php echo $ema?>" size="45" maxlength="100"></td>
-        </tr>
-        <tr>
-          	<td align="right"><label for="txt_cli_est">Estado:</label></td>
-            <td><input name="txt_cli_est" type="text" id="txt_cli_est" value="<?php echo $est?>" size="45" readonly></td>
-        </tr>
-        <tr>
-            <td align="right"><label for="cmb_cli_retiene">Retiene:</label></td>
-            <td><select name="cmb_cli_retiene" id="cmb_cli_retiene">
-                <option value="">-</option>
-                <option value="1" <?php if($cliente_retiene=='1')echo 'selected'?>>RETIENE</option>
-                <option value="2" <?php if($cliente_retiene=='2')echo 'selected'?>>NO RETIENE</option>
-            </select>
-                <label for="cmb_precio_id">Lista Precios:</label>
-                <select name="cmb_precio_id" id="cmb_precio_id">
-                </select>
-                <div id="div_precio_form">
-                </div>
-            </td>
-        </tr>
+                    <tr>
+                        <td align="right"><label for="txt_cli_con">REP. LEGAL:</label></td>
+                        <td><input name="txt_cli_con" id="txt_cli_con" type="text" value="<?php echo $con?>" size="50" tabindex="1"></td>
+                    </tr>
 
-    </table>
+                    <tr>
+                        <td align="right"><label for="txt_emp_reg">REGIMEN:</label></td>
+                        <td>
+                            <select name="cmb_regimen_id" id="cmb_regimen_id">
+                                <option value="">-</option>
+                                <option value="1" <?php if($regimen=='1')echo 'selected'?>>REGIMEN GENERAL</option>
+                                <option value="2" <?php if($regimen=='2')echo 'selected'?>>REGIMEN MYPE TRIBUTARIO</option>
+                                <option value="3"<?php if($regimen=='3')echo 'selected'?>>REGIMEN ESPECIAL</option>
+                                <option value="4"<?php if($regimen=='4')echo 'selected'?>>NUEVO RUS</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <?php if($_POST['dir']=="ok") { ?>
+                    <tr>
+                      <td align="right" valign="top"><label for="txt_cli_suc">Sucursales:</label></td>
+                      <td>
+                            <select name="cmb_cli_suc" id="cmb_cli_suc">
+
+                            </select>
+                            <a id="btn_agregar2" href="#">Agregar Direccion</a>
+                      </td>
+                    </tr>
+                    <?php } ?>
+                    <tr>
+                        <td align="right"><label for="txt_cli_tel">TELÉFONO:</label></td>
+                        <td><input name="txt_cli_tel" type="text" id="txt_cli_tel" value="<?php echo $tel?>" size="45" maxlength="100"></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><label for="txt_cli_ema">EMAIL:</label></td>
+                        <td><input name="txt_cli_ema" type="text" id="txt_cli_ema" value="<?php echo $ema?>" size="45" maxlength="100"></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><label for="txt_cli_est">ESTADO:</label></td>
+                        <td><input name="txt_cli_est" type="text" id="txt_cli_est" value="<?php echo $est?>" size="45" readonly></td>
+                    </tr>
+
+
+                </table>
+            </fieldset>
+            <fieldset style="min-width: 300px;width: 450px">
+                <legend>LIBROS CONTABLES QUE LLEVA</legend>
+
+                <table class="ui-widget ui-widget-content">
+                    <tbody>
+                    <tr class="ui-widget-header">
+                        <th title="Mostrar en Catálogo">Seleccione las opciones</th>
+                    </tr>
+
+                    <?php
+                    while($dt1 = mysql_fetch_array($dts1)){?>
+                    <tr>
+                        <td><input name="chk_cli_libros[]" id="<?php echo $dt1['tb_librocontable_id']?>" type="checkbox" value="0" > <label for="chk_cli_<?php echo $dt1['tb_librocontable_id']?>"><?php echo $dt1['tb_librocontable_nom'].' - ' .$dt1['tb_librocontable_tipo']?></label></td>
+                    </tr>
+                    <?php
+                    }
+                    mysql_free_result($dts1);
+                    ?>
+                    </tbody>
+                </table>
+            </fieldset>
+
+    </div>
+    <div style="width: 45%;float: right">
+        <fieldset style="min-width: 300px;width: 450px">
+            <legend>OTROS DATOS</legend>
+            <table>
+                <tr>
+                    <td align="left" class="cuadro"><b>AFP:</b>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id="afp">
+                                        <input name="rad_cli_afp" type="radio" id="si" value="1" <?php if($afp==1)echo 'checked="checked"'?>/><label for="si">SI</label>
+                                        <input name="rad_cli_afp" type="radio" id="no" value="0" <?php if($afp==0)echo 'checked="checked"'?>/><label for="no">NO</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="right" class="cuadro"><b>PLANILLA:</b>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id="planilla">
+                                        <input name="rad_cli_planilla" type="radio" id="si" value="1" <?php if($planilla==1)echo 'checked="checked"'?>/><label for="si">SI</label>
+                                        <input name="rad_cli_planilla" type="radio" id="no" value="0" <?php if($planilla==0)echo 'checked="checked"'?>/><label for="no">NO</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="left" class="cuadro"><b>PDT:</b>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id="pdt">
+                                        <input name="rad_cli_pdt" type="radio" id="si" value="1" <?php if($pdt==1)echo 'checked="checked"'?>/><label for="si">SI</label>
+                                        <input name="rad_cli_pdt" type="radio" id="no" value="0" <?php if($pdt==0)echo 'checked="checked"'?>/><label for="no">NO</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="right" class="cuadro"><b>BIENES FIZCALIZADOS:</b>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id="bienesfizcalizados">
+                                        <input name="rad_cli_bienesfizcalizados" type="radio" id="si" value="1" <?php if($bienfizca==1)echo 'checked="checked"'?>/><label for="si">SI</label>
+                                        <input name="rad_cli_bienesfizcalizados" type="radio" id="no" value="0" <?php if($bienfizca==0)echo 'checked="checked"'?>/><label for="no">NO</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="left" class="cuadro"><b>BALANCE ANUAL:</b>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id="balancea">
+                                        <input name="rad_cli_balancea" type="radio" id="si" value="1" <?php if($balanceanual==1)echo 'checked="checked"'?>/><label for="si">SI</label>
+                                        <input name="rad_cli_balancea" type="radio" id="no" value="0" <?php if($balanceanual==0)echo 'checked="checked"'?>/><label for="no">NO</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="right" class="cuadro"><b>CLIENTE FIJO:</b>
+                        <table>
+                            <tr>
+                                <td>
+                                    <div id="clientefijo">
+                                        <input name="rad_cli_clientefijo" type="radio" id="si" value="1" <?php if($clientefijo==1)echo 'checked="checked"'?>/><label for="si">SI</label>
+                                        <input name="rad_cli_clientefijo" type="radio" id="no" value="0" <?php if($clientefijo==0)echo 'checked="checked"'?>/><label for="no">NO</label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset style="min-width: 300px;width: 450px">
+            <legend>CLAVES</legend>
+            <table>
+                <tr>
+                    <td align="right" class="cuadro"><b>CLAVE SOL:</b>
+                        <table>
+                            <tr>
+                                <td align="right" valign="top"><label for="txt_cli_clavesolusuario">USUARIO:</label></td>
+                                <td><input name="txt_cli_clavesolusuario" type="text" id="txt_cli_clavesolusuario" value="<?php echo $usuario_sol?>" size="10" maxlength="100"></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top"><label for="txt_cli_clavesolclave">CLAVE:</label></td>
+                                <td><input name="txt_cli_clavesolclave" type="text" id="txt_cli_clavesolclave" value="<?php echo $clave_sol?>" size="10" maxlength="100"></td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td align="right" class="cuadro"><b>CLAVE AFP NET:</b>
+                        <table>
+                            <tr>
+                                <td align="right" valign="top"><label for="txt_cli_claveafpusuario">USUARIO:</label></td>
+                                <td><input name="txt_cli_claveafpusuario" type="text" id="txt_cli_claveafpusuario" value="<?php echo $usuario_afp?>" size="10" maxlength="100"></td>
+                            </tr>
+                            <tr>
+                                <td align="right" valign="top"><label for="txt_cli_claveafpclave">CLAVE:</label></td>
+                                <td><input name="txt_cli_claveafpclave" type="text" id="txt_cli_claveafpclave" value="<?php echo $clave_afp?>" size="10" maxlength="100"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <fieldset style="min-width: 300px;width: 450px">
+            <legend>FOTO REPRESENTATIVA EMPRESA</legend>
+            <table>
+                <tr>
+                    <td align="right" valign="top">
+                        <input name="txt_clie_foto" id="txt_clie_foto" type="hidden" value="<?php echo $foto?>" size="40" >
+                    </td>
+                    <td><input id="file" name="file" size="12" type="file" />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td align="right" valign="top"><input name="txt_clie_fotoimg" id="txt_clie_fotoimg" type="image" src="<?php echo $foto?>" width="80" height="100" alt="Foto" ></td>
+                </tr>
+            </table>
+        </fieldset>
+    </div>
 </form>
