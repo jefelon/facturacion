@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/config/Cado.php" afterPath="$PROJECT_DIR$/config/Cado.php" />
       <change beforePath="$PROJECT_DIR$/libreriasphp/consultaruc/cookies.txt" afterPath="$PROJECT_DIR$/libreriasphp/consultaruc/cookies.txt" />
-      <change beforePath="$PROJECT_DIR$/modulos/clientecuenta/cClientecuenta.php" afterPath="$PROJECT_DIR$/modulos/clientecuenta/cClientecuenta.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php" afterPath="$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php" afterPath="$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/letras/letra_tabla.php" afterPath="$PROJECT_DIR$/modulos/letras/letra_tabla.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,51 +17,66 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="toxml21.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/toxml21.php">
+      <file leaf-file-name="clientecuenta_tabla.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="14484">
-              <caret line="852" column="57" lean-forward="false" selection-start-line="852" selection-start-column="57" selection-end-line="852" selection-end-column="57" />
+            <state relative-caret-position="-925">
+              <caret line="131" column="45" lean-forward="false" selection-start-line="131" selection-start-column="45" selection-end-line="131" selection-end-column="45" />
+              <folding>
+                <element signature="n#script#0;n#!!top" expanded="false" />
+                <element signature="e#1100#2020#0#HTML" expanded="false" />
+                <element signature="e#1561#1766#0#HTML" expanded="false" />
+                <marker date="1547070500127" expanded="true" signature="5213:5247" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="guia_numdoc_venta.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/guia/guia_numdoc_venta.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="datos.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/datos.php">
+      <file leaf-file-name="formato.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/formatos/formato.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="36" lean-forward="false" selection-start-line="11" selection-start-column="36" selection-end-line="11" selection-end-column="36" />
+            <state relative-caret-position="219">
+              <caret line="181" column="23" lean-forward="true" selection-start-line="181" selection-start-column="23" selection-end-line="181" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="toarray21.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php">
+      <file leaf-file-name="clientecuenta_detalle.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_detalle.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5151">
-              <caret line="303" column="59" lean-forward="false" selection-start-line="303" selection-start-column="59" selection-end-line="303" selection-end-column="59" />
+            <state relative-caret-position="145">
+              <caret line="50" column="12" lean-forward="false" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="clientecuenta_tabla.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php">
+        <entry file="file://$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="175" column="42" lean-forward="true" selection-start-line="175" selection-start-column="42" selection-end-line="175" selection-end-column="42" />
+            <state relative-caret-position="136">
+              <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="11" selection-end-column="23" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cClientecuenta.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cClientecuenta.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/cClientecuenta.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="231" column="32" lean-forward="true" selection-start-line="231" selection-start-column="32" selection-end-line="231" selection-end-column="32" />
+            <state relative-caret-position="2372">
+              <caret line="323" column="70" lean-forward="true" selection-start-line="321" selection-start-column="14" selection-end-line="323" selection-end-column="70" />
               <folding>
                 <marker date="1547065158658" expanded="true" signature="218:1062" ph="INSERT INTO tb_clientecuenta" />
                 <marker date="1547065158658" expanded="true" signature="1308:1370" ph="SELECT * FRO... tb_clientecuenta" />
@@ -89,50 +104,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="clientecuenta_reg_todos.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_reg_todos.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="38" column="35" lean-forward="false" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clientecuenta_tabla.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1411">
-              <caret line="83" column="12" lean-forward="false" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="50" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clientecuenta_detalle.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_detalle.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="765">
-              <caret line="45" column="74" lean-forward="false" selection-start-line="45" selection-start-column="67" selection-end-line="45" selection-end-column="74" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="clientecuenta_detalle_tabla.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_detalle_tabla.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="clientecuenta_vista.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_vista.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="-8542">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -143,8 +118,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>logo</find>
-      <find>arr_SummaryDocumentsLine</find>
       <find>SummaryDocuments</find>
       <find>$empresa[0]-&gt;razon;</find>
       <find>CDATA</find>
@@ -173,6 +146,8 @@
       <find>$emp_id_resumen</find>
       <find>tb_clientecuenta_xac</find>
       <find>modificar_estado</find>
+      <find>$emp_id</find>
+      <find>$oClienteCuenta</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -214,8 +189,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modulos/producto/producto_proveedor_form.php" />
-        <option value="$PROJECT_DIR$/modulos/kardex/cKardex.php" />
         <option value="$PROJECT_DIR$/modulos/kardex/kardex_reporte_total_xls.php" />
         <option value="$PROJECT_DIR$/modulos/kardex/kardex_vista.php" />
         <option value="$PROJECT_DIR$/modulos/kardex/kardex_producto_tabla_total.php" />
@@ -263,8 +236,10 @@
         <option value="$PROJECT_DIR$/config/datos.php" />
         <option value="$PROJECT_DIR$/cpegeneracion/sunat/toxml21.php" />
         <option value="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" />
-        <option value="$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php" />
         <option value="$PROJECT_DIR$/modulos/clientecuenta/cClientecuenta.php" />
+        <option value="$PROJECT_DIR$/modulos/letras/letra_tabla.php" />
+        <option value="$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php" />
+        <option value="$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php" />
       </list>
     </option>
   </component>
@@ -327,7 +302,7 @@
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="clientecuenta" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="cuentasxcobrar" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
@@ -429,12 +404,12 @@
       <workItem from="1542041776801" duration="13596000" />
       <workItem from="1546999628358" duration="1951000" />
       <workItem from="1547001707600" duration="1056000" />
-      <workItem from="1547061095047" duration="3136000" />
+      <workItem from="1547061095047" duration="7384000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="418157000" />
+    <option name="totallyTimeSpent" value="422405000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -513,48 +488,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/cuentasxcobrar/cClientecuenta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="41" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/ingreso/cIngreso.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="30" lean-forward="false" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_reg.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11662">
-          <caret line="686" column="29" lean-forward="false" selection-start-line="686" selection-start-column="22" selection-end-line="686" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/kardex/cKardex.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/lote/cVentaDetalleLote.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10557">
-          <caret line="621" column="8" lean-forward="false" selection-start-line="621" selection-start-column="8" selection-end-line="621" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/cVenta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5916">
@@ -718,6 +651,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
           <caret line="35" column="23" lean-forward="false" selection-start-line="35" selection-start-column="23" selection-end-line="35" selection-end-column="23" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -803,38 +737,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1411">
-          <caret line="83" column="12" lean-forward="false" selection-start-line="83" selection-start-column="12" selection-end-line="83" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_detalle.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="74" lean-forward="false" selection-start-line="45" selection-start-column="67" selection-end-line="45" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_detalle_tabla.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_vista.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_reg_todos.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -843,18 +745,84 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php">
+    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_vista.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="175" column="42" lean-forward="true" selection-start-line="175" selection-start-column="42" selection-end-line="175" selection-end-column="42" />
+        <state relative-caret-position="-8542">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/letras/letra_tabla.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="78" column="51" lean-forward="false" selection-start-line="78" selection-start-column="51" selection-end-line="78" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/formatos/formatos.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1371">
+          <caret line="243" column="13" lean-forward="false" selection-start-line="243" selection-start-column="13" selection-end-line="243" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/php/lib/php.jar!/stubs/standard/standard_3.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="707" column="9" lean-forward="false" selection-start-line="707" selection-start-column="9" selection-end-line="707" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/formatos/formato.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="219">
+          <caret line="181" column="23" lean-forward="true" selection-start-line="181" selection-start-column="23" selection-end-line="181" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_detalle_tabla.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-131">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/letras/cLetras.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="97" column="62" lean-forward="true" selection-start-line="92" selection-start-column="14" selection-end-line="97" selection-end-column="62" />
+          <folding>
+            <marker date="1545184772687" expanded="true" signature="539:590" ph="SELECT * FRO... tb_letras" />
+            <marker date="1545184772687" expanded="true" signature="718:763" ph="SELECT * FRO... tb_letras" />
+            <marker date="1545184772687" expanded="true" signature="930:1002" ph="SELECT * FRO... tb_letras" />
+            <marker date="1545184772687" expanded="true" signature="1146:1192" ph="SELECT * FRO... tb_letras" />
+            <marker date="1545184772687" expanded="true" signature="1313:1387" ph="UPDATE tb_lote... " />
+            <marker date="1545184772687" expanded="true" signature="1521:1569" ph="SELECT * FRO... ${$tabla}" />
+            <marker date="1545184772687" expanded="true" signature="1679:1720" ph="DELETE FROM tb_letras... " />
+            <marker date="1545184772687" expanded="true" signature="1849:1906" ph="SELECT max(t... tb_letras" />
+            <marker date="1545184772687" expanded="true" signature="2106:2556" ph="SELECT * FRO... tb_venta" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="14" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="11" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/cClientecuenta.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="231" column="32" lean-forward="true" selection-start-line="231" selection-start-column="32" selection-end-line="231" selection-end-column="32" />
+        <state relative-caret-position="2372">
+          <caret line="323" column="70" lean-forward="true" selection-start-line="321" selection-start-column="14" selection-end-line="323" selection-end-column="70" />
           <folding>
             <marker date="1547065158658" expanded="true" signature="218:1062" ph="INSERT INTO tb_clientecuenta" />
             <marker date="1547065158658" expanded="true" signature="1308:1370" ph="SELECT * FRO... tb_clientecuenta" />
@@ -877,6 +845,35 @@
             <marker date="1547065158658" expanded="true" signature="7337:8422" ph="SELECT ct.tb... tb_clientecuenta" />
             <marker date="1547065158658" expanded="true" signature="9596:10685" ph="SELECT ct.tb... tb_clientecuenta" />
             <marker date="1547065158658" expanded="true" signature="11749:11907" ph="SELECT * FRO... tb_clientecuenta" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_detalle.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="145">
+          <caret line="50" column="12" lean-forward="false" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/guia/guia_numdoc_venta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="13" column="0" lean-forward="false" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/clientecuenta/clientecuenta_tabla.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-925">
+          <caret line="131" column="45" lean-forward="false" selection-start-line="131" selection-start-column="45" selection-end-line="131" selection-end-column="45" />
+          <folding>
+            <element signature="n#script#0;n#!!top" expanded="false" />
+            <element signature="e#1100#2020#0#HTML" expanded="false" />
+            <element signature="e#1561#1766#0#HTML" expanded="false" />
+            <marker date="1547070500127" expanded="true" signature="5213:5247" ph="..." />
           </folding>
         </state>
       </provider>

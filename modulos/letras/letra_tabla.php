@@ -60,6 +60,7 @@ $(function() {
             <thead>
                 <tr>
                 <th>Numero</th>
+                <th>DOC. REFERENCIA</th>
                 <th>CONDICION</th>
                 <th>VENCE</th>
                 <th>CLIENTE</th>
@@ -75,6 +76,7 @@ $(function() {
             ?>
                 <tr>
                 <td><?php echo str_pad($dt['tb_letras_numero'], 7, "0", STR_PAD_LEFT)?></td>
+                <td><?php echo $dt['tb_venta_numdoc']?></td>
                 <td>
                     <?php
                         $date1 = new  DateTime($dt['tb_venta_fec']);

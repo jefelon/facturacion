@@ -9,8 +9,6 @@ require_once ("../formatos/formato.php");
 require_once ("../venta/cVenta.php");
 require_once ("../venta/cVentapago.php");
 $oVentapago = new cVentapago();
-require_once ("../clientecuenta/cClientecuenta.php");
-$oClientecuenta = new cClientecuenta();
 $oVenta = new cVenta();
 $emp_id=$_SESSION['empresa_id'];
 $est='2,3';
