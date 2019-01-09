@@ -228,7 +228,8 @@ class cClientecuenta{
 	$sql = "
 	SELECT tb_clientecuenta_tip AS tipo, sum(tb_clientecuenta_mon) AS monto
 	FROM tb_clientecuenta
-	WHERE tb_empresa_id = $emp_id
+	WHERE tb_clientecuenta_xac=1
+	AND  tb_empresa_id = $emp_id
 	AND tb_cliente_id = $cli_id
 	GROUP BY tb_clientecuenta_tip
 	"; 
