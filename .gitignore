@@ -8,3 +8,5 @@ libreriasphp/consultaruc/cookies.txt
 libreriasphp/consultaruc/cookies.txt
 css/Estilo/menu_estilo.css
 config/Cado.php
+*.xml
+*.zip
