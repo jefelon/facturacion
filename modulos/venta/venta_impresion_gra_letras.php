@@ -284,7 +284,7 @@ $html.='
         (1)DE NO SER PAGADO A SU VENCIMIENTO, ESTE DOCUMENTO GENERARÁ EL INTERES COMPENSATORIO Y MORATORIO A LAS TASAS MAXIMAS QUE FIJA LA LEY<br>
         (2)EL PLAZO DE SU VENCIMIENTO PODRÁ SER PRORROGADO POR EL TENEDOR, POR EL PLAZO QUE ESTE SEÑALE SIN QUE SEA<br>                                  
         (3)NECESARIA LA INTERVENCIÓN DEL OBLIGADO PRINCIPAL NI DE LOS SOLIDARIOS. <br>                                                                   
-        (4)SU IMPORTE DEBE SER PAGADO SÓLO EN LA MISMA MONDEA QUE EXPRESA ESTE TÍTULO VALOR.<br>                                                         
+        (4)SU IMPORTE DEBE SER PAGADO SÓLO EN LA MISMA MONEDA QUE EXPRESA ESTE TÍTULO VALOR.<br>                                                         
         ESTA LETRA DE CAMBIO NO SE REQUIERE SER PROTESTADA POR FALTA DE PAGO <br> 
         </td>
     </tr>

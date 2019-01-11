@@ -91,97 +91,129 @@ $num_rows= mysql_num_rows($dts1);
         ?>
         <tbody>
         <?php
+        $estado="";
         while($dt1 = mysql_fetch_array($dts1)){
-            if($dt1['tb_venta_est']=='CANCELADA') {
+            $estado = $dt1['tb_venta_est'];
+            if ($dt1['tb_venta_est'] == 'CANCELADA') {
                 if ($dt1['cs_tipomoneda_id'] == '1') {
                     $total_ventas_soles += $dt1['tb_venta_tot'];
-                }else{
+                } else {
                     $total_ventas_dolares += $dt1['tb_venta_tot'];
                 }
             }
+            $tipodoc = $dt1['cs_tipodocumento_cod'];
+            $simb_moneda = "";
 
-            $simb_moneda="";
-            $xml="";
-            $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
-            $cdr="";
-            $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+            $xml = "";
+            $xml = $ruc_empresa . "-0" . $dt1['cs_tipodocumento_cod'] . "-" . $dt1['tb_venta_ser'] . "-" . $dt1['tb_venta_num'];
+            $cdr = "";
+            $cdr = "R-" . $ruc_empresa . "-0" . $dt1['cs_tipodocumento_cod'] . "-" . $dt1['tb_venta_ser'] . "-" . $dt1['tb_venta_num'];
             ?>
             <tr>
-                <td nowrap="nowrap"><?php echo $dt1['tb_documento_nom'];?></td>
-                <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
-                <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
-                <td><?php echo $dt1['tb_cliente_nom']?></td>
-                <td><?php echo $dt1['tb_cliente_doc']?></td>
+                <td nowrap="nowrap"><?php echo $dt1['tb_documento_nom']; ?></td>
+                <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'] . '-' . $dt1['tb_venta_num'] ?></td>
+                <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec']) ?></td>
+                <td><?php echo $dt1['tb_cliente_nom'] ?></td>
+                <td><?php echo $dt1['tb_cliente_doc'] ?></td>
                 <td align="center">
                     <?php
-                    if($dt1['cs_tipomoneda_id']=='1'){
-                        $simb_moneda="S/ ";
+                    if ($dt1['cs_tipomoneda_id'] == '1') {
+                        $simb_moneda = "S/ ";
                         echo 'SOLES';
                     }
-                    if($dt1['cs_tipomoneda_id']=='2'){
-                        $simb_moneda= "$ ";
+                    if ($dt1['cs_tipomoneda_id'] == '2') {
+                        $simb_moneda = "$ ";
                         echo 'DOLARES';
                     }
                     ?>
                 </td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
                 <td align="right">
                     <?php
-                    if($dt1['cs_tipomoneda_id']=='1'){
-                        echo formato_money($dt1['tb_venta_tot']);
+                    if ($estado == "ANULADA") {
+                        echo "0";
+                    } else {
+                        echo formato_money($dt1['tb_venta_valven']);
                     }
                     ?>
                 </td>
                 <td align="right">
                     <?php
-                    if($dt1['cs_tipomoneda_id']=='2'){
-                        echo formato_money($dt1['tb_venta_tot']);
+                    if ($estado == "ANULADA") {
+                        echo "0";
+                    } else {
+                        echo formato_money($dt1['tb_venta_igv']);
+                    }
+                    ?>
+                </td>
+                <td align="right">
+                    <?php
+                    if ($estado == "ANULADA") {
+                        echo "0";
+                    } else {
+                        if ($dt1['cs_tipomoneda_id'] == '1') {
+                            echo formato_money($dt1['tb_venta_igv']);
+                        }
+                    }
+                    ?>
+                </td>
+                <td align="right">
+                    <?php
+                    if ($estado == "ANULADA") {
+                        echo "0";
+                    } else {
+                        if ($dt1['cs_tipomoneda_id'] == '2') {
+                            echo formato_money($dt1['tb_venta_tot']);
+                        }
                     }
                     ?>
                 </td>
                 <td>
-
                     <?php
-                    $dts2=$oVentapago->mostrar_pagos($dt1['tb_venta_id']);
-                    $num_rows2= mysql_num_rows($dts2);
-                    while($dt2 = mysql_fetch_array($dts2)){
-                        if($dt2['tb_formapago_id']==1)echo 'CONTADO ';
-                        if($dt2['tb_formapago_id']==2)echo 'CREDITO '.$dt2['tb_ventapago_numdia'].'D | FV: '.mostrarFecha($dt2['tb_ventapago_fecven']);
-                        if($dt2['tb_formapago_id']==3){
-                            echo 'LETRAS: ';
-                            $ltrs1=$cLetras->mostrar_letras($dt1['tb_venta_id']);
+                    if($estado=="ANULADA") {
+                        echo "ANULADA";
+                    }
+                    else{
+                        $dts2 = $oVentapago->mostrar_pagos($dt1['tb_venta_id']);
+                        $num_rows2 = mysql_num_rows($dts2);
 
-                            $date1 = new  DateTime($fecha);
+                        while ($dt2 = mysql_fetch_array($dts2)) {
+                            if ($dt2['tb_formapago_id'] == 1) echo 'CONTADO ';
+                            if ($dt2['tb_formapago_id'] == 2) echo 'CREDITO ' . $dt2['tb_ventapago_numdia'] . 'D | FV: ' . mostrarFecha($dt2['tb_ventapago_fecven']);
+                            if ($dt2['tb_formapago_id'] == 3) {
+                                echo 'LETRAS: ';
+                                $ltrs1 = $cLetras->mostrar_letras($dt1['tb_venta_id']);
 
-                            $cont=1;
-                            while($ltr= mysql_fetch_array($ltrs1)){
-                                $date2 = new DateTime($ltr['tb_letras_fecha']);
-                                $interval = $date1->diff( $date2 );
-                                $diferencia=$interval->format('%a dias');
+                                $date1 = new  DateTime($fecha);
+
+                                $cont = 1;
+                                while ($ltr = mysql_fetch_array($ltrs1)) {
+                                    $date2 = new DateTime($ltr['tb_letras_fecha']);
+                                    $interval = $date1->diff($date2);
+                                    $diferencia = $interval->format('%a dias');
 
 //                                $modo.= '<br>L'.$ltr['tb_letras_orden'].' '.$diferencia.' '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
-                                echo 'L'.$ltr['tb_letras_orden'] . " ";
+                                    echo 'L' . $ltr['tb_letras_orden'] . " ";
+
+                                }
 
                             }
 
                         }
+                        mysql_free_result($dts2);
 
+                        //Saldo A Cuenta
+                        $ventip = 1;
+                        $tipo = 2;
+                        $tipo_registro = 2;
+                        $total_pagado = 0;
+
+                        $dts3 = $oClientecuenta->mostrar_por_tipo_venta($ventip, $dt1['tb_venta_id'], $tipo, $tipo_registro);
+                        while ($dt3 = mysql_fetch_array($dts3)) {
+                            $total_pagado += $dt3['tb_clientecuenta_mon'];
+                        }
+                        mysql_free_result($dts3);
+                        echo $simb_moneda . " " . $total_pagado;
                     }
-                    mysql_free_result($dts2);
-
-                    //Saldo A Cuenta
-                    $ventip=1;
-                    $tipo=2;
-                    $tipo_registro=2;
-                    $total_pagado=0;
-
-                    $dts3=$oClientecuenta->mostrar_por_tipo_venta($ventip, $dt1['tb_venta_id'],$tipo,$tipo_registro);
-                    while($dt3 = mysql_fetch_array($dts3)){
-                        $total_pagado+=$dt3['tb_clientecuenta_mon'];
-                    }
-                    mysql_free_result($dts3);
-                    echo $simb_moneda." " .$total_pagado;
                     ?>
 
                 </td>
@@ -207,6 +239,7 @@ $num_rows= mysql_num_rows($dts1);
                         {
                             echo 'RESUMEN';
                         }
+
                     }
                     else
                     {
@@ -217,7 +250,8 @@ $num_rows= mysql_num_rows($dts1);
                 <td align="center" nowrap>
                     <?php
                     echo mostrarFechaHora($dt1['tb_venta_fecenvsun']);
-                    ?></td>
+                    ?>
+                </td>
                 <td>
                     <?php
                     $cant = $oVentacorreo->contar($dt1['tb_venta_id']);
@@ -234,7 +268,21 @@ $num_rows= mysql_num_rows($dts1);
                                 )">Enviar Correo</a>
                         <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="venta_impresion('<?php echo $dt1['tb_venta_id']?>')">PDF</a>
                         <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>
-                        <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/cdr/$cdr.zip";?>" title="Descargar CDR">CDR</a>
+                        <?php
+                        if($dt1['cs_tipodocumento_cod']==1){
+                            if(file_exists("../../cperepositorio/cdr/$cdr.xml")){
+                                ?>
+                                <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/cdr/$cdr.zip";?>" title="Descargar CDR">CDR</a>
+                                <?php
+                            }
+                            else
+                            {
+                                ?>
+                                <a class="btn_cdr" href="#getcdr" onClick="cpe_cdr('<?php echo $dt1['tb_venta_id']?>')">Obt. CDR</a>
+                                <?php
+                            }
+                        }
+                        ?>
                     <?php endif;?>
                     <?php //if($dt1['tb_documento_ele']==0):?>
                     <?php if($dt1['tb_venta_est']!='ANULADA' and $_POST['chk_ven_anu']==1){?>
