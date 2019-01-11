@@ -200,7 +200,7 @@ $(function() {
 		title:'Información Proveedor',
 		autoOpen: false,
 		resizable: false,
-		height: 300,
+		height: 320,
 		width: 530,
 		modal: true,
 		buttons: {

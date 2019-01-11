@@ -61,7 +61,7 @@ $(function() {
             13: {sorter: false}, 14: {sorter: false}, 15: {sorter: false}, 16: {sorter: false}, 17: {sorter: false}, 18: {sorter: false},
             19: {sorter: false}, 20: {sorter: false}, 21: {sorter: false}, 22: {sorter: false}, 23: {sorter: false}, 24: {sorter: false},
             25: {sorter: false}, 26: {sorter: false}, 27: {sorter: false}, 28: {sorter: false}, 29: {sorter: false}, 30: {sorter: false},
-            31: {sorter: false}, 32: {sorter: false}, 33: {sorter: false}, 34: {sorter: false}, 35: {sorter: false,36: {sorter: false}
+            31: {sorter: false}, 32: {sorter: false}, 33: {sorter: false}, 34: {sorter: false}, 35: {sorter: false}
         }
     });
 });
@@ -74,36 +74,36 @@ $(function() {
         <th>3 CUO AMC</th>
         <th>4 FECHA</th>
         <th>5 TIPO COMPROBANTE</th>
-        <th>6 SERIE</th>
+        <th>6 SERIE </th>
         <th>7 NUM COMPROBANTE</th>
         <th>8 VALOR ADQUISICIONES</th>
-        <th>11 TIPO DOC PROVEE</th>
-        <th>12 RUC PROV</th>
-        <th>13 PROVEEDOR</th>
-        <th>14 OP GRAVADA</th>
-        <th>15 IGV</th>
-        <th>16 BI2</th>
-        <th>17 IGV2</th>
-        <th>18 BI3</th>
-        <th>19 IGV3</th>
-        <th>20 NO GRA</th>
-        <th>21 ISC</th>
-        <th>22 OTROS CARGOS</th>
-        <th>23 TOTAL</th>
-        <th>24 MON</th>
-
-        <th>24 PAIS PROV</th>
-        <th>25 VINCULO</th>
+        <th>9 OTROS CONCEPT AD</th>
+        <th>10 IMPORTE TOTAL</th>
+        <th>11 TIDO COMPROBANTE SUSTENTO CF</th>
+        <th>12 SERIE COMPROBANTE SUSTENT DUA</th>
+        <th>13 AÑO DUA</th>
+        <th>14 NUM DUA</th>
+        <th>15 MONTO RET. IGV</th>
+        <th>16 MON</th>
+        <th>17 TC SBS VENTA</th>
+        <th>18 COD PAIS DEL NO DOM</th>
+        <th>19 APELLIDOS, NOMBRES, RAZON SOCIAL NO DOMICILIADO</th>
+        <th>20 DOMICILIO NO DOMICILIADO</th>
+        <th>21 NUM IDENTIDAD DEL NO DOMICILIADO</th>
+        <th>22 NUM IDENTIF. FIZCAL</th>
+        <th>23 APELLIDOS, NOMBRES, RAZON SOCIAL NO DOMICILIADO</th>
+        <th>24 COD PAIS DEL NO DOM</th>
+        <th>25 VINCULO CONTRIBUYENTE- NO DOMICILIADO.</th>
         <th>26 RENTA BRUTA</th>
         <th>27 DEDUCC C/E BC</th>
         <th>28 RENTA NETA</th>
-        <th>29 TASA RET </th>
-        <th>30 IMP RET</th>
+        <th>29 TASA RETENIDA </th>
+        <th>30 IMP RETENIDO</th>
         <th>31 CONV DOBLE IMP</th>
-        <th>32 EXO APL</th>
+        <th>32 EXO APLICADA</th>
         <th>33 TIPO RENTA</th>
-        <th>34 MOD</th>
-        <th>35 ART 76</th>
+        <th>34 MODALIDAD</th>
+        <th>35 ART 76 LIR</th>
         <th>36 ESTADO</th>
         <th></th>
     </tr>
@@ -153,58 +153,98 @@ $(function() {
                 <?php
                     $numero =$dt1['tb_compra_numdoc'];
                     $serie_numero=explode("-",$numero);
+                    $ser=$serie_numero[0];
+                    $num=$serie_numero[1];
+                    if($num=="") {
+                        $num = $ser;
+                        $ser="";
+                    }
                 ?>
-                <!--6--><td><?php echo $serie_numero[0]; ?></td>
-                <!--7--><td><?php echo $serie_numero[1]; ?></td>
-                <!--8--><td></td>
+                <!--6--><td><?php echo $ser; ?></td>
+                <!--7--><td><?php echo $num; ?></td>
+                <?php $tot=$dt1['tb_compra_tot'];?>
+                <!--8--><td><?php echo $tot ?></td>
                     <?php
                     $ctipo="";
                     $prov_doc=$dt1['tb_proveedor_doc'];
                     $prov_nom=$dt1['tb_proveedor_nom'];
-                    if($dt1['tb_proveedor_tip']==1){
-                        $ctipo=1;
-                    } elseif($dt1['tb_proveedor_tip']==2){
-                        $ctipo=6;
-                    }
+                    $prov_dir=$dt1['tb_proveedor_dir'];
+                    $prov_codpais=$dt1['cs_codigopais_cod'];
                     ?>
-                <!--11--><td><?php echo $ctipo ?></td>
-                <!--12--><td><?php echo $prov_doc; ?></td>
-                <!--13--><td><?php echo $prov_nom; ?></td>
+                <!--9--><td></td>
+                <!--10--><td><?php echo $tot ?></td>
+                <!--11--><td></td>
+                <!--12--><td></td>
+                <!--13--><td></td>
                 <?php
-                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_venta_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
-                $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
-                $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_compra_tipcam'];
-                if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
-                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov="";}
+                $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_tipocambio_dolsunv'];
                 ?>
-                <!--14--><td><?php echo $gravado; ?></td>
-                <!--15--><td><?php echo $igv; ?></td>
-                <!--16--><td></td>
-                <!--17--><td></td>
-                <!--18--><td></td>
-                <!--19--><td></td>
-                <!--20--><td><?php echo $exo; ?></td>
-                <!--21--><td><?php echo $isc; ?></td>
+                <!--14--><td></td>
+                <!--15--><td></td>
+                <!--16--><td><?php echo $moneda; ?></td>
+                <!--17--><td><?php echo $tc;?></td>
+                <!--18--><td><?php echo $prov_codpais;?></td>
+                <!--19--><td><?php echo $prov_nom; ?></td>
+                <!--20--><td><?php echo $prov_dir; ?></td>
+                <!--21--><td><?php echo $prov_doc; ?></td>
                 <!--22--><td></td>
-                <!--23--><td><?php echo $tot; ?></td>
-                <!--24--><td><?php echo $moneda; ?></td>
-
+                <!--23--><td><?php echo $prov_nom; ?></td>
                 <!--24--><td><?php echo $paisprov; ?></td>
                 <!--25--><td><?php echo $vinculo; ?></td>
                 <!--26--><td><?php echo $renta_bruta; ?></td>
                 <!--27--><td><?php echo $deduccion; ?></td>
 
-                <?php $rentaneta=0;?>
+                <?php $rentaneta="";?>
                 <!--28--><td><?php echo $rentaneta; ?></td>
-                <?php $tasaret=0;?>
+                <?php $tasaret="";?>
                 <!--29--><td><?php echo $tasaret; ?></td>
-                <?php $impretenido=0; ?>
+                <?php $impretenido=""; ?>
                 <!--30--><td><?php echo $impretenido; ?></td>
-                <?php $convenio=0;?>
-                <!--31--><td><?php echo $convenio; ?></td>
+                <?php $convenio="00";//NINGUNO
+                switch ($prov_codpais)
+                {
+                    case "9149":
+                        $convenio="01"; //CANADA
+                        break;
+                    case "9211":
+                        $convenio="02"; //CHILE
+                        break;
+                    case "9097":
+                        $convenio="03"; // BOLIVIA COMUNIDAD ANDINA DE NACIONES(CAN)
+                        break;
+                    case "9169":
+                        $convenio="03"; // COLOMBIA COMUNIDAD ANDINA DE NACIONES(CAN)
+                        break;
+                    case "9239":
+                        $convenio="03"; // ECUADOR COMUNIDAD ANDINA DE NACIONES(CAN)
+                        break;
+                    case "9850":
+                        $convenio="03"; // VENEZUELA COMUNIDAD ANDINA DE NACIONES(CAN)
+                        break;
+                    case "9105":
+                        $convenio="04"; //BRASIL
+                        break;
+                    case "9493":
+                        $convenio="05"; // ESTADOS UNIDOS MEXICANOS O MEXICO
+                        break;
+                    case "9190":
+                        $convenio="06"; // REPUBLICA DE COREA O COREA DEL SUR
+                        break;
+                    case "9767":
+                        $convenio="07"; // CONFEDERACIÓN SUIZA o suiza
+                        break;
+                    case "9607":
+                        $convenio="08"; // PORTUGAL
+                        break;
+//                    case "otros-??":
+//                        $convenio="09"; // OTROS
+//                        break;
+                }
+                ?>
+                <!--31----><td><?php echo $convenio; ?></td>
                 <!--32--><td></td>
                 <?php
-                $tiporenta=0;
+                $tiporenta=$dt1['tb_tiporenta_cod'];
                 ?>
                 <!--33--><td><?php echo $tiporenta; ?></td>
                 <!--34--><td></td>
@@ -214,13 +254,13 @@ $(function() {
                 <td></td>
             </tr>
             <?php
-        }
+                                                                                                                 }
         mysql_free_result($dts1);
         ?>
         </tbody>
     <?php }?>
     <tr class="even">
-        <td colspan="41"><?php echo $num_rows.' registros'; ?></td>
+        <td colspan="38"><?php if($num_rows>0){ echo $num_rows.' registros'; }?></td>
     </tr>
 </table>
 

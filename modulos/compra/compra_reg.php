@@ -71,7 +71,9 @@ if ($_POST['action_compra'] == "insertar") {
 
         if ($com_id > 0) {
             //insertamos compra
-
+            if ($_POST['cmb_com_doc']==19) {
+                 $tipo_renta=$_POST['cmb_tiporenta_id'];
+            }
             $oCompra->insertar(
                 fecha_mysql($_POST['txt_com_fec']),
                 fecha_mysql($_POST['txt_com_fecven']),
@@ -104,7 +106,9 @@ if ($_POST['action_compra'] == "insertar") {
                 $fec_mod,
                 $_POST['txt_com_ser_nota'],
                 $_POST['txt_com_num_nota'],
-                $_POST['cmb_com_tip']
+                $_POST['cmb_com_tip'],
+                $_POST['cmb_tiporenta_id'],
+                $tipo_renta
             );
             //ultima compra
             $dts = $oCompra->ultimoInsert();
@@ -121,7 +125,7 @@ if ($_POST['action_compra'] == "insertar") {
                     $oCompra->insertar(
                         fecha_mysql($_POST['fec_ser'][$cont]),
                         fecha_mysql($_POST['txt_com_fecven']),
-                        19,
+                        1,// tipo documento factura 1 invoice 19
                         $dua,
                         $_POST['cmb_com_mon'],
                         $_POST['txt_com_tipcam'],

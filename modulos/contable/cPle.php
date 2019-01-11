@@ -30,11 +30,13 @@ class cPle
         $sql="SELECT tb_compra_id,DATE_FORMAT(c.tb_compra_reg,'%d/%m/%Y') AS  tb_compra_reg, DATE_FORMAT(c.tb_compra_fec,'%d/%m/%Y') AS  tb_compra_fec, DATE_FORMAT(c.tb_compra_fecven,'%d/%m/%Y') AS tb_compra_fecven, td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_compra_numdoc,p.tb_proveedor_tip,
               tb_proveedor_doc,tb_proveedor_nom,tb_compra_gra,tb_compra_igv,tb_compra_exo,tb_compra_isc,tb_compra_tot,tb_compra_tipcam,
               m.cs_tipomoneda_cod, (SELECT tb_tipocambio_dolsunv FROM tb_tipocambio tcm WHERE tcm.tb_tipocambio_fec = tb_compra_fec) as tc,
-              DATE_FORMAT(c.tb_compra_fec_nota,'%d/%m/%Y') AS tb_compra_fec_nota,c.tb_compra_ser_nota,c.tb_compra_num_nota
+              DATE_FORMAT(c.tb_compra_fec_nota,'%d/%m/%Y') AS tb_compra_fec_nota,c.tb_compra_ser_nota,c.tb_compra_num_nota,tr.tb_tiporenta_cod
               
         	FROM tb_compra c
             LEFT JOIN cs_tipodocumento td ON c.cs_tipodocumento_id=td.cs_tipodocumento_id
             LEFT JOIN tb_proveedor p ON c.tb_proveedor_id=p.tb_proveedor_id
+            LEFT JOIN cs_codigopais cp ON p.cs_codigopais_id=cp.cs_codigopais_id
+            LEFT JOIN tb_tiporenta tr ON c.tb_tiporenta_id=tr.tb_tiporenta_id
             INNER JOIN cs_tipomoneda m ON c.tb_compra_mon=m.cs_tipomoneda_id
             WHERE YEAR(c.tb_compra_reg) = '$anio' AND MONTH(c.tb_compra_reg) ='$mes' AND td.cs_tipodocumento_cod IN ('00','91','97','98') AND c.tb_compra_est NOT IN ('ANULADA')
             ORDER BY tb_compra_reg ASC 
