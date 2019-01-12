@@ -173,6 +173,28 @@ function venta_form(act,idf){
 		}
 	});
 }
+
+function venta_viaje_horario_form(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_viaje_horario.php",
+        async:true,
+        dataType: "html",
+        beforeSend: function() {
+            $('#msj_venta').hide();
+            $('#msj_venta_sunat').hide();
+            $('#div_venta_viaje_horario').dialog("open");
+            $('#div_venta_viaje_horario').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_viaje_horario').html(html);
+        },
+        complete: function(){
+
+        }
+    });
+}
+
 function venta_croquis_form(act,idf){
     $.ajax({
         type: "POST",
@@ -495,6 +517,31 @@ function cpe_cdr(ecomid)
     //}
 }
 
+function venta_asiento_form(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_asiento_form.php",
+        // url: "../venta/croquis.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            ven_id:	idf,
+            vista:	'administrador'
+        }),
+        beforeSend: function() {
+            $('#msj_venta').hide();
+            $('#div_venta_asiento_form').dialog("open");
+            $('#div_venta_asiento_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_asiento_form').html(html);
+        }
+    });
+}
+
+
+
 $(function() {
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
@@ -567,6 +614,8 @@ $(function() {
             }
         }
     });
+
+
 	
 	$( "#div_venta_check" ).dialog({
 		title:'Verificando Venta...',
@@ -631,6 +680,30 @@ $(function() {
 			}
 		}
 	});
+
+    $( "#div_venta_asiento_form" ).dialog({
+        title:'MAPA ASIENTOS | <?php echo $_SESSION['empresa_nombre']?>',
+        autoOpen: false,
+        resizable: false,
+        height: 740,
+        width: 1300,
+        modal: true,
+        position: "center",
+        closeOnEscape: false,
+        buttons: {
+            Guardar: function() {
+                $("#bus_form").submit();
+            },
+            Cancelar: function() {
+                $('#bus_form').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        }
+    });
+
+
+
+
     venta_croquis_form('seleccionar');
 });
 </script>
@@ -657,7 +730,7 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_form('insertar')">Agregar</a></td>
+                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_asiento_form()">Agregar</a></td>
                       <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>
                       <a href="#" onClick="modo('venta_tabla.php')" class="btn_modo" title="Modo Vista Ventas">Ventas</a>
@@ -698,6 +771,9 @@ $(function() {
 			<div id="div_venta_email"></div>
             <div id="div_venta_tabla" class="contenido_tabla">
       		</div>
+            <div id="div_venta_asiento_form">
+            </div>
+
       	</div>
     </article>
 </div>

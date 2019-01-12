@@ -14,11 +14,11 @@ $oAsiento = new cAsiento();
 
 
 
-$fila1 = serialize($_POST['sort1']);
-$fila2 = serialize($_POST['sort2']);
-$fila3 = serialize($_POST['sort3']);
-$fila4 = serialize($_POST['sort4']);
-$fila5 = serialize($_POST['sort5']);
+$fila1 = $_POST['sort1'];
+$fila2 = $_POST['sort2'];
+$fila3 = $_POST['sort3'];
+$fila4 = $_POST['sort4'];
+$fila5 = $_POST['sort5'];
 
 
 $oAsiento->actualizar_distribucionasiento(1,$fila1);

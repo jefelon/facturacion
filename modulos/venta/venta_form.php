@@ -25,6 +25,9 @@ $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
 
 
+$viaje_horario=$_POST['viaje_horario_id'];
+
+
 $cot_id = $_POST['cot_id'];
 
 if($_POST['action']=="insertar"){
@@ -864,6 +867,38 @@ if($_POST['action']=="editar"){
                 ser_des: $('#txt_ser_detven_des_'+idf).val(),//Descuento
                 ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
                 ser_pre: $('#txt_servicio_pre_'+idf).val()
+            }),
+            beforeSend: function() {
+                $("#txt_fil_ser_nom").val(''); $("#txt_fil_ser_nom").focus();
+                $('#div_venta_car_tabla').addClass("ui-state-disabled");
+            },
+            success: function(html){
+                $('#div_venta_car_tabla').html(html);
+            },
+            complete: function(){
+                $('#div_venta_car_tabla').removeClass("ui-state-disabled");
+            }
+        });
+    }
+
+
+    function venta_car_pasaje(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_car.php",
+            async:false,
+            dataType: "html",
+            data: ({
+                action:	 act,
+                unico_id: $('#unico_id').val(),
+                ser_id:	 idf,
+                ser_nom: 'PASAJE',
+                ser_can: 1,
+                ser_tip: 9,
+                ser_des: '',//Descuento
+                ser_rad_tipdes: '',
+                ser_pre: $('#hdd_precio').val(),
+                hdd_vi_ho: $('#hdd_vi_ho').val()
             }),
             beforeSend: function() {
                 $("#txt_fil_ser_nom").val(''); $("#txt_fil_ser_nom").focus();
@@ -2126,6 +2161,12 @@ if($_POST['action']=="editar"){
             $("#txt_fil_gui_con_nom").val("");
             $("#txt_fil_gui_con_dir").val("");
         }
+
+        <?php if ( isset($_POST['asiento_id'])) {
+        if ($_POST['asiento_id']) { ?>
+            venta_car_pasaje('agregar_servicio', 1);
+        <?php } } ?>
+
     });
 
 
@@ -2306,8 +2347,12 @@ if($_POST['action']=="editar"){
         <input name="hdd_emp_id" id="hdd_emp_id" type="hidden" value="<?php echo $_SESSION['empresa_id']?>">
         <input name="hdd_ven_est" id="hdd_ven_est" type="hidden" value="<?php echo $est?>">
         <input name="hdd_stock_neg" id="hdd_stock_neg" type="hidden" value="<?php echo $stock_negativo?>">
+        <input name="hdd_vi_ho" id="hdd_vi_ho" type="hidden" value="<?php echo $viaje_horario?>">
+
 
         <input name="unico_id" id="unico_id" type="hidden" value="<?php echo $unico_id?>">
+        <input name="hdd_precio" id="hdd_precio" type="hidden" value="<?php echo $_POST['precio']?>">
+
 
         <fieldset>
             <legend>Datos Principales</legend>
@@ -2657,71 +2702,20 @@ if($_POST['action']=="editar"){
                     <li><a id="carga_productos" href="#div_productos">Agregar Servicios</a></li>
 <!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
                 </ul>
-                <div id="div_productos">
+
+
+                <div id="div_servicios">
                     <div id="cuadro-contain" class="ui-widget">
-                        <!--              <legend>Agregar Producto</legend>-->
-                        <input name="hdd_bus_cat_id" id="hdd_bus_cat_id"  type="hidden" value="">
-                        <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
-                        <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
-                        <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
-
-                        <label for="txt_bus_pro_codbar">COD</label>
-                        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="10">
-                        <label for="txt_bus_pro_nom">NOM</label>
-                        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="28" style="font-size:13px; font-weight:bold">
-                        <input name="hdd_bus_pro_nom" type="hidden" id="hdd_bus_pro_nom">
-
-                        <label for="txt_bus_cat_preven">S/.</label>
-                        <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="8" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
-
-                        <label for="txt_bus_cat_can">CAN</label>
-                        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="5" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
-
-                        <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
-                        <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
-                        <label for="txt_detcom_des">DES</label>
-                        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
-                        <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
-
-
-                        <br>
-                        <!--a class="btn_agregar_producto" title="Abrir Catálogo" href="#" onClick="catalogo_venta_tab1()">Catálogo</a -->
-                        <a class="btn_rest_act" href="#" onClick="foco(); venta_car('actualizar')">Actualizar</a>
-                        <a class="btn_rest_car" href="#" onClick="foco(); venta_car('restablecer')">Vaciar</a>
-
-                        <label for="chk_modo">Automático</label>
-                        <input name="chk_modo" type="checkbox" id="chk_modo" value="1" <?php if($modo_automatico==1)echo "checked"?>>
-
-                        <label for="txt_precio_min">P.MIN.</label>
-                        <input type="text" name="txt_precio_min" id="txt_precio_min" size="10" readonly>
-
-                        <label for="txt_precio_min" style="color: red;">P.MAY.</label>
-                        <input type="text" name="txt_precio_may" id="txt_precio_may" size="10" readonly>
-
-                        <label for="che_mayorista">Precio Mayorista</label>
-                        <input type="checkbox" id="che_mayorista" style="margin-top: 5px;">
-
-                        <label for="cmb_listaprecio_id">Lista Precios:</label>
-                        <select name="cmb_listaprecio_id" id="cmb_listaprecio_id">
-                        </select>
-                        <div id="div_listaprecio_form">
-                        </div>
-                        <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                                     <legend></legend>
+                        <?php if($_POST['vista']!='cange'){?>
+                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
+                            <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
+                        <?php }?>
+                        <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>
+                        <div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:<?php if($msj!=""){echo 'block';} else{ echo 'none';}?>"><?php echo $msj?></div>
+                        <div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                     </div>
                 </div>
-
-<!--                <div id="div_servicios">-->
-<!--                    <div id="cuadro-contain" class="ui-widget">-->
-<!--                        <!--             <legend>Agregar Servicios</legend>-->
-<!--                        --><?php //if($_POST['vista']!='cange'){?>
-<!--                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>-->
-<!--                            <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>-->
-<!--                        --><?php //}?>
-<!--                        <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>-->
-<!--                        <div id="msj_ventanota_car" class="ui-state-error ui-corner-all" style="width:auto; float:right; padding:2px; display:--><?php //if($msj!=""){echo 'block';} else{ echo 'none';}?><!--">--><?php //echo $msj?><!--</div>-->
-<!--                        <div id="msj_venta_check" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>-->
-<!--                    </div>-->
-<!--                </div>-->
             </div>
         <?php } ?>
         <?php

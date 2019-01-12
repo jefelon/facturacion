@@ -776,7 +776,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			$tipo_venta=1;
 			$ser_id=0;
-			$unimed_id=13;// 12 NIU 13 ZZ, se fuerza ZZ para servicios
+			$unimed_id=12;// 12 NIU 13 ZZ, se fuerza ZZ para servicios
 
 			//////////////////////
 			$oVenta->insertar_detalle(
@@ -911,7 +911,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			
 			$tipo_venta=2;
 			$cat_id=0;
-			$afeigv_id=1;
+			$afeigv_id=9;
 			$unimed_id=13;//ZZ
 
 			//////////////////////

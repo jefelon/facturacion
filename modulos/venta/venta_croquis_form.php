@@ -68,18 +68,17 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
             connectWith: ".connectedSortable",
             update:function () {
                 //$.post('../asiento/actualizar_posicion.php',$(this).sortable('serialize'));
-
                 $.ajax(
                     {
                         type: "POST",
                         url: "../asiento/actualizar_posicion.php",
                         data:
                             {
-                                sort1:$("#sortable1").sortable('serialize'),
-                                sort2:$("#sortable2").sortable('serialize'),
-                                sort3:$("#sortable3").sortable('serialize'),
-                                sort4:$("#sortable4").sortable('serialize'),
-                                sort5:$("#sortable5").sortable('serialize')
+                                sort1:(($("#sortable1").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                sort2:(($("#sortable2").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                sort3:(($("#sortable3").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                sort4:(($("#sortable4").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                sort5:(($("#sortable5").sortable('toArray')).join(';')).split('"').pop().split('"')[0]
                             },
                         success: function(html)
                         {
@@ -157,17 +156,15 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                     <?php
                     if($orden11==""){
                         while($dt1 = mysql_fetch_array($dts1)){?>
-                           <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
+                           <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
                     <?php
                         }
                     }else{
-                        $resultado = str_replace("item[]=", "", unserialize($orden11));
-                        $resultado = str_replace("item[]", "", $resultado);
-                        $lugares = explode('&',$resultado);
+                        $lugares = explode(';',$orden11);
 
                         foreach ($lugares as $lugar) {
                             ?>
-                                <div id="<?php echo 'item_' . $lugar ?>" class="asiento"><?php echo $lugar ?></div>
+                                <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
                             }
                          }
@@ -180,17 +177,15 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                     <?php
                     if($orden22==""){
                         while($dt1 = mysql_fetch_array($dts2)){?>
-                            <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
+                            <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
                             <?php
                         }
                     }else{
-                        $resultado = str_replace("item[]=", "", unserialize($orden22));
-                        $resultado = str_replace("item[]", "", $resultado);
-                        $lugares = explode('&',$resultado);
+                        $lugares = explode(';',$orden22);
 
                         foreach ($lugares as $lugar) {
                             ?>
-                            <div id="<?php echo 'item_' . $lugar ?>" class="asiento"><?php echo $lugar ?></div>
+                            <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
                         }
                     }
@@ -203,17 +198,16 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                     <?php
                     if($orden33==""){
                         while($dt1 = mysql_fetch_array($dts3)){?>
-                            <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
+                            <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
                             <?php
                         }
                     }else{
-                        $resultado = str_replace("item[]=", "", unserialize($orden33));
-                        $resultado = str_replace("item[]", "", $resultado);
-                        $lugares = explode('&',$resultado);
+
+                        $lugares = explode(';',$orden33);
 
                         foreach ($lugares as $lugar) {
                             ?>
-                            <div id="<?php echo 'item_' . $lugar ?>" class="asiento"><?php echo $lugar ?></div>
+                            <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
                         }
                     }
@@ -226,17 +220,15 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                     <?php
                     if($orden44==""){
                         while($dt1 = mysql_fetch_array($dts4)){?>
-                            <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
+                            <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
                             <?php
                         }
                     }else{
-                        $resultado = str_replace("item[]=", "", unserialize($orden44));
-                        $resultado = str_replace("item[]", "", $resultado);
-                        $lugares = explode('&',$resultado);
+                        $lugares = explode(';',$orden44);
 
                         foreach ($lugares as $lugar) {
                             ?>
-                            <div id="<?php echo 'item_' . $lugar ?>" class="asiento"><?php echo $lugar ?></div>
+                            <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
                         }
                     }
@@ -253,17 +245,15 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             <?php
                         }
                     }else{
-                        $resultado = str_replace("item[]=", "", unserialize($orden55));
-                        $resultado = str_replace("item[]", "", $resultado);
-                        $lugares = explode('&',$resultado);
+                        $lugares = explode(';',$orden55);
 
                         foreach ($lugares as $lugar) {
                             ?>
-                            <div id="<?php echo 'item_' . $lugar ?>" class="asiento"><?php echo $lugar ?></div>
+                            <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
                         }
                     }
-                    mysql_free_result($dts3);
+                    mysql_free_result($dts5);
 
                     ?>
                 </div>

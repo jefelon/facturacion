@@ -26,10 +26,10 @@ class cAsiento{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-    function mostrarFiltroFila($desde,$hasta){
+    function mostrarFiltroFila($desde,$hasta,$vehiculo){
         $sql="SELECT * 
 	FROM tb_asiento
-	WHERE tb_asiento_nom between '$desde' AND'$hasta'
+	WHERE tb_asiento_nom between '$desde' AND '$hasta' AND tb_vehiculo_id='$vehiculo' 
 	ORDER BY tb_asiento_nom ASC ";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -43,6 +43,24 @@ class cAsiento{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrarUnovh($id){
+        $sql="SELECT * 
+	FROM tb_viajehorario
+	WHERE tb_viajehorario_id=$id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrarNombre($nom,$vehiculo){
+        $sql="SELECT * 
+        FROM tb_asiento
+        WHERE tb_asiento_nom='$nom' AND tb_vehiculo_id='$vehiculo'" ;
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function modificar($id,$nom){ 
 	$sql = "UPDATE tb_asiento SET  
 	`tb_asiento_nom` =  '$nom'
@@ -59,9 +77,9 @@ class cAsiento{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-    function mostrar_distribucionasiento($id){
+    function mostrar_distribucionasiento($fila, $piso, $vehiculo){
         $sql = "SELECT * FROM tb_distribucionasiento 
-	WHERE tb_distribucionasiento_id =$id;";
+	WHERE tb_distribucionasiento_fila ='$fila' AND tb_distribucionasiento_piso ='$piso' AND tb_vehiculo_id='$vehiculo';";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

@@ -7,7 +7,22 @@ require_once ("../producto/cCatalogoproducto.php");
 $oCatalogoProducto = new cCatalogoProducto();
 require_once ("../servicio/cServicio.php");
 $oServicio = new cServicio();
+require_once ("../asiento/cAsiento.php");
+$oAsiento = new cAsiento();
+require_once ("../lugar/cLugar.php");
+$oLugar = new cLugar();
 require_once ("../formatos/formato.php");
+
+$vhs = $oAsiento->mostrarUnovh($_POST['hdd_vi_ho']);
+$vh = mysql_fetch_array($vhs);
+
+$sls=$oLugar->mostrarUno($vh['tb_viajehorario_salida']);
+$sl = mysql_fetch_array($sls);
+
+$llgs=$oLugar->mostrarUno($vh['tb_viajehorario_llegada']);
+$llg = mysql_fetch_array($llgs);
+
+
 
 $igv_dato=0.18;
 $almacen_venta=$_SESSION['almacen_id'];
@@ -189,7 +204,8 @@ $dtscot2=$oCotizacion->mostrar_venta_detalle_servicio($_POST['cot_id']);
 //agregar a cesta
 if($_POST['action']=='agregar'){
     if($_POST['cat_can']>0){
-        //producto por catalogo y stock y almacen
+        //producto por catalog
+        //o y stock y almacen
         $dts= $oCatalogoProducto->presentacion_catalogo_stock_almacen($_POST['cat_id'],$almacen_venta);
         $dt = mysql_fetch_array($dts);
         $pro_nom=$dt['tb_producto_nom'];
@@ -387,7 +403,7 @@ if($_POST['action']=='agregar_servicio'){
             $tipo_item_txt = "***ENTREGA A TRABAJADORES***";
             break;
     }
-    $_SESSION['servicio_nom'][$unico_id][$_POST['ser_id']]		= $_POST['ser_nom'] . ' ' . $tipo_item_txt;
+    $_SESSION['servicio_nom'][$unico_id][$_POST['ser_id']]		= $_POST['ser_nom'].'-'.$sl['tb_lugar_nom'] .'-'. $llg['tb_lugar_nom']. ' ' . $tipo_item_txt;
 }
 
 
@@ -715,8 +731,15 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
 
         //tipo g/e/i ingresado
-        $tipo_item	= 1;
-        $linea_valor_unitario = $precio_unitario / 1.18;
+        $tipo_item	= 9;
+
+
+        if ($tipo_item==9) {
+            $linea_valor_unitario = $precio_unitario;
+        }else{
+            $linea_valor_unitario = $precio_unitario / 1.18;
+        }
+
 
         $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
         $linea_desc_x_item_percent=0;
@@ -728,38 +751,52 @@ if($filas>=2)echo $filas.' ítems agregados.';
         //tipo g/e/i ingresado
         $precio_unitario=$precio_unitario-$precio_unitario*($general_des/100);
 
-        $tipo_pro='Gravado';
-        $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-        $valor_venta = $valor_venta_unitario * $cantidad;
-        $precio_venta = $precio_unitario * $cantidad;
-        $ope_gravadas_total += $valor_venta;
+        if ($tipo_item==9){
+            $tipo_pro='Exonerado';
+            $valor_venta_unitario = $precio_unitario;
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_exoneradas_total += $valor_venta;
 
-        $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-        $precio_venta = $precio_unitario * $cantidad;
-        $valor_venta = $valor_venta_unitario * $cantidad;
-
+        }else if($tipo_item==1){
+            $tipo_pro='Gravado';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gravadas_total += $valor_venta;
+        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7){
+            $tipo_pro='Gratuito';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gratuitas_total += $valor_venta;
+        }
 
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];
         $descuento_linea = $_SESSION['servicio_des'][$unico_id][$indice];
 
         //sumatoria factura
-        if($tipo_item==1){
+        if($tipo_item==1 || $tipo_item==9){
             $sub_total = $sub_total + $linea_valor_venta_x_item;
         }
         ?>
         <tr>
             <td>Servicio</td>
-            <td>Gravado</td>
+            <td>Exonerado</td>
             <td>&nbsp;</td>
             <td><?php echo $_SESSION['servicio_nom'][$unico_id][$indice] ?></td>
 <!--            <td>--><?php //echo $dt['tb_unidad_abr'];?><!--</td>-->
             <td>ZZ</td>
             <td align="right"><?php echo $cantidad?></td>
             <td align="right"><?php echo formato_money($linea_valor_unitario)?></td>
-            <td align="right"><?php echo formato_money($precio_unitario)?></td>
-            <td align="right">
-            </td>
+            <?php if ($tipo_item==9){ ?>
+                <td align="right"></td>
+                <td align="right"><?php echo formato_money($precio_unitario)?></td>
+            <?php } else{ ?>
+                <td align="right"><?php echo formato_money($precio_unitario)?></td>
+                <td align="right"></td>
+            <?php } ?>
             <td align="right">
             </td>
             <td align="right">
