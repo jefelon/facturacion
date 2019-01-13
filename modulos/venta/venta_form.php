@@ -25,7 +25,7 @@ $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
 
 
-$viaje_horario=$_POST['viaje_horario_id'];
+//$viaje_horario=$_POST['viaje_horario_id'];
 
 
 $cot_id = $_POST['cot_id'];
@@ -35,8 +35,13 @@ if($_POST['action']=="insertar"){
     $fec=date('d-m-Y');
     $est='CANCELADA';
     $venpag_fec=date('d-m-Y');
-
     $unico_id=uniqid();
+
+    $asiento_id=$_POST['asiento_id'];
+    $precio=$_POST['precio'];
+    $fecha_salida=$_POST['fecha_salida'];
+    $viaje_horario= $_POST['viaje_horario'];
+    $viaje_horario_id= $_POST['viaje_horario_id'];
 }
 
 if($_POST['action']=="insertar_cot"){
@@ -2347,9 +2352,7 @@ if($_POST['action']=="editar"){
         <input name="hdd_emp_id" id="hdd_emp_id" type="hidden" value="<?php echo $_SESSION['empresa_id']?>">
         <input name="hdd_ven_est" id="hdd_ven_est" type="hidden" value="<?php echo $est?>">
         <input name="hdd_stock_neg" id="hdd_stock_neg" type="hidden" value="<?php echo $stock_negativo?>">
-        <input name="hdd_vi_ho" id="hdd_vi_ho" type="hidden" value="<?php echo $viaje_horario?>">
-
-
+<!--        <input name="hdd_vi_ho" id="hdd_vi_ho" type="hidden" value="--><?php //echo $viaje_horario?><!--">-->
         <input name="unico_id" id="unico_id" type="hidden" value="<?php echo $unico_id?>">
         <input name="hdd_precio" id="hdd_precio" type="hidden" value="<?php echo $_POST['precio']?>">
 
@@ -2491,6 +2494,22 @@ if($_POST['action']=="editar"){
                 </table>
             </fieldset>
         </div>
+
+        <div style="float: left; width: 20%; display: block;">
+            <fieldset>
+                <legend>Asiento</legend>
+                <label for="txt_num_asi">Asiento:</label>
+                <input type="text" id="txt_num_asi" name="txt_num_asi" size="4" value="<?php echo $asiento_id ?>" /><br>
+                <label for="txt_pre_asi">Precio:</label><br>
+                <input type="text" name="txt_pre_asi" id="txt_pre_asi"  size="4" value="<?php echo $precio ?>"><br>
+                <label for="txt_fech_sal">Fecha Salida:</label><br>
+                <input type="text" name="txt_fech_sal" id="txt_fech_sal"  size="6" value="<?php echo $fecha_salida ?>"><br>
+                <label for="txt_hor_sal">Hora Salida:</label><br>
+                <input type="text" name="txt_hor_sal" id="txt_hor_sal"  size="4" value="<?php echo $viaje_horario ?>">
+                <input type="hidden" name="hdd_vi_ho_id" id="hdd_vi_ho_id"  size="8" value="<?php echo $viaje_horario_id ?>">
+            </fieldset>
+        </div>
+
         <div style="float: left; width: 20%; display: none;" class="insertar-guia">
             <fieldset>
                 <legend>Datos Vehículo</legend>

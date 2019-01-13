@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-01-2019 a las 05:54:05
+-- Tiempo de generación: 13-01-2019 a las 01:36:59
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 5.6.36
 
@@ -2551,70 +2551,72 @@ INSERT INTO `tb_almacen` (`tb_almacen_id`, `tb_almacen_nom`, `tb_almacen_ven`, `
 CREATE TABLE `tb_asiento` (
   `tb_asiento_id` int(11) NOT NULL,
   `tb_asiento_nom` int(50) NOT NULL,
-  `tb_empresa_id` int(11) NOT NULL
+  `tb_empresa_id` int(11) NOT NULL,
+  `tb_vehiculo_id` int(11) NOT NULL,
+  `tb_estado` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tb_asiento`
 --
 
-INSERT INTO `tb_asiento` (`tb_asiento_id`, `tb_asiento_nom`, `tb_empresa_id`) VALUES
-(1, 1, 0),
-(2, 2, 0),
-(3, 3, 0),
-(4, 4, 0),
-(5, 5, 1),
-(6, 6, 1),
-(7, 7, 1),
-(8, 8, 1),
-(9, 9, 1),
-(10, 10, 1),
-(11, 11, 1),
-(12, 12, 1),
-(13, 13, 1),
-(14, 14, 1),
-(15, 15, 1),
-(16, 16, 1),
-(17, 17, 1),
-(18, 18, 1),
-(19, 19, 1),
-(20, 20, 1),
-(21, 21, 1),
-(22, 22, 1),
-(23, 23, 1),
-(24, 24, 1),
-(25, 25, 1),
-(26, 26, 1),
-(27, 27, 1),
-(28, 28, 1),
-(29, 29, 1),
-(30, 30, 1),
-(31, 31, 1),
-(32, 32, 1),
-(33, 33, 1),
-(34, 34, 1),
-(35, 35, 1),
-(36, 36, 1),
-(37, 37, 1),
-(38, 38, 1),
-(39, 39, 1),
-(40, 40, 1),
-(41, 41, 1),
-(42, 42, 1),
-(43, 43, 1),
-(44, 44, 1),
-(45, 45, 1),
-(46, 46, 1),
-(47, 47, 1),
-(48, 48, 1),
-(49, 49, 1),
-(50, 50, 1),
-(51, 51, 1),
-(52, 52, 1),
-(53, 53, 1),
-(54, 54, 1),
-(55, 55, 1),
-(56, 56, 1);
+INSERT INTO `tb_asiento` (`tb_asiento_id`, `tb_asiento_nom`, `tb_empresa_id`, `tb_vehiculo_id`, `tb_estado`) VALUES
+(1, 1, 1, 1, 0),
+(2, 2, 1, 1, 0),
+(3, 3, 1, 1, 0),
+(4, 4, 1, 1, 0),
+(5, 5, 1, 1, 1),
+(6, 6, 1, 1, 1),
+(7, 7, 1, 1, 0),
+(8, 8, 1, 1, 0),
+(9, 9, 1, 1, 0),
+(10, 10, 1, 1, 1),
+(11, 11, 1, 1, 0),
+(12, 12, 1, 1, 0),
+(13, 13, 1, 1, 0),
+(14, 14, 1, 1, 0),
+(15, 15, 1, 1, 0),
+(16, 16, 1, 1, 0),
+(17, 17, 1, 1, 0),
+(18, 18, 1, 1, 0),
+(19, 19, 1, 1, 0),
+(20, 20, 1, 1, 0),
+(21, 21, 1, 1, 0),
+(22, 22, 1, 1, 0),
+(23, 23, 1, 1, 0),
+(24, 24, 1, 1, 0),
+(25, 25, 1, 1, 0),
+(26, 26, 1, 1, 0),
+(27, 27, 1, 1, 0),
+(28, 28, 1, 1, 0),
+(29, 29, 1, 1, 0),
+(30, 30, 1, 1, 0),
+(31, 31, 1, 1, 0),
+(32, 32, 1, 1, 0),
+(33, 33, 1, 1, 0),
+(34, 34, 1, 1, 0),
+(35, 35, 1, 1, 0),
+(36, 36, 1, 1, 0),
+(37, 37, 1, 1, 0),
+(38, 38, 1, 1, 0),
+(39, 39, 1, 1, 0),
+(40, 40, 1, 1, 0),
+(41, 41, 1, 1, 0),
+(42, 42, 1, 1, 0),
+(43, 43, 1, 1, 0),
+(44, 44, 1, 1, 0),
+(45, 45, 1, 1, 0),
+(46, 46, 1, 1, 0),
+(47, 47, 1, 1, 0),
+(48, 48, 1, 1, 0),
+(49, 49, 1, 1, 0),
+(50, 50, 1, 1, 0),
+(51, 51, 1, 1, 0),
+(52, 52, 1, 1, 0),
+(53, 53, 1, 1, 0),
+(54, 54, 1, 1, 0),
+(55, 55, 1, 1, 0),
+(56, 56, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -2830,6 +2832,13 @@ CREATE TABLE `tb_cliente` (
   `tb_cliente_cui` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `tb_cliente`
+--
+
+INSERT INTO `tb_cliente` (`tb_cliente_id`, `tb_cliente_tip`, `tb_cliente_doc`, `tb_cliente_nom`, `tb_cliente_dir`, `tb_cliente_con`, `tb_cliente_tel`, `tb_cliente_ema`, `tb_cliente_est`, `tb_empresa_id`, `tb_precio_id`, `tb_cliente_retiene`, `tb_cliente_cui`) VALUES
+(1, 1, '45513063', 'JHEISON', 'LAS CASUAR', '', '', 'jheisonx@hotmail.com', '', 0, 0, 2, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -2861,6 +2870,14 @@ CREATE TABLE `tb_clientecuenta` (
   `tb_usuario_id` int(11) NOT NULL,
   `tb_empresa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tb_clientecuenta`
+--
+
+INSERT INTO `tb_clientecuenta` (`tb_clientecuenta_id`, `tb_clientecuenta_fecreg`, `tb_clientecuenta_xac`, `tb_clientecuenta_tipreg`, `tb_clientecuenta_fec`, `tb_clientecuenta_glo`, `tb_clientecuenta_tip`, `tb_clientecuenta_mon`, `tb_clientecuenta_est`, `tb_clientecuenta_ventip`, `tb_clientecuenta_ven_id`, `tb_formapago_id`, `tb_modopago_id`, `tb_cuentacorriente_id`, `tb_tarjeta_id`, `tb_clientecuenta_numope`, `tb_clientecuenta_numdia`, `tb_clientecuenta_fecven`, `tb_cliente_id`, `tb_clientecuenta_ver`, `tb_clientecuenta_idp`, `tb_usuario_id`, `tb_empresa_id`) VALUES
+(1, '2019-01-12 13:26:44', 1, 1, '2019-01-12', 'VENTA CONTADO EFECTIVO | BE B001-0426', 1, '30.00', 1, 1, 1, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 0, 1, 1),
+(2, '2019-01-12 13:26:44', 1, 1, '2019-01-12', 'PAGO CONTADO EFECTIVO | BE B001-0426', 2, '30.00', 0, 1, 1, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3676,19 +3693,22 @@ INSERT INTO `tb_direccion` (`tb_direccion_id`, `tb_direccion_dir`, `tb_ubigeo_co
 
 CREATE TABLE `tb_distribucionasiento` (
   `tb_distribucionasiento_id` int(11) NOT NULL,
-  `tb_distribucionasiento_lugar` text COLLATE utf8_spanish_ci NOT NULL
+  `tb_distribucionasiento_lugar` text COLLATE utf8_spanish_ci NOT NULL,
+  `tb_distribucionasiento_fila` int(11) NOT NULL,
+  `tb_vehiculo_id` int(11) NOT NULL,
+  `tb_distribucionasiento_piso` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tb_distribucionasiento`
 --
 
-INSERT INTO `tb_distribucionasiento` (`tb_distribucionasiento_id`, `tb_distribucionasiento_lugar`) VALUES
-(1, 's:130:\"item[]=7&item[]=2&item[]=3&item[]=1&item[]=4&item[]=5&item[]=6&item[]=8&item[]=9&item[]=10&item[]=11&item[]=12&item[]=13&item[]=14\";'),
-(2, 's:139:\"item[]=15&item[]=16&item[]=17&item[]=18&item[]=19&item[]=20&item[]=21&item[]=22&item[]=23&item[]=24&item[]=25&item[]=26&item[]=27&item[]=28\";'),
-(3, 's:139:\"item[]=36&item[]=37&item[]=38&item[]=39&item[]=40&item[]=41&item[]=42&item[]=43&item[]=44&item[]=45&item[]=46&item[]=47&item[]=48&item[]=49\";'),
-(4, 's:139:\"item[]=34&item[]=29&item[]=30&item[]=31&item[]=32&item[]=33&item[]=35&item[]=36&item[]=37&item[]=38&item[]=39&item[]=40&item[]=41&item[]=42\";'),
-(5, 's:139:\"item[]=56&item[]=43&item[]=44&item[]=45&item[]=46&item[]=47&item[]=48&item[]=49&item[]=50&item[]=51&item[]=52&item[]=53&item[]=54&item[]=55\";');
+INSERT INTO `tb_distribucionasiento` (`tb_distribucionasiento_id`, `tb_distribucionasiento_lugar`, `tb_distribucionasiento_fila`, `tb_vehiculo_id`, `tb_distribucionasiento_piso`) VALUES
+(1, 'item_3;item_5;item_6;item_7;item_8;item_9;item_10;item_11;item_12;item_13;item_14;item_42;item_41;item_1', 1, 1, 1),
+(2, 'item_15;item_16;item_17;item_18;item_19;item_20;item_21;item_22;item_23;item_24;item_25;item_26;item_27;item_28', 2, 1, 1),
+(3, 'item_36;item_37;item_38;item_39;item_40;item_41;item_42;item_43;item_44;item_45;item_46;item_47;item_48;item_49', 3, 1, 1),
+(4, 'item_29;item_30;item_2;item_31;item_4;item_32;item_33;item_34;item_35;item_36;item_37;item_38;item_39;item_40', 4, 1, 1),
+(5, 'item_43;item_44;item_45;item_46;item_47;item_48;item_49;item_50;item_51;item_52;item_53;item_54;item_55;item_56', 5, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -3715,7 +3735,7 @@ CREATE TABLE `tb_documento` (
 INSERT INTO `tb_documento` (`tb_documento_id`, `tb_documento_xac`, `tb_documento_abr`, `tb_documento_nom`, `tb_documento_tip`, `tb_documento_def`, `tb_documento_ele`, `cs_tipodocumento_id`, `tb_documento_mos`) VALUES
 (1, 1, 'FC', 'FACTURA COMPRA', 1, 1, 0, 1, 1),
 (2, 1, 'FV', 'FACTURA', 2, 0, 0, 1, 1),
-(3, 1, 'BV', 'BOLETA', 2, 1, 0, 2, 1),
+(3, 1, 'BV', 'BOLETA', 2, 0, 0, 2, 1),
 (4, 1, 'NV', 'NOTA DE VENTA', 3, 1, 0, 0, 1),
 (5, 1, 'OT', 'OTROS', 4, 1, 0, 0, 1),
 (6, 1, 'TR', 'TRASPASO', 5, 1, 0, 0, 1),
@@ -3724,7 +3744,7 @@ INSERT INTO `tb_documento` (`tb_documento_id`, `tb_documento_xac`, `tb_documento
 (9, 1, 'OE', 'OTROS EGRESOS', 7, 1, 0, 0, 1),
 (10, 1, 'TRF', 'TRANSFERENCIA', 8, 1, 0, 0, 1),
 (11, 1, 'FE', 'FACTURA ELECTRONICA', 2, 0, 1, 1, 1),
-(12, 1, 'BE', 'BOLETA ELECTRONICA', 2, 0, 1, 2, 1),
+(12, 1, 'BE', 'BOLETA ELECTRONICA', 2, 1, 1, 2, 1),
 (13, 1, 'NC', 'NOTA DE CREDITO', 9, 1, 1, 3, 1),
 (14, 1, 'CT', 'COTIZACION', 11, 1, 0, 0, 1),
 (15, 1, 'NS', 'NOTA DE SALIDA', 2, 0, 0, 0, 1),
@@ -4154,6 +4174,13 @@ CREATE TABLE `tb_ingreso` (
   `tb_empresa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `tb_ingreso`
+--
+
+INSERT INTO `tb_ingreso` (`tb_ingreso_id`, `tb_ingreso_fecreg`, `tb_ingreso_fecmod`, `tb_ingreso_usureg`, `tb_ingreso_usumod`, `tb_ingreso_xac`, `tb_ingreso_fec`, `tb_documento_id`, `tb_ingreso_numdoc`, `tb_ingreso_det`, `tb_ingreso_imp`, `tb_ingreso_est`, `tb_cuenta_id`, `tb_subcuenta_id`, `tb_cliente_id`, `tb_caja_id`, `tb_moneda_id`, `tb_modulo_id`, `tb_ingreso_modide`, `tb_empresa_id`) VALUES
+(1, '2019-01-12 13:26:44', '2019-01-12 13:26:44', 1, 1, 1, '2019-01-12', 12, 'B001-0426', 'VENTA BE B001-0426 | EFECTIVO', '30.00', 1, 22, 157, 1, 1, 1, 1, 1, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -4208,6 +4235,13 @@ CREATE TABLE `tb_kardex` (
   `tb_empresa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `tb_kardex`
+--
+
+INSERT INTO `tb_kardex` (`tb_kardex_id`, `tb_kardex_xac`, `tb_kardex_reg`, `tb_kardex_tipreg`, `tb_kardex_cod`, `tb_kardex_fec`, `tb_kardex_tip`, `tb_documento_id`, `tb_kardex_numdoc`, `tb_tipoperacion_id`, `tb_kardex_des`, `tb_operacion_id`, `tb_almacen_id`, `tb_usuario_id`, `tb_empresa_id`) VALUES
+(1, 1, '2019-01-12 13:26:44', 1, '1', '2019-01-12', 2, 12, 'B001-0426', 3, 'VENTA', 1, 1, 0, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -4254,6 +4288,27 @@ CREATE TABLE `tb_lote` (
   `tb_lote_estado` int(11) NOT NULL,
   `tb_almacen_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_lugar`
+--
+
+CREATE TABLE `tb_lugar` (
+  `tb_lugar_id` int(11) NOT NULL,
+  `tb_lugar_nom` varchar(30) COLLATE utf8_spanish2_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tb_lugar`
+--
+
+INSERT INTO `tb_lugar` (`tb_lugar_id`, `tb_lugar_nom`) VALUES
+(1, 'Arequipa'),
+(2, 'Secocha'),
+(3, 'Santo Tomas'),
+(4, 'Camana');
 
 -- --------------------------------------------------------
 
@@ -4829,6 +4884,13 @@ CREATE TABLE `tb_servicio` (
   `tb_servicio_aut` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `tb_servicio`
+--
+
+INSERT INTO `tb_servicio` (`tb_servicio_id`, `tb_servicio_nom`, `tb_servicio_des`, `tb_servicio_pre`, `tb_servicio_est`, `tb_categoria_id`, `tb_servicio_aut`) VALUES
+(1, 'PASAJE', 'PASAJE', '0.00', 'Activo', 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -4931,7 +4993,7 @@ INSERT INTO `tb_talonario` (`tb_talonario_id`, `tb_talonario_reg`, `tb_talonario
 (3, '2013-01-07 11:31:00', '2018-12-22 14:02:59', '0002', 1, 99999, 1882, 1, 2, 'ACTIVO', 1),
 (4, '2013-01-07 11:32:55', '2018-12-24 13:01:53', '0002', 1, 99999, 636, 1, 3, 'ACTIVO', 1),
 (17, '2016-11-26 17:49:45', '2018-12-31 16:49:03', 'F001', 1, 99999, 64, 1, 11, 'ACTIVO', 1),
-(19, '2016-11-27 23:12:03', '2018-12-17 14:17:05', 'B001', 1, 1300, 425, 1, 12, 'ACTIVO', 1),
+(19, '2016-11-27 23:12:03', '2019-01-12 13:26:44', 'B001', 1, 1300, 426, 1, 12, 'ACTIVO', 1),
 (20, '2018-03-03 12:07:43', '2018-10-03 10:57:26', 'B001', 1, 2333, 100, 2, 12, 'ACTIVO', 1),
 (21, '2018-03-23 14:01:45', '2018-06-05 13:19:03', 'CT', 1, 99999, 0, 1, 14, 'ACTIVO', 1),
 (22, '2018-04-02 19:37:33', '2018-04-02 19:39:28', 'F001', 1, 99999, 1, 5, 11, 'ACTIVO', 6),
@@ -7362,7 +7424,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`tb_usuario_id`, `tb_usuario_use`, `tb_usuario_pas`, `tb_usuario_apepat`, `tb_usuario_apemat`, `tb_usuario_nom`, `tb_usuario_ema`, `tb_usuario_reg`, `tb_usuario_mod`, `tb_usuario_ultvis`, `tb_usuario_blo`, `tb_usuariogrupo_id`, `tb_empresa_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-01-06 12:42:14', 0, 2, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-01-12 15:55:34', 0, 2, 1),
 (29, 'superusuario', '261a7d80916532797f8735dd198d4ada', 'APELLIDO PATERNO', 'APELIIDO MATERNO', 'SUPER', 'gerencia@a-zetasoft.com', '0000-00-00 00:00:00', '2018-03-03 12:28:53', '2018-12-27 18:54:26', 0, 1, 1),
 (30, 'vendedor', 'a60c36fc7c825e68bb5371a0e08f828a', 'ZIRENA', 'BEJARANO', 'ALFREDO', 'alfredzb@gmail.com', '0000-00-00 00:00:00', '2018-10-26 22:58:22', '2018-04-19 14:23:49', 0, 3, 1),
 (33, 'liquidador', '221b3a9e09a367bb69f7c7c1141c1dd9', 'PALOMINO', 'SANCHEZ', 'JOSE', 'rrpalomino65@hotmail.com', '2018-01-31 11:00:40', '2018-01-31 11:01:05', '2018-03-17 11:24:17', 0, 4, 1),
@@ -7440,6 +7502,26 @@ INSERT INTO `tb_usuariopv` (`tb_usuariopv_id`, `tb_usuario_id`, `tb_puntoventa_i
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tb_vehiculo`
+--
+
+CREATE TABLE `tb_vehiculo` (
+  `tb_vehiculo_id` int(11) NOT NULL,
+  `tb_vehiculo_placa` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
+  `tb_conductor_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tb_vehiculo`
+--
+
+INSERT INTO `tb_vehiculo` (`tb_vehiculo_id`, `tb_vehiculo_placa`, `tb_conductor_id`) VALUES
+(1, 'v4v-001', 1),
+(2, 'v6g-629', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tb_venta`
 --
 
@@ -7484,6 +7566,13 @@ CREATE TABLE `tb_venta` (
   `tb_venta_estsun` tinyint(1) NOT NULL,
   `tb_vendedor_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tb_venta`
+--
+
+INSERT INTO `tb_venta` (`tb_venta_id`, `tb_venta_reg`, `tb_venta_fec`, `tb_documento_id`, `tb_venta_numdoc`, `tb_cliente_id`, `tb_venta_valven`, `tb_venta_des`, `tb_venta_igv`, `tb_venta_tot`, `tb_venta_est`, `tb_venta_lab1`, `tb_venta_lab2`, `tb_venta_lab3`, `tb_venta_may`, `tb_usuario_id`, `tb_puntoventa_id`, `tb_empresa_id`, `cs_tipodocumento_id`, `tb_venta_ser`, `tb_venta_num`, `cs_tipomoneda_id`, `tb_venta_gra`, `tb_venta_ina`, `tb_venta_exo`, `tb_venta_grat`, `tb_venta_isc`, `tb_venta_otrtri`, `tb_venta_otrcar`, `tb_venta_desglo`, `cs_tipooperacion_id`, `cs_documentosrelacionados_id`, `tb_venta_faucod`, `tb_venta_digval`, `tb_venta_sigval`, `tb_venta_val`, `tb_venta_fecenvsun`, `tb_venta_estsun`, `tb_vendedor_id`) VALUES
+(1, '2019-01-12 13:26:43', '2019-01-12', 12, 'B001-0426', 1, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0426', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -7552,6 +7641,13 @@ CREATE TABLE `tb_ventadetalle` (
   `tb_ventadetalle_nro` int(3) NOT NULL,
   `tb_ventadetalle_serie` varchar(100) CHARACTER SET utf8 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tb_ventadetalle`
+--
+
+INSERT INTO `tb_ventadetalle` (`tb_ventadetalle_id`, `tb_ventadetalle_tipven`, `tb_catalogo_id`, `tb_servicio_id`, `tb_ventadetalle_nom`, `tb_ventadetalle_preuni`, `tb_ventadetalle_can`, `tb_ventadetalle_tipdes`, `tb_ventadetalle_des`, `tb_ventadetalle_preunilin`, `tb_ventadetalle_valven`, `tb_ventadetalle_igv`, `tb_venta_id`, `cs_tipoafectacionigv_id`, `cs_tipounidadmedida_id`, `cs_tiposistemacalculoisc_id`, `tb_ventadetalle_isc`, `tb_ventadetalle_nro`, `tb_ventadetalle_serie`) VALUES
+(1, 2, 0, 1, 'PASAJE-Arequipa-Secocha ', '30.00', '1.00', 0, '0.00', '25.42', '25.42', '4.58', 1, 9, 13, 0, '0.00', 1, '');
 
 -- --------------------------------------------------------
 
@@ -7701,6 +7797,56 @@ CREATE TABLE `tb_ventapago` (
   `tb_venta_id` int(11) NOT NULL,
   `tb_empresa_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tb_ventapago`
+--
+
+INSERT INTO `tb_ventapago` (`tb_ventapago_id`, `tb_ventapago_fecreg`, `tb_formapago_id`, `tb_modopago_id`, `tb_ventapago_fec`, `tb_ventapago_mon`, `tb_cuentacorriente_id`, `tb_tarjeta_id`, `tb_ventapago_numope`, `tb_ventapago_numdia`, `tb_ventapago_fecven`, `tb_venta_id`, `tb_empresa_id`) VALUES
+(1, '2019-01-12 13:26:44', 1, 1, '2019-01-12', '30.00', 0, 0, '', 0, '0000-00-00', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_viajehorario`
+--
+
+CREATE TABLE `tb_viajehorario` (
+  `tb_viajehorario_id` int(11) NOT NULL,
+  `tb_viajehorario_salida` int(11) NOT NULL,
+  `tb_viajehorario_llegada` int(11) NOT NULL,
+  `tb_viajehorario_fecha` date NOT NULL,
+  `tb_viajehorario_horario` time NOT NULL,
+  `tb_vehiculo_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tb_viajehorario`
+--
+
+INSERT INTO `tb_viajehorario` (`tb_viajehorario_id`, `tb_viajehorario_salida`, `tb_viajehorario_llegada`, `tb_viajehorario_fecha`, `tb_viajehorario_horario`, `tb_vehiculo_id`) VALUES
+(1, 1, 2, '0000-00-00', '16:16:00', 1),
+(2, 1, 3, '0000-00-00', '12:10:00', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tb_viajeventa`
+--
+
+CREATE TABLE `tb_viajeventa` (
+  `tb_viajeventa` int(11) NOT NULL,
+  `tb_venta_id` int(11) NOT NULL,
+  `tb_viajehorario_id` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
+  `tb_asiento_nom` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
+
+--
+-- Volcado de datos para la tabla `tb_viajeventa`
+--
+
+INSERT INTO `tb_viajeventa` (`tb_viajeventa`, `tb_venta_id`, `tb_viajehorario_id`, `tb_asiento_nom`) VALUES
+(1, 1, '1', 4);
 
 -- --------------------------------------------------------
 
@@ -8209,6 +8355,12 @@ ALTER TABLE `tb_lote`
   ADD PRIMARY KEY (`tb_lote_id`);
 
 --
+-- Indices de la tabla `tb_lugar`
+--
+ALTER TABLE `tb_lugar`
+  ADD PRIMARY KEY (`tb_lugar_id`);
+
+--
 -- Indices de la tabla `tb_marca`
 --
 ALTER TABLE `tb_marca`
@@ -8492,6 +8644,12 @@ ALTER TABLE `tb_usuariopv`
   ADD PRIMARY KEY (`tb_usuariopv_id`);
 
 --
+-- Indices de la tabla `tb_vehiculo`
+--
+ALTER TABLE `tb_vehiculo`
+  ADD PRIMARY KEY (`tb_vehiculo_id`);
+
+--
 -- Indices de la tabla `tb_venta`
 --
 ALTER TABLE `tb_venta`
@@ -8544,6 +8702,18 @@ ALTER TABLE `tb_ventanotapago`
 --
 ALTER TABLE `tb_ventapago`
   ADD PRIMARY KEY (`tb_ventapago_id`);
+
+--
+-- Indices de la tabla `tb_viajehorario`
+--
+ALTER TABLE `tb_viajehorario`
+  ADD PRIMARY KEY (`tb_viajehorario_id`);
+
+--
+-- Indices de la tabla `tb_viajeventa`
+--
+ALTER TABLE `tb_viajeventa`
+  ADD PRIMARY KEY (`tb_viajeventa`);
 
 --
 -- Indices de la tabla `va_cliente`
@@ -8752,19 +8922,19 @@ ALTER TABLE `tb_catalogo_cop21ene`
 -- AUTO_INCREMENT de la tabla `tb_categoria`
 --
 ALTER TABLE `tb_categoria`
-  MODIFY `tb_categoria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `tb_categoria_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_cliente`
 --
 ALTER TABLE `tb_cliente`
-  MODIFY `tb_cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10932;
+  MODIFY `tb_cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_clientecuenta`
 --
 ALTER TABLE `tb_clientecuenta`
-  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=338;
+  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_clientedireccion`
@@ -8788,7 +8958,7 @@ ALTER TABLE `tb_combajadetalle`
 -- AUTO_INCREMENT de la tabla `tb_compra`
 --
 ALTER TABLE `tb_compra`
-  MODIFY `tb_compra_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=383;
+  MODIFY `tb_compra_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_compracosto`
@@ -8800,7 +8970,7 @@ ALTER TABLE `tb_compracosto`
 -- AUTO_INCREMENT de la tabla `tb_compradetalle`
 --
 ALTER TABLE `tb_compradetalle`
-  MODIFY `tb_compradetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=593;
+  MODIFY `tb_compradetalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_compradetalle_lote`
@@ -8950,13 +9120,13 @@ ALTER TABLE `tb_gasto_r`
 -- AUTO_INCREMENT de la tabla `tb_guia`
 --
 ALTER TABLE `tb_guia`
-  MODIFY `tb_guia_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `tb_guia_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_guiadetalle`
 --
 ALTER TABLE `tb_guiadetalle`
-  MODIFY `tb_guiadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=249;
+  MODIFY `tb_guiadetalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_guiapagonota`
@@ -8974,7 +9144,7 @@ ALTER TABLE `tb_horario`
 -- AUTO_INCREMENT de la tabla `tb_ingreso`
 --
 ALTER TABLE `tb_ingreso`
-  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=682;
+  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ingreso_r`
@@ -8986,31 +9156,37 @@ ALTER TABLE `tb_ingreso_r`
 -- AUTO_INCREMENT de la tabla `tb_kardex`
 --
 ALTER TABLE `tb_kardex`
-  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=856;
+  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_kardexdetalle`
 --
 ALTER TABLE `tb_kardexdetalle`
-  MODIFY `tb_kardexdetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1128;
+  MODIFY `tb_kardexdetalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_letras`
 --
 ALTER TABLE `tb_letras`
-  MODIFY `tb_letras_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `tb_letras_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_lote`
 --
 ALTER TABLE `tb_lote`
-  MODIFY `tb_lote_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
+  MODIFY `tb_lote_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tb_lugar`
+--
+ALTER TABLE `tb_lugar`
+  MODIFY `tb_lugar_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_marca`
 --
 ALTER TABLE `tb_marca`
-  MODIFY `tb_marca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `tb_marca_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_modopago`
@@ -9028,7 +9204,7 @@ ALTER TABLE `tb_modulo`
 -- AUTO_INCREMENT de la tabla `tb_notacredito`
 --
 ALTER TABLE `tb_notacredito`
-  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_notacreditocorreo`
@@ -9040,13 +9216,13 @@ ALTER TABLE `tb_notacreditocorreo`
 -- AUTO_INCREMENT de la tabla `tb_notacreditodetalle`
 --
 ALTER TABLE `tb_notacreditodetalle`
-  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_notadebito`
 --
 ALTER TABLE `tb_notadebito`
-  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_notadebitocorreo`
@@ -9058,19 +9234,19 @@ ALTER TABLE `tb_notadebitocorreo`
 -- AUTO_INCREMENT de la tabla `tb_notadebitodetalle`
 --
 ALTER TABLE `tb_notadebitodetalle`
-  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_notalmacen`
 --
 ALTER TABLE `tb_notalmacen`
-  MODIFY `tb_notalmacen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=425;
+  MODIFY `tb_notalmacen_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_notalmacendetalle`
 --
 ALTER TABLE `tb_notalmacendetalle`
-  MODIFY `tb_notalmacendetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=424;
+  MODIFY `tb_notalmacendetalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_precio`
@@ -9100,13 +9276,13 @@ ALTER TABLE `tb_producto`
 -- AUTO_INCREMENT de la tabla `tb_productoproveedor`
 --
 ALTER TABLE `tb_productoproveedor`
-  MODIFY `tb_productoproveedor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `tb_productoproveedor_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_proveedor`
 --
 ALTER TABLE `tb_proveedor`
-  MODIFY `tb_proveedor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `tb_proveedor_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_puntoventa`
@@ -9130,19 +9306,19 @@ ALTER TABLE `tb_restabclave`
 -- AUTO_INCREMENT de la tabla `tb_resumenboleta`
 --
 ALTER TABLE `tb_resumenboleta`
-  MODIFY `tb_resumenboleta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `tb_resumenboleta_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_resumenboletadetalle`
 --
 ALTER TABLE `tb_resumenboletadetalle`
-  MODIFY `tb_resumenboletadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tb_resumenboletadetalle_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_servicio`
 --
 ALTER TABLE `tb_servicio`
-  MODIFY `tb_servicio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `tb_servicio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_soporte`
@@ -9154,7 +9330,7 @@ ALTER TABLE `tb_soporte`
 -- AUTO_INCREMENT de la tabla `tb_stock`
 --
 ALTER TABLE `tb_stock`
-  MODIFY `tb_stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=534;
+  MODIFY `tb_stock_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_subcuenta`
@@ -9214,7 +9390,7 @@ ALTER TABLE `tb_telefono`
 -- AUTO_INCREMENT de la tabla `tb_tipocambio`
 --
 ALTER TABLE `tb_tipocambio`
-  MODIFY `tb_tipocambio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `tb_tipocambio_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_tipoperacion`
@@ -9289,10 +9465,16 @@ ALTER TABLE `tb_usuariopv`
   MODIFY `tb_usuariopv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `tb_vehiculo`
+--
+ALTER TABLE `tb_vehiculo`
+  MODIFY `tb_vehiculo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `tb_venta`
 --
 ALTER TABLE `tb_venta`
-  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventacanje`
@@ -9310,7 +9492,7 @@ ALTER TABLE `tb_ventacorreo`
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle`
 --
 ALTER TABLE `tb_ventadetalle`
-  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=232;
+  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle_lote`
@@ -9340,7 +9522,19 @@ ALTER TABLE `tb_ventanotapago`
 -- AUTO_INCREMENT de la tabla `tb_ventapago`
 --
 ALTER TABLE `tb_ventapago`
-  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200;
+  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tb_viajehorario`
+--
+ALTER TABLE `tb_viajehorario`
+  MODIFY `tb_viajehorario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `tb_viajeventa`
+--
+ALTER TABLE `tb_viajeventa`
+  MODIFY `tb_viajeventa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `va_cliente`

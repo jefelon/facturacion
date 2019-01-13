@@ -667,3 +667,46 @@ div.m {
 
 .loading_16 { background: url(../../images/ui-anim_basic_16x16.gif) right center no-repeat; }
 .ui-autocomplete-loading { background: white url('../../images/ui-anim_basic_16x16.gif') right center no-repeat; }
+
+
+/*ESTILO PRECIO ASIENTO*/
+#txt_num_asi,#txt_pre_asi{
+	font-size: 24pt;
+	text-align: center;
+	font-weight: bold;
+}
+#txt_fech_sal{
+	font-size: 15pt;
+	text-align: center;
+	font-weight: bold;
+	color:#8a1f11;
+}
+#txt_hor_sal,#cmb_horario{
+	font-size: 15pt;
+	text-align: center;
+	font-weight: bold;
+	color:#7f007f;
+}
+#txt_num_asi{
+	color:#0000CC;
+}
+#txt_pre_asi{
+	color:#00aa00;
+}
+
+#cmb_salida_id,#cmb_llegada_id,#placa_vehiculo{
+	font-size: 15pt;
+	text-align: center;
+	font-weight: bold;
+	color:#0092ef;
+}
+#txt_precio{
+	font-size: 15pt;
+	text-align: center;
+	font-weight: bold;
+	color:#00aa00;
+}
+
+
+
+

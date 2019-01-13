@@ -68,6 +68,8 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
             $(selector).addClass('seleccionado');
         }
 
+        $('#txt_precio').focus();
+
     }
 
 
@@ -79,61 +81,61 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
 </script>
 <style>
 
-    .oculto{
-        visibility: hidden;
-    }
+    /*.oculto{*/
+        /*visibility: hidden;*/
+    /*}*/
 
-    .seleccionado, .ocupado {
-        background-color: orange !important;
-        color: white;
-    }
-    #sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {
-        border: 1px solid #eee;
-        min-height: 40px;
-        list-style-type: none;
-        margin: 0;
-        padding: 5px 0 0 0;
+    /*.seleccionado, .ocupado {*/
+        /*background-color: orange !important;*/
+        /*color: white;*/
+    /*}*/
+    /*#sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {*/
+        /*border: 1px solid #eee;*/
+        /*min-height: 40px;*/
+        /*list-style-type: none;*/
+        /*margin: 0;*/
+        /*padding: 5px 0 0 0;*/
+        /*!*float: left;*!*/
+        /*margin-right: 10px;*/
+    /*}*/
+
+    /*#sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {*/
+        /*margin: 0 5px 5px 5px;*/
+        /*padding: 5px;*/
+        /*font-size: 1.2em;*/
+        /*width: 35px;*/
+        /*height: 50px;*/
+        /*cursor: move;*/
+        /*position: relative;*/
         /*float: left;*/
-        margin-right: 10px;
-    }
+        /*background: #00aa00;*/
+    /*}*/
 
-    #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {
-        margin: 0 5px 5px 5px;
-        padding: 5px;
-        font-size: 1.2em;
-        width: 35px;
-        height: 50px;
-        cursor: move;
-        position: relative;
-        float: left;
-        background: #00aa00;
-    }
-
-    .clear{
-        clear: both;
-    }
-    #frentera{
-        height: 200px;
-        width: 220px;
-        /*background: #0D8BBD;*/
-        float: left;
-    }
-    #lugares{
-        float: left;
-        height: 200px;
-        margin-top: 100px;
-    }
-    .pasadizo{
-        height: 40px;
-    }
-    #bus{
-        width: 1180px;
-        height: 550px;
-        background: url("../../images/bus_fondo.png");
-        background-size: 95%;
-        background-repeat: no-repeat;
-        background-position-x: -52px;
-    }
+    /*.clear{*/
+        /*clear: both;*/
+    /*}*/
+    /*#frentera{*/
+        /*height: 200px;*/
+        /*width: 220px;*/
+        /*!*background: #0D8BBD;*!*/
+        /*float: left;*/
+    /*}*/
+    /*#lugares{*/
+        /*float: left;*/
+        /*height: 200px;*/
+        /*margin-top: 100px;*/
+    /*}*/
+    /*.pasadizo{*/
+        /*height: 40px;*/
+    /*}*/
+    /*#bus{*/
+        /*width: 1180px;*/
+        /*height: 550px;*/
+        /*background: url("../../images/bus_fondo.png");*/
+        /*background-size: 95%;*/
+        /*background-repeat: no-repeat;*/
+        /*background-position-x: -52px;*/
+    /*}*/
 
 </style>
 
@@ -181,7 +183,7 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                 <div class="clear"></div>
                 <div id="sortable3" class="connectedSortable pasadizo">
                     <?php
-                        $lugares = explode(';',$orden33);
+                    $lugares = explode(';',$orden33);
 
                         foreach ($lugares as $lugar) {
                             ?>
