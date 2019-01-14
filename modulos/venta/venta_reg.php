@@ -179,6 +179,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		$ven_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
 
+	    //REGISTRO DE GUIA SOLO SI ESTA MARCADO
         if($_POST['chk_imprimir_guia']==1){
 
             //consultamos talonario
@@ -199,14 +200,6 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $estadog='CONCLUIDA';
             $cbo_gui_tip_opeg=2;
             //insertamos guia
-
- //           $maxs = $oGuia->actual_numero_guia();
-//            $max = mysql_fetch_array($maxs);
-//            $numero_guia = $max['max_guia'];
-//
-//            if(!$numero_guia){
-//                $numero_guia=0;
-//            }
 
             $oGuia->insertar(
                 fecha_mysql($_POST['txt_ven_fec']),
@@ -241,6 +234,16 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $rs= $oTalonario->actualizar_correlativo($tal_idg,$numerog,$estadog);
 
         }
+
+        //REGISTRO VIAJE
+        $oVenta->insertarViajeVenta(
+            $ven_id,
+            $_POST['hdd_vi_ho_id'],
+            $_POST['txt_num_asi'],
+            fecha_mysql($_POST['txt_fech_sal'])
+        );
+
+
 		//REGISTRO DE PAGOS
 		//PAGO AUTOMATICO
 		

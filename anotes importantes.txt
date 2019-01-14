@@ -1,0 +1,10 @@
+tb_viajeventa -  campo fecha creo que es innecesario por el horario id
+tb_viajehorario -  se convierte en tabla de registro, tendran que crear para todos los dias, de esa forma
+	           se puede vender para mañana o reservar para otro dia. por eso se agregó campo fecha.
+tb_asientoestado - aquí se comprobará los estados de los asieentos por el id horario, entonnces un asiento
+                                  hoy puede estar ocupado pero para mañana puede estar ocupado
+tb_asiento - campo estado no es funcional aquí, puesto que cambian por horarios
+/////////////////////////////
+ya se guarda la  tabla viajeventa
+venta filtro bus.php solo se trabajó el estado de los asientos sortable1... pasar a todos los sortable
+	          

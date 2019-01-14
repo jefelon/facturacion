@@ -45,6 +45,15 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+    function insertarViajeVenta($ven_id,$viajehora_id,$asinum,$asifec){
+        $sql = "INSERT INTO tb_viajeventa(`tb_venta_id` ,`tb_viajehorario_id` ,`tb_asiento_nom` ,`tb_viajeventa_fecha`
+	)
+	VALUES ('$ven_id',   '$viajehora_id',  '$asinum', '$asifec'
+	);";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	// function insertar_detalle($tipven,$cat_id,$ser_id,$nom,$preuni,$can,$tipdes,$des,$preunilin,$valven,$igv,$ven_id,$afeigv,$unimed,$calisc,$isc,$nro){
 	// $sql = "INSERT INTO tb_ventadetalle(
 	// `tb_ventadetalle_tipven` ,

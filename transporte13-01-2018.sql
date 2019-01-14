@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-01-2019 a las 01:36:59
+-- Tiempo de generación: 14-01-2019 a las 04:46:09
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 5.6.36
 
@@ -2621,6 +2621,28 @@ INSERT INTO `tb_asiento` (`tb_asiento_id`, `tb_asiento_nom`, `tb_empresa_id`, `t
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `tb_asientoestado`
+--
+
+CREATE TABLE `tb_asientoestado` (
+  `tb_asientoestado_id` int(11) NOT NULL,
+  `tb_asiento_id` int(11) NOT NULL,
+  `tb_viajehorario_id` int(11) NOT NULL,
+  `tb_asientoestado_estado` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tb_asientoestado`
+--
+
+INSERT INTO `tb_asientoestado` (`tb_asientoestado_id`, `tb_asiento_id`, `tb_viajehorario_id`, `tb_asientoestado_estado`) VALUES
+(1, 1, 1, 1),
+(2, 1, 3, 1),
+(3, 10, 3, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `tb_caja`
 --
 
@@ -2877,7 +2899,11 @@ CREATE TABLE `tb_clientecuenta` (
 
 INSERT INTO `tb_clientecuenta` (`tb_clientecuenta_id`, `tb_clientecuenta_fecreg`, `tb_clientecuenta_xac`, `tb_clientecuenta_tipreg`, `tb_clientecuenta_fec`, `tb_clientecuenta_glo`, `tb_clientecuenta_tip`, `tb_clientecuenta_mon`, `tb_clientecuenta_est`, `tb_clientecuenta_ventip`, `tb_clientecuenta_ven_id`, `tb_formapago_id`, `tb_modopago_id`, `tb_cuentacorriente_id`, `tb_tarjeta_id`, `tb_clientecuenta_numope`, `tb_clientecuenta_numdia`, `tb_clientecuenta_fecven`, `tb_cliente_id`, `tb_clientecuenta_ver`, `tb_clientecuenta_idp`, `tb_usuario_id`, `tb_empresa_id`) VALUES
 (1, '2019-01-12 13:26:44', 1, 1, '2019-01-12', 'VENTA CONTADO EFECTIVO | BE B001-0426', 1, '30.00', 1, 1, 1, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 0, 1, 1),
-(2, '2019-01-12 13:26:44', 1, 1, '2019-01-12', 'PAGO CONTADO EFECTIVO | BE B001-0426', 2, '30.00', 0, 1, 1, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 1, 1, 1);
+(2, '2019-01-12 13:26:44', 1, 1, '2019-01-12', 'PAGO CONTADO EFECTIVO | BE B001-0426', 2, '30.00', 0, 1, 1, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 1, 1, 1),
+(3, '2019-01-13 20:42:50', 1, 1, '2019-01-13', 'VENTA CONTADO EFECTIVO | BE B001-0431', 1, '50.00', 1, 1, 6, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 0, 1, 1),
+(4, '2019-01-13 20:42:50', 1, 1, '2019-01-13', 'PAGO CONTADO EFECTIVO | BE B001-0431', 2, '50.00', 0, 1, 6, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 3, 1, 1),
+(5, '2019-01-13 20:46:17', 1, 1, '2019-01-13', 'VENTA CONTADO EFECTIVO | BE B001-0432', 1, '20.00', 1, 1, 7, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 0, 1, 1),
+(6, '2019-01-13 20:46:17', 1, 1, '2019-01-13', 'PAGO CONTADO EFECTIVO | BE B001-0432', 2, '20.00', 0, 1, 7, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 5, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -4179,7 +4205,9 @@ CREATE TABLE `tb_ingreso` (
 --
 
 INSERT INTO `tb_ingreso` (`tb_ingreso_id`, `tb_ingreso_fecreg`, `tb_ingreso_fecmod`, `tb_ingreso_usureg`, `tb_ingreso_usumod`, `tb_ingreso_xac`, `tb_ingreso_fec`, `tb_documento_id`, `tb_ingreso_numdoc`, `tb_ingreso_det`, `tb_ingreso_imp`, `tb_ingreso_est`, `tb_cuenta_id`, `tb_subcuenta_id`, `tb_cliente_id`, `tb_caja_id`, `tb_moneda_id`, `tb_modulo_id`, `tb_ingreso_modide`, `tb_empresa_id`) VALUES
-(1, '2019-01-12 13:26:44', '2019-01-12 13:26:44', 1, 1, 1, '2019-01-12', 12, 'B001-0426', 'VENTA BE B001-0426 | EFECTIVO', '30.00', 1, 22, 157, 1, 1, 1, 1, 1, 1);
+(1, '2019-01-12 13:26:44', '2019-01-12 13:26:44', 1, 1, 1, '2019-01-12', 12, 'B001-0426', 'VENTA BE B001-0426 | EFECTIVO', '30.00', 1, 22, 157, 1, 1, 1, 1, 1, 1),
+(2, '2019-01-13 20:42:51', '2019-01-13 20:42:51', 1, 1, 1, '2019-01-13', 12, 'B001-0431', 'VENTA BE B001-0431 | EFECTIVO', '50.00', 1, 22, 157, 1, 1, 1, 1, 6, 1),
+(3, '2019-01-13 20:46:17', '2019-01-13 20:46:17', 1, 1, 1, '2019-01-13', 12, 'B001-0432', 'VENTA BE B001-0432 | EFECTIVO', '20.00', 1, 22, 157, 1, 1, 1, 1, 7, 1);
 
 -- --------------------------------------------------------
 
@@ -4240,7 +4268,9 @@ CREATE TABLE `tb_kardex` (
 --
 
 INSERT INTO `tb_kardex` (`tb_kardex_id`, `tb_kardex_xac`, `tb_kardex_reg`, `tb_kardex_tipreg`, `tb_kardex_cod`, `tb_kardex_fec`, `tb_kardex_tip`, `tb_documento_id`, `tb_kardex_numdoc`, `tb_tipoperacion_id`, `tb_kardex_des`, `tb_operacion_id`, `tb_almacen_id`, `tb_usuario_id`, `tb_empresa_id`) VALUES
-(1, 1, '2019-01-12 13:26:44', 1, '1', '2019-01-12', 2, 12, 'B001-0426', 3, 'VENTA', 1, 1, 0, 1);
+(1, 1, '2019-01-12 13:26:44', 1, '1', '2019-01-12', 2, 12, 'B001-0426', 3, 'VENTA', 1, 1, 0, 1),
+(2, 1, '2019-01-13 20:42:51', 1, '2', '2019-01-13', 2, 12, 'B001-0431', 3, 'VENTA', 6, 1, 0, 1),
+(3, 1, '2019-01-13 20:46:17', 1, '3', '2019-01-13', 2, 12, 'B001-0432', 3, 'VENTA', 7, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -4993,7 +5023,7 @@ INSERT INTO `tb_talonario` (`tb_talonario_id`, `tb_talonario_reg`, `tb_talonario
 (3, '2013-01-07 11:31:00', '2018-12-22 14:02:59', '0002', 1, 99999, 1882, 1, 2, 'ACTIVO', 1),
 (4, '2013-01-07 11:32:55', '2018-12-24 13:01:53', '0002', 1, 99999, 636, 1, 3, 'ACTIVO', 1),
 (17, '2016-11-26 17:49:45', '2018-12-31 16:49:03', 'F001', 1, 99999, 64, 1, 11, 'ACTIVO', 1),
-(19, '2016-11-27 23:12:03', '2019-01-12 13:26:44', 'B001', 1, 1300, 426, 1, 12, 'ACTIVO', 1),
+(19, '2016-11-27 23:12:03', '2019-01-13 20:46:17', 'B001', 1, 1300, 432, 1, 12, 'ACTIVO', 1),
 (20, '2018-03-03 12:07:43', '2018-10-03 10:57:26', 'B001', 1, 2333, 100, 2, 12, 'ACTIVO', 1),
 (21, '2018-03-23 14:01:45', '2018-06-05 13:19:03', 'CT', 1, 99999, 0, 1, 14, 'ACTIVO', 1),
 (22, '2018-04-02 19:37:33', '2018-04-02 19:39:28', 'F001', 1, 99999, 1, 5, 11, 'ACTIVO', 6),
@@ -7424,7 +7454,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`tb_usuario_id`, `tb_usuario_use`, `tb_usuario_pas`, `tb_usuario_apepat`, `tb_usuario_apemat`, `tb_usuario_nom`, `tb_usuario_ema`, `tb_usuario_reg`, `tb_usuario_mod`, `tb_usuario_ultvis`, `tb_usuario_blo`, `tb_usuariogrupo_id`, `tb_empresa_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-01-12 15:55:34', 0, 2, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-01-13 18:39:15', 0, 2, 1),
 (29, 'superusuario', '261a7d80916532797f8735dd198d4ada', 'APELLIDO PATERNO', 'APELIIDO MATERNO', 'SUPER', 'gerencia@a-zetasoft.com', '0000-00-00 00:00:00', '2018-03-03 12:28:53', '2018-12-27 18:54:26', 0, 1, 1),
 (30, 'vendedor', 'a60c36fc7c825e68bb5371a0e08f828a', 'ZIRENA', 'BEJARANO', 'ALFREDO', 'alfredzb@gmail.com', '0000-00-00 00:00:00', '2018-10-26 22:58:22', '2018-04-19 14:23:49', 0, 3, 1),
 (33, 'liquidador', '221b3a9e09a367bb69f7c7c1141c1dd9', 'PALOMINO', 'SANCHEZ', 'JOSE', 'rrpalomino65@hotmail.com', '2018-01-31 11:00:40', '2018-01-31 11:01:05', '2018-03-17 11:24:17', 0, 4, 1),
@@ -7572,7 +7602,13 @@ CREATE TABLE `tb_venta` (
 --
 
 INSERT INTO `tb_venta` (`tb_venta_id`, `tb_venta_reg`, `tb_venta_fec`, `tb_documento_id`, `tb_venta_numdoc`, `tb_cliente_id`, `tb_venta_valven`, `tb_venta_des`, `tb_venta_igv`, `tb_venta_tot`, `tb_venta_est`, `tb_venta_lab1`, `tb_venta_lab2`, `tb_venta_lab3`, `tb_venta_may`, `tb_usuario_id`, `tb_puntoventa_id`, `tb_empresa_id`, `cs_tipodocumento_id`, `tb_venta_ser`, `tb_venta_num`, `cs_tipomoneda_id`, `tb_venta_gra`, `tb_venta_ina`, `tb_venta_exo`, `tb_venta_grat`, `tb_venta_isc`, `tb_venta_otrtri`, `tb_venta_otrcar`, `tb_venta_desglo`, `cs_tipooperacion_id`, `cs_documentosrelacionados_id`, `tb_venta_faucod`, `tb_venta_digval`, `tb_venta_sigval`, `tb_venta_val`, `tb_venta_fecenvsun`, `tb_venta_estsun`, `tb_vendedor_id`) VALUES
-(1, '2019-01-12 13:26:43', '2019-01-12', 12, 'B001-0426', 1, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0426', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1);
+(1, '2019-01-12 13:26:43', '2019-01-12', 12, 'B001-0426', 1, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0426', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1),
+(2, '2019-01-13 20:28:41', '2019-01-13', 12, 'B001-0427', 1, '0.00', '0.00', '0.00', '67.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0427', 1, '0.00', '0.00', '67.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
+(3, '2019-01-13 20:32:59', '2019-01-13', 12, 'B001-0428', 1, '0.00', '0.00', '0.00', '60.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0428', 1, '0.00', '0.00', '60.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
+(4, '2019-01-13 20:38:27', '2019-01-13', 12, 'B001-0429', 1, '0.00', '0.00', '0.00', '67.98', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0429', 1, '0.00', '0.00', '67.98', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
+(5, '2019-01-13 20:40:31', '2019-01-13', 12, 'B001-0430', 1, '0.00', '0.00', '0.00', '65.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0430', 1, '0.00', '0.00', '65.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
+(6, '2019-01-13 20:42:50', '2019-01-13', 12, 'B001-0431', 1, '0.00', '0.00', '0.00', '50.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0431', 1, '0.00', '0.00', '50.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '14JORW/vZ32dgM0lVFDKWo3F0P4=', 'WwIA+YBfIH1/XlRfy5KBXPnRB3mYKBD934MuzwXts26Q8AivwayeIDak5zvQ+9mVOrkhaUaY7KAN9zbKfq6ZV8R5OJTE6Tt62EwtUvllgVwrUUWXkrEfej3QYGDHGsm1whXD2w2elUCSQ6qydthkNlc/89UStkWT/LSipuwXdRLaDV6Icl8+FvajwDcIFDgGpBq7oucBhhVpbKwm4LADfc2BSne9nUwrB6mZolYApVfc1I++iPppAuQPI2POB3F+LlI19QG/rGyqt97DFUWLbY2Wn3N+ScFCbWar24Dzk4CgW85yZIAc+wvN0uTLeLrBG8REysOIReKOTZwQvFo5mA==', '1', '2019-01-13 20:42:53', 10, 1),
+(7, '2019-01-13 20:46:17', '2019-01-13', 12, 'B001-0432', 1, '0.00', '0.00', '0.00', '20.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0432', 1, '0.00', '0.00', '20.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'QVonuoKV4gQHGtkTgWB1UBio3mI=', 'ehUANHLUYnBnDrTFiBPJkU8iIUNmLVC+dxksrp0H8/iWi/szk/LYMdqZFvXW8Oyq56XfE5xqCdT5r7Rqu/orDYzL9Q9uQ2dRTbHbzwM3d7J7+bPosIVckfX8Oz1xNnAzTTLys6+UAHWHGmBqO7ri0zEB9swHmj9jdlyjuUj9rNmRol3ITLaXxqlBewXbEXGm5fU2kDgSoACANRSWbjIthQW63ubAUZM8go2R8GHY8cexbeuCDw2q3LOtSuVhUNq8aXGXepkzIGgAYj8inOo+MauYIowwn0wMWXN5APVJJ0NQx7BHzzy7H9dh3dGjnsJ98w5es+7LKKOoMITI6/hhCg==', '1', '2019-01-13 20:46:18', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -7647,7 +7683,9 @@ CREATE TABLE `tb_ventadetalle` (
 --
 
 INSERT INTO `tb_ventadetalle` (`tb_ventadetalle_id`, `tb_ventadetalle_tipven`, `tb_catalogo_id`, `tb_servicio_id`, `tb_ventadetalle_nom`, `tb_ventadetalle_preuni`, `tb_ventadetalle_can`, `tb_ventadetalle_tipdes`, `tb_ventadetalle_des`, `tb_ventadetalle_preunilin`, `tb_ventadetalle_valven`, `tb_ventadetalle_igv`, `tb_venta_id`, `cs_tipoafectacionigv_id`, `cs_tipounidadmedida_id`, `cs_tiposistemacalculoisc_id`, `tb_ventadetalle_isc`, `tb_ventadetalle_nro`, `tb_ventadetalle_serie`) VALUES
-(1, 2, 0, 1, 'PASAJE-Arequipa-Secocha ', '30.00', '1.00', 0, '0.00', '25.42', '25.42', '4.58', 1, 9, 13, 0, '0.00', 1, '');
+(1, 2, 0, 1, 'PASAJE-Arequipa-Secocha ', '30.00', '1.00', 0, '0.00', '25.42', '25.42', '4.58', 1, 9, 13, 0, '0.00', 1, ''),
+(2, 2, 0, 1, 'PASAJE-Arequipa-Secocha ', '50.00', '1.00', 0, '0.00', '42.37', '42.37', '7.63', 6, 9, 13, 0, '0.00', 1, ''),
+(3, 2, 0, 1, 'PASAJE-Arequipa-Secocha ', '20.00', '1.00', 0, '0.00', '16.95', '16.95', '3.05', 7, 9, 13, 0, '0.00', 1, '');
 
 -- --------------------------------------------------------
 
@@ -7803,7 +7841,9 @@ CREATE TABLE `tb_ventapago` (
 --
 
 INSERT INTO `tb_ventapago` (`tb_ventapago_id`, `tb_ventapago_fecreg`, `tb_formapago_id`, `tb_modopago_id`, `tb_ventapago_fec`, `tb_ventapago_mon`, `tb_cuentacorriente_id`, `tb_tarjeta_id`, `tb_ventapago_numope`, `tb_ventapago_numdia`, `tb_ventapago_fecven`, `tb_venta_id`, `tb_empresa_id`) VALUES
-(1, '2019-01-12 13:26:44', 1, 1, '2019-01-12', '30.00', 0, 0, '', 0, '0000-00-00', 1, 1);
+(1, '2019-01-12 13:26:44', 1, 1, '2019-01-12', '30.00', 0, 0, '', 0, '0000-00-00', 1, 1),
+(2, '2019-01-13 20:42:50', 1, 1, '2019-01-13', '50.00', 0, 0, '', 0, '0000-00-00', 6, 1),
+(3, '2019-01-13 20:46:17', 1, 1, '2019-01-13', '20.00', 0, 0, '', 0, '0000-00-00', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -7825,8 +7865,9 @@ CREATE TABLE `tb_viajehorario` (
 --
 
 INSERT INTO `tb_viajehorario` (`tb_viajehorario_id`, `tb_viajehorario_salida`, `tb_viajehorario_llegada`, `tb_viajehorario_fecha`, `tb_viajehorario_horario`, `tb_vehiculo_id`) VALUES
-(1, 1, 2, '0000-00-00', '16:16:00', 1),
-(2, 1, 3, '0000-00-00', '12:10:00', 2);
+(1, 1, 2, '2019-01-13', '16:16:00', 1),
+(2, 1, 3, '0000-00-00', '12:10:00', 2),
+(3, 1, 2, '2019-01-14', '20:30:00', 1);
 
 -- --------------------------------------------------------
 
@@ -7838,15 +7879,18 @@ CREATE TABLE `tb_viajeventa` (
   `tb_viajeventa` int(11) NOT NULL,
   `tb_venta_id` int(11) NOT NULL,
   `tb_viajehorario_id` varchar(11) COLLATE utf8_spanish2_ci NOT NULL,
-  `tb_asiento_nom` int(11) NOT NULL
+  `tb_asiento_nom` int(11) NOT NULL,
+  `tb_viajeventa_fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `tb_viajeventa`
 --
 
-INSERT INTO `tb_viajeventa` (`tb_viajeventa`, `tb_venta_id`, `tb_viajehorario_id`, `tb_asiento_nom`) VALUES
-(1, 1, '1', 4);
+INSERT INTO `tb_viajeventa` (`tb_viajeventa`, `tb_venta_id`, `tb_viajehorario_id`, `tb_asiento_nom`, `tb_viajeventa_fecha`) VALUES
+(1, 1, '1', 4, '0000-00-00'),
+(2, 6, '3', 23, '0000-00-00'),
+(3, 7, '1', 49, '2019-01-13');
 
 -- --------------------------------------------------------
 
@@ -8045,6 +8089,12 @@ ALTER TABLE `tb_almacen`
 --
 ALTER TABLE `tb_asiento`
   ADD PRIMARY KEY (`tb_asiento_id`);
+
+--
+-- Indices de la tabla `tb_asientoestado`
+--
+ALTER TABLE `tb_asientoestado`
+  ADD PRIMARY KEY (`tb_asientoestado_id`);
 
 --
 -- Indices de la tabla `tb_caja`
@@ -8871,6 +8921,12 @@ ALTER TABLE `tb_asiento`
   MODIFY `tb_asiento_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
+-- AUTO_INCREMENT de la tabla `tb_asientoestado`
+--
+ALTER TABLE `tb_asientoestado`
+  MODIFY `tb_asientoestado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `tb_caja`
 --
 ALTER TABLE `tb_caja`
@@ -8934,7 +8990,7 @@ ALTER TABLE `tb_cliente`
 -- AUTO_INCREMENT de la tabla `tb_clientecuenta`
 --
 ALTER TABLE `tb_clientecuenta`
-  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_clientedireccion`
@@ -9144,7 +9200,7 @@ ALTER TABLE `tb_horario`
 -- AUTO_INCREMENT de la tabla `tb_ingreso`
 --
 ALTER TABLE `tb_ingreso`
-  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ingreso_r`
@@ -9156,7 +9212,7 @@ ALTER TABLE `tb_ingreso_r`
 -- AUTO_INCREMENT de la tabla `tb_kardex`
 --
 ALTER TABLE `tb_kardex`
-  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_kardexdetalle`
@@ -9474,7 +9530,7 @@ ALTER TABLE `tb_vehiculo`
 -- AUTO_INCREMENT de la tabla `tb_venta`
 --
 ALTER TABLE `tb_venta`
-  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventacanje`
@@ -9492,7 +9548,7 @@ ALTER TABLE `tb_ventacorreo`
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle`
 --
 ALTER TABLE `tb_ventadetalle`
-  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle_lote`
@@ -9522,19 +9578,19 @@ ALTER TABLE `tb_ventanotapago`
 -- AUTO_INCREMENT de la tabla `tb_ventapago`
 --
 ALTER TABLE `tb_ventapago`
-  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_viajehorario`
 --
 ALTER TABLE `tb_viajehorario`
-  MODIFY `tb_viajehorario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `tb_viajehorario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_viajeventa`
 --
 ALTER TABLE `tb_viajeventa`
-  MODIFY `tb_viajeventa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `tb_viajeventa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `va_cliente`

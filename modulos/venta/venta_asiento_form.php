@@ -67,6 +67,8 @@ $fec=date('d-m-Y');
             async:true,
             dataType: "html",
             data: ({
+                txt_fech_sal: $('#txt_fech_sal').val(),
+                cmb_horario: $('#cmb_horario').val(),
                 txt_vehiculo_id: $('#hdd_vehiculo').val()
             }),
             beforeSend: function() {
@@ -202,6 +204,7 @@ $fec=date('d-m-Y');
                             ven_id:	'',
                             asiento_id: id_seleccionado,
                             precio: $('#txt_precio').val(),
+                            viaje_fecha_sal: $('#txt_fech_sal').val(),
                             viaje_horario_id: $('#hdd_vi_ho').val(),
                             viaje_horario: $('#cmb_horario').val()
                         }),

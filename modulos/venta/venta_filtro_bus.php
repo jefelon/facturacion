@@ -8,6 +8,9 @@ $oAsiento = new cAsiento();
 
 require_once ("../formatos/formato.php");
 
+$fecha_salida=fecha_mysql($_POST['txt_fech_sal']);
+$hora_salida=$_POST['cmb_horario'];
+
 $dts1=$oAsiento->mostrarFiltroFila(1,14, $_POST['txt_vehiculo_id']);
 $dts2=$oAsiento->mostrarFiltroFila(15,28, $_POST['txt_vehiculo_id']);
 $dts3=$oAsiento->mostrarFiltroFila(36,49, $_POST['txt_vehiculo_id']);
@@ -79,68 +82,6 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
 
     });
 </script>
-<style>
-
-    /*.oculto{*/
-        /*visibility: hidden;*/
-    /*}*/
-
-    /*.seleccionado, .ocupado {*/
-        /*background-color: orange !important;*/
-        /*color: white;*/
-    /*}*/
-    /*#sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {*/
-        /*border: 1px solid #eee;*/
-        /*min-height: 40px;*/
-        /*list-style-type: none;*/
-        /*margin: 0;*/
-        /*padding: 5px 0 0 0;*/
-        /*!*float: left;*!*/
-        /*margin-right: 10px;*/
-    /*}*/
-
-    /*#sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {*/
-        /*margin: 0 5px 5px 5px;*/
-        /*padding: 5px;*/
-        /*font-size: 1.2em;*/
-        /*width: 35px;*/
-        /*height: 50px;*/
-        /*cursor: move;*/
-        /*position: relative;*/
-        /*float: left;*/
-        /*background: #00aa00;*/
-    /*}*/
-
-    /*.clear{*/
-        /*clear: both;*/
-    /*}*/
-    /*#frentera{*/
-        /*height: 200px;*/
-        /*width: 220px;*/
-        /*!*background: #0D8BBD;*!*/
-        /*float: left;*/
-    /*}*/
-    /*#lugares{*/
-        /*float: left;*/
-        /*height: 200px;*/
-        /*margin-top: 100px;*/
-    /*}*/
-    /*.pasadizo{*/
-        /*height: 40px;*/
-    /*}*/
-    /*#bus{*/
-        /*width: 1180px;*/
-        /*height: 550px;*/
-        /*background: url("../../images/bus_fondo.png");*/
-        /*background-size: 95%;*/
-        /*background-repeat: no-repeat;*/
-        /*background-position-x: -52px;*/
-    /*}*/
-
-</style>
-
-
-
             <?php
             if($num_rows>=1){
             ?>
@@ -151,12 +92,12 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                         $lugares = explode(';',$orden11);
                         foreach ($lugares as $lugar) {
                             $nom_lugar = explode('_',$lugar)[1];
-                            $asts = $oAsiento->mostrarNombre($nom_lugar,$_POST['txt_vehiculo_id']);
+                            $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
 
                             ?>
 
-                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_estado']){echo 'ocupado';}?>"
+                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
                                      onclick="cambiar_color(this)">
                                     <?php echo explode('_',$lugar)[1] ?></div>
                             <?php
