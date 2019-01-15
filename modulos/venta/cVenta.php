@@ -55,43 +55,16 @@ class cVenta{
         return $rst;
     }
 
-    function insertarAsientoEstado($viajehora_id,$asinum){
-        $sql = "INSERT INTO tb_viajeventa(`tb_viajehorario_id` ,`tb_asiento_id`, `tb_asientoestado_estado`
+    function insertarAsientoEstado($asinum,$viajehora_id){
+        $sql = "INSERT INTO tb_asientoestado(`tb_asiento_id`,`tb_viajehorario_id` , `tb_asientoestado_estado`
 	)
-	VALUES ('$viajehora_id',   '$asinum', 1 
+	VALUES ('$asinum','$viajehora_id', 1 
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
 
-
-	// function insertar_detalle($tipven,$cat_id,$ser_id,$nom,$preuni,$can,$tipdes,$des,$preunilin,$valven,$igv,$ven_id,$afeigv,$unimed,$calisc,$isc,$nro){
-	// $sql = "INSERT INTO tb_ventadetalle(
-	// `tb_ventadetalle_tipven` ,
-	// `tb_catalogo_id` ,
-	// `tb_servicio_id` ,
-	// `tb_ventadetalle_nom` ,
-	// `tb_ventadetalle_preuni` ,
-	// `tb_ventadetalle_can` ,
-	// `tb_ventadetalle_tipdes` ,
-	// `tb_ventadetalle_des` ,
-	// `tb_ventadetalle_preunilin` ,
-	// `tb_ventadetalle_valven` ,
-	// `tb_ventadetalle_igv` ,
-	// `cs_tipoafectacionigv_id`,
-	// `cs_tipounidadmedida_id`,
-	// `cs_tiposistemacalculoisc_id`,
-	// `tb_ventadetalle_isc`,
-	// `tb_ventadetalle_nro`
-	// )
-	// VALUES (
-	// '$tipven',  '$cat_id',  '$ser_id', '$nom', '$preuni',  '$can',  '$tipdes',  '$des',  '$preunilin',  '$valven',  '$igv',  '$ven_id', '$afeigv', '$unimed', '$calisc', '$isc', '$nro'
-	// );"; 
-	// $oCado = new Cado();
-	// $rst=$oCado->ejecute_sql($sql);
-	// return $rst;	
-	// }
 	function insertar_detalle($tipven,$cat_id,$ser_id,$nom,$preuni,$can,$tipdes,$des,$preunilin,$valven,$igv,$ven_id,$afeigv,$unimed,$calisc,$isc,$nro,$pro_ser){
 	$sql = "INSERT INTO tb_ventadetalle(
 	`tb_ventadetalle_tipven`, 

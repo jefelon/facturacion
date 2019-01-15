@@ -267,7 +267,7 @@ function venta_impresion(idf){
 			$('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_venta_impresion').html(html);				
+			$('#div_venta_impresion').html(html);
 		}
 	});
 }
@@ -542,9 +542,6 @@ function venta_asiento_form(act,idf){
 }
 
 
-
-
-
 $(function() {
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
@@ -704,10 +701,8 @@ $(function() {
         }
     });
 
-
-
-
-    venta_croquis_form('seleccionar');
+    //venta_asiento_form();
+    //venta_croquis_form('seleccionar'); esto llamar en modulo ejp catalogo distribucion buses
 });
 </script>
 

@@ -1927,6 +1927,7 @@ if($_POST['action']=="editar"){
                     },
                     complete: function(){
                         venta_tabla();
+                        //sventa_asiento_form();
                     }
                 });
             },

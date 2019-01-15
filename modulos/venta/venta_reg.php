@@ -244,8 +244,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         );
 
         $oVenta->insertarAsientoEstado(
-            $_POST['hdd_vi_ho_id'],
-            $_POST['txt_num_asi']
+            $_POST['txt_num_asi'],
+            $_POST['hdd_vi_ho_id']
         );
 
 

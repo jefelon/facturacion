@@ -255,7 +255,7 @@ $fec=date('d-m-Y');
                             viaje_horario: $('#cmb_horario').val()
                         }),
                         beforeSend: function () {
-                            $('#div_venta_asiento_form').dialog("close");
+                            //$('#div_venta_asiento_form').dialog("close");
                             $('#div_venta_form').dialog("open");
                             $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
                         },
@@ -282,6 +282,8 @@ $fec=date('d-m-Y');
                                         else
                                         {
                                             $("#for_ven").submit();
+                                            cmb_lugar_vehiculo();
+                                            filtro_bus();
                                         }
                                     },
                                     Cancelar: function() {

@@ -57,6 +57,7 @@ $('.btn_canimp').button({
 function imprimir()
 {	
 	$("#for_preimp").submit();
+    $('#div_venta_impresion').dialog('close');
 }
 
 function imprimir_letras()

@@ -94,12 +94,11 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $nom_lugar = explode('_',$lugar)[1];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
-
                             ?>
-
                                 <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
                                      onclick="cambiar_color(this)">
-                                    <?php echo explode('_',$lugar)[1] ?></div>
+                                    <?php echo explode('_',$lugar)[1] ?>
+                                </div>
                             <?php
                         }
                     mysql_free_result($dts1);
@@ -116,7 +115,10 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
+                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                     onclick="cambiar_color(this)">
+                                    <?php echo explode('_',$lugar)[1] ?>
+                                </div>
                             <?php
                         }
 
@@ -134,7 +136,10 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
+                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                     onclick="cambiar_color(this)">
+                                    <?php echo explode('_',$lugar)[1] ?>
+                                </div>
                             <?php
                         }
                     mysql_free_result($dts3);
@@ -151,7 +156,10 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
+                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                                                           onclick="cambiar_color(this)">
+                                     <?php echo explode('_',$lugar)[1] ?>
+                                </div>
                             <?php
                         }
 
@@ -169,7 +177,10 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
+                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                 onclick="cambiar_color(this)">
+                                <?php echo explode('_',$lugar)[1] ?>
+                            </div>
                             <?php
                         }
                     mysql_free_result($dts5);
