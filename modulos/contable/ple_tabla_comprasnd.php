@@ -263,4 +263,5 @@ $(function() {
         <td colspan="38"><?php if($num_rows>0){ echo $num_rows.' registros'; }?></td>
     </tr>
 </table>
+<input type="text" id="lineas_libro" value="<?php if($num_rows>0){ echo "1";  }?>">
 

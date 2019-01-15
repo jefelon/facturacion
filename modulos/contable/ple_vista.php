@@ -176,6 +176,11 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 }
 
     function descargar_txt() {
+        var lineas=0;
+        var moneda =1;
+        if($('#lineas_libro').val()==1){
+            lineas=1;
+        }
         userDetails = '';
         $('#tabla_ple tbody:first tr').each(function () {
             var detail = '';
@@ -189,7 +194,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         var a = document.getElementById("btn_descargar_txt");
         var file = new Blob([userDetails], {type: 'text/plain'});
         a.href = URL.createObjectURL(file);
-        a.download = "LE<?php echo $emp_ruc;?>"+$('#cmb_fil_anio').val()+$('#cmb_fil_mes').val()+"00"+$("#cmb_fil_librople").val()+"00"+"1111.txt"
+        a.download = "LE<?php echo $emp_ruc;?>"+$('#cmb_fil_anio').val()+$('#cmb_fil_mes').val()+"00"+$("#cmb_fil_librople").val()+"00"+"1"+lineas+moneda+"1.txt"
     }
 $(function() {
 	

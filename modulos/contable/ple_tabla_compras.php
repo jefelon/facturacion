@@ -148,7 +148,7 @@ $(function() {
                     ?>
                 <!--3--><td><?php echo $cuoamc ?></td>
                 <!--4--><td><?php echo $fecha ?></td>
-               <!-- 5--><td><?php echo $fechavence ?></td>
+               <!-- 5--><td><?php echo $fecha ?></td>
 
                     <?php if(strlen($dt1['cs_tipodocumento_cod'])==1)
                     {$coddoc = '0' . $dt1['cs_tipodocumento_cod'];}
@@ -255,4 +255,5 @@ $(function() {
         <td colspan="41"><?php echo $num_rows.' registros'; ?></td>
     </tr>
 </table>
+<input type="text" id="lineas_libro" value="<?php if($num_rows>0){ echo "1";  }?>">
 

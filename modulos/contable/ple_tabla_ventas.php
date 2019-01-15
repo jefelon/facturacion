@@ -159,11 +159,14 @@ $(function() {
                     $cliente_nom="";
                     if($dt1['tb_cliente_tip']==1){
                         $ctipo=1;
-                        if($dt1['tb_cliente_doc']="00")
+                        if($dt1['tb_cliente_doc']=="00" || $dt1['tb_venta_tot']<700)
                         {
                             $cliente_doc="";
                             $ctipo="";
                             $cliente_nom="";
+                        }else {
+                            $cliente_doc = $dt1['tb_cliente_doc'];
+                            $cliente_nom = $dt1['tb_cliente_nom'];
                         }
                     } elseif($dt1['tb_cliente_tip']==2){
                         $ctipo=6;
@@ -189,9 +192,9 @@ $(function() {
                         $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tc="";}
                     ?>
                     <!--14--><td><?php echo $gravado; ?></td>
-                    <!--15--><td><?php echo $descuento; ?></td>
+                    <!--15-- jalar el monto de la nota de credito--><td><?php echo $descuento; ?></td>
                     <!--16--><td><?php echo $igv; ?></td>
-                    <!--17--><td></td>
+                    <!--17-- nota credito --><td></td>
                     <!--18--><td><?php echo $exo; ?></td>
                     <!--19--><td><?php echo $ina; ?></td>
                     <!--20--><td><?php echo $isc; ?></td>
@@ -260,3 +263,4 @@ $(function() {
         </tr>
 
     </table>
+<input type="text" id="lineas_libro" value="<?php if($num_rows>0){ echo "1";  }?>">
