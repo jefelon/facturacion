@@ -243,6 +243,12 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             fecha_mysql($_POST['txt_fech_sal'])
         );
 
+        $oVenta->insertarAsientoEstado(
+            $_POST['hdd_vi_ho_id'],
+            $_POST['txt_num_asi']
+        );
+
+
 
 		//REGISTRO DE PAGOS
 		//PAGO AUTOMATICO

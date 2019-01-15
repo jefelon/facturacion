@@ -112,6 +112,9 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                         $lugares = explode(';',$orden22);
 
                         foreach ($lugares as $lugar) {
+                            $nom_lugar = explode('_',$lugar)[1];
+                            $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
+                            $ast = mysql_fetch_array($asts);
                             ?>
                             <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
@@ -127,6 +130,9 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                     $lugares = explode(';',$orden33);
 
                         foreach ($lugares as $lugar) {
+                            $nom_lugar = explode('_',$lugar)[1];
+                            $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
+                            $ast = mysql_fetch_array($asts);
                             ?>
                             <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
@@ -141,6 +147,9 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                         $lugares = explode(';',$orden44);
 
                         foreach ($lugares as $lugar) {
+                            $nom_lugar = explode('_',$lugar)[1];
+                            $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
+                            $ast = mysql_fetch_array($asts);
                             ?>
                             <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php
@@ -156,6 +165,9 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                         $lugares = explode(';',$orden55);
 
                         foreach ($lugares as $lugar) {
+                            $nom_lugar = explode('_',$lugar)[1];
+                            $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
+                            $ast = mysql_fetch_array($asts);
                             ?>
                             <div id="<?php echo $lugar ?>" class="asiento" onclick="cambiar_color(this)"><?php echo explode('_',$lugar)[1] ?></div>
                             <?php

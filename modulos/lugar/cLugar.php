@@ -67,5 +67,35 @@ class cLugar{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
+    function mostrarViajeHorario($id){
+        $sql="SELECT * 
+	    FROM tb_viajehorario vh
+	    INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id = v.tb_vehiculo_id
+	    WHERE vh.tb_viajehorario_id=$id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function insertarViajeHorario($salida_id,$llegada_id,$fech_salida,$hora,$vehiculo){
+        $sql = "INSERT tb_viajehorario (
+		`tb_viajehorario_salida`,
+		`tb_viajehorario_llegada`,
+		`tb_viajehorario_fecha`,
+		`tb_viajehorario_horario`,
+		`tb_vehiculo_id`
+		)
+		VALUES (
+		 '$salida_id',
+		 '$llegada_id',
+		 '$fech_salida',
+		 '$hora',
+		 '$vehiculo'
+		);";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

@@ -38,6 +38,11 @@ $fec=date('d-m-Y');
         buttonImage: "../../images/calendar.gif",
         buttonImageOnly: true
     });
+    $('#btn_agregar_horario').button({
+        icons: {primary: "ui-icon-plus"},
+        text: false
+    });
+
     function cmb_lugar()
     {
         $.ajax({
@@ -157,6 +162,28 @@ $fec=date('d-m-Y');
             }
         });
     }
+
+    function venta_horario_form(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_horario_form.php",
+            // url: "../venta/croquis.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#div_venta_horario_form').dialog("open");
+                $('#div_venta_horario_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_venta_horario_form').html(html);
+            }
+        });
+    }
+
     $(function () {
         cmb_lugar();
         $('#cmb_llegada_id,#cmb_salida_id').change(function(){
@@ -184,7 +211,26 @@ $fec=date('d-m-Y');
 
         });
 
-
+        $( "#div_venta_horario_form" ).dialog({
+            title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+            autoOpen: false,
+            resizable: false,
+            height: 'auto',
+            width: 'auto',
+            zIndex: 1,
+            modal: true,
+            position: "center",
+            closeOnEscape: false,
+            buttons: {
+                Guardar: function() {
+                    $("#for_hor").submit();
+                },
+                Cancelar: function() {
+                    $('#for_hor').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
 
 
 
@@ -377,8 +423,10 @@ $fec=date('d-m-Y');
                         <td valign="top"><label for="txt_precio">Precio:</label><br>
                             <input class="venpag_moneda" name="txt_precio" size="4" type="text" id="txt_precio">
                         </td>
+                        <td width="6%" align="left" valign="middle"><a id="btn_agregar_horario" title="Agregar" href="#" onClick="venta_horario_form()">Agregar Horario</a></td>
                 </table>
             </fieldset>
+            <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
         </div>
         <div id="bus" style="width: 80%;float:left">
 
@@ -390,6 +438,10 @@ $fec=date('d-m-Y');
             <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
             <label for="txt_pasaj_edad">EDAD: </label>
             <input name="txt_pasaj_edad" type="text"  id="txt_pasaj_edad" value="" size="20" maxlength="3">
+        </div>
+
+        <div id="div_venta_horario_form">
+
         </div>
         </form>
 

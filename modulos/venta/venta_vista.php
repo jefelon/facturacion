@@ -37,6 +37,7 @@
 
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.datepicker.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/i18n/jquery.ui.datepicker-es.js"></script>
+    <script src="../../js/timepicker/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
 
 <script src="../../js/jquery-ui/development-bundle/external/jquery.metadata.js"></script>
 <script src="../../js/Moneda/autoNumeric.js"></script>
@@ -539,6 +540,8 @@ function venta_asiento_form(act,idf){
         }
     });
 }
+
+
 
 
 
