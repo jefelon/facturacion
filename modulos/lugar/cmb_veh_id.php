@@ -4,7 +4,7 @@ require_once ("cLugar.php");
 $oLugar = new cLugar();
 ?>
 <?php
-	$dts1=$oLugar->mostrarLugarHorario($_POST['salida_id'],$_POST['llegada_id'],$_POST['horario']);
+	$dts1=$oLugar->mostrarVehiculo($_POST['salida_id'],$_POST['llegada_id'],$_POST['fecha'],$_POST['horario']);
 	$dt1 = mysql_fetch_array($dts1);
     $data['viajehorario_id']=$dt1['tb_viajehorario_id'];
     $data['vehiculo_id']=$dt1['tb_vehiculo_id'];

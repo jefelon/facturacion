@@ -72,7 +72,7 @@ $fec=date('d-m-Y');
             async:true,
             dataType: "html",
             data: ({
-                txt_fech_sal: $('#txt_fech_sal').val(),
+                cmb_fech_sal: $('#cmb_fech_sal').val(),
                 cmb_horario: $('#cmb_horario').val(),
                 txt_vehiculo_id: $('#hdd_vehiculo').val()
             }),
@@ -89,7 +89,7 @@ $fec=date('d-m-Y');
     }
 
 
-    function cmb_lugar_horario()
+    function cmb_fecha_horario()
     {
         $.ajax({
             type: "POST",
@@ -99,7 +99,7 @@ $fec=date('d-m-Y');
             data: ({
                 salida_id: $('#cmb_salida_id').val(),
                 llegada_id: $('#cmb_llegada_id').val(),
-                horario: $('#cmb_horario').val()
+                fecha: $('#cmb_fech_sal').val()
             }),
             beforeSend: function() {
                 $('#cmb_horario').html('<option value="">Cargando...</option>');
@@ -112,7 +112,7 @@ $fec=date('d-m-Y');
             }
         });
     }
-    function cmb_lugar_vehiculo()
+    function cmb_horario_vehiculo()
     {
         $.ajax({
             type: "POST",
@@ -122,7 +122,8 @@ $fec=date('d-m-Y');
             data: ({
                 salida_id: $('#cmb_salida_id').val(),
                 llegada_id: $('#cmb_llegada_id').val(),
-                horario: $('#cmb_horario').val()
+                horario: $('#cmb_horario').val(),
+                fecha: $('#cmb_fech_sal').val()
             }),
             beforeSend: function() {
                 $('#placa_vehiculo').html('<option value="">Cargando...</option>');
@@ -138,6 +139,30 @@ $fec=date('d-m-Y');
             }
         });
     }
+
+    function cmb_fecha()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_fecha.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                salida_id: $('#cmb_salida_id').val(),
+                llegada_id: $('#cmb_llegada_id').val()
+            }),
+            beforeSend: function() {
+                $('#cmb_fech_sal').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_fech_sal').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
+
     function buscar_dni() {
         var dni = $('#txt_pasaj_dni').val();
         var url = '../../libreriasphp/consultadni/consulta_reniec.php';
@@ -188,15 +213,26 @@ $fec=date('d-m-Y');
         cmb_lugar();
         $('#cmb_llegada_id,#cmb_salida_id').change(function(){
             $('#cmb_horario').val('');
-            cmb_lugar_horario();
+            cmb_fecha();
             $('#placa_vehiculo').html('');
             $('#bus').html('');
+            $('#hdd_vi_ho').val('');
 
         });
+
         $('#cmb_horario').change(function(){
-            cmb_lugar_vehiculo();
+            cmb_horario_vehiculo();
             filtro_bus();
         });
+
+        $('#cmb_fech_sal').change(function(){
+            cmb_fecha_horario();
+            $('#placa_vehiculo').html('');
+            $('#bus').html('');
+            $('#hdd_vi_ho').val('');
+        });
+
+
 
         $( "#txt_precio" ).keypress(function( event ) {
             if ( event.which == 13 ) {
@@ -250,7 +286,7 @@ $fec=date('d-m-Y');
                             ven_id:	'',
                             asiento_id: id_seleccionado,
                             precio: $('#txt_precio').val(),
-                            viaje_fecha_sal: $('#txt_fech_sal').val(),
+                            viaje_fecha_sal: $('#cmb_fech_sal').val(),
                             viaje_horario_id: $('#hdd_vi_ho').val(),
                             viaje_horario: $('#cmb_horario').val()
                         }),
@@ -411,8 +447,9 @@ $fec=date('d-m-Y');
                             </select>
                         </td>
                         <td valign="top">
-                            <label for="txt_fech_sal">Fecha Salida:</label><br>
-                            <input name="txt_fech_sal" type="text" class="fecha" id="txt_fech_sal" value="<?php echo $fec ?>" size="10" maxlength="10">
+                            <label for="cmb_fech_sal">Salida</label><br>
+                            <select name="cmb_fech_sal" id="cmb_fech_sal">
+                            </select>
                         </td>
                         <td valign="top"><label for="cmb_horario">Hora Salida:</label><br>
                             <select name="cmb_horario" id="cmb_horario">

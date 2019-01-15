@@ -153,17 +153,17 @@ if($_POST['action']=="editar"){
     });
     $(".btn_ir").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
-    $('#btn_cli_form_agregar').button({
+    $('#btn_cli_form_agregar,#btn_pas_form_agregar').button({
         icons: {primary: "ui-icon-plus"},
         text: false
     });
-    $("#btn_cli_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+    $("#btn_cli_form_agregar,#btn_pas_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
-    $('#btn_cli_form_modificar').button({
+    $('#btn_cli_form_modificar, #btn_pas_form_modificar').button({
         icons: {primary: "ui-icon-pencil"},
         text: false
     });
-    $("#btn_cli_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+    $("#btn_cli_form_modificar, #btn_pas_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
     $('#btn_con_form_agregar').button({
         icons: {primary: "ui-icon-plus"},
@@ -1459,6 +1459,45 @@ if($_POST['action']=="editar"){
             }
         });
 
+
+        $( "#txt_ven_pas_doc" ).autocomplete({
+            minLength: 1,
+            source: "../clientes/cliente_complete_doc.php",
+            select: function(event, ui){
+                $("#hdd_ven_pas_id").val(ui.item.id);
+                $("#txt_ven_pas_nom").val(ui.item.nombre);
+                $("#txt_ven_pas_dir").val(ui.item.direccion);
+                $('#hdd_ven_cli_id').change();
+
+                if($("#hdd_ven_pas_id" ).val()>0){
+                    cmb_dir_id($( "#hdd_ven_pas_id" ).val());
+
+                }
+                //alert(ui.item.value);
+                // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                // $('#msj_busqueda_sunat').show(100);
+                // compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+            }
+        });
+
+        $( "#txt_ven_pas_nom" ).autocomplete({
+            minLength: 1,
+            source: "../clientes/cliente_complete_nom.php",
+            select: function(event, ui){
+                $("#hdd_ven_pas_id").val(ui.item.id);
+                $("#txt_ven_pas_doc").val(ui.item.documento);
+                $("#txt_ven_pas_dir").val(ui.item.direccion);
+                $('#hdd_ven_pas_id').change();
+                if($("#hdd_ven_pas_id" ).val()>0){
+                    cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+                }
+                //alert(ui.item.value);
+                // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                // $('#msj_busqueda_sunat').show(100);
+                // compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
+            }
+        });
+
         $( "#txt_ven_cli_nom" ).autocomplete({
             minLength: 1,
             source: "../clientes/cliente_complete_nom.php",
@@ -1927,6 +1966,7 @@ if($_POST['action']=="editar"){
                     },
                     complete: function(){
                         venta_tabla();
+                        filtro_bus();
                         //sventa_asiento_form();
                     }
                 });
@@ -2486,6 +2526,55 @@ if($_POST['action']=="editar"){
                     </tr>
                     <tr>
 <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
+                        <td>
+                            <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                            <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+
+        <div style="float: left; width: 80%;">
+            <input type="hidden" id="hdd_ven_pas_id" name="hdd_ven_pas_id" value="<?php echo $cli_id?>" />
+
+            <fieldset>
+                <legend>Datos Pasajero</legend>
+                <div id="div_cliente_form">
+                </div>
+                <table>
+                    <tr>
+                        <td align="right"><?php if($_POST['action']=='insertar'){?>
+                                <a id="btn_pas_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
+                                <a id="btn_pas_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                            <?php }?>
+                            <label for="txt_fil_gui_cod">Código:</label>
+                        </td>
+                        <td>
+                            <input type="text" id="txt_fil_gui_cod" name="txt_fil_gui_cod" size="15" value="<?php echo $con_doc?>" /><br>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right">
+                            <label for="txt_ven_pas_doc">DNI:</label>
+                        </td>
+                        <td>
+                            <input name="txt_ven_pas_doc" type="text" id="txt_ven_pas_doc" value="<?php echo $cli_doc?>" size="11" maxlength="11" />
+
+                            <label for="txt_ven_pas_nom">Cliente:</label>
+                            <input type="text" id="txt_ven_pas_nom" name="txt_ven_pas_nom" size="40" value='<?php echo $cli_nom?>' />
+                        </td>
+                        <td rowspan="2" valign="top">
+                            <div id="div_clientecuenta_detalle">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
+                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                    </tr>
+                    <tr>
+                        <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                         <td>
                             <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
                             <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>

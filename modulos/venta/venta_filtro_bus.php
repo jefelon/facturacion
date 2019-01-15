@@ -8,7 +8,7 @@ $oAsiento = new cAsiento();
 
 require_once ("../formatos/formato.php");
 
-$fecha_salida=fecha_mysql($_POST['txt_fech_sal']);
+$fecha_salida=fecha_mysql($_POST['cmb_fech_sal']);
 $hora_salida=$_POST['cmb_horario'];
 
 $dts1=$oAsiento->mostrarFiltroFila(1,14, $_POST['txt_vehiculo_id']);

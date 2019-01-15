@@ -45,10 +45,10 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-    function insertarViajeVenta($ven_id,$viajehora_id,$asinum,$asifec){
-        $sql = "INSERT INTO tb_viajeventa(`tb_venta_id` ,`tb_viajehorario_id` ,`tb_asiento_nom` ,`tb_viajeventa_fecha`
+    function insertarViajeVenta($ven_id,$viajehora_id,$asinum,$asifec, $pasaj){
+        $sql = "INSERT INTO tb_viajeventa(`tb_venta_id` ,`tb_viajehorario_id` ,`tb_asiento_nom` ,`tb_viajeventa_fecha`,`tb_cliente_id`
 	)
-	VALUES ('$ven_id',   '$viajehora_id',  '$asinum', '$asifec'
+	VALUES ('$ven_id',   '$viajehora_id',  '$asinum', '$asifec', '$pasaj'
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

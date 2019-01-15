@@ -56,13 +56,33 @@ class cLugar{
 	return $rst;
 	}
 
-    function mostrarLugarHorario($salida_id,$llegada_id,$horario){
+    function mostrarFechaHorario($salida_id,$llegada_id,$fecha){
+        $sql="SELECT * 
+	    FROM tb_viajehorario vh
+	    WHERE vh.tb_viajehorario_salida='$salida_id' AND vh.tb_viajehorario_llegada='$llegada_id' AND vh.tb_viajehorario_fecha='$fecha'";
+        $sql.=" ORDER BY tb_viajehorario_horario";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrarVehiculo($salida_id,$llegada_id,$fecha,$horario){
+        $sql="SELECT * 
+	    FROM tb_viajehorario vh
+	    INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id = v.tb_vehiculo_id
+	    WHERE vh.tb_viajehorario_salida='$salida_id' AND vh.tb_viajehorario_llegada='$llegada_id' AND vh.tb_viajehorario_fecha='$fecha' AND vh.tb_viajehorario_horario='$horario'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+
+    function mostrarFechas($salida_id,$llegada_id){
         $sql="SELECT * 
 	    FROM tb_viajehorario vh
 	    INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id = v.tb_vehiculo_id
 	    WHERE vh.tb_viajehorario_salida=$salida_id AND vh.tb_viajehorario_llegada=$llegada_id";
-        if($horario>0)$sql.=" AND vh.tb_viajehorario_horario = '$horario'";
-	    $sql.=" ORDER BY tb_viajehorario_horario";
+        $sql.=" ORDER BY tb_viajehorario_horario";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
