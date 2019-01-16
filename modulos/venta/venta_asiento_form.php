@@ -209,6 +209,33 @@ $fec=date('d-m-Y');
         });
     }
 
+    function venta_cliente_reg(act, idf) {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async: true,
+            dataType: "json",
+            data: ({
+                action_cliente: 'insertar',
+                txt_cli_nom: $('#txt_pasaj_nom').val(),
+                txt_cli_doc: $('#txt_pasaj_dni').val(),
+                rad_cli_tip: 1
+            }),
+            beforeSend: function () {
+                $('#div_cliente_form').dialog("close");
+                $('#msj_cliente').html("Guardando...");
+                $('#msj_cliente').show(100);
+            },
+            success: function (data) {
+                $('#msj_cliente').html(data.cli_msj);
+                pasajero_cargar_datos(data.cli_id);
+                cliente_cargar_datos(data.cli_id);
+            },
+            complete: function () {
+            }
+        })
+    }
+
     $(function () {
         cmb_lugar();
         $('#cmb_llegada_id,#cmb_salida_id').change(function(){
@@ -288,7 +315,10 @@ $fec=date('d-m-Y');
                             precio: $('#txt_precio').val(),
                             viaje_fecha_sal: $('#cmb_fech_sal').val(),
                             viaje_horario_id: $('#hdd_vi_ho').val(),
-                            viaje_horario: $('#cmb_horario').val()
+                            viaje_horario: $('#cmb_horario').val(),
+                            pasaj_dni:$('#txt_pasaj_dni').val(),
+                            pasaj_nom:$('#txt_pasaj_nom').val(),
+                            pasaj_edad:$('#txt_pasaj_edad').val()
                         }),
                         beforeSend: function () {
                             //$('#div_venta_asiento_form').dialog("close");
@@ -297,6 +327,7 @@ $fec=date('d-m-Y');
                         },
                         success: function (html) {
                             $('#div_venta_form').html(html);
+                                venta_cliente_reg();
                         },
                         complete: function () {
                             $( "#div_venta_form" ).dialog({

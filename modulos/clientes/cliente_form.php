@@ -212,6 +212,7 @@ $(function() {
 				},
 				success: function(data){
 					$('#msj_cliente').html(data.cli_msj);
+
 					<?php
 					if($_POST['vista']=="cmb_cli_id")
 					{
