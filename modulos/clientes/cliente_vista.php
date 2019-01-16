@@ -232,8 +232,6 @@ $(function() {
     $('#btn_agregar').button({
         icons: {primary: "ui-icon-plus"},
         text: true
-    }).click(function() {
-        location.reload();
     });
 
 
@@ -255,7 +253,8 @@ $(function() {
 		title:'Información de Cliente',
 		autoOpen: false,
 		resizable: false,
-		height: 'auto',
+        height: 660,
+        width: 1100,
 		modal: true,
 		position: 'top',
 		buttons: {
@@ -352,8 +351,7 @@ $(function() {
             //$( "#div_venta_por_cliente" ).html('venta_cliente');
         }
     });
-	
-    cliente_form('insertar');
+
 });
 </script>
 

@@ -244,7 +244,7 @@ function ingreso_txt_numdoc(){
 function cliente_form_i(act,idf){
 	$.ajax({
 		type: "POST",
-		url: "../cliente/cliente_form.php",
+		url: "../clientes/cliente_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -553,6 +553,7 @@ $(function() {
 <input type="hidden" id="hdd_emp_id" name="hdd_emp_id" value="<?php echo $_SESSION['empresa_id']?>">
 <input type="hidden" id="hdd_ven_id" name="hdd_ven_id" value="<?php echo $ven_id?>">
 <input type="hidden" id="hdd_tra_id" name="hdd_tra_id" value="<?php echo $tra_id?>">
+    <input type="hidden" name="cmb_caj_id" value="<?php echo $caj_id?>">
 
   <table border="0" cellspacing="0" cellpadding="1">
     <tr>
@@ -560,7 +561,8 @@ $(function() {
       <td><input name="txt_ing_fec" type="text" class="fecha" id="txt_ing_fec" value="<?php echo $fec?>" size="10" maxlength="10"></td>
       <td align="right"><label for="cmb_caj_id">Caja:</label></td>
       <td>
-        <select name="cmb_caj_id" id="cmb_caj_id">
+        <select name="cmb_caj_id" id="cmb_caj_id" readonly disabled>
+
         </select></td>
     </tr>
     <tr>

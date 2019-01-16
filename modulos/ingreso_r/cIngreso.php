@@ -86,7 +86,7 @@ class cIngreso{
 	LEFT JOIN tb_entfinanciera ef ON i.tb_entfinanciera_id=ef.tb_entfinanciera_id
 	LEFT JOIN tb_cliente cl ON i.tb_cliente_id = cl.tb_cliente_id
 	LEFT JOIN tb_subcuenta_r sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
-	WHERE i.tb_empresa_id=$emp_id ";
+	WHERE tb_empresa_id=$emp_id ";
 	
 	if($y!=0){
 	$sql = $sql." AND YEAR( tb_ingreso_feccon ) =$y ";
@@ -155,7 +155,7 @@ class cIngreso{
 	LEFT JOIN tb_entfinanciera ef ON i.tb_entfinanciera_id=ef.tb_entfinanciera_id
 	LEFT JOIN tb_cliente cl ON i.tb_cliente_id = cl.tb_cliente_id
 	LEFT JOIN tb_subcuenta_r sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
-	WHERE i.tb_empresa_id=$emp_id 
+	WHERE tb_empresa_id=$emp_id 
 	AND tb_ingreso_feccon BETWEEN '$fec1' AND '$fec2' ";
 	
 		if($caj_id>0){

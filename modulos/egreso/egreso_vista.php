@@ -171,7 +171,7 @@ function egreso_reporte_xls(){
 }
 
 $(function() {
-	
+
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
 		text: true
@@ -182,6 +182,11 @@ $(function() {
 	$('#btn_agregar').button({
 		icons: {primary: "ui-icon-plus"},
 		text: true
+        <?php
+        if ($_SESSION['caja_estado']==0){
+            echo ", disabled: true";
+        }
+        ?>
 	});
 	
 	$('#btn_imprimir_pdf').button({

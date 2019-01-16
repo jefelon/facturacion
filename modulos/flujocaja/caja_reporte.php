@@ -527,7 +527,7 @@ mysql_free_result($dts);
 $saldo_sol=$saldo_anterior_sol+$ingreso_sol-$egreso_sol;
 
 //Ganancias
-$dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),0,0,'',0,0,$_SESSION['empresa_id'],0);
+$dts1=$oVenta->mostrar_filtro_adm(fechahora_mysql($_POST['txt_fil_caj_fec1']),fechahora_mysql_agregar_dias($_POST['txt_fil_caj_fec2'],'+24 hours' ),0,0,'',0,0,$_SESSION['empresa_id'],0);
 $ventas = 0;
 $compras = 0;
 while($dt1 = mysql_fetch_array($dts1)){

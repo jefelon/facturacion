@@ -495,7 +495,16 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
-	
+
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+        <?php
+        if ($_SESSION['caja_estado']==0){
+            echo ", disabled: true";
+        }
+        ?>
+    });
 	venta_filtro();		
 	
 	$('#chk_ven_anu').change( function(){

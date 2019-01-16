@@ -104,8 +104,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 	if(!empty($_POST['txt_ven_fec']))
 	{
 		//consultamos talonario
-			$dts= $oTalonario->correlativo($_SESSION['puntoventa_id'],$_POST['cmb_ven_doc']);
-			$dt = mysql_fetch_array($dts);
+        $dts= $oTalonario->correlativo($_SESSION['puntoventa_id'],$_POST['cmb_ven_doc']);
+        $dt = mysql_fetch_array($dts);
 		$tal_id=$dt['tb_talonario_id'];
 		$tal_ser=$dt['tb_talonario_ser'];
 		$tal_fin=$dt['tb_talonario_fin'];

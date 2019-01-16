@@ -50,7 +50,8 @@ $dt = mysql_fetch_array($dts);
 	$emp_dir2=$dt['tb_empresa_dir2'];
 	$emp_tel=$dt['tb_empresa_tel'];
 	$emp_ema=$dt['tb_empresa_ema'];
-	$emp_fir=$dt['tb_empresa_fir'];		
+	$emp_fir=$dt['tb_empresa_fir'];
+    $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
 
 if($emp_tel!="")$texto_telefono='Teléfono: '.$emp_tel;
@@ -149,7 +150,7 @@ if($impresion=='pdf' or $impresion=='html'){
     <td style="width: 70mm; height:12mm; vertical-align:top;">
         <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
         <tr>
-          <td><img src="logo.jpg" width="100"  height="45" border="0" align="" alt="logo"></td>
+          <td><img src="<?php echo $empresa_logo ?>" width="100"  height="45" border="0" align="" alt="logo"></td>
         	<td>
             <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
             <tr>
@@ -214,7 +215,7 @@ if($impresion=='pdf' or $impresion=='html'){
     <td valign="top" colspan="3" style="font-size: 8pt; height:2mm;"><?php echo ''?></td>
   </tr>
   <tr>
-    <td valign="top" colspan="3" style="font-size: 8pt; height:5mm; text-align:right;"><?php echo "Chiclayo, $fec_d de $fec_m de $fec_y.";?></td>
+    <td valign="top" colspan="3" style="font-size: 8pt; height:5mm; text-align:right;"><?php echo "$fec_d de $fec_m de $fec_y.";?></td>
   </tr>
   <tr>
     <td valign="top" colspan="3" style="font-size: 8pt; height:2mm;"><?php echo ''?></td>
@@ -253,7 +254,7 @@ if($impresion=='pdf' or $impresion=='html'){
     <td style="width: 70mm; height:12mm; vertical-align:top;">
         <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
         <tr>
-          <td><img src="logo.jpg" width="100"  height="45" border="0" align="" alt="logo"></td>
+          <td><img src="<?php echo $empresa_logo ?>" width="100"  height="45" border="0" align="" alt="logo"></td>
           <td>
             <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
             <tr>
@@ -318,7 +319,7 @@ if($impresion=='pdf' or $impresion=='html'){
     <td valign="top" colspan="3" style="font-size: 8pt; height:2mm;"><?php echo ''?></td>
   </tr>
   <tr>
-    <td valign="top" colspan="3" style="font-size: 8pt; height:5mm; text-align:right;"><?php echo "Chiclayo, $fec_d de $fec_m de $fec_y.";?></td>
+    <td valign="top" colspan="3" style="font-size: 8pt; height:5mm; text-align:right;"><?php echo "$fec_d de $fec_m de $fec_y.";?></td>
   </tr>
   <tr>
     <td valign="top" colspan="3" style="font-size: 8pt; height:2mm;"><?php echo ''?></td>
