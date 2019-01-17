@@ -1,0 +1,94 @@
+/*This Script is changing database localhost.sercofi to be like localhost.bordado*/
+
+USE sercofi
+;
+
+ALTER TABLE `tb_caja` ADD `tb_caja_estado`  tinyint  NULL 
+;
+
+
+CREATE TABLE `tb_cajadetalle`
+(
+`tb_cajadetalle_id`  int  NOT NULL  AUTO_INCREMENT,
+`tb_caja_id`  int  NOT NULL,
+`tb_caja_apertura`  datetime  NOT NULL,
+`tb_caja_cierre`  datetime  NULL,
+`tb_caja_inicial`  decimal  (8,2)  NOT NULL,
+`tb_caja_estado`  tinyint  NOT NULL,
+`tb_caja_final`  decimal  (8,2)  NULL
+)
+;
+
+
+ALTER TABLE `tb_compra` DROP COLUMN `tb_compra_orden`
+ALTER TABLE `tb_compra` DROP COLUMN `cs_tipodocumento_id`
+ALTER TABLE `tb_compra` DROP COLUMN `tb_compra_ser_nota`
+ALTER TABLE `tb_compra` DROP COLUMN `tb_compra_num_nota`
+ALTER TABLE `tb_compra` DROP COLUMN `tb_compra_fec_nota`
+ALTER TABLE `tb_compra` DROP COLUMN `tb_compra_tip_nota`
+
+;
+
+ALTER TABLE `tb_empresa` DROP COLUMN `tb_empresa_regimen`
+
+;
+
+ALTER TABLE `tb_guia` DROP COLUMN `tb_guia_serie`
+
+;
+
+ALTER TABLE `tb_venta` MODIFY `tb_venta_id`  int  NOT NULL  AUTO_INCREMENT
+;
+ALTER TABLE `tb_venta` MODIFY `tb_venta_fec`  datetime  NOT NULL 
+;
+ALTER TABLE `tb_venta` ADD `tb_venta_tipven`  int  NULL 
+;
+ALTER TABLE `tb_venta` ADD `tb_ventafec_ent`  datetime  NULL 
+;
+ALTER TABLE `tb_venta` ADD `tb_ventacol`  varchar  (45)  COLLATE utf8_spanish_ci NULL 
+;
+
+
+ALTER TABLE `tb_ventacanje` MODIFY `tb_ventacanje_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `tb_ventacorreo` MODIFY `tb_ventacorreo_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `tb_ventadetalle` MODIFY `tb_ventadetalle_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `tb_ventanota` MODIFY `tb_venta_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `tb_ventanotadetalle` MODIFY `tb_ventadetalle_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `tb_ventanotapago` MODIFY `tb_ventanotapago_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `tb_ventapago` MODIFY `tb_ventapago_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `va_cliente` MODIFY `cliente_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `va_detalle` MODIFY `detalle_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+
+ALTER TABLE `va_vale` MODIFY `vale_id`  int  NOT NULL  AUTO_INCREMENT
+;
+
+ALTER TABLE `tb_caja` ALTER COLUMN `tb_caja_estado`  tinyint  NOT NULL
+;
+ALTER TABLE `tb_venta` ALTER COLUMN `tb_venta_tipven`  int  NOT NULLALTER TABLE `tb_venta` ALTER COLUMN `tb_ventafec_ent`  datetime  NOT NULL
+;
