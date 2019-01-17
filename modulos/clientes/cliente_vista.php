@@ -100,7 +100,8 @@ function cliente_form(act,idf){
 			action: act,
 			cli_id:	idf,
 			vista:	'cliente_tabla',
-            dir:'ok'
+            dir:'ok',
+            ver:'todo'
 		}),
 		beforeSend: function() {
 			$('#msj_cliente').hide();

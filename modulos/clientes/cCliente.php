@@ -1,6 +1,9 @@
 <?php
 class cCliente{
-	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,$pdt,$bienfizc,$balancean,$clifijo,$foto){
+	function insertar(
+	    $tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
+        $pdt,$bienfizc,$balancean,$clifijo,$foto,$soluser,$solpass,$afpuser,$afppass
+    ){
 	$sql = "INSERT tb_cliente(
 	`tb_cliente_tip` ,
 	`tb_cliente_nom` ,
@@ -21,13 +24,15 @@ class cCliente{
 	`tb_cliente_bienfizc`,
 	`tb_cliente_balanceanual`,
 	`tb_cliente_clientefijo`,
-	`tb_cliente_foto`
-	
-
+	`tb_cliente_foto`,
+	`tb_cliente_soluser`,
+	`tb_cliente_solpass`,
+	`tb_cliente_afpuser`,
+	`tb_cliente_afppass`
 	)
 	VALUES (
 	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio','$retiene','$cui','$regimen_id',
-	'$afp','$planilla','$pdt','$bienfizc','$balancean','$clifijo','$foto'
+	'$afp','$planilla','$pdt','$bienfizc','$balancean','$clifijo','$foto','$soluser','$solpass','$afpuser','$afppass'
 	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -57,6 +62,14 @@ class cCliente{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
+    function borraLibroContableCliente($id_cliente){
+        $sql = "DELETE FROM tb_librocontablecliente WHERE tb_cliente_id=$id_cliente";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function ultimoInsert(){
 	$sql = "SELECT last_insert_id()";
 	$oCado = new Cado();
@@ -106,7 +119,10 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,$pdt,$bienfizc,$balancean,$clifijo,$foto){
+	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
+                       $pdt,$bienfizc,$balancean,$clifijo,$foto,$soluser,$solpass,$afpuser,$afppass
+    )
+    {
 	$sql = "UPDATE tb_cliente SET  
 	`tb_cliente_tip` =  '$tip',
 	`tb_cliente_nom` =  '$nom',
@@ -127,7 +143,11 @@ class cCliente{
 	`tb_cliente_bienfizc`=  '$bienfizc',
 	`tb_cliente_balanceanual`=  '$balancean',
 	`tb_cliente_clientefijo`=  '$clifijo',
-	`tb_cliente_foto`=  '$foto'
+	`tb_cliente_foto`=  '$foto',
+	`tb_cliente_soluser`=  '$soluser',
+	`tb_cliente_solpass`=  '$solpass',
+	`tb_cliente_afpuser`=  '$afpuser',
+	`tb_cliente_afppass`=  '$afppass'
 	
 	WHERE tb_cliente_id =$id";
 	$oCado = new Cado();

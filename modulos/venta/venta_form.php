@@ -1724,7 +1724,7 @@ if($_POST['action']=="editar"){
             title:'Información de Cliente',
             autoOpen: false,
             resizable: false,
-            height: 330,
+            height: 420,
             width: 530,
             zIndex: 4,
             modal: true,

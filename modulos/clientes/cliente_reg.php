@@ -43,13 +43,23 @@ if($_POST['action_cliente']=="insertar")
                 $_POST['rad_cli_bienesfizcalizados'],
                 $_POST['rad_cli_balancea'],
                 $_POST['rad_cli_clientefijo'],
-                $_POST['txt_clie_foto']
+                $_POST['txt_clie_foto'],
+                $_POST['txt_cli_clavesolusuario'],
+                $_POST['txt_cli_clavesolclave'],
+                $_POST['txt_cli_claveafpusuario'],
+                $_POST['txt_cli_claveafpclave']
 				);
 			
 				$dts=$oCliente->ultimoInsert();
 				$dt = mysql_fetch_array($dts);
-			$cli_id=$dt['last_insert_id()'];
+			    $cli_id=$dt['last_insert_id()'];
 				mysql_free_result($dts);
+
+                if(!empty($_POST['chk_cli_libros'])){
+                        foreach($_POST['chk_cli_libros'] as $selected){
+                            $oCliente->insertar_librocontablecliente($cli_id,$selected);
+                        }
+                }
 			
 			$data['cli_id']=$cli_id;
 			$data['cli_msj']='Se registró cliente correctamente.';
@@ -101,8 +111,19 @@ if($_POST['action_cliente']=="editar")
                 $_POST['rad_cli_bienesfizcalizados'],
                 $_POST['rad_cli_balancea'],
                 $_POST['rad_cli_clientefijo'],
-                $_POST['txt_clie_foto']
+                $_POST['txt_clie_foto'],
+                $_POST['txt_cli_clavesolusuario'],
+                $_POST['txt_cli_clavesolclave'],
+                $_POST['txt_cli_claveafpusuario'],
+                $_POST['txt_cli_claveafpclave']
 				);
+
+                if(!empty($_POST['chk_cli_libros'])){
+                    $oCliente->borraLibroContableCliente($_POST['hdd_cli_id']);// aqui mejorar
+                    foreach($_POST['chk_cli_libros'] as $selected){
+                        $oCliente->insertar_librocontablecliente($_POST['hdd_cli_id'],$selected); // aqui solo deberia actualizar
+                    }
+                }
 			
 			$data['cli_msj']='Se registró cliente correctamente.';
 			$data['cli_id']=$_POST['hdd_cli_id'];

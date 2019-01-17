@@ -31,6 +31,12 @@ if($_POST['action']=="editar"){
         $balanceanual=$dt['tb_cliente_balanceanual'];
         $clientefijo=    $dt['tb_cliente_clientefijo'];
         $foto=    $dt['tb_cliente_foto'];
+        $soluser=    $dt['tb_cliente_soluser'];
+        $solpass=    $dt['tb_cliente_solpass'];
+        $afpuser=    $dt['tb_cliente_afpuser'];
+        $afppass=    $dt['tb_cliente_afppass'];
+
+
 
 
 	mysql_free_result($dts);
@@ -374,7 +380,7 @@ $(function() {
 
                 </table>
             </fieldset>
-            <fieldset style="min-width: 300px;width: 450px">
+            <fieldset style="min-width: 300px;width: 450px;display:<?php if($_POST['ver']=="todo"){ echo 'block';} { echo 'none';}?>">
                 <legend>LIBROS CONTABLES QUE LLEVA</legend>
 
                 <table class="ui-widget ui-widget-content">
@@ -386,7 +392,7 @@ $(function() {
                     <?php
                     while($dt1 = mysql_fetch_array($dts1)){?>
                     <tr>
-                        <td><input name="chk_cli_libros[]" id="<?php echo $dt1['tb_librocontable_id']?>" type="checkbox" value="0" > <label for="chk_cli_<?php echo $dt1['tb_librocontable_id']?>"><?php echo $dt1['tb_librocontable_nom'].' - ' .$dt1['tb_librocontable_tipo']?></label></td>
+                        <td><input name="chk_cli_libros[]" type="checkbox" value="<?php echo $dt1['tb_librocontable_id']?>"> <label for="chk_cli_<?php echo $dt1['tb_librocontable_id']?>"><?php echo $dt1['tb_librocontable_nom'].' - ' .$dt1['tb_librocontable_tipo']?></label></td>
                     </tr>
                     <?php
                     }
@@ -397,7 +403,8 @@ $(function() {
             </fieldset>
 
     </div>
-    <div style="width: 45%;float: right">
+
+    <div style="width: 45%;float: right;display: <?php if($_POST['ver']=="todo"){ echo 'block';} { echo 'none';}?>">
         <fieldset style="min-width: 300px;width: 450px">
             <legend>OTROS DATOS</legend>
             <table>
@@ -487,11 +494,11 @@ $(function() {
                         <table>
                             <tr>
                                 <td align="right" valign="top"><label for="txt_cli_clavesolusuario">USUARIO:</label></td>
-                                <td><input name="txt_cli_clavesolusuario" type="text" id="txt_cli_clavesolusuario" value="<?php echo $usuario_sol?>" size="10" maxlength="100"></td>
+                                <td><input name="txt_cli_clavesolusuario" type="text" id="txt_cli_clavesolusuario" value="<?php echo $soluser?>" size="10" maxlength="100"></td>
                             </tr>
                             <tr>
                                 <td align="right" valign="top"><label for="txt_cli_clavesolclave">CLAVE:</label></td>
-                                <td><input name="txt_cli_clavesolclave" type="text" id="txt_cli_clavesolclave" value="<?php echo $clave_sol?>" size="10" maxlength="100"></td>
+                                <td><input name="txt_cli_clavesolclave" type="text" id="txt_cli_clavesolclave" value="<?php echo $solpass?>" size="10" maxlength="100"></td>
                             </tr>
                         </table>
                     </td>
@@ -499,11 +506,11 @@ $(function() {
                         <table>
                             <tr>
                                 <td align="right" valign="top"><label for="txt_cli_claveafpusuario">USUARIO:</label></td>
-                                <td><input name="txt_cli_claveafpusuario" type="text" id="txt_cli_claveafpusuario" value="<?php echo $usuario_afp?>" size="10" maxlength="100"></td>
+                                <td><input name="txt_cli_claveafpusuario" type="text" id="txt_cli_claveafpusuario" value="<?php echo $afpuser?>" size="10" maxlength="100"></td>
                             </tr>
                             <tr>
                                 <td align="right" valign="top"><label for="txt_cli_claveafpclave">CLAVE:</label></td>
-                                <td><input name="txt_cli_claveafpclave" type="text" id="txt_cli_claveafpclave" value="<?php echo $clave_afp?>" size="10" maxlength="100"></td>
+                                <td><input name="txt_cli_claveafpclave" type="text" id="txt_cli_claveafpclave" value="<?php echo $afppass?>" size="10" maxlength="100"></td>
                             </tr>
                         </table>
                     </td>
