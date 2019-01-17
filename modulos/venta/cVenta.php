@@ -55,6 +55,16 @@ class cVenta{
         return $rst;
     }
 
+    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_id,$origen_id, $destino_id){
+        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_id` ,`tb_origen_id`,`tb_destino_id`
+	)
+	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_id', '$origen_id', '$destino_id'
+	);";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
     function insertarAsientoEstado($asinum,$viajehora_id){
         $sql = "INSERT INTO tb_asientoestado(`tb_asiento_id`,`tb_viajehorario_id` , `tb_asientoestado_estado`
 	)
@@ -505,6 +515,20 @@ WHERE tb_software_id =$id";
 	`tb_venta_fecenvsun` =  NOW(),
 	`tb_venta_estsun` =  '$est'
 	WHERE  tb_venta_id =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrar_encomienda_viaje($ven_id){
+        $sql="SELECT ev.tb_encomiendaventa_id, ev.tb_venta_id, o.tb_lugar_nom AS ltb_origen, 
+        d.tb_lugar_nom AS ltb_destino, cr.tb_cliente_nom AS crtb_cliente, cd.tb_cliente_nom AS cdtb_cliente 
+        FROM tb_encomiendaventa ev 
+        LEFT JOIN tb_lugar o ON ev.tb_origen_id=o.tb_lugar_id 
+        LEFT JOIN tb_lugar d ON ev.tb_destino_id=d.tb_lugar_id 
+        LEFT JOIN tb_cliente cr ON ev.tb_remitente_id=cr.tb_cliente_id 
+        LEFT JOIN tb_cliente cd ON ev.tb_destinatario_id=cd.tb_cliente_id	
+                        WHERE ev.tb_venta_id=$ven_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

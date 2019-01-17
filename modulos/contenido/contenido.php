@@ -99,6 +99,8 @@ $menu_administrador=
 	  <li class="separator">_____________________</li>
 	  <li><a href="../venta/venta_vista_adm.php">Ventas</a></li>
 	  <li><a href="../venta/venta_vista.php">Registrar Venta</a></li>
+	  <li><a href="../venta/venta_vista_encomienda.php">Registrar Encomienda</a></li>
+	  <li><a href="../venta/venta_vista_adm_encomienda.php">Encomiendas</a></li>
 	  <li><a href="../guia/guia_vista_adm.php">Guia</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../notacredito/">Nota de Crédito</a></li>
@@ -179,6 +181,7 @@ $menu_vendedor=
   <li class="topmenu"><a href="#" >Operaciones</a>
 	<ul>
 	  <li><a href="../venta/">Registrar Venta</a></li>
+	  <li><a href="../venta/venta_vista_encomienda.php">Registrar Encomiendas</a></li>
 	  <li><a href="../traspaso/">Traspaso</a></li>
       <li class="separator">-----------------------</li>
 	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>

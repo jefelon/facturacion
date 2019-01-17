@@ -235,19 +235,31 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
         }
 
-        //REGISTRO VIAJE
-        $oVenta->insertarViajeVenta(
-            $ven_id,
-            $_POST['hdd_vi_ho_id'],
-            $_POST['txt_num_asi'],
-            fecha_mysql($_POST['txt_fech_sal']),
-            $_POST['hdd_ven_pas_id']
-        );
 
-        $oVenta->insertarAsientoEstado(
-            $_POST['txt_num_asi'],
-            $_POST['hdd_vi_ho_id']
-        );
+
+        //REGISTRO VIAJE
+        if($_POST['hdd_tipo']=='encomienda'){
+            $oVenta->insertarEncomiendaVenta(
+                $ven_id,
+                $_POST['hdd_ven_pas_id'],
+                $_POST['hdd_ven_des_id'],
+                $_POST['cmb_salida_id'],
+                $_POST['cmb_llegada_id']
+            );
+        }else{
+            $oVenta->insertarViajeVenta(
+                $ven_id,
+                $_POST['hdd_vi_ho_id'],
+                $_POST['txt_num_asi'],
+                fecha_mysql($_POST['txt_fech_sal']),
+                $_POST['hdd_ven_pas_id']
+            );
+            $oVenta->insertarAsientoEstado(
+                $_POST['txt_num_asi'],
+                $_POST['hdd_vi_ho_id']
+            );
+        }
+
 
 
 
