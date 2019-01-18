@@ -273,6 +273,12 @@ $fec=date('d-m-Y');
             }
 
         });
+        $( "#txt_pasaj_edad" ).keypress(function( event ) {
+            if ( event.which == 13 ) {
+                $( "#bus_form" ).submit();
+            }
+
+        });
 
         $( "#div_venta_horario_form" ).dialog({
             title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
