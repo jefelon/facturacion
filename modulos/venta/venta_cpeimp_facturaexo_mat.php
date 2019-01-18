@@ -152,6 +152,8 @@ while($dt = mysql_fetch_array($dts))
     
 }
 
+$vvs = $oVenta->mostrar_viajeventa($ven_id);
+$vv = mysql_fetch_array($vvs);
 
 $evs = $oVenta->mostrar_encomienda_viaje($ven_id);
 $ev = mysql_fetch_array($evs);
@@ -340,6 +342,12 @@ if($impresion=='pdf')ob_start();
     </tr>
     <tr>
         <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+    </tr>
+    <tr>
+        <td colspan="4"> <?php echo 'CLIENTE: ' .$vv['tb_cliente_nom'] ?></td>
+    </tr>
+    <tr>
+        <td colspan="4"> <?php echo 'DNI: ' .$vv['tb_cliente_doc'] ?></td>
     </tr>
     <tr>
         <td colspan="4"> <?php echo 'Remitente: ' . $ev['crtb_cliente'] ?></td>

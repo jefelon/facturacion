@@ -535,8 +535,9 @@ WHERE tb_software_id =$id";
     }
 
     function mostrar_viajeventa($ven_id){
-        $sql="SELECT * FROM tb_viajeventa
-                        WHERE tb_venta_id=$ven_id";
+        $sql="SELECT * FROM tb_viajeventa vv
+        LEFT JOIN tb_cliente c ON vv.tb_cliente_id=c.tb_cliente_id
+                        WHERE vv.tb_venta_id=$ven_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -552,5 +553,6 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
 }
 ?>

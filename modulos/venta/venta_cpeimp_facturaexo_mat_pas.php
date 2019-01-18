@@ -346,6 +346,12 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
     </tr>
     <tr>
+        <td colspan="4"> <?php echo 'CLIENTE: ' .$vv['tb_cliente_nom'] ?></td>
+    </tr>
+    <tr>
+        <td colspan="4"> <?php echo 'DNI: ' .$vv['tb_cliente_doc'] ?></td>
+    </tr>
+    <tr>
         <td colspan="2"> <?php echo 'Origen: ' . $vh['ltb_origen'] ?></td>
         <td colspan="2"> <?php echo 'Destino: ' . $vh['ltb_destino'] ?></td>
     </tr>

@@ -83,7 +83,7 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
     });
 </script>
             <?php
-            if($num_rows>=1){
+            if(1){
             ?>
             <div id="frentera"><!--FRENTE--></div>
             <div id="lugares">
