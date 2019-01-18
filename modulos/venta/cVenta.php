@@ -533,5 +533,24 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
+    function mostrar_viajeventa($ven_id){
+        $sql="SELECT * FROM tb_viajeventa
+                        WHERE tb_venta_id=$ven_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrar_viajehorario($vh_id){
+        $sql="SELECT tb_viajehorario_id,tb_viajehorario_horario, tb_viajehorario_fecha, o.tb_lugar_nom AS ltb_origen, 
+        d.tb_lugar_nom AS ltb_destino FROM tb_viajehorario vh
+              LEFT JOIN tb_lugar o ON vh.tb_viajehorario_salida=o.tb_lugar_id 
+              LEFT JOIN tb_lugar d ON vh.tb_viajehorario_llegada=d.tb_lugar_id 
+                        WHERE tb_viajehorario_id=$vh_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>
