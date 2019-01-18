@@ -15,19 +15,13 @@ $oEmpresa = new cEmpresa();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
-require_once ("../letras/cLetras.php");
-$cLetras = new cLetras();
-
-require_once("../guia/cGuia.php");
-$oGuia = new cGuia();
-
 require_once ("../conductor/cConductor.php");
 $oConductor = new cConductor();
 
 require_once ("../transporte/cTransporte.php");
 $oTransporte = new cTransporte();
 
-$ven_id=$_POST['ven_id'];
+$id_horario=$_POST['id_horario'];
 
 $guias = $oGuia->mostrarGuiaUno($ven_id);
 $guia = mysql_fetch_array($guias);
