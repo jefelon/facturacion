@@ -43,6 +43,12 @@ $fec=date('d-m-Y');
         text: false
     });
 
+    $('#btn_manifiesto').button({
+        icons: {primary: "ui-icon-print"},
+        text: false
+    });
+
+
     function cmb_lugar()
     {
         $.ajax({
@@ -132,6 +138,7 @@ $fec=date('d-m-Y');
                 $('#placa_vehiculo').html(data.vehiculo_placa);
                 $('#hdd_vehiculo').val(data.vehiculo_id);
                 $('#hdd_vi_ho').val(data.viajehorario_id);
+                $('#id_horario').val(data.viajehorario_id);
 
             },
             complete: function(){
@@ -250,6 +257,7 @@ $fec=date('d-m-Y');
         $('#cmb_horario').change(function(){
             cmb_horario_vehiculo();
             filtro_bus();
+
         });
 
         $('#cmb_fech_sal').change(function(){
@@ -488,18 +496,18 @@ $fec=date('d-m-Y');
                             <select name="cmb_fech_sal" id="cmb_fech_sal">
                             </select>
                         </td>
-                        <td valign="top"><label for="cmb_horario">Hora Salida:</label><br>
+                        <td width="7%" align="center" valign="top"><label for="cmb_horario">Hora Salida:</label><br>
                             <select name="cmb_horario" id="cmb_horario">
                             </select>
                         </td>
-                        <td valign="top"><label>Vehiculo:</label><br>
+                        <td width="7%" align="center"  valign="top"><label>Vehiculo:</label><br>
                             <div id="placa_vehiculo">
                             </div>
                         </td>
                         <td valign="top"><label for="txt_precio">Precio:</label><br>
                             <input class="venpag_moneda" name="txt_precio" size="4" type="text" id="txt_precio">
                         </td>
-                        <td width="6%" align="left" valign="middle"><a id="btn_agregar_horario" title="Agregar" href="#" onClick="venta_horario_form()">Agregar Horario</a></td>
+                        <td width="10%" align="left" valign="middle"><a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a></td>
                 </table>
             </fieldset>
             <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
@@ -520,5 +528,11 @@ $fec=date('d-m-Y');
 
         </div>
         </form>
+<div>
+    <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post">
+        <input name="precio_prod" type="hidden" id="id_horario" name="id_horario"  value="">
+        <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
+    </form>
+</div>
 
 
