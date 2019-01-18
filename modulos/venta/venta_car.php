@@ -515,8 +515,6 @@ else
         text: false
     });
 
-
-
     function calcular_vuelto(){
         var importe = $("#txt_importe_cliente").val();
         var total = $('#txt_ven_tot').val();

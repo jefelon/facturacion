@@ -328,6 +328,20 @@ if($impresion=='pdf')ob_start();
         <td colspan="2"><?php echo ' Hora: ' . $hora ?></td>
     </tr>
     <tr>
+        <td colspan="4" height="10mm">
+            .............................................................................................
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4"> <?php echo 'RAZON SOCIAL: ' .$razon ?></td>
+    </tr>
+    <tr>
+        <td colspan="4"> <?php echo 'RUC: ' .$ruc ?></td>
+    </tr>
+    <tr>
+        <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+    </tr>
+    <tr>
         <td colspan="4"> <?php echo 'Remitente: ' . $ev['crtb_cliente'] ?></td>
     </tr>
     <tr>
@@ -371,7 +385,7 @@ if($impresion=='pdf')ob_start();
                 <td class="izquierda"
                     style="width: 10mm"><?php echo $dt2["tb_ventadetalle_can"] ?></td>
               <td class="izquierda" style="width: 45mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
-              <td class="derecha" style="width: 25mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+              <td class="derecha" style="width: 25mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt2['tb_ventadetalle_can'])?></td>
             </tr>
             <?php  } mysql_free_result($dts2); ?>
           </table>

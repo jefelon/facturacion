@@ -2168,7 +2168,28 @@ if($_POST['action']=="editar"){
                 $("#div_producto_form").html('Cargando...');
             }
         });
-
+        $( "#div_servicio_form" ).dialog({
+            title:'Información de Servicio',
+            autoOpen: false,
+            resizable: false,
+            height: 200,
+            width: 480,
+            modal: true,
+            position: 'center',
+            buttons: {
+                Guardar: function() {
+                    $("#for_ser").submit();
+                },
+                Cancelar: function() {
+                    $('#for_ser').each (function(){this.reset();});
+                    $( this ).dialog("close");
+                }
+            },
+            close: function()
+            {
+                $("#div_servicio_form").html('Cargando...');
+            }
+        });
 
         $('#txt_bus_pro_codbar').keypress(function(e){
             if(e.which == 13){
@@ -2729,7 +2750,7 @@ if($_POST['action']=="editar"){
                     <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>
                 </fieldset>
             </div>
-            <div style="float: left; width: 100%;">
+            <div style="float: left; width: 80%;">
                 <fieldset><legend>Registro de Pagos</legend>
                     <?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
                         <table border="0" cellspacing="2" cellpadding="0">
@@ -2875,6 +2896,12 @@ if($_POST['action']=="editar"){
                     </div>
                 </fieldset>
             </div>
+            <div style="width: 20%;float: left">
+                <fieldset>
+                    <fieldset><legend>Clave encomienda</legend>
+                    <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="5">
+                 </fieldset>
+            </div>
         </div>
 
         <div style="float: left; width: 20%; display: block;">
@@ -2914,7 +2941,7 @@ if($_POST['action']=="editar"){
                     <div id="cuadro-contain" class="ui-widget">
                                      <legend></legend>
                         <?php if($_POST['vista']!='cange'){?>
-                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
+                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="servicio_form_i('insertar')">Agregar</a>
                             <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
                         <?php }?>
                         <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>
@@ -2954,7 +2981,8 @@ if($_POST['action']=="editar"){
 <div id="div_producto_form">
 
 </div>
-
+<div id="div_servicio_form">
+</div>
 <div id="div_tabla_lote_venta">
 </div>
 

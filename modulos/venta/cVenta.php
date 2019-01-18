@@ -55,10 +55,10 @@ class cVenta{
         return $rst;
     }
 
-    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_id,$origen_id, $destino_id){
-        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_id` ,`tb_origen_id`,`tb_destino_id`
+    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_id,$origen_id, $destino_id,$clave){
+        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_id` ,`tb_origen_id`,`tb_destino_id`,`tb_encomiendaventa_clave`
 	)
-	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_id', '$origen_id', '$destino_id'
+	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_id', '$origen_id', '$destino_id','$clave'
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

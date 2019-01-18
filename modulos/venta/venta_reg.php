@@ -244,7 +244,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $_POST['hdd_ven_pas_id'],
                 $_POST['hdd_ven_des_id'],
                 $_POST['cmb_salida_id'],
-                $_POST['cmb_llegada_id']
+                $_POST['cmb_llegada_id'],
+                $_POST['txt_clave']
+
             );
         }else{
             $oVenta->insertarViajeVenta(

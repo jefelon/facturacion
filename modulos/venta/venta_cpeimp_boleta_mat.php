@@ -328,6 +328,20 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="2"><?php echo ' Hora: ' . $hora ?></td>
                 </tr>
                 <tr>
+                    <td colspan="4" height="10mm">
+                        .............................................................................................
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'DNI: ' .$ruc ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+                </tr>
+                <tr>
                     <td colspan="4"> <?php echo 'Remitente: ' . $ev['crtb_cliente'] ?></td>
                 </tr>
                 <tr>
@@ -376,7 +390,7 @@ if ($impresion == 'pdf') ob_start();
                                     <td class="izquierda"
                                         style="width: 40mm"><?php echo '' . $dt2['tb_servicio_nom'] . ''; ?></td>
                                     <td class="derecha"
-                                        style="width: 25mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'] * $dt1['tb_ventadetalle_can']) ?></td>
+                                        style="width: 25mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'] * $dt2['tb_ventadetalle_can']) ?></td>
                                 </tr>
                             <?php }
                             mysql_free_result($dts2); ?>
