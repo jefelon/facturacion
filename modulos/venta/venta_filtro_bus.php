@@ -11,11 +11,11 @@ require_once ("../formatos/formato.php");
 $fecha_salida=fecha_mysql($_POST['cmb_fech_sal']);
 $hora_salida=$_POST['cmb_horario'];
 
-$dts1=$oAsiento->mostrarFiltroFila(1,14, $_POST['txt_vehiculo_id']);
-$dts2=$oAsiento->mostrarFiltroFila(15,28, $_POST['txt_vehiculo_id']);
-$dts3=$oAsiento->mostrarFiltroFila(36,49, $_POST['txt_vehiculo_id']);
-$dts4=$oAsiento->mostrarFiltroFila(29,42, $_POST['txt_vehiculo_id']);
-$dts5=$oAsiento->mostrarFiltroFila(43,56, $_POST['txt_vehiculo_id']);
+$dts1=$oAsiento->mostrarFiltroFila(1,14);
+$dts2=$oAsiento->mostrarFiltroFila(15,28);
+$dts3=$oAsiento->mostrarFiltroFila(36,49);
+$dts4=$oAsiento->mostrarFiltroFila(29,42);
+$dts5=$oAsiento->mostrarFiltroFila(43,56);
 
 $num_rows= mysql_num_rows($dts1);
 
@@ -83,7 +83,7 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
     });
 </script>
             <?php
-            if($num_rows>=1){
+            if(1){
             ?>
             <div id="frentera"><!--FRENTE--></div>
             <div id="lugares">

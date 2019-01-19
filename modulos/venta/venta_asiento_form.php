@@ -59,10 +59,12 @@ $fec=date('d-m-Y');
             beforeSend: function() {
                 $('#cmb_salida_id').html('<option value="">Cargando...</option>');
                 $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
+                $('#cmb_parada_id').html('<option value="">Cargando...</option>');
             },
             success: function(html){
                 $('#cmb_salida_id').html(html);
                 $('#cmb_llegada_id').html(html);
+                $('#cmb_parada_id').html(html);
             },
             complete: function(){
 
@@ -332,7 +334,8 @@ $fec=date('d-m-Y');
                             viaje_horario: $('#cmb_horario').val(),
                             pasaj_dni:$('#txt_pasaj_dni').val(),
                             pasaj_nom:$('#txt_pasaj_nom').val(),
-                            pasaj_edad:$('#txt_pasaj_edad').val()
+                            pasaj_edad:$('#txt_pasaj_edad').val(),
+                            viaje_parada: $('#cmb_parada_id').val()
                         }),
                         beforeSend: function () {
                             //$('#div_venta_asiento_form').dialog("close");
@@ -485,6 +488,11 @@ $fec=date('d-m-Y');
                         <td valign="top">
                             <label for="cmb_salida_id">Salida</label><br>
                             <select name="cmb_salida_id" id="cmb_salida_id">
+                            </select>
+                        </td>
+                        <td valign="top">
+                            <label for="cmb_salida_id">Parada</label><br>
+                            <select name="cmb_parada_id" id="cmb_parada_id">
                             </select>
                         </td>
                         <td valign="top"><label for="cmb_llegada_id">Llegada:</label><br>

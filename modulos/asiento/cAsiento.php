@@ -26,10 +26,10 @@ class cAsiento{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-    function mostrarFiltroFila($desde,$hasta,$vehiculo){
+    function mostrarFiltroFila($desde,$hasta){
         $sql="SELECT * 
 	FROM tb_asiento
-	WHERE tb_asiento_nom between '$desde' AND '$hasta' AND tb_vehiculo_id='$vehiculo' 
+	WHERE tb_asiento_nom between '$desde' AND '$hasta'
 	ORDER BY tb_asiento_nom ASC ";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -66,7 +66,7 @@ class cAsiento{
         FROM tb_asientoestado ae 
         INNER JOIN tb_asiento a ON a.tb_asiento_id= ae.tb_asiento_id
         INNER JOIN tb_viajehorario vh ON vh.tb_viajehorario_id=ae.tb_viajehorario_id
-        WHERE a.tb_asiento_nom='$nom' AND a.tb_vehiculo_id='$vehiculo' AND vh.tb_viajehorario_fecha='$fecha' AND vh.tb_viajehorario_horario='$horario'" ;
+        WHERE a.tb_asiento_nom='$nom' AND vh.tb_vehiculo_id='$vehiculo' AND vh.tb_viajehorario_fecha='$fecha' AND vh.tb_viajehorario_horario='$horario'" ;
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

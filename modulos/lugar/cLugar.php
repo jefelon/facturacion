@@ -78,7 +78,7 @@ class cLugar{
 
 
     function mostrarFechas($salida_id,$llegada_id){
-        $sql="SELECT * 
+        $sql="SELECT DISTINCT tb_viajehorario_fecha
 	    FROM tb_viajehorario vh
 	    INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id = v.tb_vehiculo_id
 	    WHERE vh.tb_viajehorario_salida=$salida_id AND vh.tb_viajehorario_llegada=$llegada_id";

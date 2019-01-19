@@ -255,7 +255,7 @@ function venta_check(){
 function venta_impresion(idf){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_preimpresion.php",
+		url: "../venta/venta_preimpresion_pas.php",
 		async:true,
 		dataType: "html",                      
 		data: ({

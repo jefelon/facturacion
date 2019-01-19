@@ -153,17 +153,17 @@ if($_POST['action']=="editar"){
     });
     $(".btn_ir").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
-    $('#btn_cli_form_agregar,#btn_pas_form_agregar').button({
+    $('#btn_cli_form_agregar,#btn_pas_form_agregar,#btn_des_form_agregar').button({
         icons: {primary: "ui-icon-plus"},
         text: false
     });
-    $("#btn_cli_form_agregar,#btn_pas_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+    $("#btn_cli_form_agregar,#btn_pas_form_agregar,#btn_des_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
-    $('#btn_cli_form_modificar, #btn_pas_form_modificar').button({
+    $('#btn_cli_form_modificar, #btn_pas_form_modificar,#btn_des_form_modificar').button({
         icons: {primary: "ui-icon-pencil"},
         text: false
     });
-    $("#btn_cli_form_modificar, #btn_pas_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+    $("#btn_cli_form_modificar, #btn_pas_form_modificar,#btn_des_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
     $('#btn_con_form_agregar').button({
         icons: {primary: "ui-icon-plus"},
@@ -1133,6 +1133,71 @@ if($_POST['action']=="editar"){
     }
 
 
+    function remitente_form_i(act,idf,nom,dir,con,tel,est){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: 		act,
+                cli_id:			idf,
+                cli_nom:		nom,
+                cli_dir:		dir,
+                cli_con:		con,
+                cli_tel:		tel,
+                cli_est:		est,
+                vista:			'hdd_cli_id'
+            }),
+            beforeSend: function(a) {
+                //$('#msj_proveedor').hide();
+                //$("#btn_cmb_pro_id").click(function(e){
+                $("#btn_pas_form_agregar").click(function(e){
+                    //x=e.pageX+5;
+                    //y=e.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_pasajero_form').dialog("open");
+                });
+
+                if(act=='editar'){
+                    if(idf>0){
+                        $("#btn_pas_form_modificar").click(function(e){
+                            //x=e.pageX+5;
+                            //y=e.pageY+15;
+                            //$('#div_cliente_form').dialog({ position: [x,y] });
+                            $('#div_pasajero_form').dialog("open");
+                        });
+                    }
+                    else{
+                        alert('Seleccione Cliente');
+                    }
+                }
+
+                if(act=='editarSunat'){
+                    //x=a.pageX+5;
+                    //y=a.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_pasajero_form').dialog("open");
+                }
+
+                $('#div_pasajero_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_pasajero_form').html(html);
+            },
+            complete: function(){
+                if(act=='insertar' & $('#hdd_ven_cli_id').val()=="")
+                {
+                    $('#txt_cli_doc').val($('#txt_ven_pas_doc').val());
+                    $('#txt_cli_nom').val($('#txt_ven_pas_nom').val());
+                }
+
+            }
+        });
+    }
+
+
+
 
     function cliente_cargar_datos(idf){
         $.ajax({
@@ -1475,22 +1540,28 @@ if($_POST['action']=="editar"){
             }
         });
 
-
         $( "#txt_ven_pas_doc" ).autocomplete({
             minLength: 1,
             source: "../clientes/cliente_complete_doc.php",
             select: function(event, ui){
-                $("#hdd_ven_pas_id").val(ui.item.id);
-                $("#hdd_ven_cli_id").val(ui.item.id);
-                $("#hdd_ven_cli_tip").val(ui.item.tipo);
-                $("#txt_ven_pas_nom").val(ui.item.nombre);
-                $("#txt_ven_pas_dir").val(ui.item.direccion);
-                $('#hdd_ven_cli_id').change();
 
-                if($("#hdd_ven_pas_id" ).val()>0){
-                    cmb_dir_id($( "#hdd_ven_pas_id" ).val());
 
+                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                    alert($('#cmb_ven_doc').val());
+                    $("#hdd_ven_cli_id").val(ui.item.id);
+                    $("#hdd_ven_cli_tip").val(ui.item.tipo);
+                    $('#hdd_ven_cli_id').change();
                 }
+                    $("#hdd_ven_pas_id").val(ui.item.id);
+                    $("#txt_ven_pas_nom").val(ui.item.nombre);
+                    $("#txt_ven_pas_dir").val(ui.item.direccion);
+
+
+                    if($("#hdd_ven_pas_id" ).val()>0){
+                        cmb_dir_id($( "#hdd_ven_pas_id" ).val());
+
+                    }
+
                 //alert(ui.item.value);
                 // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
                 // $('#msj_busqueda_sunat').show(100);
@@ -1498,23 +1569,29 @@ if($_POST['action']=="editar"){
             }
         });
 
+
+
         $( "#txt_ven_pas_nom" ).autocomplete({
             minLength: 1,
             source: "../clientes/cliente_complete_nom.php",
             select: function(event, ui){
-                $("#hdd_ven_pas_id").val(ui.item.id);
-                $("#hdd_ven_cli_id").val(ui.item.id);
-                $("#hdd_ven_cli_tip").val(ui.item.tipo);
-                $("#txt_ven_pas_doc").val(ui.item.documento);
-                $("#txt_ven_pas_dir").val(ui.item.direccion);
-                $('#hdd_ven_pas_id').change();
-                if($("#hdd_ven_pas_id" ).val()>0){
-                    cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12') {
+
+                    $("#hdd_ven_cli_id").val(ui.item.id);
+                    $("#hdd_ven_cli_tip").val(ui.item.tipo);
                 }
-                //alert(ui.item.value);
-                // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
-                // $('#msj_busqueda_sunat').show(100);
-                // compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
+                    $("#hdd_ven_pas_id").val(ui.item.id);
+                    $("#txt_ven_pas_doc").val(ui.item.documento);
+                    $("#txt_ven_pas_dir").val(ui.item.direccion);
+                    $('#hdd_ven_pas_id').change();
+                    if ($("#hdd_ven_pas_id").val() > 0) {
+                        cmb_dir_id($("#hdd_ven_cli_id").val());
+                    }
+                    //alert(ui.item.value);
+                    // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                    // $('#msj_busqueda_sunat').show(100);
+                    // compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
+
             }
         });
 
@@ -1875,6 +1952,46 @@ if($_POST['action']=="editar"){
 
 
         $( "#div_cliente_form" ).dialog({
+            title:'Información de Cliente',
+            autoOpen: false,
+            resizable: false,
+            height: 330,
+            width: 530,
+            zIndex: 4,
+            modal: true,
+            position: ["center",0],
+            buttons: {
+                Guardar: function() {
+                    $("#for_cli").submit();
+                },
+                Cancelar: function() {
+                    $('#for_cli').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+        $( "#div_pasajero_form" ).dialog({
+            title:'Información de Cliente',
+            autoOpen: false,
+            resizable: false,
+            height: 330,
+            width: 530,
+            zIndex: 4,
+            modal: true,
+            position: ["center",0],
+            buttons: {
+                Guardar: function() {
+                    $("#for_cli").submit();
+                },
+                Cancelar: function() {
+                    $('#for_cli').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+        $( "#div_destinatario_form" ).dialog({
             title:'Información de Cliente',
             autoOpen: false,
             resizable: false,
@@ -2622,8 +2739,8 @@ if($_POST['action']=="editar"){
                     <table>
                         <tr>
                             <td align="right"><?php if($_POST['action']=='insertar'){?>
-                                    <a id="btn_pas_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
-                                    <a id="btn_pas_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                                    <a id="btn_pas_form_agregar" href="#" onClick="remitente_form_i('insertar')">Agregar Cliente</a>
+                                    <a id="btn_pas_form_modificar" href="#" onClick="remitente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
                                 <?php }?>
                             </td>
                             <td align="right">
@@ -2658,13 +2775,13 @@ if($_POST['action']=="editar"){
 
                 <fieldset>
                     <legend>Datos Destinatario</legend>
-                    <div id="div_pasajero_form">
+                    <div id="div_destinatario_form">
                     </div>
                     <table>
                         <tr>
                             <td align="right"><?php if($_POST['action']=='insertar'){?>
-                                    <a id="btn_pas_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
-                                    <a id="btn_pas_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                                    <a id="btn_des_form_agregar" href="#" onClick="destinatario_form_i('insertar')">Agregar Cliente</a>
+                                    <a id="btn_des_form_modificar" href="#" onClick="destinatario_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
                                 <?php }?>
                             </td>
 

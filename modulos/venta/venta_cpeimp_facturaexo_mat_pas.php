@@ -101,6 +101,7 @@ $dt = mysql_fetch_array($dts);
   $cui = $dt['tb_cliente_cui'];
   
   $valven =$dt['tb_venta_valven'];
+   $exo = $dt['tb_venta_exo'];
   $igv  =$dt['tb_venta_igv'];
   $tot  =$dt['tb_venta_tot'];
   
@@ -155,8 +156,10 @@ while($dt = mysql_fetch_array($dts))
 $vvs = $oVenta->mostrar_viajeventa($ven_id);
 $vv = mysql_fetch_array($vvs);
 
-$evs = $oVenta->mostrar_encomienda_viaje($ven_id);
-$ev = mysql_fetch_array($evs);
+$vhs = $oVenta->mostrar_viajehorario($vv['tb_viajehorario_id']);
+$vh = mysql_fetch_array($vhs);
+
+
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
 $num_rows_vp= mysql_num_rows($rws1);
@@ -350,16 +353,24 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'DNI: ' .$vv['tb_cliente_doc'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Remitente: ' . $ev['crtb_cliente'] ?></td>
+        <td colspan="2"> <?php echo 'Origen: ' . $vh['ltb_origen'] ?></td>
+        <td colspan="2"> <?php
+            if ($vv['tb_lugar_id']>0){
+                echo 'Destino: ' . $vv['tb_lugar_nom'];
+            }else{
+                echo 'Destino: ' . $vh['ltb_destino'];
+            }
+
+            ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Destinatario: ' . $ev['cdtb_cliente'] ?></td>
+        <td colspan="4"> <?php echo 'Fecha de Viaje: ' . $vh['tb_viajehorario_fecha'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Origen: ' . $ev['ltb_origen'] ?></td>
+        <td colspan="4"> <?php echo 'Hora de Viaje: ' . $vh['tb_viajehorario_horario'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Destino: ' . $ev['ltb_destino'] ?></td>
+        <td colspan="4"> <?php echo 'Nro Asiento: ' . $vv['tb_asiento_nom'] ?></td>
     </tr>
     <tr>
         <td colspan="4" height="10mm">
