@@ -14,19 +14,21 @@ $oAsiento = new cAsiento();
 
 require_once ("../formatos/formato.php");
 
-$dts1=$oAsiento->mostrarFiltroFila(1,14);
-$dts2=$oAsiento->mostrarFiltroFila(15,28);
-$dts3=$oAsiento->mostrarFiltroFila(36,49);
-$dts4=$oAsiento->mostrarFiltroFila(29,42);
-$dts5=$oAsiento->mostrarFiltroFila(43,56);
+$vehiculo_id=4;
+echo  "Modificando vehiculo Id: ". $vehiculo_id;
+$dts1=$oAsiento->mostrarFiltroFila(1,14, $vehiculo_id);
+$dts2=$oAsiento->mostrarFiltroFila(15,28, $vehiculo_id);
+$dts3=$oAsiento->mostrarFiltroFila(36,49, $vehiculo_id);
+$dts4=$oAsiento->mostrarFiltroFila(29,42,$vehiculo_id );
+$dts5=$oAsiento->mostrarFiltroFila(43,56, $vehiculo_id);
 
 $num_rows= mysql_num_rows($dts1);
 
-$dts11=$oAsiento->mostrar_distribucionasiento(1);
-$dts22=$oAsiento->mostrar_distribucionasiento(2);
-$dts33=$oAsiento->mostrar_distribucionasiento(3);
-$dts44=$oAsiento->mostrar_distribucionasiento(4);
-$dts55=$oAsiento->mostrar_distribucionasiento(5);
+$dts11=$oAsiento->mostrar_distribucionasiento(1,1, $vehiculo_id);
+$dts22=$oAsiento->mostrar_distribucionasiento(2,1,$vehiculo_id );
+$dts33=$oAsiento->mostrar_distribucionasiento(3,1, $vehiculo_id);
+$dts44=$oAsiento->mostrar_distribucionasiento(4,1, $vehiculo_id);
+$dts55=$oAsiento->mostrar_distribucionasiento(5,1, $vehiculo_id);
 
 $dt11 = mysql_fetch_array($dts11);
 $dt22 = mysql_fetch_array($dts22);
@@ -38,6 +40,7 @@ $orden22=$dt22['tb_distribucionasiento_lugar'];
 $orden33=$dt33['tb_distribucionasiento_lugar'];
 $orden44=$dt44['tb_distribucionasiento_lugar'];
 $orden55=$dt55['tb_distribucionasiento_lugar'];
+
 
 
 ?>
