@@ -39,6 +39,7 @@ if($_POST['action']=="actualizar"){
     $cierre = mostrarFechaHora(date('d-m-Y H:i'));
     $inicial = $cdet['tb_caja_inicial'];
     $cdetalle_id = $cdet['tb_cajadetalle_id'];
+
     $cdetants = $oCajadetalle->mostrarUno($cdet['tb_cajadetalle_id']-1);
     $cdetant = mysql_fetch_array($cdetants);
     $saldo_anterior_sol =  $cdetant['tb_caja_final'];

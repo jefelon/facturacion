@@ -7,9 +7,8 @@ $oFormula = new cFormula();
 
 require_once("../venta/cVenta.php");
 $oVenta = new cVenta();
-
-
-
+require_once ("../cajadetalle/cCajadetalle.php");
+$oCajadetalle = new cCajadetalle();
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 require_once ("../puntoventa/cPuntoventa.php");
@@ -17,7 +16,7 @@ $oPuntoventa = new cPuntoventa();
 
 $pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
 $pv = mysql_fetch_array($pvs);
-
+$caja_venta		=$pv['tb_caja_id'];
 
 if($_POST['action']=="insertar"){
 	//$cli_id=1;
@@ -26,6 +25,13 @@ if($_POST['action']=="insertar"){
 	$est='CANCELADA';
 	$venpag_fec=date('d-m-Y');
 	$unico_id=uniqid();
+
+    $cdets = $oCajadetalle->ultimoInsertCaja($caja_venta);
+    $cdet = mysql_fetch_array($cdets);
+    $cdetants = $oCajadetalle->mostrarUno($cdet['tb_cajadetalle_id']-1);
+    $cdetant = mysql_fetch_array($cdetants);
+    $saldo_anterior_sol =  $cdetant['tb_caja_final'];
+
 }
 
 ?>
@@ -123,6 +129,15 @@ $(function() {
                                style="text-align:right; font-size:12px" size="30"
                                value="<?php echo $fec_ape ?>" maxlength="20" readonly/>
                     </td>
+                <tr>
+                    <td style="width:30%;">
+                        <label for="txt_mon_inicial"><b>SALDO ANTERIOR:</b></label>
+                    </td>
+                    <td style="width:50%;">
+                        <input name="txt_sal_anterior" type="text" class="moneda" id="txt_mon_inicial"
+                               style="text-align:right; font-size:14px;font-weight: bold;color: green;" size="23" maxlength="20" value="<?php echo formato_moneda($saldo_anterior_sol) ?>" disabled>
+                    </td>
+                </tr>
                 <tr>
                     <td style="width:30%;">
                         <label for="txt_mon_inicial">Monto Apertura:</label>

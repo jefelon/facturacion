@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/caja_abrir_form.php" afterPath="$PROJECT_DIR$/modulos/cajadetalle/caja_abrir_form.php" />
       <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" afterPath="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,21 +57,34 @@
       <file leaf-file-name="caja_cerrar_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="246">
-              <caret line="171" column="24" lean-forward="false" selection-start-line="171" selection-start-column="24" selection-end-line="171" selection-end-column="24" />
+            <state relative-caret-position="75">
+              <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="35" />
               <folding>
-                <element signature="e#1612#2799#0#HTML" expanded="false" />
+                <element signature="e#1613#2800#0#HTML" expanded="false" />
+                <element signature="n#script#2;n#!!top" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cajadetalle_vista.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="cajadetalle_vista.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="381">
               <caret line="137" column="27" lean-forward="false" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="caja_abrir_form.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/cajadetalle/caja_abrir_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="337">
+              <caret line="137" column="112" lean-forward="false" selection-start-line="137" selection-start-column="112" selection-end-line="137" selection-end-column="112" />
+              <folding>
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,7 +122,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>signatu</find>
       <find>razon</find>
       <find>guia</find>
       <find>NIU</find>
@@ -140,6 +151,7 @@
       <find>txt_cli_doc</find>
       <find>graci</find>
       <find>caja_cerrar_form('actualizar')</find>
+      <find>$saldo_anterior_sol</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -182,7 +194,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modulos/listaprecio/cmb_precio_id.php" />
         <option value="$PROJECT_DIR$/cpegeneracion/sunat/act db.txt" />
         <option value="$PROJECT_DIR$/modulos/notacredito/enviar_sunat.php" />
         <option value="$PROJECT_DIR$/modulos/catalogo/catalogo_compra_tab.php" />
@@ -231,8 +242,9 @@
         <option value="$PROJECT_DIR$/modulos/ingreso/ingreso_form.php" />
         <option value="$PROJECT_DIR$/modulos/clientes/cliente_vista.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php" />
-        <option value="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" />
         <option value="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php" />
+        <option value="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" />
+        <option value="$PROJECT_DIR$/modulos/cajadetalle/caja_abrir_form.php" />
       </list>
     </option>
   </component>
@@ -381,7 +393,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="457087000" />
+    <option name="totallyTimeSpent" value="458133000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -473,18 +485,11 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="18" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/ejecutor/ejecutor_validar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2397">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/usuarios/cUsuario.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
@@ -705,6 +710,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
           <caret line="966" column="0" lean-forward="false" selection-start-line="966" selection-start-column="0" selection-end-line="966" selection-end-column="0" />
+          <folding>
+            <element signature="e#5079#7271#0#PHP" expanded="false" />
+            <element signature="e#7319#18987#0#PHP" expanded="false" />
+            <element signature="e#8187#11278#0#PHP" expanded="false" />
+            <element signature="e#11313#12164#0#PHP" expanded="false" />
+            <element signature="e#13071#18987#0#PHP" expanded="false" />
+            <element signature="e#18993#19423#0#PHP" expanded="false" />
+            <element signature="e#19883#20153#0#PHP" expanded="false" />
+            <element signature="e#20485#27431#0#PHP" expanded="false" />
+            <element signature="e#28083#28617#0#PHP" expanded="false" />
+            <element signature="e#28619#29053#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -972,21 +989,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="246">
-          <caret line="171" column="24" lean-forward="false" selection-start-line="171" selection-start-column="24" selection-end-line="171" selection-end-column="24" />
-          <folding>
-            <element signature="e#1612#2799#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
           <caret line="137" column="27" lean-forward="false" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="15" column="0" lean-forward="false" selection-start-line="15" selection-start-column="0" selection-end-line="16" selection-end-column="35" />
+          <folding>
+            <element signature="e#1613#2800#0#HTML" expanded="false" />
+            <element signature="n#script#2;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/cajadetalle/caja_abrir_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="137" column="112" lean-forward="false" selection-start-line="137" selection-start-column="112" selection-end-line="137" selection-end-column="112" />
+          <folding>
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#fieldset#0;n#form#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
