@@ -412,7 +412,10 @@ if($impresion=='pdf')ob_start();
                                 <td colspan="4" style="width: 80mm" class="centrado">Canjear por comprobante de pago</td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="centrado"><h5>GRACIAS POR LA COMPRA</h5></td>
+                                <td colspan="4" style="width: 80mm" class="centrado">NOTA: </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="centrado"><h5>GRACIAS POR SU PREFERENCIA</h5></td>
                             </tr>
                             </tbody>
                         </table>

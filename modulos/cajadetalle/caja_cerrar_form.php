@@ -169,7 +169,7 @@ $pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
 $pv = mysql_fetch_array($pvs);
 $caja_venta		=$pv['tb_caja_id'];
 
-$monto_inicial=$_POST['txt_mon_inicial'];
+$monto_inicial=$inicial;
 
 
 $dts1=$oIngreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fechahora_mysql($apertura),fechahora_mysql($cierre),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_ing_numdoc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ing_est']);
@@ -327,7 +327,7 @@ $num_rows= mysql_num_rows($dts1);
 <input name="hdd_gasto_total" id="hdd_gasto_total" type="hidden" value="<?php echo $sum_imp_egr?>">
 
 <?php
-$saldo_sol = $saldo_anterior_sol + $monto_inicial+$sum_imp_ingr-$sum_imp_egr
+$saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
 ?>
 <div class="ui-widget-header ui-corner-all" style="width:auto; padding:2px; margin:3px">CONSULTA SALDO CAJA</div>
 <table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
