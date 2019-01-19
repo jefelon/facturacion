@@ -346,9 +346,17 @@ if ($impresion == 'pdf') ob_start();
                 <tr>
                     <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
                 </tr>
+
                 <tr>
                     <td colspan="2"> <?php echo 'Origen: ' . $vh['ltb_origen'] ?></td>
-                    <td colspan="2"> <?php echo 'Destino: ' . $vh['ltb_destino'] ?></td>
+                    <td colspan="2"> <?php
+                        if ($vv['tb_lugar_id']>0){
+                            echo 'Destino: ' . $vv['tb_lugar_nom'];
+                        }else{
+                            echo 'Destino: ' . $vh['ltb_destino'];
+                        }
+
+                        ?></td>
                 </tr>
                 <tr>
                     <td colspan="4"> <?php echo 'Fecha de Viaje: ' . $vh['tb_viajehorario_fecha'] ?></td>

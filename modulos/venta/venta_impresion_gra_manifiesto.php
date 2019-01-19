@@ -15,82 +15,9 @@ $oEmpresa = new cEmpresa();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
-require_once ("../conductor/cConductor.php");
-$oConductor = new cConductor();
 
-require_once ("../transporte/cTransporte.php");
-$oTransporte = new cTransporte();
-
-$id_horario=$_POST['id_horario'];
-
-$guias = $oGuia->mostrarGuiaUno($ven_id);
-$guia = mysql_fetch_array($guias);
-$guia_id = $guia['tb_guia_id'];
-$fecha  = mostrarFecha($guia['tb_guia_fec']);
-$marca= $guia['tb_guia_mar'];
-$placa= $guia['tb_guia_pla'];
-
-if($guia['tb_guia_tipope'] == 1){
-    $guia_ope = "Transferencia";
-}elseif ($guia['tb_guia_tipope'] == 2) {
-    $guia_ope = "Venta";
-}
-$serie=$guia['tb_guia_serie'];
-$numero=$guia["tb_guia_num"];
-
-
-$cond_id=0;
-if ($guia["tb_conductor_id"]){
-    $cond_id = $guia["tb_conductor_id"];
-}
-$dts=$oConductor->mostrarUno($cond_id);
-$dt = mysql_fetch_array($dts);
-$cond_nombre=$dt['tb_conductor_nom'];
-$cond_lic=$dt['tb_conductor_lic'];
-mysql_free_result($dts);
-
-$dts=$oTransporte->mostrarUno($guia["tb_transporte_id"]);
-$dt = mysql_fetch_array($dts);
-$trans_razsoc=$dt['tb_transporte_razsoc'];
-$trans_ruc=$dt['tb_transporte_ruc'];
-mysql_free_result($dts);
-
-$dts=$oEmpresa->mostrarUno($guia["tb_empresa_id"]);
-$dt = mysql_fetch_array($dts);
-$ruc_empresa=$dt['tb_empresa_ruc'];
-$razon_defecto = $dt['tb_empresa_razsoc'];
-$direccion_defecto = $dt['tb_empresa_dir'];
-$contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
-$empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
-if(!is_file($empresa_logo)){
-    $empresa_logo='../../images/logo.jpg';
-}
-mysql_free_result($dts);
-
-$dts=$oUsuario->mostrarUno($guia["tb_usuario_id"]);
-$dt = mysql_fetch_array($dts);
-$usugru		=$dt['tb_usuariogrupo_id'];
-$usugru_nom	=$dt['tb_usuariogrupo_nom'];
-$usu_nom	=$dt['tb_usuario_nom'];
-$apepat		=$dt['tb_usuario_apepat'];
-$apemat		=$dt['tb_usuario_apemat'];
-$ema		=$dt['tb_usuario_ema'];
-mysql_free_result($dts);
-
-$tipodoc = 'GUIA DE REMISIÓN';
-
-$ven_id=$_POST['ven_id'];
-
-if($moneda==1){
-    $moneda  = "SOLES";
-    $mon = "S/ ";
-    $monedaval=1;
-}
-if($moneda==2){
-    $moneda  = "DOLARES";
-    $mon = "$ ";
-    $monedaval=2;
-}
+$vts=$oVenta->mostrar_manifiesto($_POST['vh_id']);
+$vt = mysql_fetch_array($vts);
 
 
 

@@ -45,10 +45,10 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-    function insertarViajeVenta($ven_id,$viajehora_id,$asinum,$asifec, $pasaj){
-        $sql = "INSERT INTO tb_viajeventa(`tb_venta_id` ,`tb_viajehorario_id` ,`tb_asiento_nom` ,`tb_viajeventa_fecha`,`tb_cliente_id`
+    function insertarViajeVenta($ven_id,$viajehora_id,$asinum,$asifec, $pasaj, $parada){
+        $sql = "INSERT INTO tb_viajeventa(`tb_venta_id` ,`tb_viajehorario_id` ,`tb_asiento_nom` ,`tb_viajeventa_fecha`,`tb_cliente_id`,`tb_viajeventa_parada`
 	)
-	VALUES ('$ven_id',   '$viajehora_id',  '$asinum', '$asifec', '$pasaj'
+	VALUES ('$ven_id',   '$viajehora_id',  '$asinum', '$asifec', '$pasaj','$parada' 
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -537,6 +537,7 @@ WHERE tb_software_id =$id";
     function mostrar_viajeventa($ven_id){
         $sql="SELECT * FROM tb_viajeventa vv
         LEFT JOIN tb_cliente c ON vv.tb_cliente_id=c.tb_cliente_id
+        LEFT JOIN tb_lugar l ON vv.tb_viajeventa_parada=l.tb_lugar_id
                         WHERE vv.tb_venta_id=$ven_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -549,6 +550,15 @@ WHERE tb_software_id =$id";
               LEFT JOIN tb_lugar o ON vh.tb_viajehorario_salida=o.tb_lugar_id 
               LEFT JOIN tb_lugar d ON vh.tb_viajehorario_llegada=d.tb_lugar_id 
                         WHERE tb_viajehorario_id=$vh_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function mostrar_manifiesto($vh_id)
+    {
+        $sql = "SELECT * FROM tb_viajeventa vv INNER JOIN tb_cliente c ON vv.tb_cliente_id=c.tb_cliente_id INNER JOIN tb_venta v ON vv.tb_venta_id=vv.tb_venta_id 
+        LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        WHERE tb_viajehorario_id=$vh_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
