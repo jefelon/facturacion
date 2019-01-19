@@ -515,10 +515,11 @@ $fec=date('d-m-Y');
                         <td valign="top"><label for="txt_precio">Precio:</label><br>
                             <input class="venpag_moneda" name="txt_precio" size="4" type="text" id="txt_precio">
                         </td>
-                        <td width="10%" align="left" valign="middle"><a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a></td>
+                        <td width="10%" align="left" valign="middle"><a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
+                            <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: block;position: absolute;top: 8%;right: 3%;"></div>
+                        </td>
                 </table>
             </fieldset>
-            <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
         </div>
         <div id="bus" style="width: 80%;float:left">
 

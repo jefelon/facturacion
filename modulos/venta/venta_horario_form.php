@@ -97,10 +97,13 @@ $(function() {
                     $('#txt_fech_salida').val(data.vh_fecha);
                     // $('#cmb_vehiculo').val(data.vh_vehiculo);
                     // $('#placa_vehiculo').html(data.vh_placa);
-                    cmb_lugar_horario();
+
+                    //cmb_lugar_horario();
+
                     // $('#cmb_horario').val(data.vh_horario);
 					$('#msj_horario').html(data.ven_ho_msj);
                     $("#div_venta_horario_form" ).dialog( "close" );
+                    $('#msj_horario').delay(5000).hide(600);
 				},
 				complete: function(){
 
