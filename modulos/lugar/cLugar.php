@@ -70,7 +70,10 @@ class cLugar{
         $sql="SELECT * 
 	    FROM tb_viajehorario vh
 	    INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id = v.tb_vehiculo_id
-	    WHERE vh.tb_viajehorario_salida='$salida_id' AND vh.tb_viajehorario_llegada='$llegada_id' AND vh.tb_viajehorario_fecha='$fecha' AND vh.tb_viajehorario_horario='$horario'";
+	    WHERE vh.tb_viajehorario_salida='$salida_id' 
+	      AND vh.tb_viajehorario_llegada='$llegada_id'
+	      AND vh.tb_viajehorario_fecha='$fecha' 
+	      AND vh.tb_viajehorario_horario='$horario'";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

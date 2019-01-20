@@ -23,7 +23,7 @@ $fec=date('d-m-Y');
         //aSign: 'S/. ',
         //pSign: 's',
         vMin: '0.00',
-        vMax: '999999999999.99'
+        vMax: '99999999.99'
     });
     $( "#txt_fech_sal" ).datepicker({
         minDate: "-0D",
@@ -140,7 +140,7 @@ $fec=date('d-m-Y');
                 $('#placa_vehiculo').html(data.vehiculo_placa);
                 $('#hdd_vehiculo').val(data.vehiculo_id);
                 $('#hdd_vi_ho').val(data.viajehorario_id);
-                $('#id_horario').val(data.viajehorario_id);
+                $('#hdd_vh_id').val(data.viajehorario_id);
 
             },
             complete: function(){
@@ -478,8 +478,8 @@ $fec=date('d-m-Y');
 
 
     <form id="bus_form">
-        <input type="hidden" id="hdd_vehiculo" value="">
-        <input type="hidden" id="hdd_vi_ho" value="">
+        <label for="">vehiculo</label><input type="text" id="hdd_vehiculo" value=""><br>
+        <label for="">horario id</label> <input type="text" id="hdd_vi_ho" value="">
         <div id="origen_destino">
             <fieldset><legend>Seleccionar Salida y Llegada</legend>
 
@@ -513,10 +513,10 @@ $fec=date('d-m-Y');
                             </div>
                         </td>
                         <td valign="top"><label for="txt_precio">Precio:</label><br>
-                            <input class="venpag_moneda" name="txt_precio" size="4" type="text" id="txt_precio">
+                            <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
                         </td>
                         <td width="10%" align="left" valign="middle"><a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
-                            <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: block;position: absolute;top: 8%;right: 3%;"></div>
+                            <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
                         </td>
                 </table>
             </fieldset>
@@ -539,7 +539,7 @@ $fec=date('d-m-Y');
         </form>
 <div>
     <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post">
-        <input name="precio_prod" type="hidden" id="id_horario" name="id_horario"  value="">
+        <input name="hdd_vh_id" type="hidden" id="hdd_vh_id" name="hdd_vh_id"  value="">
         <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
     </form>
 </div>
