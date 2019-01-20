@@ -366,8 +366,8 @@ if($impresion=='pdf')ob_start();
                                     <tr>
                                         <td class="izquierda" style="width: 10mm"><?php echo $dt1['tb_ventadetalle_can']?></td>
                                         <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>
 
                                 <?php } mysql_free_result($dts1);?>
@@ -377,8 +377,8 @@ if($impresion=='pdf')ob_start();
                                 <tr>
                                     <td class="izquierda" style="width: 10mm"><?php echo $dt2['tb_ventadetalle_can'];?></td>
                                     <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin'])?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                 </tr>
                             <?php  } mysql_free_result($dts2); ?>
                         </table>
@@ -409,10 +409,20 @@ if($impresion=='pdf')ob_start();
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm" class="centrado">Canjear por comprobante de pago</td>
+                                <td colspan="4" style="width: 80mm" class="centrado"><b>SERVICIOS:</b></td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm" class="centrado">NOTA: </td>
+                                <td colspan="4" class="centrado" style="border: 1px dotted #000">Asesoría Contable,
+                                        Asesoría Laboral,
+                                        Auditorías,
+                                        Declaraciones Juradas,
+                                        Llevado de Contabilidad,
+                                        PDT,
+                                        PLAME
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="width: 80mm" class="centrado" style="height:10mm">"Canjear por comprobante de pago"</td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="centrado"><h5>GRACIAS POR SU PREFERENCIA</h5></td>

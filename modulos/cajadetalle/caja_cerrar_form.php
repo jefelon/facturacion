@@ -152,7 +152,7 @@ $(function() {
                         <label for="txt_mon_cie">Monto Cierre:</label>
                     </td>
                     <td style="width:50%;">
-                        <input id="txt_mon_cie" name="txt_mon_cie" class="moneda"
+                        <input id="txt_mon_cie" name="txt_mon_cie"
                                style="text-align:right; font-size:12px" size="30"
                                value="<?php echo formato_moneda(0) ?>" maxlength="30"/>
                     </td>

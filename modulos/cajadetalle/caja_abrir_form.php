@@ -143,7 +143,7 @@ $(function() {
                         <label for="txt_mon_inicial">Monto Apertura:</label>
                     </td>
                     <td style="width:50%;">
-                        <input name="txt_mon_inicial" type="text" class="moneda" id="txt_mon_inicial"
+                        <input name="txt_mon_inicial" type="text" id="txt_mon_inicial"
                                style="text-align:right; font-size:12px; " size="30" maxlength="20" value="<?php echo formato_moneda(0) ?>" >
                     </td>
                 </tr>
