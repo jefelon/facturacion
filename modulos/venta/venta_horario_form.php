@@ -2,6 +2,7 @@
 require_once ("../../config/Cado.php");
 require_once ("../lugar/cLugar.php");
 
+$fec=date('d-m-Y');
 ?>
 
 <script type="text/javascript">
@@ -50,8 +51,8 @@ require_once ("../lugar/cLugar.php");
 
 $(function() {
     $( "#txt_fech_salida" ).datepicker({
-        minDate: "-0D",
-        maxDate:"+7D",
+        minDate: new Date(),
+        maxDate:"+5D",
         yearRange: 'c-0:c+0',
         changeMonth: true,
         changeYear: false,

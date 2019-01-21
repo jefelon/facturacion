@@ -574,7 +574,9 @@ WHERE tb_software_id =$id";
         INNER JOIN tb_cliente c ON vv.tb_cliente_id=c.tb_cliente_id 
         INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
         LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
-        WHERE tb_viajehorario_id=$vh_id";
+        WHERE tb_viajehorario_id=$vh_id
+        ORDER  BY c.tb_cliente_nom
+        ";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

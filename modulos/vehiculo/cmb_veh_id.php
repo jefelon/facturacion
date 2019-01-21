@@ -9,7 +9,7 @@ $oVehiculo = new cVehiculo();
 	while($dt1 = mysql_fetch_array($dts1))
 	{
 ?>
-        <option value="<?php echo $dt1['tb_vehiculo_id']?>" <?php if($dt1['tb_vehiculo_id']==$_POST['veh_id'])echo 'selected'?>><?php echo $dt1['tb_vehiculo_placa']?></option>
+        <option value="<?php echo $dt1['tb_vehiculo_id']?>" <?php if($dt1['tb_vehiculo_id']==$_POST['veh_id'])echo 'selected'?>><?php echo $dt1['tb_vehiculo_id']. ' '.$dt1['tb_vehiculo_marca']. ' - '.$dt1['tb_vehiculo_placa'].' de '.$dt1['tb_vehiculo_numasi'].' Asientos.'?></option>
 <?php
 	}
 	mysql_free_result($dts1);

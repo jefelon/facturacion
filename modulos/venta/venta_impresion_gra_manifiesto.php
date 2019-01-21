@@ -18,7 +18,7 @@ $oUsuario = new cUsuario();
 $dts= $oVenta->mostrar_cabecera_manifiesto($_POST['hdd_vh_id']);
 $dt = mysql_fetch_array($dts);
 
-$fecha=$dt['tb_viajehorario_fecha'];
+$fecha=strtotime($dt['tb_viajehorario_fecha']);
 $hora=$dt['tb_viajehorario_horario'];
 $origen=$dt['Origen'];
 $destino=$dt['Destino'];
@@ -26,6 +26,8 @@ $marca=$dt['tb_vehiculo_marca'];
 $placa=$dt['tb_vehiculo_placa'];
 $conductor=$dt['tb_conductor_nom'];
 $licencia=$dt['tb_conductor_lic'];
+
+$certmtc="";
 
 mysql_free_result($dts);
 
@@ -173,15 +175,44 @@ if($estado=="ANULADA"){
 }
 $html.='
     <tr>
-        <td colspan="4" style="text-align: left; height:48mm;"></td>
+        <td colspan="4" style="text-align: left; height:8mm;"></td>
     </tr>
 </table>
 <table style="width: 194mm;" border="0">
-    <tr><!--punto de partida -->
-        <td style="text-align: left;width:26mm; height:11mm;">&nbsp;</td>
-        <td style="text-align: left;width:74mm;">'.$fecha.'</td>
-        <td style="text-align: left;width:23mm;"></td>
-        <td style="text-align: left;width:74mm;">'.$hora.'</td>
+    <tr>
+        <td style="text-align: left;width:80mm; height:5mm;">&nbsp;</td>
+        <td style="text-align: left;width:10mm;">'.date("d", $fecha).'</td>
+        <td style="text-align: left;width:10mm;">'.date("m", $fecha).'</td>
+        <td style="text-align: left;width:10mm;">'.date("Y", $fecha).'</td>
+        <td style="width: 84mm"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;width:80mm; height:5mm;">&nbsp;</td>
+        <td colspan="3" valign="bottom" style="text-align: center;width:30mm;">'.$hora.'</td>
+        <td style="width: 84mm"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;width:10mm; height:5mm;">&nbsp;</td>
+        <td valign="bottom" style="text-align: left;width:50mm;">'.$origen.'</td>
+        <td valign="bottom" style="text-align: right;width:50mm;">'.$destino.'</td>
+        <td style="width: 84mm"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;width:20mm; height:5mm;">&nbsp;</td>
+        <td valign="bottom" style="text-align: left;width:50mm;">'.$marca.'</td>
+        <td valign="bottom" style="text-align: right;width:40mm;">'.$placa.'</td>
+        <td style="width: 84mm"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;width:10mm; height:5mm;">&nbsp;</td>
+        <td  colspan="2" valign="bottom" style="text-align: left;width:100mm;">'.$certmtc.'</td>
+        <td style="width: 84mm"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;width:10mm; height:5mm;">&nbsp;</td>
+        <td valign="bottom" style="text-align: left;width:50mm;">'.$conductor.'</td>
+        <td valign="bottom" style="text-align: right;width:50mm;">'.$licencia.'</td>
+        <td style="width: 84mm"></td>
     </tr>
  </table>
 
@@ -198,13 +229,13 @@ $html.='
         $html.='<tr>';
 
         $html .= '   
-                    <td style="text-align:center; width: 8mm">'.$cont.'</td>
+                    <td style="text-align:center; width: 8mm;height: 4mm">'.$cont.'</td>
                     <td style="text-align:left;width: 90mm">' .$dt["tb_cliente_nom"] .'</td>
                     <td style="text-align: center; width: 10mm">' .$tipo_doc.'</td>
                     <td style="text-align:center; width: 25mm">' .$dt["tb_cliente_doc"]. '</td>
                     <td style="text-align:center; width: 10mm">' .$dt["tb_asiento_nom"].'</td>
                     <td style="text-align:center; width: 25mm">' .$dt["tb_venta_numdoc"].'</td>
-                    <td style="text-align:center; width: 25mm">' .$dt["tb_venta_tot"].'</td>';
+                    <td style="text-align:right; width: 25mm">' .$dt["tb_venta_tot"].'</td>';
         $html.='</tr>';
         $cont++;
     }
