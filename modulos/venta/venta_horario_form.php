@@ -93,14 +93,15 @@ $(function() {
 					$('#msj_horario').show(100);
 				},
 				success: function(data){
-                    $('#cmb_salida_id').val(data.vh_sal);
+
+				    $('#cmb_salida_id').val(data.vh_sal);
                     $('#cmb_llegada_id').val(data.vh_lleg);
-                    $('#txt_fech_salida').val(data.vh_fecha);
-                    // $('#cmb_vehiculo').val(data.vh_vehiculo);
-                    // $('#placa_vehiculo').html(data.vh_placa);
-
-                    //cmb_lugar_horario();
-
+                    cmb_fecha();
+                    $('#cmb_fech_salida').val(data.vh_fecha);
+                    cmb_fecha_horario();
+                    $('#cmb_horario').val(data.vh_horario);
+                    cmb_vehiculo();
+                    filtro_bus();
                     // $('#cmb_horario').val(data.vh_horario);
 					$('#msj_horario').html(data.ven_ho_msj);
                     $("#div_venta_horario_form" ).dialog( "close" );

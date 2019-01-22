@@ -65,10 +65,10 @@ class cVenta{
         return $rst;
     }
 
-    function insertarAsientoEstado($asinum,$viajehora_id){
-        $sql = "INSERT INTO tb_asientoestado(`tb_asiento_id`,`tb_viajehorario_id` , `tb_asientoestado_estado`
+    function insertarAsientoEstado($asinum,$viajehora_id,$dest_par){
+        $sql = "INSERT INTO tb_asientoestado(`tb_asiento_id`,`tb_viajehorario_id` , `tb_asientoestado_estado`, `tb_destpar_id`
 	)
-	VALUES ('$asinum','$viajehora_id', 1 
+	VALUES ('$asinum','$viajehora_id', 1 , '$dest_par'
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -577,6 +577,38 @@ WHERE tb_software_id =$id";
         WHERE tb_viajehorario_id=$vh_id
         ORDER  BY c.tb_cliente_nom
         ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrar_filtro_cliente($cli_id){
+        $sql="SELECT * 
+	FROM tb_encomiendaventa ev
+	INNER JOIN tb_venta v ON v.tb_venta_id=ev.tb_venta_id
+	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	WHERE v.tb_cliente_id = '$cli_id' ORDER  BY v.tb_venta_fec DESC";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrar_estado_enc($id,$clave){
+        $sql = "SELECT * FROM tb_encomiendaventa 
+        WHERE  tb_encomiendaventa_id=$id AND tb_encomiendaventa_clave=$clave;";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function modificar_estado_enc($id,$clave){
+        $sql = "UPDATE tb_encomiendaventa SET  
+	`tb_estado` =  1
+	WHERE  tb_encomiendaventa_id=$id AND tb_encomiendaventa_clave=$clave;";
+
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

@@ -2431,6 +2431,7 @@ if($_POST['action']=="editar"){
         <input name="unico_id" id="unico_id" type="hidden" value="<?php echo $unico_id?>">
         <input name="hdd_precio" id="hdd_precio" type="hidden" value="<?php echo $_POST['precio']?>">
         <input name="viaje_parada" id="viaje_parada" type="hidden" value="<?php echo $_POST['viaje_parada']?>">
+        <input name="viaje_llegada" id="viaje_llegada" type="hidden" value="<?php echo $_POST['viaje_llegada']?>">
 
 
 

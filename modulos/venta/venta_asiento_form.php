@@ -46,6 +46,7 @@ $fec=date('d-m-Y');
     $('#btn_manifiesto').button({
         icons: {primary: "ui-icon-print"},
         text: false
+
     });
 
 
@@ -134,10 +135,12 @@ $fec=date('d-m-Y');
                 fecha: $('#cmb_fech_sal').val()
             }),
             beforeSend: function() {
-                $('#placa_vehiculo').html('<option value="">Cargando...</option>');
+                $('#txt_placa_vehiculo').val('<option value="">Cargando...</option>');
             },
             success: function(data){
-                $('#placa_vehiculo').html(data.vehiculo_placa);
+                $('#txt_placa_vehiculo').val(data.vehiculo_placa);
+                $('#txt_modelo_vehiculo').val(data.vehiculo_marca);
+                $('#txt_asientos_vehiculo').val(data.vehiculo_numasi);
                 $('#hdd_vehiculo').val(data.vehiculo_id);
                 $('#hdd_vi_ho').val(data.viajehorario_id);
                 $('#hdd_vh_id').val(data.viajehorario_id);
@@ -247,14 +250,33 @@ $fec=date('d-m-Y');
 
     $(function () {
         cmb_lugar();
-        $('#cmb_llegada_id,#cmb_salida_id').change(function(){
+        $('#cmb_parada_id').prop("disabled", true).addClass("ui-state-disabled");
+        $('#cmb_llegada_id').change(function(){
             $('#cmb_horario').val('');
             cmb_fecha();
-            $('#placa_vehiculo').html('');
+            $('#txt_placa_vehiculo').val('');
+            $('#txt_modelo_vehiculo').val('');
+            $('#txt_asientos_vehiculo').val('');
+            $('#bus').html('');
+            $('#hdd_vi_ho').val('');
+            $('#cmb_parada_id').prop("disabled", false);
+            $('#cmb_parada_id').removeClass("ui-state-disabled");
+
+        });
+
+        $('#cmb_salida_id').change(function(){
+            $('#cmb_horario').val('');
+            cmb_fecha();
+            $('#txt_placa_vehiculo').val('');
+            $('#txt_modelo_vehiculo').val('');
+            $('#txt_asientos_vehiculo').val('');
             $('#bus').html('');
             $('#hdd_vi_ho').val('');
 
         });
+
+
+
 
         $('#cmb_horario').change(function(){
             cmb_horario_vehiculo();
@@ -264,7 +286,9 @@ $fec=date('d-m-Y');
 
         $('#cmb_fech_sal').change(function(){
             cmb_fecha_horario();
-            $('#placa_vehiculo').html('');
+            $('#txt_placa_vehiculo').val('');
+            $('#txt_modelo_vehiculo').val('');
+            $('#txt_asientos_vehiculo').val('');
             $('#bus').html('');
             $('#hdd_vi_ho').val('');
         });
@@ -335,7 +359,8 @@ $fec=date('d-m-Y');
                             pasaj_dni:$('#txt_pasaj_dni').val(),
                             pasaj_nom:$('#txt_pasaj_nom').val(),
                             pasaj_edad:$('#txt_pasaj_edad').val(),
-                            viaje_parada: $('#cmb_parada_id').val()
+                            viaje_parada: $('#cmb_parada_id').val(),
+                            viaje_llegada: $('#cmb_llegada_id').val()
                         }),
                         beforeSend: function () {
                             //$('#div_venta_asiento_form').dialog("close");
@@ -437,10 +462,10 @@ $fec=date('d-m-Y');
 
     #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {
         margin: 0 5px 5px 5px;
-        padding: 5px;
+        padding: 0px;
         font-size: 1.2em;
-        width: 30px;
-        height: 40px;
+        width: 40px;
+        height: 50px;
         cursor: pointer !important;
         position: relative;
         float: left;
@@ -478,8 +503,8 @@ $fec=date('d-m-Y');
 
 
     <form id="bus_form">
-        <label for="">vehiculo</label><input type="text" id="hdd_vehiculo" value=""><br>
-        <label for="">horario id</label> <input type="text" id="hdd_vi_ho" value="">
+        <input type="hidden" id="hdd_vehiculo" value="">
+        <input type="hidden" id="hdd_vi_ho" value="">
         <div id="origen_destino">
             <fieldset><legend>Seleccionar Salida y Llegada</legend>
 
@@ -508,10 +533,7 @@ $fec=date('d-m-Y');
                             <select name="cmb_horario" id="cmb_horario">
                             </select>
                         </td>
-                        <td width="7%" align="center"  valign="top"><label>Vehiculo:</label><br>
-                            <div id="placa_vehiculo">
-                            </div>
-                        </td>
+
                         <td valign="top"><label for="txt_precio">Precio:</label><br>
                             <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
                         </td>
@@ -525,23 +547,56 @@ $fec=date('d-m-Y');
 
         </div>
         <div id="pasajero" style="width: 20%;float: right">
-            <label for="txt_pasaj_dni">DNI:</label>
-            <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
-            <label for="txt_pasaj_nom">NOMBRE: </label>
-            <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
-            <label for="txt_pasaj_edad">EDAD: </label>
-            <input name="txt_pasaj_edad" type="text"  id="txt_pasaj_edad" value="" size="20" maxlength="3">
+            <fieldset><legend>Datos Pasajero</legend>
+                <label for="txt_pasaj_dni">DNI:</label><br>
+                <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
+                <label for="txt_pasaj_nom">NOMBRE: </label><br>
+                <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
+                <label for="txt_pasaj_edad">EDAD: </label><br>
+                <input name="txt_pasaj_edad" type="text"  id="txt_pasaj_edad" value="" size="20" maxlength="3">
+            </fieldset>
+            <br>
+            <br>
+        </div>
+        <div id="datos-vehiculo" style="width: 20%;float: right">
+            <fieldset><legend>Datos Vehiculo</legend>
+                <table>
+                    <tr>
+                        <td width="100%" align="left"  valign="top">
+                            <label for="txt_placa_vehiculo">VEHICULO:</label><br>
+                            <input name="txt_placa_vehiculo" type="text" id="txt_placa_vehiculo" value="" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" align="left"  valign="top"><br>
+                            <label for="txt_asientos_vehiculo">ASIENTOS:</label><br>
+                            <input name="txt_asientos_vehiculo" type="text" id="txt_asientos_vehiculo" value="" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" align="left"  valign="top">
+                            <label for="txt_modelo_vehiculo">MODELO:</label><br>
+                            <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
+                        </td>
+                    </tr>
+                </table>
+            </fieldset>
+            <br>
+            <br>
         </div>
 
         <div id="div_venta_horario_form">
 
         </div>
         </form>
+
 <div>
-    <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post">
-        <input name="hdd_vh_id" type="hidden" id="hdd_vh_id" name="hdd_vh_id"  value="">
-        <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
-    </form>
+    <fieldset><legend>Imprimir Manifiesto</legend>
+        <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post" style="text-align: center">
+            <input name="hdd_vh_id" type="hidden" id="hdd_vh_id" name="hdd_vh_id"  value="">
+            <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
+        </form>
+    </fieldset>
 </div>
 
 

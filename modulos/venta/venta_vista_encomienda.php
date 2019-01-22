@@ -175,6 +175,57 @@ function venta_form(act,idf){
 	});
 }
 
+    function venta_entregar_form(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_entregar_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act,
+                ven_id:	idf
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#msj_venta_sunat').hide();
+                $('#div_venta_form').dialog("open");
+                $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_venta_form').html(html);
+            },
+            complete: function(){
+                if(act=='insertar')
+                {
+                    $( "#div_venta_form" ).dialog({
+                        title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
+                        height: 650,
+                        width: 980,
+                        buttons: {
+                            Cerrar: function() {
+                                $('#for_ven').each (function(){this.reset();});
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    });
+                }
+
+                if(act=='editar')
+                {
+                    $( "#div_venta_form" ).dialog({
+                        title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar',
+                        buttons: {
+                            Cancelar: function() {
+                                $('#for_ven').each (function(){this.reset();});
+                                $( this ).dialog( "close" );
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
 function venta_viaje_horario_form(act,idf){
     $.ajax({
         type: "POST",
@@ -560,7 +611,7 @@ $(function() {
 		text: true
 	});
 	
-	$('#btn_agregar').button({
+	$('#btn_agregar,#btn_entregar').button({
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
@@ -729,7 +780,9 @@ $(function() {
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                       <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_form('insertar')">Agregar</a></td>
-                      <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
+                        <td width="6%" align="left" valign="middle"><a id="btn_entregar" title="Entregar Encomienda" href="#" onClick="venta_entregar_form('insertar')">Entregar Encomienda</a></td>
+
+                        <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>
                       <a href="#" onClick="modo('venta_tabla.php')" class="btn_modo" title="Modo Vista Ventas">Ventas</a>
                       </td>

@@ -81,11 +81,17 @@ class cLugar{
 
 
     function mostrarFechas($salida_id,$llegada_id){
+        $fecha = date('Y-m-d');
+        $nuevafecha = strtotime ( '+30 day' , strtotime ( $fecha ) ) ;
+        $nuevafecha = date ( 'Y-m-d' , $nuevafecha );
+
+
         $sql="SELECT DISTINCT tb_viajehorario_fecha
 	    FROM tb_viajehorario vh
-	    INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id = v.tb_vehiculo_id
-	    WHERE vh.tb_viajehorario_salida=$salida_id AND vh.tb_viajehorario_llegada=$llegada_id";
-        $sql.=" ORDER BY tb_viajehorario_horario";
+	    INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id = v.tb_vehiculo_id  
+	    WHERE vh.tb_viajehorario_salida=$salida_id AND vh.tb_viajehorario_llegada=$llegada_id AND tb_viajehorario_fecha BETWEEN '$fecha' AND '$nuevafecha'";
+
+        $sql.=" ORDER BY tb_viajehorario_fecha";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

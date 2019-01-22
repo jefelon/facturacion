@@ -9,6 +9,8 @@ $oLugar = new cLugar();
     $data['viajehorario_id']=$dt1['tb_viajehorario_id'];
     $data['vehiculo_id']=$dt1['tb_vehiculo_id'];
     $data['vehiculo_placa']=$dt1['tb_vehiculo_placa'];
+    $data['vehiculo_marca']=$dt1['tb_vehiculo_marca'];
+    $data['vehiculo_numasi']=$dt1['tb_vehiculo_numasi'];
     echo json_encode($data);
 	mysql_free_result($dts1);
 ?>

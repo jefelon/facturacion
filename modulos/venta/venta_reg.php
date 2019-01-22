@@ -257,10 +257,23 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $_POST['hdd_ven_pas_id'],
                 $_POST['viaje_parada']
             );
-            $oVenta->insertarAsientoEstado(
-                $_POST['txt_num_asi'],
-                $_POST['hdd_vi_ho_id']
-            );
+
+            if ($_POST['viaje_parada']>0){
+                $oVenta->insertarAsientoEstado(
+                    $_POST['txt_num_asi'],
+                    $_POST['hdd_vi_ho_id'],
+                    $_POST['viaje_parada']
+                );
+            }else{
+                $oVenta->insertarAsientoEstado(
+                    $_POST['txt_num_asi'],
+                    $_POST['hdd_vi_ho_id'],
+                    $_POST['viaje_llegada']
+                );
+            }
+
+
+
         }
 
 

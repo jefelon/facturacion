@@ -97,7 +97,14 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             ?>
                                 <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
                                      onclick="cambiar_color(this)">
-                                    <?php echo explode('_',$lugar)[1] ?>
+                                    <div class="" style="padding-left: 4px;">
+                                        <?php echo explode('_',$lugar)[1] ?>
+                                    </div>
+
+                                    <div class="" style="background-color: <?php echo $ast['tb_lugar_color'];?>; color: #000000; position: absolute;bottom: 4px; text-align: center;
+                                            width: 100%;">
+                                        <?php echo substr($ast['tb_lugar_nom'],0,2) ?>
+                                    </div>
                                 </div>
                             <?php
                         }
@@ -115,10 +122,17 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
-                                     onclick="cambiar_color(this)">
+                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                 onclick="cambiar_color(this)">
+                                <div class="" style="padding-left: 4px;">
                                     <?php echo explode('_',$lugar)[1] ?>
                                 </div>
+
+                                <div class="" style="background-color: <?php echo $ast['tb_lugar_color'];?>; color: #000000; position: absolute;bottom: 4px; text-align: center;
+                                        width: 100%;">
+                                    <?php echo substr($ast['tb_lugar_nom'],0,2) ?>
+                                </div>
+                            </div>
                             <?php
                         }
 
@@ -136,10 +150,17 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
-                                     onclick="cambiar_color(this)">
+                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                 onclick="cambiar_color(this)">
+                                <div class="" style="padding-left: 4px;">
                                     <?php echo explode('_',$lugar)[1] ?>
                                 </div>
+
+                                <div class="" style="background-color: <?php echo $ast['tb_lugar_color'];?>; color: #000000; position: absolute;bottom: 4px; text-align: center;
+                                        width: 100%;">
+                                    <?php echo substr($ast['tb_lugar_nom'],0,2) ?>
+                                </div>
+                            </div>
                             <?php
                         }
                     mysql_free_result($dts3);
@@ -156,10 +177,17 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
-                                                                           onclick="cambiar_color(this)">
-                                     <?php echo explode('_',$lugar)[1] ?>
+                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                 onclick="cambiar_color(this)">
+                                <div class="" style="padding-left: 4px;">
+                                    <?php echo explode('_',$lugar)[1] ?>
                                 </div>
+
+                                <div class="" style="background-color: <?php echo $ast['tb_lugar_color'];?>; color: #000000; position: absolute;bottom: 4px; text-align: center;
+                                        width: 100%;">
+                                    <?php echo substr($ast['tb_lugar_nom'],0,2) ?>
+                                </div>
+                            </div>
                             <?php
                         }
 
@@ -179,7 +207,14 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             ?>
                             <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
                                  onclick="cambiar_color(this)">
-                                <?php echo explode('_',$lugar)[1] ?>
+                                <div class="" style="padding-left: 4px;">
+                                    <?php echo explode('_',$lugar)[1] ?>
+                                </div>
+
+                                <div class="" style="background-color: <?php echo $ast['tb_lugar_color'];?>; color: #000000; position: absolute;bottom: 4px; text-align: center;
+                                        width: 100%;">
+                                    <?php echo substr($ast['tb_lugar_nom'],0,2) ?>
+                                </div>
                             </div>
                             <?php
                         }

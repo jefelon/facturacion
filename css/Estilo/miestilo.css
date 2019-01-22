@@ -700,6 +700,23 @@ div.m {
 	font-weight: bold;
 	color:#0092ef;
 }
+
+#txt_pasaj_dni,#txt_pasaj_nom,#txt_pasaj_edad{
+	font-size: 12pt;
+	text-align: center;
+	font-weight: bold;
+	color:#0092ef;
+	width: 100%;
+}
+#txt_placa_vehiculo,#txt_asientos_vehiculo,#txt_modelo_vehiculo{
+	font-size: 12pt;
+	text-align: center;
+	font-weight: bold;
+	color:#0092ef;
+	width: 100%;
+}
+
+
 #txt_precio{
 	font-size: 15pt;
 	text-align: center;
