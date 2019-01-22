@@ -79,7 +79,6 @@ $dts=$oClientecuenta->mostrarUno($_POST['clicue_id']);
 		$clicue_ver	=$dt['tb_clientecuenta_ver'];
 		
 		$usu_id	=$dt['tb_usuario_id'];
-		$emp_id	=$dt['tb_empresa_id'];
 		
 	mysql_free_result($dts);
 
@@ -156,7 +155,7 @@ $texto_pago=$forma.''.$modo;
 	}
 
 //empresa
-$dts=$oEmpresa->mostrarUno($emp_id);
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
 	$emp_ruc=$dt['tb_empresa_ruc'];
 	$emp_nomcom=$dt['tb_empresa_nomcom'];
