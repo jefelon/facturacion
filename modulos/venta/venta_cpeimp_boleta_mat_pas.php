@@ -48,7 +48,7 @@ $dt = mysql_fetch_array($rs);
 $imprimir_direccion = $dt['tb_formula_dat'];
 mysql_free_result($rs);
 
-$pager_formato = 'format="350x90" orientation="P" style="font-size: 14pt; font-family:' . $tipo_de_letra . '"';
+$pager_formato = 'format="350x90" orientation="P" style="font-size: 11.5pt; font-family:' . $tipo_de_letra . '"';
 
 $pager_margen = 'backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
 
@@ -461,7 +461,9 @@ if ($impresion == 'pdf') ob_start();
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm;" class="centrado">Solo valido en hora y fecha indicada; no se acepta reclamos posteriores.</td>
+                                <td colspan="4" style="width: 80mm;" class="centrado">Solo valido en hora y fecha indicada; no se acepta reclamos posteriores.<br>
+                                Todo niño mayor a 5 años paga pasaje.
+                                </td>
                             </tr>
                             </tbody>
                         </table>

@@ -58,9 +58,9 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
         $('.pasadizo >div').addClass('oculto');
         $('.pasadizo >div:last').removeClass('oculto');
 
-
-
-
+        if($('.pasadizo >div:last').is("#item_45")){
+            $('.pasadizo >div:last').css("margin-left","-45px");
+        }
     });
 
     function cambiar_color(selector) {

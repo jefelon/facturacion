@@ -1996,6 +1996,9 @@ if($_POST['action']=="editar"){
                     complete: function(){
                         venta_tabla();
                         filtro_bus();
+                        $('#txt_pasaj_dni').val('');
+                        $('#txt_pasaj_edad').val('');
+                        $('#txt_pasaj_nom').val('');
                         //sventa_asiento_form();
                     }
                 });
