@@ -395,7 +395,8 @@ function venta_car_servicio(act,idf,ser_nom,ser_can,ser_pre){
             ser_can: ser_can,
             ser_des: 0,//Descuento
             ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
-            ser_pre: ser_pre
+            ser_pre: ser_pre,
+            ser_tip: 1
         }),
         beforeSend: function() {
             $('#div_venta_car_tabla').addClass("ui-state-disabled");
@@ -419,6 +420,7 @@ function venta_car_servicio(act,idf,ser_nom,ser_can,ser_pre){
 <input name="hdd_ser_id" id="hdd_ser_id" type="hidden" value="<?php echo $_POST['ser_id']?>">
 <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="hdd_ser_aut" id="hdd_ser_aut" type="hidden" value="<?php echo $_POST['aut']?>">
+
     <input name="cmb_ser_est" id="cmb_ser_est" type="hidden" value="Activo">
     <input name="cmb_cat_id" id="cmb_cat_id" type="hidden" value="1">
 

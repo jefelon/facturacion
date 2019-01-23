@@ -1547,7 +1547,6 @@ if($_POST['action']=="editar"){
 
 
                 if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
-                    alert($('#cmb_ven_doc').val());
                     $("#hdd_ven_cli_id").val(ui.item.id);
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
                     $('#hdd_ven_cli_id').change();

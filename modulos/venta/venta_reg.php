@@ -950,7 +950,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			
 			$tipo_venta=2;
 			$cat_id=0;
-			$afeigv_id=9;
+			$afeigv_id=$_SESSION['servicio_tip'][$unico_id][$indice];;
 			$unimed_id=13;//ZZ
 
 			//////////////////////
