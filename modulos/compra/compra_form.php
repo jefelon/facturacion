@@ -1075,8 +1075,9 @@ if($_POST['action']=="editar"){
             <div id="nota-debito-credito" style="display:none;">
                 <label for="cmb_com_tip">Tipo:</label>
                 <select name="cmb_com_tip" id="cmb_com_tip">
-                    <option value="6" selected="selected">DEVOLUCIÓN TOTAL</option>
-                    <option value="9" selected="selected">DISMINUICIÓN EN EL VALOR</option>
+                    <option value="0" selected="selected">-</option>
+                    <option value="6">DEVOLUCIÓN TOTAL</option>
+                    <option value="9">DISMINUICIÓN EN EL VALOR</option>
                 </select>
                 <label for="txt_com_ser_nota">Serie:</label>
                 <input name="txt_com_ser_nota" type="text" id="txt_com_ser_nota" disabled
