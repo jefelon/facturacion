@@ -11,7 +11,7 @@ class Cado{
 
     function Cado(){
         $this->Servidor = '192.168.1.34'; $this->Usuario = 'red'; $this->Clave = 'red';
-        $this->BaseDatos ="transportefac";
+        $this->BaseDatos ="autosfac";
     }
 	
 	function conectar()

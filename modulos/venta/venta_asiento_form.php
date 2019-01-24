@@ -461,11 +461,11 @@ $fec=date('d-m-Y');
     }
 
     #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {
-        margin: 0 5px 5px 5px;
+        margin: 0 5px 5px 18px;
         padding: 0px;
-        font-size: 1.2em;
-        width: 40px;
-        height: 50px;
+        font-size: 2.4em;
+        width: 80px;
+        height: 70px;
         cursor: pointer !important;
         position: relative;
         float: left;
@@ -477,7 +477,7 @@ $fec=date('d-m-Y');
     }
     #frentera{
         height: 200px;
-        width: 185px;
+        width: 410px;
         /*background: #0D8BBD;*/
         float: left;
     }
@@ -489,14 +489,21 @@ $fec=date('d-m-Y');
     .pasadizo{
         height: 40px;
     }
+
+
     #bus{
         width: 1229px;
         height: 480px;
-        background: url("../../images/bus_fondo.png");
+        background: url("../../images/auto.jpg");
         background-size: 99%;
         background-repeat: no-repeat;
-        background-position-x: -45px;
         overflow: hidden;
+    }
+    #item_7{
+        background: url("../../images/chofer_icon.png") !important;
+        background-size: 99% !important;
+        background-repeat: no-repeat !important;
+        pointer-events: none;
     }
 
 </style>
