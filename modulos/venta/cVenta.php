@@ -575,7 +575,7 @@ WHERE tb_software_id =$id";
         INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
         LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
         WHERE tb_viajehorario_id=$vh_id
-        ORDER  BY c.tb_cliente_nom
+        ORDER  BY v.tb_venta_numdoc
         ";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -589,7 +589,7 @@ WHERE tb_software_id =$id";
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE v.tb_cliente_id = '$cli_id' ORDER  BY v.tb_venta_fec DESC";
+	WHERE ev.tb_destinatario_id = '$cli_id' ORDER  BY v.tb_venta_fec DESC";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

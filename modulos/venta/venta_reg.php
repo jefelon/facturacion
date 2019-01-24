@@ -241,7 +241,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         if($_POST['hdd_tipo']=='encomienda'){
             $oVenta->insertarEncomiendaVenta(
                 $ven_id,
-                $_POST['hdd_ven_pas_id'],
+                $_POST['hdd_ven_rem_id'],
                 $_POST['hdd_ven_des_id'],
                 $_POST['cmb_salida_id'],
                 $_POST['cmb_llegada_id'],

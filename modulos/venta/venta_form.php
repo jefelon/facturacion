@@ -1162,7 +1162,10 @@ if($_POST['action']=="editar"){
                 $('#txt_ven_cli_nom').val(data.nombre);
                 $('#txt_ven_cli_doc').val(data.documento);
                 $('#txt_ven_cli_dir').val(data.direccion);
-                $("#hdd_ven_cli_tip").val(data.tipo);
+                console.log(data.tipo);
+                if(data.tipo==1 || data.tipo==3){
+                    $("#hdd_ven_cli_tip").val(1);
+                }
                 $('#txt_ven_cli_est').val(data.estado);
                 $('#hdd_ven_cli_ret').val(data.retiene);
                 $('#hdd_cli_precio_id').val(data.precio_id);
