@@ -1249,10 +1249,72 @@ if($_POST['action']=="editar"){
                 $('#div_pasajero_form').html(html);
             },
             complete: function(){
-                if(act=='insertar' & $('#hdd_ven_cli_id').val()=="")
+                if(act=='insertar' & $('#hdd_ven_pas_id').val()=="")
                 {
                     $('#txt_cli_doc').val($('#txt_ven_pas_doc').val());
                     $('#txt_cli_nom').val($('#txt_ven_pas_nom').val());
+                }
+
+            }
+        });
+    }
+    function destinatario_form_i(act,idf,nom,dir,con,tel,est){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: 		act,
+                cli_id:			idf,
+                cli_nom:		nom,
+                cli_dir:		dir,
+                cli_con:		con,
+                cli_tel:		tel,
+                cli_est:		est,
+                vista:			'hdd_cli_id'
+            }),
+            beforeSend: function(a) {
+                //$('#msj_proveedor').hide();
+                //$("#btn_cmb_pro_id").click(function(e){
+                $("#btn_des_form_agregar").click(function(e){
+                    //x=e.pageX+5;
+                    //y=e.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_destinatario_form').dialog("open");
+                });
+
+                if(act=='editar'){
+                    if(idf>0){
+                        $("#btn_des_form_modificar").click(function(e){
+                            //x=e.pageX+5;
+                            //y=e.pageY+15;
+                            //$('#div_cliente_form').dialog({ position: [x,y] });
+                            $('#div_destinatario_form').dialog("open");
+                        });
+                    }
+                    else{
+                        alert('Seleccione Cliente');
+                    }
+                }
+
+                if(act=='editarSunat'){
+                    //x=a.pageX+5;
+                    //y=a.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_destinatario_form').dialog("open");
+                }
+
+                $('#div_destinatario_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_destinatario_form').html(html);
+            },
+            complete: function(){
+                if(act=='insertar' & $('#hdd_ven_des_id').val()=="")
+                {
+                    $('#txt_cli_doc').val($('#txt_ven_des_doc').val());
+                    $('#txt_cli_nom').val($('#txt_ven_des_nom').val());
                 }
 
             }

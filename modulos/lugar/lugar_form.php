@@ -1,13 +1,13 @@
 <?php
 require_once ("../../config/Cado.php");
-require_once ("cMarca.php");
-$oMarca = new cMarca();
+require_once ("cLugar.php");
+$oLugar = new cLugar();
 
 if($_POST['action']=="editar")
 {
-	$dts=$oMarca->mostrarUno($_POST['mar_id']);
+	$dts=$oLugar->mostrarUno($_POST['lugar_id']);
 	$dt = mysql_fetch_array($dts);
-		$mar_nom=$dt['tb_marca_nom'];
+		$lugar_nom=$dt['tb_lugar_nom'];
 	mysql_free_result($dts);
 }
 ?>
@@ -20,38 +20,38 @@ $(function() {
 	if($_POST['action']=="insertar")
 	{
 	?>
-	$('#txt_mar_nom').focus();
+	$('#txt_lugar_nom').focus();
 	<?php }?>
 	
-	$('#txt_mar_nom').keyup(function(){
-		$(this).val($(this).val().toUpperCase());
-	});
+	// $('#txt_lugar_nom').keyup(function(){
+	// 	$(this).val($(this).val().toUpperCase());
+	// });
 
-	$("#for_mar").validate({
+	$("#for_lugar").validate({
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
-				url: "../marca/marca_reg.php",
+				url: "../lugar/lugar_reg.php",
 				async:true,
 				dataType: "json",
-				data: $("#for_mar").serialize(),
+				data: $("#for_lugar").serialize(),
 				beforeSend: function() {
-					$("#div_marca_form" ).dialog( "close" );
-					$('#msj_marca').html("Guardando...");
-					$('#msj_marca').show(100);
+					$("#div_lugar_form" ).dialog( "close" );
+					$('#msj_lugar').html("Guardando...");
+					$('#msj_lugar').show(100);
 				},
 				success: function(data){						
-					$('#msj_marca').html(data.mar_msj);
+					$('#msj_lugar').html(data.lugar_msj);
 					<?php
-					if($_POST['vista']=="cmb_mar_id")
+					if($_POST['vista']=="cmb_lugar_id")
 					{
-						echo $_POST['vista'].'(data.mar_id)';
+						echo $_POST['vista'].'(data.lugar_id)';
 					}
 					?>
 				},
 				complete: function(){
 					<?php
-					if($_POST['vista']=="marca_tabla")
+					if($_POST['vista']=="lugar_tabla")
 					{
 						echo $_POST['vista'].'()';
 					}
@@ -60,25 +60,25 @@ $(function() {
 			});
 		},
 		rules: {
-			txt_mar_nom: {
+			txt_lugar_nom: {
 				required: true
 			}
 		},
 		messages: {
-			txt_mar_nom: {
+			txt_lugar_nom: {
 				required: '*'
 			}
 		}
 	});
 });
 </script>
-<form id="for_mar">
-<input name="action_marca" id="action_marca" type="hidden" value="<?php echo $_POST['action']?>">
-<input name="hdd_mar_id" id="hdd_mar_id" type="hidden" value="<?php echo $_POST['mar_id']?>">
+<form id="for_lugar">
+<input name="action_lugar" id="action_lugar" type="hidden" value="<?php echo $_POST['action']?>">
+<input name="hdd_lugar_id" id="hdd_lugar_id" type="hidden" value="<?php echo $_POST['lugar_id']?>">
     <table>
         <tr>
         <td align="right" valign="top">Nombre:</td>
-        <td><input name="txt_mar_nom" type="text" id="txt_mar_nom" value="<?php echo $mar_nom?>" size="55" maxlength="50"></td>
+        <td><input name="txt_lugar_nom" type="text" id="txt_lugar_nom" value="<?php echo $lugar_nom?>" size="55" maxlength="50"></td>
         </tr>
     </table>
 </form>
