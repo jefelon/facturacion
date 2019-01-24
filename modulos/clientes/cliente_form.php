@@ -55,43 +55,64 @@ if($_POST['action']=="editarSunat"){
 
 
     function buscar() {
-	/*if($("#txt_cli_doc").val().substr(0,2)=='20'){
-		$('#radio2').prop( "checked", true );
-	}else if($("#txt_cli_doc").val().substr(0,2)=='10'){
-		$('#radio1').prop( "checked", true );
-	}*/
-	$('#msj_busqueda_sunat_2').html("Buscando en Sunat...");
-	$('#msj_busqueda_sunat_2').show(100);
-	$.post('../../libreriasphp/consultaruc/index.php', {
-		vruc: $('#txt_cli_doc').val(),
-		vtipod: 6
-	},
-	function(data, textStatus){
-		if(data == null){
-			alert('Intente nuevamente...Sunat');
-		}
-		if(data.length==1){
-			alert(data[0]);
-			$('#msj_busqueda_sunat_2').hide();
-		}else{
-			$('#txt_cli_nom').val(data['RazonSocial']);
-			$('#txt_cli_dir').val(data['Direccion']);
-			if( typeof data['Contacto'] != 'undefined'){
-				$('#txt_cli_con').val(data['Contacto']);
-			}else{
-				$('#txt_cli_con').val(data['RazonSocial']);
-			}
-			
-			// var telefono = data['Telefonos'];
-			// telefono = telefono.replace(/ \/ /g, "/");
-			// telefono = telefono.replace("/ ", "");
-			// telefono = telefono.replace(/\//g, " / ");
-			// $('#txt_cli_tel').val(telefono);
-			$('#txt_cli_est').val(data['Estado']);
-			$('#msj_busqueda_sunat_2').hide();
-		}
-	},"json");
-}
+        if($("input[id=radio1]").is(":checked")){
+            var dni = $('#txt_cli_doc').val();
+            var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+            $.ajax({
+                type:'POST',
+                url:url,
+                data:'dni='+dni,
+                success: function(datos_dni){
+                    var datos = eval(datos_dni);
+                    // $('#mostrar_dni').text(datos[0]);
+                    // $('#paterno').text(datos[1]);
+                    // $('#materno').text(datos[2]);
+                    // $('#nombres').text(datos[3]);
+                    if(datos[1]!="" && datos[2]!="" && datos[3]!="") {
+                        $('#txt_cli_nom').val(datos[1] + " " + datos[2] + " " + datos[3]);
+                    }else {
+                        $('#txt_cli_nom').val("Datos no encontrados o menor de edad. Editar manualmente los datos.");
+                    }
+                }
+            });
+        }else {
+            /*if($("#txt_cli_doc").val().substr(0,2)=='20'){
+                $('#radio2').prop( "checked", true );
+            }else if($("#txt_cli_doc").val().substr(0,2)=='10'){
+                $('#radio1').prop( "checked", true );
+            }*/
+            $('#msj_busqueda_sunat_2').html("Buscando en Sunat...");
+            $('#msj_busqueda_sunat_2').show(100);
+            $.post('../../libreriasphp/consultaruc/index.php', {
+                    vruc: $('#txt_cli_doc').val(),
+                    vtipod: 6
+                },
+                function (data, textStatus) {
+                    if (data == null) {
+                        alert('Intente nuevamente...Sunat');
+                    }
+                    if (data.length == 1) {
+                        alert(data[0]);
+                        $('#msj_busqueda_sunat_2').hide();
+                    } else {
+                        $('#txt_cli_nom').val(data['RazonSocial']);
+                        $('#txt_cli_dir').val(data['Direccion']);
+                        if (typeof data['Contacto'] != 'undefined') {
+                            $('#txt_cli_con').val(data['Contacto']);
+                        } else {
+                            $('#txt_cli_con').val(data['RazonSocial']);
+                        }
+                        // var telefono = data['Telefonos'];
+                        // telefono = telefono.replace(/ \/ /g, "/");
+                        // telefono = telefono.replace("/ ", "");
+                        // telefono = telefono.replace(/\//g, " / ");
+                        // $('#txt_cli_tel').val(telefono);
+                        $('#txt_cli_est').val(data['Estado']);
+                        $('#msj_busqueda_sunat_2').hide();
+                    }
+                }, "json");
+        }
+    }
 
 
     function cmb_precio_id(ids)
@@ -291,7 +312,7 @@ $(function() {
             <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
             <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
             <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
-            <label for="txt_cli_cui">CUI:</label><input name="txt_cli_cui" id="txt_cli_cui" type="text" value="<?php echo $cui?>" size="8">
+            <input name="txt_cli_cui" id="txt_cli_cui" type="hidden" value="<?php echo $cui?>" size="8">
             <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
             </td>
         </tr>
