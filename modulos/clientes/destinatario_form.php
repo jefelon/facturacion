@@ -230,6 +230,7 @@ $(function() {
                     $('#div_destinatario_form').dialog("close");
 					$('#msj_cliente').html("Guardando...");
 					$('#msj_cliente').show(100);
+                    $('#div_destinatario_form').html('');
 				},
 				success: function(data){
 					$('#msj_cliente').html(data.cli_msj);
@@ -319,7 +320,7 @@ $(function() {
         </tr>
         <tr>
     	  <td align="right" valign="top"><label for="txt_cli_nom">Cliente:</label></td>
-    	  <td><textarea name="txt_cli_nom" cols="50" rows="2" id="txt_cli_nom"><?php echo $nom?></textarea></td>
+    	  <td><textarea name="txt_cli_nom" cols="50" rows="2" id="txt_cli_nom" class="cl_des_nom"><?php echo $nom?></textarea></td>
   	  </tr>
         <tr>
           <td align="right" valign="top"><label for="txt_cli_dir">Dirección:</label></td>

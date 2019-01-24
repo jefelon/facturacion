@@ -228,10 +228,9 @@ $(function() {
 				data: $("#for_cli").serialize(),
 				beforeSend: function(){
 					$('#div_cliente_form').dialog("close");
-                    $('#div_destinatario_form').dialog("close");
-                    $('#div_pasajero_form').dialog("close");
 					$('#msj_cliente').html("Guardando...");
 					$('#msj_cliente').show(100);
+                    $('#div_cliente_form').html('');
 				},
 				success: function(data){
 					$('#msj_cliente').html(data.cli_msj);
@@ -247,16 +246,7 @@ $(function() {
 						echo 'cliente_cargar_datos(data.cli_id);';
 
 					}
-                    if($_POST['vista']=="hdd_des_id")
-                    {
-                        echo 'destinatario_cargar_datos(data.cli_id);';
 
-                    }
-                    if($_POST['vista']=="hdd_pas_id")
-                    {
-                        echo 'remitente_cargar_datos(data.cli_id);';
-
-                    }
 					?>
 				},
 				complete: function(){
@@ -322,7 +312,7 @@ $(function() {
     	  </td>
   	    </tr>
     	<tr>
-            <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
+            <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc" >DNI:</label></td>
             <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
             <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
             <input name="txt_cli_cui" id="txt_cli_cui" type="hidden" value="<?php echo $cui?>" size="8">

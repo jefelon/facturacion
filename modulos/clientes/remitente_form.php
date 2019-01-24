@@ -230,6 +230,7 @@ $(function() {
                     $('#div_remitente_form').dialog("close");
 					$('#msj_cliente').html("Guardando...");
 					$('#msj_cliente').show(100);
+                    $('#div_remitente_form').html('');
 				},
 				success: function(data){
 					$('#msj_cliente').html(data.cli_msj);
@@ -310,7 +311,7 @@ $(function() {
     	  </td>
   	  </tr>
     	<tr>
-            <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
+            <td align="right"><label for="txt_cli_doc"  id="lbl_cli_doc">DNI:</label></td>
             <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
             <a id="validar_ruc_rem" href="#validar" onClick="buscar()">Validar Ruc</a>
             <input name="txt_cli_cui" id="txt_cli_cui" type="hidden" value="<?php echo $cui?>" size="8">
