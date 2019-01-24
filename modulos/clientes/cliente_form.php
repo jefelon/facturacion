@@ -207,6 +207,8 @@ $(function() {
 				data: $("#for_cli").serialize(),
 				beforeSend: function(){
 					$('#div_cliente_form').dialog("close");
+                    $('#div_destinatario_form').dialog("close");
+                    $('#div_pasajero_form').dialog("close");
 					$('#msj_cliente').html("Guardando...");
 					$('#msj_cliente').show(100);
 				},
@@ -222,7 +224,18 @@ $(function() {
 					if($_POST['vista']=="hdd_cli_id")
 					{
 						echo 'cliente_cargar_datos(data.cli_id);';
+
 					}
+                    if($_POST['vista']=="hdd_des_id")
+                    {
+                        echo 'destinatario_cargar_datos(data.cli_id);';
+
+                    }
+                    if($_POST['vista']=="hdd_pas_id")
+                    {
+                        echo 'pasajero_cargar_datos(data.cli_id);';
+
+                    }
 					?>
 				},
 				complete: function(){

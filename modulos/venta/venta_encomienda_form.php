@@ -1132,6 +1132,69 @@ if($_POST['action']=="editar"){
         });
     }
 
+    function destinatario_form_i(act,idf,nom,dir,con,tel,est){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: 		act,
+                cli_id:			idf,
+                cli_nom:		nom,
+                cli_dir:		dir,
+                cli_con:		con,
+                cli_tel:		tel,
+                cli_est:		est,
+                vista:			'hdd_des_id'
+            }),
+            beforeSend: function(a) {
+                //$('#msj_proveedor').hide();
+                //$("#btn_cmb_pro_id").click(function(e){
+                $("#btn_des_form_agregar").click(function(e){
+                    //x=e.pageX+5;
+                    //y=e.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_destinatario_form').dialog("open");
+                });
+
+                if(act=='editar'){
+                    if(idf>0){
+                        $("#btn_des_form_modificar").click(function(e){
+                            //x=e.pageX+5;
+                            //y=e.pageY+15;
+                            //$('#div_cliente_form').dialog({ position: [x,y] });
+                            $('#div_destinatario_form').dialog("open");
+                        });
+                    }
+                    else{
+                        alert('Seleccione Cliente');
+                    }
+                }
+
+                if(act=='editarSunat'){
+                    //x=a.pageX+5;
+                    //y=a.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_destinatario_form').dialog("open");
+                }
+
+                $('#div_destinatario_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_destinatario_form').html(html);
+            },
+            complete: function(){
+                if(act=='insertar' & $('#hdd_ven_des_id').val()=="")
+                {
+                    $('#txt_des_doc').val($('#txt_ven_des_doc').val());
+                    $('#txt_des_nom').val($('#txt_ven_des_nom').val());
+                }
+
+            }
+        });
+    }
+
 
     function remitente_form_i(act,idf,nom,dir,con,tel,est){
         $.ajax({
@@ -1147,7 +1210,7 @@ if($_POST['action']=="editar"){
                 cli_con:		con,
                 cli_tel:		tel,
                 cli_est:		est,
-                vista:			'hdd_cli_id'
+                vista:			'hdd_pas_id'
             }),
             beforeSend: function(a) {
                 //$('#msj_proveedor').hide();
@@ -1225,6 +1288,35 @@ if($_POST['action']=="editar"){
             }
         });
     }
+
+
+    function destinatario_cargar_datos(idf){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async:true,
+            dataType: "json",
+            data: ({
+                action: "obtener_datos",
+                cli_id:	idf
+            }),
+            beforeSend: function() {
+                //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(data){
+                $('#hdd_ven_des_id').val(idf);
+                $('#hdd_ven_des_id').change();
+                $('#txt_ven_des_nom').val(data.nombre);
+                $('#txt_ven_des_doc').val(data.documento);
+                $('#txt_ven_des_dir').val(data.direccion);
+                $("#hdd_ven_des_tip").val(data.tipo);
+                $('#txt_ven_des_est').val(data.estado);
+                $('#hdd_ven_des_ret').val(data.retiene);
+                $('#hdd_ven_precio_id').val(data.precio_id);
+            }
+        });
+    }
+
 
     function pasajero_cargar_datos(idf){
         $.ajax({
