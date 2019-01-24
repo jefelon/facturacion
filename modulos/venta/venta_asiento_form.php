@@ -240,7 +240,7 @@ $fec=date('d-m-Y');
             },
             success: function (data) {
                 $('#msj_cliente').html(data.cli_msj);
-                pasajero_cargar_datos(data.cli_id);
+                remitente_cargar_datos(data.cli_id);
                 cliente_cargar_datos(data.cli_id);
             },
             complete: function () {

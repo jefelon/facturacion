@@ -153,17 +153,17 @@ if($_POST['action']=="editar"){
     });
     $(".btn_ir").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
-    $('#btn_cli_form_agregar,#btn_pas_form_agregar,#btn_des_form_agregar').button({
+    $('#btn_cli_form_agregar,#btn_rem_form_agregar,#btn_des_form_agregar').button({
         icons: {primary: "ui-icon-plus"},
         text: false
     });
-    $("#btn_cli_form_agregar,#btn_pas_form_agregar,#btn_des_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+    $("#btn_cli_form_agregar,#btn_rem_form_agregar,#btn_des_form_agregar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
-    $('#btn_cli_form_modificar, #btn_pas_form_modificar,#btn_des_form_modificar').button({
+    $('#btn_cli_form_modificar, #btn_rem_form_modificar,#btn_des_form_modificar').button({
         icons: {primary: "ui-icon-pencil"},
         text: false
     });
-    $("#btn_cli_form_modificar, #btn_pas_form_modificar,#btn_des_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
+    $("#btn_cli_form_modificar, #btn_rem_form_modificar,#btn_des_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
     $('#btn_con_form_agregar').button({
         icons: {primary: "ui-icon-plus"},
@@ -1135,7 +1135,7 @@ if($_POST['action']=="editar"){
     function destinatario_form_i(act,idf,nom,dir,con,tel,est){
         $.ajax({
             type: "POST",
-            url: "../clientes/cliente_form.php",
+            url: "../clientes/destinatario_form.php",
             async:true,
             dataType: "html",
             data: ({
@@ -1199,7 +1199,7 @@ if($_POST['action']=="editar"){
     function remitente_form_i(act,idf,nom,dir,con,tel,est){
         $.ajax({
             type: "POST",
-            url: "../clientes/cliente_form.php",
+            url: "../clientes/remitente_form.php",
             async:true,
             dataType: "html",
             data: ({
@@ -1210,25 +1210,25 @@ if($_POST['action']=="editar"){
                 cli_con:		con,
                 cli_tel:		tel,
                 cli_est:		est,
-                vista:			'hdd_pas_id'
+                vista:			'hdd_rem_id'
             }),
             beforeSend: function(a) {
                 //$('#msj_proveedor').hide();
                 //$("#btn_cmb_pro_id").click(function(e){
-                $("#btn_pas_form_agregar").click(function(e){
+                $("#btn_rem_form_agregar").click(function(e){
                     //x=e.pageX+5;
                     //y=e.pageY+15;
                     //$('#div_cliente_form').dialog({ position: [x,y] });
-                    $('#div_pasajero_form').dialog("open");
+                    $('#div_remitente_form').dialog("open");
                 });
 
                 if(act=='editar'){
                     if(idf>0){
-                        $("#btn_pas_form_modificar").click(function(e){
+                        $("#btn_rem_form_modificar").click(function(e){
                             //x=e.pageX+5;
                             //y=e.pageY+15;
                             //$('#div_cliente_form').dialog({ position: [x,y] });
-                            $('#div_pasajero_form').dialog("open");
+                            $('#div_remitente_form').dialog("open");
                         });
                     }
                     else{
@@ -1240,81 +1240,19 @@ if($_POST['action']=="editar"){
                     //x=a.pageX+5;
                     //y=a.pageY+15;
                     //$('#div_cliente_form').dialog({ position: [x,y] });
-                    $('#div_pasajero_form').dialog("open");
+                    $('#div_remitente_form').dialog("open");
                 }
 
-                $('#div_pasajero_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+                $('#div_remitente_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
             },
             success: function(html){
-                $('#div_pasajero_form').html(html);
+                $('#div_remitente_form').html(html);
             },
             complete: function(){
-                if(act=='insertar' & $('#hdd_ven_pas_id').val()=="")
+                if(act=='insertar' & $('#hdd_ven_rem_id').val()=="")
                 {
-                    $('#txt_cli_doc').val($('#txt_ven_pas_doc').val());
-                    $('#txt_cli_nom').val($('#txt_ven_pas_nom').val());
-                }
-
-            }
-        });
-    }
-    function destinatario_form_i(act,idf,nom,dir,con,tel,est){
-        $.ajax({
-            type: "POST",
-            url: "../clientes/cliente_form.php",
-            async:true,
-            dataType: "html",
-            data: ({
-                action: 		act,
-                cli_id:			idf,
-                cli_nom:		nom,
-                cli_dir:		dir,
-                cli_con:		con,
-                cli_tel:		tel,
-                cli_est:		est,
-                vista:			'hdd_cli_id'
-            }),
-            beforeSend: function(a) {
-                //$('#msj_proveedor').hide();
-                //$("#btn_cmb_pro_id").click(function(e){
-                $("#btn_des_form_agregar").click(function(e){
-                    //x=e.pageX+5;
-                    //y=e.pageY+15;
-                    //$('#div_cliente_form').dialog({ position: [x,y] });
-                    $('#div_destinatario_form').dialog("open");
-                });
-
-                if(act=='editar'){
-                    if(idf>0){
-                        $("#btn_des_form_modificar").click(function(e){
-                            //x=e.pageX+5;
-                            //y=e.pageY+15;
-                            //$('#div_cliente_form').dialog({ position: [x,y] });
-                            $('#div_destinatario_form').dialog("open");
-                        });
-                    }
-                    else{
-                        alert('Seleccione Cliente');
-                    }
-                }
-
-                if(act=='editarSunat'){
-                    //x=a.pageX+5;
-                    //y=a.pageY+15;
-                    //$('#div_cliente_form').dialog({ position: [x,y] });
-                    $('#div_destinatario_form').dialog("open");
-                }
-
-                $('#div_destinatario_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-            },
-            success: function(html){
-                $('#div_destinatario_form').html(html);
-            },
-            complete: function(){
-                if(act=='insertar' & $('#hdd_ven_des_id').val()=="")
-                {
-                    $('#txt_cli_doc').val($('#txt_ven_des_doc').val());
-                    $('#txt_cli_nom').val($('#txt_ven_des_nom').val());
+                    $('#txt_cli_doc').val($('#txt_ven_rem_doc').val());
+                    $('#txt_cli_nom').val($('#txt_ven_rem_nom').val());
                 }
 
             }
@@ -1380,7 +1318,7 @@ if($_POST['action']=="editar"){
     }
 
 
-    function pasajero_cargar_datos(idf){
+    function remitente_cargar_datos(idf){
         $.ajax({
             type: "POST",
             url: "../clientes/cliente_reg.php",
@@ -1394,13 +1332,13 @@ if($_POST['action']=="editar"){
                 //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
             },
             success: function(data){
-                $('#hdd_ven_pas_id').val(idf);
-                $('#hdd_ven_pas_id').change();
-                $('#txt_ven_pas_nom').val(data.nombre);
-                $('#txt_ven_pas_doc').val(data.documento);
-                $('#txt_ven_cli_dir').val(data.direccion);
-                $("#hdd_ven_pas_tip").val(data.tipo);
-                $('#txt_ven_pas_est').val(data.estado);
+                $('#hdd_ven_rem_id').val(idf);
+                $('#hdd_ven_rem_id').change();
+                $('#txt_ven_rem_nom').val(data.nombre);
+                $('#txt_ven_rem_doc').val(data.documento);
+                $('#txt_ven_rem_dir').val(data.direccion);
+                $("#hdd_ven_rem_tip").val(data.tipo);
+                $('#txt_ven_rem_est').val(data.estado);
             }
         });
     }
@@ -1694,7 +1632,7 @@ if($_POST['action']=="editar"){
             }
         });
 
-        $( "#txt_ven_pas_doc" ).autocomplete({
+        $( "#txt_ven_rem_doc" ).autocomplete({
             minLength: 1,
             source: "../clientes/cliente_complete_doc.php",
             select: function(event, ui){
@@ -1705,13 +1643,13 @@ if($_POST['action']=="editar"){
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
                     $('#hdd_ven_cli_id').change();
                 }
-                    $("#hdd_ven_pas_id").val(ui.item.id);
-                    $("#txt_ven_pas_nom").val(ui.item.nombre);
-                    $("#txt_ven_pas_dir").val(ui.item.direccion);
+                    $("#hdd_ven_rem_id").val(ui.item.id);
+                    $("#txt_ven_rem_nom").val(ui.item.nombre);
+                    $("#txt_ven_rem_dir").val(ui.item.direccion);
 
 
-                    if($("#hdd_ven_pas_id" ).val()>0){
-                        cmb_dir_id($( "#hdd_ven_pas_id" ).val());
+                    if($("#hdd_ven_rem_id" ).val()>0){
+                        cmb_dir_id($( "#hdd_ven_rem_id" ).val());
 
                     }
 
@@ -1724,7 +1662,7 @@ if($_POST['action']=="editar"){
 
 
 
-        $( "#txt_ven_pas_nom" ).autocomplete({
+        $( "#txt_ven_rem_nom" ).autocomplete({
             minLength: 1,
             source: "../clientes/cliente_complete_nom.php",
             select: function(event, ui){
@@ -1733,11 +1671,11 @@ if($_POST['action']=="editar"){
                     $("#hdd_ven_cli_id").val(ui.item.id);
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
                 }
-                    $("#hdd_ven_pas_id").val(ui.item.id);
-                    $("#txt_ven_pas_doc").val(ui.item.documento);
-                    $("#txt_ven_pas_dir").val(ui.item.direccion);
-                    $('#hdd_ven_pas_id').change();
-                    if ($("#hdd_ven_pas_id").val() > 0) {
+                    $("#hdd_ven_rem_id").val(ui.item.id);
+                    $("#txt_ven_rem_doc").val(ui.item.documento);
+                    $("#txt_ven_rem_dir").val(ui.item.direccion);
+                    $('#hdd_ven_rem_id').change();
+                    if ($("#hdd_ven_rem_id").val() > 0) {
                         cmb_dir_id($("#hdd_ven_cli_id").val());
                     }
                     //alert(ui.item.value);
@@ -1758,7 +1696,7 @@ if($_POST['action']=="editar"){
                 $("#txt_ven_des_dir").val(ui.item.direccion);
                 $('#hdd_ven_des_id').change();
 
-                if($("#hdd_ven_pas_id" ).val()>0){
+                if($("#hdd_ven_des_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_des_id" ).val());
 
                 }
@@ -1824,7 +1762,7 @@ if($_POST['action']=="editar"){
 
             if ((this).value=== '3' || (this).value=== '12') {
                 $('#datos-cliente').hide();
-                cliente_cargar_datos($('#hdd_ven_pas_id').val())
+                cliente_cargar_datos($('#hdd_ven_rem_id').val())
             }else{
                 $('#datos-cliente').show();
             }
@@ -2124,7 +2062,7 @@ if($_POST['action']=="editar"){
             }
         });
 
-        $( "#div_pasajero_form" ).dialog({
+        $( "#div_remitente_form" ).dialog({
             title:'Información de Cliente',
             autoOpen: false,
             resizable: false,
@@ -2135,10 +2073,10 @@ if($_POST['action']=="editar"){
             position: ["center",0],
             buttons: {
                 Guardar: function() {
-                    $("#for_cli").submit();
+                    $("#for_rem").submit();
                 },
                 Cancelar: function() {
-                    $('#for_cli').each (function(){this.reset();});
+                    $('#for_rem').each (function(){this.reset();});
                     $( this ).dialog( "close" );
                 }
             }
@@ -2155,10 +2093,10 @@ if($_POST['action']=="editar"){
             position: ["center",0],
             buttons: {
                 Guardar: function() {
-                    $("#for_cli").submit();
+                    $("#for_des").submit();
                 },
                 Cancelar: function() {
-                    $('#for_cli').each (function(){this.reset();});
+                    $('#for_des').each (function(){this.reset();});
                     $( this ).dialog( "close" );
                 }
             }
@@ -2317,8 +2255,8 @@ if($_POST['action']=="editar"){
                     required: true,
                     totalDoc: "#cmb_ven_doc"
                 },
-                hdd_ven_pas_id: {
-                    required: true,
+                hdd_ven_rem_id: {
+                    required: true
                 },
                 hdd_ven_numite: {
                     required: true
@@ -2352,8 +2290,8 @@ if($_POST['action']=="editar"){
                 hdd_ven_cli_id: {
                     required: 'Seleccione Cliente.'
                 },
-                hdd_pas_cli_id: {
-                    required: 'Seleccione Pasajero.'
+                hdd_ven_rem_id: {
+                    required: 'Seleccione Remitente.'
                 },
                 hdd_ven_numite: {
                     required: 'Agregue producto a detalle de venta.'
@@ -2883,37 +2821,37 @@ if($_POST['action']=="editar"){
             </div>
 
             <div id="datos-pasajero" style="float: left; width: 100%;">
-                <input type="hidden" id="hdd_ven_pas_id" name="hdd_ven_pas_id" value="<?php echo $cli_id?>" />
+                <input type="hidden" id="hdd_ven_rem_id" name="hdd_ven_rem_id" value="<?php echo $cli_id?>" />
 
                 <fieldset>
                     <legend>Datos Remitente</legend>
-                    <div id="div_pasajero_form">
+                    <div id="div_remitente_form">
                     </div>
                     <table>
                         <tr>
                             <td align="right"><?php if($_POST['action']=='insertar'){?>
-                                    <a id="btn_pas_form_agregar" href="#" onClick="remitente_form_i('insertar')">Agregar Cliente</a>
-                                    <a id="btn_pas_form_modificar" href="#" onClick="remitente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                                    <a id="btn_rem_form_agregar" href="#" onClick="remitente_form_i('insertar')">Agregar Cliente</a>
+                                    <a id="btn_rem_form_modificar" href="#" onClick="remitente_form_i('editar',$('#hdd_ven_rem_id').val())">Modificar Cliente</a>
                                 <?php }?>
                             </td>
                             <td align="right">
-                                <label for="txt_ven_pas_doc">DNI:</label>
+                                <label for="txt_ven_rem_doc">DNI:</label>
                             </td>
                             <td>
-                                <input name="txt_ven_pas_doc" type="text" id="txt_ven_pas_doc" value="" size="11" maxlength="11" />
+                                <input name="txt_ven_rem_doc" type="text" id="txt_ven_rem_doc" value="" size="11" maxlength="11" />
 
-                                <label for="txt_ven_pas_nom">Cliente:</label>
-                                <input type="text" id="txt_ven_pas_nom" name="txt_ven_pas_nom" size="40" value="" />
+                                <label for="txt_ven_rem_nom">Cliente:</label>
+                                <input type="text" id="txt_ven_rem_nom" name="txt_ven_rem_nom" size="40" value="" />
                             </td>
                             <td rowspan="2" valign="top">
                                 <div id="div_clientecuenta_detalle">
                                 </div>
                             </td>
 
-                            <td><input type="hidden" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                            <td><input type="hidden" id="txt_ven_cli_dir" name="txt_ven_rem_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
                            <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                             <td>
-                                <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                                <input type="hidden" id="txt_ven_cli_est" name="txt_ven_rem_est" size="40" value="" disabled="disabled"/>
                                 <div id="msj_busqueda_sunat" class="ui-state-highlight ui-fcorner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                             </td>
                         </tr>
@@ -2934,7 +2872,7 @@ if($_POST['action']=="editar"){
                         <tr>
                             <td align="right"><?php if($_POST['action']=='insertar'){?>
                                     <a id="btn_des_form_agregar" href="#" onClick="destinatario_form_i('insertar')">Agregar Cliente</a>
-                                    <a id="btn_des_form_modificar" href="#" onClick="destinatario_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                                    <a id="btn_des_form_modificar" href="#" onClick="destinatario_form_i('editar',$('#hdd_ven_des_id').val())">Modificar Cliente</a>
                                 <?php }?>
                             </td>
 

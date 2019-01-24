@@ -154,7 +154,7 @@ if($_POST['action']=="editarSunat"){
         });
     }
 
-$('#validar_ruc').button({
+$('#validar_ruc_rem').button({
     text: true
   });
 
@@ -169,22 +169,22 @@ $(function() {
 	if($("input[id=radio1]").is(":checked")){
 		$('#lbl_cli_doc').html("DNI:");
 		$( "#txt_cli_doc" ).attr('maxlength','8');
-        $( "#validar_ruc span").html("Valida DNI");
-        $( "#validar_ruc").show(200);
+        $( "#validar_ruc_rem span").html("Valida DNI");
+        $( "#validar_ruc_rem").show(200);
 	}
 	$("input[id=radio2]").change(function(){
         if($("input[id=radio2]").is(":checked")){
             $('#lbl_cli_doc').html("RUC:");
             $( "#txt_cli_doc" ).attr('maxlength','11');
-            $( "#validar_ruc span").html("Valida RUC");
-            $( "#validar_ruc").show(200);
+            $( "#validar_ruc_rem span").html("Valida RUC");
+            $( "#validar_ruc_rem").show(200);
         }
     });
     $("input[id=radio3]").change(function(){
         if($("input[id=radio3]").is(":checked")){
             $('#lbl_cli_doc').html("DOC:");
             $( "#txt_cli_doc").attr('maxlength','11');
-            $( "#validar_ruc").hide(200);
+            $( "#validar_ruc_rem").hide(200);
         }
     });
 
@@ -218,18 +218,16 @@ $(function() {
         direccion_form('insertar',id_cliente);
     });
 
-        $("#for_cli").validate({
+        $("#for_rem").validate({
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
 				url: "../clientes/cliente_reg.php",
 				async:true,
 				dataType: "json",
-				data: $("#for_cli").serialize(),
+				data: $("#for_rem").serialize(),
 				beforeSend: function(){
-					$('#div_cliente_form').dialog("close");
-                    $('#div_destinatario_form').dialog("close");
-                    $('#div_pasajero_form').dialog("close");
+                    $('#div_remitente_form').dialog("close");
 					$('#msj_cliente').html("Guardando...");
 					$('#msj_cliente').show(100);
 				},
@@ -242,17 +240,7 @@ $(function() {
 						echo $_POST['vista'].'(data.cli_id);';?>
 						<?php
 					}
-					if($_POST['vista']=="hdd_cli_id")
-					{
-						echo 'cliente_cargar_datos(data.cli_id);';
-
-					}
-                    if($_POST['vista']=="hdd_des_id")
-                    {
-                        echo 'destinatario_cargar_datos(data.cli_id);';
-
-                    }
-                    if($_POST['vista']=="hdd_pas_id")
+                    if($_POST['vista']=="hdd_rem_id")
                     {
                         echo 'remitente_cargar_datos(data.cli_id);';
 
@@ -307,7 +295,7 @@ $(function() {
 	});		
 });
 </script>
-<form id="for_cli">
+<form id="for_rem">
 <input name="action_cliente" id="action_cliente" type="hidden" value="<?php echo $_POST['action']?>">
 <input name="hdd_cli_id" id="hdd_cli_id" type="hidden" value="<?php echo $_POST['cli_id']?>">
     <table>
@@ -320,11 +308,11 @@ $(function() {
               <input name="rad_cli_tip" type="radio" id="radio3" value="3" <?php if($tip==3)echo 'checked="checked"'?>/><label for="radio3">OTROS</label>
             </div>
     	  </td>
-  	    </tr>
+  	  </tr>
     	<tr>
             <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc">DNI:</label></td>
             <td><input name="txt_cli_doc" id="txt_cli_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
-            <a id="validar_ruc" href="#validar" onClick="buscar()">Validar Ruc</a>
+            <a id="validar_ruc_rem" href="#validar" onClick="buscar()">Validar Ruc</a>
             <input name="txt_cli_cui" id="txt_cli_cui" type="hidden" value="<?php echo $cui?>" size="8">
             <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>
             </td>
@@ -332,7 +320,7 @@ $(function() {
         <tr>
     	  <td align="right" valign="top"><label for="txt_cli_nom">Cliente:</label></td>
     	  <td><textarea name="txt_cli_nom" cols="50" rows="2" id="txt_cli_nom"><?php echo $nom?></textarea></td>
-  	    </tr>
+  	  </tr>
         <tr>
           <td align="right" valign="top"><label for="txt_cli_dir">Dirección:</label></td>
           <td><textarea name="txt_cli_dir" cols="50" rows="3" id="txt_cli_dir" ><?php echo $dir?></textarea>            
