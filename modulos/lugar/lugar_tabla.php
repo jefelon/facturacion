@@ -1,9 +1,9 @@
 <?php
 require_once ("../../config/Cado.php");
-require_once ("cMarca.php");
-$oMarca = new cMarca();
+require_once ("cLugar.php");
+$oLugar = new cLugar();
 
-$dts=$oMarca->mostrarTodos();
+$dts=$oLugar->mostrarTodos();
 $num_rows= mysql_num_rows($dts);
 
 ?>
@@ -20,7 +20,7 @@ $(function() {
 	});
 
 	$.tablesorter.defaults.widgets = ['zebra'];
-	$("#tabla_marca").tablesorter({ 
+	$("#tabla_lugar").tablesorter({
 		headers: {
 			1: {sorter: false }, 
 			2: { sorter: false}},
@@ -29,7 +29,7 @@ $(function() {
     });
 }); 
 </script>
-        <table cellspacing="1" id="tabla_marca" class="tablesorter">
+        <table cellspacing="1" id="tabla_lugar" class="tablesorter">
             <thead>
                 <tr>
                 <th>Nombre</th>
@@ -45,9 +45,9 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                <td><?php echo $dt['tb_marca_nom']?></td>
-                <td align="center"><a class="btn_editar" href="#" onClick="marca_form('editar','<?php echo $dt['tb_marca_id']?>')">Editar</a></td>
-                <td align="center"><a class="btn_eliminar" href="#" onClick="eliminar_marca('<?php echo $dt['tb_marca_id']?>')">Eliminar</a></td>
+                <td><?php echo $dt['tb_lugar_nom']?></td>
+                <td align="center"><a class="btn_editar" href="#" onClick="lugar_form('editar','<?php echo $dt['tb_lugar_id']?>')">Editar</a></td>
+                <td align="center"><a class="btn_eliminar" href="#" onClick="eliminar_lugar('<?php echo $dt['tb_lugar_id']?>')">Eliminar</a></td>
                 </tr>
 			<?php
 				}

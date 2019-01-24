@@ -11,7 +11,7 @@ $oContenido = new cContenido();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Marcas</title>
+<title>Lugares - Destinos</title>
 <link href="../../css/Estilo/miestilo.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -39,58 +39,58 @@ $oContenido = new cContenido();
 <script type="text/javascript" src="../../js/tablesorter/jquery.tablesorter.js"></script>
 
 <script type="text/javascript">
-function marca_tabla()
+function lugar_tabla()
 {	
 	$.ajax({
 		type: "POST",
-		url: "marca_tabla.php",
+		url: "lugar_tabla.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			//pro_est:	$('#cmb_fil_pro_est').val()
 		}),
 		beforeSend: function() {
-			$('#div_marca_tabla').addClass("ui-state-disabled");
+			$('#div_lugar_tabla').addClass("ui-state-disabled");
         },
 		success: function(html){
-			$('#div_marca_tabla').html(html);
+			$('#div_lugar_tabla').html(html);
 		},
 		complete: function(){			
-			$('#div_marca_tabla').removeClass("ui-state-disabled");
+			$('#div_lugar_tabla').removeClass("ui-state-disabled");
 		}
 	});     
 }
 
-function marca_form(act,idf)
+function lugar_form(act,idf)
 {
 	$.ajax({
 		type: "POST",
-		url: "marca_form.php",
+		url: "lugar_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			action: act,
-			mar_id:	idf,
-			vista:	'marca_tabla'
+			lugar_id:	idf,
+			vista:	'lugar_tabla'
 		}),
 		beforeSend: function() {
-			$('#msj_marca').hide();
-			$('#div_marca_form').dialog("open");
-			$('#div_marca_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+			$('#msj_lugar').hide();
+			$('#div_lugar_form').dialog("open");
+			$('#div_lugar_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_marca_form').html(html);				
+			$('#div_lugar_form').html(html);
 		}
 	});
 }
 
-function eliminar_marca(id)
+function eliminar_lugar(id)
 {   
-	$('#msj_marca').hide();   
+	$('#msj_lugar').hide();
 	if(confirm("Realmente desea eliminar?")){
 		$.ajax({
 			type: "POST",
-			url: "marca_reg.php",
+			url: "lugar_reg.php",
 			async:true,
 			dataType: "html",
 			data: ({
@@ -98,14 +98,14 @@ function eliminar_marca(id)
 				id:		id
 			}),
 			beforeSend: function() {
-				$('#msj_marca').html("Cargando...");
-				$('#msj_marca').show(100);
+				$('#msj_lugar').html("Cargando...");
+				$('#msj_lugar').show(100);
 			},
 			success: function(html){
-				$('#msj_marca').html(html);
+				$('#msj_lugar').html(html);
 			},
 			complete: function(){
-				marca_tabla();
+				lugar_tabla();
 			}
 		});
 	}
@@ -127,10 +127,10 @@ $(function() {
 		text: true
 	});
 
-	marca_tabla();
+	lugar_tabla();
 	
-	$( "#div_marca_form" ).dialog({
-		title:'Información de Marca',
+	$( "#div_lugar_form" ).dialog({
+		title:'Información de Lugar',
 		autoOpen: false,
 		resizable: false,
 		height: 180,
@@ -138,10 +138,10 @@ $(function() {
 		modal: true,
 		buttons: {
 			Guardar: function() {
-				$("#for_mar").submit();
+				$("#for_lugar").submit();
 			},
 			Cancelar: function() {
-				$('#for_mar').each (function(){this.reset();});
+				$('#for_lugar').each (function(){this.reset();});
 				$( this ).dialog( "close" );
 			}
 		}
@@ -162,7 +162,7 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">MARCAS</td>
+                    <td class="caption_cont">Lugares - Destinos</td>
                   </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
@@ -171,10 +171,10 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="marca_form('insertar')">Agregar</a></td>
+                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="lugar_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
-                      <td align="right"><div id="msj_marca" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
+                      <td align="right"><div id="msj_lugar" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
                     </td>
@@ -185,9 +185,9 @@ $(function() {
                   </tr>
               </table>
 			</div>
-        	<div id="div_marca_form">
+        	<div id="div_lugar_form">
 			</div>
-        	<div id="div_marca_tabla" class="contenido_tabla">
+        	<div id="div_lugar_tabla" class="contenido_tabla">
       		</div>
       	</div>
     </article>

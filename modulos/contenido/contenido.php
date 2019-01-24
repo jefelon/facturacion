@@ -59,6 +59,7 @@ $menu_administrador=
 		  <li><a href="../transporte/">Transporte</a></li>
 		  <li><a href="../venta/venta_vista_croquis.php">Croquis Transporte</a></li>
 		  <li><a href="../conductor/">Condutor</a></li>
+		  <li><a href="../lugar/">Destinos</a></li>
 	    </ul>
 	  </li>
 	  <li class="topmenu"><span><a href="#" >Ventas</a></span>
