@@ -230,19 +230,36 @@ $num_rows= mysql_num_rows($dts1);
     <tr>
         <th nowrap title="Fecha">FECHA</th>
         <th>DOCUMENTO</th>
+        <th>TIPO</th>
         <th align="right">IMPORTE</th>
     </tr>
     </thead>
     <tbody>
     <?php
     $sum_imp_ingr=0;
+    $sum_imp_enc=0;
+    $sum_imp_via=0;
     while($dt1 = mysql_fetch_array($dts1)){
+        $vvs=$oVenta->mostrar_venta_viaje($dt1['tb_ingreso_modide']);
+        $ves=$oVenta->mostrar_venta_encomienda($dt1['tb_ingreso_modide']);
+        $vvs_rows = mysql_num_rows($vvs);
+        $ves_rows = mysql_num_rows($ves);
+        if($vvs_rows>0){
+            $tipo_ven='Pasaje';
+            $sum_imp_via+=$dt1['tb_ingreso_imp'];
+        }
+        if($ves_rows>0){
+            $tipo_ven='Encomienda';
+            $sum_imp_enc+=$dt1['tb_ingreso_imp'];
+        }
+
         $sum_imp_ingr+=$dt1['tb_ingreso_imp'];
         $caja_estado=caja_cierre($dt1['tb_caja_id'],$dt1['tb_ingreso_fec']);
         ?>
         <tr>
             <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_ingreso_fec'])?></td>
             <td><?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_ingreso_numdoc']?></td>
+            <td><?php echo $tipo_ven ?></td>
             <td align="right"><?php echo formato_money($dt1['tb_ingreso_imp'])?></td>
         </tr>
         <?php
@@ -251,7 +268,7 @@ $num_rows= mysql_num_rows($dts1);
     ?>
     </tbody>
     <tr class="even">
-        <td colspan="2"><strong>TOTAL <?php echo $num_rows." registros";?></strong></td>
+        <td colspan="3"><strong>TOTAL <?php echo $num_rows." registros";?></strong></td>
         <td colspan="1" align="right"><strong><?php echo formato_money($sum_imp_ingr)?></strong></td>
     </tr>
 </table>
@@ -331,7 +348,7 @@ $num_rows= mysql_num_rows($dts1);
 $saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
 ?>
 <div class="ui-widget-header ui-corner-all" style="width:auto; padding:2px; margin:3px">CONSULTA SALDO CAJA</div>
-<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left;">
     <tr>
         <th height="24" align="left">CAJA</th>
         <th height="24" align="right">SOLES S/.</th>
@@ -365,6 +382,32 @@ $saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
     <tr style="font-weight:bold" height="25">
         <td align="left">SALDO</td>
         <td align="right"><?php echo formato_money($saldo_sol)?></td>
+        <td align="right">&nbsp;</td>
+    </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:right">
+    <tr>
+        <th height="24" align="left">TIPO</th>
+        <th height="24" align="right">SOLES S/.</th>
+        <th height="24" align="right">&nbsp;</th>
+    <tr>
+        <td align="left">VENTAS ENCOMIENDAS</td>
+        <td align="right"><?php echo formato_money($sum_imp_enc)?></td>
+        <td align="right">&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">&nbsp;</td>
+        <td align="right">&nbsp;</td>
+        <td align="right">&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">VENTA PASAJES</td>
+        <td align="right"><?php echo formato_money($sum_imp_via)?></td>
+        <td align="right">&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">&nbsp;</td>
+        <td align="right">&nbsp;</td>
         <td align="right">&nbsp;</td>
     </tr>
 </table>

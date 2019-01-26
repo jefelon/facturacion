@@ -142,8 +142,8 @@ $(function() {
     <label for="cmb_fil_ven_tip">Tipo:</label>
     <select name="cmb_fil_ven_tip" id="cmb_fil_ven_tip">
         <option value="">-</option>
-        <option value="ENCOMIEMDA" selected>ENCOMIENDA</option>
-        <option value="PASAJE">PASAJE</option>
+        <option value="ENCOMIENDA" <?php if ($_POST['ven_tip']=='ENCOMIENDA') echo 'selected'?> >ENCOMIENDA</option>
+        <option value="PASAJE" <?php if ($_POST['ven_tip']=='PASAJE') echo 'selected'?>>PASAJE</option>
     </select>
     <label for="chk_fil_ven_may" title="Venta Mayorista">Venta Mayorista<input name="chk_fil_ven_may" id="chk_fil_ven_may" type="checkbox" value="1"></label>
     <label for="chk_ven_anu" title="Activar para anular venta.">Anular Venta<input name="chk_ven_anu" id="chk_ven_anu" type="checkbox" value="1"></label>

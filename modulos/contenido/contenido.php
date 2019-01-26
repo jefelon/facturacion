@@ -109,6 +109,11 @@ $menu_administrador=
 	  <li><a href="../gasto_r/">Pagos a Proveedores</a></li>
 	</ul>
   </li>
+    <li class="topmenu"><a href="#" >Consultas</a>
+  	<ul>
+	  <li><a href="../venta/venta_vista_adm.php">Ventas General</a></li>
+	</ul>
+  </li>
 	<li class="topmenu"><a href="#" >Gráficos</a>
   	<ul>
         <li><a href="../grafico" >Volumen de ventas</a>
@@ -156,8 +161,6 @@ $menu_vendedor=
 	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
 	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
 	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
-	  <li class="separator">-----------------------</li>
-	  <li><a href="../venta/venta_vista_adm.php">Ventas General</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Caja</a>

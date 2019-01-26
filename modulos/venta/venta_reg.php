@@ -180,7 +180,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			mysql_free_result($dts);
 
 	    //REGISTRO DE GUIA SOLO SI ESTA MARCADO
-        if($_POST['chk_imprimir_guia']==1){
+        if(0==1){
 
             //consultamos talonario
             $dtsg= $oTalonario->correlativo($_SESSION['puntoventa_id'],22);

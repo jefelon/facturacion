@@ -65,10 +65,10 @@ function venta_filtro()
 		type: "POST",
 		url: "../venta/venta_filtro.php",
 		async:true,
-		dataType: "html",                      
-		//data: ({
-			//venta: $('#txt_fil_pro').val()
-		//}),
+		dataType: "html",
+		data: ({
+            ven_tip: 'ENCOMIENDA'
+		}),
 		beforeSend: function() {
 			$('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },

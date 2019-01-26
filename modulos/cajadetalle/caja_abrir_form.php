@@ -28,9 +28,13 @@ if($_POST['action']=="insertar"){
 
     $cdets = $oCajadetalle->ultimoInsertCaja($caja_venta);
     $cdet = mysql_fetch_array($cdets);
-    $cdetants = $oCajadetalle->mostrarUno($cdet['tb_cajadetalle_id']);
-    $cdetant = mysql_fetch_array($cdetants);
-    $saldo_anterior_sol =  $cdetant['tb_caja_final'];
+    if ($cdet['tb_cajadetalle_id']){
+        $cdetants = $oCajadetalle->mostrarUno($cdet['tb_cajadetalle_id']);
+        $cdetant = mysql_fetch_array($cdetants);
+        $saldo_anterior_sol =  $cdetant['tb_caja_final'];
+    }else{
+        $saldo_anterior_sol =  0;
+    }
 
 }
 
