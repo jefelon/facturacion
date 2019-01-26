@@ -50,10 +50,7 @@ $menu_administrador=
 	  </li>
 	  <li class="topmenu"><span><a href="#" >Catálogo</a></span>
 	    <ul>
-		  <li><a href="../categoria/">Categorías</a></li>
-		  <li><a href="../marca/">Marcas</a></li>
 		  <li><a href="../unidad/">Unidades de Medida</a></li>
-		  <li><a href="../producto/">Productos</a></li>
 		  <li><a href="../listaprecio/">Lista de Precios</a></li>
 		  <li><a href="../servicio/">Servicios</a></li>
 		  <li><a href="../transporte/">Transporte</a></li>
@@ -76,12 +73,6 @@ $menu_administrador=
 		  <li><a href="../cuentacorriente/">Cuenta Corriente</a></li>
 	    </ul>
 	  </li>
-	  <li class="topmenu"><span><a href="#" >Compras</a></span>
-	    <ul>
-	  		<li><a href="../proveedor/">Proveedores</a></li>
-	 		<li><a href="../almacen/">Almacenes</a></li>
-	    </ul>
-	  </li>
 	  <li class="topmenu"><span><a href="#" >Caja</a></span>
 	    <ul>
 	  		<li><a href="../cuentas/">Cuentas - Caja General</a></li>
@@ -102,7 +93,6 @@ $menu_administrador=
 	  <li><a href="../venta/venta_vista.php">Vender Pasaje</a></li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
-	  <li><a href="../guia/guia_vista_adm.php">Guia</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../notacredito/">Nota de Crédito</a></li>
 	  <li class="separator">----------------------</li>
@@ -111,33 +101,12 @@ $menu_administrador=
 	  <li><a href="../resumenboleta/">Resumen Diario de Boletas</a></li>
 	  <li><a href="../comunicacionbaja/">Comunicación de Baja</a></li>
 	  <li class="separator">----------------------</li>
-	  <li><a href="../contingencia/">Resumen de Contingencia</a></li>
-	  <li class="separator">----------------------</li>
 	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
 	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
 	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
 	  <li class="separator">_____________________</li>
 	  <li><a href="../cuentasxpagar/">Cuentas por Pagar</a></li>
 	  <li><a href="../gasto_r/">Pagos a Proveedores</a></li>
-	  <li>---------------------</li>
-	  <li><a href="../traspaso/">Traspaso</a></li>
-	  <li class="separator">_____________________</li>
-	  <li><a href="../notalmacen/">Nota de Almacén</a></li>
-	  <li class="separator">_____________________</li>
-	  <li><a href="../cotizacion/cotizacion_vista_adm.php">Cotizaciones</a></li>
-	  <li><a href="../cotizacion/cotizacion_vista.php">Registrar Cotizaciones</a></li>
-	</ul>
-  </li>
-  <li class="topmenu"><a href="#" >Consultas</a>
-  	<ul>
-	  <li><a href="../catalogo/">Catálogo de Productos</a></li>
-	  <li><a href="../kardex/">Kardex de Productos</a></li>
-	  <li><a href="../historial/">Historial de Productos</a></li>
-	  <li class="separator">_________________________</li>
-	  <li><a href="../letras/">Letras</a></li>
-	  <li><a href="../venta_cst/">Ventas - Artículos</a></li>
-	  <li><a href="../venta/venta_vista_reparto.php">Venta Reparto</a></li>
-	 <li><a href="../venta/venta_vista_garantia.php">Buscar Garantía</a></li>
 	</ul>
   </li>
 	<li class="topmenu"><a href="#" >Gráficos</a>
@@ -159,8 +128,6 @@ $menu_administrador=
    <li class="topmenu"><a href="#">Contable</a>
 	<ul>
       <li class="topmenu"><a href="../contable/ple_vista.php">PLE - 5.1.0.0 (Actualizado el 01.03.2018)</a></li>
-	  <li><a href="../contable/registro_compras.php">Contable1</a></li>
-	  <li><a href="../contable/registro_compras.php">Contable2</a></li>
        <li><a href="../contable/contable_vista_registro.php">Informes Contables</a></li>
 	</ul>
   </li>
@@ -183,19 +150,13 @@ $menu_vendedor=
 	<ul>
 	  <li><a href="../venta/">Vender Pasaje</a></li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
-	  <li><a href="../traspaso/">Traspaso</a></li>
+	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
       <li class="separator">-----------------------</li>
 	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
 	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
 	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
 	  <li class="separator">-----------------------</li>
 	  <li><a href="../venta/venta_vista_adm.php">Ventas General</a></li>
-	  <li><a href="../ventanota/venta_vista_adm.php">Notas de Venta General</a></li>
-	</ul>
-  </li>
-  <li class="topmenu"><a href="#" >Consultas</a>
-  	<ul>
-	  <li><a href="../kardex/">Kardex de Productos</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Caja</a>
