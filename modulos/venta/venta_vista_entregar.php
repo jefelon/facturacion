@@ -8,6 +8,19 @@
 	
 	if($_SESSION['usuariogrupo_id']==2)$titulo='Registrar Ventas - Administrador';
 	if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
+    require_once("../formula/cFormula.php");
+    $oFormula = new cFormula();
+
+    require_once("../venta/cVenta.php");
+    $oVenta = new cVenta();
+
+
+
+    require_once ("../formatos/mysql.php");
+    $oMysql= new cMysql();
+
+    require_once("../formatos/formato.php");
+    require_once("../menu/acceso.php");
 ?>
 <!DOCTYPE html>
 <html>
@@ -111,7 +124,7 @@ function venta_tabla()
 function venta_form(act,idf){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_encomienda_form.php",
+		url: "../venta/venta_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -174,8 +187,6 @@ function venta_form(act,idf){
 		}
 	});
 }
-
-
 
 function venta_viaje_horario_form(act,idf){
     $.ajax({
@@ -257,7 +268,7 @@ function venta_check(){
 function venta_impresion(idf){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_preimpresion.php",
+		url: "../venta/venta_preimpresion_pas.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -730,8 +741,7 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_form('insertar')">Agregar</a></td>
-
+                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_asiento_form()">Agregar</a></td>
 
                         <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>
@@ -759,22 +769,81 @@ $(function() {
                   </tr>
               </table>
 			</div>
-        	<div id="div_venta_filtro" class="contenido_tabla">
-      		</div>
-            <div id="div_venta_form">
-			</div>
-            <div id="div_venta_croquis_form">
-            </div>
-            <div id="div_venta_check">
-			</div>
-            <div id="div_venta_impresion">
-			</div>
-			<div id="div_venta_correo_form"></div>
-			<div id="div_venta_email"></div>
-            <div id="div_venta_tabla" class="contenido_tabla">
-      		</div>
-            <div id="div_venta_asiento_form">
-            </div>
+            <script type="text/javascript">
+                function venta_encomienda_tabla()
+                {
+                    $.ajax({
+                        type: "POST",
+                        url: 'venta_encomienda_tabla.php',
+                        async:true,
+                        dataType: "html",
+                        data: ({
+                            ven_des_nom: $("#txt_ven_cli_nom").val()
+                        }),
+                        beforeSend: function(){
+                            $('#div-tabla-encomiendas').addClass("ui-state-disabled");
+                        },
+                        success: function(html){
+                            $('#div-tabla-encomiendas').html(html);
+                        },
+                        complete: function(){
+                            $('#div-tabla-encomiendas').removeClass("ui-state-disabled");
+                        }
+                    });
+                }
+
+                $(function() {
+
+                    $('#txt_ven_cli_nom').change(function () {
+                        $(this).val($(this).val().toUpperCase());
+                    });
+
+
+                    $("#txt_ven_cli_nom").autocomplete({
+                        minLength: 1,
+                        source: "../clientes/clientev_complete_nom.php",
+                        select: function (event, ui) {
+                            $("#txt_ven_cli_nom").val(ui.item.id);
+                            venta_encomienda_tabla()
+
+                            //alert(ui.item.value);
+                            // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                            // $('#msj_busqueda_sunat').show(100);
+                            // compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
+                        }
+                    });
+                });
+
+            </script>
+
+            <style>
+                .carro{
+                    overflow-x: hidden;
+                }
+            </style>
+            <form id="for_ven">
+                <div id="datos-cliente" class="contenido_tabla" style="width: 100%%;">
+                    <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
+
+                    <fieldset>
+                        <legend>Datos Cliente</legend>
+                        <div id="div_cliente_form">
+                        </div>
+                        <table>
+                            <tr>
+
+                                <td>
+                                    <label for="txt_ven_cli_nom">Cliente:</label>
+                                    <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="40" value='<?php echo $cli_nom?>' />
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+                <div id="msj_encomienda" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                <div id="div-tabla-encomiendas" class="contenido_tabla">
+                </div>
+            </form>
 
       	</div>
     </article>

@@ -14,7 +14,7 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa = $dt['tb_empresa_ruc'];
 
 
-$dts1=$oVenta->mostrar_filtro_cliente($_POST['hdd_ven_cli_id']);
+$dts1=$oVenta->mostrar_filtro_cliente($_POST['ven_des_nom']);
 $num_rows= mysql_num_rows($dts1);
 ?>
 

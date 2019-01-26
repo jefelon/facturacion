@@ -99,10 +99,9 @@ $menu_administrador=
 	<ul>
 	  <li><a href="../compra/">Compras</a></li>
 	  <li class="separator">_____________________</li>
-	  <li><a href="../venta/venta_vista_adm.php">Ventas</a></li>
 	  <li><a href="../venta/venta_vista.php">Vender Pasaje</a></li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
-	  <li><a href="../venta/venta_vista_adm_encomienda.php">Encomiendas</a></li>
+	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
 	  <li><a href="../guia/guia_vista_adm.php">Guia</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../notacredito/">Nota de Crédito</a></li>

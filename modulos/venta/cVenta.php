@@ -55,10 +55,10 @@ class cVenta{
         return $rst;
     }
 
-    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_id,$origen_id, $destino_id,$clave){
-        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_id` ,`tb_origen_id`,`tb_destino_id`,`tb_encomiendaventa_clave`
+    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_nom,$origen_id, $destino_id,$clave){
+        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_nom` ,`tb_origen_id`,`tb_destino_id`,`tb_encomiendaventa_clave`
 	)
-	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_id', '$origen_id', '$destino_id','$clave'
+	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_nom', '$origen_id', '$destino_id','$clave'
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -106,16 +106,23 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrar_filtro($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$venmay){
-	$sql="SELECT * 
-	FROM tb_venta v
-	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
-	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
-	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	function mostrar_filtro($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$venmay,$tip){
+	$sql="SELECT * FROM tb_venta v LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id 
+    LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id 
+    INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id 
+    LEFT JOIN tb_viajeventa vv ON vv.tb_venta_id=v.tb_venta_id 
+    LEFT JOIN tb_encomiendaventa ev ON ev.tb_venta_id=v.tb_venta_id
+    
 	WHERE tb_usuario_id = $usu_id 
 	AND tb_puntoventa_id = $punven_id
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
-	
+	if ($tip=='ENCOMIENDA'){
+        $sql.=" AND ev.tb_ventaencomienda_id IS NOT NULL";
+    }
+    if ($tip=='PASAJE'){
+        $sql.=" AND vv.tb_viajeventa_id IS NOT NULL";
+    }
+
 	if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
 	if($cli_id>0)$sql.=" AND v.tb_cliente_id = $cli_id ";
 	if($venmay>0)$sql.=" AND v.tb_venta_may = $venmay ";
@@ -582,14 +589,14 @@ WHERE tb_software_id =$id";
         return $rst;
     }
 
-    function mostrar_filtro_cliente($cli_id){
+    function mostrar_filtro_cliente($des_nom){
         $sql="SELECT * 
 	FROM tb_encomiendaventa ev
 	INNER JOIN tb_venta v ON v.tb_venta_id=ev.tb_venta_id
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE ev.tb_destinatario_id = '$cli_id' ORDER  BY v.tb_venta_fec DESC";
+	WHERE ev.tb_destinatario_nom = '$des_nom' ORDER  BY v.tb_venta_fec DESC";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -613,6 +620,35 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
+    function mostrar_venta_asiento($venta){
+        $sql = "SELECT * 
+        FROM tb_viajeventa vv 
+        INNER JOIN tb_asientoestado ae ON vv.tb_viajehorario_id=ae.tb_viajehorario_id 
+        INNER JOIN tb_asiento a ON a.tb_asiento_id=ae.tb_asiento_id 
+        WHERE a.tb_asiento_nom = vv.tb_asiento_nom AND tb_venta_id=$venta;";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function eliminar_asiento_estado($id){
+        $sql="DELETE FROM tb_asientoestado WHERE tb_asientoestado_id=$id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+
+    function mostrar_cli_nom($dato){
+        $sql = "SELECT DISTINCT(tb_destinatario_nom) FROM tb_encomiendaventa WHERE tb_destinatario_nom LIKE '%$dato%';";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+
 
 }
 ?>
