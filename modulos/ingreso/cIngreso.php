@@ -24,7 +24,7 @@ class cIngreso{
 	)
 	VALUES (
 	NOW( ) , NOW( ) ,  '$usureg',  '$usumod',  '$xac',  '$fec',  '$doc_id',  '$numdoc',  '$det',  '$imp',  '$est',  '$cue_id',  '$subcue_id',  '$cli_id',  '$caj_id',  '$mon_id',  '$mod_id',  '$modide',  '$emp_id'
-	);"; 
+	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
@@ -138,7 +138,6 @@ class cIngreso{
 		if($est!=''){
 		$sql = $sql." AND tb_ingreso_est LIKE '$est' ";
 		}
-		
 		$sql = $sql." ORDER BY tb_ingreso_feccon ";
 		
 	$oCado = new Cado();
@@ -179,13 +178,53 @@ class cIngreso{
 		if($est!=''){
 		$sql = $sql." AND tb_ingreso_est LIKE '$est' ";
 		}
-		
+
 		$sql = $sql." ORDER BY i.tb_ingreso_fec ";
-		
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrar_filtro_fechahora($emp_id,$caj_id,$fec1,$fec2,$cue_id,$subcue_id,$doc_id,$numdoc,$cli_id,$est){
+        $sql="SELECT * 
+	FROM tb_ingreso i
+	INNER JOIN tb_cuenta c ON i.tb_cuenta_id = c.tb_cuenta_id
+	INNER JOIN tb_caja cj ON i.tb_caja_id = cj.tb_caja_id
+	INNER JOIN tb_cliente cl ON i.tb_cliente_id = cl.tb_cliente_id
+	INNER JOIN tb_documento d ON i.tb_documento_id=d.tb_documento_id
+	LEFT JOIN tb_subcuenta sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
+	WHERE tb_ingreso_xac=1
+	AND i.tb_empresa_id=$emp_id 
+	AND i.tb_ingreso_fecreg BETWEEN '$fec1' AND '$fec2' ";
+
+        if($caj_id>0){
+            $sql = $sql." AND i.tb_caja_id = $caj_id ";
+        }
+        if($cue_id>0){
+            $sql = $sql." AND i.tb_cuenta_id = $cue_id ";
+        }
+        if($subcue_id>0){
+            $sql = $sql." AND i.tb_subcuenta_id = $subcue_id ";
+        }
+        if($doc_id>0){
+            $sql = $sql." AND i.tb_documento_id = $doc_id ";
+        }
+        if($numdoc!=""){
+            $sql = $sql." AND tb_ingreso_numdoc LIKE '%$numdoc%' ";
+        }
+
+        if($cli_id>0){
+            $sql = $sql." AND i.tb_cliente_id = $cli_id ";
+        }
+        if($est!=''){
+            $sql = $sql." AND tb_ingreso_est LIKE '$est' ";
+        }
+
+        $sql = $sql." ORDER BY i.tb_ingreso_fec";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	
 	function mostrar_por_modulo($mod_id,$modide,$est){
 	$sql="SELECT * 

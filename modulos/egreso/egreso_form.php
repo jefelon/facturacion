@@ -142,7 +142,7 @@ $('.moneda2').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '9999999.9999'
+	vMax: '9999999.99'
 });
 
 $("#txt_egr_fec").datepicker({
@@ -547,6 +547,7 @@ $(function() {
 <input type="hidden" id="hdd_emp_id" name="hdd_emp_id" value="<?php echo $_SESSION['empresa_id']?>">
 <input type="hidden" id="hdd_gas_id" name="hdd_gas_id" value="<?php echo $gas_id?>">
 <input type="hidden" id="hdd_tra_id" name="hdd_tra_id" value="<?php echo $tra_id?>">
+    <input type="hidden" name="cmb_caj_id" value="<?php echo $caj_id?>">
 
   <table border="0" cellspacing="0" cellpadding="1">
     <tr>
@@ -554,7 +555,7 @@ $(function() {
       <td><input name="txt_egr_fec" type="text" class="fecha" id="txt_egr_fec" value="<?php echo $fec?>" size="10" maxlength="10"></td>
       <td align="right"><label for="cmb_caj_id">Caja:</label></td>
       <td>
-        <select name="cmb_caj_id" id="cmb_caj_id">
+        <select name="cmb_caj_id" id="cmb_caj_id" readonly disabled>
         </select></td>
     </tr>
     <tr>

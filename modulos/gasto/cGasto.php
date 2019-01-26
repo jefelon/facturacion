@@ -121,7 +121,7 @@ WHERE tb_gasto_id=$id";
 	LEFT JOIN tb_entfinanciera ef ON g.tb_entfinanciera_id=ef.tb_entfinanciera_id
 	LEFT JOIN tb_proveedor p ON g.tb_proveedor_id = p.tb_proveedor_id
 	LEFT JOIN tb_subcuenta sc ON g.tb_subcuenta_id = sc.tb_subcuenta_id
-	WHERE g.tb_empresa_id=$emp_id ";
+	WHERE tb_empresa_id=$emp_id ";
 	
 	if($y!=0){
 	$sql = $sql." AND YEAR( tb_gasto_fec ) =$y ";
@@ -163,7 +163,7 @@ WHERE tb_gasto_id=$id";
 	LEFT JOIN tb_entfinanciera ef ON g.tb_entfinanciera_id=ef.tb_entfinanciera_id
 	LEFT JOIN tb_proveedor p ON g.tb_proveedor_id = p.tb_proveedor_id
 	LEFT JOIN tb_subcuenta sc ON g.tb_subcuenta_id = sc.tb_subcuenta_id
-	WHERE g.tb_empresa_id=$emp_id 
+	WHERE tb_empresa_id=$emp_id 
 	AND tb_gasto_fec BETWEEN '$fec1' AND '$fec2' ";
 
 		if($caj_id>0){

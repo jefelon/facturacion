@@ -674,9 +674,9 @@ if($_POST['action']=="editar"){
                 txt_pro_des: $('#txt_bus_pro_nom').val(),
                 num_alm: "",
                 tipo_accion: "insertar_venta",
-                cmb_cat_id: 9,
+                cmb_cat_id: 1,
                 cmb_mar_id: 1,
-                cmb_afec_id: 9, //EXONERADO
+                cmb_afec_id: 1, //GRABADO
                 cmb_lote: "",
                 cmb_pro_est: "Activo",
                 hdd_prod_img:"",

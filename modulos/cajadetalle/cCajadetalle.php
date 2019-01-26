@@ -1,11 +1,15 @@
 <?php
-class cCaja{
-	function insertar($nom){
-	$sql = "INSERT tb_caja (
-		`tb_caja_nom`
+class cCajadetalle{
+	function insertar($caja_id, $fec_apertura, $fec_cierre, $inicial, $estado){
+	$sql = "INSERT tb_cajadetalle (
+		`tb_caja_id`,
+		`tb_caja_apertura`,
+		`tb_caja_cierre`,
+		`tb_caja_inicial`,
+		`tb_caja_estado`
 		)
 		VALUES (
-		 '$nom'
+		 '$caja_id', '$fec_apertura', '$fec_cierre', '$inicial', '$estado'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -17,19 +21,42 @@ class cCaja{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+
+    function ultimoInsertCaja($caja_id){
+        $sql = "SELECT * 
+        FROM tb_cajadetalle 
+        WHERE tb_caja_id=$caja_id 
+        ORDER BY tb_cajadetalle_id DESC LIMIT 1";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+
 	function mostrarTodos(){
 	$sql="SELECT * 
-	FROM tb_caja
+	FROM tb_cajadetalle
 	ORDER BY tb_caja_id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrarTodosCaja($id,$limit){
+        $sql="SELECT * 
+	FROM tb_cajadetalle
+    WHERE tb_caja_id=$id
+    ORDER BY tb_cajadetalle_id DESC
+    LIMIT 20";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrarUno($id){
 	$sql="SELECT * 
-	FROM tb_caja c
+	FROM tb_cajadetalle c
 	INNER JOIN tb_puntoventa pv ON c.tb_caja_id=pv.tb_caja_id
-	WHERE c.tb_caja_id=$id";
+	WHERE c.tb_cajadetalle_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -42,11 +69,12 @@ class cCaja{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-
-    function modificar_estado($id,$est){
-        $sql = "UPDATE tb_caja SET  
-	    `tb_caja_estado` =  '$est'
-	    WHERE  tb_caja_id =$id;";
+    function modificar_fec_cierre($id,$ape,$est,$final){
+        $sql = "UPDATE tb_cajadetalle SET  
+	`tb_caja_cierre` =  '$ape',
+	`tb_caja_estado` =  '$est',
+	`tb_caja_final` =  '$final'
+	WHERE  tb_cajadetalle_id =$id;";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

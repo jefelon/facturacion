@@ -228,7 +228,10 @@ function cliente_reporte_xls(){
     $("#for_rep_xls").submit();
 }
 $(function() {
-	
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
 		text: true

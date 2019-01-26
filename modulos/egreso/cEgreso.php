@@ -186,6 +186,49 @@ class cEgreso{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrar_filtro_fechahora($emp_id,$caj_id,$fec1,$fec2,$cue_id,$subcue_id,$doc_id,$numdoc,$pro_id,$est){
+        $sql="SELECT * 
+	FROM tb_egreso e
+	INNER JOIN tb_cuenta c ON e.tb_cuenta_id = c.tb_cuenta_id
+	INNER JOIN tb_caja cj ON e.tb_caja_id = cj.tb_caja_id
+	INNER JOIN tb_proveedor p ON e.tb_proveedor_id = p.tb_proveedor_id
+	INNER JOIN tb_documento d ON e.tb_documento_id=d.tb_documento_id
+	LEFT JOIN tb_subcuenta sc ON e.tb_subcuenta_id = sc.tb_subcuenta_id
+	WHERE tb_egreso_xac=1
+	AND e.tb_empresa_id=$emp_id 
+	AND tb_egreso_fecreg BETWEEN '$fec1' AND '$fec2' ";
+
+        if($caj_id>0){
+            $sql = $sql." AND e.tb_caja_id = $caj_id ";
+        }
+        if($cue_id>0){
+            $sql = $sql." AND e.tb_cuenta_id = $cue_id ";
+        }
+        if($subcue_id>0){
+            $sql = $sql." AND e.tb_subcuenta_id = $subcue_id ";
+        }
+        if($doc_id>0){
+            $sql = $sql." AND e.tb_documento_id = $doc_id ";
+        }
+        if($numdoc!=""){
+            $sql = $sql." AND tb_egreso_numdoc LIKE '%$numdoc%' ";
+        }
+
+        if($pro_id>0){
+            $sql = $sql." AND e.tb_proveedor_id = $pro_id ";
+        }
+        if($est!=''){
+            $sql = $sql." AND tb_egreso_est LIKE '$est' ";
+        }
+
+        $sql = $sql." ORDER BY tb_egreso_fec ";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function mostrar_suma($emp_id,$caj_id,$fec1,$fec2,$cue_id,$subcue_id,$numdoc,$pro_id,$est){
 	$sql="SELECT SUM(tb_egreso_imp) as total 
 	FROM tb_egreso e
