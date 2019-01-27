@@ -329,11 +329,11 @@ if($impresion=='pdf')ob_start();
     </tr>
     <tr>
         <td colspan="2"><?php echo 'Nro. Factura: ' .$serie . ' - ' . $numero ?></td>
-        <td colspan="2"><?php echo ' Fecha: ' . $fec ?></td>
+        <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
     </tr>
     <tr>
         <td colspan="2"></td>
-        <td colspan="2"><?php echo ' Hora: ' . $hora ?></td>
+        <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
     </tr>
     <tr>
         <td colspan="4" height="10mm">
@@ -341,7 +341,7 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'RAZON SOCIAL: ' .$razon ?></td>
+        <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
     </tr>
     <tr>
         <td colspan="4"> <?php echo 'RUC: ' .$ruc ?></td>
@@ -350,7 +350,7 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'CLIENTE: ' .$vv['tb_cliente_nom'] ?></td>
+        <td colspan="4"> <?php echo 'PASAJERO: ' .$vv['tb_cliente_nom'] ?></td>
     </tr>
     <tr>
         <td colspan="4"> <?php echo 'DNI: ' .$vv['tb_cliente_doc'] ?></td>

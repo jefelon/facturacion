@@ -1254,7 +1254,6 @@ if($_POST['action']=="editar"){
                     $('#txt_cli_doc').val($('#txt_ven_rem_doc').val());
                     $('#txt_cli_nom').val($('#txt_ven_rem_nom').val());
                 }
-
             }
         });
     }
@@ -1650,7 +1649,7 @@ if($_POST['action']=="editar"){
 
                     if($("#hdd_ven_rem_id" ).val()>0){
                         cmb_dir_id($( "#hdd_ven_rem_id" ).val());
-
+                        cliente_cargar_datos($('#hdd_ven_rem_id').val());
                     }
 
                 //alert(ui.item.value);
@@ -1677,6 +1676,7 @@ if($_POST['action']=="editar"){
                     $('#hdd_ven_rem_id').change();
                     if ($("#hdd_ven_rem_id").val() > 0) {
                         cmb_dir_id($("#hdd_ven_cli_id").val());
+                        cliente_cargar_datos($('#hdd_ven_rem_id').val());
                     }
                     //alert(ui.item.value);
                     // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1724,7 +1724,7 @@ if($_POST['action']=="editar"){
             }
 
             if ((this).value=== '3' || (this).value=== '12') {
-                $('#datos-cliente').hide();
+                //$('#datos-cliente').hide();
                 cliente_cargar_datos($('#hdd_ven_rem_id').val())
             }else{
                 $('#datos-cliente').show();
@@ -2740,7 +2740,7 @@ if($_POST['action']=="editar"){
         </fieldset>
 
         <div class="cliente-pasajero" style="float: left; width: 80%";>
-            <div id="datos-cliente" style="display:none; width: 100%%;">
+            <div id="datos-cliente" style="display:block; width: 100%%;">
                 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
                 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
                 <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
