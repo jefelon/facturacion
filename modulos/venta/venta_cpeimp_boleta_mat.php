@@ -48,9 +48,9 @@ $dt = mysql_fetch_array($rs);
 $imprimir_direccion = $dt['tb_formula_dat'];
 mysql_free_result($rs);
 
-$pager_formato = 'format="350x90" orientation="P" style="font-size: 11.5pt; font-family:' . $tipo_de_letra . '"';
+$pager_formato='format="350x90" orientation="P" style="font-size: 9pt; font-family:'.$tipo_de_letra.'"';
 
-$pager_margen = 'backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
+$pager_margen='backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
 
 //html2pdf
 $orientacion_impresion = 'P';
@@ -89,8 +89,6 @@ $reg = mostrarFechaHoraH($dt['tb_venta_reg']);
 $hora = mostrarHora($dt['tb_venta_reg']);
 
 $fec = mostrarFecha($dt['tb_venta_fec']);
-
-
 
 $doc_id = $dt['tb_documento_id'];
 $doc_nom = $dt['tb_documento_nom'];
@@ -302,7 +300,7 @@ if ($impresion == 'pdf') ob_start();
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="centrado" style="font-size: 18px;">
+                    <td colspan="4" class="centrado negrita" style="font-size: 15px;">
                         <?php echo $emp_razsoc ?>
                     </td>
                 </tr>
@@ -315,22 +313,21 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="4" class="centrado"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" height="10mm">
-                        .............................................................................................
-                    </td>
+                    <td colspan="4" height="10mm">.............................................................................................</td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado negrita py-5">BOLETA DE VENTA ELECTRÓNICA</td>
                 </tr>
                 <tr>
                     <td colspan="2"><?php echo 'Nro. Boleta: ' .$serie . ' - ' . $numero ?></td>
-                    <td colspan="2"><?php echo ' Fecha: ' . $fec ?></td>
+                    <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
                 </tr>
                 <tr>
                     <td colspan="2"></td>
-                    <td colspan="2"><?php echo ' Hora: ' . $hora ?></td>
+                    <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4" height="10mm">
-                        .............................................................................................
-                    </td>
+                    <td colspan="4" height="10mm">.............................................................................................</td>
                 </tr>
                 <tr>
                     <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
@@ -339,44 +336,38 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="4"> <?php echo 'DNI: ' .$ruc ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+                    <td colspan="4"> <?php echo 'REMITENTE: ' . $ev['crtb_cliente'] ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'Remitente: ' . $ev['crtb_cliente'] ?></td>
+                    <td colspan="4"> <?php echo 'DESTINATARIO: ' . $ev['cdtb_cliente'] ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'Destinatario: ' . $ev['cdtb_cliente'] ?></td>
+                    <td colspan="4"> <?php echo 'ORIGEN: ' . $ev['ltb_origen'] ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'Origen: ' . $ev['ltb_origen'] ?></td>
+                    <td colspan="4"> <?php echo 'DESTINO: ' . $ev['ltb_destino'] ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'Destino: ' . $ev['ltb_destino'] ?></td>
-                </tr>
-                <tr>
-                    <td colspan="4" height="10mm">
-                        .............................................................................................
-                    </td>
+                    <td colspan="4" height="10mm">.............................................................................................</td>
                 </tr>
                 <tr>
                     <td colspan="4">
                         <table width="80mm">
                             <thead>
                             <tr>
-                                <td style="width: 15mm" class="izquierda ">CANT</td>
-                                <td style="width: 40mm" class="izquierda ">DESCRIPCION</td>
-                                <td style="width: 25mm" class="derecha">IMPORTE</td>
+                                <td style="width: 10mm" class="izquierda negrita">CANT</td>
+                                <td style="width: 30mm" class="izquierda negrita" >DESCRIPCION</td>
+                                <td style="width: 20mm" class="derecha negrita">P. UNIT</td>
+                                <td style="width: 20mm" class="derecha negrita">IMPORTE</td>
                             </tr>
                             </thead>
                             <?php if ($numero_filas >= 1) { ?>
                                 <?php while ($dt1 = mysql_fetch_array($dts1)) { ?>
                                     <tr>
-                                        <td class="izquierda"
-                                            style="width: 15mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
-                                        <td class="izquierda"
-                                            style="width: 40mm"><?php echo $dt1['tb_producto_nom'] ?></td>
-                                        <td class="derecha"
-                                            style="width: 25mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'] * $dt1['tb_ventadetalle_can']) ?></td>
+                                        <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
+                                        <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom'] ?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']) ?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'] * $dt1['tb_ventadetalle_can']) ?></td>
                                     </tr>
 
                                 <?php }
@@ -385,12 +376,10 @@ if ($impresion == 'pdf') ob_start();
 
                             <?php while ($dt2 = mysql_fetch_array($dts2)) { ?>
                                 <tr>
-                                    <td class="izquierda"
-                                        style="width: 15mm"><?php echo $dt2["tb_ventadetalle_can"] ?></td>
-                                    <td class="izquierda"
-                                        style="width: 40mm"><?php echo '' . $dt2['tb_servicio_nom'] . ''; ?></td>
-                                    <td class="derecha"
-                                        style="width: 25mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'] * $dt2['tb_ventadetalle_can']) ?></td>
+                                    <td class="izquierda" style="width: 10mm"><?php echo $dt2["tb_ventadetalle_can"] ?></td>
+                                    <td class="izquierda" style="width: 30mm"><?php echo $dt2["tb_servicio_nom"] ?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']) ?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'] * $dt2['tb_ventadetalle_can']) ?></td>
                                 </tr>
                             <?php }
                             mysql_free_result($dts2); ?>
@@ -417,17 +406,17 @@ if ($impresion == 'pdf') ob_start();
                                     S/ <?php echo formato_money($valven) ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="izquierda">OP. EXONERADA:</td>
+                                <td colspan="2" class="izquierda negrita">OP. EXONERADA:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     S/ <?php echo formato_money($exo) ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="izquierda">IGV:</td>
+                                <td colspan="2" class="izquierda negrita">IGV:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     S/ <?php echo formato_money($igv) ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="izquierda">TOTAL A PAGAR:</td>
+                                <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     S/ <?php echo formato_money($tot) ?></td>
                             </tr>
@@ -442,12 +431,10 @@ if ($impresion == 'pdf') ob_start();
                                     consultada en: <br><?php echo $d_documentos_app ?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" height="10mm">
-                                    .............................................................................................
-                                </td>
+                                <td colspan="4" height="10mm">.............................................................................................</td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm;" class="centrado">Todo entrega de enconmienda es personal y con su respectiva clave de seguridad.</td>
+                                <td colspan="4" class="centrado negrita">Todo entrega de encomienda es personal y con su respectiva clave de seguridad.</td>
                             </tr>
                             </tbody>
                         </table>
@@ -485,7 +472,8 @@ if ($impresion == 'pdf') {
 
         $nombre_arc = 'venta_' . $numdoc . '.pdf';
         $html2pdf->Output($nombre_arc);
-    } catch (HTML2PDF_exception $e) {
+    }
+    catch (HTML2PDF_exception $e) {
         echo $e;
         exit;
     }

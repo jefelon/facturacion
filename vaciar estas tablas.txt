@@ -1,3 +1,0 @@
-DELETE FROM `tb_asientoestado`
-DELETE FROM `tb_viajeventa`
-DELETE FROM tb_viajehorario

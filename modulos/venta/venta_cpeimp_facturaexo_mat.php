@@ -48,7 +48,7 @@ $rs = $oFormula->consultar_dato_formula('VEN_IMP_DIR');
   $imprimir_direccion = $dt['tb_formula_dat'];
   mysql_free_result($rs);
 
-$pager_formato='format="350x90" orientation="P" style="font-size: 11.5pt; font-family:'.$tipo_de_letra.'"';
+$pager_formato='format="350x90" orientation="P" style="font-size: 9pt; font-family:'.$tipo_de_letra.'"';
 
 $pager_margen='backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
 
@@ -304,7 +304,7 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
-        <td colspan="4" class="centrado" style="font-size: 18px;">
+        <td colspan="4" class="centrado negrita" style="font-size: 15px;">
             <?php echo $emp_razsoc ?>
         </td>
     </tr>
@@ -322,6 +322,9 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
+        <td colspan="4" class="centrado negrita py-5">FACTURA DE VENTA ELECTRÓNICA</td>
+    </tr>
+    <tr>
         <td colspan="2"><?php echo 'Nro. Factura: ' .$serie . ' - ' . $numero ?></td>
         <td colspan="2"><?php echo ' Fecha: ' . $fec ?></td>
     </tr>
@@ -335,7 +338,7 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'RAZON SOCIAL: ' .$razon ?></td>
+        <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
     </tr>
     <tr>
         <td colspan="4"> <?php echo 'RUC: ' .$ruc ?></td>
@@ -344,22 +347,16 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'CLIENTE: ' .$vv['tb_cliente_nom'] ?></td>
+        <td colspan="4"> <?php echo 'REMITENTE: ' . $ev['crtb_cliente'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'DNI: ' .$vv['tb_cliente_doc'] ?></td>
+        <td colspan="4"> <?php echo 'DESTINATARIO: ' . $ev['cdtb_cliente'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Remitente: ' . $ev['crtb_cliente'] ?></td>
+        <td colspan="4"> <?php echo 'ORIGEN: ' . $ev['ltb_origen'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Destinatario: ' . $ev['cdtb_cliente'] ?></td>
-    </tr>
-    <tr>
-        <td colspan="4"> <?php echo 'Origen: ' . $ev['ltb_origen'] ?></td>
-    </tr>
-    <tr>
-        <td colspan="4"> <?php echo 'Destino: ' . $ev['ltb_destino'] ?></td>
+        <td colspan="4"> <?php echo 'DESTINO: ' . $ev['ltb_destino'] ?></td>
     </tr>
     <tr>
         <td colspan="4" height="10mm">
@@ -371,18 +368,19 @@ if($impresion=='pdf')ob_start();
         <table width="80mm">
           <thead>
             <tr>
-                <td style="width: 15mm" class="izquierda ">CANT</td>
-                <td style="width: 45mm" class="izquierda ">DESCRIPCION</td>
-                <td style="width: 25mm" class="derecha">IMPORTE</td>
+                <td style="width: 10mm" class="izquierda negrita">CANT</td>
+                <td style="width: 30mm" class="izquierda negrita" >DESCRIPCION</td>
+                <td style="width: 20mm" class="derecha negrita">P. UNIT</td>
+                <td style="width: 20mm" class="derecha negrita">IMPORTE</td>
             </tr>
           </thead>
           <?php  if($numero_filas>=1){ ?>
           <?php while($dt1 = mysql_fetch_array($dts1)){ ?>
             <tr>
-                <td class="izquierda"
-                    style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
-              <td class="izquierda" style="width: 45mm"><?php echo $dt1['tb_producto_nom']?></td>
-              <td class="derecha" style="width: 25mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+              <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
+              <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']?></td>
+              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preun'])?></td>
+              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preun']*$dt1['tb_ventadetalle_can'])?></td>
             </tr>
 
           <?php } mysql_free_result($dts1);?>
@@ -392,8 +390,9 @@ if($impresion=='pdf')ob_start();
             <tr>
                 <td class="izquierda"
                     style="width: 10mm"><?php echo $dt2["tb_ventadetalle_can"] ?></td>
-              <td class="izquierda" style="width: 45mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
-              <td class="derecha" style="width: 25mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt2['tb_ventadetalle_can'])?></td>
+              <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
+              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
+              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']*$dt2['tb_ventadetalle_can'])?></td>
             </tr>
             <?php  } mysql_free_result($dts2); ?>
           </table>
@@ -418,17 +417,17 @@ if($impresion=='pdf')ob_start();
               S/ <?php echo formato_money($valven) ?></td>
       </tr>
       <tr>
-          <td colspan="2" class="izquierda">OP. EXONERADA:</td>
+          <td colspan="2" class="izquierda negrita">OP. EXONERADA:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
               S/ <?php echo formato_money($exo) ?></td>
       </tr>
       <tr>
-          <td colspan="2" class="izquierda">IGV:</td>
+          <td colspan="2" class="izquierda negrita">IGV:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
               S/ <?php echo formato_money($igv) ?></td>
       </tr>
       <tr>
-          <td colspan="2" class="izquierda">TOTAL A PAGAR:</td>
+          <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
               S/ <?php echo formato_money($tot) ?></td>
       </tr>
@@ -448,7 +447,7 @@ if($impresion=='pdf')ob_start();
             </td>
         </tr>
         <tr>
-            <td colspan="4" style="width: 80mm;" class="centrado">Todo reclamo es realizado dentro los días
+            <td colspan="4" style="width: 80mm;" class="centrado negrita">Todo reclamo es realizado dentro los días
                 hábiles.</td>
         </tr>
       </tbody>

@@ -378,7 +378,7 @@ if($impresion=='pdf')ob_start();
                                     <td class="izquierda" style="width: 10mm"><?php echo $dt2['tb_ventadetalle_can'];?></td>
                                     <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
                                     <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin'])?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt2['tb_ventadetalle_can'])?></td>
                                 </tr>
                             <?php  } mysql_free_result($dts2); ?>
                         </table>

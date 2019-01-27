@@ -572,11 +572,16 @@ $(function() {
 		icons: {primary: "ui-icon-document"},
 		text: true
 	});
-	
-	$('#btn_agregar').button({
-		icons: {primary: "ui-icon-plus"},
-		text: true
-	});
+
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+        <?php
+        if ($_SESSION['caja_estado']==0){
+            echo ", disabled: true";
+        }
+        ?>
+    });
 	
 	venta_filtro();		
 	
@@ -843,6 +848,10 @@ $(function() {
                 <div id="msj_encomienda" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                 <div id="div-tabla-encomiendas" class="contenido_tabla">
                 </div>
+
+                <div id="div_venta_impresion" class="contenido_tabla">
+                </div>
+
             </form>
 
       	</div>
