@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_pas.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_pas.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_pas.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_pas.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_vista_encomienda.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_vista_encomienda.php" />
       <change beforePath="$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php" />
-      <change beforePath="$PROJECT_DIR$/transportefact.sql" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/vaciar estas tablas.txt" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -57,193 +47,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="producto_reg.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/producto/producto_reg.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1768">
-              <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_vista.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="254" column="25" lean-forward="false" selection-start-line="254" selection-start-column="9" selection-end-line="254" selection-end-column="25" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_preimpresion.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_preimpresion.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-357">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_vista_entregar.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="270" column="32" lean-forward="false" selection-start-line="270" selection-start-column="23" selection-end-line="270" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_cpeimp_boleta_mat.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="302" column="86" lean-forward="false" selection-start-line="302" selection-start-column="86" selection-end-line="302" selection-end-column="86" />
-              <folding>
-                <element signature="n#style#0;n#!!top" expanded="false" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#td#0;n#tr#16;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#3;n#tbody#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#qrcode#0;n#td#0;n#tr#5;n#tbody#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#6;n#tbody#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_cpeimp_facturaexo_mat_pas.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_pas.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="161">
-              <caret line="309" column="74" lean-forward="false" selection-start-line="309" selection-start-column="74" selection-end-line="309" selection-end-column="74" />
-              <folding>
-                <element signature="e#8186#8210#0#HTML" expanded="true" />
-                <element signature="e#10651#10670#0#HTML" expanded="true" />
-                <element signature="e#10727#10746#0#HTML" expanded="true" />
-                <element signature="e#10811#10830#0#HTML" expanded="true" />
-                <element signature="e#10888#10907#0#HTML" expanded="true" />
-                <element signature="e#11164#11183#0#HTML" expanded="true" />
-                <element signature="e#11277#11296#0#HTML" expanded="true" />
-                <element signature="e#11383#11402#0#HTML" expanded="true" />
-                <element signature="e#11510#11529#0#HTML" expanded="true" />
-                <element signature="e#11872#11891#0#HTML" expanded="true" />
-                <element signature="e#11981#12000#0#HTML" expanded="true" />
-                <element signature="e#12090#12109#0#HTML" expanded="true" />
-                <element signature="e#12214#12233#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_cpeimp_boleta_mat_pas.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_pas.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-215">
-              <caret line="335" column="50" lean-forward="false" selection-start-line="335" selection-start-column="50" selection-end-line="335" selection-end-column="50" />
-              <folding>
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_cpeimp_facturaexo_mat.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="306" column="74" lean-forward="false" selection-start-line="306" selection-start-column="74" selection-end-line="306" selection-end-column="74" />
-              <folding>
-                <element signature="e#4399#5966#0#PHP" expanded="false" />
-                <element signature="e#8139#8163#0#HTML" expanded="true" />
-                <element signature="e#10137#10156#0#HTML" expanded="true" />
-                <element signature="e#10213#10232#0#HTML" expanded="true" />
-                <element signature="e#10297#10316#0#HTML" expanded="true" />
-                <element signature="e#10374#10393#0#HTML" expanded="true" />
-                <element signature="e#10622#10641#0#HTML" expanded="true" />
-                <element signature="e#10725#10744#0#HTML" expanded="true" />
-                <element signature="e#10821#10840#0#HTML" expanded="true" />
-                <element signature="e#10938#10957#0#HTML" expanded="true" />
-                <element signature="e#11270#11289#0#HTML" expanded="true" />
-                <element signature="e#11373#11392#0#HTML" expanded="true" />
-                <element signature="e#11476#11495#0#HTML" expanded="true" />
-                <element signature="e#11594#11613#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_cpeimp_nota_mat.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="100">
-              <caret line="360" column="43" lean-forward="true" selection-start-line="360" selection-start-column="43" selection-end-line="360" selection-end-column="43" />
-              <folding>
-                <element signature="e#0#5#0#PHP" expanded="false" />
-                <element signature="e#6813#7724#0#HTML" expanded="false" />
-                <element signature="e#10893#10912#0#HTML" expanded="true" />
-                <element signature="e#10985#11004#0#HTML" expanded="true" />
-                <element signature="e#11085#11104#0#HTML" expanded="true" />
-                <element signature="e#11178#11197#0#HTML" expanded="true" />
-                <element signature="e#11550#11569#0#HTML" expanded="true" />
-                <element signature="e#11678#11697#0#HTML" expanded="true" />
-                <element signature="e#11800#11819#0#HTML" expanded="true" />
-                <element signature="e#11947#11966#0#HTML" expanded="true" />
-                <element signature="e#12385#12404#0#HTML" expanded="true" />
-                <element signature="e#12510#12529#0#HTML" expanded="true" />
-                <element signature="e#12635#12654#0#HTML" expanded="true" />
-                <element signature="e#12778#12797#0#HTML" expanded="true" />
-                <element signature="e#13289#13308#0#HTML" expanded="true" />
-                <element signature="e#13351#13370#0#HTML" expanded="true" />
-                <element signature="e#13413#13431#0#HTML" expanded="true" />
-                <element signature="e#13474#13493#0#HTML" expanded="true" />
-                <element signature="e#13800#13826#0#HTML" expanded="true" />
-                <element signature="e#14328#14347#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="venta_encomienda_tabla.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_encomienda_tabla.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="417">
-              <caret line="123" column="104" lean-forward="true" selection-start-line="123" selection-start-column="104" selection-end-line="123" selection-end-column="104" />
+              <caret line="123" column="105" lean-forward="true" selection-start-line="123" selection-start-column="105" selection-end-line="123" selection-end-column="105" />
               <folding>
                 <marker date="1548527472113" expanded="true" signature="3555:3565" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_vista_entregar.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="270" column="41" lean-forward="false" selection-start-line="270" selection-start-column="41" selection-end-line="270" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -277,11 +98,11 @@
       <find>cmb_cat_id</find>
       <find>div_venta_impresion</find>
       <find>table</find>
-      <find>venta_pre</find>
       <find>$tipo_de_letra</find>
-      <find>venta_impresion(</find>
-      <find>negrita</find>
       <find>$razon</find>
+      <find>negrita</find>
+      <find>venta_pre</find>
+      <find>venta_impresion(</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -371,13 +192,13 @@
         <option value="$PROJECT_DIR$/modulos/cajadetalle/cCajadetalle.php" />
         <option value="$PROJECT_DIR$/modulos/cajadetalle/caja_abrir_form.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_vista_encomienda.php" />
-        <option value="$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_preimpresion_pas.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_pas.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_pas.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php" />
       </list>
     </option>
   </component>
@@ -537,7 +358,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="506486000" />
+    <option name="totallyTimeSpent" value="506699000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -920,32 +741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_encomienda_tabla.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="417">
-          <caret line="123" column="104" lean-forward="true" selection-start-line="123" selection-start-column="104" selection-end-line="123" selection-end-column="104" />
-          <folding>
-            <marker date="1548527472113" expanded="true" signature="3555:3565" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/producto/producto_reg.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1768">
-          <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="270" column="32" lean-forward="false" selection-start-line="270" selection-start-column="23" selection-end-line="270" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat-cervatn.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -983,26 +778,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="254" column="25" lean-forward="false" selection-start-line="254" selection-start-column="9" selection-end-line="254" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_preimpresion_pas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="42" column="93" lean-forward="false" selection-start-line="42" selection-start-column="93" selection-end-line="42" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_preimpresion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-357">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1025,6 +804,51 @@
             <element signature="e#11981#12000#0#HTML" expanded="true" />
             <element signature="e#12090#12109#0#HTML" expanded="true" />
             <element signature="e#12214#12233#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="306" column="74" lean-forward="false" selection-start-line="306" selection-start-column="74" selection-end-line="306" selection-end-column="74" />
+          <folding>
+            <element signature="e#4399#5966#0#PHP" expanded="false" />
+            <element signature="e#8139#8163#0#HTML" expanded="true" />
+            <element signature="e#10137#10156#0#HTML" expanded="true" />
+            <element signature="e#10213#10232#0#HTML" expanded="true" />
+            <element signature="e#10297#10316#0#HTML" expanded="true" />
+            <element signature="e#10374#10393#0#HTML" expanded="true" />
+            <element signature="e#10622#10641#0#HTML" expanded="true" />
+            <element signature="e#10725#10744#0#HTML" expanded="true" />
+            <element signature="e#10821#10840#0#HTML" expanded="true" />
+            <element signature="e#10938#10957#0#HTML" expanded="true" />
+            <element signature="e#11270#11289#0#HTML" expanded="true" />
+            <element signature="e#11373#11392#0#HTML" expanded="true" />
+            <element signature="e#11476#11495#0#HTML" expanded="true" />
+            <element signature="e#11594#11613#0#HTML" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_pas.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-215">
+          <caret line="335" column="50" lean-forward="false" selection-start-line="335" selection-start-column="50" selection-end-line="335" selection-end-column="50" />
+          <folding>
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1062,48 +886,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php">
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_preimpresion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="306" column="74" lean-forward="false" selection-start-line="306" selection-start-column="74" selection-end-line="306" selection-end-column="74" />
+        <state relative-caret-position="-357">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="254" column="25" lean-forward="false" selection-start-line="254" selection-start-column="9" selection-end-line="254" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/producto/producto_reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1768">
+          <caret line="20" column="24" lean-forward="false" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_encomienda_tabla.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="417">
+          <caret line="123" column="105" lean-forward="true" selection-start-line="123" selection-start-column="105" selection-end-line="123" selection-end-column="105" />
           <folding>
-            <element signature="e#4399#5966#0#PHP" expanded="false" />
-            <element signature="e#8139#8163#0#HTML" expanded="true" />
-            <element signature="e#10137#10156#0#HTML" expanded="true" />
-            <element signature="e#10213#10232#0#HTML" expanded="true" />
-            <element signature="e#10297#10316#0#HTML" expanded="true" />
-            <element signature="e#10374#10393#0#HTML" expanded="true" />
-            <element signature="e#10622#10641#0#HTML" expanded="true" />
-            <element signature="e#10725#10744#0#HTML" expanded="true" />
-            <element signature="e#10821#10840#0#HTML" expanded="true" />
-            <element signature="e#10938#10957#0#HTML" expanded="true" />
-            <element signature="e#11270#11289#0#HTML" expanded="true" />
-            <element signature="e#11373#11392#0#HTML" expanded="true" />
-            <element signature="e#11476#11495#0#HTML" expanded="true" />
-            <element signature="e#11594#11613#0#HTML" expanded="true" />
+            <marker date="1548527472113" expanded="true" signature="3555:3565" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_pas.php">
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista_entregar.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-215">
-          <caret line="335" column="50" lean-forward="false" selection-start-line="335" selection-start-column="50" selection-end-line="335" selection-end-column="50" />
-          <folding>
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#2;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#3;n#tr#0;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#0;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#td#3;n#tr#1;n#table#0;n#td#0;n#tr#17;n#table#0;n#page#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="184">
+          <caret line="270" column="41" lean-forward="false" selection-start-line="270" selection-start-column="41" selection-end-line="270" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
     </entry>
