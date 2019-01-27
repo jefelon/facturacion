@@ -168,6 +168,6 @@ if($aut==1){
 }
 else
 {
-	header("location: ../vendedor/index.php"); 
+    header("location: ../puntoventa/puntoventa_seleccionar.php");
 }
 ?>

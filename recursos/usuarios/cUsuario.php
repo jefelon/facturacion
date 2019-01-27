@@ -71,7 +71,7 @@ class cUsuario{
             $use="?invalido?";
         }
         //$use=mysql_real_escape_string($use);
-        $sql="SELECT * FROM tb_cliente WHERE tb_cliente_cui='$use' AND tb_cliente_cui='$pas';";
+        $sql="SELECT * FROM tb_cliente WHERE tb_cliente_doc='$use' AND tb_cliente_doc='$pas';";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

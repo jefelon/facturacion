@@ -52,7 +52,7 @@
 
    <form action="ctaInicio.php" method="post" name="form" id="form">
       <div id="main-header">
-            <h1 class="site-name">Consulta Pagos Mensualidades</h1>
+            <h1 class="site-name">Consulta de Comprobantes Electrónicos</h1>
       </div>
      <div class="imgcontainer">
        <img src="../../images/logo.jpg" alt="Logo" class="avatar">
