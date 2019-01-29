@@ -244,6 +244,7 @@ $(function() {
                     if($_POST['vista']=="hdd_rem_id")
                     {
                         echo 'remitente_cargar_datos(data.cli_id);';
+                        echo 'cliente_cargar_datos(data.cli_id);';
 
                     }
 					?>

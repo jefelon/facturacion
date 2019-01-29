@@ -1724,7 +1724,7 @@ if($_POST['action']=="editar"){
             }
 
             if ((this).value=== '3' || (this).value=== '12') {
-                //$('#datos-cliente').hide();
+                $('#datos-cliente').hide();
                 cliente_cargar_datos($('#hdd_ven_rem_id').val())
             }else{
                 $('#datos-cliente').show();
@@ -2740,7 +2740,7 @@ if($_POST['action']=="editar"){
         </fieldset>
 
         <div class="cliente-pasajero" style="float: left; width: 80%";>
-            <div id="datos-cliente" style="display:block; width: 100%%;">
+            <div id="datos-cliente" style="display:none; width: 100%%;">
                 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
                 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
                 <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
@@ -2922,8 +2922,9 @@ if($_POST['action']=="editar"){
                                     <label for="cmb_forpaf_id">Forma<!-- Pago-->:</label></br>
                                     <select name="cmb_forpag_id" id="cmb_forpag_id">
                                         <option value="1" selected="selected">CONTADO</option>
-                                        <option value="2">CREDITO</option>
-                                        <option value="3">LETRAS</option>
+<!--                                        <option value="2">CREDITO</option>-->
+<!--                                        <option value="3">LETRAS</option>-->
+                                        <option value="4">POR PAGAR</option>
                                     </select>
                                 </td>
                                 <td valign="top"><!--<label for="cmb_modpaf_id">Modo Pago:</label>--></br>
