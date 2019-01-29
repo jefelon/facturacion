@@ -16,7 +16,7 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa = $dt['tb_empresa_ruc'];
 
 
-$dts1=$oVenta->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may']);
+$dts1=$oVenta->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may'],$_POST['cmb_fil_ven_tip']);
 $num_rows= mysql_num_rows($dts1);
 ?>
 
@@ -72,6 +72,8 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">CLIENTE</th>
         <th align="center">RUC/DNI</th>
         <th align="center">MONEDA</th>
+        <th align="center">OP EXO</th>
+        <th align="center">IGV</th>
         <th align="center">IMPORTE TOTAL</th>
         <th align="center">ESTADO DOC.</th>
         <th align="center">ESTADO SUNAT</th>
@@ -197,11 +199,11 @@ $num_rows= mysql_num_rows($dts1);
     }
     ?>
     <tr class="even">
-        <td colspan="6">TOTAL</td>
+        <td colspan="8">TOTAL</td>
         <td align="right"><strong><?php echo formato_money($total_ventas)?></strong></td>
         <td colspan="5" align="right">&nbsp;</td>
     </tr>
     <tr class="even">
-        <td colspan="13"><?php echo $num_rows.' registros'?></td>
+        <td colspan="14"><?php echo $num_rows.' registros'?></td>
     </tr>
 </table>

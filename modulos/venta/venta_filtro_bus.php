@@ -43,7 +43,6 @@ $orden33=$dt33['tb_distribucionasiento_lugar'];
             text: false
         });
 
-
     });
 
     function cambiar_color(selector) {

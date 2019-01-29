@@ -1,21 +1,21 @@
 <?php
 require_once ("../../config/Cado.php");
-require_once("cMarca.php");
-$oMarca = new cMarca();
+require_once("cLugar.php");
+$oLugar = new cLugar();
 
-if($_POST['action_marca']=="insertar")
+if($_POST['action_lugar']=="insertar")
 {
-	if(!empty($_POST['txt_mar_nom']))
+	if(!empty($_POST['txt_lugar_nom']))
 	{
-		$oMarca->insertar(strip_tags($_POST['txt_mar_nom']));
+        $oLugar->insertar(strip_tags($_POST['txt_lugar_nom']));
 		
-			$dts=$oMarca->ultimoInsert();
+			$dts=$oLugar->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
-		$mar_id=$dt['last_insert_id()'];
+		    $lugar_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
 		
-		$data['mar_id']=$mar_id;
-		$data['mar_msj']='Se registró marca correctamente.';
+		$data['lugar_id']=$lugar_id;
+		$data['lugar_msj']='Se registró el lugar correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -24,13 +24,13 @@ if($_POST['action_marca']=="insertar")
 	}
 }
 
-if($_POST['action_marca']=="editar")
+if($_POST['action_lugar']=="editar")
 {
-	if(!empty($_POST['txt_mar_nom']))
+	if(!empty($_POST['txt_lugar_nom']))
 	{
-		$oMarca->modificar($_POST['hdd_mar_id'],strip_tags($_POST['txt_mar_nom']));
+		$oLugar->modificar($_POST['hdd_lugar_id'],strip_tags($_POST['txt_lugar_nom']));
 		
-		$data['mar_msj']='Se registró marca correctamente.';
+		$data['lugar_msj']='Se registró el lugar correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -43,9 +43,9 @@ if($_POST['action']=="eliminar")
 {
 	if(!empty($_POST['id']))
 	{
-		$cst1 = $oMarca->verifica_marca_tabla($_POST['id'],'tb_producto');
+		$cst1 = $oLugar->verifica_lugar_tabla($_POST['id'],'tb_viajehorario');
 		$rst1= mysql_num_rows($cst1);
-		if($rst1>0)$msj1=' - Producto';
+		if($rst1>0)$msj1=' - Viaje Horario';
 		
 		if($rst1>0)
 		{
@@ -53,8 +53,8 @@ if($_POST['action']=="eliminar")
 		}
 		else
 		{
-			$oMarca->eliminar($_POST['id']);
-			echo 'Se eliminó marca correctamente.';
+			$oLugar->eliminar($_POST['id']);
+			echo 'Se eliminó lugar correctamente.';
 		}
 	}
 	else

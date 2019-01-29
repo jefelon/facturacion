@@ -14,7 +14,7 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa = $dt['tb_empresa_ruc'];
 
 
-$dts1=$oVenta->mostrar_filtro_cliente($_POST['hdd_ven_cli_id']);
+$dts1=$oVenta->mostrar_filtro_cliente($_POST['ven_des_nom']);
 $num_rows= mysql_num_rows($dts1);
 ?>
 
@@ -122,7 +122,9 @@ $num_rows= mysql_num_rows($dts1);
                 </td>
                 <td align="left" nowrap="nowrap">
                     <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="venta_impresion('<?php echo $dt1['tb_venta_id']?>')">PDF</a>
-                    <a class="btn_pdf" id="btn_pdf" title="Entregar" onclick="pedir_clave(<?php echo $dt1['tb_encomiendaventa_id'];?>)">Entregar</a>
+                    <?php if ($dt1['tb_estado']=='0') {?>
+                        <a class="btn_pdf" id = "btn_pdf" title = "Entregar" onclick = "pedir_clave(<?php echo $dt1['tb_encomiendaventa_id'];?>)" > Entregar</a>
+                    <?php } ?>
                 </td>
             </tr>
             <?php

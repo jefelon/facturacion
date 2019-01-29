@@ -109,6 +109,9 @@ if($est!='ANULADA')
     }
     mysql_free_result($rws1);
 
+
+
+
 	//_________________________________________
 	$error1=0;
 	$data['act']='correcto';

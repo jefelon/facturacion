@@ -10,6 +10,8 @@ require_once ("./cPuntoventa.php");
 $oPuntoventa = new cPuntoventa();
 require_once ("../almacen/cAlmacen.php");
 $oAlmacen = new cAlmacen();
+require_once ("../caja/cCaja.php");
+$oCaja = new cCaja();
 
 require_once ("../menu/acceso.php");
 
@@ -25,8 +27,13 @@ if(isset($_POST['cmb_punven_id']) and $_POST['cmb_punven_id']>0)
 		$_SESSION['puntoventa_nom']	=$dt['tb_puntoventa_nom'];
 	
 		$alm_id	=$dt['tb_almacen_id'];
-	mysql_free_result($dts);
-	
+    $cjs=$oCaja->mostrarUno($dt['tb_caja_id']);
+    $cj = mysql_fetch_array($cjs);
+    $_SESSION['caja_estado']=$cj['tb_caja_estado'];
+    $_SESSION['caja_id']=$cj['tb_caja_id'];
+	mysql_free_result($cjs);
+    mysql_free_result($dts);
+
 	//almacen
 	$dts=$oAlmacen->mostrarUno($alm_id);
 	$dt = mysql_fetch_array($dts);

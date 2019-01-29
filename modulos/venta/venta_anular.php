@@ -136,6 +136,10 @@ if($est!='ANULADA')
     }
     mysql_free_result($rws1);
 
+    $vas=$oVenta->mostrar_venta_asiento($_POST['ven_id']);
+    $va = mysql_fetch_array($vas);
+
+    $vas=$oVenta->eliminar_asiento_estado($va['tb_asientoestado_id']);
 	//_________________________________________
 	$error1=0;
 	$data['act']='correcto';

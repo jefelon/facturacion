@@ -182,6 +182,11 @@ $(function() {
 	$('#btn_agregar').button({
 		icons: {primary: "ui-icon-plus"},
 		text: true
+        <?php
+        if ($_SESSION['caja_estado']==0){
+            echo ", disabled: true";
+        }
+        ?>
 	});
 	
 	$('#btn_imprimir_pdf').button({

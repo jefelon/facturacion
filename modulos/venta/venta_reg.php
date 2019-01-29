@@ -180,7 +180,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			mysql_free_result($dts);
 
 	    //REGISTRO DE GUIA SOLO SI ESTA MARCADO
-        if($_POST['chk_imprimir_guia']==1){
+        if(0==1){
 
             //consultamos talonario
             $dtsg= $oTalonario->correlativo($_SESSION['puntoventa_id'],22);
@@ -241,12 +241,11 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         if($_POST['hdd_tipo']=='encomienda'){
             $oVenta->insertarEncomiendaVenta(
                 $ven_id,
-                $_POST['hdd_ven_pas_id'],
-                $_POST['hdd_ven_des_id'],
+                $_POST['hdd_ven_rem_id'],
+                $_POST['txt_ven_des_nom'],
                 $_POST['cmb_salida_id'],
                 $_POST['cmb_llegada_id'],
                 $_POST['txt_clave']
-
             );
         }else{
             $oVenta->insertarViajeVenta(

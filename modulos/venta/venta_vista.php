@@ -65,10 +65,10 @@ function venta_filtro()
 		type: "POST",
 		url: "../venta/venta_filtro.php",
 		async:true,
-		dataType: "html",                      
-		//data: ({
-			//venta: $('#txt_fil_pro').val()
-		//}),
+		dataType: "html",
+        data: ({
+            ven_tip: 'PASAJE'
+        }),
 		beforeSend: function() {
 			$('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
@@ -559,11 +559,16 @@ $(function() {
 		icons: {primary: "ui-icon-document"},
 		text: true
 	});
-	
-	$('#btn_agregar').button({
-		icons: {primary: "ui-icon-plus"},
-		text: true
-	});
+
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+        <?php
+        if ($_SESSION['caja_estado']==0){
+            echo ", disabled: true";
+        }
+        ?>
+    });
 	
 	venta_filtro();		
 	

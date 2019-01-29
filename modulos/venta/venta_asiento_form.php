@@ -231,7 +231,7 @@ $fec=date('d-m-Y');
                 action_cliente: 'insertar',
                 txt_cli_nom: $('#txt_pasaj_nom').val(),
                 txt_cli_doc: $('#txt_pasaj_dni').val(),
-                rad_cli_tip: 1
+                rad_cli_tip: $("input[name=rad_cli_tip]:checked").val()
             }),
             beforeSend: function () {
                 $('#div_cliente_form').dialog("close");
@@ -249,6 +249,23 @@ $fec=date('d-m-Y');
     }
 
     $(function () {
+        $("input[id=radio1]").change(function(){
+            if($("input[id=radio1]").is(":checked")){
+                $('#lbl_cli_doc').html("DNI:");
+                $( "#txt_pasaj_dni" ).attr('maxlength','8');
+                $( "#txt_pasaj_dni").val('');
+            }
+        });
+
+        $("input[id=radio3]").change(function(){
+            if($("input[id=radio3]").is(":checked")){
+                $('#lbl_cli_doc').html("DOC:");
+                $( "#txt_pasaj_dni").attr('maxlength','11');
+                $( "#txt_pasaj_dni").val('');
+                $( "#validar_ruc").hide(200);
+            }
+        });
+
         cmb_lugar();
         $('#cmb_parada_id').prop("disabled", true).addClass("ui-state-disabled");
         $('#cmb_llegada_id').change(function(){
@@ -302,7 +319,7 @@ $fec=date('d-m-Y');
 
         });
         $( "#txt_pasaj_dni" ).keypress(function( event ) {
-            if ( event.which == 13 ) {
+            if ( event.which == 13 && $("input[name=rad_cli_tip]:checked").val()==1) {
                 buscar_dni();
             }
 
@@ -397,6 +414,7 @@ $fec=date('d-m-Y');
                                     },
                                     Cancelar: function() {
                                         $('#for_ven').each (function(){this.reset();});
+                                        $('#cmb_parada_id').val('');
                                         $( this ).dialog( "close" );
                                     }
                                 }
@@ -555,7 +573,11 @@ $fec=date('d-m-Y');
         </div>
         <div id="pasajero" style="width: 20%;float: right">
             <fieldset><legend>Datos Pasajero</legend>
-                <label for="txt_pasaj_dni">DNI:</label><br>
+                <div id="radio">
+                    <input name="rad_cli_tip" type="radio" id="radio1" value="1" checked="checked"/><label for="radio1">DNI</label>
+                    <input name="rad_cli_tip" type="radio" id="radio3" value="3"><label for="radio3">OTROS</label>
+                </div>
+                <label for="txt_pasaj_dni" id="lbl_cli_doc">DNI:</label><br>
                 <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
                 <label for="txt_pasaj_nom">NOMBRE: </label><br>
                 <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
