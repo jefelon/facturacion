@@ -2702,6 +2702,7 @@ if($_POST['action']=="editar"){
                                         <option value="1" selected="selected">CONTADO</option>
                                         <option value="2">CREDITO</option>
                                         <option value="3">LETRAS</option>
+                                        <option value="4">POR PAGAR</option>
                                     </select>
                                 </td>
                                 <td valign="top"><!--<label for="cmb_modpaf_id">Modo Pago:</label>--></br>

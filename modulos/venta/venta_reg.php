@@ -235,7 +235,11 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
         }
 
-
+        if ($_POST['cmb_forpag_id'] == 4) {
+            $pagado=0;
+        }else{
+            $pagado=1;
+        }
 
         //REGISTRO VIAJE
         if($_POST['hdd_tipo']=='encomienda'){
@@ -245,7 +249,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $_POST['txt_ven_des_nom'],
                 $_POST['cmb_salida_id'],
                 $_POST['cmb_llegada_id'],
-                $_POST['txt_clave']
+                $_POST['txt_clave'],
+                $pagado
             );
         }else{
             $oVenta->insertarViajeVenta(
@@ -282,23 +287,23 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		//REGISTRO DE PAGOS
 		//PAGO AUTOMATICO
 		
-		if($_POST['chk_venpag_aut']==1)
-		{
-			//Registro de pago
-			$oVentapago->insertar(
-				$_POST['cmb_forpag_id'],
-				$_POST['cmb_modpag_id'],
-				fecha_mysql($_POST['txt_ven_fec']),
-				moneda_mysql($_POST['txt_venpag_mon']),
-				$_POST['cmb_cuecor_id'],
-				$_POST['cmb_tar_id'],
-				$_POST['txt_venpag_numope'],
-				$_POST['txt_venpag_numdia'],
-				fecha_mysql($_POST['txt_venpag_fecven']),
-				$ven_id,
-				$_SESSION['empresa_id']
-			);
-			
+		if($_POST['chk_venpag_aut']==1) {
+            if ($_POST['cmb_forpag_id'] != 4) {
+                //Registro de pago
+                $oVentapago->insertar(
+                    $_POST['cmb_forpag_id'],
+                    $_POST['cmb_modpag_id'],
+                    fecha_mysql($_POST['txt_ven_fec']),
+                    moneda_mysql($_POST['txt_venpag_mon']),
+                    $_POST['cmb_cuecor_id'],
+                    $_POST['cmb_tar_id'],
+                    $_POST['txt_venpag_numope'],
+                    $_POST['txt_venpag_numdia'],
+                    fecha_mysql($_POST['txt_venpag_fecven']),
+                    $ven_id,
+                    $_SESSION['empresa_id']
+                );
+            }
 			//datos para glosa cuenta cliente
 			switch ($_POST['cmb_forpag_id']) {
 				case 1:

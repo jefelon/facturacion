@@ -125,6 +125,9 @@ $num_rows= mysql_num_rows($dts1);
                     <?php if ($dt1['tb_estado']=='0') {?>
                         <a class="btn_pdf" id = "btn_pdf" title = "Entregar" onclick = "pedir_clave(<?php echo $dt1['tb_encomiendaventa_id'];?>)" > Entregar</a>
                     <?php } ?>
+                    <?php if ($dt1['tb_encomiendaventa_pagado']=='0') {?>
+                        <a class="btn_pdf" id = "btn_pdf" title = "Entregar" onclick = "pagar_encomienda(<?php echo $dt1['tb_encomiendaventa_id'];?>)" >Pagar</a>
+                    <?php } ?>
                 </td>
             </tr>
             <?php
