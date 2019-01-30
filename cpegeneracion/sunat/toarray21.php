@@ -614,9 +614,9 @@ function arr_LegalMonetaryTotal($header, $detalle, $empresa, $tipodoc)
         $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['tag'] = 'cbc';
         $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['ChargeTotalAmount']['atr']['currencyID'] = $header[0]->isomoneda;
     }
-        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount'][0] = round($header[0]->importetotal, 2);
-        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['tag'] = 'cbc';
-        $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['atr']['currencyID'] = $header[0]->isomoneda;
+    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount'][0] = round($header[0]->importetotal, 2);
+    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['tag'] = 'cbc';
+    $arr['doc'][$tipodoc]['child']['LegalMonetaryTotal']['child']['PayableAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
 }
 
@@ -689,7 +689,8 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             $TaxExemptionReasonCode = $item->idafectaciond;
             if($item->idafectaciond == 10){
                 $impuestos = round(($item->igv + $item->isc),2);
-                $basecalculo = round(($item->igv / 0.18), 2);
+//                $basecalculo = round(($item->igv / 0.18), 2);
+                $basecalculo = round(($item->valorventa), 2);
                 $impuesto = round($item->igv,2);
                 $TaxCategoryID = 'S';
                 $Percent = '18.00';
@@ -1176,27 +1177,27 @@ function arr_SummaryDocumentsLine($header, $detalle, $empresa, $tipodoc){
             $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TotalAmount']['currencyID'] = $item->isomoneda;
             $nBi=0;
             if($item->totopgra>0){
-            $nBi++;
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopgra,2);
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '01';
+                $nBi++;
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopgra,2);
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '01';
             }
             if($item->totopexo>0){
                 $nBi++;
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopexo,2);
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '02';
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopexo,2);
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '02';
             }
             if($item->totopina>0){
                 $nBi++;
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopina,2);
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '03';
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['Amount'] = round($item->totopina,2);
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['PaidAmount']['currencyID'] = $item->isomoneda;
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['BillingPayment'][$nBi]['InstructionID'] = '03';
             }
             if($item->tototroca>0){
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'true';
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->tototroca,2);
-            $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $item->isomoneda;
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['ChargeIndicator'] = 'true';
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['Amount'] = round($item->tototroca,2);
+                $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['AllowanceCharge']['Amount']['currencyID'] = $item->isomoneda;
             }
             $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxAmount']['currencyID'] = $item->isomoneda;
             $arr['doc'][$tipodoc]['child']['SummaryDocumentsLine'][$row+1]['TaxTotal'][1]['TaxAmount']['Amount'] = round($item->totisc,2);
