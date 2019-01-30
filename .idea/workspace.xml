@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" afterPath="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -47,11 +48,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="toarray21.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php">
+      <file leaf-file-name="venta_encomienda_form.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="465">
-              <caret line="1220" column="1" lean-forward="true" selection-start-line="1220" selection-start-column="1" selection-end-line="1220" selection-end-column="1" />
+            <state relative-caret-position="337">
+              <caret line="1650" column="30" lean-forward="false" selection-start-line="1650" selection-start-column="20" selection-end-line="1650" selection-end-column="30" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Cado.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/Cado.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -61,9 +72,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>venta_impresion</find>
-      <find>venta_impresion(</find>
-      <find>imprimir</find>
       <find>catalogo_imprimir_codbarras.php</find>
       <find>btn_bar</find>
       <find>FINALIZAR</find>
@@ -91,6 +99,9 @@
       <find>graci</find>
       <find>msj_horario</find>
       <find>tb_encomiendaventa_pagado</find>
+      <find>tb_asientoestado_estado</find>
+      <find>txt_ven_rem_doc</find>
+      <find>cmb_dir_id</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -125,8 +136,8 @@
       <dir>C:\xampp\htdocs\facturacion</dir>
       <dir>C:\xampp\htdocs\facturacion\modulos\</dir>
       <dir>C:\xampp\htdocs\facturacion\modulos\asiento</dir>
-      <dir>C:\xampp\htdocs\facturacion\modulos\venta</dir>
       <dir>C:\xampp\htdocs\facturacion\modulos</dir>
+      <dir>C:\xampp\htdocs\facturacion\modulos\venta</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -135,7 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cpegeneracion/20601411076-01-F001-0349.xml" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_factura.php" />
         <option value="$PROJECT_DIR$/modulos/resumenboleta/cpe_ticket.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_guia.php" />
@@ -186,6 +196,7 @@
         <option value="$PROJECT_DIR$/modulos/venta/venta_horario_form.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" />
         <option value="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" />
       </list>
     </option>
   </component>
@@ -232,13 +243,7 @@
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="cpegeneracion" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="cpegeneracion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="sunat" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
@@ -345,10 +350,11 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="493352000" />
+    <option name="totallyTimeSpent" value="496029000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2591508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -432,13 +438,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="18" lean-forward="false" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/menu/acceso.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -704,13 +703,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/Cado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/catalogo/catalogo_tabla.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2771">
@@ -744,7 +736,7 @@
         <state relative-caret-position="544">
           <caret line="449" column="115" lean-forward="false" selection-start-line="449" selection-start-column="115" selection-end-line="449" selection-end-column="115" />
           <folding>
-            <element signature="e#13823#13843#0#HTML" expanded="true" />
+            <element signature="e#13946#13966#0#HTML" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -890,8 +882,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="1220" column="1" lean-forward="true" selection-start-line="1220" selection-start-column="1" selection-end-line="1220" selection-end-column="1" />
+        <state relative-caret-position="142">
+          <caret line="1201" column="92" lean-forward="false" selection-start-line="1201" selection-start-column="92" selection-end-line="1201" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/Cado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="337">
+          <caret line="1650" column="30" lean-forward="false" selection-start-line="1650" selection-start-column="20" selection-end-line="1650" selection-end-column="30" />
           <folding />
         </state>
       </provider>

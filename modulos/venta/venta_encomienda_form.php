@@ -1647,10 +1647,10 @@ if($_POST['action']=="editar"){
                     $("#txt_ven_rem_dir").val(ui.item.direccion);
 
 
-                    if($("#hdd_ven_rem_id" ).val()>0){
-                        cmb_dir_id($( "#hdd_ven_rem_id" ).val());
-                        cliente_cargar_datos($('#hdd_ven_rem_id').val());
-                    }
+                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                    cmb_dir_id($( "#hdd_ven_rem_id" ).val());
+                    cliente_cargar_datos($('#hdd_ven_rem_id').val());
+                }
 
                 //alert(ui.item.value);
                 // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1678,6 +1678,11 @@ if($_POST['action']=="editar"){
                         cmb_dir_id($("#hdd_ven_cli_id").val());
                         cliente_cargar_datos($('#hdd_ven_rem_id').val());
                     }
+
+                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                    cmb_dir_id($( "#hdd_ven_rem_id" ).val());
+                    cliente_cargar_datos($('#hdd_ven_rem_id').val());
+                }
                     //alert(ui.item.value);
                     // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
                     // $('#msj_busqueda_sunat').show(100);
