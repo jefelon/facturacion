@@ -689,7 +689,8 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             $TaxExemptionReasonCode = $item->idafectaciond;
             if($item->idafectaciond == 10){
                 $impuestos = round(($item->igv + $item->isc),2);
-                $basecalculo = round(($item->igv / 0.18), 2);
+//                $basecalculo = round(($item->igv / 0.18), 2);
+                $basecalculo = round(($item->valorventa), 2);
                 $impuesto = round($item->igv,2);
                 $TaxCategoryID = 'S';
                 $Percent = '18.00';
