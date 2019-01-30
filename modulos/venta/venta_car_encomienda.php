@@ -745,7 +745,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
 
         //tipo g/e/i ingresado
-        $tipo_item	= 9;
+        $tipo_item	= 1;
 
 
         if ($tipo_item==9) {
