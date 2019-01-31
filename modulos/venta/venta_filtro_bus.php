@@ -75,6 +75,12 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
 
     }
 
+    function seleccionar_reserva(selector) {
+        $('.seleccionado').removeClass('seleccionado');
+
+            $(selector).addClass('seleccionado');
+
+    }
 
 
 
@@ -95,7 +101,14 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                                <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                                <div id="<?php echo $lugar ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $ast['tb_clientereserva_id']?>); return false;" class="asiento
+                                <?php if ($ast['tb_asientoestado_id']){
+                                    if($ast['tb_asientoestado_reserva']==1){
+                                        echo 'reserva';
+                                    }else{
+                                        echo 'ocupado';
+                                    }
+                                }?>"
                                      onclick="cambiar_color(this)">
                                     <div class="" style="padding-left: 4px;">
                                         <?php echo explode('_',$lugar)[1] ?>
@@ -122,7 +135,14 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                            <div id="<?php echo $lugar ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $ast['tb_clientereserva_id']?>); return false;" class="asiento
+                            <?php if ($ast['tb_asientoestado_id']){
+                                if($ast['tb_asientoestado_reserva']==1){
+                                    echo 'reserva';
+                                }else{
+                                    echo 'ocupado';
+                                }
+                            }?>"
                                  onclick="cambiar_color(this)">
                                 <div class="" style="padding-left: 4px;">
                                     <?php echo explode('_',$lugar)[1] ?>
@@ -150,7 +170,14 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                            <div id="<?php echo $lugar ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $ast['tb_clientereserva_id']?>); return false;" class="asiento
+                            <?php if ($ast['tb_asientoestado_id']){
+                                if($ast['tb_asientoestado_reserva']==1){
+                                    echo 'reserva';
+                                }else{
+                                    echo 'ocupado';
+                                }
+                            }?>"
                                  onclick="cambiar_color(this)">
                                 <div class="" style="padding-left: 4px;">
                                     <?php echo explode('_',$lugar)[1] ?>
@@ -177,7 +204,14 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                            <div id="<?php echo $lugar ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $ast['tb_clientereserva_id']?>); return false;" class="asiento
+                            <?php if ($ast['tb_asientoestado_id']){
+                                if($ast['tb_asientoestado_reserva']==1){
+                                    echo 'reserva';
+                                }else{
+                                    echo 'ocupado';
+                                }
+                            }?>"
                                  onclick="cambiar_color(this)">
                                 <div class="" style="padding-left: 4px;">
                                     <?php echo explode('_',$lugar)[1] ?>
@@ -205,7 +239,14 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" class="asiento <?php if ($ast['tb_asientoestado_estado']){echo 'ocupado';}?>"
+                            <div id="<?php echo $lugar ?>" oncontextmenu="click_derecho(event,$(this)); return false;" class="asiento
+                            <?php if ($ast['tb_asientoestado_id']){
+                                        if($ast['tb_asientoestado_reserva']==1){
+                                            echo 'reserva';
+                                        }else{
+                                            echo 'ocupado';
+                                        }
+                            }?>"
                                  onclick="cambiar_color(this)">
                                 <div class="" style="padding-left: 4px;">
                                     <?php echo explode('_',$lugar)[1] ?>

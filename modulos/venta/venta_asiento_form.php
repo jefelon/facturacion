@@ -14,6 +14,12 @@ require_once ("../formatos/formato.php");
 
 $fec=date('d-m-Y');
 
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
+
+$pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
+$pv = mysql_fetch_array($pvs);
+
 ?>
 
 <script type="text/javascript">
@@ -50,7 +56,29 @@ $fec=date('d-m-Y');
     });
 
 
-    function cmb_lugar()
+    function cmb_lugar_origen()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_id.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                lug_id: <?php echo $pv['tb_lugar_id']?>
+            }),
+            beforeSend: function() {
+                $('#cmb_salida_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_salida_id').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
+
+    function cmb_lugar_parada()
     {
         $.ajax({
             type: "POST",
@@ -58,14 +86,29 @@ $fec=date('d-m-Y');
             async:true,
             dataType: "html",
             beforeSend: function() {
-                $('#cmb_salida_id').html('<option value="">Cargando...</option>');
-                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
                 $('#cmb_parada_id').html('<option value="">Cargando...</option>');
             },
             success: function(html){
-                $('#cmb_salida_id').html(html);
-                $('#cmb_llegada_id').html(html);
                 $('#cmb_parada_id').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
+
+    function cmb_lugar_destino()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_id.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_llegada_id').html(html);
             },
             complete: function(){
 
@@ -121,6 +164,76 @@ $fec=date('d-m-Y');
             }
         });
     }
+
+    function asientoestado_reg(act) {
+        if($('.seleccionado').length<=0){
+            alert('Seleccione un asiento');
+        }else{
+
+            if($('#txt_pasaj_dni').val()==''){
+                alert('Falta Documento');
+                $('#txt_pasaj_dni').focus();
+            }else {
+                var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
+                var cli_id = venta_clientereserva_reg();
+                $.ajax({
+                    type: "POST",
+                    url: "../asientoestado/asientoestado_reg.php",
+                    async: true,
+                    dataType: "json",
+                    data: ({
+                        action_asientoestado: act,
+                        txt_asiento_id: id_seleccionado,
+                        hdd_vh_id: $('#hdd_vi_ho').val(),
+                        txt_destpar: $('#cmb_llegada_id').val(),
+                        cli_id: $('#hdd_cli_res').val()
+                    }),
+                    beforeSend: function () {
+                        $('#msj_asientoestado').html("Guardando...");
+                        $('#msj_asientoestado').show(100);
+                    },
+                    success: function (data) {
+                        $('#msj_asientoestado').html(data.asientoestado_msj);
+                    },
+                    complete: function () {
+                        filtro_bus();
+                    }
+                })
+            }
+
+        }
+    }
+
+    function eliminar_asientoestado(act) {
+        if($('.reserva').length<=0){
+            alert('Seleccione un asiento');
+        }else{
+            var id_seleccionado = ($('.reserva').attr("id")).split('_')[1];
+            $.ajax({
+                type: "POST",
+                url: "../asientoestado/asientoestado_reg.php",
+                async: true,
+                dataType: "json",
+                data: ({
+                    action_asientoestado: act,
+                    txt_asiento_id: id_seleccionado,
+                    hdd_vh_id: $('#hdd_vi_ho').val()
+                }),
+                beforeSend: function () {
+                    $('#msj_asientoestado').html("Guardando...");
+                    $('#msj_asientoestado').show(100);
+                },
+                success: function (data) {
+                    $('#msj_asientoestado').html(data.asientoestado_msj);
+                },
+                complete: function () {
+                    filtro_bus();
+                }
+            })
+
+        }
+    }
+
     function cmb_horario_vehiculo()
     {
         $.ajax({
@@ -248,7 +361,112 @@ $fec=date('d-m-Y');
         })
     }
 
+    function venta_clientereserva_reg() {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async: false,
+            dataType: "json",
+            data: ({
+                action_cliente: 'insertar',
+                txt_cli_nom: $('#txt_pasaj_nom').val(),
+                txt_cli_doc: $('#txt_pasaj_dni').val(),
+                rad_cli_tip: $("input[name=rad_cli_tip]:checked").val()
+            }),
+            beforeSend: function () {
+                $('#msj_cliente').html("Guardando...");
+                $('#msj_cliente').show(100);
+            },
+            success: function (data) {
+                $('#msj_cliente').html(data.cli_msj);
+                return data.cli_id;
+            },
+            complete: function () {
+            }
+        });
+    }
+
+    function reserva_cargar_datos(idf){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async:true,
+            dataType: "json",
+            data: ({
+                action: "obtener_datos",
+                cli_id:	idf
+            }),
+            beforeSend: function() {
+                //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(data){
+                $('#txt_pasaj_dni').val(data.documento);
+                $('#txt_pasaj_nom').val(data.nombre);
+            }
+        });
+    }
+
+
+
+
+    function click_derecho(event,selector,cli_id){
+        var offset = selector.offset();
+        if($(selector).hasClass('ocupado')){
+            alert('Esta ocupado!!!');
+        }else if($(selector).hasClass('reserva')){
+            $("#menu-click").css({'display': 'block', 'left': offset.left - 100, 'top': offset.top - 70});
+            $("#reservar").css({'display': 'none'});
+            $("#eliminar").css({'display': 'block'});
+            $("#vender").css({'display': 'block'});
+            $("#hdd_act_res").val(cli_id);
+            $(selector).addClass( "seleccionado" );
+
+        }else {
+            seleccionar_reserva(selector);
+            $("#menu-click").css({'display': 'block', 'left': offset.left - 100, 'top': offset.top - 70});
+            $("#reservar").css({'display': 'block'});
+            $("#eliminar").css({'display': 'none'});
+        }
+    }
+
     $(function () {
+        //Ocultamos el menú al cargar la página
+        $("#menu-click").hide();
+
+        //cuando hagamos click, el menú desaparecerá
+        $(document).click(function(e){
+            if(e.button == 0){
+                $("#menu-click").css("display", "none");
+            }
+        });
+
+        //si pulsamos escape, el menú desaparecerá
+        $(document).keydown(function(e){
+            if(e.keyCode == 27){
+                $("#menu-click").css("display", "none");
+            }
+        });
+
+        //controlamos los botones del menú
+        $("#menu-click").click(function(e){
+
+            // El switch utiliza los IDs de los <li> del menú
+            switch(e.target.id){
+                case "reservar":
+                    asientoestado_reg('insertar');
+                    break;
+                case "eliminar":
+                    eliminar_asientoestado('eliminar');
+                    break;
+                case "vender":
+                    reserva_cargar_datos($("#hdd_act_res").val());
+                    $( "#bus_form" ).submit();
+                    break;
+            }
+
+        });
+
+
         $("input[id=radio1]").change(function(){
             if($("input[id=radio1]").is(":checked")){
                 $('#lbl_cli_doc').html("DNI:");
@@ -266,7 +484,9 @@ $fec=date('d-m-Y');
             }
         });
 
-        cmb_lugar();
+        cmb_lugar_origen();
+        cmb_lugar_parada();
+        cmb_lugar_destino();
         $('#cmb_parada_id').prop("disabled", true).addClass("ui-state-disabled");
         $('#cmb_llegada_id').change(function(){
             $('#cmb_horario').val('');
@@ -454,6 +674,7 @@ $fec=date('d-m-Y');
         });
     });
 </script>
+
 <style>
 
     .oculto{
@@ -462,6 +683,11 @@ $fec=date('d-m-Y');
 
     .seleccionado {
         background: orange !important;
+        color: white;
+    }
+
+    .reserva{
+        background: #dd09ff !important;
         color: white;
     }
     .ocupado {
@@ -523,13 +749,15 @@ $fec=date('d-m-Y');
     <form id="bus_form">
         <input type="hidden" id="hdd_vehiculo" value="">
         <input type="hidden" id="hdd_vi_ho" value="">
+        <input type="hidden" id="hdd_cli_res" value="">
+        <input type="hidden" id="hdd_act_res" value="">
         <div id="origen_destino">
-            <fieldset><legend>Seleccionar Salida y Llegada</legend>
+            <fieldset><legend>Seleccionar Origen y Destino</legend>
 
                 <table border="0" cellspacing="2" cellpadding="0">
                     <tr>
                         <td valign="top">
-                            <label for="cmb_salida_id">Salida</label><br>
+                            <label for="cmb_salida_id">Origen</label><br>
                             <select name="cmb_salida_id" id="cmb_salida_id">
                             </select>
                         </td>
@@ -538,12 +766,12 @@ $fec=date('d-m-Y');
                             <select name="cmb_parada_id" id="cmb_parada_id">
                             </select>
                         </td>
-                        <td valign="top"><label for="cmb_llegada_id">Llegada:</label><br>
+                        <td valign="top"><label for="cmb_llegada_id">Destino:</label><br>
                             <select name="cmb_llegada_id" id="cmb_llegada_id">
                             </select>
                         </td>
                         <td valign="top">
-                            <label for="cmb_fech_sal">Salida</label><br>
+                            <label for="cmb_fech_sal">F. Salida</label><br>
                             <select name="cmb_fech_sal" id="cmb_fech_sal">
                             </select>
                         </td>
@@ -555,8 +783,12 @@ $fec=date('d-m-Y');
                         <td valign="top"><label for="txt_precio">Precio:</label><br>
                             <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
                         </td>
-                        <td width="10%" align="left" valign="middle"><a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
+                        <td width="10%" align="left" valign="middle">
+                            <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
+                        </td>
+                        <td width="5%" align="left" valign="middle">
                             <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
+                            <div id="msj_asientoestado" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
                         </td>
                 </table>
             </fieldset>
@@ -619,6 +851,14 @@ $fec=date('d-m-Y');
             <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
         </form>
     </fieldset>
+</div>
+
+<div id="menu-click">
+    <ul>
+        <li id="reservar">Reservar</li>
+        <li id="vender">Vender</li>
+        <li id="eliminar">Eliminar</li>
+    </ul>
 </div>
 
 

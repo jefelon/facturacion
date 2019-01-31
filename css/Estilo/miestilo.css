@@ -724,6 +724,37 @@ div.m {
 	color:#00aa00;
 }
 
+#menu-click ul{
+	list-style: none;
+	list-style-type: none;
+	list-style-position: outside;
+}
+
+#menu-click li{
+	line-height: 30px;
+	font-size: 16px;
+	cursor:pointer;
+	background-color: #eee; /* Grey background color */
+	color: black; /* Black text color */
+	padding: 12px;
+}
+
+#menu-click{
+	width:250px;
+	position:absolute;
+	border:1px solid black;
+	background: #ffffff;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px#888;
+	box-shadow: 0 0 5px #888;
+}
+
+#menu-click li:hover {
+	background-color: #4CAF50; /* Add a green color to the "active/current" link */
+	color: white;
+}
+
+
 
 
 

@@ -22,6 +22,7 @@
 
 <link rel="stylesheet" href="../../js/jquery-ui/development-bundle/themes/start/jquery.ui.all.css">
 <script src="../../js/jquery-ui/development-bundle/jquery-1.6.2.js"></script>
+
 <script src="../../js/jquery-ui/development-bundle/ui/jquery-ui-1.8.16.custom.js?v=2"></script>
 <script src="../../js/jquery-ui/development-bundle/external/jquery.bgiframe-2.1.2.js"></script>
 <script src="../../js/jquery-ui/development-bundle/ui/jquery.ui.core.js"></script>
@@ -56,6 +57,8 @@
 <script src="../../js/ckeditor/ckeditor-standar/jquery.min.js"></script>
 <script src="../../js/ckeditor/ckeditor-standar/ckeditor.js"></script>
 <script src="../../js/ckeditor/ckeditor-standar/adapters/jquery.js"></script>
+    <link rel="stylesheet" href="../../js/contextmenu/jquery.contextmenu.css" type="text/css" />
+    <script src="../../js/contextmenu/jquery.contextmenu.js"></script>
 <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
