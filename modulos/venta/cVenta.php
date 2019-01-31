@@ -593,14 +593,15 @@ WHERE tb_software_id =$id";
         return $rst;
     }
 
-    function mostrar_filtro_cliente($des_nom){
+    function mostrar_filtro_cliente($des_nom, $punven_id){
         $sql="SELECT * 
 	FROM tb_encomiendaventa ev
 	INNER JOIN tb_venta v ON v.tb_venta_id=ev.tb_venta_id
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE ev.tb_destinatario_nom = '$des_nom' ORDER  BY v.tb_venta_fec DESC";
+	INNER JOIN tb_puntoventa pv ON ev.tb_destino_id=pv.tb_lugar_id	
+	WHERE ev.tb_destinatario_nom = '$des_nom' AND pv.tb_puntoventa_id = '$punven_id' ORDER BY v.tb_venta_fec DESC";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -645,8 +646,11 @@ WHERE tb_software_id =$id";
     }
 
 
-    function mostrar_cli_nom($dato){
-        $sql = "SELECT DISTINCT(tb_destinatario_nom) FROM tb_encomiendaventa WHERE tb_destinatario_nom LIKE '%$dato%';";
+    function mostrar_cli_nom($dato, $punven_id){
+        $sql = "SELECT DISTINCT(tb_destinatario_nom) 
+        FROM tb_encomiendaventa ev
+        INNER JOIN tb_puntoventa pv ON ev.tb_destino_id=pv.tb_lugar_id
+        WHERE ev.tb_destinatario_nom LIKE '%$dato%' AND pv.tb_puntoventa_id = '$punven_id';";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

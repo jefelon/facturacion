@@ -783,7 +783,8 @@ $(function() {
                         async:true,
                         dataType: "html",
                         data: ({
-                            ven_des_nom: $("#txt_ven_cli_nom").val()
+                            ven_des_nom: $("#txt_ven_cli_nom").val(),
+                            puntoventa_id: <?php echo $_SESSION['puntoventa_id'] ?>
                         }),
                         beforeSend: function(){
                             $('#div-tabla-encomiendas').addClass("ui-state-disabled");
