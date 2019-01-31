@@ -888,7 +888,7 @@ if($_POST['action']=="editar"){
                 ser_id:	 idf,
                 ser_nom: $('#hdd_ser_nom_'+idf).val(),
                 ser_can: $('#txt_ser_can_'+idf).val(),
-                ser_tip: 9,
+                ser_tip: $('#cmb_detven_tip_'+idf).val(),
                 ser_des: $('#txt_ser_detven_des_'+idf).val(),//Descuento
                 ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
                 ser_pre: $('#txt_servicio_pre_'+idf).val()

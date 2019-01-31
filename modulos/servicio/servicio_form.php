@@ -396,7 +396,7 @@ function venta_car_servicio(act,idf,ser_nom,ser_can,ser_pre){
             ser_des: 0,//Descuento
             ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
             ser_pre: ser_pre,
-            ser_tip: 1
+            ser_tip: 9
         }),
         beforeSend: function() {
             $('#div_venta_car_tabla').addClass("ui-state-disabled");
