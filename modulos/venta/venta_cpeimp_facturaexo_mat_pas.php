@@ -312,6 +312,11 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
+        <td colspan="4" class="centrado negrita">
+            RUC: <?php echo $emp_ruc ?>
+        </td>
+    </tr>
+    <tr>
         <td colspan="4" class="centrado">
             <?php if ($imprimir_direccion == 1) echo $emp_dir . ' - ' . $emp_tel . ' ' . $emp_dir2 ?>
         </td>

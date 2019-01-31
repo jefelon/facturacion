@@ -66,9 +66,9 @@ class cVenta{
     }
 
     function insertarAsientoEstado($asinum,$viajehora_id,$dest_par){
-        $sql = "INSERT INTO tb_asientoestado(`tb_asiento_id`,`tb_viajehorario_id` , `tb_asientoestado_estado`, `tb_destpar_id`
+        $sql = "INSERT INTO tb_asientoestado(`tb_asiento_id`,`tb_viajehorario_id` , `tb_asientoestado_reserva`, `tb_destpar_id`
 	)
-	VALUES ('$asinum','$viajehora_id', 1 , '$dest_par'
+	VALUES ('$asinum','$viajehora_id', 0 , '$dest_par'
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

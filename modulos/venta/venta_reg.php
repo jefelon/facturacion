@@ -79,6 +79,9 @@ $oLote = new cLote();
 require_once ("../lote/cVentaDetalleLote.php");
 $oVentaDetalleLote = new cVentaDetalleLote();
 
+require_once("../asientoestado/cAsientoestado.php");
+$oAsientoestado = new cAsientoestado();
+
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
 $emp_razsoc=$dt['tb_empresa_razsoc'];
@@ -261,6 +264,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $_POST['hdd_ven_pas_id'],
                 $_POST['viaje_parada']
             );
+
+            $oAsientoestado->eliminar($_POST['hdd_vi_ho_id'],$_POST['txt_num_asi']);
+
 
             if ($_POST['viaje_parada']>0){
                 $oVenta->insertarAsientoEstado(
@@ -932,9 +938,14 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			//precio de venta ingresado
             $precio_unitario_linea = $_SESSION['servicio_preven'][$unico_id][$indice];
-			
+
+            $afeigv_id=$_SESSION['servicio_tip'][$unico_id][$indice];
 			//precio unitario de venta
-			$valor_unitario_linea=$precio_unitario_linea/(1+$igv_dato);
+            if ($afeigv_id == 1) {
+                $valor_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
+            }elseif ($afeigv_id == 9){
+                $valor_unitario_linea = $precio_unitario_linea;
+            }
 			
 			$nom = $_SESSION['servicio_nom'][$unico_id][$indice];
 
