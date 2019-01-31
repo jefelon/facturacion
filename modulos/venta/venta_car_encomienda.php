@@ -745,7 +745,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
 
         //tipo g/e/i ingresado
-        $tipo_item	= 1;
+        $tipo_item	= 9;
 
 
         if ($tipo_item==9) {
@@ -917,7 +917,6 @@ $descuento_total= $descuento_global + $desc_x_item_total;
                     <tr>
                         <td><label for="txt_ven_tot" style="font-size:12px"><strong>IMPORTE TOTAL:</strong></label></td>
                         <td align="right"><input name="txt_ven_tot" type="text" id="txt_ven_tot" style="text-align:right; font-size:14px; font-weight:bold;" value="<?php echo formato_money($importe_total)?>" size="13" readonly></td>
-
                     </tr>
                 </table>
             </div>

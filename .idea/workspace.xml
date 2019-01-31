@@ -3,8 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_horario_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_horario_form.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_car_encomienda.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_car_encomienda.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_reg.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_reg.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -49,53 +52,128 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="venta_form.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
+      <file leaf-file-name="cUsuario.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recursos/usuarios/cUsuario.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="595" column="39" lean-forward="false" selection-start-line="595" selection-start-column="39" selection-end-line="595" selection-end-column="39" />
+            <state relative-caret-position="1241">
+              <caret line="73" column="92" lean-forward="false" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="92" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_cpeimp_nota_mat.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php">
+      <file leaf-file-name="login.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recursos/usuarios/login.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="439">
-              <caret line="420" column="20" lean-forward="false" selection-start-line="420" selection-start-column="20" selection-end-line="420" selection-end-column="20" />
+            <state relative-caret-position="390">
+              <caret line="54" column="71" lean-forward="false" selection-start-line="54" selection-start-column="71" selection-end-line="54" selection-end-column="71" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_horario_form.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_horario_form.php">
+      <file leaf-file-name="venta_car_encomienda.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car_encomienda.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="90" column="35" lean-forward="false" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="venta_asiento_form.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="518" column="98" lean-forward="false" selection-start-line="518" selection-start-column="98" selection-end-line="518" selection-end-column="98" />
+            <state relative-caret-position="184">
+              <caret line="367" column="27" lean-forward="false" selection-start-line="367" selection-start-column="20" selection-end-line="367" selection-end-column="27" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#td#7;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="e#26970#26976#1#HTML" expanded="true" />
+                <element signature="e#34764#34770#1#HTML" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#0;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#1;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#1;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#2;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#2;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#label#0;n#td#0;n#tr#3;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="catalogo_tabla.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/catalogo/catalogo_tabla.php">
+      <file leaf-file-name="venta_encomienda_form.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2771">
-              <caret line="163" column="20" lean-forward="false" selection-start-line="163" selection-start-column="20" selection-end-line="167" selection-end-column="27" />
+            <state relative-caret-position="31">
+              <caret line="878" column="32" lean-forward="false" selection-start-line="878" selection-start-column="32" selection-end-line="878" selection-end-column="32" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_form.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="117">
+              <caret line="859" column="24" lean-forward="true" selection-start-line="859" selection-start-column="24" selection-end-line="859" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_car_item_reg.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car_item_reg.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_cpeimp_facturaexo_mat.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="103" column="2" lean-forward="false" selection-start-line="103" selection-start-column="2" selection-end-line="103" selection-end-column="2" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_cpeimp_boleta_mat.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_car.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-10607">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="916" selection-end-column="9" />
+              <folding>
+                <element signature="n#script#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ctaInicio.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recursos/usuarios/ctaInicio.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -105,15 +183,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>foco(); venta_car('agregar')</find>
-      <find>venta_impresion</find>
-      <find>venta_impresion(</find>
-      <find>imprimir</find>
-      <find>catalogo_imprimir_codbarras.php</find>
-      <find>btn_bar</find>
-      <find>FINALIZAR</find>
-      <find>txt_bus_cat_preven</find>
-      <find>venta_croquis_form</find>
       <find>marca</find>
       <find>empres</find>
       <find>Marca</find>
@@ -135,6 +204,15 @@
       <find>../venta/venta_horario_reg.php</find>
       <find>graci</find>
       <find>msj_horario</find>
+      <find>tb_encomiendaventa_pagado</find>
+      <find>tb_asientoestado_estado</find>
+      <find>txt_ven_rem_doc</find>
+      <find>cmb_dir_id</find>
+      <find>ss</find>
+      <find>ser_id</find>
+      <find>venta_car_servicio</find>
+      <find>venta_car</find>
+      <find>ser_tip</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -169,8 +247,8 @@
       <dir>C:\xampp\htdocs\facturacion</dir>
       <dir>C:\xampp\htdocs\facturacion\modulos\</dir>
       <dir>C:\xampp\htdocs\facturacion\modulos\asiento</dir>
-      <dir>C:\xampp\htdocs\facturacion\modulos\venta</dir>
       <dir>C:\xampp\htdocs\facturacion\modulos</dir>
+      <dir>C:\xampp\htdocs\facturacion\modulos\venta</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -179,8 +257,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cpegeneracion/20601411076-01-F001-0349.xml" />
-        <option value="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_factura.php" />
         <option value="$PROJECT_DIR$/modulos/resumenboleta/cpe_ticket.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_guia.php" />
         <option value="$PROJECT_DIR$/recursos/venta/descargar_xml.php" />
@@ -195,7 +271,6 @@
         <option value="$PROJECT_DIR$/modulos/resumenboleta/cVenta.php" />
         <option value="$PROJECT_DIR$/modulos/resumenboleta/resumenboleta_reg.php" />
         <option value="$PROJECT_DIR$/cpegeneracion/sunat/toxml21.php" />
-        <option value="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_form_marvic.php" />
         <option value="$PROJECT_DIR$/modulos/clientes/cCliente.php" />
         <option value="$PROJECT_DIR$/modulos/clientes/cliente_form.php" />
@@ -206,7 +281,6 @@
         <option value="$PROJECT_DIR$/recursos/venta/venta_filtro.php" />
         <option value="$PROJECT_DIR$/recursos/usuarios/cerrar_sesion.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php" />
-        <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php" />
         <option value="$PROJECT_DIR$/recursos/usuarios/ctaInicio.php" />
         <option value="$PROJECT_DIR$/recursos/venta/venta_tabla.php" />
@@ -230,6 +304,10 @@
         <option value="$PROJECT_DIR$/config/Cado.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_horario_form.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" />
+        <option value="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_car_encomienda.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" />
       </list>
     </option>
   </component>
@@ -264,17 +342,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="config" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
@@ -291,7 +365,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -383,24 +456,24 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="492341000" />
+    <option name="totallyTimeSpent" value="500692000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25183016" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2591508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -417,7 +490,6 @@
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25183016" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -462,11 +534,6 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php</url>
-          <line>612</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/modulos/resumenboleta/cVenta.php</url>
           <line>193</line>
           <option name="timeStamp" value="14" />
@@ -476,55 +543,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1513">
-          <caret line="89" column="34" lean-forward="false" selection-start-line="89" selection-start-column="25" selection-end-line="89" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recursos/venta/venta_cpeimp.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="23" lean-forward="true" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="18" lean-forward="false" selection-start-line="6" selection-start-column="18" selection-end-line="6" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/menu/acceso.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="14" lean-forward="false" selection-start-line="17" selection-start-column="14" selection-end-line="17" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/ejecutor/ejecutor_validar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2397">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/usuarios/cUsuario.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="63" column="13" lean-forward="false" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recursos/venta/cVenta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="16" lean-forward="false" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/contenido/contenido.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -548,30 +566,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos/usuarios/cUsuario.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="92">
-          <caret line="63" column="13" lean-forward="false" selection-start-line="63" selection-start-column="13" selection-end-line="63" selection-end-column="13" />
+        <state relative-caret-position="1241">
+          <caret line="73" column="92" lean-forward="false" selection-start-line="73" selection-start-column="14" selection-end-line="73" selection-end-column="92" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos/usuarios/login.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-181">
-          <caret line="29" column="23" lean-forward="false" selection-start-line="29" selection-start-column="23" selection-end-line="29" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="977">
-          <caret line="383" column="38" lean-forward="false" selection-start-line="383" selection-start-column="38" selection-end-line="383" selection-end-column="38" />
+        <state relative-caret-position="390">
+          <caret line="54" column="71" lean-forward="false" selection-start-line="54" selection-start-column="71" selection-end-line="54" selection-end-column="71" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos/usuarios/ctaInicio.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="59" lean-forward="false" selection-start-line="38" selection-start-column="59" selection-end-line="38" selection-end-column="59" />
+        <state relative-caret-position="442">
+          <caret line="26" column="28" lean-forward="false" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -656,13 +669,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4108">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_croquis_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2125">
@@ -674,22 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="46" column="0" lean-forward="false" selection-start-line="46" selection-start-column="0" selection-end-line="51" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1905">
-          <caret line="385" column="86" lean-forward="false" selection-start-line="385" selection-start-column="86" selection-end-line="385" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="595" column="39" lean-forward="false" selection-start-line="595" selection-start-column="39" selection-end-line="595" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -754,9 +744,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3213">
           <caret line="242" column="23" lean-forward="false" selection-start-line="242" selection-start-column="12" selection-end-line="242" selection-end-column="23" />
-          <folding>
-            <element signature="e#5114#7073#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -781,18 +768,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/config/Cado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/catalogo/catalogo_tabla.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2771">
           <caret line="163" column="20" lean-forward="false" selection-start-line="163" selection-start-column="20" selection-end-line="167" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -800,7 +779,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="439">
           <caret line="420" column="20" lean-forward="false" selection-start-line="420" selection-start-column="20" selection-end-line="420" selection-end-column="20" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -808,7 +786,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="167">
           <caret line="90" column="35" lean-forward="false" selection-start-line="90" selection-start-column="24" selection-end-line="90" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -816,9 +793,128 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="234">
           <caret line="518" column="98" lean-forward="false" selection-start-line="518" selection-start-column="98" selection-end-line="518" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_factura_mat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="419" column="47" lean-forward="false" selection-start-line="419" selection-start-column="47" selection-end-line="419" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="1201" column="92" lean-forward="false" selection-start-line="1201" selection-start-column="92" selection-end-line="1201" selection-end-column="92" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/Cado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="27" selection-end-line="13" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="103" column="0" lean-forward="false" selection-start-line="103" selection-start-column="0" selection-end-line="103" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="103" column="2" lean-forward="false" selection-start-line="103" selection-start-column="2" selection-end-line="103" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10607">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="916" selection-end-column="9" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#td#7;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#script#0;n#!!top" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car_item_reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/administrador/administrador_validar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="61" column="1" lean-forward="false" selection-start-line="61" selection-start-column="1" selection-end-line="61" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/vendedor/vendedor_validar.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2873">
+          <caret line="169" column="1" lean-forward="false" selection-start-line="169" selection-start-column="1" selection-end-line="169" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="117">
+          <caret line="859" column="24" lean-forward="true" selection-start-line="859" selection-start-column="24" selection-end-line="859" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car_encomienda.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="367" column="27" lean-forward="false" selection-start-line="367" selection-start-column="20" selection-end-line="367" selection-end-column="27" />
+          <folding>
+            <element signature="e#26970#26976#1#HTML" expanded="true" />
+            <element signature="e#34764#34770#1#HTML" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#0;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#1;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#fieldset#1;n#div#0;n#td#0;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#1;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#2;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#td#1;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#0;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#0;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#2;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#2;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#label#0;n#td#0;n#tr#3;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#1;n#tr#3;n#table#0;n#div#0;n#td#2;n#tr#0;n#table#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="878" column="32" lean-forward="false" selection-start-line="878" selection-start-column="32" selection-end-line="878" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>

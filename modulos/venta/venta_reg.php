@@ -927,9 +927,14 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
 			//precio de venta ingresado
             $precio_unitario_linea = $_SESSION['servicio_preven'][$unico_id][$indice];
-			
+
+            $afeigv_id=$_SESSION['servicio_tip'][$unico_id][$indice];
 			//precio unitario de venta
-			$valor_unitario_linea=$precio_unitario_linea/(1+$igv_dato);
+            if ($afeigv_id == 1) {
+                $valor_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
+            }elseif ($afeigv_id == 9){
+                $valor_unitario_linea = $precio_unitario_linea;
+            }
 			
 			$nom = $_SESSION['servicio_nom'][$unico_id][$indice];
 
