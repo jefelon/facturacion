@@ -186,7 +186,7 @@ $pv = mysql_fetch_array($pvs);
                         txt_asiento_id: id_seleccionado,
                         hdd_vh_id: $('#hdd_vi_ho').val(),
                         txt_destpar: $('#cmb_llegada_id').val(),
-                        cli_id: $('#hdd_cli_res').val()
+                        cli_id: cli_id
                     }),
                     beforeSend: function () {
                         $('#msj_asientoestado').html("Guardando...");
@@ -362,6 +362,7 @@ $pv = mysql_fetch_array($pvs);
     }
 
     function venta_clientereserva_reg() {
+        var cli_id='';
         $.ajax({
             type: "POST",
             url: "../clientes/cliente_reg.php",
@@ -379,11 +380,13 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function (data) {
                 $('#msj_cliente').html(data.cli_msj);
-                return data.cli_id;
+                cli_id = data.cli_id;
+
             },
             complete: function () {
             }
         });
+        return cli_id;
     }
 
     function reserva_cargar_datos(idf){
@@ -425,6 +428,7 @@ $pv = mysql_fetch_array($pvs);
             seleccionar_reserva(selector);
             $("#menu-click").css({'display': 'block', 'left': offset.left - 100, 'top': offset.top - 70});
             $("#reservar").css({'display': 'block'});
+            $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
         }
     }
@@ -775,7 +779,7 @@ $pv = mysql_fetch_array($pvs);
                             <select name="cmb_fech_sal" id="cmb_fech_sal">
                             </select>
                         </td>
-                        <td width="7%" align="center" valign="top"><label for="cmb_horario">Hora Salida:</label><br>
+                        <td align="center" valign="top"><label for="cmb_horario">Hora Salida:</label><br>
                             <select name="cmb_horario" id="cmb_horario">
                             </select>
                         </td>
@@ -783,10 +787,10 @@ $pv = mysql_fetch_array($pvs);
                         <td valign="top"><label for="txt_precio">Precio:</label><br>
                             <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
                         </td>
-                        <td width="10%" align="left" valign="middle">
+                        <td align="left" valign="middle">
                             <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
                         </td>
-                        <td width="5%" align="left" valign="middle">
+                        <td align="center" valign="top">
                             <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
                             <div id="msj_asientoestado" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
                         </td>
