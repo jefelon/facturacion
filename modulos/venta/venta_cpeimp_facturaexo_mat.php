@@ -101,6 +101,7 @@ $dt = mysql_fetch_array($dts);
   $cui = $dt['tb_cliente_cui'];
   
   $valven =$dt['tb_venta_valven'];
+  $exo = $dt['tb_venta_exo'];
   $igv  =$dt['tb_venta_igv'];
   $tot  =$dt['tb_venta_tot'];
   
@@ -384,8 +385,8 @@ if($impresion=='pdf')ob_start();
             <tr>
               <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
               <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']?></td>
-              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preun'])?></td>
-              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preun']*$dt1['tb_ventadetalle_can'])?></td>
+              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+              <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
             </tr>
 
           <?php } mysql_free_result($dts1);?>

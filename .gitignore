@@ -6,3 +6,5 @@ libreriasphp/consultaruc/cookies.txt
 .idea/workspace.xml
 libreriasphp/consultaruc/cookies.txt
 config/Cado.php
+*.xml
+*.zip

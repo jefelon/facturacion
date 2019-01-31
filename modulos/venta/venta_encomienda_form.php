@@ -876,6 +876,7 @@ if($_POST['action']=="editar"){
 
 
     function venta_car_servicio(act,idf){
+        console.log('funciona');
         $.ajax({
             type: "POST",
             url: "../venta/venta_car_encomienda.php",
@@ -887,7 +888,7 @@ if($_POST['action']=="editar"){
                 ser_id:	 idf,
                 ser_nom: $('#hdd_ser_nom_'+idf).val(),
                 ser_can: $('#txt_ser_can_'+idf).val(),
-                ser_tip: $('#cmb_detven_tip_'+idf).val(),
+                ser_tip: 9,
                 ser_des: $('#txt_ser_detven_des_'+idf).val(),//Descuento
                 ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
                 ser_pre: $('#txt_servicio_pre_'+idf).val()
@@ -1646,7 +1647,6 @@ if($_POST['action']=="editar"){
                     $("#txt_ven_rem_nom").val(ui.item.nombre);
                     $("#txt_ven_rem_dir").val(ui.item.direccion);
 
-
                 if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
                     cliente_cargar_datos($('#hdd_ven_rem_id').val());
@@ -1674,10 +1674,6 @@ if($_POST['action']=="editar"){
                     $("#txt_ven_rem_doc").val(ui.item.documento);
                     $("#txt_ven_rem_dir").val(ui.item.direccion);
                     $('#hdd_ven_rem_id').change();
-                    if ($("#hdd_ven_rem_id").val() > 0) {
-                        cmb_dir_id($("#hdd_ven_cli_id").val());
-                        cliente_cargar_datos($('#hdd_ven_rem_id').val());
-                    }
 
                 if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
