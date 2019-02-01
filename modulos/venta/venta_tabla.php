@@ -114,6 +114,8 @@ $num_rows= mysql_num_rows($dts1);
                     }
                     ?>
                 </td>
+                <td align="right"><?php echo formato_money($dt1['tb_venta_exo'])?></td>
+                <td align="right"><?php echo formato_money(0.00)?></td>
                 <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
                 <td><?php echo $dt1['tb_venta_est']?></td>
                 <td>
