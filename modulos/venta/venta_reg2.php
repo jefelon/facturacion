@@ -3,7 +3,7 @@ session_start();
 if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 require_once ("../../config/Cado.php");
 
-require_once ("../talonarionc/cTalonario.php");
+require_once ("../talonario/cTalonario.php");
 $oTalonario= new cTalonario();
 require_once("../venta/cVenta.php");
 $oVenta = new cVenta();
@@ -16,6 +16,9 @@ $oStock = new cStock();
 
 
 require_once("../formatos/formato.php");
+
+$ven_id = $_POST['ven_id'];
+$documento_id = $_POST['cmb_ven_doc'];
 
 if ($_POST['action_venta'] == "insertar") {
     if ($ven_id > 0) {
@@ -63,11 +66,9 @@ if ($_POST['action_venta'] == "insertar") {
         mysql_free_result($dts);
 
 
-        if ($tipo_documento == 'F') $documento_id = 11;//factura
-        if ($tipo_documento == 'B') $documento_id = 12;//boleta
 
         //consultamos talonario
-        $dts = $oTalonario->correlativo($punven_id, $documento_id);
+        $dts= $oTalonario->correlativo($_SESSION['puntoventa_id'],$documento_id);
         $dt = mysql_fetch_array($dts);
         $tal_id = $dt['tb_talonario_id'];
         $tal_ser = $dt['tb_talonario_ser'];
@@ -134,8 +135,8 @@ if ($_POST['action_venta'] == "insertar") {
         $tipo_registro = 1;//1 automatico 2 manual
         $kar_tip = 1;//1 entrada 2 salida
         $tipope_id = 11;//3 venta
-        $kar_des = 'NOTA DE CREDITO';
-        $operacion_id = $notcre_id;//id de la operacion(modulo compras, ventas, etc)
+        $kar_des = 'VENTA';
+        $operacion_id = $ven_id;//id de la operacion(modulo compras, ventas, etc)
         //$emp_id=$_SESSION['empresa_id'];
 
         //insertamos kardex
@@ -163,7 +164,7 @@ if ($_POST['action_venta'] == "insertar") {
         $oKardex->modificar_codigo($kar_id, $kar_id);
 
 
-        //DETALLE DE NOTA CREDITO
+        //DETALLE DE VENTA
 
         $dts1 = $oVenta->mostrar_venta_detalle($ven_id);
         $num_rows = mysql_num_rows($dts1);
@@ -180,7 +181,7 @@ if ($_POST['action_venta'] == "insertar") {
                 $dt1['tb_ventadetalle_preunilin'],
                 $dt1['tb_ventadetalle_valven'],
                 $dt1['tb_ventadetalle_igv'],
-                $notcre_id,
+                $ven_id,
                 $dt1['cs_tipoafectacionigv_id'],
                 $dt1['cs_tipounidadmedida_id'],
                 $dt1['cs_tiposistemacalculoisc_id'],
@@ -249,6 +250,10 @@ if ($_POST['action_venta'] == "insertar") {
             );
         }
         mysql_free_result($dts2);
+
+
+        $oVenta->modificar_encomiendaviaje_pagado($_POST['ven_id']);
+
 
 
         $data['ven_id'] = $ven_id;

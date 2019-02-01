@@ -545,6 +545,15 @@ WHERE tb_software_id =$id";
         return $rst;
     }
 
+    function modificar_encomiendaviaje_pagado($ven_id){
+        $sql="UPDATE tb_encomiendaventa SET
+        `tb_encomiendaventa_pagado` =  1
+        WHERE tb_venta_id=$ven_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
     function mostrar_viajeventa($ven_id){
         $sql="SELECT * FROM tb_viajeventa vv
         LEFT JOIN tb_cliente c ON vv.tb_cliente_id=c.tb_cliente_id

@@ -94,66 +94,24 @@ $num_rows= mysql_num_rows($dts1);
     function pagar_encomienda(act,idf){
         $.ajax({
             type: "POST",
-            url: "../venta/venta_encomienda_form.php",
+            url: "../venta/venta_reg2.php",
             async:true,
-            dataType: "html",
+            dataType: "json",
             data: ({
-                action: act,
-                ven_id:	idf
+                action_venta: act,
+                ven_id:	idf,
+                cmb_ven_doc: $('#cmb_ven_doc').val()
             }),
             beforeSend: function() {
-                $('#msj_venta').hide();
-                $('#msj_venta_sunat').hide();
-                $('#div_venta_form').dialog("open");
-                $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+                $('#msj_venta').html("Cargando...");
+                $('#msj_venta').show(100);
             },
-            success: function(html){
-                $('#div_venta_form').html(html);
+            success: function(data){
+                $('#msj_venta').html(data.ven_msj);
+                $('#msj_venta').show();
             },
             complete: function(){
-                if(act=='insertar')
-                {
-                    $( "#div_venta_form" ).dialog({
-                        title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
-                        height: 650,
-                        width: 980,
-                        buttons: {
-                            Guardar: function(){
-                                txt_ven_numdoc();
-                                if($('#hdd_ven_doc').val()==1){
-                                    if($('#hdd_ven_numite').val()>0)
-                                    {
-                                        venta_check();
-                                    }
-                                    else{
-                                        $("#for_ven").submit();
-                                    }
-                                }
-                                else
-                                {
-                                    $("#for_ven").submit();
-                                }
-                            },
-                            Cancelar: function() {
-                                $('#for_ven').each (function(){this.reset();});
-                                $( this ).dialog( "close" );
-                            }
-                        }
-                    });
-                }
-
-                if(act=='editar')
-                {
-                    $( "#div_venta_form" ).dialog({
-                        title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar',
-                        buttons: {
-                            Cancelar: function() {
-                                $('#for_ven').each (function(){this.reset();});
-                                $( this ).dialog( "close" );
-                            }
-                        }
-                    });
-                }
+                venta_encomienda_tabla();
             }
         });
     }
@@ -197,9 +155,15 @@ $num_rows= mysql_num_rows($dts1);
                             <a class="btn_pdf" id = "btn_pdf" title = "Entregar" onclick = "pedir_clave(<?php echo $dt1['tb_encomiendaventa_id'];?>)" > Entregar</a>
                         <?php }else{ ?>
                         <a class="btn_pdf" id = "btn_pdf" title = "Pagar" onclick = "pagar_encomienda('insertar', <?php echo $dt1['tb_venta_id'];?>)" >Pagar</a>
-                    <?php }
+                            <select name="cmb_ven_doc" id="cmb_ven_doc" class="valid">	<option value="">-</option>
+                                <option value="11">FE | FACTURA ELECTRONICA</option>
+                                <option value="12" selected="">BE | BOLETA ELECTRONICA</option>
+                            </select>
+                        <?php }
                     } ?>
+
                 </td>
+
             </tr>
             <?php
         }
