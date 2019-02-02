@@ -8,7 +8,7 @@ if($_POST['action_asientoestado']=="insertar")
 {
     if(!empty($_POST['txt_asiento_id']) && !empty($_POST['hdd_vh_id']) && !empty($_POST['txt_destpar']) && !empty($_POST['cli_id']))
     {
-        $oAsientoestado->insertar($_POST['txt_asiento_id'],$_POST['hdd_vh_id'],$_POST['cli_id'],$_POST['txt_destpar']);
+        $oAsientoestado->insertar($_POST['txt_asiento_id'],$_POST['hdd_vh_id'],$_POST['cli_id'],$_POST['txt_destpar'],$_POST['txt_precio']);
 
         $dts=$oAsientoestado->ultimoInsert();
         $dt = mysql_fetch_array($dts);
@@ -33,6 +33,22 @@ if($_POST['action_asientoestado']=="eliminar")
         $oAsientoestado->eliminar($_POST['hdd_vh_id'],$_POST['txt_asiento_id']);
 
         $data['asientoestado_msj']='Se elimino asiento correctamente.';
+        echo json_encode($data);
+    }
+    else
+    {
+        echo 'Intentelo nuevamente';
+    }
+}
+
+if($_POST['action_asientoestado']=="obtener_datos")
+{
+    if(!empty($_POST['txt_asiento_id']) && !empty($_POST['hdd_vh_id']))
+    {
+        $dts = $oAsientoestado->mostrar_asiento_estado($_POST['hdd_vh_id'],$_POST['txt_asiento_id']);
+        $dt = mysql_fetch_array($dts);
+        $data['asientoestado_precio']=$dt['tb_asientoestado_precio'];
+        $data['asientoestado_msj']='Correcto.';
         echo json_encode($data);
     }
     else

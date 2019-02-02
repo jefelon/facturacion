@@ -2,12 +2,43 @@
 require_once ("../../config/Cado.php");
 require_once ("../lugar/cLugar.php");
 
+session_start();
 $fec=date('d-m-Y');
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
+
+$pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
+$pv = mysql_fetch_array($pvs);
 ?>
 
 <script type="text/javascript">
 
-    function cmb_lugar_sl()
+
+    <?php echo $pv['tb_lugar_id']?>
+
+    function cmb_lugar_origen()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_id.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                lug_id: <?php echo $pv['tb_lugar_id']?>
+            }),
+            beforeSend: function() {
+                $('#cmb_salida').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_salida').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
+
+    function cmb_lugar_destino()
     {
         $.ajax({
             type: "POST",
@@ -15,11 +46,9 @@ $fec=date('d-m-Y');
             async:true,
             dataType: "html",
             beforeSend: function() {
-                $('#cmb_salida').html('<option value="">Cargando...</option>');
                 $('#cmb_llegada').html('<option value="">Cargando...</option>');
             },
             success: function(html){
-                $('#cmb_salida').html(html);
                 $('#cmb_llegada').html(html);
             },
             complete: function(){
@@ -147,7 +176,8 @@ $(function() {
             }
 		}
 	});
-    cmb_lugar_sl();
+    cmb_lugar_origen();
+    cmb_lugar_destino();
     cmb_vehiculo();
 });
 </script>

@@ -28,13 +28,13 @@ if ($_POST['action_venta'] == "insertar") {
         $dt = mysql_fetch_array($dts);
         $reg = mostrarFechaHora($dt['tb_venta_reg']);
 
-        $fec = mostrarFecha($dt['tb_venta_fec']);
+        $fec = date('Y-m-d');
         $doc_id = $dt['tb_documento_id'];
         $documento_tipdoc = $dt["cs_tipodocumento_cod"];
         $ven_numdoc = $dt['tb_venta_numdoc'];
         $ven_ser = $dt['tb_venta_ser'];
         $ven_num = $dt['tb_venta_num'];
-        $cli_id = $dt['tb_cliente_id'];
+        $cli_id = $_POST['cli_id'];
 
         $valven = $dt['tb_venta_valven'];
         $subtot = $dt['tb_venta_subtot'];
@@ -81,16 +81,18 @@ if ($_POST['action_venta'] == "insertar") {
         $numero = str_pad($numero, $largo, "0", STR_PAD_LEFT);
         $numdoc = $tal_ser . '-' . $numero;
 
+
         //actualizamos talonario
         $estado = 'ACTIVO';
         if ($numero == $tal_fin) $estado = 'INACTIVO';
         $rs = $oTalonario->actualizar_correlativo($tal_id, $numero, $estado);
 
+
         $oVenta->insertar(
             $fec,
-            $doc_id,
-            $ven_numdoc,
-            $ven_ser,
+            $documento_id,
+            $numdoc,
+            $tal_ser,
             $numero,
             $cli_id,
             moneda_mysql($valven),
@@ -253,6 +255,7 @@ if ($_POST['action_venta'] == "insertar") {
 
 
         $oVenta->modificar_encomiendaviaje_pagado($_POST['ven_id']);
+        $oVenta->modificar_puntoventa($_POST['ven_id'],$_SESSION['puntoventa_id']);
 
 
 

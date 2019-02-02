@@ -60,6 +60,42 @@ $num_rows= mysql_num_rows($dts1);
 
     });
 
+    function venta_clientereserva_reg() {
+        var cli_id='';
+        var cli_tip;
+        $('#cmb_ven_doc').val()
+        if ($('#cmb_ven_doc').val()=='11'){
+            cli_tip = 2;
+        }else if($('#cmb_ven_doc').val()=='12'){
+            cli_tip = 1;
+        }
+        console.log(cli_tip);
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async: false,
+            dataType: "json",
+            data: ({
+                action_cliente: 'insertar',
+                txt_cli_nom: $('#txt_ven_cli_nom').val(),
+                txt_cli_doc: $('#txt_dni').val(),
+                rad_cli_tip: cli_tip
+            }),
+            beforeSend: function () {
+                $('#msj_cliente').html("Guardando...");
+                $('#msj_cliente').show(100);
+            },
+            success: function (data) {
+                $('#msj_cliente').html(data.cli_msj);
+                cli_id = data.cli_id;
+
+            },
+            complete: function () {
+            }
+        });
+        return cli_id;
+    }
+
     function pedir_clave(enc_id) {
         var clave = prompt("Ingresa la clave");
         if (clave !== '') {
@@ -92,6 +128,7 @@ $num_rows= mysql_num_rows($dts1);
     }
 
     function pagar_encomienda(act,idf){
+        var cli_id = venta_clientereserva_reg();
         $.ajax({
             type: "POST",
             url: "../venta/venta_reg2.php",
@@ -100,7 +137,8 @@ $num_rows= mysql_num_rows($dts1);
             data: ({
                 action_venta: act,
                 ven_id:	idf,
-                cmb_ven_doc: $('#cmb_ven_doc').val()
+                cmb_ven_doc: $('#cmb_ven_doc').val(),
+                cli_id: cli_id
             }),
             beforeSend: function() {
                 $('#msj_venta').html("Cargando...");
@@ -159,9 +197,9 @@ $num_rows= mysql_num_rows($dts1);
                                 <option value="11">FE | FACTURA ELECTRONICA</option>
                                 <option value="12" selected="">BE | BOLETA ELECTRONICA</option>
                             </select>
+                            <input name="txt_dni" type="text" id="txt_dni" value="" size="10" maxlength="11">
                         <?php }
                     } ?>
-
                 </td>
 
             </tr>

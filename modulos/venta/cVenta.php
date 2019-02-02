@@ -107,7 +107,7 @@ class cVenta{
 	return $rst;	
 	}
 	function mostrar_filtro($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$venmay,$tip){
-	$sql="SELECT v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
+	$sql="SELECT ev.tb_encomiendaventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
     v.tb_venta_valven, v.tb_venta_igv
@@ -196,13 +196,18 @@ class cVenta{
     }
 
 	function mostrar_filtro_adm($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay){
-	$sql="SELECT * 
+	$sql="SELECT ev.tb_encomiendaventa_id, vv.tb_viajeventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
+    v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
+    v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
+    v.tb_venta_valven, v.tb_venta_igv 
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
 	INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
-	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id	
+	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
+	LEFT JOIN tb_encomiendaventa ev ON v.tb_venta_id=ev.tb_venta_id
+	LEFT JOIN tb_viajeventa vv ON vv.tb_venta_id=v.tb_venta_id	
 	WHERE v.tb_empresa_id = $emp_id 
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
@@ -548,6 +553,14 @@ WHERE tb_software_id =$id";
     function modificar_encomiendaviaje_pagado($ven_id){
         $sql="UPDATE tb_encomiendaventa SET
         `tb_encomiendaventa_pagado` =  1
+        WHERE tb_venta_id=$ven_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function modificar_puntoventa($ven_id,$punven_id){
+        $sql="UPDATE tb_venta SET
+        `tb_puntoventa_id` =  $punven_id
         WHERE tb_venta_id=$ven_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

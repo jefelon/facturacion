@@ -170,8 +170,18 @@ $pv = mysql_fetch_array($pvs);
             alert('Seleccione un asiento');
         }else{
 
-            if($('#txt_pasaj_dni').val()==''){
-                alert('Falta Documento');
+            if($('#txt_pasaj_dni').val()=='' || $('#txt_precio').val()==''){
+                var mensaje = '';
+                if ($('#txt_pasaj_dni').val()==''){
+                    mensaje = mensaje + 'Falta Documento';
+                }
+                if ($('#txt_pasaj_dni').val()=='' && $('#txt_precio').val()==''){
+                    mensaje = mensaje + ',';
+                }
+                if ($('#txt_precio').val()==''){
+                    mensaje = mensaje + 'Falta Precio';
+                }
+                alert(mensaje);
                 $('#txt_pasaj_dni').focus();
             }else {
                 var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
@@ -186,7 +196,8 @@ $pv = mysql_fetch_array($pvs);
                         txt_asiento_id: id_seleccionado,
                         hdd_vh_id: $('#hdd_vi_ho').val(),
                         txt_destpar: $('#cmb_llegada_id').val(),
-                        cli_id: cli_id
+                        cli_id: cli_id,
+                        txt_precio: $('#txt_precio').val()
                     }),
                     beforeSend: function () {
                         $('#msj_asientoestado').html("Guardando...");
@@ -197,6 +208,8 @@ $pv = mysql_fetch_array($pvs);
                     },
                     complete: function () {
                         filtro_bus();
+                        $('#txt_pasaj_dni').val('');
+                        $('#txt_pasaj_nom').val('');
                     }
                 })
             }
@@ -208,7 +221,7 @@ $pv = mysql_fetch_array($pvs);
         if($('.reserva').length<=0){
             alert('Seleccione un asiento');
         }else{
-            var id_seleccionado = ($('.reserva').attr("id")).split('_')[1];
+            var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
             $.ajax({
                 type: "POST",
                 url: "../asientoestado/asientoestado_reg.php",
@@ -304,7 +317,6 @@ $pv = mysql_fetch_array($pvs);
                 // $('#nombres').text(datos[3]);
                 if(datos[1]!="" && datos[2]!="" && datos[3]!="") {
                     $('#txt_pasaj_nom').val(datos[1] + " " + datos[2] + " " + datos[3]);
-                    $( "#txt_pasaj_edad" ).focus();
                 }else {
                     $('#txt_pasaj_nom').val("Datos no encontrados o menor de edad. Editar manualmente los datos.");
                     $( "#txt_pasaj_nom" ).focus();
@@ -409,15 +421,69 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
+    function reserva_cargar_precio(){
+        if($('.reserva').length<=0){
+            alert('Seleccione un asiento');
+        }else{
+            var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
+            $.ajax({
+                type: "POST",
+                url: "../asientoestado/asientoestado_reg.php",
+                async: true,
+                dataType: "json",
+                data: ({
+                    action_asientoestado: 'obtener_datos',
+                    txt_asiento_id: id_seleccionado,
+                    hdd_vh_id: $('#hdd_vi_ho').val()
+                }),
+                beforeSend: function () {
+
+                },
+                success: function (data) {
+                    $('#txt_precio').val(data.asientoestado_precio);
+                },
+                complete: function () {
+                    filtro_bus();
+                }
+            })
+
+        }
+    }
 
 
+    function getPosition(el) {
+        var xPos = 0;
+        var yPos = 0;
+
+        while (el) {
+            if (el.tagName == "BODY") {
+                // deal with browser quirks with body/window/document and page scroll
+                var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
+                var yScroll = el.scrollTop || document.documentElement.scrollTop;
+
+                xPos += (el.offsetLeft - xScroll + el.clientLeft);
+                yPos += (el.offsetTop - yScroll + el.clientTop);
+            } else {
+                // for all other non-BODY elements
+                xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
+                yPos += (el.offsetTop - el.scrollTop + el.clientTop);
+            }
+
+            el = el.offsetParent;
+        }
+        return {
+            x: xPos,
+            y: yPos
+        };
+    }
 
     function click_derecho(event,selector,cli_id){
-        var offset = selector.offset();
+        var id_selector = selector.attr('id');
+        var position = $("#"+id_selector).position();
         if($(selector).hasClass('ocupado')){
             alert('Esta ocupado!!!');
         }else if($(selector).hasClass('reserva')){
-            $("#menu-click").css({'display': 'block', 'left': offset.left - 100, 'top': offset.top - 70});
+            $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
             $("#reservar").css({'display': 'none'});
             $("#eliminar").css({'display': 'block'});
             $("#vender").css({'display': 'block'});
@@ -426,7 +492,7 @@ $pv = mysql_fetch_array($pvs);
 
         }else {
             seleccionar_reserva(selector);
-            $("#menu-click").css({'display': 'block', 'left': offset.left - 100, 'top': offset.top - 70});
+            $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
             $("#reservar").css({'display': 'block'});
             $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
@@ -463,6 +529,7 @@ $pv = mysql_fetch_array($pvs);
                     eliminar_asientoestado('eliminar');
                     break;
                 case "vender":
+                    reserva_cargar_precio();
                     reserva_cargar_datos($("#hdd_act_res").val());
                     $( "#bus_form" ).submit();
                     break;
@@ -548,12 +615,6 @@ $pv = mysql_fetch_array($pvs);
             }
 
         });
-        $( "#txt_pasaj_edad" ).keypress(function( event ) {
-            if ( event.which == 13 ) {
-                $( "#bus_form" ).submit();
-            }
-
-        });
 
         $( "#div_venta_horario_form" ).dialog({
             title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
@@ -599,7 +660,6 @@ $pv = mysql_fetch_array($pvs);
                             viaje_horario: $('#cmb_horario').val(),
                             pasaj_dni:$('#txt_pasaj_dni').val(),
                             pasaj_nom:$('#txt_pasaj_nom').val(),
-                            pasaj_edad:$('#txt_pasaj_edad').val(),
                             viaje_parada: $('#cmb_parada_id').val(),
                             viaje_llegada: $('#cmb_llegada_id').val()
                         }),
@@ -810,8 +870,6 @@ $pv = mysql_fetch_array($pvs);
                 <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
                 <label for="txt_pasaj_nom">NOMBRE: </label><br>
                 <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
-                <label for="txt_pasaj_edad">EDAD: </label><br>
-                <input name="txt_pasaj_edad" type="text"  id="txt_pasaj_edad" value="" size="20" maxlength="3">
             </fieldset>
             <br>
             <br>
