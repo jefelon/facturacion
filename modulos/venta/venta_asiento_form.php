@@ -71,6 +71,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_salida_id').html(html);
+                $('#cmb_salida_id').prop('disabled', 'disabled');
             },
             complete: function(){
 
@@ -90,6 +91,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_parada_id').html(html);
+                $("#cmb_parada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
             },
             complete: function(){
 
@@ -109,6 +111,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_llegada_id').html(html);
+                $("#cmb_llegada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
             },
             complete: function(){
 
@@ -174,18 +177,29 @@ $pv = mysql_fetch_array($pvs);
                 var mensaje = '';
                 if ($('#txt_pasaj_dni').val()==''){
                     mensaje = mensaje + 'Falta Documento';
+                    alert(mensaje);
+                    $('#txt_pasaj_dni').focus();
                 }
-                if ($('#txt_pasaj_dni').val()=='' && $('#txt_precio').val()==''){
+               else if ($('#txt_pasaj_dni').val()=='' && $('#txt_precio').val()==''){
                     mensaje = mensaje + ',';
+                    alert(mensaje);
+                    $('#txt_precio').focus();
                 }
-                if ($('#txt_precio').val()==''){
+               else if ($('#txt_precio').val()==''){
                     mensaje = mensaje + 'Falta Precio';
+                    alert(mensaje);
+                    $('#txt_precio').focus();
                 }
-                alert(mensaje);
-                $('#txt_pasaj_dni').focus();
+
             }else {
                 var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
                 var cli_id = venta_clientereserva_reg();
+                var destino_id;
+                if($('#cmb_parada_id').val()>0){
+                    destino_id=$('#cmb_parada_id').val();
+                }else{
+                    destino_id=$('#cmb_llegada_id').val();
+                }
                 $.ajax({
                     type: "POST",
                     url: "../asientoestado/asientoestado_reg.php",
@@ -195,7 +209,7 @@ $pv = mysql_fetch_array($pvs);
                         action_asientoestado: act,
                         txt_asiento_id: id_seleccionado,
                         hdd_vh_id: $('#hdd_vi_ho').val(),
-                        txt_destpar: $('#cmb_llegada_id').val(),
+                        txt_destpar: destino_id,
                         cli_id: cli_id,
                         txt_precio: $('#txt_precio').val()
                     }),
@@ -210,6 +224,7 @@ $pv = mysql_fetch_array($pvs);
                         filtro_bus();
                         $('#txt_pasaj_dni').val('');
                         $('#txt_pasaj_nom').val('');
+                        cmb_lugar_parada();
                     }
                 })
             }
@@ -441,6 +456,13 @@ $pv = mysql_fetch_array($pvs);
                 },
                 success: function (data) {
                     $('#txt_precio').val(data.asientoestado_precio);
+                    if(data.asientoestado_destpar_id  == $('#cmb_llegada_id').val())
+                    {
+                        cmb_lugar_parada();
+                    }else {
+                        $('#cmb_parada_id').val(data.asientoestado_destpar_id);
+                    }
+
                 },
                 complete: function () {
                     filtro_bus();
@@ -531,8 +553,13 @@ $pv = mysql_fetch_array($pvs);
                 case "vender":
                     reserva_cargar_precio();
                     reserva_cargar_datos($("#hdd_act_res").val());
-                    $( "#bus_form" ).submit();
+                    $("#bus_form").submit();
                     break;
+                // case "detalle":
+                //     reserva_cargar_precio();
+                //     reserva_cargar_datos($("#hdd_act_res").val());
+                //     $( "#bus_form" ).submit();
+                //     break;
             }
 
         });
@@ -920,6 +947,7 @@ $pv = mysql_fetch_array($pvs);
         <li id="reservar">Reservar</li>
         <li id="vender">Vender</li>
         <li id="eliminar">Eliminar</li>
+        <li id="detalle">Ver Detalle</li>
     </ul>
 </div>
 

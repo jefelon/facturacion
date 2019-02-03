@@ -3049,7 +3049,7 @@ if($_POST['action']=="editar"){
             <div style="width: 20%;float: left">
                 <fieldset>
                     <fieldset><legend>Clave encomienda</legend>
-                    <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="5">
+                    <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="4">
                  </fieldset>
             </div>
         </div>
