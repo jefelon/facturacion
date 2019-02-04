@@ -457,7 +457,7 @@ if ($impresion == 'pdf') ob_start();
                                 <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Factura  de Venta  Electrónica,  esta puede ser
+                                <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Boleta  de Venta  Electrónica,  esta puede ser
                                     consultada en: <br><?php echo $d_documentos_app ?></td>
                             </tr>
                             <tr>

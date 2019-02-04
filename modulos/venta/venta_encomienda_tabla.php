@@ -40,7 +40,7 @@ $num_rows= mysql_num_rows($dts1);
             icons: {primary: "ui-icon-cancel"},
             text: false
         });
-        $('.btn_pdf').button({
+        $('.btn_pdf,#btn_cobrar').button({
             //icons: {primary: "ui-icon-document"},
             //text: false
         });
@@ -56,6 +56,26 @@ $num_rows= mysql_num_rows($dts1);
             },
             //sortForce: [[0,0]],
             sortList: [[0,0],[1,1]]
+        });
+
+        $('#cmb_ven_doc').change( function(){
+
+            if($('#cmb_ven_doc').val()=='11')//factura->ruc
+            {
+                $("#txt_dni").attr('maxlength','11');
+            }
+            else{//boleta->dni
+                $("#txt_dni").attr('maxlength','8');
+            }
+            $('#txt_dni').val('');
+            $('#txt_cli_nom').val('');
+            $('#txt_dni').focus();
+        });
+
+        $( "#txt_dni" ).keypress(function( event ) {
+            if ( event.which == 13) {
+                buscar();
+            }
         });
 
     });
@@ -77,7 +97,7 @@ $num_rows= mysql_num_rows($dts1);
             dataType: "json",
             data: ({
                 action_cliente: 'insertar',
-                txt_cli_nom: $('#txt_ven_cli_nom').val(),
+                txt_cli_nom: $('#txt_cli_nom').val(),
                 txt_cli_doc: $('#txt_dni').val(),
                 rad_cli_tip: cli_tip
             }),
@@ -126,7 +146,6 @@ $num_rows= mysql_num_rows($dts1);
             pedir_clave(enc_id);
         }
     }
-
     function pagar_encomienda(act,idf){
         var cli_id = venta_clientereserva_reg();
         $.ajax({
@@ -138,7 +157,8 @@ $num_rows= mysql_num_rows($dts1);
                 action_venta: act,
                 ven_id:	idf,
                 cmb_ven_doc: $('#cmb_ven_doc').val(),
-                cli_id: cli_id
+                cli_id: cli_id,
+                chk_imprimir:1
             }),
             beforeSend: function() {
                 $('#msj_venta').html("Cargando...");
@@ -147,6 +167,19 @@ $num_rows= mysql_num_rows($dts1);
             success: function(data){
                 $('#msj_venta').html(data.ven_msj);
                 $('#msj_venta').show();
+
+                if(data.ven_sun=='enviar')
+                {
+                    enviar_sunat(data.ven_id,data.ven_act);
+                }
+                else
+                {
+                    if(data.ven_act=='imprime')
+                    {
+                        venta_impresion(data.ven_id);
+                    }
+                }
+
             },
             complete: function(){
                 venta_encomienda_tabla();
@@ -192,12 +225,14 @@ $num_rows= mysql_num_rows($dts1);
                         if ($dt1['tb_encomiendaventa_pagado']=='1') {?>
                             <a class="btn_pdf" id = "btn_pdf" title = "Entregar" onclick = "pedir_clave(<?php echo $dt1['tb_encomiendaventa_id'];?>)" > Entregar</a>
                         <?php }else{ ?>
-                        <a class="btn_pdf" id = "btn_pdf" title = "Pagar" onclick = "pagar_encomienda('insertar', <?php echo $dt1['tb_venta_id'];?>)" >Pagar</a>
                             <select name="cmb_ven_doc" id="cmb_ven_doc" class="valid">	<option value="">-</option>
                                 <option value="11">FE | FACTURA ELECTRONICA</option>
                                 <option value="12" selected="">BE | BOLETA ELECTRONICA</option>
                             </select>
                             <input name="txt_dni" type="text" id="txt_dni" value="" size="10" maxlength="11">
+                            <input name="txt_cli_nom" type="text" id="txt_cli_nom" value="" size="60">
+
+                            <a id = "btn_cobrar" title = "Cobrar" onclick = "pagar_encomienda('insertar', <?php echo $dt1['tb_venta_id'];?>)" >Cobrar y entregar</a>
                         <?php }
                     } ?>
                 </td>

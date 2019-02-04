@@ -71,7 +71,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_salida_id').html(html);
-                $('#cmb_salida_id').prop('disabled', 'disabled');
+                $('#cmb_salida_id').find('option').not(':selected').remove();
             },
             complete: function(){
 

@@ -360,7 +360,7 @@ if($_POST['action']=="editar"){
             },
             success: function(html){
                 $('#cmb_salida_id').html(html);
-                $('#cmb_salida_id').prop('disabled', 'disabled');
+                $('#cmb_salida_id').find('option').not(':selected').remove();
             },
             complete: function(){
 
@@ -1541,7 +1541,6 @@ if($_POST['action']=="editar"){
             }
         });
     }
-
     $(function() {
 
         $('#txt_ven_fec').keyup(function(e) {

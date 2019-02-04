@@ -31,7 +31,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_salida').html(html);
-                $('#cmb_salida').prop('disabled', 'disabled');
+                $('#cmb_salida').find('option').not(':selected').remove();
             },
             complete: function(){
 
