@@ -443,7 +443,6 @@ $pv = mysql_fetch_array($pvs);
                     $('#txt_precio').val(data.asientoestado_precio);
                 },
                 complete: function () {
-                    filtro_bus();
                 }
             })
 
@@ -815,6 +814,7 @@ $pv = mysql_fetch_array($pvs);
         <input type="hidden" id="hdd_vi_ho" value="">
         <input type="hidden" id="hdd_cli_res" value="">
         <input type="hidden" id="hdd_act_res" value="">
+        <input type="hidden" id="hdd_precio" value="">
         <div id="origen_destino">
             <fieldset><legend>Seleccionar Origen y Destino</legend>
 
