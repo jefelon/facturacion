@@ -255,9 +255,28 @@ function venta_check(){
 }
 
 function venta_impresion(idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_preimpresion.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            ven_id:	idf
+        }),
+        beforeSend: function() {
+            $('#div_venta_impresion').dialog("open");
+            $('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_impresion').html(html);
+        }
+    });
+}
+
+function venta_impresion_enc(idf){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_preimpresion.php",
+		url: "../venta/venta_preimpresion_enc.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -272,6 +291,26 @@ function venta_impresion(idf){
 			$('#div_venta_impresion').html(html);
 		}
 	});
+}
+
+function venta_impresion_pas(idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_preimpresion_pas.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            ven_id:	idf
+
+        }),
+        beforeSend: function() {
+            $('#div_venta_impresion').dialog("open");
+            $('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_impresion').html(html);
+        }
+    });
 }
 
 function enviar_sunat(id,imp)

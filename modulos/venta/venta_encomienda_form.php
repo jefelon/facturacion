@@ -1664,7 +1664,7 @@ if($_POST['action']=="editar"){
             select: function(event, ui){
 
 
-                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     $("#hdd_ven_cli_id").val(ui.item.id);
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
                     $('#hdd_ven_cli_id').change();
@@ -1673,7 +1673,7 @@ if($_POST['action']=="editar"){
                     $("#txt_ven_rem_nom").val(ui.item.nombre);
                     $("#txt_ven_rem_dir").val(ui.item.direccion);
                 
-                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
                     cliente_cargar_datos($('#hdd_ven_rem_id').val());
                 }
@@ -1691,7 +1691,7 @@ if($_POST['action']=="editar"){
             minLength: 1,
             source: "../clientes/cliente_complete_nom.php",
             select: function(event, ui){
-                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12') {
+                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15') {
 
                     $("#hdd_ven_cli_id").val(ui.item.id);
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
@@ -1701,7 +1701,7 @@ if($_POST['action']=="editar"){
                     $("#txt_ven_rem_dir").val(ui.item.direccion);
                     $('#hdd_ven_rem_id').change();
 
-                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
                     cliente_cargar_datos($('#hdd_ven_rem_id').val());
                 }
@@ -1749,8 +1749,14 @@ if($_POST['action']=="editar"){
             }else{
                 $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
             }
+            if ((this).value=== '15') {
+                $("#cmb_forpag_id").val(4);
+                $("#cmb_forpag_id").attr('disabled', true);
+            }else{
+                $("#cmb_forpag_id").attr('disabled', false);
+            }
 
-            if ((this).value=== '3' || (this).value=== '12') {
+            if ((this).value=== '3' || (this).value=== '12' || (this).value=== '15') {
                 $('#datos-cliente').hide();
                 cliente_cargar_datos($('#hdd_ven_rem_id').val())
             }else{
@@ -2191,7 +2197,7 @@ if($_POST['action']=="editar"){
 //formulario
         $("#for_ven").validate({
             submitHandler: function(){
-
+                $("#cmb_forpag_id").attr('disabled', false);
                 $.ajax({
                     type: "POST",
                     url: "../venta/venta_reg.php",
@@ -2265,6 +2271,15 @@ if($_POST['action']=="editar"){
                 },
                 hdd_ven_doc: {
                     required: true
+                },
+                cmb_salida_id: {
+                    required: true
+                },
+                cmb_llegada_id: {
+                    required: true
+                },
+                txt_clave: {
+                    required: true
                 }
             },
             messages: {
@@ -2297,6 +2312,15 @@ if($_POST['action']=="editar"){
                 },
                 hdd_ven_doc: {
                     required: "Existe registro con mismo N° Documento."
+                },
+                cmb_salida_id: {
+                    required: "Seleccione origen."
+                },
+                cmb_llegada_id: {
+                    required: "Seleccione destino."
+                },
+                txt_clave: {
+                    required: "Falta clave."
                 }
             }
         });

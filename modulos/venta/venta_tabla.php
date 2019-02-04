@@ -181,7 +181,7 @@ $num_rows= mysql_num_rows($dts1);
                             <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="<?php if($dt1['tb_encomiendaventa_id']){?>
                                 venta_impresion_enc('<?php echo $dt1['tb_venta_id']?>')"
                             <?php }else{?>
-                                venta_impresion('<?php echo $dt1['tb_venta_id']?>')"
+                                venta_impresion_pas('<?php echo $dt1['tb_venta_id']?>')"
                             <?php }?>
                         >PDF</a>
                             <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>

@@ -247,8 +247,7 @@ $num_rows= mysql_num_rows($dts1);
         if($vvs_rows>0){
             $tipo_ven='Pasaje';
             $sum_imp_via+=$dt1['tb_ingreso_imp'];
-        }
-        if($ves_rows>0){
+        }else{
             $tipo_ven='Encomienda';
             $sum_imp_enc+=$dt1['tb_ingreso_imp'];
         }

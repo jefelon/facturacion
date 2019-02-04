@@ -13,6 +13,10 @@ require_once ("../producto/cCatalogoproducto.php");
 $oCatalogoproducto = new cCatalogoproducto();
 require_once("../producto/cStock.php");
 $oStock = new cStock();
+require_once ("../ingreso/cIngreso.php");
+$oIngreso = new cIngreso();
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
 
 
 require_once("../formatos/formato.php");
@@ -22,6 +26,10 @@ $documento_id = $_POST['cmb_ven_doc'];
 
 if ($_POST['action_venta'] == "insertar") {
     if ($ven_id > 0) {
+        $dts=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
+        $dt = mysql_fetch_array($dts);
+        $caja_venta		=$dt['tb_caja_id'];
+
 
         //venta
         $dts = $oVenta->mostrarUno($ven_id);
@@ -168,7 +176,7 @@ if ($_POST['action_venta'] == "insertar") {
 
         //DETALLE DE VENTA
 
-        $dts1 = $oVenta->mostrar_venta_detalle($ven_id);
+        $dts1 = $oVenta->mostrar_venta_detalle($_POST['ven_id']);
         $num_rows = mysql_num_rows($dts1);
         while ($dt1 = mysql_fetch_array($dts1)) {
             $oVenta->insertar_detalle(
@@ -228,7 +236,7 @@ if ($_POST['action_venta'] == "insertar") {
         }
         mysql_free_result($dts1);
 
-        $dts2 = $oVenta->mostrar_venta_detalle_servicio($ven_id);
+        $dts2 = $oVenta->mostrar_venta_detalle_servicio($_POST['ven_id']);
         $num_rows_2 = mysql_num_rows($dts2);
         while ($dt2 = mysql_fetch_array($dts2)) {
             $oVenta->insertar_detalle(
@@ -257,6 +265,40 @@ if ($_POST['action_venta'] == "insertar") {
         $oVenta->modificar_encomiendaviaje_pagado($_POST['ven_id']);
         $oVenta->modificar_puntoventa($_POST['ven_id'],$_SESSION['puntoventa_id']);
 
+
+
+        //INGRESO CAJA
+        $modo_pago='EFECTIVO';
+        $xac=1;
+        $ing_det="VENTA $documento $numdoc | $modo_pago";
+        $ing_est='1';
+        $ing_cue_id=22;
+        if($_SESSION['empresa_id']==1)$ing_subcue_id=157;
+        //$ing_subcue_id=0;
+        //$caj_id=1;
+        $mon_id=1;
+        $mod_id=1;
+        $caj_id=$caja_venta;
+
+        $oIngreso->insertar(
+            $_SESSION['usuario_id'],
+            $_SESSION['usuario_id'],
+            $xac,
+            $fec,
+            $documento_id,
+            $numdoc,
+            $ing_det,
+            moneda_mysql($tot),
+            $ing_est,
+            $ing_cue_id,
+            $ing_subcue_id,
+            $_POST['cli_id'],
+            $caj_id,
+            $mon_id,
+            $mod_id,
+            $ven_id,
+            $_SESSION['empresa_id']
+        );
 
 
         $data['ven_id'] = $ven_id;

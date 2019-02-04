@@ -1,5 +1,6 @@
 <?php
 require_once ("../../config/Cado.php");
+require_once("../formatos/formato.php");
 require_once ("cLugar.php");
 $oLugar = new cLugar();
 ?>
@@ -9,7 +10,7 @@ $oLugar = new cLugar();
 	while($dt1 = mysql_fetch_array($dts1))
 	{
 ?>
-        <option value="<?php echo $dt1['tb_viajehorario_fecha']?>"><?php echo $dt1['tb_viajehorario_fecha']?></option>
+        <option value="<?php echo $dt1['tb_viajehorario_fecha']?>"><?php echo mostrarFecha($dt1['tb_viajehorario_fecha'])?></option>
 <?php
 	}
 	mysql_free_result($dts1);

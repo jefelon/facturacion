@@ -152,6 +152,8 @@ while ($dt = mysql_fetch_array($dts)) {
 
 }
 
+$evs = $oVenta->mostrar_encomienda_viaje($ven_id);
+$ev = mysql_fetch_array($evs);
 
 //pagos
 $rws1 = $oVentapago->mostrar_pagos($ven_id);
@@ -337,6 +339,18 @@ if ($impresion == 'pdf') ob_start();
                 </tr>
                 <tr>
                     <td colspan="4"> <?php echo 'DNI: ' .$ruc ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'REMITENTE: ' . $ev['crtb_cliente'] ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'DESTINATARIO: ' . $ev['cdtb_cliente'] ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'ORIGEN: ' . $ev['ltb_origen'] ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'DESTINO: ' . $ev['ltb_destino'] ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">.............................................................................................</td>

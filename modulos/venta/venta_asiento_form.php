@@ -444,7 +444,7 @@ $pv = mysql_fetch_array($pvs);
             $.ajax({
                 type: "POST",
                 url: "../asientoestado/asientoestado_reg.php",
-                async: true,
+                async: false,
                 dataType: "json",
                 data: ({
                     action_asientoestado: 'obtener_datos',
