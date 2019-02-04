@@ -286,77 +286,76 @@ function venta_impresion(idf){
 }
 
 function enviar_sunat(id,imp)
-{      
-	//if(confirm("Realmente desea Enviar a la Sunat?"))
-	//{
-		$.ajax({
-			type: "POST",
-			url: "../venta/enviar_sunat.php",
-			async:true,
-			dataType: "json",
-			data: ({
-				ven_id:		id
-			}),
-			beforeSend: function() {
-				$('#msj_venta_sunat').html("Enviando a SUNAT...");
-				$('#msj_venta_sunat').show(100);
-			},
-			success: function(data){
-				$('#msj_venta_sunat').html(data.msj);
-				$('#msj_venta_sunat').show();
-				if(data.enviar==1)
-				{
-					enviar_sunat2(id,'');
-					//alert(data.enviar);
-				}
-			},
-			complete: function(){
-				venta_tabla();
-				if(imp=='imprime')
-				{
-					venta_impresion(id);
-				}
-			}
-		});
-	//}
+{
+    //if(confirm("Realmente desea Enviar a la Sunat?"))
+    //{
+    $.ajax({
+        type: "POST",
+        url: "../venta/enviar_sunat.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            ven_id:		id
+        }),
+        beforeSend: function() {
+            $('#msj_venta_sunat').html("Enviando a SUNAT...");
+            $('#msj_venta_sunat').show(100);
+        },
+        success: function(data){
+            $('#msj_venta_sunat').html(data.msj);
+            $('#msj_venta_sunat').show();
+            if(data.enviar==1)
+            {
+                enviar_sunat2(id,'');
+                //alert(data.enviar);
+            }
+        },
+        complete: function(){
+            //venta_tabla();
+            if(imp=='imprime')
+            {
+                venta_impresion(id);
+            }
+        }
+    });
+    //}
 }
 
 function enviar_sunat2(id,imp)
-{      
-	//if(confirm("Realmente desea Enviar a la Sunat?"))
-	//{
-		$.ajax({
-			type: "POST",
-			url: "../venta/enviar_sunat.php",
-			async:true,
-			dataType: "json",
-			data: ({
-				ven_id:		id
-			}),
-			beforeSend: function() {
-				$('#msj_venta_sunat').html("Enviando a SUNAT...");
-				$('#msj_venta_sunat').show(100);
-			},
-			success: function(data){
-				$('#msj_venta_sunat').html(data.msj);
-				$('#msj_venta_sunat').show();
-				// if(data.enviar==1)
-				// {
-				// 	enviar_sunat(id,'');
-				// 	//alert(data.enviar);
-				// }
-			},
-			complete: function(){
-				venta_tabla();
-				// if(imp=='imprime')
-				// {
-				// 	venta_impresion(id);
-				// }
-			}
-		});
-	//}
+{
+    //if(confirm("Realmente desea Enviar a la Sunat?"))
+    //{
+    $.ajax({
+        type: "POST",
+        url: "../venta/enviar_sunat.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            ven_id:		id
+        }),
+        beforeSend: function() {
+            $('#msj_venta_sunat').html("Enviando a SUNAT...");
+            $('#msj_venta_sunat').show(100);
+        },
+        success: function(data){
+            $('#msj_venta_sunat').html(data.msj);
+            $('#msj_venta_sunat').show();
+            // if(data.enviar==1)
+            // {
+            // 	enviar_sunat(id,'');
+            // 	//alert(data.enviar);
+            // }
+        },
+        complete: function(){
+            //venta_tabla();
+            // if(imp=='imprime')
+            // {
+            // 	venta_impresion(id);
+            // }
+        }
+    });
+    //}
 }
-
 function venta_anular(id,texto)
 {      
 	if(confirm("Realmente desea anular venta "+texto+", se actualizará el stock. ASEGURESE QUE LAS CANTIDADES DE PRODUCTO SE PUEDAN REPONER CORRECTAMENTE.  Continuar?")){
@@ -554,7 +553,57 @@ function venta_asiento_form(act,idf){
     });
 }
 
-
+function buscar() {
+    if($('#cmb_ven_doc').val()=='12'){
+        $('#msj_busqueda_sunat').html("Buscando en RENIEC...");
+        $('#msj_busqueda_sunat').show(100);
+        var dni = $('#txt_dni').val();
+        var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+        $.ajax({
+            type:'POST',
+            url:url,
+            data:'dni='+dni,
+            success: function(datos_dni){
+                var datos = eval(datos_dni);
+                // $('#mostrar_dni').text(datos[0]);
+                // $('#paterno').text(datos[1]);
+                // $('#materno').text(datos[2]);
+                // $('#nombres').text(datos[3]);
+                if(datos[1]!="" && datos[2]!="" && datos[3]!="") {
+                    $('#txt_cli_nom').val(datos[1] + " " + datos[2] + " " + datos[3]);
+                    $('#btn_cobrar').focus();
+                    $('#msj_busqueda_sunat').hide();
+                }else {
+                    $('#txt_cli_nom').val("Datos no encontrados o menor de edad. Editar manualmente los datos.");
+                    $('#txt_cli_nom').focus();
+                    $('#msj_busqueda_sunat').hide();
+                }
+            }
+        });
+    }else {
+        $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+        $('#msj_busqueda_sunat').show(100);
+        $.post('../../libreriasphp/consultaruc/index.php', {
+                vruc: $('#txt_dni').val(),
+                vtipod: 6
+            },
+            function (data, textStatus) {
+                if (data == null) {
+                    alert('Intente nuevamente...Sunat');
+                }
+                if (data.length == 1) {
+                    alert(data[0]);
+                    $('#msj_busqueda_sunat').hide();
+                } else {
+                    $('#txt_cli_nom').val(data['RazonSocial']);
+                    //$('#txt_cli_dir').val(data['Direccion']);
+                    //$('#txt_cli_est').val(data['Estado']);
+                    $('#btn_pagar').focus();
+                    $('#msj_busqueda_sunat').hide();
+                }
+            }, "json");
+    }
+}
 $(function() {
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
@@ -583,12 +632,11 @@ $(function() {
         ?>
     });
 	
-	venta_filtro();		
-	
+	venta_filtro();
 	$('#chk_ven_anu').change( function(){
 		venta_tabla();
 	});
-	
+
 	$( "#div_venta_form" ).dialog({
 		title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
 		autoOpen: false,
@@ -791,6 +839,7 @@ $(function() {
                         },
                         success: function(html){
                             $('#div-tabla-encomiendas').html(html);
+                            $("#txt_dni").focus();
                         },
                         complete: function(){
                             $('#div-tabla-encomiendas').removeClass("ui-state-disabled");
@@ -810,8 +859,7 @@ $(function() {
                         source: "../clientes/clientev_complete_nom.php",
                         select: function (event, ui) {
                             $("#txt_ven_cli_nom").val(ui.item.id);
-                            venta_encomienda_tabla()
-
+                            venta_encomienda_tabla();
                             //alert(ui.item.value);
                             // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
                             // $('#msj_busqueda_sunat').show(100);
@@ -828,7 +876,7 @@ $(function() {
                 }
             </style>
             <form id="for_ven">
-                <div id="datos-cliente" class="contenido_tabla" style="width: 100%%;">
+                <div id="datos-cliente" class="contenido_tabla" style="width: 100%;">
                     <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
 
                     <fieldset>
@@ -845,11 +893,12 @@ $(function() {
                             </tr>
                         </table>
                     </fieldset>
+                    <div></div>
                 </div>
                 <div id="msj_encomienda" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                 <div id="div-tabla-encomiendas" class="contenido_tabla">
                 </div>
-
+                <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                 <div id="div_venta_impresion" class="contenido_tabla">
                 </div>
 

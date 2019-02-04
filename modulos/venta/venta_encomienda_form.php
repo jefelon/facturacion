@@ -20,6 +20,12 @@ require_once("../menu/acceso.php");
 require_once("../guia/cGuia.php");
 $oGuia = new cGuia();
 
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
+
+$pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
+$pv = mysql_fetch_array($pvs);
+
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
@@ -346,13 +352,34 @@ if($_POST['action']=="editar"){
             url: "../lugar/cmb_lug_id.php",
             async:true,
             dataType: "html",
+            data: ({
+                lug_id: <?php echo $pv['tb_lugar_id']?>
+            }),
             beforeSend: function() {
                 $('#cmb_salida_id').html('<option value="">Cargando...</option>');
-                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
             },
             success: function(html){
                 $('#cmb_salida_id').html(html);
+                $('#cmb_salida_id').find('option').not(':selected').remove();
+            },
+            complete: function(){
+
+            }
+        });
+    }
+    function cmb_lugar_destino()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_id.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
                 $('#cmb_llegada_id').html(html);
+                $("#cmb_llegada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
             },
             complete: function(){
 
@@ -1514,7 +1541,6 @@ if($_POST['action']=="editar"){
             }
         });
     }
-
     $(function() {
 
         $('#txt_ven_fec').keyup(function(e) {
@@ -1531,6 +1557,7 @@ if($_POST['action']=="editar"){
         cmb_ven_doc();
         cmb_ven_id();
         cmb_lugar();
+        cmb_lugar_destino();
         cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
         lote_venta_car('restablecer');
 
@@ -3049,7 +3076,7 @@ if($_POST['action']=="editar"){
             <div style="width: 20%;float: left">
                 <fieldset>
                     <fieldset><legend>Clave encomienda</legend>
-                    <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="5">
+                    <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="4">
                  </fieldset>
             </div>
         </div>

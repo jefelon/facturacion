@@ -48,6 +48,7 @@ if($_POST['action_asientoestado']=="obtener_datos")
         $dts = $oAsientoestado->mostrar_asiento_estado($_POST['hdd_vh_id'],$_POST['txt_asiento_id']);
         $dt = mysql_fetch_array($dts);
         $data['asientoestado_precio']=$dt['tb_asientoestado_precio'];
+        $data['asientoestado_destpar_id']=$dt['tb_destpar_id'];
         $data['asientoestado_msj']='Correcto.';
         echo json_encode($data);
     }

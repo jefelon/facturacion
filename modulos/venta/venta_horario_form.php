@@ -31,6 +31,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_salida').html(html);
+                $('#cmb_salida').find('option').not(':selected').remove();
             },
             complete: function(){
 
@@ -50,6 +51,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_llegada').html(html);
+                $("#cmb_llegada").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
             },
             complete: function(){
 
