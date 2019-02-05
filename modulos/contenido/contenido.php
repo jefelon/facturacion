@@ -106,18 +106,17 @@ $menu_administrador=
 	  <li><a href="../resumenboleta/">Resumen Diario de Boletas</a></li>
 	  <li><a href="../comunicacionbaja/">Comunicación de Baja</a></li>
 	  <li class="separator">----------------------</li>
-	  <li><a href="../contingencia/">Resumen de Contingencia</a></li>
-	  <li class="separator">----------------------</li>
 	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
 	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
 	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
 	  <li class="separator">_____________________</li>
-	  <li><a href="../traspaso/">Traspaso</a></li>
-	  <li class="separator">_____________________</li>
-	  <li><a href="../notalmacen/">Nota de Almacén</a></li>
-	  <li class="separator">_____________________</li>
 	  <li><a href="../cotizacion/cotizacion_vista_adm.php">Cotizaciones</a></li>
 	  <li><a href="../cotizacion/cotizacion_vista.php">Registrar Cotizaciones</a></li>
+	</ul>
+  </li>
+    <li class="topmenu"><a href="#" >Módulos</a>
+	<ul>
+	  <li><a href="../recepciondocumentos/">Recepción de Documentos</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Consultas</a>
