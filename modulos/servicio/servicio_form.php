@@ -105,13 +105,11 @@ function existe_servicio()
                 $("#txt_ser_pre" ).val(data.servicio_pre);
                 $("#txt_ser_prevent" ).val(parseFloat(data.servicio_pre)*parseFloat($("#txt_ser_can_servicio" ).val()));
                 $("#hdd_ser_id" ).val(data.servicio_id);
-                $("#txt_ser_pre" ).attr('readonly', true);
                 $("#txt_ser_prevent" ).attr('readonly', true);
             }else{
                 $("#txt_ser_pre" ).val('');
                 $("#txt_ser_prevent" ).val('');
                 $("#hdd_ser_id" ).val('');
-                $("#txt_ser_pre" ).attr('readonly', false);
                 $("#txt_ser_prevent" ).attr('readonly', false);
             }
         }
@@ -315,6 +313,9 @@ $(function() {
 //formulario			
 	$("#for_ser").validate({
 		submitHandler: function() {
+            var ser_nom = $('#txt_ser_nom').val();
+            var ser_can = $('#txt_ser_can_servicio').val();
+            var ser_pre = $('#txt_ser_pre').val();
 			$.ajax({
 				type: "POST",
 				url: "../servicio/servicio_reg.php",
@@ -329,7 +330,7 @@ $(function() {
 				success: function(data){
 					$('#msj_servicio').html(data.ser_msj);
 					$('#txt_fil_ser_nom').val(data.ser_nom);
-                    venta_car_servicio('agregar_servicio',data.ser_id,data.ser_nom,data.ser_can,data.ser_pre);
+                    venta_car_servicio('agregar_servicio',data.ser_id,ser_nom,ser_can, ser_pre);
 					if(data.ser_act=='editar_presentacion')
 					{
 						servicio_form('editar',data.ser_id);
@@ -355,7 +356,7 @@ $(function() {
 				maxlength: 50
 			},
 			txt_ser_pre: {
-				required: true,
+				required: true
 			},
 			cmb_cat_id: {
 				required: true

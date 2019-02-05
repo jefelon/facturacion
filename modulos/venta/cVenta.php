@@ -107,7 +107,8 @@ class cVenta{
 	return $rst;	
 	}
 	function mostrar_filtro($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$venmay,$tip){
-	$sql="SELECT ev.tb_encomiendaventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
+	$sql="SELECT ev.tb_encomiendaventa_id, ev.tb_destinatario_nom, cc.tb_cliente_nom AS tb_remitente_nom, v.tb_venta_id,
+    v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
     v.tb_venta_valven, v.tb_venta_igv
@@ -116,6 +117,7 @@ class cVenta{
     INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id 
     LEFT JOIN tb_viajeventa vv ON vv.tb_venta_id=v.tb_venta_id 
     LEFT JOIN tb_encomiendaventa ev ON ev.tb_venta_id=v.tb_venta_id
+    LEFT JOIN tb_cliente cc ON ev.tb_remitente_id=cc.tb_cliente_id 
     
 	WHERE tb_usuario_id = $usu_id 
 	AND tb_puntoventa_id = $punven_id

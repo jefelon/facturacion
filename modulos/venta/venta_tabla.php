@@ -70,6 +70,12 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">DOCUMENTO</th>
         <th align="center">FECHA EMISIÓN</th>
         <th align="center">CLIENTE</th>
+        <?php if ($_POST['cmb_fil_ven_tip']=='ENCOMIENDA'){?>
+            <th align="center">REMITENTE</th>
+            <th align="center">DESTINATARIO</th>
+        <?php } ?>
+
+
         <th align="center">RUC/DNI</th>
         <th align="center">MONEDA</th>
 
@@ -109,6 +115,10 @@ $num_rows= mysql_num_rows($dts1);
                 <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
                 <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                 <td><?php echo $dt1['tb_cliente_nom']?></td>
+                <?php if ($_POST['cmb_fil_ven_tip']=='ENCOMIENDA'){?>
+                    <td><?php echo $dt1['tb_remitente_nom']?></td>
+                    <td><?php echo $dt1['tb_destinatario_nom']?></td>
+                <?php }?>
                 <td><?php echo $dt1['tb_cliente_doc']?></td>
                 <td align="center">
                     <?php

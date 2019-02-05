@@ -150,6 +150,7 @@ while($dt = mysql_fetch_array($dts))
     $lab1=$dt['tb_venta_lab1'];
     $lab2=$dt['tb_venta_lab2'];
     $lab3=$dt['tb_venta_lab3'];
+    $pun_nom = $dt['tb_puntoventa_nom'];
     
 }
 
@@ -322,6 +323,11 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
+        <td colspan="4" class="centrado">
+            SUC: <?php echo $pun_nom ?>
+        </td>
+    </tr>
+    <tr>
         <td colspan="4" class="centrado"></td>
     </tr>
     <tr>
@@ -375,7 +381,7 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'Fecha de Viaje: ' . $vh['tb_viajehorario_fecha'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Hora de Viaje: ' . $vh['tb_viajehorario_horario'] ?></td>
+        <td colspan="4"> <?php echo 'Hora de Viaje: ' . mostrarHora($vh['tb_viajehorario_horario']) ?></td>
     </tr>
     <tr>
         <td colspan="4"> <?php echo 'Nro Asiento: ' . $vv['tb_asiento_nom'] ?></td>

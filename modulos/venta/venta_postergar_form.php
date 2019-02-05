@@ -498,98 +498,9 @@ $pv = mysql_fetch_array($pvs);
         };
     }
 
-    function click_derecho(event,selector,cli_id){
-        var id_selector = selector.attr('id');
-        var position = $("#"+id_selector).position();
-        if($(selector).hasClass('ocupado')){
-            $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
-            $("#reservar").css({'display': 'none'});
-            $("#vender").css({'display': 'none'});
-            $("#eliminar").css({'display': 'none'});
-            $("#postergar").css({'display': 'block'});
-
-        }else if($(selector).hasClass('reserva')){
-            $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
-            $("#reservar").css({'display': 'none'});
-            $("#eliminar").css({'display': 'block'});
-            $("#vender").css({'display': 'block'});
-            $("#postergar").css({'display': 'none'});
-            $("#hdd_act_res").val(cli_id);
-            $(selector).addClass( "seleccionado" );
-
-        }else {
-            seleccionar_reserva(selector);
-            $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
-            $("#reservar").css({'display': 'block'});
-            $("#vender").css({'display': 'none'});
-            $("#eliminar").css({'display': 'none'});
-            $("#postergar").css({'display': 'none'});
-        }
-    }
 
     $(function () {
-        //Ocultamos el menú al cargar la página
-        $("#menu-click").hide();
 
-        //cuando hagamos click, el menú desaparecerá
-        $(document).click(function(e){
-            if(e.button == 0){
-                $("#menu-click").css("display", "none");
-            }
-        });
-
-        //si pulsamos escape, el menú desaparecerá
-        $(document).keydown(function(e){
-            if(e.keyCode == 27){
-                $("#menu-click").css("display", "none");
-            }
-        });
-
-        //controlamos los botones del menú
-        $("#menu-click").click(function(e){
-
-            // El switch utiliza los IDs de los <li> del menú
-            switch(e.target.id){
-                case "reservar":
-                    asientoestado_reg('insertar');
-                    break;
-                case "eliminar":
-                    eliminar_asientoestado('eliminar');
-                    break;
-                case "vender":
-                    reserva_cargar_precio();
-                    reserva_cargar_datos($("#hdd_act_res").val());
-                    $("#bus_form").submit();
-                    break;
-                case "postergar":
-                    postergar_form();
-                    break;
-                // case "detalle":
-                //     reserva_cargar_precio();
-                //     reserva_cargar_datos($("#hdd_act_res").val());
-                //     $( "#bus_form" ).submit();
-                //     break;
-            }
-
-        });
-
-
-        $("input[id=radio1]").change(function(){
-            if($("input[id=radio1]").is(":checked")){
-                $('#lbl_cli_doc').html("DNI:");
-                $( "#txt_pasaj_dni" ).attr('maxlength','8');
-                $( "#txt_pasaj_dni").val('');
-            }
-        });
-
-        $("input[id=radio3]").change(function(){
-            if($("input[id=radio3]").is(":checked")){
-                $('#lbl_cli_doc').html("DOC:");
-                $( "#txt_pasaj_dni").attr('maxlength','11');
-                $( "#txt_pasaj_dni").val('');
-                $( "#validar_ruc").hide(200);
-            }
-        });
 
         cmb_lugar_origen();
         cmb_lugar_parada();
@@ -637,23 +548,8 @@ $pv = mysql_fetch_array($pvs);
             $('#hdd_vi_ho').val('');
         });
 
-
-
-        $( "#txt_precio" ).keypress(function( event ) {
-            if ( event.which == 13 ) {
-                $( "#txt_pasaj_dni" ).focus();
-            }
-
-        });
-        $( "#txt_pasaj_dni" ).keypress(function( event ) {
-            if ( event.which == 13 && $("input[name=rad_cli_tip]:checked").val()==1) {
-                buscar_dni();
-            }
-
-        });
-
-        $( "#div_venta_horario_form" ).dialog({
-            title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+        $( "#div_venta_postergacion_form" ).dialog({
+            title:'Postergación de Viaje | <?php echo $_SESSION['empresa_nombre']?>',
             autoOpen: false,
             resizable: false,
             height: 'auto',
@@ -675,7 +571,7 @@ $pv = mysql_fetch_array($pvs);
 
 
 
-        $("#bus_form").validate({
+        $("#postergar_form").validate({
             submitHandler: function () {
                 if($('.seleccionado').length<=0){
                     alert('Seleccione un asiento');
@@ -775,75 +671,7 @@ $pv = mysql_fetch_array($pvs);
     });
 </script>
 
-<style>
 
-    .oculto{
-        visibility: hidden;
-    }
-
-    .seleccionado {
-        background: orange !important;
-        color: white;
-    }
-
-    .reserva{
-        background: #dd09ff !important;
-        color: white;
-    }
-    .ocupado {
-        background: red !important;
-        color: white;
-    }
-    #sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {
-        border: 1px solid #eee;
-        min-height: 40px;
-        list-style-type: none;
-        margin: 0;
-        padding: 5px 0 0 0;
-        /*float: left;*/
-        margin-right: 10px;
-    }
-
-    #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {
-        margin: 0 5px 5px 5px;
-        padding: 0px;
-        font-size: 1.2em;
-        width: 40px;
-        height: 50px;
-        cursor: pointer !important;
-        position: relative;
-        float: left;
-        background: #00aa00;
-    }
-
-    .clear{
-        clear: both;
-    }
-    #frentera{
-        height: 200px;
-        width: 185px;
-        /*background: #0D8BBD;*/
-        float: left;
-    }
-    #lugares{
-        float: left;
-        height: 200px;
-        margin-top: 80px;
-    }
-    .pasadizo{
-        height: 40px;
-    }
-    #bus{
-        width: 1229px;
-        height: 480px;
-        background: url("../../images/bus_fondo.png");
-        background-size: 99%;
-        background-repeat: no-repeat;
-        background-position-x: -45px;
-        overflow: hidden;
-    }
-
-</style>
 
 
     <form id="bus_form">
@@ -880,86 +708,11 @@ $pv = mysql_fetch_array($pvs);
                             <select name="cmb_horario" id="cmb_horario">
                             </select>
                         </td>
-
-                        <td valign="top"><label for="txt_precio">Precio:</label><br>
-                            <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
-                        </td>
-                        <td align="left" valign="middle">
-                            <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
-                        </td>
-                        <td align="center" valign="top">
-                            <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
-                            <div id="msj_asientoestado" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
-                        </td>
                 </table>
             </fieldset>
         </div>
-        <div id="bus" style="width: 80%;float:left">
-
-        </div>
-        <div id="pasajero" style="width: 20%;float: right">
-            <fieldset><legend>Datos Pasajero</legend>
-                <div id="radio">
-                    <input name="rad_cli_tip" type="radio" id="radio1" value="1" checked="checked"/><label for="radio1">DNI</label>
-                    <input name="rad_cli_tip" type="radio" id="radio3" value="3"><label for="radio3">OTROS</label>
-                </div>
-                <label for="txt_pasaj_dni" id="lbl_cli_doc">DNI:</label><br>
-                <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
-                <label for="txt_pasaj_nom">NOMBRE: </label><br>
-                <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
-            </fieldset>
-            <br>
-            <br>
-        </div>
-        <div id="datos-vehiculo" style="width: 20%;float: right">
-            <fieldset><legend>Datos Vehiculo</legend>
-                <table>
-                    <tr>
-                        <td width="100%" align="left"  valign="top">
-                            <label for="txt_placa_vehiculo">VEHICULO:</label><br>
-                            <input name="txt_placa_vehiculo" type="text" id="txt_placa_vehiculo" value="" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100%" align="left"  valign="top"><br>
-                            <label for="txt_asientos_vehiculo">ASIENTOS:</label><br>
-                            <input name="txt_asientos_vehiculo" type="text" id="txt_asientos_vehiculo" value="" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100%" align="left"  valign="top">
-                            <label for="txt_modelo_vehiculo">MODELO:</label><br>
-                            <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-            <br>
-            <br>
-        </div>
-
-        <div id="div_venta_horario_form">
-
-        </div>
         </form>
 
-<div>
-    <fieldset><legend>Imprimir Manifiesto</legend>
-        <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post" style="text-align: center">
-            <input name="hdd_vh_id" type="hidden" id="hdd_vh_id" name="hdd_vh_id"  value="">
-            <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
-        </form>
-    </fieldset>
-</div>
 
-<div id="menu-click">
-    <ul>
-        <li id="reservar">Reservar</li>
-        <li id="vender">Vender</li>
-        <li id="postergar">Postergar</li>
-        <li id="eliminar">Eliminar</li>
-        <li id="detalle">Ver Detalle</li>
-    </ul>
-</div>
 
 

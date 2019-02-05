@@ -149,7 +149,7 @@ while($dt = mysql_fetch_array($dts))
     $lab1=$dt['tb_venta_lab1'];
     $lab2=$dt['tb_venta_lab2'];
     $lab3=$dt['tb_venta_lab3'];
-    
+    $pun_nom = $dt['tb_puntoventa_nom'];
 }
 
 $vvs = $oVenta->mostrar_viajeventa($ven_id);
@@ -316,6 +316,11 @@ if($impresion=='pdf')ob_start();
     <tr>
         <td colspan="4" class="centrado">
             <?php if ($imprimir_direccion == 1) echo $emp_dir . ' - ' . $emp_tel . ' ' . $emp_dir2 ?>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="centrado">
+            SUC: <?php echo $pun_nom ?>
         </td>
     </tr>
     <tr>
