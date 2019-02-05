@@ -299,6 +299,11 @@ if($impresion=='pdf')ob_start();
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="4" class="centrado" >
+                        <img src="<?php echo $empresa_logo ?>" alt="" width="auto" height="auto">
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="4" class="centrado negrita" style="font-size: 15px;">
                         <?php echo $emp_razsoc ?>
                     </td>
