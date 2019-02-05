@@ -151,7 +151,7 @@ $num_rows= mysql_num_rows($dts1);
                         echo "0";
                     } else {
                         if ($dt1['cs_tipomoneda_id'] == '1') {
-                            echo formato_money($dt1['tb_venta_igv']);
+                            echo formato_money($dt1['tb_venta_tot']);
                         }
                     }
                     ?>
