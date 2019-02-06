@@ -232,7 +232,7 @@ $num_rows= mysql_num_rows($dts1);
                             <input name="txt_dni" type="text" id="txt_dni" value="" size="10" maxlength="11">
                             <input name="txt_cli_nom" type="text" id="txt_cli_nom" value="" size="60">
 
-                            <a id = "btn_cobrar" title = "Cobrar" onclick = "pagar_encomienda('insertar', <?php echo $dt1['tb_venta_id'];?>)" >Cobrar y entregar</a>
+                            <a id = "btn_cobrar" title = "Cobrar" onclick = "pagar_encomienda('insertar', <?php echo $dt1['tb_venta_id'];?>)" >Pagar</a>
                         <?php }
                     } ?>
                 </td>

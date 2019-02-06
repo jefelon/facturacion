@@ -75,7 +75,7 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
 
     }
 
-    function seleccionar_reserva(selector) {
+    function seleccionar(selector) {
         $('.seleccionado').removeClass('seleccionado');
 
             $(selector).addClass('seleccionado');

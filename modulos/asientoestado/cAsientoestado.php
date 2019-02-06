@@ -39,5 +39,14 @@ class cAsientoestado{
 	    $rst=$oCado->ejecute_sql($sql);
 	    return $rst;
 	}
+
+    function modificar_asiento_estado($vh_id,$asiento_id, $n_vh_id){
+        $sql="UPDATE tb_asientoestado SET
+        `tb_viajehorario_id` =  $n_vh_id
+        WHERE tb_viajehorario_id=$vh_id AND tb_asiento_id=$asiento_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

@@ -361,6 +361,50 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
+    function venta_postergar_form(act){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_postergar_form.php",
+            // url: "../venta/croquis.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#div_postergacion_form').dialog("open");
+                $('#div_postergacion_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_postergacion_form').html(html);
+            }
+        });
+    }
+
+    function venta_detalle_viaje(){
+        var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_detalleviaje.php",
+            // url: "../venta/croquis.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                asiento_id: id_seleccionado,
+                viaje_horario_id: $('#hdd_vi_ho').val()
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#div_detalleviaje').dialog("open");
+                $('#div_detalleviaje').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_detalleviaje').html(html);
+            }
+        });
+    }
+
     function venta_cliente_reg(act, idf) {
         $.ajax({
             type: "POST",
@@ -507,6 +551,8 @@ $pv = mysql_fetch_array($pvs);
             $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
             $("#postergar").css({'display': 'block'});
+            $("#detalle").css({'display': 'block'});
+            seleccionar(selector);
 
         }else if($(selector).hasClass('reserva')){
             $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
@@ -514,16 +560,18 @@ $pv = mysql_fetch_array($pvs);
             $("#eliminar").css({'display': 'block'});
             $("#vender").css({'display': 'block'});
             $("#postergar").css({'display': 'none'});
+            $("#detalle").css({'display': 'block'});
             $("#hdd_act_res").val(cli_id);
             $(selector).addClass( "seleccionado" );
 
         }else {
-            seleccionar_reserva(selector);
+            seleccionar(selector);
             $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
             $("#reservar").css({'display': 'block'});
             $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
             $("#postergar").css({'display': 'none'});
+            $("#detalle").css({'display': 'none'});
         }
     }
 
@@ -562,13 +610,11 @@ $pv = mysql_fetch_array($pvs);
                     $("#bus_form").submit();
                     break;
                 case "postergar":
-                    postergar_form();
+                    venta_postergar_form();
                     break;
-                // case "detalle":
-                //     reserva_cargar_precio();
-                //     reserva_cargar_datos($("#hdd_act_res").val());
-                //     $( "#bus_form" ).submit();
-                //     break;
+                case "detalle":
+                    venta_detalle_viaje();
+                    break;
             }
 
         });
@@ -668,6 +714,44 @@ $pv = mysql_fetch_array($pvs);
                 },
                 Cancelar: function() {
                     $('#for_hor').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+        $( "#div_postergacion_form" ).dialog({
+            title:'Postergación de Viaje | <?php echo $_SESSION['empresa_nombre']?>',
+            autoOpen: false,
+            resizable: false,
+            height: 'auto',
+            width: 'auto',
+            zIndex: 1,
+            modal: true,
+            position: "center",
+            closeOnEscape: false,
+            buttons: {
+                Guardar: function() {
+                    $("#postergar_form").submit();
+                },
+                Cancelar: function() {
+                    $('#postergar_form').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+        $( "#div_detalleviaje" ).dialog({
+            title:'Detalle de Viaje | <?php echo $_SESSION['empresa_nombre']?>',
+            autoOpen: false,
+            resizable: false,
+            height: 'auto',
+            width: 'auto',
+            zIndex: 1,
+            modal: true,
+            position: "center",
+            closeOnEscape: false,
+            buttons: {
+                Cerrar: function() {
                     $( this ).dialog( "close" );
                 }
             }
@@ -942,7 +1026,12 @@ $pv = mysql_fetch_array($pvs);
 
         </div>
         </form>
+        <div id="div_postergacion_form">
 
+        </div>
+        <div id="div_detalleviaje">
+
+        </div>
 <div>
     <fieldset><legend>Imprimir Manifiesto</legend>
         <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post" style="text-align: center">

@@ -88,6 +88,26 @@ $emp_razsoc=$dt['tb_empresa_razsoc'];
 $emp_dir=$dt['tb_empresa_dir'];
 mysql_free_result($dts);
 
+if($_POST['action']=="postergar")
+{
+    if(!empty($_POST['asiento_id']) && !empty($_POST['viaje_horario_id']) && !empty($_POST['viaje_horario_pos']))
+    {
+
+        $aes=$oAsientoestado->mostrar_asiento_estado($_POST['viaje_horario_pos'],$_POST['asiento_id']);
+        $ae_rows = mysql_numrows($aes);
+        if($ae_rows<=0){
+            $oVenta->modificar_venta_viaje($_POST['viaje_horario_id'],$_POST['asiento_id'],$_POST['viaje_horario_pos']);
+            $oAsientoestado->modificar_asiento_estado($_POST['viaje_horario_id'],$_POST['asiento_id'],$_POST['viaje_horario_pos']);
+            echo "Se postergo correctamente";
+        }else{
+            echo "No se puede postergar, el asiento esta ocupado";
+        }
+    }
+    else
+    {
+        echo 'Intentelo nuevamente.';
+    }
+}
 
 
 $unico_id=$_POST['unico_id'];
@@ -101,6 +121,8 @@ if($_POST['hdd_punven_id']>0)
 		$caja_venta		=$dt['tb_caja_id'];
 	mysql_free_result($dts);
 }
+
+
 
 if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 {
@@ -1087,4 +1109,6 @@ if($_POST['action']=="eliminar")
 		echo 'Intentelo nuevamente.';
 	}
 }
+
+
 ?>

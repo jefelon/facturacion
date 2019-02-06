@@ -662,6 +662,19 @@ WHERE tb_software_id =$id";
         return $rst;
     }
 
+
+    function mostrar_venta_viaje($venta){
+        $sql = "SELECT * 
+        FROM tb_viajeventa vv 
+        INNER JOIN tb_asientoestado ae ON vv.tb_viajehorario_id=ae.tb_viajehorario_id 
+        INNER JOIN tb_asiento a ON a.tb_asiento_id=ae.tb_asiento_id 
+        WHERE a.tb_asiento_nom = vv.tb_asiento_nom AND tb_venta_id=$venta;";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
     function eliminar_asiento_estado($id){
         $sql="DELETE FROM tb_asientoestado WHERE tb_asientoestado_id=$id";
         $oCado = new Cado();
@@ -691,18 +704,23 @@ WHERE tb_software_id =$id";
         return $rst;
     }
 
-    function mostrar_venta_viaje($venta){
+    function mostrar_venta_viaje2($vh_id,$asiento_id){
         $sql = "SELECT * 
-        FROM tb_viajeventa vv 
-        INNER JOIN tb_venta v ON v.tb_venta_id=vv.tb_venta_id 
-        WHERE v.tb_venta_id=$venta;";
+        FROM tb_viajeventa
+        WHERE tb_viajehorario_id=$vh_id AND tb_asiento_nom=$asiento_id";
 
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
 
-
-
+    function modificar_venta_viaje($vh_id,$asiento_id, $n_vh_id){
+        $sql="UPDATE tb_viajeventa SET
+        `tb_viajehorario_id` =  $n_vh_id
+        WHERE tb_viajehorario_id=$vh_id AND tb_asiento_nom=$asiento_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

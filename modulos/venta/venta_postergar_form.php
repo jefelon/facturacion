@@ -56,22 +56,22 @@ $pv = mysql_fetch_array($pvs);
     });
 
 
-    function cmb_lugar_origen()
+    function cmb_lugar_origen_pos()
     {
         $.ajax({
             type: "POST",
             url: "../lugar/cmb_lug_id.php",
-            async:true,
+            async:false,
             dataType: "html",
             data: ({
                 lug_id: <?php echo $pv['tb_lugar_id']?>
             }),
             beforeSend: function() {
-                $('#cmb_salida_id').html('<option value="">Cargando...</option>');
+                $('#cmb_salida_pos').html('<option value="">Cargando...</option>');
             },
             success: function(html){
-                $('#cmb_salida_id').html(html);
-                $('#cmb_salida_id').find('option').not(':selected').remove();
+                $('#cmb_salida_pos').html(html);
+                $('#cmb_salida_pos').find('option').not(':selected').remove();
             },
             complete: function(){
 
@@ -79,63 +79,22 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
-    function cmb_lugar_parada()
+    function cmb_lugar_parada_pos()
     {
         $.ajax({
             type: "POST",
             url: "../lugar/cmb_lug_id.php",
-            async:true,
-            dataType: "html",
-            beforeSend: function() {
-                $('#cmb_parada_id').html('<option value="">Cargando...</option>');
-            },
-            success: function(html){
-                $('#cmb_parada_id').html(html);
-                $("#cmb_parada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
-            },
-            complete: function(){
-
-            }
-        });
-    }
-
-    function cmb_lugar_destino()
-    {
-        $.ajax({
-            type: "POST",
-            url: "../lugar/cmb_lug_id.php",
-            async:true,
-            dataType: "html",
-            beforeSend: function() {
-                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
-            },
-            success: function(html){
-                $('#cmb_llegada_id').html(html);
-                $("#cmb_llegada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
-            },
-            complete: function(){
-
-            }
-        });
-    }
-
-    function filtro_bus()
-    {
-        $.ajax({
-            type: "POST",
-            url: "../venta/venta_filtro_bus.php",
-            async:true,
+            async:false,
             dataType: "html",
             data: ({
-                cmb_fech_sal: $('#cmb_fech_sal').val(),
-                cmb_horario: $('#cmb_horario').val(),
-                txt_vehiculo_id: $('#hdd_vehiculo').val()
+                lug_id: $('#cmb_parada_id').val()
             }),
             beforeSend: function() {
-                $('#bus').html('<option value="">Cargando...</option>');
+                $('#cmb_parada_pos').html('<option value="">Cargando...</option>');
             },
             success: function(html){
-                $('#bus').html(html);
+                $('#cmb_parada_pos').html(html);
+                $("#cmb_parada_pos").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
             },
             complete: function(){
 
@@ -143,24 +102,46 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
+    function cmb_lugar_destino_pos()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_id.php",
+            async:false,
+            dataType: "html",
+            data: ({
+                lug_id: $('#cmb_llegada_id').val()
+            }),
+            beforeSend: function() {
+                $('#cmb_llegada_pos').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_llegada_pos').html(html);
+                $("#cmb_llegada_pos").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
+            },
+            complete: function(){
 
-    function cmb_fecha_horario()
+            }
+        });
+    }
+
+    function cmb_fecha_horario_pos()
     {
         $.ajax({
             type: "POST",
             url: "../lugar/cmb_hor_id.php",
-            async:true,
+            async:false,
             dataType: "html",
             data: ({
-                salida_id: $('#cmb_salida_id').val(),
-                llegada_id: $('#cmb_llegada_id').val(),
-                fecha: $('#cmb_fech_sal').val()
+                salida_id: $('#cmb_salida_pos').val(),
+                llegada_id: $('#cmb_llegada_pos').val(),
+                fecha: $('#cmb_fech_sal_pos').val()
             }),
             beforeSend: function() {
-                $('#cmb_horario').html('<option value="">Cargando...</option>');
+                $('#cmb_horario_pos').html('<option value="">Cargando...</option>');
             },
             success: function(html){
-                $('#cmb_horario').html(html);
+                $('#cmb_horario_pos').html(html);
             },
             complete: function(){
 
@@ -195,10 +176,10 @@ $pv = mysql_fetch_array($pvs);
                 var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
                 var cli_id = venta_clientereserva_reg();
                 var destino_id;
-                if($('#cmb_parada_id').val()>0){
-                    destino_id=$('#cmb_parada_id').val();
+                if($('#cmb_parada_pos').val()>0){
+                    destino_id=$('#cmb_parada_pos').val();
                 }else{
-                    destino_id=$('#cmb_llegada_id').val();
+                    destino_id=$('#cmb_llegada_pos').val();
                 }
                 $.ajax({
                     type: "POST",
@@ -208,7 +189,7 @@ $pv = mysql_fetch_array($pvs);
                     data: ({
                         action_asientoestado: act,
                         txt_asiento_id: id_seleccionado,
-                        hdd_vh_id: $('#hdd_vi_ho').val(),
+                        hdd_vh_id: $('#hdd_vi_ho_pos').val(),
                         txt_destpar: destino_id,
                         cli_id: cli_id,
                         txt_precio: $('#txt_precio').val()
@@ -245,7 +226,7 @@ $pv = mysql_fetch_array($pvs);
                 data: ({
                     action_asientoestado: act,
                     txt_asiento_id: id_seleccionado,
-                    hdd_vh_id: $('#hdd_vi_ho').val()
+                    hdd_vh_id: $('#hdd_vi_ho_pos').val()
                 }),
                 beforeSend: function () {
                     $('#msj_asientoestado').html("Guardando...");
@@ -262,7 +243,7 @@ $pv = mysql_fetch_array($pvs);
         }
     }
 
-    function cmb_horario_vehiculo()
+    function cmb_horario_vehiculo_pos()
     {
         $.ajax({
             type: "POST",
@@ -270,21 +251,16 @@ $pv = mysql_fetch_array($pvs);
             async:false,
             dataType: "json",
             data: ({
-                salida_id: $('#cmb_salida_id').val(),
-                llegada_id: $('#cmb_llegada_id').val(),
-                horario: $('#cmb_horario').val(),
-                fecha: $('#cmb_fech_sal').val()
+                salida_id: $('#cmb_salida_pos').val(),
+                llegada_id: $('#cmb_llegada_pos').val(),
+                horario: $('#cmb_horario_pos').val(),
+                fecha: $('#cmb_fech_sal_pos').val()
             }),
             beforeSend: function() {
-                $('#txt_placa_vehiculo').val('<option value="">Cargando...</option>');
+
             },
             success: function(data){
-                $('#txt_placa_vehiculo').val(data.vehiculo_placa);
-                $('#txt_modelo_vehiculo').val(data.vehiculo_marca);
-                $('#txt_asientos_vehiculo').val(data.vehiculo_numasi);
-                $('#hdd_vehiculo').val(data.vehiculo_id);
-                $('#hdd_vi_ho').val(data.viajehorario_id);
-                $('#hdd_vh_id').val(data.viajehorario_id);
+                $('#hdd_vi_ho_pos').val(data.viajehorario_id);
 
             },
             complete: function(){
@@ -293,7 +269,7 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
-    function cmb_fecha()
+    function cmb_fecha_pos()
     {
         $.ajax({
             type: "POST",
@@ -301,14 +277,14 @@ $pv = mysql_fetch_array($pvs);
             async:true,
             dataType: "html",
             data: ({
-                salida_id: $('#cmb_salida_id').val(),
-                llegada_id: $('#cmb_llegada_id').val()
+                salida_id: $('#cmb_salida_pos').val(),
+                llegada_id: $('#cmb_llegada_pos').val()
             }),
             beforeSend: function() {
-                $('#cmb_fech_sal').html('<option value="">Cargando...</option>');
+                $('#cmb_fech_sal_pos').html('<option value="">Cargando...</option>');
             },
             success: function(html){
-                $('#cmb_fech_sal').html(html);
+                $('#cmb_fech_sal_pos').html(html);
             },
             complete: function(){
 
@@ -316,29 +292,6 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
-    function buscar_dni() {
-        var dni = $('#txt_pasaj_dni').val();
-        var url = '../../libreriasphp/consultadni/consulta_reniec.php';
-        $.ajax({
-            type:'POST',
-            url:url,
-            data:'dni='+dni,
-            success: function(datos_dni){
-                var datos = eval(datos_dni);
-
-                // $('#mostrar_dni').text(datos[0]);
-                // $('#paterno').text(datos[1]);
-                // $('#materno').text(datos[2]);
-                // $('#nombres').text(datos[3]);
-                if(datos[1]!="" && datos[2]!="" && datos[3]!="") {
-                    $('#txt_pasaj_nom').val(datos[1] + " " + datos[2] + " " + datos[3]);
-                }else {
-                    $('#txt_pasaj_nom').val("Datos no encontrados o menor de edad. Editar manualmente los datos.");
-                    $( "#txt_pasaj_nom" ).focus();
-                }
-            }
-        });
-    }
 
     function venta_horario_form(act,idf){
         $.ajax({
@@ -436,138 +389,49 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
-    function reserva_cargar_precio(){
-        if($('.reserva').length<=0){
-            alert('Seleccione un asiento');
-        }else{
-            var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
-            $.ajax({
-                type: "POST",
-                url: "../asientoestado/asientoestado_reg.php",
-                async: false,
-                dataType: "json",
-                data: ({
-                    action_asientoestado: 'obtener_datos',
-                    txt_asiento_id: id_seleccionado,
-                    hdd_vh_id: $('#hdd_vi_ho').val()
-                }),
-                beforeSend: function () {
 
-                },
-                success: function (data) {
-                    $('#txt_precio').val(data.asientoestado_precio);
-                    if(data.asientoestado_destpar_id  == $('#cmb_llegada_id').val())
-                    {
-                        cmb_lugar_parada();
-                    }else {
-                        $('#cmb_parada_id').val(data.asientoestado_destpar_id);
-                    }
-
-                },
-                complete: function () {
-                }
-            })
-
-        }
-    }
-
-
-    function getPosition(el) {
-        var xPos = 0;
-        var yPos = 0;
-
-        while (el) {
-            if (el.tagName == "BODY") {
-                // deal with browser quirks with body/window/document and page scroll
-                var xScroll = el.scrollLeft || document.documentElement.scrollLeft;
-                var yScroll = el.scrollTop || document.documentElement.scrollTop;
-
-                xPos += (el.offsetLeft - xScroll + el.clientLeft);
-                yPos += (el.offsetTop - yScroll + el.clientTop);
-            } else {
-                // for all other non-BODY elements
-                xPos += (el.offsetLeft - el.scrollLeft + el.clientLeft);
-                yPos += (el.offsetTop - el.scrollTop + el.clientTop);
-            }
-
-            el = el.offsetParent;
-        }
-        return {
-            x: xPos,
-            y: yPos
-        };
-    }
 
 
     $(function () {
 
 
-        cmb_lugar_origen();
-        cmb_lugar_parada();
-        cmb_lugar_destino();
-        $('#cmb_parada_id').prop("disabled", true).addClass("ui-state-disabled");
-        $('#cmb_llegada_id').change(function(){
-            $('#cmb_horario').val('');
-            cmb_fecha();
+        cmb_lugar_origen_pos();
+        cmb_lugar_parada_pos();
+        cmb_lugar_destino_pos();
+        cmb_fecha_pos();
+        $('#cmb_parada_pos').prop("disabled", true).addClass("ui-state-disabled");
+        $('#cmb_llegada_pos').change(function(){
+            $('#cmb_horario_pos').val('');
+            cmb_fecha_pos();
+            $('#hdd_vi_ho_pos').val('');
+            $('#cmb_parada_pos').prop("disabled", false);
+            $('#cmb_parada_pos').removeClass("ui-state-disabled");
+
+        });
+
+        $('#cmb_salida_pos').change(function(){
+            $('#cmb_horario_pos').val('');
+            cmb_fecha_pos();
+            $('#hdd_vi_ho_pos').val('');
+
+        });
+
+
+
+
+        $('#cmb_horario_pos').change(function(){
+            cmb_horario_vehiculo_pos();
+        });
+
+        $('#cmb_fech_sal_pos').change(function(){
+            cmb_fecha_horario_pos();
             $('#txt_placa_vehiculo').val('');
             $('#txt_modelo_vehiculo').val('');
             $('#txt_asientos_vehiculo').val('');
-            $('#bus').html('');
-            $('#hdd_vi_ho').val('');
-            $('#cmb_parada_id').prop("disabled", false);
-            $('#cmb_parada_id').removeClass("ui-state-disabled");
-
-        });
-
-        $('#cmb_salida_id').change(function(){
-            $('#cmb_horario').val('');
-            cmb_fecha();
-            $('#txt_placa_vehiculo').val('');
-            $('#txt_modelo_vehiculo').val('');
-            $('#txt_asientos_vehiculo').val('');
-            $('#bus').html('');
-            $('#hdd_vi_ho').val('');
-
+            $('#hdd_vi_ho_pos').val('');
         });
 
 
-
-
-        $('#cmb_horario').change(function(){
-            cmb_horario_vehiculo();
-            filtro_bus();
-
-        });
-
-        $('#cmb_fech_sal').change(function(){
-            cmb_fecha_horario();
-            $('#txt_placa_vehiculo').val('');
-            $('#txt_modelo_vehiculo').val('');
-            $('#txt_asientos_vehiculo').val('');
-            $('#bus').html('');
-            $('#hdd_vi_ho').val('');
-        });
-
-        $( "#div_venta_postergacion_form" ).dialog({
-            title:'Postergación de Viaje | <?php echo $_SESSION['empresa_nombre']?>',
-            autoOpen: false,
-            resizable: false,
-            height: 'auto',
-            width: 'auto',
-            zIndex: 1,
-            modal: true,
-            position: "center",
-            closeOnEscape: false,
-            buttons: {
-                Guardar: function() {
-                    $("#for_hor").submit();
-                },
-                Cancelar: function() {
-                    $('#for_hor').each (function(){this.reset();});
-                    $( this ).dialog( "close" );
-                }
-            }
-        });
 
 
 
@@ -579,91 +443,50 @@ $pv = mysql_fetch_array($pvs);
                     var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
                     $.ajax({
                         type: "POST",
-                        url: "../venta/venta_form.php",
+                        url: "../venta/venta_reg.php",
                         async:true,
                         dataType: "html",
                         data: ({
-                            action: 'insertar',
-                            ven_id:	'',
+                            action: 'postergar',
                             asiento_id: id_seleccionado,
-                            precio: $('#txt_precio').val(),
-                            viaje_fecha_sal: $('#cmb_fech_sal').val(),
                             viaje_horario_id: $('#hdd_vi_ho').val(),
-                            viaje_horario: $('#cmb_horario').val(),
-                            pasaj_dni:$('#txt_pasaj_dni').val(),
-                            pasaj_nom:$('#txt_pasaj_nom').val(),
-                            viaje_parada: $('#cmb_parada_id').val(),
-                            viaje_llegada: $('#cmb_llegada_id').val()
+                            viaje_horario_pos: $('#hdd_vi_ho_pos').val(),
+                            hdd_punven_id: <?php echo $_SESSION['puntoventa_id']?>,
+                            hdd_emp_id: <?php echo $_SESSION['empresa_id']?>
                         }),
                         beforeSend: function () {
-                            //$('#div_venta_asiento_form').dialog("close");
-                            $('#div_venta_form').dialog("open");
-                            $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+                            $('#msj_asientoestado').html("Guardando...");
+                            $('#msj_asientoestado').show(100);
                         },
                         success: function (html) {
-                            $('#div_venta_form').html(html);
-                                venta_cliente_reg();
+                            $('#div_postergacion_form').dialog("close");
+                            $('#msj_asientoestado').html(html);
                         },
                         complete: function () {
-                            $( "#div_venta_form" ).dialog({
-                                title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
-                                height: 650,
-                                width: 980,
-                                buttons: {
-                                    Guardar: function(){
-                                        txt_ven_numdoc();
-                                        if($('#hdd_ven_doc').val()==1){
-                                            if($('#hdd_ven_numite').val()>0)
-                                            {
-                                                venta_check();
-                                            }
-                                            else{
-                                                $("#for_ven").submit();
-                                            }
-                                        }
-                                        else
-                                        {
-                                            $("#for_ven").submit();
-                                            cmb_lugar_vehiculo();
-                                            filtro_bus();
-                                        }
-                                    },
-                                    Cancelar: function() {
-                                        $('#for_ven').each (function(){this.reset();});
-                                        $('#cmb_parada_id').val('');
-                                        $( this ).dialog( "close" );
-                                    }
-                                }
-                            });
+                            filtro_bus();
                         }
                     });
                 }
             },
             rules: {
-                cmb_salida_id: {
+                cmb_salida_pos: {
                     required: true
                 },
-                cmb_llegada_id: {
+                cmb_llegada_pos: {
                     required: true
                 },
-                cmb_horario: {
-                    required: true
-                },
-                txt_precio: {
+                cmb_horario_pos: {
                     required: true
                 }
             },
             messages: {
-                cmb_salida_id: {
+                cmb_salida_pos: {
                     required: '*'
                 },
-                cmb_llegada_id: {
+                cmb_llegada_pos: {
                     required: '*'
                 },
-                cmb_horario: {
-                    required: '*'
-                },
-                txt_precio: {
+                cmb_horario_pos: {
                     required: '*'
                 }
             }
@@ -674,38 +497,35 @@ $pv = mysql_fetch_array($pvs);
 
 
 
-    <form id="bus_form">
+    <form id="postergar_form">
         <input type="hidden" id="hdd_vehiculo" value="">
-        <input type="hidden" id="hdd_vi_ho" value="">
-        <input type="hidden" id="hdd_cli_res" value="">
-        <input type="hidden" id="hdd_act_res" value="">
-        <input type="hidden" id="hdd_precio" value="">
+        <input type="hidden" id="hdd_vi_ho_pos" value="">
         <div id="origen_destino">
             <fieldset><legend>Seleccionar Origen y Destino</legend>
 
                 <table border="0" cellspacing="2" cellpadding="0">
                     <tr>
                         <td valign="top">
-                            <label for="cmb_salida_id">Origen</label><br>
-                            <select name="cmb_salida_id" id="cmb_salida_id">
+                            <label for="cmb_salida_pos">Origen</label><br>
+                            <select name="cmb_salida_pos" id="cmb_salida_pos">
                             </select>
                         </td>
                         <td valign="top">
-                            <label for="cmb_salida_id">Parada</label><br>
-                            <select name="cmb_parada_id" id="cmb_parada_id">
+                            <label for="cmb_salida_pos">Parada</label><br>
+                            <select name="cmb_parada_pos" id="cmb_parada_pos">
                             </select>
                         </td>
-                        <td valign="top"><label for="cmb_llegada_id">Destino:</label><br>
-                            <select name="cmb_llegada_id" id="cmb_llegada_id">
+                        <td valign="top"><label for="cmb_llegada_pos">Destino:</label><br>
+                            <select name="cmb_llegada_pos" id="cmb_llegada_pos">
                             </select>
                         </td>
                         <td valign="top">
-                            <label for="cmb_fech_sal">F. Salida</label><br>
-                            <select name="cmb_fech_sal" id="cmb_fech_sal">
+                            <label for="cmb_fech_sal_pos">F. Salida</label><br>
+                            <select name="cmb_fech_sal_pos" id="cmb_fech_sal_pos">
                             </select>
                         </td>
-                        <td align="center" valign="top"><label for="cmb_horario">Hora Salida:</label><br>
-                            <select name="cmb_horario" id="cmb_horario">
+                        <td align="center" valign="top"><label for="cmb_horario_pos">Hora Salida:</label><br>
+                            <select name="cmb_horario_pos" id="cmb_horario_pos">
                             </select>
                         </td>
                 </table>
