@@ -1,7 +1,7 @@
 <?php
 class cAsientoestado{
-	function insertar($asiento_id,$vh_id,$cli_id,$destpar,$precio){
-	$sql = "INSERT tb_asientoestado (
+    function insertar($asiento_id,$vh_id,$cli_id,$destpar,$precio){
+        $sql = "INSERT tb_asientoestado (
 		`tb_asiento_id`,
 		`tb_viajehorario_id`,
 		`tb_asientoestado_reserva`,
@@ -11,15 +11,16 @@ class cAsientoestado{
 		)
 		VALUES (
 		 '$asiento_id', '$vh_id', '1' ,$cli_id ,'$destpar', '$precio'
-		);"; 
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;	
-	}
+		);";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function mostrar_asiento_estado($vh_id,$asi_id){
         $sql = "SELECT * 
-        FROM tb_asientoestado ae 
+        FROM tb_asientoestado ae
+        LEFT JOIN tb_cliente c ON ae.tb_clientereserva_id=c.tb_cliente_id
         WHERE ae.tb_viajehorario_id=$vh_id AND ae.tb_asiento_id=$asi_id;";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -33,12 +34,12 @@ class cAsientoestado{
         return $rst;
     }
 
-	function eliminar($vh_id, $asiento_id){
-	    $sql="DELETE FROM tb_asientoestado WHERE tb_viajehorario_id=$vh_id AND tb_asiento_id=$asiento_id";
-	    $oCado = new Cado();
-	    $rst=$oCado->ejecute_sql($sql);
-	    return $rst;
-	}
+    function eliminar($vh_id, $asiento_id){
+        $sql="DELETE FROM tb_asientoestado WHERE tb_viajehorario_id=$vh_id AND tb_asiento_id=$asiento_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function modificar_asiento_estado($vh_id,$asiento_id, $n_vh_id){
         $sql="UPDATE tb_asientoestado SET
