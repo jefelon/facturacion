@@ -551,7 +551,7 @@ $pv = mysql_fetch_array($pvs);
             $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
             $("#postergar").css({'display': 'block'});
-            $("#detalle").css({'display': 'block'});
+            // $("#detalle").css({'display': 'block'});
             seleccionar(selector);
 
         }else if($(selector).hasClass('reserva')){
@@ -560,7 +560,7 @@ $pv = mysql_fetch_array($pvs);
             $("#eliminar").css({'display': 'block'});
             $("#vender").css({'display': 'block'});
             $("#postergar").css({'display': 'none'});
-            $("#detalle").css({'display': 'block'});
+            // $("#detalle").css({'display': 'block'});
             $("#hdd_act_res").val(cli_id);
             $(selector).addClass( "seleccionado" );
 
@@ -571,7 +571,7 @@ $pv = mysql_fetch_array($pvs);
             $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
             $("#postergar").css({'display': 'none'});
-            $("#detalle").css({'display': 'none'});
+            // $("#detalle").css({'display': 'none'});
         }
     }
 
@@ -1047,7 +1047,7 @@ $pv = mysql_fetch_array($pvs);
         <li id="vender">Vender</li>
         <li id="postergar">Postergar</li>
         <li id="eliminar">Eliminar</li>
-        <li id="detalle">Ver Detalle</li>
+<!--        <li id="detalle">Ver Detalle</li>-->
     </ul>
 </div>
 
