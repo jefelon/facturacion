@@ -7,7 +7,9 @@ if($_POST['action_recepciondocumentos']=="insertar")
 {
 	if(!empty($_POST['txt_recdoc_nom']))
 	{
-		$oRecepcionDocumentos->insertar(strip_tags($_POST['txt_recdoc_nom']));
+		$oRecepcionDocumentos->insertar($_POST['hdd_recdoc_id'], $_POST['hdd_perspentrega_id'],
+            $_POST['hdd_recepdocumentos_id'], $_POST['hdd_docpersrecojo_id'], $_POST['cmb_pendiente'],
+            $_POST['cmb_pendiente'], strip_tags($_POST['txt_recdoc_nom']));
 		
 			$dts=$oRecepcionDocumentos->ultimoInsert();
 			$dt = mysql_fetch_array($dts);

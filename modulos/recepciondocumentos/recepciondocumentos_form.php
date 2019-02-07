@@ -122,9 +122,11 @@ $(function() {
 </script>
 <form id="for_recdoc">
 <input name="action_recepciondocumentos" id="action_recepciondocumentos" type="hidden" value="<?php echo $_POST['action']?>">
-<input name="hdd_recdoc_id" id="hdd_recdoc_id" type="hidden" value="<?php echo $_POST['recdoc_id']?>">
 <input name="hdd_recdoc_empresa_id" id="hdd_recdoc_empresa_id" type="hidden" value="<?php echo $_POST['recdoc_empresa_id']?>">
 <input name="hdd_perspentrega_id" id="hdd_perspentrega_id" type="hidden" value="<?php echo $_POST['perspentrega_id']?>">
+    <input name="hdd_recepdocumentos_id" id="hdd_perspentrega_id" type="hidden" value="<?php echo $_POST['recepdocumentos_id']?>">
+    <input name="hdd_docpersrecojo_id" id="hdd_perspentrega_id" type="hidden" value="<?php echo $_POST['docpersrecojo_id']?>">
+
     <table>
         <tr>
             <td align="right" valign="top">Fecha:</td>
@@ -142,6 +144,29 @@ $(function() {
             <td>
                 <input name="txt_docpersentrega" type="text" id="txt_docpersentrega" value="<?php echo $docpersentrega?>" size="10" maxlength="11">
                 <input name="txt_nomperspentrega" type="text" id="txt_nompersentrega" value="<?php echo $nompersentrega?>" size="30">
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Recep. Documentos:</td>
+            <td>
+                <input name="txt_docrecepdocumentos" type="text" id="txt_docrecepdocumentos" value="<?php echo $docpersentrega?>" size="10" maxlength="11">
+                <input name="txt_nomrecepdocumentos" type="text" id="txt_nomrecepdocumentos" value="<?php echo $nompersentrega?>" size="30">
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Resp. Recojo:</td>
+            <td>
+                <input name="txt_docpersrecojo" type="text" id="txt_docpersrecojo" value="<?php echo $docpersentrega?>" size="10" maxlength="11">
+                <input name="txt_nompersrecojo" type="text" id="txt_nompersrecojo" value="<?php echo $nompersentrega?>" size="30">
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Pendientes:</td>
+            <td>
+                <select name="cmb_pendiente" id="cmb_pendiente">
+                    <option value="Trajo"<?php if($tipfle==1)echo 'selected'?>>Trajo</option>
+                    <option value="No Trajo"<?php if($tipfle==2)echo 'selected'?>>No Trajo</option>
+                </select>
             </td>
         </tr>
     </table>
