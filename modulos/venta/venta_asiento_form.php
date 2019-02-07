@@ -180,12 +180,12 @@ $pv = mysql_fetch_array($pvs);
                     alert(mensaje);
                     $('#txt_pasaj_dni').focus();
                 }
-               else if ($('#txt_pasaj_dni').val()=='' && $('#txt_precio').val()==''){
+                else if ($('#txt_pasaj_dni').val()=='' && $('#txt_precio').val()==''){
                     mensaje = mensaje + ',';
                     alert(mensaje);
                     $('#txt_precio').focus();
                 }
-               else if ($('#txt_precio').val()==''){
+                else if ($('#txt_precio').val()==''){
                     mensaje = mensaje + 'Falta Precio';
                     alert(mensaje);
                     $('#txt_precio').focus();
@@ -551,7 +551,7 @@ $pv = mysql_fetch_array($pvs);
             $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
             $("#postergar").css({'display': 'block'});
-            // $("#detalle").css({'display': 'block'});
+            $("#detalle").css({'display': 'block'});
             seleccionar(selector);
 
         }else if($(selector).hasClass('reserva')){
@@ -560,9 +560,9 @@ $pv = mysql_fetch_array($pvs);
             $("#eliminar").css({'display': 'block'});
             $("#vender").css({'display': 'block'});
             $("#postergar").css({'display': 'none'});
-            // $("#detalle").css({'display': 'block'});
+            $("#detalle").css({'display': 'block'});
             $("#hdd_act_res").val(cli_id);
-            $(selector).addClass( "seleccionado" );
+            seleccionar(selector);
 
         }else {
             seleccionar(selector);
@@ -571,7 +571,7 @@ $pv = mysql_fetch_array($pvs);
             $("#vender").css({'display': 'none'});
             $("#eliminar").css({'display': 'none'});
             $("#postergar").css({'display': 'none'});
-            // $("#detalle").css({'display': 'none'});
+            $("#detalle").css({'display': 'none'});
         }
     }
 
@@ -790,7 +790,7 @@ $pv = mysql_fetch_array($pvs);
                         },
                         success: function (html) {
                             $('#div_venta_form').html(html);
-                                venta_cliente_reg();
+                            venta_cliente_reg();
                         },
                         complete: function () {
                             $( "#div_venta_form" ).dialog({
@@ -930,108 +930,108 @@ $pv = mysql_fetch_array($pvs);
 </style>
 
 
-    <form id="bus_form">
-        <input type="hidden" id="hdd_vehiculo" value="">
-        <input type="hidden" id="hdd_vi_ho" value="">
-        <input type="hidden" id="hdd_cli_res" value="">
-        <input type="hidden" id="hdd_act_res" value="">
-        <input type="hidden" id="hdd_precio" value="">
-        <div id="origen_destino">
-            <fieldset><legend>Seleccionar Origen y Destino</legend>
+<form id="bus_form">
+    <input type="hidden" id="hdd_vehiculo" value="">
+    <input type="hidden" id="hdd_vi_ho" value="">
+    <input type="hidden" id="hdd_cli_res" value="">
+    <input type="hidden" id="hdd_act_res" value="">
+    <input type="hidden" id="hdd_precio" value="">
+    <div id="origen_destino">
+        <fieldset><legend>Seleccionar Origen y Destino</legend>
 
-                <table border="0" cellspacing="2" cellpadding="0">
-                    <tr>
-                        <td valign="top">
-                            <label for="cmb_salida_id">Origen</label><br>
-                            <select name="cmb_salida_id" id="cmb_salida_id">
-                            </select>
-                        </td>
-                        <td valign="top">
-                            <label for="cmb_salida_id">Parada</label><br>
-                            <select name="cmb_parada_id" id="cmb_parada_id">
-                            </select>
-                        </td>
-                        <td valign="top"><label for="cmb_llegada_id">Destino:</label><br>
-                            <select name="cmb_llegada_id" id="cmb_llegada_id">
-                            </select>
-                        </td>
-                        <td valign="top">
-                            <label for="cmb_fech_sal">F. Salida</label><br>
-                            <select name="cmb_fech_sal" id="cmb_fech_sal">
-                            </select>
-                        </td>
-                        <td align="center" valign="top"><label for="cmb_horario">Hora Salida:</label><br>
-                            <select name="cmb_horario" id="cmb_horario">
-                            </select>
-                        </td>
+            <table border="0" cellspacing="2" cellpadding="0">
+                <tr>
+                    <td valign="top">
+                        <label for="cmb_salida_id">Origen</label><br>
+                        <select name="cmb_salida_id" id="cmb_salida_id">
+                        </select>
+                    </td>
+                    <td valign="top">
+                        <label for="cmb_salida_id">Parada</label><br>
+                        <select name="cmb_parada_id" id="cmb_parada_id">
+                        </select>
+                    </td>
+                    <td valign="top"><label for="cmb_llegada_id">Destino:</label><br>
+                        <select name="cmb_llegada_id" id="cmb_llegada_id">
+                        </select>
+                    </td>
+                    <td valign="top">
+                        <label for="cmb_fech_sal">F. Salida</label><br>
+                        <select name="cmb_fech_sal" id="cmb_fech_sal">
+                        </select>
+                    </td>
+                    <td align="center" valign="top"><label for="cmb_horario">Hora Salida:</label><br>
+                        <select name="cmb_horario" id="cmb_horario">
+                        </select>
+                    </td>
 
-                        <td valign="top"><label for="txt_precio">Precio:</label><br>
-                            <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
-                        </td>
-                        <td align="left" valign="middle">
-                            <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
-                        </td>
-                        <td align="center" valign="top">
-                            <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
-                            <div id="msj_asientoestado" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
-                        </td>
-                </table>
-            </fieldset>
-        </div>
-        <div id="bus" style="width: 80%;float:left">
+                    <td valign="top"><label for="txt_precio">Precio:</label><br>
+                        <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
+                    </td>
+                    <td align="left" valign="middle">
+                        <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
+                    </td>
+                    <td align="center" valign="top">
+                        <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
+                        <div id="msj_asientoestado" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
+                    </td>
+            </table>
+        </fieldset>
+    </div>
+    <div id="bus" style="width: 80%;float:left">
 
-        </div>
-        <div id="pasajero" style="width: 20%;float: right">
-            <fieldset><legend>Datos Pasajero</legend>
-                <div id="radio">
-                    <input name="rad_cli_tip" type="radio" id="radio1" value="1" checked="checked"/><label for="radio1">DNI</label>
-                    <input name="rad_cli_tip" type="radio" id="radio3" value="3"><label for="radio3">OTROS</label>
-                </div>
-                <label for="txt_pasaj_dni" id="lbl_cli_doc">DNI:</label><br>
-                <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
-                <label for="txt_pasaj_nom">NOMBRE: </label><br>
-                <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
-            </fieldset>
-            <br>
-            <br>
-        </div>
-        <div id="datos-vehiculo" style="width: 20%;float: right">
-            <fieldset><legend>Datos Vehiculo</legend>
-                <table>
-                    <tr>
-                        <td width="100%" align="left"  valign="top">
-                            <label for="txt_placa_vehiculo">VEHICULO:</label><br>
-                            <input name="txt_placa_vehiculo" type="text" id="txt_placa_vehiculo" value="" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100%" align="left"  valign="top"><br>
-                            <label for="txt_asientos_vehiculo">ASIENTOS:</label><br>
-                            <input name="txt_asientos_vehiculo" type="text" id="txt_asientos_vehiculo" value="" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100%" align="left"  valign="top">
-                            <label for="txt_modelo_vehiculo">MODELO:</label><br>
-                            <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
-                        </td>
-                    </tr>
-                </table>
-            </fieldset>
-            <br>
-            <br>
-        </div>
+    </div>
+    <div id="pasajero" style="width: 20%;float: right">
+        <fieldset><legend>Datos Pasajero</legend>
+            <div id="radio">
+                <input name="rad_cli_tip" type="radio" id="radio1" value="1" checked="checked"/><label for="radio1">DNI</label>
+                <input name="rad_cli_tip" type="radio" id="radio3" value="3"><label for="radio3">OTROS</label>
+            </div>
+            <label for="txt_pasaj_dni" id="lbl_cli_doc">DNI:</label><br>
+            <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
+            <label for="txt_pasaj_nom">NOMBRE: </label><br>
+            <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
+        </fieldset>
+        <br>
+        <br>
+    </div>
+    <div id="datos-vehiculo" style="width: 20%;float: right">
+        <fieldset><legend>Datos Vehiculo</legend>
+            <table>
+                <tr>
+                    <td width="100%" align="left"  valign="top">
+                        <label for="txt_placa_vehiculo">VEHICULO:</label><br>
+                        <input name="txt_placa_vehiculo" type="text" id="txt_placa_vehiculo" value="" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="left"  valign="top"><br>
+                        <label for="txt_asientos_vehiculo">ASIENTOS:</label><br>
+                        <input name="txt_asientos_vehiculo" type="text" id="txt_asientos_vehiculo" value="" disabled>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="100%" align="left"  valign="top">
+                        <label for="txt_modelo_vehiculo">MODELO:</label><br>
+                        <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
+                    </td>
+                </tr>
+            </table>
+        </fieldset>
+        <br>
+        <br>
+    </div>
 
-        <div id="div_venta_horario_form">
+    <div id="div_venta_horario_form">
 
-        </div>
-        </form>
-        <div id="div_postergacion_form">
+    </div>
+</form>
+<div id="div_postergacion_form">
 
-        </div>
-        <div id="div_detalleviaje">
+</div>
+<div id="div_detalleviaje">
 
-        </div>
+</div>
 <div>
     <fieldset><legend>Imprimir Manifiesto</legend>
         <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post" style="text-align: center">
@@ -1047,7 +1047,7 @@ $pv = mysql_fetch_array($pvs);
         <li id="vender">Vender</li>
         <li id="postergar">Postergar</li>
         <li id="eliminar">Eliminar</li>
-<!--        <li id="detalle">Ver Detalle</li>-->
+        <li id="detalle">Ver Detalle</li>
     </ul>
 </div>
 

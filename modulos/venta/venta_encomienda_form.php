@@ -1669,10 +1669,10 @@ if($_POST['action']=="editar"){
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
                     $('#hdd_ven_cli_id').change();
                 }
-                    $("#hdd_ven_rem_id").val(ui.item.id);
-                    $("#txt_ven_rem_nom").val(ui.item.nombre);
-                    $("#txt_ven_rem_dir").val(ui.item.direccion);
-                
+                $("#hdd_ven_rem_id").val(ui.item.id);
+                $("#txt_ven_rem_nom").val(ui.item.nombre);
+                $("#txt_ven_rem_dir").val(ui.item.direccion);
+
                 if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
                     cliente_cargar_datos($('#hdd_ven_rem_id').val());
@@ -1696,19 +1696,19 @@ if($_POST['action']=="editar"){
                     $("#hdd_ven_cli_id").val(ui.item.id);
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
                 }
-                    $("#hdd_ven_rem_id").val(ui.item.id);
-                    $("#txt_ven_rem_doc").val(ui.item.documento);
-                    $("#txt_ven_rem_dir").val(ui.item.direccion);
-                    $('#hdd_ven_rem_id').change();
+                $("#hdd_ven_rem_id").val(ui.item.id);
+                $("#txt_ven_rem_doc").val(ui.item.documento);
+                $("#txt_ven_rem_dir").val(ui.item.direccion);
+                $('#hdd_ven_rem_id').change();
 
                 if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
                     cliente_cargar_datos($('#hdd_ven_rem_id').val());
                 }
-                    //alert(ui.item.value);
-                    // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
-                    // $('#msj_busqueda_sunat').show(100);
-                    // compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
+                //alert(ui.item.value);
+                // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                // $('#msj_busqueda_sunat').show(100);
+                // compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
 
             }
         });
@@ -2226,7 +2226,7 @@ if($_POST['action']=="editar"){
                         {
                             if(data.ven_act=='imprime')
                             {
-                                venta_impresion(data.ven_id);
+                                venta_impresion_enc(data.ven_id);
                             }
                         }
                     },
@@ -2601,7 +2601,7 @@ if($_POST['action']=="editar"){
                     } else {
                         $('#txt_bus_pro_codbar').val(data.pro_codbar);
                         $('#hdd_bus_pro_nom').val('');
-                            $('#txt_bus_cat_preven').focus();
+                        $('#txt_bus_cat_preven').focus();
 
                     }
                     //precios_min_may($('#hdd_bus_cat_id').val());
@@ -2824,7 +2824,7 @@ if($_POST['action']=="editar"){
                                 <div id="div_clientecuenta_detalle">
                                 </div>
                             </td>
-    <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
+                            <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                             <td>
                                 <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
                                 <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
@@ -2863,7 +2863,7 @@ if($_POST['action']=="editar"){
                             </td>
 
                             <td><input type="hidden" id="txt_ven_cli_dir" name="txt_ven_rem_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
-                           <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
+                            <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                             <td>
                                 <input type="hidden" id="txt_ven_cli_est" name="txt_ven_rem_est" size="40" value="" disabled="disabled"/>
                                 <div id="msj_busqueda_sunat" class="ui-state-highlight ui-fcorner-all" style="width:auto; float:right; padding:2px; display:none"></div>
@@ -2973,8 +2973,8 @@ if($_POST['action']=="editar"){
                                     <label for="cmb_forpaf_id">Forma<!-- Pago-->:</label></br>
                                     <select name="cmb_forpag_id" id="cmb_forpag_id">
                                         <option value="1" selected="selected">CONTADO</option>
-<!--                                        <option value="2">CREDITO</option>-->
-<!--                                        <option value="3">LETRAS</option>-->
+                                        <!--                                        <option value="2">CREDITO</option>-->
+                                        <!--                                        <option value="3">LETRAS</option>-->
                                         <option value="4">POR PAGAR</option>
                                     </select>
                                 </td>
@@ -3100,8 +3100,8 @@ if($_POST['action']=="editar"){
             <div style="width: 20%;float: left">
                 <fieldset>
                     <fieldset><legend>Clave encomienda</legend>
-                    <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="4">
-                 </fieldset>
+                        <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="4">
+                    </fieldset>
             </div>
         </div>
 
@@ -3134,13 +3134,13 @@ if($_POST['action']=="editar"){
             <div id="div_productos_servicios_tab">
                 <ul>
                     <li><a id="carga_productos" href="#div_productos">Agregar Servicios</a></li>
-<!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
+                    <!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
                 </ul>
 
 
                 <div id="div_servicios">
                     <div id="cuadro-contain" class="ui-widget">
-                                     <legend></legend>
+                        <legend></legend>
                         <?php if($_POST['vista']!='cange'){?>
                             <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="servicio_form_i('insertar')">Agregar</a>
                             <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>

@@ -1990,7 +1990,7 @@ if($_POST['action']=="editar"){
                         {
                             if(data.ven_act=='imprime')
                             {
-                                venta_impresion(data.ven_id);
+                                venta_impresion_pas(data.ven_id);
                             }
                         }
 
@@ -2250,7 +2250,7 @@ if($_POST['action']=="editar"){
 
         <?php if ( isset($_POST['asiento_id'])) {
         if ($_POST['asiento_id']) { ?>
-            venta_car_pasaje('agregar_servicio', 1);
+        venta_car_pasaje('agregar_servicio', 1);
         <?php } } ?>
 
     });
@@ -2335,7 +2335,7 @@ if($_POST['action']=="editar"){
                     } else {
                         $('#txt_bus_pro_codbar').val(data.pro_codbar);
                         $('#hdd_bus_pro_nom').val('');
-                            $('#txt_bus_cat_preven').focus();
+                        $('#txt_bus_cat_preven').focus();
 
                     }
                     //precios_min_may($('#hdd_bus_cat_id').val());
@@ -2567,7 +2567,7 @@ if($_POST['action']=="editar"){
                             <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
                         </tr>
                         <tr>
-    <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
+                            <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                             <td>
                                 <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
                                 <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
@@ -2849,13 +2849,13 @@ if($_POST['action']=="editar"){
             <div id="div_productos_servicios_tab">
                 <ul>
                     <li><a id="carga_productos" href="#div_productos">Agregar Servicios</a></li>
-<!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
+                    <!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
                 </ul>
 
 
                 <div id="div_servicios">
                     <div id="cuadro-contain" class="ui-widget">
-                                     <legend></legend>
+                        <legend></legend>
                         <?php if($_POST['vista']!='cange'){?>
                             <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
                             <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
