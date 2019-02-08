@@ -452,7 +452,8 @@ $pv = mysql_fetch_array($pvs);
                             viaje_horario_id: $('#hdd_vi_ho').val(),
                             viaje_horario_pos: $('#hdd_vi_ho_pos').val(),
                             hdd_punven_id: <?php echo $_SESSION['puntoventa_id']?>,
-                            hdd_emp_id: <?php echo $_SESSION['empresa_id']?>
+                            hdd_emp_id: <?php echo $_SESSION['empresa_id']?>,
+                            hdd_usu_id: <?php echo $_SESSION['usuario_id']?>
                         }),
                         beforeSend: function () {
                             $('#msj_asientoestado').html("Guardando...");

@@ -21,9 +21,7 @@ if ($_SESSION['usuariogrupo_id']==3){
     $usu_ses = $_POST['hdd_usu_id']!==$_SESSION['usuario_id'];
 }
 
-if($usu_ses ||
-	$_POST['hdd_punven_id']!==$_SESSION['puntoventa_id'] ||
-	$_POST['hdd_emp_id']!==$_SESSION['empresa_id'])
+if($usu_ses || $_POST['hdd_punven_id']!==$_SESSION['puntoventa_id'] || $_POST['hdd_emp_id']!==$_SESSION['empresa_id'])
 {
 	echo json_encode(['redireccionar'=>true]);
 	exit();
