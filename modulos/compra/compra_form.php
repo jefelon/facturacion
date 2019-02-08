@@ -80,7 +80,7 @@ if($_POST['action']=="editar"){
 
 
     $( "#txt_com_fec,.txt_com_fec" ).datepicker({
-        minDate: "-1Y",
+        minDate: "-2Y",
         maxDate:"+0D",
         yearRange: 'c-0:c+0',
         changeMonth: true,
