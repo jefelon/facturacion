@@ -60,6 +60,10 @@ $pv = mysql_fetch_array($pvs);
 
     });
 
+    $('.btn_newwin').button({
+        icons: {primary: "ui-icon-newwin"},
+        text: false
+    });
 
     function cmb_lugar_origen()
     {
@@ -1004,6 +1008,9 @@ $pv = mysql_fetch_array($pvs);
                     <td align="center" valign="top">
                         <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
                         <div id="msj_asientoestado" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
+                    </td>
+                    <td align="center" valign="top">
+                    <a class="btn_newwin" target="_blank" title="Saltar a otra pestaña" href="venta_vista_encomienda.php">Saltar</a>
                     </td>
             </table>
         </fieldset>

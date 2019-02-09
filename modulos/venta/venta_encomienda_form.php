@@ -2748,9 +2748,9 @@ if($_POST['action']=="editar"){
                             <a class="btn_imp" title="Imprimir" href="#imprimir" onClick="venta_impresion('<?php echo $_POST['ven_id']?>')">Imprimir</a>
                         <?php }?>
                         <?php
-                        $url=ir_principal($_SESSION['usuariogrupo_id']);
+
                         ?>
-                        <a class="btn_newwin" target="_blank" title="Saltar a otra pestaña" href="<?php echo $url?>">Saltar</a>
+                        <a class="btn_newwin" target="_blank" title="Saltar a otra pestaña" href="venta_vista.php">Saltar</a>
                     </td>
                 </tr>
                 <tr>
