@@ -49,6 +49,11 @@ $pv = mysql_fetch_array($pvs);
         text: false
     });
 
+    $('#btn_editar_horario').button({
+        icons: {primary: "ui-icon-pencil"},
+        text: false
+    });
+
     $('#btn_manifiesto').button({
         icons: {primary: "ui-icon-print"},
         text: false
@@ -349,6 +354,28 @@ $pv = mysql_fetch_array($pvs);
             dataType: "html",
             data: ({
                 action: act
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#div_venta_horario_form').dialog("open");
+                $('#div_venta_horario_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_venta_horario_form').html(html);
+            }
+        });
+    }
+
+    function venta_vh_vehiculo_form(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_vh_vehiculo_form.php",
+            // url: "../venta/croquis.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act,
+                veh_id: $('#hdd_vehiculo').val()
             }),
             beforeSend: function() {
                 $('#msj_venta').hide();
@@ -970,6 +997,9 @@ $pv = mysql_fetch_array($pvs);
                     </td>
                     <td align="left" valign="middle">
                         <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
+                    </td>
+                    <td align="left" valign="middle">
+                        <a id="btn_editar_horario" title="Editar Horario de salida de bus" href="#" onClick="venta_vh_vehiculo_form()">Agregar Horario</a>
                     </td>
                     <td align="center" valign="top">
                         <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>

@@ -29,4 +29,14 @@ if($_POST['action']=="insertar")
         echo 'Intentelo nuevamente';
     }
 }
+if($_POST['action']=="actualizar-vehiculo")
+{
+    if(!empty($_POST['hdd_vi_ho']) && !empty($_POST['cmb_vehiculo'])) {
+        $lgs=$oLugar->modificar_vh_vehiculo($_POST['hdd_vi_ho'],$_POST['cmb_vehiculo']);
+        $data['ven_ho_msj']='Se actualizo vehiculo correctamente.';
+        echo json_encode($data);
+    }else{
+        echo 'Intentelo nuevamente';
+    }
+}
 ?>

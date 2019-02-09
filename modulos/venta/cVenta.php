@@ -108,7 +108,7 @@ class cVenta{
 	}
 	function mostrar_filtro($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$venmay,$tip){
 	$sql="SELECT ev.tb_encomiendaventa_id, ev.tb_destinatario_nom, cc.tb_cliente_nom AS tb_remitente_nom, v.tb_venta_id,
-    v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
+    v.tb_venta_est,v.tb_documento_id, v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
     v.tb_venta_valven, v.tb_venta_igv
@@ -625,7 +625,7 @@ WHERE tb_software_id =$id";
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
 	INNER JOIN tb_puntoventa pv ON ev.tb_destino_id=pv.tb_lugar_id	
-	WHERE ev.tb_destinatario_nom = '$des_nom' AND pv.tb_puntoventa_id = '$punven_id' ORDER BY v.tb_venta_fec DESC";
+	WHERE ev.tb_destinatario_nom = '$des_nom' AND pv.tb_puntoventa_id = '$punven_id' AND v.tb_venta_est NOT IN ('ANULADA') ORDER BY v.tb_venta_fec DESC";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

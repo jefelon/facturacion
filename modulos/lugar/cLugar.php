@@ -126,5 +126,14 @@ class cLugar{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
+    function modificar_vh_vehiculo($vh_ho_id, $vehiculo_id){
+        $sql = "UPDATE tb_viajehorario SET  
+	`tb_vehiculo_id` =  '$vehiculo_id'
+	WHERE  tb_viajehorario_id =$vh_ho_id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

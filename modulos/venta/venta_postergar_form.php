@@ -149,100 +149,6 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
-    function asientoestado_reg(act) {
-        if($('.seleccionado').length<=0){
-            alert('Seleccione un asiento');
-        }else{
-
-            if($('#txt_pasaj_dni').val()=='' || $('#txt_precio').val()==''){
-                var mensaje = '';
-                if ($('#txt_pasaj_dni').val()==''){
-                    mensaje = mensaje + 'Falta Documento';
-                    alert(mensaje);
-                    $('#txt_pasaj_dni').focus();
-                }
-               else if ($('#txt_pasaj_dni').val()=='' && $('#txt_precio').val()==''){
-                    mensaje = mensaje + ',';
-                    alert(mensaje);
-                    $('#txt_precio').focus();
-                }
-               else if ($('#txt_precio').val()==''){
-                    mensaje = mensaje + 'Falta Precio';
-                    alert(mensaje);
-                    $('#txt_precio').focus();
-                }
-
-            }else {
-                var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
-                var cli_id = venta_clientereserva_reg();
-                var destino_id;
-                if($('#cmb_parada_pos').val()>0){
-                    destino_id=$('#cmb_parada_pos').val();
-                }else{
-                    destino_id=$('#cmb_llegada_pos').val();
-                }
-                $.ajax({
-                    type: "POST",
-                    url: "../asientoestado/asientoestado_reg.php",
-                    async: true,
-                    dataType: "json",
-                    data: ({
-                        action_asientoestado: act,
-                        txt_asiento_id: id_seleccionado,
-                        hdd_vh_id: $('#hdd_vi_ho_pos').val(),
-                        txt_destpar: destino_id,
-                        cli_id: cli_id,
-                        txt_precio: $('#txt_precio').val()
-                    }),
-                    beforeSend: function () {
-                        $('#msj_asientoestado').html("Guardando...");
-                        $('#msj_asientoestado').show(100);
-                    },
-                    success: function (data) {
-                        $('#msj_asientoestado').html(data.asientoestado_msj);
-                    },
-                    complete: function () {
-                        filtro_bus();
-                        $('#txt_pasaj_dni').val('');
-                        $('#txt_pasaj_nom').val('');
-                        cmb_lugar_parada();
-                    }
-                })
-            }
-
-        }
-    }
-
-    function eliminar_asientoestado(act) {
-        if($('.reserva').length<=0){
-            alert('Seleccione un asiento');
-        }else{
-            var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
-            $.ajax({
-                type: "POST",
-                url: "../asientoestado/asientoestado_reg.php",
-                async: true,
-                dataType: "json",
-                data: ({
-                    action_asientoestado: act,
-                    txt_asiento_id: id_seleccionado,
-                    hdd_vh_id: $('#hdd_vi_ho_pos').val()
-                }),
-                beforeSend: function () {
-                    $('#msj_asientoestado').html("Guardando...");
-                    $('#msj_asientoestado').show(100);
-                },
-                success: function (data) {
-                    $('#msj_asientoestado').html(data.asientoestado_msj);
-                },
-                complete: function () {
-                    filtro_bus();
-                }
-            })
-
-        }
-    }
-
     function cmb_horario_vehiculo_pos()
     {
         $.ajax({
@@ -425,10 +331,6 @@ $pv = mysql_fetch_array($pvs);
 
         $('#cmb_fech_sal_pos').change(function(){
             cmb_fecha_horario_pos();
-            $('#txt_placa_vehiculo').val('');
-            $('#txt_modelo_vehiculo').val('');
-            $('#txt_asientos_vehiculo').val('');
-            $('#hdd_vi_ho_pos').val('');
         });
 
 

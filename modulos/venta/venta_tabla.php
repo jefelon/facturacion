@@ -100,11 +100,14 @@ $num_rows= mysql_num_rows($dts1);
         <tbody>
         <?php
         while($dt1 = mysql_fetch_array($dts1)){
+
+            $doc_id = $dt1['tb_documento_id'];
             if($dt1['tb_venta_est']=='CANCELADA'){
-                $total_ventas+=$dt1['tb_venta_tot'];
+                if ($doc_id!='15' || $_POST['cmb_fil_ven_doc']=='15'){
+                    $total_ventas+=$dt1['tb_venta_tot'];
+                }
             }
             $tipodoc = $dt1['cs_tipodocumento_cod'];
-
             $xml="";
             $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
             $cdr="";
@@ -132,13 +135,22 @@ $num_rows= mysql_num_rows($dts1);
                 </td>
                 <td align="right">
                     <?php if ($_POST['cmb_fil_ven_tip']=='ENCOMIENDA'){
-                        echo formato_money($dt1['tb_venta_valven']);
+                        if($doc_id=='15' && $_POST['cmb_fil_ven_doc']!='15'){
+                            echo formato_money(0.00);
+                        }else{
+                            echo formato_money($dt1['tb_venta_valven']);
+                        }
                     }else{
                         echo formato_money($dt1['tb_venta_tot']);
                     }
                     ?></td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
+                <?php if($doc_id=='15' && $_POST['cmb_fil_ven_doc']!='15'){?>
+                    <td align="right"><?php echo formato_money(0.00)?></td>
+                    <td align="right"><?php echo formato_money(0.00)?></td>
+                <?php }else{?>
+                    <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
+                    <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
+                <?php }?>
                 <td><?php echo $dt1['tb_venta_est']?></td>
                 <td>
                     <?php
@@ -228,7 +240,7 @@ $num_rows= mysql_num_rows($dts1);
     }
     ?>
     <tr class="even">
-        <td colspan="8">TOTAL</td>
+        <td colspan="<?php if ($_POST['cmb_fil_ven_tip']=='ENCOMIENDA'){ echo '10'; }else{ echo '8';} ?>">TOTAL</td>
         <td align="right"><strong><?php echo formato_money($total_ventas)?></strong></td>
         <td colspan="5" align="right">&nbsp;</td>
     </tr>
