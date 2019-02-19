@@ -62,6 +62,7 @@ while($dt = mysql_fetch_array($dts))
     $toigv=$dt["tb_venta_igv"];
     $importetotal=$dt["tb_venta_tot"];
     $totopgrat=$dt["tb_venta_grat"];
+    $totopexo=$dt["tb_venta_exo"];
     $subtotal=$dt["tb_venta_gra"];
     $valorventa=$dt["tb_venta_valven"];
     $toisc="0.00";
@@ -352,6 +353,10 @@ $html.='<tr class="row">';
         <td width="20%" style="text-align: right;">'.$mon . $valorventa.'</td>
     </tr>
     <tr>
+        <td width="80%" style="text-align: right;" colspan="2">Ope Exo: </td>
+        <td width="20%" style="text-align: right;">'.$mon . $totopexo.'</td>
+    </tr>
+    <tr>
         <td  width="80%" style="text-align: right;" colspan="2">IGV: </td>
         <td width="20%" style="text-align: right;">'.$mon . $toigv.'</td>
     </tr>
@@ -438,9 +443,9 @@ $style = array(
 );
 
 
-//$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 40, 40, $style, 'N'));
-//$html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
-$html .= '</td>
+$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
+$html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
+</td>
 </tr>
 </table>
 </body>
@@ -448,6 +453,6 @@ $html .= '</td>
 
 $pdf->writeHTML($html, true, 0, true, true);
 
-$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
+//$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
 
 $pdf->Output($nombre_archivo, 'I');
