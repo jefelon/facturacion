@@ -1965,12 +1965,10 @@ if($_POST['action']=="editar"){
                     producto_form('insertar',"nuevo producto");
                     $("#txt_bus_pro_nom").val();
                     $("#txt_pro_nom").val("nuevo producto");
-
-
                 }else{
                     $("#txt_bus_pro_nom").val(ui.item.label);
                     $("#hdd_bus_pro_nom").val(ui.item.value);
-                    catalogo_buscar();
+                    catalogo_buscar(ui.item.preven);
                 }
             }
         });
@@ -2110,7 +2108,7 @@ if($_POST['action']=="editar"){
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    function catalogo_buscar() {
+    function catalogo_buscar(precio) {
         $.ajax({
             type: "POST",
             url: "../venta/catalogo_buscar.php",
@@ -2192,15 +2190,48 @@ if($_POST['action']=="editar"){
                 }
                 if (data.accion == 2) {
 
-                    if ($('#cmb_listaprecio_id').val()) {
-                        data.cat_preven = data.cat_prelista;
+                    if ($('#che_mayorista').is(':checked')) {
+                        data.cat_preven = data.cat_premay;
+                    }else{
+                        if ($('#cmb_listaprecio_id').val()!='') {
+                            data.cat_preven = data.cat_prelista;
+                        }
                     }
 
-                    //$('#txt_bus_pro_codbar').val(data.pro_codbar);
 
-                    ///catalogo_venta_tab1();
-                    //alert(data.pro_codbar);
-                    //$('#txt_fil_pro_codbar').val('hola');
+
+
+                    $('#hdd_bus_cat_id').val(data.cat_id);
+                    $('#hdd_bus_cat_stouni').val(data.cat_stouni);
+                    $('#hdd_bus_cat_cospro').val(data.cat_cospro);
+                    $('#txt_bus_pro_nom').val(data.pro_nom);
+                    $('#txt_bus_cat_preven').val(precio);
+                    $('#txt_bus_cat_can').val(data.cat_can);
+
+                    $('#txt_precio_min').val(data.cat_premin);
+                    $('#txt_precio_may').val(data.cat_premay);
+                    $('#hdd_detven_tip').val(data.ven_tip);
+
+                    if ($('#chk_modo').is(':checked')) {
+                        venta_car('agregar');
+
+                        $('#hdd_bus_cat_id').val('');
+                        $('#hdd_bus_cat_stouni').val('');
+                        $('#hdd_bus_cat_cospro').val('');
+                        $('#txt_bus_pro_codbar').val('');
+                        $('#txt_bus_cat_preven').val('');
+                        $('#txt_bus_cat_can').val('');
+                        $('#txt_precio_min').val('');
+                        $('#txt_precio_may').val('');
+                        $('#hdd_bus_pro_nom').val('');
+                        $('#txt_bus_pro_nom').val('');
+                        $('#txt_bus_pro_nom').focus();
+                    } else {
+                        $('#txt_bus_pro_codbar').val(data.pro_codbar);
+                        $('#hdd_bus_pro_nom').val('');
+                        $('#txt_bus_cat_preven').focus();
+
+                    }
                 }
             },
             complete: function(){

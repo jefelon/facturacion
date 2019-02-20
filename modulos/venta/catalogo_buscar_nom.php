@@ -11,11 +11,15 @@ class ElementoAutocompletar {
     var $value;
     var $label;
     var $catid;
+    var $preven;
+    var $id_unidad;
 
-    function __construct($label, $value,$catid){
+    function __construct($label, $value,$catid,$preven, $id_unidad){
         $this->label = $label;
         $this->value = $value;
         $this->catid = $catid;
+        $this->preven = $preven;
+        $this->id_unidad = $id_unidad;
     }
 }
 
@@ -23,7 +27,7 @@ $datoBuscar = '%'.$_GET["term"].'%';
 $est='Activo';
 $lim=12;
 
-$rs=$oCatalogo->filtrar($datoBuscar,$codbar,$est,$_SESSION['almacen_id'],$lim);
+$rs=$oCatalogo->filtrar_unidades($datoBuscar,$codbar,$est,$_SESSION['almacen_id'],$lim);
 
 //creo el array de los elementos sugeridos
 $arrayElementos = array();
@@ -51,11 +55,11 @@ if($num_rows>0){
         $espacio=" ".str_pad($ini,$n_espacio,"-")." ";
 
         $etiqueta= '<span style="display:inline-block; width:250px;">'.$producto.'</span><span style="display:inline-block; width:100px;">'.$marca.'</span><span style="display:inline-block; width:50px;text-align:right;">'.$stock." ".$fila["tb_unidad_abr"].'</span><span style="display:inline-block; width:100px;text-align:right;">'.$precio;
-        array_push($arrayElementos, new ElementoAutocompletar($etiqueta, $fila["tb_producto_nom"],$fila["tb_catalogo_id"]));
+        array_push($arrayElementos, new ElementoAutocompletar($etiqueta, $fila["tb_producto_nom"],$fila["tb_catalogo_id"],$fila["tb_catalogo_preven"]));
     }
 }else{
 
     $etiqueta= '<span style="display:inline-block; width:250px;">Agregar Producto</span>';
-    array_push($arrayElementos, new ElementoAutocompletar($etiqueta, '',''));
+    array_push($arrayElementos, new ElementoAutocompletar($etiqueta, '','',$precio));
 }
 print_r(json_encode($arrayElementos));

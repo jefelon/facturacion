@@ -5,7 +5,7 @@ $oCatalogoproducto = new cCatalogoproducto();
 require_once("../formatos/formato.php");
 
 if($_POST['action_catalogo']=="insertar"){
-	if(!empty($_POST['hdd_com_pro_id']))
+	if(!empty($_POST['hdd_com_pro_id']) || !empty($_POST['cmb_cat_uni_alt']))
 	{
 		$preunicom=0;
 		
