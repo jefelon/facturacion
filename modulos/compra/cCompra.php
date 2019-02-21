@@ -1,6 +1,6 @@
 <?php
 class cCompra{
-	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento,$fec_nota,$ser_nota, $num_nota,$tip_nota){
+	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento,$fec_nota,$ser_nota, $num_nota,$tip_nota,$tiporenta_id){
 	$sql = "INSERT INTO tb_compra(
 	`tb_compra_reg` ,
 	`tb_compra_mod` ,
@@ -35,10 +35,11 @@ class cCompra{
 	`tb_compra_fec_nota`,
 	`tb_compra_ser_nota` ,
 	`tb_compra_num_nota`,
-	`tb_compra_tip_nota`
+	`tb_compra_tip_nota`,
+	`tb_tiporenta_id`
 	)
 	VALUES (
-	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id','$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento','$fec_nota', '$ser_nota','$num_nota','$tip_nota'
+	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id','$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento','$fec_nota', '$ser_nota','$num_nota','$tip_nota','$tiporenta_id'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -275,6 +276,13 @@ WHERE tb_software_id =$id";
         $sql="SELECT * 
 	FROM tb_compra c
 	WHERE c.tb_compra_numdoc='$numdoc'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function mostrarTipoRentaND(){
+        $sql="SELECT * 
+	FROM tb_tiporenta";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

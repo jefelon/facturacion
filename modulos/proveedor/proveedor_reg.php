@@ -29,7 +29,9 @@ if($_POST['action_proveedor']=="insertar")
                 strip_tags($_POST['txt_pro_dir']),
                 strip_tags(limpia_espacios($_POST['txt_pro_con'])),
 				$_POST['txt_pro_tel'], 
-				$_POST['txt_pro_ema']);
+				$_POST['txt_pro_ema'],
+                $_POST['cmb_pais_id']
+            );
 			
 				$dts=$oProveedor->ultimoInsert();
 				$dt = mysql_fetch_array($dts);
@@ -73,7 +75,9 @@ if($_POST['action_proveedor']=="editar")
                 strip_tags($_POST['txt_pro_dir']),
                 strip_tags(limpia_espacios($_POST['txt_pro_con'])),
 				$_POST['txt_pro_tel'], 
-				$_POST['txt_pro_ema']);
+				$_POST['txt_pro_ema'],
+                $_POST['cmb_pais_id']
+            );
 			
 			$data['pro_id']=$_POST['hdd_pro_id'];
 			$data['pro_msj']='Se registró proveedor correctamente.';

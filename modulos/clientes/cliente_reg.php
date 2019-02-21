@@ -24,7 +24,7 @@ if($_POST['action_cliente']=="insertar")
 		{
 			$oCliente->insertar(
 				$_POST['rad_cli_tip'],
-                addslashes(strip_tags(limpia_espacios($_POST['txt_cli_nom']))),
+                strip_tags(limpia_espacios($_POST['txt_cli_nom'])),
 				$_POST['txt_cli_doc'],
                 strip_tags($_POST['txt_cli_dir']),
                 strip_tags(limpia_espacios($_POST['txt_cli_con'])),
@@ -74,7 +74,7 @@ if($_POST['action_cliente']=="editar")
 			$oCliente->modificar(
 				$_POST['hdd_cli_id'], 
 				$_POST['rad_cli_tip'],
-                addslashes(strip_tags(limpia_espacios($_POST['txt_cli_nom']))),
+                strip_tags(limpia_espacios($_POST['txt_cli_nom'])),
 				$_POST['txt_cli_doc'],
                 strip_tags($_POST['txt_cli_dir']),
                 strip_tags(limpia_espacios($_POST['txt_cli_con'])),

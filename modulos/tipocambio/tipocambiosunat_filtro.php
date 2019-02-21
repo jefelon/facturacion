@@ -4,7 +4,7 @@ session_start();
 
 ?>
 <script type="text/javascript">
-	$('#btn_descargar_txt').button({
+	$('#btn_cargartablaple_txt').button({
 		icons: {primary: "ui-icon-search"},
 	});
 	$('#btn_resfil').button({
@@ -12,48 +12,12 @@ session_start();
 
     });
 
-
-    function test_comp() {
-        $('#hdd_action').val('filter_comp');
-        venta_tabla();
-    }
-
-    function test_doc() {
-        $('#hdd_action').val('filter_doc');
-        venta_tabla();
-    }
-
-function cmb_ven_doc(ids)
-{	
-	$.ajax({
-		type: "POST",
-		url: "../../modulos/documento/cmb_doc_id.php",
-		async:true,
-		dataType: "html",                      
-		data: ({
-			doc_tip:	'2',
-			doc_id: ids,
-			vista:	'<?php echo $_POST['action']?>'
-		}),
-		beforeSend: function() {
-			$('#cmb_fil_ven_doc').html('<option value="">Cargando...</option>');
-        },
-		success: function(html){			
-			$('#cmb_fil_ven_doc').html(html);
-		}
-	});
-}
 $(function() {
-
-	cmb_ven_doc('<?php echo $_POST['doc']?>');
-    $('#cmb_fil_librople').change(function(e) {
-        ple_tabla();
-    });
     $('#cmb_fil_anio').change(function(e) {
-        ple_tabla();
+        tipocambiosunat_tabla();
     });
     $('#cmb_fil_mes').change(function(e) {
-        ple_tabla();
+        tipocambiosunat_tabla();
     });
 });
 </script>
@@ -81,8 +45,8 @@ $(function() {
     }
 </style>
 
-<form name="for_fil_ple" id="for_fil_ple" target="_blank" action="" method="post">
-<input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla_garantia.php">
+<form name="for_fil_tc" id="for_fil_tc" target="_blank" action="" method="post">
+<input name="hdd_modo" id="hdd_modo" type="hidden" value="tipocambiosunat_tabla.php">
 
     <input name="hdd_action" id="hdd_action" type="hidden" value="">
     <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
@@ -111,21 +75,7 @@ $(function() {
             <option value="11">Noviembre</option>
             <option value="12">Diciembre</option>
         </select>
-
-        <br/>
-
-        <label for="cmb_fil_ven_doc" align="right">Libro o Registro:</label>
-        <select name="cmb_fil_librople" id="cmb_fil_librople">
-            <option value="-">Seleccionar Libro</option>
-            <option value="080100">PLE Registro de Compras 080100 - COMPLETO</option>
-            <option value="080200">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
-            <option value="140100">PLE Registro de Ventas 140100 - COMPLETO</option>
-            <option value="4">PLE Diario de Formato Simplificado 050200</option>
-            <option value="5">PLE Diario de Formato Simplificado - PLAN CONTABLE</option>
-        </select>
-        <br/>
-
-        <a href="#" onClick="descargar_txt()" id="btn_descargar_txt" class="center">DESCARGAR</a>
+<!--        <a href="#" onClick="tipocambiosunat_tabla();" id="btn_cargartablaple_txt" class="center">CARGAR</a>-->
     </fieldset>
 </div>
 

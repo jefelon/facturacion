@@ -103,8 +103,8 @@ $(function() {
     <label for="cmb_fil_com_est">Estado:</label>
 	<select name="cmb_fil_com_est" id="cmb_fil_com_est">
 	  <option value="">-</option>
-	  <option value="EMITIDA">EMITIDA</option>
-      <option value="CANCELADA">CANCELADA</option>
+	  <option value="CREDITO">CREDITO</option>
+      <option value="CONTADO">CONTADO</option>
 	  <option value="ANULADA">ANULADA</option>
     </select>
     <div>

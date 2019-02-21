@@ -148,7 +148,7 @@ $(function() {
                     ?>
                 <!--3--><td><?php echo $cuoamc ?></td>
                 <!--4--><td><?php echo $fecha ?></td>
-               <!-- 5--><td><?php echo $fechavence ?></td>
+               <!-- 5--><td><?php echo $fecha ?></td>
 
                     <?php if(strlen($dt1['cs_tipodocumento_cod'])==1)
                     {$coddoc = '0' . $dt1['cs_tipodocumento_cod'];}
@@ -182,7 +182,7 @@ $(function() {
                 $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
                 $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_compra_tipcam'];
                 if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
-                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambio="";}
+                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov="";}
                 ?>
                 <!--14--><td><?php echo $gravado; ?></td>
                 <!--15--><td><?php echo $igv; ?></td>
@@ -195,7 +195,7 @@ $(function() {
                 <!--22--><td></td>
                 <!--23--><td><?php echo $tot; ?></td>
                 <!--24--><td><?php echo $moneda; ?></td>
-                <!--25--><td><?php echo $tipocambio; ?></td>
+                <!--25--><td><?php echo $tipocambiov; ?></td>
 
                 <?php
                 $fec_nota="";
@@ -255,4 +255,5 @@ $(function() {
         <td colspan="41"><?php echo $num_rows.' registros'; ?></td>
     </tr>
 </table>
+<input type="text" id="lineas_libro" value="<?php if($num_rows>0){ echo "1";  }?>">
 

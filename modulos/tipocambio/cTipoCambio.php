@@ -1,14 +1,15 @@
 <?php
 class cTipoCambio{
-	function insertar($fec,$dolsun){
+	function insertar($fec,$dolsunv,$dolsunc){
 	$sql = "INSERT tb_tipocambio(
 	`tb_tipocambio_reg` ,
 	`tb_tipocambio_mod` ,
 	`tb_tipocambio_fec` ,
-	`tb_tipocambio_dolsun`
+	`tb_tipocambio_dolsunv`,
+	`tb_tipocambio_dolsunc`
 	)
 	VALUES (
-	NOW( ), NOW( ), '$fec','$dolsun'
+	NOW( ), NOW( ), '$fec','$dolsunv','$dolsunc'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -22,7 +23,7 @@ class cTipoCambio{
 	}
 	function mostrarTodos(){
 	$sql="SELECT * FROM tb_tipocambio 
-	ORDER BY tb_tipocambio_fec DESC";
+	ORDER BY tb_tipocambio_fec ASC";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
@@ -35,11 +36,12 @@ class cTipoCambio{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$fec,$dolsun,$dol){
+	function modificar($id,$fec,$dolsunv,$dolsunc){
 	$sql = "UPDATE tb_tipocambio SET  	
 	`tb_tipocambio_mod` =  NOW(),
 	`tb_tipocambio_fec` =  '$fec',
-	`tb_tipocambio_dolsun` =  '$dolsun'
+	`tb_tipocambio_dolsunv` =  '$dolsunv',
+	`tb_tipocambio_dolsunc` =  '$dolsunc'
 	WHERE tb_tipocambio_id =$id"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
