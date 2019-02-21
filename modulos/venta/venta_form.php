@@ -1968,7 +1968,7 @@ if($_POST['action']=="editar"){
                 }else{
                     $("#txt_bus_pro_nom").val(ui.item.label);
                     $("#hdd_bus_pro_nom").val(ui.item.value);
-                    catalogo_buscar(ui.item.preven);
+                    catalogo_buscar(ui.item.catid);
                 }
             }
         });
@@ -2108,7 +2108,7 @@ if($_POST['action']=="editar"){
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    function catalogo_buscar(precio) {
+    function catalogo_buscar(cat_id) {
         $.ajax({
             type: "POST",
             url: "../venta/catalogo_buscar.php",
@@ -2119,7 +2119,8 @@ if($_POST['action']=="editar"){
                 unico_id: $('#unico_id').val(),
                 txt_bus_pro_codbar: $('#txt_bus_pro_codbar').val(),
                 txt_bus_pro_nom: $('#hdd_bus_pro_nom').val(),
-                cmb_listaprecio_id: $('#cmb_listaprecio_id').val()
+                cmb_listaprecio_id: $('#cmb_listaprecio_id').val(),
+                cat_id: cat_id
             }),
             beforeSend: function() {
                 //$('#div_venta_pago_car').addClass("ui-state-disabled");
@@ -2189,49 +2190,13 @@ if($_POST['action']=="editar"){
                     //precios_min_may($('#hdd_bus_cat_id').val());
                 }
                 if (data.accion == 2) {
-
-                    if ($('#che_mayorista').is(':checked')) {
-                        data.cat_preven = data.cat_premay;
-                    }else{
-                        if ($('#cmb_listaprecio_id').val()!='') {
-                            data.cat_preven = data.cat_prelista;
-                        }
+                    if ($('#cmb_listaprecio_id').val()) {
+                        data.cat_preven = data.cat_prelista;
                     }
-
-
-
-
-                    $('#hdd_bus_cat_id').val(data.cat_id);
-                    $('#hdd_bus_cat_stouni').val(data.cat_stouni);
-                    $('#hdd_bus_cat_cospro').val(data.cat_cospro);
-                    $('#txt_bus_pro_nom').val(data.pro_nom);
-                    $('#txt_bus_cat_preven').val(precio);
-                    $('#txt_bus_cat_can').val(data.cat_can);
-
-                    $('#txt_precio_min').val(data.cat_premin);
-                    $('#txt_precio_may').val(data.cat_premay);
-                    $('#hdd_detven_tip').val(data.ven_tip);
-
-                    if ($('#chk_modo').is(':checked')) {
-                        venta_car('agregar');
-
-                        $('#hdd_bus_cat_id').val('');
-                        $('#hdd_bus_cat_stouni').val('');
-                        $('#hdd_bus_cat_cospro').val('');
-                        $('#txt_bus_pro_codbar').val('');
-                        $('#txt_bus_cat_preven').val('');
-                        $('#txt_bus_cat_can').val('');
-                        $('#txt_precio_min').val('');
-                        $('#txt_precio_may').val('');
-                        $('#hdd_bus_pro_nom').val('');
-                        $('#txt_bus_pro_nom').val('');
-                        $('#txt_bus_pro_nom').focus();
-                    } else {
-                        $('#txt_bus_pro_codbar').val(data.pro_codbar);
-                        $('#hdd_bus_pro_nom').val('');
-                        $('#txt_bus_cat_preven').focus();
-
-                    }
+                    //$('#txt_bus_pro_codbar').val(data.pro_codbar);
+                    ///catalogo_venta_tab1();
+                    //alert(data.pro_codbar);
+                    //$('#txt_fil_pro_codbar').val('hola');
                 }
             },
             complete: function(){
@@ -2317,13 +2282,13 @@ if($_POST['action']=="editar"){
 
         <input name="unico_id" id="unico_id" type="hidden" value="<?php echo $unico_id?>">
 
-        <fieldset>
+        <fieldset style="background-color: rgba(255,182,134,0.29);">
             <legend>Datos Principales</legend>
             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td style="width:80%;"><label for="txt_ven_fec">Fecha:</label>
                         <input name="txt_ven_fec" type="text" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10">
-                        <label for="cmb_ven_doc">Documento:</label>
+                        <label for="cmb_ven_doc">Documento:<span style="color: #00aa00;font-size: 30px; font-weight: bold">1.</span></label>
                         <select name="cmb_ven_doc" id="cmb_ven_doc" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                         </select>
                         <label for="txt_ven_numdoc">N° Doc:</label>
@@ -2379,6 +2344,11 @@ if($_POST['action']=="editar"){
                         <label for="txt_ven_lab3">Ord. Compra:</label>
                         <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
                         <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
+                        <label for="cmb_ven_imp">Formato:</label>
+                        <select name="cmb_ven_imp" id="cmb_ven_imp">
+                            <option value="1" selected>Ticket</option>
+                            <option value="2" selected>A4</option>
+                        </select>
                         <br>
                         <label for="cmb_ven_moneda">Moneda:</label>
                         <select name="cmb_ven_moneda" id="cmb_ven_moneda" <?php if($_POST['action']=='editar')echo 'disabled'?>>
@@ -2409,7 +2379,7 @@ if($_POST['action']=="editar"){
             <input type="hidden" id="hdd_cli_precio_id" name="hdd_cli_precio_id" value="<?php echo $cli_prec_id?>" />
             <input type="hidden" id="hdd_val_cli_tip" name="hdd_val_cli_tip" value="<?php if($_POST['action']=='editar')echo $cli_tip;?>" />
 
-            <fieldset>
+            <fieldset style="background-color: rgba(0,239,230,0.22);">
                 <legend>Datos Cliente</legend>
                 <div id="div_cliente_form">
                 </div>
@@ -2419,7 +2389,7 @@ if($_POST['action']=="editar"){
                                 <a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
                                 <a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
                             <?php }?>
-                            <label for="txt_ven_cli_doc">RUC/DNI:</label>
+                            <label for="txt_ven_cli_doc">RUC/DNI: <span style="color: #00aa00;font-size: 30px; font-weight: bold">2.</span></label>
                         </td>
                         <td>
                             <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
@@ -2656,14 +2626,14 @@ if($_POST['action']=="editar"){
                     <li><a id="carga_productos" href="#div_productos">Agregar Productos</a></li>
                     <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
                 </ul>
-                <div id="div_productos">
+                <div id="div_productos" style="background-color: rgba(220,240,5,0.25);">
                     <div id="cuadro-contain" class="ui-widget">
                         <!--              <legend>Agregar Producto</legend>-->
                         <input name="hdd_bus_cat_id" id="hdd_bus_cat_id"  type="hidden" value="">
                         <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
                         <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
                         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
-
+                        <span style="color: #00aa00;font-size: 30px; font-weight: bold">3.</span>
                         <label for="txt_bus_pro_codbar">COD</label>
                         <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="10">
                         <label for="txt_bus_pro_nom">NOM</label>
@@ -2680,6 +2650,7 @@ if($_POST['action']=="editar"){
                         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
                         <label for="txt_detcom_des">DES</label>
                         <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
+                        <span style="color: #00aa00;font-size: 30px; font-weight: bold">4.</span>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
 

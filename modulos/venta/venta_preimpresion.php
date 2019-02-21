@@ -18,6 +18,7 @@ require_once("../formatos/formato.php");
 	$dt = mysql_fetch_array($dts);
 		$doc_id	=$dt['tb_documento_id'];
 		$doc_nom=$dt['tb_documento_nom'];
+        $formato=$dt['tb_venta_imp'];
 		$ser	=$dt['tb_venta_ser'];
 		$num	=$dt['tb_venta_num'];
 		
@@ -40,8 +41,22 @@ require_once("../formatos/formato.php");
 	//if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura.php';
 	//if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta.php';
 
-	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_facturaexo_mat.php';
-	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta_mat.php';
+
+	if($doc_nom=='FACTURA ELECTRONICA'){
+        if($formato=='1'){
+            $archivo_destino='../venta/venta_cpeimp_facturaexo_mat.php';
+        }elseif ($formato=='2'){
+            $archivo_destino='../venta/venta_cpeimp_facturaexo_mat_a4.php';
+        }
+    }
+	if($doc_nom=='BOLETA ELECTRONICA'){
+        if($formato=='1'){
+            $archivo_destino='../venta/venta_cpeimp_boleta_mat.php';
+        }elseif ($formato=='2'){
+            $archivo_destino='../venta/venta_cpeimp_boleta_mat_a4.php';
+        }
+
+    }
     if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../venta/venta_cpeimp_nota_mat.php';
 
 ?>

@@ -1,7 +1,7 @@
 <?php
 class cVenta{
 	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$valven,$igv,$des,$tot,$est,$lab1,$lab2,$lab3,$may,$usu_id,$punven_id,$emp_id,
-		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id){
+		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id,$ven_imp){
 	$sql = "INSERT INTO tb_venta(
 	`tb_venta_reg` ,
 	`tb_venta_fec` ,
@@ -35,11 +35,13 @@ class cVenta{
 	`tb_venta_desglo`,
 	`cs_tipooperacion_id`,
 	`cs_documentosrelacionados_id`,
-	`tb_vendedor_id`
+	`tb_vendedor_id`,
+	`tb_venta_imp`
 	)
 	VALUES (
 	NOW( ) ,  '$fec',  '$doc_id',  '$numdoc', '$ser',  '$num',  '$cli_id',  '$valven',  '$igv', '$des',  '$tot',  '$est', '$lab1', '$lab2', '$lab3', '$may',  '$usu_id', '$punven_id', '$emp_id',
-	'$tipdoc', '$tipmon', '$gra', '$ina', '$exp', '$grat', '$isc', '$otrtri', '$otrcar', '$desglo', '$tipope','$docrel','$use_id'
+	'$tipdoc', '$tipmon', '$gra', '$ina', '$exp', '$grat', '$isc', '$otrtri', '$otrcar', '$desglo', '$tipope','$docrel','$use_id',
+	'$ven_imp'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -374,7 +376,8 @@ class cVenta{
 	LEFT JOIN tb_producto p ON pr.tb_producto_id = p.tb_producto_id
 	LEFT JOIN tb_marca m ON p.tb_marca_id = m.tb_marca_id
 	LEFT JOIN tb_categoria cg ON p.tb_categoria_id = cg.tb_categoria_id
-	LEFT JOIN tb_unidad un ON ct.tb_unidad_id_bas = un.tb_unidad_id 
+	INNER JOIN tb_unidad un ON ct.tb_unidad_id_equ=un.tb_unidad_id
+
 	
 	LEFT JOIN tb_servicio s ON vd.tb_servicio_id = s.tb_servicio_id
 	

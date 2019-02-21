@@ -11,15 +11,11 @@ class ElementoAutocompletar {
     var $value;
     var $label;
     var $catid;
-    var $preven;
-    var $id_unidad;
 
-    function __construct($label, $value,$catid,$preven, $id_unidad){
+    function __construct($label, $value,$catid){
         $this->label = $label;
         $this->value = $value;
         $this->catid = $catid;
-        $this->preven = $preven;
-        $this->id_unidad = $id_unidad;
     }
 }
 
@@ -55,11 +51,11 @@ if($num_rows>0){
         $espacio=" ".str_pad($ini,$n_espacio,"-")." ";
 
         $etiqueta= '<span style="display:inline-block; width:250px;">'.$producto.'</span><span style="display:inline-block; width:100px;">'.$marca.'</span><span style="display:inline-block; width:50px;text-align:right;">'.$stock." ".$fila["tb_unidad_abr"].'</span><span style="display:inline-block; width:100px;text-align:right;">'.$precio;
-        array_push($arrayElementos, new ElementoAutocompletar($etiqueta, $fila["tb_producto_nom"],$fila["tb_catalogo_id"],$fila["tb_catalogo_preven"]));
+        array_push($arrayElementos, new ElementoAutocompletar($etiqueta, $fila["tb_producto_nom"],$fila["tb_catalogo_id"]));
     }
 }else{
 
     $etiqueta= '<span style="display:inline-block; width:250px;">Agregar Producto</span>';
-    array_push($arrayElementos, new ElementoAutocompletar($etiqueta, '','',$precio));
+    array_push($arrayElementos, new ElementoAutocompletar($etiqueta, '',''));
 }
 print_r(json_encode($arrayElementos));

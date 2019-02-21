@@ -18,7 +18,7 @@ $unico_id=$_POST['unico_id'];
 $est="Activo";
 $lim="";
 
-$dts0=$oCatalogo->filtrar_unidades($_POST['txt_bus_pro_nom'],$_POST['txt_bus_pro_codbar'],$est,$_SESSION['almacen_id'],$lim);
+$dts0=$oCatalogo->filtrar_unidades2($_POST['cat_id'],$_POST['txt_bus_pro_nom'],$_POST['txt_bus_pro_codbar'],$est,$_SESSION['almacen_id'],$lim);
 $dt0 = mysql_fetch_array($dts0);
 
 $num_rows= mysql_num_rows($dts0);
@@ -27,7 +27,7 @@ if($num_rows>0)
 ///arreglar el buscar
 	if($num_rows==1)
 	{	
-		$dts1=$oCatalogo->filtrar_unidades($_POST['txt_bus_pro_nom'],$_POST['txt_bus_pro_codbar'],$est,$_SESSION['almacen_id'],$lim);
+		$dts1=$oCatalogo->filtrar_unidades2($_POST['cat_id'],$_POST['txt_bus_pro_nom'],$_POST['txt_bus_pro_codbar'],$est,$_SESSION['almacen_id'],$lim);
 		$dt1 = mysql_fetch_array($dts1);
 
 			$data['pro_id']		=$dt1['tb_producto_id'];
