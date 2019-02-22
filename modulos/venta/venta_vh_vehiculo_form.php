@@ -6,15 +6,60 @@ session_start();
 $fec=date('d-m-Y');
 require_once ("../puntoventa/cPuntoventa.php");
 $oPuntoventa = new cPuntoventa();
+require_once("../venta/cVenta.php");
+$oVenta = new cVenta();
 
 $pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
 $pv = mysql_fetch_array($pvs);
+
+$vhs = $oVenta->mostrar_viajehorario($_POST['vh_id']);
+$vh = mysql_fetch_array($vhs);
+
 ?>
 
 <script type="text/javascript">
+    function cmb_conductor()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../conductor/cmb_con_id.php",
+            async:false,
+            dataType: "html",
+            data: ({
+                con_id: <?php echo $vh['tb_conductor_id']?>
+            }),
+            beforeSend: function() {
+                $('#cmb_conductor').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_conductor').html(html);
+            },
+            complete: function(){
 
+            }
+        });
+    }
+    function cmb_copiloto()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../conductor/cmb_con_id.php",
+            async:false,
+            dataType: "html",
+            data: ({
+                con_id: <?php echo $vh['tb_copiloto_id']?>
+            }),
+            beforeSend: function() {
+                $('#cmb_copiloto').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_copiloto').html(html);
+            },
+            complete: function(){
 
-    <?php echo $pv['tb_lugar_id']?>
+            }
+        });
+    }
 
     function cmb_vehiculo()
     {
@@ -80,7 +125,10 @@ $(function() {
                 data: ({
                     action: 'actualizar-vehiculo',
                     hdd_vi_ho: $('#hdd_vi_ho').val(),
-                    cmb_vehiculo: $('#cmb_vehiculo').val()
+                    cmb_vehiculo: $('#cmb_vehiculo').val(),
+                    cmb_conductor: $('#cmb_conductor').val(),
+                    cmb_copiloto: $('#cmb_copiloto').val()
+
                 }),
 				beforeSend: function() {
 					$("#div_venta_horario_form" ).dialog( "close" );
@@ -102,15 +150,30 @@ $(function() {
 		rules: {
             cmb_vehiculo: {
                 required: true
+            },
+            cmb_conductor: {
+                required: true
+            },
+            cmb_copiloto: {
+                required: true
             }
 		},
 		messages: {
             cmb_vehiculo: {
                 required: '*'
+            },
+            cmb_conductor: {
+                required: '*'
+            },
+            cmb_copiloto: {
+                required: '*'
             }
 		}
 	});
     cmb_vehiculo();
+    cmb_conductor();
+    cmb_copiloto();
+
 });
 </script>
 <form id="for_hor">
@@ -119,6 +182,20 @@ $(function() {
             <td valign="top">
                 <label for="cmb_vehiculo">Vehiculo</label><br>
                 <select name="cmb_vehiculo" id="cmb_vehiculo">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <label for="cmb_conductor">Conductor</label><br>
+                <select name="cmb_conductor" id="cmb_conductor">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <label for="cmb_copiloto">Copiloto</label><br>
+                <select name="cmb_copiloto" id="cmb_copiloto">
                 </select>
             </td>
         </tr>

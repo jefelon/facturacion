@@ -581,7 +581,7 @@ WHERE tb_software_id =$id";
 
     function mostrar_viajehorario($vh_id){
         $sql="SELECT tb_viajehorario_id,tb_viajehorario_horario, tb_viajehorario_fecha, o.tb_lugar_nom AS ltb_origen, 
-        d.tb_lugar_nom AS ltb_destino FROM tb_viajehorario vh
+        d.tb_lugar_nom AS ltb_destino, tb_conductor_id,tb_copiloto_id FROM tb_viajehorario vh
               LEFT JOIN tb_lugar o ON vh.tb_viajehorario_salida=o.tb_lugar_id 
               LEFT JOIN tb_lugar d ON vh.tb_viajehorario_llegada=d.tb_lugar_id 
                         WHERE tb_viajehorario_id=$vh_id";
@@ -591,13 +591,15 @@ WHERE tb_software_id =$id";
     }
     function mostrar_cabecera_manifiesto($vh_id)
     {
-        $sql = "SELECT vh.tb_viajehorario_fecha,vh.tb_viajehorario_horario, o.tb_lugar_nom as Origen, d.tb_lugar_nom as Destino,
-        v.tb_vehiculo_marca,v.tb_vehiculo_placa, c.tb_conductor_nom, c.tb_conductor_lic 
+        $sql = "SELECT vh.tb_viajehorario_fecha,vh.tb_viajehorario_horario,vh.tb_viajehorario_ser,vh.tb_viajehorario_num, 
+        o.tb_lugar_nom as Origen, d.tb_lugar_nom as Destino, v.tb_vehiculo_marca,v.tb_vehiculo_placa,v.tb_vehiculo_numasi, 
+        c.tb_conductor_nom, co.tb_conductor_nom AS tb_copiloto_nom,co.tb_conductor_lic AS tb_copiloto_lic, c.tb_conductor_lic 
         FROM tb_viajehorario vh 
         INNER JOIN tb_lugar o ON vh.tb_viajehorario_salida=o.tb_lugar_id 
         INNER JOIN tb_lugar d ON vh.tb_viajehorario_llegada=d.tb_lugar_id 
         INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id=v.tb_vehiculo_id 
-        LEFT JOIN tb_conductor c ON v.tb_conductor_id=c.tb_conductor_id
+        LEFT JOIN tb_conductor c ON vh.tb_conductor_id=c.tb_conductor_id
+        LEFT JOIN tb_conductor co ON vh.tb_copiloto_id=co.tb_conductor_id
         WHERE tb_viajehorario_id=$vh_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

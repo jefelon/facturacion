@@ -79,6 +79,27 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
+    function cmb_con_id()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../conductor/cmb_con_id.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_conductor').html('<option value="">Cargando...</option>');
+                $('#cmb_copiloto').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_conductor').html(html);
+                $('#cmb_copiloto').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
+
 
 $(function() {
     $( "#txt_fech_salida" ).datepicker({
@@ -158,6 +179,12 @@ $(function() {
             },
             cmb_vehiculo: {
                 required: true
+            },
+            cmb_conductor: {
+                required: true
+            },
+            cmb_copiloto: {
+                required: true
             }
 		},
 		messages: {
@@ -175,16 +202,24 @@ $(function() {
             },
             cmb_vehiculo: {
                 required: '*'
+            },
+            cmb_conductor: {
+                required: '*'
+            },
+            cmb_copiloto: {
+                required: '*'
             }
 		}
 	});
     cmb_lugar_origen();
     cmb_lugar_destino();
     cmb_vehiculo();
+    cmb_con_id();
 });
 </script>
 <form id="for_hor">
     <input name="action" id="action" type="hidden" value="insertar">
+    <input name="cmb_ven_doc" id="cmb_ven_doc" type="hidden" value="23">
     <table>
         <tr>
             <td valign="top">
@@ -215,6 +250,20 @@ $(function() {
             <td valign="top">
                 <label for="cmb_vehiculo">Vehiculo</label><br>
                 <select name="cmb_vehiculo" id="cmb_vehiculo">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <label for="cmb_conductor">Conductor</label><br>
+                <select name="cmb_conductor" id="cmb_conductor">
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <label for="cmb_copiloto">Copiloto</label><br>
+                <select name="cmb_copiloto" id="cmb_copiloto">
                 </select>
             </td>
         </tr>

@@ -107,29 +107,39 @@ class cLugar{
         return $rst;
     }
 
-    function insertarViajeHorario($salida_id,$llegada_id,$fech_salida,$hora,$vehiculo){
+    function insertarViajeHorario($salida_id,$llegada_id,$fech_salida,$hora,$vehiculo,$conductor,$copiloto,$ser,$num){
         $sql = "INSERT tb_viajehorario (
 		`tb_viajehorario_salida`,
 		`tb_viajehorario_llegada`,
 		`tb_viajehorario_fecha`,
 		`tb_viajehorario_horario`,
-		`tb_vehiculo_id`
+		`tb_vehiculo_id`,
+		`tb_conductor_id`,
+		`tb_copiloto_id`,
+		`tb_viajehorario_ser`,
+		`tb_viajehorario_num`
 		)
 		VALUES (
 		 '$salida_id',
 		 '$llegada_id',
 		 '$fech_salida',
 		 '$hora',
-		 '$vehiculo'
+		 '$vehiculo',
+		 '$conductor',
+		 '$copiloto',
+		 '$ser',
+		 '$num'
 		);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
 
-    function modificar_vh_vehiculo($vh_ho_id, $vehiculo_id){
+    function modificar_vh_vehiculo($vh_ho_id, $vehiculo_id,$conductor_id,$copiloto_id){
         $sql = "UPDATE tb_viajehorario SET  
-	`tb_vehiculo_id` =  '$vehiculo_id'
+	`tb_vehiculo_id` =  '$vehiculo_id',
+	`tb_conductor_id` =  '$conductor_id',
+	`tb_copiloto_id` =  '$copiloto_id'
 	WHERE  tb_viajehorario_id =$vh_ho_id;";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

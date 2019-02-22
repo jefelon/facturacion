@@ -1165,6 +1165,8 @@ if($_POST['action']=="editar"){
                 console.log(data.tipo);
                 if(data.tipo==1 || data.tipo==3){
                     $("#hdd_ven_cli_tip").val(1);
+                }else if(data.tipo==2){
+                    $("#hdd_ven_cli_tip").val(2);
                 }
                 $('#txt_ven_cli_est').val(data.estado);
                 $('#hdd_ven_cli_ret').val(data.retiene);

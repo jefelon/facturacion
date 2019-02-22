@@ -379,7 +379,8 @@ $pv = mysql_fetch_array($pvs);
             dataType: "html",
             data: ({
                 action: act,
-                veh_id: $('#hdd_vehiculo').val()
+                veh_id: $('#hdd_vehiculo').val(),
+                vh_id: $('#hdd_vi_ho').val()
             }),
             beforeSend: function() {
                 $('#msj_venta').hide();
@@ -446,7 +447,7 @@ $pv = mysql_fetch_array($pvs);
                 action_cliente: 'insertar',
                 txt_cli_nom: $('#txt_pasaj_nom').val(),
                 txt_cli_doc: $('#txt_pasaj_dni').val(),
-                rad_cli_tip: $("input[name=rad_cli_tip]:checked").val()
+                rad_cli_tip: $("input[name=rad_cli_tip_pas]:checked").val()
             }),
             beforeSend: function () {
                 $('#div_cliente_form').dialog("close");
@@ -474,7 +475,7 @@ $pv = mysql_fetch_array($pvs);
                 action_cliente: 'insertar',
                 txt_cli_nom: $('#txt_pasaj_nom').val(),
                 txt_cli_doc: $('#txt_pasaj_dni').val(),
-                rad_cli_tip: $("input[name=rad_cli_tip]:checked").val()
+                rad_cli_tip: $("input[name=rad_cli_tip_pas]:checked").val()
             }),
             beforeSend: function () {
                 $('#msj_cliente').html("Guardando...");
@@ -651,17 +652,17 @@ $pv = mysql_fetch_array($pvs);
         });
 
 
-        $("input[id=radio1]").change(function(){
-            if($("input[id=radio1]").is(":checked")){
-                $('#lbl_cli_doc').html("DNI:");
+        $("input[id=radiopas1]").change(function(){
+            if($("input[id=radiopas1]").is(":checked")){
+                $('#lbl_cli_doc_pas').html("DNI:");
                 $( "#txt_pasaj_dni" ).attr('maxlength','8');
                 $( "#txt_pasaj_dni").val('');
             }
         });
 
-        $("input[id=radio3]").change(function(){
-            if($("input[id=radio3]").is(":checked")){
-                $('#lbl_cli_doc').html("DOC:");
+        $("input[id=radiopas3]").change(function(){
+            if($("input[id=radiopas3]").is(":checked")){
+                $('#lbl_cli_doc_pas').html("DOC:");
                 $( "#txt_pasaj_dni").attr('maxlength','11');
                 $( "#txt_pasaj_dni").val('');
                 $( "#validar_ruc").hide(200);
@@ -723,7 +724,7 @@ $pv = mysql_fetch_array($pvs);
 
         });
         $( "#txt_pasaj_dni" ).keypress(function( event ) {
-            if ( event.which == 13 && $("input[name=rad_cli_tip]:checked").val()==1) {
+            if ( event.which == 13 && $("input[name=rad_cli_tip_pas]:checked").val()==1) {
                 buscar_dni();
             }
 
@@ -787,6 +788,9 @@ $pv = mysql_fetch_array($pvs);
                 }
             }
         });
+
+
+
 
 
 
@@ -1020,11 +1024,11 @@ $pv = mysql_fetch_array($pvs);
     </div>
     <div id="pasajero" style="width: 20%;float: right">
         <fieldset><legend>Datos Pasajero</legend>
-            <div id="radio">
-                <input name="rad_cli_tip" type="radio" id="radio1" value="1" checked="checked"/><label for="radio1">DNI</label>
-                <input name="rad_cli_tip" type="radio" id="radio3" value="3"><label for="radio3">OTROS</label>
+            <div id="radiopas">
+                <input name="rad_cli_tip_pas" type="radio" id="radiopas1" value="1" checked="checked"/><label for="radiopas1">DNI</label>
+                <input name="rad_cli_tip_pas" type="radio" id="radiopas3" value="3"><label for="radiopas3">OTROS</label>
             </div>
-            <label for="txt_pasaj_dni" id="lbl_cli_doc">DNI:</label><br>
+            <label for="txt_pasaj_dni" id="lbl_cli_doc_pas">DNI:</label><br>
             <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
             <label for="txt_pasaj_nom">NOMBRE: </label><br>
             <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>

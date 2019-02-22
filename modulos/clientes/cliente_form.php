@@ -223,7 +223,7 @@ $(function() {
 			$.ajax({
 				type: "POST",
 				url: "../clientes/cliente_reg.php",
-				async:true,
+				async:false,
 				dataType: "json",
 				data: $("#for_cli").serialize(),
 				beforeSend: function(){
@@ -273,8 +273,8 @@ $(function() {
 			},
 			txt_cli_doc: {
 				required: true,
-				digits: true,
-                tip_doc: true
+                tip_doc: true,
+                digits: true
 			},
 			txt_cli_dir: {
 				maxlength: 150
