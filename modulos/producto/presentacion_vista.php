@@ -757,18 +757,18 @@ if($_POST['vista']=='Presentacion'){
     </div>
 <?php }?>
 <div id="accordion" style="width:<?php echo $ancho_acordion?>;">
-    <fieldset class = "ui-widget ui-widget-content">
-        <h3><a href="#">Proveedores</a></h3>
-        <div>
-            <div id="msj_presentacion_proveedores" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
-            </div>
-            <div id="div_proveedores_form">
-            </div>
-        </div>
-    </fieldset>
+<!--    <fieldset class = "ui-widget ui-widget-content">-->
+<!--        <h3><a href="#">Proveedores</a></h3>-->
+<!--        <div>-->
+<!--            <div id="msj_presentacion_proveedores" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">-->
+<!--            </div>-->
+<!--            <div id="div_proveedores_form">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </fieldset>-->
     <br>
     <fieldset class = "ui-widget ui-widget-content">
-        <h3><a href="#">Presentación</a></h3>
+        <h3><a href="#">Códigos</a></h3>
         <div>
             <div id="msj_presentacion" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
             </div>

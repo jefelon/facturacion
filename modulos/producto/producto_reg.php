@@ -28,7 +28,9 @@ if($_POST['action_producto']=="insertar")
 			$_POST['hdd_usu_id'],
             $_POST['hdd_prod_img'],
             $_POST['cmb_lote'],
-            $_POST['emp_id']
+            $_POST['emp_id'],
+            $_POST['txt_pro_princ'],
+            $_POST['txt_pro_ind']
 		);
 
         if (!file_exists('img_products')) {
@@ -57,7 +59,8 @@ if($_POST['action_producto']=="insertar")
             strip_tags($_POST['txt_pre_cod']),
 			$_POST['txt_pre_stomin'],
 			$_POST['cmb_pre_est'],
-			$pro_id
+			$pro_id,
+            $_POST['txt_pre_codigemid']
 		);
 		
 		//id presentacion
@@ -137,7 +140,9 @@ if($_POST['action_producto']=="editar")
             $_POST['cmb_afec_id'],
 			$_POST['hdd_usu_id'],
             $_POST['hdd_prod_img'],
-            $_POST['cmb_lote']
+            $_POST['cmb_lote'],
+            $_POST['txt_pro_princ'],
+            $_POST['txt_pro_ind']
 
 		);
         $oPresentacion->modificar2(

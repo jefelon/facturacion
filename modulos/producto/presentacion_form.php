@@ -31,6 +31,7 @@ if($_POST['action']=="editar"){
 		$stomin	=$dt['tb_presentacion_stomin'];
 		$est	=$dt['tb_presentacion_est'];
 		$pro_id	=$dt['tb_producto_id'];
+        $codigemid=$dt['tb_presentacion_codigemid'];
 
 	mysql_free_result($dts);
 }
@@ -369,7 +370,9 @@ $(function() {
         </tr>
         <tr>
           <td><label for="txt_pre_cod">Código:</label></td>
-          <td><input type="text" name="txt_pre_cod" id="txt_pre_cod" value="<?php echo $pre_cod?>"></td>
+          <td><input type="text" name="txt_pre_cod" id="txt_pre_cod" value="<?php echo $pre_cod?>" size="10"></td>
+          <td><label for="txt_pre_codigemid">Código Digemid:</label></td>
+          <td><input type="text" name="txt_pre_codigemid" id="txt_pre_codigemid" value="<?php echo $codigemid?>" size="7"></td>
           <td align="right"><label for="txt_pre_stomin">Stock Mínimo:</label></td>
           <td><input name="txt_pre_stomin" type="text" class="cantidad" id="txt_pre_stomin" style="text-align:right" size="10" maxlength="6" value="<?php echo $stomin?>"></td>
           <td align="right"><label for="cmb_pre_est">Estado:</label></td>

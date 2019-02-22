@@ -80,7 +80,7 @@ if($_POST['action_presentacion']=="editar")
             strip_tags($_POST['txt_pre_cod']),
 			$_POST['txt_pre_stomin'],
 			$_POST['cmb_pre_est'],
-			$_POST['hdd_pre_pro_id']
+            $_POST['txt_pre_codigemid']
 		);
 		
 		echo 'Se registró presentación correctamente.';

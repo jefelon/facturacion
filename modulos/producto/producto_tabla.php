@@ -80,6 +80,7 @@ $(document).ready(function() {
             <thead>
                 <tr>
                     <th>CODIGO</th>
+                    <th>CODIGO DIGEMID</th>
                     <th>NOMBRE</th>
                     <th>DESCRIPCION</th>
                     <th>MARCA</th>
@@ -100,6 +101,7 @@ $(document).ready(function() {
 					while($dt1 = mysql_fetch_array($dts1)){?>
                         <tr>
                             <td><?php echo $dt1['tb_presentacion_cod']?></td>
+                            <td><?php echo $dt1['tb_presentacion_codigemid']?></td>
                             <td><?php echo $dt1['tb_producto_nom']?></td>
                             <td><?php echo $dt1['tb_producto_des']?></td>
                             <td><?php echo $dt1['tb_marca_nom']?></td>
@@ -124,6 +126,6 @@ $(document).ready(function() {
 				}
 				?>
                 <tr class="even">
-                  <td colspan="8"><?php echo $num_rows.' registros'?></td>
+                  <td colspan="12"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>

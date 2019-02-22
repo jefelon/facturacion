@@ -1,6 +1,6 @@
 <?php
 class cPresentacion{
-	function insertar($nom,$cod,$stomin, $est, $pro_id){
+	function insertar($nom,$cod,$stomin, $est, $pro_id,$codigemid){
 	$sql = "INSERT INTO tb_presentacion(
 		`tb_presentacion_reg` ,
 		`tb_presentacion_mod` ,
@@ -8,10 +8,11 @@ class cPresentacion{
 		`tb_presentacion_cod` ,
 		`tb_presentacion_stomin` ,
 		`tb_presentacion_est` ,
-		`tb_producto_id`
+		`tb_producto_id`,
+		`tb_presentacion_codigemid`
 		)
 		VALUES (
-		NOW( ) , NOW( ) ,  '$nom', '$cod',  '$stomin', '$est',  '$pro_id'
+		NOW( ) , NOW( ) ,  '$nom', '$cod',  '$stomin', '$est',  '$pro_id',  '$codigemid'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -98,13 +99,14 @@ class cPresentacion{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		  
 	}
-	function modificar($id,$nom,$cod, $stomin, $est){
+	function modificar($id,$nom,$cod, $stomin, $est,$codigemid){
 	$sql = "UPDATE  tb_presentacion SET  
 	`tb_presentacion_mod` = NOW( ) ,
 	`tb_presentacion_nom` =  '$nom',
 	`tb_presentacion_cod` =  '$cod',
 	`tb_presentacion_stomin` =  '$stomin',
-	`tb_presentacion_est` =  '$est'
+	`tb_presentacion_est` =  '$est',
+	`tb_presentacion_codigemid` =  '$codigemid'
 	 WHERE tb_presentacion_id =$id;"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

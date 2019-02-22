@@ -36,6 +36,8 @@ if($_POST['action']=="editar"){
 		$est	=$dt['tb_producto_est'];
         $img    =$dt['tb_producto_imagen'];
         $lote	=$dt['tb_producto_lote'];
+        $princ  =$dt['tb_producto_princactivo'];
+        $ind  =$dt['tb_producto_indicacion'];
 	mysql_free_result($dts);
 }
 ?>
@@ -925,20 +927,31 @@ $(function() {
           <td><label for="txt_pro_nom"><b>Nombre:</b></label></td>
         </tr>
         <tr>
-            <td><textarea name="txt_pro_nom" cols="40" rows="2" id="txt_pro_nom"><?php echo $nom?></textarea>
+            <td><textarea name="txt_pro_nom" cols="40" rows="1" id="txt_pro_nom"><?php echo $nom?></textarea>
           </td>
         </tr>
-        <br>
         <tr>
           <td><label for="txt_pro_des"><b>Descripción:</b></label></td>
         </tr>
         <tr>
-          <td><textarea name="txt_pro_des" cols="40" rows="4" id="txt_pro_des"><?php echo $des?></textarea></td>
+          <td><textarea name="txt_pro_des" cols="40" rows="2" id="txt_pro_des"><?php echo $des?></textarea></td>
         </tr>
         <tr>
-          <td width="34"><label for="cmb_cat_id"><b>Categoría:</b></label></td>
+            <td><label for="txt_pro_princ"><b>Principio Activo:</b></label></td>
+        </tr>
+        <tr>
+            <td><textarea name="txt_pro_princ" cols="40" rows="1" id="txt_pro_princ"><?php echo $princ?></textarea></td>
+        </tr>
+        <tr>
+            <td><label for="txt_pro_ind"><b>Indicaciones:</b></label></td>
+        </tr>
+        <tr>
+            <td><textarea name="txt_pro_ind" cols="40" rows="1" id="txt_pro_ind"><?php echo $ind?></textarea></td>
+        </tr>
+        <tr>
+          <td width="34"><label for="cmb_cat_id"><b>Categoría/Grupo:</b></label></td>
           <td width="34">
-              <select name="cmb_cat_id" id="cmb_cat_id">
+              <select name="cmb_cat_id" id="cmb_cat_id" style="width: 132px">
               </select>
               <a id="btn_cmb_cat_id" class="btn_ir" href="#" onClick="categoria_form('insertar')">Agregar Categoría</a>
               <div id="div_categoria_form">
@@ -947,12 +960,12 @@ $(function() {
         </tr>
 
         <tr>
-          <td width="34"><label for="cmb_mar_id"><b>Marca:</b></label>
+          <td width="34"><label for="cmb_mar_id"><b>Laboratorio/Marca:</b></label>
               <div id="div_marca_form">
               </div>
           </td>
           <td width="34">
-             <select name="cmb_mar_id" id="cmb_mar_id">
+             <select name="cmb_mar_id" id="cmb_mar_id" style="width: 132px">
              </select>
              <a id="btn_cmb_mar_id" class="btn_ir" href="#" onClick="marca_form('insertar')">Agregar Marca</a>
           </td>
@@ -1010,18 +1023,18 @@ $(function() {
 </div>
 <?php if($_POST['action']=="insertar"){?>
 <div style="float:left; margin-left:15px;">
-    <fieldset>
-        <legend>Proveedores</legend>
-        <div>
-            <div id="msj_producto_proveedor" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">
-            </div>
-            <div id="div_producto_proveedor_form">
-            </div>
-            <div id="div_producto_proveedor">
-            </div>
-        </div>
-    </fieldset>
-  <fieldset><legend>Presentación de producto</legend>
+<!--    <fieldset>-->
+<!--        <legend>Proveedores</legend>-->
+<!--        <div>-->
+<!--            <div id="msj_producto_proveedor" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none">-->
+<!--            </div>-->
+<!--            <div id="div_producto_proveedor_form">-->
+<!--            </div>-->
+<!--            <div id="div_producto_proveedor">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </fieldset>-->
+  <fieldset><legend>Códigos del producto</legend>
     <table>
 <!--        <tr>-->
 <!--          <td align="right" valign="top"><label for="txt_pre_nom">Nombre:</label></td>-->
@@ -1029,9 +1042,11 @@ $(function() {
 <!--        </tr>-->
         <tr>
           <td><label for="txt_pre_cod">Código:</label></td>
-          <td><input type="text" name="txt_pre_cod" id="txt_pre_cod"></td>
+          <td><input type="text" name="txt_pre_cod" id="txt_pre_cod" size="10"></td>
+          <td><label for="txt_pre_codigemid">Código Digemid:</label></td>
+          <td><input type="text" name="txt_pre_codigemid" id="txt_pre_codigemid" size="7"></td>
           <td align="right"><label for="txt_pre_stomin">Stock Mínimo:</label></td>
-          <td><input name="txt_pre_stomin" type="text" class="cantidad" id="txt_pre_stomin" style="text-align:right" size="10" maxlength="6" value="<?php echo $stomin?>"></td>
+          <td><input name="txt_pre_stomin" type="text" class="cantidad" id="txt_pre_stomin" style="text-align:right" size="5" maxlength="6" value="<?php echo $stomin?>"></td>
           <td align="right"><label for="cmb_pre_est">Estado:</label></td>
           <td><select name="cmb_pre_est" id="cmb_pre_est">
             <option value="">-</option>
@@ -1050,7 +1065,7 @@ $(function() {
 	</div>
   </fieldset><?php */?>
 
-  <fieldset><legend>Unidad Base, Precios y Catálogo</legend>
+  <fieldset><legend>Presentación/Unidad Base , Precios y Catálogo</legend>
     <table>
         <tr>
           <td align="right"><label for="cmb_cat_uni_bas">Unidad de Medida Base:</label></td>
@@ -1085,7 +1100,7 @@ $(function() {
                 <table class="ui-widget ui-widget-content">
                     <tr class="ui-widget-header">
                         <th align="center">Precio Costo</th>
-                        <th align="center">Desc. Prov</th>
+<!--                        <th align="center">Desc. Prov</th>-->
                         <!--<th align="center">IGV</th>-->
                         <th align="center">Utilidad (%)</th>
                         <th align="center">Valor Venta</th>
@@ -1094,7 +1109,7 @@ $(function() {
                     </tr>
                     <tr class="">
                         <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
-                        <td align="center"><input name="txt_cat_descprov" type="text" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $descprov?>"></td>
+                        <input name="txt_cat_descprov" type="hidden" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="9" value="0">
                         <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
                         <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
                         <td align="center"><input name="txt_cat_valven" type="text" id="txt_cat_valven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $valven?>"></td>
