@@ -24,6 +24,8 @@ $(function() {
     //icons: {primary: "ui-icon-document"},
     //text: false
   });
+    $('.btn_bar').button({
+    });
 
 	$("#tabla_venta").tablesorter({
 		widgets: ['zebra', 'zebraHover'],
@@ -80,38 +82,44 @@ $(function() {
                       <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
                       <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                       <td><?php echo $dt1['tb_venta_est']?></td>
-                      <td align="center" nowrap="nowrap">
-                          <?php
-                          function encrypt($string, $key) {
-                              $result = '';
-                              for($i=0; $i<strlen($string); $i++) {
-                                  $char = substr($string, $i, 1);
-                                  $keychar = substr($key, ($i % strlen($key))-1, 1);
-                                  $char = chr(ord($char)+ord($keychar));
-                                  $result.=$char;
-                              }
-                              return base64_encode($result);
-                          }
-                          function decrypt($string, $key) {
-                              $result = '';
-                              $string = base64_decode($string);
-                              for($i=0; $i<strlen($string); $i++) {
-                                  $char = substr($string, $i, 1);
-                                  $keychar = substr($key, ($i % strlen($key))-1, 1);
-                                  $char = chr(ord($char)-ord($keychar));
-                                  $result.=$char;
-                              }
-                              return $result;
-                          }
 
-                          $cadena_a_codificar="PIO)/((454546fgffg?¡paraDescargar&ven_id=".$dt1['tb_venta_id'];
-                          $key="l09=4di_-T==";
-                          $cadena_codificada=encrypt($cadena_a_codificar, $key);
+                        <td align="left" nowrap="nowrap">
+                            <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
+                            <?php
+                            $doc_nom=$dt1['tb_documento_nom'];
+                            $formato=$dt1['tb_venta_imp'];
+                            if($doc_nom=='FACTURA')$archivo_destino='../../modulos/venta/venta_impresion_gra_factura.php';
+                            if($doc_nom=='BOLETA')$archivo_destino='../../modulos/venta/venta_impresion_gra_boleta.php';
+                            if($doc_nom=='FACTURA ELECTRONICA'){
+                                if($formato=='1'){
+                                    $archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
+                                }elseif ($formato=='2'){
+                                    $archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat_a4.php';
+                                }
+                            }
+                            if($doc_nom=='BOLETA ELECTRONICA'){
+                                if($formato=='1'){
+                                    $archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+                                }elseif ($formato=='2'){
+                                    $archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat_a4.php';
+                                }
+
+                            }
+                          if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
+
+                          $xml="";
+                          $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+                          $cdr="";
+                          $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
                           ?>
-                      <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
-                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="venta_cpeimp.php?action=<?php echo $cadena_codificada; ?>" title="Descargar pdf">PDF</a>
-                      <a class="btn_xml" id="btn_xml" target="_blank" href="../venta/descargar_xml.php?action=<?php echo $cadena_codificada; ?>" title="Descargar XML">XML</a>
-                      </td>
+
+                              <form action="<?php echo $archivo_destino?>" target="_blank" method="post" style="display: inline-block;">
+                                  <input name="ven_id" type="hidden" value="<?php echo $dt1['tb_venta_id']?>">
+                                  <button class="btn_bar" id="btn_bar" type="submit" title="PDF">PDF</button>
+                              </form>
+
+                            <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>
+                        </td>
                     </tr>
                 <?php
         }
