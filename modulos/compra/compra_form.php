@@ -1228,6 +1228,7 @@ if($_POST['action']=="editar"){
                                                                                                      class="moneda"
                                                                                                      name="imp_sol[]"
                                                                                                      value="0.00"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice" value="0"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text"  name="fec_ser[]" class="txt_com_fec fecha" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
@@ -1247,6 +1248,9 @@ if($_POST['action']=="editar"){
                                                                                                      class="moneda"
                                                                                                      name="imp_sol[]"
                                                                                                      value="19.00"></td>
+                                            <td align="right">
+                                                <input name="chk_invoice[]" type="checkbox" id="chk_invoice1" value="1">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
@@ -1257,6 +1261,7 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Servicio">ALMACENAJE, ESTIBA</td>
                                             <td align="right" nowrap="" title="Importe Dolares"> <input id="imp_dol2" type="text" class="moneda" name="imp_dol[]" value="150.60"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="485.68"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice2" value="2"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
@@ -1267,6 +1272,7 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Servicio">TRAMITE DOCUMENTARIO</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text" id="imp_dol3" class="moneda" name="imp_dol[]" value="110.00"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="354.75"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice3" value="3"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
@@ -1277,6 +1283,7 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Servicio">GASTOS OPERATIVOS</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" id="imp_dol4" name="imp_dol[]" value="247.93"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="806.02"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice4" value="4"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
@@ -1287,6 +1294,7 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Servicio">TRANSPORTE LM-AQP</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" name="imp_dol[]" id="imp_dol5" value="15.80"> </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="50.85"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice5" value="5"></td>
                                         </tr>
                                     <?php }?>
                                     </tbody>

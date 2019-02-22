@@ -122,6 +122,7 @@ if ($_POST['action_compra'] == "insertar") {
                 $duas = $_POST['dua'];
                 $cont = 0;
                 foreach ($duas as $dua) {
+                    if(in_array($cont, $_POST['chk_invoice'])){
                     $oCompra->insertar(
                         fecha_mysql($_POST['fec_ser'][$cont]),
                         fecha_mysql($_POST['txt_com_fecven']),
@@ -178,9 +179,8 @@ if ($_POST['action_compra'] == "insertar") {
                     );
 
                     $oCompra->insertar_compra_costo($com_id, $comcosto_id);
-
+                    }
                     $cont++;
-
                 }
             }
 
