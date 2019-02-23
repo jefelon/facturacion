@@ -11,7 +11,7 @@ $oContenido = new cContenido();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Recepción Documentos</title>
+<title>Area de Planilla</title>
 <link href="../../css/Estilo/miestilo.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -55,58 +55,58 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
-function recepciondocumentos_tabla()
+function planilla_tabla()
 {	
 	$.ajax({
 		type: "POST",
-		url: "recepciondocumentos_tabla.php",
+		url: "planilla_tabla.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			//pro_est:	$('#cmb_fil_pro_est').val()
 		}),
 		beforeSend: function() {
-			$('#div_recepciondocumentos_tabla').addClass("ui-state-disabled");
+			$('#div_planilla_tabla').addClass("ui-state-disabled");
         },
 		success: function(html){
-			$('#div_recepciondocumentos_tabla').html(html);
+			$('#div_planilla_tabla').html(html);
 		},
 		complete: function(){			
-			$('#div_recepciondocumentos_tabla').removeClass("ui-state-disabled");
+			$('#div_planilla_tabla').removeClass("ui-state-disabled");
 		}
 	});     
 }
 
-function recepciondocumentos_form(act,idf)
+function planilla_form(act,idf)
 {
 	$.ajax({
 		type: "POST",
-		url: "recepciondocumentos_form.php",
+		url: "planilla_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			action: act,
-            recepcion_id:	idf,
-			vista:	'recepciondocumentos_tabla'
+            planilla_id:	idf,
+			vista:	'planilla_tabla'
 		}),
 		beforeSend: function() {
-			$('#msj_recepciondocumentos').hide();
-			$('#div_recepciondocumentos_form').dialog("open");
-			$('#div_recepciondocumentos_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+			$('#msj_planilla').hide();
+			$('#div_planilla_form').dialog("open");
+			$('#div_planilla_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_recepciondocumentos_form').html(html);				
+			$('#div_planilla_form').html(html);
 		}
 	});
 }
 
-function eliminar_recepciondocumentos(id)
+function eliminar_planilla(id)
 {   
-	$('#msj_recepciondocumentos').hide();   
+	$('#msj_planilla').hide();
 	if(confirm("Realmente desea eliminar?")){
 		$.ajax({
 			type: "POST",
-			url: "recepciondocumentos_reg.php",
+			url: "planilla_reg.php",
 			async:true,
 			dataType: "html",
 			data: ({
@@ -114,22 +114,17 @@ function eliminar_recepciondocumentos(id)
 				id:		id
 			}),
 			beforeSend: function() {
-				$('#msj_recepciondocumentos').html("Cargando...");
-				$('#msj_recepciondocumentos').show(100);
+				$('#msj_planilla').html("Cargando...");
+				$('#msj_planilla').show(100);
 			},
 			success: function(html){
-				$('#msj_recepciondocumentos').html(html);
+				$('#msj_planilla').html(html);
 			},
 			complete: function(){
-				recepciondocumentos_tabla();
+                planilla_tabla();
 			}
 		});
 	}
-}
-
-function recdoc_reporte_xls(){
-    $("#hdd_tabla").val( $("<div>").append( $("#tabla_venta").eq(0).clone()).html());
-    $("#for_rep_xls").submit();
 }
 
 
@@ -148,10 +143,10 @@ $(function() {
 		text: true
 	});
 
-	recepciondocumentos_tabla();
+	planilla_tabla();
 	
-	$( "#div_recepciondocumentos_form" ).dialog({
-		title:'Información de recepciondocumentos',
+	$( "#div_planilla_form" ).dialog({
+		title:'Información de planilla',
 		autoOpen: false,
 		resizable: false,
 		height: 400,
@@ -183,7 +178,7 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">DOCUMENTOS</td>
+                    <td class="caption_cont">AREA DE PLANILLA</td>
                   </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
@@ -192,10 +187,10 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="recepciondocumentos_form('insertar')">Agregar</a></td>
+                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="planilla_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
-                      <td align="right"><div id="msj_recepciondocumentos" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
+                      <td align="right"><div id="msj_planilla" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
                     </td>
@@ -206,9 +201,9 @@ $(function() {
                   </tr>
               </table>
 			</div>
-        	<div id="div_recepciondocumentos_form">
+        	<div id="div_planilla_form">
 			</div>
-        	<div id="div_recepciondocumentos_tabla" class="contenido_tabla">
+        	<div id="div_planilla_tabla" class="contenido_tabla">
       		</div>
       	</div>
     </article>

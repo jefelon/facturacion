@@ -1,8 +1,8 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
-require_once ("cRecepcionDocumentos.php");
-$oRecepcionDocumentos = new cRecepcionDocumentos();
+require_once("cTramitependiente.php");
+$oTramitependiente = new cTramitependiente;
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
@@ -10,23 +10,21 @@ if($_POST['action']=="insertar") {
 
 if($_POST['action']=="editar")
 {
-	$dts=$oRecepcionDocumentos->mostrarUno($_POST['recepcion_id']);
+	$dts=$oTramitependiente->mostrarUno($_POST['tramitependiente_id']);
 	$dt = mysql_fetch_array($dts);
-    $recdoc_fech = mostrarFecha($dt['tb_recepciondocumentos_fecha']);
+    $recdoc_fech = mostrarFecha($dt['tb_tramitependiente_fecha']);
 	$recdoc_empresa = $dt['tb_cliente_doc'];
     $recnom_empresa = $dt['tb_cliente_nom'];
     $recid_empresa = $dt['tb_cliente_id'];
-    $docpersentrega = $dt['tb_persentrega_doc'];
-    $nompersentrega = $dt['tb_persentrega_nom'];
-    $idpersentrega = $dt['tb_persentrega_id'];
-    $docrecepdocumentos = $dt['tb_persrecepcion_doc'];
-    $nomrecepdocumentos = $dt['tb_persrecepcion_nom'];
-    $idrecepdocumentos = $dt['tb_persrecepcion_id'];
-    $docpersrecojo = $dt['tb_persrecoge_doc'];
-    $nompersrecojo = $dt['tb_persrecoge_nom'];
-    $idpersrecojo = $dt['tb_persrecoge_id'];
-    $pendiente = $dt['tb_recepciondocumentos_pendientes'];
-    $observaciones = $dt['tb_recepciondocumentos_observacion'];
+    $fecha_finalizado = $dt['tb_fecha_finalizado'];
+    $tramite_ejecutar = $dt['tb_tramite_ejecutar'];
+    $fecha_acuerdo = $dt['tb_fecha_acuerdo'];
+    $fecha_conteo = $dt['tb_fecha_conteo'];
+    $fecha_plazo = $dt['tb_fecha_plazo'];
+    $persdecl_id = $dt['tb_persdecl_id'];
+    $docpersdecl = $dt['tb_persdecl_doc'];
+    $nompersdecl = $dt['tb_persdecl_nom'];
+    $observaciones = $dt['tb_observaciones'];
 
 	mysql_free_result($dts);
 }
@@ -111,27 +109,27 @@ $(function() {
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
-				url: "../recepciondocumentos/recepciondocumentos_reg.php",
+				url: "../tramitependiente/tramitependiente_reg.php",
 				async:true,
 				dataType: "json",
 				data: $("#for_recdoc").serialize(),
 				beforeSend: function() {
-					$("#div_recepciondocumentos_form" ).dialog( "close" );
-					$('#msj_recepciondocumentos').html("Guardando...");
-					$('#msj_recepciondocumentos').show(100);
+					$("#div_tramitependiente_form" ).dialog( "close" );
+					$('#msj_tramitependiente').html("Guardando...");
+					$('#msj_tramitependiente').show(100);
 				},
 				success: function(data){						
-					$('#msj_recepciondocumentos').html(data.recdoc_msj);
+					$('#msj_tramitependiente').html(data.recdoc_msj);
 					<?php
-					if($_POST['vista']=="cmb_recdoc_id")
+					if($_POST['vista']=="cmb_trapen_id")
 					{
-						echo $_POST['vista'].'(data.recdoc_id)';
+						echo $_POST['vista'].'(data.trapen_id)';
 					}
 					?>
 				},
 				complete: function(){
 					<?php
-					if($_POST['vista']=="recepciondocumentos_tabla")
+					if($_POST['vista']=="tramitependiente_tabla")
 					{
 						echo $_POST['vista'].'()';
 					}
@@ -140,91 +138,32 @@ $(function() {
 			});
 		},
 		rules: {
-            txt_recdoc_fech:{
-                required: true
-            },
-            hdd_recdoc_empresa_id{
-                required: true
-            },
-            txt_docnom_empresa: {
-                required: true
-            },
             txt_recnom_empresa: {
 				required: true
 			},
-            hdd_perspentrega_id{
+            txt_nomperspentrega: {
                 required: true
             },
-            txt_docpersentrega:{
-                required: true
-            },
-            txt_nompersentrega:{
-                required: true
-            },
-            hdd_recepdocumentos_id{
-                required: true
-            }
-            txt_docrecepdocumentos{
-                required: true
-            }
             txt_nomrecepdocumentos: {
-                required: true
-            },
-            hdd_docpersrecojo_id{
-                required: true
-            },
-            txt_docpersrecojo: {
                 required: true
             },
             txt_nompersrecojo: {
                 required: true
-            },
-            cmb_pendiente{
-                required:true
             }
+
 		},
 		messages: {
-            txt_recdoc_fech:{
-                required: '*'
-            },
-            hdd_recdoc_empresa_id{
-                required: '*'
-            },
-            txt_docnom_empresa: {
-                required: '*'
-            },
             txt_recnom_empresa: {
+				required: '*'
+			},
+            txt_nomperspentrega: {
                 required: '*'
             },
-            hdd_perspentrega_id{
-                required: '*'
-            },
-            txt_docpersentrega:{
-                required: '*'
-            },
-            txt_nompersentrega:{
-                required: '*'
-            },
-            hdd_recepdocumentos_id{
-                required: '*'
-            }
-            txt_docrecepdocumentos{
-                required: '*'
-            }
             txt_nomrecepdocumentos: {
-                required: '*'
-            },
-            hdd_docpersrecojo_id{
-                required: '*'
-            },
-            txt_docpersrecojo: {
                 required: '*'
             },
             txt_nompersrecojo: {
                 required: '*'
-            },
-            cmb_pendiente{
-                required:'*'
             }
 		}
 	});
@@ -244,18 +183,12 @@ $(function() {
 });
 </script>
 <form id="for_recdoc">
-<input name="action_recepciondocumentos" id="action_recepciondocumentos" type="hidden" value="<?php echo $_POST['action']?>">
-    <input name="hdd_recepcion_id" id="hdd_recepcion_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
+<input name="action_tramitependiente" id="action_tramitependiente" type="hidden" value="<?php echo $_POST['action']?>">
+    <input name="hdd_tramitependiente_id" id="hdd_tramitependiente_id" type="hidden" value="<?php echo $_POST['tramitependiente_id'] ?>">
     <input name="hdd_recdoc_empresa_id" id="hdd_recdoc_empresa_id" type="hidden" value="<?php echo $recid_empresa ?>">
-    <input name="hdd_perspentrega_id" id="hdd_perspentrega_id" type="hidden" value="<?php echo $idpersentrega ?>">
-    <input name="hdd_recepdocumentos_id" id="hdd_recepdocumentos_id" type="hidden" value="<?php echo $idrecepdocumentos?>">
-    <input name="hdd_docpersrecojo_id" id="hdd_docpersrecojo_id" type="hidden" value="<?php echo $idpersrecojo?>">
+    <input name="hdd_persdecl_id" id="hdd_persdecl_id" type="hidden" value="<?php echo $persdecl_id ?>">
 
     <table>
-        <tr>
-            <td align="right" valign="top">Fecha:</td>
-            <td><input name="txt_recdoc_fech" type="text" id="txt_recdoc_fech" value="<?php echo $recdoc_fech?>" size="41" maxlength="10"></td>
-        </tr>
         <tr>
             <td align="right" valign="top">Empresa:</td>
             <td>
@@ -264,33 +197,32 @@ $(function() {
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Resp. Entrega:</td>
+            <td align="right" valign="top">Fecha de Acuerdo:</td>
+            <td><input name="txt_fecha_acuerdo" type="text" id="txt_fecha_acuerdo" value="<?php echo $fecha_acuerdo?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Tramite Finalizado:</td>
+            <td><input name="txt_fecha_finalizado" type="text" id="txt_fecha_finalizado" value="<?php echo $fecha_finalizado?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Tramite por ejecutar:</td>
             <td>
-                <input name="txt_docpersentrega" type="text" id="txt_docpersentrega" value="<?php echo $docpersentrega?>" size="10" maxlength="11">
-                <input name="txt_nomperspentrega" type="text" id="txt_nompersentrega" value="<?php echo $nompersentrega?>" size="30">
+                <input name="txt_afp_decl" type="text" id="txt_tramite_ejecutar" value="<?php echo $tramite_ejecutar?>" size="30">
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Recep. Documentos:</td>
-            <td>
-                <input name="txt_docrecepdocumentos" type="text" id="txt_docrecepdocumentos" value="<?php echo $docrecepdocumentos?>" size="10" maxlength="11">
-                <input name="txt_nomrecepdocumentos" type="text" id="txt_nomrecepdocumentos" value="<?php echo $nomrecepdocumentos?>" size="30">
-            </td>
+            <td align="right" valign="top">Fecha que empieza conteo:</td>
+            <td><input name="txt_fecha_conteo" type="text" id="txt_fecha_conteo" value="<?php echo $fecha_conteo?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Resp. Recojo:</td>
-            <td>
-                <input name="txt_docpersrecojo" type="text" id="txt_docpersrecojo" value="<?php echo $docpersrecojo?>" size="10" maxlength="11">
-                <input name="txt_nompersrecojo" type="text" id="txt_nompersrecojo" value="<?php echo $nompersrecojo?>" size="30">
-            </td>
+            <td align="right" valign="top">Tramite Finalizado:</td>
+            <td><input name="tb_fecha_plazo" type="text" id="tb_fecha_plazo" value="<?php echo $fecha_plazo?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Pendientes:</td>
+            <td align="right" valign="top">Persona Responsable:</td>
             <td>
-                <select name="cmb_pendiente" id="cmb_pendiente">
-                    <option value="1"<?php if($pendiente==True)echo 'selected'?>>Trajo</option>
-                    <option value="0"<?php if($pendiente==False)echo 'selected'?>>No Trajo</option>
-                </select>
+                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11">
+                <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30">
             </td>
         </tr>
         <tr>

@@ -1,5 +1,5 @@
 <?php
-class cRecepcionDocumentos{
+class cAfp{
 	function insertar($fec,$id_cliente,$perspentrega_id,$persrecepcion_id,$persrecoge_id,$pendiente,$obs){
 	$sql = "INSERT tb_recepciondocumentos (
 		`tb_recepciondocumentos_fecha`,`tb_cliente_id`,`tb_persentrega_id`,`tb_persrecepcion_id`,`tb_persrecoge_id`,`tb_recepciondocumentos_pendientes`

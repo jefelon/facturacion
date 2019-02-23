@@ -11,7 +11,7 @@ $oContenido = new cContenido();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Recepción Documentos</title>
+<title>Marcación Personal</title>
 <link href="../../css/Estilo/miestilo.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -55,7 +55,7 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
-function recepciondocumentos_tabla()
+function marcacionpersonal_tabla()
 {	
 	$.ajax({
 		type: "POST",
@@ -66,47 +66,47 @@ function recepciondocumentos_tabla()
 			//pro_est:	$('#cmb_fil_pro_est').val()
 		}),
 		beforeSend: function() {
-			$('#div_recepciondocumentos_tabla').addClass("ui-state-disabled");
+			$('#div_marcacionpersonal_tabla').addClass("ui-state-disabled");
         },
 		success: function(html){
-			$('#div_recepciondocumentos_tabla').html(html);
+			$('#div_marcacionpersonal_tabla').html(html);
 		},
 		complete: function(){			
-			$('#div_recepciondocumentos_tabla').removeClass("ui-state-disabled");
+			$('#div_marcacionpersonal_tabla').removeClass("ui-state-disabled");
 		}
 	});     
 }
 
-function recepciondocumentos_form(act,idf)
+function marcacionpersonal_form(act,idf)
 {
 	$.ajax({
 		type: "POST",
-		url: "recepciondocumentos_form.php",
+		url: "marcacionpersonal_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			action: act,
             recepcion_id:	idf,
-			vista:	'recepciondocumentos_tabla'
+			vista:	'marcacionpersonal_tabla'
 		}),
 		beforeSend: function() {
-			$('#msj_recepciondocumentos').hide();
-			$('#div_recepciondocumentos_form').dialog("open");
-			$('#div_recepciondocumentos_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+			$('#msj_marcacionpersonal').hide();
+			$('#div_marcacionpersonal_form').dialog("open");
+			$('#div_marcacionpersonal_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_recepciondocumentos_form').html(html);				
+			$('#div_marcacionpersonal_form').html(html);
 		}
 	});
 }
 
-function eliminar_recepciondocumentos(id)
+function eliminar_marcacionpersonal(id)
 {   
-	$('#msj_recepciondocumentos').hide();   
+	$('#msj_marcacionpersonal').hide();
 	if(confirm("Realmente desea eliminar?")){
 		$.ajax({
 			type: "POST",
-			url: "recepciondocumentos_reg.php",
+			url: "marcacionpersonal_reg.php",
 			async:true,
 			dataType: "html",
 			data: ({
@@ -114,22 +114,17 @@ function eliminar_recepciondocumentos(id)
 				id:		id
 			}),
 			beforeSend: function() {
-				$('#msj_recepciondocumentos').html("Cargando...");
-				$('#msj_recepciondocumentos').show(100);
+				$('#msj_marcacionpersonal').html("Cargando...");
+				$('#msj_marcacionpersonal').show(100);
 			},
 			success: function(html){
-				$('#msj_recepciondocumentos').html(html);
+				$('#msj_marcacionpersonal').html(html);
 			},
 			complete: function(){
-				recepciondocumentos_tabla();
+                marcacionpersonal_tabla();
 			}
 		});
 	}
-}
-
-function recdoc_reporte_xls(){
-    $("#hdd_tabla").val( $("<div>").append( $("#tabla_venta").eq(0).clone()).html());
-    $("#for_rep_xls").submit();
 }
 
 
@@ -148,9 +143,9 @@ $(function() {
 		text: true
 	});
 
-	recepciondocumentos_tabla();
+    marcacionpersonal_tabla();
 	
-	$( "#div_recepciondocumentos_form" ).dialog({
+	$( "#div_marcacionpersonal_form" ).dialog({
 		title:'Información de recepciondocumentos',
 		autoOpen: false,
 		resizable: false,
@@ -183,7 +178,7 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">DOCUMENTOS</td>
+                    <td class="caption_cont">MARCACIÓN PERSONAL</td>
                   </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
@@ -192,10 +187,10 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="recepciondocumentos_form('insertar')">Agregar</a></td>
+                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="marcacionpersonal_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
-                      <td align="right"><div id="msj_recepciondocumentos" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
+                      <td align="right"><div id="msj_marcacionpersonal" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
                     </td>
@@ -206,9 +201,9 @@ $(function() {
                   </tr>
               </table>
 			</div>
-        	<div id="div_recepciondocumentos_form">
+        	<div id="div_marcacionpersonal_form">
 			</div>
-        	<div id="div_recepciondocumentos_tabla" class="contenido_tabla">
+        	<div id="div_marcacionpersonal_tabla" class="contenido_tabla">
       		</div>
       	</div>
     </article>

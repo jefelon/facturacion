@@ -1,8 +1,8 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
-require_once ("cRecepcionDocumentos.php");
-$oRecepcionDocumentos = new cRecepcionDocumentos();
+require_once("cAfp.php");
+$oRecepcionDocumentos = new cPlanilla;
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
@@ -140,91 +140,32 @@ $(function() {
 			});
 		},
 		rules: {
-            txt_recdoc_fech:{
-                required: true
-            },
-            hdd_recdoc_empresa_id{
-                required: true
-            },
-            txt_docnom_empresa: {
-                required: true
-            },
             txt_recnom_empresa: {
 				required: true
 			},
-            hdd_perspentrega_id{
+            txt_nomperspentrega: {
                 required: true
             },
-            txt_docpersentrega:{
-                required: true
-            },
-            txt_nompersentrega:{
-                required: true
-            },
-            hdd_recepdocumentos_id{
-                required: true
-            }
-            txt_docrecepdocumentos{
-                required: true
-            }
             txt_nomrecepdocumentos: {
-                required: true
-            },
-            hdd_docpersrecojo_id{
-                required: true
-            },
-            txt_docpersrecojo: {
                 required: true
             },
             txt_nompersrecojo: {
                 required: true
-            },
-            cmb_pendiente{
-                required:true
             }
+
 		},
 		messages: {
-            txt_recdoc_fech:{
-                required: '*'
-            },
-            hdd_recdoc_empresa_id{
-                required: '*'
-            },
-            txt_docnom_empresa: {
-                required: '*'
-            },
             txt_recnom_empresa: {
+				required: '*'
+			},
+            txt_nomperspentrega: {
                 required: '*'
             },
-            hdd_perspentrega_id{
-                required: '*'
-            },
-            txt_docpersentrega:{
-                required: '*'
-            },
-            txt_nompersentrega:{
-                required: '*'
-            },
-            hdd_recepdocumentos_id{
-                required: '*'
-            }
-            txt_docrecepdocumentos{
-                required: '*'
-            }
             txt_nomrecepdocumentos: {
-                required: '*'
-            },
-            hdd_docpersrecojo_id{
-                required: '*'
-            },
-            txt_docpersrecojo: {
                 required: '*'
             },
             txt_nompersrecojo: {
                 required: '*'
-            },
-            cmb_pendiente{
-                required:'*'
             }
 		}
 	});
@@ -244,18 +185,14 @@ $(function() {
 });
 </script>
 <form id="for_recdoc">
-<input name="action_recepciondocumentos" id="action_recepciondocumentos" type="hidden" value="<?php echo $_POST['action']?>">
-    <input name="hdd_recepcion_id" id="hdd_recepcion_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
+<input name="action_afp" id="action_afp" type="hidden" value="<?php echo $_POST['action']?>">
+    <input name="hdd_afp_id" id="hdd_afp_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
     <input name="hdd_recdoc_empresa_id" id="hdd_recdoc_empresa_id" type="hidden" value="<?php echo $recid_empresa ?>">
     <input name="hdd_perspentrega_id" id="hdd_perspentrega_id" type="hidden" value="<?php echo $idpersentrega ?>">
     <input name="hdd_recepdocumentos_id" id="hdd_recepdocumentos_id" type="hidden" value="<?php echo $idrecepdocumentos?>">
     <input name="hdd_docpersrecojo_id" id="hdd_docpersrecojo_id" type="hidden" value="<?php echo $idpersrecojo?>">
 
     <table>
-        <tr>
-            <td align="right" valign="top">Fecha:</td>
-            <td><input name="txt_recdoc_fech" type="text" id="txt_recdoc_fech" value="<?php echo $recdoc_fech?>" size="41" maxlength="10"></td>
-        </tr>
         <tr>
             <td align="right" valign="top">Empresa:</td>
             <td>
@@ -264,24 +201,52 @@ $(function() {
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Resp. Entrega:</td>
+            <td align="right" valign="top">Fecha de Declaración:</td>
+            <td><input name="txt_fech_decl" type="text" id="txt_fech_decl" value="<?php echo $fech_decl?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Fecha de Vencimiento:</td>
+            <td><input name="txt_fech_ven" type="text" id="txt_fech_ven" value="<?php echo $fech_ven?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Fecha de Envio Correo:</td>
+            <td><input name="txt_fech_envio" type="text" id="txt_fech_decl" value="<?php echo $fech_envio?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Estado Envio:</td>
             <td>
-                <input name="txt_docpersentrega" type="text" id="txt_docpersentrega" value="<?php echo $docpersentrega?>" size="10" maxlength="11">
-                <input name="txt_nomperspentrega" type="text" id="txt_nompersentrega" value="<?php echo $nompersentrega?>" size="30">
+                <select name="cmb_estado_envio" id="cmb_estado_envio">
+                    <option value="1"<?php if($estado_envio==True)echo 'selected'?>>Enviado</option>
+                    <option value="0"<?php if($estado_envio==False)echo 'selected'?>>Pendiente</option>
+                </select>
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Recep. Documentos:</td>
+            <td align="right" valign="top">AFP No declarados:</td>
             <td>
-                <input name="txt_docrecepdocumentos" type="text" id="txt_docrecepdocumentos" value="<?php echo $docrecepdocumentos?>" size="10" maxlength="11">
-                <input name="txt_nomrecepdocumentos" type="text" id="txt_nomrecepdocumentos" value="<?php echo $nomrecepdocumentos?>" size="30">
+                <input name="txt_afp_decl" type="text" id="txt_afp_decl" value="<?php echo $afp_decl?>" size="30">
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Pago Realizado:</td>
+            <td>
+                <select name="cmb_pago_realizado" id="cmb_pago_realizado">
+                    <option value="1"<?php if($pago_realizado==True)echo 'selected'?>>Efectuado</option>
+                    <option value="0"<?php if($pago_realizado==False)echo 'selected'?>>Pendiente</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Deudas pendientes:</td>
+            <td>
+                <input name="txt_deudas" type="text" id="txt_deudas" value="<?php echo $deudas?>" size="30">
             </td>
         </tr>
         <tr>
             <td align="right" valign="top">Resp. Recojo:</td>
             <td>
-                <input name="txt_docpersrecojo" type="text" id="txt_docpersrecojo" value="<?php echo $docpersrecojo?>" size="10" maxlength="11">
-                <input name="txt_nompersrecojo" type="text" id="txt_nompersrecojo" value="<?php echo $nompersrecojo?>" size="30">
+                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11">
+                <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30">
             </td>
         </tr>
         <tr>

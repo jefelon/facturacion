@@ -1,7 +1,7 @@
 <?php
 require_once ("../../config/Cado.php");
-require_once ("cRecepcionDocumentos.php");
-$oRecepcionDocumentos = new cRecepcionDocumentos();
+require_once("cAfp.php");
+$oRecepcionDocumentos = new cPlanilla();
 
 $dts=$oRecepcionDocumentos->mostrarTodos();
 $num_rows= mysql_num_rows($dts);

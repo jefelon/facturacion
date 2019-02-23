@@ -127,11 +127,6 @@ function eliminar_recepciondocumentos(id)
 	}
 }
 
-function recdoc_reporte_xls(){
-    $("#hdd_tabla").val( $("<div>").append( $("#tabla_venta").eq(0).clone()).html());
-    $("#for_rep_xls").submit();
-}
-
 
 //
 $(function() {

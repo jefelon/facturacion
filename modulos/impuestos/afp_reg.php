@@ -1,13 +1,13 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
-require_once("cRecepcionDocumentos.php");
-$oRecepcionDocumentos = new cRecepcionDocumentos();
+require_once("cAfp.php");
+$oRecepcionDocumentos = new cPlanilla();
 
 if($_POST['action_recepciondocumentos']=="insertar")
 {
 	if(!empty($_POST['txt_recdoc_fech']) && !empty($_POST['hdd_recdoc_empresa_id']) && !empty($_POST['hdd_perspentrega_id']) && !empty($_POST['hdd_recepdocumentos_id'])
-        && !empty($_POST['hdd_docpersrecojo_id'] ) && $_POST['cmb_pendiente']!='')
+        && !empty($_POST['hdd_docpersrecojo_id'] ) && !empty($_POST['cmb_pendiente'] ))
 	{
 		$oRecepcionDocumentos->insertar(fecha_mysql($_POST['txt_recdoc_fech']),$_POST['hdd_recdoc_empresa_id'], $_POST['hdd_perspentrega_id'],
             $_POST['hdd_recepdocumentos_id'], $_POST['hdd_docpersrecojo_id'],
@@ -31,7 +31,7 @@ if($_POST['action_recepciondocumentos']=="insertar")
 if($_POST['action_recepciondocumentos']=="editar")
 {
     if(!empty($_POST['hdd_recepcion_id']) && !empty($_POST['txt_recdoc_fech']) && !empty($_POST['hdd_recdoc_empresa_id']) && !empty($_POST['hdd_perspentrega_id']) && !empty($_POST['hdd_recepdocumentos_id'])
-        && !empty($_POST['hdd_docpersrecojo_id'] ) && $_POST['cmb_pendiente']!='')
+        && !empty($_POST['hdd_docpersrecojo_id'] ) && !empty($_POST['cmb_pendiente'] ))
     {
 		$oRecepcionDocumentos->modificar($_POST['hdd_recepcion_id'],fecha_mysql($_POST['txt_recdoc_fech']),$_POST['hdd_recdoc_empresa_id'], $_POST['hdd_perspentrega_id'],
             $_POST['hdd_recepdocumentos_id'], $_POST['hdd_docpersrecojo_id'],

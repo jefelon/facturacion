@@ -33,7 +33,7 @@ $menu_superusuario=
 ';	
 
 $menu_administrador=
-'
+    '
 <ul id="menu1" class="topmenu">
   <li class="topfirst"><a href="../administrador/">Principal</a></li>
   <li class="topmenu"><a href="#">Mantenimiento</a>
@@ -117,6 +117,16 @@ $menu_administrador=
     <li class="topmenu"><a href="#" >Módulos</a>
 	<ul>
 	  <li><a href="../recepciondocumentos/">Recepción de Documentos</a></li>
+	  <li><a href="../afp/">AFP Declarados y no Declarados</a></li>
+	  <li><a href="../planilla/">Area De Planilla</a></li>
+	  <li><a href="../libroselectronicos/">Area de Libros Electrónicos</a></li>
+	  <li><a href="../tramitespendiente/">Area de Tramites Pendientes</a></li>
+	  <li><a href="../marcacionpersonal/">Marcación Personal</a></li>
+	  <li><a href="../recursoshumanos/">Recursos Humanos</a></li>
+	  <li><a href="../impuestos/">Declaración de Impuestos</a></li>
+	  <li><a href="../balancesanuales/">Balances Anuales</a></li>
+	  <li><a href="../legalizacionlibros/">Legalizacón de Libros Anuales</a></li>
+	  <li><a href="../comisionistas/">Area de Comisionistas</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Consultas</a>
