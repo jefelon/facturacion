@@ -2288,7 +2288,7 @@ if($_POST['action']=="editar"){
                 <tr>
                     <td style="width:80%;"><label for="txt_ven_fec">Fecha:</label>
                         <input name="txt_ven_fec" type="text" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10">
-                        <label for="cmb_ven_doc">Documento:<span style="color: #00aa00;font-size: 30px; font-weight: bold">1.</span></label>
+                        <label for="cmb_ven_doc">Documento:<span style="color: #00aa00;font-size: 25px; font-weight: bold">1.</span></label>
                         <select name="cmb_ven_doc" id="cmb_ven_doc" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                         </select>
                         <label for="txt_ven_numdoc">N° Doc:</label>
@@ -2389,7 +2389,7 @@ if($_POST['action']=="editar"){
                                 <a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
                                 <a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
                             <?php }?>
-                            <label for="txt_ven_cli_doc">RUC/DNI: <span style="color: #00aa00;font-size: 30px; font-weight: bold">2.</span></label>
+                            <label for="txt_ven_cli_doc">RUC/DNI: <span style="color: #00aa00;font-size: 25px; font-weight: bold">2.</span></label>
                         </td>
                         <td>
                             <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
@@ -2633,7 +2633,7 @@ if($_POST['action']=="editar"){
                         <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
                         <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
                         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
-                        <span style="color: #00aa00;font-size: 30px; font-weight: bold">3.</span>
+                        <span style="color: #00aa00;font-size: 25px; font-weight: bold">3.</span>
                         <label for="txt_bus_pro_codbar">COD</label>
                         <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="10">
                         <label for="txt_bus_pro_nom">NOM</label>
@@ -2650,7 +2650,7 @@ if($_POST['action']=="editar"){
                         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
                         <label for="txt_detcom_des">DES</label>
                         <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
-                        <span style="color: #00aa00;font-size: 30px; font-weight: bold">4.</span>
+                        <span style="color: #00aa00;font-size: 25px; font-weight: bold">4.</span>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
 
