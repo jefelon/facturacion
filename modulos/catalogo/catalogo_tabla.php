@@ -100,6 +100,7 @@ else
         <th align="right">VALORIZADO US$</th>
         <th align="right">VALORIZADO S/.</th>
         <th align="right"></th>
+        <th align="right"></th>
     </tr>
     </thead>
     <?php
@@ -164,7 +165,14 @@ else
                     <form action="catalogo_imprimir_codbarras.php" target="_blank" method="post">
                         <input name="precio_prod" type="hidden" value="<?php echo $dt1['tb_catalogo_preven']?>">
                         <input name="barcode" type="hidden" value="<?php echo $dt1['tb_presentacion_cod']?>">
-                        <button class="btn_bar" id="btn_bar" type="submit" title="Descargar codigo">Imprimir Código</button>
+                        <button class="btn_bar" id="btn_bar" type="submit" title="Descargar codigo">Imprimir Código Troquelado</button>
+                    </form>
+                </td>
+                <td align="center">
+                    <form action="catalogo_imprimir_codbarras_a4.php" target="_blank" method="post">
+                        <input name="precio_prod" type="hidden" value="<?php echo $dt1['tb_catalogo_preven']?>">
+                        <input name="barcode" type="hidden" value="<?php echo $dt1['tb_presentacion_cod']?>">
+                        <button class="btn_bar" id="btn_bar" type="submit" title="Descargar codigo">Imprimir Código A4</button>
                     </form>
                 </td>
 
