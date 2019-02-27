@@ -1,5 +1,6 @@
 <?php
 require_once ("../../config/Cado.php");
+require_once ("../formatos/formato.php");
 require_once("cLibroelectronico.php");
 $oLibroelectronico = new cLibroelectronico();
 
@@ -20,7 +21,7 @@ $(function() {
 	});
 
 	$.tablesorter.defaults.widgets = ['zebra'];
-	$("#tabla_recepciondocumentos").tablesorter({
+	$("#tabla_libroelectronico").tablesorter({
 		headers: {
 			1: {sorter: false }, 
 			2: { sorter: false}},
@@ -51,10 +52,10 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_libroelectronico_id']?></td>
+                    <td>COD.SCF-<?php echo $dt['tb_libroelectronico_id']?></td>
                     <td><?php echo $dt['tb_cliente_nom']?></td>
-                    <td><?php echo $dt['tb_fecha_declaracion']?></td>
-                    <td><?php echo $dt['tb_fecha_vencimiento']; ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_declaracion'])?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_vencimiento']); ?></td>
                     <td><?php echo $dt['tb_libros_nodeclarados']; ?></td>
                     <td><?php if($dt['tb_libros_vencidos']==True)
                     {echo 'Enviados';}else{ echo 'Pendiente'; } ?></td>
@@ -72,6 +73,6 @@ $(function() {
         }
 		?>
                 <tr class="even">
-                  <td colspan="11"><?php echo $num_rows.' registros'?></td>
+                  <td colspan="9"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>

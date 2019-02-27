@@ -1,6 +1,6 @@
 <?php
 require_once ("../../config/Cado.php");
-require_once("cAfp.php");
+require_once("cDeclaracionimpuestos.php");
 $oRecepcionDocumentos = new cPlanilla();
 ?>
 	<option value="">-</option>

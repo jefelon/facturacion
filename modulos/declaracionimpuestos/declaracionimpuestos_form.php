@@ -1,8 +1,8 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
-require_once("cAfp.php");
-$oRecepcionDocumentos = new cPlanilla;
+require_once("cDeclaracionimpuestos.php");
+$Declaracionimpuestos = new cDeclaracionimpuestos();
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
@@ -10,7 +10,7 @@ if($_POST['action']=="insertar") {
 
 if($_POST['action']=="editar")
 {
-	$dts=$oRecepcionDocumentos->mostrarUno($_POST['recepcion_id']);
+	$dts=$Declaracionimpuestos->mostrarUno($_POST['recepcion_id']);
 	$dt = mysql_fetch_array($dts);
     $recdoc_fech = mostrarFecha($dt['tb_recepciondocumentos_fecha']);
 	$recdoc_empresa = $dt['tb_cliente_doc'];
@@ -243,10 +243,19 @@ $(function() {
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Pers. Responsable de la Declaración:</td>
+            <td align="right" valign="top">Resp. Recojo:</td>
             <td>
                 <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11">
                 <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30">
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Pendientes:</td>
+            <td>
+                <select name="cmb_pendiente" id="cmb_pendiente">
+                    <option value="1"<?php if($pendiente==True)echo 'selected'?>>Trajo</option>
+                    <option value="0"<?php if($pendiente==False)echo 'selected'?>>No Trajo</option>
+                </select>
             </td>
         </tr>
         <tr>

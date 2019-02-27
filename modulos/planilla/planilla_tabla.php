@@ -1,5 +1,6 @@
 <?php
 require_once ("../../config/Cado.php");
+require_once ("../formatos/formato.php");
 require_once("cPlanilla.php");
 $oPlanilla = new cPlanilla();
 
@@ -38,10 +39,10 @@ $(function() {
                 <th>Fec. Vencimiento</th>
                 <th>Fec. Envio</th>
                 <th>Estado Fec. Envio</th>
-                <th>AFP No Declarados</th>
-                <th>Realizo Pago</th>
+                <th>Planilla No Declarados</th>
+                <th>Realizo el Pago de Planilla</th>
                 <th>Deudas Pendientes</th>
-                <th>Persona Responsable</th>
+                <th>Persona Responsable de Declaración</th>
                 <th>Observaciones</th>
                 <th></th>
             </tr>
@@ -54,11 +55,11 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_planilla_id']?></td>
+                    <td>COD.SCF-<?php echo $dt['tb_planilla_id']?></td>
                     <td><?php echo $dt['tb_cliente_nom']?></td>
-                    <td><?php echo $dt['tb_fecha_declaracion']?></td>
-                    <td><?php echo $dt['tb_fecha_vencimiento']; ?></td>
-                    <td><?php echo $dt['tb_fecha_envio']; ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_declaracion'])?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_vencimiento']); ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_envio']); ?></td>
                     <td><?php if($dt['tb_estado_correo']==True)
                         {echo 'Enviado';}else{ echo 'Pendiente'; } ?></td>
                     <td><?php echo $dt['tb_planilla_nodeclarados']; ?></td>

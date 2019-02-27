@@ -1,5 +1,6 @@
 <?php
 require_once ("../../config/Cado.php");
+require_once ("../formatos/formato.php");
 require_once("cAfp.php");
 $oAfp = new cAfp();
 
@@ -36,12 +37,12 @@ $(function() {
                     <th>Empresa</th>
                     <th>Fec. Declaración</th>
                     <th>Fec. Vencimiento</th>
-                    <th>Fec. Envio</th>
-                    <th>Estado Fec. Envio</th>
-                    <th>AFP No Declarados</th>
-                    <th>Realizo Pago</th>
-                    <th>Deudas Pendientes</th>
-                    <th>Persona Responsable</th>
+                    <th>Fec. Envio Correo</th>
+                    <th>Se envio al correo del cliente</th>
+                    <th>AFP NET No Declarados</th>
+                    <th>Realizo el Pago AFP NET</th>
+                    <th>Deudas Pendientes por Pagar AFP NET</th>
+                    <th>Persona Responsable de Declaración</th>
                     <th>Observaciones</th>
                     <th></th>
                 </tr>
@@ -54,11 +55,11 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_declaraciondocumentos_id']?></td>
+                    <td>COD.SCF-<?php echo $dt['tb_declaraciondocumentos_id']?></td>
                     <td><?php echo $dt['tb_cliente_nom']?></td>
-                    <td><?php echo $dt['tb_fecha_declaracion']?></td>
-                    <td><?php echo $dt['tb_fecha_vencimiento']; ?></td>
-                    <td><?php echo $dt['tb_fecha_envio']; ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_declaracion'])?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_vencimiento']); ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_envio']); ?></td>
                     <td><?php if($dt['tb_estado_correo']==True)
                         {echo 'Enviado';}else{ echo 'Pendiente'; } ?></td>
                     <td><?php echo $dt['tb_afp_nodeclarados']; ?></td>

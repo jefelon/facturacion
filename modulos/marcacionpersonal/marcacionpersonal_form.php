@@ -12,7 +12,6 @@ if($_POST['action']=="editar")
 {
 	$dts=$oMarcacionpersonal->mostrarUno($_POST['marcacionpersonal_id']);
 	$dt = mysql_fetch_array($dts);
-    $recdoc_fech = mostrarFecha($dt['tb_recepciondocumentos_fecha']);
 	$recdoc_empresa = $dt['tb_cliente_doc'];
     $recnom_empresa = $dt['tb_cliente_nom'];
     $recid_empresa = $dt['tb_cliente_id'];
@@ -56,7 +55,23 @@ $(function() {
     });
 
 
-	$("#for_recdoc").validate({
+    $( "#txt_docpersdecl" ).autocomplete({
+        minLength: 1,
+        source: "../clientes/cliente_complete_doc.php",
+        select: function(event, ui){
+            $("#hdd_persdecl_id").val(ui.item.id);
+            $("#txt_nompersdecl").val(ui.item.nombre);
+            // $("#txt_ven_cli_dir").val(ui.item.direccion);
+            // $("#txt_fil_gui_cod").val(ui.item.codigo);
+            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
+            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
+            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
+            $('#hdd_perspdecl_id').change();
+        }
+    });
+
+
+    $("#for_recdoc").validate({
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
@@ -70,7 +85,7 @@ $(function() {
 					$('#msj_marcacionpersonal').show(100);
 				},
 				success: function(data){						
-					$('#msj_marcacionpersonal').html(data.recdoc_msj);
+					$('#msj_marcacionpersonal').html(data.marper_msj);
 					<?php
 					if($_POST['vista']=="cmb_marper_id")
 					{
@@ -118,7 +133,7 @@ $(function() {
             }
 		}
 	});
-    $( "#txt_recdoc_fech" ).datepicker({
+    $( "#txt_fecha_ingreso" ).datepicker({
         minDate: "-7D",
         maxDate:"+0D",
         yearRange: 'c-0:c+0',

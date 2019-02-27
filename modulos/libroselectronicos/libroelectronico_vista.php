@@ -127,6 +127,12 @@ function eliminar_libroelectronico(id)
 	}
 }
 
+function libele_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_libroelectronico").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
+
+
 
 //
 $(function() {
@@ -142,6 +148,11 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
+
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
 
     libroelectronico_tabla();
 	
@@ -189,7 +200,11 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="libroelectronico_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+                        <td align="left" valign="middle">
+                            <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="libele_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="libele_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form></td>
                       <td align="right"><div id="msj_libroelectronico" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>

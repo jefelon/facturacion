@@ -1,5 +1,6 @@
 <?php
 require_once ("../../config/Cado.php");
+require_once ("../formatos/formato.php");
 require_once ("cRecepcionDocumentos.php");
 $oRecepcionDocumentos = new cRecepcionDocumentos();
 
@@ -33,7 +34,7 @@ $(function() {
             <thead>
                 <tr>
                     <th>Código</th>
-                    <th>Fec. Recepción</th>
+                    <th>Fecha de Recepción</th>
                     <th>Empresa</th>
                     <th>Pers. Entrega</th>
                     <th>Pers. Recepciona</th>
@@ -53,8 +54,8 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_recepciondocumentos_id']?></td>
-                    <td><?php echo $dt['tb_recepciondocumentos_fecha']?></td>
+                    <td>COD.SCF-<?php echo $dt['tb_recepciondocumentos_id']?></td>
+                    <td><?php echo mostrarFecha($dt['tb_recepciondocumentos_fecha'])?></td>
                     <td><?php echo $dt['tb_cliente_nom']; ?></td>
                     <td><?php echo $dt['tb_persentrega_nom']; ?></td>
                     <td><?php echo $dt['tb_persrecepcion_nom']; ?></td>

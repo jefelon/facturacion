@@ -16,6 +16,7 @@ if($_POST['action']=="editar"){
 		$doc=$dt['tb_cliente_doc'];
 		$dir=$dt['tb_cliente_dir'];
 		$con=$dt['tb_cliente_con'];
+        $cum=$dt['tb_cliente_cumpleanos'];
 		$tel=$dt['tb_cliente_tel'];
 		$ema=$dt['tb_cliente_ema'];
 		$est=$dt['tb_cliente_est'];
@@ -364,6 +365,10 @@ $(function() {
                       </td>
                     </tr>
                     <?php } ?>
+                    <tr>
+                        <td align="right"><label for="txt_cli_cum">CUMPLEAÑOS:</label></td>
+                        <td><input name="txt_cli_cum" type="text" id="txt_cli_cum" value="<?php echo $cum?>" size="45" maxlength="100"></td>
+                    </tr>
                     <tr>
                         <td align="right"><label for="txt_cli_tel">TELÉFONO:</label></td>
                         <td><input name="txt_cli_tel" type="text" id="txt_cli_tel" value="<?php echo $tel?>" size="45" maxlength="100"></td>

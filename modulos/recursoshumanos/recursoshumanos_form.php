@@ -1,33 +1,25 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
-require_once("cTramitependiente.php");
-$oTramitependiente = new cTramitependiente;
+require_once("cRecursoshumanos.php");
+$oRecursoshumanos = new cRecursoshumanos;
 
 if($_POST['action']=="insertar") {
-    $fecha_acuerdo = date('d-m-Y');
-    $fecha_finalizado = date('d-m-Y');
-    $fecha_conteo = date('d-m-Y');
-    $fecha_plazo = date('d-m-Y');
+    $recdoc_fech = date('d-m-Y');
 }
 
 if($_POST['action']=="editar")
 {
-	$dts=$oTramitependiente->mostrarUno($_POST['tramitependiente_id']);
+	$dts=$oRecursoshumanos->mostrarUno($_POST['recursoshumanos_id']);
 	$dt = mysql_fetch_array($dts);
 	$recdoc_empresa = $dt['tb_cliente_doc'];
     $recnom_empresa = $dt['tb_cliente_nom'];
     $recid_empresa = $dt['tb_cliente_id'];
-    $fecha_acuerdo = mostrarFecha($dt['tb_fecha_acuerdo']);
-    $fecha_finalizado = mostrarFecha($dt['tb_fecha_finalizado']);
-    $tramite_ejecutar = $dt['tb_tramite_ejecutar'];
-    $fecha_conteo = mostrarFecha($dt['tb_fecha_conteo']);
-    $fecha_plazo = mostrarFecha($dt['tb_fecha_plazo']);
-    $persdecl_id = $dt['tb_persdecl_id'];
-    $docpersdecl = $dt['tb_persdecl_doc'];
-    $nompersdecl = $dt['tb_persdecl_nom'];
-    $observaciones = $dt['tb_observaciones'];
-
+    $fecha_ingreso = $dt['tb_fecha_ingreso'];
+    $fecha_salida = $dt['tb_fecha_salida'];
+    $tardanza = $dt['tb_tardanza'];
+    $falta = $dt['tb_falta'];
+    $permisos = $dt['tb_permisos'];
 	mysql_free_result($dts);
 }
 ?>
@@ -62,6 +54,7 @@ $(function() {
         }
     });
 
+
     $( "#txt_docpersdecl" ).autocomplete({
         minLength: 1,
         source: "../clientes/cliente_complete_doc.php",
@@ -77,31 +70,32 @@ $(function() {
         }
     });
 
-	$("#for_recdoc").validate({
+
+    $("#for_recdoc").validate({
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
-				url: "../tramitespendiente/tramitependiente_reg.php",
+				url: "../recursoshumanos/recursoshumanos_reg.php",
 				async:true,
 				dataType: "json",
 				data: $("#for_recdoc").serialize(),
 				beforeSend: function() {
-					$("#div_tramitependiente_form" ).dialog( "close" );
-					$('#msj_tramitependiente').html("Guardando...");
-					$('#msj_tramitependiente').show(100);
+					$("#div_recursoshumanos_form" ).dialog( "close" );
+					$('#msj_recursoshumanos').html("Guardando...");
+					$('#msj_recursoshumanos').show(100);
 				},
 				success: function(data){						
-					$('#msj_tramitependiente').html(data.trapen_msj);
+					$('#msj_recursoshumanos').html(data.marper_msj);
 					<?php
-					if($_POST['vista']=="cmb_trapen_id")
+					if($_POST['vista']=="cmb_marper_id")
 					{
-						echo $_POST['vista'].'(data.trapen_id)';
+						echo $_POST['vista'].'(data.marper_id)';
 					}
 					?>
 				},
 				complete: function(){
 					<?php
-					if($_POST['vista']=="tramitependiente_tabla")
+					if($_POST['vista']=="recursoshumanos_tabla")
 					{
 						echo $_POST['vista'].'()';
 					}
@@ -139,9 +133,9 @@ $(function() {
             }
 		}
 	});
-    $( "#txt_fecha_acuerdo,#txt_fecha_finalizado,#txt_fecha_conteo,#txt_fecha_plazo").datepicker({
-        minDate: "-2Y",
-        maxDate:"+2Y",
+    $( "#txt_fecha_ingreso" ).datepicker({
+        minDate: "-7D",
+        maxDate:"+0D",
         yearRange: 'c-0:c+0',
         changeMonth: true,
         changeYear: false,
@@ -155,53 +149,40 @@ $(function() {
 });
 </script>
 <form id="for_recdoc">
-<input name="action_tramitependiente" id="action_tramitependiente" type="hidden" value="<?php echo $_POST['action']?>">
-    <input name="hdd_tramitependiente_id" id="hdd_tramitependiente_id" type="hidden" value="<?php echo $_POST['tramitependiente_id'] ?>">
+<input name="action_recursoshumanos" id="action_recursoshumanos" type="hidden" value="<?php echo $_POST['action']?>">
+    <input name="hdd_recursoshumanos_id" id="hdd_recursoshumanos_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
     <input name="hdd_recdoc_empresa_id" id="hdd_recdoc_empresa_id" type="hidden" value="<?php echo $recid_empresa ?>">
-    <input name="hdd_persdecl_id" id="hdd_persdecl_id" type="hidden" value="<?php echo $persdecl_id ?>">
-
     <table>
         <tr>
-            <td align="right" valign="top">Empresa:</td>
+            <td align="right" valign="top">Personal:</td>
             <td>
                 <input name="txt_recdoc_empresa" type="text" id="txt_recdoc_empresa" value="<?php echo $recdoc_empresa?>" size="10" maxlength="11">
                 <input name="txt_recnom_empresa" type="text" id="txt_recnom_empresa" value="<?php echo $recnom_empresa?>" size="30">
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Fecha de Acuerdo:</td>
-            <td><input name="txt_fecha_acuerdo" type="text" id="txt_fecha_acuerdo" value="<?php echo $fecha_acuerdo?>" size="41" maxlength="10"></td>
+            <td align="right" valign="top">Cargo:</td>
+            <td><input name="txt_cargo" type="text" id="txt_cargo" value="<?php echo $cargo?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Tramite Finalizado:</td>
-            <td><input name="txt_fecha_finalizado" type="text" id="txt_fecha_finalizado" value="<?php echo $fecha_finalizado?>" size="41" maxlength="10"></td>
+            <td align="right" valign="top">Fecha de Ingreso:</td>
+            <td><input name="txt_fecha_ingreso" type="text" id="txt_fecha_ingreso" value="<?php echo $fecha_ingreso?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Tramite por ejecutar:</td>
-            <td>
-                <input name="txt_tramite_ejecutar" type="text" id="txt_tramite_ejecutar" value="<?php echo $tramite_ejecutar?>" size="30">
-            </td>
+            <td align="right" valign="top">Fecha de Salida:</td>
+            <td><input name="txt_fecha_salida" type="text" id="txt_fecha_salida" value="<?php echo $fecha_salida?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Fecha que empieza conteo:</td>
-            <td><input name="txt_fecha_conteo" type="text" id="txt_fecha_conteo" value="<?php echo $fecha_conteo?>" size="41" maxlength="10"></td>
+            <td align="right" valign="top">Tardanza:</td>
+            <td><input name="txt_tardanza" type="text" id="txt_tardanza" value="<?php echo $tardanza?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Fecha que cumple el plazo:</td>
-            <td><input name="txt_fecha_plazo" type="text" id="txt_fecha_plazo" value="<?php echo $fecha_plazo?>" size="41" maxlength="10"></td>
+            <td align="right" valign="top">Falta:</td>
+            <td><input name="txt_falta" type="text" id="txt_falta" value="<?php echo $falta?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Persona Responsable:</td>
-            <td>
-                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11">
-                <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30">
-            </td>
-        </tr>
-        <tr>
-            <td align="right" valign="top">Observaciones:</td>
-            <td>
-                <textarea name="txt_observaciones" type="textarea" id="txt_observaciones" rows="4" cols="50" maxlength="300"><?php echo $observaciones?></textarea>
-            </td>
+            <td align="right" valign="top">Permisos:</td>
+            <td><input name="txt_permisos" type="text" id="txt_permisos" value="<?php echo $permisos?>" size="41" maxlength="10"></td>
         </tr>
     </table>
 </form>

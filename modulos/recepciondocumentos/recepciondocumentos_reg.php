@@ -37,7 +37,7 @@ if($_POST['action_recepciondocumentos']=="editar")
             $_POST['hdd_recepdocumentos_id'], $_POST['hdd_docpersrecojo_id'],
             $_POST['cmb_pendiente'], strip_tags($_POST['txt_observaciones']));
 		
-		$data['recdoc_msj']='Se registró recepciondocumentos correctamente.';
+		$data['recdoc_msj']='Se registró recepción documento correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -50,8 +50,9 @@ if($_POST['action']=="eliminar")
 {
 	if(!empty($_POST['id']))
 	{
-		$cst1 = $oRecepcionDocumentos->verifica_recepciondocumentos_tabla($_POST['id'],'tb_producto');
-		$rst1= mysql_num_rows($cst1);
+//		$cst1 = $oRecepcionDocumentos->verifica_recepciondocumentos_tabla($_POST['id'],'tb_producto');
+        $cst1=0;
+        $rst1= mysql_num_rows($cst1);
 		if($rst1>0)$msj1=' - Producto';
 		
 		if($rst1>0)
@@ -61,7 +62,7 @@ if($_POST['action']=="eliminar")
 		else
 		{
 			$oRecepcionDocumentos->eliminar($_POST['id']);
-			echo 'Se eliminó recepcion correctamente.';
+			echo 'Se eliminó recepcion documento correctamente.';
 		}
 	}
 	else

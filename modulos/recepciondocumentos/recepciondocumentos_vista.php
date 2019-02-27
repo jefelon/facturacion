@@ -11,7 +11,7 @@ $oContenido = new cContenido();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Recepción Documentos</title>
+<title>Recepción de Documentos</title>
 <link href="../../css/Estilo/miestilo.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -128,7 +128,7 @@ function eliminar_recepciondocumentos(id)
 }
 
 function recdoc_reporte_xls(){
-    $("#hdd_tabla").val( $("<div>").append( $("#tabla_venta").eq(0).clone()).html());
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_recepciondocumentos").eq(0).clone()).html());
     $("#for_rep_xls").submit();
 }
 
@@ -147,6 +147,11 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
+
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
 
 	recepciondocumentos_tabla();
 	
@@ -194,7 +199,11 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="recepciondocumentos_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+
+                        <td align="left" valign="middle">&nbsp;<a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="recdoc_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="recepdoc_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form></td>
                       <td align="right"><div id="msj_recepciondocumentos" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>

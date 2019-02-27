@@ -143,7 +143,7 @@ $(function() {
             txt_recdoc_fech:{
                 required: true
             },
-            hdd_recdoc_empresa_id{
+            hdd_recdoc_empresa_id:{
                 required: true
             },
             txt_docnom_empresa: {
@@ -152,25 +152,25 @@ $(function() {
             txt_recnom_empresa: {
 				required: true
 			},
-            hdd_perspentrega_id{
+            hdd_perspentrega_id: {
                 required: true
             },
             txt_docpersentrega:{
                 required: true
             },
-            txt_nompersentrega:{
+            txt_nomperspentrega:{
                 required: true
             },
-            hdd_recepdocumentos_id{
+            hdd_recepdocumentos_id:{
                 required: true
-            }
-            txt_docrecepdocumentos{
+            },
+            txt_docrecepdocumentos:{
                 required: true
-            }
+            },
             txt_nomrecepdocumentos: {
                 required: true
             },
-            hdd_docpersrecojo_id{
+            hdd_docpersrecojo_id:{
                 required: true
             },
             txt_docpersrecojo: {
@@ -179,7 +179,7 @@ $(function() {
             txt_nompersrecojo: {
                 required: true
             },
-            cmb_pendiente{
+            cmb_pendiente:{
                 required:true
             }
 		},
@@ -187,35 +187,35 @@ $(function() {
             txt_recdoc_fech:{
                 required: '*'
             },
-            hdd_recdoc_empresa_id{
-                required: '*'
+            hdd_recdoc_empresa_id:{
+                required: 'Seleccione empresa, '
             },
             txt_docnom_empresa: {
                 required: '*'
             },
-            txt_recnom_empresa: {
+            txt_recdoc_empresa: {
                 required: '*'
             },
-            hdd_perspentrega_id{
-                required: '*'
+            hdd_perspentrega_id:{
+                required: 'Seleccione persona que realiza entrega, '
             },
             txt_docpersentrega:{
                 required: '*'
             },
-            txt_nompersentrega:{
+            txt_nomperspentrega:{
                 required: '*'
             },
-            hdd_recepdocumentos_id{
+            hdd_recepdocumentos_id:{
+                required: 'Seleccione persona que recepeciona documentos, '
+            },
+            txt_docrecepdocumentos:{
                 required: '*'
-            }
-            txt_docrecepdocumentos{
-                required: '*'
-            }
+            },
             txt_nomrecepdocumentos: {
                 required: '*'
             },
-            hdd_docpersrecojo_id{
-                required: '*'
+            hdd_docpersrecojo_id:{
+                required: 'Seleccione persona que recoje documentos'
             },
             txt_docpersrecojo: {
                 required: '*'
@@ -223,13 +223,14 @@ $(function() {
             txt_nompersrecojo: {
                 required: '*'
             },
-            cmb_pendiente{
+            cmb_pendiente:{
                 required:'*'
             }
 		}
 	});
+
     $( "#txt_recdoc_fech" ).datepicker({
-        minDate: "-7D",
+        minDate: "-1Y",
         maxDate:"+0D",
         yearRange: 'c-0:c+0',
         changeMonth: true,

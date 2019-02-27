@@ -1,6 +1,7 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once("cTramitependiente.php");
+require_once("../formatos/formato.php");
 $oTramitependiente = new cTramitependiente();
 
 $dts=$oTramitependiente->mostrarTodos();
@@ -20,7 +21,7 @@ $(function() {
 	});
 
 	$.tablesorter.defaults.widgets = ['zebra'];
-	$("#tabla_recepciondocumentos").tablesorter({
+	$("#tabla_tramitependiente").tablesorter({
 		headers: {
 			1: {sorter: false }, 
 			2: { sorter: false}},
@@ -52,13 +53,13 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_tramitependiente_id']?></td>
+                    <td>COD.SCF-<?php echo $dt['tb_tramitependiente_id']?></td>
                     <td><?php echo $dt['tb_cliente_nom']?></td>
-                    <td><?php echo $dt['tb_fecha_acuerdo']; ?></td>
-                    <td><?php echo $dt['tb_fecha_finalizado']; ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_acuerdo']); ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_finalizado']); ?></td>
                     <td><?php echo $dt['tb_tramite_ejecutar']; ?></td>
-                    <td><?php echo $dt['tb_fecha_conteo']; ?></td>
-                    <td><?php echo $dt['tb_fecha_plazo']; ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_conteo']); ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_plazo']); ?></td>
                     <td><?php echo $dt['tb_persdecl_nom']; ?></td>
                     <td><?php echo $dt['tb_observaciones']; ?></td>
                     <td align="center"><a class="btn_editar" href="#" onClick="tramitependiente_form('editar','<?php echo $dt['tb_tramitependiente_id']?>')">Editar</a>

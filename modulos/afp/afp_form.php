@@ -2,7 +2,7 @@
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
 require_once("cAfp.php");
-$oAfp = new cLibroelectronico();
+$oAfp = new cAfp();
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
@@ -141,8 +141,8 @@ $(function() {
 		}
 	});
     $( "#txt_fech_decl,#txt_fech_ven,#txt_fech_envio" ).datepicker({
-        minDate: "-7D",
-        maxDate:"+0D",
+        minDate: "-1Y",
+        maxDate:"+2Y",
         yearRange: 'c-0:c+0',
         changeMonth: true,
         changeYear: false,

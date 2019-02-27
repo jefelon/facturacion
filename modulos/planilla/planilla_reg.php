@@ -22,7 +22,7 @@ if($_POST['action_planilla']=="insertar")
         mysql_free_result($dts);
 
         $data['plan_id']=$recdoc_id;
-        $data['plan_msj']='Se registró planillas correctamente.';
+        $data['plan_msj']='Se registró planilla correctamente.';
         echo json_encode($data);
     }
     else

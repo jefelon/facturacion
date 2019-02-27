@@ -1,7 +1,7 @@
 <?php
 class cCliente{
 	function insertar(
-	    $tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
+	    $tip,$nom,$doc,$dir,$con,$cum,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
         $pdt,$bienfizc,$balancean,$clifijo,$foto,$soluser,$solpass,$afpuser,$afppass
     ){
 	$sql = "INSERT tb_cliente(
@@ -10,6 +10,7 @@ class cCliente{
 	`tb_cliente_doc` ,
 	`tb_cliente_dir` ,
 	`tb_cliente_con` ,
+	`tb_cliente_cumpleanos` ,
 	`tb_cliente_tel` ,
 	`tb_cliente_ema` ,
 	`tb_cliente_est`,
@@ -31,7 +32,7 @@ class cCliente{
 	`tb_cliente_afppass`
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio','$retiene','$cui','$regimen_id',
+	'$tip',  '$nom',  '$doc',  '$dir','$cum', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio','$retiene','$cui','$regimen_id',
 	'$afp','$planilla','$pdt','$bienfizc','$balancean','$clifijo','$foto','$soluser','$solpass','$afpuser','$afppass'
 	);";
 	$oCado = new Cado();
@@ -119,7 +120,7 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
+	function modificar($id,$tip,$nom,$doc,$dir,$con,$cum,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
                        $pdt,$bienfizc,$balancean,$clifijo,$foto,$soluser,$solpass,$afpuser,$afppass
     )
     {
@@ -129,6 +130,7 @@ class cCliente{
 	`tb_cliente_doc` =  '$doc',
 	`tb_cliente_dir` =  '$dir',
 	`tb_cliente_con` =  '$con',
+	`tb_cliente_cumpleanos` =  '$cum',
 	`tb_cliente_tel` =  '$tel',
 	`tb_cliente_ema` =  '$ema',
 	`tb_cliente_est` =  '$est',

@@ -127,6 +127,11 @@ function eliminar_declaraciondocumentos(id)
 	}
 }
 
+function afp_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_afp").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
+
 
 //
 $(function() {
@@ -143,10 +148,16 @@ $(function() {
 		text: true
 	});
 
-	declaraciondocumentos_tabla();
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
+
+
+    declaraciondocumentos_tabla();
 	
 	$( "#div_declaraciondocumentos_form" ).dialog({
-		title:'Información de declaraciondocumentos',
+		title:'Información de AFP Declarados y No Declarados',
 		autoOpen: false,
 		resizable: false,
 		height: 400,
@@ -178,7 +189,7 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">DECLARACIÓN DE DOCUMENTOS</td>
+                    <td class="caption_cont">AREA DE AFP DECLARADOS Y NO DECLARADOS</td>
                   </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
@@ -189,7 +200,11 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="declaraciondocumentos_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+                      <td align="left" valign="middle">
+                          <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="afp_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                          <form action="afp_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                              <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                          </form></td>
                       <td align="right"><div id="msj_declaraciondocumentos" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>

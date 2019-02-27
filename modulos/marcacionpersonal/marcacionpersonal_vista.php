@@ -59,7 +59,7 @@ function marcacionpersonal_tabla()
 {	
 	$.ajax({
 		type: "POST",
-		url: "recepciondocumentos_tabla.php",
+		url: "marcacionpersonal_tabla.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -127,7 +127,10 @@ function eliminar_marcacionpersonal(id)
 	}
 }
 
-
+function marper_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_marcacionpersonal").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
 //
 $(function() {
 	
@@ -142,6 +145,11 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
+
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
 
     marcacionpersonal_tabla();
 	
@@ -189,7 +197,10 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="marcacionpersonal_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+                        <td align="left" valign="middle">&nbsp;<a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="marper_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="marper_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form></td>
                       <td align="right"><div id="msj_marcacionpersonal" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>

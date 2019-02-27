@@ -1,9 +1,9 @@
 <?php
 require_once ("../../config/Cado.php");
-require_once("cAfp.php");
-$oRecepcionDocumentos = new cPlanilla();
+require_once("cDeclaracionimpuestos.php");
+$oDeclaracionimpuestos = new cDeclaracionimpuestos();
 
-$dts=$oRecepcionDocumentos->mostrarTodos();
+$dts=$oDeclaracionimpuestos->mostrarTodos();
 $num_rows= mysql_num_rows($dts);
 
 ?>
@@ -20,7 +20,7 @@ $(function() {
 	});
 
 	$.tablesorter.defaults.widgets = ['zebra'];
-	$("#tabla_recepciondocumentos").tablesorter({
+	$("#tabla_declaracionimpuestos").tablesorter({
 		headers: {
 			1: {sorter: false }, 
 			2: { sorter: false}},
@@ -29,7 +29,7 @@ $(function() {
     });
 }); 
 </script>
-        <table cellspacing="1" id="tabla_recepciondocumentos" class="tablesorter">
+        <table cellspacing="1" id="tabla_declaracionimpuestos" class="tablesorter">
             <thead>
                 <tr>
                     <th>Código</th>
@@ -53,19 +53,19 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_recepciondocumentos_id']?></td>
-                    <td><?php echo $dt['tb_recepciondocumentos_fecha']?></td>
+                    <td><?php echo $dt['tb_declaracionimpuestos_id']?></td>
+                    <td><?php echo $dt['tb_declaracionimpuestos_fecha']?></td>
                     <td><?php echo $dt['tb_cliente_nom']; ?></td>
                     <td><?php echo $dt['tb_persentrega_nom']; ?></td>
                     <td><?php echo $dt['tb_persrecepcion_nom']; ?></td>
                     <td><?php echo $dt['tb_persrecoge_nom']; ?></td>
-                    <td><?php if($dt['tb_recepciondocumentos_pendientes']==True)
+                    <td><?php if($dt['tb_declaracionimpuestos_pendientes']==True)
                     {echo 'Trajo';}else{ echo 'No Trajo'; } ?></td>
                     <td><?php echo $dt['tb_cliente_dir']; ?></td>
                     <td><?php echo $dt['tb_cliente_tel']; ?></td>
-                    <td><?php echo $dt['tb_recepciondocumentos_observacion']; ?></td>
-                    <td align="center"><a class="btn_editar" href="#" onClick="recepciondocumentos_form('editar','<?php echo $dt['tb_recepciondocumentos_id']?>')">Editar</a>
-                    <a class="btn_eliminar" href="#" onClick="eliminar_recepciondocumentos('<?php echo $dt['tb_recepciondocumentos_id']?>')">Eliminar</a></td>
+                    <td><?php echo $dt['tb_observaciones']; ?></td>
+                    <td align="center"><a class="btn_editar" href="#" onClick="declaracionimpuestos_form('editar','<?php echo $dt['tb_declaracionimpuestos_id']?>')">Editar</a>
+                    <a class="btn_eliminar" href="#" onClick="eliminar_declaracionimpuestos('<?php echo $dt['tb_declaracionimpuestos_id']?>')">Eliminar</a></td>
                 </tr>
 			<?php
 				}

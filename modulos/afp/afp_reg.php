@@ -22,7 +22,7 @@ if($_POST['action_afp']=="insertar")
 			mysql_free_result($dts);
 		
 		$data['decldoc_id']=$recdoc_id;
-		$data['decldoc_msj']='Se registró declaracion documentos correctamente.';
+		$data['decldoc_msj']='Se registró AFP correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -44,7 +44,7 @@ if($_POST['action_afp']=="editar")
             $_POST['cmb_pago_realizado'], $_POST['txt_deudas'],
             $_POST['hdd_persdecl_id'], strip_tags($_POST['txt_observaciones']));
 		
-		$data['decldoc_msj']='Se registró declaracion documentos correctamente.';
+		$data['decldoc_msj']='Se registró AFP correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -57,7 +57,7 @@ if($_POST['action']=="eliminar")
 {
 	if(!empty($_POST['id']))
 	{
-		$cst1 = $oAfp->verifica_afp_tabla($_POST['id'],'tb_producto');
+//		$cst1 = $oAfp->verifica_afp_tabla($_POST['id'],'tb_producto');
 //		$rst1= mysql_num_rows($cst1);
         $rst1 = 0;
         if($rst1>0)$msj1=' - Producto';
@@ -69,7 +69,7 @@ if($_POST['action']=="eliminar")
 		else
 		{
             $oAfp->eliminar($_POST['id']);
-			echo 'Se eliminó recepcion correctamente.';
+			echo 'Se eliminó AFP correctamente.';
 		}
 	}
 	else

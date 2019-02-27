@@ -136,8 +136,8 @@ $(function() {
 		}
 	});
     $( "#txt_fech_decl,#txt_fech_ven" ).datepicker({
-        minDate: "-7D",
-        maxDate:"+0D",
+        minDate: "-2Y",
+        maxDate:"+2Y",
         yearRange: 'c-0:c+0',
         changeMonth: true,
         changeYear: false,
