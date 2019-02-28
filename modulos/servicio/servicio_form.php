@@ -28,7 +28,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.9999'
+	vMax: '99999.99'
 });
 
 $('.btn_ir').button({
@@ -45,7 +45,7 @@ function cmb_cat_id(ids)
 		async:true,
 		dataType: "html",                      
 		data: ({
-			cat_id: ids
+			cat_id: 1
 		}),
 		beforeSend: function() {
 			$('#cmb_cat_id').html('<option value="">Cargando...</option>');
@@ -55,6 +55,8 @@ function cmb_cat_id(ids)
 		}
 	});
 }
+
+//adicionales
 
 function categoria_form(act,idf)
 {
@@ -84,13 +86,43 @@ function categoria_form(act,idf)
 	});
 }
 
+function existe_servicio()
+{
+    $.ajax({
+        type: "POST",
+        url: "../servicio/existe_servicio.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            txt_ser_nom: $("#txt_ser_nom" ).val(),
+        }),
+        beforeSend: function() {
+
+        },
+        success: function(data){
+            if(data.ser_existe===1){
+                $("#txt_ser_nom" ).val(data.servicio_nom);
+                $("#txt_ser_pre" ).val(data.servicio_pre);
+                $("#txt_ser_prevent" ).val(parseFloat(data.servicio_pre)*parseFloat($("#txt_ser_can_servicio" ).val()));
+                $("#hdd_ser_id" ).val(data.servicio_id);
+                $("#txt_ser_prevent" ).attr('readonly', true);
+            }else{
+                $("#txt_ser_pre" ).val('');
+                $("#txt_ser_prevent" ).val('');
+                $("#hdd_ser_id" ).val('');
+                $("#txt_ser_prevent" ).attr('readonly', false);
+            }
+        }
+    });
+}
+
 /*function marca_form(act,idf)
 {
 	$.ajax({
 		type: "POST",
 		url: "marca_form.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: act,
 			mar_id:	idf,
@@ -107,7 +139,7 @@ function categoria_form(act,idf)
 			$('#div_marca_form').html('Cargando <img src="images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_marca_form').html(html);				
+			$('#div_marca_form').html(html);
 		}
 	});
 }*/
@@ -118,7 +150,7 @@ function categoria_form(act,idf)
 		type: "POST",
 		url: "unidad_form.php",
 		async:true,
-		dataType: "html",                      
+		dataType: "html",
 		data: ({
 			action: act,
 			uni_id:	idf,
@@ -135,7 +167,7 @@ function categoria_form(act,idf)
 			$('#div_unidad_form').html('Cargando <img src="images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_unidad_form').html(html);				
+			$('#div_unidad_form').html(html);
 		}
 	});
 }*/
@@ -144,37 +176,37 @@ function categoria_form(act,idf)
 var datven;
 
 function chk_cat_com()
-{   
-	if($('#chk_cat_vercom').is(':checked')) {  
+{
+	if($('#chk_cat_vercom').is(':checked')) {
 		$('#txt_cat_precom').removeAttr('disabled');
 		$("#txt_cat_precom").removeClass("ui-state-disabled");
 		datcom=true;
-		
+
 		$('#chk_cat_igvcom').removeAttr('disabled');
 	}
 	else
-	{  
+	{
 		$('#txt_cat_precom').attr('disabled', 'disabled');
 		$("#txt_cat_precom").addClass("ui-state-disabled");
 		datcom=false;
-		
+
 		$('#chk_cat_igvcom').attr('disabled', 'disabled');
 	}
 }
 
 function chk_cat_ven()
-{   
-	if($('#chk_cat_verven').is(':checked')) {  
+{
+	if($('#chk_cat_verven').is(':checked')) {
 		$('#txt_cat_preven').removeAttr('disabled');
 		$("#txt_cat_preven").removeClass("ui-state-disabled");
 		datven=true;
-		
-		$('#chk_cat_igvven').removeAttr('disabled');  
-	} else {  
+
+		$('#chk_cat_igvven').removeAttr('disabled');
+	} else {
 		$('#txt_cat_preven').attr('disabled', 'disabled');
 		$("#txt_cat_preven").addClass("ui-state-disabled");
 		datven=false;
-		
+
 		$('#chk_cat_igvven').attr('disabled', 'disabled');
 	}
 }*/
@@ -188,42 +220,55 @@ $(function() {
 	?>
 	$('#txt_ser_nom').focus();
 	<?php }?>
-	
-	$( "#txt_ser_nom" ).autocomplete({
-   		minLength: 2,
-   		source: "servicio_complete_nom.php"
-    });
-	
+
 	$('#txt_ser_nom').keyup(function(){
-		$(this).val($(this).val().toUpperCase());
-	});
+        $(this).val($(this).val().toUpperCase());
+        existe_servicio();
+
+    });
     <?php if($_POST['action']=="insertar"){?>
-        $("#txt_ser_valor" ).keyup(function() {
-            var prevalor	=parseFloat($("#txt_ser_valor" ).autoNumericGet());
-            var igv		=prevalor*0.18;
-            $( "#txt_ser_igv" ).autoNumericSet(igv.toFixed(2));
+        $("#txt_ser_pre" ).keyup(function() {
+            var cantidad	=parseFloat($("#txt_ser_can_servicio" ).autoNumericGet());
+            var prevalor	=parseFloat($("#txt_ser_pre" ).autoNumericGet());
 
             if(prevalor>=0)
             {
-                var calculo=prevalor+igv;
-                //$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-                $( "#txt_ser_pre" ).autoNumericSet(calculo.toFixed(2));
+                var calculo=prevalor*cantidad;
+                $( "#txt_ser_prevent" ).autoNumericSet(calculo.toFixed(2));
+            }
+        });
+        $("#txt_ser_can_servicio" ).keyup(function() {
+            var cantidad	=parseFloat($("#txt_ser_can_servicio" ).autoNumericGet());
+            var prevalor	=parseFloat($("#txt_ser_pre" ).autoNumericGet());
+
+            if(prevalor>=0)
+            {
+                var calculo=prevalor*cantidad;
+                $( "#txt_ser_prevent" ).autoNumericSet(calculo.toFixed(2));
             }
         });
     <?php }?>
     <?php if($_POST['action']=="editar"){?>
-        $(document ).ready(function() {
-            var ser_pre	=parseFloat($("#txt_ser_pre" ).autoNumericGet());
+    $("#txt_ser_pre" ).keyup(function() {
+        var cantidad	=parseFloat($("#txt_ser_can_servicio" ).autoNumericGet());
+        var prevalor	=parseFloat($("#txt_ser_pre" ).autoNumericGet());
 
-            if(ser_pre>=0)
-            {
-                var valor=ser_pre/1.18;
-                var igv		=ser_pre-(ser_pre/1.18);
-                //$( "#txt_cat_preven" ).val(calculo.toFixed(2));
-                $( "#txt_ser_valor" ).autoNumericSet(valor.toFixed(2));
-                $( "#txt_ser_igv" ).autoNumericSet(igv.toFixed(2));
-            }
-        });
+        if(prevalor>=0)
+        {
+            var calculo=prevalor*cantidad;
+            $( "#txt_ser_prevent" ).autoNumericSet(calculo.toFixed(2));
+        }
+    });
+    $("#txt_ser_can_servicio" ).keyup(function() {
+        var cantidad	=parseFloat($("#txt_ser_can_servicio" ).autoNumericGet());
+        var prevalor	=parseFloat($("#txt_ser_pre" ).autoNumericGet());
+
+        if(prevalor>=0)
+        {
+            var calculo=prevalor*cantidad;
+            $( "#txt_ser_prevent" ).autoNumericSet(calculo.toFixed(2));
+        }
+    });
     <?php }?>
 
 	/*$( "#txt_pre_nom" ).autocomplete({
@@ -240,8 +285,8 @@ $(function() {
    		minLength: 1,
    		source: "../servicio/servicio_complete_nom.php",
 		select: function( event, ui ) {
-			$("#txt_ser_nom").val(ui.item.label)
-			catalogo_servicio_tabla();
+			$("#txt_ser_nom").val(ui.item.value);
+            existe_servicio();
 		}
     });
 	
@@ -268,6 +313,9 @@ $(function() {
 //formulario			
 	$("#for_ser").validate({
 		submitHandler: function() {
+            var ser_nom = $('#txt_ser_nom').val();
+            var ser_can = $('#txt_ser_can_servicio').val();
+            var ser_pre = $('#txt_ser_pre').val();
 			$.ajax({
 				type: "POST",
 				url: "../servicio/servicio_reg.php",
@@ -282,11 +330,12 @@ $(function() {
 				success: function(data){
 					$('#msj_servicio').html(data.ser_msj);
 					$('#txt_fil_ser_nom').val(data.ser_nom);
-					catalogo_servicio_tabla();
+                    venta_car_servicio('agregar_servicio',data.ser_id,ser_nom,ser_can, ser_pre);
 					if(data.ser_act=='editar_presentacion')
 					{
 						servicio_form('editar',data.ser_id);
 					}
+
 				},
 				complete: function(){
 					<?php
@@ -296,6 +345,7 @@ $(function() {
 					}
 					
 					?>
+
 				}
 			});			
 		},
@@ -305,11 +355,8 @@ $(function() {
 				minlength: 1,
 				maxlength: 50
 			},
-			txt_ser_des: {
-				maxlength: 250
-			},
 			txt_ser_pre: {
-				required: true,
+				required: true
 			},
 			cmb_cat_id: {
 				required: true
@@ -334,6 +381,35 @@ $(function() {
 		}
 	});	
 });
+
+function venta_car_servicio(act,idf,ser_nom,ser_can,ser_pre){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_car.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action:	 act,
+            ser_id:	 idf,
+            unico_id: $('#unico_id').val(),
+            ser_nom: ser_nom,
+            ser_can: ser_can,
+            ser_des: 0,//Descuento
+            ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
+            ser_pre: ser_pre,
+            ser_tip: 1
+        }),
+        beforeSend: function() {
+            $('#div_venta_car_tabla').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('#div_venta_car_tabla').html(html);
+        },
+        complete: function(){
+            $('#div_venta_car_tabla').removeClass("ui-state-disabled");
+        }
+    });
+}
 </script>
 <style>
 	div#cuadro-contain { width: 330px; margin: 0 0; }
@@ -345,56 +421,47 @@ $(function() {
 <input name="hdd_ser_id" id="hdd_ser_id" type="hidden" value="<?php echo $_POST['ser_id']?>">
 <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
 <input name="hdd_ser_aut" id="hdd_ser_aut" type="hidden" value="<?php echo $_POST['aut']?>">
+
+    <input name="cmb_ser_est" id="cmb_ser_est" type="hidden" value="Activo">
+    <input name="cmb_cat_id" id="cmb_cat_id" type="hidden" value="1">
+
 <div style="float:left">
   <!--<fieldset>-->
     <!--<legend>Servicio</legend>-->
     <table>
         <tr>
-          <td><label for="txt_ser_nom">Nombre:</label></td>
-          <td><input type="text" name="txt_ser_nom" size='41' id="txt_ser_nom" value="<?php echo $nom?>" />
-          </td>
-        </tr>        
+          <p><label for="txt_ser_nom" style="width: 68px;display: inline-block">Nombre:</label>
+          <input type="text" name="txt_ser_nom" size='41' id="txt_ser_nom" value="<?php echo $nom?>" />
+          </p>
+        </tr>
+
+<!--        <tr class="servicio_existe" style="">-->
+<!--          <p><label for="txt_ser_des" style="width: 68px;display: inline-block">Descripción:</label>-->
+<!--          <textarea name="txt_ser_des" cols="40" id="txt_ser_des">--><?php //echo $des?><!--</textarea>-->
+<!--          </p>-->
+<!--        </tr>-->
         <tr>
-          <td valign="top"><label for="txt_ser_des">Descripción:</label></td>
-          <td><textarea name="txt_ser_des" cols="40" id="txt_ser_des"><?php echo $des?></textarea></td>
+            <p>
+                <label for="txt_ser_can_servicio" style="width: 72px;display: inline-block">Cantidad:</label><input name="txt_ser_can_servicio" type="text" id="txt_ser_can_servicio" class="cat_ser_cantidad" value="1" size="5" maxlength="6" style="text-align:right">
+                <label for="txt_ser_pre" title="Precio Referencial">Precio Un:</label> <input type="text" name="txt_ser_pre" size='5' rows="4" id="txt_ser_pre" value="<?php echo $pre?>" class="moneda" style="text-align:right" /></td>
+                <label for="txt_ser_prevent" title="Precio Venta">Precio Venta:</label></td><input type="text" name="txt_ser_prevent" size='5' rows="4" id="txt_ser_prevent" value="<?php echo $preVent?>" class="moneda" style="text-align:right" /></td>
+            </p>
         </tr>
         <tr>
-            <td><label for="txt_ser_valor" title="Valor del servicio">Valor sin IGV.:</label></td>
-            <td><input type="text" name="txt_ser_valor" size='10' rows="4" id="txt_ser_valor" value="<?php echo $pre/1.18?>" class="moneda" style="text-align:right" /></td>
-        </tr>
-        <tr>
-            <td><label for="txt_ser_igv" title="IGV">IGV:</label></td>
-            <td><input type="text" name="txt_ser_igv" size='10' rows="4" id="txt_ser_igv" value="<?php echo $pre-($pre/1.18)?>" class="moneda" style="text-align:right" /></td>
-        </tr>
-        <tr>
-          <td><label for="txt_ser_pre" title="Precio Referencial">Precio Ref.:</label></td>
-          <td><input type="text" name="txt_ser_pre" size='10' rows="4" id="txt_ser_pre" value="<?php echo $pre?>" class="moneda" style="text-align:right" /></td>
-        </tr>
-        <tr>
-          <td><label for="cmb_cat_id">Categoría:</label></td>
+<!--          <td><label for="cmb_cat_id">Categoría:</label></td>-->
           <td>
-          <select name="cmb_cat_id" id="cmb_cat_id">
-          </select>
-          <a id="btn_cmb_cat_id" class="btn_ir" href="#" onClick="categoria_form('insertar')">Agregar Categoría</a>  
+
+<!--          <a id="btn_cmb_cat_id" class="btn_ir" href="#" onClick="categoria_form('insertar')">Agregar Categoría</a>  -->
           </td>
         </tr>
-        
+
         <tr>
           <td>
-           
+
           <div id="div_categoria_form">
 			</div>
           </td>
         </tr>
-        <tr>
-          <td><label for="cmb_ser_est">Estado:</label></td>
-          <td><select name="cmb_ser_est" id="cmb_ser_est">
-          		<option value="">-</option>
-              	<option value="Activo" <?php if($est=='Activo')echo 'selected'?>>Activo</option>
-                <option value="Inactivo" <?php if($est=='Inactivo')echo 'selected'?>>Inactivo</option>
-          </select></td>
-        </tr>
-       
     </table>
 <!--</fieldset>-->
 </div>

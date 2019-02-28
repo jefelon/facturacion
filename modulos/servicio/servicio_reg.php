@@ -9,7 +9,7 @@ if($_POST['action_servicio']=="insertar")
 	if(!empty($_POST['txt_ser_nom']))
 	{
 		
-		$dts=$oServicio->mostrar_filtro_2($_POST['txt_ser_nom'],"Activo");
+		$dts=$oServicio->mostrar_filtro_3($_POST['txt_ser_nom']);
 		$num_rows = mysql_num_rows($dts);
 		if($num_rows==0){
 			//insertamos servicio
@@ -26,13 +26,25 @@ if($_POST['action_servicio']=="insertar")
 			$dts=$oServicio->ultimoInsert();
 			$dt = mysql_fetch_array($dts);
 			$ser_id=$dt['last_insert_id()'];
-			mysql_free_result($dts);
+            mysql_free_result($dts);
 
-			$data['ser_id']=$ser_id;		
+
+			$data['ser_id']=$ser_id;
+            $svs=$oServicio->mostrarUno($ser_id);
+            $sv = mysql_fetch_array($svs);
+            $data['ser_nom'] = $sv['tb_servicio_nom'];
+            $data['ser_pre'] = $sv['tb_servicio_pre'];
+            $data['ser_can'] = $_POST['txt_ser_can_servicio'];
 			$data['ser_msj']='Se registró servicio correctamente.';	
-		}
-	
-		$data['ser_nom']=$_POST['txt_ser_nom'];
+		}else{
+            $svs=$oServicio->mostrarUno($_POST['hdd_ser_id']);
+            $sv = mysql_fetch_array($svs);
+            $data['ser_id']= $_POST['hdd_ser_id'];
+            $data['ser_nom'] = $sv['tb_servicio_nom'];
+            $data['ser_pre'] = $sv['tb_servicio_pre'];
+            $data['ser_msj']='Se retorno correctamente servicio.';
+        }
+        $data['ser_can'] = $_POST['txt_ser_can_servicio'];
 		echo json_encode($data);
 	}
 	else

@@ -1992,6 +1992,28 @@ if($_POST['action']=="editar"){
             }
         });
 
+        $( "#div_servicio_form" ).dialog({
+            title:'Información de Servicio',
+            autoOpen: false,
+            resizable: false,
+            height: 200,
+            width: 480,
+            modal: true,
+            position: 'center',
+            buttons: {
+                Guardar: function() {
+                    $("#for_ser").submit();
+                },
+                Cancelar: function() {
+                    $('#for_ser').each (function(){this.reset();});
+                    $( this ).dialog("close");
+                }
+            },
+            close: function()
+            {
+                $("#div_servicio_form").html('Cargando...');
+            }
+        });
 
         $('#txt_bus_pro_codbar').keypress(function(e){
             if(e.which == 13){
@@ -2616,8 +2638,8 @@ if($_POST['action']=="editar"){
         <?php if($_POST['action']=='insertar'){?>
             <div id="div_productos_servicios_tab">
                 <ul>
+                    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
                     <li><a id="carga_productos" href="#div_productos">Agregar Productos</a></li>
-                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
                 </ul>
                 <div id="div_productos">
                     <div id="cuadro-contain" class="ui-widget">
@@ -2676,7 +2698,7 @@ if($_POST['action']=="editar"){
                     <div id="cuadro-contain" class="ui-widget">
                         <!--             <legend>Agregar Servicios</legend>-->
                         <?php if($_POST['vista']!='cange'){?>
-                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
+                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="servicio_form_i('insertar')">Agregar</a>
                             <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
                         <?php }?>
                         <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>
@@ -2716,7 +2738,8 @@ if($_POST['action']=="editar"){
 <div id="div_producto_form">
 
 </div>
-
+<div id="div_servicio_form">
+</div>
 <div id="div_tabla_lote_venta">
 </div>
 
