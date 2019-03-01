@@ -703,7 +703,7 @@ if($_POST['action']=="editar"){
                 $("#txt_com_num_nota").attr('disabled', true);
                 $("#cmb_com_tip").attr('disabled', true);
             }
-            if ($(this).val()=='19') {
+            if ($(this).val()=='19' || $(this).val()=='23') {
                 $("#cmb_com_tippre").val('2');
                 $('#doc_compra_serv').css('display', 'block');
                 $('.tipo_renta').css('display', 'block');
