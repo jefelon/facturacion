@@ -43,7 +43,7 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
-$contacto_empresa = "<b>Teléfono:</b> " . $dt['tb_empresa_tel'] ."<b> Cel:</b>998032654 <b>Correo:</b> " . $dt['tb_empresa_ema'];
+$contacto_empresa = "<b>Correo: </b>". $dt['tb_empresa_ema'];
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 if(!is_file($empresa_logo)){
     $empresa_logo='../../images/logo.jpg';
@@ -353,11 +353,11 @@ if($estado=="ANULADA"){
 	    </tr>';
 }
 $html.='<tr>
-        <td style="text-align: left" width="15%" align="left">
+        <td style="text-align: left" width="20%" align="left">
         <img src="'.$empresa_logo.'" alt="" width: "100%">
         </td>   
-        <td style="text-align: left" width="55%" align="center"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
-        <br>'.$contacto_empresa.' <br><b style="text-align: center">Venta de Pinturas Epóxicas, Poliuretanos, Perladas, Acrílicas, Decorativas y Otros - Matizado de colores al gusto del cliente.</b>
+        <td style="text-align: left" width="50%" align="center"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
+        <br>'.$contacto_empresa.'
         </td>
         <!-- <td width="20%" style="text-align: center">
             <img src="../../images/banderas.jpg" alt="" style="max-width: 50%" height="40px" align="left">
@@ -429,11 +429,11 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . $ven_det_serie . ' ';
 
                 $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
                 while($lote = mysql_fetch_array($lotes)) {
-                    $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
+                    $html.= '- L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
                 }
 
         $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
@@ -444,7 +444,7 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . $ven_det_serie . ' ';
 
                 $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
                 while($lote = mysql_fetch_array($lotes)) {
