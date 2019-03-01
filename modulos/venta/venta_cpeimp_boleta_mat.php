@@ -76,7 +76,7 @@ $sucursales='
     
 </table>';
 
-$tipodoc = 'FACTURA ELECTRONICA';
+$tipodoc = 'BOLETA ELECTRONICA';
 
 $ven_id=$_POST['ven_id'];
 
@@ -357,7 +357,7 @@ $html.='<tr>
         <img src="'.$empresa_logo.'" alt="" width: "100%">
         </td>   
         <td style="text-align: left" width="55%" align="center"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
-        <br>'.$contacto_empresa.' <br><b style="text-align: center">Venta de Pinturas Epóxicas, Poliuretanos, Perladas, Acrílicas, Decorativas y Otros - Matizado de colores al gusto del cliente.</b>
+        <br>'.$contacto_empresa.'
         </td>
         <!-- <td width="20%" style="text-align: center">
             <img src="../../images/banderas.jpg" alt="" style="max-width: 50%" height="40px" align="left">
