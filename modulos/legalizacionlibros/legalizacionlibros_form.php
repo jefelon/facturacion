@@ -1,8 +1,8 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
-require_once("cAfp.php");
-$oRecepcionDocumentos = new cPlanilla;
+require_once("cLegalizacionlibros.php");
+$oLegalizacionlibros = new cLegalizacionlibros();
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
@@ -10,12 +10,12 @@ if($_POST['action']=="insertar") {
 
 if($_POST['action']=="editar")
 {
-	$dts=$oRecepcionDocumentos->mostrarUno($_POST['recepcion_id']);
+	$dts=$oLegalizacionlibros->mostrarUno($_POST['recepcion_id']);
 	$dt = mysql_fetch_array($dts);
     $recdoc_fech = mostrarFecha($dt['tb_recepciondocumentos_fecha']);
-	$recdoc_empresa = $dt['tb_cliente_doc'];
-    $recnom_empresa = $dt['tb_cliente_nom'];
-    $recid_empresa = $dt['tb_cliente_id'];
+    $id_empresa = $dt['tb_cliente_id'];
+    $doc_empresa = $dt['tb_cliente_doc'];
+    $nom_empresa = $dt['tb_cliente_nom'];
     $docpersentrega = $dt['tb_persentrega_doc'];
     $nompersentrega = $dt['tb_persentrega_nom'];
     $idpersentrega = $dt['tb_persentrega_id'];

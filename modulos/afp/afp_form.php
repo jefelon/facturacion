@@ -2,7 +2,7 @@
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
 require_once("cAfp.php");
-$oAfp = new cAfp();
+$oAfp = new cComisionista();
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');

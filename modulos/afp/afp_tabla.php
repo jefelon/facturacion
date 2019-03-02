@@ -2,7 +2,7 @@
 require_once ("../../config/Cado.php");
 require_once ("../formatos/formato.php");
 require_once("cAfp.php");
-$oAfp = new cAfp();
+$oAfp = new cComisionista();
 
 $dts=$oAfp->mostrarTodos();
 $num_rows= mysql_num_rows($dts);

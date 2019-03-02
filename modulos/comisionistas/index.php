@@ -4,6 +4,6 @@
 
  */
 
-require('afp_vista.php');
+require('comisionista_vista.php');
 
 ?>
