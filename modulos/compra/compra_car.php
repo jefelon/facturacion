@@ -364,7 +364,7 @@ if($num_rows>0){
 				$dts1=$oCatalogoproducto->presentacion_catalogo($indice);
 				$dt1 = mysql_fetch_array($dts1);
 
-                $tipo_item	=$_SESSION['compra_linea_tip_bon'][$_POST['cat_id']];
+                $tipo_item	=$_SESSION['compra_linea_tip_bon'][$indice];
 				
 				//tipo de cambio
 				$mul_tipo_cambio=$_POST['tipo_cambio'];
@@ -467,14 +467,8 @@ if($num_rows>0){
                 }elseif ($tipo_item==6){
                     $valor_venta = $linea_preuni*$linea_cantidad;
                 }elseif ($tipo_item==1){
-                    if($_POST['cmb_com_doc']=='19'){
-                        $linea_preuni=$linea_preuni*1.18;
                         $valor_venta = $linea_preuni*$linea_cantidad;
                         $total_opegrav =$total_opegrav+$valor_venta-($valor_venta*($general_des/100));
-                    }else{
-                        $valor_venta = $linea_preuni*$linea_cantidad;
-                        $total_opegrav =$total_opegrav+$valor_venta-($valor_venta*($general_des/100));
-                    }
                 }
 
 

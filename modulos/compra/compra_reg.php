@@ -266,9 +266,9 @@ if ($_POST['action_compra'] == "insertar") {
                 $_SESSION['precio_car'][] = $indice;
 
                 //precio unitario
-                if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='1') {
+                if($_SESSION['compra_linea_tip_bon'][$indice]=='9') {
                     $linea_preuni = ($_SESSION['compra_linea_preuni'][$indice])*1.18;
-                }else if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='9'){
+                }else if($_SESSION['compra_linea_tip_bon'][$indice]=='1'){
                     $linea_preuni = $_SESSION['compra_linea_preuni'][$indice];
                 }
 
@@ -290,9 +290,9 @@ if ($_POST['action_compra'] == "insertar") {
                 $linea_importe = $linea_preuni * $linea_cantidad * $linea_calculo_des;
 
                 //igv por linea
-                if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='1') {
+                if($_SESSION['compra_linea_tip_bon'][$indice]=='9') {
                     $linea_igv = 0;
-                }else if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='9'){
+                }else if($_SESSION['compra_linea_tip_bon'][$indice]=='1'){
                     $linea_igv = $linea_importe * $igv_dato;
                 }
 
