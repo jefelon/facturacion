@@ -420,7 +420,7 @@ if ($_POST['action_compra'] == "insertar") {
                             $kar_id
                         );
                     }
-                }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19') {
+                }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='23' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19') {
                     //conversion a la minima unidad
                     $cantidad_compra=$linea_cantidad*$mul;
 
