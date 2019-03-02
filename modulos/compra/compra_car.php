@@ -364,7 +364,7 @@ if($num_rows>0){
 				$dts1=$oCatalogoproducto->presentacion_catalogo($indice);
 				$dt1 = mysql_fetch_array($dts1);
 
-                $tipo_item	=$dt1['tb_afectacion_id'];
+                $tipo_item	=$_SESSION['compra_linea_tip_bon'][$_POST['cat_id']];
 				
 				//tipo de cambio
 				$mul_tipo_cambio=$_POST['tipo_cambio'];
@@ -459,10 +459,6 @@ if($num_rows>0){
 				$linea_calculo_cos = ($linea_calculo_importe + $linea_calculo_igv)/$linea_cantidad + $linea_calculo_fle + $linea_prorrateo_fle+$linea_calculo_percepcion;
 
                 $_SESSION['compra_linea_cos'][$indice] = $linea_calculo_cos;
-
-                if($_SESSION['compra_linea_tip_bon'][$indice]){
-                    $tipo_item=6;
-                }
 
 				if($tipo_item==9){
                     $linea_preuni=$linea_preuni*1.18;

@@ -1294,12 +1294,12 @@ if($_POST['action']=="editar"){
                 var direccionPrincipal=  $('#txt_ven_cli_dir').val();
                 if($("#hdd_ven_cli_id" ).val()>0){
                     $('#cmb_cli_suc').append($('<option>', {
-                        value: 0,
+                        value: direccionPrincipal,
                         text : direccionPrincipal
                     }));
-                    $("#cmb_cli_suc option[value='0']").attr("selected", true);
-                }
+                    // $("#cmb_cli_suc option[value='0']").attr("selected", true);
 
+                }
             }
         });
     }
@@ -1821,7 +1821,7 @@ if($_POST['action']=="editar"){
 //formulario
         $("#for_ven").validate({
             submitHandler: function(){
-
+                $("#txt_ven_guia_dir").val($("#cmb_cli_suc").val());
                 $.ajax({
                     type: "POST",
                     url: "../venta/venta_reg.php",

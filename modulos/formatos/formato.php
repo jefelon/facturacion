@@ -74,6 +74,25 @@
 		
 		return $fecha;
 	}
+
+function mostrarFechaEspacios($fec){
+    if(!empty($fec))
+    {
+        if($fec!='0000-00-00'){
+            $fecha	=date('d &\nb\sp;&\nb\sp;&\nb\sp;&\nb\sp;&\nb\sp;m &\nb\sp;&\nb\sp;&\nb\sp;&\nb\sp;&\nb\sp;y', strtotime($fec));
+        }
+        else
+        {
+            $fecha="";
+        }
+    }
+    else
+    {
+        $fecha="";
+    }
+
+    return $fecha;
+}
 	
 	function mostrarHora($hor){
 		if(!empty($hor))

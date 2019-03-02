@@ -85,7 +85,9 @@ class cGuia{
 	FROM tb_guia c
 	LEFT JOIN tb_conductor p ON c.tb_conductor_id=p.tb_conductor_id
 	LEFT JOIN tb_transporte t ON t.tb_transporte_id=t.tb_transporte_id
-	WHERE tb_venta_id=$ven_id";
+	INNER JOIN tb_venta v ON v.tb_venta_id= c.tb_venta_id 
+	LEFT JOIN tb_cliente cl ON v.tb_cliente_id=cl.tb_cliente_id
+	WHERE v.tb_venta_id=$ven_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

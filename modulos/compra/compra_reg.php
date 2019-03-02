@@ -184,74 +184,6 @@ if ($_POST['action_compra'] == "insertar") {
                 }
             }
 
-
-            if ($_POST['cmb_com_doc']==23){
-                $_POST['dua'];
-                $duas = $_POST['dua'];
-                $cont = 0;
-                foreach ($duas as $dua) {
-                    if(in_array($cont, $_POST['chk_invoice'])){
-                        $oCompra->insertar(
-                            fecha_mysql($_POST['fec_ser'][$cont]),
-                            fecha_mysql($_POST['txt_com_fecven']),
-                            1,// tipo documento factura 1 invoice 19
-                            $dua,
-                            $_POST['cmb_com_mon'],
-                            $_POST['txt_com_tipcam'],
-                            $_POST['txt_com_tipcam'],
-                            $_POST['proveedor'][$cont],
-                            moneda_mysql(0),
-                            moneda_mysql(0),
-                            moneda_mysql(0),
-                            moneda_mysql(0),
-                            $_POST['cmb_com_tipfle'],
-                            moneda_mysql(0),
-                            moneda_mysql(0),
-                            moneda_mysql($_POST['imp_sol'][$cont]),
-                            moneda_mysql($_POST['txt_com_opexo']),
-                            moneda_mysql($_POST['imp_sol'][$cont]),
-                            moneda_mysql(0.00),
-                            moneda_mysql($_POST['imp_sol'][$cont]),
-                            $_POST['chk_com_tipper'],
-                            moneda_mysql($_POST['txt_com_per']),
-                            $_POST['cmb_com_alm_id'],
-                            $_POST['cmb_com_est'],
-                            $_POST['hdd_usu_id'],
-                            $_POST['hdd_emp_id'],
-                            $_POST['txt_com_numorden'],
-                            $documento_tipdoc,
-                            $fec_mod,
-                            $_POST['txt_com_ser_nota'],
-                            $_POST['txt_com_num_nota'],
-                            $_POST['cmb_com_tip']
-                        );
-                        //ultima compra
-                        $dts = $oCompra->ultimoInsert();
-                        $dt = mysql_fetch_array($dts);
-                        $comcosto_id = $dt['last_insert_id()'];
-
-
-                        $oCompra->insertar_detalle(
-                            0,
-                            1,
-                            $dua / 1.18,
-                            0,
-                            $dua,
-                            1,
-                            $dua * 0.18,
-                            0,
-                            0,
-                            $dua,
-                            $comcosto_id,
-                            $_POST['servicio'][$cont]
-                        );
-
-                        $oCompra->insertar_compra_costo($com_id, $comcosto_id);
-                    }
-                    $cont++;
-                }
-            }
-
             if($_POST['cmb_com_doc']=='20' or $_POST['cmb_com_doc']=='21'){
                 if ($_POST['cmb_com_tip'] == '9' ) {
                 }elseif ($_POST['cmb_com_tip'] == '6'){
@@ -334,11 +266,13 @@ if ($_POST['action_compra'] == "insertar") {
                 $_SESSION['precio_car'][] = $indice;
 
                 //precio unitario
-                if($_POST['cmb_com_doc']=='19') {
+                if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='1') {
                     $linea_preuni = ($_SESSION['compra_linea_preuni'][$indice])*1.18;
-                }else{
+                }else if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='9'){
                     $linea_preuni = $_SESSION['compra_linea_preuni'][$indice];
                 }
+
+
                 //descuento
                 $linea_des = $_SESSION['compra_linea_des'][$indice];
                 if ($linea_des == "") $linea_des = 0;
@@ -356,9 +290,9 @@ if ($_POST['action_compra'] == "insertar") {
                 $linea_importe = $linea_preuni * $linea_cantidad * $linea_calculo_des;
 
                 //igv por linea
-                if($_POST['cmb_com_doc']=='19') {
+                if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='1') {
                     $linea_igv = 0;
-                }else{
+                }else if($_SESSION['compra_linea_tip_bon'][$_POST['cat_id']]=='9'){
                     $linea_igv = $linea_importe * $igv_dato;
                 }
 
