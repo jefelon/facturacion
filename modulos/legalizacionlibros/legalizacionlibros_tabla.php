@@ -90,6 +90,6 @@ $(function() {
         }
 		?>
                 <tr class="even">
-                  <td colspan="11"><?php echo $num_rows.' registros'?></td>
+                  <td colspan="15"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>

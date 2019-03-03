@@ -18,8 +18,8 @@ if($_POST['action_legalizacionlibros']=="insertar")
 		    $recdoc_id=$dt['last_insert_id()'];
 			mysql_free_result($dts);
 		
-		$data['recdoc_id']=$recdoc_id;
-		$data['recdoc_msj']='Se registró recepción correctamente.';
+		$data['leglib_id']=$recdoc_id;
+		$data['leglib_msj']='Se registró recepción correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -50,9 +50,10 @@ if($_POST['action']=="eliminar")
 {
 	if(!empty($_POST['id']))
 	{
-		$cst1 = $oLegalizacionlibros->verifica_legalizacionlibros_tabla($_POST['id'],'tb_producto');
-		$rst1= mysql_num_rows($cst1);
-		if($rst1>0)$msj1=' - Producto';
+//		$cst1 = $oLegalizacionlibros->verifica_legalizacionlibros_tabla($_POST['id'],'tb_producto');
+//		$rst1= mysql_num_rows($cst1);
+        $rst1=0;
+        if($rst1>0)$msj1=' - Producto';
 		
 		if($rst1>0)
 		{

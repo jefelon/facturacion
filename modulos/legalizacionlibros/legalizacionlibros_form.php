@@ -10,23 +10,26 @@ if($_POST['action']=="insertar") {
 
 if($_POST['action']=="editar")
 {
-	$dts=$oLegalizacionlibros->mostrarUno($_POST['recepcion_id']);
+	$dts=$oLegalizacionlibros->mostrarUno($_POST['legalizacionlibros_id']);
 	$dt = mysql_fetch_array($dts);
-    $recdoc_fech = mostrarFecha($dt['tb_recepciondocumentos_fecha']);
     $id_empresa = $dt['tb_cliente_id'];
     $doc_empresa = $dt['tb_cliente_doc'];
     $nom_empresa = $dt['tb_cliente_nom'];
-    $docpersentrega = $dt['tb_persentrega_doc'];
-    $nompersentrega = $dt['tb_persentrega_nom'];
-    $idpersentrega = $dt['tb_persentrega_id'];
-    $docrecepdocumentos = $dt['tb_persrecepcion_doc'];
-    $nomrecepdocumentos = $dt['tb_persrecepcion_nom'];
-    $idrecepdocumentos = $dt['tb_persrecepcion_id'];
-    $docpersrecojo = $dt['tb_persrecoge_doc'];
-    $nompersrecojo = $dt['tb_persrecoge_nom'];
-    $idpersrecojo = $dt['tb_persrecoge_id'];
-    $pendiente = $dt['tb_recepciondocumentos_pendientes'];
-    $observaciones = $dt['tb_recepciondocumentos_observacion'];
+    $domicilio_fiscal = $dt['tb_domicilio_fiscal'];
+    $fecha_recepcion = mostrarFecha($dt['tb_fecha_recepcion']);
+    $notaria = $dt['tb_notaria'];
+    $fecha_legalizacion = mostrarFecha($dt['tb_fecha_legalizacion']);
+    $fecha_recojo = mostrarFecha($dt['tb_fecha_recojo']);
+    $numdoc = $dt['tb_numdoc'];
+    $regimen = $dt['tb_regimen_tributario'];
+    $cantidad_libros = $dt['tb_cantidad_libros'];
+    $id_responsable = $dt['tb_responsable_id'];
+    $doc_responsable = $dt['tb_responsable_doc'];
+    $nom_responsable = $dt['tb_responsable_nom'];
+    $libros_legalizados = $dt['tb_libros_legalizados'];
+    $libros_nolegalizados = $dt['tb_libros_nolegalizados'];
+    $pendiente_cobro = $dt['tb_pendiente_cobro'];
+    $observaciones = $dt['tb_observaciones'];
 
 	mysql_free_result($dts);
 }
@@ -185,79 +188,82 @@ $(function() {
 });
 </script>
 <form id="for_recdoc">
-<input name="action_afp" id="action_afp" type="hidden" value="<?php echo $_POST['action']?>">
-    <input name="hdd_afp_id" id="hdd_afp_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
-    <input name="hdd_recdoc_empresa_id" id="hdd_recdoc_empresa_id" type="hidden" value="<?php echo $recid_empresa ?>">
-    <input name="hdd_perspentrega_id" id="hdd_perspentrega_id" type="hidden" value="<?php echo $idpersentrega ?>">
-    <input name="hdd_recepdocumentos_id" id="hdd_recepdocumentos_id" type="hidden" value="<?php echo $idrecepdocumentos?>">
-    <input name="hdd_docpersrecojo_id" id="hdd_docpersrecojo_id" type="hidden" value="<?php echo $idpersrecojo?>">
+<input name="action_legalizacionlibros" id="action_legalizacionlibros" type="hidden" value="<?php echo $_POST['action']?>">
+    <input name="hdd_legalizacionlibros_id" id="hdd_afp_id" type="hidden" value="<?php echo $_POST['legalizacionlibros_id'] ?>">
+    <input name="hdd_empresa_id" id="hdd_empresa_id" type="hidden" value="<?php echo $id_empresa ?>">
+    <input name="hdd_responsable_id" id="hdd_responsable_id" type="hidden" value="<?php echo $id_responsable ?>">
 
     <table>
         <tr>
             <td align="right" valign="top">Empresa:</td>
             <td>
-                <input name="txt_recdoc_empresa" type="text" id="txt_recdoc_empresa" value="<?php echo $recdoc_empresa?>" size="10" maxlength="11">
-                <input name="txt_recnom_empresa" type="text" id="txt_recnom_empresa" value="<?php echo $recnom_empresa?>" size="30">
+                <input name="txt_doc_empresa" type="text" id="txt_doc_empresa" value="<?php echo $doc_empresa?>" size="10" maxlength="11">
+                <input name="txt_nom_empresa" type="text" id="txt_nom_empresa" value="<?php echo $nom_empresa?>" size="30">
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Fecha de Declaración:</td>
-            <td><input name="txt_fech_decl" type="text" id="txt_fech_decl" value="<?php echo $fech_decl?>" size="41" maxlength="10"></td>
-        </tr>
-        <tr>
-            <td align="right" valign="top">Fecha de Vencimiento:</td>
-            <td><input name="txt_fech_ven" type="text" id="txt_fech_ven" value="<?php echo $fech_ven?>" size="41" maxlength="10"></td>
-        </tr>
-        <tr>
-            <td align="right" valign="top">Fecha de Envio Correo:</td>
-            <td><input name="txt_fech_envio" type="text" id="txt_fech_decl" value="<?php echo $fech_envio?>" size="41" maxlength="10"></td>
-        </tr>
-        <tr>
-            <td align="right" valign="top">Estado Envio:</td>
+            <td align="right" valign="top">Lugar Domicilio Fiscal</td>
             <td>
-                <select name="cmb_estado_envio" id="cmb_estado_envio">
-                    <option value="1"<?php if($estado_envio==True)echo 'selected'?>>Enviado</option>
-                    <option value="0"<?php if($estado_envio==False)echo 'selected'?>>Pendiente</option>
+                <input name="txt_domicilio_fiscal" type="text" id="txt_domicilio_fiscal" value="<?php echo $domicilio_fiscal?>" size="30">
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Fecha de Recepción:</td>
+            <td><input name="txt_fecha_recepcion" type="text" id="txt_fecha_recepcion" value="<?php echo $fecha_recepcion?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Notaria</td>
+            <td>
+                <input name="txt_notaria" type="text" id="txt_notaria" value="<?php echo $notaria?>" size="30">
+            </td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Fecha de Legalizacion:</td>
+            <td><input name="txt_fecha_legalizacion" type="text" id="txt_fecha_legalizacion" value="<?php echo $fecha_legalizacion?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Fecha de Recojo:</td>
+            <td><input name="txt_fecha_recojo" type="text" id="txt_fecha_recojo" value="<?php echo $fecha_recojo?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">NUMDOC:</td>
+            <td><input name="txt_fecha_numdoc" type="text" id="txt_fecha_numdoc" value="<?php echo $numdoc?>" size="41" maxlength="10"></td>
+        </tr>
+
+        <tr>
+            <td align="right" valign="top">Regimen Tributario:</td>
+            <td>
+                <select name="cmb_opcion_com" id="cmb_opcion_com">
+                    <option value="1"<?php if($regimen==1)echo 'selected'?>>Regimen Especial</option>
+                    <option value="2"<?php if($regimen==2)echo 'selected'?>>Regimen MYPE Tributario</option>
+                    <option value="3"<?php if($regimen==3)echo 'selected'?>>Regimen General</option>
                 </select>
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">AFP No declarados:</td>
+            <td align="right" valign="top">Cantidad de Libros:</td>
+            <td><input name="txt_cantidad_libros" type="text" id="txt_cantidad_libros" value="<?php echo $cantidad_libros?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Responsable de Legalización:</td>
             <td>
-                <input name="txt_afp_decl" type="text" id="txt_afp_decl" value="<?php echo $afp_decl?>" size="30">
+                <input name="txt_doc_responsable" type="text" id="txt_doc_responsable" value="<?php echo $doc_empresa?>" size="10" maxlength="11">
+                <input name="txt_nom_responsable" type="text" id="txt_nom_responsable" value="<?php echo $nom_empresa?>" size="30">
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Pago Realizado:</td>
-            <td>
-                <select name="cmb_pago_realizado" id="cmb_pago_realizado">
-                    <option value="1"<?php if($pago_realizado==True)echo 'selected'?>>Efectuado</option>
-                    <option value="0"<?php if($pago_realizado==False)echo 'selected'?>>Pendiente</option>
-                </select>
-            </td>
+            <td align="right" valign="top">Libros Legalizados:</td>
+            <td><input name="txt_libros_legalizados" type="text" id="txt_libros_legalizados" value="<?php echo $libros_legalizados?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Deudas pendientes:</td>
-            <td>
-                <input name="txt_deudas" type="text" id="txt_deudas" value="<?php echo $deudas?>" size="30">
-            </td>
+            <td align="right" valign="top">Libros No Legalizados:</td>
+            <td><input name="txt_libros_nolegalizados" type="text" id="txt_libros_nolegalizados" value="<?php echo $libros_nolegalizados?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">Resp. Recojo:</td>
-            <td>
-                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11">
-                <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30">
-            </td>
+            <td align="right" valign="top">Pendiente Cobro:</td>
+            <td><input name="txt_pendiente_cobro" type="text" id="txt_pendiente_cobro" value="<?php echo $pendiente_cobro?>" size="41" maxlength="10"></td>
         </tr>
-        <tr>
-            <td align="right" valign="top">Pendientes:</td>
-            <td>
-                <select name="cmb_pendiente" id="cmb_pendiente">
-                    <option value="1"<?php if($pendiente==True)echo 'selected'?>>Trajo</option>
-                    <option value="0"<?php if($pendiente==False)echo 'selected'?>>No Trajo</option>
-                </select>
-            </td>
-        </tr>
+
         <tr>
             <td align="right" valign="top">Observaciones:</td>
             <td>

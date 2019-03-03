@@ -1,12 +1,16 @@
 <?php
 class cLegalizacionlibros{
-	function insertar($fec,$id_cliente,$perspentrega_id,$persrecepcion_id,$persrecoge_id,$pendiente,$obs){
+	function insertar($id_cliente,$domicilio_fiscal,$fecha_recepcion,$notaria,$fecha_legalizacion,$fecha_recojo,$numdoc,
+                      $regimen,$cant_libros,$id_responsable,$libros_legalizados,$lib_nolegalizados,$pendiente_cobro,$obs){
 	$sql = "INSERT tb_legalizacionlibros (
-		`tb_legalizacionlibros_fecha`,`tb_cliente_id`,`tb_persentrega_id`,`tb_persrecepcion_id`,`tb_persrecoge_id`,`tb_legalizacionlibros_pendientes`
-		,`tb_legalizacionlibros_observacion`
+		`tb_cliente_id`,`tb_domicilio_fiscal`,`tb_fecha_recepcion`,`tb_notaria`,`tb_fecha_legalizacion`,`tb_fecha_recojo`,
+		`tb_numdoc`,`tb_regimen_tributario`,`tb_cantidad_libros`,`tb_responsable_id`,`tb_libros_legalizados`,
+		`tb_libros_nolegalizados`,`tb_pendiente_cobro`,,`tb_observaciones`
 		)
 		VALUES (
-		 '$fec','$id_cliente','$perspentrega_id','$persrecepcion_id','$persrecoge_id','$pendiente','$obs'
+		 '$id_cliente','$domicilio_fiscal','$fecha_recepcion','$notaria','$fecha_legalizacion','$fecha_recojo',
+		 '$numdoc','$regimen','$cant_libros','$id_responsable','$libros_legalizados','$lib_nolegalizados',
+		 '$pendiente_cobro','$obs'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -19,46 +23,49 @@ class cLegalizacionlibros{
 	return $rst;	
 	}
 	function mostrarTodos(){
-	$sql="SELECT r.tb_legalizacionlibros_id, r.tb_legalizacionlibros_observacion, r.tb_legalizacionlibros_fecha, 
-    r.tb_legalizacionlibros_pendientes, r.tb_cliente_id, r.tb_persentrega_id, r.tb_persrecepcion_id, r.tb_persrecoge_id, 
-    cr.tb_cliente_nom AS tb_cliente_nom, cr.tb_cliente_dir AS tb_cliente_dir, cr.tb_cliente_tel AS tb_cliente_tel, pe.tb_cliente_nom AS tb_persentrega_nom, pr.tb_cliente_nom AS tb_persrecepcion_nom,
-    pg.tb_cliente_nom AS tb_persrecoge_nom, cr.tb_cliente_doc AS tb_cliente_doc, pe.tb_cliente_doc AS tb_persentrega_doc,
-    pr.tb_cliente_doc AS tb_persrecepcion_doc, pg.tb_cliente_doc AS tb_persrecoge_doc
-	FROM tb_legalizacionlibros r
-	INNER JOIN tb_cliente cr ON r.tb_cliente_id = cr.tb_cliente_id
-	INNER JOIN tb_cliente pe ON r.tb_persentrega_id = pe.tb_cliente_id
-	INNER JOIN tb_cliente pr ON r.tb_persrecepcion_id = pr.tb_cliente_id
-	INNER JOIN tb_cliente pg ON r.tb_persrecoge_id = pg.tb_cliente_id
-	ORDER BY tb_legalizacionlibros_fecha";
+	$sql="SELECT ll.tb_legalizacionlibros_id, ep.tb_cliente_nom, ll.tb_domicilio_fiscal,ll.tb_fecha_recepcion,
+    ll.tb_notaria, ll.tb_fecha_legalizacion, ll.tb_fecha_recojo,ll.tb_numdoc,ll.tb_regimen_tributario,
+    ll.tb_cantidad_libros, pr.tb_cliente_nom AS tb_responsable_nom, ll.tb_libros_legalizados, ll.tb_libros_nolegalizados,
+    ll.tb_pendiente_cobro, ll.tb_observaciones
+	FROM tb_legalizacionlibros ll
+	INNER JOIN tb_cliente ep ON ep.tb_cliente_id = ll.tb_cliente_id
+	INNER JOIN tb_cliente pr ON pr.tb_cliente_id = ll.tb_responsable_id
+  
+	ORDER BY tb_fecha_recepcion";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function mostrarUno($id){
-	$sql="SELECT r.tb_legalizacionlibros_id, r.tb_legalizacionlibros_observacion, r.tb_legalizacionlibros_fecha, 
-    r.tb_legalizacionlibros_pendientes, r.tb_cliente_id, r.tb_persentrega_id, r.tb_persrecepcion_id, r.tb_persrecoge_id, 
-    cr.tb_cliente_nom AS tb_cliente_nom, pe.tb_cliente_nom AS tb_persentrega_nom, pr.tb_cliente_nom AS tb_persrecepcion_nom,
-    pg.tb_cliente_nom AS tb_persrecoge_nom, cr.tb_cliente_doc AS tb_cliente_doc, pe.tb_cliente_doc AS tb_persentrega_doc,
-    pr.tb_cliente_doc AS tb_persrecepcion_doc, pg.tb_cliente_doc AS tb_persrecoge_doc
-	FROM tb_legalizacionlibros r
-	INNER JOIN tb_cliente cr ON r.tb_cliente_id = cr.tb_cliente_id
-	INNER JOIN tb_cliente pe ON r.tb_persentrega_id = pe.tb_cliente_id
-	INNER JOIN tb_cliente pr ON r.tb_persrecepcion_id = pr.tb_cliente_id
-	INNER JOIN tb_cliente pg ON r.tb_persrecoge_id = pg.tb_cliente_id
+	$sql="SELECT ll.tb_legalizacionlibros_id, ll.tb_cliente_id, ep.tb_cliente_nom, ll.tb_domicilio_fiscal,ll.tb_fecha_recepcion,
+    ll.tb_notaria, ll.tb_fecha_legalizacion, ll.tb_fecha_recojo,ll.tb_numdoc,ll.tb_regimen_tributario,
+    ll.tb_cantidad_libros,ll.tb_responsable_id, pr.tb_cliente_nom AS tb_responsable_nom, ll.tb_libros_legalizados, ll.tb_libros_nolegalizados,
+    ll.tb_pendiente_cobro, ll.tb_observaciones
+	FROM tb_legalizacionlibros ll
+	INNER JOIN tb_cliente ep ON ep.tb_cliente_id = ll.tb_cliente_id
+	INNER JOIN tb_cliente pr ON pr.tb_cliente_id = ll.tb_responsable_id
 	WHERE tb_legalizacionlibros_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$fec,$id_cliente,$perspentrega_id,$persrecepcion_id,$persrecoge_id,$pendiente,$obs){
+	function modificar($id,$id_cliente,$domicilio_fiscal,$fecha_recepcion,$notaria,$fecha_legalizacion,$fecha_recojo,$numdoc,
+                       $regimen,$cant_libros,$id_responsable,$libros_legalizados,$lib_nolegalizados,$pendiente_cobro,$obs){
 	$sql = "UPDATE tb_legalizacionlibros SET  
-	`tb_legalizacionlibros_fecha` =  '$fec',
 	`tb_cliente_id` =  '$id_cliente',
-	`tb_persentrega_id` =  '$perspentrega_id',
-	`tb_persrecepcion_id` =  '$persrecepcion_id',
-	`tb_persrecoge_id` =  '$persrecoge_id',
-	`tb_legalizacionlibros_pendientes` =  '$pendiente',
-	`tb_legalizacionlibros_observacion` =  '$obs'
+	`tb_domicilio_fiscal` =  '$domicilio_fiscal',
+	`tb_fecha_recepcion` =  '$fecha_recepcion',
+	`tb_notaria` =  '$notaria',
+	`tb_fecha_legalizacion` =  '$fecha_legalizacion',
+	`tb_fecha_recojo` =  '$fecha_recojo',
+	`tb_numdoc` =  '$numdoc',
+	`tb_regimen_tributario` =  '$regimen',
+	`tb_cantidad_libros` =  '$cant_libros',
+	`tb_responsable_id` =  '$id_responsable',
+	`tb_libros_legalizados` =  '$libros_legalizados',
+	`tb_libros_nolegalizados` =  '$lib_nolegalizados',
+	`tb_pendiente_cobro` =  '$pendiente_cobro',
+	`tb_observaciones` =  '$obs'
 	WHERE  tb_legalizacionlibros_id =$id;";
 
 	$oCado = new Cado();
