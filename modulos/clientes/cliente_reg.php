@@ -10,16 +10,26 @@ if($_POST['action_cliente']=="insertar")
 	{
 		$cst1 = $oCliente->verifica_cliente_doc($_POST['txt_cli_doc'],0);
 		$rst1= mysql_num_rows($cst1);
-		
-		if($rst1>0)
-		{
-			$dt = mysql_fetch_array($cst1);
-			$cli_id=$dt['tb_cliente_id'];
-			mysql_free_result($cst1);
-			
-			$data['cli_id']=$cli_id;
-			$data['cli_msj']='Existe cliente con el mismo número de documento '.$_POST['txt_cli_doc'].'.';
-		}
+
+        if($rst1>0)
+        {
+            $dt = mysql_fetch_array($cst1);
+            $cli_id=$dt['tb_cliente_id'];
+            mysql_free_result($cst1);
+
+            $cst2 = $oCliente->verifica_cliente_nombre($_POST['txt_cli_doc'],0);
+            $dt = mysql_fetch_array($cst2);
+            $cli_nom=$dt['tb_cliente_nom'];
+            if($cli_nom=="")// cliente con nombre vacio
+            {
+                $oCliente->actualizar_nombre(
+                    $cli_id,
+                    strip_tags(limpia_espacios($_POST['txt_cli_nom'])));
+            }
+
+            $data['cli_id']=$cli_id;
+            $data['cli_msj']='Existe cliente con el mismo número de documento '.$_POST['txt_cli_doc'].'.';
+        }
 		else
 		{
 			$oCliente->insertar(

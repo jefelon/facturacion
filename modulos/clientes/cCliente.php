@@ -112,6 +112,23 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function verifica_cliente_nombre($doc,$cli_id){
+        $sql="SELECT * 
+	FROM tb_cliente 
+	WHERE tb_cliente_doc LIKE '$doc' ";
+        if($cli_id>0)$sql.= " AND tb_cliente_id <> $cli_id ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function actualizar_nombre($id,$nom){
+        $sql = "UPDATE tb_cliente SET  
+	`tb_cliente_nom` =  '$nom'
+	WHERE tb_cliente_id =$id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function eliminar($id){
 	$sql="DELETE FROM tb_cliente WHERE tb_cliente_id=$id";
 	$oCado = new Cado();
