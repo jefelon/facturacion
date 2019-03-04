@@ -231,10 +231,10 @@ $(function() {
                         <?php if($cantidad_total == 0){
                             echo formato_decimal(0.000, 2);
                         }else{
-                            echo formato_decimal($costo_promedio,2);
+                            echo formato_decimal($precio_promedio,2);
                         } ?>
                     </td>
-                    <td align="right"><?php echo formato_decimal($costo_promedio*$cantidad_total,2) ?></td>
+                    <td align="right"><?php echo formato_decimal($precio_promedio*$cantidad_total,2) ?></td>
 
                 </tr>
                 <?php

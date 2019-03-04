@@ -153,6 +153,17 @@ $menu_administrador=
 
 	</ul>
   </li>
+  
+  <li class="topmenu"><a href="#">Integración</a>
+	<ul>
+	  <li class="topmenu"><span><a href="#" >NetSoft</a></span>
+	    <ul>
+		  <li><a href="../integracion/compra_vista_adm.php">Compras</a></li>
+		  <li><a href="../integracion/venta_vista_adm.php">Ventas</a></li>
+	    </ul>
+	  </li>
+	</ul>
+  </li>
    <li class="topmenu"><a href="#">Contable</a>
 	<ul>
       <li class="topmenu"><a href="../contable/ple_vista.php">PLE - 5.1.0.0 (Actualizado el 01.03.2018)</a></li>

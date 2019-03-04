@@ -97,6 +97,24 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+    function mostrar_filtro_integracion($fec1,$fec2,$mon,$pro_id,$est,$emp_id){
+        $sql="SELECT * 
+	FROM tb_compra c
+	INNER JOIN tb_proveedor p ON c.tb_proveedor_id=p.tb_proveedor_id
+	INNER JOIN tb_documento d ON c.tb_documento_id=d.tb_documento_id
+	INNER JOIN tb_almacen a ON c.tb_almacen_id=a.tb_almacen_id
+	LEFT JOIN tb_tipocambio tc ON c.tb_compra_fec = tc.tb_tipocambio_fec
+	WHERE c.tb_empresa_id = $emp_id AND tb_compra_fec BETWEEN '$fec1' AND '$fec2' ";
+
+        if($mon>0)$sql.=" AND tb_compra_mon = $mon ";
+        if($pro_id>0)$sql.=" AND c.tb_proveedor_id = $pro_id ";
+        if($est!="")$sql.=" AND tb_compra_est LIKE '$est' ";
+
+        $sql.=" ORDER BY tb_compra_fec ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_filtro($fec1,$fec2,$mon,$pro_id,$est,$emp_id){
 	$sql="SELECT * 
 	FROM tb_compra c
