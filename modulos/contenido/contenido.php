@@ -159,6 +159,7 @@ $menu_administrador=
 	  <li><a href="../contable/registro_compras.php">Contable1</a></li>
 	  <li><a href="../contable/registro_compras.php">Contable2</a></li>
        <li><a href="../contable/contable_vista_registro.php">Informes Contables</a></li>
+       <li><a href="../tributos/">Tributos Contables</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#">Opciones</a>
