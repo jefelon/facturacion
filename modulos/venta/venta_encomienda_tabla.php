@@ -146,45 +146,49 @@ $num_rows= mysql_num_rows($dts1);
             pedir_clave(enc_id);
         }
     }
-    function pagar_encomienda(act,idf){
-        var cli_id = venta_clientereserva_reg();
-        $.ajax({
-            type: "POST",
-            url: "../venta/venta_reg2.php",
-            async:true,
-            dataType: "json",
-            data: ({
-                action_venta: act,
-                ven_id:	idf,
-                cmb_ven_doc: $('#cmb_ven_doc').val(),
-                cli_id: cli_id,
-                chk_imprimir:1
-            }),
-            beforeSend: function() {
-                $('#msj_venta').html("Cargando...");
-                $('#msj_venta').show(100);
-            },
-            success: function(data){
-                $('#msj_venta').html(data.ven_msj);
-                $('#msj_venta').show();
+    function pagar_encomienda(act,idf) {
 
-                if(data.ven_sun=='enviar')
-                {
-                    enviar_sunat(data.ven_id,data.ven_act);
-                }
-                else
-                {
-                    if(data.ven_act=='imprime')
-                    {
-                        venta_impresion(data.ven_id);
+        if ($('#txt_dni').val()=="") {
+            alert("Escriba el DNI del cliente y presione la tecla ENTER para obtener sus datos...");
+            $('#txt_dni').focus();
+        }
+        else{
+            var cli_id = venta_clientereserva_reg();
+            $.ajax({
+                type: "POST",
+                url: "../venta/venta_reg2.php",
+                async: true,
+                dataType: "json",
+                data: ({
+                    action_venta: act,
+                    ven_id: idf,
+                    cmb_ven_doc: $('#cmb_ven_doc').val(),
+                    cli_id: cli_id,
+                    chk_imprimir: 1
+                }),
+                beforeSend: function () {
+                    $('#msj_venta').html("Cargando...");
+                    $('#msj_venta').show(100);
+                },
+                success: function (data) {
+                    $('#msj_venta').html(data.ven_msj);
+                    $('#msj_venta').show();
+
+                    if (data.ven_sun == 'enviar') {
+                        enviar_sunat(data.ven_id, data.ven_act);
                     }
-                }
+                    else {
+                        if (data.ven_act == 'imprime') {
+                            venta_impresion(data.ven_id);
+                        }
+                    }
 
-            },
-            complete: function(){
-                venta_encomienda_tabla();
-            }
-        });
+                },
+                complete: function () {
+                    venta_encomienda_tabla();
+                }
+            });
+        }
     }
 
 
