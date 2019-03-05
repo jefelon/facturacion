@@ -20,17 +20,18 @@ html {
 body {
 	margin: 0;
 	padding: 0;
+	background: url(../../images/fondo_sistema2.jpg);
 	background-color: #e9ebee;
 	color: #1d2129;
 	/*font-family: Helvetica, Arial, sans-serif;*/
 	font-family: Verdana, Geneva, sans-serif;
-	font-size: 11px;
+	font-size: 16px;
 }
 
 td,th {
 	/*font-family: Helvetica, Arial, sans-serif;*/
 	font-family: Helvetica, Arial, sans-serif;
-	font-size: 12px;
+	font-size: 13px;
 }
 ul, ol, dl { /* Debido a las diferencias existentes entre los navegadores, es recomendable no añadir relleno ni márgenes en las listas. Para lograr coherencia, puede especificar las cantidades deseadas aquí o en los elementos de lista (LI, DT, DD) que contienen. Recuerde que lo que haga aquí se aplicará en cascada en la lista .nav, a no ser que escriba un selector más específico. */
 	padding: 0;
@@ -73,7 +74,6 @@ a img { /* este selector elimina el borde azul predeterminado que se muestra en 
 	/* [disabled]max-width:1300px; */
 	min-height:600px;
 	/*height:100%;*/
-	background: #FFFFFF;
 	margin: 0 auto; /* el valor automático de los lados, unido a la anchura, centra el diseño  */
 	padding: 5px 0;
 	border-radius: 10px;
@@ -98,7 +98,6 @@ header {
 	padding-bottom: 10px;
 }
 .content {
-	background:#FFF;
 	/*padding: 1px 0;*/
 	width: 100%;
 	float: left;
@@ -110,9 +109,10 @@ header {
 .contenido{
 	width: 100%;
 	/*padding:3px 0;*/
-	border-radius: 7px;  
-    -moz-border-radius: 7px;  
-    -webkit-border-radius: 7px;
+	background: #fff;
+	border-radius: 7px;
+	-moz-border-radius: 7px;
+	-webkit-border-radius: 7px;
 	/*border:1px solid #025A8D;*/
 	margin: 0 auto;
 }
@@ -120,8 +120,8 @@ header {
 	width: 100%;
 	padding:2px 0;
 	/*
-	border-radius: 7px;  
-    -moz-border-radius: 7px;  
+	border-radius: 7px;
+    -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
 	border:1px solid #025A8D;*/
 	margin: 0 auto;
@@ -129,8 +129,8 @@ header {
 .contenido_tabla{
 	width: 99%;
 	padding:3px 0;
-	/*border-radius: 7px;  
-    -moz-border-radius: 7px;  
+	/*border-radius: 7px;
+    -moz-border-radius: 7px;
     -webkit-border-radius: 7px;
 	border:1px solid #CCC;*/
 	margin: 0 auto;
@@ -185,7 +185,7 @@ header, section, footer, aside, nav, article, figure {
 	vertical-align: middle;
 	text-align:center;
 	float:right;
-	
+
 }
 
 .menu_user {
@@ -206,12 +206,14 @@ form {
 
 fieldset {
 	margin-bottom: 5px;
-	border: 1px #ccc solid;
+	border: 1px #f5f2f2 solid;
 	padding: 5px 5px 5px 5px;
 	text-align: left;
-	-moz-border-radius:5px;   
-  	border-radius: 20px;   
-  	-webkit-border-radius: 5px; //edit :D 
+	-moz-border-radius:5px;
+	border-radius: 20px;
+	/*background:#b9d1ea;*/
+	-webkit-border-radius: 5px; //edit :D
+
 }
 
 legend {
@@ -280,30 +282,30 @@ form label.error{
 	-webkit-transition: all 0.4s ease-in-out;
 }
 .ButtonT:hover {
-background:#4195DD;
-background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4195DD), to(#003C82));
-border-color: #3278BE;
-color: white;
-cursor:pointer;
+	background:#4195DD;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4195DD), to(#003C82));
+	border-color: #3278BE;
+	color: white;
+	cursor:pointer;
 }
 .ButtonT {
--webkit-transition: none;
-background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#EEE));
-/*border: 1px solid #DDD;*/
-border: 1px solid #3278BE;
-border-bottom-left-radius: 3px 3px;
-border-bottom-right-radius: 3px 3px;
-border-top-left-radius: 3px 3px;
-border-top-right-radius: 3px 3px;
-color: black;
-/*display: block;*/
-font-family: Verdana, Geneva, sans-serif;
-/*font-weight:bold;*/
-font-size: 11px;
-padding: 1px 7px 1px 7px;
-text-align: center;
-text-decoration: none;
-/*width: 478px;*/
+	-webkit-transition: none;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(white), to(#EEE));
+	/*border: 1px solid #DDD;*/
+	border: 1px solid #3278BE;
+	border-bottom-left-radius: 3px 3px;
+	border-bottom-right-radius: 3px 3px;
+	border-top-left-radius: 3px 3px;
+	border-top-right-radius: 3px 3px;
+	color: black;
+	/*display: block;*/
+	font-family: Verdana, Geneva, sans-serif;
+	/*font-weight:bold;*/
+	font-size: 11px;
+	padding: 1px 7px 1px 7px;
+	text-align: center;
+	text-decoration: none;
+	/*width: 478px;*/
 }
 
 /*login*/
@@ -312,9 +314,9 @@ text-decoration: none;
 	border: 1px #ccc solid;
 	padding: 7px 7px 7px 7px;
 	text-align: left;
-	-moz-border-radius:5px;   
-  	border-radius: 5px;   
-  	-webkit-border-radius: 5px; //edit :D 
+	-moz-border-radius:5px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px; //edit :D
 }
 
 .leg {
@@ -582,7 +584,7 @@ text-decoration: none;
 /*TABLA FLUJO DE GASTOS*/
 /*encabezados*/
 .flujo_enc {
-	background-color:#EBEBEB;	
+	background-color:#EBEBEB;
 }
 .flujo_enc1 {
 	font-size: 11px;
@@ -614,34 +616,34 @@ text-decoration: none;
 }
 /*colores tabla*/
 .entrada_1 {
-	background-color:#CEF6CE;	
+	background-color:#CEF6CE;
 }
 .entrada_2 {
-	background-color:#CEE3F6;	
+	background-color:#CEE3F6;
 }
 .entrada_5 {
-	background-color:#E0F8E0;	
+	background-color:#E0F8E0;
 }
 .salida_1 {
-	background-color:#F6CECE;	
+	background-color:#F6CECE;
 }
 .salida_2 {
-	background-color:#CEE3F6;	
+	background-color:#CEE3F6;
 }
 .salida_3 {
-	background-color:#EFF5FB;	
+	background-color:#EFF5FB;
 }
 .salida_4 {
-	background-color:#E0ECF8;	
+	background-color:#E0ECF8;
 }
 .salida_5 {
-	background-color:#F8E0E0;	
+	background-color:#F8E0E0;
 }
 .saldo_1 {
-	background-color:#F2F2F2;	
+	background-color:#F2F2F2;
 }
 .acumulado_1 {
-	background-color:#E6E6E6;	
+	background-color:#E6E6E6;
 }
 
 
@@ -668,7 +670,15 @@ div.m {
 .loading_16 { background: url(../../images/ui-anim_basic_16x16.gif) right center no-repeat; }
 .ui-autocomplete-loading { background: white url('../../images/ui-anim_basic_16x16.gif') right center no-repeat; }
 
-/*==========ESTILO ICONOS===========*/
+.ui-autocomplete{
+	background: #fff !important;
+}
+
+.ui-autocomplete li a {
+
+	padding: .1em 0.4em !important;
+	font-size: 9pt !important;
+}
 .iconos{
 	clear: both;
 }
@@ -778,11 +788,4 @@ div.m {
 	height: 100px;
 	background: url("../../images/iconos/icons8-play-button-100.png");
 }
-
-
-
-
-
-
-
 

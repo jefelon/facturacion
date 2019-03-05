@@ -1,4 +1,7 @@
 /*Div del menu*/
+
+@import url("https://use.fontawesome.com/releases/v5.4.1/css/all.css");
+
 #divmenu {
 	background: #F6F6F6;
 	background-color:#c1c1c1;
@@ -42,7 +45,7 @@ ul#menu1,ul#menu1 ul{
 	border-style:solid;
 	/*border-color:#5f5f5f;*/
 	/*border-color:#5f5f5f;*/
-	border-color:#0079B2;	
+	border-color:#0079B2;
 	border-color:#EAEAEA;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
@@ -83,30 +86,30 @@ ul#menu1{
 	display:block;
 	font-size:0;
 	float:left;
-	}
+}
 ul#menu1 li{
 	display:block;
 	white-space:nowrap;
 	font-size:10px;
 	float:left;
-	}
+}
 ul#menu1>li,ul#menu1 li{
 	margin:0;
-	}
+}
 ul#menu1 a:active, ul#menu1 a:focus{
 	outline-style:none;
 	background-color:#c1c1c1;
-	}
+}
 ul#menu1 a{
 	display:block;
 	vertical-align:middle;
 	text-align:left;
 	text-decoration:none;
-	font:12px Verdana;
+	font:15px Verdana;
 	color:#000000;
 	/*text-shadow:#FFF 0 0 1px;*/
 	cursor:pointer;
-	padding:10px;
+	padding:5px;
 	background-color:#c1c1c1;
 	/*background-color:#EAEAEA;*/
 	background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADICAYAAAAp8ov1AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJGA41KpTYroIAAACASURBVCjP7ZE7DsJADESfJiL37znNXoJLUNARa7Ni6Bw5AtFEqXAx8vj/wfZNwBBAakPAWukQEJUu1RGVLt9su4yo9eJ3t0FrDWyTg58HezlujFPE9lXAQ8BdQM93R9LtM2ve/vnB22tcF/DaTpItJwHKVWcBk4BLwlw1/nAUvAGm30u0udPq+QAAAABJRU5ErkJggg==");
@@ -115,11 +118,13 @@ ul#menu1 a{
 	border-width:0 0 0 0px;
 	border-style:solid;
 	border-color:#C0C0C0;
-	}
+
+	padding-right: 16px;
+}
 ul#menu1 ul li{
 	display:block;
 	white-space:nowrap;
-	font-size:10px;
+	font-size:15px;
 	float:none;
 	/*margin:10px 0 0;*/
 }
@@ -133,56 +138,56 @@ ul#menu1 ul a{
 	border-radius:0px;
 	-moz-border-radius:0px;
 	-webkit-border-radius:0px;
-	font:11px Verdana;
+	font:15px Verdana;
 	color:#000;
 	text-decoration:none;
-	}
+}
 ul#menu1 li:hover>a{
 	display:block;
 	background-color:#0c97e2;
 	border-color:#C0C0C0;
 	border-style:solid;
-	font:12px Verdana;
+	font:15px Verdana;
 	color:#000000;
 	text-decoration:none;
 	/*text-shadow:#FFF 0 0 1px;*/
 	background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAADICAYAAAAp8ov1AAAAAXNSR0IArs4c6QAAAAZiS0dEAAAAAAAA+UO7fwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAAd0SU1FB9oJGA41KpTYroIAAACASURBVCjP7ZE7DsJADESfJiL37znNXoJLUNARa7Ni6Bw5AtFEqXAx8vj/wfZNwBBAakPAWukQEJUu1RGVLt9su4yo9eJ3t0FrDWyTg58HezlujFPE9lXAQ8BdQM93R9LtM2ve/vnB22tcF/DaTpItJwHKVWcBk4BLwlw1/nAUvAGm30u0udPq+QAAAABJRU5ErkJggg==");
 	background-position:0 100px;
-	}
+}
 ul#menu1 img{
 	border:none;
 	vertical-align:middle;
 	margin-right:10px;
-	}
+}
 ul#menu1 img.over{
 	display:none;
-	}
+}
 ul#menu1 li:hover > a img.def{
 	display:none;
-	}
+}
 ul#menu1 li:hover > a img.over{
 	display:inline;
-	}
+}
 ul#menu1 span{
 	display:block;
 	overflow:visible;
 	background-position:right center;
 	background-repeat:no-repeat;
 	padding-right:0px;
-	}
+}
 ul#menu1 ul li:hover{
 	display:block;
 	background-color:#0c97e2;
-	}
+}
 ul#menu1 ul span{
 	background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAIAAAD38zoCAAAABnRSTlMA/wD/AP83WBt9AAAAJ0lEQVR42mP8//8/AwNDfHw8kFy4cCEDDDBCJDDlEBJocoR0YNoBANV8HfcEGx0AAAAAAElFTkSuQmCC");
 	padding-right:28px;
-	}
+}
 ul#menu1 ul li:hover>a{
 	/*background-color:#ffffff;*/
 	background-color:#0c97e2;
 	background-image:none;
-	font:11px Verdana;
+	font:15px Verdana;
 	/*color:#0978b3;*/
 	color:#ffffff;
 	text-decoration:none;
@@ -198,36 +203,34 @@ ul#menu1 li.topfirst>a{
 	-webkit-border-top-left-radius:3px;
 	-webkit-border-bottom-right-radius:0;
 	-webkit-border-bottom-left-radius:3px;
-	}
+}
 ul#menu1 li.topfirst:hover>a{
-	line-height:5px;
-	}
+	line-height:10px;
+}
 ul#menu1 li.topmenu>a{
-	height:5px;
-	line-height:5px;
+	height:10px;
+	line-height:10px;
 }
 ul#menu1 li.topmenu:hover>a{
-	line-height:5px;
+	line-height:10px;
 	background-color:#0c97e2;
 }
 ul#menu1 li.toplast>a{
-	height:5px;
+	height:10px;
 	line-height:5px;
 	border-radius:0 0px 0px 0;
 	-moz-border-radius:0 0px 0px 0;
 	-webkit-border-radius:0;
 	-webkit-border-top-right-radius:3px;
 	-webkit-border-bottom-right-radius:3px;
-	}
+}
 ul#menu1 li.toplast:hover>a{
-	line-height:5px;
-	}
+	line-height:10px;
+}
 
 ul#menu1 ul li.separator:hover{
 	background-color:#ffffff;
 }
-
-
 
 /*****panel formulario*****/
 /* tamaño y forma del panel principal */
@@ -248,41 +251,41 @@ ul#tabs {
 	height: 24px;
 	z-index: 20;
 }
-	ul#tabs li {
-		float:left;
-		height: 23px;
-		padding-left: 5px;
-		list-style: none;
-		margin-right: 0px;
-		/*background:#069;*/
-		background:url(../../images/iconos/tabs.png) left -48px;
-	}
-	ul#tabs li.actual {
-		height: 24px;
-		background:url(../../images/iconos/tabs.png) left -72px;
-	}
-		ul#tabs li a {
-			display: block;
-				/* hack para ie6 */
-				.display: inline-block;
-				/* fin del hack */
-			height: 23px;
-			line-height: 23px;
-			padding-right: 5px;
-			outline: 0px none;
-			font-size:11px;
-			font-family:Verdana, Geneva, sans-serif;
-			text-decoration: none;
-			color: #000;
-			background: url(../../images/iconos/tabs.png) right 0px;
-		}
-		
-		ul#tabs li.actual a {
-			height: 24px;
-			line-height: 24px;
-			background: url(../../images/iconos/tabs.png) right -24px;
-			cursor: default;	
-		}
+ul#tabs li {
+	float:left;
+	height: 23px;
+	padding-left: 5px;
+	list-style: none;
+	margin-right: 0px;
+	/*background:#069;*/
+	background:url(../../images/iconos/tabs.png) left -48px;
+}
+ul#tabs li.actual {
+	height: 24px;
+	background:url(../../images/iconos/tabs.png) left -72px;
+}
+ul#tabs li a {
+	display: block;
+	/* hack para ie6 */
+.display: inline-block;
+	/* fin del hack */
+	height: 23px;
+	line-height: 23px;
+	padding-right: 5px;
+	outline: 0px none;
+	font-size:11px;
+	font-family:Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	color: #000;
+	background: url(../../images/iconos/tabs.png) right 0px;
+}
+
+ul#tabs li.actual a {
+	height: 24px;
+	line-height: 24px;
+	background: url(../../images/iconos/tabs.png) right -24px;
+	cursor: default;
+}
 
 /* Configuración de los paneles */
 div#panel #paneles {
@@ -298,15 +301,15 @@ div#panel #paneles {
 	overflow: hidden;
 	z-index: 10px;
 }
-	div#panel #paneles div {
-		margin:10px;
-		/*width: 800px;
-		height: 400px;*/
-		width:100%;
-		/*height:80%;*/
-		font-family:Verdana, Geneva, sans-serif;
-		font-size: 11px;
-		text-decoration: none;
-		color: #000;
-		overflow: auto;
-	}
+div#panel #paneles div {
+	margin:10px;
+	/*width: 800px;
+    height: 400px;*/
+	width:100%;
+	/*height:80%;*/
+	font-family:Verdana, Geneva, sans-serif;
+	font-size: 11px;
+	text-decoration: none;
+	color: #000;
+	overflow: auto;
+}
