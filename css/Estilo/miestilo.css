@@ -686,6 +686,8 @@ div.m {
 	border: 1px solid lightgrey;
 	margin-right: 1%;
 	margin-bottom: 1%;
+	background-color: white;
+	padding: 3px;
 }
 
 .iconos .botonera:hover{

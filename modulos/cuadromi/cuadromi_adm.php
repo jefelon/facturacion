@@ -124,7 +124,7 @@ $(function() {
 	.ui-dialog .ui-state-error { padding: .3em; }
 	.validateTips { border: 1px solid transparent; padding: 0.3em; }
 </style>
-<div  style="float:left;width: 50%">
+<div  style="float:left;width: 50%;">
     <div class="iconos">
         <a href="../compra/" target="_blank" class="botonera">
             <div class="compras"></div><span>COMPRAR</span>
@@ -169,7 +169,7 @@ $(function() {
     </div>
     <div class="iconos">
         <a href="../contable/contable_vista_registro.php" target="_blank" class="botonera">
-            <div class="infor_contable"></div><span>INFORME CONTABLE</span>
+            <div class="infor_contable"></div><span>INFOR. CONTABLE</span>
         </a>
         <a href="../contable/ple_vista.php" target="_blank" class="botonera">
             <div class="ple"></div><span>PLE SUNAT</span>
