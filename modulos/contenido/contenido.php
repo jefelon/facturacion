@@ -156,10 +156,8 @@ $menu_administrador=
    <li class="topmenu"><a href="#">Contable</a>
 	<ul>
       <li class="topmenu"><a href="../contable/ple_vista.php">PLE - 5.1.0.0 (Actualizado el 01.03.2018)</a></li>
-	  <li><a href="../contable/registro_compras.php">Contable1</a></li>
-	  <li><a href="../contable/registro_compras.php">Contable2</a></li>
        <li><a href="../contable/contable_vista_registro.php">Informes Contables</a></li>
-       <li><a href="../tributos/">Tributos Contables</a></li>
+       <li><a href="../tributos/">Cuadro de Tributos Mensuales</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#">Opciones</a>

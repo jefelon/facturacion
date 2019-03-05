@@ -679,3 +679,115 @@ div.m {
 	padding: .1em 0.4em !important;
 	font-size: 9pt !important;
 }
+.iconos{
+	clear: both;
+}
+.iconos .botonera{
+	border: 1px solid lightgrey;
+	margin-right: 1%;
+	margin-bottom: 1%;
+	background-color: white;
+	padding: 3px;
+}
+
+.iconos .botonera:hover{
+	border: 1px solid #00dd00;
+}
+
+.iconos a {
+	display: block;
+	float: left;
+	text-decoration: none;
+}
+
+.iconos a .ventas{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-cash-register-100.png");
+}
+
+.iconos a .compras{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-buy-100.png");
+}
+.iconos a .productos{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-box-100.png");
+}
+.iconos a .categorias{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-categorize-100.png");
+}
+.iconos a .marcas{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-marca-100.png");
+}
+.iconos a .inventario{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-en-inventario-100.png");
+}
+
+.iconos a .kardex{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-kardex-100.png");
+}
+.iconos a .grafico{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-bar-chart-100.png");
+}
+
+.iconos a .clientes{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-customers-100.png");
+}
+.iconos a .proveedores{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-supplier-100.png");
+}
+.iconos a .caja{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-cash-100.png");
+}
+.iconos a .ingresos{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-en-alza-100.png");
+}
+.iconos a .egresos{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-de-baja-100.png");
+}
+
+.iconos a .infor_contable{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-info_contable-100.png");
+}
+.iconos a .ple{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/ple-100.png");
+}
+.iconos a .usuario{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-user-menu-male-100.png");
+}
+
+.iconos a .videos{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-play-button-100.png");
+}
+

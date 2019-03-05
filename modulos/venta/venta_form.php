@@ -1318,7 +1318,7 @@ if($_POST['action']=="editar"){
         $( "#div_productos_servicios_tab" ).tabs();
 
         cmb_ven_doc();
-        cmb_ven_id();
+        //cmb_ven_id();
         cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
         lote_venta_car('restablecer');
 
@@ -2390,10 +2390,10 @@ if($_POST['action']=="editar"){
                         <select name="cmb_ven_doc" id="cmb_ven_doc" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                         </select>
                         <label for="txt_ven_numdoc">N° Doc:</label>
-                        <input name="txt_ven_numdoc" type="text" id="txt_ven_numdoc" style="text-align:right; font-size:14px"  value="<?php echo $ser.'-'.$num?>" size="10" readonly>
+                        <input name="txt_ven_numdoc" type="text" id="txt_ven_numdoc" style="text-align:right; font-size:14px"  value="<?php echo $ser.'-'.$num?>" size="8" readonly>
                         <?php //if($_POST['action']=="editar")echo $est?>
                         <?php if($_POST['action']=="insertar" || $_POST['action']=="insertar_cot"){?>
-                            <label for="chk_imprimir"> Imprimir Documento</label>
+                            <label for="chk_imprimir"> Imprimir Doc.</label>
                             <input name="chk_imprimir" type="checkbox" id="chk_imprimir" value="1" checked="CHECKED">
                         <?php }?>
                     </td>
@@ -2447,7 +2447,6 @@ if($_POST['action']=="editar"){
                             <option value="1" selected>Ticket</option>
                             <option value="2" selected>A4</option>
                         </select>
-                        <br>
                         <label for="cmb_ven_moneda">Moneda:</label>
                         <select name="cmb_ven_moneda" id="cmb_ven_moneda" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                             <option value="1" <?php if($monval=='1')echo 'selected'?>>SOLES</option>
@@ -2698,9 +2697,10 @@ if($_POST['action']=="editar"){
                     <?php
                     if($_SESSION['usuariogrupo_id']==2){
                         ?>
-                        <label for="hdd_usu_id">Vendedor:</label>
-                        <select name="hdd_usu_id" id="hdd_usu_id" <?php if($_POST['action']=='editar')echo 'disabled'?>>
-                        </select>
+<!--                        <label for="hdd_usu_id">Vendedor:</label>-->
+<!--                        <select name="hdd_usu_id" id="hdd_usu_id" --><?php //if($_POST['action']=='editar')echo 'disabled'?><!-->
+<!--                        </select>-->
+                        <input name="hdd_usu_id" id="hdd_usu_id" type="hidden" value="<?php echo $_SESSION['usuario_id']?>">
                         <?php if($_POST['action']=='insertar'||$_POST['action']=='insertar_cot') { ?>
 
                             <?php
@@ -2733,21 +2733,21 @@ if($_POST['action']=="editar"){
                         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
                         <span style="color: #00aa00;font-size: 25px; font-weight: bold">3.</span>
                         <label for="txt_bus_pro_codbar">COD</label>
-                        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="10">
+                        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="7">
                         <label for="txt_bus_pro_nom">NOM</label>
-                        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="28" style="font-size:13px; font-weight:bold">
+                        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="25" style="font-size:13px; font-weight:bold">
                         <input name="hdd_bus_pro_nom" type="hidden" id="hdd_bus_pro_nom">
 
                         <label for="txt_bus_cat_preven">S/.</label>
-                        <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="8" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
+                        <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="5" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
                         <label for="txt_bus_cat_can">CAN</label>
-                        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="5" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
+                        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="4" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
 
                         <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
                         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
                         <label for="txt_detcom_des">DES</label>
-                        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
+                        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="4" maxlength="5" style="text-align:right" >
                         <span style="color: #00aa00;font-size: 25px; font-weight: bold">4.</span>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
