@@ -129,7 +129,7 @@ $(function() {
         <a href="../compra/" target="_blank" class="botonera">
             <div class="compras"></div><span>COMPRAR</span>
         </a>
-        <a href="../venta/" target="_blank" class="botonera">
+        <a href="../venta/venta_vista.php" target="_blank" class="botonera">
             <div class="ventas"></div><span>VENDER</span>
         </a>
         <a href="../clientes/" target="_blank" class="botonera">
