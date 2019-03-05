@@ -38,7 +38,7 @@ if(isset($_POST['pro_cat']) and $_POST['pro_cat']>0)
 //echo $dc;			
 }
 
-$dts1=$oProducto->mostrar_filtro($_POST['pro_nom'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$_POST['limit'],$_POST['ordby']);
+$dts1=$oProducto->mostrar_filtro_stock($_POST['pro_nom'],$dc,$_POST['pro_mar'],$_SESSION['almacen_id'],$_POST['pro_est'],$_POST['limit'],$_POST['ordby']);
 $num_rows= mysql_num_rows($dts1);
 
 //orden
@@ -88,6 +88,7 @@ $(document).ready(function() {
                     <th>LOTE</th>
                     <th>MODIFICACION</th>
                     <th>ESTADO</th>
+                    <th>STOCK</th>
                     <th align="center" title="N° PRESENTACIONES">PRES</th>
                     <th>&nbsp;</th>
                 </tr>
@@ -97,7 +98,12 @@ $(document).ready(function() {
             ?>
             <tbody>
                 <?php
-					while($dt1 = mysql_fetch_array($dts1)){?>
+					while($dt1 = mysql_fetch_array($dts1)){
+                        $stock=$dt1['tb_stock_num'];
+
+                        $st_uni=floor($stock);
+					    ?>
+
                         <tr>
                             <td><?php echo $dt1['tb_presentacion_cod']?></td>
                             <td><?php echo $dt1['tb_producto_nom']?></td>
@@ -108,6 +114,7 @@ $(document).ready(function() {
                             <td><?php echo $dt1['tb_producto_lote']?></td>
                             <td><?php echo mostrarFechaHora($dt1['tb_producto_mod'])?></td>
                             <td><?php echo $dt1['tb_producto_est']?></td>
+                            <td><?php echo $st_uni?></td>
                             <td align="center"><?php
 							$dts2=$oPresentacion->mostrar_por_producto($dt1['tb_producto_id']);
 							echo mysql_num_rows($dts2);
