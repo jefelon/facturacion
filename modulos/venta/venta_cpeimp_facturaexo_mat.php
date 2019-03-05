@@ -86,6 +86,7 @@ $dts= $oVenta->mostrarUno($ven_id);
 $dt = mysql_fetch_array($dts);
 //$reg  =mostrarFechaHora($dt['tb_venta_reg']);
 $reg  =mostrarFechaHoraH($dt['tb_venta_reg']);
+$hora = mostrarHora($dt['tb_venta_reg']);
 
 $fec  =mostrarFecha($dt['tb_venta_fec']);
 
@@ -100,6 +101,7 @@ $cli_dir=$dt['tb_cliente_dir'];
 $cui = $dt['tb_cliente_cui'];
 
 $valven =$dt['tb_venta_valven'];
+$exo = $dt['tb_venta_exo'];
 $igv  =$dt['tb_venta_igv'];
 $tot  =$dt['tb_venta_tot'];
 
@@ -150,7 +152,6 @@ while($dt = mysql_fetch_array($dts))
     $lab3=$dt['tb_venta_lab3'];
 
 }
-
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
 $num_rows_vp= mysql_num_rows($rws1);
@@ -298,20 +299,32 @@ if($impresion=='pdf')ob_start();
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="centrado" style="font-size: 18px;">
+                    <td colspan="4" class="centrado" >
+                        <img src="<?php echo $empresa_logo ?>" alt="" width="auto" height="auto">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado negrita" style="font-size: 15px;">
                         <?php echo $emp_razsoc ?>
                     </td>
                 </tr>
                 <tr>
+                    <td colspan="4" class="centrado negrita">
+                        RUC: <?php echo $emp_ruc ?>
+                    </td>
+                </tr>
+                <tr>
                     <td colspan="4" class="centrado">
-                        <?php if ($imprimir_direccion == 1) echo $emp_dir . ' - ' . $emp_tel . ' ' . $emp_dir2 ?>
+                        <?php if ($imprimir_direccion == 1) echo $emp_dir . ' - ' . $emp_tel . ' - ' . '054-666706' .' ' . $emp_dir2 ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado">
+                        <?php if ($_SESSION['puntoventa_id'] != 1) echo '054-318068 MZA. H LOTE. 13 JAVIER DE LUNA PIZARRO (A 2 CDRAS D VILLA PARAISO.FTEGRIFOREPSOL) AREQUIPA - AREQUIPA - CERRO COLORADO'?>
                     </td>
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado"></td>
-                </tr>
-                <tr>
-                    <td colspan="4">RUC: <?php echo $emp_ruc ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">
@@ -319,19 +332,29 @@ if($impresion=='pdf')ob_start();
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4">FACTURA ELECTRÓNICA: <?php echo $serie . ' - ' . $numero ?></td>
+                    <td colspan="4" class="centrado negrita py-5">FACTURA DE VENTA ELECTRÓNICA</td>
                 </tr>
                 <tr>
-                    <td colspan="4">FECHA: <?php echo $fec ?></td>
+                    <td colspan="2"><?php echo 'Nro. Factura: ' .$serie . ' - ' . $numero ?></td>
+                    <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'DNI: ' . $cli_doc ?></td>
+                    <td colspan="2"></td>
+                    <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'COD: ' . $cui ?></td>
+                    <td colspan="4" height="10mm">
+                        .............................................................................................
+                    </td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo $cli_nom ?></td>
+                    <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'RUC: ' .$ruc ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">
@@ -343,15 +366,19 @@ if($impresion=='pdf')ob_start();
                         <table width="80mm">
                             <thead>
                             <tr>
-                                <td style="width: 50mm" class="izquierda" >DESCRIPCION</td>
-                                <td style="width: 30mm" class="derecha">IMPORTE</td>
+                                <td style="width: 10mm" class="izquierda negrita">CANT</td>
+                                <td style="width: 30mm" class="izquierda negrita" >DESCRIPCION</td>
+                                <td style="width: 20mm" class="derecha negrita">P. UNIT</td>
+                                <td style="width: 20mm" class="derecha negrita">IMPORTE</td>
                             </tr>
                             </thead>
                             <?php  if($numero_filas>=1){ ?>
                                 <?php while($dt1 = mysql_fetch_array($dts1)){ ?>
                                     <tr>
-                                        <td class="izquierda" style="width: 50mm"><?php echo $dt1['tb_producto_nom']?></td>
-                                        <td class="derecha" style="width: 30mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                        <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
+                                        <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>
 
                                 <?php } mysql_free_result($dts1);?>
@@ -359,12 +386,14 @@ if($impresion=='pdf')ob_start();
 
                             <?php while($dt2 = mysql_fetch_array($dts2)){ ?>
                                 <tr>
-                                    <td class="izquierda" style="width: 50mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
-                                    <td class="derecha" style="width: 30mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                    <td class="izquierda"
+                                        style="width: 10mm"><?php echo $dt2["tb_ventadetalle_can"] ?></td>
+                                    <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']*$dt2['tb_ventadetalle_can'])?></td>
                                 </tr>
                             <?php  } mysql_free_result($dts2); ?>
                         </table>
-
                     </td>
                 </tr>
 
@@ -386,17 +415,17 @@ if($impresion=='pdf')ob_start();
                                     S/ <?php echo formato_money($valven) ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="izquierda">OP. EXONERADA:</td>
+                                <td colspan="2" class="izquierda negrita">OP. EXONERADA:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     S/ <?php echo formato_money($exo) ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="izquierda">IGV:</td>
+                                <td colspan="2" class="izquierda negrita">IGV:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     S/ <?php echo formato_money($igv) ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="izquierda">TOTAL A PAGAR:</td>
+                                <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     S/ <?php echo formato_money($tot) ?></td>
                             </tr>
@@ -416,8 +445,7 @@ if($impresion=='pdf')ob_start();
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm;" class="centrado">Todo reclamo es realizado dentro los días
-                                    hábiles.</td>
+                                <td colspan="4" style="width: 80mm;" class="centrado negrita">Gracias por su preferencia</td>
                             </tr>
                             </tbody>
                         </table>
