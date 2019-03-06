@@ -1997,6 +1997,24 @@ if($_POST['action']=="editar"){
         });
 
 
+        $('#txt_bus_pro_nom').keypress(function(e){
+            if(e.which == 13){
+                catalogo_venta_tab();
+                $("#txt_bus_pro_nom").val(('#txt_bus_ser_nom').val());
+                $("#hdd_bus_pro_nom").val('');
+                $('#hdd_bus_cat_id').val('');
+                $('#hdd_bus_cat_stouni').val('');
+                $('#hdd_bus_cat_cospro').val('');
+                $('#txt_bus_pro_codbar').val('');
+                $('#txt_bus_cat_preven').val('');
+                $('#txt_bus_cat_can').val('');
+                $('#txt_precio_min').val('');
+                $('#txt_precio_may').val('');
+                $("#txt_bus_pro_codbar").focus();
+            }
+        });
+
+
         $('#txt_bus_pro_codbar').keypress(function(e){
             if(e.which == 13){
                 catalogo_buscar();
