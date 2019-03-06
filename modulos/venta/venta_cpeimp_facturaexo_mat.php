@@ -21,6 +21,9 @@ $cLetras = new cLetras();
 require_once ("../lote/cVentaDetalleLote.php");
 $oVentaDetalleLote = new cVentaDetalleLote();
 
+require_once("../guia/cGuia.php");
+$oGuia = new cGuia();
+
 $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
 $dt = mysql_fetch_array($dts);
@@ -120,6 +123,10 @@ while($dt = mysql_fetch_array($dts))
     $lab2=$dt['tb_venta_lab2'];
     $lab3=$dt['tb_venta_lab3'];
 }
+
+$guias = $oGuia->mostrarGuiaUno($ven_id);
+$guia = mysql_fetch_array($guias);
+$numero_guia=$guia['tb_guia_serie']."-".$guia["tb_guia_num"];
 
 
 if($moneda==1){
@@ -331,7 +338,7 @@ $html = '
         border-bottom: 0.9px solid #01a2e6;
         border-right: 0.9px solid #01a2e6;
         border-left: 0.9px solid #01a2e6;
-        background-color: #01a2e6;
+        /*background-color: #01a2e6;*/
         text-transform:uppercase;
     }
     .odd_row td {
@@ -408,6 +415,10 @@ $html.='<tr>
         <td style="text-align: left; vertical-align:top;" width="10%">DIRECCIÓN</td>
         <td style="text-align: left; vertical-align:top;" width="2%">:</td>
         <td style="text-align: left" width="58%">'.$direccion.'</td>
+        
+        <td style="text-align: left" width="10%">GUIA REM.:</td>
+        <td style="text-align: left" width="2%">:</td>
+        <td style="text-align: left" width="18%">'.$numero_guia.'</td>
     </tr>
 </table>
 <br/>

@@ -317,7 +317,7 @@ $html = '
         border-bottom: 0.9px solid #01a2e6;
         border-right: 0.9px solid #01a2e6;
         border-left: 0.9px solid #01a2e6;
-        background-color: #01a2e6;
+         /*background-color: #01a2e6;*/
         text-transform:uppercase;
     }
     .odd_row td {
