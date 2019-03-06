@@ -55,8 +55,9 @@ $('.btn_canimp').button({
 	text: true
 });
 function imprimir()
-{	
-	$("#for_preimp").submit();
+{
+    $('#for_preimp').attr('action', '<?php echo $archivo_destino?>');
+    $("#for_preimp").submit();
 }
 
 function imprimir_letras()

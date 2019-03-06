@@ -285,7 +285,7 @@ $html.='
     </tr>
     <tr><!--punto de partida -->
         <td style="text-align: left;width:25mm; height:10mm;">&nbsp;</td>
-        <td style="text-align: left;width:75mm;">'.$guia['tb_guia_punlle'].'</td>
+        <td style="text-align: left;width:75mm;">'.$guia['tb_cliente_dir'].'</td>
         <td style="text-align: left;width:23mm;"></td>
         <td style="text-align: left;width:74mm;"></td>
     </tr>
