@@ -64,7 +64,7 @@ class cProducto{
 	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id
 	INNER JOIN tb_marca m ON p.tb_marca_id=m.tb_marca_id
 	INNER JOIN tb_presentacion r ON p.tb_producto_id=r.tb_producto_id
-	INNER JOIN tb_stock s ON r.tb_presentacion_id=s.tb_presentacion_id 
+	LEFT JOIN tb_stock s ON r.tb_presentacion_id=s.tb_presentacion_id 
 	WHERE tb_producto_est LIKE '%$est%' ";
 
         if($alm_id>0)$sql.=" AND s.tb_almacen_id = $alm_id ";
