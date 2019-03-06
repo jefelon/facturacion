@@ -243,7 +243,7 @@ if($estado=="ANULADA"){
 }
 $html.='
     <tr>
-        <td colspan="4" style="text-align: left; height:25mm;"></td>
+        <td colspan="4" style="text-align: left; height:38mm;"></td>
     </tr>
 </table>
 <table style="width: 194mm;" border="0">
@@ -257,17 +257,17 @@ $html.='
         <td style="text-align: right; width:30mm;">-</td>
     </tr>
     <tr>
-        <td colspan="4" style="text-align: left; height:5mm;"></td>
+        <td colspan="4" style="text-align: left; height:3mm;"></td>
     </tr>
     <tr><!--punto de partida -->
-        <td style="text-align: left;width:20mm; height:17mm;">&nbsp;</td>
+        <td style="text-align: left;width:20mm; height:16mm;">&nbsp;</td>
         <td style="text-align: left;width:80mm;">'.$guia['tb_guia_punpar'].'</td>
         <td style="text-align: left;width:23mm;"></td>
         <td style="text-align: left;width:74mm;"></td>
     </tr>
     <tr><!--punto de partida -->
-        <td style="text-align: left;width:15mm; height:5mm;">&nbsp;</td>
-        <td style="text-align: left;width:80mm;">'.$guia['tb_guia_des'].'</td>
+        <td style="text-align: left;width:15mm; height:7mm;">&nbsp;</td>
+        <td style="text-align: left;width:80mm;vertical-align : middle;">&nbsp;<br>'.$guia['tb_guia_des'].'</td>
         <td style="text-align: left;width:23mm;"></td>
         <td style="text-align: left;width:74mm;"></td>
     </tr>
@@ -279,18 +279,18 @@ $html.='
     </tr>
      <tr><!--punto de partida -->
         <td style="text-align: left;width:25mm; height:9mm;">&nbsp;</td>
-        <td style="text-align: left;width:75mm;">'.$ruc_empresa.'</td>
+        <td style="text-align: left;width:75mm;">'.$guia['tb_cliente_doc'].'</td>
         <td style="text-align: left;width:23mm;"></td>
         <td style="text-align: left;width:74mm;"></td>
     </tr>
     <tr><!--punto de partida -->
-        <td style="text-align: left;width:25mm; height:9mm;">&nbsp;</td>
+        <td style="text-align: left;width:25mm; height:10mm;">&nbsp;</td>
         <td style="text-align: left;width:75mm;">'.$guia['tb_guia_punlle'].'</td>
         <td style="text-align: left;width:23mm;"></td>
         <td style="text-align: left;width:74mm;"></td>
     </tr>
     <tr><!--punto de partida -->
-        <td style="text-align: left;width:25mm; height:25mm;">&nbsp;</td>
+        <td style="text-align: left;width:25mm; height:10mm;">&nbsp;</td>
         <td style="text-align: left;width:75mm;">'.$guia['tb_guia_numdoc'].'</td>
         <td style="text-align: left;width:23mm;"></td>
         <td style="text-align: left;width:74mm;"></td>
@@ -300,7 +300,7 @@ $html.='
 <table border="0" style="width: 188mm;">
     <tbody>
         <tr>
-            <td colspan="5" style="height: 8mm;"></td>
+            <td colspan="5" style="height: 23mm;"></td>
         </tr>';
 $dts = $oGuia->mostrar_guia_detalle($guia_id);
 $cont = 1;
