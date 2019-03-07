@@ -105,7 +105,7 @@ function declaracionimpuestos_form(act,idf)
 		dataType: "html",                      
 		data: ({
 			action: act,
-            recepcion_id:	idf,
+            declaracionimpuestos_id:	idf,
 			vista:	'declaracionimpuestos_tabla'
 		}),
 		beforeSend: function() {

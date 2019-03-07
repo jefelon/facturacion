@@ -1,5 +1,6 @@
 <?php
 require_once ("../../config/Cado.php");
+require_once ("../formatos/formato.php");
 require_once("cRecursoshumanos.php");
 $oRecursoshumanos = new cRecursoshumanos();
 
@@ -35,8 +36,8 @@ $(function() {
                     <th>Código</th>
                     <th>Personal</th>
                     <th>Cargo</th>
-                    <th>Fec. Ingreso</th>
-                    <th>Fec. Salida</th>
+                    <th>Fecha y Hora de Ingreso</th>
+                    <th>Fecha y Hora de Salida</th>
                     <th>Tardanza</th>
                     <th>Falta</th>
                     <th>Permisos</th>
@@ -52,14 +53,15 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_recursoshumanos_id']?></td>
+                    <td>COD.SCF-<?php echo $dt['tb_recursoshumanos_id']?></td>
+                    <td><?php echo $dt['tb_cliente_nom']?></td>
                     <td><?php echo $dt['tb_cargo']?></td>
-                    <td><?php echo $dt['tb_fecha_ingreso']?></td>
-                    <td><?php echo $dt['tb_fecha_salida']; ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_ingreso']).' - '.formato_hora($dt['tb_hora_ingreso']); ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_salida']).' - '.formato_hora($dt['tb_hora_salida']); ?></td>
                     <td><?php echo $dt['tb_tardanza']; ?></td>
                     <td><?php echo $dt['tb_falta']; ?></td>
                     <td><?php echo $dt['tb_permisos']; ?></td>
-                    <td><?php echo $dt['tb_permisos']; ?></td>
+                    <td><?php echo $dt['tb_cumpleanos']; ?></td>
                     <td align="center"><a class="btn_editar" href="#" onClick="recursoshumanos_form('editar','<?php echo $dt['tb_recursoshumanos_id']?>')">Editar</a>
                     <a class="btn_eliminar" href="#" onClick="eliminar_recursoshumanos('<?php echo $dt['tb_recursoshumanos_id']?>')">Eliminar</a></td>
                 </tr>

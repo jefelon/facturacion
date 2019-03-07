@@ -6,6 +6,10 @@ $oMarcacionpersonal = new cMarcacionpersonal;
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
+    $fecha_ingreso = date('d-m-Y');
+    $fecha_salida = date('d-m-Y');
+    $hora_ingreso = formato_hora('0:00');
+    $hora_salida = formato_hora('0:00');
 }
 
 if($_POST['action']=="editar")
@@ -133,7 +137,7 @@ $(function() {
             }
 		}
 	});
-    $( "#txt_fecha_ingreso" ).datepicker({
+    $( "#txt_fecha_ingreso,#txt_fecha_salida" ).datepicker({
         minDate: "-7D",
         maxDate:"+0D",
         yearRange: 'c-0:c+0',
@@ -145,6 +149,21 @@ $(function() {
         showOn: "button",
         buttonImage: "../../images/calendar.gif",
         buttonImageOnly: true
+    });
+
+    $('#txt_hora_ingreso,#txt_hora_salida').timepicker({
+        timeOnlyTitle: 'Seleccionar Hora',
+        timeText: 'Hora',
+        hourText: 'Hora',
+        minuteText: 'Minuto',
+        currentText: 'Hora Actual',
+        closeText: 'Cerrar',
+        timeFormat: 'hh:mm',
+        stepHour: 1,
+        stepMinute: 1,
+        hourGrid: 4,
+        minuteGrid: 10,
+        showButtonPanel: false
     });
 });
 </script>
@@ -165,8 +184,16 @@ $(function() {
             <td><input name="txt_fecha_ingreso" type="text" id="txt_fecha_ingreso" value="<?php echo $fecha_ingreso?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
+            <td align="right" valign="top">Hora de Ingreso:</td>
+            <td><input name="txt_hora_ingreso" type="text" id="txt_hora_ingreso" value="<?php echo $hora_ingreso?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
             <td align="right" valign="top">Fecha de Salida:</td>
             <td><input name="txt_fecha_salida" type="text" id="txt_fecha_salida" value="<?php echo $fecha_salida?>" size="41" maxlength="10"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top">Hora de Salida:</td>
+            <td><input name="txt_hora_salida" type="text" id="txt_hora_salida" value="<?php echo $hora_salida?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
             <td align="right" valign="top">Tardanza:</td>

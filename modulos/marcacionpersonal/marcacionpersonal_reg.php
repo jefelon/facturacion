@@ -10,7 +10,8 @@ if($_POST['action_marcacionpersonal']=="insertar")
         && !empty($_POST['txt_tardanza']) && !empty($_POST['txt_falta']) && !empty($_POST['txt_permisos']))
 	{
 		$oMarcacionpersonal->insertar($_POST['hdd_recdoc_empresa_id'], fecha_mysql($_POST['txt_fecha_ingreso']),
-            fecha_mysql($_POST['txt_fecha_salida']), $_POST['txt_tardanza'],
+            hora_mysql($_POST['txt_hora_ingreso']),fecha_mysql($_POST['txt_fecha_salida']),
+            hora_mysql($_POST['txt_hora_salida']), $_POST['txt_tardanza'],
             $_POST['txt_falta'], $_POST['txt_permisos']);
 		
 			$dts=$oMarcacionpersonal->ultimoInsert();

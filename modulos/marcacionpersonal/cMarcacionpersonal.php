@@ -1,11 +1,11 @@
 <?php
 class cMarcacionpersonal{
-	function insertar($id_cliente,$fec_ingreso,$fec_salida, $tardanza,$falta,$permisos){
+	function insertar($id_cliente,$fec_ingreso,$hor_ingreso,$fec_salida,$hor_salida, $tardanza,$falta,$permisos){
 	$sql = "INSERT 	tb_marcacionpersonal (
-		`tb_cliente_id`,`tb_fecha_ingreso`,`tb_fecha_salida`,`tb_tardanza`,`tb_falta`,`tb_permisos`
+		`tb_cliente_id`,`tb_fecha_ingreso`,`tb_hora_ingreso`,`tb_fecha_salida`,`tb_hora_salida`,`tb_tardanza`,`tb_falta`,`tb_permisos`
 		)
 		VALUES (
-		 '$id_cliente','$fec_ingreso','$fec_salida','$tardanza','$falta','$permisos'
+		 '$id_cliente','$fec_ingreso','$hor_ingreso','$fec_salida','$hor_salida','$tardanza','$falta','$permisos'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -19,7 +19,7 @@ class cMarcacionpersonal{
 	}
 	function mostrarTodos(){
 	$sql="SELECT mp.tb_marcacionpersonal_id, mp.tb_cliente_id, cd.tb_cliente_nom AS tb_cliente_nom, 
-    cd.tb_cliente_doc AS tb_cliente_doc, mp.tb_fecha_ingreso, mp.tb_fecha_salida, mp.tb_tardanza, 
+    cd.tb_cliente_doc AS tb_cliente_doc, mp.tb_fecha_ingreso,  mp.tb_hora_ingreso, mp.tb_fecha_salida,mp.tb_hora_salida, mp.tb_tardanza, 
     mp.tb_permisos
 	FROM tb_marcacionpersonal mp
 	INNER JOIN tb_cliente cd ON mp.tb_cliente_id = cd.tb_cliente_id

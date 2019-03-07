@@ -5,21 +5,21 @@ require_once("cDeclaracionimpuestos.php");
 $Declaracionimpuestos = new cDeclaracionimpuestos();
 
 if($_POST['action']=="insertar") {
-    $recdoc_fech = date('d-m-Y');
-    $recdoc_fech = date('d-m-Y');
-
+    $fecha_declaracion = date('d-m-Y');
+    $fecha_vencimiento = date('d-m-Y');
+    $fecha_envio = date('d-m-Y');
 }
 
 if($_POST['action']=="editar")
 {
-	$dts=$Declaracionimpuestos->mostrarUno($_POST['recepcion_id']);
+	$dts=$Declaracionimpuestos->mostrarUno($_POST['declaracionimpuestos_id']);
 	$dt = mysql_fetch_array($dts);
 	$doc_empresa = $dt['tb_cliente_doc'];
     $nom_empresa = $dt['tb_cliente_nom'];
     $id_empresa = $dt['tb_cliente_id'];
-    $fecha_declaracion = mostrarFecha($dt['tb_fecha_declaracion']);
-    $fecha_vencimiento = mostrarFecha($dt['tb_fecha_vencimiento']);
-    $fecha_envio = mostrarFecha($dt['tb_fecha_envio']);
+    $fecha_declaracion = $dt['tb_fecha_declaracion'];
+    $fecha_vencimiento = $dt['tb_fecha_vencimiento'];
+    $fecha_envio = $dt['tb_fecha_envio'];
     $estado_envio = $dt['	tb_estado_correo'];
     $pdt_nodeclarados = $dt['tb_pdt_nodeclarados'];
     $pago_realizado = $dt['tb_estadopago'];
@@ -48,65 +48,35 @@ $(function() {
 		$(this).val($(this).val().toUpperCase());
 	});
 
-    $( "#txt_recdoc_empresa" ).autocomplete({
+    $( "#txt_doc_empresa" ).autocomplete({
         minLength: 1,
         source: "../clientes/cliente_complete_doc.php",
         select: function(event, ui){
-            $("#hdd_recdoc_empresa_id").val(ui.item.id);
-            $("#txt_recnom_empresa").val(ui.item.nombre);
+            $("#hdd_empresa_id").val(ui.item.id);
+            $("#txt_nom_empresa").val(ui.item.nombre);
             // $("#txt_ven_cli_dir").val(ui.item.direccion);
             // $("#txt_fil_gui_cod").val(ui.item.codigo);
             // $("#hdd_ven_cli_tip").val(ui.item.tipo);
             // $("#hdd_ven_cli_ret").val(ui.item.retiene);
             // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_recdoc_empresa_id').change();
+            $('#hdd_doc_empresa_id').change();
+        }
+    });
+    $( "#txt_docpersdecl" ).autocomplete({
+        minLength: 1,
+        source: "../clientes/cliente_complete_doc.php",
+        select: function(event, ui){
+            $("#hdd_persdecl_id").val(ui.item.id);
+            $("#txt_nompersdecl").val(ui.item.nombre);
+            // $("#txt_ven_cli_dir").val(ui.item.direccion);
+            // $("#txt_fil_gui_cod").val(ui.item.codigo);
+            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
+            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
+            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
+            $('#hdd_persdecl_id').change();
         }
     });
 
-    $( "#txt_docpersentrega" ).autocomplete({
-        minLength: 1,
-        source: "../clientes/cliente_complete_doc.php",
-        select: function(event, ui){
-            $("#hdd_perspentrega_id").val(ui.item.id);
-            $("#txt_nompersentrega").val(ui.item.nombre);
-            // $("#txt_ven_cli_dir").val(ui.item.direccion);
-            // $("#txt_fil_gui_cod").val(ui.item.codigo);
-            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
-            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
-            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_perspentrega_id').change();
-        }
-    });
-
-    $( "#txt_docrecepdocumentos" ).autocomplete({
-        minLength: 1,
-        source: "../clientes/cliente_complete_doc.php",
-        select: function(event, ui){
-            $("#hdd_recepdocumentos_id").val(ui.item.id);
-            $("#txt_nomrecepdocumentos").val(ui.item.nombre);
-            // $("#txt_ven_cli_dir").val(ui.item.direccion);
-            // $("#txt_fil_gui_cod").val(ui.item.codigo);
-            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
-            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
-            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_recepdocumentos_id').change();
-        }
-    });
-
-    $( "#txt_docpersrecojo" ).autocomplete({
-        minLength: 1,
-        source: "../clientes/cliente_complete_doc.php",
-        select: function(event, ui){
-            $("#hdd_docpersrecojo_id").val(ui.item.id);
-            $("#txt_nompersrecojo").val(ui.item.nombre);
-            // $("#txt_ven_cli_dir").val(ui.item.direccion);
-            // $("#txt_fil_gui_cod").val(ui.item.codigo);
-            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
-            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
-            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_docpersrecojo_id').change();
-        }
-    });
 
 	$("#for_recdoc").validate({
 		submitHandler: function() {
@@ -122,11 +92,11 @@ $(function() {
 					$('#msj_declaracionimpuestos').show(100);
 				},
 				success: function(data){						
-					$('#msj_declaracionimpuestos').html(data.recdoc_msj);
+					$('#msj_declaracionimpuestos').html(data.decimp_msj);
 					<?php
-					if($_POST['vista']=="cmb_recdoc_id")
+					if($_POST['vista']=="cmb_decimp_id")
 					{
-						echo $_POST['vista'].'(data.recdoc_id)';
+						echo $_POST['vista'].'(data.decimp_id)';
 					}
 					?>
 				},
@@ -170,9 +140,9 @@ $(function() {
             }
 		}
 	});
-    $( "#txt_recdoc_fech" ).datepicker({
-        minDate: "-7D",
-        maxDate:"+0D",
+    $( "#txt_fecha_declaracion,#txt_fecha_vencimiento,#txt_fecha_envio" ).datepicker({
+        minDate: "-7Y",
+        maxDate:"+7Y",
         yearRange: 'c-0:c+0',
         changeMonth: true,
         changeYear: false,
@@ -187,7 +157,7 @@ $(function() {
 </script>
 <form id="for_recdoc">
 <input name="action_declaracionimpuestos" id="action_declaracionimpuestos" type="hidden" value="<?php echo $_POST['action']?>">
-    <input name="hdd_declaracionimpuestos_id" id="hdd_declaracionimpuestos_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
+    <input name="hdd_declaracionimpuestos_id" id="hdd_declaracionimpuestos_id" type="hidden" value="<?php echo $_POST['declaracionimpuestos_id'] ?>">
     <input name="hdd_empresa_id" id="hdd_empresa_id" type="hidden" value="<?php echo $id_empresa ?>">
     <input name="hdd_persdecl_id" id="hdd_persdecl_id" type="hidden" value="<?php echo $id_persdecl ?>">
 

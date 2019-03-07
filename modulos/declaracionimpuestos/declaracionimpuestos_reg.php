@@ -8,8 +8,8 @@ if($_POST['action_declaracionimpuestos']=="insertar")
 {
 	if(!empty($_POST['hdd_empresa_id']) && !empty($_POST['txt_doc_empresa']) && !empty($_POST['txt_nom_empresa'])
         && !empty($_POST['txt_fecha_declaracion']) && !empty($_POST['txt_fecha_vencimiento'])
-        && !empty($_POST['txt_fecha_envio']) && !empty($_POST['cmb_estado_envio'])
-        && !empty($_POST['txt_pdt_nodeclarados'] ) && !empty($_POST['cmb_pago_realizado'])
+        && !empty($_POST['txt_fecha_envio']) && $_POST['cmb_estado_envio']!=''
+        && !empty($_POST['txt_pdt_nodeclarados'] ) && $_POST['cmb_pago_realizado']!=''
         && !empty($_POST['txt_deudas']) && !empty($_POST['hdd_persdecl_id']))
 	{
 		$oDeclaracionimpuestos->insertar($_POST['hdd_empresa_id'],fecha_mysql($_POST['tb_fecha_declaracion']),
@@ -33,13 +33,17 @@ if($_POST['action_declaracionimpuestos']=="insertar")
 	}
 }
 
+
+
+
+
 if($_POST['action_declaracionimpuestos']=="editar")
 {
     if(!empty($_POST['hdd_declaracionimpuestos_id']) && !empty($_POST['hdd_empresa_id'])
         && !empty($_POST['txt_doc_empresa']) && !empty($_POST['txt_nom_empresa'])
     && !empty($_POST['txt_fecha_declaracion']) && !empty($_POST['txt_fecha_vencimiento'])
-    && !empty($_POST['txt_fecha_envio']) && !empty($_POST['cmb_estado_envio'])
-    && !empty($_POST['txt_pdt_nodeclarados'] ) && !empty($_POST['cmb_pago_realizado'])
+    && !empty($_POST['txt_fecha_envio']) && $_POST['cmb_estado_envio']!=''
+    && !empty($_POST['txt_pdt_nodeclarados'] ) && $_POST['cmb_pago_realizado']!=''
     && !empty($_POST['txt_deudas']) && !empty($_POST['hdd_persdecl_id']))
     {
         $oDeclaracionimpuestos->modificar($_POST['hdd_declaracionimpuestos_id'],$_POST['hdd_empresa_id'],
@@ -48,7 +52,7 @@ if($_POST['action_declaracionimpuestos']=="editar")
             $_POST['cmb_pago_realizado'], $_POST['txt_deudas'], $_POST['hdd_persdecl_id'],
             strip_tags($_POST['txt_observaciones']));
 		
-		$data['decimp_msj']='Se registró declaracionimpuestos correctamente.';
+		$data['decimp_msj']='Se registró declaracion impuestos correctamente.';
 		echo json_encode($data);
 	}
 	else
@@ -73,7 +77,7 @@ if($_POST['action']=="eliminar")
 		else
 		{
 			$oDeclaracionimpuestos->eliminar($_POST['id']);
-			echo 'Se eliminó recepcion correctamente.';
+			echo 'Se eliminó declaración impuestos correctamente.';
 		}
 	}
 	else

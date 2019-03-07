@@ -9,8 +9,9 @@ if($_POST['action_recursoshumanos']=="insertar")
 	if(!empty($_POST['hdd_recdoc_empresa_id']) && !empty($_POST['txt_fecha_ingreso']) && !empty($_POST['txt_fecha_salida'])
         && !empty($_POST['txt_tardanza']) && !empty($_POST['txt_falta']) && !empty($_POST['txt_permisos']))
 	{
-		$oRecursoshumanos->insertar($_POST['hdd_recdoc_empresa_id'], fecha_mysql($_POST['txt_fecha_ingreso']),
-            fecha_mysql($_POST['txt_fecha_salida']), $_POST['txt_tardanza'],
+		$oRecursoshumanos->insertar($_POST['hdd_recdoc_empresa_id'],$_POST['txt_cargo'], fecha_mysql($_POST['txt_fecha_ingreso']),
+            hora_mysql($_POST['txt_hora_ingreso']),fecha_mysql($_POST['txt_fecha_salida']),
+            hora_mysql($_POST['txt_hora_salida']),$_POST['txt_tardanza'],
             $_POST['txt_falta'], $_POST['txt_permisos']);
 		
 			$dts=$oRecursoshumanos->ultimoInsert();
@@ -33,9 +34,9 @@ if($_POST['action_recursoshumanos']=="editar")
     if(!empty($_POST['hdd_recdoc_empresa_id']) && !empty($_POST['txt_cargo']) && !empty($_POST['txt_fecha_ingreso']) && !empty($_POST['txt_fecha_salida'])
         && !empty($_POST['txt_tardanza']) && !empty($_POST['txt_falta']) && !empty($_POST['txt_permisos']))
     {
-		$oRecursoshumanos->modificar($_POST['hdd_recursoshumanos_id'],$_POST['hdd_recdoc_empresa_id'],
-            fecha_mysql($_POST['txt_fecha_ingreso']),
-            fecha_mysql($_POST['txt_fecha_salida']), $_POST['txt_tardanza'],
+		$oRecursoshumanos->modificar($_POST['hdd_recursoshumanos_id'],$_POST['hdd_recdoc_empresa_id'],$_POST['txt_cargo'],
+            fecha_mysql($_POST['txt_fecha_ingreso']),hora_mysql($_POST['txt_hora_ingreso']),
+            fecha_mysql($_POST['txt_fecha_salida']),hora_mysql($_POST['txt_hora_salida']), $_POST['txt_tardanza'],
             $_POST['txt_falta'], $_POST['txt_permisos']);
 		
 		$data['marper_msj']='Se registró recurso humano correctamente.';

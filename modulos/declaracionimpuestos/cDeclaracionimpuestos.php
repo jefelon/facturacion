@@ -36,7 +36,7 @@ class cDeclaracionimpuestos{
 	function mostrarUno($id){
 	$sql="SELECT di.tb_declaracionimpuestos_id, di.tb_cliente_id, ep.tb_cliente_nom AS tb_cliente_nom, 
     ep.tb_cliente_doc AS tb_cliente_doc, di.tb_fecha_declaracion, di.tb_fecha_vencimiento, 
-    di.tb_fecha_envio, di.tb_estado_correo, di.tb_pdt_nodeclarados, di.tb_estadopago, di.tb_deudas, di.tb_persdecl_id
+    di.tb_fecha_envio, di.tb_estado_correo, di.tb_pdt_nodeclarados, di.tb_estadopago, di.tb_deudas, di.tb_persdecl_id,
     ep.tb_cliente_nom AS tb_persdecl_nom, ep.tb_cliente_doc AS tb_persdecl_doc, di.tb_observaciones
 	FROM tb_declaracionimpuestos di
 	INNER JOIN tb_cliente ep ON di.tb_cliente_id = ep.tb_cliente_id
@@ -49,7 +49,6 @@ class cDeclaracionimpuestos{
 	function modificar($id,$cliente_id,$fecha_declaracion,$fecha_vencimiento,$fecha_envio,$estado_correo,$pdt_nodeclarados,
                        $estadopago,$deudas,$persdecl_id,$obs){
 	$sql = "UPDATE tb_declaracionimpuestos SET
-    `tb_declaracionimpuestos_id` =  '$fec',  
 	`tb_cliente_id` =  '$cliente_id',
 	`tb_fecha_declaracion` =  '$fecha_declaracion',
 	`tb_fecha_vencimiento` =  '$fecha_vencimiento',

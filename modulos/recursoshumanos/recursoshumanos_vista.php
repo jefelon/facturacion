@@ -42,6 +42,8 @@ $oContenido = new cContenido();
     <script src="../../js/jquery-validation/additional-methods.js" type="text/javascript"></script>
     <script src="../../js/jquery-validation/localization/messages_es.js" type="text/javascript"></script>
 
+    <script src="../../js/timepicker/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+
     <link rel="stylesheet" href="../../js/tablesorter/themes/blue/style.css" type="text/css" media="print, projection, screen" />
     <script type="text/javascript" src="../../js/tablesorter/jquery.tablesorter.js"></script>
 
@@ -86,7 +88,7 @@ function recursoshumanos_form(act,idf)
 		dataType: "html",                      
 		data: ({
 			action: act,
-            recepcion_id:	idf,
+            recursoshumanos_id:	idf,
 			vista:	'recursoshumanos_tabla'
 		}),
 		beforeSend: function() {
