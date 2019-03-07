@@ -54,8 +54,9 @@ class cPle
               
         	FROM tb_venta v
             LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
-            LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
-            INNER JOIN cs_tipomoneda m ON v.cs_tipomoneda_id=m.cs_tipomoneda_id
+            INNER JOIN tb_documento td2 ON v.tb_documento_id=td2.tb_documento_id
+            INNER JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+            INNER JOIN cs_tipomoneda m ON v.cs_tipomoneda_id=m.cs_tipomoneda_id 
             WHERE YEAR(v.tb_venta_reg) = '$anio' AND MONTH(v.tb_venta_reg) ='$mes'
             
         UNION ALL 
