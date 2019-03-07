@@ -5,7 +5,7 @@ class cLegalizacionlibros{
 	$sql = "INSERT tb_legalizacionlibros (
 		`tb_cliente_id`,`tb_domicilio_fiscal`,`tb_fecha_recepcion`,`tb_notaria`,`tb_fecha_legalizacion`,`tb_fecha_recojo`,
 		`tb_numdoc`,`tb_regimen_tributario`,`tb_cantidad_libros`,`tb_responsable_id`,`tb_libros_legalizados`,
-		`tb_libros_nolegalizados`,`tb_pendiente_cobro`,,`tb_observaciones`
+		`tb_libros_nolegalizados`,`tb_pendiente_cobro`,`tb_observaciones`
 		)
 		VALUES (
 		 '$id_cliente','$domicilio_fiscal','$fecha_recepcion','$notaria','$fecha_legalizacion','$fecha_recojo',
@@ -22,7 +22,7 @@ class cLegalizacionlibros{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
+	function mostrar_filtro($fec1,$fec2){
 	$sql="SELECT ll.tb_legalizacionlibros_id, ep.tb_cliente_nom, ll.tb_domicilio_fiscal,ll.tb_fecha_recepcion,
     ll.tb_notaria, ll.tb_fecha_legalizacion, ll.tb_fecha_recojo,ll.tb_numdoc,ll.tb_regimen_tributario,
     ll.tb_cantidad_libros, pr.tb_cliente_nom AS tb_responsable_nom, ll.tb_libros_legalizados, ll.tb_libros_nolegalizados,
@@ -30,16 +30,17 @@ class cLegalizacionlibros{
 	FROM tb_legalizacionlibros ll
 	INNER JOIN tb_cliente ep ON ep.tb_cliente_id = ll.tb_cliente_id
 	INNER JOIN tb_cliente pr ON pr.tb_cliente_id = ll.tb_responsable_id
-  
+    WHERE tb_fecha_recepcion BETWEEN '$fec1' AND '$fec2' 
 	ORDER BY tb_fecha_recepcion";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function mostrarUno($id){
-	$sql="SELECT ll.tb_legalizacionlibros_id, ll.tb_cliente_id, ep.tb_cliente_nom, ll.tb_domicilio_fiscal,ll.tb_fecha_recepcion,
+	$sql="SELECT ll.tb_legalizacionlibros_id, ll.tb_cliente_id, ep.tb_cliente_nom,ep.tb_cliente_doc, ll.tb_domicilio_fiscal,ll.tb_fecha_recepcion,
     ll.tb_notaria, ll.tb_fecha_legalizacion, ll.tb_fecha_recojo,ll.tb_numdoc,ll.tb_regimen_tributario,
-    ll.tb_cantidad_libros,ll.tb_responsable_id, pr.tb_cliente_nom AS tb_responsable_nom, ll.tb_libros_legalizados, ll.tb_libros_nolegalizados,
+    ll.tb_cantidad_libros,ll.tb_responsable_id, pr.tb_cliente_nom AS tb_responsable_nom,
+    pr.tb_cliente_doc AS tb_responsable_doc, ll.tb_libros_legalizados, ll.tb_libros_nolegalizados,
     ll.tb_pendiente_cobro, ll.tb_observaciones
 	FROM tb_legalizacionlibros ll
 	INNER JOIN tb_cliente ep ON ep.tb_cliente_id = ll.tb_cliente_id

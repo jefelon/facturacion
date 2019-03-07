@@ -6,6 +6,8 @@ $oPlanilla = new cPlanilla();
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
+    $recdoc_fech_ven = date('d-m-Y');
+    $fecha_envio = date('d-m-Y');
 }
 
 if($_POST['action']=="editar")

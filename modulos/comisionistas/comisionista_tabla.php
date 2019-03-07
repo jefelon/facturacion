@@ -4,7 +4,7 @@ require_once("../formatos/formato.php");
 require_once("cComisionista.php");
 $oComisionista = new cComisionista();
 
-$dts=$oComisionista->mostrarTodos();
+$dts=$oComisionista->mostrar_filtro(fecha_mysql($_POST['txt_fil_fec1']),fecha_mysql($_POST['txt_fil_fec2']));
 $num_rows= mysql_num_rows($dts);
 
 ?>
@@ -88,6 +88,6 @@ $(function() {
         }
 		?>
                 <tr class="even">
-                  <td colspan="13"><?php echo $num_rows.' registros'?></td>
+                  <td colspan="14"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>

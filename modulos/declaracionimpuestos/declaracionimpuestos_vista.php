@@ -55,16 +55,35 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
+    function declaracionimpuestos_filtro()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../declaracionimpuestos/declaracionimpuestos_filtro.php",
+            async:true,
+            dataType: "html",
+            //data: ({
+            //venta: $('#txt_fil_pro').val()
+            //}),
+            beforeSend: function() {
+                $('#div_declaracionimpuestos_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_declaracionimpuestos_filtro').html(html);
+            },
+            complete: function(){
+                declaracionimpuestos_tabla();
+            }
+        });
+    }
 function declaracionimpuestos_tabla()
 {	
 	$.ajax({
 		type: "POST",
 		url: "declaracionimpuestos_tabla.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			//pro_est:	$('#cmb_fil_pro_est').val()
-		}),
+		dataType: "html",
+        data: $("#for_fil").serialize(),
 		beforeSend: function() {
 			$('#div_declaracionimpuestos_tabla').addClass("ui-state-disabled");
         },
@@ -127,6 +146,11 @@ function eliminar_declaracionimpuestos(id)
 	}
 }
 
+function decimp_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_declaracionimpuestos").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
+
 
 //
 $(function() {
@@ -143,7 +167,12 @@ $(function() {
 		text: true
 	});
 
-	declaracionimpuestos_tabla();
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
+
+	declaracionimpuestos_filtro();
 	
 	$( "#div_declaracionimpuestos_form" ).dialog({
 		title:'Información de declaracionimpuestos',
@@ -189,7 +218,11 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="declaracionimpuestos_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+                        <td align="left" valign="middle">
+                            <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="decimp_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="decimp_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form></td>
                       <td align="right"><div id="msj_declaracionimpuestos" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
@@ -201,6 +234,8 @@ $(function() {
                   </tr>
               </table>
 			</div>
+            <div id="div_declaracionimpuestos_filtro" class="contenido_tabla">
+            </div>
         	<div id="div_declaracionimpuestos_form">
 			</div>
         	<div id="div_declaracionimpuestos_tabla" class="contenido_tabla">

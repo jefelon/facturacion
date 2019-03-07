@@ -1,9 +1,10 @@
 <?php
 require_once ("../../config/Cado.php");
+require_once ("../formatos/formato.php");
 require_once("cDeclaracionimpuestos.php");
 $oDeclaracionimpuestos = new cDeclaracionimpuestos();
 
-$dts=$oDeclaracionimpuestos->mostrarTodos();
+$dts=$oDeclaracionimpuestos->mostrar_filtro(fecha_mysql($_POST['txt_fil_fec1']),fecha_mysql($_POST['txt_fil_fec2']));
 $num_rows= mysql_num_rows($dts);
 
 ?>

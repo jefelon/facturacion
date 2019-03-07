@@ -2,7 +2,7 @@
 require_once ("../../config/Cado.php");
 require_once("../formatos/formato.php");
 require_once("cAfp.php");
-$oAfp = new cComisionista();
+$oAfp = new cAfp();
 
 if($_POST['action_afp']=="insertar")
 {

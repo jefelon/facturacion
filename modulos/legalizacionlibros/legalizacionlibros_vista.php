@@ -55,16 +55,35 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
+    function legalizacionlibros_filtro()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../legalizacionlibros/legalizacionlibros_filtro.php",
+            async:true,
+            dataType: "html",
+            //data: ({
+            //venta: $('#txt_fil_pro').val()
+            //}),
+            beforeSend: function() {
+                $('#div_legalizacionlibros_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_legalizacionlibros_filtro').html(html);
+            },
+            complete: function(){
+                legalizacionlibros_tabla();
+            }
+        });
+    }
 function legalizacionlibros_tabla()
 {	
 	$.ajax({
 		type: "POST",
 		url: "legalizacionlibros_tabla.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			//pro_est:	$('#cmb_fil_pro_est').val()
-		}),
+		dataType: "html",
+        data: $("#for_fil").serialize(),
 		beforeSend: function() {
 			$('#div_legalizacionlibros_tabla').addClass("ui-state-disabled");
         },
@@ -86,7 +105,7 @@ function legalizacionlibros_form(act,idf)
 		dataType: "html",                      
 		data: ({
 			action: act,
-            recepcion_id:	idf,
+            legalizacionlibros_id:	idf,
 			vista:	'legalizacionlibros_tabla'
 		}),
 		beforeSend: function() {
@@ -99,6 +118,12 @@ function legalizacionlibros_form(act,idf)
 		}
 	});
 }
+
+function leglib_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_legalizacionlibros").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
+
 
 function eliminar_legalizacionlibros(id)
 {   
@@ -143,21 +168,26 @@ $(function() {
 		text: true
 	});
 
-	legalizacionlibros_tabla();
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
+
+    legalizacionlibros_filtro();
 	
 	$( "#div_legalizacionlibros_form" ).dialog({
 		title:'Información de legalizacionlibros',
 		autoOpen: false,
 		resizable: false,
 		height: 400,
-		width: 450,
+		width: 500,
 		modal: true,
 		buttons: {
 			Guardar: function() {
-				$("#for_recdoc").submit();
+				$("#for_leglib").submit();
 			},
 			Cancelar: function() {
-				$('#for_recdoc').each (function(){this.reset();});
+				$('#for_leglib').each (function(){this.reset();});
 				$( this ).dialog( "close" );
 			}
 		}
@@ -189,7 +219,11 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="legalizacionlibros_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+                        <td align="left" valign="middle">
+                            <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="leglib_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="leglib_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form></td>
                       <td align="right"><div id="msj_legalizacionlibros" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
@@ -201,6 +235,8 @@ $(function() {
                   </tr>
               </table>
 			</div>
+            <div id="div_legalizacionlibros_filtro" class="contenido_tabla">
+            </div>
         	<div id="div_legalizacionlibros_form">
 			</div>
         	<div id="div_legalizacionlibros_tabla" class="contenido_tabla">

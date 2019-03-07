@@ -1,12 +1,14 @@
 <?php
 class cDeclaracionimpuestos{
-	function insertar($fec,$id_cliente,$perspentrega_id,$persrecepcion_id,$persrecoge_id,$pendiente,$obs){
+	function insertar($cliente_id,$fecha_declaracion,$fecha_vencimiento,$fecha_envio,$estado_correo,$pdt_nodeclarados,
+                      $estadopago,$deudas,$persdecl_id,$obs){
 	$sql = "INSERT tb_declaracionimpuestos (
-		`tb_declaracionimpuestos_fecha`,`tb_cliente_id`,`tb_persentrega_id`,`tb_persrecepcion_id`,`tb_persrecoge_id`,`tb_declaracionimpuestos_pendientes`
-		,`tb_declaracionimpuestos_observacion`
+		`tb_cliente_id`,`tb_fecha_declaracion`,`tb_fecha_vencimiento`,`tb_fecha_envio`,`tb_estado_correo`,
+		`tb_pdt_nodeclarados`,`tb_estadopago`,`tb_deudas`, `tb_persdecl_id`, `tb_observaciones`
 		)
 		VALUES (
-		 '$fec','$id_cliente','$perspentrega_id','$persrecepcion_id','$persrecoge_id','$pendiente','$obs'
+		 '$cliente_id','$fecha_declaracion','$fecha_vencimiento','$fecha_envio','$estado_correo','$pdt_nodeclarados',
+		 '$estadopago','$deudas','$persdecl_id','$obs'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -18,54 +20,53 @@ class cDeclaracionimpuestos{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
-	$sql="SELECT di.tb_declaracionimpuestos_id, di.tb_cliente_id, di.tb_observaciones, di.tb_declaracionimpuestos_fecha, 
-    di.tb_declaracionimpuestos_pendientes, di.tb_cliente_id, di.tb_persentrega_id, di.tb_persrecepcion_id, di.tb_persrecoge_id, 
-    cr.tb_cliente_nom AS tb_cliente_nom, cr.tb_cliente_dir AS tb_cliente_dir, cr.tb_cliente_tel AS tb_cliente_tel, pe.tb_cliente_nom AS tb_persentrega_nom, pr.tb_cliente_nom AS tb_persrecepcion_nom,
-    pg.tb_cliente_nom AS tb_persrecoge_nom, cr.tb_cliente_doc AS tb_cliente_doc, pe.tb_cliente_doc AS tb_persentrega_doc,
-    pr.tb_cliente_doc AS tb_persrecepcion_doc, pg.tb_cliente_doc AS tb_persrecoge_doc
-	FROM tb_declaracionimpuestos di
-	INNER JOIN tb_cliente  ON di.tb_cliente_id = cr.tb_cliente_id
-	INNER JOIN tb_cliente pe ON di.tb_persentrega_id = pe.tb_cliente_id
-	INNER JOIN tb_cliente pr ON di.tb_persrecepcion_id = pr.tb_cliente_id
-	INNER JOIN tb_cliente pg ON di.tb_persrecoge_id = pg.tb_cliente_id
-	ORDER BY tb_declaracionimpuestos_fecha";
+	function mostrar_filtro($fec1,$fec2){
+	$sql="SELECT di.tb_declaracionimpuestos_id, di.tb_cliente_id, ep.tb_cliente_nom AS tb_cliente_nom, 
+    di.tb_fecha_declaracion, di.tb_fecha_vencimiento, di.tb_fecha_envio, di.tb_estado_correo, di.tb_pdt_nodeclarados, 
+    di.tb_estadopago, di.tb_deudas, di.tb_persdecl_id, ep.tb_cliente_nom AS tb_persdecl_nom, di.tb_observaciones
+    FROM tb_declaracionimpuestos di
+	INNER JOIN tb_cliente ep ON di.tb_cliente_id = ep.tb_cliente_id
+	INNER JOIN tb_cliente pr ON di.tb_persdecl_id = pr.tb_cliente_id
+	WHERE di.tb_fecha_declaracion BETWEEN '$fec1' AND '$fec2' 
+	ORDER BY di.tb_fecha_declaracion";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
 	function mostrarUno($id){
-	$sql="SELECT di.tb_declaracionimpuestos_id, di.tb_declaracionimpuestos_observacion, di.tb_declaracionimpuestos_fecha, 
-    di.tb_declaracionimpuestos_pendientes, di.tb_cliente_id, di.tb_persentrega_id, di.tb_persrecepcion_id, di.tb_persrecoge_id, 
-    cr.tb_cliente_nom AS tb_cliente_nom, pe.tb_cliente_nom AS tb_persentrega_nom, pr.tb_cliente_nom AS tb_persrecepcion_nom,
-    pg.tb_cliente_nom AS tb_persrecoge_nom, cr.tb_cliente_doc AS tb_cliente_doc, pe.tb_cliente_doc AS tb_persentrega_doc,
-    pr.tb_cliente_doc AS tb_persrecepcion_doc, pg.tb_cliente_doc AS tb_persrecoge_doc
-	FROM tb_declaracionimpuestos r
-	INNER JOIN tb_cliente cr ON di.tb_cliente_id = cr.tb_cliente_id
-	INNER JOIN tb_cliente pe ON di.tb_persentrega_id = pe.tb_cliente_id
-	INNER JOIN tb_cliente pr ON di.tb_persrecepcion_id = pr.tb_cliente_id
-	INNER JOIN tb_cliente pg ON di.tb_persrecoge_id = pg.tb_cliente_id
+	$sql="SELECT di.tb_declaracionimpuestos_id, di.tb_cliente_id, ep.tb_cliente_nom AS tb_cliente_nom, 
+    ep.tb_cliente_doc AS tb_cliente_doc, di.tb_fecha_declaracion, di.tb_fecha_vencimiento, 
+    di.tb_fecha_envio, di.tb_estado_correo, di.tb_pdt_nodeclarados, di.tb_estadopago, di.tb_deudas, di.tb_persdecl_id
+    ep.tb_cliente_nom AS tb_persdecl_nom, ep.tb_cliente_doc AS tb_persdecl_doc, di.tb_observaciones
+	FROM tb_declaracionimpuestos di
+	INNER JOIN tb_cliente ep ON di.tb_cliente_id = ep.tb_cliente_id
+	INNER JOIN tb_cliente pr ON di.tb_persdecl_id = pr.tb_cliente_id
 	WHERE tb_declaracionimpuestos_id=$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
-	}
-	function modificar($id,$fec,$id_cliente,$perspentrega_id,$persrecepcion_id,$persrecoge_id,$pendiente,$obs){
-	$sql = "UPDATE tb_declaracionimpuestos SET  
-	`tb_declaracionimpuestos_fecha` =  '$fec',
-	`tb_cliente_id` =  '$id_cliente',
-	`tb_persentrega_id` =  '$perspentrega_id',
-	`tb_persrecepcion_id` =  '$persrecepcion_id',
-	`tb_persrecoge_id` =  '$persrecoge_id',
-	`tb_declaracionimpuestos_pendientes` =  '$pendiente',
-	`tb_declaracionimpuestos_observacion` =  '$obs'
+    }
+	function modificar($id,$cliente_id,$fecha_declaracion,$fecha_vencimiento,$fecha_envio,$estado_correo,$pdt_nodeclarados,
+                       $estadopago,$deudas,$persdecl_id,$obs){
+	$sql = "UPDATE tb_declaracionimpuestos SET
+    `tb_declaracionimpuestos_id` =  '$fec',  
+	`tb_cliente_id` =  '$cliente_id',
+	`tb_fecha_declaracion` =  '$fecha_declaracion',
+	`tb_fecha_vencimiento` =  '$fecha_vencimiento',
+	`tb_fecha_envio` =  '$fecha_envio',
+	`tb_estado_correo` =  '$estado_correo',
+	`tb_pdt_nodeclarados` =  '$pdt_nodeclarados',
+	`tb_estadopago` =  '$estadopago',
+	`tb_deudas` =  '$deudas',
+	`tb_persdecl_id` =  '$persdecl_id',
+	`tb_observaciones` =  '$obs'
 	WHERE  tb_declaracionimpuestos_id =$id;";
 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function verifica_recepciondocumentos_tabla($id,$tabla){
+	function verifica_declaracionimpuestos_tabla($id,$tabla){
 	$sql = "SELECT * 
 		FROM  $tabla 
 		WHERE tb_declaracionimpuestos_id =$id";

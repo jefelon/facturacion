@@ -5,7 +5,9 @@ require_once("cLegalizacionlibros.php");
 $oLegalizacionlibros = new cLegalizacionlibros();
 
 if($_POST['action']=="insertar") {
-    $recdoc_fech = date('d-m-Y');
+    $fecha_recepcion = date('d-m-Y');
+    $fecha_legalizacion = date('d-m-Y');
+    $fecha_recojo = date('d-m-Y');
 }
 
 if($_POST['action']=="editar")
@@ -50,91 +52,53 @@ $(function() {
 		$(this).val($(this).val().toUpperCase());
 	});
 
-    $( "#txt_recdoc_empresa" ).autocomplete({
+    $( "#txt_doc_empresa" ).autocomplete({
         minLength: 1,
         source: "../clientes/cliente_complete_doc.php",
         select: function(event, ui){
-            $("#hdd_recdoc_empresa_id").val(ui.item.id);
-            $("#txt_recnom_empresa").val(ui.item.nombre);
-            // $("#txt_ven_cli_dir").val(ui.item.direccion);
-            // $("#txt_fil_gui_cod").val(ui.item.codigo);
-            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
-            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
-            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_recdoc_empresa_id').change();
+            $("#hdd_empresa_id").val(ui.item.id);
+            $("#txt_nom_empresa").val(ui.item.nombre);
+            $('#hdd_empresa_id').change();
         }
     });
 
-    $( "#txt_docpersentrega" ).autocomplete({
+    $( "#txt_doc_responsable" ).autocomplete({
         minLength: 1,
         source: "../clientes/cliente_complete_doc.php",
         select: function(event, ui){
-            $("#hdd_perspentrega_id").val(ui.item.id);
-            $("#txt_nompersentrega").val(ui.item.nombre);
-            // $("#txt_ven_cli_dir").val(ui.item.direccion);
-            // $("#txt_fil_gui_cod").val(ui.item.codigo);
-            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
-            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
-            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_perspentrega_id').change();
+            $("#hdd_responsable_id").val(ui.item.id);
+            $("#txt_nom_responsable").val(ui.item.nombre);
+            $('#hdd_responsable_id').change();
         }
     });
 
-    $( "#txt_docrecepdocumentos" ).autocomplete({
-        minLength: 1,
-        source: "../clientes/cliente_complete_doc.php",
-        select: function(event, ui){
-            $("#hdd_recepdocumentos_id").val(ui.item.id);
-            $("#txt_nomrecepdocumentos").val(ui.item.nombre);
-            // $("#txt_ven_cli_dir").val(ui.item.direccion);
-            // $("#txt_fil_gui_cod").val(ui.item.codigo);
-            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
-            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
-            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_recepdocumentos_id').change();
-        }
-    });
 
-    $( "#txt_docpersrecojo" ).autocomplete({
-        minLength: 1,
-        source: "../clientes/cliente_complete_doc.php",
-        select: function(event, ui){
-            $("#hdd_docpersrecojo_id").val(ui.item.id);
-            $("#txt_nompersrecojo").val(ui.item.nombre);
-            // $("#txt_ven_cli_dir").val(ui.item.direccion);
-            // $("#txt_fil_gui_cod").val(ui.item.codigo);
-            // $("#hdd_ven_cli_tip").val(ui.item.tipo);
-            // $("#hdd_ven_cli_ret").val(ui.item.retiene);
-            // $("#hdd_cli_precio_id").val(ui.item.precio_id);
-            $('#hdd_docpersrecojo_id').change();
-        }
-    });
 
-	$("#for_recdoc").validate({
+	$("#for_leglib").validate({
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
-				url: "../recepciondocumentos/recepciondocumentos_reg.php",
+				url: "../legalizacionlibros/legalizacionlibros_reg.php",
 				async:true,
 				dataType: "json",
-				data: $("#for_recdoc").serialize(),
+				data: $("#for_leglib").serialize(),
 				beforeSend: function() {
-					$("#div_recepciondocumentos_form" ).dialog( "close" );
-					$('#msj_recepciondocumentos').html("Guardando...");
-					$('#msj_recepciondocumentos').show(100);
+					$("#div_legalizacionlibros_form" ).dialog( "close" );
+					$('#msj_legalizacionlibros').html("Guardando...");
+					$('#msj_legalizacionlibros').show(100);
 				},
 				success: function(data){						
-					$('#msj_recepciondocumentos').html(data.recdoc_msj);
+					$('#msj_legalizacionlibros').html(data.leglib_msj);
 					<?php
-					if($_POST['vista']=="cmb_recdoc_id")
+					if($_POST['vista']=="cmb_leglib_id")
 					{
-						echo $_POST['vista'].'(data.recdoc_id)';
+						echo $_POST['vista'].'(data.leglib_id)';
 					}
 					?>
 				},
 				complete: function(){
 					<?php
-					if($_POST['vista']=="recepciondocumentos_tabla")
+					if($_POST['vista']=="legalizacionlibros_tabla")
 					{
 						echo $_POST['vista'].'()';
 					}
@@ -172,9 +136,9 @@ $(function() {
             }
 		}
 	});
-    $( "#txt_recdoc_fech" ).datepicker({
-        minDate: "-7D",
-        maxDate:"+0D",
+    $( "#txt_fecha_recepcion,#txt_fecha_legalizacion,#txt_fecha_recojo" ).datepicker({
+        minDate: "-7Y",
+        maxDate:"+7Y",
         yearRange: 'c-0:c+0',
         changeMonth: true,
         changeYear: false,
@@ -185,9 +149,16 @@ $(function() {
         buttonImage: "../../images/calendar.gif",
         buttonImageOnly: true
     });
+
+    $('.cantidad').autoNumeric({
+        aSep: '',
+        aDec: '.',
+        vMin: '0',
+        vMax: '99999'
+    });
 });
 </script>
-<form id="for_recdoc">
+<form id="for_leglib">
 <input name="action_legalizacionlibros" id="action_legalizacionlibros" type="hidden" value="<?php echo $_POST['action']?>">
     <input name="hdd_legalizacionlibros_id" id="hdd_afp_id" type="hidden" value="<?php echo $_POST['legalizacionlibros_id'] ?>">
     <input name="hdd_empresa_id" id="hdd_empresa_id" type="hidden" value="<?php echo $id_empresa ?>">
@@ -226,14 +197,14 @@ $(function() {
             <td><input name="txt_fecha_recojo" type="text" id="txt_fecha_recojo" value="<?php echo $fecha_recojo?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
-            <td align="right" valign="top">NUMDOC:</td>
-            <td><input name="txt_fecha_numdoc" type="text" id="txt_fecha_numdoc" value="<?php echo $numdoc?>" size="41" maxlength="10"></td>
+            <td align="right" valign="top">Nro de Documento:</td>
+            <td><input name="txt_numdoc" type="text" id="txt_numdoc" value="<?php echo $numdoc?>" size="41" maxlength="10"></td>
         </tr>
 
         <tr>
             <td align="right" valign="top">Regimen Tributario:</td>
             <td>
-                <select name="cmb_opcion_com" id="cmb_opcion_com">
+                <select name="cmb_regimen_tributario" id="cmb_regimen_tributario">
                     <option value="1"<?php if($regimen==1)echo 'selected'?>>Regimen Especial</option>
                     <option value="2"<?php if($regimen==2)echo 'selected'?>>Regimen MYPE Tributario</option>
                     <option value="3"<?php if($regimen==3)echo 'selected'?>>Regimen General</option>
@@ -242,13 +213,13 @@ $(function() {
         </tr>
         <tr>
             <td align="right" valign="top">Cantidad de Libros:</td>
-            <td><input name="txt_cantidad_libros" type="text" id="txt_cantidad_libros" value="<?php echo $cantidad_libros?>" size="41" maxlength="10"></td>
+            <td><input name="txt_cantidad_libros" type="text" class="cantidad" id="txt_cantidad_libros" value="<?php echo $cantidad_libros?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
             <td align="right" valign="top">Responsable de Legalización:</td>
             <td>
-                <input name="txt_doc_responsable" type="text" id="txt_doc_responsable" value="<?php echo $doc_empresa?>" size="10" maxlength="11">
-                <input name="txt_nom_responsable" type="text" id="txt_nom_responsable" value="<?php echo $nom_empresa?>" size="30">
+                <input name="txt_doc_responsable" type="text" id="txt_doc_responsable" value="<?php echo $doc_responsable?>" size="10" maxlength="11">
+                <input name="txt_nom_responsable" type="text" id="txt_nom_responsable" value="<?php echo $nom_responsable?>" size="30">
             </td>
         </tr>
         <tr>

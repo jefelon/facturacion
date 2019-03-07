@@ -20,7 +20,7 @@ class cAfp{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
+	function mostrar_filtro($fec1,$fec2){
 	$sql="SELECT dd.tb_declaraciondocumentos_id, dd.tb_cliente_id, cd.tb_cliente_nom AS tb_cliente_nom, 
     cd.tb_cliente_dir AS tb_cliente_dir, dd.tb_fecha_declaracion, dd.tb_fecha_vencimiento, dd.tb_fecha_envio, 
     dd.tb_afp_nodeclarados, dd.tb_afp_estadopago, dd.tb_afp_deudas, dd.tb_observaciones,
@@ -28,6 +28,7 @@ class cAfp{
 	FROM tb_declaraciondocumentos dd
 	INNER JOIN tb_cliente cd ON dd.tb_cliente_id = cd.tb_cliente_id
 	INNER JOIN tb_cliente pe ON dd.tb_persdecl_id = pe.tb_cliente_id
+	WHERE dd.tb_fecha_declaracion BETWEEN '$fec1' AND '$fec2' 
 	ORDER BY dd.tb_fecha_declaracion";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

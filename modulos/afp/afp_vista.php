@@ -55,16 +55,36 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
+
+    function declaraciondocumentos_filtro()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../afp/afp_filtro.php",
+            async:true,
+            dataType: "html",
+            //data: ({
+            //venta: $('#txt_fil_pro').val()
+            //}),
+            beforeSend: function() {
+                $('#div_declaraciondocumentos_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_declaraciondocumentos_filtro').html(html);
+            },
+            complete: function(){
+                declaraciondocumentos_tabla();
+            }
+        });
+    }
 function declaraciondocumentos_tabla()
 {	
 	$.ajax({
 		type: "POST",
 		url: "afp_tabla.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			//pro_est:	$('#cmb_fil_pro_est').val()
-		}),
+		dataType: "html",
+        data: $("#for_fil").serialize(),
 		beforeSend: function() {
 			$('#div_declaraciondocumentos_tabla').addClass("ui-state-disabled");
         },
@@ -153,8 +173,7 @@ $(function() {
         text: true
     });
 
-
-    declaraciondocumentos_tabla();
+    declaraciondocumentos_filtro();
 	
 	$( "#div_declaraciondocumentos_form" ).dialog({
 		title:'Información de AFP Declarados y No Declarados',
@@ -216,6 +235,8 @@ $(function() {
                   </tr>
               </table>
 			</div>
+            <div id="div_declaraciondocumentos_filtro" class="contenido_tabla">
+            </div>
         	<div id="div_declaraciondocumentos_form">
 			</div>
         	<div id="div_declaraciondocumentos_tabla" class="contenido_tabla">

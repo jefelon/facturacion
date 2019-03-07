@@ -55,16 +55,35 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
+    function comisionista_filtro()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../comisionistas/comisionista_filtro.php",
+            async:true,
+            dataType: "html",
+            //data: ({
+            //venta: $('#txt_fil_pro').val()
+            //}),
+            beforeSend: function() {
+                $('#div_comisionista_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_comisionista_filtro').html(html);
+            },
+            complete: function(){
+                comisionista_tabla();
+            }
+        });
+    }
 function comisionista_tabla()
 {	
 	$.ajax({
 		type: "POST",
 		url: "comisionista_tabla.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			//pro_est:	$('#cmb_fil_pro_est').val()
-		}),
+		dataType: "html",
+        data: $("#for_fil").serialize(),
 		beforeSend: function() {
 			$('#div_comisionista_tabla').addClass("ui-state-disabled");
         },
@@ -99,6 +118,12 @@ function comisionista_form(act,idf)
 		}
 	});
 }
+
+function com_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_comisionista").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
+
 
 function eliminar_comisionista(id)
 {   
@@ -143,7 +168,12 @@ $(function() {
 		text: true
 	});
 
-	comisionista_tabla();
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
+
+	comisionista_filtro();
 	
 	$( "#div_comisionista_form" ).dialog({
 		title:'Información de comisionista',
@@ -189,7 +219,11 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="comisionista_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+                        <td align="left" valign="middle">
+                            <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="com_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="com_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form></td>
                       <td align="right"><div id="msj_comisionista" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
@@ -201,6 +235,8 @@ $(function() {
                   </tr>
               </table>
 			</div>
+            <div id="div_comisionista_filtro" class="contenido_tabla">
+            </div>
         	<div id="div_comisionista_form">
 			</div>
         	<div id="div_comisionista_tabla" class="contenido_tabla">

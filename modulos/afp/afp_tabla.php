@@ -2,9 +2,9 @@
 require_once ("../../config/Cado.php");
 require_once ("../formatos/formato.php");
 require_once("cAfp.php");
-$oAfp = new cComisionista();
+$oAfp = new cAfp();
 
-$dts=$oAfp->mostrarTodos();
+$dts=$oAfp->mostrar_filtro(fecha_mysql($_POST['txt_fil_fec1']),fecha_mysql($_POST['txt_fil_fec2']));
 $num_rows= mysql_num_rows($dts);
 
 ?>

@@ -18,7 +18,7 @@ class cRecepcionDocumentos{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
+	function mostrar_filtro($fec1,$fec2){
 	$sql="SELECT r.tb_recepciondocumentos_id, r.tb_recepciondocumentos_observacion, r.tb_recepciondocumentos_fecha, 
     r.tb_recepciondocumentos_pendientes, r.tb_cliente_id, r.tb_persentrega_id, r.tb_persrecepcion_id, r.tb_persrecoge_id, 
     cr.tb_cliente_nom AS tb_cliente_nom, cr.tb_cliente_dir AS tb_cliente_dir, cr.tb_cliente_tel AS tb_cliente_tel, pe.tb_cliente_nom AS tb_persentrega_nom, pr.tb_cliente_nom AS tb_persrecepcion_nom,
@@ -29,6 +29,7 @@ class cRecepcionDocumentos{
 	INNER JOIN tb_cliente pe ON r.tb_persentrega_id = pe.tb_cliente_id
 	INNER JOIN tb_cliente pr ON r.tb_persrecepcion_id = pr.tb_cliente_id
 	INNER JOIN tb_cliente pg ON r.tb_persrecoge_id = pg.tb_cliente_id
+	WHERE tb_recepciondocumentos_fecha BETWEEN '$fec1' AND '$fec2' 
 	ORDER BY tb_recepciondocumentos_fecha";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

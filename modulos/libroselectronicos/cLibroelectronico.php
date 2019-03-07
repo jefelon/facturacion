@@ -18,7 +18,7 @@ class cLibroelectronico{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
+	function mostrar_filtro($fec1,$fec2){
 	$sql="SELECT le.tb_libroelectronico_id, le.tb_cliente_id, cd.tb_cliente_nom AS tb_cliente_nom, 
     cd.tb_cliente_doc AS tb_cliente_doc, le.tb_fecha_declaracion, le.tb_fecha_vencimiento, 
     le.tb_libros_nodeclarados, le.tb_libros_vencidos, le.tb_observaciones,
@@ -26,6 +26,7 @@ class cLibroelectronico{
 	FROM tb_libroelectronico le
 	INNER JOIN tb_cliente cd ON le.tb_cliente_id = cd.tb_cliente_id
 	INNER JOIN tb_cliente pe ON le.tb_persdecl_id = pe.tb_cliente_id
+	WHERE le.tb_fecha_declaracion BETWEEN '$fec1' AND '$fec2' 
 	ORDER BY le.tb_fecha_declaracion";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

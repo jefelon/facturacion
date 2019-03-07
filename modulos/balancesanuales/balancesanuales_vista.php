@@ -11,7 +11,7 @@ $oContenido = new cContenido();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Recepción Documentos</title>
+<title>Balances Anuales</title>
 <link href="../../css/Estilo/miestilo.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -55,58 +55,63 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
-function recepciondocumentos_tabla()
+function balancesanuales_tabla()
 {	
 	$.ajax({
 		type: "POST",
-		url: "recepciondocumentos_tabla.php",
+		url: "balancesanuales_tabla.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			//pro_est:	$('#cmb_fil_pro_est').val()
 		}),
 		beforeSend: function() {
-			$('#div_recepciondocumentos_tabla').addClass("ui-state-disabled");
+			$('#div_balancesanuales_tabla').addClass("ui-state-disabled");
         },
 		success: function(html){
-			$('#div_recepciondocumentos_tabla').html(html);
+			$('#div_balancesanuales_tabla').html(html);
 		},
 		complete: function(){			
-			$('#div_recepciondocumentos_tabla').removeClass("ui-state-disabled");
+			$('#div_balancesanuales_tabla').removeClass("ui-state-disabled");
 		}
 	});     
 }
 
-function recepciondocumentos_form(act,idf)
+function balancesanuales_form(act,idf)
 {
 	$.ajax({
 		type: "POST",
-		url: "recepciondocumentos_form.php",
+		url: "balancesanuales_form.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
 			action: act,
-            recepcion_id:	idf,
-			vista:	'recepciondocumentos_tabla'
+            balancesanuales_id:	idf,
+			vista:	'balancesanuales_tabla'
 		}),
 		beforeSend: function() {
-			$('#msj_recepciondocumentos').hide();
-			$('#div_recepciondocumentos_form').dialog("open");
-			$('#div_recepciondocumentos_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+			$('#msj_balancesanuales').hide();
+			$('#div_balancesanuales_form').dialog("open");
+			$('#div_balancesanuales_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_recepciondocumentos_form').html(html);				
+			$('#div_balancesanuales_form').html(html);				
 		}
 	});
 }
 
-function eliminar_recepciondocumentos(id)
+function balanu_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_balancesanuales").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
+}
+
+function eliminar_balancesanuales(id)
 {   
-	$('#msj_recepciondocumentos').hide();   
+	$('#msj_balancesanuales').hide();   
 	if(confirm("Realmente desea eliminar?")){
 		$.ajax({
 			type: "POST",
-			url: "recepciondocumentos_reg.php",
+			url: "balancesanuales_reg.php",
 			async:true,
 			dataType: "html",
 			data: ({
@@ -114,14 +119,14 @@ function eliminar_recepciondocumentos(id)
 				id:		id
 			}),
 			beforeSend: function() {
-				$('#msj_recepciondocumentos').html("Cargando...");
-				$('#msj_recepciondocumentos').show(100);
+				$('#msj_balancesanuales').html("Cargando...");
+				$('#msj_balancesanuales').show(100);
 			},
 			success: function(html){
-				$('#msj_recepciondocumentos').html(html);
+				$('#msj_balancesanuales').html(html);
 			},
 			complete: function(){
-				recepciondocumentos_tabla();
+				balancesanuales_tabla();
 			}
 		});
 	}
@@ -143,10 +148,15 @@ $(function() {
 		text: true
 	});
 
-	recepciondocumentos_tabla();
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
+
+	balancesanuales_tabla();
 	
-	$( "#div_recepciondocumentos_form" ).dialog({
-		title:'Información de recepciondocumentos',
+	$( "#div_balancesanuales_form" ).dialog({
+		title:'Información de balances anuales',
 		autoOpen: false,
 		resizable: false,
 		height: 400,
@@ -154,10 +164,10 @@ $(function() {
 		modal: true,
 		buttons: {
 			Guardar: function() {
-				$("#for_recdoc").submit();
+				$("#for_balanu").submit();
 			},
 			Cancelar: function() {
-				$('#for_recdoc').each (function(){this.reset();});
+				$('#for_balanu').each (function(){this.reset();});
 				$( this ).dialog( "close" );
 			}
 		}
@@ -178,7 +188,7 @@ $(function() {
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">DOCUMENTOS</td>
+                    <td class="caption_cont">AREA DE BALANCES ANUALES</td>
                   </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $_SESSION['empresa_nombre']?></td>
@@ -187,10 +197,14 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="recepciondocumentos_form('insertar')">Agregar</a></td>
+                      <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="balancesanuales_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
-                      <td align="right"><div id="msj_recepciondocumentos" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
+                        <td align="left" valign="middle">
+                            <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="balanu_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="balanu_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form></td>
+                      <td align="right"><div id="msj_balancesanuales" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
                   </table>
                     </td>
@@ -201,9 +215,9 @@ $(function() {
                   </tr>
               </table>
 			</div>
-        	<div id="div_recepciondocumentos_form">
+        	<div id="div_balancesanuales_form">
 			</div>
-        	<div id="div_recepciondocumentos_tabla" class="contenido_tabla">
+        	<div id="div_balancesanuales_tabla" class="contenido_tabla">
       		</div>
       	</div>
     </article>

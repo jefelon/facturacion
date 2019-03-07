@@ -55,16 +55,35 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
+    function planilla_filtro()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../planilla/planilla_filtro.php",
+            async:true,
+            dataType: "html",
+            //data: ({
+            //venta: $('#txt_fil_pro').val()
+            //}),
+            beforeSend: function() {
+                $('#div_planilla_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_planilla_filtro').html(html);
+            },
+            complete: function(){
+                planilla_tabla();
+            }
+        });
+    }
 function planilla_tabla()
 {	
 	$.ajax({
 		type: "POST",
 		url: "planilla_tabla.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			//pro_est:	$('#cmb_fil_pro_est').val()
-		}),
+		dataType: "html",
+        data: $("#for_fil").serialize(),
 		beforeSend: function() {
 			$('#div_planilla_tabla').addClass("ui-state-disabled");
         },
@@ -152,7 +171,7 @@ $(function() {
         text: true
     });
 
-	planilla_tabla();
+	planilla_filtro();
 	
 	$( "#div_planilla_form" ).dialog({
 		title:'Información de planilla',
@@ -214,6 +233,8 @@ $(function() {
                   </tr>
               </table>
 			</div>
+            <div id="div_planilla_filtro" class="contenido_tabla">
+            </div>
         	<div id="div_planilla_form">
 			</div>
         	<div id="div_planilla_tabla" class="contenido_tabla">

@@ -6,27 +6,28 @@ $Declaracionimpuestos = new cDeclaracionimpuestos();
 
 if($_POST['action']=="insertar") {
     $recdoc_fech = date('d-m-Y');
+    $recdoc_fech = date('d-m-Y');
+
 }
 
 if($_POST['action']=="editar")
 {
 	$dts=$Declaracionimpuestos->mostrarUno($_POST['recepcion_id']);
 	$dt = mysql_fetch_array($dts);
-    $recdoc_fech = mostrarFecha($dt['tb_recepciondocumentos_fecha']);
-	$recdoc_empresa = $dt['tb_cliente_doc'];
-    $recnom_empresa = $dt['tb_cliente_nom'];
-    $recid_empresa = $dt['tb_cliente_id'];
-    $docpersentrega = $dt['tb_persentrega_doc'];
-    $nompersentrega = $dt['tb_persentrega_nom'];
-    $idpersentrega = $dt['tb_persentrega_id'];
-    $docrecepdocumentos = $dt['tb_persrecepcion_doc'];
-    $nomrecepdocumentos = $dt['tb_persrecepcion_nom'];
-    $idrecepdocumentos = $dt['tb_persrecepcion_id'];
-    $docpersrecojo = $dt['tb_persrecoge_doc'];
-    $nompersrecojo = $dt['tb_persrecoge_nom'];
-    $idpersrecojo = $dt['tb_persrecoge_id'];
-    $pendiente = $dt['tb_recepciondocumentos_pendientes'];
-    $observaciones = $dt['tb_recepciondocumentos_observacion'];
+	$doc_empresa = $dt['tb_cliente_doc'];
+    $nom_empresa = $dt['tb_cliente_nom'];
+    $id_empresa = $dt['tb_cliente_id'];
+    $fecha_declaracion = mostrarFecha($dt['tb_fecha_declaracion']);
+    $fecha_vencimiento = mostrarFecha($dt['tb_fecha_vencimiento']);
+    $fecha_envio = mostrarFecha($dt['tb_fecha_envio']);
+    $estado_envio = $dt['	tb_estado_correo'];
+    $pdt_nodeclarados = $dt['tb_pdt_nodeclarados'];
+    $pago_realizado = $dt['tb_estadopago'];
+    $deudas = $dt['tb_deudas'];
+    $doc_persdecl = $dt['tb_persdecl_doc'];
+    $nom_persdecl = $dt['tb_persdecl_nom'];
+    $id_persdecl = $dt['tb_persdecl_id'];
+    $observaciones = $dt['tb_observaciones'];
 
 	mysql_free_result($dts);
 }
@@ -111,17 +112,17 @@ $(function() {
 		submitHandler: function() {
 			$.ajax({
 				type: "POST",
-				url: "../recepciondocumentos/recepciondocumentos_reg.php",
+				url: "../declaracionimpuestos/declaracionimpuestos_reg.php",
 				async:true,
 				dataType: "json",
 				data: $("#for_recdoc").serialize(),
 				beforeSend: function() {
-					$("#div_recepciondocumentos_form" ).dialog( "close" );
-					$('#msj_recepciondocumentos').html("Guardando...");
-					$('#msj_recepciondocumentos').show(100);
+					$("#div_declaracionimpuestos_form" ).dialog( "close" );
+					$('#msj_declaracionimpuestos').html("Guardando...");
+					$('#msj_declaracionimpuestos').show(100);
 				},
 				success: function(data){						
-					$('#msj_recepciondocumentos').html(data.recdoc_msj);
+					$('#msj_declaracionimpuestos').html(data.recdoc_msj);
 					<?php
 					if($_POST['vista']=="cmb_recdoc_id")
 					{
@@ -131,7 +132,7 @@ $(function() {
 				},
 				complete: function(){
 					<?php
-					if($_POST['vista']=="recepciondocumentos_tabla")
+					if($_POST['vista']=="declaracionimpuestos_tabla")
 					{
 						echo $_POST['vista'].'()';
 					}
@@ -185,32 +186,31 @@ $(function() {
 });
 </script>
 <form id="for_recdoc">
-<input name="action_afp" id="action_afp" type="hidden" value="<?php echo $_POST['action']?>">
-    <input name="hdd_afp_id" id="hdd_afp_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
-    <input name="hdd_recdoc_empresa_id" id="hdd_recdoc_empresa_id" type="hidden" value="<?php echo $recid_empresa ?>">
-    <input name="hdd_perspentrega_id" id="hdd_perspentrega_id" type="hidden" value="<?php echo $idpersentrega ?>">
-    <input name="hdd_recepdocumentos_id" id="hdd_recepdocumentos_id" type="hidden" value="<?php echo $idrecepdocumentos?>">
-    <input name="hdd_docpersrecojo_id" id="hdd_docpersrecojo_id" type="hidden" value="<?php echo $idpersrecojo?>">
+<input name="action_declaracionimpuestos" id="action_declaracionimpuestos" type="hidden" value="<?php echo $_POST['action']?>">
+    <input name="hdd_declaracionimpuestos_id" id="hdd_declaracionimpuestos_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
+    <input name="hdd_empresa_id" id="hdd_empresa_id" type="hidden" value="<?php echo $id_empresa ?>">
+    <input name="hdd_persdecl_id" id="hdd_persdecl_id" type="hidden" value="<?php echo $id_persdecl ?>">
 
     <table>
         <tr>
             <td align="right" valign="top">Empresa:</td>
             <td>
-                <input name="txt_recdoc_empresa" type="text" id="txt_recdoc_empresa" value="<?php echo $recdoc_empresa?>" size="10" maxlength="11">
-                <input name="txt_recnom_empresa" type="text" id="txt_recnom_empresa" value="<?php echo $recnom_empresa?>" size="30">
+                <input name="txt_doc_empresa" type="text" id="txt_doc_empresa" value="<?php echo $doc_empresa?>" size="10" maxlength="11">
+                <input name="txt_nom_empresa" type="text" id="txt_nom_empresa" value="<?php echo $nom_empresa?>" size="30">
             </td>
         </tr>
         <tr>
             <td align="right" valign="top">Fecha de Declaración:</td>
-            <td><input name="txt_fech_decl" type="text" id="txt_fech_decl" value="<?php echo $fech_decl?>" size="41" maxlength="10"></td>
+            <td><input name="txt_fecha_declaracion" type="text" id="txt_fecha_declaracion" value="<?php echo $fecha_declaracion?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
             <td align="right" valign="top">Fecha de Vencimiento:</td>
-            <td><input name="txt_fech_ven" type="text" id="txt_fech_ven" value="<?php echo $fech_ven?>" size="41" maxlength="10"></td>
+            <td><input name="txt_fecha_vencimiento" type="text" id="txt_fecha_vencimiento"
+                       value="<?php echo $fecha_vencimiento?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
             <td align="right" valign="top">Fecha de Envio Correo:</td>
-            <td><input name="txt_fech_envio" type="text" id="txt_fech_decl" value="<?php echo $fech_envio?>" size="41" maxlength="10"></td>
+            <td><input name="txt_fecha_envio" type="text" id="txt_fecha_envio" value="<?php echo $fecha_envio?>" size="41" maxlength="10"></td>
         </tr>
         <tr>
             <td align="right" valign="top">Estado Envio:</td>
@@ -222,9 +222,9 @@ $(function() {
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">AFP No declarados:</td>
+            <td align="right" valign="top">PDT No declarados:</td>
             <td>
-                <input name="txt_afp_decl" type="text" id="txt_afp_decl" value="<?php echo $afp_decl?>" size="30">
+                <input name="txt_pdt_nodeclarados" type="text" id="txt_pdt_nodeclarados" value="<?php echo $pdt_nodeclarados?>" size="30">
             </td>
         </tr>
         <tr>
@@ -243,19 +243,10 @@ $(function() {
             </td>
         </tr>
         <tr>
-            <td align="right" valign="top">Resp. Recojo:</td>
+            <td align="right" valign="top">Responsable de la Declaración:</td>
             <td>
-                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11">
-                <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30">
-            </td>
-        </tr>
-        <tr>
-            <td align="right" valign="top">Pendientes:</td>
-            <td>
-                <select name="cmb_pendiente" id="cmb_pendiente">
-                    <option value="1"<?php if($pendiente==True)echo 'selected'?>>Trajo</option>
-                    <option value="0"<?php if($pendiente==False)echo 'selected'?>>No Trajo</option>
-                </select>
+                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $doc_persdecl?>" size="10" maxlength="11">
+                <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nom_persdecl?>" size="30">
             </td>
         </tr>
         <tr>

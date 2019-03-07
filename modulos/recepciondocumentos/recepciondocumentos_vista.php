@@ -55,16 +55,36 @@ $oContenido = new cContenido();
     <script> var $j = jQuery.noConflict(true); </script>
 
 <script type="text/javascript">
+
+    function recepciondocumentos_filtro()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../recepciondocumentos/recepciondocumentos_filtro.php",
+            async:true,
+            dataType: "html",
+            //data: ({
+            //venta: $('#txt_fil_pro').val()
+            //}),
+            beforeSend: function() {
+                $('#div_recepciondocumentos_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_recepciondocumentos_filtro').html(html);
+            },
+            complete: function(){
+                recepciondocumentos_tabla();
+            }
+        });
+    }
 function recepciondocumentos_tabla()
 {	
 	$.ajax({
 		type: "POST",
 		url: "recepciondocumentos_tabla.php",
 		async:true,
-		dataType: "html",                      
-		data: ({
-			//pro_est:	$('#cmb_fil_pro_est').val()
-		}),
+		dataType: "html",
+        data: $("#for_fil").serialize(),
 		beforeSend: function() {
 			$('#div_recepciondocumentos_tabla').addClass("ui-state-disabled");
         },
@@ -152,8 +172,8 @@ $(function() {
         icons: {primary: "ui-icon-print"},
         text: true
     });
+    recepciondocumentos_filtro();
 
-	recepciondocumentos_tabla();
 	
 	$( "#div_recepciondocumentos_form" ).dialog({
 		title:'Información de recepciondocumentos',
@@ -215,6 +235,8 @@ $(function() {
                   </tr>
               </table>
 			</div>
+            <div id="div_recepciondocumentos_filtro" class="contenido_tabla">
+            </div>
         	<div id="div_recepciondocumentos_form">
 			</div>
         	<div id="div_recepciondocumentos_tabla" class="contenido_tabla">

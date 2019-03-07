@@ -20,12 +20,13 @@ class cComisionista{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function mostrarTodos(){
+	function mostrar_filtro($fec1,$fec2){
 	$sql="SELECT co.tb_comisionista_id, i.tb_cliente_nom AS tb_intermediario_nom, ep.tb_cliente_nom AS tb_cliente_nom,
      co.tb_fecha_consiguio, co.tb_opcion_com,co.tb_cobro,co.tb_comision,co.tb_mes1,co.tb_mes2,co.tb_mes3,co.tb_monto_total
 	FROM tb_comisionista co
 	INNER JOIN tb_cliente ep ON ep.tb_cliente_id = co.tb_cliente_id
 	INNER JOIN tb_cliente i ON i.tb_cliente_id = co.tb_intermediario_id
+	WHERE co.tb_fecha_consiguio BETWEEN '$fec1' AND '$fec2' 
 	ORDER BY tb_fecha_consiguio";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

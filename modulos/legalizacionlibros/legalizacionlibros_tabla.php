@@ -4,7 +4,7 @@ require_once ("../formatos/formato.php");
 require_once("cLegalizacionlibros.php");
 $oLegalizacionlibros = new cLegalizacionlibros();
 
-$dts=$oLegalizacionlibros->mostrarTodos();
+$dts=$oLegalizacionlibros->mostrar_filtro(fecha_mysql($_POST['txt_fil_fec1']),fecha_mysql($_POST['txt_fil_fec2']));
 $num_rows= mysql_num_rows($dts);
 
 ?>
@@ -35,6 +35,7 @@ $(function() {
                 <tr>
                     <th>CÓDIGO</th>
                     <th>EMPRESA</th>
+                    <th>LUGAR DE DOMICILIO FISCAL</th>
                     <th>FECHA DE RECEPCIÓN DE DINERO</th>
                     <th>NOTARÍA</th>
                     <th>FECHA DE LEGALIZACIÓN</th>
@@ -61,7 +62,7 @@ $(function() {
                     <td>COD.SCF-<?php echo $dt['tb_legalizacionlibros_id']?></td>
                     <td><?php echo $dt['tb_cliente_nom']; ?></td>
                     <td><?php echo $dt['tb_domicilio_fiscal']?></td>
-                    <td><?php echo mostrarFecha($dt['tb_recepcion']); ?></td>
+                    <td><?php echo mostrarFecha($dt['tb_fecha_recepcion']); ?></td>
                     <td><?php echo $dt['tb_notaria']; ?></td>
                     <td><?php echo mostrarFecha($dt['tb_fecha_legalizacion']); ?></td>
                     <td><?php echo mostrarFecha($dt['tb_fecha_recojo']); ?></td>
@@ -72,7 +73,6 @@ $(function() {
                         if($dt['tb_regimen_tributario']==3){ echo 'Regimen General'; }
                         ?></td>
                     <td><?php echo $dt['tb_cantidad_libros']; ?></td>
-                    <td><?php echo $dt['tb_cliente_tel']; ?></td>
                     <td><?php echo $dt['tb_responsable_nom']; ?></td>
                     <td><?php echo $dt['tb_libros_legalizados']; ?></td>
                     <td><?php echo $dt['tb_libros_nolegalizados']; ?></td>
