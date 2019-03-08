@@ -57,7 +57,7 @@ class cPle
             INNER JOIN tb_documento td2 ON v.tb_documento_id=td2.tb_documento_id
             INNER JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
             INNER JOIN cs_tipomoneda m ON v.cs_tipomoneda_id=m.cs_tipomoneda_id 
-            WHERE YEAR(v.tb_venta_reg) = '$anio' AND MONTH(v.tb_venta_reg) ='$mes'
+            WHERE YEAR(v.tb_venta_reg) = '$anio' AND MONTH(v.tb_venta_reg) ='$mes' AND cs_tipodocumento_cod <> ''
             
         UNION ALL 
         
