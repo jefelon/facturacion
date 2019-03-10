@@ -36,7 +36,7 @@ $(function() {
                     <th>Código</th>
                     <th>Personal</th>
                     <th>Fecha y Hora Ingreso</th>
-                    <th>Fecha y Hora Salida</th>
+                    <th>Fecha y Hora Salidas</th>
                     <th>Tardanza</th>
                     <th>Falta</th>
                     <th>Permisos</th>
@@ -52,15 +52,16 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td><?php echo $dt['tb_marcacionpersonal_id']?></td>
+                    <td>COD.SCF-<?php echo $dt['tb_marcacionpersonal_id']?></td>
+                    <td><?php echo $dt['tb_cliente_nom']?></td>
                     <td><?php echo mostrarFecha($dt['tb_fecha_ingreso']).' - '.formato_hora($dt['tb_hora_ingreso']); ?></td>
                     <td><?php echo mostrarFecha($dt['tb_fecha_salida']).' - '.formato_hora($dt['tb_hora_salida']); ?></td>
                     <td><?php echo $dt['tb_tardanza']; ?></td>
                     <td><?php echo $dt['tb_falta']; ?></td>
                     <td><?php echo $dt['tb_permisos']; ?></td>
-                    <td><?php echo $dt['tb_permisos']; ?></td>
-                    <td align="center"><a class="btn_editar" href="#" onClick="recepciondocumentos_form('editar','<?php echo $dt['tb_marcacionpersonal_id']?>')">Editar</a>
-                    <a class="btn_eliminar" href="#" onClick="eliminar_recepciondocumentos('<?php echo $dt['tb_marcacionpersonal_id']?>')">Eliminar</a></td>
+                    <td><?php echo $dt['tb_fecha_cumpleanos']; ?></td>
+                    <td align="center"><a class="btn_editar" href="#" onClick="marcacionpersonal_form('editar','<?php echo $dt['tb_marcacionpersonal_id']?>')">Editar</a>
+                    <a class="btn_eliminar" href="#" onClick="eliminar_marcacionpersonal('<?php echo $dt['tb_marcacionpersonal_id']?>')">Eliminar</a></td>
                 </tr>
 			<?php
 				}
@@ -71,6 +72,6 @@ $(function() {
         }
 		?>
                 <tr class="even">
-                  <td colspan="11"><?php echo $num_rows.' registros'?></td>
+                  <td colspan="12"><?php echo $num_rows.' registros'?></td>
                 </tr>
         </table>

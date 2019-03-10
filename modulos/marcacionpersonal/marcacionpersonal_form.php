@@ -19,8 +19,10 @@ if($_POST['action']=="editar")
 	$recdoc_empresa = $dt['tb_cliente_doc'];
     $recnom_empresa = $dt['tb_cliente_nom'];
     $recid_empresa = $dt['tb_cliente_id'];
-    $fecha_ingreso = $dt['tb_fecha_ingreso'];
-    $fecha_salida = $dt['tb_fecha_salida'];
+    $hora_ingreso = formato_hora($dt['tb_hora_ingreso']);
+    $hora_salida = formato_hora($dt['tb_hora_salida']);
+    $fecha_ingreso = mostrarFecha($dt['tb_fecha_ingreso']);
+    $fecha_salida = mostrarFecha($dt['tb_fecha_salida']);
     $tardanza = $dt['tb_tardanza'];
     $falta = $dt['tb_falta'];
     $permisos = $dt['tb_permisos'];
@@ -169,7 +171,7 @@ $(function() {
 </script>
 <form id="for_recdoc">
 <input name="action_marcacionpersonal" id="action_marcacionpersonal" type="hidden" value="<?php echo $_POST['action']?>">
-    <input name="hdd_marcacionpersonal_id" id="hdd_marcacionpersonal_id" type="hidden" value="<?php echo $_POST['recepcion_id'] ?>">
+    <input name="hdd_marcacionpersonal_id" id="hdd_marcacionpersonal_id" type="hidden" value="<?php echo $_POST['marcacionpersonal_id'] ?>">
     <input name="hdd_recdoc_empresa_id" id="hdd_recdoc_empresa_id" type="hidden" value="<?php echo $recid_empresa ?>">
     <table>
         <tr>

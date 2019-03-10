@@ -42,6 +42,8 @@ $oContenido = new cContenido();
     <script src="../../js/jquery-validation/additional-methods.js" type="text/javascript"></script>
     <script src="../../js/jquery-validation/localization/messages_es.js" type="text/javascript"></script>
 
+    <script src="../../js/timepicker/jquery-ui-timepicker-addon.js" type="text/javascript"></script>
+
     <link rel="stylesheet" href="../../js/tablesorter/themes/blue/style.css" type="text/css" media="print, projection, screen" />
     <script type="text/javascript" src="../../js/tablesorter/jquery.tablesorter.js"></script>
 
@@ -86,7 +88,7 @@ function marcacionpersonal_form(act,idf)
 		dataType: "html",                      
 		data: ({
 			action: act,
-            recepcion_id:	idf,
+            marcacionpersonal_id:	idf,
 			vista:	'marcacionpersonal_tabla'
 		}),
 		beforeSend: function() {
@@ -154,7 +156,7 @@ $(function() {
     marcacionpersonal_tabla();
 	
 	$( "#div_marcacionpersonal_form" ).dialog({
-		title:'Información de recepciondocumentos',
+		title:'Información de Marcación Personal',
 		autoOpen: false,
 		resizable: false,
 		height: 400,

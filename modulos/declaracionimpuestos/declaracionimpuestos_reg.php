@@ -12,8 +12,8 @@ if($_POST['action_declaracionimpuestos']=="insertar")
         && !empty($_POST['txt_pdt_nodeclarados'] ) && $_POST['cmb_pago_realizado']!=''
         && !empty($_POST['txt_deudas']) && !empty($_POST['hdd_persdecl_id']))
 	{
-		$oDeclaracionimpuestos->insertar($_POST['hdd_empresa_id'],fecha_mysql($_POST['tb_fecha_declaracion']),
-            fecha_mysql($_POST['tb_fecha_vencimiento']), fecha_mysql($_POST['txt_fecha_envio']),
+		$oDeclaracionimpuestos->insertar($_POST['hdd_empresa_id'],fecha_mysql($_POST['txt_fecha_declaracion']),
+            fecha_mysql($_POST['txt_fecha_vencimiento']), fecha_mysql($_POST['txt_fecha_envio']),
             $_POST['cmb_estado_envio'], $_POST['txt_pdt_nodeclarados'],
             $_POST['cmb_pago_realizado'], $_POST['txt_deudas'], $_POST['hdd_persdecl_id'],
             strip_tags($_POST['txt_observaciones']));
@@ -47,7 +47,7 @@ if($_POST['action_declaracionimpuestos']=="editar")
     && !empty($_POST['txt_deudas']) && !empty($_POST['hdd_persdecl_id']))
     {
         $oDeclaracionimpuestos->modificar($_POST['hdd_declaracionimpuestos_id'],$_POST['hdd_empresa_id'],
-            fecha_mysql($_POST['tb_fecha_declaracion']), fecha_mysql($_POST['tb_fecha_vencimiento']),
+            fecha_mysql($_POST['txt_fecha_declaracion']), fecha_mysql($_POST['txt_fecha_vencimiento']),
             fecha_mysql($_POST['txt_fecha_envio']), $_POST['cmb_estado_envio'], $_POST['txt_pdt_nodeclarados'],
             $_POST['cmb_pago_realizado'], $_POST['txt_deudas'], $_POST['hdd_persdecl_id'],
             strip_tags($_POST['txt_observaciones']));

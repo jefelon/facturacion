@@ -17,9 +17,9 @@ if($_POST['action']=="editar")
 	$doc_empresa = $dt['tb_cliente_doc'];
     $nom_empresa = $dt['tb_cliente_nom'];
     $id_empresa = $dt['tb_cliente_id'];
-    $fecha_declaracion = $dt['tb_fecha_declaracion'];
-    $fecha_vencimiento = $dt['tb_fecha_vencimiento'];
-    $fecha_envio = $dt['tb_fecha_envio'];
+    $fecha_declaracion = mostrarFecha($dt['tb_fecha_declaracion']);
+    $fecha_vencimiento = mostrarFecha($dt['tb_fecha_vencimiento']);
+    $fecha_envio = mostrarFecha($dt['tb_fecha_envio']);
     $estado_envio = $dt['	tb_estado_correo'];
     $pdt_nodeclarados = $dt['tb_pdt_nodeclarados'];
     $pago_realizado = $dt['tb_estadopago'];

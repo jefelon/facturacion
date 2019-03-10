@@ -36,7 +36,8 @@ if($_POST['action_marcacionpersonal']=="editar")
     {
 		$oMarcacionpersonal->modificar($_POST['hdd_marcacionpersonal_id'],$_POST['hdd_recdoc_empresa_id'],
             fecha_mysql($_POST['txt_fecha_ingreso']),
-            fecha_mysql($_POST['txt_fecha_salida']), $_POST['txt_tardanza'],
+            hora_mysql($_POST['txt_hora_ingreso']),fecha_mysql($_POST['txt_fecha_salida']),
+            hora_mysql($_POST['txt_hora_salida']), $_POST['txt_tardanza'],
             $_POST['txt_falta'], $_POST['txt_permisos']);
 		
 		$data['marper_msj']='Se registró marcación correctamente.';

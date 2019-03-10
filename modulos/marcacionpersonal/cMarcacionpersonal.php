@@ -20,7 +20,7 @@ class cMarcacionpersonal{
 	function mostrarTodos(){
 	$sql="SELECT mp.tb_marcacionpersonal_id, mp.tb_cliente_id, cd.tb_cliente_nom AS tb_cliente_nom, 
     cd.tb_cliente_doc AS tb_cliente_doc, mp.tb_fecha_ingreso,  mp.tb_hora_ingreso, mp.tb_fecha_salida,mp.tb_hora_salida, mp.tb_tardanza, 
-    mp.tb_permisos
+    mp.tb_permisos,mp.tb_falta
 	FROM tb_marcacionpersonal mp
 	INNER JOIN tb_cliente cd ON mp.tb_cliente_id = cd.tb_cliente_id
 	ORDER BY mp.tb_fecha_ingreso";
@@ -30,26 +30,27 @@ class cMarcacionpersonal{
 	}
 	function mostrarUno($id){
 	$sql="SELECT mp.tb_marcacionpersonal_id, mp.tb_cliente_id, cd.tb_cliente_nom AS tb_cliente_nom, 
-    cd.tb_cliente_doc AS tb_cliente_doc, mp.tb_fecha_ingreso, mp.tb_fecha_salida, mp.tb_tardanza, 
-    mp.tb_permisos
+    cd.tb_cliente_doc AS tb_cliente_doc, mp.tb_fecha_ingreso,mp.tb_hora_ingreso, mp.tb_fecha_salida, 
+    mp.tb_hora_salida, mp.tb_tardanza, mp.tb_permisos,mp.tb_falta
 	FROM tb_marcacionpersonal mp
 	INNER JOIN tb_cliente cd ON mp.tb_cliente_id = cd.tb_cliente_id
-	ORDER BY mp.tb_fecha_ingreso
-	WHERE tb_marcacionpersonal_id=$id";
+	WHERE tb_marcacionpersonal_id=$id
+	ORDER BY mp.tb_fecha_ingreso";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$id_cliente,$fec_ingreso,$fec_salida, $tardanza,$falta,$permisos){
+	function modificar($id,$id_cliente,$fec_ingreso,$hor_ingreso,$fec_salida,$hor_salida, $tardanza,$falta,$permisos){
 	$sql = "UPDATE tb_marcacionpersonal SET  
     `tb_cliente_id` =  '$id_cliente',
 	`tb_fecha_ingreso` =  '$fec_ingreso',
+	`tb_hora_ingreso` =  '$hor_ingreso',
 	`tb_fecha_salida` =  '$fec_salida',
+	`tb_hora_salida` =  '$hor_salida',
 	`tb_tardanza` =  '$tardanza',
 	`tb_falta` =  '$falta',
 	`tb_permisos` =  '$permisos'
 	WHERE  tb_marcacionpersonal_id =$id;";
-
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
