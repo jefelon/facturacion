@@ -243,7 +243,7 @@ $html.='
         <td style="text-align: center" width="30mm"> '.$serie.'-'.$numero.'</td>
         <td style="text-align: center" width="22mm">'.mostrarFecha($fecha).'</td>
         <td style="text-align: center" width="30mm">'.mostrarFecha($ltr['tb_letras_fecha']).'</td>
-        <td style="text-align: center" width="48mm">'.$ltr['tb_letras_monto'].'</td>
+        <td style="text-align: center" width="48mm">'.$mon.' '.$ltr['tb_letras_monto'].'</td>
     </tr>
     <tr>
         <td style="text-align: left;height: 12mm" width="100%"></td>
