@@ -204,7 +204,7 @@ if($_POST['action']=='agregar'){
         $num=0;
         if(isset($_SESSION['venta_car'][$unico_id])){
             foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad){
-                if(($_POST['cat_id']!=$indice) and ($pre_id==$_SESSION['presentacion_id'][$unico_id][$indice])){
+                if(($_POST['cat_id']==$indice) and ($pre_id==$_SESSION['presentacion_id'][$unico_id][$indice])){
                     $num++;
                 }
             }

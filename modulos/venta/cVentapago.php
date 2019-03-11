@@ -17,7 +17,7 @@ class cVentapago{
 	)
 	VALUES (
 	NOW( ) ,  '$forpag_id',  '$modpag_id',  '$fec',  '$mon', '$cuecor_id',  '$tar_id',  '$numope',  '$numdia',  '$fecven',  '$ven_id', '$emp_id'
-	);"; 
+	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	

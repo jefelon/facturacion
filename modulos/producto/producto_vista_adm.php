@@ -229,8 +229,14 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
-		
-	producto_filtro();		
+
+    $('#btn_reporte').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
+
+
+    producto_filtro();
 	
 	$( "#div_producto_form" ).dialog({
 		title:'Información de Producto',
@@ -301,7 +307,7 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="producto_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
-                      <td align="left" valign="middle">&nbsp;</td>
+                      <td align="left" valign="middle">&nbsp;<a id="btn_reporte" href="#">Reporte Productos</a></td>
                       <td align="right">
                       <div id="msj_producto" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                       </td>

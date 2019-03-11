@@ -347,19 +347,21 @@ if($impresion=='pdf')ob_start();
                         <table width="80mm">
                             <thead>
                             <tr>
-                                <td style="width: 10mm" class="izquierda negrita">CANT</td>
-                                <td style="width: 30mm" class="izquierda negrita" >DESCRIPCION</td>
-                                <td style="width: 20mm" class="derecha negrita">P. UNIT</td>
-                                <td style="width: 20mm" class="derecha negrita">IMPORTE</td>
+                                <td style="width: 9mm" class="izquierda negrita">CANT</td>
+                                <td style="width: 25mm" class="izquierda negrita" >DESCRIPCION</td>
+                                <td style="width: 8mm" class="izquierda negrita">UND.</td>
+                                <td style="width: 19mm" class="derecha negrita">P. UNIT</td>
+                                <td style="width: 19mm" class="derecha negrita">IMPORTE</td>
                             </tr>
                             </thead>
                             <?php  if($numero_filas>=1){ ?>
                                 <?php while($dt1 = mysql_fetch_array($dts1)){ ?>
                                     <tr>
-                                        <td class="izquierda" style="width: 10mm"><?php echo $dt1['tb_ventadetalle_can']?></td>
-                                        <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                        <td class="izquierda" style="width: 9mm"><?php echo $dt1['tb_ventadetalle_can']?></td>
+                                        <td class="izquierda" style="width: 25mm"><?php echo $dt1['tb_producto_nom']?></td>
+                                        <td class="izquierda" style="width: 8mm"><?php echo $dt1['tb_unidad_abr']?></td>
+                                        <td class="derecha" style="width: 19mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?></td>
+                                        <td class="derecha" style="width: 19mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>
 
                                 <?php } mysql_free_result($dts1);?>
@@ -367,10 +369,11 @@ if($impresion=='pdf')ob_start();
 
                             <?php while($dt2 = mysql_fetch_array($dts2)){ ?>
                                 <tr>
-                                    <td class="izquierda" style="width: 10mm"><?php echo $dt2['tb_ventadetalle_can'];?></td>
-                                    <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin'])?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                    <td class="izquierda" style="width: 9mm"><?php echo $dt2['tb_ventadetalle_can'];?></td>
+                                    <td class="izquierda" style="width: 25mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
+                                    <td class="izquierda" style="width: 8mm"><?php echo $dt1['tb_unidad_abr']?></td>
+                                    <td class="derecha" style="width: 19mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin'])?></td>
+                                    <td class="derecha" style="width: 19mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
                                 </tr>
                             <?php  } mysql_free_result($dts2); ?>
                         </table>

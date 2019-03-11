@@ -947,6 +947,30 @@ if($_POST['action']=="editar"){
         });
     }
 
+    function catalogo_ventafarmacia_tab(){
+        $.ajax({
+            type: "POST",
+            url: "../catalogo/catalogo_ventafarmacia_tab.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                //action: act,
+                pro_nom_tab: $('#txt_bus_pro_nom').val()
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#div_catalogo_venta').dialog("open");
+                $('#div_catalogo_venta').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_catalogo_venta').html(html);
+            },
+            complete: function(){
+                catalogo_venta();
+            }
+        });
+    }
+
     function venta_pago_tabla()
     {
         $.ajax({
@@ -1999,18 +2023,7 @@ if($_POST['action']=="editar"){
 
         $('#txt_bus_pro_nom').keypress(function(e){
             if(e.which == 13){
-                catalogo_venta_tab();
-                $("#txt_bus_pro_nom").val(('#txt_bus_ser_nom').val());
-                $("#hdd_bus_pro_nom").val('');
-                $('#hdd_bus_cat_id').val('');
-                $('#hdd_bus_cat_stouni').val('');
-                $('#hdd_bus_cat_cospro').val('');
-                $('#txt_bus_pro_codbar').val('');
-                $('#txt_bus_cat_preven').val('');
-                $('#txt_bus_cat_can').val('');
-                $('#txt_precio_min').val('');
-                $('#txt_precio_may').val('');
-                $("#txt_bus_pro_codbar").focus();
+                catalogo_ventafarmacia_tab();
             }
         });
 
@@ -2365,7 +2378,7 @@ if($_POST['action']=="editar"){
                         <label for="cmb_ven_imp">Formato:</label>
                         <select name="cmb_ven_imp" id="cmb_ven_imp">
                             <option value="1" selected>Ticket</option>
-                            <option value="2" selected>A4</option>
+                            <option value="2">A4</option>
                         </select>
                         <br>
                         <label for="cmb_ven_moneda">Moneda:</label>

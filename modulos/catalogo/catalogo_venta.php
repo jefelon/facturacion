@@ -16,7 +16,7 @@ function catalogo_venta_filtro()
 			$('#div_catalogo_venta_filtro').html(html);
 		},
 		complete: function(){
-			//catalogo_venta_tabla();
+			catalogo_venta_tabla();
 		}
 	});
 }
@@ -33,6 +33,8 @@ function catalogo_venta_tabla(){
 			pro_cat:	$('#cmb_fil_pro_cat').val(),
 			pro_mar:	$('#cmb_fil_pro_mar').val(),
 			pro_est:	$('#cmb_fil_pro_est').val(),
+            cbox1:	    $('#cbox1').prop('checked'),
+            cbox2:	    $('#cbox2').prop('checked'),
 			limit: 		$("#cmb_fil_pro_lim").val()
 			
 		}),
@@ -53,7 +55,6 @@ function catalogo_venta_tabla(){
 
 $(function() {
 	catalogo_venta_filtro();
-
 });
 </script>
 <div id="div_catalogo_venta_filtro">

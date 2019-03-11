@@ -1,3 +1,8 @@
+<?php
+session_start();
+if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
+require_once ("../../config/Cado.php");
+?>
 <script type="text/javascript">
 	$('#btn_venta_filtrar').button({
 		icons: {primary: "ui-icon-search"},
@@ -67,16 +72,12 @@ $(function() {
         catalogo_venta_tabla();
     });
 
-	$( "#txt_fil_pro_nom" ).autocomplete({
-   		minLength: 2,
-			delay: 10,
-   		source: "../producto/producto_complete_nom.php",
-		select: function( event, ui ) {
-			$("#txt_fil_pro_nom").val(ui.item.label)
-			catalogo_venta_tabla();
-		}
+    $('#txt_fil_pro_nom').keypress(function(e){
+        if(e.which == 13){
+            catalogo_venta_tabla();
+        }
     });
-	
+
 	$( "#txt_fil_pro_cod" ).autocomplete({
    		minLength: 1,
    		source: "../producto/presentacion_complete_cod.php",
@@ -96,7 +97,7 @@ $(function() {
 <fieldset><legend>Filtro de producto</legend>
 
   <label for="txt_fil_pro_nom">Nombre:</label>
-  <input name="txt_fil_pro_nom" type="text" id="txt_fil_pro_nom" size="50">
+  <input name="txt_fil_pro_nom" type="text" id="txt_fil_pro_nom" size="50" value="<?php echo $_SESSION['pro_nom_tab']?>">
 
 	<?php /*?><label for="txt_fil_pro_cod">Código:</label>
   <input name="txt_fil_pro_cod" type="text" id="txt_fil_pro_cod" size="20"><?php */?>
@@ -118,6 +119,9 @@ $(function() {
   <label for="cmb_fil_pro_mar">Marca:</label>
   <select name="cmb_fil_pro_mar" id="cmb_fil_pro_mar">
   </select>
+    <br>
+    <label><input type="checkbox" id="cbox1" name="cbox" value="pactivo"> Principio Activo</label>
+    <input type="checkbox" id="cbox2" name="cbox" value="indicacion"> <label for="cbox2">Indicación</label>
 
   <?php /*?><label for="cmb_fil_pro_est">Estado:</label>
   <select name="cmb_fil_pro_est" id="cmb_fil_pro_est">
