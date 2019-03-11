@@ -325,25 +325,24 @@ $num_rows= mysql_num_rows($dts1);
 	$aSimpleHeader[1] = $table_default_header_type;
 	$aSimpleHeader[1]['TEXT'] = "DOCUMENTO";
 	$aSimpleHeader[1]['WIDTH'] = 22;
-	
-	$aSimpleHeader[2] = $table_default_header_type;
-	$aSimpleHeader[2]['TEXT'] = "CLIENTE";
-	$aSimpleHeader[2]['WIDTH'] = 66;
-	
+
+    $aSimpleHeader[2] = $table_default_header_type;
+    $aSimpleHeader[2]['TEXT'] = "CUI";
+    $aSimpleHeader[2]['WIDTH'] = 16;
+
 	$aSimpleHeader[3] = $table_default_header_type;
-	$aSimpleHeader[3]['TEXT'] = "";
-	$aSimpleHeader[3]['WIDTH'] = 8;
+	$aSimpleHeader[3]['TEXT'] = "CLIENTE";
+	$aSimpleHeader[3]['WIDTH'] = 50;
 	
 	$aSimpleHeader[4] = $table_default_header_type;
 	$aSimpleHeader[4]['TEXT'] = "";
-	$aSimpleHeader[4]['T_ALIGN'] = 'R';
-	$aSimpleHeader[4]['WIDTH'] = 15;
-	//$aSimpleHeader[5]['T_ALIGN'] = 'R';
+	$aSimpleHeader[4]['WIDTH'] = 8;
 	
 	$aSimpleHeader[5] = $table_default_header_type;
 	$aSimpleHeader[5]['TEXT'] = "";
 	$aSimpleHeader[5]['T_ALIGN'] = 'R';
-	$aSimpleHeader[5]['WIDTH'] = 17;
+	$aSimpleHeader[5]['WIDTH'] = 15;
+	//$aSimpleHeader[5]['T_ALIGN'] = 'R';
 	
 	$aSimpleHeader[6] = $table_default_header_type;
 	$aSimpleHeader[6]['TEXT'] = "CAN";
@@ -408,16 +407,17 @@ $num_rows= mysql_num_rows($dts1);
 			//$data[0]['BRD_TYPE'] = '1';
 			
 			$data[1]['TEXT'] = utf8_decode($dt1['tb_documento_abr'].' '.$dt1['tb_venta_numdoc']);
-			$data[2]['TEXT'] = utf8_decode($dt1['tb_cliente_nom']);
-			$data[3]['TEXT'] = utf8_decode($dt1['tb_cliente_doc']);
-			$data[3]['COLSPAN'] = 2;
+            $data[2]['TEXT'] = utf8_decode($dt1['tb_cliente_cui']);
+			$data[3]['TEXT'] = utf8_decode($dt1['tb_cliente_nom']);
+			$data[4]['TEXT'] = utf8_decode($dt1['tb_cliente_doc']);
+			$data[4]['COLSPAN'] = 2;
 			
-			$data[5]['TEXT'] = ''/*formato_money($dt1['tb_venta_valven'])*/;
-			$data[5]['T_ALIGN'] = 'R';
-			
-			$data[6]['TEXT'] = $venmay.$dt1['tb_venta_est']/*formato_money($dt1['tb_venta_igv'])*/;
+			$data[6]['TEXT'] = ''/*formato_money($dt1['tb_venta_valven'])*/;
 			$data[6]['T_ALIGN'] = 'R';
-			$data[6]['COLSPAN'] = 2;
+			
+			$data[7]['TEXT'] = $venmay.$dt1['tb_venta_est']/*formato_money($dt1['tb_venta_igv'])*/;
+			$data[7]['T_ALIGN'] = 'R';
+			$data[7]['COLSPAN'] = 2;
 			
 			//$data[7]['TEXT'] = ''/*formato_money($dt1['tb_venta_tot'])*/;
 			//$data[7]['T_ALIGN'] = 'R';

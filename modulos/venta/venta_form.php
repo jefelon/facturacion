@@ -352,7 +352,7 @@ if($_POST['action']=="editar"){
                 <?php if($_POST['action']=="insertar" or $_POST['action']=="insertar_cot"){?>
                 txt_ven_numdoc();
                 if ($('#cmb_ven_doc').val()==12){
-                    cliente_cargar_datos(1);
+                    //cliente_cargar_datos(1);
                 }
                 <?php }?>
             }
@@ -1447,7 +1447,7 @@ if($_POST['action']=="editar"){
         ?>
         $('#cmb_ven_doc').change( function() {
             txt_ven_numdoc();
-            if ((this).value=== '12' || (this).value=== '15') {
+            if ((this).value=== '15') {
                 cliente_cargar_datos(1);
                 $("#chk_imprimir_guia").attr('checked', false);
 

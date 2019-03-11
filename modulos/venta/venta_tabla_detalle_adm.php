@@ -46,7 +46,9 @@ $(function() {
                 <tr>
                   <th>FECHA</th>
                   <th>DOCUMENTO</th>
-                  <th>ARTICULO</th>
+                    <th>CUI</th>
+                    <th>NOMBRE</th>
+                    <th>ARTICULO</th>
                     <th>UNI</th>
                     <th align="right">CAN</th>
                     <th align="right">PREC UNIT</th>
@@ -89,7 +91,9 @@ $(function() {
                     <tr>
                       <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                       <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_venta_numdoc']?></td>
-                      <td><?php 
+                        <td nowrap="nowrap"><?php echo $dt1['tb_cliente_cui']?></td>
+                        <td nowrap="nowrap"><?php echo $dt1['tb_cliente_nom']?></td>
+                        <td><?php
 					  	if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_producto_nom'];
 						if($dt1['tb_ventadetalle_tipven']==2)echo $dt1['tb_servicio_nom'];
 					  ?></td>
