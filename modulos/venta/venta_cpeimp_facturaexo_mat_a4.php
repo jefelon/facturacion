@@ -444,7 +444,7 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"].' X ' .' '.$dt['tb_unidad_abr'].' - ' . $ven_det_serie . ' - ';
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"].' - ' . $ven_det_serie . ' - ';
                 $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
                 while($lote = mysql_fetch_array($lotes)) {
                     $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
