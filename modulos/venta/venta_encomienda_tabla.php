@@ -148,8 +148,8 @@ $num_rows= mysql_num_rows($dts1);
     }
     function pagar_encomienda(act,idf) {
 
-        if ($('#txt_dni').val()=="") {
-            alert("Escriba el DNI del cliente y presione la tecla ENTER para obtener sus datos...");
+        if ($('#txt_dni').val()=="" || $('#txt_cli_nom').val()=="") {
+            alert("DNI o Nombre Vacío, Escriba el DNI del cliente y presione la tecla ENTER para obtener sus datos...");
             $('#txt_dni').focus();
         }
         else{

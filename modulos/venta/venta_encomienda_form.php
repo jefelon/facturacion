@@ -1542,7 +1542,7 @@ if($_POST['action']=="editar"){
         });
     }
     $(function() {
-
+        $("#cmb_forpag_id").attr('disabled', true);
         $('#txt_ven_fec').keyup(function(e) {
             var patron = new Array(2, 2, 4);
             mascara(this,'-',patron,false);
@@ -1754,6 +1754,8 @@ if($_POST['action']=="editar"){
                 $("#cmb_forpag_id").attr('disabled', true);
             }else{
                 $("#cmb_forpag_id").attr('disabled', false);
+                $("#cmb_forpag_id").val(1);
+                $("#cmb_forpag_id").attr('disabled', true);
             }
 
             if ((this).value=== '3' || (this).value=== '12' || (this).value=== '15') {

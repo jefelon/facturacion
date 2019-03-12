@@ -38,7 +38,12 @@ if ($_POST['action_venta'] == "insertar") {
 
         $fec = date('Y-m-d');
         $doc_id = $dt['tb_documento_id'];
-        $documento_tipdoc = $dt["cs_tipodocumento_cod"];
+        
+        $documento_tipdoc=2; // 2 boleta, 1 factura
+        if($_POST['cmb_ven_doc']==11)
+        {
+            $documento_tipdoc=1; //factura
+        }
         $ven_numdoc = $dt['tb_venta_numdoc'];
         $ven_ser = $dt['tb_venta_ser'];
         $ven_num = $dt['tb_venta_num'];
