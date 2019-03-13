@@ -320,7 +320,7 @@ if($impresion=='pdf')ob_start();
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado">
-                        <?php if ($_SESSION['puntoventa_id'] != 1) echo '054-318068 MZA. H LOTE. 13 JAVIER DE LUNA PIZARRO (A 2 CDRAS D VILLA PARAISO.FTEGRIFOREPSOL) AREQUIPA - AREQUIPA - CERRO COLORADO'?>
+                        <?php if ($_SESSION['puntoventa_id'] != 1) echo 'SUC: AV. GARCILAZO NRO. 703A CUSCO - CUSCO - WANCHAQ'?>
                     </td>
                 </tr>
                 <tr>
@@ -376,7 +376,7 @@ if($impresion=='pdf')ob_start();
                                 <?php while($dt1 = mysql_fetch_array($dts1)){ ?>
                                     <tr>
                                         <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
-                                        <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom'] . 'x' .$dt1['tb_unidad_abr']; ?></td>
+                                        <td class="izquierda" style="width: 30mm; font-size: 8pt;"><?php echo $dt1['tb_producto_nom'] . ' x ' .$dt1['tb_unidad_abr']; ?></td>
                                         <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
                                         <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>

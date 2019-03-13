@@ -50,16 +50,21 @@ if(!is_file($empresa_logo)){
 }
 mysql_free_result($dts);
 
+if($_SESSION['puntoventa_id'] != 1){
+    $suc_imp=' <tr>
+        <td width="80">SUCURSAL:</td>
+        <td width="580">AV. GARCILAZO NRO. 703A CUSCO - CUSCO - WANCHAQ</td>
+    </tr>';
+}
+
+
 $sucursales='
 <table style="font-size:7pt" border="0">
     <tr>
         <td width="80">PRINCIPAL:</td>
         <td width="580">'.$dt['tb_empresa_dir'] .'</td>
     </tr>
-    <!--<tr>
-        <td width="80">SUCURSAL:</td>
-        <td width="580">CAR.AREQUIPA KM. 9 (CC AREQUIPA NORTE GO 15 Y GO 16)<br> AREQUIPA - AREQUIPA - CERRO COLORADO</td>
-    </tr>-->
+    '.$suc_imp.'
     <tr>
         <td>TELEFONO: </td>
         <td>'.$dt['tb_empresa_tel'] .'</td>
@@ -76,7 +81,7 @@ $sucursales='
     
 </table>';
 
-$tipodoc = 'FACTURA ELECTRONICA';
+$tipodoc = 'BOLETA ELECTRONICA';
 
 $ven_id=$_POST['ven_id'];
 
