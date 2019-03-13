@@ -2445,7 +2445,7 @@ if($_POST['action']=="editar"){
                         <label for="cmb_ven_imp">Formato:</label>
                         <select name="cmb_ven_imp" id="cmb_ven_imp">
                             <option value="1" selected>Ticket</option>
-                            <option value="2" selected>A4</option>
+                            <option value="2">A4</option>
                         </select>
                         <label for="cmb_ven_moneda">Moneda:</label>
                         <select name="cmb_ven_moneda" id="cmb_ven_moneda" <?php if($_POST['action']=='editar')echo 'disabled'?>>
