@@ -120,6 +120,52 @@ $(function() {
 	.ui-dialog .ui-state-error { padding: .3em; }
 	.validateTips { border: 1px solid transparent; padding: 0.3em; }
 </style>
+<div  style="float:left;width: 50%;">
+    <div class="iconos">
+        <a href="../venta/venta_vista.php" target="_blank" class="botonera">
+            <div class="ventas"></div><span>VENDER</span>
+        </a>
+        <a href="../clientes/" target="_blank" class="botonera">
+            <div class="clientes"></div><span>CLIENTES</span>
+        </a>
+        <a href="../kardex/" target="_blank" class="botonera">
+            <div class="kardex"></div><span>KARDEX</span>
+        </a>
+    </div>
+    <div class="iconos">
+        <a href="../producto/" target="_blank" class="botonera">
+            <div class="productos"></div><span>PRODUCTOS</span>
+        </a>
+        <a href="../categoria/" target="_blank" class="botonera">
+            <div class="categorias"></div><span>CATEGORIAS</span>
+        </a>
+        <a href="../catalogo/" target="_blank" class="botonera">
+            <div class="catalogo"></div><span>CAT. DE PRODUCTOS</span>
+        </a>
+    </div>
+    <div class="iconos">
+        <a href="../grafico/" target="_blank" class="botonera">
+            <div class="grafico"></div><span>GRAFICO VENTAS</span>
+        </a>
+        <a href="../flujocaja/caja_vista.php" target="_blank" class="botonera">
+            <div class="caja"></div><span>CAJA</span>
+        </a>
+        <a href="../ingreso/" target="_blank" class="botonera">
+            <div class="ingresos"></div><span>INGRESOS</span>
+        </a>
+    </div>
+    <div class="iconos">
+        <a href="../usuarios/usuario_datos_vista.php" target="_blank" class="botonera">
+            <div class="usuario"></div><span>MIS DATOS</span>
+        </a>
+        <a href="https://youtu.be/c1Zu3txOpAc" target="_blank" class="botonera">
+            <div class="videos"></div><span>VIDEOS</span>
+        </a>
+        <a href="../egreso/" target="_blank" class="botonera">
+            <div class="egresos"></div><span>EGRESOS</span>
+        </a>
+    </div>
+</div>
 <div align="left">
 <?php
 echo fechaActual(1);

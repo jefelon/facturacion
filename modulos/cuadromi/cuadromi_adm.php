@@ -146,8 +146,8 @@ $(function() {
         <a href="../categoria/" target="_blank" class="botonera">
             <div class="categorias"></div><span>CATEGORIAS</span>
         </a>
-        <a href="../marca/" target="_blank" class="botonera">
-            <div class="marcas"></div><span>MARCAS</span>
+        <a href="../catalogo/" target="_blank" class="botonera">
+            <div class="catalogo"></div><span>CAT. DE PRODUCTOS</span>
         </a>
         <a href="../kardex/" target="_blank" class="botonera">
             <div class="kardex"></div><span>KARDEX</span>

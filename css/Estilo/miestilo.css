@@ -790,4 +790,15 @@ div.m {
 	height: 100px;
 	background: url("../../images/iconos/icons8-play-button-100.png");
 }
+.iconos a .catalogo{
+	width: 100px;
+	height: 100px;
+	background: url("../../images/iconos/icons8-open-box-100.png");
+}
+
+#cluetip{
+	width: auto !important;
+	
+}
+
 
