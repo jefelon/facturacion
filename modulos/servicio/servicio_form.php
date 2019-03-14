@@ -331,6 +331,7 @@ $(function() {
 					$('#msj_servicio').html(data.ser_msj);
 					$('#txt_fil_ser_nom').val(data.ser_nom);
                     venta_car_servicio('agregar_servicio',data.ser_id,ser_nom,ser_can, ser_pre);
+                    catalogo_servicio_tabla();
 					if(data.ser_act=='editar_presentacion')
 					{
 						servicio_form('editar',data.ser_id);

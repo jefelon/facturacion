@@ -69,9 +69,9 @@ class cCajadetalle{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-    function modificar_fec_cierre($id,$ape,$est,$final){
+    function modificar_fec_cierre($id,$est,$final){
         $sql = "UPDATE tb_cajadetalle SET  
-	`tb_caja_cierre` =  '$ape',
+	`tb_caja_cierre` =  NOW(),
 	`tb_caja_estado` =  '$est',
 	`tb_caja_final` =  '$final'
 	WHERE  tb_cajadetalle_id =$id;";

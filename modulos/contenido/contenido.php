@@ -71,6 +71,7 @@ $menu_administrador=
           </li>
 		  <li><a href="../tarjeta/">Tarjetas</a></li>
 		  <li><a href="../cuentacorriente/">Cuenta Corriente</a></li>
+		  
 	    </ul>
 	  </li>
 	  <li class="topmenu"><span><a href="#" >Caja</a></span>
@@ -95,6 +96,9 @@ $menu_administrador=
 	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../venta/venta_vista_encomienda_cobro_destino.php">Encomiendas cobradas en el destino</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../contingencia2019/venta_vista.php">Pasaje-Contigencia2019</a></li>
+      <li><a href="../contingencia2019/venta_vista_encomienda.php">Encomienda-Contigencia2019</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../notacredito/">Nota de Crédito</a></li>
 	  <li class="separator">----------------------</li>
@@ -162,11 +166,15 @@ $menu_vendedor=
       <li class="separator">-----------------------</li>
       <li><a href="../venta/venta_vista_encomienda_cobro_destino.php">Encomiendas cobradas en el destino</a></li>
       <li class="separator">----------------------</li>
+      <li><a href="../contingencia2019/venta_vista_adm.php">Pasaje-Contigencia2019</a></li>
+       <li><a href="../contingencia2019/venta_vista_encomienda_cobro_destino.php">Encomienda-Contigencia2019</a></li>
+       <li class="separator">----------------------</li>
 	  <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
 	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>
 	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
 	</ul>
   </li>
+ 
   <li class="topmenu"><a href="#" >Caja</a>
   	<ul>
   	  <li><a href="../cajadetalle">Apertura y Cierre</a></li>

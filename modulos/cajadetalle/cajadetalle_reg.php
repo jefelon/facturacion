@@ -102,7 +102,6 @@ if($_POST['action_caja']=="actualizar") {
         //insertamos venta
         $oCajadetalle->modificar_fec_cierre(
             $_POST['hdd_cajadetalle_id'],
-            fechahora_mysql($_POST['txt_fec_cie']),
             0,
             $_POST['txt_mon_cie']
         );
