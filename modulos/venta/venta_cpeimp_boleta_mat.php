@@ -337,7 +337,7 @@ if ($impresion == 'pdf') ob_start();
                 </tr>
                 <tr>
                     <td colspan="2"></td>
-                    <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
+                    <td colspan="2" class="derecha"><?php //echo ' Hora: ' . $hora ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">.............................................................................................</td>
