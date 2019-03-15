@@ -118,7 +118,7 @@ if ($_POST['action_venta'] == "insertar") {
             $lab3,
             $may,
             $_SESSION['usuario_id'],
-            $punven_id,
+            $_SESSION['puntoventa_id'],
             $_SESSION['empresa_id'],
 
             $documento_tipdoc,//cs_tipodocumento_id

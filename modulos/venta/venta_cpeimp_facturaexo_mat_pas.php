@@ -137,6 +137,16 @@ while($dt = mysql_fetch_array($dts))
     $totanti="0.00";
     $moneda=1;
 
+    if($moneda==1){
+        $moneda  = "SOLES";
+        $mon = "S/ ";
+        $monedaval=1;
+    }
+    if($moneda==2){
+        $moneda  = "DOLARES";
+        $mon = "$ ";
+        $monedaval=2;
+    }
 
     $estsun=$dt['tb_venta_estsun'];
       $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -460,7 +470,7 @@ if($impresion=='pdf')ob_start();
               S/ <?php echo formato_money($tot) ?></td>
       </tr>
       <tr>
-          <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot)?></td>
+          <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>
       </tr>
         <tr>
           <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>

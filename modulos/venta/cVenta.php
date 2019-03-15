@@ -286,8 +286,7 @@ class cVenta{
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
 	LEFT JOIN tb_encomiendaventa ev ON v.tb_venta_id=ev.tb_venta_id
 	LEFT JOIN tb_viajeventa vv ON vv.tb_venta_id=v.tb_venta_id	
-	WHERE  vv.tb_viajeventa_id IS NULL AND ev.tb_encomiendaventa_id IS NULL
-	AND (v.tb_documento_id=11 OR v.tb_documento_id=12)
+	WHERE v.tb_venta_tipo=3
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 
         if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
