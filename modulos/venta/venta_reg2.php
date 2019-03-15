@@ -101,7 +101,7 @@ if ($_POST['action_venta'] == "insertar") {
         $rs = $oTalonario->actualizar_correlativo($tal_id, $numero, $estado);
 
 
-        $oVenta->insertar(
+        $oVenta->insertar_tipo_venta(
             $fec,
             $documento_id,
             $numdoc,
@@ -133,7 +133,9 @@ if ($_POST['action_venta'] == "insertar") {
             moneda_mysql($desglo),//tb_venta_desglo
             1,//cs_tipooperacion_id
             0,//cs_documentosrelacionados_id
-            $usu_id
+            $usu_id,
+            3,
+            'encomiendapagada'
         );
 
 

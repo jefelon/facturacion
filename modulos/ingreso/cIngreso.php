@@ -185,7 +185,7 @@ class cIngreso{
 	return $rst;
 	}
 
-    function mostrar_filtro_fechahora($emp_id,$caj_id,$fec1,$fec2,$cue_id,$subcue_id,$doc_id,$numdoc,$cli_id,$est){
+    function mostrar_filtro_fechahora($emp_id,$caj_id,$fec1,$fec2,$cue_id,$subcue_id,$doc_id,$numdoc,$cli_id,$est,$usu_reg){
         $sql="SELECT * 
 	FROM tb_ingreso i
 	INNER JOIN tb_cuenta c ON i.tb_cuenta_id = c.tb_cuenta_id
@@ -195,7 +195,7 @@ class cIngreso{
 	LEFT JOIN tb_subcuenta sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
 	WHERE tb_ingreso_xac=1
 	AND i.tb_empresa_id=$emp_id 
-	AND i.tb_ingreso_fec = '$fec1' AND '$fec2' ";
+	AND i.tb_ingreso_fec BETWEEN '$fec1' AND '$fec2' AND i.tb_ingreso_usureg=$usu_reg";
 
         if($caj_id>0){
             $sql = $sql." AND i.tb_caja_id = $caj_id ";
@@ -221,6 +221,7 @@ class cIngreso{
         }
 
         $sql = $sql." ORDER BY i.tb_ingreso_fec";
+
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

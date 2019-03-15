@@ -249,7 +249,7 @@ class cVenta{
 	$sql="SELECT ev.tb_encomiendaventa_id, vv.tb_viajeventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
-    v.tb_venta_valven, v.tb_venta_igv 
+    v.tb_venta_valven, v.tb_venta_igv,v.tb_documento_id  
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
@@ -775,6 +775,16 @@ WHERE tb_software_id =$id";
         FROM tb_encomiendaventa ev 
         INNER JOIN tb_venta v ON v.tb_venta_id=ev.tb_venta_id 
         WHERE v.tb_venta_id=$venta;";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function mostrar_venta_encomienda_pagada($venta){
+        $sql = "SELECT * 
+        FROM tb_venta ep  
+        WHERE ep.tb_venta_id=$venta AND ep.tb_venta_tipo=3;";
 
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

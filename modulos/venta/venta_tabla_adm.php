@@ -86,7 +86,7 @@ $num_rows= mysql_num_rows($dts1);
         <tbody>
         <?php
         while($dt1 = mysql_fetch_array($dts1)){
-            if($dt1['tb_venta_est']=='CANCELADA'){
+            if($dt1['tb_venta_est']=='CANCELADA' AND $dt1['tb_documento_id']!='15'){
                 $total_ventas+=$dt1['tb_venta_tot'];
             }
 
@@ -111,9 +111,18 @@ $num_rows= mysql_num_rows($dts1);
                     }
                     ?>
                 </td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
-                <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
+
+                <?php if($dt1['tb_documento_id']!='15'){?>
+                    <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
+                    <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
+                    <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?> </td>
+                <?php
+                } else {
+                    echo '<td align="right">0.00</td>
+                    <td align="right">0.00</td>
+                    <td align="right">0.00</td>';
+                }
+                    ?>
                 <td><?php echo $dt1['tb_venta_est']?></td>
                 <td>
                     <?php
