@@ -266,11 +266,13 @@ if ($_POST['action_compra'] == "insertar") {
                 $_SESSION['precio_car'][] = $indice;
 
                 //precio unitario
-                if($_POST['cmb_com_doc']=='19') {
+                if($_SESSION['compra_linea_tip_bon'][$indice]=='9') {
                     $linea_preuni = ($_SESSION['compra_linea_preuni'][$indice])*1.18;
-                }else{
+                }else if($_SESSION['compra_linea_tip_bon'][$indice]=='1'){
                     $linea_preuni = $_SESSION['compra_linea_preuni'][$indice];
                 }
+
+
                 //descuento
                 $linea_des = $_SESSION['compra_linea_des'][$indice];
                 if ($linea_des == "") $linea_des = 0;
@@ -288,9 +290,9 @@ if ($_POST['action_compra'] == "insertar") {
                 $linea_importe = $linea_preuni * $linea_cantidad * $linea_calculo_des;
 
                 //igv por linea
-                if($_POST['cmb_com_doc']=='19') {
+                if($_SESSION['compra_linea_tip_bon'][$indice]=='9') {
                     $linea_igv = 0;
-                }else{
+                }else if($_SESSION['compra_linea_tip_bon'][$indice]=='1'){
                     $linea_igv = $linea_importe * $igv_dato;
                 }
 
@@ -418,7 +420,7 @@ if ($_POST['action_compra'] == "insertar") {
                             $kar_id
                         );
                     }
-                }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19') {
+                }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='23' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19') {
                     //conversion a la minima unidad
                     $cantidad_compra=$linea_cantidad*$mul;
 
