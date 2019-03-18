@@ -669,7 +669,7 @@ if($_POST['action']=="editar"){
                 txt_pro_des: $('#txt_bus_pro_nom').val(),
                 num_alm: "",
                 tipo_accion: "insertar_venta",
-                cmb_cat_id: 9,
+                cmb_cat_id: 1,
                 cmb_mar_id: 1,
                 cmb_afec_id: 1,
                 cmb_lote: "",
@@ -1434,14 +1434,10 @@ if($_POST['action']=="editar"){
             if ((this).value=== '2' || (this).value=== '11') {
                 $('.imprimir_guia').show();
                 // $('.insertar-guia').show();
-                $('#txt_bus_cat_preven_noigv').show();
-                $('#txt_bus_cat_preven').hide();
                 $("#chk_imprimir_guia").attr('checked', false);
             }else{
                 $('.imprimir_guia').hide();
                 $('.insertar-guia').hide();
-                $('#txt_bus_cat_preven_noigv').hide();
-                $('#txt_bus_cat_preven').show();
                 $("#chk_imprimir_guia").attr('checked', false);
             }
 
