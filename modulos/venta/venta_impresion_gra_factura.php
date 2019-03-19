@@ -242,10 +242,10 @@ if($impresion=='pdf')ob_start();
             font-size: 8pt;
         }
         .items tbody tr td{
-            font-size: 8pt;
+            font-size: 9pt;
         }
         .total tr td{
-            font-size: 11pt;
+            font-size: 10pt;
         }
     </style>
 <page id="contenido_pdf" <?php echo $pager_formato?> <?php echo $pager_margen?>>
@@ -281,40 +281,28 @@ if($impresion=='pdf')ob_start();
   <tbody>
   <tr>
     <td style="width: 17mm; height:45mm"></td>
-    <td colspan="2" style="width: 100mm;"></td>
-    <td style="width: 73mm;"></td>
+    <td colspan="3" style="width: 175mm;"></td>
   </tr>
   <tr>
       <td><span style=""><!--RAZON .:--></span></td>
-      <td  colspan="2" style="width: 100mm;"><?php echo $cli_nom?></td>
-      <td></td>
+      <td  colspan="3" style="width: 175mm;height:4mm"><?php echo $cli_nom?></td>
   </tr>
 
   <tr>
       <td><span style=""><!--DIRECCION.:--></span></td>
-      <td  colspan="2" style="height:4mm;width: 100mm;"><?php echo $cli_dir?></td>
-      <td>
-          <table border="<?php echo $borde_tablas?>">
-              <tr>
-                  <td style="width: 13mm;"></td>
-                  <td style="width: 20mm; text-align:center;"><?php if($num_rows_vp==1)echo $texto_pago1[0]?></td>
-                  <td style="width: 15mm; text-align:center;"></td>
-                  <td style="width: 16mm; text-align:right;"><?php echo $lab3 ?></td>
-              </tr>
-          </table>
-      </td>
+      <td  colspan="3" style="width: 175mm;height:4mm"><?php echo $cli_dir?></td>
   </tr>
   <tr>
       <td><span style=""><!--DOC. IDENT.:--></span></td>
-      <td><?php echo $cli_doc?></td>
-      <td style="text-align: center"><?php echo $numguia?></td>
+      <td style="width: 70mm;"><?php echo $cli_doc?></td>
+      <td style="width: 20mm;text-align: center"><?php echo $numguia?></td>
       <td>
           <table border="<?php echo $borde_tablas?>">
               <tr>
-                  <td style="width: 14mm;"></td>
+                  <td style="width: 24mm;"></td>
                   <td style="width: 10mm; text-align:center;"><?php echo mostrarDiaMesAnio(1, $fec)?></td>
                   <td style="width: 20mm; text-align:center;"><?php echo mostrarDiaMesAnio(2, $fec)?></td>
-                  <td style="width: 20mm; text-align:center;"><?php echo substr(mostrarDiaMesAnio(3, $fec),2)?></td>
+                  <td style="width: 10mm; text-align:center;"><?php echo substr(mostrarDiaMesAnio(3, $fec),2)?></td>
               </tr>
           </table>
       </td>
