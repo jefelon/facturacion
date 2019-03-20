@@ -318,12 +318,12 @@ if ($impresion == 'pdf') ob_start();
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="centrado negrita" style="font-size: 15px;">
+                    <td colspan="4" class="centrado negrita" style="font-size: 20px;">
                         <?php echo $emp_nomcom ?>
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="centrado" style="font-size: 12px;">
+                    <td colspan="4" class="centrado" style="font-size: 10px;">
                         <?php echo $emp_razsoc ?>
                     </td>
                 </tr>
@@ -374,6 +374,9 @@ if ($impresion == 'pdf') ob_start();
                 </tr>
                 <tr>
                     <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'VENDEDOR: ' .$texto_vendedor ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">
