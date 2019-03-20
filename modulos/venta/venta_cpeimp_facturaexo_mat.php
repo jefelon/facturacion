@@ -108,6 +108,8 @@ $tot  =$dt['tb_venta_tot'];
 $lab1 =$dt['tb_venta_lab1'];
 
 $usu_id =$dt['tb_usuario_id'];
+
+$puntoventa=$dt['tb_puntoventa_nom'];
 mysql_free_result($dts);
 
 
@@ -316,6 +318,11 @@ if($impresion=='pdf')ob_start();
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado negrita" style="font-size: 15px;">
+                        <?php echo $emp_nomcom ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado" style="font-size: 12px;">
                         <?php echo $emp_razsoc ?>
                     </td>
                 </tr>
@@ -331,7 +338,7 @@ if($impresion=='pdf')ob_start();
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado">
-                        <?php if ($_SESSION['puntoventa_id'] != 1) echo '054-318068 MZA. H LOTE. 13 JAVIER DE LUNA PIZARRO (A 2 CDRAS D VILLA PARAISO.FTEGRIFOREPSOL) AREQUIPA - AREQUIPA - CERRO COLORADO'?>
+                        <?php if ($_SESSION['puntoventa_id'] != 1) echo 'SUC.: '.$puntoventa ?>
                     </td>
                 </tr>
                 <tr>

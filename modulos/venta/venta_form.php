@@ -1457,15 +1457,11 @@ if($_POST['action']=="editar"){
 
             if ((this).value=== '2' || (this).value=== '11') {
                 $('.imprimir_guia').show();
-                $('.insertar-guia').show();
-                $('#txt_bus_cat_preven_noigv').show();
-                $('#txt_bus_cat_preven').hide();
-                $("#chk_imprimir_guia").attr('checked', true);
+                $('.insertar-guia').hide();
+                $("#chk_imprimir_guia").attr('checked', false);
             }else{
                 $('.imprimir_guia').hide();
                 $('.insertar-guia').hide();
-                $('#txt_bus_cat_preven_noigv').hide();
-                $('#txt_bus_cat_preven').show();
                 $("#chk_imprimir_guia").attr('checked', false);
             }
 
