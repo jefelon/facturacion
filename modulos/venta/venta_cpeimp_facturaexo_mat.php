@@ -315,7 +315,7 @@ if($impresion=='pdf')ob_start();
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado">
-                        <?php if ($imprimir_direccion == 1) echo $emp_dir . ' - ' . $emp_tel . ' - ' . '054-666706' .' ' . $emp_dir2 ?>
+                        <?php if ($imprimir_direccion == 1) echo $emp_dir . ' - ' . $emp_tel . ' - ' . $emp_dir2 ?>
                     </td>
                 </tr>
                 <tr>

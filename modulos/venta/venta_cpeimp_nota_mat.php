@@ -129,6 +129,17 @@ while($dt = mysql_fetch_array($dts))
     $totanti="0.00";
     $moneda=1;
 
+    if($moneda==1){
+        $moneda  = "SOLES";
+        $mon = "S/ ";
+        $monedaval=1;
+    }
+    if($moneda==2){
+        $moneda  = "DOLARES";
+        $mon = "$ ";
+        $monedaval=2;
+    }
+
 
     $estsun=$dt['tb_venta_estsun'];
     $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -301,21 +312,26 @@ if($impresion=='pdf')ob_start();
                         <?php //echo //'<h3>'.$emp_nomcom .'</h3>'?>
                     </td>
                 </tr>
-                <tr>
-                    <td  colspan="4" class="centrado">
-                        <?php echo $emp_razsoc?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="centrado">
-                        <?php echo $emp_ruc ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="centrado">
-                        <?php if($imprimir_direccion==1)echo $emp_dir.' - '.$emp_tel.' '.$emp_dir2?>
-                    </td>
-                </tr>
+                                <tr>
+                                    <td  colspan="4" class="centrado">
+                                       COMERCIALIZADORA MAYORISTA
+                                    </td>
+                                </tr>
+<!--                <tr>-->
+<!--                    <td  colspan="4" class="centrado">-->
+<!--                        --><?php //echo $emp_razsoc?>
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td colspan="4" class="centrado">-->
+<!--                        --><?php //echo $emp_ruc ?>
+<!--                    </td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td colspan="4" class="centrado">-->
+<!--                        --><?php //if($imprimir_direccion==1)echo $emp_dir.' - '.$emp_tel.' '.$emp_dir2?>
+<!--                    </td>-->
+<!--                </tr>-->
                 <tr>
                     <td colspan="4" class="centrado negrita py-5">NOTA DE VENTA</td>
                 </tr>
@@ -357,9 +373,9 @@ if($impresion=='pdf')ob_start();
                                 <?php while($dt1 = mysql_fetch_array($dts1)){ ?>
                                     <tr>
                                         <td class="izquierda" style="width: 10mm"><?php echo $dt1['tb_ventadetalle_can']?></td>
-                                        <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                        <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']. ' x ' .$dt1['tb_unidad_abr'];?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>
 
                                 <?php } mysql_free_result($dts1);?>
@@ -369,8 +385,8 @@ if($impresion=='pdf')ob_start();
                                 <tr>
                                     <td class="izquierda" style="width: 10mm"><?php echo $dt2['tb_ventadetalle_can'];?></td>
                                     <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin'])?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                 </tr>
                             <?php  } mysql_free_result($dts2); ?>
                         </table>
@@ -395,7 +411,15 @@ if($impresion=='pdf')ob_start();
                                 <td colspan="2"  class="derecha negrita" style="text-align: right;">S/ <?php echo  formato_money($tot)?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot)?></td>
+                                <td colspan="4" class="izquierda mt-5">
+                                    <?php
+                                    if($tot>0){
+                                        echo 'SON: ' . numtoletras($tot,$monedaval);
+                                    }else{
+                                        echo 'Leyenda TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE';
+                                    }
+                                    ?>
+                                </td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
@@ -404,7 +428,7 @@ if($impresion=='pdf')ob_start();
                                 <td colspan="4" style="width: 80mm" class="centrado">Canjear por comprobante de pago</td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="centrado"><h5>GRACIAS POR LA COMPRA</h5></td>
+                                <td colspan="4" class="centrado"><h5>GRACIAS POR SU COMPRA</h5></td>
                             </tr>
                             </tbody>
                         </table>
