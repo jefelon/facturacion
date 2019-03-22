@@ -74,6 +74,15 @@ $(function() {
                     $tipodoc = $dt1['cs_tipodocumento_cod'];
                     $simb_moneda = "";
 
+                    $compra_tot=$dt1['tb_compra_tot'];
+                    if ($dt1['tb_compra_mon']==2){
+                        $compra_tot=$compra_tot*$dt1['tb_tipocambio_dolsunv'];
+                    }
+                    $compra_igv=$dt1['tb_compra_igv'];
+                    if ($dt1['tb_compra_mon']==2){
+                        $compra_igv=$compra_igv*$dt1['tb_tipocambio_dolsunv'];
+                    }
+
                     ?>
                     <tr>
                         <td nowrap="nowrap">01</td>
@@ -96,12 +105,12 @@ $(function() {
                         <td nowrap="nowrap"><?php echo $dt1['tb_compra_ser'] ?></td>
                         <td nowrap="nowrap" align="center"><?php echo $dt1['tb_compra_num'] ?></td>
                         <td></td>
-                        <td><?php echo $dt1['tb_compra_tot'] ?></td>
+                        <td><?php echo $compra_tot ?></td>
                         <td align="center">
 
                         </td>
                         <td align="right">
-                            <?php echo formato_money($dt1['tb_compra_tot']/$dt1['tb_tipocambio_dolsunv']); ?>
+                            <?php echo formato_money($compra_tot/$dt1['tb_tipocambio_dolsunv']); ?>
                         </td>
                         <td align="right">
                         </td>
@@ -134,13 +143,13 @@ $(function() {
                         <td></td>
                         <td></td>
                         <td align="center">
-                            <?php echo $dt1['tb_compra_igv'] ?>
+                            <?php echo $compra_igv ?>
                         </td>
                         <td align="right">
 
                         </td>
                         <td align="right">
-                            <?php echo formato_money($dt1['tb_compra_igv']/$dt1['tb_tipocambio_dolsunv']); ?>
+                            <?php echo formato_money($compra_igv/$dt1['tb_tipocambio_dolsunv']); ?>
                         </td>
                         <td align="right">
                             001
@@ -155,6 +164,9 @@ $(function() {
 
                     $cont_det=3;
                     while($cd = mysql_fetch_array($cds)){
+                        if ($dt1['tb_compra_mon']==2){
+                            $com_imp = $cd['tb_compradetalle_imp'];
+                        }
                         ?>
                         <tr>
                             <td nowrap="nowrap">01</td>
@@ -179,13 +191,13 @@ $(function() {
                             <td></td>
                             <td></td>
                             <td align="center">
-                                <?php echo $cd['tb_compradetalle_imp'] ?>
+                                <?php echo $com_imp ?>
                             </td>
                             <td align="right">
 
                             </td>
                             <td align="right">
-                                <?php echo formato_money($cd['tb_compradetalle_imp']/$dt1['tb_tipocambio_dolsunv']); ?>
+                                <?php echo formato_money($com_imp/$dt1['tb_tipocambio_dolsunv']); ?>
                             </td>
                             <td align="right">
                                 001

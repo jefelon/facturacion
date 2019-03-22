@@ -102,6 +102,22 @@ $num_rows= mysql_num_rows($dts1);
             $estado = $dt1['tb_venta_est'];
             $tipodoc = $dt1['cs_tipodocumento_cod'];
             $simb_moneda = "";
+            $venta_tot=$dt1['tb_venta_tot'];
+            if ($dt1['cs_tipomoneda_id']==2){
+                $venta_tot=$venta_tot*$dt1['tb_tipocambio_dolsunv'];
+            }
+
+
+
+            $venta_igv=$dt1['tb_venta_igv'];
+            if ($dt1['cs_tipomoneda_id']==2){
+                $venta_igv=$venta_igv*$dt1['tb_tipocambio_dolsunv'];
+            }
+
+            if($dt1['tb_venta_est']=='ANULADA') {
+                $venta_tot = formato_money(0.00);
+                $venta_igv = formato_money(0.00);
+            }
 
             ?>
 
@@ -122,17 +138,17 @@ $num_rows= mysql_num_rows($dts1);
                 <td nowrap="nowrap">1</td>
                 <td nowrap="nowrap">VENTA MERCADERIA</td>
                 <td nowrap="nowrap"></td>
-                <td nowrap="nowrap"></td>
+                <td nowrap="nowrap"><?php echo str_pad($dt1['cs_tipodocumento_cod'],3, "0", STR_PAD_LEFT); ?></td>
                 <td nowrap="nowrap"><?php echo date('d/m/Y', strtotime($dt1['tb_venta_fec'])); ?></td>
                 <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'] ?></td>
                 <td nowrap="nowrap" align="center"><?php echo $dt1['tb_venta_num'] ?></td>
                 <td></td>
-                <td><?php echo $dt1['tb_venta_tot'] ?></td>
+                <td><?php echo $venta_tot ?></td>
                 <td align="center">
 
                 </td>
                 <td align="right">
-                    <?php echo formato_money($dt1['tb_venta_tot']/$dt1['tb_tipocambio_dolsunv']); ?>
+                    <?php echo formato_money($venta_tot/$dt1['tb_tipocambio_dolsunv']); ?>
                 </td>
                 <td align="right">
                 </td>
@@ -158,20 +174,20 @@ $num_rows= mysql_num_rows($dts1);
                 <td nowrap="nowrap">2</td>
                 <td nowrap="nowrap">VENTA MERCADERIA</td>
                 <td nowrap="nowrap"></td>
-                <td nowrap="nowrap"></td>
+                <td nowrap="nowrap"><?php echo str_pad($dt1['cs_tipodocumento_cod'],3, "0", STR_PAD_LEFT); ?></td>
                 <td nowrap="nowrap"><?php echo date('d/m/Y', strtotime($dt1['tb_venta_fec'])); ?></td>
                 <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'] ?></td>
                 <td nowrap="nowrap" align="center"><?php echo $dt1['tb_venta_num'] ?></td>
                 <td></td>
                 <td></td>
                 <td align="center">
-                    <?php echo $dt1['tb_venta_igv'] ?>
+                    <?php echo $venta_igv ?>
                 </td>
                 <td align="right">
 
                 </td>
                 <td align="right">
-                    <?php echo formato_money($dt1['tb_venta_igv']/$dt1['tb_tipocambio_dolsunv']); ?>
+                    <?php echo formato_money($venta_igv/$dt1['tb_tipocambio_dolsunv']); ?>
                 </td>
                 <td align="right">
                     001
@@ -190,6 +206,14 @@ $num_rows= mysql_num_rows($dts1);
             $num_rows_total = ($num_rows + $num_rows_2);
             $cont_det=3;
             while($vd = mysql_fetch_array($vds)){
+                if ($dt1['cs_tipomoneda_id']==2){
+                    $valven = $vd['tb_ventadetalle_valven'];
+                }
+                if($dt1['tb_venta_est']=='ANULADA') {
+                    $valven = formato_money(0.00);
+                }
+
+
             ?>
                 <tr>
                 <td nowrap="nowrap">01</td>
@@ -207,20 +231,20 @@ $num_rows= mysql_num_rows($dts1);
                 <td nowrap="nowrap"><?php echo $cont_det; ?></td>
                 <td nowrap="nowrap">VENTA MERCADERIA</td>
                 <td nowrap="nowrap">01.01.<?php echo str_pad($cont_det-2,2, "0", STR_PAD_LEFT); ?></td>
-                <td nowrap="nowrap"></td>
+                <td nowrap="nowrap"><?php echo str_pad($dt1['cs_tipodocumento_cod'],3, "0", STR_PAD_LEFT); ?></td>
                 <td nowrap="nowrap"><?php echo date('d/m/Y', strtotime($dt1['tb_venta_fec'])); ?></td>
                 <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'] ?></td>
                 <td nowrap="nowrap" align="center"><?php echo $dt1['tb_venta_num'] ?></td>
                 <td></td>
                 <td></td>
                 <td align="center">
-                    <?php echo $vd['tb_ventadetalle_valven'] ?>
+                    <?php echo $valven ?>
                 </td>
                 <td align="right">
 
                 </td>
                 <td align="right">
-                    <?php echo formato_money($vd['tb_ventadetalle_valven']/$dt1['tb_tipocambio_dolsunv']); ?>
+                    <?php echo formato_money($valven/$dt1['tb_tipocambio_dolsunv']); ?>
                 </td>
                 <td align="right">
                     001
@@ -232,6 +256,9 @@ $num_rows= mysql_num_rows($dts1);
                 $cont_det++;
             }
             while($vs = mysql_fetch_array($vss)){
+                if ($dt1['cs_tipomoneda_id']==2){
+                    $valven = $vd['tb_ventadetalle_valven'];
+                }
                 ?>
                 <tr>
                     <td nowrap="nowrap">01 ?></td>
@@ -256,7 +283,7 @@ $num_rows= mysql_num_rows($dts1);
                     <td></td>
                     <td></td>
                     <td align="center">
-                        <?php echo $vs['tb_ventadetalle_valven'] ?>
+                        <?php echo $valven ?>
                     </td>
                     <td align="right">
 

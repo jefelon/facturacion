@@ -189,8 +189,8 @@ $(function() {
     
     <label for="cmb_fil_ven_est">Estado:</label>
 	<select name="cmb_fil_ven_est" id="cmb_fil_ven_est">
-	  <option value="">-</option>
-	  <option value="CANCELADA" selected>CANCELADA</option>
+	  <option value="" selected>-</option>
+	  <option value="CANCELADA">CANCELADA</option>
 	  <option value="ANULADA">ANULADA</option>
     </select>
     <br>
