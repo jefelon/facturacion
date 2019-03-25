@@ -84,14 +84,16 @@ class cGuia{
         $sql="SELECT * 
 	FROM tb_guia c
 	LEFT JOIN tb_conductor p ON c.tb_conductor_id=p.tb_conductor_id
-	LEFT JOIN tb_transporte t ON t.tb_transporte_id=t.tb_transporte_id
-	WHERE tb_venta_id=$ven_id";
+	LEFT JOIN tb_transporte t ON t.tb_transporte_id=c.tb_transporte_id
+	INNER JOIN tb_venta v ON v.tb_venta_id= c.tb_venta_id 
+	LEFT JOIN tb_cliente cl ON v.tb_cliente_id=cl.tb_cliente_id
+	WHERE v.tb_venta_id=$ven_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
-	function mostrar_guia_detalle($gui_id){
-	$sql="SELECT * 
+    function mostrar_guia_detalle($gui_id){
+        $sql="SELECT * 
 	FROM tb_producto p
 	INNER JOIN tb_categoria c ON p.tb_categoria_id = c.tb_categoria_id
 	INNER JOIN tb_marca m ON p.tb_marca_id = m.tb_marca_id
@@ -100,10 +102,10 @@ class cGuia{
 	INNER JOIN tb_guiadetalle cd ON ct.tb_catalogo_id = cd.tb_catalogo_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ = u.tb_unidad_id
 	WHERE cd.tb_guia_id=$gui_id ";
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
-	}
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function modificar($id, $fec, $rem, $des, $punpar, $punlle, $serie,$num, $obs, $pla, $mar, $est, $con_id, $tra_id){
 	$sql = "UPDATE tb_guia SET  
 	`tb_guia_mod` =  NOW(),

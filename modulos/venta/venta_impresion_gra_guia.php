@@ -326,5 +326,5 @@ $html.='
 
 $pdf->writeHTML($html, true, 0, true, true);
 
-
+ob_get_clean();
 $pdf->Output($nombre_archivo, 'I');

@@ -266,12 +266,12 @@ if($impresion=='pdf')ob_start();
                         <!--                <td style="text-align: left; width: 40mm; font-size: 10pt;">R: --><?php //// echo $reg//date('d/m/Y'); ?><!--</td>-->
                         <td style="text-align: left; width: 130mm; font-size: 11pt;">
                             <?php
-                            if($num_rows_vp>1){
-                                //echo '* ';
-                                foreach($texto_pago2 as $indice=>$valor){
-                                    echo '* '.$valor.'  ';
-                                }
-                            }
+//                            if($num_rows_vp>1){
+//                                //echo '* ';
+//                                foreach($texto_pago2 as $indice=>$valor){
+//                                    echo '* '.$valor.'  ';
+//                                }
+//                            }
                             ?>
                             <!--Página [[page_cu]]/[[page_nb]]--></td>
                     </tr>
@@ -436,6 +436,7 @@ if($impresion=='pdf')
 
 
         $nombre_arc='venta_'.$numdoc.'.pdf';
+        ob_get_clean();
         $html2pdf->Output($nombre_arc);
     }
     catch(HTML2PDF_exception $e) {
