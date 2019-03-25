@@ -70,16 +70,14 @@ $('.btn_canimp').button({
 	text: true
 });
 function imprimir()
-{	
-	$("#for_preimp").submit();
+{
+    $("#for_preimp").submit();
 }
-
 function imprimir_letras()
 {
     $('#for_preimp').attr('action', 'venta_impresion_gra_letras.php');
     $("#for_preimp").submit();
 }
-
 function imprimir_guia()
 {
     $('#for_preimp').attr('action', 'venta_impresion_gra_guia.php');
