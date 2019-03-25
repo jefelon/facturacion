@@ -52,7 +52,7 @@ $rs = $oFormula->consultar_dato_formula('VEN_IMP_DIR');
 	$imprimir_direccion = $dt['tb_formula_dat'];
 	mysql_free_result($rs);
 
-$pager_formato='format="210x215" orientation="P" style="font-size: 11pt; font-family:'.$tipo_de_letra.'"';
+$pager_formato='format="230x297" orientation="P" style="font-size: 11pt; font-family:'.$tipo_de_letra.'"';
 
 $pager_margen='backtop="0mm" backbottom="0mm" backright="0mm"';
 
@@ -280,41 +280,36 @@ if($impresion=='pdf')ob_start();
 <table border="<?php echo $borde_tablas?>" class="cliente">
   <tbody>
   <tr>
-    <td style="width: 17mm; height:45mm"></td>
-    <td colspan="2" style="width: 100mm;"></td>
+    <td style="width: 15mm; height:58mm"></td>
+    <td style="width: 150mm;"></td>
     <td style="width: 73mm;"></td>
   </tr>
   <tr>
-      <td><span style=""><!--RAZON .:--></span></td>
-      <td  colspan="2" style="width: 100mm;"><?php echo $cli_nom?></td>
-      <td></td>
+      <td style="width: 15mm; height:5mm"></td>
+      <td style="width: 150mm;"><?php echo mostrarDiaMesAnio(1, $fec).' de '.mostrarDiaMesAnio(2, $fec).' del '.mostrarDiaMesAnio(3, $fec)?></td>
+      <td><?php echo $cli_doc?></td>
+  </tr>
+  <tr>
+      <td style="width: 15mm; height:5mm"></td>
+      <td  style="width: 160mm;"><?php echo $cli_nom?></td>
+      <td><?php echo $lab3 ?></td>
   </tr>
 
   <tr>
-      <td><span style=""><!--DIRECCION.:--></span></td>
-      <td  colspan="2" style="height:4mm;width: 100mm;"><?php echo $cli_dir?></td>
-      <td>
-          <table border="<?php echo $borde_tablas?>">
-              <tr>
-                  <td style="width: 13mm;"></td>
-                  <td style="width: 20mm; text-align:center;"><?php if($num_rows_vp==1)echo $texto_pago1[0]?></td>
-                  <td style="width: 15mm; text-align:center;"></td>
-                  <td style="width: 16mm; text-align:right;"><?php echo $lab3 ?></td>
-              </tr>
-          </table>
-      </td>
+      <td style="width: 15mm; height:5mm"></td>
+      <td style="height:4mm;width: 160mm;"><?php echo $cli_dir?></td>
+      <td><?php echo $numguia?></td>
   </tr>
   <tr>
-      <td><span style=""><!--DOC. IDENT.:--></span></td>
-      <td><?php echo $cli_doc?></td>
-      <td style="text-align: center"><?php echo $numguia?> </td>
+      <td style="width: 15mm; height:5mm"></td>
+      <td style="width: 155mm;">
+      </td>
       <td>
           <table border="<?php echo $borde_tablas?>">
               <tr>
-                  <td style="width: 5mm;"></td>
-                  <td style="width: 15mm; text-align:center;"><?php echo mostrarDiaMesAnio(1, $fec)?></td>
-                  <td style="width: 20mm; text-align:center;"><?php echo mostrarDiaMesAnio(2, $fec)?></td>
-                  <td style="width: 24mm; text-align:right;"><?php echo substr(mostrarDiaMesAnio(3, $fec),2)?></td>
+                  <td style="width: 20mm; text-align:center;"><?php if($num_rows_vp==1)echo $texto_pago1[0]?></td>
+                  <td style="width: 15mm; text-align:center;"></td>
+                  <td style="width: 16mm; text-align:right;"></td>
               </tr>
           </table>
       </td>
@@ -323,10 +318,10 @@ if($impresion=='pdf')ob_start();
 </table>
 <table width="100%" border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
   <tr>
-    <td style="height:4mm;"></td>
+    <td style="height:10mm;"></td>
   </tr>
   <tr>
-    <td style="height:47mm; vertical-align:top">
+    <td style="height:93mm; vertical-align:top">
     <table cellspacing="1" id="tabla_venta_detalle" class="tablesorter items" border="<?php echo $borde_tablas?>">
             <!--<thead>
                 <tr>
@@ -344,8 +339,9 @@ if($impresion=='pdf')ob_start();
 					while($dt1 = mysql_fetch_array($dts1)){
 				?>
                         <tr class="even">
-                            <td style="text-align: center; width: 17mm;"><?php echo $dt1['tb_presentacion_cod']?></td>
-                        	<td style="text-align: left; width: 80mm;">
+                            <td style="text-align: center; width: 15mm;"><?php echo $dt1['tb_presentacion_cod']?></td>
+                            <td style="text-align: center; width: 11mm;"><?php echo $dt1['tb_ventadetalle_can']?></td>
+                        	<td style="text-align: left; width: 130mm;">
 							<?php 
 							//echo $dt1['tb_unidad_abr'].' | ';
 							echo ''.$dt1['tb_ventadetalle_nom'].' - '.$dt1['tb_marca_nom'].'';
@@ -365,28 +361,8 @@ if($impresion=='pdf')ob_start();
                                 <?php echo $html_lotes ?>
                             </td>
 
-                            <td style="text-align: center; width: 7mm;"><?php echo $dt1['tb_unidad_abr']?></td>
-                            <td style="text-align: center; width: 10mm;"><?php echo $dt1['tb_ventadetalle_can']?></td>
-                            <td style="text-align: center; width: 7mm;">
-                                <?php
-                                if($dt1['tb_ventadetalle_preunilin']<=0){
-                                    echo "SI";
-                                }else{
-                                    echo "NO";
-                                }
-                                ?>
-                            </td>
-                            <td style="text-align: center; width: 10mm;">
-                                <?php
-                                if($dt['tb_ventadetalle_des']<=0){
-                                    echo "0.00";
-                                }else{
-                                    echo formato_money($dt['tb_ventadetalle_des']);
-                                }
-                                ?>
-                            </td>
                             <td style="text-align: right; width: 20mm;"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?>&nbsp;</td>
-                            <td style="text-align: right; width: 23mm;"><?php echo formato_money($dt1['tb_ventadetalle_valven']*1.18)?>&nbsp;</td>
+                            <td style="text-align: right; width: 28mm;"><?php echo formato_money($dt1['tb_ventadetalle_valven'])?>&nbsp;</td>
                         </tr>
                         <?php
                 	}
@@ -397,33 +373,14 @@ if($impresion=='pdf')ob_start();
 						?>
                         <tr>
                           <td style="text-align: right; width: 5mm; font-size: 11pt;">&nbsp;</td>
+                            <td style="text-align: center; width: 10mm;"><?php echo $dt1['tb_ventadetalle_can']?></td>
                           <td style="text-align: left; width: 115mm; font-size: 11pt;">
 							<?php 
 							echo ''.$dt2['tb_ventadetalle_nom'].'';
 							//echo ' | '.$dt2['tb_categoria_nom'];?>
                           </td>
-                            <td style="text-align: center; width: 7mm;"><?php echo $dt1['tb_unidad_abr']?></td>
-                            <td style="text-align: center; width: 10mm;"><?php echo $dt1['tb_ventadetalle_can']?></td>
-                            <td style="text-align: center; width: 7mm;">
-                                <?php
-                                if($dt1['tb_ventadetalle_preunilin']<=0){
-                                    echo "SI";
-                                }else{
-                                    echo "NO";
-                                }
-                                ?>
-                            </td>
-                            <td style="text-align: center; width: 10mm;">
-                                <?php
-                                if($dt['tb_ventadetalle_des']<=0){
-                                    echo "0.00";
-                                }else{
-                                    echo formato_money($dt['tb_ventadetalle_des']);
-                                }
-                                ?>
-                            </td>
                             <td style="text-align: right; width: 20mm;"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?>&nbsp;</td>
-                            <td style="text-align: right; width: 23mm;"><?php echo formato_money($dt1['tb_ventadetalle_valven']*1.18)?>&nbsp;</td>
+                            <td style="text-align: right; width: 23mm;"><?php echo formato_money($dt1['tb_ventadetalle_valven'])?>&nbsp;</td>
                         </tr>
                         <?php
                 	}
@@ -442,22 +399,29 @@ if($impresion=='pdf')ob_start();
 <br>
 <?php }?>
 <table border="<?php echo $borde_tablas?>" cellpadding="0" cellspacing="0" style="font-family:Arial;" class="total">
+    <tr>
+        <td style="text-align: right; width: 12mm; height:6mm;">&nbsp;</td>
+        <td  valign="bottom" style="text-align: left; width: 140mm;"><?php echo numtoletras($tot,$monedaval)?></td>
+        <td style="text-align: left; width: 10mm;"></td>
+        <td style="text-align: right; width: 5mm;"></td>
+        <td style="text-align: right; width: 20mm;">&nbsp;</td>
+    </tr>
   <tr>
-    <td style="text-align: right; width: 13mm; height:4mm;">&nbsp;</td>
-    <td  valign="bottom" style="text-align: left; width: 140mm;"><?php echo numtoletras($tot,$monedaval)?></td>
+    <td style="text-align: right; width: 13mm; height:6mm;">&nbsp;</td>
+    <td  valign="bottom" style="text-align: left; width: 163mm;"></td>
     <td style="text-align: left; width: 10mm;"><!--SUB TOTAL--></td>
     <td style="text-align: right; width: 5mm;"><?php echo $mon?></td>
     <td style="text-align: right; width: 20mm;"><?php echo formato_money($valven)?>&nbsp;</td>
   </tr>
   <tr>
-    <td style="height:5mm;">&nbsp;</td>
+    <td style="height:6mm;">&nbsp;</td>
     <td>&nbsp;</td>
-    <td style="text-align: right;">18%<!--IGV--></td>
+    <td style="text-align: right;"></td>
     <td style="text-align: right;"><?php echo $mon?></td>
     <td style="text-align: right;"><?php echo formato_money($igv)?>&nbsp;</td>
   </tr>
   <tr>
-    <td style="height:5mm;">&nbsp;</td>
+    <td style="height:6mm;">&nbsp;</td>
     <td>&nbsp;</td>
     <td style="text-align: left;"><!--TOTAL--></td>
     <td style="text-align: right;"><?php echo $mon?></td>

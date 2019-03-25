@@ -243,65 +243,65 @@ if($estado=="ANULADA"){
 }
 $html.='
     <tr>
-        <td colspan="4" style="text-align: left; height:48mm;"></td>
+        <td colspan="4" style="text-align: left; height:50mm;"></td>
     </tr>
 </table>
 <table style="width: 194mm;" border="0">
-    <tr><!--punto de partida -->
-        <td style="text-align: left;width:26mm; height:11mm;">&nbsp;</td>
-        <td style="text-align: left;width:74mm;">'.$guia['tb_guia_punpar'].'</td>
-        <td style="text-align: left;width:23mm;"></td>
-        <td style="text-align: left;width:74mm;">'.$guia['tb_guia_punlle'].'</td>
-    </tr>
-
     <tr>
         <!--razon social destinatario -->
-        <td style="text-align: left; width:38mm; height:4mm;">&nbsp;</td>
-        <td style="text-align: left; width:108mm">'.$guia['tb_guia_des'].'</td>
+        <td style="text-align: left; width:6mm; height:12mm;">&nbsp;</td>
+        <td style="text-align: left; width:68mm;font-size: 13pt">'.mostrarDiaMesAnio(1, $fec).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+        .date("m", strtotime($fec)).'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.substr(mostrarDiaMesAnio(3, $fec),2).'</td>
         <td style="text-align: left; width:20mm"></td>
-        <td style="text-align: left; width:40mm">'.$ruc_empresa.'</td>
+        <td style="text-align: left; width:40mm"></td>
+    </tr>
+    <tr>
+        <!--razon social destinatario -->
+        <td style="text-align: left; width:28mm; height:5mm;">&nbsp;</td>
+        <td style="text-align: left; width:82mm">'.$guia['tb_guia_des'].'</td>
+        <td style="text-align: left; width:20mm"></td>
+        <td style="text-align: left; width:40mm">'.$trans_razsoc .'</td>
+    </tr>
+    <tr>
+        <!--razon social destinatario -->
+        <td style="text-align: left; width:25mm; height:3mm;">&nbsp;</td>
+        <td style="text-align: left; width:95mm">'.$ruc_empresa.'</td>
+        <td style="text-align: left; width:20mm"></td>
+        <td style="text-align: left; width:40mm">-</td>
+    </tr>
+    <tr><!--punto de partida -->
+        <td style="text-align: left;width:33mm; height:8mm;">&nbsp;</td>
+        <td style="text-align: left;width:70mm;">'.$guia['tb_guia_punpar'].'</td>
+        <td style="text-align: left;width:23mm;"></td>
+        <td style="text-align: left;width:74mm;">'.$trans_ruc.'</td>
+    </tr>
+    <tr><!--punto de partida -->
+        <td style="text-align: left;width:33mm; height:7mm;">&nbsp;</td>
+        <td style="text-align: left;width:70mm;">'.$guia['tb_guia_punlle'].'</td>
+        <td style="text-align: left;width:70mm;"></td>
+        <td style="text-align: left;width:74mm;">'. $marca.' / '.$placa .'</td>
     </tr>
     <tr>
         <!--fecha inicio traslado -->
-        <td style="text-align: left; width:33mm; height:4mm;">&nbsp;</td>
+        <td style="text-align: left; width:45mm; height:5mm;">&nbsp;</td>
         <td style="text-align: left; width:46mm;">'.mostrarFecha($guia['tb_guia_fec']).'</td>
-        <td style="text-align: left; width:18mm;"></td>
-        <td style="text-align: left; width:30mm;">'.$guia['tb_guia_numdoc'].'</td>
+        <td style="text-align: left; width:75mm;"></td>
+        <td style="text-align: left; width:30mm;">-</td>
+    </tr>
+    <tr>
+        <td style="text-align: left; width:46mm; height:5mm;">&nbsp;</td>
+        <td style="text-align: left; width:46mm;">'.$guia['tb_guia_numdoc'].'</td>
+        <td style="text-align: left; width:65mm;"></td>
+        <td style="text-align: left; width:30mm;">'.$cond_lic.'</td>
         <td style="text-align: left; width:25mm;"></td>
         <td style="text-align: right; width:30mm;">-</td>
     </tr>
+    
  </table>
- 
- <table style="width: 194mm;" border="0"> 
-    <tr> <!--ESPACIO UNIDAD TRASNSPORTE Y CONDUCTOR-->
-        <td colspan="4" style="text-align: left;width:190mm;height: 6mm"></td>
-    </tr>
-    <tr>
-        <!--marca y placa -->
-        <td style="text-align: left;width:30mm;height: 4mm"></td>
-        <td style="text-align: left;width:72mm">'. $marca.' / '.$placa .'</td>
-        <td style="text-align: left;width:20mm;"></td>
-        <td style="text-align: left;width:85mm;">' . $trans_razsoc . '</td>
-    </tr>
-    <tr>
-        <!--constancia inscripcion-->
-        <td style="text-align: left; width:55mm;height: 4mm;"></td>
-        <td style="text-align: left;width:140mm;">-</td>
-    </tr>
-    <tr>
-        <!--n licencia de conducir-->
-        <td style="text-align: left;width:43mm;height: 4mm;"></td>
-        <td style="text-align: left;width:55mm;">'.$cond_lic.'</td>
-        <td style="text-align: left;width:20mm;"></td>
-        <td style="text-align: left;width:43mm;">' . $trans_ruc . '</td>
-        <td style="text-align: right;width:27mm;">-</td>
-    </tr>
- </table>
-
 <table border="0" style="width: 194mm;">
     <tbody>
         <tr>
-            <td colspan="5" style="height: 6mm;"></td>
+            <td colspan="5" style="height: 15mm;"></td>
         </tr>';
 $dts = $oGuia->mostrar_guia_detalle($guia_id);
 $cont = 1;
@@ -310,10 +310,11 @@ while($dt = mysql_fetch_array($dts)){
     $html.='<tr>';
 
     $html .= '   <td style="text-align:center;width: 15mm">' . $dt["tb_presentacion_cod"] .'</td>
-                 <td style="text-align: left; width: 119mm; font-size; 10pt;"> &nbsp; &nbsp; ' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
+                 <td style="text-align: left; width: 126mm; font-size; 10pt;"> &nbsp; &nbsp; ' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
                  <td style="text-align:center; width: 16mm">' . $dt["tb_guiadetalle_can"] . '</td>
-                 <td style="text-align:center; width: 24mm">NIU</td>
-                 <td style="text-align:center; width: 20mm">-</td>';
+                 <td style="text-align:center; width: 14mm"></td>
+                 <td style="text-align:center; width: 20mm">' .$dt["tb_unidad_abr"].'</td>
+                 <td style="text-align:center; width: 30mm">-</td>';
     $html.='</tr>';
     $cont++;
 }
