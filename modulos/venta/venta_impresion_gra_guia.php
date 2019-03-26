@@ -243,7 +243,7 @@ if($estado=="ANULADA"){
 }
 $html.='
     <tr>
-        <td colspan="4" style="text-align: left; height:50mm;"></td>
+        <td colspan="4" style="text-align: left; height:52mm;"></td>
     </tr>
 </table>
 <table style="width: 194mm;" border="0">
@@ -260,12 +260,12 @@ $html.='
         <td style="text-align: left; width:28mm; height:5mm;">&nbsp;</td>
         <td style="text-align: left; width:82mm">'.$guia['tb_guia_des'].'</td>
         <td style="text-align: left; width:20mm"></td>
-        <td style="text-align: left; width:40mm">'.$trans_razsoc .'</td>
+        <td style="text-align: center; width:40mm">'.$trans_razsoc .'</td>
     </tr>
     <tr>
         <!--razon social destinatario -->
         <td style="text-align: left; width:25mm; height:3mm;">&nbsp;</td>
-        <td style="text-align: left; width:95mm">'.$ruc_empresa.'</td>
+        <td style="text-align: left; width:95mm;height: 4mm">'.$guia['tb_cliente_doc'].'</td>
         <td style="text-align: left; width:20mm"></td>
         <td style="text-align: left; width:40mm">-</td>
     </tr>
@@ -273,11 +273,11 @@ $html.='
         <td style="text-align: left;width:33mm; height:8mm;">&nbsp;</td>
         <td style="text-align: left;width:70mm;">'.$guia['tb_guia_punpar'].'</td>
         <td style="text-align: left;width:23mm;"></td>
-        <td style="text-align: left;width:74mm;">'.$trans_ruc.'</td>
+        <td style="text-align: center;width:74mm;">'.$trans_ruc.'</td>
     </tr>
     <tr><!--punto de partida -->
         <td style="text-align: left;width:33mm; height:7mm;">&nbsp;</td>
-        <td style="text-align: left;width:70mm;">'.$guia['tb_guia_punlle'].'</td>
+        <td style="text-align: left;width:70mm;">'.$guia['tb_cliente_dir'].'</td>
         <td style="text-align: left;width:70mm;"></td>
         <td style="text-align: left;width:74mm;">'. $marca.' / '.$placa .'</td>
     </tr>
@@ -309,8 +309,8 @@ while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
     $html.='<tr>';
 
-    $html .= '   <td style="text-align:center;width: 15mm">' . $dt["tb_presentacion_cod"] .'</td>
-                 <td style="text-align: left; width: 126mm; font-size; 10pt;"> &nbsp; &nbsp; ' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
+    $html .= '   <td style="text-align:center;width: 15mm;height: 5mm">' . $dt["tb_presentacion_cod"] .'</td>
+                 <td style="text-align: left; width: 126mm; font-size; 10pt;"> &nbsp; &nbsp; ' . $dt["tb_producto_nom"] .'</td>
                  <td style="text-align:center; width: 16mm">' . $dt["tb_guiadetalle_can"] . '</td>
                  <td style="text-align:center; width: 14mm"></td>
                  <td style="text-align:center; width: 20mm">' .$dt["tb_unidad_abr"].'</td>

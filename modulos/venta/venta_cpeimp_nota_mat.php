@@ -360,8 +360,8 @@ if($impresion=='pdf')ob_start();
                                         <td class="izquierda" style="width: 9mm"><?php echo $dt1['tb_ventadetalle_can']?></td>
                                         <td class="izquierda" style="width: 25mm"><?php echo $dt1['tb_producto_nom']?></td>
                                         <td class="izquierda" style="width: 8mm"><?php echo $dt1['tb_unidad_abr']?></td>
-                                        <td class="derecha" style="width: 19mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?></td>
-                                        <td class="derecha" style="width: 19mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                        <td class="derecha" style="width: 19mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+                                        <td class="derecha" style="width: 19mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>
 
                                 <?php } mysql_free_result($dts1);?>
@@ -372,8 +372,8 @@ if($impresion=='pdf')ob_start();
                                     <td class="izquierda" style="width: 9mm"><?php echo $dt2['tb_ventadetalle_can'];?></td>
                                     <td class="izquierda" style="width: 25mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
                                     <td class="izquierda" style="width: 8mm"><?php echo $dt1['tb_unidad_abr']?></td>
-                                    <td class="derecha" style="width: 19mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin'])?></td>
-                                    <td class="derecha" style="width: 19mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                    <td class="derecha" style="width: 19mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
+                                    <td class="derecha" style="width: 19mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                 </tr>
                             <?php  } mysql_free_result($dts2); ?>
                         </table>
@@ -447,6 +447,7 @@ if($impresion=='pdf')
 
 
         $nombre_arc='venta_'.$numdoc.'.pdf';
+        ob_get_clean();
         $html2pdf->Output($nombre_arc);
     }
     catch(HTML2PDF_exception $e) {

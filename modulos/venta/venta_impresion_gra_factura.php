@@ -318,7 +318,7 @@ if($impresion=='pdf')ob_start();
 </table>
 <table width="100%" border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
   <tr>
-    <td style="height:10mm;"></td>
+    <td style="height:12mm;"></td>
   </tr>
   <tr>
     <td style="height:93mm; vertical-align:top">
