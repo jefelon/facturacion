@@ -28,6 +28,7 @@ if($_POST['action_cliente']=="insertar")
             }
 
             $data['cli_id']=$cli_id;
+
             $data['cli_msj']='Existe cliente con el mismo número de documento '.$_POST['txt_cli_doc'].'.';
         }
 		else
@@ -194,5 +195,32 @@ if($_POST['action'] == "obtener_datos"){
 		$data['msj']="Error en la obtención de datos del Cliente!";	
 	}
 	echo json_encode($data);
+}
+
+
+if($_POST['action'] == "obtener_nombre"){
+    $cst1 = $oCliente->verifica_cliente_doc($_POST['txt_cli_doc'],0);
+    $rst1= mysql_num_rows($cst1);
+
+    if($rst1>0)
+    {
+        $dt = mysql_fetch_array($cst1);
+        $cli_id=$dt['tb_cliente_id'];
+        mysql_free_result($cst1);
+
+        $cst2 = $oCliente->verifica_cliente_nombre($_POST['txt_cli_doc'],0);
+        $dt = mysql_fetch_array($cst2);
+        $cli_nom=$dt['tb_cliente_nom'];
+
+
+        $data['cli_nom']=$cli_nom;
+        $data['cli_msj']='Existe cliente';
+    }
+    else
+    {
+        $data['cli_nom']=$cli_nom;
+        $data['cli_msj']='No existe cliente.';
+    }
+    echo json_encode($data);
 }
 ?>
