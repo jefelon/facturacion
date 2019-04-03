@@ -130,6 +130,7 @@ $menu_administrador=
 	  <li><a href="../catalogo/">Catálogo de Productos</a></li>
 	  <li><a href="../kardex/">Kardex de Productos</a></li>
 	  <li><a href="../historial/">Historial de Productos</a></li>
+	  <li><a href="../catalogohistoria/">Catalogo Historia</a></li>
 	  <li class="separator">_________________________</li>
 	  <li><a href="../letras/">Letras</a></li>
 	  <li><a href="../venta_cst/">Ventas - Artículos</a></li>
