@@ -107,8 +107,8 @@ if ($_POST['action_compra'] == "insertar") {
                 $_POST['txt_com_ser_nota'],
                 $_POST['txt_com_num_nota'],
                 $_POST['cmb_com_tip'],
-                $_POST['cmb_tiporenta_id'],
-                $tipo_renta
+                $tipo_renta,
+                $_POST['cmb_baseimp_tip']
             );
             //ultima compra
             $dts = $oCompra->ultimoInsert();
@@ -155,7 +155,9 @@ if ($_POST['action_compra'] == "insertar") {
                         $fec_mod,
                         $_POST['txt_com_ser_nota'],
                         $_POST['txt_com_num_nota'],
-                        $_POST['cmb_com_tip']
+                        $_POST['cmb_com_tip'],
+                        $_POST['cmb_tiporenta_id'],
+                        $_POST['cmb_baseimp_tip']
                     );
                     //ultima compra
                     $dts = $oCompra->ultimoInsert();
