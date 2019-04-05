@@ -211,9 +211,8 @@ class cHistorial{
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id = pv.tb_puntoventa_id
 	INNER JOIN tb_documento d ON v.tb_documento_id = d.tb_documento_id
 	WHERE ct.tb_catalogo_id = $cat_id  AND d.tb_documento_id=$tipo_doc
-	AND v.tb_venta_est IN ('CANCELADA')
-	AND pv.tb_almacen_id = $alm_id ";
-
+	AND v.tb_venta_est IN ('CANCELADA')";
+        if($alm_id>0)$sql.=" AND pv.tb_almacen_id = $alm_id  ";
 		if($fecini!="")$sql.=" AND tb_venta_fec>='$fecini' ";
 		if($fecfin!="")$sql.=" AND tb_venta_fec<='$fecfin' ";
 

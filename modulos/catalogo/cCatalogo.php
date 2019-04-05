@@ -251,8 +251,8 @@ class cCatalogo{
 	
 	if($atr_ids!="")$sql.=" INNER JOIN tb_tag t ON pr.tb_presentacion_id=t.tb_presentacion_id ";
 	
-	$sql.=" WHERE s.tb_almacen_id=$alm_id
-	AND tb_producto_est LIKE '%$est%' ";
+	$sql.="
+	WHERE tb_producto_est LIKE '%$est%' ";
 
 	if($atr_ids!="")$sql.=" AND tb_atributo_id IN ($atr_ids) ";
 
@@ -276,6 +276,7 @@ class cCatalogo{
 		$sql.=" AND (ct.tb_catalogo_verven=0 AND ct.tb_catalogo_vercom=0)";
 	}
 
+	if($alm_id>0)$sql.=" AND s.tb_almacen_id=$alm_id ";
 	if($nom!="")$sql.=" AND tb_producto_nom LIKE '%$nom%' ";
 	if($cod!="")$sql.=" AND tb_presentacion_cod LIKE '%$cod%' ";
 	if($cat!="")$sql.=" AND p.tb_categoria_id IN ($cat) ";

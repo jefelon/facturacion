@@ -46,17 +46,12 @@ if(is_array($atr_array)){
 }
 
 
-if($_POST['alm_id']>0)
-{
+
     $dts1=$oCatalogo->catalogo_filtro($_POST['pro_nom'],$_POST['pro_cod'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$_POST['alm_id'],$cadena_atr,$_POST['verven'],$_POST['vercom'],$_POST['unibas']);
     $num_rows= mysql_num_rows($dts1);
     $fecini=$_POST['fec_ini'];
     $fecfin=$_POST['fec_fin'];
-}
-else
-{
-    $num_rows=0;
-}
+
 
 ?>
 <script type="text/javascript">
