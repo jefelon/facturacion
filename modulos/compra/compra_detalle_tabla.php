@@ -21,6 +21,7 @@ require_once ("../formatos/formato.php");
 		$ajuneg	=$dt['tb_compra_ajuneg'];
 		$valven	=$dt['tb_compra_valven'];
 		$igv	=$dt['tb_compra_igv'];
+        $ope_exo	=$dt['tb_compra_exo'];
 		$tot	=$dt['tb_compra_tot'];
 		
 		$tipper	=$dt['tb_compra_tipper'];
@@ -274,6 +275,10 @@ if($num_rows_total>=2)echo ($num_rows_total).' registros.';
     <td><label for="txt_com_igv">IGV</label></td>
     <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_money($igv)?>" readonly style="text-align:right"></td>
   </tr>
+    <tr>
+        <td><label for="txt_com_exo">OPEEXO</label></td>
+        <td align="right"><input type="text" name="txt_com_exo" id="txt_com_exo" value="<?php echo formato_money($ope_exo)?>" readonly style="text-align:right"></td>
+    </tr>
   <?php if($tipper==1){?>
   <tr>
     <td><label for="txt_com_per">PERCEPCION(2%)</label></td>
