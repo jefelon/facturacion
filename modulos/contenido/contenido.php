@@ -51,6 +51,7 @@ $menu_administrador=
 	  <li class="topmenu"><span><a href="#" >Catálogo</a></span>
 	    <ul>
 		  <li><a href="../unidad/">Unidades de Medida</a></li>
+		  <li><a href="../producto/">Productos</a></li>
 		  <li><a href="../listaprecio/">Lista de Precios</a></li>
 		  <li><a href="../servicio/">Servicios</a></li>
 		  <li><a href="../transporte/">Transporte</a></li>

@@ -73,6 +73,7 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">VALOR VENTA</th>
         <th align="center">IGV</th>
         <th align="center">IMPORTE TOTAL</th>
+        <th align="center">TIPO</th>
         <th align="center">ESTADO DOC.</th>
         <th align="center">ESTADO SUNAT</th>
         <th align="center">FECHA DE ENVIO SUNAT</th>
@@ -112,17 +113,52 @@ $num_rows= mysql_num_rows($dts1);
                     ?>
                 </td>
 
-                <?php if($dt1['tb_documento_id']!='15'){?>
-                    <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
+                <?php if($dt1['tb_documento_id']!='15' AND $dt1['tb_venta_est']=='CANCELADA'){?>
+                    <td align="right">
+                        <?php
+                            if($dt1['tb_venta_tipo']==2 || $dt1['tb_venta_tipo']==3){
+                                echo formato_money($dt1['tb_venta_valven']) ;
+                            }
+                            else if($dt1['tb_venta_tipo']==0 ){
+                                echo formato_money($dt1['tb_venta_tot']) ;
+                            }
+                        ?>
+                    </td>
                     <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
                     <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?> </td>
+                    <td align="right">
+                        <?php if($dt1['tb_venta_tipo']==2)
+                        {
+                            echo 'Encomienda';
+                        }
+                        else if ($dt1['tb_venta_tipo']==3){
+                            echo 'Encomienda Pago en Destino';
+                        }
+                        else{
+                            echo 'Pasaje';
+                        }
+//                        ?>
+                    </td>
                 <?php
-                } else {
-                    echo '<td align="right">0.00</td>
+                } else { ?>
                     <td align="right">0.00</td>
-                    <td align="right">0.00</td>';
-                }
-                    ?>
+                    <td align="right">0.00</td>
+                    <td align="right">0.00</td>            
+                    <td align="right">
+                        <?php
+                        if($dt1['tb_venta_tipo']==2)
+                        {
+                            echo 'Encomienda';
+                        }
+                        else if ($dt1['tb_venta_tipo']==3){
+                            echo 'Encomienda Cobro a Destino';
+                        }
+                        else{
+                            echo 'Pasaje';
+                        }
+                        ?>
+                    </td>
+                <?php } ?>
                 <td><?php echo $dt1['tb_venta_est']?></td>
                 <td>
                     <?php
