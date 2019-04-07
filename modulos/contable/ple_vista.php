@@ -1,16 +1,27 @@
 <?php
-	/*session_start();
+	session_start();
 	if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 	require_once ("../../config/Cado.php");
-	
-	require_once ("../../modulos/contenido/contenido.php");
-	$oContenido = new cContenido();*/
+    require_once ("../../config/datos.php");
 
-	require_once ("../../config/datos.php");
+	require_once ("../../modulos/contenido/contenido.php");
+	$oContenido = new cContenido();
+
+    require_once ("../empresa/cEmpresa.php");
+    $oEmpresa = new cEmpresa();
+
+
+
+    $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+    $dt = mysql_fetch_array($dts);
+    $emp_ruc=$dt['tb_empresa_ruc'];
+    $emp_razsoc=$dt['tb_empresa_razsoc'];
+    $emp_dir=$dt['tb_empresa_dir'];
+    mysql_free_result($dts);
 ?>
 
 <?php
-session_start();
+
 if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 require_once ("../../config/Cado.php");
 
@@ -165,6 +176,11 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 }
 
     function descargar_txt() {
+        var lineas=0;
+        var moneda =1;
+        if($('#lineas_libro').val()==1){
+            lineas=1;
+        }
         userDetails = '';
         $('#tabla_ple tbody:first tr').each(function () {
             var detail = '';
@@ -178,7 +194,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         var a = document.getElementById("btn_descargar_txt");
         var file = new Blob([userDetails], {type: 'text/plain'});
         a.href = URL.createObjectURL(file);
-        a.download = "LE20601411076"+$('#cmb_fil_anio').val()+$('#cmb_fil_mes').val()+"00"+$("#cmb_fil_librople").val()+"00"+"1111.txt"
+        a.download = "LE<?php echo $emp_ruc;?>"+$('#cmb_fil_anio').val()+$('#cmb_fil_mes').val()+"00"+$("#cmb_fil_librople").val()+"00"+"1"+lineas+moneda+"1.txt"
     }
 $(function() {
 	
