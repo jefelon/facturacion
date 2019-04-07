@@ -225,7 +225,8 @@ $(function() {
                             </td>
                             <td>
                                 <select name="cmb_afec_id" id="cmb_afec_id_<?php echo $dt1['tb_catalogo_id']?>">
-                                    <option value="">-</option>
+                                    <option value="1">GRAVADO</option>
+                                    <option value="9">EXONERADO</option>
                                     <option value="6">BONIFICACION</option>
                                 </select>
                             </td>

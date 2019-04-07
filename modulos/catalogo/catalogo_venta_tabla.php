@@ -47,21 +47,8 @@ if(isset($_POST['pro_cat']) and $_POST['pro_cat']>0)
 	}//fin nivel 2
 //echo $dc;
 }
-$nom = $_POST['pro_nom'];
 
-if($_POST['cbox1']=='true'){
-    $pactivo = 1;
-}else{
-    $pactivo = 0;
-}
-
-if($_POST['cbox2']=='true'){
-    $indicacion = 1;
-}else{
-    $indicacion = 0;
-}
-
-$dts1=$oCatalogo->catalogo_ventafarmacia_filtro($_SESSION['almacen_id'],$nom,$pactivo,$indicacion,$_POST['pro_cod'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$_POST['limit']);
+$dts1=$oCatalogo->catalogo_venta_filtro($_SESSION['almacen_id'],$_POST['pro_nom'],$_POST['pro_cod'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$_POST['limit']);
 $num_rows= mysql_num_rows($dts1);
 ?>
 <script type="text/javascript">
@@ -283,11 +270,10 @@ $(function() {
     <thead>
         <tr>
           <th>NOMBRE</th>
-            <th align="right">UND.</th>
-            <th align="right">STOCK</th>
           <th align="right" nowrap="nowrap" title="PRECIO DE VENTA MAYORISTA">PV. MAY</th>
           <th align="right" nowrap="nowrap" title="PRECIO DE VENTA MINIMO">PV. MIN</th>
           <th align="right" nowrap title="PRECIO VENTA ACTUAL">PRECIO S/.</th>
+          <th align="right">STOCK</th>
           <th width="110" align="center">CANTIDAD</th>
           <?php /*?><th align="center">DESCUENTO</th><?php */?>
           <th width="50">&nbsp;</th>
@@ -400,18 +386,6 @@ $(function() {
 					<?php //echo $dt1['tb_unidad_abr']?>
                     </span>-->
                     </td>
-                    <td align="right">
-                        <?php echo $dt1['tb_unidad_abr'];?>
-                    </td>
-                    <td align="right">
-                    <span style="font-weight: bold;">
-					<?php echo $stock_unidad?>
-                    </span>
-                        <input name="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $stock_unidad?>">
-
-                        <input name="hdd_cat_cospro_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_cospro_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $costo_ponderado?>">
-                        <input name="hdd_detven_tip_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_detven_tip_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $dt1['tb_afectacion_id']?>">
-                    </td>
                   <td align="right"><span style="font-size: 9pt;">
                     <?php if($predet_val2!=0)echo formato_money($predet_val2)?>
                   </span></td>
@@ -428,8 +402,15 @@ $(function() {
                     <a class="btn_info" href="#info">*</a>
                     </span>
             </td>
+                    <td align="right">
+                    <span style="font-weight: bold;">
+					<?php echo $stock_unidad?>
+                    </span>
+                    <input name="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_stouni_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $stock_unidad?>">
 
-
+                    <input name="hdd_cat_cospro_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_cat_cospro_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $costo_ponderado?>">
+                        <input name="hdd_detven_tip_<?php echo $dt1['tb_catalogo_id']?>" id="hdd_detven_tip_<?php echo $dt1['tb_catalogo_id']?>"  type="hidden" value="<?php echo $dt1['tb_afectacion_id']?>">
+                    </td>
                     <td align="center">
                     <input name="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" type="text" id="txt_cat_can_<?php echo $dt1['tb_catalogo_id']?>" class="cantidad_cat_ven" value="1" size="5" maxlength="6" style="text-align:right">
                     <a class="btn_mas" href="#mas" onClick="cantidad('mas','<?php echo $dt1['tb_catalogo_id']?>')">Aumentar</a>
