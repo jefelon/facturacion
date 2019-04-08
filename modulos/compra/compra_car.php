@@ -752,25 +752,25 @@ foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad) {
 <table border="0" align="right" cellpadding="0" cellspacing="0">
   <tr>
     <td width="110">VALOR VENTA</td>
-    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_decimal($total_operaciones_gravadas, 3)?>" readonly style="text-align:right"></td>
+    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_decimal($total_operaciones_gravadas, 2)?>" readonly style="text-align:right"></td>
   </tr>
   <tr>
     <td><label for="txt_com_igv">IGV</label></td>
-    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_decimal($igv_total_gravados,3)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_decimal($igv_total_gravados,2)?>" readonly style="text-align:right"></td>
   </tr>
     <tr>
         <td width="110">OPE. EXO.</td>
-        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_decimal($total_operaciones_exoneradas,3)?>" readonly style="text-align:right"></td>
+        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_decimal($total_operaciones_exoneradas,2)?>" readonly style="text-align:right"></td>
     </tr>
   <tr>
   <?php if($_POST['com_tipper']==1){?>
     <td><label for="txt_com_per">PERCEPCION(2%)</label></td>
-    <td align="right"><input type="text" name="txt_com_per" id="txt_com_per" value="<?php echo formato_decimal($total_percepcion, 3)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_per" id="txt_com_per" value="<?php echo formato_decimal($total_percepcion, 2)?>" readonly style="text-align:right"></td>
   </tr>
   <?php }?>
   <tr>
     <td><label for="txt_com_tot"><strong>TOTAL</strong></label></td>
-    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" value="<?php echo formato_decimal($importe_total_venta, 3)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" class="totales" value="<?php echo formato_decimal($importe_total_venta, 2)?>" readonly style="text-align:right"></td>
   </tr>
     <input type="hidden" name="hdd_cant_filas" id="hdd_cant_filas" value="<?php echo $num_rows ?>">
 </table>
