@@ -1,6 +1,7 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once ("../clientes/cCliente.php");
+require_once ("../formatos/formato.php");
 $oCliente = new cCliente();
 
 $tip = 0;
@@ -16,7 +17,7 @@ if($_POST['action']=="editar"){
 		$doc=$dt['tb_cliente_doc'];
 		$dir=$dt['tb_cliente_dir'];
 		$con=$dt['tb_cliente_con'];
-        $cum=$dt['tb_cliente_cumpleanos'];
+        $cum=mostrarFecha($dt['tb_cliente_cumpleanos']);
 		$tel=$dt['tb_cliente_tel'];
 		$ema=$dt['tb_cliente_ema'];
 		$est=$dt['tb_cliente_est'];
@@ -154,6 +155,19 @@ if($_POST['action']=="editarSunat"){
 $('#validar_ruc').button({
     text: true
   });
+    $( "#txt_cli_cum" ).datepicker({
+        minDate: "-7Y",
+        maxDate:"+7Y",
+        yearRange: 'c-0:c+0',
+        changeMonth: true,
+        changeYear: false,
+        dateFormat: 'dd-mm-yy',
+        //altField: fecha,
+        //altFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: "../../images/calendar.gif",
+        buttonImageOnly: true
+    });
 
 $(function() {
     cmb_precio_id(<?php echo $precio_id ?>);

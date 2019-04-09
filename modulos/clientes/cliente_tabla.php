@@ -1,6 +1,7 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once ("cCliente.php");
+require_once ("../formatos/formato.php");
 $oCliente = new cCliente();
 
 if($_POST['cli_id']!="")
@@ -69,7 +70,7 @@ $(function() {
                             <td><?php echo $dt1['tb_cliente_doc']?></td>
                             <td><?php echo $dt1['tb_cliente_dir']?></td>
                             <td><?php echo $dt1['tb_cliente_con']?></td>
-                            <td><?php echo $dt1['tb_cliente_cumpleanos']?></td>
+                            <td><?php echo mostrarFecha($dt1['tb_cliente_cumpleanos'])?></td>
                             <td><?php echo $dt1['tb_cliente_tel']?></td>
                             <td><?php echo $dt1['tb_cliente_ema']?></td>
                             <td><?php echo $dt1['tb_precio_nom']?></td>

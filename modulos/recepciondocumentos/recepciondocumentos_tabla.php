@@ -32,16 +32,16 @@ $(function() {
         <table cellspacing="1" id="tabla_recepciondocumentos" class="tablesorter">
             <thead>
                 <tr>
-                    <th>Código</th>
-                    <th>Fecha de Recepción</th>
-                    <th>Empresa</th>
-                    <th>Pers. Entrega</th>
-                    <th>Pers. Recepciona</th>
-                    <th>Resp. Recojo</th>
-                    <th>Pendientes</th>
-                    <th>Dirección</th>
-                    <th>Celular</th>
-                    <th>Observaciones</th>
+                    <th>CÓDIGO</th>
+                    <th>FECHA DE RECEPCIÓN</th>
+                    <th>EMPRESA</th>
+                    <th>PERSONA QUE REALIZA LA ENTREGA</th>
+                    <th>PERSONA QUE RECEPCIONA LOS DOCUMENTOS</th>
+                    <th>RESPONSABLE DE RECOJO DE DOCUMENTOS</th>
+                    <th>PENDIENTES POR TRAER Y RECOGER DOCUMENTOS</th>
+                    <th>DIRECCIÓN</th>
+                    <th>CELULAR</th>
+                    <th>OBSERVACIONES</th>
                     <th></th>
                 </tr>
             </thead>
@@ -53,7 +53,7 @@ $(function() {
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
-                    <td>COD.SCF-<?php echo $dt['tb_recepciondocumentos_id']?></td>
+                    <td>COD.SCF-<?php echo str_pad($dt['tb_recepciondocumentos_id'],4, "0", STR_PAD_LEFT)?></td>
                     <td><?php echo mostrarFecha($dt['tb_recepciondocumentos_fecha'])?></td>
                     <td><?php echo $dt['tb_cliente_nom']; ?></td>
                     <td><?php echo $dt['tb_persentrega_nom']; ?></td>
