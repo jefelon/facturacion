@@ -112,7 +112,8 @@ function catalogo_tabla(){
 			verven:		datven,
 			vercom:		datcom,
 			unibas:		dunibas,
-			inv_fec:	$('#txt_fil_inv_fec').val()
+			inv_fec:	$('#txt_fil_inv_fec').val(),
+            cmb_fil_lim: $('#cmb_fil_lim').val()
 		}),
 		beforeSend: function() {
 			$('#msj_catalogo').html("Cargando...");

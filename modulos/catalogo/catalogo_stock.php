@@ -56,7 +56,7 @@ if(is_array($atr_array)){
 
 if($_POST['alm_id']>0)
 {
-	$dts1=$oCatalogo->catalogo_filtro_stock($_POST['pro_nom'],$_POST['pro_cod'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$cadena_atr,$_POST['verven'],$_POST['vercom'],$_POST['unibas']);
+	$dts1=$oCatalogo->catalogo_filtro_stock($_POST['pro_nom'],$_POST['pro_cod'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$cadena_atr,$_POST['verven'],$_POST['vercom'],$_POST['unibas'],$_POST['cmb_fil_lim']);
 $num_rows= mysql_num_rows($dts1);
 }
 else

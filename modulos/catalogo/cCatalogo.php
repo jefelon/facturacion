@@ -292,7 +292,7 @@ class cCatalogo{
 	return $rst;
 	}
 	
-	function catalogo_filtro_stock($nom,$cod,$cat,$mar,$est,$atr_ids,$verven,$vercom,$unibas){
+	function catalogo_filtro_stock($nom,$cod,$cat,$mar,$est,$atr_ids,$verven,$vercom,$unibas,$limit){
 	$sql="SELECT * 
 	FROM tb_producto p
 	INNER JOIN tb_categoria c ON p.tb_categoria_id=c.tb_categoria_id
@@ -302,8 +302,11 @@ class cCatalogo{
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id ";
 	
 	if($atr_ids!="")$sql.=" INNER JOIN tb_tag t ON pr.tb_presentacion_id=t.tb_presentacion_id ";
-	
+
+
+
 	$sql.=" WHERE tb_producto_est LIKE '%$est%' ";
+
 
 	if($atr_ids!="")$sql.=" AND tb_atributo_id IN ($atr_ids) ";
 
@@ -333,10 +336,12 @@ class cCatalogo{
 	if($mar!="")$sql.=" AND p.tb_marca_id=$mar ";
 	
 	if($unibas==1)$sql.=" AND ct.tb_catalogo_unibas =1 ";
+
 	
 	if($atr_ids!="")$sql.=" GROUP BY ct.tb_catalogo_id ";
 	
 	$sql.=" ORDER BY c.tb_categoria_nom, m.tb_marca_nom ";
+	if($limit!="")$sql.=" LIMIT 0,$limit ";
 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

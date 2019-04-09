@@ -184,6 +184,16 @@ $(function() {
   <tr>
     <td colspan="2"><label for="txt_fil_pro_nom">Nombre:</label>
       <input name="txt_fil_pro_nom" type="text" id="txt_fil_pro_nom" size="50"></td>
+      <td colspan="3">
+      <label for="cmb_fil_lim">N° Filas:</label>
+          <select name="cmb_fil_lim" id="cmb_fil_lim">
+              <option value="">-Todos-</option>
+              <option value="10">10</option>
+              <option value="20" selected="selected">20</option>
+              <option value="50">50</option>
+              <option value="100">100</option>
+          </select>
+      </td>
     <td><label for="txt_fil_pro_cod">Código:</label>
       <input name="txt_fil_pro_cod" type="text" id="txt_fil_pro_cod" size="20"></td>
     <td><div id="div_modo"></div></td>
