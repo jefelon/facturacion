@@ -66,6 +66,7 @@ $(function() {
     width: 150px; 
 }*/
 </style>
+<?php $est='Activo' ?>
 <form name="for_fil_pro" id="for_fil_pro">
 <fieldset><legend>Filtro de producto</legend>
 
