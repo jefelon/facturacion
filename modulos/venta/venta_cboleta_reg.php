@@ -15,14 +15,11 @@ $oEmpresa = new cEmpresa();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
-require_once ("../letras/cLetras.php");
-$cLetras = new cLetras();
-
 require_once ("../lote/cVentaDetalleLote.php");
 $oVentaDetalleLote = new cVentaDetalleLote();
 
-require_once("../guia/cGuia.php");
-$oGuia = new cGuia();
+require_once ("../letras/cLetras.php");
+$cLetras = new cLetras();
 
 $ven_id=$_POST['ven_id'];
 $dts = $oVenta->mostrarUno($ven_id);
@@ -79,7 +76,7 @@ $sucursales='
     
 </table>';
 
-$tipodoc = 'FACTURA ELECTRONICA';
+$tipodoc = 'BOLETA ELECTRONICA';
 
 $ven_id=$_POST['ven_id'];
 
@@ -98,6 +95,7 @@ while($dt = mysql_fetch_array($dts))
     if($dt["tb_cliente_tip"]==2)$idtipodni=6;
 
     $fecha=mostrarFecha($dt["tb_venta_fec"]);
+
     $toigv=$dt["tb_venta_igv"];
     $importetotal=$dt["tb_venta_tot"];
     $totopgrat=$dt["tb_venta_grat"];
@@ -123,10 +121,6 @@ while($dt = mysql_fetch_array($dts))
     $lab2=$dt['tb_venta_lab2'];
     $lab3=$dt['tb_venta_lab3'];
 }
-
-$guias = $oGuia->mostrarGuiaUno($ven_id);
-$guia = mysql_fetch_array($guias);
-$numero_guia=$guia['tb_guia_serie']."-".$guia["tb_guia_num"];
 
 
 if($moneda==1){
@@ -195,35 +189,20 @@ if($num_rows_vp>0)
             }
         }
 
-        if($rw1['tb_formapago_id']==3)
-        {
-
-                $forma='LETRAS ';
-                $suma_pago7+=$rw1['tb_ventapago_mon'];
-
-                $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
-
-            $date1 = new  DateTime($fecha);
-
-            $cont=1;
+        if($rw1['tb_formapago_id']==3){
+            $modo='';
+            $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+            $forma = 'LETRAS ';
             while($ltr= mysql_fetch_array($ltrs1)){
-                $date2 = new DateTime($ltr['tb_letras_fecha']);
-                $interval = $date1->diff( $date2 );
-                $diferencia=$interval->format('%a dias');
-
-                    $modo.= '<br>L'.$ltr['tb_letras_orden'].' '.$diferencia.' '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
-
-                }
-
-                //$modo.='CANJE'.$vence_letras;
-//            }
+                $modo = $modo .' L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
+            }
+            $modo=$modo . ' TOTAL: ';
         }
-
 
         $pago_mon=formato_money($rw1['tb_ventapago_mon']);
 
         $texto_pago1[]=$forma.' '.$modo;
-        $texto_pago2[]=$forma.' '.$modo.':'.$diff.$mon.'  '.$pago_mon;
+        $texto_pago2[]=$forma.' '.$modo.':'.$mon.'  '.$pago_mon;
     }
     mysql_free_result($rws1);
 }
@@ -338,7 +317,7 @@ $html = '
         border-bottom: 0.9px solid #01a2e6;
         border-right: 0.9px solid #01a2e6;
         border-left: 0.9px solid #01a2e6;
-        /*background-color: #01a2e6;*/
+         /*background-color: #01a2e6;*/
         text-transform:uppercase;
     }
     .odd_row td {
@@ -415,10 +394,6 @@ $html.='<tr>
         <td style="text-align: left; vertical-align:top;" width="10%">DIRECCIÓN</td>
         <td style="text-align: left; vertical-align:top;" width="2%">:</td>
         <td style="text-align: left" width="58%">'.$direccion.'</td>
-        
-        <td style="text-align: left" width="10%">GUIA REM.:</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="18%">'.$numero_guia.'</td>
     </tr>
 </table>
 <br/>
@@ -433,9 +408,9 @@ $html.='<tr>
             <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
             <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
             <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
-            <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
+            <th style="text-align: right; width: 12%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 12%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: right; width: 13%;"><b>VALOR VENTA</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
@@ -454,10 +429,11 @@ while($dt = mysql_fetch_array($dts)){
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
                  <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
-                $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
-                while($lote = mysql_fetch_array($lotes)) {
-                    $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
-                }
+
+        $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
+        while($lote = mysql_fetch_array($lotes)) {
+            $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
+        }
 
         $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
@@ -467,17 +443,17 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie;
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
+
         $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
         while($lote = mysql_fetch_array($lotes)) {
-            $html.=$lote["tb_ventadetalle_lotenum"].', ';
+            $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
         }
 
         $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
     }
-
     $html.='</tr>';
     $cont++;
 }
@@ -640,4 +616,12 @@ $pdf->writeHTML($html, true, 0, true, true);
 
 //$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
 
-$pdf->Output($nombre_archivo, 'I');
+$path = "../../cperepositorio/send";
+
+// Supply a filename including the .pdf extension
+$filename = $nombre_archivo;
+$full_path = $path . '/' .$ruc_empresa.'-0'.$idcomprobante.'-'. $filename;
+if (!file_exists($full_path))
+{
+    $pdf->Output($full_path, 'F');
+}

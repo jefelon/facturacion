@@ -198,10 +198,10 @@ if($num_rows_vp>0)
         if($rw1['tb_formapago_id']==3)
         {
 
-                $forma='LETRAS ';
-                $suma_pago7+=$rw1['tb_ventapago_mon'];
+            $forma='LETRAS ';
+            $suma_pago7+=$rw1['tb_ventapago_mon'];
 
-                $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
+            $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
 
             $date1 = new  DateTime($fecha);
 
@@ -211,11 +211,11 @@ if($num_rows_vp>0)
                 $interval = $date1->diff( $date2 );
                 $diferencia=$interval->format('%a dias');
 
-                    $modo.= '<br>L'.$ltr['tb_letras_orden'].' '.$diferencia.' '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
+                $modo.= '<br>L'.$ltr['tb_letras_orden'].' '.$diferencia.' '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
 
-                }
+            }
 
-                //$modo.='CANJE'.$vence_letras;
+            //$modo.='CANJE'.$vence_letras;
 //            }
         }
 
@@ -454,10 +454,10 @@ while($dt = mysql_fetch_array($dts)){
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
                  <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
-                $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
-                while($lote = mysql_fetch_array($lotes)) {
-                    $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
-                }
+        $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
+        while($lote = mysql_fetch_array($lotes)) {
+            $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
+        }
 
         $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
@@ -640,4 +640,12 @@ $pdf->writeHTML($html, true, 0, true, true);
 
 //$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
 
-$pdf->Output($nombre_archivo, 'I');
+$path = "../../cperepositorio/send";
+
+// Supply a filename including the .pdf extension
+$filename = $nombre_archivo;
+$full_path = $path . '/' .$ruc_empresa.'-0'.$idcomprobante.'-'. $filename;
+if (!file_exists($full_path))
+{
+    $pdf->Output($full_path, 'F');
+}

@@ -118,11 +118,11 @@ if($num_rows_total>=2)echo ($num_rows_total).' registros.';
                   <th>NOMBRE / PRESENTACION</th>
                   <th>CATEGORIA / MARCA</th>
                   <th align="right" nowrap="nowrap" title="PRECIO UNITARIO">PRECIO UNIT</th>
+                    <th align="right" title="COSTO UNITARIO">COSTO UNIT S/.</th>
                   <th align="right" nowrap="nowrap" title="DESCUENTO %">DSCTO %</th>
-                  <th align="right">IMPORTE</th>
                   <th align="right">FLETE S/.</th>                   
-                  <!--<th align="right">FLETE</th> --> 
-                  <th align="right" title="COSTO UNITARIO">COSTO UNIT S/.</th>
+                  <!--<th align="right">FLETE</th> -->
+                    <th align="right">IMPORTE</th>
                     <th align="center"></th>
                 </tr>
             </thead>
@@ -150,21 +150,23 @@ if($num_rows_total>=2)echo ($num_rows_total).' registros.';
                             <td align="right"><?php 
 							echo $dt1['tb_compradetalle_preuni'];
 							?></td>
+                            <td align="right"><?php
+                                echo formato_money($dt1['tb_compradetalle_cosuni']);
+                                ?></td>
                             <td align="right"><?php 
-							echo $dt1['tb_compradetalle_des'];
+							echo formato_money($dt1['tb_compradetalle_des']*100);
 							?></td>
+                            <td align="right"><?php
+                                echo formato_money($dt1['tb_compradetalle_fle']);
+                                ?></td>
                             <td align="right"><?php 
 							echo formato_money($dt1['tb_compradetalle_imp']);
 							?></td>
-                            <td align="right"><?php 
-							echo formato_money($dt1['tb_compradetalle_fle']);
-							?></td>
+
                             <!--<td align="right"><?php 
 							//echo $dt1['tb_compradetalle_fle'];
 							?></td>-->
-                            <td align="right"><?php 
-							echo formato_money($dt1['tb_compradetalle_cosuni']);
-							?></td>
+
                             <td align="center"><a class="btn_tabla_lote" onClick="lote_tabla(<?php echo $dt1['tb_compradetalle_id'] ?>)">Ver Lote</a></td>
                         </tr>
                 <?php
@@ -190,10 +192,10 @@ if($num_rows_total>=2)echo ($num_rows_total).' registros.';
                         echo $dt2['tb_compradetalle_preuni'];
                         ?></td>
                     <td align="right"><?php
-                        echo $dt2['tb_compradetalle_des'];
+                        echo formato_money($dt2['tb_compradetalle_cosuni']);
                         ?></td>
                     <td align="right"><?php
-                        echo formato_money($dt2['tb_compradetalle_imp']);
+                        echo $dt2['tb_compradetalle_des'];
                         ?></td>
                     <td align="right"><?php
                         echo formato_money($dt2['tb_compradetalle_fle']);
@@ -201,8 +203,9 @@ if($num_rows_total>=2)echo ($num_rows_total).' registros.';
                     <!--<td align="right"><?php
                     //echo $dt1['tb_compradetalle_fle'];
                     ?></td>-->
+
                     <td align="right"><?php
-                        echo formato_money($dt2['tb_compradetalle_cosuni']);
+                        echo formato_money($dt2['tb_compradetalle_imp']);
                         ?></td>
                     <td align="center"></td>
                 </tr>
