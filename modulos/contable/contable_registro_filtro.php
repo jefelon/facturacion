@@ -78,6 +78,7 @@ $(function() {
     <fieldset style="width: 100%;float: left; text-align: center;"><legend>Descargar Registro</legend>
         <label for="cmb_fil_ven_doc" align="right" style="font-size: 12px;">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio" required>
+            <option value="2019">2019</option>
             <option value="2018">2018</option>
             <option value="2018">2017</option>
         </select>
@@ -109,7 +110,6 @@ $(function() {
 
         <a class="btn_descargar_excel" id="btn_descargar_excel" href="#" onClick="registro_reporte_xls()" title="Imprimir en Excel">DESCARGAR EXCEL</a>
         <a class="btn_descargar_pdf" id="btn_descargar_pdf" href="#" onClick="registro_reporte_pdf()" title="Imprimir en PDF">DESCARGAR PDF</a>
-        <a class="btn_descargar_txt" id="btn_descargar_txt" href="#" onClick="registro_reporte_txt()" title="Descargar PLE TXT">DESCARGAR PLE TXT</a>
         <a class="filtrar_consulta" id="filtrar_consulta" href="#" onClick="registro_filtro()" title="Filtrar">FILTRAR</a>
     </fieldset>
 </div>
