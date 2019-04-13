@@ -198,7 +198,6 @@ class cCompra{
 	INNER JOIN tb_compradetalle cd ON ct.tb_catalogo_id = cd.tb_catalogo_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ = u.tb_unidad_id
 	WHERE cd.tb_compra_id=$com_id ";
-        print $sql;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

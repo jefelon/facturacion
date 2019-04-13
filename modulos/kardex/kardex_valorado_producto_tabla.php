@@ -99,144 +99,178 @@ $(function() {
 			$cantidad_total_salidas = 0;
 			$costo_total_entradas = 0;
 			$costo_total_salidas = 0;
-			$mes_empezar=00;
+            $mes_anterior='';
+
 
             $d_ini = strtotime($_POST['fec_ini']);
-            while($dt1 = mysql_fetch_array($dts1)) {
+            while($dt1 = mysql_fetch_array($dts1)){
 
                 $d_kar_fec = strtotime($dt1['tb_kardex_fec']);
 
-                if ($d_kar_fec >= $d_ini) {
-                    if ($dt1['tb_tipoperacion_id'] == '1') $operacion = 'STOCK INICIAL';
-                    if ($dt1['tb_tipoperacion_id'] == '2') $operacion = 'COMPRA';
-                    if ($dt1['tb_tipoperacion_id'] == '3') $operacion = 'VENTA';
-                    //if($dt1['tb_tipoperacion_id']=='9')$operacion='NOTA DE ALMACEN';
-                    if ($dt1['tb_tipoperacion_id'] == '4') $operacion = 'TRASPASO';
-                    if ($dt1['tb_tipoperacion_id'] == '5') $operacion = 'NOTA DE VENTA';
-                    if ($dt1['tb_tipoperacion_id'] == '11') $operacion = 'NOTA DE CREDITO';
+                if ($d_kar_fec>=$d_ini){
+            	if($dt1['tb_tipoperacion_id']=='1')$operacion='STOCK INICIAL';
+            	if($dt1['tb_tipoperacion_id']=='2')$operacion='COMPRA';
+            	if($dt1['tb_tipoperacion_id']=='3')$operacion='VENTA';
+            	//if($dt1['tb_tipoperacion_id']=='9')$operacion='NOTA DE ALMACEN';
+            	if($dt1['tb_tipoperacion_id']=='4')$operacion='TRASPASO';
+            	if($dt1['tb_tipoperacion_id']=='5')$operacion='NOTA DE VENTA';
+            	if($dt1['tb_tipoperacion_id']=='11')$operacion='NOTA DE CREDITO';
+
+                if ($mes_anterior!=date("m",strtotime($dt1['tb_kardex_reg'])) and $mes_anterior){
                     ?>
-
-
                     <tr>
-                        <td nowrap="nowrap"
-                            title="<?php echo 'Registrado: ' . mostrarFechaHoraH($dt1['tb_kardex_reg']) ?>"><?php echo mostrarFecha($dt1['tb_kardex_fec']) ?></td>
-                        <td nowrap="nowrap"><?php if (9 != $dt1['tb_tipoperacion_id']) {
-                                echo $dt1['tb_kardex_cod'];
-                            } ?></td>
-                        <td><?php if (9 != $dt1['tb_tipoperacion_id']) {
-                                echo $dt1['tb_documento_nom'];
-                            } ?></td>
-                        <td nowrap="nowrap"><?php if (9 != $dt1['tb_tipoperacion_id']) {
-                                echo $dt1['tb_kardex_numdoc'];
-                            } ?></td>
-                        <td><?php
-                                echo $dt1['tb_kardex_des']; ?>
-                        </td>
-                        <?php
-                        $can = $dt1['tb_kardexdetalle_can'];
-                        $tip = $dt1['tb_kardex_tip'];//Verificando si es Entrada o Salida (1: ENTRADA | 2: SALIDA)
-
-                        if ($tip == 1){
-                            $precos = $dt1['tb_kardexdetalle_cos'];
-                            $subtotal = $can * $precos;
-                            $cantidad_total += $can;
-                            $cantidad_total_entradas += $can;
-                            $costo_total_entradas += $subtotal;
-                        } ?>
-                        <td align="right" nowrap="nowrap"><?php
-                            if ($tip == 1) {
-                                if (9 != $dt1['tb_tipoperacion_id']) {
-                                    echo formato_decimal($can, 0);
-                                }
-                            }
-                             ?>
-                        </td>
-                        <td align="right" nowrap="nowrap"><?php
-                            if ($tip == 1) {
-                                    echo formato_decimal($dt1['tb_kardexdetalle_cos'], 2);
-                            } ?>
-                        </td>
-                        <td align="right" nowrap="nowrap"><?php
-                            if ($tip == 1) {
-                                echo formato_decimal($dt1['tb_kardexdetalle_cos'] * $can, 2);
-                            } ?>
-                        </td>
-                        <?php
-
-                        if ($tip == 2) {
-                            $precos = $dt1['tb_kardexdetalle_pre'];
-                            $subtotal = $can * $precos;
-                            $cantidad_total -= $can;
-                            $cantidad_total_salidas += $can;
-                            $costo_total_salidas += $subtotal;
-                        } ?>
-
-                        <td align="right"><?php if ($tip == 2) echo $can ?></td>
-
-                        <td align="right" nowrap="nowrap"><?php
-                            if ($tip == 2) {
-                                    echo formato_decimal($precos, 2);
-                            } ?>
-                        </td>
-                        <td align="right" nowrap="nowrap"><?php
-                            if ($tip == 2) {
-                                    echo formato_decimal($precos * $can, 2);
-                            } ?>
-                        </td>
-                        <?php
-
-                        $precio_promedio = ($costo_total_entradas-$costo_total_salidas) / $cantidad_total;
-                        ?>
-                        <td align="right"><?php echo $cantidad_total ?></td>
-                        <td align="right">
-                            <?php if ($cantidad_total == 0) {
-                                echo formato_decimal(0.000, 2);
-                            } else {
-                                echo formato_decimal($precio_promedio, 2);
-                            } ?>
-                        </td>
-                        <td align="right"><?php echo formato_decimal($costo_total_entradas-$costo_total_salidas, 2); ?></td>
-
-                    </tr>
-                     <?php if (date("m",strtotime($dt1['tb_kardex_reg'])) != $mes_empezar) {
-                        $mes_empezar=date("m",strtotime($dt1['tb_kardex_reg']));
-                         ?>
-                    <tr>
-                        <td nowrap="nowrap"></td>
-                        <td nowrap="nowrap"></td>
-                        <td></td>
-                        <td nowrap="nowrap"></td>
-                        <td>
-                            Stock Inicial - Mes - <?php echo mostrarDiaMesAnio(2, $dt1['tb_kardex_fec']); ?>
-                        </td>
-
-                        <td align="right" nowrap="nowrap">
-                        </td>
-                        <td align="right" nowrap="nowrap">
-                        </td>
-                        <td align="right" nowrap="nowrap">
-                        </td>
 
 
-                        <td align="right"></td>
+                    <td nowrap="nowrap" title="<?php echo 'Registrado: '.mostrarFechaHoraH($dt1['tb_kardex_reg'])?>"><?php echo "01-".date('m-Y', strtotime($dt1['tb_kardex_fec'])); ?></td>
+                    <td nowrap="nowrap"></td>
+                    <td></td>
+                    <td nowrap="nowrap"></td>
+                    <td>Stock Inicial - Mes - <?php echo mostrarDiaMesAnio(2, $dt1['tb_kardex_fec']); ?></td>
+                    <td align="right" nowrap="nowrap">
 
-                        <td align="right" nowrap="nowrap">
-                        </td>
-                        <td align="right" nowrap="nowrap">
-                        </td>
-                        <td align="right"><?php echo $cantidad_total ?></td>
-                        <td align="right">
-                            <?php echo formato_decimal($precio_promedio, 2); ?>
-                        </td>
-                        <td align="right"><?php echo formato_decimal($costo_total_entradas-$costo_total_salidas, 2); ?></td>
+                    </td>
+                    <td align="right" nowrap="nowrap">
 
-                    </tr>
+                    </td>
+                    <td align="right" nowrap="nowrap">
+
+                    </td>
+
+                    <td align="right"><?php if($tip == 2)echo $can?></td>
+
+                    <td align="right" nowrap="nowrap"><?php
+                        if($tip == 2)echo formato_decimal($precos,2); ?>
+                    </td>
+                    <td align="right" nowrap="nowrap"><?php
+                        if($tip == 2)echo formato_decimal($precos*$can,2); ?>
+                    </td>
+                    <td align="right"><?php echo $cantidad_total ?></td>
+                    <td align="right"><?php echo formato_decimal($costo_promedio,2) ?></td>
+                    <td align="right"><?php echo formato_decimal($costo_promedio*$cantidad_total,2) ?></td>
+                </tr>
+                <?php }
+                    $mes_anterior = date("m",strtotime($dt1['tb_kardex_reg']));
+                ?>
+                <tr>
+                    <td nowrap="nowrap" title="<?php echo 'Registrado: '.mostrarFechaHoraH($dt1['tb_kardex_reg'])?>"><?php echo mostrarFecha($dt1['tb_kardex_fec'])?></td>
+                    <td nowrap="nowrap"><?php if (9!=$dt1['tb_tipoperacion_id']){ echo $dt1['tb_kardex_cod']; }?></td>
+                    <td><?php if (9!=$dt1['tb_tipoperacion_id']){ echo $dt1['tb_documento_nom']; }?></td>
+                    <td nowrap="nowrap"><?php  if (9!=$dt1['tb_tipoperacion_id']){ echo $dt1['tb_kardex_numdoc']; }?></td>
+                    <td><?php if (9==$dt1['tb_tipoperacion_id']){
+                        echo 'Stock Inicial - Mes -'. mostrarDiaMesAnio(2, $dt1['tb_kardex_fec']);
+                    } else{
+                        echo $dt1['tb_kardex_des'];
+                    } ?>
+                    </td>
                     <?php
+                    $can = $dt1['tb_kardexdetalle_can'];
+                    $tip = $dt1['tb_kardex_tip'];//Verificando si es Entrada o Salida (1: ENTRADA | 2: SALIDA)
+
+                    if($tip == 1){
+
+                        $stock_kardex=stock_kardex_reg($dt1['tb_catalogo_id'],0,$firstrow['tb_kardex_reg'],$dt1['tb_kardex_reg'],$_SESSION['empresa_id']);
+
+                        $costo_ponderado_array=costo_ponderado_empresa_fechas_reg($dt1['tb_catalogo_id'],$_SESSION['almacen_id'],$firstrow['tb_kardex_reg'],$dt1['tb_kardex_reg'],$stock_kardex,$dt1['tb_kardexdetalle_cos'],$dt1['tb_catalogo_precosdol'],$_SESSION['empresa_id']);
+
+                        $costo_promedio=$costo_ponderado_array['soles'];
+
+
+
+                        if($dt1['tb_tipoperacion_id']==1)$precos=$cat_precos;
+
+                        $subtotal = $can*$precos;
+                        $cantidad_total += $can;
+                        $cantidad_total_entradas += $can;
+                        $costo_total_entradas += $subtotal;
+                    }?>
+                    <td align="right" nowrap="nowrap"><?php
+                        if($tip == 1){
+                            if (9!=$dt1['tb_tipoperacion_id']){
+                                echo formato_decimal($can,0);
+                            }
+                        };
+                        if($dt1['tb_tipoperacion_id']==1){}?>
+                    </td>
+                    <td align="right" nowrap="nowrap"><?php
+                        if($tip == 1){
+                            if (9!=$dt1['tb_tipoperacion_id']){
+                                echo formato_decimal($dt1['tb_kardexdetalle_cos'],2);
+                            }
+                        } ?>
+                    </td>
+                    <td align="right" nowrap="nowrap"><?php
+                        if($tip == 1){
+                            if (9!=$dt1['tb_tipoperacion_id']) {
+                                echo formato_decimal($dt1['tb_kardexdetalle_cos']*$can,2);
+                            }
+                        } ?>
+                    </td>
+                    <?php
+
+                    if($tip == 2){
+                        $precos = $dt1['tb_kardexdetalle_pre'];
+                        $subtotal = $can*$precos;
+                        $cantidad_total -= $can;
+                        $cantidad_total_salidas += $can;
+                        $costo_total_salidas += $subtotal;}?>
+
+                    <td align="right"><?php if($tip == 2)echo $can?></td>
+
+                    <td align="right" nowrap="nowrap"><?php
+                        if($tip == 2){if (9!=$dt1['tb_tipoperacion_id']){echo formato_decimal($costo_promedio,2);} }?>
+                    </td>
+                    <td align="right" nowrap="nowrap"><?php
+                        if($tip == 2){if (9!=$dt1['tb_tipoperacion_id']){echo formato_decimal($costo_promedio*$can,2);} }?>
+                    </td>
+                    <?php
+
+                    if($cantidad_total>0)$precio_promedio = ($subtotal+$costo_total)/$cantidad_total;
+                    ?>
+                    <td align="right"><?php echo $cantidad_total ?></td>
+                    <td align="right">
+                        <?php if($cantidad_total == 0){
+                            echo formato_decimal(0.000, 2);
+                        }else{
+                            echo formato_decimal($precio_promedio,2);
+                        } ?>
+                    </td>
+                    <td align="right"><?php echo formato_decimal($precio_promedio*$cantidad_total,2) ?></td>
+
+                </tr>
+                <?php
+                }else{
+                    if ($mes_anterior!=date("m",strtotime($dt1['tb_kardex_reg'])) and $mes_anterior) {
+
+                    }
+                    $mes_anterior = date("m",strtotime($dt1['tb_kardex_reg']));
+                    $can = $dt1['tb_kardexdetalle_can'];
+                    $tip = $dt1['tb_kardex_tip'];//Verificando si es Entrada o Salida (1: ENTRADA | 2: SALIDA)
+
+                    if($tip == 1){
+
+                        $stock_kardex=stock_kardex_reg($dt1['tb_catalogo_id'],0,$firstrow['tb_kardex_reg'],$dt1['tb_kardex_reg'],$_SESSION['empresa_id']);
+
+                        $costo_ponderado_array=costo_ponderado_empresa_fechas_reg($dt1['tb_catalogo_id'],$_SESSION['almacen_id'],$firstrow['tb_kardex_reg'],$dt1['tb_kardex_reg'],$stock_kardex,$dt1['tb_kardexdetalle_cos'],$dt1['tb_catalogo_precosdol'],$_SESSION['empresa_id']);
+
+                        $costo_promedio=$costo_ponderado_array['soles'];
+
+
+
+                        if($dt1['tb_tipoperacion_id']==1)$precos=$cat_precos;
+
+                        $subtotal = $can*$precos;
+                        $cantidad_total += $can;
+                        $cantidad_total_entradas += $can;
+                        $costo_total_entradas += $subtotal;
                     }
 
-            }
-
-
+                    if($tip == 2){
+                        $precos = $dt1['tb_kardexdetalle_pre'];
+                        $subtotal = $can*$precos;
+                        $cantidad_total -= $can;
+                        $cantidad_total_salidas += $can;
+                        $costo_total_salidas += $subtotal;}
+                }
             }
 			mysql_free_result($dts1);
 			?>

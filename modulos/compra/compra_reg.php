@@ -323,7 +323,7 @@ if ($_POST['action_compra'] == "insertar") {
                     $indice,
                     $linea_cantidad,
                     $linea_preuni,
-                    $linea_des/100,
+                    $linea_des,
                     $linea_importe,
                     $tipo_item,
                     $linea_igv,
@@ -414,7 +414,6 @@ if ($_POST['action_compra'] == "insertar") {
 
                         //registro detalle de kardex
                         $precio = 0;
-                        $costo=$costo-$costo*($linea_des/100);
                         $oKardex->insertar_detalle(
                             $cat_id,
                             $cantidad_compra,
@@ -462,7 +461,6 @@ if ($_POST['action_compra'] == "insertar") {
 
                     //registro detalle de kardex
                     $precio=0;
-                    $costo=$costo-$costo*($linea_des/100);
                     $oKardex->insertar_detalle(
                         $cat_id,
                         $cantidad_compra,
