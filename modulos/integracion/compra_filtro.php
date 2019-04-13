@@ -100,13 +100,13 @@ $(function() {
      <option value="2">DOLAR AME | US$</option>
     </select>
     
-<!--    <label for="cmb_fil_com_est">Estado:</label>-->
-<!--	<select name="cmb_fil_com_est" id="cmb_fil_com_est">-->
-<!--	  <option value="">-</option>-->
-<!--	  <option value="CREDITO">CREDITO</option>-->
-<!--      <option value="CONTADO">CONTADO</option>-->
-<!--	  <option value="ANULADA">ANULADA</option>-->
-<!--    </select>-->
+    <label for="cmb_fil_com_est">Estado:</label>
+	<select name="cmb_fil_com_est" id="cmb_fil_com_est">
+	  <option value="">-</option>
+	  <option value="CREDITO">CREDITO</option>
+      <option value="CONTADO">CONTADO</option>
+	  <option value="ANULADA">ANULADA</option>
+    </select>
     <div>
   	<a href="#" onClick="compra_tabla()" id="btn_filtrar">Filtrar</a>
     <a href="#" onClick="compra_filtro()" id="btn_resfil">Restablecer</a>

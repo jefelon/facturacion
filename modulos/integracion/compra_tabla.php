@@ -74,13 +74,6 @@ $(function() {
                     $tipodoc = $dt1['cs_tipodocumento_cod'];
                     $simb_moneda = "";
 
-                    $serie="";
-                    $numero="";
-                    $numerodoc=explode('-',$dt1['tb_compra_numdoc']);
-                    $serie=$numerodoc[0];
-                    $numero=$numerodoc[1];
-                    if($numero==''){$numero=$serie;}
-
                     $compra_tot=$dt1['tb_compra_tot'];
                     if ($dt1['tb_compra_mon']==2){
                         $compra_tot=$compra_tot*$dt1['tb_tipocambio_dolsunv'];
@@ -97,20 +90,20 @@ $(function() {
                         <td nowrap="nowrap"><?php echo date("m", strtotime($dt1['tb_compra_fec'])); ?></td>
                         <td nowrap="nowrap">002</td>
                         <td nowrap="nowrap"><?php echo str_pad($dt1['tb_compra_id'],6, "0", STR_PAD_LEFT); ?></td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_compra_numdoc'].' '.$dt1['tb_proveedor_nom'] ; ?></td>
+                        <td nowrap="nowrap">VENTA MERCADERIA</td>
                         <td nowrap="nowrap">contabilidad</td>
                         <td nowrap="nowrap"><?php echo $dt1['tb_compra_mon']; ?></td>
                         <td nowrap="nowrap"><?php echo $dt1['tb_compra_mon']; ?></td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_proveedor_doc']; ?></td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_proveedor_nom']; ?></td>
-                        <td nowrap="nowrap">60.1.1.1</td>
+                        <td nowrap="nowrap"><?php echo $dt1['tb_cliente_doc']; ?></td>
+                        <td nowrap="nowrap"><?php echo $dt1['tb_cliente_nom']; ?></td>
+                        <td nowrap="nowrap">12.1.3.1</td>
                         <td nowrap="nowrap">1</td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_compra_numdoc'].' '.$dt1['tb_proveedor_nom'] ; ?></td>
+                        <td nowrap="nowrap">VENTA MERCADERIA</td>
                         <td nowrap="nowrap"></td>
-                        <td nowrap="nowrap"><?php echo str_pad($dt1['cs_tipodocumento_cod'],3, "0", STR_PAD_LEFT); ?></td>
+                        <td nowrap="nowrap"></td>
                         <td nowrap="nowrap"><?php echo date('d/m/Y', strtotime($dt1['tb_compra_fec'])); ?></td>
-                        <td nowrap="nowrap"><?php echo $serie ?></td>
-                        <td nowrap="nowrap" align="center"><?php echo $numero ?></td>
+                        <td nowrap="nowrap"><?php echo $dt1['tb_compra_ser'] ?></td>
+                        <td nowrap="nowrap" align="center"><?php echo $dt1['tb_compra_num'] ?></td>
                         <td></td>
                         <td><?php echo $compra_tot ?></td>
                         <td align="center">
@@ -133,20 +126,20 @@ $(function() {
                         <td nowrap="nowrap"><?php echo date("m", strtotime($dt1['tb_compra_fec'])); ?></td>
                         <td nowrap="nowrap">002</td>
                         <td nowrap="nowrap"><?php echo str_pad($dt1['tb_compra_id'],6, "0", STR_PAD_LEFT); ?></td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_compra_numdoc'].' '.$dt1['tb_proveedor_nom'] ; ?></td>
+                        <td nowrap="nowrap">VENTA MERCADERIA</td>
                         <td nowrap="nowrap">contabilidad</td>
                         <td nowrap="nowrap"><?php echo $dt1['tb_compra_mon']; ?></td>
                         <td nowrap="nowrap"><?php echo $dt1['tb_compra_mon']; ?></td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_proveedor_doc']; ?></td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_proveedor_nom']; ?></td>
+                        <td nowrap="nowrap"><?php echo $dt1['tb_cliente_doc']; ?></td>
+                        <td nowrap="nowrap"><?php echo $dt1['tb_cliente_nom']; ?></td>
                         <td nowrap="nowrap">40.1.1.1</td>
                         <td nowrap="nowrap">2</td>
-                        <td nowrap="nowrap"><?php echo $dt1['tb_compra_numdoc'].' '.$dt1['tb_proveedor_nom'] ; ?></td>
+                        <td nowrap="nowrap">VENTA MERCADERIA</td>
                         <td nowrap="nowrap"></td>
-                        <td nowrap="nowrap"><?php echo str_pad($dt1['cs_tipodocumento_cod'],3, "0", STR_PAD_LEFT); ?></td>
+                        <td nowrap="nowrap"></td>
                         <td nowrap="nowrap"><?php echo date('d/m/Y', strtotime($dt1['tb_compra_fec'])); ?></td>
-                        <td nowrap="nowrap"><?php echo $serie ?></td>
-                        <td nowrap="nowrap" align="center"><?php echo $numero ?></td>
+                        <td nowrap="nowrap"><?php echo $dt1['tb_compra_ser'] ?></td>
+                        <td nowrap="nowrap" align="center"><?php echo $dt1['tb_compra_num'] ?></td>
                         <td></td>
                         <td></td>
                         <td align="center">
@@ -181,20 +174,20 @@ $(function() {
                             <td nowrap="nowrap"><?php echo date("m", strtotime($dt1['tb_compra_fec'])); ?></td>
                             <td nowrap="nowrap">002</td>
                             <td nowrap="nowrap"><?php echo str_pad($dt1['tb_venta_id'],6, "0", STR_PAD_LEFT); ?></td>
-                            <td nowrap="nowrap"><?php echo $dt1['tb_compra_numdoc'].' '.$dt1['tb_proveedor_nom'] ; ?></td>
+                            <td nowrap="nowrap">VENTA MERCADERIA</td>
                             <td nowrap="nowrap">contabilidad</td>
                             <td nowrap="nowrap"><?php echo $dt1['tb_compra_mon']; ?></td>
                             <td nowrap="nowrap"><?php echo $dt1['tb_compra_mon']; ?></td>
                             <td nowrap="nowrap"><?php echo $dt1['tb_proveedor_doc']; ?></td>
                             <td nowrap="nowrap"><?php echo $dt1['tb_proveedor_nom']; ?></td>
-                            <td nowrap="nowrap">42.1.2.1</td>
+                            <td nowrap="nowrap">70.1.1.1</td>
                             <td nowrap="nowrap"><?php echo $cont_det; ?></td>
-                            <td nowrap="nowrap"><?php echo $dt1['tb_compra_numdoc'].' '.$dt1['tb_proveedor_nom'] ; ?></td>
+                            <td nowrap="nowrap">VENTA MERCADERIA</td>
                             <td nowrap="nowrap">01.01.<?php echo str_pad($cont_det-2,2, "0", STR_PAD_LEFT); ?></td>
-                            <td nowrap="nowrap"><?php echo str_pad($dt1['cs_tipodocumento_cod'],3, "0", STR_PAD_LEFT); ?></td>
+                            <td nowrap="nowrap"></td>
                             <td nowrap="nowrap"><?php echo date('d/m/Y', strtotime($dt1['tb_compra_fec'])); ?></td>
-                            <td nowrap="nowrap"><?php echo $serie ?></td>
-                            <td nowrap="nowrap" align="center"><?php echo $numero ?></td>
+                            <td nowrap="nowrap"><?php echo $dt1['tb_compra_ser'] ?></td>
+                            <td nowrap="nowrap" align="center"><?php echo $dt1['tb_compra_num'] ?></td>
                             <td></td>
                             <td></td>
                             <td align="center">
