@@ -127,6 +127,8 @@ $menu_administrador=
 	  <li><a href="../balancesanuales/">Balances Anuales</a></li>
 	  <li><a href="../legalizacionlibros/">Legalizacón de Libros Anuales</a></li>
 	  <li><a href="../comisionistas/">Area de Comisionistas</a></li>
+	  <li><a href="../cuentaspagar/">Cuentas por pagar</a></li>
+	  <li><a href="../cuentascobrar/">Cuentas por cobrar</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Consultas</a>

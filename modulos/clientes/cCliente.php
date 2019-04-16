@@ -77,12 +77,22 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrarTodoscl(){
+        $sql="SELECT * FROM tb_cliente c
+	    ORDER BY c.tb_cliente_nom
+	";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function mostrarTodos($fil){
 	$sql="SELECT * FROM tb_cliente c
 	LEFT JOIN tb_precio p ON c.tb_precio_id=p.tb_precio_id
 	ORDER BY c.tb_cliente_nom
 	";
 	if($fil!="")$sql.=" LIMIT 0,$fil ";
+	print $sql;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
