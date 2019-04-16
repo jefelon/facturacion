@@ -87,7 +87,7 @@ if($_POST['action']=='enviar')
     $destinatario='Estimado Cliente:<br>'.$cli_nom.'<br>';
 
 
-    $mentip="<p>Sírvase presionar los siguientes links para descargar su Comprobante de Pago Electrónico CPE:</p>";
+    $mentip="<p>Sírvase descargar su Comprobante de Pago Electrónico CPE:</p>";
 
     $mentip.="<p><strong>$doc_nom $ser-$num</strong></p>";
 
