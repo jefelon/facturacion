@@ -9,7 +9,7 @@ class cClientecuenta{
 	`tb_clientecuenta_tip` ,
 	`tb_clientecuenta_mon` ,
 	`tb_clientecuenta_est` ,
-	`tb_venta_id` ,
+	`tb_clientecuenta_ven_id` ,
 	`tb_formapago_id` ,
 	`tb_modopago_id` ,
 	`tb_cuentacorriente_id` ,
@@ -181,5 +181,7 @@ class cClientecuenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+
 }
 ?>

@@ -66,12 +66,12 @@ else
 ?>
 <script type="text/javascript">
 
-// $('.cantidad').autoNumeric({
-// 	aSep: '',
-// 	aDec: '.',
-// 	vMin: '0',
-// 	vMax: '99999999'
-// });
+$('.cantidad').autoNumeric({
+	aSep: '',
+	aDec: '.',
+	vMin: '0',
+	vMax: '99999'
+});
 function categoria_form(act,idf)
 {
     $.ajax({
@@ -302,7 +302,7 @@ $(document).ready(function() {
 							{
 							?>
 							<label id="lbl_sto_<?php echo $dt1['tb_catalogo_id']?>" style="display:none"></label>
-                            <input class="cantidad" name="txt_sto_<?php echo $dt1['tb_catalogo_id']?>" id="txt_sto_<?php echo $dt1['tb_catalogo_id']?>"  type="text" value="<?php echo $can?>" style="text-align:right" size="8" maxlength="11">
+                            <input class="cantidad" name="txt_sto_<?php echo $dt1['tb_catalogo_id']?>" id="txt_sto_<?php echo $dt1['tb_catalogo_id']?>"  type="text" value="<?php echo $can?>" style="text-align:right" size="8" maxlength="6">
                             <?php 
                             
                             	if($notalm_id=="")

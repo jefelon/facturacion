@@ -65,7 +65,6 @@ $(function() {
                 <tr>
                   <th>CODIGO-</th>
                   <th>NOMBRE</th>
-                  <th>UNIDAD</th>
                     <th align="right" nowrap>PRECIO S/.</th>                   
                   <th width="50">&nbsp;</th>
                     <th width="50">&nbsp;</th>
@@ -76,8 +75,7 @@ $(function() {
 					while($dt1 = mysql_fetch_array($dts1)){?>
                         <tr>
                             <td><?php echo $dt1['tb_presentacion_cod']?></td>
-                            <td><?php echo $dt1['tb_producto_nom']?></td>
-                            <td><?php echo $dt1['tb_unidad_abr']?></td>
+                          <td><?php echo $dt1['tb_producto_nom']?></td>
                             <td align="right">
                             <span style="font-weight: bold;">
 							<?php echo $dt1['tb_catalogo_preven']?>

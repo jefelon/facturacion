@@ -96,6 +96,7 @@ class cLetras{
         LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
         INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
         INNER JOIN tb_letras l ON v.tb_venta_id=l.tb_venta_id 
+        LEFT JOIN cs_tipomoneda tm ON  v.cs_tipomoneda_id= tm.cs_tipomoneda_id
         WHERE tb_puntoventa_id = $punven_id
         AND v.tb_empresa_id=$empresa_id AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 

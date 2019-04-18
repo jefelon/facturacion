@@ -91,6 +91,7 @@ $(function() {
     <fieldset style="width: 100%;float: left"><legend>Descargar PLE</legend>
         <label for="cmb_fil_anio" align="right">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio">
+            <option value="2019">2019</option>
             <option value="2018">2018</option>
             <option value="2017">2017</option>
         </select>
@@ -117,7 +118,7 @@ $(function() {
         <select name="cmb_fil_librople" id="cmb_fil_librople">
             <option value="-">Seleccionar Libro</option>
             <option value="080100">PLE Registro de Compras 080100 - COMPLETO</option>
-            <option value="080200-">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
+            <option value="080200">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
             <option value="140100">PLE Registro de Ventas 140100 - COMPLETO</option>
             <option value="4">PLE Diario de Formato Simplificado 050200</option>
             <option value="5">PLE Diario de Formato Simplificado - PLAN CONTABLE</option>

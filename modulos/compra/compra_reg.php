@@ -71,7 +71,9 @@ if ($_POST['action_compra'] == "insertar") {
 
         if ($com_id > 0) {
             //insertamos compra
-
+            if ($_POST['cmb_com_doc']==19) {
+                 $tipo_renta=$_POST['cmb_tiporenta_id'];
+            }
             $oCompra->insertar(
                 fecha_mysql($_POST['txt_com_fec']),
                 fecha_mysql($_POST['txt_com_fecven']),
@@ -104,7 +106,9 @@ if ($_POST['action_compra'] == "insertar") {
                 $fec_mod,
                 $_POST['txt_com_ser_nota'],
                 $_POST['txt_com_num_nota'],
-                $_POST['cmb_com_tip']
+                $_POST['cmb_com_tip'],
+                $_POST['cmb_tiporenta_id'],
+                $tipo_renta
             );
             //ultima compra
             $dts = $oCompra->ultimoInsert();
@@ -118,10 +122,11 @@ if ($_POST['action_compra'] == "insertar") {
                 $duas = $_POST['dua'];
                 $cont = 0;
                 foreach ($duas as $dua) {
+                    if(in_array($cont, $_POST['chk_invoice'])){
                     $oCompra->insertar(
                         fecha_mysql($_POST['fec_ser'][$cont]),
                         fecha_mysql($_POST['txt_com_fecven']),
-                        19,
+                        1,// tipo documento factura 1 invoice 19
                         $dua,
                         $_POST['cmb_com_mon'],
                         $_POST['txt_com_tipcam'],
@@ -174,9 +179,8 @@ if ($_POST['action_compra'] == "insertar") {
                     );
 
                     $oCompra->insertar_compra_costo($com_id, $comcosto_id);
-
+                    }
                     $cont++;
-
                 }
             }
 
@@ -262,7 +266,13 @@ if ($_POST['action_compra'] == "insertar") {
                 $_SESSION['precio_car'][] = $indice;
 
                 //precio unitario
-                $linea_preuni = $_SESSION['compra_linea_preuni'][$indice];
+                if($_SESSION['compra_linea_tip_bon'][$indice]=='9') {
+                    $linea_preuni = ($_SESSION['compra_linea_preuni'][$indice])*1.18;
+                }else if($_SESSION['compra_linea_tip_bon'][$indice]=='1'){
+                    $linea_preuni = $_SESSION['compra_linea_preuni'][$indice];
+                }
+
+
                 //descuento
                 $linea_des = $_SESSION['compra_linea_des'][$indice];
                 if ($linea_des == "") $linea_des = 0;
@@ -280,7 +290,11 @@ if ($_POST['action_compra'] == "insertar") {
                 $linea_importe = $linea_preuni * $linea_cantidad * $linea_calculo_des;
 
                 //igv por linea
-                $linea_igv = $linea_importe * $igv_dato;
+                if($_SESSION['compra_linea_tip_bon'][$indice]=='9') {
+                    $linea_igv = 0;
+                }else if($_SESSION['compra_linea_tip_bon'][$indice]=='1'){
+                    $linea_igv = $linea_importe * $igv_dato;
+                }
 
                 $linea_calculo_cos = $_SESSION['compra_linea_cos'][$indice];
 
@@ -324,19 +338,22 @@ if ($_POST['action_compra'] == "insertar") {
                 $comdet_id = $dt['last_insert_id()'];
                 mysql_free_result($dts);
 
-                foreach($_SESSION['lote_car'][$indice] as $indice_lote) {
-                    $lts=$oLote->mostrarUnoLoteNumero($indice, $_SESSION['lote_car'][$indice][$indice_lote], $_POST['cmb_com_alm_id']);
-                    $lt = mysql_fetch_array($lts);
-                    $nro_rows = mysql_num_rows($lts);
+                if (!$_POST['cmb_com_tip'] == '6'){
 
-                    if ($nro_rows>0){
-                        $nuevo_stock = $_SESSION['lote_sto_num'][$indice][$indice_lote]+$lt['tb_lote_exisact'];
-                        $oLote->modificar_stock($indice, $_SESSION['lote_car'][$indice][$indice_lote],$_POST['cmb_com_alm_id'], $nuevo_stock);
-                    }elseif ($nro_rows==0){
-                        $oLote->insertar($_SESSION['lote_car'][$indice][$indice_lote],$indice,fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]),fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote],$_SESSION['lote_estado'][$indice][$indice_lote],$_POST['cmb_com_alm_id']);
+                    foreach($_SESSION['lote_car'][$indice] as $indice_lote) {
+                        $lts=$oLote->mostrarUnoLoteNumero($indice, $_SESSION['lote_car'][$indice][$indice_lote], $_POST['cmb_com_alm_id']);
+                        $lt = mysql_fetch_array($lts);
+                        $nro_rows = mysql_num_rows($lts);
+
+                        if ($nro_rows>0){
+                            $nuevo_stock = $_SESSION['lote_sto_num'][$indice][$indice_lote]+$lt['tb_lote_exisact'];
+                            $oLote->modificar_stock($indice, $_SESSION['lote_car'][$indice][$indice_lote],$_POST['cmb_com_alm_id'], $nuevo_stock);
+                        }elseif ($nro_rows==0){
+                            $oLote->insertar($_SESSION['lote_car'][$indice][$indice_lote],$indice,fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]),fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote],$_SESSION['lote_estado'][$indice][$indice_lote],$_POST['cmb_com_alm_id']);
+                        }
+
+                        $oCompraDetalleLote->insertar($comdet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote], $_SESSION['lote_car'][$indice][$indice_lote]);
                     }
-
-                    $oCompraDetalleLote->insertar($comdet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote], $_SESSION['lote_car'][$indice][$indice_lote]);
                 }
 
                 if($_POST['cmb_com_doc']=='20' or $_POST['cmb_com_doc']=='21'){
@@ -372,6 +389,21 @@ if ($_POST['action_compra'] == "insertar") {
 
                         }
 
+                        foreach($_SESSION['lote_car'][$indice] as $indice_lote) {
+                            $lts=$oLote->mostrarUnoLoteNumero($indice, $_SESSION['lote_car'][$indice][$indice_lote], $_POST['cmb_com_alm_id']);
+                            $lt = mysql_fetch_array($lts);
+                            $nro_rows = mysql_num_rows($lts);
+
+                            if ($nro_rows>0){
+                                $nuevo_stock = $lt['tb_lote_exisact']-$_SESSION['lote_sto_num'][$indice][$indice_lote];
+                                $oLote->modificar_stock($indice, $_SESSION['lote_car'][$indice][$indice_lote],$_POST['cmb_com_alm_id'], $nuevo_stock);
+                            }elseif ($nro_rows==0){
+                                $oLote->insertar($_SESSION['lote_car'][$indice][$indice_lote],$indice,fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]),fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote],$_SESSION['lote_estado'][$indice][$indice_lote],$_POST['cmb_com_alm_id']);
+                            }
+
+                            $oCompraDetalleLote->insertar($comdet_id, fecha_mysql($_SESSION['lote_fecfab'][$indice][$indice_lote]), fecha_mysql($_SESSION['lote_fecven'][$indice][$indice_lote]),$_SESSION['lote_sto_num'][$indice][$indice_lote], $_SESSION['lote_car'][$indice][$indice_lote]);
+                        }
+
                         //unidad base
                         $dts = $oKardex->presentacion_buscar_unidad_base($pre_id);
                         $dt = mysql_fetch_array($dts);
@@ -388,7 +420,7 @@ if ($_POST['action_compra'] == "insertar") {
                             $kar_id
                         );
                     }
-                }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19') {
+                }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='23' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19') {
                     //conversion a la minima unidad
                     $cantidad_compra=$linea_cantidad*$mul;
 

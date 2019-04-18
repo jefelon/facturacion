@@ -228,7 +228,8 @@ class cClientecuenta{
 	$sql = "
 	SELECT tb_clientecuenta_tip AS tipo, sum(tb_clientecuenta_mon) AS monto
 	FROM tb_clientecuenta
-	WHERE tb_empresa_id = $emp_id
+	WHERE tb_clientecuenta_xac=1
+	AND  tb_empresa_id = $emp_id
 	AND tb_cliente_id = $cli_id
 	GROUP BY tb_clientecuenta_tip
 	"; 
@@ -316,5 +317,16 @@ class cClientecuenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function obtener_moneda($emp_id,$venta_id){
+        $sql="SELECT *
+	FROM tb_clientecuenta cc
+	INNER JOIN tb_venta v ON v.tb_venta_id= cc.tb_clientecuenta_ven_id
+    WHERE cc.tb_empresa_id = $emp_id AND v.tb_venta_id=$venta_id
+        ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

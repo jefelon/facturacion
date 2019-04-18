@@ -159,11 +159,14 @@ $(function() {
                     $cliente_nom="";
                     if($dt1['tb_cliente_tip']==1){
                         $ctipo=1;
-                        if($dt1['tb_cliente_doc']="00")
+                        if($dt1['tb_cliente_doc']=="00" || $dt1['tb_venta_tot']<700)
                         {
                             $cliente_doc="";
                             $ctipo="";
                             $cliente_nom="";
+                        }else {
+                            $cliente_doc = $dt1['tb_cliente_doc'];
+                            $cliente_nom = $dt1['tb_cliente_nom'];
                         }
                     } elseif($dt1['tb_cliente_tip']==2){
                         $ctipo=6;
@@ -181,24 +184,24 @@ $(function() {
                     <!--12--><td><?php echo $cliente_nom; ?></td>
                     <!--13--><td></td>
                     <?php
-                    $gravado=$dt1['tb_venta_gra'];$descuento=$dt1['tb_venta_des'];$igv=$dt1['tb_venta_igv'];$exo=$dt1['tb_venta_exo'];
+                    $gravado=$dt1['tb_venta_gra'];$descuento="";$igv=$dt1['tb_venta_igv'];$exo=$dt1['tb_venta_exo'];
                     $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_venta_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_venta_tot'];$moneda=$dt1['cs_tipomoneda_cod'];
                     $tc = $dt1['tc'];
                     if($tc<1) {$tc="1.000";}
                     if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
                         $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tc="";}
                     ?>
-                    <!--14--><td><?php echo $gravado; ?></td>
-                    <!--15--><td><?php echo $descuento; ?></td>
-                    <!--16--><td><?php echo $igv; ?></td>
-                    <!--17--><td></td>
+                    <!--14--><td><?php if($coddoc=="07") {echo "-".$gravado;}else{ echo $gravado;} ?></td>
+                    <!--15-- jalar el monto de la nota de credito--><td><?php echo $descuento; ?></td>
+                    <!--16--><td><?php if($coddoc=="07") {echo "-".$igv;}else{ echo $igv;} ?></td>
+                    <!--17-- nota credito --><td></td>
                     <!--18--><td><?php echo $exo; ?></td>
                     <!--19--><td><?php echo $ina; ?></td>
                     <!--20--><td><?php echo $isc; ?></td>
                     <!--21--><td></td>
                     <!--22--><td></td>
                     <!--23--><td><?php echo $otrcar; ?></td>
-                    <!--24--><td><?php echo $tot; ?></td>
+                    <!--24--><td><?php if($coddoc=="07") {echo "-".$tot;}else{ echo $tot;} ?></td>
                     <!--25--><td><?php echo $moneda; ?></td>
 
                     <?php
@@ -260,3 +263,4 @@ $(function() {
         </tr>
 
     </table>
+<input type="text" id="lineas_libro" value="<?php if($num_rows>0){ echo "1";  }?>">

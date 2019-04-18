@@ -100,6 +100,21 @@ foreach ($_SESSION['lote_car'][$_POST['cat_id']] as $indice => $linea_cantidad) 
         }
     });
 
+    $( "#txt_lote_num").autocomplete({
+        minLength: 0,
+        source: "../lote/lote_complete_num.php?cat_id=<?php echo $_POST['cat_id']?>",
+        select: function(event, ui){
+            $("#txt_lote_fecfab").val(ui.item.fecfab);
+            $("#txt_lote_fecven").val(ui.item.fecven);
+            $("#txt_lote_sto_num").val(ui.item.stock);
+
+
+            $("#txt_lote_cant").focus();
+        }
+    }).click(function () {
+        $(this).autocomplete("search", $(this).val());
+    });
+
 </script>
 <form id="for_lote_form">
     <input name="action" id="action_lote" type="hidden" value="<?php echo $_POST['action']?>">

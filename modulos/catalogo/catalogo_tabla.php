@@ -100,6 +100,7 @@ else
         <th align="right">VALORIZADO US$</th>
         <th align="right">VALORIZADO S/.</th>
         <th align="right"></th>
+        <th align="right"></th>
     </tr>
     </thead>
     <?php
