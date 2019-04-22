@@ -30,9 +30,9 @@ $cli_id	=$dt['tb_cliente_id'];
 $cli_nom=$dt['tb_cliente_nom'];
 $cli_doc=$dt['tb_cliente_doc'];
 
-if($doc_nom=='FACTURA ELECTRONICA')$nom_arch.='../venta/venta_cfactura_reg.php';
+if($doc_nom=='FACTURA ELECTRONICA')$nom_arch.='../venta/venta_cpeimp_facturaexo_mat.php';
 
-if($doc_nom=='BOLETA ELECTRONICA')$nom_arch.='../venta/venta_cboleta_reg.php';
+if($doc_nom=='BOLETA ELECTRONICA')$nom_arch.='../venta/venta_cpeimp_boleta_mat.php';
 /*
 $valven	=$dt['tb_venta_valven'];
 $igv	=$dt['tb_venta_igv'];
@@ -270,7 +270,8 @@ if($_POST['action']=='enviar')
                             async:false,
                             dataType: "html",
                             data: ({
-                                ven_id:	<?php echo $_POST['ven_id'];?>
+                                ven_id:	<?php echo $_POST['ven_id'];?>,
+                                tipo: 'correo'
                             }),
                             beforeSend: function() {
                                 $('#msj_venta').html("Cargando archivos...");

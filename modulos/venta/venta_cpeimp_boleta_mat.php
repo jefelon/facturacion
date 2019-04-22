@@ -617,4 +617,17 @@ $pdf->writeHTML($html, true, 0, true, true);
 //$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
 
 
-$pdf->Output($nombre_archivo, 'I');
+//$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
+if ($_POST['tipo']=='correo'){
+    $path = "../../cperepositorio/send";
+
+// Supply a filename including the .pdf extension
+    $filename = $nombre_archivo;
+    $full_path = $path . '/' .$ruc_empresa.'-0'.$idcomprobante.'-'. $filename;
+    if (!file_exists($full_path))
+    {
+        $pdf->Output($full_path, 'F');
+    }
+}else{
+    $pdf->Output($nombre_archivo, 'I');
+}
