@@ -6,8 +6,8 @@
 	require_once ("../contenido/contenido.php");
 	$oContenido = new cContenido();
 	
-	if($_SESSION['usuariogrupo_id']==2)$titulo='Registrar Ventas - Administrador';
-	if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
+	if($_SESSION['usuariogrupo_id']==2)$titulo='Cuadro de Tributos - Administrador';
+	if($_SESSION['usuariogrupo_id']==3)$titulo='Cuadro de Tributos - Vendedor';
 ?>
 <!DOCTYPE html>
 <html>
@@ -113,14 +113,10 @@ function modo(url){
 	venta_tabla();
 };
 
-function venta_reporte(url)
-{	
-	$("#for_fil_ven").attr("action", url);
-	$("#for_fil_ven").submit();
+function venta_reporte_xls(){
+    $("#hdd_tabla").val( $("<div>").append( $("#tabla_venta").eq(0).clone()).html());
+    $("#for_rep_xls").submit();
 }
-
-
-
 
 $(function() {
 	
@@ -130,7 +126,11 @@ $(function() {
 		}).click(function() {
 		location.reload();
 	});
-	
+
+    $('#btn_imprimir_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
 
 	$('.btn_modo').button({
 		icons: {primary: "ui-icon-document"},
@@ -172,7 +172,13 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-
+                        <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
+                        <td width="6%" align="left" valign="middle">
+                            <a class="btn_imprimir_xls" id="btn_imprimir_xls" href="#" onClick="venta_reporte_xls()" title="Imprimir en Excel">Excel</a>
+                            <form action="venta_reporte_xls.php" method="post" target="_blank" id="for_rep_xls">
+                                <input type="hidden" id="hdd_tabla" name="hdd_tabla" />
+                            </form>
+                        </td>
                       <td align="right">
                       	<div id="msj_venta" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                       	<div id="msj_venta_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
