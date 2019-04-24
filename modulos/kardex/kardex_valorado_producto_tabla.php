@@ -62,7 +62,7 @@ $(function() {
 	div#div_tabla_kardex table td { height:17px }
 </style>
 <div id="div_tabla_kardex" class="ui-widget">
-<table border="0" cellspacing="2" cellpadding="2" class="ui-widget ui-widget-content">
+<table id="tabla_kardex_valorado" border="0" cellspacing="2" cellpadding="2" class="ui-widget ui-widget-content">
     <thead>
     	<tr class="ui-widget-header">
         	<th colspan="4">DOCUMENTO</th>
@@ -231,10 +231,10 @@ $(function() {
                         <?php if($cantidad_total == 0){
                             echo formato_decimal(0.000, 2);
                         }else{
-                            echo formato_decimal($costo_promedio,2);
+                            echo formato_decimal($precio_promedio,2);
                         } ?>
                     </td>
-                    <td align="right"><?php echo formato_decimal($costo_promedio*$cantidad_total,2) ?></td>
+                    <td align="right"><?php echo formato_decimal($precio_promedio*$cantidad_total,2) ?></td>
 
                 </tr>
                 <?php

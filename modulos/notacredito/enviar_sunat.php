@@ -52,7 +52,8 @@ while($dt = mysql_fetch_array($dts)){
         $monval=2;
     }
 	$fechadoc=$dt["tb_venta_fec"];
-	
+    $issuetime=$dt["tb_venta_reg"];
+
 	$identidad=$dt["tb_cliente_doc"];
 	if($dt["tb_cliente_tip"]==1)$idtipodni=1;
 	if($dt["tb_cliente_tip"]==2)$idtipodni=6;
@@ -124,6 +125,7 @@ $header[0]['AdditionalProperty_Value']=$total_letras;
 
 //NOTA CREDITO
 $header[0]['issuedate']				=$fechadoc;//fecha nota credito
+$header[0]['issuetime']				=$issuetime;//hora nota credito
 
 $header[0]['referencedocumenttypecode']=$ventipdoc;//ID DOCUMENT
 $header[0]['referenceid']			=$vennumdoc;//factura

@@ -26,7 +26,7 @@ require_once("../formatos/numletras.php");
 //$tipo_de_letra="FreeMono";
 //$tipo_de_letra="FreeSans";
 //$tipo_de_letra="times";
-//$tipo_de_letra="arial";
+$tipo_de_letra="arial";
 //$tipo_de_letra="courier";
 //$tipo_de_letra="helvetica";
 //$tipo_de_letra="ArialUnicodeMS";
@@ -34,14 +34,14 @@ require_once("../formatos/numletras.php");
 //$tipo_de_letra_arch="dejavusans.php";
 //$tipo_de_letra_arch="arialunicid0.php";
 
-$pager_formato='format="168x205" orientation="L" style="font-size: 11pt; font-family:'.$tipo_de_letra.'"';
+$pager_formato='format="90x205" orientation="P" style="font-size: 9pt; font-family:'.$tipo_de_letra.'"';
 
-$pager_margen='backtop="0mm" backbottom="0mm" backleft="3mm" backright="0mm"';
+$pager_margen='backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
 
 //html2pdf
 $orientacion_impresion='P';
 $formato_impresion='A4';
-$margen_array=array(10, 10, 10, 15);
+$margen_array=array(2, 2, 2, 5);
 //$margen_array=0;
 
 $borde_tablas=0;
@@ -79,7 +79,6 @@ $dts=$oClientecuenta->mostrarUno($_POST['clicue_id']);
 		$clicue_ver	=$dt['tb_clientecuenta_ver'];
 		
 		$usu_id	=$dt['tb_usuario_id'];
-		$emp_id	=$dt['tb_empresa_id'];
 		
 	mysql_free_result($dts);
 
@@ -156,7 +155,7 @@ $texto_pago=$forma.''.$modo;
 	}
 
 //empresa
-$dts=$oEmpresa->mostrarUno($emp_id);
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
 	$emp_ruc=$dt['tb_empresa_ruc'];
 	$emp_nomcom=$dt['tb_empresa_nomcom'];
@@ -196,6 +195,12 @@ header("Expires: 0");
 if($impresion=='pdf')ob_start();
 
 ?>
+
+<style>
+    .centrado{
+        text-align: center;
+    }
+</style>
 <page id="contenido_pdf" <?php echo $pager_formato?> <?php echo $pager_margen?>>
 <link rel="stylesheet" href="../../css/Estilo/documento_venta.css" type="text/css" media="print, projection, screen" />
 <?php if($impresion=='pdf' or $impresion=='html'){?>
@@ -226,90 +231,77 @@ if($impresion=='pdf')ob_start();
         </table>
     </page_footer>
 <table border="<?php echo $borde_tablas?>">
-  <tr>
-    <td style="width: 121mm; height:25mm;">
-        <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0" style="width: 120mm;">
         <tr>
-        	<td><span style="font-size: 13pt;"><?php echo $emp_razsoc?></span></td>
+        	<td class="centrado"><span style="font-size: 13pt;"><?php echo $emp_razsoc?></span></td>
         </tr>
         <tr>
-        	<td><span style="font-size: 10pt;"><?php echo $emp_dir?></span></td>
+        	<td class="centrado"><span style="font-size: 10pt;"><?php echo $emp_dir?></span></td>
         </tr>
         <tr>
-        	<td><span style="font-size: 10pt;"><?php echo $emp_dir2?></span></td>
+        	<td class="centrado"><span style="font-size: 10pt;"><?php echo $emp_dir2?></span></td>
         </tr>
         <tr>
-          	<td><span style="font-size: 8pt;"><?php //echo $texto_telefono.' '.$texto_email?></span></td>
+          	<td class="centrado"><span style="font-size: 8pt;"><?php echo $texto_telefono.' '.$texto_email?></span></td>
         </tr>
-        </table>
-	</td>
-    <td style="width: 34mm; text-align:right;">
-        <table align="right" style="width: 34mm;">
-            <tr>
-            <td style="width: 33mm; height: 7mm; text-align: center;"><span style="font-size: 12pt;"><?php echo 'R.U.C. N° '.$emp_ruc?></span></td>
-            </tr>
-            <tr>
-            <td align="center"><span style="font-size: 12pt; font-weight: bold;"><?php echo $doc_nom?></span></td>
-            </tr>
-            <tr>
-            <td style="text-align: center; font-size: 11pt;"><?php echo 'N° '.$clicue_id?></td>
-            </tr>
-        </table>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" style="width: 100mm; vertical-align:top">
-    	<table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
-        <tr>
-          <td style="width: 23mm;"><span style="font-size: 11pt;">CLIENTE:</span></td>
-        <td colspan="4" style="width:120mm; font-size: 11pt;"><?php echo $cli_nom?></td>
-        </tr>
-        <tr>
-          <td style="width: 23mm;"><span style="font-size: 11pt;">DIRECCION:</span></td>
-          <td colspan="3" style="width:100mm; font-size: 10pt;"><?php echo $cli_dir?></td>
-          <td style=" text-align:right; width:45mm; font-size: 10pt;"><?php echo $texto_pago?></td>
-          </tr>
-        <tr>
-          <td style="width: 23mm;"><span style="font-size: 11pt;">DOCMTO:</span></td>
-        <td style="width: 15mm; font-size: 11pt;"><?php echo $cli_doc?></td>
-        <td style="width: 22mm; font-size: 10pt;">&nbsp;</td>
-        <td style="width: 18mm; font-size: 10pt;"><?php if($texto_vendedor!="")echo 'VEND: '.$texto_vendedor?></td>
-        <td style="width: 20mm; text-align:right; font-size: 10pt;"><?php echo 'FECHA: '.mostrarFecha($clicue_fec)?></td>
-        </tr>
-        </table>
-    </td>
-  </tr>
-</table>
 
+        <tr>
+            <td class="centrado"><span style="font-size: 12pt;"><?php echo 'R.U.C. N° '.$emp_ruc?></span></td>
+        </tr>
+        <tr>
+            <td class="centrado"><span style="font-size: 15pt; font-weight: bold;"><?php echo $doc_nom .' - '.'N° '.$clicue_id?></span></td>
+        </tr>
+
+        <tr>
+            <td class="centrado"><span style="font-size: 12pt;"><?php echo 'FECHA: '.mostrarFecha($clicue_fec)?></span></td>
+        </tr>
+    <tr>
+        <td colspan="4" height="10mm">.............................................................................................</td>
+    </tr>
+        <tr>
+          <td><span style="font-size: 11pt;">CLIENTE:</span><?php echo $cli_nom?></td>
+        </tr>
+        <tr>
+          <td><span style="font-size: 11pt;">DIRECCION: </span> <?php echo $cli_dir?></td>
+        </tr>
+    <tr>
+        <td colspan="4" height="10mm">.............................................................................................</td>
+    </tr>
+        <tr>
+            <td style="font-size: 10pt;">FORMA PAGO: <?php echo $texto_pago?></td>
+        </tr>
+        <tr>
+          <td><span style="font-size: 11pt;">DOCUMENTO: </span> <?php echo $cli_doc?></td>
+        </tr>
+    <tr>
+        <td style="font-size: 10pt;"><?php if($texto_vendedor!="")echo 'VENDEDOR: '.$texto_vendedor?></td>
+    </tr>
+    <tr>
+        <td colspan="4" height="10mm">.............................................................................................</td>
+    </tr>
+</table>
 <table border="<?php echo $borde_tablas?>" cellpadding="0" cellspacing="0" style="font-family:Arial;">
   <tr>
-    <td style="text-align: right; width: 0mm; font-size: 10pt; height:5mm;">&nbsp;</td>
-    <td style="text-align: left; width: 135mm; font-size: 10pt;"><?php echo 'POR CONCEPTO DE: '.$clicue_glo.' FECHA VENTA: '.$ven_fec?></td>
-    <td style="text-align: left; width: 5mm; font-size: 10pt;">&nbsp;</td>
-    <td style="text-align: left; width: 2mm; font-size: 10pt;">&nbsp;</td>
-    <td style="text-align: right; width: 20mm; font-size: 11pt;">&nbsp;</td>
+    <td style="text-align: left;font-size: 10pt;"><?php echo 'POR CONCEPTO DE: '.$clicue_glo.' FECHA VENTA: '.$ven_fec?></td>
   </tr>
   <tr>
-    <td style="height:5mm;">&nbsp;</td>
-    <td>&nbsp;</td>
-    <td style="text-align: left; font-size: 10pt;">&nbsp;</td>
-    <td style="text-align: left; font-size: 10pt;">&nbsp;</td>
-    <td style="text-align: right; font-size: 11pt;">&nbsp;</td>
+      <td height="15mm"></td>
   </tr>
   <tr>
-    <td style="height:5mm;">&nbsp;</td>
-    <td><span style="text-align: left; width: 127mm; font-size: 10pt;"><?php echo 'SON: '.numtoletras($clicue_mon)?></span></td>
-    <td style="text-align: left; font-size: 10pt;"><!--TOTAL--></td>
-    <td style="text-align: left; font-size: 11pt;">S/.</td>
-    <td style="text-align: right; font-size: 12pt;"><?php echo formato_money($clicue_mon)?></td>
+    <td><span style="text-align: left; font-size: 10pt;">SON:  <?php echo numtoletras($clicue_mon)?></span></td>
+  </tr>
+  <tr>
+     <td colspan="2" style="text-align: right">S/. <?php echo formato_money($clicue_mon)?></td>
   </tr>
 </table>
 <br>
 <br>
-<div style="text-align:right">
+<div style="text-align:left">
 <?php echo 'REG: '.$reg//date('d/m/Y'); ?>
 </div>
-<?php 
+    <div style="text-align:center">
+        <h5>GRACIAS POR SU PREFERENCIA</h5>
+    </div>
+<?php
 }
 ?>
 </page>

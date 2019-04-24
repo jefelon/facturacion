@@ -1,6 +1,6 @@
 <?php
 class cProveedor{
-	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema){
+	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$codpais_id){
 	$sql = "INSERT tb_proveedor(
 	`tb_proveedor_tip` ,
 	`tb_proveedor_nom` ,
@@ -8,10 +8,11 @@ class cProveedor{
 	`tb_proveedor_dir` ,
 	`tb_proveedor_con` ,
 	`tb_proveedor_tel` ,
-	`tb_proveedor_ema`
+	`tb_proveedor_ema`,
+	`cs_codigopais_id`
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema'
+	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema','$codpais_id'
 	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -29,6 +30,14 @@ class cProveedor{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrarTodosPaises(){
+        $sql="SELECT * 
+	FROM cs_codigopais
+	ORDER BY cs_codigopais_des";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_proveedor 
@@ -37,7 +46,7 @@ class cProveedor{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema){
+	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$codpais_id){
 	$sql = "UPDATE tb_proveedor SET  
 	`tb_proveedor_tip` =  '$tip',
 	`tb_proveedor_nom` =  '$nom',
@@ -45,8 +54,9 @@ class cProveedor{
 	`tb_proveedor_dir` =  '$dir',
 	`tb_proveedor_con` =  '$con',
 	`tb_proveedor_tel` =  '$tel',
-	`tb_proveedor_ema` =  '$ema'
-	WHERE tb_proveedor_id =$id"; 
+	`tb_proveedor_ema` =  '$ema',
+	`cs_codigopais_id` =  '$codpais_id'
+	WHERE tb_proveedor_id =$id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	

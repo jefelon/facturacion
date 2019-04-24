@@ -88,8 +88,8 @@ $(function() {
         <table cellspacing="1" id="tabla_clientecuenta" class="tablesorter">
             <thead>
                 <tr>
-                  <th>FECHA</th>
-                  <th>CODIGO</th>
+                <th>FECHA</th>
+                <th>CODIGO</th>
                 <th>GLOSA</th>
                 <th align="center">VENTA</th>
                 <th align="right">CARGO</th>
@@ -103,6 +103,7 @@ $(function() {
 		?>  
             <tbody>
 			<?php
+            $simb_moneda="";
            	while($dt = mysql_fetch_array($dts)){
             ?>
                 <tr>
@@ -123,8 +124,21 @@ $(function() {
                 <?php }
 								}?>
                 </td>
-                <td align="right" nowrap="nowrap"><?php if($dt['tb_clientecuenta_tip']==1){echo 'S/. '.formato_money($dt['tb_clientecuenta_mon']);}?></td>
-                <td align="right" nowrap="nowrap"><?php if($dt['tb_clientecuenta_tip']==2){echo 'S/. '.formato_money($dt['tb_clientecuenta_mon']);}?></td>
+                <?php
+                $dts2=$oClienteCuenta->obtener_moneda($emp_id,$dt['tb_clientecuenta_ven_id']);
+                while($dt2 = mysql_fetch_array($dts2)) {
+                    $venta_id = $dt2['tb_clientecuenta_ven_id'];
+                    if ($dt2['cs_tipomoneda_id'] == '1') {
+                        $simb_moneda = "S/ ";
+                    }
+                    if ($dt2['cs_tipomoneda_id'] == '2') {
+                        $simb_moneda = "$ ";
+                    }
+
+                }
+                ?>
+                <td align="right" nowrap="nowrap"><?php if($dt['tb_clientecuenta_tip']==1){echo $simb_moneda.' '.formato_money($dt['tb_clientecuenta_mon']);}?></td>
+                <td align="right" nowrap="nowrap"><?php if($dt['tb_clientecuenta_tip']==2){echo $simb_moneda.' '.formato_money($dt['tb_clientecuenta_mon']);}?></td>
                 <td align="right" title="<?php echo $dt['tb_clientecuenta_id']?>">
 				<?php if($dt['tb_clientecuenta_est']==1){
 						echo "<strong>CANCELADA</strong>";

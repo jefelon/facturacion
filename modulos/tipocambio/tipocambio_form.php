@@ -15,7 +15,8 @@ if($_POST['action']=="editar"){
 		$reg=mostrarFechaHora($dt['tb_tipocambio_reg']);
 		$mod=mostrarFechaHora($dt['tb_tipocambio_mod']);
 		$fec=mostrarFecha($dt['tb_tipocambio_fec']);
-		$dolsun=$dt['tb_tipocambio_dolsun'];
+		$dolsunv=$dt['tb_tipocambio_dolsunv'];
+        $dolsunc=$dt['tb_tipocambio_dolsunc'];
 	mysql_free_result($dts);
 }
 ?>
@@ -45,7 +46,7 @@ $('.moneda').autoNumeric({
 
 $(function() {
 	
-	$("#txt_tipcam_dolsun").focus();
+	$("#txt_tipcam_dolsunc").focus();
 	
 	$("#for_tipcam").validate({
 		submitHandler: function() {
@@ -85,7 +86,7 @@ $(function() {
 				required: true,
 				dateITA: true
 			},
-			txt_tipcam_dolsun: {
+			txt_tipcam_dolsunv: {
 				required: true
 			}
 		},
@@ -93,7 +94,7 @@ $(function() {
 			txt_tipcam_fec: {
 				required: '*'
 			},
-			txt_tipcam_dolsun: {
+			txt_tipcam_dolsunv: {
 				required: '*'
 			}
 		}
@@ -110,8 +111,12 @@ $(function() {
     	  <td><input name="txt_tipcam_fec" class="fecha" id="txt_tipcam_fec" type="text" value="<?php echo $fec?>" size="10" maxlength="10"></td>
   	  </tr>
     	<tr>
-            <td align="right" valign="top"><label for="txt_tipcam_dolsun">Dólar Sunat:</label></td>
-          <td><input name="txt_tipcam_dolsun" type="text" class='moneda' id="txt_tipcam_dolsun" style="text-align:right" value="<?php echo $dolsun?>" size="8" maxlength="5"></td>
-        </tr>       
+          <td align="right" valign="top"><label for="txt_tipcam_dolsunc">Dólar Sunat Compra:</label></td>
+          <td><input name="txt_tipcam_dolsunc" type="text" class='moneda' id="txt_tipcam_dolsunc" style="text-align:right" value="<?php echo $dolsunc?>" size="8" maxlength="5"></td>
+        </tr>
+        <tr>
+            <td align="right" valign="top"><label for="txt_tipcam_dolsunv">Dólar Sunat Venta:</label></td>
+            <td><input name="txt_tipcam_dolsunv" type="text" class='moneda' id="txt_tipcam_dolsunv" style="text-align:right" value="<?php echo $dolsunv?>" size="8" maxlength="5"></td>
+        </tr>
      </table>
 </form>

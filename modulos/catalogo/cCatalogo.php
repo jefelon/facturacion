@@ -91,7 +91,7 @@ class cCatalogo{
 	$sql.=" ORDER BY tb_producto_nom ";
 	
 	if($limit!="")$sql.=" LIMIT 0,$limit ";
-        print $sql;
+
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

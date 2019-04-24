@@ -56,6 +56,10 @@ $("#cmb_almacen").change(function(){
 
 $(function(){
 	kardex_datos();
+    $('#btn_imp_xls').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
 });
 </script>
 <div id="div_producto_kardex_datos">
@@ -67,5 +71,9 @@ $(function(){
         <select name="cmb_almacen" id="cmb_almacen">
             <option value="">-</option>              
         </select>
+        <a class="btn_imp_xls" id="btn_imp_xls" href="#" onClick="karde_valorado_reporte_xls()" title="Imprimir en Excel">Excel</a>
+        <form action="kardex_reporte_valorado_xls.php" method="post" target="_blank" id="for_rep_valorado_xls">
+            <input type="hidden" id="hdd_tabla_valorada" name="hdd_tabla_valorada" />
+        </form>
     </fieldset>
 </div>

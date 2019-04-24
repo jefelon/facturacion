@@ -13,6 +13,7 @@ if($_POST['action']=="editar"){
 		$con=$dt['tb_proveedor_con'];
 		$tel=$dt['tb_proveedor_tel'];
 		$ema=$dt['tb_proveedor_ema'];
+        $pais_id=$dt['cs_codigopais_id'];
 	mysql_free_result($dts);
 }
 ?>
@@ -56,9 +57,29 @@ if($_POST['action']=="editar"){
                 }
             },"json");
     }
+    function cmb_pais_id(ids)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../proveedor/cmb_pais_id.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                pais_id: ids
+            }),
+            beforeSend: function() {
+                $('#cmb_pais_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_pais_id').html(html);
+            }
+        });
+
+    }
     $('#validar_ruc').button({
         text: true
     });
+
 $(function() {
 	
 	$( "#radio" ).buttonset();
@@ -66,7 +87,7 @@ $(function() {
 	$('#txt_pro_nom, #txt_pro_dir, #txt_pro_con').keyup(function(){
 		$(this).val($(this).val().toUpperCase());
 	});
-	
+    cmb_pais_id(<?php echo $pais_id?>);
 	$("#for_pro").validate({
 		submitHandler: function() {
 			$.ajax({
@@ -182,6 +203,13 @@ $(function() {
         <tr>
           	<td align="right"><label for="txt_pro_ema">Email:</label></td>
             <td><input name="txt_pro_ema" type="text" id="txt_pro_ema" value="<?php echo $ema?>" size="45" maxlength="100"></td>
-        </tr>  
+        </tr>
+        <tr>
+            <td align="right"><label for="txt_pro_ema">PAIS:</label></td>
+            <td width="34">
+                <select name="cmb_pais_id" id="cmb_pais_id">
+                </select>
+            </td>
+        </tr>
     </table>
 </form>
