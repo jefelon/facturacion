@@ -36,10 +36,11 @@ class cCompra{
 	`tb_compra_ser_nota` ,
 	`tb_compra_num_nota`,
 	`tb_compra_tip_nota`,
-	`tb_tiporenta_id`
+	`tb_tiporenta_id`,
+	`tb_compra_baseimp_tip`
 	)
 	VALUES (
-	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id','$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento','$fec_nota', '$ser_nota','$num_nota','$tip_nota','$tiporenta_id'
+	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id','$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento','$fec_nota', '$ser_nota','$num_nota','$tip_nota','$tiporenta_id','$baseimp_tip'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
