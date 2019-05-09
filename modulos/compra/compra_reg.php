@@ -222,7 +222,7 @@ if ($_POST['action_compra'] == "insertar") {
 
                     $oKardex->modificar_codigo($kar_id, $kar_id);
                 }
-            }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19'){
+            }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19' or $_POST['cmb_com_doc']=='23'){
                 //registro de kardex
                 $xac = 1;
                 $tipo_registro = 1;//1 automatico 2 manual
