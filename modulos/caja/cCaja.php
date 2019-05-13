@@ -50,6 +50,15 @@ class cCaja{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function modificar_estado($id,$est){
+        $sql = "UPDATE tb_caja SET  
+	    `tb_caja_estado` =  '$est'
+	    WHERE  tb_caja_id =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function eliminar($id){
 	$sql="DELETE FROM tb_caja WHERE tb_caja_id=$id";
 	$oCado = new Cado();

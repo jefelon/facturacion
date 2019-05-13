@@ -122,6 +122,24 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrar_filtro_suma($ano,$doc_id,$cli_id,$est,$venmay){
+        $sql="SELECT SUM(tb_venta_tot) AS suma_ventas, YEAR(`tb_venta_fec`) as `ano`, MONTH(`tb_venta_fec`)  as `mes`
+        FROM tb_venta v
+        LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+        LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+        WHERE YEAR(`tb_venta_fec`) in ($ano,$ano) ";
+        if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
+        if($cli_id>0)$sql.=" AND v.tb_cliente_id = $cli_id ";
+        if($venmay>0)$sql.=" AND v.tb_venta_may = $venmay ";
+        if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
+        $sql.="GROUP BY YEAR(`tb_venta_fec`),MONTH(`tb_venta_fec`)";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	function mostrar_filtro_detalle($fec1,$fec2,$doc_id,$art,$cat_ids,$cli_id,$est,$usu_id,$punven_id,$venmay){
 	$sql="SELECT * 
 	FROM tb_venta v
@@ -178,6 +196,8 @@ class cVenta{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
+
 
 	function mostrar_filtro_adm($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay){
 	$sql="SELECT * 
@@ -388,9 +408,9 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	
-	function mostrar_venta_detalle_ps($ven_id){
-	$sql="SELECT * 
+
+    function mostrar_venta_detalle_ps($ven_id){
+        $sql="SELECT * 
 	FROM tb_venta v
 	INNER JOIN tb_ventadetalle vd ON v.tb_venta_id = vd.tb_venta_id
 	LEFT JOIN cs_tipoafectacionigv ai ON vd.cs_tipoafectacionigv_id=ai.cs_tipoafectacionigv_id
@@ -400,16 +420,16 @@ class cVenta{
 	LEFT JOIN tb_producto p ON pr.tb_producto_id = p.tb_producto_id
 	LEFT JOIN tb_marca m ON p.tb_marca_id = m.tb_marca_id
 	LEFT JOIN tb_categoria cg ON p.tb_categoria_id = cg.tb_categoria_id
-	LEFT JOIN tb_unidad un ON ct.tb_unidad_id_bas = un.tb_unidad_id 
+	INNER JOIN tb_unidad un ON ct.tb_unidad_id_equ=un.tb_unidad_id
 	
 	LEFT JOIN tb_servicio s ON vd.tb_servicio_id = s.tb_servicio_id
 	
 	WHERE v.tb_venta_id = $ven_id 
 	ORDER BY tb_ventadetalle_nro";
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
-	}
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
 	function mostrar_venta_detalle_ps_copia($ven_id){
 	$sql="SELECT * 

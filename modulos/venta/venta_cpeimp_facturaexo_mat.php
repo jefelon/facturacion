@@ -1,89 +1,121 @@
 <?php
 session_start();
-require_once('../../libreriasphp/html2pdf/_tcpdf_5.9.206/tcpdf.php');
+if ($_SESSION["autentificado"] != "SI") {
+    if ($_SESSION["autentificado2"] == "SI") {
 
+    }
+    else{
+        header("location: ../../index.php");
+        exit();
+    }
+}
 require_once ("../../config/Cado.php");
 require_once ("../../config/datos.php");
-require_once ("../venta/cVenta.php");
-$oVenta = new cVenta();
-require_once ("../venta/cVentapago.php");
-$oVentapago = new cVentapago();
-require_once ("../formatos/numletras.php");
-require_once ("../formatos/formato.php");
 require_once ("../empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
+require_once ("../venta/cVenta.php");
+$oVenta = new cVenta();
+require_once ("cVentapago.php");
+$oVentapago = new cVentapago();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
-require_once ("../letras/cLetras.php");
-$cLetras = new cLetras();
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
 
-require_once ("../lote/cVentaDetalleLote.php");
-$oVentaDetalleLote = new cVentaDetalleLote();
+require_once("../formatos/formato.php");
+require_once("../formatos/numletras.php");
 
-require_once("../guia/cGuia.php");
-$oGuia = new cGuia();
+//$tipo_de_letra="DejaVuSansCondensed";
+//$tipo_de_letra="DejaVuSans";
+//$tipo_de_letra="DejaVuSansMono";
+//$tipo_de_letra="DejaVuSerif";
+//$tipo_de_letra="DejaVuSerifCondensed";
+//$tipo_de_letra="FreeMono";
+//$tipo_de_letra="FreeSans";
+//$tipo_de_letra="times";
+//$tipo_de_letra="arial";
+//$tipo_de_letra="courier";
+//$tipo_de_letra="helvetica";
+//$tipo_de_letra="ArialUnicodeMS";
+//$tipo_de_letra="Consolas";
+
+//$tipo_de_letra_arch="dejavusans.php";
+//$tipo_de_letra_arch="arialunicid0.php";
+
+$rs = $oFormula->consultar_dato_formula('VEN_IMP_DIR');
+$dt = mysql_fetch_array($rs);
+$imprimir_direccion = $dt['tb_formula_dat'];
+mysql_free_result($rs);
+
+$pager_formato='format="350x90" orientation="P" style="font-size: 9pt; font-family:'.$tipo_de_letra.'"';
+
+$pager_margen='backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
+
+//html2pdf
+$orientacion_impresion='P';
+$formato_impresion='A4';
+$margen_array=array(2, 2, 2, 2);
+//$margen_array=1;
+
+$borde_tablas=0;
 
 $ven_id=$_POST['ven_id'];
-$dts = $oVenta->mostrarUno($ven_id);
-$dt = mysql_fetch_array($dts);
-
-$dts=$oUsuario->mostrarUno($dt['tb_vendedor_id']);
-$dt = mysql_fetch_array($dts);
-$usugru		=$dt['tb_usuariogrupo_id'];
-$usugru_nom	=$dt['tb_usuariogrupo_nom'];
-$usu_nom	=$dt['tb_usuario_nom'];
-$apepat		=$dt['tb_usuario_apepat'];
-$apemat		=$dt['tb_usuario_apemat'];
-$ema		=$dt['tb_usuario_ema'];
-
-mysql_free_result($dts);
-
-$texto_vendedor="$usu_nom $apepat $apemat";
 
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
-$ruc_empresa=$dt['tb_empresa_ruc'];
-$razon_defecto = $dt['tb_empresa_razsoc'];
-$direccion_defecto = $dt['tb_empresa_dir'];
-$contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
+$emp_ruc=$dt['tb_empresa_ruc'];
+$emp_nomcom=$dt['tb_empresa_nomcom'];
+$emp_razsoc=$dt['tb_empresa_razsoc'];
+$emp_dir=$dt['tb_empresa_dir'];
+$emp_dir2=$dt['tb_empresa_dir2'];
+$emp_tel=$dt['tb_empresa_tel'];
+$emp_ema=$dt['tb_empresa_ema'];
+$emp_fir=$dt['tb_empresa_fir'];
+$empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 if(!is_file($empresa_logo)){
     $empresa_logo='../../images/logo.jpg';
 }
 mysql_free_result($dts);
 
-$sucursales='
-<table style="font-size:7pt" border="0">
-    <tr>
-        <td width="80">PRINCIPAL:</td>
-        <td width="580">'.$dt['tb_empresa_dir'] .'</td>
-    </tr>
-    <!--<tr>
-        <td width="80">SUCURSAL:</td>
-        <td width="580">CAR.AREQUIPA KM. 9 (CC AREQUIPA NORTE GO 15 Y GO 16)<br> AREQUIPA - AREQUIPA - CERRO COLORADO</td>
-    </tr>-->
-    <tr>
-        <td>TELEFONO: </td>
-        <td>'.$dt['tb_empresa_tel'] .'</td>
-    </tr>
-
-    <tr>
-        <td>CORREO:</td>
-        <td>'.$dt['tb_empresa_ema'].'</td>
-    </tr>
-    <tr>
-        <td>VENDEDOR:</td>
-        <td>'.$texto_vendedor.'</td>
-    </tr>
-    
-</table>';
-
-$tipodoc = 'FACTURA ELECTRONICA';
+if($emp_tel!="")$texto_telefono='Teléfono: '.$emp_tel;
+if($emp_ema!="")$texto_email='Correo: '.$emp_ema;
+if($emp_ruc==0)$emp_ruc="";
+//venta
 
 $ven_id=$_POST['ven_id'];
 
-$dts = $oVenta->mostrarUno($ven_id);
+$dts= $oVenta->mostrarUno($ven_id);
+$dt = mysql_fetch_array($dts);
+//$reg  =mostrarFechaHora($dt['tb_venta_reg']);
+$reg  =mostrarFechaHoraH($dt['tb_venta_reg']);
+$hora = mostrarHora($dt['tb_venta_reg']);
+
+$fec  =mostrarFecha($dt['tb_venta_fec']);
+
+$doc_id =$dt['tb_documento_id'];
+$doc_nom=$dt['tb_documento_nom'];
+$numdoc =$dt['tb_venta_numdoc'];
+
+$cli_id =$dt['tb_cliente_id'];
+$cli_nom=$dt['tb_cliente_nom'];
+$cli_doc=$dt['tb_cliente_doc'];
+$cli_dir=$dt['tb_cliente_dir'];
+$cui = $dt['tb_cliente_cui'];
+
+$valven =$dt['tb_venta_valven'];
+$exo = $dt['tb_venta_exo'];
+$igv  =$dt['tb_venta_igv'];
+$tot  =$dt['tb_venta_tot'];
+
+$lab1 =$dt['tb_venta_lab1'];
+
+$usu_id =$dt['tb_usuario_id'];
+mysql_free_result($dts);
+
+
+$dts= $oVenta->mostrarUno($ven_id);
 while($dt = mysql_fetch_array($dts))
 {
     $idcomprobante=$dt["cs_tipodocumento_cod"];
@@ -98,17 +130,17 @@ while($dt = mysql_fetch_array($dts))
     if($dt["tb_cliente_tip"]==2)$idtipodni=6;
 
     $fecha=mostrarFecha($dt["tb_venta_fec"]);
+
     $toigv=$dt["tb_venta_igv"];
     $importetotal=$dt["tb_venta_tot"];
     $totopgrat=$dt["tb_venta_grat"];
-    $totopexo=$dt["tb_venta_exo"];
-    $totopgrav=$dt["tb_venta_gra"];
-    $totopeina=$dt["tb_venta_ina"];
+    $subtotal=$dt["tb_venta_gra"];
     $valorventa=$dt["tb_venta_valven"];
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
-    $moneda=$dt["cs_tipomoneda_id"];
+    $moneda=1;
+
 
     $estsun=$dt['tb_venta_estsun'];
     $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -122,33 +154,14 @@ while($dt = mysql_fetch_array($dts))
     $lab1=$dt['tb_venta_lab1'];
     $lab2=$dt['tb_venta_lab2'];
     $lab3=$dt['tb_venta_lab3'];
+
 }
-
-$guias = $oGuia->mostrarGuiaUno($ven_id);
-$guia = mysql_fetch_array($guias);
-$numero_guia=$guia['tb_guia_serie']."-".$guia["tb_guia_num"];
-
-
-if($moneda==1){
-    $moneda  = "SOLES";
-    $mon = "S/ ";
-    $monedaval=1;
-}
-if($moneda==2){
-    $moneda  = "DOLARES";
-    $mon = "$ ";
-    $monedaval=2;
-}
-
-
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
 $num_rows_vp= mysql_num_rows($rws1);
 
-if($num_rows_vp>0)
-{
-    while($rw1 = mysql_fetch_array($rws1))
-    {
+if($num_rows_vp>0){
+    while($rw1 = mysql_fetch_array($rws1)){
         //forma
         if($rw1['tb_formapago_id']==1)
         {
@@ -195,462 +208,292 @@ if($num_rows_vp>0)
             }
         }
 
-        if($rw1['tb_formapago_id']==3)
-        {
-
-                $forma='LETRAS ';
-                $suma_pago7+=$rw1['tb_ventapago_mon'];
-
-                $ltrs1=$cLetras->mostrar_letras($_POST['ven_id']);
-
-            $date1 = new  DateTime($fecha);
-
-            $cont=1;
-            while($ltr= mysql_fetch_array($ltrs1)){
-                $date2 = new DateTime($ltr['tb_letras_fecha']);
-                $interval = $date1->diff( $date2 );
-                $diferencia=$interval->format('%a dias');
-
-                    $modo.= '<br>L'.$ltr['tb_letras_orden'].' '.$diferencia.' '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
-
-                }
-
-                //$modo.='CANJE'.$vence_letras;
-//            }
-        }
-
-
         $pago_mon=formato_money($rw1['tb_ventapago_mon']);
 
         $texto_pago1[]=$forma.' '.$modo;
-        $texto_pago2[]=$forma.' '.$modo.':'.$diff.$mon.'  '.$pago_mon;
+        $texto_pago2[]=$forma.' '.$modo.': S/.  '.$pago_mon;
     }
     mysql_free_result($rws1);
 }
 
-$nombre_archivo = ''.$serie.'-'.$numero.'.pdf';
+//vendedor
+$dts=$oUsuario->mostrarUno($usu_id);
+$dt = mysql_fetch_array($dts);
+$usu_nom  =$dt['tb_usuario_nom'];
+$usu_apepat =$dt['tb_usuario_apepat'];
+$usu_apemat =$dt['tb_usuario_apemat'];
+mysql_free_result($dts);
+$texto_vendedor="$usu_nom $usu_apepat $usu_apemat";
+$texto_vendedor=substr($usu_nom, 0, 3).substr($usu_apepat, 0, 1).substr($usu_apemat, 0, 1);
 
-// $file_name = 'FA-'.$serie.'-'.$numero.'-code.png';
-// $path = 'temp/'.$file_name;
-// $type = pathinfo($path, PATHINFO_EXTENSION);
-// $data = file_get_contents($path);
-// $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+$dts1=$oVenta->mostrar_venta_detalle($ven_id);
+$num_rows= mysql_num_rows($dts1);
 
+$dts2=$oVenta->mostrar_venta_detalle_servicio($ven_id);
+$num_rows_2= mysql_num_rows($dts2);
 
-class MYPDF extends TCPDF
-{
+$numero_filas=$num_rows+$num_rows_2;
 
-    public function Header() {
-        //$image_file = K_PATH_IMAGES.'logo.jpg';
-        //$this->Image($image_file, 20, 10, 71, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
-        // Set font
-        //$this->SetFont('helvetica', 'B', 20);
-        // Title
-        //$this->Cell(0, 15, '<< TCPDF Example 003 >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
-    }
+$impresion='pdf';
 
-    public function Footer()
-    {
-        // $style = array(
-        //   'position' => 'L',
-        //   'align' => 'L',
-        //   'stretch' => false,
-        //   'fitwidth' => true,
-        //   'cellfitalign' => '',
-        //   'border' => false,
-        //   'padding' => 0,
-        //   'fgcolor' => array(0,0,0),
-        //   'bgcolor' => false,
-        //   'text' => false
-        // //     'font' => 'helvetica',
-        // //     'fontsize' => 8,
-        // //     'stretchtext' => 4
-        // );
+/*header('Content-type: application/vnd.ms-word');
+header("Content-Disposition: attachment; filename=nombre_archivo.doc");
+header("Pragma: no-cache");
+header("Expires: 0");
+*/
+if($impresion=='pdf')ob_start();
 
-        // $this -> SetY(-24);
-        // // Page number
-        // $this->SetFont('helvetica', '', 9);
-        // //$this->SetTextColor(0,0,0);
-        // $this->Cell(0, 0, 'Página '.$this->getAliasNumPage().' de '.$this->getAliasNbPages(), 'T', 1, 'R', 0, '', 0, false, 'T', 'M');
+?>
 
-        // $codigo='CAV-'.str_pad($_GET['d1'], 4, "0", STR_PAD_LEFT);
+    <style>
+        .centrado{
+            text-align: center;
+        }
+        .izquierda{
+            text-align: left;
+        }
+        .derecha{
+            text-align: right;
+        }
+        tr.bordetop{border-top: 0.8px solid #000}
 
-        // $this->write1DBarcode($codigo, 'C128', '', 273, '', 6, 0.3, $style, 'N');
-        // $this->Cell(0, 0, 'www.prestamosdelnortechiclayo.com', 0, 1, 'C', 0, '', 0, false, 'T', 'M');
-    }
-}
+        th, td {
 
-// create new PDF document
-$pdf = new MYPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
-
-$pdf->SetCreator(PDF_CREATOR);
-$pdf->SetAuthor('www.a-zetasoft.com');
-$pdf->SetTitle($title);
-$pdf->SetSubject('www.a-zetasoft.com');
-$pdf->SetKeywords('www.a-zetasoft.com');
-
-// set header and footer fonts
-$pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
-$pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
-
-// set default monospaced font
-$pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
-
-//set margins
-$pdf->SetMargins(12, 15, 12);// left top right
-$pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
-//$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
-
-//set auto page breaks
-$pdf->SetAutoPageBreak(TRUE, 15);
-
-//set image scale factor
-$pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-//set some language-dependent strings
-$pdf->setLanguageArray($l);
-
-// ---------------------------------------------------------
-
-// add a page
-$pdf->AddPage('P', 'A4');
-
-//font-family: Consolas, monaco, monospace;
-//helvetica, monaco, monospace;
-
-// Introducimos HTML de prueba
-$html = '
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-</head>
-<style type="text/css">
-    body {
-        color: black;
-        font-family: Verdana, Arial, Consolas;
-        margin: 0px;
-        padding-top: 0px;
-        font-size: 7.5pt;
-    }
-
-    .header_row th {
-        border-bottom: 0.9px solid #01a2e6;
-        border-right: 0.9px solid #01a2e6;
-        border-left: 0.9px solid #01a2e6;
-        /*background-color: #01a2e6;*/
-        text-transform:uppercase;
-    }
-    .odd_row td {
-        background-color: transparent;
-        border-bottom: 0.9px solid #01a2e6;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    .even_row td {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        background-color: #f6f6f6;
-        border-bottom: 0.9px solid #01a2e6;
-    }
-    .row td{
-        border-right: 0.9px solid #01a2e6;
-        border-left: 0.9px solid #01a2e6;
-    }
-</style>
-
-<style media="print">
-    .oculto{
-        display: none;
-    }
-
-</style>
-<body><table style="width: 100%; margin-bottom: 50mm" border="0">';
-if($estado=="ANULADA"){
-    $html.='<tr>
-	    <td width="50%"></td>
-	    <td width="10%"></td>
-	    <td td width="40%" style="text-align: center"><strong>ANULADO</strong></td>
-	    </tr>';
-}
-$html.='<tr>
-        <td style="text-align: left" width="15%" align="left">
-        <img src="'.$empresa_logo.'" alt="" width: "100%">
-        </td>   
-        <td style="text-align: left" width="55%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
-        </td>
-        <!-- <td width="20%" style="text-align: center">
-            <img src="../../images/banderas.jpg" alt="" style="max-width: 50%" height="40px" align="left">
-        </td> -->
-        <td style="text-align: center;" width="30%" border="1">
-            <strong style="font-size: 11pt">'.$tipodoc.'<br>
-            RUC: '.$ruc_empresa.'<br>
-            '.$serie.'-'.$numero.'</strong>
-        </td>
-    </tr>
-</table>
-<br/>
-<br/>
-<br/>
-<table style="width: 100%;" border="0">
-    <tr>
-        <td style="text-align: left" width="10%">SEÑOR(ES)</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="58%">'.$razon.'</td>
-
-        <td style="text-align: left" width="10%">FECHA</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="18%">'.$fecha.'</td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="10%">RUC</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="58%">'.$ruc.'</td>
-
-        <td style="text-align: left" width="10%">MONEDA</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="18%">'.$moneda.'</td>
-    </tr>
-    <tr>
-        <td style="text-align: left; vertical-align:top;" width="10%">DIRECCIÓN</td>
-        <td style="text-align: left; vertical-align:top;" width="2%">:</td>
-        <td style="text-align: left" width="58%">'.$direccion.'</td>
-        
-        <td style="text-align: left" width="10%">GUIA REM.:</td>
-        <td style="text-align: left" width="2%">:</td>
-        <td style="text-align: left" width="18%">'.$numero_guia.'</td>
-    </tr>
-</table>
-<br/>
-<br/>
-<br/>
-<table style="width: 100%; border: 0.5px solid #01a2e6; border-collapse:collapse;">
-    <tbody>
-        <tr class="header_row">
-            <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 7%;"><b>CANT.</b></th>
-             <th style="text-align: center; width: 8%;"><b>UNIDAD</b></th>
-            <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
-            <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
-            <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
-            <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 12%;"><b>VALOR VENTA</b></th>
-        </tr>';
-$dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
-$cont = 1;
-while($dt = mysql_fetch_array($dts)){
-    $codigo = $cont;
-    $valor_unitario_linea = $dt["tb_ventadetalle_preunilin"];
-    $html.='<tr class="row">';
-    if($dt["tb_ventadetalle_tipven"]==1){
-
-        $ven_det_serie= '';
-        if ($dt['tb_ventadetalle_serie']!=''){
-            $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
+            padding: 0px;
+            white-space: pre; /* CSS 2.0 */
+            white-space: pre-wrap; /* CSS 2.1 */
+            white-space: pre-line; /* CSS 3.0 */
+            white-space: -pre-wrap; /* Opera 4-6 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            white-space: -moz-pre-wrap; /* Mozilla */
+            white-space: -hp-pre-wrap; /* HP */
+            word-wrap: break-word; /* IE 5+ */
         }
 
-        $html .='<td style="text-align:center">' . $cont . '</td>
-                 <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
-                 <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
-                $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
-                while($lote = mysql_fetch_array($lotes)) {
-                    $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
-                }
-
-        $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
-                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
-                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
-
-    }else{
-        $html .='<td style="text-align:center">' . $cont . '</td>
-                 <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
-                 <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie;
-        $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
-        while($lote = mysql_fetch_array($lotes)) {
-            $html.=$lote["tb_ventadetalle_lotenum"].', ';
+        .negrita {
+            font-weight:bold;
         }
 
-        $html .= '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
-                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
-                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
-    }
+        .py-5{
+            padding-top: 2.5mm;
+            padding-bottom: 2.5mm;
+        }
+        .pt-5{
+            padding-top: 2.5mm;
+        }
 
-    $html.='</tr>';
-    $cont++;
-}
-$html.='</tbody>
-</table>
-<br/>
-<br/>
-<table style="width: 100%"  border="0">
-    <tr>
-        <td style="text-align: left;" colspan="3">'.$observacion.'</td>
-    </tr>';
-if($totopgrat > 0){
-    $html.='<tr>
-        <td width="78%" style="text-align: right;" colspan="2">Vtas. Gratuitas: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $totopgrat.'</td>
-    </tr>';
-}
+    </style>
 
-$html.='
-    <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Ope Grav: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $totopgrav.'</td>
-    </tr>
-    <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Ope Exo: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $totopexo.'</td>
-    </tr>
-    <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Ope Ina: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $totopeina.'</td>
-    </tr>';
-if($totanti > 0){
-    $html.='<tr>
-            <td width="78%" style="text-align: right;" colspan="2">Anticipos: </td>
-            <td width="23%" style="text-align: right;">'.$mon . $totanti.'</td>
-        </tr>';
-}
-$html.='
-    <tr>
-        <td width="78%" style="text-align: right;" colspan="2">Total Descuento: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $totdes.'</td>
-    </tr>
-    <tr>
-        <td  width="78%" style="text-align: right;" colspan="2">IGV: </td>
-        <td width="23%" style="text-align: right;">'.$mon . $toigv.'</td>
-    </tr>
-        <tr>
-            <td width="60%" style="text-align: left;">';
-if($importetotal>0){
-    $html.='SON: ' . numtoletras($importetotal,$monedaval);
-}else{
-    $html.='Leyenda TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE';
-}
-$html.='</td>
-            <td width="18%" style="text-align: right;">Importe Total: </td>
-            <td width="23%" style="text-align: right;  border-top: 1px solid black;">'.$mon . $importetotal.'</td>
-        </tr>
+    <page id="contenido_pdf" <?php echo $pager_formato?> <?php echo $pager_margen?>>
+        <link rel="stylesheet" href="../../css/Estilo/documento_venta.css" type="text/css" media="print, projection, screen" />
+        <?php if($impresion=='pdf' or $impresion=='html'){?>
 
-</table>
-<br/>
-<br/>';
+            <table width="80mm">
+                <thead>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                </thead>
+                <tr>
+                    <td colspan="4" class="centrado">
+                        <?php //echo //'<h3>'.$emp_nomcom .'</h3>'?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado" >
+                        <img src="<?php echo $empresa_logo ?>" alt="" width="auto" height="auto">
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado negrita" style="font-size: 15px;">
+                        <?php echo $emp_razsoc ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado negrita">
+                        RUC: <?php echo $emp_ruc ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado">
+                        <?php if ($imprimir_direccion == 1) echo $emp_dir . ' - ' . $emp_tel . ' - ' . $emp_dir2 ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado">
+                        <?php if ($_SESSION['puntoventa_id'] != 1) echo 'SUC: AV. GARCILAZO NRO. 703A CUSCO - CUSCO - WANCHAQ'?>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado"></td>
+                </tr>
+                <tr>
+                    <td colspan="4" height="10mm">
+                        .............................................................................................
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4" class="centrado negrita py-5">FACTURA DE VENTA ELECTRÓNICA</td>
+                </tr>
+                <tr>
+                    <td colspan="2"><?php echo 'Nro. Factura: ' .$serie . ' - ' . $numero ?></td>
+                    <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
+                </tr>
+                <tr>
+                    <td colspan="2"></td>
+                    <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4" height="10mm">
+                        .............................................................................................
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'RUC: ' .$ruc ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+                </tr>
+                <tr>
+                    <td colspan="4" height="10mm">
+                        .............................................................................................
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <table width="80mm">
+                            <thead>
+                            <tr>
+                                <td style="width: 10mm" class="izquierda negrita">CANT</td>
+                                <td style="width: 30mm" class="izquierda negrita" >DESCRIPCION</td>
+                                <td style="width: 20mm" class="derecha negrita">P. UNIT</td>
+                                <td style="width: 20mm" class="derecha negrita">IMPORTE</td>
+                            </tr>
+                            </thead>
+                            <?php  if($numero_filas>=1){ ?>
+                                <?php while($dt1 = mysql_fetch_array($dts1)){ ?>
+                                    <tr>
+                                        <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
+                                        <td class="izquierda" style="width: 30mm; font-size: 8pt;"><?php echo $dt1['tb_producto_nom'] . ' x ' .$dt1['tb_unidad_abr']; ?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
+                                    </tr>
 
-if($num_rows_vp==1)$texto_pago=trim($texto_pago1[0]);
+                                <?php } mysql_free_result($dts1);?>
+                            <?php } ?>
 
-if($num_rows_vp>1)
+                            <?php while($dt2 = mysql_fetch_array($dts2)){ ?>
+                                <tr>
+                                    <td class="izquierda"
+                                        style="width: 10mm"><?php echo $dt2["tb_ventadetalle_can"] ?></td>
+                                    <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']*$dt2['tb_ventadetalle_can'])?></td>
+                                </tr>
+                            <?php  } mysql_free_result($dts2); ?>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <table  width="80mm">
+                            <thead>
+                            <tr>
+                                <td style="width: 20mm"></td>
+                                <td style="width: 20mm"></td>
+                                <td style="width:20mm"></td>
+                                <td style="width: 20mm"></td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td colspan="2" class="izquierda mt-5 negrita">OP. GRAVADA:</td>
+                                <td colspan="2" class="derecha" style="text-align: right;">
+                                    S/ <?php echo formato_money($valven) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="izquierda negrita">OP. EXONERADA:</td>
+                                <td colspan="2" class="derecha" style="text-align: right;">
+                                    S/ <?php echo formato_money($exo) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="izquierda negrita">IGV:</td>
+                                <td colspan="2" class="derecha" style="text-align: right;">
+                                    S/ <?php echo formato_money($igv) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
+                                <td colspan="2" class="derecha" style="text-align: right;">
+                                    S/ <?php echo formato_money($tot) ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Factura  de Venta  Electrónica,  esta puede ser
+                                    consultada en: <br><?php echo $d_documentos_app ?></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" height="10mm">
+                                    .............................................................................................
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="width: 80mm;" class="centrado negrita">Gracias por su preferencia</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+
+
+            <?php
+        }
+        ?>
+    </page>
+
+<?php
+if($impresion=='pdf')
 {
-    $texto_pago="";
-    foreach($texto_pago2 as $indice=>$valor)
+    $content = ob_get_clean();
+
+    //require_once(dirname(__FILE__).'/html2pdf/html2pdf.class.php');
+    require_once('../../libreriasphp/html2pdf/html2pdf.class.php');
+
+    try
     {
-        $texto_pago.='<br>'.trim($valor).'';
+        $html2pdf = new HTML2PDF($orientacion_impresion, $formato_impresion, 'es', true, 'UTF-8', $margen_array);
+        $html2pdf->pdf->SetDisplayMode('fullpage');
+
+        //$html2pdf->AddFont($tipo_de_letra, '',"../../libreriasphp/html2pdf/_tcpdf_5.0.002/fonts/$tipo_de_letra_arch");
+        //$html2pdf->pdf->SetFont($tipo_de_letra, '', 11);
+
+        $html_d=$_GET['vuehtml'];
+        //$html_d=1;
+
+        $html2pdf->writeHTML($content, isset($html_d));
+        $html2pdf->pdf->IncludeJS("print(true);");
+        //$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
+
+
+
+        $nombre_arc='venta_'.$numdoc.'.pdf';
+        $html2pdf->Output($nombre_arc);
+    }
+    catch(HTML2PDF_exception $e) {
+        echo $e;
+        exit;
     }
 }
-
-$num=0;
-$html.='INFORMACIÓN ADICIONAL<br>
-<table style="width: 50%; border: 0.5px solid #01a2e6; border-collapse:collapse;">';
-$num++;
-$html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Forma de Pago:</td>
-        <td width="70%" style="text-align: left;">'.$texto_pago.'</td>
-    </tr>';
-
-if($lab1!="")
-{
-    $num++;
-    $html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Nro. de Placa:</td>
-        <td width="70%" style="text-align: left;">'.$lab1.'</td>
-    </tr>';
-}
-if($lab2!="")
-{
-    $num++;
-    $html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Kilometraje:</td>
-        <td width="70%" style="text-align: left;">'.$lab2.'</td>
-    </tr>';
-}
-if($lab3!="")
-{
-    $num++;
-    $html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Ord. Servicio:</td>
-        <td width="70%" style="text-align: left;">'.$lab3.'</td>
-    </tr>';
-}
-
-$html.='
-</table>';
-
-
-$html.='
-<br/>
-<br/>
-<table>
-<tr>
-<td style="width:78%">';
-
-$html.='<br/>'.$sucursales;
-
-$html.='<br/>
-<p style="font-size:7pt">
-Código de Seguridad (Hash): '.$digval.'<br>
-Representación Impresa de la '.$tipodoc.'.<br>Esta puede ser consultada en: '.$d_documentos_app.'<br>
-'.$d_resolucion.'
-</p>
-</td>
-<td>
-';
-
-
-$style = array(
-    'border' => 2,
-    'vpadding' => 'auto',
-    'hpadding' => 'auto',
-    'fgcolor' => array(0,0,0),
-    'bgcolor' => false, //array(255,255,255)
-    'module_width' => 1, // width of a single module in points
-    'module_height' => 1 // height of a single module in points
-);
-
-
-$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
-$html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
-</td>
-</tr>
-</table>
-</body>
-</html>';
-
-$pdf->writeHTML($html, true, 0, true, true);
-
-//$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
-if ($_POST['tipo']=='correo'){
-    $path = "../../cperepositorio/send";
-
-// Supply a filename including the .pdf extension
-    $filename = $nombre_archivo;
-    $full_path = $path . '/' .$ruc_empresa.'-0'.$idcomprobante.'-'. $filename;
-    if (!file_exists($full_path))
-    {
-        $pdf->Output($full_path, 'F');
-    }
-}else{
-    $pdf->Output($nombre_archivo, 'I');
-}
-
-
+?>

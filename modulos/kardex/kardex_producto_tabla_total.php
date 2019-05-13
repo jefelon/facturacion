@@ -13,7 +13,35 @@ $oStock = new cStock();
 ?>
 <script type="text/javascript">
 
+    function cmb_fil_pro_alm()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../almacen/cmb_alm_id.php",
+            async:false,
+            dataType: "html",
+            data: ({
+                alm_id: '<?php echo $_POST['alm_id']?>'
+            }),
+            beforeSend: function() {
+                $('#cmb_fil_pro_alm').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_fil_pro_alm').html(html);
+            },
+            complete: function(){
+            }
+        });
+    }
+
+
+
 $(function() {
+
+    cmb_fil_pro_alm();
+    $('#cmb_fil_pro_alm').change(function(e) {
+        catalogo_kardex_tabla_total();
+    });
 	//$.tablesorter.defaults.widgets = ['zebra'];
 	//$("#tabla_kardex").tablesorter({});
 }); 
@@ -26,7 +54,19 @@ $(function() {
 	div#div_tabla_kardex table td { height:17px }
 </style>
 <div id="div_tabla_kardex" class="ui-widget">
-    <h4>MOVIMIENTO GENERAL, TODOS LOS ALMACENES</h4>
+        <label for="cmb_fil_pro_alm">Almacén:</label>
+        <select name="cmb_fil_pro_alm" id="cmb_fil_pro_alm">
+        </select>
+    <br>
+    <br>
+        <h4 id="text-alm"><?php
+
+            if ($_POST['alm_id']){
+                echo "<script>$('#text-alm').html('MOVIMIENTO '+$('#cmb_fil_pro_alm option:selected').text());</script>";
+             }else{
+                echo 'MOVIMIENTO GENERAL, TODOS LOS ALMACENES';
+            }?> </h4>
+
 <table border="0" cellspacing="2" cellpadding="2" class="ui-widget ui-widget-content" id="tabla_kardex_total">
     <thead>
         <tr class="ui-widget-header">
@@ -53,7 +93,7 @@ $(function() {
         $fecini = '01-01-2013';
         $fecfin = '';
 
-        $dts2 = $oKardex->mostrar_kardex_por_producto_total($dt1['tb_catalogo_id'], $_SESSION['empresa_id'], fecha_mysql($fecini), fecha_mysql($fecfin));
+        $dts2 = $oKardex->mostrar_kardex_total_almacen($dt1['tb_catalogo_id'], $_SESSION['empresa_id'], $_POST['alm_id'],fecha_mysql($fecini), fecha_mysql($fecfin));
         $cantidad_total = 0;
         $precio_promedio = 0;
         $costo_total = 0;

@@ -38,7 +38,7 @@ if(isset($_POST['pro_cat']) and $_POST['pro_cat']>0)
 //echo $dc;			
 }
 
-$dts1=$oProducto->mostrar_filtro($_POST['pro_nom'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$_POST['limit'],$_POST['ordby']);
+$dts1=$oProducto->mostrar_filtro_codigo($_POST['pro_nom'],$dc,$_POST['pro_mar'],$_POST['pro_est'],$_POST['pro_cod'],$_POST['limit'],$_POST['ordby']);
 $num_rows= mysql_num_rows($dts1);
 
 //orden

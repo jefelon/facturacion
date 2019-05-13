@@ -9,9 +9,15 @@ $oCliente = new cCliente();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 require_once("../formatos/formato.php");
-
-
 require_once ("../empresa/cEmpresa.php");
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
+
+$rs = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
+$dt = mysql_fetch_array($rs);
+$dato = $dt['tb_formula_dat'];
+mysql_free_result($rs);
+
 $oEmpresa = new cEmpresa();
 $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
@@ -30,9 +36,21 @@ $cli_id	=$dt['tb_cliente_id'];
 $cli_nom=$dt['tb_cliente_nom'];
 $cli_doc=$dt['tb_cliente_doc'];
 
-if($doc_nom=='FACTURA ELECTRONICA')$nom_arch.='../venta/venta_cpeimp_facturaexo_mat.php';
+if($doc_nom=='FACTURA ELECTRONICA'){
+    if($dato=='TICKET'){
+        $nom_arch.='../venta/venta_cpeimp_facturaexo_mat.php';
+    }elseif ($dato=='A4'){
+        $nom_arch.='../venta/venta_cpeimp_facturaexo_mat_a4.php';
+    }
+}
 
-if($doc_nom=='BOLETA ELECTRONICA')$nom_arch.='../venta/venta_cpeimp_boleta_mat.php';
+if($doc_nom=='BOLETA ELECTRONICA'){
+    if($dato=='TICKET'){
+        $nom_arch.='../venta/venta_cpeimp_boleta_mat_a4.php';
+    }elseif ($dato=='A4'){
+        $nom_arch.='../venta/venta_cpeimp_facturaexo_mat_a4.php';
+    }
+}
 /*
 $valven	=$dt['tb_venta_valven'];
 $igv	=$dt['tb_venta_igv'];

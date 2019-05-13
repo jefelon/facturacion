@@ -135,6 +135,22 @@ class cCompra{
 	return $rst;
 	}
 
+    function mostrar_filtro_suma($ano,$mon,$est,$emp_id){
+        $sql="SELECT SUM(tb_compra_tot) AS suma_compras, YEAR(`tb_compra_fec`) as `ano`, MONTH(`tb_compra_fec`)  as `mes`,
+              COUNT(*) 
+	FROM tb_compra c
+	INNER JOIN tb_proveedor p ON c.tb_proveedor_id=p.tb_proveedor_id
+	INNER JOIN tb_documento d ON c.tb_documento_id=d.tb_documento_id
+	INNER JOIN tb_almacen a ON c.tb_almacen_id=a.tb_almacen_id
+	WHERE c.tb_empresa_id = $emp_id AND YEAR(`tb_compra_fec`) in ($ano,$ano) ";
+        if($mon>0)$sql.=" AND tb_compra_mon = $mon ";
+        if($est!="")$sql.=" AND tb_compra_est LIKE '$est' ";
+        $sql.="GROUP BY YEAR(`tb_compra_fec`),MONTH(`tb_compra_fec`)";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
     function mostrar_filtro_por_mes_anio($mes_id,$anio_id,$emp_id){
         $sql="SELECT * 
 	FROM tb_compra c

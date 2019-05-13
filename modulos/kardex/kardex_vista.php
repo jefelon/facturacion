@@ -165,12 +165,17 @@ function kardex_valorado_tabla(cat_id,alm_id, fec_ini, fec_fin){
     });
 }
 
+
+
 function catalogo_kardex_tabla_total(){
     $.ajax({
         type: "POST",
         url: "../kardex/kardex_producto_tabla_total.php",
         async:true,
         dataType: "html",
+        data: ({
+            alm_id: $('#cmb_fil_pro_alm').val()
+        }),
         beforeSend: function() {
             $('#div_catalogo_kardex_tabla').addClass("ui-state-disabled");
         },
@@ -214,6 +219,7 @@ $(function() {
         icons: {primary: "ui-icon-print"},
         text: true
     });
+
 
 
 	/*$( "#div_catalogo_kardex" ).dialog({
