@@ -11,7 +11,17 @@ class cMarca{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-	function ultimoInsert(){
+
+    function mostrar_filtro_nombre($nom){
+        $sql="SELECT * 
+	    FROM tb_marca
+	    WHERE tb_marca_nom='$nom'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
+    function ultimoInsert(){
 	$sql = "SELECT last_insert_id()"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

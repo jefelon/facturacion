@@ -19,6 +19,14 @@ class cUnidad{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+    function mostrar_filtro_nombre($nom){
+        $sql="SELECT * 
+	    FROM tb_unidad
+	    WHERE tb_unidad_nom='$nom'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrarTodos(){
 	$sql="SELECT * 
 	FROM tb_unidad
