@@ -56,9 +56,34 @@ function cuadromi(){
 			$('#div_cuadromi').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
 		success: function(html){
-			$('#div_cuadromi').html(html);				
+			$('#div_cuadromi').html(html);
+            stock_minimo();
+
 		}
 	});
+}
+
+
+function stock_minimo(){
+    $.ajax({
+        type: "POST",
+        url: "stock_minimo.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            //action: act,
+            //ven_id:	idf
+        }),
+        beforeSend: function() {
+            $('#div_stockmin').dialog("open");
+            $('#div_stockmin').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_stockmin').html(html);
+        },
+        complete: function(){
+        }
+    });
 }
 
 function tipoCambiodelDia(){
@@ -129,7 +154,7 @@ function verificarDatoFormula(){
 $(function() {
 
 	tipoCambiodelDia();
-	
+
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
 		text: false
@@ -138,7 +163,16 @@ $(function() {
 	});
 	
 	cuadromi();
-	
+
+    $( "#div_stockmin" ).dialog({
+        title:'Stock Minimo',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: '1000',
+        modal: true,
+        position: ['center', 'top']
+    });
 	
 	$( "#div_tipocambio_form" ).dialog({
 		title:'Información de Tipo de Cambio',
@@ -197,6 +231,9 @@ $(function() {
         </div>
 		<div id="div_cuadromi" class="contenido_tabla">
       	</div>
+
+        <div id="div_stockmin">
+        </div>
         <div id="div_tipocambio_form"></div>
 </div>
 <footer>
