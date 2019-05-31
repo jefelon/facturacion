@@ -43,20 +43,12 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
-$contacto_empresa = "<b>Teléfono:</b> " . $dt['tb_empresa_tel'] ."<b> Cel:</b>998032654 <b>Correo:</b> " . $dt['tb_empresa_ema'];
+$contacto_empresa = "<b>Teléfono:</b> " . $dt['tb_empresa_tel'] ."<b> Correo:</b>" . $dt['tb_empresa_ema'];
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 if(!is_file($empresa_logo)){
     $empresa_logo='../../images/logo.jpg';
 }
 mysql_free_result($dts);
-
-if($_SESSION['puntoventa_id'] != 1){
-    $suc_imp=' <tr>
-        <td width="80">SUCURSAL:</td>
-        <td width="580">AV. GARCILAZO NRO. 703A CUSCO - CUSCO - WANCHAQ</td>
-    </tr>';
-}
-
 
 $sucursales='
 <table style="font-size:7pt" border="0">
@@ -64,7 +56,6 @@ $sucursales='
         <td width="80">PRINCIPAL:</td>
         <td width="580">'.$dt['tb_empresa_dir'] .'</td>
     </tr>
-    '.$suc_imp.'
     <tr>
         <td>TELEFONO: </td>
         <td>'.$dt['tb_empresa_tel'] .'</td>
@@ -92,7 +83,7 @@ while($dt = mysql_fetch_array($dts))
 
     $serie=$dt["tb_venta_ser"];
     $numero=$dt["tb_venta_num"];
-
+    $punto_venta_dir=$dt["tb_puntoventa_direccion"];
     $ruc=$dt["tb_cliente_doc"];
     $razon=$dt["tb_cliente_nom"];
     $direccion=$dt["tb_cliente_dir"];
@@ -362,7 +353,7 @@ $html.='<tr>
         <img src="'.$empresa_logo.'" alt="" width: "100%">
         </td>   
         <td style="text-align: left" width="55%" align="center"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'
-        <br>'.$contacto_empresa.' <br><b style="text-align: center">Venta de Pinturas Epóxicas, Poliuretanos, Perladas, Acrílicas, Decorativas y Otros - Matizado de colores al gusto del cliente.</b>
+        <br>'.$contacto_empresa.' <br><b style="text-align: center">PUNTO DE VENTA:</b> '.$punto_venta_dir.'
         </td>
         <!-- <td width="20%" style="text-align: center">
             <img src="../../images/banderas.jpg" alt="" style="max-width: 50%" height="40px" align="left">

@@ -16,6 +16,11 @@ $oGuia = new cGuia();
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
+
+$rs2 = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
+$dt2 = mysql_fetch_array($rs2);
+$formato_imp = $dt2['tb_formula_dat'];
+
 $cot_id = $_POST['cot_id'];
 if($_POST['action']=="insertar"){
     //$cli_id=1;
@@ -2223,9 +2228,12 @@ if($_POST['action']=="editar"){
                         <input type="text" name="txt_ven_lab3" id="txt_ven_lab3" value="<?php echo $lab3?>" size="20" maxlength="20">
                         <input name="hdd_ven_doc" id="hdd_ven_doc" type="hidden" value="">
                         <label for="cmb_ven_imp">Formato:</label>
-                        <select name="cmb_ven_imp" id="cmb_ven_imp">
+                        <select name="cmb_ven_imp" id="cmb_ven_imp" title="Cambiar el formato en Mantenimiento-->General-->Fórmulas">
+                            <?php if($formato_imp=="TICKET"){?>
                             <option value="1" selected>Ticket</option>
-                            <option value="2">A4</option>
+                            <?php } elseif ($formato_imp=="A4") {?>
+                            <option value="2" selected>A4</option>
+                            <?php }?>
                         </select>
                         <label for="cmb_ven_moneda">Moneda:</label>
                         <select name="cmb_ven_moneda" id="cmb_ven_moneda" <?php if($_POST['action']=='editar')echo 'disabled'?>>

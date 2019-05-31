@@ -122,7 +122,7 @@ while ($dt = mysql_fetch_array($dts)) {
 
     $serie = $dt["tb_venta_ser"];
     $numero = $dt["tb_venta_num"];
-
+    $punto_venta_dir=$dt["tb_puntoventa_direccion"];
     $ruc = $dt["tb_cliente_doc"];
     $razon = $dt["tb_cliente_nom"];
     $direccion = $dt["tb_cliente_dir"];
@@ -325,7 +325,7 @@ if ($impresion == 'pdf') ob_start();
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado">
-                        <?php if ($_SESSION['puntoventa_id'] != 1) echo 'SUC: AV. GARCILAZO NRO. 703A CUSCO - CUSCO - WANCHAQ'?>
+                        <b>PUNTO DE VENTA:</b> <?php echo $punto_venta_dir ?>
                     </td>
                 </tr>
                 <tr>
@@ -343,10 +343,10 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="2"><?php echo 'Nro. Boleta: ' .$serie . ' - ' . $numero ?></td>
                     <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
                 </tr>
-                <tr>
-                    <td colspan="2"></td>
-                    <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
-                </tr>
+<!--                <tr>-->
+<!--                    <td colspan="2"></td>-->
+<!--                    <td colspan="2" class="derecha">--><?php //echo ' Hora: ' . $hora ?><!--</td>-->
+<!--                </tr>-->
                 <tr>
                     <td colspan="4" height="10mm">
                         .............................................................................................
@@ -443,7 +443,7 @@ if ($impresion == 'pdf') ob_start();
                                 <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Factura  de Venta  Electrónica,  esta puede ser
+                                <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Boleta  de Venta  Electrónica,  esta puede ser
                                     consultada en: <br><?php echo $d_documentos_app ?></td>
                             </tr>
                             <tr>
