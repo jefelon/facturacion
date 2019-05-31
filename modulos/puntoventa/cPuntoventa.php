@@ -8,7 +8,7 @@ class cPuntoventa{
 		`tb_puntoventa_direccion`
 		)
 		VALUES (
-		 '$nom', '$alm_id', '$emp_id',, '$dir'
+		 '$nom', '$alm_id', '$emp_id', '$dir'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
