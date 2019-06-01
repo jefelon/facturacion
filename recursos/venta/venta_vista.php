@@ -185,6 +185,10 @@ $(function() {
 		icons: {primary: "ui-icon-print"},
 		text: true
 	});
+
+    $('#btn_iniciar_sesion').button({
+        text: true
+    });
 	
 	$('.btn_modo').button({
 		icons: {primary: "ui-icon-document"},
@@ -251,6 +255,10 @@ $(function() {
               </table>
 			</div>
 			<div class="ct-logo"></div>
+            <div class="contenido_tabla" style="text-align: right">
+                <a class="btn_iniciar_sesion" id="btn_iniciar_sesion" href="../../recursos2/venta" title="Iniciar Sesion">Iniciar Sesion</a>
+            </div>
+
         	<div id="div_venta_filtro" class="contenido_tabla">
       		</div>
             <div id="div_venta_form">

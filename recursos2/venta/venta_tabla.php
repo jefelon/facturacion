@@ -11,7 +11,12 @@ require_once ("../../modulos/empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
 require_once ("../../modulos/usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
+require_once("../../modulos/formula/cFormula.php");
+$oFormula = new cFormula();
 
+$rs = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
+$dt = mysql_fetch_array($rs);
+$dato = $dt['tb_formula_dat'];
 
 require_once ("../../modulos/lote/cLote.php");
 $oLote = new cLote();
@@ -116,8 +121,21 @@ if($num_rows>0){
                         $doc_nom=$dt1['tb_documento_nom'];
                         if($doc_nom=='FACTURA')$archivo_destino='../../modulos/venta/venta_impresion_gra_factura.php';
                         if($doc_nom=='BOLETA')$archivo_destino='../../modulos/venta/venta_impresion_gra_boleta.php';
-                        if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
-                        if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+                        if($doc_nom=='FACTURA ELECTRONICA'){
+                            if($dato=='TICKET'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
+                            }elseif ($dato=='A4'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_facturaexo_mat_a4.php';
+                            }
+                        }
+
+                        if($doc_nom=='BOLETA ELECTRONICA'){
+                            if($dato=='TICKET'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+                            }elseif ($dato=='A4'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_facturaexo_mat_a4.php';
+                            }
+                        }
                         if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
 
                         $xml="";

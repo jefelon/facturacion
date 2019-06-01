@@ -109,7 +109,7 @@ $(function() {
                           $cadena_codificada=encrypt($cadena_a_codificar, $key);
                           ?>
                       <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
-                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="venta_cpeimp.php?action=<?php echo $cadena_codificada; ?>" title="Descargar pdf">PDF</a>
+                      <a class="btn_pdf" id="btn_pdf" target="_blank" href="#print" title="Descargar pdf" onClick="venta_impresion('<?php echo $dt1['tb_venta_id']?>')">PDF</a>
                       <a class="btn_xml" id="btn_xml" target="_blank" href="../venta/descargar_xml.php?action=<?php echo $cadena_codificada; ?>" title="Descargar XML">XML</a>
                       </td>
                     </tr>
