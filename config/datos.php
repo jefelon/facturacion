@@ -1,34 +1,27 @@
 <?php
-session_start();
-require_once ("../config/Cado.php");
-require_once ("../modulos/empresa/cEmpresa.php");
-$oEmpresa = new cEmpresa();
-//
-$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
-$dt = mysql_fetch_array($dts);
-$d_dominio=$dt['tb_dominio'];
+$d_dominio="www.a-zetasoft.com";
 //$d_dominio_app="www.ssdhosting.com.pe/facturacion/";
 //$d_documentos_app="www.ssdhosting.com.pe/facturacion/recursos/venta/";
-$d_dominio_app=$dt['tb_dominio_app'];
-$d_documentos_app=$dt['tb_documentos_app'];
-$d_email_emp=$dt['tb_email_emp'];
-$d_email_soporte=$dt['tb_email_soporte'];
+$d_dominio_app=$_SERVER['SERVER_NAME'];
+$d_documentos_app=$_SERVER['SERVER_NAME']."/recursos/venta/";
+$d_email_emp=$_SESSION['empresa_ema'];
+$d_email_soporte="soporte@aqpfact.pe";
 $d_resolucion="";
 
-$certificado = $dt['tb_certificado'];;
-$clave_certificado = $dt['tb_clave_certificado'];;
-$usuario_sunat = $dt['tb_usuario_sunat'];
-$clave_sunat = $dt['tb_clave_sunat'];;
-$idempresa = $dt['tb_idempresa'];
-$signature_id = $dt['tb_firma1'];
-$signature_id2 = $dt['tb_firma2'];
-$razon = $dt['empresa_razsoc'];
-$idtipodni = $dt['tb_idtipodni'];
-$nomcomercial = $dt['tb_nomcomercial'];
-$iddistrito = $dt['tb_iddistrito'];
-$direccion = $dt['tb_direccion'];
-$subdivision = $dt['tb_subdivision'];
-$departamento = $dt['tb_departamento'];
-$provincia = $dt['tb_provincia'];
-$distrito = $dt['tb_distrito'];
+$certificado = "20601411076.pfx";
+$clave_certificado = "20agosto2011";
+$usuario_sunat = "20601411076MODDDATOS";
+$clave_sunat = "MODDATOS";
+$idempresa = $_SESSION['empresa_ruc'];
+$signature_id = "SignAQPFACT_".$_SESSION['empresa_ruc'];
+$signature_id2 = "IdSignAQPFACT_".$_SESSION['empresa_ruc'];
+$razon = $_SESSION['empresa_razsoc'];
+$idtipodni = "6";
+$nomcomercial = $_SESSION['empresa_nomcom'];
+$iddistrito = "040102";
+$direccion = "CAL. OCTAVIO MUÑOZ NAJAR 223 OF. 238";
+$subdivision = "URB. CERCADO";
+$departamento = "AREQUIPA";
+$provincia = "AREQUIPA";
+$distrito = "CERCADO";
 ?>
