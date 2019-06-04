@@ -17,6 +17,22 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrar_filtro_cui($cui, $fec1,$doc_id,$est,$cli_id){
+        $sql="SELECT * 
+	FROM tb_venta v
+	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	WHERE tb_venta_fec = '$fec1' AND c.tb_cliente_cui = '$cui' AND c.tb_cliente_id = $cli_id
+	";
+        if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
+        if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
+
+        $sql.=" ORDER BY tb_venta_fec, tb_documento_nom, tb_venta_numdoc ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_venta v

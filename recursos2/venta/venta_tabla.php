@@ -70,24 +70,24 @@ $num_rows= mysql_num_rows($dts1);
     }
 </style>
 <?php
-if($num_rows>0){
-    ?>
-    <table cellspacing="1" id="tabla_venta" class="tablesorter">
-        <thead>
-        <tr>
-            <th align="center">ALUMNO</th>
-            <th align="center">TIPO DOCUMENTO</th>
-            <th align="center">DOCUMENTO</th>
-            <th align="center">MONEDA</th>
-            <th align="center">IMPORTE TOTAL</th>
-            <th align="center">FECHA EMISIÓN</th>
-            <th align="center">ESTADO DOC.</th>
-            <th>&nbsp;</th>
-        </tr>
-        </thead>
+      if($num_rows>0){
+      ?>
+        <table cellspacing="1" id="tabla_venta" class="tablesorter">
+            <thead>
+                <tr>
+                  <th align="center">CLIENTE</th>
+                  <th align="center">TIPO DOCUMENTO</th>
+                  <th align="center">DOCUMENTO</th>
+                  <th align="center">MONEDA</th>
+                  <th align="center">IMPORTE TOTAL</th>
+                  <th align="center">FECHA EMISIÓN</th>
+                  <th align="center">ESTADO DOC.</th>
+                  <th>&nbsp;</th>
+                </tr>
+            </thead>
 
-        <tbody>
-        <?php
+            <tbody>
+                <?php
         while($dt1 = mysql_fetch_array($dts1)){
             if($dt1['tb_venta_est']=='CANCELADA'){
                 $total_ventas+=$dt1['tb_venta_tot'];
