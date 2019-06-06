@@ -75,6 +75,7 @@ if ($_POST['action_compra'] == "insertar") {
                  $tipo_renta=$_POST['cmb_tiporenta_id'];
             }
             $oCompra->insertar(
+                fecha_mysql($_POST['txt_com_fecreg']),
                 fecha_mysql($_POST['txt_com_fec']),
                 fecha_mysql($_POST['txt_com_fecven']),
                 $_POST['cmb_com_doc'],
@@ -124,6 +125,7 @@ if ($_POST['action_compra'] == "insertar") {
                 foreach ($duas as $dua) {
                     if(in_array($cont, $_POST['chk_invoice'])){
                     $oCompra->insertar(
+                        fecha_mysql($_POST['txt_com_fecreg']),
                         fecha_mysql($_POST['fec_ser'][$cont]),
                         fecha_mysql($_POST['txt_com_fecven']),
                         1,// tipo documento factura 1 invoice 19
@@ -600,6 +602,7 @@ if($_POST['action_compra']=="editar")
 
 		$oCompra->modificar(
 			$_POST['hdd_com_id'],
+            fecha_mysql($_POST['txt_com_fecreg']),
 			fecha_mysql($_POST['txt_com_fec']),
 			fecha_mysql($_POST['txt_com_fecven']),
 			$_POST['cmb_com_doc'],

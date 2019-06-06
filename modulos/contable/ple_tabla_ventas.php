@@ -187,7 +187,7 @@ $(function() {
                     $gravado=$dt1['tb_venta_gra'];$descuento="";$igv=$dt1['tb_venta_igv'];$exo=$dt1['tb_venta_exo'];
                     $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_venta_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_venta_tot'];$moneda=$dt1['cs_tipomoneda_cod'];
                     $tc = $dt1['tc'];
-                    if($tc<1) {$tc="1.000";}
+                    if($tc<1 || $moneda=="PEN") {$tc="1.000";}
                     if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
                         $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tc="";}
                     ?>

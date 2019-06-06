@@ -10,6 +10,7 @@ require_once("../proveedor/cProveedor.php");
 $oProveedor = new cProveedor();
 
 if($_POST['action']=="insertar"){
+    $fecreg=date('d-m-Y');
     $fec=date('d-m-Y');
     $dias=0;
     $fecven=date('d-m-Y');
@@ -20,6 +21,7 @@ if($_POST['action']=="insertar"){
 if($_POST['action']=="editar"){
     $dts= $oCompra->mostrarUno($_POST['com_id']);
     $dt = mysql_fetch_array($dts);
+    $fecreg	=mostrarFecha($dt['tb_compra_reg']);
     $fec	=mostrarFecha($dt['tb_compra_fec']);
     $fecven	=mostrarFecha($dt['tb_compra_fecven']);
 
@@ -97,6 +99,19 @@ if($_POST['action']=="editar"){
             if (e.target.value.length == 2) e.target.value = e.target.value + "-";
             if (e.target.value.length == 5) e.target.value = e.target.value + "-";
         }
+    });
+    $( "#txt_com_fecreg" ).datepicker({
+        minDate: "-1Y",
+        maxDate:"+0D",
+        yearRange: 'c-0:c+0',
+        changeMonth: true,
+        changeYear: false,
+        dateFormat: 'dd-mm-yy',
+        //altField: fecha,
+        //altFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: "../../images/calendar.gif",
+        buttonImageOnly: true
     });
 
     $( "#txt_com_fecven" ).datepicker({
@@ -1020,7 +1035,9 @@ if($_POST['action']=="editar"){
 
     <fieldset>
         <legend>Datos Principales</legend>
-        <label for="txt_com_fec">Fecha:</label>
+        <label for="txt_com_fecreg">Fecha Reg:</label>
+        <input name="txt_com_fecreg" placeholder="dd-mm-aaaa" class="fecha" id="txt_com_fecreg"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fecreg?>" size="10" maxlength="10">
+        <label for="txt_com_fec">Fecha Doc:</label>
         <input name="txt_com_fec" placeholder="dd-mm-aaaa" class="fecha" id="txt_com_fec"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fec?>" size="10" maxlength="10">
         <label for="txt_fecven_dias">Dias:</label>
         <input name="txt_fecven_dias" type="text" class="dias" id="txt_fecven_dias" value="<?php echo $dias?>" size="2" maxlength="5">

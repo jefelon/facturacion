@@ -182,7 +182,8 @@ $(function() {
                 $exo="";$ina="";$isc="";
                 $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_venta_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
                 $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
-                $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_compra_tipcam'];
+                $moneda=$dt1['cs_tipomoneda_cod'];$tipocambiov=$dt1['tb_compra_tipcam'];
+                if($tipocambiov<1 || $moneda=="PEN") {$tipocambiov="1.000";}
                 if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
                     $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov="";}
                 ?>
