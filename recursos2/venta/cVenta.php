@@ -58,7 +58,7 @@ class cVenta{
 	LEFT JOIN tb_producto p ON pr.tb_producto_id = p.tb_producto_id
 	LEFT JOIN tb_marca m ON p.tb_marca_id = m.tb_marca_id
 	LEFT JOIN tb_categoria cg ON p.tb_categoria_id = cg.tb_categoria_id
-	LEFT JOIN tb_unidad un ON ct.tb_unidad_id_bas = un.tb_unidad_id 
+	LEFT JOIN tb_unidad un ON ct.tb_unidad_id_equ = un.tb_unidad_id 
 	
 	LEFT JOIN tb_servicio s ON vd.tb_servicio_id = s.tb_servicio_id
 	
