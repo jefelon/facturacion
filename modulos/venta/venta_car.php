@@ -652,8 +652,12 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $dt1 = mysql_fetch_array($dts1);
         $precio_unitario	=$_SESSION['servicio_preven'][$unico_id][$indice];
         //tipo g/e/i ingresado
-        $tipo_item	= 1;
-        $linea_valor_unitario = $precio_unitario / 1.18;
+        $tipo_item	= 9;
+        if ($tipo_item==9) {
+            $linea_valor_unitario = $precio_unitario;
+        }else{
+            $linea_valor_unitario = $precio_unitario / 1.18;
+        }
         $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
         $linea_desc_x_item_percent=0;
         $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
@@ -661,34 +665,51 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $linea_igv=$linea_valor_venta_x_item*0.18;
         //tipo g/e/i ingresado
         $precio_unitario=$precio_unitario-$precio_unitario*($general_des/100);
-        $tipo_pro='Gravado';
-        $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-        $valor_venta = $valor_venta_unitario * $cantidad;
-        $precio_venta = $precio_unitario * $cantidad;
-        $ope_gravadas_total += $valor_venta;
-        $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-        $precio_venta = $precio_unitario * $cantidad;
-        $valor_venta = $valor_venta_unitario * $cantidad;
+        if ($tipo_item==9){
+            $tipo_pro='Exonerado';
+            $valor_venta_unitario = $precio_unitario;
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_exoneradas_total += $valor_venta;
+
+        }else if($tipo_item==1){
+            $tipo_pro='Gravado';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gravadas_total += $valor_venta;
+        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7){
+            $tipo_pro='Gratuito';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $precio_unitario * $cantidad;
+            $ope_gratuitas_total += $valor_venta;
+        }
+
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['servicio_tipdes'][$unico_id][$indice];
         $descuento_linea = $_SESSION['servicio_des'][$unico_id][$indice];
         //sumatoria factura
-        if($tipo_item==1){
+        if($tipo_item==1 || $tipo_item==9){
             $sub_total = $sub_total + $linea_valor_venta_x_item;
         }
         ?>
         <tr>
             <td>Servicio</td>
-            <td>Gravado</td>
+            <td>Exonerado</td>
             <td>&nbsp;</td>
             <td><?php echo $_SESSION['servicio_nom'][$unico_id][$indice] ?></td>
             <!--            <td>--><?php //echo $dt['tb_unidad_abr'];?><!--</td>-->
             <td>ZZ</td>
             <td align="right"><?php echo $cantidad?></td>
             <td align="right"><?php echo formato_money($linea_valor_unitario)?></td>
-            <td align="right"><?php echo formato_money($precio_unitario)?></td>
-            <td align="right">
-            </td>
+            <?php if ($tipo_item==9){ ?>
+                <td align="right"></td>
+                <td align="right"><?php echo formato_money($precio_unitario)?></td>
+            <?php } else{ ?>
+                <td align="right"><?php echo formato_money($precio_unitario)?></td>
+                <td align="right"></td>
+            <?php } ?>
             <td align="right">
             </td>
             <td align="right">
