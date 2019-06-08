@@ -156,6 +156,20 @@ while($dt = mysql_fetch_array($dts))
     $lab3=$dt['tb_venta_lab3'];
 
 }
+
+
+if($moneda==1){
+    $moneda  = "SOLES";
+    $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
+}
+
+
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
 $num_rows_vp= mysql_num_rows($rws1);
@@ -211,7 +225,7 @@ if($num_rows_vp>0){
         $pago_mon=formato_money($rw1['tb_ventapago_mon']);
 
         $texto_pago1[]=$forma.' '.$modo;
-        $texto_pago2[]=$forma.' '.$modo.': S/.  '.$pago_mon;
+        $texto_pago2[]=$forma.' '.$modo.':'.$mon.'  '.$pago_mon;
     }
     mysql_free_result($rws1);
 }
@@ -416,22 +430,22 @@ if($impresion=='pdf')ob_start();
                             <tr>
                                 <td colspan="2" class="izquierda mt-5 negrita">OP. GRAVADA:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($valven) ?></td>
+                                     <?php echo $mon . formato_money($valven) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="izquierda negrita">OP. EXONERADA:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($exo) ?></td>
+                                    <?php echo $mon . formato_money($exo) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="izquierda negrita">IGV:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($igv) ?></td>
+                                    <?php echo $mon . formato_money($igv) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($tot) ?></td>
+                                    <?php echo $mon . formato_money($tot) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>

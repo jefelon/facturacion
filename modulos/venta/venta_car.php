@@ -652,7 +652,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $dt1 = mysql_fetch_array($dts1);
         $precio_unitario	=$_SESSION['servicio_preven'][$unico_id][$indice];
         //tipo g/e/i ingresado
-        $tipo_item	= 9;
+        $tipo_item	= $_SESSION['servicio_tip'][$unico_id][$indice];
         if ($tipo_item==9) {
             $linea_valor_unitario = $precio_unitario;
         }else{

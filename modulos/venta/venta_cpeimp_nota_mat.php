@@ -127,7 +127,7 @@ while($dt = mysql_fetch_array($dts))
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
-    $moneda=1;
+    $moneda=$dt["cs_tipomoneda_id"];
 
 
     $estsun=$dt['tb_venta_estsun'];
@@ -144,6 +144,19 @@ while($dt = mysql_fetch_array($dts))
     $lab3=$dt['tb_venta_lab3'];
 
 }
+
+
+if($moneda==1){
+    $moneda  = "SOLES";
+    $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
+}
+
 
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
@@ -358,8 +371,8 @@ if($impresion=='pdf')ob_start();
                                     <tr>
                                         <td class="izquierda" style="width: 10mm"><?php echo $dt1['tb_ventadetalle_can']?></td>
                                         <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom']?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin'])?></td>
-                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
+                                        <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>
 
                                 <?php } mysql_free_result($dts1);?>
@@ -369,8 +382,8 @@ if($impresion=='pdf')ob_start();
                                 <tr>
                                     <td class="izquierda" style="width: 10mm"><?php echo $dt2['tb_ventadetalle_can'];?></td>
                                     <td class="izquierda" style="width: 30mm"><?php echo ''.$dt2['tb_servicio_nom'].'';?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin'])?></td>
-                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preunilin']*$dt1['tb_ventadetalle_can'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'])?></td>
+                                    <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                 </tr>
                             <?php  } mysql_free_result($dts2); ?>
                         </table>
@@ -392,10 +405,10 @@ if($impresion=='pdf')ob_start();
                             <tbody>
                             <tr>
                                 <td colspan="2" class="izquierda negrita" >TOTAL:</td>
-                                <td colspan="2"  class="derecha negrita" style="text-align: right;">S/ <?php echo  formato_money($tot)?></td>
+                                <td colspan="2"  class="derecha negrita" style="text-align: right;"><?php echo $mon . formato_money($tot)?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot)?></td>
+                                <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>

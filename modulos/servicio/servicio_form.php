@@ -316,6 +316,7 @@ if($_POST['action']=="editar"){
                 var ser_nom = $('#txt_ser_nom').val();
                 var ser_can = $('#txt_ser_can_servicio').val();
                 var ser_pre = $('#txt_ser_pre').val();
+                var ser_tip =$('#cmb_servicio_tip').val();
                 $.ajax({
                     type: "POST",
                     url: "../servicio/servicio_reg.php",
@@ -330,7 +331,7 @@ if($_POST['action']=="editar"){
                     success: function(data){
                         $('#msj_servicio').html(data.ser_msj);
                         $('#txt_fil_ser_nom').val(data.ser_nom);
-                        venta_car_servicio('agregar_servicio',data.ser_id,ser_nom,ser_can, ser_pre);
+                        venta_car_servicio('agregar_servicio',data.ser_id,ser_nom,ser_can, ser_pre,ser_tip);
                         catalogo_servicio_tabla();
                         if(data.ser_act=='editar_presentacion')
                         {
@@ -383,7 +384,7 @@ if($_POST['action']=="editar"){
         });
     });
 
-    function venta_car_servicio(act,idf,ser_nom,ser_can,ser_pre){
+    function venta_car_servicio(act,idf,ser_nom,ser_can,ser_pre,ser_tip){
         $.ajax({
             type: "POST",
             url: "../venta/venta_car.php",
@@ -398,7 +399,7 @@ if($_POST['action']=="editar"){
                 ser_des: 0,//Descuento
                 ser_rad_tipdes: $("input[name='rad_ser_tip_des_"+idf+"']:checked").val(),
                 ser_pre: ser_pre,
-                ser_tip: 1
+                ser_tip: ser_tip
             }),
             beforeSend: function() {
                 $('#div_venta_car_tabla').addClass("ui-state-disabled");
@@ -435,7 +436,14 @@ if($_POST['action']=="editar"){
                     <input type="text" name="txt_ser_nom" size='41' id="txt_ser_nom" value="<?php echo $nom?>" />
                 </p>
             </tr>
-
+            <tr>
+                <p><label for="txt_ser_nom" style="width: 68px;display: inline-block">Tipo IGV:</label>
+                    <select name="cmb_servicio_tip" id="cmb_servicio_tip">
+                        <option value="1">GRABADO</option>
+                        <option value="9">EXONERADO</option>
+                    </select>
+                </p>
+            </tr>
             <!--        <tr class="servicio_existe" style="">-->
             <!--          <p><label for="txt_ser_des" style="width: 68px;display: inline-block">Descripción:</label>-->
             <!--          <textarea name="txt_ser_des" cols="40" id="txt_ser_des">--><?php //echo $des?><!--</textarea>-->

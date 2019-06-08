@@ -414,7 +414,7 @@ $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
 while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
-    $valor_unitario_linea = $dt["tb_ventadetalle_preunilin"];
+    $valor_unitario_linea = $dt["tb_ventadetalle_preuni"];
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
 
@@ -422,7 +422,6 @@ while($dt = mysql_fetch_array($dts)){
         if ($dt['tb_ventadetalle_serie']!=''){
             $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
         }
-
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                 
@@ -430,31 +429,22 @@ while($dt = mysql_fetch_array($dts)){
 
                 $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
                 while($lote = mysql_fetch_array($lotes)) {
-                    $html.= '- L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
+                    $html.= '- L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].'';
                 }
-
         $html .= '</td>
                     <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
                     <td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
-
     }else{
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                 
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
-
-                $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
-                while($lote = mysql_fetch_array($lotes)) {
-                    $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
-                }
-
-        $html .= '</td>
-                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] .'</td>';
+        $html .= '<td style="text-align: center">ZZ</td>
                   <td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
-                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
+                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_preuni'] * $dt['tb_ventadetalle_can']) . '</td>';
     }
     $html.='</tr>';
     $cont++;
