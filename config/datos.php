@@ -1,7 +1,6 @@
 <?php
+session_start();
 $d_dominio="www.a-zetasoft.com";
-//$d_dominio_app="www.ssdhosting.com.pe/facturacion/";
-//$d_documentos_app="www.ssdhosting.com.pe/facturacion/recursos/venta/";
 $d_dominio_app=$_SERVER['SERVER_NAME'];
 $d_documentos_app=$_SERVER['SERVER_NAME']."/recursos/venta/";
 $d_email_emp=$_SESSION['empresa_ema'];
