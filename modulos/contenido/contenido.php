@@ -207,6 +207,7 @@ $menu_vendedor=
   </li>
   <li class="topmenu"><a href="#" >Caja</a>
   	<ul>
+  	  <li><a href="../cajadetalle">Apertura y Cierre</a></li>
 	  <li><a href="../ingreso/">Ingresos</a></li>
 	  <li><a href="../egreso/">Egresos</a></li>
 		<li><a href="../transferencia/">Transferencias</a></li>

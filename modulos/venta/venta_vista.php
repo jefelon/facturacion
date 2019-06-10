@@ -481,6 +481,17 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                 text: true
             });
 
+            <?php
+            if ($_SESSION['caja_estado'] == 1) {
+            ?>
+            $("#btn_agregar").button("option", "disabled", false);
+            <?php
+            } elseif($_SESSION['caja_estado'] == 0) {
+            ?>
+            $("#btn_agregar").button("option", "disabled", true);
+            <?php }?>
+
+
             venta_filtro();
 
             $('#chk_ven_anu').change( function(){
