@@ -600,7 +600,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                         <td>
                             <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                 <tr>
-                                    <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_form('insertar')">Agregar</a></td>
+                                    <td width="6%" align="left" valign="middle"><button id="btn_agregar" title="Agregar"  onClick="venta_form('insertar')">Agregar</button></td>
                                     <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                                     <td width="6%" align="left" valign="middle" nowrap>
                                         <a href="#" onClick="modo('venta_tabla.php')" class="btn_modo" title="Modo Vista Ventas">Ventas</a>
