@@ -540,7 +540,34 @@ function venta_asiento_form(act,idf){
         }
     });
 }
-
+function servicio_form_i(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "../servicio/servicio_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: 		act,
+            ser_id:			idf,
+            aut: 			1,
+            vista:			'hdd_ser_id'
+        }),
+        beforeSend: function(a) {
+            $('#div_servicio_form').dialog("open");
+            $('#div_servicio_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_servicio_form').html(html);
+        },
+        complete: function(){
+            /*if(act=='insertar' & $('#hdd_ven_ser_id').val()=="")
+            {
+                $('#txt_ser_doc').val($('#txt_ven_ser_doc').val());
+                $('#txt_ser_nom').val($('#txt_ven_ser_nom').val());
+            }*/
+        }
+    });
+}
 
 $(function() {
 	$('#btn_actualizar').button({
@@ -733,7 +760,7 @@ $(function() {
                     <td>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
-                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_asiento_form()">Agregar</a></td>
+                      <td width="6%" align="left" valign="middle"><a id="btn_agregar" title="Agregar" href="#" onClick="venta_form('insertar')">Agregar</a></td>
 
                         <td width="6%" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
                       <td width="6%" align="left" valign="middle" nowrap>

@@ -91,9 +91,7 @@ $(document).ready(function() {
                              <td><?php echo formato_money($dt1['tb_servicio_pre'])?></td>                            
                             <td><?php echo $dt1['tb_categoria_nom']?></td>                            
                             <td><?php echo $dt1['tb_servicio_est']?></td>
-                            <?php if($dt1['tb_servicio_id']!='1'){?>
-                                <td align="center" nowrap><a class="btn_editar" href="#editar" onClick="servicio_form('editar','<?php echo $dt1['tb_servicio_id']?>')">Editar</a><a class="btn_eliminar" href="#eliminar" onClick="eliminar_servicio('<?php echo $dt1['tb_servicio_id']?>')"> Eliminar</a></td>
-                            <?php }?>
+                            <td align="center" nowrap><a class="btn_editar" href="#editar" onClick="servicio_form('editar','<?php echo $dt1['tb_servicio_id']?>')">Editar</a><a class="btn_eliminar" href="#eliminar" onClick="eliminar_servicio('<?php echo $dt1['tb_servicio_id']?>')"> Eliminar</a></td>
                         </tr>
                 <?php
                 	}

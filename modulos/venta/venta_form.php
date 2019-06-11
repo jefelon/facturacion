@@ -1164,6 +1164,8 @@ if($_POST['action']=="editar"){
                 $('#txt_ven_cli_dir').val(data.direccion);
                 if(data.tipo==1 || data.tipo==3){
                     $("#hdd_ven_cli_tip").val(1);
+                }else if(data.tipo==2){
+                    $("#hdd_ven_cli_tip").val(2);
                 }
                 $('#txt_ven_cli_est').val(data.estado);
                 $('#hdd_ven_cli_ret').val(data.retiene);
@@ -1581,7 +1583,7 @@ if($_POST['action']=="editar"){
             $('#txt_ven_cli_doc').focus();
         });
 
-        venta_car();
+        // venta_car();
 
         $("#cmb_ven_est").change(function(){
             verificar_numdoc();
@@ -2142,6 +2144,28 @@ if($_POST['action']=="editar"){
             }
         });
 
+        $( "#div_servicio_form" ).dialog({
+            title:'Información de Servicio',
+            autoOpen: false,
+            resizable: false,
+            height: 200,
+            width: 480,
+            modal: true,
+            position: 'center',
+            buttons: {
+                Guardar: function() {
+                    $("#for_ser").submit();
+                },
+                Cancelar: function() {
+                    $('#for_ser').each (function(){this.reset();});
+                    $( this ).dialog("close");
+                }
+            },
+            close: function()
+            {
+                $("#div_servicio_form").html('Cargando...');
+            }
+        });
 
         $('#txt_bus_pro_codbar').keypress(function(e){
             if(e.which == 13){
@@ -2856,7 +2880,7 @@ if($_POST['action']=="editar"){
                     <div id="cuadro-contain" class="ui-widget">
                                      <legend></legend>
                         <?php if($_POST['vista']!='cange'){?>
-                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
+                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="servicio_form_i('insertar')">Agregar</a>
                             <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
                         <?php }?>
                         <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>
@@ -2901,6 +2925,8 @@ if($_POST['action']=="editar"){
 </div>
 
 <div id="div_lote_venta_form">
+</div>
+<div id="div_servicio_form">
 </div>
 <script type="text/javascript">
     //catalogo_venta_tab();
