@@ -6,6 +6,7 @@ class cVenta{
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	WHERE v.tb_venta_fec = '$fec1'
 	AND v.tb_documento_id = '$doc_id'
 	AND v.tb_venta_ser = '$ser'

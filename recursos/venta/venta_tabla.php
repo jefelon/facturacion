@@ -9,18 +9,6 @@ require_once ("../../modulos/formatos/numletras.php");
 require_once ("../../modulos/formatos/formato.php");
 require_once ("../../modulos/empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
-require_once ("../../modulos/usuarios/cUsuario.php");
-$oUsuario = new cUsuario();
-require_once("../../modulos/formula/cFormula.php");
-$oFormula = new cFormula();
-
-$rs = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
-$dt = mysql_fetch_array($rs);
-$dato = $dt['tb_formula_dat'];
-
-require_once ("../../modulos/lote/cLote.php");
-$oLote = new cLote();
-
 $dts=$oEmpresa->mostrarUno(1);
 $dt = mysql_fetch_array($dts);
 $ruc_empresa=$dt['tb_empresa_ruc'];
@@ -29,8 +17,7 @@ $direccion_defecto = $dt['tb_empresa_dir'];
 $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
 $empresa_logo = '../../modulos/empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
-
-$dts1=$oVenta->mostrar_filtro_cui($_SESSION['cliente_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),$_POST['cmb_fil_ven_doc'],$_POST['cmb_fil_ven_est'],$_SESSION['cliente_id']);
+$dts1=$oVenta->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),$_POST['cmb_fil_ven_doc'],$_POST['txt_fil_ser'],$_POST['txt_fil_cor'],$_POST['txt_fil_mon']);
 $num_rows= mysql_num_rows($dts1);
 
 ?>
