@@ -463,6 +463,9 @@ if ($impresion == 'pdf') ob_start();
                                 </td>
                             </tr>
                             <tr>
+                                <td colspan="4" style="width: 80mm;" class="centrado">Le atendió:<?php echo $texto_vendedor ?></td>
+                            </tr>
+                            <tr>
                                 <td colspan="4" style="width: 80mm;" class="centrado">Gracias por su preferencia.
                                 </td>
                             </tr>
