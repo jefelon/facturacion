@@ -180,11 +180,11 @@ $(function() {
                 <?php
                 $tipo_baseimp=$dt1['tb_compra_baseimp_tip'];
                 $exo="";$ina="";$isc="";
-                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_venta_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
-                $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
+                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_compra_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
+                $ina=$dt1['tb_compra_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_compra_otrcar'];$tot=$dt1['tb_compra_tot'];
                 $moneda=$dt1['cs_tipomoneda_cod'];$tipocambiov=$dt1['tb_compra_tipcam']; $valorventa=$dt1['tb_compra_valven'];
-                if($tipocambiov<1 || $moneda=="PEN") {$tipocambiov="1.000";}
-                if($moneda=="USD")
+                if($tipocambiov<1 && $moneda=="PEN") {$tipocambiov=1.000;}
+                if($moneda=="USD" && $tipocambiov>1)
                 {
                     $gravado=round($gravado*$tipocambiov,2);
                     $igv=round($igv*$tipocambiov,2);
@@ -193,7 +193,7 @@ $(function() {
                     $isc=round($isc*$tipocambiov,2);
                     $tot=round($tot*$tipocambiov,2);
                 }
-                if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
+                if($dt1['tb_compra_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
                     $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov=""; $valorventa="";}
                 ?>
                 <!--14--><td><?php if($tipo_baseimp==1){echo $gravado;} ?></td>

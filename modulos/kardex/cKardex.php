@@ -3,16 +3,6 @@ require_once ("../formatos/formato.php");
 
 class cKardex{
 	function insertar($xac,$tipreg,$cod,$fec,$tip,$doc_id,$numdoc,$tipope_id,$des,$ope_id,$alm_id,$usu_id,$emp_id){
-        if ($tipope_id==9){
-            $resultado_fechora = date('Y-m-d H:i:s', strtotime('first day of January '.date('Y') ));
-            $resultado_fec = date('Y-m-d H:i:s', strtotime('first day of January '.date('Y') ));
-        }else{
-            $duration = time() - strtotime("today");
-            $resultado_fechora = date('Y-m-d H:i:s', strtotime("+$duration seconds", strtotime($fec)));
-            $resultado_fec = date('Y-m-d H:i:s', strtotime("+$duration seconds", strtotime($fec)));
-        }
-
-
 	$sql = "INSERT INTO tb_kardex(
 	`tb_kardex_xac` ,
 	`tb_kardex_reg` ,
@@ -30,9 +20,8 @@ class cKardex{
 	`tb_empresa_id`
 	)
 	VALUES (
-	'$xac','$resultado_fechora' ,  '$tipreg',  '$cod',  '$resultado_fec',  '$tip',  '$doc_id',  '$numdoc',  '$tipope_id',  '$des', '$ope_id',  '$alm_id',  '$usu_id',  '$emp_id'
+	'$xac', NOW( ) ,  '$tipreg',  '$cod',  '$fec',  '$tip',  '$doc_id',  '$numdoc',  '$tipope_id',  '$des', '$ope_id',  '$alm_id',  '$usu_id',  '$emp_id'
 	);";
-
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	

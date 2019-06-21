@@ -92,7 +92,7 @@ $(function() {
             	if($dt1['tb_tipoperacion_id']=='1')$operacion='STOCK INICIAL';
             	if($dt1['tb_tipoperacion_id']=='2')$operacion='COMPRA';
             	if($dt1['tb_tipoperacion_id']=='3')$operacion='VENTA';
-            	//if($dt1['tb_tipoperacion_id']=='9')$operacion='NOTA DE ALMACEN';
+            	if($dt1['tb_tipoperacion_id']=='9')$operacion='NOTA DE ALMACEN';
             	if($dt1['tb_tipoperacion_id']=='4')$operacion='TRASPASO';
             	if($dt1['tb_tipoperacion_id']=='5')$operacion='NOTA DE VENTA';
             	if($dt1['tb_tipoperacion_id']=='11')$operacion='NOTA DE CREDITO';

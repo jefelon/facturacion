@@ -56,7 +56,7 @@ if ($_POST['action_compra'] == "insertar") {
         //$estado='CONTADO';
 
         if ($_POST['cmb_com_doc'] == '20' || $_POST['cmb_com_doc'] == '21') {
-            if ($_POST['cmb_com_tip'] == '1'){
+            if ($_POST['cmb_com_tip'] !=""){
                 $dts = $oCompra->verificar_compra($_POST['txt_com_ser_nota'].'-'.$_POST['txt_com_num_nota']);
                 $dt = mysql_fetch_array($dts);
                 $com_id = $dt['tb_compra_id'];
@@ -224,7 +224,7 @@ if ($_POST['action_compra'] == "insertar") {
 
                     $oKardex->modificar_codigo($kar_id, $kar_id);
                 }
-            }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19'){
+            }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19' or $_POST['cmb_com_doc']=='23'){
                 //registro de kardex
                 $xac = 1;
                 $tipo_registro = 1;//1 automatico 2 manual
