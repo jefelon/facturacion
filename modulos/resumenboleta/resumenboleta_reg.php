@@ -12,7 +12,7 @@ $num = mysql_num_rows($dts1);
 $num = 0;
 while($dt1 = mysql_fetch_array($dts1))
 {
-	$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id']);
+	$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id'],2);
 	$d=mysql_num_rows($dts2);
 
 	if($d==0)
@@ -63,7 +63,7 @@ if($num>0)
 		$estado="";
 		$insertar=0;
 
-		$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id']);
+		$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id'],2);
 		$d=mysql_num_rows($dts2);
 		if($d==0)
         {
@@ -236,12 +236,12 @@ if($num>0)
     mysql_free_result($dts1);
 
 
-    $data['msj']="Registrado $cod Correctamente. N° Filas $item.";
+    $data['msj'].="Registrado $cod Correctamente. N° Filas $item.";
 
 }
 else
 {
-    $data['msj']='No existe Comprobantes para declarar.';
+    //$data['msj'].=' / No existe Notas de Crédito y Débito para declarar.';
 }
 //================================fin nota de crédito
 
