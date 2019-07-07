@@ -9,6 +9,14 @@ require_once ("../../modulos/formatos/numletras.php");
 require_once ("../../modulos/formatos/formato.php");
 require_once ("../../modulos/empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
+
+require_once("../../modulos/formula/cFormula.php");
+$oFormula = new cFormula();
+
+$rs = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
+$dt = mysql_fetch_array($rs);
+$dato = $dt['tb_formula_dat'];
+
 $dts=$oEmpresa->mostrarUno(1);
 $dt = mysql_fetch_array($dts);
 $ruc_empresa=$dt['tb_empresa_ruc'];

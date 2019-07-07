@@ -1,5 +1,6 @@
 <?php
 session_start();
+$_SESSION['autentificado2']		= "SI";
 require_once ("../../config/Cado.php");
 require_once ("cVenta.php");
 $oVenta = new cVenta();
