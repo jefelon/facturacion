@@ -1105,6 +1105,20 @@ if($_POST['action']=="editar"){
                        style="text-align:right; font-size:14px" value=""
                        maxlength="8" size="10">
             </div>
+            <div id="tipobase" style="width: 45%">
+                <label for="cmb_baseimp_tip">Tipo de base imponible - IGV:</label>
+                <select name="cmb_baseimp_tip" id="cmb_baseimp_tip">
+                    <option value="1" selected="selected" title="Base imponible de las adquisiciones gravadas que dan derecho a crédito fiscal y/o saldo a favor por exportación, destinadas exclusivamente a operaciones gravadas y/o de exportación
+                    ">BI1 - CRÉDITO FIZCAL
+                    </option>
+                    <option value="2" title="Base imponible de las adquisiciones gravadas que dan derecho a crédito fiscal y/o saldo a favor por exportación, destinadas a operaciones gravadas y/o de exportación y a operaciones no gravadas
+                    ">BI2 - PRÓRRATA
+                    </option>
+                    <option value="3" title="Base imponible de las adquisiciones gravadas que no dan derecho a crédito fiscal y/o saldo a favor por exportación, por no estar destinadas a operaciones gravadas y/o de exportación.
+                    ">BI3 - COSTO/GASTO
+                    </option>
+                </select>
+            </div>
         <?php }?>
         <?php //if($_POST['action']=='editar') echo 'COMPRA: '.$est?>
         <?php if($_POST['action']=='editar'){?>
