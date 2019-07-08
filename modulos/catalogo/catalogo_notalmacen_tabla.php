@@ -59,6 +59,7 @@ if($_POST['tipo']==1)
 <script type="text/javascript">
 
 $('.moneda').autoNumeric({
+    mDec: '2',
 	aSep: ',',
 	aDec: '.',
 	//aSign: 'S/. ',

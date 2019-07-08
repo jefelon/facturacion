@@ -180,17 +180,27 @@ $(function() {
                 <?php
                 $tipo_baseimp=$dt1['tb_compra_baseimp_tip'];
                 $exo="";$ina="";$isc="";
-                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_venta_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
-                $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
-                $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_compra_tipcam'];
-                if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
-                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov="";}
+                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_compra_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
+                $ina=$dt1['tb_compra_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_compra_otrcar'];$tot=$dt1['tb_compra_tot'];
+                $moneda=$dt1['cs_tipomoneda_cod'];$tipocambiov=$dt1['tb_compra_tipcam']; $valorventa=$dt1['tb_compra_valven'];
+                if($tipocambiov<1 && $moneda=="PEN") {$tipocambiov=1.000;}
+                if($moneda=="USD" && $tipocambiov>1)
+                {
+                    $gravado=round($gravado*$tipocambiov,2);
+                    $igv=round($igv*$tipocambiov,2);
+                    $valorventa=round($valorventa*$tipocambiov,2);
+                    $exo=round($exo*$tipocambiov,2);
+                    $isc=round($isc*$tipocambiov,2);
+                    $tot=round($tot*$tipocambiov,2);
+                }
+                if($dt1['tb_compra_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
+                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov=""; $valorventa="";}
                 ?>
                 <!--14--><td><?php if($tipo_baseimp==1){echo $gravado;} ?></td>
                 <!--15--><td><?php if($tipo_baseimp==1){echo $igv;} ?></td>
-                <!--16--><td><?php if($tipo_baseimp==2){echo $dt1['tb_compra_valven'];} ?></td>
+                <!--16--><td><?php if($tipo_baseimp==2){echo $valorventa;} ?></td>
                 <!--17--><td><?php if($tipo_baseimp==2){echo $igv;} ?></td>
-                <!--18--><td><?php if($tipo_baseimp==3){echo $dt1['tb_compra_valven'];}?></td>
+                <!--18--><td><?php if($tipo_baseimp==3){echo $valorventa;}?></td>
                 <!--19--><td><?php if($tipo_baseimp==3){echo $igv;} ?></td>
                 <!--20--><td><?php echo $exo; ?></td>
                 <!--21--><td><?php echo $isc; ?></td>

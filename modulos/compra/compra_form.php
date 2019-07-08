@@ -10,6 +10,7 @@ require_once("../proveedor/cProveedor.php");
 $oProveedor = new cProveedor();
 
 if($_POST['action']=="insertar"){
+    $fecreg=date('d-m-Y');
     $fec=date('d-m-Y');
     $dias=0;
     $fecven=date('d-m-Y');
@@ -20,6 +21,7 @@ if($_POST['action']=="insertar"){
 if($_POST['action']=="editar"){
     $dts= $oCompra->mostrarUno($_POST['com_id']);
     $dt = mysql_fetch_array($dts);
+    $fecreg	=mostrarFecha($dt['tb_compra_reg']);
     $fec	=mostrarFecha($dt['tb_compra_fec']);
     $fecven	=mostrarFecha($dt['tb_compra_fecven']);
 
@@ -97,6 +99,19 @@ if($_POST['action']=="editar"){
             if (e.target.value.length == 2) e.target.value = e.target.value + "-";
             if (e.target.value.length == 5) e.target.value = e.target.value + "-";
         }
+    });
+    $( "#txt_com_fecreg" ).datepicker({
+        minDate: "-1Y",
+        maxDate:"+0D",
+        yearRange: 'c-0:c+0',
+        changeMonth: true,
+        changeYear: false,
+        dateFormat: 'dd-mm-yy',
+        //altField: fecha,
+        //altFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: "../../images/calendar.gif",
+        buttonImageOnly: true
     });
 
     $( "#txt_com_fecven" ).datepicker({
@@ -649,7 +664,7 @@ if($_POST['action']=="editar"){
         });
         $('#txt_com_fecven').keyup(function(e) {
             var patron = new Array(2, 2, 4);
-                mascara(this,'-',patron,false);
+            mascara(this,'-',patron,false);
         });
 
         $('#cmb_com_doc').change(function(e) {
@@ -1020,7 +1035,9 @@ if($_POST['action']=="editar"){
 
     <fieldset>
         <legend>Datos Principales</legend>
-        <label for="txt_com_fec">Fecha:</label>
+        <label for="txt_com_fecreg">Fecha Reg:</label>
+        <input name="txt_com_fecreg" placeholder="dd-mm-aaaa" class="fecha" id="txt_com_fecreg"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fecreg?>" size="10" maxlength="10">
+        <label for="txt_com_fec">Fecha Doc:</label>
         <input name="txt_com_fec" placeholder="dd-mm-aaaa" class="fecha" id="txt_com_fec"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fec?>" size="10" maxlength="10">
         <label for="txt_fecven_dias">Dias:</label>
         <input name="txt_fecven_dias" type="text" class="dias" id="txt_fecven_dias" value="<?php echo $dias?>" size="2" maxlength="5">
@@ -1072,7 +1089,7 @@ if($_POST['action']=="editar"){
                 <option value="1" selected="selected">Valor Venta(sin IGV)</option>
                 <option value="2">Precio Venta(con IGV)</option>
             </select>
-            <div id="nota-debito-credito" style="display:none;width: 45%">
+            <div id="nota-debito-credito" style="display:none;">
                 <label for="cmb_com_tip">Tipo:</label>
                 <select name="cmb_com_tip" id="cmb_com_tip">
                     <option value="0" selected="selected">-</option>
@@ -1221,8 +1238,8 @@ if($_POST['action']=="editar"){
                                                 <td title="Detalle de Dua"><input type="text" value="<?php echo $dt2['tb_compra_numdoc']?>" name="dua[]"></td>
                                                 <td align="right" nowrap="" title="Proveedor"><?php echo $prov['tb_proveedor_nom']?></td>
                                                 <td align="right" nowrap="" title="Servicio"><?php echo $comp_det['tb_servicio_nom']?></td>
-                                                <td align="right" nowrap="" title="Importe Dolares"> <input type="text" class="moneda_" name="imp_dol[]" value="<?php echo $dt2['tb_compra_tot']?>"> </td>
-                                                <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda_" name="imp_sol[]" value="<?php echo $dt2['tb_compra_tot']* $dt2['tb_compra_tipcam']?>"></td>
+                                                <td align="right" nowrap="" title="Importe Dolares"> <input type="text" class="moneda" name="imp_dol[]" value="<?php echo $dt2['tb_compra_tot']?>"> </td>
+                                                <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="<?php echo $dt2['tb_compra_tot']* $dt2['tb_compra_tipcam']?>"></td>
                                             </tr>
                                         <?php }?>
                                     <?php }else{?>
@@ -1235,11 +1252,11 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Servicio">SEGURO</td>
 
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text"
-                                                                                                       class="moneda_"
+                                                                                                       class="moneda"
                                                                                                        name="imp_dol[]"
                                                                                                        placeholder="0.00"></td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text"
-                                                                                                     class="moneda_"
+                                                                                                     class="moneda"
                                                                                                      name="imp_sol[]"
                                                                                                      placeholder="0.00"></td>
                                             <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice" value="0"></td>
@@ -1247,19 +1264,19 @@ if($_POST['action']=="editar"){
                                         <tr>
                                             <td title="Fecha"><input type="text"  name="fec_ser[]" class="txt_com_fec fecha" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
                                             <td title="Detalle de Dua"><input type="text" placeholder="F066-35053"
-                                                                               name="dua[]"></td>
+                                                                              name="dua[]"></td>
                                             <input type="hidden" name="proveedor[]" value="10" >
                                             <td align="right">ADVALOREM ADUANAS</td>
                                             <input type="hidden" name="servicio[]" value="10">
                                             <td align="right" nowrap="" title="Servicio">ADVALOREM</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input id="imp_dol1"
-                                                                                                        type="text"
-                                                                                                       class="moneda_"
+                                                                                                       type="text"
+                                                                                                       class="moneda"
                                                                                                        name="imp_dol[]"
                                                                                                        placeholder="5.89">
                                             </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text"
-                                                                                                     class="moneda_"
+                                                                                                     class="moneda"
                                                                                                      name="imp_sol[]"
                                                                                                      placeholder="19.00"></td>
                                             <td align="right">
@@ -1273,8 +1290,8 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Proveedor">TALMA SERVICIOS AEROPORTUARIOS</td>
                                             <input type="hidden" name="servicio[]" value="11">
                                             <td align="right" nowrap="" title="Servicio">ALMACENAJE, ESTIBA</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"> <input id="imp_dol2" type="text" class="moneda_" name="imp_dol[]" placeholder="150.60"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda_" name="imp_sol[]" placeholder="485.68"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"> <input id="imp_dol2" type="text" class="moneda" name="imp_dol[]" placeholder="150.60"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="485.68"></td>
                                             <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice2" value="2"></td>
                                         </tr>
                                         <tr>
@@ -1284,8 +1301,8 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Proveedor">SCHENKER PERU SRL</td>
                                             <input type="hidden" name="servicio[]" value="12">
                                             <td align="right" nowrap="" title="Servicio">TRAMITE DOCUMENTARIO</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" id="imp_dol3" class="moneda_" name="imp_dol[]" placeholder="110.00"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda_" name="imp_sol[]" placeholder="354.75"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" id="imp_dol3" class="moneda" name="imp_dol[]" placeholder="110.00"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="354.75"></td>
                                             <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice3" value="3"></td>
                                         </tr>
                                         <tr>
@@ -1295,8 +1312,8 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Proveedor">MILLENNIUM AGENES DE ADUANA SAC</td>
                                             <input type="hidden" name="servicio[]" value="13">
                                             <td align="right" nowrap="" title="Servicio">GASTOS OPERATIVOS</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda_" id="imp_dol4" name="imp_dol[]" placeholder="247.93"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda_" name="imp_sol[]" placeholder="806.02"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" id="imp_dol4" name="imp_dol[]" placeholder="247.93"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="806.02"></td>
                                             <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice4" value="4"></td>
                                         </tr>
                                         <tr>
@@ -1306,8 +1323,8 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Proveedor">PACIFICO DEL SUR SAC</td>
                                             <input type="hidden" name="servicio[]" value="14">
                                             <td align="right" nowrap="" title="Servicio">TRANSPORTE LM-AQP</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda_" name="imp_dol[]" id="imp_dol5" placeholder="15.80"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda_" name="imp_sol[]" placeholder="50.85"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" name="imp_dol[]" id="imp_dol5" placeholder="15.80"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="50.85"></td>
                                             <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice5" value="5"></td>
                                         </tr>
                                     <?php }?>
@@ -1315,18 +1332,17 @@ if($_POST['action']=="editar"){
                                 </table>
     </fieldset>
 
-        </form>
-                             </div>
-                        </td>
-                        <td valign="top">
+</form>
+</div>
+</td>
+<td valign="top">
 
-                        </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">&nbsp;</td>
-                        </tr>
-                        </tbody>
-             </table>
-        </div>
-    </div>
-
+</td>
+</tr>
+<tr>
+    <td colspan="2">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>

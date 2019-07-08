@@ -2,7 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/modulos/catalogo/catalogo_notalmacen_tabla.php" afterPath="$PROJECT_DIR$/modulos/catalogo/catalogo_notalmacen_tabla.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/catalogo/catalogo_stock.php" afterPath="$PROJECT_DIR$/modulos/catalogo/catalogo_stock.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/compra/cCompra.php" afterPath="$PROJECT_DIR$/modulos/compra/cCompra.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/compra/compra_anular.php" afterPath="$PROJECT_DIR$/modulos/compra/compra_anular.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/compra/compra_car.php" afterPath="$PROJECT_DIR$/modulos/compra/compra_car.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/compra/compra_form.php" afterPath="$PROJECT_DIR$/modulos/compra/compra_form.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/compra/compra_reg.php" afterPath="$PROJECT_DIR$/modulos/compra/compra_reg.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/contable/ple_tabla_compras.php" afterPath="$PROJECT_DIR$/modulos/contable/ple_tabla_compras.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/contable/ple_tabla_ventas.php" afterPath="$PROJECT_DIR$/modulos/contable/ple_tabla_ventas.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,82 +60,130 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Cado.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/Cado.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="producto_complete_nom.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/producto/producto_complete_nom.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cProducto.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/producto/cProducto.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2839">
+              <caret line="167" column="32" lean-forward="false" selection-start-line="167" selection-start-column="32" selection-end-line="167" selection-end-column="32" />
+              <folding>
+                <marker date="1562607202385" expanded="true" signature="132:554" ph="INSERT INTO tb_producto... " />
+                <marker date="1562607202385" expanded="true" signature="817:911" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="867:910" ph="SELECT MAX(t... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="1078:1331" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="2104:2655" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="2112:2422" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="2703:2949" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="3083:3220" ph="SELECT * FRO... tb_productoproveedor" />
+                <marker date="1562607202385" expanded="true" signature="3363:3829" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="3371:3748" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="3858:4113" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="3866:4037" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="4212:4669" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="4222:4590" ph="UPDATE tb_producto... " />
+                <marker date="1562607202385" expanded="true" signature="4726:4830" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="4983:5087" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="5221:5357" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="5231:5281" ph="SELECT * FRO... ${$tabla}" />
+                <marker date="1562607202385" expanded="true" signature="5428:5703" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="5438:5562" ph="SELECT * FRO... tb_producto" />
+                <marker date="1562607202385" expanded="true" signature="5729:5858" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="5737:5782" ph="DELETE FROM tb_producto... " />
+                <marker date="1562607202385" expanded="true" signature="5910:6601" ph="..." />
+                <marker date="1562607202385" expanded="true" signature="5918:6527" ph="SELECT tb_pr... tb_producto" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resumenboleta_reg.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/resumenboleta_reg.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4029">
+              <caret line="237" column="0" lean-forward="false" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_vista.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/venta_vista.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2176">
+              <caret line="128" column="9" lean-forward="false" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="venta_form.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
+        <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/venta_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="43571">
-              <caret line="2563" column="33" lean-forward="false" selection-start-line="2563" selection-start-column="33" selection-end-line="2563" selection-end-column="33" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cliente_form.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/clientes/cliente_form.php">
+      <file leaf-file-name="venta_tabla.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/venta_tabla.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1292">
-              <caret line="76" column="15" lean-forward="false" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="15" />
-              <folding />
+            <state relative-caret-position="221">
+              <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+              <folding>
+                <marker date="1557957281917" expanded="true" signature="2004:2013" ph="..." />
+                <marker date="1557957281917" expanded="true" signature="3974:3983" ph="..." />
+                <marker date="1557957281917" expanded="true" signature="4334:4345" ph="..." />
+                <marker date="1557957281917" expanded="true" signature="4593:4603" ph="..." />
+                <marker date="1557957281917" expanded="true" signature="6634:6645" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_asiento_form.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
+      <file leaf-file-name="cVenta.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/cVenta.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="5729">
-              <caret line="337" column="47" lean-forward="false" selection-start-line="337" selection-start-column="47" selection-end-line="337" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="consulta_reniec.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/consulta_reniec.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mintra.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/src/mintra/mintra.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="799">
-              <caret line="47" column="38" lean-forward="false" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="curl.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/src/curl.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="541">
-              <caret line="216" column="24" lean-forward="false" selection-start-line="216" selection-start-column="24" selection-end-line="216" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="prueba.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/prueba.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="consulta_reniec.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/libreriasphp/consultadni/consulta_reniec.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-              <folding />
+            <state relative-caret-position="2431">
+              <caret line="143" column="13" lean-forward="false" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
+              <folding>
+                <marker date="1557957281907" expanded="true" signature="54:114" ph="SELECT * FRO... tb_resumenboleta" />
+                <marker date="1557957281907" expanded="true" signature="243:541" ph="SELECT * FRO... tb_venta" />
+                <marker date="1557957281907" expanded="true" signature="796:1172" ph="SELECT * FRO... tb_notacredito" />
+                <marker date="1557957281907" expanded="true" signature="796:1593" ph="SELECT * FRO... " />
+                <marker date="1557957281907" expanded="true" signature="1218:1593" ph="SELECT * FRO... tb_notadebito" />
+                <marker date="1557957281907" expanded="true" signature="1820:1940" ph="SELECT IFNUL... tb_resumenboleta" />
+                <marker date="1557957281907" expanded="true" signature="2066:2138" ph="SELECT * FRO... tb_resumenboleta" />
+                <marker date="1557957281907" expanded="true" signature="2285:2602" ph="INSERT INTO tb_resumenboleta... " />
+                <marker date="1557957281907" expanded="true" signature="3014:3906" ph="INSERT INTO tb_resumenboletadetalle... " />
+                <marker date="1557957281907" expanded="true" signature="4042:4290" ph="SELECT * FRO... tb_resumenboletadetalle" />
+                <marker date="1557957281907" expanded="true" signature="4461:4604" ph="SELECT tb_re... tb_resumenboletadetalle" />
+                <marker date="1557957281907" expanded="true" signature="4783:4926" ph="SELECT tb_re... tb_resumenboletadetalle" />
+                <marker date="1557957281907" expanded="true" signature="5070:5157" ph="SELECT * FRO... tb_resumenboleta" />
+                <marker date="1557957281907" expanded="true" signature="5310:5381" ph="UPDATE tb_venta... " />
+                <marker date="1557957281907" expanded="true" signature="5542:5871" ph="UPDATE tb_resumenboleta... " />
+                <marker date="1557957281907" expanded="true" signature="6020:6203" ph="UPDATE tb_resumenboleta... " />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -271,12 +327,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="NodeModulesDirectoryManager">
-    <handled-path value="$PROJECT_DIR$/node_modules" />
-  </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
-  <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="181" />
+    <option name="y" value="135" />
     <option name="width" value="1386" />
     <option name="height" value="735" />
   </component>
@@ -295,7 +349,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -311,44 +364,25 @@
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="consultadni" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="datos-peru" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="datos-peru" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="datos-peru" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="src" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="mintra" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="contable" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="producto" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -445,33 +479,43 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="542629000" />
+    <option name="totallyTimeSpent" value="544153000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="0" width="1386" height="735" extended-state="0" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2591241" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2408492" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2591241" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -773,8 +817,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/Cado.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="41" lean-forward="false" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
+        <state relative-caret-position="238">
+          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -827,19 +872,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/prueba.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="0" lean-forward="true" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/prueba.php" />
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43571">
           <caret line="2563" column="33" lean-forward="false" selection-start-line="2563" selection-start-column="33" selection-end-line="2563" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -847,7 +884,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="24" lean-forward="true" selection-start-line="17" selection-start-column="24" selection-end-line="17" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -855,7 +891,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1292">
           <caret line="76" column="15" lean-forward="false" selection-start-line="76" selection-start-column="15" selection-end-line="76" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -863,33 +898,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5729">
           <caret line="337" column="47" lean-forward="false" selection-start-line="337" selection-start-column="47" selection-end-line="337" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/consulta_reniec.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="29" lean-forward="false" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/src/mintra/mintra.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" column="38" lean-forward="false" selection-start-line="47" selection-start-column="38" selection-end-line="47" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/src/curl.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="541">
-          <caret line="216" column="24" lean-forward="false" selection-start-line="216" selection-start-column="24" selection-end-line="216" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/consulta_reniec.php" />
+    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/src/mintra/mintra.php" />
+    <entry file="file://$PROJECT_DIR$/libreriasphp/datos-peru/src/curl.php" />
   </component>
 </project>

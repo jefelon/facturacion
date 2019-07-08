@@ -21,6 +21,7 @@ $oVentaDetalleLote = new cVentaDetalleLote();
 
 $dts= $oCompra->mostrarUno($_POST['com_id']);
 $dt = mysql_fetch_array($dts);
+    $fecreg	=mostrarFecha($dt['tb_compra_reg']);
 	$fec	=mostrarFecha($dt['tb_compra_fec']);
 	$fecven	=mostrarFecha($dt['tb_compra_fecven']);
 	$doc_id	=$dt['tb_documento_id'];
@@ -167,6 +168,7 @@ else
 	$estado='ANULADA';
 	$oCompra->modificar(
 		$_POST['com_id'],
+        fecha_mysql($fecreg),
 		fecha_mysql($fec),
 		fecha_mysql($fecven),
 		$doc_id,

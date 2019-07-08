@@ -56,7 +56,7 @@ if ($_POST['action_compra'] == "insertar") {
         //$estado='CONTADO';
 
         if ($_POST['cmb_com_doc'] == '20' || $_POST['cmb_com_doc'] == '21') {
-            if ($_POST['cmb_com_tip'] == '1'){
+            if ($_POST['cmb_com_tip'] !=""){
                 $dts = $oCompra->verificar_compra($_POST['txt_com_ser_nota'].'-'.$_POST['txt_com_num_nota']);
                 $dt = mysql_fetch_array($dts);
                 $com_id = $dt['tb_compra_id'];
@@ -75,6 +75,7 @@ if ($_POST['action_compra'] == "insertar") {
                  $tipo_renta=$_POST['cmb_tiporenta_id'];
             }
             $oCompra->insertar(
+                fecha_mysql($_POST['txt_com_fecreg']),
                 fecha_mysql($_POST['txt_com_fec']),
                 fecha_mysql($_POST['txt_com_fecven']),
                 $_POST['cmb_com_doc'],
@@ -124,6 +125,7 @@ if ($_POST['action_compra'] == "insertar") {
                 foreach ($duas as $dua) {
                     if(in_array($cont, $_POST['chk_invoice'])){
                     $oCompra->insertar(
+                        fecha_mysql($_POST['txt_com_fecreg']),
                         fecha_mysql($_POST['fec_ser'][$cont]),
                         fecha_mysql($_POST['txt_com_fecven']),
                         1,// tipo documento factura 1 invoice 19
@@ -222,7 +224,7 @@ if ($_POST['action_compra'] == "insertar") {
 
                     $oKardex->modificar_codigo($kar_id, $kar_id);
                 }
-            }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19'){
+            }elseif ($_POST['cmb_com_doc']=='1' or $_POST['cmb_com_doc']=='7' or $_POST['cmb_com_doc']=='17' or $_POST['cmb_com_doc']=='18' or $_POST['cmb_com_doc']=='19' or $_POST['cmb_com_doc']=='23'){
                 //registro de kardex
                 $xac = 1;
                 $tipo_registro = 1;//1 automatico 2 manual
@@ -600,6 +602,7 @@ if($_POST['action_compra']=="editar")
 
 		$oCompra->modificar(
 			$_POST['hdd_com_id'],
+            fecha_mysql($_POST['txt_com_fecreg']),
 			fecha_mysql($_POST['txt_com_fec']),
 			fecha_mysql($_POST['txt_com_fecven']),
 			$_POST['cmb_com_doc'],
