@@ -8,6 +8,7 @@ if($_POST['action']=="editar")
 	$dts=$oPuntoventa->mostrarUno($_POST['punven_id']);
 	$dt = mysql_fetch_array($dts);
 		$punven_nom=$dt['tb_puntoventa_nom'];
+        $punven_dir=$dt['tb_puntoventa_direccion'];
 		$alm_id=$dt['tb_almacen_id'];
 	mysql_free_result($dts);
 }
@@ -101,6 +102,9 @@ $(function() {
         </tr>
         <tr>
         <td><input name="txt_punven_nom" type="text" id="txt_punven_nom" value="<?php echo $punven_nom?>" size="55" maxlength="50"></td>
+        </tr>
+        <tr>
+            <td><input name="txt_punven_dir" type="text" id="txt_punven_dir" value="<?php echo $punven_dir?>" size="55" maxlength="300"></td>
         </tr>
         <tr>
           <td><label for="cmb_alm_id">Almacén para ventas:</label></td>

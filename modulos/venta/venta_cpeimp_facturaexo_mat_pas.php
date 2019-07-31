@@ -112,18 +112,17 @@ mysql_free_result($dts);
 
 
 $dts= $oVenta->mostrarUno($ven_id);
-while($dt = mysql_fetch_array($dts))
-{
+while($dt = mysql_fetch_array($dts)) {
     $idcomprobante=$dt["cs_tipodocumento_cod"];
 
-    $serie=$dt["tb_venta_ser"];
-    $numero=$dt["tb_venta_num"];
-
-    $ruc=$dt["tb_cliente_doc"];
-    $razon=$dt["tb_cliente_nom"];
-    $direccion=$dt["tb_cliente_dir"];
-    if($dt["tb_cliente_tip"]==1)$idtipodni=1;
-    if($dt["tb_cliente_tip"]==2)$idtipodni=6;
+    $serie = $dt["tb_venta_ser"];
+    $numero = $dt["tb_venta_num"];
+    $punto_venta_dir=$dt["tb_puntoventa_direccion"];
+    $ruc = $dt["tb_cliente_doc"];
+    $razon = $dt["tb_cliente_nom"];
+    $direccion = $dt["tb_cliente_dir"];
+    if ($dt["tb_cliente_tip"] == 1) $idtipodni = 1;
+    if ($dt["tb_cliente_tip"] == 2) $idtipodni = 6;
 
     $fecha=mostrarFecha($dt["tb_venta_fec"]);
 
@@ -160,7 +159,6 @@ while($dt = mysql_fetch_array($dts))
     $lab1=$dt['tb_venta_lab1'];
     $lab2=$dt['tb_venta_lab2'];
     $lab3=$dt['tb_venta_lab3'];
-    $pun_nom = $dt['tb_puntoventa_nom'];
     
 }
 
@@ -334,7 +332,7 @@ if($impresion=='pdf')ob_start();
     </tr>
     <tr>
         <td colspan="4" class="centrado">
-            SUC: <?php echo $pun_nom ?>
+            <b>PUNTO DE VENTA:</b> <?php echo $punto_venta_dir ?>
         </td>
     </tr>
     <tr>
@@ -354,7 +352,7 @@ if($impresion=='pdf')ob_start();
     </tr>
     <tr>
         <td colspan="2"></td>
-        <td colspan="2" class="derecha"><?php //echo ' Hora: ' . $hora ?></td>
+        <td colspan="2" class="derecha"><?php echo ' Hora Registro: ' . $hora ?></td>
     </tr>
     <tr>
         <td colspan="4" height="10mm">
@@ -391,7 +389,7 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'Fecha de Viaje: ' . $vh['tb_viajehorario_fecha'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Hora de Viaje: ' . mostrarHora($vh['tb_viajehorario_horario']) ?></td>
+        <td colspan="4" style="font-size: 12pt"><b> <?php echo 'HORA DE VIAJE: ' . mostrarHora($vh['tb_viajehorario_horario']) ?></b></td>
     </tr>
     <tr>
         <td colspan="4"> <?php echo 'Nro Asiento: ' . $vv['tb_asiento_nom'] ?></td>
@@ -452,22 +450,22 @@ if($impresion=='pdf')ob_start();
       <tr>
           <td colspan="2" class="izquierda mt-5 negrita">OP. GRAVADA:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
-              S/ <?php echo formato_money($valven) ?></td>
+              <?php echo $mon . formato_money($valven) ?></td>
       </tr>
       <tr>
           <td colspan="2" class="izquierda negrita">OP. EXONERADA:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
-              S/ <?php echo formato_money($exo) ?></td>
+              <?php echo $mon . formato_money($exo) ?></td>
       </tr>
       <tr>
           <td colspan="2" class="izquierda negrita">IGV:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
-              S/ <?php echo formato_money($igv) ?></td>
+              <?php echo $mon . formato_money($igv) ?></td>
       </tr>
       <tr>
           <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
-              S/ <?php echo formato_money($tot) ?></td>
+              <?php echo $mon . formato_money($tot) ?></td>
       </tr>
       <tr>
           <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>

@@ -117,7 +117,7 @@ while ($dt = mysql_fetch_array($dts)) {
 
     $serie = $dt["tb_venta_ser"];
     $numero = $dt["tb_venta_num"];
-
+    $punto_venta_dir=$dt["tb_puntoventa_direccion"];
     $ruc = $dt["tb_cliente_doc"];
     $razon = $dt["tb_cliente_nom"];
     $direccion = $dt["tb_cliente_dir"];
@@ -160,7 +160,7 @@ while ($dt = mysql_fetch_array($dts)) {
     $lab1 = $dt['tb_venta_lab1'];
     $lab2 = $dt['tb_venta_lab2'];
     $lab3 = $dt['tb_venta_lab3'];
-    $pun_nom = $dt['tb_puntoventa_nom'];
+
 
 }
 
@@ -213,8 +213,8 @@ if ($num_rows_vp > 0) {
 
         $pago_mon = formato_money($rw1['tb_ventapago_mon']);
 
-        $texto_pago1[] = $forma . ' ' . $modo;
-        $texto_pago2[] = $forma . ' ' . $modo . ': S/.  ' . $pago_mon;
+        $texto_pago1[]=$forma.' '.$modo;
+        $texto_pago2[]=$forma.' '.$modo.':'.$mon.'  '.$pago_mon;
     }
     mysql_free_result($rws1);
 }
@@ -328,7 +328,7 @@ if ($impresion == 'pdf') ob_start();
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado">
-                        SUC: <?php echo $pun_nom ?>
+                        <b>PUNTO DE VENTA:</b> <?php echo $punto_venta_dir ?>
                     </td>
                 </tr>
                 <tr>
@@ -346,7 +346,7 @@ if ($impresion == 'pdf') ob_start();
                 </tr>
                 <tr>
                     <td colspan="2"></td>
-                    <td colspan="2" class="derecha"><?php //echo ' Hora: ' . $hora ?></td>
+                    <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">.............................................................................................</td>
@@ -425,25 +425,22 @@ if ($impresion == 'pdf') ob_start();
                             <tr>
                                 <td colspan="2" class="izquierda mt-5 negrita">OP. GRAVADA:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($valven) ?></td>
+                                    <?php echo $mon . formato_money($valven) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="izquierda negrita">OP. EXONERADA:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($exo) ?></td>
+                                    <?php echo $mon . formato_money($exo) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="izquierda negrita">IGV:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($igv) ?></td>
+                                    <?php echo $mon . formato_money($igv) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
-                                    S/ <?php echo formato_money($tot) ?></td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>
+                                    <?php echo $mon . formato_money($tot) ?></td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
