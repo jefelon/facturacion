@@ -448,6 +448,9 @@ if($impresion=='pdf')ob_start();
                                     <?php echo $mon . formato_money($tot) ?></td>
                             </tr>
                             <tr>
+                                <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>
+                            </tr>
+                            <tr>
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
                             </tr>
                             <tr>
