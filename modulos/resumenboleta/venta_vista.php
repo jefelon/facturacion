@@ -227,6 +227,10 @@ $(function() {
 		icons: {primary: "ui-icon-document"},
 		text: true
 	});
+    $('.btn_ticket').button({
+        icons: {primary: "ui-icon-document"},
+        text: true
+    });
 	
 	$('#btn_agregar').button({
 		icons: {primary: "ui-icon-plus"},

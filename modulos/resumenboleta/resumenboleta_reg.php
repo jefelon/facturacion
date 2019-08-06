@@ -128,6 +128,7 @@ else
 //==========================nota de crédito
 
 $dts1=$oVenta->mostrar_filtro_nc($_SESSION['empresa_id'],fecha_mysql($_POST['hdd_resbol_fec']));
+
 $num = mysql_num_rows($dts1);
 
 $num = 0;
@@ -136,6 +137,7 @@ while($dt1 = mysql_fetch_array($dts1))
     $dts2=$oVenta->comparar_resumenboleta_detalle_notas($dt1['tb_venta_id'],$dt1['cs_tipodocumento_id']);
     $d=mysql_num_rows($dts2);
 
+    echo  "ventaid: ". $dt1['tb_venta_id']. " Tipo documento: ". $dt1['cs_tipodocumento_id']. " variable d: ".$d."";
     if($d==0)
     {
         $num++;
@@ -241,7 +243,7 @@ if($num>0)
 }
 else
 {
-    //$data['msj'].=' / No existe Notas de Crédito y Débito para declarar.';
+    $data['msj'].='No existe Notas de Crédito y Débito para declarar.';
 }
 //================================fin nota de crédito
 
