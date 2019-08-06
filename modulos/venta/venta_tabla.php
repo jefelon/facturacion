@@ -227,20 +227,20 @@ $num_rows= mysql_num_rows($dts1);
                     {
                         if($dt1['tb_venta_estsun']=='0')
                         {
-                            echo 'PENDIENTE ENVIO';
+                            echo '<span style="color:orange">PENDIENTE ENVIO</span>';
                             $mostrar_envio_sunat=1;
                         }
                         if($dt1['tb_venta_estsun']=='1')
                         {
-                            echo 'ACEPTADO';
+                            echo '<span style="color: green">ACEPTADO</span>';
                         }
                         if($dt1['tb_venta_estsun']=='2')
                         {
-                            echo 'RECHAZADO';
+                            echo '<span style="color: red">RECHAZADO</span>';
                         }
                         if($dt1['tb_venta_estsun']=='10')
                         {
-                            echo 'RESUMEN';
+                            echo '<span style="color:#35a2fc">RESUMEN</span>';
                         }
 
                     }

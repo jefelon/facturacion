@@ -27,7 +27,7 @@ if($_POST['action_venta']=="insertar")
 	if(!empty($_POST['txt_ven_fec']))
 	{
 		$tipo_documento=substr($_POST['txt_ven_ser'], 0, 1);
-		if($tipo_documento=='F' OR $tipo_documento=='B' OR $tipo_documento =='0')
+		if($tipo_documento=='F' OR $tipo_documento=='B')
 		{
 
 			$serie= $_POST['txt_ven_ser'];
@@ -81,12 +81,6 @@ if($_POST['action_venta']=="insertar")
 
 				if($tipo_documento=='F')$documento_id=11;//factura
 				if($tipo_documento=='B')$documento_id=12;//boleta
-                if($tipo_documento=='0')
-				{
-                    $documento_id=$_POST['cmb_ven_docRel'];//boleta O FACTURA FISICA
-
-				}
-
 
 				//consultamos talonario
 				$dts= $oTalonario->correlativo($punven_id,$documento_id);

@@ -86,13 +86,6 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                 async:true,
                 dataType: "html",
                 data: $("#for_fil_ven").serialize(),
-                /*data: ({
-                    ven_fec1:	$('#txt_fil_ven_fec1').val(),
-                    ven_fec2:	$('#txt_fil_ven_fec2').val(),
-                    cli_id:		$('#txt_fil_cli_id').val(),
-                    ven_est:	$('#cmb_fil_ven_est').val(),
-                    ven_doc:	$('#cmb_fil_ven_doc').val()
-                }),*/
                 beforeSend: function(){
                     $('#div_venta_tabla').addClass("ui-state-disabled");
                 },
@@ -251,6 +244,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                     {
                         venta_impresion(id);
                     }
+
                 }
             });
             //}
@@ -268,7 +262,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                     ven_id:		id
                 }),
                 beforeSend: function() {
-                    $('#msj_venta_sunat').html("Enviando a SUNAT...");
+                    $('#msj_venta_sunat').html("Enviando a SUNAT 2...");
                     $('#msj_venta_sunat').show(100);
                 },
                 success: function(data){

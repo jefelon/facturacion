@@ -295,8 +295,8 @@ $html.='<tr>
             <th style="text-align: center; width: 7%;"><b>CANT</b></th>
             <th style="text-align: center; width: 10%;"><b>UNIDAD</b></th>
             <th style="text-align: center; width: 53%;"><b>DESCRIPCIÓN</b></th>
-            <th style="text-align: right; width: 15%;"><b>VALOR UNITARIO</b></th>
-            <th style="text-align: right; width: 15%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: right; width: 15%;"><b>PRECIO UNITARIO</b></th>
+            <th style="text-align: right; width: 15%;"><b>IMPORTE</b></th>
         </tr>';
 $dts = $oNotacredito->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
@@ -308,7 +308,7 @@ while($dt = mysql_fetch_array($dts)){
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
                 <td style="text-align: left">'.$dt["tb_producto_nom"].'</td>              
                 <td style="text-align: right">'.$dt["tb_ventadetalle_preuni"].'</td>';
-        $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preunilin"]*$dt["tb_ventadetalle_can"]).'</td>';
+        $html.='<td style="text-align: right">'.formato_moneda($dt["tb_ventadetalle_preuni"]*$dt["tb_ventadetalle_can"]).'</td>';
     }else{
         $html.='<td style="text-align: right">'.$dt["tb_ventadetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
