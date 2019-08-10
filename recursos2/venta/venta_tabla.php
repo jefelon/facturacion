@@ -25,7 +25,7 @@ $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_em
 $empresa_logo = '../../modulos/empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
 
-$dts1=$oVenta->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),$_POST['cmb_fil_ven_doc'],$_POST['txt_fil_ser'],$_POST['txt_fil_cor'],$_POST['txt_fil_mon']);
+$dts1=$oVenta->mostrar_filtro_cui($_SESSION['cliente_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['cmb_fil_ven_est'],$_SESSION['cliente_id']);
 $num_rows= mysql_num_rows($dts1);
 
 ?>
@@ -70,7 +70,7 @@ if($num_rows>0){
     <table cellspacing="1" id="tabla_venta" class="tablesorter">
         <thead>
         <tr>
-            <th align="center">CLIENTE</th>
+            <th align="center">ALUMNO</th>
             <th align="center">TIPO DOCUMENTO</th>
             <th align="center">DOCUMENTO</th>
             <th align="center">MONEDA</th>
@@ -112,16 +112,24 @@ if($num_rows>0){
                         <td>
                             <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
                         </td>
+                        <?php
+                        $doc_nom=$dt1['tb_documento_nom'];
+                        if($doc_nom=='FACTURA')$archivo_destino='../../modulos/venta/venta_impresion_gra_factura.php';
+                        if($doc_nom=='BOLETA')$archivo_destino='../../modulos/venta/venta_impresion_gra_boleta.php';
+                        if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
+                        if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+                        if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
+
+                        $xml="";
+                        $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+                        $cdr="";
+                        $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+                        ?>
                         <td>
-                            <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="
-                            <?php if($dt1['tb_encomiendaventa_id']){?>
-                                    venta_impresion_enc('<?php echo $dt1['tb_venta_id']?>')"
-                                <?php }else if($dt1['tb_viajeventa_id']){?>
-                               venta_impresion_pas('<?php echo $dt1['tb_venta_id']?>')"
-                            <?php }else{?>
-                                venta_impresion('<?php echo $dt1['tb_venta_id']?>')"
-                            <?php } ?>
-                            >PDF 2</a>
+                            <form action="<?php echo $archivo_destino?>" target="_blank" method="post">
+                                <input name="ven_id" type="hidden" value="<?php echo $dt1['tb_venta_id']?>">
+                                <button class="btn_bar" id="btn_bar" type="submit" title="PDF">PDF</button>
+                            </form>
                         </td>
                         <td>
                             <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>

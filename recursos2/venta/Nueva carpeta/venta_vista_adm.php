@@ -45,6 +45,8 @@
 <link rel="stylesheet" href="../../js/tablesorter/themes/blue/style.css" type="text/css" media="print, projection, screen" />
 <script type="text/javascript" src="../../js/tablesorter/jquery.tablesorter.js"></script>
 
+<script type="text/javascript" src="../../js/jquery-shortkeys/shortkeys.js"></script>
+
 <script src="../../js/ckeditor/ckeditor-standar/jquery.min.js"></script>
 <script src="../../js/ckeditor/ckeditor-standar/ckeditor.js"></script>
 <script src="../../js/ckeditor/ckeditor-standar/adapters/jquery.js"></script>
@@ -80,7 +82,17 @@ function venta_tabla()
 		url: $('#hdd_modo').val(),
 		async:true,
 		dataType: "html",
-		data: $("#for_fil_ven").serialize(),
+		data: $("#for_fil_ven").serialize(),                     
+		/*data: ({
+			ven_fec1:	$('#txt_fil_ven_fec1').val(),
+			ven_fec2:	$('#txt_fil_ven_fec2').val(),
+			ven_doc:	$('#cmb_fil_ven_doc').val(),
+			cli_id:		$('#hdd_fil_cli_id').val(),
+			usu_id:		$('#cmb_fil_ven_ven').val(),
+			punven_id:	$('#cmb_fil_ven_punven').val(),
+			ven_est:	$('#cmb_fil_ven_est').val()
+			
+		}),*/
 		beforeSend: function() {
 			$('#div_venta_tabla').addClass("ui-state-disabled");
         },
@@ -149,29 +161,43 @@ function venta_check(){
 	});
 }
 
-function venta_impresion(idf){
-    $.ajax({
-        type: "POST",
-        url: "../venta/venta_preimpresion.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            ven_id:	idf
-        }),
-        beforeSend: function() {
-            $('#div_venta_impresion').dialog("open");
-            $('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-        success: function(html){
-            $('#div_venta_impresion').html(html);
-        }
-    });
+function correo_form(act,idf,cli,per,eje){
+	//if($("#hdd_fil_cli_id").val()>0)
+	//{
+		$.ajax({
+			type: "POST",
+			url: "../guiapagocontrol/guiapagocontrol_correo_form.php",
+			async:true,
+			dataType: "html",
+			//data: $("#for_fil_dec").serialize(),                   
+			data: ({
+				action: act,
+				guipagnot_id: idf,
+				cli_id:	cli,
+				per_id: per,
+				eje_id: eje
+			}),
+			beforeSend: function() {
+				//$('#msj_guiapagocontrol').hide();
+				$('#div_guiapagocontrol_correo_form').dialog("open");
+				//$('#div_guiapagocontrol_nota').dialog("close");
+				$('#div_guiapagocontrol_correo_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+	        },
+			success: function(html){
+				$('#div_guiapagocontrol_correo_form').html(html);				
+			}
+		});
+	/*}
+	else
+	{
+		alert('Seleccione un Cliente para poder envíar reporte por correo.');
+	}*/
 }
 
-function venta_impresion_pas(idf){
+function venta_impresion(idf){
 	$.ajax({
 		type: "POST",
-		url: "../venta/venta_preimpresion_pas.php",
+		url: "../venta/venta_preimpresion.php",
 		async:true,
 		dataType: "html",                      
 		data: ({
@@ -185,26 +211,6 @@ function venta_impresion_pas(idf){
 			$('#div_venta_impresion').html(html);				
 		}
 	});
-}
-
-function venta_impresion_enc(idf){
-    $.ajax({
-        type: "POST",
-        url: "../venta/venta_preimpresion_enc.php",
-        async:true,
-        dataType: "html",
-        data: ({
-            ven_id:	idf
-
-        }),
-        beforeSend: function() {
-            $('#div_venta_impresion').dialog("open");
-            $('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-        success: function(html){
-            $('#div_venta_impresion').html(html);
-        }
-    });
 }
 	
 function eliminar_venta(id)
@@ -246,12 +252,11 @@ function enviar_sunat(id)
 				ven_id:		id
 			}),
 			beforeSend: function() {
-				$('#msj_venta').html("Enviando a SUNAT...");
+				$('#msj_venta').html("Cargando...");
 				$('#msj_venta').show(100);
 			},
 			success: function(data){
 				$('#msj_venta').html(data.msj);
-				//$('#msj_venta').html(data.msj2);
 				$('#msj_venta').show();
 			},
 			complete: function(){
@@ -311,53 +316,6 @@ function modo(url){
 	venta_tabla();
 };
 
-function venta_correo_form(act,venid){
-	//if($("#hdd_fil_cli_id").val()>0)
-	//{
-		$.ajax({
-			type: "POST",
-			url: "../venta/venta_correo_form.php",
-			async:true,
-			dataType: "html",
-			data: ({
-				action: act,
-				ven_id: venid
-			}),
-			beforeSend: function() {
-				$('#msj_venta').hide();
-				$('#div_venta_correo_form').dialog("open");
-				$('#div_venta_correo_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-	        },
-			success: function(html){
-				$('#div_venta_correo_form').html(html);				
-			}
-		});
-	/*}
-	else
-	{
-		alert('Seleccione un Cliente para poder envíar reporte por correo.');
-	}*/
-}
-function venta_correo_email(ven_id){
-	$.ajax({
-		type: "POST",
-		url: "../venta/venta_correo_email.php",
-		async:true,
-		dataType: "html",
-		data: ({
-			ven_id:	ven_id
-		}),
-		beforeSend: function() {
-			$('#msj_venta').hide();
-			$('#div_venta_email').dialog("open");
-			$('#div_venta_email').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        },
-		success: function(html){
-			$('#div_venta_email').html(html);				
-		}
-	});
-}
-
 $(function() {
 	
 	$('#btn_actualizar').button({
@@ -392,7 +350,7 @@ $(function() {
 		autoOpen: false,
 		resizable: false,
 		height: 550,
-		width: 980,
+		width: 940,
 		modal: true,
 		position: "top",
 		closeOnEscape: false,
@@ -436,12 +394,11 @@ $(function() {
 		resizable: false,
 		height: 'auto',
 		width: 370,
-		modal: true,
-		position: 'top'
+		modal: true
 	});
 
-	$( "#div_venta_correo_form" ).dialog({
-		title:'Enviar por Correo',
+	$( "#div_guiapagocontrol_correo_form" ).dialog({
+		title:'Enviar por correo',
 		autoOpen: false,
 		resizable: false,
 		//height: 600,
@@ -451,35 +408,20 @@ $(function() {
 		closeOnEscape: false,
 		buttons: {
 			Enviar: function() {
-				//if(confirm("Confirmar envío de correo?"))
-				//{
-					$("#for_ven_cor").submit();
-				//}
+				if(confirm("Confirmar envío de correo?")){
+					$("#for_procon_cor").submit();
+				}
 			},
 			Cancelar: function() {
-				$('#for_ven_cor').each (function(){this.reset();});
-				$( this ).dialog( "close" );
-			}
-		}
-	});
-
-
-	$( "#div_venta_email" ).dialog({
-		title:'Detalle de Correos',
-		autoOpen: false,
-		resizable: false,
-		height: 600,
-		width: 990,
-		modal: true,
-		position: "top",
-		closeOnEscape: true,
-		buttons: {
-			Cerrar: function() {
+				$('#for_procon_cor').each (function(){this.reset();});
 				$( this ).dialog( "close" );
 			}
 		}
 	});
 	
+	$(document).shortkeys({
+	  //'a+g':       function () { venta_form('insertar') }
+	});
 		
 });
 </script>
@@ -547,9 +489,8 @@ $(function() {
 			</div>
             <div id="div_venta_check">
 			</div>
-            <div id="div_venta_impresion"></div>
-            <div id="div_venta_correo_form"></div>
-			<div id="div_venta_email"></div>
+            <div id="div_venta_impresion">
+			</div>
             <div id="div_venta_tabla" class="contenido_tabla">
       		</div>
       	</div>

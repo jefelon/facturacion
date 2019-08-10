@@ -1,6 +1,6 @@
 <?php
 session_start();
-if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
+//if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 require_once ("../../config/Cado.php");
 require_once ("../venta/cVenta.php");
 $oVenta = new cVenta();
@@ -11,24 +11,24 @@ $oVenta = new cVenta();
 		$doc_nom=$dt['tb_documento_nom'];
 		$ser	=$dt['tb_venta_ser'];
 		$num	=$dt['tb_venta_num'];
-		
+
 		/*$cli_id	=$dt['tb_cliente_id'];
 		$cli_nom=$dt['tb_cliente_nom'];
 		$cli_doc=$dt['tb_cliente_doc'];
-		
+
 		$valven	=$dt['tb_venta_valven'];
 		$igv	=$dt['tb_venta_igv'];
 		$tot	=$dt['tb_venta_tot'];*/
 	mysql_free_result($dts);
 
-	if($doc_nom=='FACTURA')$archivo_destino='../../modulos/venta/venta_impresion_gra_factura.php';
-	if($doc_nom=='BOLETA')$archivo_destino='../../modulos/venta/venta_impresion_gra_boleta.php';
-	
+	if($doc_nom=='FACTURA')$archivo_destino='../venta/venta_impresion_gra_factura.php';
+	if($doc_nom=='BOLETA')$archivo_destino='../venta/venta_impresion_gra_boleta.php';
+
 	//if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura.php';
 	//if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta.php';
 
-	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
-	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat_pas.php';
+	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat_pas.php';
     if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
 
 ?>
@@ -107,14 +107,6 @@ $(function() {
 <br>
 	<div style="text-align:center">
         <a id="imprimir" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir()">Imprimir</a>
-        <?php if ($nro_letras>0){ ?>
-            <a id="imprimir_letras" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir_letras()">Imprimir Letras</a>
-        <?php } ?>
-        <?php if ($chk_guia){ ?>
-            <a id="imprimir_letras" class="btn_imprimir" title="Imprimir" href="#print" onClick="imprimir_guia()">Imprimir Guia</a>
-        <?php } ?>
-
-
         <a class="btn_canimp" href="#printc" onClick="$('#div_venta_impresion').dialog('close');">Cancelar</a>
     </div>
 </form>

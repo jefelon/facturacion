@@ -4,6 +4,15 @@ if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit
 require_once ("../../config/Cado.php");
 require_once ("../venta/cVenta.php");
 $oVenta = new cVenta();
+require_once ("../letras/cLetras.php");
+$cLetras = new cLetras();
+require_once ("../guia/cGuia.php");
+$oGuia = new cGuia();
+$dts= $oGuia->mostrarGuiaUno($_POST['ven_id']);
+$chk_guia = mysql_num_rows($dts);
+mysql_free_result($dts);
+
+require_once("../formatos/formato.php");
 
 	$dts= $oVenta->mostrarUno($_POST['ven_id']);
 	$dt = mysql_fetch_array($dts);
@@ -20,16 +29,20 @@ $oVenta = new cVenta();
 		$igv	=$dt['tb_venta_igv'];
 		$tot	=$dt['tb_venta_tot'];*/
 	mysql_free_result($dts);
+	
+	$letras = $cLetras->mostrar_letras($_POST['ven_id']);
+	
+	$nro_letras = mysql_num_rows($letras);
 
-	if($doc_nom=='FACTURA')$archivo_destino='../../modulos/venta/venta_impresion_gra_factura.php';
-	if($doc_nom=='BOLETA')$archivo_destino='../../modulos/venta/venta_impresion_gra_boleta.php';
+	if($doc_nom=='FACTURA')$archivo_destino='../venta/venta_impresion_gra_factura.php';
+	if($doc_nom=='BOLETA')$archivo_destino='../venta/venta_impresion_gra_boleta.php';
 	
 	//if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura.php';
 	//if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta.php';
 
-	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
-	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
-    if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
+	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_facturaexo_mat_pas.php';
+	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta_mat_pas.php';
+    if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../venta/venta_cpeimp_nota_mat.php';
 
 ?>
 <script type="text/javascript">
