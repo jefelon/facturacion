@@ -642,6 +642,10 @@ if($_POST['action']=="editar"){
     }
     function venta_car(act,cat_id){
         var cat_tip=$('#hdd_detven_tip').val();
+        if($('#cmb_afec_id').val())
+        {
+            cat_tip = $('#cmb_afec_id').val() ;
+        }
         if(act=='agregar') {
             var stouni=$('#hdd_bus_cat_stouni').val();
             var cantidad=$('#txt_bus_cat_can').val();
@@ -670,7 +674,7 @@ if($_POST['action']=="editar"){
             cot_id = $('#hdd_cot_id').val();
             if(!cat_id && $('#txt_bus_cat_can').val() && $('#txt_bus_cat_preven').val()){
                 cat_id = producto_reg();
-                cat_tip = 1;
+                cat_tip = $('#cmb_afec_id').val() ;
             }
             $.ajax({
                 type: "POST",
@@ -1244,6 +1248,13 @@ if($_POST['action']=="editar"){
                 }
             }
         });
+
+        ///////////////////////////////////////////////////////////////////////////////////
+
+        $('#cmb_afec_id').change(function(){
+            $('#hdd_detven_tip').val($('#cmb_afec_id').val());
+        });
+
         cmb_tar_id(<?php echo $tar_id?>);
         cmb_cuecor_id(<?php echo $cuecor_id?>);
         $( "#txt_ven_cli_doc" ).autocomplete({
@@ -1976,6 +1987,9 @@ if($_POST['action']=="editar"){
                     $('#txt_precio_min').val(data.cat_premin);
                     $('#txt_precio_may').val(data.cat_premay);
                     $('#hdd_detven_tip').val(data.ven_tip);
+                    var cat_tipo= $('#hdd_detven_tip').val();
+                    $("#cmb_afec_id option[value="+ cat_tipo +"]").attr("selected",true);
+
                     if ($('#chk_modo').is(':checked')) {
                         venta_car('agregar');
                         $('#hdd_bus_cat_id').val('');
@@ -2062,6 +2076,8 @@ if($_POST['action']=="editar"){
                     $('#txt_precio_min').val(data.cat_premin);
                     $('#txt_precio_may').val(data.cat_premay);
                     $('#hdd_detven_tip').val(data.ven_tip);
+                    var cat_tipo= $('#hdd_detven_tip').val();
+                    $("#cmb_afec_id option[value="+ cat_tipo +"]").attr("selected",true);
                     if ($('#chk_modo').is(':checked')) {
                         venta_car('agregar');
                         $('#hdd_bus_cat_id').val('');
@@ -2537,6 +2553,12 @@ if($_POST['action']=="editar"){
                         <label for="txt_detcom_des">DES</label>
                         <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="4" maxlength="5" style="text-align:right" >
                         <span style="color: #00aa00;font-size: 25px; font-weight: bold">4.</span>
+                        <label for="cmb_afec_id">T. AFECTO</label>
+                        <select name="cmb_afec_id" id="cmb_afec_id">
+                            <option value="1"<?php if($afec_id=='1')echo 'selected'?>>GRAVADO</option>
+                            <option value="9" <?php if($afec_id=='1')echo 'selected'?>>EXONERADO</option>
+                            <option value="11"<?php if($afec_id=='1')echo 'selected'?>>INAFECTO</option>
+                        </select>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
 

@@ -171,7 +171,7 @@ if($_POST['action']=='agregar'){
         if(isset($_SESSION['venta_car'][$unico_id])){
             foreach($_SESSION['venta_car'][$unico_id] as $indice=>$cantidad){
                 if(($_POST['cat_id']!=$indice) and ($pre_id==$_SESSION['presentacion_id'][$unico_id][$indice])){
-                    $num++;
+                    //$num++;
                 }
             }
         }
@@ -554,7 +554,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         {
             $linea_desc_x_item_percent = $_SESSION['venta_des'][$unico_id][$indice];
         }
-        $tipo_item	=$dt1['tb_afectacion_id'];
+        $tipo_item	=$_POST['cat_tip'];
         if ($tipo_item==9) {
             $linea_valor_unitario = $precio_unitario;
         }else{

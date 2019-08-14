@@ -650,6 +650,17 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxSchemeID = 1000;
                 $TaxSchemeName = 'IGV';
                 $TaxSchemeTaxTypeCode = 'VAT';
+
+            }elseif ($item->idafectaciond>=15) {
+                $impuestos = '0.00';
+                $impuesto = '0.00';
+                $basecalculo = '0.00';
+                $TaxCategoryID = 'Z';
+                $Percent = '18.00';
+                $TaxSchemeID = 9996;
+                $TaxSchemeName = 'GRA';
+                $TaxSchemeTaxTypeCode = 'FRE';
+
             }elseif ($item->idafectaciond>=11 && $item->idafectaciond<=17) {
                 $impuestos = '0.00';
                 $impuesto = '0.00';
