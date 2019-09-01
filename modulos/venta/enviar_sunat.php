@@ -203,7 +203,7 @@ if($idcomprobante==1)//FACTURA
 	$enviar=true;
 	$r = run(datatoarray($header, $detalle, $empresa, 'Invoice'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "Invoice", $enviar);
 
-	if($r['faultcode']=='0')
+	if($r['faultcode']=='0' || $r['faultcode']=='1033')
 	{
         $data['msj']="<span style='color: green'>".$documento." enviado a SUNAT</span>";
 		$estado=true;
