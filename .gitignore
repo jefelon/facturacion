@@ -11,3 +11,4 @@ config/Cado.php
 *.txt
 *.xml
 *.zip
+config/Cado.php
