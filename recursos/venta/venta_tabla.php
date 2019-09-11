@@ -112,6 +112,12 @@ if($num_rows>0){
                         <td>
                             <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">DETALLE</a>
                         </td>
+                        <?php
+                        $xml="";
+                        $xml=$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+                        $cdr="";
+                        $cdr="R-".$ruc_empresa."-0".$dt1['cs_tipodocumento_cod']."-".$dt1['tb_venta_ser']."-".$dt1['tb_venta_num'];
+                        ?>
                         <td>
                             <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="
                             <?php if($dt1['tb_encomiendaventa_id']){?>
@@ -121,10 +127,11 @@ if($num_rows>0){
                             <?php }else{?>
                                 venta_impresion('<?php echo $dt1['tb_venta_id']?>')"
                             <?php } ?>
-                            >PDF 2</a>
+                            >PDF</a>
                         </td>
                         <td>
                             <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>
+                            <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/cdr/$cdr.zip";?>" title="Descargar CDR">CDR</a>
                         </td>
                     </table>
                     </td>

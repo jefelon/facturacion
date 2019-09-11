@@ -2,130 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos/venta/venta_preimpresion_enc.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos/venta/venta_preimpresion_pas.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/acceso.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cDireccion.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cTelefono.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cUsuario.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cUsuariodetalle.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cUsuariogrupo.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cerrar_sesion.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cmb_use_id.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cmb_usugru.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/cmb_ven_id.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/ctaInicio.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/error_log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/index.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/login.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/restablecerpas.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/restablecerpas_operacion.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/restablecerpas_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/users.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuarioGrupo_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuarioGrupo_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuarioGrupo_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuarioGrupo_vista.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_adm_pass_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_complete_nom.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_datos_detalle.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_datos_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_datos_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_datos_vista.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_direccion_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_direccion_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_direccion_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_filtrar.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_filtrar_ven.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_form_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_form_sup.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_form_ven.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_pass_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_pass_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_puntoventa_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_puntoventa_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_puntoventa_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_reg_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_reg_editar.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_reg_eliminar.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_reg_sup.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_reg_ven.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_seleccionar.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_seleccionar_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_tabla_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_tabla_sup.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_tabla_ven.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_telefono_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_telefono_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_telefono_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_user_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_user_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_vista_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_vista_sup.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/usuarios/usuario_vista_ven.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/cVentapago.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/enviar_sunat.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_anular.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_car_item.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_car_item_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_catalogo.html" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_check.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_filtro_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_form_cange.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_impresion.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_impresion_gra_boleta.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_impresion_gra_factura.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_reg.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_reg_cange.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_reporte.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_reporte_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_reporte_detalle_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_reporte_xls.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_tabla_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_tabla_caja_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_tabla_detalle.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_tabla_detalle_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_tabla_resumen.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_tabla_resumen_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_tabla_seleccionar.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_txt_fecven.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_txt_numdoc.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_ver_numdoc.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_vista_adm.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/Nueva carpeta/venta_vuelto.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/cVenta.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/descargar_xml.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/error_log" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/generarPDF.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/generate.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/index.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/pre_cargarPDF.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/printFactura.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/temp/Thumbs.db" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_car.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_cpeimp.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_detalle_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_filtro.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_form.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_pago_car.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_pago_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_preimpresion.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_preimpresion_enc.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_preimpresion_pas.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_tabla.php" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/recursos2/venta/venta_vista.php" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_vista_adm.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_vista_adm.php" />
-      <change beforePath="$PROJECT_DIR$/recursos/index.php" afterPath="$PROJECT_DIR$/recursos2/index.php" />
-      <change beforePath="$PROJECT_DIR$/recursos/venta/cVenta.php" afterPath="$PROJECT_DIR$/recursos/venta/cVenta.php" />
-      <change beforePath="$PROJECT_DIR$/recursos/venta/venta_filtro.php" afterPath="$PROJECT_DIR$/recursos/venta/venta_filtro.php" />
-      <change beforePath="$PROJECT_DIR$/recursos/venta/venta_preimpresion.php" afterPath="$PROJECT_DIR$/recursos/venta/venta_preimpresion.php" />
-      <change beforePath="$PROJECT_DIR$/recursos/venta/venta_tabla.php" afterPath="$PROJECT_DIR$/recursos/venta/venta_tabla.php" />
-      <change beforePath="$PROJECT_DIR$/recursos/venta/venta_vista.php" afterPath="$PROJECT_DIR$/recursos/venta/venta_vista.php" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/recursos/venta/venta_tabla.php" beforeDir="false" afterPath="$PROJECT_DIR$/recursos/venta/venta_tabla.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
-    <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -141,30 +21,31 @@
           <entry key="project.open.time.37" value="1" />
           <entry key="project.open.time.40" value="1" />
           <entry key="project.open.time.53" value="1" />
-          <entry key="project.opened" value="5" />
+          <entry key="project.open.time.83" value="1" />
+          <entry key="project.opened" value="6" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="css" value="1" />
-          <entry key="php" value="61" />
+          <entry key="php" value="62" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="1" />
-          <entry key="PHP" value="61" />
+          <entry key="PHP" value="62" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="php" value="2703" />
+          <entry key="php" value="2722" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="27" />
-          <entry key="PHP" value="2648" />
+          <entry key="PHP" value="2667" />
           <entry key="SQL" value="28" />
         </counts>
       </usages-collector>
@@ -172,85 +53,74 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="venta_vista.php" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/recursos/venta/venta_vista.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="186" column="35" lean-forward="false" selection-start-line="186" selection-start-column="23" selection-end-line="186" selection-end-column="45" />
-              <folding>
-                <element signature="e#3963#4606#0#HTML" expanded="false" />
-                <element signature="e#4637#5399#0#HTML" expanded="false" />
-                <marker date="1565394608339" expanded="true" signature="480:504" ph="..." />
-              </folding>
+            <state relative-caret-position="2192">
+              <caret line="186" column="35" selection-start-line="186" selection-start-column="23" selection-end-line="186" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_tabla_adm.php" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/recursos/venta/descargar_xml.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="415">
+              <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_tabla_adm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3247">
-              <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="3553">
+              <caret line="209" selection-start-line="209" selection-end-line="209" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_vista_adm.php" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista_adm.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="305">
-              <caret line="192" column="45" lean-forward="false" selection-start-line="192" selection-start-column="45" selection-end-line="192" selection-end-column="45" />
-              <folding />
+            <state relative-caret-position="3264">
+              <caret line="192" column="45" selection-start-line="192" selection-start-column="45" selection-end-line="192" selection-end-column="45" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_preimpresion.php" pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/recursos/venta/venta_preimpresion.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="527">
-              <caret line="31" column="66" lean-forward="false" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
-              <folding />
+              <caret line="31" column="66" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_tabla.php" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/recursos/venta/venta_tabla.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="113" column="29" lean-forward="false" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
-              <folding />
+            <state relative-caret-position="439">
+              <caret line="133" column="118" selection-start-line="133" selection-start-column="118" selection-end-line="133" selection-end-column="118" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="cVenta.php" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/recursos2/venta/cVenta.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="52" column="24" lean-forward="false" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
-              <folding>
-                <marker date="1565389430594" expanded="true" signature="110:1070" ph="SELECT ev.tb... tb_venta" />
-                <marker date="1565389430594" expanded="true" signature="110:1213" ph="SELECT ev.tb... tb_venta" />
-                <marker date="1565389430594" expanded="true" signature="110:1243" ph="SELECT ev.tb... tb_venta" />
-                <marker date="1565389430594" expanded="true" signature="1401:1732" ph="SELECT * FRO... tb_venta" />
-                <marker date="1565389430594" expanded="true" signature="2077:2382" ph="SELECT * FRO... tb_venta" />
-                <marker date="1565389430594" expanded="true" signature="2512:3097" ph="SELECT * FRO... tb_venta" />
-                <marker date="1565389430594" expanded="true" signature="3229:3688" ph="SELECT * FRO... tb_producto" />
-                <marker date="1565389430594" expanded="true" signature="3829:4022" ph="SELECT * FRO... tb_servicio" />
-              </folding>
+            <state relative-caret-position="884">
+              <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_preimpresion.php" pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/recursos2/venta/venta_preimpresion.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-272">
-              <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-              <folding />
+            <state relative-caret-position="136">
+              <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -259,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>txt_ven</find>
       <find>puntoventa_seleccionar.php</find>
       <find>falta precio</find>
       <find>reservar</find>
@@ -289,6 +158,7 @@
       <find>mostrar_filtro_fechahora</find>
       <find>txt_pasaj_dni</find>
       <find>autentificado2</find>
+      <find>$xml</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -327,6 +197,7 @@
       <dir>C:\xampp\htdocs\facturacion\modulos\servicio</dir>
       <dir>C:\xampp\htdocs\facturacion\modulos\venta</dir>
       <dir>C:\xampp\htdocs\facturacion\recursos2</dir>
+      <dir>C:\xampp\htdocs\facturacion\recursos\venta</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -379,13 +250,13 @@
         <option value="$PROJECT_DIR$/recursos/venta/cVenta.php" />
         <option value="$PROJECT_DIR$/recursos/index.php" />
         <option value="$PROJECT_DIR$/recursos/venta/venta_vista.php" />
-        <option value="$PROJECT_DIR$/recursos/venta/venta_tabla.php" />
         <option value="$PROJECT_DIR$/recursos2/venta/venta_preimpresion_pas.php" />
         <option value="$PROJECT_DIR$/recursos2/venta/venta_tabla.php" />
         <option value="$PROJECT_DIR$/recursos2/venta/venta_vista.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_vista_adm.php" />
         <option value="$PROJECT_DIR$/recursos2/venta/venta_preimpresion_enc.php" />
         <option value="$PROJECT_DIR$/recursos2/venta/venta_preimpresion.php" />
+        <option value="$PROJECT_DIR$/recursos/venta/venta_tabla.php" />
       </list>
     </option>
   </component>
@@ -395,7 +266,6 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="y" value="1" />
@@ -403,17 +273,7 @@
     <option name="height" value="726" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
@@ -422,36 +282,29 @@
           <expand>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="facturacion" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="facturacion" type="462c0819:PsiDirectoryNode" />
+              <item name="cperepositorio" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="consultaruc" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="facturacion" type="462c0819:PsiDirectoryNode" />
+              <item name="recursos" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="venta" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="facturacion" type="462c0819:PsiDirectoryNode" />
+              <item name="recursos" type="462c0819:PsiDirectoryNode" />
+              <item name="venta" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -480,9 +333,6 @@
         </RuleState>
       </list>
     </option>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -544,70 +394,61 @@
       <workItem from="1552593997901" duration="194000" />
       <workItem from="1554148444657" duration="601000" />
       <workItem from="1564596885220" duration="4902000" />
+      <workItem from="1568157991018" duration="996000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="557143000" />
+    <option name="totallyTimeSpent" value="558139000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24743778" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25841874" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2624811" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32913387" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Command Line Tools Console" order="12" weight="0.32913387" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout>
     <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25945538" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25945538" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32913387" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Command Line Tools Console" order="12" weight="0.32913387" />
+      <window_info anchor="bottom" id="Messages" order="13" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
     </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -635,43 +476,34 @@
           <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="1" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/contable/contable_vista_registro.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4329">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/contable/contable_registro_filtro.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
-          <caret line="111" column="149" lean-forward="false" selection-start-line="111" selection-start-column="149" selection-end-line="111" selection-end-column="149" />
+          <caret line="111" column="149" selection-start-line="111" selection-start-column="149" selection-end-line="111" selection-end-column="149" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/contable/contable_registro_reporte_venta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1479">
-          <caret line="258" column="55" lean-forward="false" selection-start-line="258" selection-start-column="55" selection-end-line="258" selection-end-column="55" />
+          <caret line="258" column="55" selection-start-line="258" selection-start-column="55" selection-end-line="258" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/contenido/contenido.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-153">
-          <caret line="138" column="112" lean-forward="false" selection-start-line="138" selection-start-column="112" selection-end-line="138" selection-end-column="112" />
+          <caret line="138" column="112" selection-start-line="138" selection-start-column="112" selection-end-line="138" selection-end-column="112" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/contable/ple_filtro.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="93" column="31" lean-forward="false" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
+          <caret line="93" column="31" selection-start-line="93" selection-start-column="31" selection-end-line="93" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -679,7 +511,7 @@
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43571">
-          <caret line="2563" column="33" lean-forward="false" selection-start-line="2563" selection-start-column="33" selection-end-line="2563" selection-end-column="33" />
+          <caret line="2563" column="33" selection-start-line="2563" selection-start-column="33" selection-end-line="2563" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -692,16 +524,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/clientes/cliente_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1428">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+        <state relative-caret-position="-1428" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="5729">
-          <caret line="337" column="47" lean-forward="false" selection-start-line="337" selection-start-column="47" selection-end-line="337" selection-end-column="47" />
+          <caret line="337" column="47" selection-start-line="337" selection-start-column="47" selection-end-line="337" selection-end-column="47" />
         </state>
       </provider>
     </entry>
@@ -711,70 +540,44 @@
     <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/venta_vista.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2176">
-          <caret line="128" column="9" lean-forward="false" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
-          <folding />
+          <caret line="128" column="9" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/venta_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/venta_tabla.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="13" column="35" lean-forward="false" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+          <caret line="13" column="35" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/cVenta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2431">
-          <caret line="143" column="13" lean-forward="false" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
-          <folding>
-            <marker date="1557957281907" expanded="true" signature="54:114" ph="SELECT * FRO... tb_resumenboleta" />
-            <marker date="1557957281907" expanded="true" signature="243:541" ph="SELECT * FRO... tb_venta" />
-            <marker date="1557957281907" expanded="true" signature="796:1172" ph="SELECT * FRO... tb_notacredito" />
-            <marker date="1557957281907" expanded="true" signature="796:1593" ph="SELECT * FRO... " />
-            <marker date="1557957281907" expanded="true" signature="1218:1593" ph="SELECT * FRO... tb_notadebito" />
-            <marker date="1557957281907" expanded="true" signature="1820:1940" ph="SELECT IFNUL... tb_resumenboleta" />
-            <marker date="1557957281907" expanded="true" signature="2066:2138" ph="SELECT * FRO... tb_resumenboleta" />
-            <marker date="1557957281907" expanded="true" signature="2285:2602" ph="INSERT INTO tb_resumenboleta... " />
-            <marker date="1557957281907" expanded="true" signature="3014:3906" ph="INSERT INTO tb_resumenboletadetalle... " />
-            <marker date="1557957281907" expanded="true" signature="4042:4290" ph="SELECT * FRO... tb_resumenboletadetalle" />
-            <marker date="1557957281907" expanded="true" signature="4461:4604" ph="SELECT tb_re... tb_resumenboletadetalle" />
-            <marker date="1557957281907" expanded="true" signature="4783:4926" ph="SELECT tb_re... tb_resumenboletadetalle" />
-            <marker date="1557957281907" expanded="true" signature="5070:5157" ph="SELECT * FRO... tb_resumenboleta" />
-            <marker date="1557957281907" expanded="true" signature="5310:5381" ph="UPDATE tb_venta... " />
-            <marker date="1557957281907" expanded="true" signature="5542:5871" ph="UPDATE tb_resumenboleta... " />
-            <marker date="1557957281907" expanded="true" signature="6020:6203" ph="UPDATE tb_resumenboleta... " />
-          </folding>
+          <caret line="143" column="13" selection-start-line="143" selection-start-column="13" selection-end-line="143" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/resumenboleta/resumenboleta_reg.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4029">
-          <caret line="237" column="0" lean-forward="false" selection-start-line="237" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
+          <caret line="237" selection-start-line="237" selection-end-line="237" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/producto/cProducto.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2669">
-          <caret line="157" column="22" lean-forward="false" selection-start-line="157" selection-start-column="22" selection-end-line="157" selection-end-column="22" />
+          <caret line="157" column="22" selection-start-line="157" selection-start-column="22" selection-end-line="157" selection-end-column="22" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_impresion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3825">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+        <state relative-caret-position="-3825" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/puntoventa/puntoventa_form.php">
@@ -787,223 +590,109 @@
     <entry file="file://$PROJECT_DIR$/config/Cado.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
-          <caret line="14" column="5" lean-forward="false" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding />
+          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/producto/producto_complete_nom.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="20" column="25" lean-forward="false" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/puntoventa/puntoventa_reg.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_preimpresion.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-969">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+        <state relative-caret-position="-969" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_enc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2071">
-          <caret line="435" column="33" lean-forward="false" selection-start-line="435" selection-start-column="33" selection-end-line="435" selection-end-column="33" />
-          <folding />
+          <caret line="435" column="33" selection-start-line="435" selection-start-column="33" selection-end-line="435" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/boleta.php" />
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_preimpresion_pas.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+        <state relative-caret-position="-510" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_pas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
           <caret line="391" column="79" lean-forward="true" selection-start-line="391" selection-start-column="79" selection-end-line="391" selection-end-column="79" />
-          <folding>
-            <element signature="e#10749#10772#0#HTML" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-816">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
+        <state relative-caret-position="-816" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libreriasphp/consultaruc/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="561">
-          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/notacredito/venta_tabla.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2329">
-          <caret line="137" column="25" lean-forward="false" selection-start-line="121" selection-start-column="24" selection-end-line="137" selection-end-column="25" />
-          <folding />
+          <caret line="137" column="25" selection-start-line="121" selection-start-column="24" selection-end-line="137" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/libreriasphp/consultaruc/sunat.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1479">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="n#ProcesaNumRand#0;n#Sunat#0;n#!!top" expanded="false" />
-          </folding>
-        </state>
+        <state relative-caret-position="-1479" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/cVenta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="867">
-          <caret line="270" column="64" lean-forward="false" selection-start-line="270" selection-start-column="64" selection-end-line="270" selection-end-column="64" />
-          <folding>
-            <marker date="1565386856671" expanded="true" signature="260:1240" ph="INSERT INTO tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="1617:2658" ph="INSERT INTO tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="2864:3093" ph="INSERT INTO tb_viajeventa... " />
-            <marker date="1565386856671" expanded="true" signature="3328:3615" ph="INSERT INTO tb_encomiendaventa... " />
-            <marker date="1565386856671" expanded="true" signature="3801:3970" ph="INSERT INTO tb_asientoestado... " />
-            <marker date="1565386856671" expanded="true" signature="4239:4925" ph="INSERT INTO tb_ventadetalle... " />
-            <marker date="1565386856671" expanded="true" signature="5236:6268" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="6928:7804" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="8394:8682" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="8842:9085" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="9291:10318" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="10937:11903" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="12542:12931" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="13854:14753" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="15519:16671" ph="SELECT tb_ve... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="17387:18083" ph="SELECT tb_ve... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="18670:19054" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="19184:19416" ph="SELECT cs_ti... tb_ventadetalle" />
-            <marker date="1565386856671" expanded="true" signature="19589:19658" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="19787:20592" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="20726:21311" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="21444:21903" ph="SELECT * FRO... tb_producto" />
-            <marker date="1565386856671" expanded="true" signature="22046:22239" ph="SELECT * FRO... tb_servicio" />
-            <marker date="1565386856671" expanded="true" signature="22381:22538" ph="UPDATE tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="22669:22768" ph="UPDATE tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="22885:22941" ph="SELECT * FRO... tb_usosoftware" />
-            <marker date="1565386856671" expanded="true" signature="23054:23093" ph="DELETE FROM tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="23202:23292" ph="SELECT DISTI... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="23429:23656" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="23786:23858" ph="UPDATE tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="24015:24245" ph="UPDATE tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="24394:24531" ph="UPDATE tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="24697:25171" ph="SELECT ev.tb... tb_encomiendaventa" />
-            <marker date="1565386856671" expanded="true" signature="25348:25445" ph="UPDATE tb_encomiendaventa... " />
-            <marker date="1565386856671" expanded="true" signature="25620:25707" ph="UPDATE tb_venta... " />
-            <marker date="1565386856671" expanded="true" signature="25870:26083" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1565386856671" expanded="true" signature="26247:26654" ph="SELECT tb_vi... tb_viajehorario" />
-            <marker date="1565386856671" expanded="true" signature="26830:27622" ph="SELECT vh.tb... tb_viajehorario" />
-            <marker date="1565386856671" expanded="true" signature="27789:28152" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1565386856671" expanded="true" signature="28334:28844" ph="SELECT * FRO... tb_encomiendaventa" />
-            <marker date="1565386856671" expanded="true" signature="29005:29109" ph="SELECT * FRO... tb_encomiendaventa" />
-            <marker date="1565386856671" expanded="true" signature="29280:29393" ph="UPDATE tb_encomiendaventa... " />
-            <marker date="1565386856671" expanded="true" signature="29561:29825" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1565386856671" expanded="true" signature="29992:30256" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1565386856671" expanded="true" signature="30421:30476" ph="DELETE FROM tb_asientoestado... " />
-            <marker date="1565386856671" expanded="true" signature="30645:30879" ph="SELECT DISTI... tb_encomiendaventa" />
-            <marker date="1565386856671" expanded="true" signature="31043:31180" ph="SELECT * FRO... tb_encomiendaventa" />
-            <marker date="1565386856671" expanded="true" signature="31358:31453" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565386856671" expanded="true" signature="31626:31722" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1565386856671" expanded="true" signature="31914:32039" ph="UPDATE tb_viajeventa... " />
-          </folding>
+          <caret line="270" column="64" selection-start-line="270" selection-start-column="64" selection-end-line="270" selection-end-column="64" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos2/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="5" column="23" lean-forward="false" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-          <folding />
+          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos2/venta/venta_vista.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1292">
-          <caret line="162" column="0" lean-forward="true" selection-start-line="162" selection-start-column="0" selection-end-line="162" selection-end-column="0" />
-          <folding />
+          <caret line="162" lean-forward="true" selection-start-line="162" selection-end-line="162" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos2/venta/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos2/venta/venta_tabla.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
           <caret line="34" column="33" lean-forward="true" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos/venta/venta_filtro.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1694">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recursos2/venta/cVenta.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="52" column="24" lean-forward="false" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
-          <folding>
-            <marker date="1565389430594" expanded="true" signature="110:1070" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1565389430594" expanded="true" signature="110:1213" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1565389430594" expanded="true" signature="110:1243" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1565389430594" expanded="true" signature="1401:1732" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565389430594" expanded="true" signature="2077:2382" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565389430594" expanded="true" signature="2512:3097" ph="SELECT * FRO... tb_venta" />
-            <marker date="1565389430594" expanded="true" signature="3229:3688" ph="SELECT * FRO... tb_producto" />
-            <marker date="1565389430594" expanded="true" signature="3829:4022" ph="SELECT * FRO... tb_servicio" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recursos2/venta/venta_preimpresion.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-272">
-          <caret line="8" column="35" lean-forward="false" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
-          <folding />
-        </state>
+        <state relative-caret-position="-1694" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos/venta/venta_preimpresion_pas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="374">
-          <caret line="31" column="66" lean-forward="false" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
-          <folding />
+          <caret line="31" column="66" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
         </state>
       </provider>
     </entry>
@@ -1011,75 +700,81 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="34" column="55" lean-forward="true" selection-start-line="34" selection-start-column="16" selection-end-line="34" selection-end-column="55" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_pas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
-          <caret line="65" column="50" lean-forward="false" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recursos/venta/venta_tabla.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="113" column="29" lean-forward="false" selection-start-line="113" selection-start-column="29" selection-end-line="113" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/recursos/venta/venta_vista.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="186" column="35" lean-forward="false" selection-start-line="186" selection-start-column="23" selection-end-line="186" selection-end-column="45" />
-          <folding>
-            <element signature="e#3963#4606#0#HTML" expanded="false" />
-            <element signature="e#4637#5399#0#HTML" expanded="false" />
-            <marker date="1565394608339" expanded="true" signature="480:504" ph="..." />
-          </folding>
+          <caret line="65" column="50" selection-start-line="65" selection-start-column="29" selection-end-line="65" selection-end-column="52" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_preimpresion_enc.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_tabla_adm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3247">
-          <caret line="209" column="0" lean-forward="false" selection-start-line="209" selection-start-column="0" selection-end-line="209" selection-end-column="0" />
-          <folding />
-        </state>
+        <state relative-caret-position="-510" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos/venta/venta_preimpresion_enc.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
-          <caret line="31" column="58" lean-forward="false" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
-          <folding />
+          <caret line="31" column="58" selection-start-line="31" selection-start-column="58" selection-end-line="31" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_tabla_adm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3553">
+          <caret line="209" selection-start-line="209" selection-end-line="209" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista_adm.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="305">
-          <caret line="192" column="45" lean-forward="false" selection-start-line="192" selection-start-column="45" selection-end-line="192" selection-end-column="45" />
-          <folding />
+        <state relative-caret-position="3264">
+          <caret line="192" column="45" selection-start-line="192" selection-start-column="45" selection-end-line="192" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recursos2/venta/cVenta.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="884">
+          <caret line="52" column="24" selection-start-line="52" selection-start-column="24" selection-end-line="52" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recursos2/venta/venta_preimpresion.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="35" selection-start-line="8" selection-start-column="35" selection-end-line="8" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/recursos/venta/venta_preimpresion.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
-          <caret line="31" column="66" lean-forward="false" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
-          <folding />
+          <caret line="31" column="66" selection-start-line="31" selection-start-column="66" selection-end-line="31" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recursos/venta/venta_vista.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2192">
+          <caret line="186" column="35" selection-start-line="186" selection-start-column="23" selection-end-line="186" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recursos/venta/descargar_xml.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="46" column="4" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/recursos/venta/venta_tabla.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="133" column="118" selection-start-line="133" selection-start-column="118" selection-end-line="133" selection-end-column="118" />
         </state>
       </provider>
     </entry>
