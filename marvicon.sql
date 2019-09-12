@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-07-2019 a las 23:08:30
+-- Tiempo de generación: 12-09-2019 a las 22:55:15
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 5.6.36
 
@@ -2784,7 +2784,8 @@ INSERT INTO `tb_catalogo` (`tb_catalogo_id`, `tb_catalogo_reg`, `tb_catalogo_mod
 (152, '2018-11-20 10:07:25', '2018-11-20 10:07:25', 1, 1, '1.00', '0.000', '0.00', '0.00', '145.00', '27.00', '184.71', 1, 1, 0, 0, 'Activo', 1, 150),
 (153, '2018-12-14 09:50:58', '2019-02-22 14:54:27', 1, 1, '1.00', '3.370', '3.51', '4.14', '4.14', '21.94', '5.05', 1, 1, 0, 0, 'Activo', 1, 151),
 (154, '2019-05-09 16:17:24', '2019-05-09 16:19:41', 1, 1, '1.00', '0.000', '0.00', '100.00', '100.00', '0.00', '100.00', 1, 1, 0, 0, 'Activo', 1, 152),
-(155, '2019-06-06 19:59:23', '2019-06-06 20:03:24', 1, 16, '5.00', '0.000', '0.00', '0.00', '200.00', '0.00', '236.00', 1, 1, 0, 0, 'Activo', 0, 152);
+(155, '2019-06-06 19:59:23', '2019-06-06 20:03:24', 1, 16, '5.00', '0.000', '0.00', '0.00', '200.00', '0.00', '236.00', 1, 1, 0, 0, 'Activo', 0, 152),
+(156, '2019-08-09 16:23:55', '2019-08-09 20:27:52', 1, 17, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 0, 0, 'Activo', 0, 52);
 
 -- --------------------------------------------------------
 
@@ -14861,7 +14862,8 @@ INSERT INTO `tb_unidad` (`tb_unidad_id`, `tb_unidad_abr`, `tb_unidad_nom`, `tb_u
 (13, 'MT', 'METRO', 1, 0),
 (14, 'FCO', 'FRASCO', 1, 0),
 (15, 'MTRS', 'METROS', 2, 0),
-(16, 'CJA', 'CAJA', 2, 0);
+(16, 'CJA', 'CAJA', 2, 0),
+(17, 'UND', 'UNIDAD', 2, 0);
 
 -- --------------------------------------------------------
 
@@ -14890,7 +14892,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`tb_usuario_id`, `tb_usuario_use`, `tb_usuario_pas`, `tb_usuario_apepat`, `tb_usuario_apemat`, `tb_usuario_nom`, `tb_usuario_ema`, `tb_usuario_reg`, `tb_usuario_mod`, `tb_usuario_ultvis`, `tb_usuario_blo`, `tb_usuariogrupo_id`, `tb_empresa_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'AQPFACT', 'mail@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-07-22 12:49:26', 0, 2, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'AQPFACT', 'mail@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-08-07 13:10:33', 0, 2, 1),
 (29, 'superusuario', '261a7d80916532797f8735dd198d4ada', 'APELLIDO PATERNO', 'APELIIDO MATERNO', 'SUPER', 'gerencia@a-zetasoft.com', '0000-00-00 00:00:00', '2018-03-03 12:28:53', '2018-07-06 18:10:38', 0, 1, 1),
 (30, 'vendedor', '827ccb0eea8a706c4c34a16891f84e7b', 'ZIRENA', 'BEJARANO', 'ALFREDO', 'alfredzb@gmail.com', '0000-00-00 00:00:00', '2018-10-26 22:58:22', '2019-06-14 19:12:51', 0, 3, 1),
 (33, 'liquidador', '221b3a9e09a367bb69f7c7c1141c1dd9', 'PALOMINO', 'SANCHEZ', 'JOSE', 'rrpalomino65@hotmail.com', '2018-01-31 11:00:40', '2018-01-31 11:01:05', '2018-03-17 11:24:17', 0, 4, 1);
@@ -15689,7 +15691,7 @@ INSERT INTO `tb_venta` (`tb_venta_id`, `tb_venta_reg`, `tb_venta_fec`, `tb_docum
 (668, '2019-06-07 21:29:58', '2019-06-07', 15, 'NS01-00001', 65, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 0, 'NS01', '00001', 2, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
 (669, '2019-06-17 14:02:59', '2019-06-17', 12, 'B001-0410', 65, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0410', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '16X8JgmOZ4ydNjAVNrkB0c4C2AY=', 'KY4MIRATq2RpwxRfmiknvzNMIG68AJ/XWEVYUJigBQh0bCbF624HNOZynFQ+sfn3MhDlUu+876E1W1Tf1s4OpftuJVczPZdbC9G4X7MyNcoNHszx9SioAPgFnsci+768yzkYnTGPV0lCxNCkKugdS2RDXKiM4OQd3x171oeD1ZmnjUCL/6ZCYVStrfoO+RlzLZYbHCSlvUKteYDnXSRafLAkP0kX+/DAEJ9TWv5UmskBA11ZJw23QHu3uj3TFKT6Gapru4qrhb8LEFnDyLiSSqQV20YxWlZ1uUc2YGpELYyBSozx3Bc/+h5hbpEtiuOxbHvuwBjxSvoKEN8cC21ptg==', '1', '2019-06-17 14:03:00', 10, 1),
 (670, '2019-06-17 14:04:37', '2019-06-17', 12, 'B001-0411', 65, '0.00', '0.00', '0.00', '6.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0411', 1, '0.00', '0.00', '6.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'jhvyl8wkUUYTaD3ffZE5YG57cyU=', 'WQfhsTZDe0maqvvFLDh9DjAHARYkohHLA1uC7vRkzT4bIET6AiCCzr5v/xkINhd9MMabxuuYsl249AlTfrFE3hmWcmGGP+FCrVdfQDFI0xT9KWU8siJJ4e0GBaAoYtxsM++7BF6PSA5LjjkXWGcoH9M3Kp2seDITOIDQZ/3SDWqTvBT/RB1brGICB/oIpbNk23wZLstcADXd/rDvhvFyr5kpVn6d/+c/hSZCCoIVE3zEi2Qx4FYUtqsCGNlRqkySh4IcRCceFd13zBfx7I5WhdUJhpXCyQKtnoKWFcasisjWYQS/Q9lAMqvUli7iXrtlW0SSXtRQrvbxCT+gK+J0yg==', '1', '2019-06-17 14:04:37', 10, 1),
-(671, '2019-07-09 21:19:23', '2019-07-09', 11, 'F001-00012', 43, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00012', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, 'HTTP', 'iRWJsxnfAk80IEFrwIwLiXR0JmE=', 'GAYeZYhODjvKd/xUuVFMgzFmF9gupsEL5V/B1rL9iAcIxyAnfUOrTy8yUVtGrPd/cUsJ4poaSALtOlNVDixIFyQKqQ1w1CLfac2Jns5yfp1tCkGCno5rJ+iTcjl2za/hf80100U9En32f/a9eYqa8ZKDupO8EgxxWTIb0Fg8gxE76EQtqhzav/J7qAX+SBmbWKWB+gaok5ayxKDJjNMwVsS3qoCr7MEohNYF7ONdWEh4le/Hs2Zo4KpPHgc2Apy91Pl/F43pXJGfU8Y3WSiVLcaGwof0/ZiyG+ZPTP+j15YypngJfa6V7wavITlcHqCi9TOhL8YDvAohLqPldJZgyw==', '1', '2019-07-09 21:19:38', 0, 1);
+(671, '2019-07-09 21:19:23', '2019-07-09', 11, 'F001-00012', 43, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00012', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'kWUhO5+8IkZxRpivFPgb5Hmww54=', 'yRGHASUztUJfv8uYRgk1LyxA+FClPGdYTwsCqvTOFQOBV1cG4HmKmn8CBFSBSjiQtwlQK7Xzpy7sKmlg2aQsQXjLQLI9MuERuHj9jffL7+skpQY50bwahPGDfupBbXEFTvXrrd3hnCfP5Ub/DxY8w458kJdCE2sKQDI9q4WeYKL71+V2T/cKeV5a4DRu1QvHQZgjpVuPtvEIuQ4zwGph+BY1hdHO31jsMuBxFtNYQiGMLyi3B2/QDJ0Td2p5JCq0C1LM43DKepscK+jsx3FVGqJ4OjPQSe5fWBTsgxZVoohdwqcWXraR83qVyiVuykBxjqfoeMm6lSPpFdbK0iaT/Q==', '1', '2019-07-23 13:28:34', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -19221,7 +19223,7 @@ ALTER TABLE `tb_caja_r`
 -- AUTO_INCREMENT de la tabla `tb_catalogo`
 --
 ALTER TABLE `tb_catalogo`
-  MODIFY `tb_catalogo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `tb_catalogo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_catalogoimagen`
@@ -19761,7 +19763,7 @@ ALTER TABLE `tb_ubigeo`
 -- AUTO_INCREMENT de la tabla `tb_unidad`
 --
 ALTER TABLE `tb_unidad`
-  MODIFY `tb_unidad_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `tb_unidad_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_usuario`
