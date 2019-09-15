@@ -63,9 +63,9 @@ function venta_filtro()
 		url: "../resumenboleta/venta_filtro.php",
 		async:true,
 		dataType: "html",                      
-		//data: ({
-			//venta: $('#txt_fil_pro').val()
-		//}),
+		data: ({
+			fecha: '<?php echo $_POST['fecha'];?>'
+		}),
 		beforeSend: function() {
 			$('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },

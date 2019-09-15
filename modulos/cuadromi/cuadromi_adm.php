@@ -7,6 +7,8 @@ $oCuadromi = new cCuadromi();
 require_once ("../almacen/cAlmacen.php");
 $oAlmacen = new cAlmacen();
 require_once ("../formatos/formatos.php");
+require_once ("../venta/cVenta.php");
+$oVenta = new cVenta();
 
 $y=date('Y');
 $m=date('m');
@@ -14,7 +16,6 @@ $d=date('d');
 
 $com_est='CANCELADA';
 $ven_est='CANCELADA';
-
 
 ?>
 <script type="text/javascript">
@@ -38,6 +39,48 @@ function marca_tabla()
 			$('#div_marca_tabla').removeClass("ui-state-disabled");
 		}
 	});     
+}
+function facturas_pendientes_tabla()
+{
+    $.ajax({
+        type: "POST",
+        url: "../cuadromi/cuadromi_tabla_facturas_pendientes.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            //pro_est:	$('#cmb_fil_pro_est').val()
+        }),
+        beforeSend: function() {
+            $('.cuadromi_tabla_facturas_pendientes').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('.cuadromi_tabla_facturas_pendientes').html(html);
+        },
+        complete: function(){
+            $('.cuadromi_tabla_facturas_pendientes').removeClass("ui-state-disabled");
+        }
+    });
+}
+function resumen_pendientes_tabla()
+{
+    $.ajax({
+        type: "POST",
+        url: "../cuadromi/prueba.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            //pro_est:	$('#cmb_fil_pro_est').val()
+        }),
+        beforeSend: function() {
+            $('.cuadromi_tabla_resumen_pendientes').addClass("ui-state-disabled");
+        },
+        success: function(html){
+            $('.cuadromi_tabla_resumen_pendientes').html(html);
+        },
+        complete: function(){
+            $('.cuadromi_tabla_resumen_pendientes').removeClass("ui-state-disabled");
+        }
+    });
 }
 
 function marca_form(act,idf)
@@ -89,6 +132,33 @@ function eliminar_marca(id)
 	}
 }
 //
+function enviar_sunat(id)
+{
+    if(confirm("Realmente desea Enviar a la Sunat?")){
+        $.ajax({
+            type: "POST",
+            url: "../venta/enviar_sunat.php",
+            async:true,
+            dataType: "json",
+            data: ({
+                ven_id:		id
+            }),
+            beforeSend: function() {
+                $('#msj_venta').html("Enviando a SUNAT...");
+                $('#msj_venta').show(100);
+            },
+            success: function(data){
+                $('#msj_venta').html(data.msj);
+                //$('#msj_venta').html(data.msj2);
+                $('#msj_venta').show();
+            },
+            complete: function(){
+                facturas_pendientes_tabla();
+            }
+        });
+    }
+}
+
 $(function() {
 	
 	$( "#div_marca_form" ).dialog({
@@ -108,6 +178,11 @@ $(function() {
 			}
 		}
 	});
+    $('.btn_sunat').button({
+        text: true
+    });
+    facturas_pendientes_tabla();
+    resumen_pendientes_tabla();
 	
 });
 
@@ -126,8 +201,9 @@ $(function() {
 </style>
 <div align="left">
 <?php
-echo fechaActual(1);
+    echo fechaActual(1);
 ?>
+    <div id="msj_venta" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
 </div>
 <div id="cuadro-contain" class="ui-widget" style="float:left; margin-left:20px">
     <table id="cuadro" class="ui-widget ui-widget-content">
@@ -351,3 +427,10 @@ mysql_free_result($rws);
 ?>
 </div>
 <?php */?>
+<div id="cuadro-contain" class="ui-widget cuadromi_tabla_facturas_pendientes" style="float:left;" >
+
+</div>
+
+<div id="cuadro-contain" class="ui-widget cuadromi_tabla_resumen_pendientes" style="float:left;" >
+
+</div>

@@ -561,5 +561,16 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function mostrar_filtro_pend_facturas($punven_id,$emp_id){
+        $sql="SELECT * 
+	FROM tb_venta v
+	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
+	WHERE v.tb_empresa_id = $emp_id AND v.tb_documento_id = 11 AND v.tb_venta_estsun = 0";
+        if($punven_id>0)$sql.=" AND v.tb_puntoventa_id = $punven_id ";
+        $sql.=" ORDER BY  tb_venta_numdoc ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

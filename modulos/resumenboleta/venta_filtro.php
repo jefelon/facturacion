@@ -4,6 +4,11 @@
 	$d=date('d');
 	
 	$fec1="$d-$m-$y";
+
+	if($_POST['fecha'])
+    {
+        $fec1=$_POST['fecha'];
+    }
 	
 ?>
 <script type="text/javascript">
@@ -94,8 +99,7 @@ $(function() {
 <input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla.php">
 <fieldset><legend>Filtrar por</legend>
     <label for="txt_fil_ven_fec1">Fecha:</label>
-    <input name="txt_fil_ven_fec1" type="text" id="txt_fil_ven_fec1" value="<?php echo $fec1?>" size="8" readonly>
-
+    <input name="txt_fil_ven_fec1" type="text" id="txt_fil_ven_fec1" value="<?php echo $fec1 ?>" size="8" readonly>
     <?PHP /*?><label for="cmb_fil_ven_doc">Doc:</label>
     <select name="cmb_fil_ven_doc" id="cmb_fil_ven_doc">
     	<option value="3">BV | BOLETA</option>

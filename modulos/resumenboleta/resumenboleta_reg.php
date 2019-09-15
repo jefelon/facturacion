@@ -93,6 +93,8 @@ if($num>0)
 	    	//sumatorias
             $valor=$dt1['tb_venta_gra'];
 			$opegra=$dt1['tb_venta_gra'];
+            $opeexo=$dt1['tb_venta_exo'];
+            $opeina=$dt1['tb_venta_ina'];
 	        $igv=$dt1['tb_venta_igv'];
 	        $imptot=$dt1['tb_venta_tot'];
 
@@ -209,6 +211,8 @@ if($num>0)
             //sumatorias
             $valor=$dt1['tb_venta_gra'];
             $opegra=$dt1['tb_venta_gra'];
+            $opeexo=$dt1['tb_venta_exo'];
+            $opeina=$dt1['tb_venta_ina'];
             $igv=$dt1['tb_venta_igv'];
             $imptot=$dt1['tb_venta_tot'];
 
