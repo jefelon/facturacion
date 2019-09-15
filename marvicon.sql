@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-09-2019 a las 22:55:15
+-- Tiempo de generación: 15-09-2019 a las 03:38:27
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 5.6.36
 
@@ -2785,7 +2785,17 @@ INSERT INTO `tb_catalogo` (`tb_catalogo_id`, `tb_catalogo_reg`, `tb_catalogo_mod
 (153, '2018-12-14 09:50:58', '2019-02-22 14:54:27', 1, 1, '1.00', '3.370', '3.51', '4.14', '4.14', '21.94', '5.05', 1, 1, 0, 0, 'Activo', 1, 151),
 (154, '2019-05-09 16:17:24', '2019-05-09 16:19:41', 1, 1, '1.00', '0.000', '0.00', '100.00', '100.00', '0.00', '100.00', 1, 1, 0, 0, 'Activo', 1, 152),
 (155, '2019-06-06 19:59:23', '2019-06-06 20:03:24', 1, 16, '5.00', '0.000', '0.00', '0.00', '200.00', '0.00', '236.00', 1, 1, 0, 0, 'Activo', 0, 152),
-(156, '2019-08-09 16:23:55', '2019-08-09 20:27:52', 1, 17, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 0, 0, 'Activo', 0, 52);
+(156, '2019-08-09 16:23:55', '2019-08-09 20:27:52', 1, 17, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 1, 0, 0, 'Activo', 0, 52),
+(157, '2019-09-14 18:32:34', '2019-09-14 18:32:34', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '15.00', 1, 1, 0, 0, 'Activo', 1, 153),
+(158, '2019-09-14 18:43:49', '2019-09-14 18:43:49', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '10.00', 1, 1, 0, 0, 'Activo', 1, 154),
+(159, '2019-09-14 18:44:56', '2019-09-14 18:44:56', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '4.00', 1, 1, 0, 0, 'Activo', 1, 155),
+(160, '2019-09-14 18:46:42', '2019-09-14 18:46:42', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '4.00', 1, 1, 0, 0, 'Activo', 1, 156),
+(161, '2019-09-14 18:47:08', '2019-09-14 18:47:08', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '5.00', 1, 1, 0, 0, 'Activo', 1, 157),
+(162, '2019-09-14 18:47:52', '2019-09-14 18:47:52', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '12.00', 1, 1, 0, 0, 'Activo', 1, 158),
+(163, '2019-09-14 18:48:52', '2019-09-14 18:48:52', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '45.00', 1, 1, 0, 0, 'Activo', 1, 159),
+(164, '2019-09-14 18:50:05', '2019-09-14 18:50:05', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '10.00', 1, 1, 0, 0, 'Activo', 1, 160),
+(165, '2019-09-14 18:50:47', '2019-09-14 18:50:47', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '45.00', 1, 1, 0, 0, 'Activo', 1, 161),
+(166, '2019-09-14 19:00:16', '2019-09-14 19:00:16', 1, 1, '1.00', '0.000', '0.00', '0.00', '0.00', '0.00', '10.00', 1, 1, 0, 0, 'Activo', 1, 162);
 
 -- --------------------------------------------------------
 
@@ -3704,7 +3714,18 @@ INSERT INTO `tb_clientecuenta` (`tb_clientecuenta_id`, `tb_clientecuenta_fecreg`
 (598, '2019-06-17 14:04:37', 1, 1, '2019-06-17', 'VENTA CONTADO EFECTIVO | BE B001-0411', 1, '6.00', 1, 1, 670, 1, 1, 0, 0, '', 0, '0000-00-00', 65, 1, 0, 1, 1),
 (599, '2019-06-17 14:04:37', 1, 1, '2019-06-17', 'PAGO CONTADO EFECTIVO | BE B001-0411', 2, '6.00', 0, 1, 670, 1, 1, 0, 0, '', 0, '0000-00-00', 65, 1, 598, 1, 1),
 (600, '2019-07-09 21:19:23', 1, 1, '2019-07-09', 'VENTA CONTADO EFECTIVO | FE F001-00012', 1, '175.23', 1, 1, 671, 1, 1, 0, 0, '', 0, '0000-00-00', 43, 1, 0, 1, 1),
-(601, '2019-07-09 21:19:23', 1, 1, '2019-07-09', 'PAGO CONTADO EFECTIVO | FE F001-00012', 2, '175.23', 0, 1, 671, 1, 1, 0, 0, '', 0, '0000-00-00', 43, 1, 600, 1, 1);
+(601, '2019-07-09 21:19:23', 1, 1, '2019-07-09', 'PAGO CONTADO EFECTIVO | FE F001-00012', 2, '175.23', 0, 1, 671, 1, 1, 0, 0, '', 0, '0000-00-00', 43, 1, 600, 1, 1),
+(602, '2019-09-13 19:44:23', 1, 1, '2019-09-13', 'VENTA CONTADO EFECTIVO | BE B001-0412', 1, '175.23', 1, 1, 672, 1, 1, 0, 0, '', 0, '0000-00-00', 65, 1, 0, 1, 1);
+INSERT INTO `tb_clientecuenta` (`tb_clientecuenta_id`, `tb_clientecuenta_fecreg`, `tb_clientecuenta_xac`, `tb_clientecuenta_tipreg`, `tb_clientecuenta_fec`, `tb_clientecuenta_glo`, `tb_clientecuenta_tip`, `tb_clientecuenta_mon`, `tb_clientecuenta_est`, `tb_clientecuenta_ventip`, `tb_clientecuenta_ven_id`, `tb_formapago_id`, `tb_modopago_id`, `tb_cuentacorriente_id`, `tb_tarjeta_id`, `tb_clientecuenta_numope`, `tb_clientecuenta_numdia`, `tb_clientecuenta_fecven`, `tb_cliente_id`, `tb_clientecuenta_ver`, `tb_clientecuenta_idp`, `tb_usuario_id`, `tb_empresa_id`) VALUES
+(603, '2019-09-13 19:44:23', 1, 1, '2019-09-13', 'PAGO CONTADO EFECTIVO | BE B001-0412', 2, '175.23', 0, 1, 672, 1, 1, 0, 0, '', 0, '0000-00-00', 65, 1, 602, 1, 1),
+(604, '2019-09-13 20:16:51', 1, 1, '2019-09-13', 'VENTA CONTADO EFECTIVO | FE F001-00013', 1, '175.23', 1, 1, 673, 1, 1, 0, 0, '', 0, '0000-00-00', 42, 1, 0, 1, 1),
+(605, '2019-09-13 20:16:51', 1, 1, '2019-09-13', 'PAGO CONTADO EFECTIVO | FE F001-00013', 2, '175.23', 0, 1, 673, 1, 1, 0, 0, '', 0, '0000-00-00', 42, 1, 604, 1, 1),
+(606, '2019-09-14 13:46:30', 1, 1, '2019-09-14', 'VENTA CONTADO EFECTIVO | FE F001-00014', 1, '175.23', 1, 1, 674, 1, 1, 0, 0, '', 0, '0000-00-00', 43, 1, 0, 1, 1),
+(607, '2019-09-14 13:46:30', 1, 1, '2019-09-14', 'PAGO CONTADO EFECTIVO | FE F001-00014', 2, '175.23', 0, 1, 674, 1, 1, 0, 0, '', 0, '0000-00-00', 43, 1, 606, 1, 1),
+(608, '2019-09-14 13:48:57', 1, 1, '2019-09-14', 'VENTA CONTADO EFECTIVO | FE F001-00015', 1, '525.69', 1, 1, 675, 1, 1, 0, 0, '', 0, '0000-00-00', 43, 1, 0, 1, 1),
+(609, '2019-09-14 13:48:57', 1, 1, '2019-09-14', 'PAGO CONTADO EFECTIVO | FE F001-00015', 2, '525.69', 0, 1, 675, 1, 1, 0, 0, '', 0, '0000-00-00', 43, 1, 608, 1, 1),
+(610, '2019-09-14 18:23:26', 1, 1, '2019-09-14', 'VENTA CONTADO EFECTIVO | BE B001-0413', 1, '175.23', 1, 1, 676, 1, 1, 0, 0, '', 0, '0000-00-00', 65, 1, 0, 1, 1),
+(611, '2019-09-14 18:23:27', 1, 1, '2019-09-14', 'PAGO CONTADO EFECTIVO | BE B001-0413', 2, '175.23', 0, 1, 676, 1, 1, 0, 0, '', 0, '0000-00-00', 65, 1, 610, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5519,7 +5540,8 @@ INSERT INTO `tb_formula` (`tb_formula_id`, `tb_formula_ele`, `tb_formula_ide`, `
 (3, 'Ventas', 'VEN_TIPO_IMPRESION', '0', 'Configura el modo de impresiÃ³n de los comprobantes de venta. Valores del Dato: 1=Activado, 0=Desactivado.'),
 (4, 'Ventas', 'VEN_IMP_DIR', '1', 'Muestra en la impresiÃ³n del comprobante de venta la direcciÃ³n. 1=Activado 0=Desactivado'),
 (5, 'Ventas', 'VEN_VENTAS_NEGATIVAS', '1', 'Permite vender productos sin stock'),
-(6, 'Ventas', 'VEN_IMP_FORMATO', 'TICKET', 'Configurar el formato de impresiÃ³n de los comprobantes de pago electrÃ³nicos. A4= A4 GRANDE TICKET=TICKET PEQUEÃ‘O');
+(6, 'Ventas', 'VEN_IMP_FORMATO', 'A4', 'Configurar el formato de impresiÃ³n de los comprobantes de pago electrÃ³nicos. A4= A4 GRANDE TICKET=TICKET PEQUEÃ‘O'),
+(7, 'Ventas', 'NUM_COPIAS', '2', 'Numero de copias, por defecto 1');
 
 -- --------------------------------------------------------
 
@@ -7353,7 +7375,12 @@ INSERT INTO `tb_guiadetalle` (`tb_guiadetalle_id`, `tb_guiadetalle_can`, `tb_cat
 (1067, '1.00', 54, 0),
 (1068, '1.00', 35, 0),
 (1069, '1.00', 54, 0),
-(1070, '1.00', 54, 0);
+(1070, '1.00', 54, 0),
+(1071, '1.00', 54, 0),
+(1072, '1.00', 54, 0),
+(1073, '1.00', 54, 0),
+(1074, '3.00', 54, 0),
+(1075, '1.00', 54, 0);
 
 -- --------------------------------------------------------
 
@@ -7566,7 +7593,12 @@ INSERT INTO `tb_ingreso` (`tb_ingreso_id`, `tb_ingreso_fecreg`, `tb_ingreso_fecm
 (116, '2019-06-07 21:29:58', '2019-06-07 21:29:58', 1, 1, 1, '2019-06-07', 15, 'NS01-00001', 'VENTA NS NS01-00001 | EFECTIVO', '175.23', 1, 22, 157, 65, 1, 1, 1, 668, 1),
 (117, '2019-06-17 14:02:59', '2019-06-17 14:02:59', 1, 1, 1, '2019-06-17', 12, 'B001-0410', 'VENTA BE B001-0410 | EFECTIVO', '5.00', 1, 22, 157, 65, 1, 1, 1, 669, 1),
 (118, '2019-06-17 14:04:37', '2019-06-17 14:04:37', 1, 1, 1, '2019-06-17', 12, 'B001-0411', 'VENTA BE B001-0411 | EFECTIVO', '6.00', 1, 22, 157, 65, 1, 1, 1, 670, 1),
-(119, '2019-07-09 21:19:23', '2019-07-09 21:19:23', 1, 1, 1, '2019-07-09', 11, 'F001-00012', 'VENTA FE F001-00012 | EFECTIVO', '175.23', 1, 22, 157, 43, 1, 1, 1, 671, 1);
+(119, '2019-07-09 21:19:23', '2019-07-09 21:19:23', 1, 1, 1, '2019-07-09', 11, 'F001-00012', 'VENTA FE F001-00012 | EFECTIVO', '175.23', 1, 22, 157, 43, 1, 1, 1, 671, 1),
+(120, '2019-09-13 19:44:23', '2019-09-13 19:44:23', 1, 1, 1, '2019-09-13', 12, 'B001-0412', 'VENTA BE B001-0412 | EFECTIVO', '175.23', 1, 22, 157, 65, 1, 1, 1, 672, 1),
+(121, '2019-09-13 20:16:51', '2019-09-13 20:16:51', 1, 1, 1, '2019-09-13', 11, 'F001-00013', 'VENTA FE F001-00013 | EFECTIVO', '175.23', 1, 22, 157, 42, 1, 1, 1, 673, 1),
+(122, '2019-09-14 13:46:30', '2019-09-14 13:46:30', 1, 1, 1, '2019-09-14', 11, 'F001-00014', 'VENTA FE F001-00014 | EFECTIVO', '175.23', 1, 22, 157, 43, 1, 1, 1, 674, 1),
+(123, '2019-09-14 13:48:57', '2019-09-14 13:48:57', 1, 1, 1, '2019-09-14', 11, 'F001-00015', 'VENTA FE F001-00015 | EFECTIVO', '525.69', 1, 22, 157, 43, 1, 1, 1, 675, 1),
+(124, '2019-09-14 18:23:27', '2019-09-14 18:23:27', 1, 1, 1, '2019-09-14', 12, 'B001-0413', 'VENTA BE B001-0413 | EFECTIVO', '175.23', 1, 22, 157, 65, 1, 1, 1, 676, 1);
 
 -- --------------------------------------------------------
 
@@ -8579,7 +8611,23 @@ INSERT INTO `tb_kardex` (`tb_kardex_id`, `tb_kardex_xac`, `tb_kardex_reg`, `tb_k
 (1087, 1, '2019-01-01 00:00:00', 1, '1087', '2019-01-01', 1, 5, 'A1-000816', 9, 'NOTA DE ALMACEN', 148, 1, 1, 1),
 (1088, 1, '2019-01-01 00:00:00', 1, '1088', '2019-01-01', 1, 5, 'A1-000817', 9, 'NOTA DE ALMACEN', 149, 1, 1, 1),
 (1089, 1, '2019-06-21 17:00:59', 1, '1089', '2019-06-21', 1, 5, 'A1-000818', 9, 'NOTA DE ALMACEN', 150, 1, 1, 1),
-(1090, 1, '2019-07-09 21:19:24', 1, '1090', '2019-07-09', 2, 11, 'F001-00012', 3, 'VENTA', 671, 1, 1, 1);
+(1090, 1, '2019-07-09 21:19:24', 1, '1090', '2019-07-09', 2, 11, 'F001-00012', 3, 'VENTA', 671, 1, 1, 1),
+(1091, 1, '2019-09-13 19:44:23', 1, '1091', '2019-09-13', 2, 12, 'B001-0412', 3, 'VENTA', 672, 1, 1, 1),
+(1092, 1, '2019-09-13 20:16:51', 1, '1092', '2019-09-13', 2, 11, 'F001-00013', 3, 'VENTA', 673, 1, 1, 1);
+INSERT INTO `tb_kardex` (`tb_kardex_id`, `tb_kardex_xac`, `tb_kardex_reg`, `tb_kardex_tipreg`, `tb_kardex_cod`, `tb_kardex_fec`, `tb_kardex_tip`, `tb_documento_id`, `tb_kardex_numdoc`, `tb_tipoperacion_id`, `tb_kardex_des`, `tb_operacion_id`, `tb_almacen_id`, `tb_usuario_id`, `tb_empresa_id`) VALUES
+(1093, 1, '2019-09-14 13:46:30', 1, '1093', '2019-09-14', 2, 11, 'F001-00014', 3, 'VENTA', 674, 1, 1, 1),
+(1094, 1, '2019-09-14 13:48:57', 1, '1094', '2019-09-14', 2, 11, 'F001-00015', 3, 'VENTA', 675, 1, 1, 1),
+(1095, 1, '2019-09-14 18:23:27', 1, '1095', '2019-09-14', 2, 12, 'B001-0413', 3, 'VENTA', 676, 1, 1, 1),
+(1096, 1, '2019-09-14 18:32:35', 1, '1096', '2019-09-14', 1, 5, 'A1-000819', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 151, 1, 1, 1),
+(1097, 1, '2019-09-14 18:43:50', 1, '1097', '2019-09-14', 1, 5, 'A1-000820', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 152, 1, 1, 1),
+(1098, 1, '2019-09-14 18:44:56', 1, '1098', '2019-09-14', 1, 5, 'A1-000821', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 153, 1, 1, 1),
+(1099, 1, '2019-09-14 18:46:42', 1, '1099', '2019-09-14', 1, 5, 'A1-000822', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 154, 1, 1, 1),
+(1100, 1, '2019-09-14 18:47:09', 1, '1100', '2019-09-14', 1, 5, 'A1-000823', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 155, 1, 1, 1),
+(1101, 1, '2019-09-14 18:47:53', 1, '1101', '2019-09-14', 1, 5, 'A1-000824', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 156, 1, 1, 1),
+(1102, 1, '2019-09-14 18:48:52', 1, '1102', '2019-09-14', 1, 5, 'A1-000825', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 157, 1, 1, 1),
+(1103, 1, '2019-09-14 18:50:05', 1, '1103', '2019-09-14', 1, 5, 'A1-000826', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 158, 1, 1, 1),
+(1104, 1, '2019-09-14 18:50:47', 1, '1104', '2019-09-14', 1, 5, 'A1-000827', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 159, 1, 1, 1),
+(1105, 1, '2019-09-14 19:00:16', 1, '1105', '2019-09-14', 1, 5, 'A1-000828', 9, 'NOTA DE ALMACEN - STOCK INICIAL', 160, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -10235,7 +10283,22 @@ INSERT INTO `tb_kardexdetalle` (`tb_kardexdetalle_id`, `tb_catalogo_id`, `tb_kar
 (1768, 35, '1.00', '15.00', '116.82', 1087),
 (1769, 54, '222.67', '153.16', '175.23', 1088),
 (1770, 54, '77777.00', '153.16', '175.23', 1089),
-(1771, 54, '1.00', '0.00', '175.23', 1090);
+(1771, 54, '1.00', '0.00', '175.23', 1090),
+(1772, 54, '1.00', '0.00', '175.23', 1091),
+(1773, 54, '1.00', '0.00', '175.23', 1092),
+(1774, 54, '1.00', '0.00', '175.23', 1093),
+(1775, 54, '3.00', '0.00', '175.23', 1094),
+(1776, 54, '1.00', '0.00', '206.77', 1095),
+(1777, 157, '0.00', '0.00', '0.00', 1096),
+(1778, 158, '0.00', '0.00', '0.00', 1097),
+(1779, 159, '0.00', '0.00', '0.00', 1098),
+(1780, 160, '0.00', '0.00', '0.00', 1099),
+(1781, 161, '0.00', '0.00', '0.00', 1100),
+(1782, 162, '0.00', '0.00', '0.00', 1101),
+(1783, 163, '0.00', '0.00', '0.00', 1102),
+(1784, 164, '0.00', '0.00', '0.00', 1103),
+(1785, 165, '0.00', '0.00', '0.00', 1104),
+(1786, 166, '0.00', '0.00', '0.00', 1105);
 
 -- --------------------------------------------------------
 
@@ -11035,7 +11098,17 @@ INSERT INTO `tb_notalmacen` (`tb_notalmacen_id`, `tb_notalmacen_reg`, `tb_notalm
 (147, '2019-06-21 16:24:48', '2019-06-21', 1, 5, 'A1-000815', 6, 'hmnnm', 1, 1, 1),
 (148, '2019-06-21 16:39:20', '2019-06-21', 1, 5, 'A1-000816', 6, 'uiuuu', 1, 1, 1),
 (149, '2019-06-21 16:41:20', '2019-06-21', 1, 5, 'A1-000817', 6, 'pppppppppp', 1, 1, 1),
-(150, '2019-06-21 17:00:59', '2019-06-21', 1, 5, 'A1-000818', 6, 'oooooo', 1, 1, 1);
+(150, '2019-06-21 17:00:59', '2019-06-21', 1, 5, 'A1-000818', 6, 'oooooo', 1, 1, 1),
+(151, '2019-09-14 18:32:35', '2019-09-14', 1, 5, 'A1-000819', 1, 'STOCK INICIAL', 1, 1, 1),
+(152, '2019-09-14 18:43:49', '2019-09-14', 1, 5, 'A1-000820', 1, 'STOCK INICIAL', 1, 1, 1),
+(153, '2019-09-14 18:44:56', '2019-09-14', 1, 5, 'A1-000821', 1, 'STOCK INICIAL', 1, 1, 1),
+(154, '2019-09-14 18:46:42', '2019-09-14', 1, 5, 'A1-000822', 1, 'STOCK INICIAL', 1, 1, 1),
+(155, '2019-09-14 18:47:09', '2019-09-14', 1, 5, 'A1-000823', 1, 'STOCK INICIAL', 1, 1, 1),
+(156, '2019-09-14 18:47:52', '2019-09-14', 1, 5, 'A1-000824', 1, 'STOCK INICIAL', 1, 1, 1),
+(157, '2019-09-14 18:48:52', '2019-09-14', 1, 5, 'A1-000825', 1, 'STOCK INICIAL', 1, 1, 1),
+(158, '2019-09-14 18:50:05', '2019-09-14', 1, 5, 'A1-000826', 1, 'STOCK INICIAL', 1, 1, 1),
+(159, '2019-09-14 18:50:47', '2019-09-14', 1, 5, 'A1-000827', 1, 'STOCK INICIAL', 1, 1, 1),
+(160, '2019-09-14 19:00:16', '2019-09-14', 1, 5, 'A1-000828', 1, 'STOCK INICIAL', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -11175,7 +11248,17 @@ INSERT INTO `tb_notalmacendetalle` (`tb_notalmacendetalle_id`, `tb_catalogo_id`,
 (146, 50, '9.00', '0.00', '0.00', 147),
 (147, 35, '1.00', '0.00', '0.00', 148),
 (148, 54, '222.67', '0.00', '0.00', 149),
-(149, 54, '77777.00', '0.00', '0.00', 150);
+(149, 54, '77777.00', '0.00', '0.00', 150),
+(150, 157, '0.00', '0.00', '0.00', 151),
+(151, 158, '0.00', '0.00', '0.00', 152),
+(152, 159, '0.00', '0.00', '0.00', 153),
+(153, 160, '0.00', '0.00', '0.00', 154),
+(154, 161, '0.00', '0.00', '0.00', 155),
+(155, 162, '0.00', '0.00', '0.00', 156),
+(156, 163, '0.00', '0.00', '0.00', 157),
+(157, 164, '0.00', '0.00', '0.00', 158),
+(158, 165, '0.00', '0.00', '0.00', 159),
+(159, 166, '0.00', '0.00', '0.00', 160);
 
 -- --------------------------------------------------------
 
@@ -11359,7 +11442,17 @@ INSERT INTO `tb_presentacion` (`tb_presentacion_id`, `tb_presentacion_reg`, `tb_
 (149, '2018-11-20 10:02:47', '2018-11-20 10:13:57', 'PORCILIS PCV 50 DS', '00530080', 0, 'Activo', 149),
 (150, '2018-11-20 10:07:25', '2018-11-20 10:11:25', 'PORCILIS COLICLOS X 50 ML (25 DS)', '00530044', 0, 'Activo', 150),
 (151, '2018-12-14 09:50:58', '2018-12-14 09:50:58', 'KOMPLETT AVES 735 GALLINAS PONEDORAS X KG', '00600652', 0, 'Activo', 151),
-(152, '2019-05-09 16:17:24', '2019-05-09 16:17:24', 'DEMO', '', 0, 'Activo', 152);
+(152, '2019-05-09 16:17:24', '2019-05-09 16:17:24', 'DEMO', '', 0, 'Activo', 152),
+(153, '2019-09-14 18:32:34', '2019-09-14 18:32:34', 'tryryrtyrtyrty', '', 0, 'Activo', 153),
+(154, '2019-09-14 18:43:49', '2019-09-14 18:43:49', 'pollos descuartizados', '', 0, 'Activo', 154),
+(155, '2019-09-14 18:44:56', '2019-09-14 18:44:56', 'patatas 4', '', 0, 'Activo', 155),
+(156, '2019-09-14 18:46:42', '2019-09-14 18:46:42', 'rtyrtytry', '', 0, 'Activo', 156),
+(157, '2019-09-14 18:47:08', '2019-09-14 18:47:08', 'rtyrtyrtyrtytryrty', '', 0, 'Activo', 157),
+(158, '2019-09-14 18:47:52', '2019-09-14 18:47:52', 'a33445', '', 0, 'Activo', 158),
+(159, '2019-09-14 18:48:52', '2019-09-14 18:48:52', 'oppopoop', '', 0, 'Activo', 159),
+(160, '2019-09-14 18:50:04', '2019-09-14 18:50:04', 'pololos', '', 0, 'Activo', 160),
+(161, '2019-09-14 18:50:47', '2019-09-14 18:50:47', 'yerttt', '', 0, 'Activo', 161),
+(162, '2019-09-14 19:00:16', '2019-09-14 19:00:16', 'zapallos', '', 0, 'Activo', 162);
 
 -- --------------------------------------------------------
 
@@ -11507,7 +11600,17 @@ INSERT INTO `tb_producto` (`tb_producto_id`, `tb_producto_reg`, `tb_producto_mod
 (149, '2018-11-20 10:02:47', '2018-11-20 10:13:57', 'PORCILIS PCV 50 DS', '', 'Activo', 41, 8, 1, '', 0, 1, 1),
 (150, '2018-11-20 10:07:25', '2018-11-20 10:11:25', 'PORCILIS COLICLOS X 50 ML (25 DS)', '', 'Activo', 41, 8, 1, '', 0, 1, 1),
 (151, '2018-12-14 09:50:58', '2018-12-14 09:50:58', 'KOMPLETT AVES 735 GALLINAS PONEDORAS X KG', '', 'Activo', 10, 9, 1, '', 0, 1, 0),
-(152, '2019-05-09 16:17:24', '2019-05-09 16:17:24', 'DEMO', '', 'Activo', 21, 8, 1, '', 0, 1, 0);
+(152, '2019-05-09 16:17:24', '2019-05-09 16:17:24', 'DEMO', '', 'Activo', 21, 8, 1, '', 0, 1, 0),
+(153, '2019-09-14 18:32:34', '2019-09-14 18:32:34', 'tryryrtyrtyrty', 'tryryrtyrtyrty', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(154, '2019-09-14 18:43:49', '2019-09-14 18:43:49', 'pollos descuartizados', 'pollos descuartizados', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(155, '2019-09-14 18:44:56', '2019-09-14 18:44:56', 'patatas 4', 'patatas 4', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(156, '2019-09-14 18:46:42', '2019-09-14 18:46:42', 'rtyrtytry', 'rtyrtytry', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(157, '2019-09-14 18:47:08', '2019-09-14 18:47:08', 'rtyrtyrtyrtytryrty', 'rtyrtyrtyrtytryrty', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(158, '2019-09-14 18:47:52', '2019-09-14 18:47:52', 'a33445', 'a33445', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(159, '2019-09-14 18:48:52', '2019-09-14 18:48:52', 'oppopoop', 'oppopoop', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(160, '2019-09-14 18:50:04', '2019-09-14 18:50:04', 'pololos', 'pololos', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(161, '2019-09-14 18:50:47', '2019-09-14 18:50:47', 'yerttt', 'yerttt', 'Activo', 1, 1, 1, '', 0, 1, 0),
+(162, '2019-09-14 19:00:16', '2019-09-14 19:00:16', 'zapallos', 'zapallos', 'Activo', 1, 1, 1, '', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -11775,6 +11878,15 @@ CREATE TABLE `tb_resumenboleta` (
   `tb_resumenboleta_estsun2` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `tb_resumenboleta`
+--
+
+INSERT INTO `tb_resumenboleta` (`tb_resumenboleta_id`, `tb_resumenboleta_reg`, `tb_resumenboleta_mod`, `tb_resumenboleta_usureg`, `tb_resumenboleta_usumod`, `tb_resumenboleta_fec`, `tb_resumenboleta_fecref`, `tb_resumenboleta_cod`, `tb_resumenboleta_num`, `tb_resumenboleta_tic`, `tb_resumenboleta_faucod`, `tb_resumenboleta_digval`, `tb_resumenboleta_sigval`, `tb_resumenboleta_val`, `tb_resumenboleta_fecenvsun`, `tb_resumenboleta_estsun`, `tb_resumenboleta_faucod2`, `tb_resumenboleta_fecenvsun2`, `tb_resumenboleta_estsun2`) VALUES
+(1, '2019-09-14 17:49:49', '2019-09-14 17:49:49', 1, 1, '2019-09-14', '2019-06-17', 'RC-20190914-001', 1, '1568501397217', '0', 'M8CaoTVSUfXBA0ypgIeb5mFTuw0=', 'DzH5wkXU2AxmmS/ohNPb/te+Rih1c/7kq0DFN1i+55P1OfesqeJtpenY60DggwFnRspHVpyhI8colMBj64I8YoI5bsuBLccXYhYgr5/SxWveJY9nSj0cYIHh6832wPh3yxnpoClRL8dTp7vwGfNBdmcsYlwgFa+rqr2ndeHbJWZowiX2KUdAAqlV5W3FNbmlJl8z0hCZP+kdijko4EWYFMsNTZVZavg2xJfGHJGLr9XMICprVb2gId9YejAFkr6h8HkufYSFLhQ8Q5uVlkwqHlpUIi5hKrdRb+r4qe08DnP7QV1SIoZlu64UDUiCXG8E1agNfdGsW77L8ByzRxG3ZA==', '1', '2019-09-14 17:49:56', 1, '', '0000-00-00 00:00:00', 0),
+(2, '2019-09-14 18:23:41', '2019-09-14 18:23:41', 1, 1, '2019-09-14', '2019-09-14', 'RC-20190914-002', 2, '', '', '', '', '', '0000-00-00 00:00:00', 0, '', '0000-00-00 00:00:00', 0),
+(3, '2019-09-14 18:30:24', '2019-09-14 18:30:24', 1, 1, '2019-09-14', '2019-09-14', 'RC-20190914-003', 3, '1568503831627', '0', 'N7NdW0VoCX1TImvi5HGGszWFESQ=', 'RFQnoE0g5f4pmdFEX5Ncp5i1vSaljesU9USHiPH64GISXc1f0yZMIBhvsZt8KyDoAdztQl+SS7ks4McUvzwb6lgVBkeV2dC7p8ISnpxSx6yaNl5k+QvfIonS6LQP+KeHelexi0p39v+SwceANfUH8caB4cDkgSX8krdd/8PdhImAKneLYpfkD2fWG+rUO4/MoVlne73hKVpb7N5EuwMSgnIMVU9vcFN1WLIfStyjrJyYyYpi7vH3MA0JmzxXLyhM7dYmZx4Dv/RUcGg+3b8E0TLJJrwwBRDrOynxMX/xwDXfrQxJEl9ysSya0JbqJq8VI6oG7fEJ8idh1RmJxX8bnA==', '1', '2019-09-14 18:30:31', 1, '', '0000-00-00 00:00:00', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -11803,6 +11915,13 @@ CREATE TABLE `tb_resumenboletadetalle` (
   `tb_venta_id` int(11) NOT NULL,
   `tb_resumenboletadetalle_est` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `tb_resumenboletadetalle`
+--
+
+INSERT INTO `tb_resumenboletadetalle` (`tb_resumenboletadetalle_id`, `tb_resumenboleta_id`, `tb_resumenboletadetalle_num`, `cs_tipodocumento_id`, `tb_resumenboletadetalle_ser`, `tb_resumenboletadetalle_cor`, `tb_cliente_id`, `tb_resumenboletadetalle_tipdocrel`, `tb_resumenboletadetalle_docrelser`, `tb_resumenboletadetalle_docrelcor`, `cs_tipomoneda_id`, `tb_resumenboletadetalle_opegra`, `tb_resumenboletadetalle_opeexo`, `tb_resumenboletadetalle_opeina`, `tb_resumenboletadetalle_otrcar`, `tb_resumenboletadetalle_isc`, `tb_resumenboletadetalle_igv`, `tb_resumenboletadetalle_imptot`, `tb_venta_id`, `tb_resumenboletadetalle_est`) VALUES
+(4, 3, 1, 2, 'B001', '0413', 65, '', '', '', 1, '0.00', '175.23', '0.00', '0.00', '0.00', '0.00', '175.23', 676, 1);
 
 -- --------------------------------------------------------
 
@@ -11926,7 +12045,7 @@ INSERT INTO `tb_stock` (`tb_stock_id`, `tb_stock_mod`, `tb_almacen_id`, `tb_pres
 (108, '2018-11-07 15:47:06', 1, 46, '0.00'),
 (109, '2018-12-15 10:42:12', 1, 88, '64.00'),
 (110, '2018-11-09 18:48:12', 1, 123, '0.00'),
-(111, '2019-07-09 21:19:24', 1, 52, '78013.67'),
+(111, '2019-09-14 18:23:27', 1, 52, '78006.67'),
 (112, '2018-11-08 01:33:30', 1, 70, '0.00'),
 (113, '2018-12-13 08:38:27', 1, 59, '43.00'),
 (114, '2018-10-25 12:52:30', 1, 44, '50.00'),
@@ -12070,7 +12189,17 @@ INSERT INTO `tb_stock` (`tb_stock_id`, `tb_stock_mod`, `tb_almacen_id`, `tb_pres
 (252, '2018-11-08 02:52:47', 1, 146, '0.00'),
 (253, '2018-11-09 18:38:58', 1, 148, '-8.00'),
 (254, '2019-02-22 14:54:27', 1, 151, '2.00'),
-(255, '2019-06-06 20:01:41', 1, 152, '0.00');
+(255, '2019-06-06 20:01:41', 1, 152, '0.00'),
+(256, '2019-09-14 18:32:35', 1, 153, '0.00'),
+(257, '2019-09-14 18:43:50', 1, 154, '0.00'),
+(258, '2019-09-14 18:44:56', 1, 155, '0.00'),
+(259, '2019-09-14 18:46:42', 1, 156, '0.00'),
+(260, '2019-09-14 18:47:09', 1, 157, '0.00'),
+(261, '2019-09-14 18:47:53', 1, 158, '0.00'),
+(262, '2019-09-14 18:48:52', 1, 159, '0.00'),
+(263, '2019-09-14 18:50:05', 1, 160, '0.00'),
+(264, '2019-09-14 18:50:47', 1, 161, '0.00'),
+(265, '2019-09-14 19:00:16', 1, 162, '0.00');
 
 -- --------------------------------------------------------
 
@@ -12139,8 +12268,8 @@ CREATE TABLE `tb_talonario` (
 INSERT INTO `tb_talonario` (`tb_talonario_id`, `tb_talonario_reg`, `tb_talonario_mod`, `tb_talonario_ser`, `tb_talonario_ini`, `tb_talonario_fin`, `tb_talonario_num`, `tb_puntoventa_id`, `tb_documento_id`, `tb_talonario_est`, `tb_empresa_id`) VALUES
 (3, '2013-01-07 11:31:00', '2019-01-09 15:38:08', '0002', 1, 99999, 2415, 1, 2, 'ACTIVO', 1),
 (4, '2013-01-07 11:32:55', '2019-01-14 13:09:43', '0002', 1, 99999, 673, 1, 3, 'ACTIVO', 1),
-(17, '2016-11-26 17:49:45', '2019-07-09 21:19:23', 'F001', 1, 99999, 12, 1, 11, 'ACTIVO', 1),
-(19, '2016-11-27 23:12:03', '2019-06-17 14:04:37', 'B001', 1, 1300, 411, 1, 12, 'ACTIVO', 1),
+(17, '2016-11-26 17:49:45', '2019-09-14 13:48:57', 'F001', 1, 99999, 15, 1, 11, 'ACTIVO', 1),
+(19, '2016-11-27 23:12:03', '2019-09-14 18:23:27', 'B001', 1, 1300, 413, 1, 12, 'ACTIVO', 1),
 (20, '2018-03-03 12:07:43', '2018-10-03 10:57:26', 'B001', 1, 2333, 100, 2, 12, 'ACTIVO', 1),
 (21, '2018-03-23 14:01:45', '2018-06-05 13:19:03', 'CT', 1, 99999, 0, 1, 14, 'ACTIVO', 1),
 (22, '2018-04-02 19:37:33', '2018-04-02 19:39:28', 'F001', 1, 99999, 1, 5, 11, 'ACTIVO', 6),
@@ -12184,7 +12313,7 @@ INSERT INTO `tb_talonariointerno` (`tb_talonario_id`, `tb_talonario_reg`, `tb_ta
 (4, '2013-01-10 04:55:27', '2015-01-26 17:21:45', '03', 1, 99999, 36, 2, 'ACTIVO', 4, 0, 2),
 (5, '2013-01-12 11:57:01', '2018-10-23 13:24:49', '02', 1, 999999, 1339, 2, 'ACTIVO', 1, 0, 1),
 (6, '2013-01-12 12:01:25', '2016-12-28 18:40:57', '04', 1, 99999, 640, 2, 'ACTIVO', 3, 0, 2),
-(7, '2013-01-16 05:16:54', '2019-06-21 17:00:59', 'A1', 1, 999999, 818, 3, 'ACTIVO', 1, 0, 1),
+(7, '2013-01-16 05:16:54', '2019-09-14 19:00:16', 'A1', 1, 999999, 828, 3, 'ACTIVO', 1, 0, 1),
 (8, '2013-01-16 05:17:16', '2018-10-15 12:34:54', 'A2', 1, 999999, 462, 3, 'ACTIVO', 2, 0, 1),
 (9, '2013-01-16 05:20:19', '2018-10-25 11:16:42', 'SD', 1, 999999, 925, 3, 'ACTIVO', 3, 0, 2),
 (10, '2013-01-16 05:20:33', '2018-04-03 18:53:31', 'SD', 1, 999999, 372, 3, 'ACTIVO', 4, 0, 2),
@@ -14892,7 +15021,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`tb_usuario_id`, `tb_usuario_use`, `tb_usuario_pas`, `tb_usuario_apepat`, `tb_usuario_apemat`, `tb_usuario_nom`, `tb_usuario_ema`, `tb_usuario_reg`, `tb_usuario_mod`, `tb_usuario_ultvis`, `tb_usuario_blo`, `tb_usuariogrupo_id`, `tb_empresa_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'AQPFACT', 'mail@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-08-07 13:10:33', 0, 2, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'AQPFACT', 'mail@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-09-14 12:24:04', 0, 2, 1),
 (29, 'superusuario', '261a7d80916532797f8735dd198d4ada', 'APELLIDO PATERNO', 'APELIIDO MATERNO', 'SUPER', 'gerencia@a-zetasoft.com', '0000-00-00 00:00:00', '2018-03-03 12:28:53', '2018-07-06 18:10:38', 0, 1, 1),
 (30, 'vendedor', '827ccb0eea8a706c4c34a16891f84e7b', 'ZIRENA', 'BEJARANO', 'ALFREDO', 'alfredzb@gmail.com', '0000-00-00 00:00:00', '2018-10-26 22:58:22', '2019-06-14 19:12:51', 0, 3, 1),
 (33, 'liquidador', '221b3a9e09a367bb69f7c7c1141c1dd9', 'PALOMINO', 'SANCHEZ', 'JOSE', 'rrpalomino65@hotmail.com', '2018-01-31 11:00:40', '2018-01-31 11:01:05', '2018-03-17 11:24:17', 0, 4, 1);
@@ -15672,26 +15801,32 @@ INSERT INTO `tb_venta` (`tb_venta_id`, `tb_venta_reg`, `tb_venta_fec`, `tb_docum
 (649, '2019-03-05 20:11:52', '2019-03-05', 11, 'F001-00002', 43, '34.65', '0.00', '6.24', '40.89', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00002', 1, '34.65', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'jPwTzR45HwWyfbWVyqN67ho3I4Y=', 'L+EG23YtGn1U2CeDkoz+1SkuxC8dgCz65bWIOU9LAERBrASE75xVx2zIGMh09ETqDVOEe7kGWCwXwKTonMQc0W0wEVx76G81n+wRGdQvGzHQ7/qajb3b2MjjJ739DE3KEpk0kX4ifOn3hmXB004oBvTM4gn8IFn5jLFtXNUpIF/lwP802w4XerlDCNMOnpaB7cmaCWeyVqdNwhBsvRyAPmSOSpmPqse35+WDljegWnG2eTH/ulodwwgL4X8oMLC4nq261SKYkqf952a8wlSySWc5+c0cF6NTph+hNyWx6IC+ZzHySMTj+CA/RfU1Zi+3RDI5wD3fTYS6sQ7a05dvQw==', '1', '2019-03-05 20:11:54', 1, 1),
 (650, '2019-04-01 15:17:47', '2019-04-01', 12, 'B001-0401', 65, '326.55', '0.00', '58.78', '385.33', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0401', 1, '326.55', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '19nczuo+T7ghd7pDqN5k7T0TZU4=', 'U9l9eDCtkQ5XMlzJPaEKn/hcuN8kvUDLoKR/o0+qpOYohBeGBLodTK/ZETJ9bLN/8eV9CIrliPutlPFkOQAy+6TGMlD2ksFoeLDAAUqLaF09m6obdvZ5OUxgdJA7iIS48QZ3CEs0q0OA+I+f5YJYhA0JB4qnd07wjhuZz7vgVl46db5C5jwJt5lHakxpuXFebAIVj3v/SmoFMZplYdWd0T/M+RpGN4+Mqo+PQcOhP6qkLbn+n2Fj5stssg11UNTnpjWdCoecJzGIZhUoppwpbgWXFWqcz5NSSjuR/IY1N6NYtMMADML6mlmI7n6+eE5UdguHNx59CKoUF6y4Uoj7ng==', '1', '2019-04-01 15:17:49', 10, 1),
 (651, '2019-05-30 20:04:40', '2019-05-30', 12, 'B001-0402', 65, '7.00', '0.00', '1.26', '8.26', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0402', 1, '7.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'iXReTVRDFE51nZB+SUr/oOyKpZo=', 'j6XiuVe2B5y03uyKUfzsGH6HuC8bAnVfcJhvFPlQ+qSjDnBrs+AK0EPwo0WoXK6OK5LifXikGfQq++2m3sELyNzKQbxDnvNqACj6Mg9ExUrTDle6zHYicULQ7jYgkTRvfd7DMJ14dbcm/xA97VQfgduf7L6kpTEQR6T2QMMUDHhJyfPppaC+EMkPGsGM6CD4ExTioSxaTyz2FAuLJ679R0Jwc2Tqbo27IdngOK87yIvzBTyAFvVFp+9EUnliasMG3+lf5X6LjD1b3iJrpUAPK4yzVwT4mJDEFq3VoBOcww8Zrv3ye++ORwVzUvxY20tSH2sVL1oAX73Vd4IVDaz/oA==', '1', '2019-05-30 20:04:41', 10, 1),
-(652, '2019-05-30 20:16:50', '2019-05-30', 11, 'F001-00003', 46, '43.69', '0.00', '7.87', '51.56', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00003', 1, '43.69', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0151', 'pS9duQjAA6NAJ7UzRwEm9/mK1Qs=', 'qv70W4nGHGaUbYqJdkPP/2xxc2m15qeToHe5WmUhtpD6JNqwAzqUNRodFIB1gWmezOjysqXb8vyvsDBwa+2XT0h20mz8+iK9wRG0vUngJokpZdel2qtVZKRHUkaGco4Yl/ijHHhjpK7ZqwVD/BbclPQEM/CpcoLnJV/mb/CmgJBH/HgshFKJ5iOmg1mzt7sF+bwZ3UR3wWAjNJm/dNv083HY9gRgFdF9qMC1b8IZS0GRVXiD0MH3MGYia6wnc3rlRsvgkV0v3FxsUxrLe75OF/nQ2PDeqQsLgzJC/yEB03tJYlFAtPh7kpRZBXs5vyE2aj1gCrlyharuqwtHrCrpQA==', '1', '2019-05-30 20:16:51', 0, 1),
+(652, '2019-05-30 20:16:50', '2019-05-30', 11, 'F001-00003', 46, '43.69', '0.00', '7.87', '51.56', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00003', 1, '43.69', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'KIygPTBF8cygKSs3KfqgcFsU/E0=', 'veROTpJMO4Sa+9NiHCRal8h1lROFU5dUkK1QlCss1IscPE+QGYY7HDjwyjujbTWu3dn185OuZ2oKrJ676hjcBCvQyLvCaGmcbTt0xACD6DBPnMrOsA4d9m4EtDoP5lLOn72tARzGnOnT7bu/yTmqxU8nNAIgoreRUo0rkRIdA2B1oFOIb44QBZahlTGyah+9P70KvAKjy6c2OW7gCGW1Q0seiqU9vbpw3iElvrAvmer9rJttFdGgAP4DmfLoYkxi1fppE7bLeknCaMUjzgvZY3jDXjwRW3Zz1Nefg3aPrRhllKm6Eb3y+K6A6tfo/gapm3NnYSplyNOwnyOJqApueQ==', '1', '2019-09-14 15:55:18', 1, 1),
 (653, '2019-05-30 20:20:36', '2019-05-30', 12, 'B001-0403', 65, '51.25', '0.00', '9.22', '60.47', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0403', 1, '51.25', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'VNb1m4quIWZqRGngpA1dnYl4RH0=', 'KsF4BtWk4Glye4LQ9xMDjx2f/NChiNKJUt1rs3UUOHm6kJDj3YMQOiEgYezJrWG3r2wM2/NiUrIY++Na8fYX0rH1wEMQh6CcC/l+SCwhYeRVKtx3nskrE/pXHR2NsD3za6nET6+j7Pavncmjw3Zg2PRhJC0OtKNSjJFoQq2vhr6e/MRnO/TELA6+GHQ9XOnwZHdopjLctMc8WXUKbS3phhojy1eauVoaZzcoeNVEUS5PB+aXMt8rfbCkc+KCnxRxl9NQij6p/reYeAv1py5VWVuN+yW0KFAM1nP3rdH+ys0jQKocH5mw/AbYOqvk2bFCQK+3HPf2EAmYrMBiTX77OQ==', '1', '2019-05-30 20:20:37', 10, 1),
-(654, '2019-05-30 20:25:08', '2019-05-30', 11, 'F001-00004', 45, '14.00', '0.00', '2.52', '16.52', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00004', 1, '14.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0151', 'HiQMl8+CRW1tb+06XQnBo+1MeKw=', 'R3t3taYSbFstA1V1+tTOqB0XCeI1h579ZQBlpw6pJPlMVPPI86YGd2+PHGvB3DP2Hd8DeqSDto/SvEA0wVdmOJJx2MZaRAi6IItUwyl9UD/bcK778FB1PeKWUNfwzx6Mvqk5bGZuDeZ4oBckfuLtRIbq4cu6L5gbdT4XHPGm/A/H9ZC8T9I9ZjWukbji49kgVjAxwNWxFsdCG7Z4AUGQv5x1KVN//dTUrCmRwFeoog7L1ND6S9Cy+B+guzJeO8cA9FjCFrw5i10EMoKGenwDS5aDzrxci26I+P3vqSkuBEh0gfAcr871qIek0ljJu6bdetDKOieOj15tlxeXCoUKXA==', '1', '2019-05-30 20:25:09', 0, 1),
-(655, '2019-05-31 18:00:07', '2019-05-31', 11, 'F001-00005', 41, '83.39', '0.00', '15.01', '98.40', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00005', 1, '83.39', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
+(654, '2019-05-30 20:25:08', '2019-05-30', 11, 'F001-00004', 45, '14.00', '0.00', '2.52', '16.52', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00004', 1, '14.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'mjHPG2aM/A1rtq1Ndoixm8u4Gpg=', 'bmdsWTw9VC+/0UHlKAzfky/DMqFQqpfH+HV8v22oHuSDJ19jjn0ZDxjrgU2g2CC17YBM+3y3dlibao4p2mwHVy1MAJxk/foAAV7TXR4tmGk069B2eTRUpvQbe4GXa7eVs6cmd6DveC7ceoQQsxgwSLL8QSJFT9KFa8lUff+GuWML/VnAx002KKSf0eyykryoYX5vqQ/WAqHgKmzrqYGZgjXvq6gI1tCnCEDaE2qQCiDXVOXcw1s9vugCy6yw8gOXtcJc0z9MIPUHF1LWry2xGPjySY/hz9Sk/qoRZflj3bHmsTzmDupcz00leCSWNAfWxRQ2S1FygyFzOoe9MHIWEg==', '1', '2019-09-14 16:00:54', 1, 1),
+(655, '2019-05-31 18:00:07', '2019-05-31', 11, 'F001-00005', 41, '83.39', '0.00', '15.01', '98.40', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00005', 1, '83.39', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', '1fP7hNJ4YdwhCsGbgypLIct2ftA=', 'k6otzLezyq3Bc2GE17e8AEDlFl9iO5GgVci6LHhL9M3d75h2etbB8riyYwiYUMQ7Nkk2ByMd5X5aOemWhGw/snzc4qCq3OSoYu+vebYCL+LBCdSm/aNX2VebgR6VZVV9ARP0Wf/MjiqyQEnokPoEHFvqQoUo/NB7jFoECp+kw/2bGNBuBzNcfyK68GLbbXKQruARRWA3LoxbvN4LId4AsgQNETw6KYK4kLHfzeHPvONqfer9i+b2mG37VvuwT/y+LoNfFzyOLhl+IzV2zx4my5ZNRtkyNf3eDEnRW7lJRwA5ehaNifKaBHZaLanCUb/ahWA0FAxeU4aLLWIz+bL4rQ==', '1', '2019-09-14 16:01:00', 1, 1),
 (656, '2019-06-06 20:01:40', '2019-06-06', 12, 'B001-0404', 65, '423.73', '0.00', '76.27', '500.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0404', 1, '423.73', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'q+fspc9gRzevGjYSTyhAbXm+Jhk=', 'sjE1t6fDVDqnctpVxeY6YXSG2VnYMrKWGvjM0vEdwB+7DR2zp+sPwU0hiswaXyHvT8WOl8aexycereGoijU0xrjLR3zC2XbfKtf/zMw1UVaL1xnK8RyGsAiILk2Uxt/oncfkkupbx7Ab+r/oH/GyAZ5D+o1JZkmOOsKZ66XbVgK4ol6/y6Oekqo1mfJ5qCSwyTiNIqley5gzH4zStmWP0lrWBnGLQR/U0gcLPqLsRMrh7RhoJNTUj+mLZQG6yQSC7cbDWSz340Bd8+DIXrmdfiFmvGjDCxbnDl0hnEbJy5ro1oNUIGxiBsz7UC2OMt3otlOj/gADYXKlmFWot+yCtg==', '1', '2019-06-06 20:01:42', 10, 1),
-(657, '2019-06-07 13:16:58', '2019-06-07', 11, 'F001-00006', 43, '0.00', '0.00', '0.00', '64.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00006', 1, '0.00', '0.00', '64.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
+(657, '2019-06-07 13:16:58', '2019-06-07', 11, 'F001-00006', 43, '0.00', '0.00', '0.00', '64.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00006', 1, '0.00', '0.00', '64.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'KzlBtA79WoKm50FYm95w8DMx07Q=', 'BE7zRVF/+UDg2A3UHnq9LvKXUX/nHWaFhZEpV4hd4HpXUL1wG+0viCEVXDMPvycijVwYtVpeIY8zFx2sOYZkdBEejQvlSAHHy5RFZCMiJlm5nwlWaqsWX2obg+i8+lxonu9a/s++Sy8hWOpxaiciKCo6Oi/XfxlzJP5l9bJZ29Yg48IpwRiOKiAvAir/SZsE9ZI4Qh2YCMfsV8iyhNjKN/q/DQ2JojQ2lsW7yXX2QREO2AjqP1eMom955LPrY9+VJSc832+8tpCA8Fc3L4OZDLu0cV+2fQo30eyReeDQaD23qaL46Ha96NSZ3hFsFjiPxx7Lh4y8F7u20ep788wvdg==', '1', '2019-09-14 16:24:37', 1, 1),
 (658, '2019-06-07 13:42:27', '2019-06-07', 11, 'F001-00007', 43, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00007', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0151', 'PLKGyv0i4jRfZZE2tccJ6k4lLJg=', 'RZIseegagAWt1NZnkr0nJCMRW9gHo5EbWtc1IyRWowTZ3TKkoUoqOFoA8N2oGziy35s6VHXJLvcVzRPg7yPCAYddM7LSw7xIjWgOm44Ea05gOnAhNSENFlYNhp1++m5gO0iwu0UFV1e6UdrcSw5ciwG9qCZxjkXSm7jNJIVx2F594SffpC0m48ewgjI9shtZd0wjJ3aqH4wnfcBRBglqFsURpYnQWUqtmgZGYF3eDObkCvgwZ9wBo2v/tcym+qmU4eDwwm4Xo7Gj5BiM5rxG3KI9FXuMrxEZ/1Q3aNQKF4FqNmFOTYd0Qo5Y6m84+gBM2KuEfDJwVqV2QeyVxQbziQ==', '1', '2019-06-07 13:42:28', 0, 1),
-(659, '2019-06-07 13:53:56', '2019-06-07', 11, 'F001-00008', 46, '54.66', '0.00', '9.84', '64.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00008', 1, '54.66', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
+(659, '2019-06-07 13:53:56', '2019-06-07', 11, 'F001-00008', 46, '54.66', '0.00', '9.84', '64.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00008', 1, '54.66', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'lvDRpupZir4GGY5KKsOuL1BgBz8=', 'i391lb2zV3cL8Icbj9xSV/oC0XTsEeYkm+cz8/rmuEv2PnWtoCDkRW51w0CQUAobTALcvrDepTatG/w0CQHY5e5Ap8nKWtCd80iWfdlgW7yhrcIKUre+f9yAo3DABU2CrohcJd7WPtL6rUMrRJ2UpzcmGi6rwKGXTxNdKN5uX5bpUeQO19W8wQjKUmoH/I28HsHngDGBt11DAlFfpgUlW89FAYTZRGFk9og1rsxxl5ECw1eHmGHzTad4EbB96YNFKb6g+kl4/4kkCuXeW/BCAoDCxEGXddyidN9EUbybSGz6v50azqc/ZkVpP2Dgm1qGE2TKU4F3t1b2tm5BGl8wsA==', '1', '2019-09-14 16:30:57', 1, 1),
 (660, '2019-06-07 13:55:04', '2019-06-07', 11, 'F001-00009', 46, '4.24', '0.00', '0.76', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00009', 1, '4.24', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
-(661, '2019-06-07 14:31:05', '2019-06-07', 11, 'F001-00010', 48, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00010', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0151', '15tSpyLthlJdCWbOQ7A3B96jpbo=', 'a+h6Uk3CYBd7qBl1qyrzar38DLYAI56HngN/icQ8QfmK3kev7zHjA7trSyfnUAUQEzfcu3KBgTagDbDt3QCeo7HLOs3s036EeA/xJdKKXRhvGCaEQFaseUusfVTXt4lXZzZT83scdQOOa5dZsWFOijPSmE+ug55j9tud+2YYGFZFAYz1V5pPaqQi5zlEfioL6+NGmToKDo/K6He7Z8E3Fz1WoYzKd2UOhCMsIZNS5lTOgz5dtkkLhSTCciPLEits8DId0Jd4zQwCDgx2bjWA/JWH/L/i4EICMm3xlTNVL10ht76UFV78r5nRD/ThoId9T4lN2EdDNNhBFX81Ec8BSQ==', '1', '2019-06-07 21:14:06', 0, 1),
+(661, '2019-06-12 14:31:05', '2019-06-13', 11, 'F001-00010', 48, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00010', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0151', '15tSpyLthlJdCWbOQ7A3B96jpbo=', 'a+h6Uk3CYBd7qBl1qyrzar38DLYAI56HngN/icQ8QfmK3kev7zHjA7trSyfnUAUQEzfcu3KBgTagDbDt3QCeo7HLOs3s036EeA/xJdKKXRhvGCaEQFaseUusfVTXt4lXZzZT83scdQOOa5dZsWFOijPSmE+ug55j9tud+2YYGFZFAYz1V5pPaqQi5zlEfioL6+NGmToKDo/K6He7Z8E3Fz1WoYzKd2UOhCMsIZNS5lTOgz5dtkkLhSTCciPLEits8DId0Jd4zQwCDgx2bjWA/JWH/L/i4EICMm3xlTNVL10ht76UFV78r5nRD/ThoId9T4lN2EdDNNhBFX81Ec8BSQ==', '1', '2019-06-07 21:14:06', 0, 1),
 (662, '2019-06-07 14:31:42', '2019-06-07', 12, 'B001-0405', 65, '0.00', '0.00', '0.00', '1.18', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0405', 1, '0.00', '0.00', '1.18', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1),
 (663, '2019-06-07 14:36:44', '2019-06-07', 12, 'B001-0406', 65, '0.00', '0.00', '0.00', '10.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0406', 1, '0.00', '0.00', '10.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1),
 (664, '2019-06-07 18:47:02', '2019-06-07', 12, 'B001-0407', 65, '54.66', '0.00', '9.84', '64.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0407', 1, '54.66', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'qrhWw0WNb0APV3ELyj5ySsk+zFk=', 'cUjkj928m3584psRPph7lnL826R9lCWV+a497qzEYtqElx8I1JNE8vIkyEt4cilYsokRnSrx8nFSrXm2OxgY2aWcPlahYf+ubwvDDuWX1fg4Z7Y794U26EfvtYKxPKna5tCY4z/RveuGRWqwBJLYW2EIsvAVD1E7A3yy6y6toO0zNODqAOmuv8ORl8+jyG61Ci/15bJmxQFJSQB8z7W3ovYFeL8P6knxFuXCTGIjB3OfAJF95LD8J3X1SyphiYvEYUwvZDw4FaYANLhGY3LO400SwChlzGHcAK+7xTCN/dtdbeClF0rtcjXduPbS3wjSJ55MFjKxk067+SzcGGKjHQ==', '1', '2019-06-07 18:47:03', 10, 1),
 (665, '2019-06-07 18:49:19', '2019-06-07', 12, 'B001-0408', 65, '0.00', '0.00', '0.00', '64.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0408', 1, '0.00', '0.00', '64.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '1zCLm2rlazTBOpNdMafSWhDlAp4=', 'MDV9S7AWCKa19rHgOHlFVRC7r9bxknna7FE4ZwLw77DbSxW/H10XWwm2drG935UqTP1uX6yFwr9oBTG2WVO0m+7Ov66ecMEwV91svpOGxeE/OxWCvzZrGeiscJTQitmJCJA//b879HxJH6o34B9HnO/WV5GvoupLmmDZTuql4eFInA+rCf4F+TR7WtoasyNlKOupsVdDIe1rhNSEfd/pjHTJ40rXwo5CX8HdGCrm80U/FQyGsEtAZCSxVZVQFfwicPJ+MZZXihlNjIXHBHUqiJPr0fw+HD5+9kvV7UGVSy26Vtr03eaDDzNOfLADH026/c0fV7EvDZZ05sKk/RPalA==', '1', '2019-06-07 18:49:20', 10, 1),
 (666, '2019-06-07 19:06:44', '2019-06-07', 12, 'B001-0409', 65, '0.00', '0.00', '0.00', '64.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0409', 1, '0.00', '0.00', '64.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '7TAtRehMF/+1F0/CE//jx02xT9k=', 'f59CvWF5L4ItW5OenkhxmWemn//gRszIb3RK6BVBVnPej5X7fhVepG4im9mIlX1JBtmBMUx/N6qK4sSlMr0SZPuPCIW/keWzOXp286FAH71a4OpUXg+0OALXJGuWsxU497kw2ogynlpkgmJhg1Imxfm0HPprUlhIZxSxMB7YF85iRgZOwjZLDkS4AlXnCim8dxGHmlAIP99uhJ4PiEFfdOEvJIGJZ6+dxKCAPrgK4Y2yXkS8GI0Ev5Kb+hGMlb09Kfyd8pINpg7O8tHhF67Ns4NoFBGdgg/3AykaD2aG8Rdk/YOezl5USQXRHfXIyVRORXJvQhsSLMK82vqxq66aEw==', '1', '2019-06-07 19:06:44', 10, 1),
-(667, '2019-06-07 21:15:29', '2019-06-07', 11, 'F001-00011', 42, '99.00', '0.00', '17.82', '116.82', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00011', 1, '99.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0151', '3ZBmEqaV2zAqPyc5ILv8+Onujg0=', 'uXnvu+3towlR8w1i0tfV4C8uzi4pH2Spvjtu2ngKupxK9TeQgn7ihMjHfe2GoBDrbD6VwYCvDQGuvsVP9TJthOZE0vg5F4JXZzK1Ary36JhrqzkTT38gogExjLysBYmStTb7C3O6+gjQfqff/k4RwNUnYJlITmRJbBkaacAlVV448q6zHB9wRqKbipmRH6MF3r4qeXXxFOoE80JkcvXLY6oeOBGdSYq3Wf5Y3B1PYxCBTjRHxpJt0WSztruh39GbfV2MrbqLUPkoP34e5CgYeoA+oS0+fa9bcM1mvcZDxLKJkHWrNDukV5NOXKRISmrHOFvYx6y4MsfMxBadLQoovA==', '1', '2019-06-07 21:15:31', 0, 1),
+(667, '2019-06-07 21:15:29', '2019-06-07', 11, 'F001-00011', 42, '99.00', '0.00', '17.82', '116.82', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00011', 1, '99.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'Fnev8YlNjPA5SlwB0M4wYrI3GBM=', 'Zr1TBSZWWgR7VozGQUZoyvPLJ63TusxB9mnRNTAeeo4qidvgwy3K4qRDyo2j+lIB6BWDrohlbx+eofbNWwDwLyExKANENrPHWv3uVL6L6SIWCgopt6VHa2oB0C6XmV1oIJtQoHsmz6uLfHnnzbSkjraiPvMXR5k1IpY8ouSWZatWS+0Fvj4xYG5U7riz5TZzYEX+NF/0xayJC8zADOApMFmuH4VWGJlJLsCbIjRS3S+K3cw798yCpXCJeakY5HIscEy+uMycyW5sZ+I7bw1ind3z4ifQQWnK65pCb5dR0Tg+4dXe4Y/zUTetY0/0Xe6y8MLDvoMqW0NK8zi2/vLQnA==', '1', '2019-09-14 16:24:52', 1, 1),
 (668, '2019-06-07 21:29:58', '2019-06-07', 15, 'NS01-00001', 65, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 0, 'NS01', '00001', 2, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
 (669, '2019-06-17 14:02:59', '2019-06-17', 12, 'B001-0410', 65, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0410', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '16X8JgmOZ4ydNjAVNrkB0c4C2AY=', 'KY4MIRATq2RpwxRfmiknvzNMIG68AJ/XWEVYUJigBQh0bCbF624HNOZynFQ+sfn3MhDlUu+876E1W1Tf1s4OpftuJVczPZdbC9G4X7MyNcoNHszx9SioAPgFnsci+768yzkYnTGPV0lCxNCkKugdS2RDXKiM4OQd3x171oeD1ZmnjUCL/6ZCYVStrfoO+RlzLZYbHCSlvUKteYDnXSRafLAkP0kX+/DAEJ9TWv5UmskBA11ZJw23QHu3uj3TFKT6Gapru4qrhb8LEFnDyLiSSqQV20YxWlZ1uUc2YGpELYyBSozx3Bc/+h5hbpEtiuOxbHvuwBjxSvoKEN8cC21ptg==', '1', '2019-06-17 14:03:00', 10, 1),
-(670, '2019-06-17 14:04:37', '2019-06-17', 12, 'B001-0411', 65, '0.00', '0.00', '0.00', '6.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0411', 1, '0.00', '0.00', '6.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'jhvyl8wkUUYTaD3ffZE5YG57cyU=', 'WQfhsTZDe0maqvvFLDh9DjAHARYkohHLA1uC7vRkzT4bIET6AiCCzr5v/xkINhd9MMabxuuYsl249AlTfrFE3hmWcmGGP+FCrVdfQDFI0xT9KWU8siJJ4e0GBaAoYtxsM++7BF6PSA5LjjkXWGcoH9M3Kp2seDITOIDQZ/3SDWqTvBT/RB1brGICB/oIpbNk23wZLstcADXd/rDvhvFyr5kpVn6d/+c/hSZCCoIVE3zEi2Qx4FYUtqsCGNlRqkySh4IcRCceFd13zBfx7I5WhdUJhpXCyQKtnoKWFcasisjWYQS/Q9lAMqvUli7iXrtlW0SSXtRQrvbxCT+gK+J0yg==', '1', '2019-06-17 14:04:37', 10, 1),
-(671, '2019-07-09 21:19:23', '2019-07-09', 11, 'F001-00012', 43, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00012', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'kWUhO5+8IkZxRpivFPgb5Hmww54=', 'yRGHASUztUJfv8uYRgk1LyxA+FClPGdYTwsCqvTOFQOBV1cG4HmKmn8CBFSBSjiQtwlQK7Xzpy7sKmlg2aQsQXjLQLI9MuERuHj9jffL7+skpQY50bwahPGDfupBbXEFTvXrrd3hnCfP5Ub/DxY8w458kJdCE2sKQDI9q4WeYKL71+V2T/cKeV5a4DRu1QvHQZgjpVuPtvEIuQ4zwGph+BY1hdHO31jsMuBxFtNYQiGMLyi3B2/QDJ0Td2p5JCq0C1LM43DKepscK+jsx3FVGqJ4OjPQSe5fWBTsgxZVoohdwqcWXraR83qVyiVuykBxjqfoeMm6lSPpFdbK0iaT/Q==', '1', '2019-07-23 13:28:34', 1, 1);
+(670, '2019-06-17 14:04:37', '2019-06-17', 12, 'B001-0411', 65, '0.00', '0.00', '0.00', '6.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0411', 1, '0.00', '0.00', '6.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'jhvyl8wkUUYTaD3ffZE5YG57cyU=', 'WQfhsTZDe0maqvvFLDh9DjAHARYkohHLA1uC7vRkzT4bIET6AiCCzr5v/xkINhd9MMabxuuYsl249AlTfrFE3hmWcmGGP+FCrVdfQDFI0xT9KWU8siJJ4e0GBaAoYtxsM++7BF6PSA5LjjkXWGcoH9M3Kp2seDITOIDQZ/3SDWqTvBT/RB1brGICB/oIpbNk23wZLstcADXd/rDvhvFyr5kpVn6d/+c/hSZCCoIVE3zEi2Qx4FYUtqsCGNlRqkySh4IcRCceFd13zBfx7I5WhdUJhpXCyQKtnoKWFcasisjWYQS/Q9lAMqvUli7iXrtlW0SSXtRQrvbxCT+gK+J0yg==', '1', '2019-06-17 14:04:37', 10, 1);
+INSERT INTO `tb_venta` (`tb_venta_id`, `tb_venta_reg`, `tb_venta_fec`, `tb_documento_id`, `tb_venta_numdoc`, `tb_cliente_id`, `tb_venta_valven`, `tb_venta_des`, `tb_venta_igv`, `tb_venta_tot`, `tb_venta_est`, `tb_venta_lab1`, `tb_venta_lab2`, `tb_venta_lab3`, `tb_venta_may`, `tb_usuario_id`, `tb_puntoventa_id`, `tb_empresa_id`, `cs_tipodocumento_id`, `tb_venta_ser`, `tb_venta_num`, `cs_tipomoneda_id`, `tb_venta_gra`, `tb_venta_ina`, `tb_venta_exo`, `tb_venta_grat`, `tb_venta_isc`, `tb_venta_otrtri`, `tb_venta_otrcar`, `tb_venta_desglo`, `cs_tipooperacion_id`, `cs_documentosrelacionados_id`, `tb_venta_faucod`, `tb_venta_digval`, `tb_venta_sigval`, `tb_venta_val`, `tb_venta_fecenvsun`, `tb_venta_estsun`, `tb_vendedor_id`) VALUES
+(671, '2019-07-09 21:19:23', '2019-07-09', 11, 'F001-00012', 43, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00012', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'kWUhO5+8IkZxRpivFPgb5Hmww54=', 'yRGHASUztUJfv8uYRgk1LyxA+FClPGdYTwsCqvTOFQOBV1cG4HmKmn8CBFSBSjiQtwlQK7Xzpy7sKmlg2aQsQXjLQLI9MuERuHj9jffL7+skpQY50bwahPGDfupBbXEFTvXrrd3hnCfP5Ub/DxY8w458kJdCE2sKQDI9q4WeYKL71+V2T/cKeV5a4DRu1QvHQZgjpVuPtvEIuQ4zwGph+BY1hdHO31jsMuBxFtNYQiGMLyi3B2/QDJ0Td2p5JCq0C1LM43DKepscK+jsx3FVGqJ4OjPQSe5fWBTsgxZVoohdwqcWXraR83qVyiVuykBxjqfoeMm6lSPpFdbK0iaT/Q==', '1', '2019-07-23 13:28:34', 1, 1),
+(672, '2019-09-13 19:44:22', '2019-09-13', 12, 'B001-0412', 65, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0412', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 's+h6iBt73LkizdrYnGK/Z/aJv6o=', 'V/gjYNeWptqsa/kH14cR5q0emJLN9VYp8A8rGy909prWr1Dzv66xuK0SWkaUQdB2nvQYLRXHovaMDNant2SwZd/naV/d1UhUQ3vQM0Y6KlIAariQhbjFPsuA8OSso5Fmrmd+Uc/TR5xyJH2rBe+U0bC2uWocBAK+ysFxSXHbO9suu1bhGAkPH/WgoF4i7PSt2VV4yw7pwPm7L3zErwRstbRIrNZw6nCudbGrvBwPiyE7ajg2PkBDn99OwGw/9tz8XO2mzEGzuiGVOXf3vZltfJpyekK3yP2/xudNXzXS8AbiIvE/pdTh5JbKPJGPHeod43shNF94xa06GYxXyv/DEg==', '1', '2019-09-13 19:44:24', 10, 1),
+(673, '2019-09-13 20:16:51', '2019-09-13', 11, 'F001-00013', 42, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00013', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'wMWpOUKVjnFzP+zGIRPeZWwDfEs=', 'Yo8/rfwATXnKdDCgiMYngo7KdFBTSLiLkL8WHVRzUK06pgE2KwNOggkMio7TjWbPfmABw6XOe0WXFrRxuUJJLE77Z3dXvVVOfnMH4VxROAUsilz7h+FMimNjVSZ1gag/v4QS1ylmWMKYKp7dcciF1YaPULcinEZIJjNmmQkNseHD+2K63EXvJg4MZomMFiXNvObfSqotdzculMmGO/LEVU/0+8+VBG+C67GFc15NDXwTS17zrmIEF+haa67wF9Bw3gm0H55EqUK4mTnPhEmdg2sfiTlxkNfPXlh0D3ZL1HdKknUiHZUNmm7P1dpxt35V6aEXNddjukr04S4CMyWCOw==', '1', '2019-09-13 20:16:52', 1, 1),
+(674, '2019-09-14 13:46:30', '2019-09-14', 11, 'F001-00014', 43, '148.50', '0.00', '26.73', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00014', 1, '148.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'lWqcTMV3gC9Qb7bvvwzYMhHA60o=', 'Ym6b3+8ZpQ9wTIkP5DQNKPENWG3AgrNJ3gqJedqkin6+qIGY5x2NWCPesEHDP41ACvGLiv0qX0X2LjgZM/dJbW+mTxK8yKrZJghAxUpA3DjW6IAyV/P2ukj1t0dtTz6bHWfsfnB/yX/UHMaTYSJ6lw6qqMUNX0ET60+I6zwdgb6s1d4Go8HYUIzwxbY1NkoTQJ1qWYAzQJNW6+zI1q/5H9bJVJst6qsWL2gCqR4M6gFpO/H25L0/97dyT1W/M3XBljTU9Qd5b3tYlYcu/X8D3QTMykZ+0hcSNgJSl+77/xBWs0csKvl7GQh4LfDClu8T+Ad9QElZ/54jkpHd2cc5Fw==', '1', '2019-09-14 13:46:32', 1, 1),
+(675, '2019-09-14 13:48:57', '2019-09-14', 11, 'F001-00015', 43, '445.50', '0.00', '80.19', '525.69', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00015', 1, '445.50', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', '1ddT8wpqBp9W8Nb8XHdeHbcyg9s=', 'lamiFRKZIfATrg2R43DTl51pbE6yjvhydWtjJ3WoaQNWCtYiasS4YfvRbslepPnhJ0ydpW3f9K68rMwppL05AYQ6KzVN8/DEycCVPWfw1kymois22fko7xdD03KDHhFc17oF+RGKybNC6GevwhXcKPsujYpmoqbYiCdtywx1URgmR6DfrlgyVgVb+xrJjAjYZ/ulZWqf9bRaStr27vaPuFV2tm+A9QlrSOHBtffYgD5KmpniAH+NlnWxXyLUacsAP5MGzKAeQnnptD0Mb/5xQchTw1+cr+xjieGKmYhQtOzYDAx1wJnfQ5ck4BaQxmKRY0KwXwgpnBMAr5MAfitmAw==', '1', '2019-09-14 13:48:58', 1, 1),
+(676, '2019-09-14 18:23:26', '2019-09-14', 12, 'B001-0413', 65, '0.00', '0.00', '0.00', '175.23', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0413', 1, '0.00', '0.00', '175.23', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'USnpz+o12MsfhWNa8AVSeDb8z/k=', 'JP3I3kx9oZa1ioLs8gH1OZ8LKij5rPRpK+2VFtSGDeEcFnBU49Y9lWQQLij+8SKchZZUOrrFiR6gdep1XlAWanAJdslRuaRrTmh/AcsEEjeyih29FK6hBoVLKM6XjTJW4tXEasyaKzuxix3HtFlMM4UFolZSDww5orRnes2QGPRlmbbDKuH2tCv88vxXqHBq+mt5Lw+BmISq4V9BSNdXEHKxzgrtFiInyEZayoeuxZOrDG5pUjzD8cxQ/alheBc/JlcXdExBpqacAjPTQfj5w0FEqJcyqmYOAW5zzoKyq7ipsQnNdOYTmDTo9KCk8K6p9gosx7b4mxaEchwB3mAyFA==', '1', '2019-09-14 18:23:27', 10, 1);
 
 -- --------------------------------------------------------
 
@@ -16875,7 +17010,12 @@ INSERT INTO `tb_ventadetalle` (`tb_ventadetalle_id`, `tb_ventadetalle_tipven`, `
 (1079, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '1.00', 0, '0.00', '148.50', '148.50', '26.73', 668, 1, 12, 0, '0.00', 1, ''),
 (1080, 2, 0, 30, 'RECARGA BITEL CHIP 959675436 ', '5.00', '1.00', 0, '0.00', '5.00', '5.00', '0.90', 669, 9, 13, 0, '0.00', 1, ''),
 (1081, 2, 0, 31, 'RECARGA BITEL CHIP ', '6.00', '1.00', 0, '0.00', '6.00', '6.00', '1.08', 670, 9, 13, 0, '0.00', 1, ''),
-(1082, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '1.00', 0, '0.00', '148.50', '148.50', '26.73', 671, 1, 12, 0, '0.00', 1, '');
+(1082, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '1.00', 0, '0.00', '148.50', '148.50', '26.73', 671, 1, 12, 0, '0.00', 1, ''),
+(1083, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '1.00', 0, '0.00', '148.50', '148.50', '26.73', 672, 1, 12, 0, '0.00', 1, ''),
+(1084, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '1.00', 0, '0.00', '148.50', '148.50', '26.73', 673, 1, 12, 0, '0.00', 1, ''),
+(1085, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '1.00', 0, '0.00', '148.50', '148.50', '26.73', 674, 1, 12, 0, '0.00', 1, ''),
+(1086, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '3.00', 0, '0.00', '148.50', '445.50', '80.19', 675, 1, 12, 0, '0.00', 1, '455/6788/6767'),
+(1087, 1, 54, 0, 'CEPRAVIN X 20 JERINGAS', '175.23', '1.00', 0, '0.00', '175.23', '175.23', '31.54', 676, 9, 12, 0, '0.00', 1, '');
 
 -- --------------------------------------------------------
 
@@ -18201,7 +18341,12 @@ INSERT INTO `tb_ventapago` (`tb_ventapago_id`, `tb_ventapago_fecreg`, `tb_formap
 (668, '2019-06-07 21:29:58', 1, 1, '2019-06-07', '175.23', 0, 0, '', 0, '0000-00-00', 668, 1),
 (669, '2019-06-17 14:02:59', 1, 1, '2019-06-17', '5.00', 0, 0, '', 0, '0000-00-00', 669, 1),
 (670, '2019-06-17 14:04:37', 1, 1, '2019-06-17', '6.00', 0, 0, '', 0, '0000-00-00', 670, 1),
-(671, '2019-07-09 21:19:23', 1, 1, '2019-07-09', '175.23', 0, 0, '', 0, '0000-00-00', 671, 1);
+(671, '2019-07-09 21:19:23', 1, 1, '2019-07-09', '175.23', 0, 0, '', 0, '0000-00-00', 671, 1),
+(672, '2019-09-13 19:44:23', 1, 1, '2019-09-13', '175.23', 0, 0, '', 0, '0000-00-00', 672, 1),
+(673, '2019-09-13 20:16:51', 1, 1, '2019-09-13', '175.23', 0, 0, '', 0, '0000-00-00', 673, 1),
+(674, '2019-09-14 13:46:30', 1, 1, '2019-09-14', '175.23', 0, 0, '', 0, '0000-00-00', 674, 1),
+(675, '2019-09-14 13:48:57', 1, 1, '2019-09-14', '525.69', 0, 0, '', 0, '0000-00-00', 675, 1),
+(676, '2019-09-14 18:23:26', 1, 1, '2019-09-14', '175.23', 0, 0, '', 0, '0000-00-00', 676, 1);
 
 -- --------------------------------------------------------
 
@@ -19223,7 +19368,7 @@ ALTER TABLE `tb_caja_r`
 -- AUTO_INCREMENT de la tabla `tb_catalogo`
 --
 ALTER TABLE `tb_catalogo`
-  MODIFY `tb_catalogo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
+  MODIFY `tb_catalogo_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_catalogoimagen`
@@ -19265,7 +19410,7 @@ ALTER TABLE `tb_cliente`
 -- AUTO_INCREMENT de la tabla `tb_clientecuenta`
 --
 ALTER TABLE `tb_clientecuenta`
-  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=602;
+  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=612;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_clientedireccion`
@@ -19427,7 +19572,7 @@ ALTER TABLE `tb_formapago`
 -- AUTO_INCREMENT de la tabla `tb_formula`
 --
 ALTER TABLE `tb_formula`
-  MODIFY `tb_formula_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `tb_formula_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_gasto`
@@ -19451,7 +19596,7 @@ ALTER TABLE `tb_guia`
 -- AUTO_INCREMENT de la tabla `tb_guiadetalle`
 --
 ALTER TABLE `tb_guiadetalle`
-  MODIFY `tb_guiadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1071;
+  MODIFY `tb_guiadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1076;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_guiapagonota`
@@ -19469,7 +19614,7 @@ ALTER TABLE `tb_horario`
 -- AUTO_INCREMENT de la tabla `tb_ingreso`
 --
 ALTER TABLE `tb_ingreso`
-  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=120;
+  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=125;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ingreso_r`
@@ -19481,13 +19626,13 @@ ALTER TABLE `tb_ingreso_r`
 -- AUTO_INCREMENT de la tabla `tb_kardex`
 --
 ALTER TABLE `tb_kardex`
-  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1091;
+  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1106;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_kardexdetalle`
 --
 ALTER TABLE `tb_kardexdetalle`
-  MODIFY `tb_kardexdetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1772;
+  MODIFY `tb_kardexdetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1787;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_letras`
@@ -19559,13 +19704,13 @@ ALTER TABLE `tb_notadebitodetalle`
 -- AUTO_INCREMENT de la tabla `tb_notalmacen`
 --
 ALTER TABLE `tb_notalmacen`
-  MODIFY `tb_notalmacen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=151;
+  MODIFY `tb_notalmacen_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_notalmacendetalle`
 --
 ALTER TABLE `tb_notalmacendetalle`
-  MODIFY `tb_notalmacendetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `tb_notalmacendetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_precio`
@@ -19583,13 +19728,13 @@ ALTER TABLE `tb_preciodetalle`
 -- AUTO_INCREMENT de la tabla `tb_presentacion`
 --
 ALTER TABLE `tb_presentacion`
-  MODIFY `tb_presentacion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `tb_presentacion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_producto`
 --
 ALTER TABLE `tb_producto`
-  MODIFY `tb_producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=153;
+  MODIFY `tb_producto_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_productoproveedor`
@@ -19625,13 +19770,13 @@ ALTER TABLE `tb_restabclave`
 -- AUTO_INCREMENT de la tabla `tb_resumenboleta`
 --
 ALTER TABLE `tb_resumenboleta`
-  MODIFY `tb_resumenboleta_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tb_resumenboleta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_resumenboletadetalle`
 --
 ALTER TABLE `tb_resumenboletadetalle`
-  MODIFY `tb_resumenboletadetalle_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `tb_resumenboletadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_servicio`
@@ -19649,7 +19794,7 @@ ALTER TABLE `tb_soporte`
 -- AUTO_INCREMENT de la tabla `tb_stock`
 --
 ALTER TABLE `tb_stock`
-  MODIFY `tb_stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=256;
+  MODIFY `tb_stock_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_subcuenta`
@@ -19793,7 +19938,7 @@ ALTER TABLE `tb_usuariopv`
 -- AUTO_INCREMENT de la tabla `tb_venta`
 --
 ALTER TABLE `tb_venta`
-  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=672;
+  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=677;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventacanje`
@@ -19811,7 +19956,7 @@ ALTER TABLE `tb_ventacorreo`
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle`
 --
 ALTER TABLE `tb_ventadetalle`
-  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1083;
+  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1088;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle_lote`
@@ -19841,7 +19986,7 @@ ALTER TABLE `tb_ventanotapago`
 -- AUTO_INCREMENT de la tabla `tb_ventapago`
 --
 ALTER TABLE `tb_ventapago`
-  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=672;
+  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=677;
 
 --
 -- AUTO_INCREMENT de la tabla `va_cliente`
