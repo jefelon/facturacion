@@ -21,7 +21,7 @@ class cCatalogo
         $sql.=" GROUP BY tb_producto_nom ";
         if($limit>0)$sql.=" LIMIT 0,$limit ";
         //echo $sql;exit;
-        print $sql;
+        //print $sql;
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

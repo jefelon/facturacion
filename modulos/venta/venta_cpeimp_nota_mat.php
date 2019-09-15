@@ -40,6 +40,11 @@ $dt = mysql_fetch_array($rs);
 $imprimir_direccion = $dt['tb_formula_dat'];
 mysql_free_result($rs);
 
+$rs = $oFormula->consultar_dato_formula('NUM_COPIAS');
+$dt = mysql_fetch_array($rs);
+$num_copias = $dt['tb_formula_dat'];
+mysql_free_result($rs);
+
 $pager_formato='format="350x90" orientation="P" style="font-size: 9pt; font-family:'.$tipo_de_letra.'"';
 
 $pager_margen='backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
@@ -449,8 +454,12 @@ if($impresion=='pdf')
 
         $html_d=$_GET['vuehtml'];
         //$html_d=1;
-
-        $html2pdf->writeHTML($content, isset($html_d));
+        $copias = 1;
+        while ($copias<=$num_copias)
+        {
+            $html2pdf->writeHTML($content, isset($html_d));
+            $copias++;
+        }
         $html2pdf->pdf->IncludeJS("print(true);");
         //$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
 

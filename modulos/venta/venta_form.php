@@ -2187,7 +2187,7 @@ if($_POST['action']=="editar"){
                 <tr>
                     <td style="width:80%;"><label for="txt_ven_fec">Fecha:</label>
                         <input name="txt_ven_fec" type="text" class="fecha" id="txt_ven_fec" value="<?php echo $fec?>" size="10" maxlength="10">
-                        <label for="cmb_ven_doc">Documento:<span style="color: #00aa00;font-size: 25px; font-weight: bold">1.</span></label>
+                        <label for="cmb_ven_doc">Documento:</label>
                         <select name="cmb_ven_doc" id="cmb_ven_doc" <?php if($_POST['action']=='editar')echo 'disabled'?>>
                         </select>
                         <label for="txt_ven_numdoc">N° Doc:</label>
@@ -2290,7 +2290,7 @@ if($_POST['action']=="editar"){
                                 <a id="btn_cli_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
                                 <a id="btn_cli_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
                             <?php }?>
-                            <label for="txt_ven_cli_doc">RUC/DNI: <span style="color: #00aa00;font-size: 25px; font-weight: bold">2.</span></label>
+                            <label for="txt_ven_cli_doc">RUC/DNI:</label>
                         </td>
                         <td>
                             <input name="txt_ven_cli_doc" type="text" id="txt_ven_cli_doc" value="<?php echo $cli_doc?>" size="12" maxlength="11" />
@@ -2304,13 +2304,8 @@ if($_POST['action']=="editar"){
                     </tr>
                     <tr>
                         <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
-                    </tr>
-                    <tr>
-                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
-                        <td>
-                            <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
-                            <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/>
+                            <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est"  value="" disabled="disabled"/><div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                         </td>
                     </tr>
                 </table>
@@ -2535,7 +2530,6 @@ if($_POST['action']=="editar"){
                         <input name="hdd_detven_tip" id="hdd_detven_tip"  type="hidden" value="">
                         <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
                         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
-                        <span style="color: #00aa00;font-size: 25px; font-weight: bold">3.</span>
                         <label for="txt_bus_pro_codbar">COD</label>
                         <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="7">
                         <label for="txt_bus_pro_nom">NOM</label>
@@ -2552,8 +2546,8 @@ if($_POST['action']=="editar"){
                         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
                         <label for="txt_detcom_des">DES</label>
                         <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="4" maxlength="5" style="text-align:right" >
-                        <span style="color: #00aa00;font-size: 25px; font-weight: bold">4.</span>
-                        <label for="cmb_afec_id">T. AFECTO</label>
+
+                        <label for="cmb_afec_id">T. IGV</label>
                         <select name="cmb_afec_id" id="cmb_afec_id">
                             <option value="1"<?php if($afec_id=='1')echo 'selected'?>>GRAVADO</option>
                             <option value="9" <?php if($afec_id=='1')echo 'selected'?>>EXONERADO</option>

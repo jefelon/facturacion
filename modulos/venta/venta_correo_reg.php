@@ -64,12 +64,12 @@ if($_POST['action_correo']=='enviar' or $_POST['action_correo']=='reenviar')
     $mail->IsSMTP();
     $mail->SMTPDebug = 0;//Enable SMTP debugging // 0 = off (for production use) // 1 = client messages // 2 = client and server messages
     $mail->Debugoutput = 'html';//Ask for HTML-friendly debug output
-    $mail->Host = 'mail.repvetmarvic.com';//Set the hostname of the mail server
+    $mail->Host = 'mail.aqpfact.pe';//Set the hostname of the mail server
     $mail->Port = '465';//Set the SMTP port number - likely to be 25, 465 or 587
     $mail->SMTPAuth = true;//Whether to use SMTP authentication
     $mail->SMTPSecure = 'ssl';
-    $mail->Username = 'cpe@repvetmarvic.com'; //Username to use for SMTP authentication
-    $mail->Password = 'RVM@2019.fe+'; //Password to use for SMTP authentication
+    $mail->Username = 'cpe@aqpfact.pe'; //Username to use for SMTP authentication
+    $mail->Password = 'srWcF9vWrd-K'; //Password to use for SMTP authentication
 //$mail->Timeout=30;
 
 //$mail->setFrom('soporte@estudiovidalcontadores.com', 'Sistema Web | Estudiovidalcontadores.com'); //correo envío
@@ -77,8 +77,8 @@ if($_POST['action_correo']=='enviar' or $_POST['action_correo']=='reenviar')
 
 //$usu_ema_nom="$usu_nom $apepat | Estudiovidalcontadores.com";
 
-    $mail->setFrom('cpe@repvetmarvic.com','cpe@repvetmarvic.com'); //correo envío
-    $mail->addReplyTo('cpe@repvetmarvic.com','cpe@repvetmarvic.com'); //Responder a correo
+    $mail->setFrom('cpe@aqpfact.pe','cpe@aqpfact.pe'); //correo envío
+    $mail->addReplyTo('cpe@aqpfact.pe','cpe@aqpfact.pe'); //Responder a correo
 
     $mail->addAddress(trim($_POST['txt_cli_ema']),trim($_POST['txt_cli_con'])); //Destinatario
     $mail->addCC(trim($_POST['txt_cli_emacop']),trim($_POST['txt_cli_concop'])); //con copia
