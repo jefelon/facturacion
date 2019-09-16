@@ -43,3 +43,6 @@ DELETE FROM `tb_letras`;
 DELETE FROM `tb_detallelistaprecio`;
 DELETE FROM `tb_tipocambio`;
 DELETE FROM `tb_cajadetalle`;
+DELETE FROM `tb_talonarionc`;
+DELETE FROM `tb_talonariond`;
+UPDATE `tb_caja` SET `tb_caja_estado` = '0' ;
