@@ -596,7 +596,7 @@ $style = array(
 );
 
 
-$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
+$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
 $html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
 </td>
 </tr>

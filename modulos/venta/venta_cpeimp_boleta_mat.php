@@ -370,13 +370,13 @@ if ($impresion == 'pdf') ob_start();
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+                    <td colspan="4"><b>CLIENTE: </b> <?php echo $razon ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'DNI: ' .$ruc ?></td>
+                    <td colspan="4"> <b>RUC: </b><?php echo  $ruc ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+                    <td colspan="4"> <b>DIRECCIÓN: </b><?php echo $direccion ?></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">
@@ -460,11 +460,11 @@ if ($impresion == 'pdf') ob_start();
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
+                                <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Boleta  de Venta  Electrónica,  esta puede ser
-                                    consultada en: <br><?php echo $d_documentos_app ?></td>
+                                    consultada en: <br><b><?php echo $d_documentos_app ?></b></td>
                             </tr>
                             <tr>
                                 <td colspan="4" height="10mm">
