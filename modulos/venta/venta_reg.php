@@ -167,8 +167,19 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             moneda_mysql($_POST['txt_ven_desglob']),//tb_venta_desglo
 			1,//cs_tipooperacion_id
 			0,//cs_documentosrelacionados_id
-            $usu_id
+            $usu_id,
+            $_POST['cmb_salida_id'],
+            $_POST['cmb_llegada_id'],
+            fecha_mysql($_POST['txt_fech_sal']),
+            $_POST['txt_hor_sal'],
+            $_POST['txt_num_asi'],
+            $_POST['hdd_tipo']
 		);
+
+        $_SESSION['cmb_salida_nom']=$_POST['cmb_salida_id'];
+        $_SESSION['cmb_llegada_nom']=$_POST['cmb_llegada_id'];
+        $_SESSION['txt_hor_sal']=$_POST['txt_hor_sal'];
+
 
         if ($_POST['hdd_cot_id']!=''){
          $oCotizacion->modificar_est($_POST['hdd_cot_id'],'VENDIDA');
@@ -235,8 +246,6 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
         }
 
-
-
         //REGISTRO VIAJE
         if($_POST['hdd_tipo']=='encomienda'){
             $oVenta->insertarEncomiendaVenta(
@@ -250,7 +259,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         }else{
             $oVenta->insertarViajeVenta(
                 $ven_id,
-                $_POST['hdd_vi_ho_id'],
+                0,
                 $_POST['txt_num_asi'],
                 fecha_mysql($_POST['txt_fech_sal']),
                 $_POST['hdd_ven_pas_id'],
@@ -275,11 +284,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
         }
 
-
-
-
-
-		//REGISTRO DE PAGOS
+        //REGISTRO DE PAGOS
 		//PAGO AUTOMATICO
 		
 		if($_POST['chk_venpag_aut']==1)

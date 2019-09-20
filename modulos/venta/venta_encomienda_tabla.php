@@ -14,7 +14,7 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa = $dt['tb_empresa_ruc'];
 
 
-$dts1=$oVenta->mostrar_filtro_cliente($_POST['ven_des_nom']);
+$dts1=$oVenta->mostrar_filtro_cliente($_POST['ven_des_nom'],$_POST['puntoventa_id']);
 $num_rows= mysql_num_rows($dts1);
 ?>
 
@@ -40,7 +40,7 @@ $num_rows= mysql_num_rows($dts1);
             icons: {primary: "ui-icon-cancel"},
             text: false
         });
-        $('.btn_pdf').button({
+        $('.btn_pdf,#btn_cobrar').button({
             //icons: {primary: "ui-icon-document"},
             //text: false
         });
@@ -58,7 +58,63 @@ $num_rows= mysql_num_rows($dts1);
             sortList: [[0,0],[1,1]]
         });
 
+        $('#cmb_ven_doc').change( function(){
+
+            if($('#cmb_ven_doc').val()=='11')//factura->ruc
+            {
+                $("#txt_dni").attr('maxlength','11');
+            }
+            else{//boleta->dni
+                $("#txt_dni").attr('maxlength','8');
+            }
+            $('#txt_dni').val('');
+            $('#txt_cli_nom').val('');
+            $('#txt_dni').focus();
+        });
+
+        $( "#txt_dni" ).keypress(function( event ) {
+            if ( event.which == 13) {
+                buscar();
+            }
+        });
+
     });
+
+    function venta_clientereserva_reg() {
+        var cli_id='';
+        var cli_tip;
+        $('#cmb_ven_doc').val()
+        if ($('#cmb_ven_doc').val()=='11'){
+            cli_tip = 2;
+        }else if($('#cmb_ven_doc').val()=='12'){
+            cli_tip = 1;
+        }
+        console.log(cli_tip);
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async: false,
+            dataType: "json",
+            data: ({
+                action_cliente: 'insertar',
+                txt_cli_nom: $('#txt_cli_nom').val(),
+                txt_cli_doc: $('#txt_dni').val(),
+                rad_cli_tip: cli_tip
+            }),
+            beforeSend: function () {
+                $('#msj_cliente').html("Guardando...");
+                $('#msj_cliente').show(100);
+            },
+            success: function (data) {
+                $('#msj_cliente').html(data.cli_msj);
+                cli_id = data.cli_id;
+
+            },
+            complete: function () {
+            }
+        });
+        return cli_id;
+    }
 
     function pedir_clave(enc_id) {
         var clave = prompt("Ingresa la clave");
@@ -90,6 +146,52 @@ $num_rows= mysql_num_rows($dts1);
             pedir_clave(enc_id);
         }
     }
+    function pagar_encomienda(act,idf) {
+
+        if ($('#txt_dni').val()=="" || $('#txt_cli_nom').val()=="") {
+            alert("DNI o Nombre Vacío, Escriba el DNI del cliente y presione la tecla ENTER para obtener sus datos...");
+            $('#txt_dni').focus();
+        }
+        else{
+            var cli_id = venta_clientereserva_reg();
+            $.ajax({
+                type: "POST",
+                url: "../venta/venta_reg2.php",
+                async: true,
+                dataType: "json",
+                data: ({
+                    action_venta: act,
+                    ven_id: idf,
+                    cmb_ven_doc: $('#cmb_ven_doc').val(),
+                    cli_id: cli_id,
+                    chk_imprimir: 1
+                }),
+                beforeSend: function () {
+                    $('#msj_venta').html("Cargando...");
+                    $('#msj_venta').show(100);
+                },
+                success: function (data) {
+                    $('#msj_venta').html(data.ven_msj);
+                    $('#msj_venta').show();
+
+                    if (data.ven_sun == 'enviar') {
+                        enviar_sunat(data.ven_id, data.ven_act);
+                    }
+                    else {
+                        if (data.ven_act == 'imprime') {
+                            venta_impresion(data.ven_id);
+                        }
+                    }
+
+                },
+                complete: function () {
+                    venta_encomienda_tabla();
+                }
+            });
+        }
+    }
+
+
 </script>
 <table cellspacing="1" id="tabla_encomienda_venta" class="tablesorter">
     <thead>
@@ -122,10 +224,23 @@ $num_rows= mysql_num_rows($dts1);
                 </td>
                 <td align="left" nowrap="nowrap">
                     <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="venta_impresion('<?php echo $dt1['tb_venta_id']?>')">PDF</a>
-                    <?php if ($dt1['tb_estado']=='0') {?>
-                        <a class="btn_pdf" id = "btn_pdf" title = "Entregar" onclick = "pedir_clave(<?php echo $dt1['tb_encomiendaventa_id'];?>)" > Entregar</a>
-                    <?php } ?>
+
+                    <?php if ($dt1['tb_estado']=='0') {
+                        if ($dt1['tb_encomiendaventa_pagado']=='1') {?>
+                            <a class="btn_pdf" id = "btn_pdf" title = "Entregar" onclick = "pedir_clave(<?php echo $dt1['tb_encomiendaventa_id'];?>)" > Entregar</a>
+                        <?php }else{ ?>
+                            <select name="cmb_ven_doc" id="cmb_ven_doc" class="valid">	<option value="">-</option>
+                                <option value="11">FE | FACTURA ELECTRONICA</option>
+                                <option value="12" selected="">BE | BOLETA ELECTRONICA</option>
+                            </select>
+                            <input name="txt_dni" type="text" id="txt_dni" value="" size="10" maxlength="11">
+                            <input name="txt_cli_nom" type="text" id="txt_cli_nom" value="" size="60">
+
+                            <a id = "btn_cobrar" title = "Cobrar" onclick = "pagar_encomienda('insertar', <?php echo $dt1['tb_venta_id'];?>)" >Pagar</a>
+                        <?php }
+                    } ?>
                 </td>
+
             </tr>
             <?php
         }

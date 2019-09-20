@@ -7,6 +7,8 @@
 	require_once ("../../modulos/contenido/contenido.php");
 	$oContenido = new cContenido();*/
 session_start();
+$_SESSION['autentificado2']		= "SI";
+$_SESSION['empresa_id']="1";
 if($_SESSION["autentificado2"]!= "SI"){ header("location: ../index.php"); exit();}
 	require_once ("../../config/datos.php");
 ?>
@@ -160,7 +162,44 @@ function venta_impresion(idf){
 		}
 	});
 }
+function venta_impresion_pas(idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_preimpresion_pas.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            ven_id:	idf
+        }),
+        beforeSend: function() {
+            $('#div_venta_impresion').dialog("open");
+            $('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_impresion').html(html);
+        }
+    });
+}
 
+function venta_impresion_enc(idf){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_preimpresion_enc.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            ven_id:	idf
+
+        }),
+        beforeSend: function() {
+            $('#div_venta_impresion').dialog("open");
+            $('#div_venta_impresion').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_venta_impresion').html(html);
+        }
+    });
+}
 function modo(url){
 	$('#hdd_modo').val(url);
 	venta_tabla();
@@ -229,37 +268,31 @@ $(function() {
 <body>
 
 <div class="container">
-	<header>
-</header>
+    <header>
+        <?php /*echo $oContenido->print_header()*/ ?>
+    </header>
     <article class="content">
-    	<div class="contenido">
+        <div class="contenido">
             <div class="contenido_des">
-            <table align="center" class="tabla_cont">
-                  <tr>
-                    <td class="caption_cont">CONSULTA DE MIS COMPROBANTES</td>
-                  </tr>
-                <tr>
-                    <td height="30px" align="center" class=""> <b>CUI:</b> <?php echo $_SESSION['cliente_cui'].'   '.$_SESSION['cliente_nombre']; ?>
-
-                        <img src="../../images/iconos/shut_down.png" alt="Cerrar Sesion" width="14" height="14" border="0" align="top" />
-                        <a href="../usuarios/cerrar_sesion.php" title="Cerrar Sesión" tabindex="9999">FINALIZAR</a>
-                    </td>
-                </tr>
-                  <tr>
-                    <td align="right" class="cont_emp"><?php echo $razon ?></td>
-                  </tr>
-              </table>
-			</div>
-			<div class="ct-logo"></div>
-        	<div id="div_venta_filtro" class="contenido_tabla">
-      		</div>
+                <table align="center" class="tabla_cont">
+                    <tr>
+                        <td class="caption_cont">CONSULTA DE DOCUMENTOS</td>
+                    </tr>
+                    <tr>
+                        <td align="right" class="cont_emp"><?php echo $razon ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="ct-logo"></div>
+            <div id="div_venta_filtro" class="contenido_tabla">
+            </div>
             <div id="div_venta_form">
-			</div>
+            </div>
             <div id="div_venta_impresion">
-			</div>
+            </div>
             <div id="div_venta_tabla" class="contenido_tabla">
-      		</div>
-      	</div>
+            </div>
+        </div>
     </article>
 </div>
 <footer>

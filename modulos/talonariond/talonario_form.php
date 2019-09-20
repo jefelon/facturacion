@@ -30,7 +30,7 @@ $('.cantidad').autoNumeric({
 	aSep: '',
 	aDec: '.',
 	vMin: '0',
-	vMax: '99999.9999'
+	vMax: '99999'
 });
 
 function cmb_punven_id()

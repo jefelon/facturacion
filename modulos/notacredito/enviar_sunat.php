@@ -52,7 +52,8 @@ while($dt = mysql_fetch_array($dts)){
         $monval=2;
     }
 	$fechadoc=$dt["tb_venta_fec"];
-	
+    $issuetime=$dt["tb_venta_reg"];
+
 	$identidad=$dt["tb_cliente_doc"];
 	if($dt["tb_cliente_tip"]==1)$idtipodni=1;
 	if($dt["tb_cliente_tip"]==2)$idtipodni=6;
@@ -124,6 +125,7 @@ $header[0]['AdditionalProperty_Value']=$total_letras;
 
 //NOTA CREDITO
 $header[0]['issuedate']				=$fechadoc;//fecha nota credito
+$header[0]['issuetime']				=$issuetime;//hora nota credito
 
 $header[0]['referencedocumenttypecode']=$ventipdoc;//ID DOCUMENT
 $header[0]['referenceid']			=$vennumdoc;//factura
@@ -190,30 +192,30 @@ mysql_free_result($dts);
 $detalle = json_decode(json_encode($detalle));
 //===============================================================================================
 
-//$r = run(datatoarray($header, $detalle, $empresa, 'Invoice'), $_SERVER['DOCUMENT_ROOT'] ."granadosllantas/facturacion/cperepositorio/send/", $_SERVER['DOCUMENT_ROOT'] ."granadosllantas/facturacion/cperepositorio/cdr/", $nodo="", "Invoice", true);
-$r = run(datatoarray($header, $detalle, $empresa, 'CreditNote'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "CreditNote", true);
-
-/*echo $r['faultcode'].'<br>';
-echo $r['digvalue'].'<br>';
-echo $r['signvalue'].'<br>';
-echo $r['valid'].'<br>';*/
-
-//var_dump($header);
-//var_dump($detalle);
-//$r['faultcode'] = 0;
-
-if($r['faultcode']=='0')
+if($ventipdoc==1)//relacionado a factura
 {
-	$data['msj']='Enviado Correctamente a SUNAT';
-	$estado = 1;
-}else{
-	$data['msj']='Error: '.$r['faultcode'];
-	$estado = 0;
+    $r = run(datatoarray($header, $detalle, $empresa, 'CreditNote'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "CreditNote", true);
+    if($r['faultcode']=='0')
+    {
+        $data['msj']="<span style='color: green'>Enviado Correctamente a SUNAT</span>";
+        $estado = 1;
+    }else{
+        $data['msj']="<span style='color: red'>Error:".$r['faultcode']."</span>";
+        $estado = 0;
+    }
+
+    $oNotacredito->actualizar_sunat($ven_id,$r['faultcode'],$r['digvalue'],$r['signvalue'],$r['valid'],$estado);
 }
+if($ventipdoc==3)// RELACIONADO A BOLETA
+{
+    $enviar=false;
+    $r = run(datatoarray($header, $detalle, $empresa, 'CreditNote'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "CreditNote", true);
 
-//$data['msj2']=$r['faultcode'].'<br>'.$r['digvalue'].'<br>'.$r['signvalue'].'<br>'.$r['valid'];
+    $estado_envsun='10';
+    $estado=true;
+    $data['msj']=$documento.' registrado, enviar en resumen.';
+    $oNotacredito->actualizar_sunat($ven_id,$r['faultcode'],$r['digvalue'],$r['signvalue'],$r['valid'],$estado_envsun);
 
-$oNotacredito->actualizar_sunat($ven_id,$r['faultcode'],$r['digvalue'],$r['signvalue'],$r['valid'],$estado);
-
+}
 echo json_encode($data);
 ?>

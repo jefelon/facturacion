@@ -12,7 +12,7 @@ $num = mysql_num_rows($dts1);
 $num = 0;
 while($dt1 = mysql_fetch_array($dts1))
 {
-	$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id']);
+	$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id'],2);
 	$d=mysql_num_rows($dts2);
 
 	if($d==0)
@@ -63,7 +63,7 @@ if($num>0)
 		$estado="";
 		$insertar=0;
 
-		$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id']);
+		$dts2=$oVenta->comparar_resumenboleta_detalle($dt1['tb_venta_id'],2);
 		$d=mysql_num_rows($dts2);
 		if($d==0)
         {
@@ -93,6 +93,8 @@ if($num>0)
 	    	//sumatorias
             $valor=$dt1['tb_venta_gra'];
 			$opegra=$dt1['tb_venta_gra'];
+            $opeexo=$dt1['tb_venta_exo'];
+            $opeina=$dt1['tb_venta_ina'];
 	        $igv=$dt1['tb_venta_igv'];
 	        $imptot=$dt1['tb_venta_tot'];
 
@@ -128,6 +130,7 @@ else
 //==========================nota de crédito
 
 $dts1=$oVenta->mostrar_filtro_nc($_SESSION['empresa_id'],fecha_mysql($_POST['hdd_resbol_fec']));
+
 $num = mysql_num_rows($dts1);
 
 $num = 0;
@@ -136,6 +139,7 @@ while($dt1 = mysql_fetch_array($dts1))
     $dts2=$oVenta->comparar_resumenboleta_detalle_notas($dt1['tb_venta_id'],$dt1['cs_tipodocumento_id']);
     $d=mysql_num_rows($dts2);
 
+    echo  "ventaid: ". $dt1['tb_venta_id']. " Tipo documento: ". $dt1['cs_tipodocumento_id']. " variable d: ".$d."";
     if($d==0)
     {
         $num++;
@@ -207,6 +211,8 @@ if($num>0)
             //sumatorias
             $valor=$dt1['tb_venta_gra'];
             $opegra=$dt1['tb_venta_gra'];
+            $opeexo=$dt1['tb_venta_exo'];
+            $opeina=$dt1['tb_venta_ina'];
             $igv=$dt1['tb_venta_igv'];
             $imptot=$dt1['tb_venta_tot'];
 
@@ -236,12 +242,12 @@ if($num>0)
     mysql_free_result($dts1);
 
 
-    $data['msj']="Registrado $cod Correctamente. N° Filas $item.";
+    $data['msj'].="Registrado $cod Correctamente. N° Filas $item.";
 
 }
 else
 {
-    $data['msj']='No existe Comprobantes para declarar.';
+    $data['msj'].='No existe Notas de Crédito y Débito para declarar.';
 }
 //================================fin nota de crédito
 

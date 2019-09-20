@@ -13,7 +13,7 @@ $dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
 $dt = mysql_fetch_array($dts);
 $ruc_empresa=$dt['tb_empresa_ruc'];
 
-$dts1=$oVenta->mostrar_filtro_adm(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_POST['cmb_fil_ven_ven'],$_POST['cmb_fil_ven_punven'],$_SESSION['empresa_id'],$_POST['chk_fil_ven_may']);
+$dts1=$oVenta->mostrar_filtro_cobro_destino(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_SESSION['empresa_id'],$_POST['chk_fil_ven_may']);
 
 $num_rows= mysql_num_rows($dts1);
 ?>
@@ -73,7 +73,6 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">VALOR VENTA</th>
         <th align="center">IGV</th>
         <th align="center">IMPORTE TOTAL</th>
-        <th align="center">TIPO</th>
         <th align="center">ESTADO DOC.</th>
         <th align="center">ESTADO SUNAT</th>
         <th align="center">FECHA DE ENVIO SUNAT</th>
@@ -87,7 +86,7 @@ $num_rows= mysql_num_rows($dts1);
         <tbody>
         <?php
         while($dt1 = mysql_fetch_array($dts1)){
-            if($dt1['tb_venta_est']=='CANCELADA' AND $dt1['tb_documento_id']!='15'){
+            if($dt1['tb_venta_est']=='CANCELADA'){
                 $total_ventas+=$dt1['tb_venta_tot'];
             }
 
@@ -112,53 +111,9 @@ $num_rows= mysql_num_rows($dts1);
                     }
                     ?>
                 </td>
-
-                <?php if($dt1['tb_documento_id']!='15' AND $dt1['tb_venta_est']=='CANCELADA'){?>
-                    <td align="right">
-                        <?php
-                            if($dt1['tb_venta_tipo']==2 || $dt1['tb_venta_tipo']==3){
-                                echo formato_money($dt1['tb_venta_valven']) ;
-                            }
-                            else if($dt1['tb_venta_tipo']==0 ){
-                                echo formato_money($dt1['tb_venta_tot']) ;
-                            }
-                        ?>
-                    </td>
-                    <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
-                    <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?> </td>
-                    <td align="right">
-                        <?php if($dt1['tb_venta_tipo']=='encomienda')
-                        {
-                            echo 'Encomienda';
-                        }
-                        else if ($dt1['tb_venta_tipo']=='encomiendapagada'){
-                            echo 'Encomienda Pago en Destino';
-                        }
-                        else{
-                            echo 'Pasaje';
-                        }
-//                        ?>
-                    </td>
-                <?php
-                } else { ?>
-                    <td align="right">0.00</td>
-                    <td align="right">0.00</td>
-                    <td align="right">0.00</td>
-                    <td align="right">
-                        <?php
-                        if($dt1['tb_venta_tipo']=='encomienda')
-                        {
-                            echo 'Encomienda';
-                        }
-                        else if ($dt1['tb_venta_tipo']=='encomiendapagada'){
-                            echo 'Encomienda Cobro a Destino';
-                        }
-                        else{
-                            echo 'Pasaje';
-                        }
-                        ?>
-                    </td>
-                <?php } ?>
+                <td align="right"><?php echo formato_money($dt1['tb_venta_valven'])?></td>
+                <td align="right"><?php echo formato_money($dt1['tb_venta_igv'])?></td>
+                <td align="right"><?php echo formato_money($dt1['tb_venta_tot'])?></td>
                 <td><?php echo $dt1['tb_venta_est']?></td>
                 <td>
                     <?php
@@ -209,13 +164,14 @@ $num_rows= mysql_num_rows($dts1);
                                 )">Enviar Correo</a>
 
                         <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="
-                        <?php if($dt1['tb_venta_tipo']=="encomienda"){?>
-                                venta_impresion_enc('<?php echo $dt1['tb_venta_id']?>')
-                            <?php }else if($dt1['tb_venta_tipo']=="pasaje"){?>
-                                venta_impresion_pas('<?php echo $dt1['tb_venta_id']?>')
+                        <?php if($dt1['tb_encomiendaventa_id']){?>
+                                venta_impresion_enc('<?php echo $dt1['tb_venta_id']?>')"
+                            <?php }else if($dt1['tb_viajeventa_id']){?>
+                                venta_impresion_pas('<?php echo $dt1['tb_venta_id']?>')"
                             <?php }else{?>
-                                venta_impresion('<?php echo $dt1['tb_venta_id']?>')
-                            <?php } ?> ">PDF</a>
+                                venta_impresion('<?php echo $dt1['tb_venta_id']?>')"
+                            <?php } ?>
+                        >PDF</a>
                         <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>
                         <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/cdr/$cdr.zip";?>" title="Descargar CDR">CDR</a>
                     <?php endif;?>

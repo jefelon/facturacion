@@ -25,6 +25,21 @@ class cVenta{
 		$rst=$oCado->ejecute_sql($sql);
 		return $rst;
 	}
+    function mostrar_filtro_pendiente($emp_id){
+        $sql="SELECT tb_venta_fec,rb.tb_venta_id,tb_venta_est
+		FROM tb_venta v
+		LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        
+        LEFT JOIN tb_resumenboletadetalle rb ON v.tb_venta_id=rb.tb_venta_id
+        
+		WHERE v.tb_empresa_id = $emp_id AND rb.tb_venta_id IS NULL
+        AND td.cs_tipodocumento_cod = 3 
+        GROUP BY tb_venta_fec
+        ORDER BY tb_venta_fec ASC";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function mostrar_filtro_nc($emp_id,$fec1){
         $sql="SELECT * 
@@ -45,6 +60,32 @@ class cVenta{
         LEFT JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
         WHERE v.tb_empresa_id = $emp_id 
         AND v.tb_venta_fec = '$fec1'
+        AND v.tb_venta_ventipdoc=3
+        
+        ";
+
+        $sql.=" ORDER BY tb_venta_fec, tb_venta_ser, tb_venta_num ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function mostrar_filtro_nc_pendiente($emp_id){
+        $sql="SELECT * 
+        FROM tb_notacredito v
+        LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+        LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        LEFT JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+        WHERE v.tb_empresa_id = $emp_id 
+        AND v.tb_venta_ventipdoc=3
+        
+        UNION ALL 
+        
+        SELECT * 
+        FROM tb_notadebito v
+        LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+        LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        LEFT JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+        WHERE v.tb_empresa_id = $emp_id 
         AND v.tb_venta_ventipdoc=3
         
         ";
@@ -149,6 +190,14 @@ class cVenta{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
 	}
+    function comparar_resumenboleta_detalle_pendiente($ven_id,$tipodoc){
+        $sql="SELECT tb_resumenboletadetalle_id
+        FROM tb_resumenboletadetalle
+        WHERE tb_venta_id = '$ven_id' AND cs_tipodocumento_id='$tipodoc'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
     function comparar_resumenboleta_detalle_notas($ven_id,$tipodoc){
         $sql="SELECT tb_resumenboletadetalle_id
         FROM tb_resumenboletadetalle

@@ -20,6 +20,12 @@ require_once("../menu/acceso.php");
 require_once("../guia/cGuia.php");
 $oGuia = new cGuia();
 
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
+
+$pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
+$pv = mysql_fetch_array($pvs);
+
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
@@ -42,6 +48,8 @@ if($_POST['action']=="insertar"){
     $viaje_fecha_sal=$_POST['viaje_fecha_sal'];
     $viaje_horario= $_POST['viaje_horario'];
     $viaje_horario_id= $_POST['viaje_horario_id'];
+
+    $txt_hor_sal= $_SESSION['txt_hor_sal'];
 }
 
 if($_POST['action']=="insertar_cot"){
@@ -187,6 +195,20 @@ if($_POST['action']=="editar"){
         icons: {primary: "ui-icon-pencil"},
         text: false
     });
+    $('.btn_agregar_producto').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
+    $('.btn_rest_car').button({
+        icons: {primary: "ui-icon-cart"},
+        text: true
+    });
+    $('.btn_rest_act').button({
+        icons: {primary: "ui-icon-arrowrefresh-1-e"},
+        text: true
+    });
+
+
     $("#btn_tra_form_modificar").css({width: "16px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
     $('.venpag_moneda').autoNumeric({
@@ -219,6 +241,20 @@ if($_POST['action']=="editar"){
         buttonImage: "../../images/calendar.gif",
         buttonImageOnly: true
     });
+    $( "#txt_fech_sal" ).datepicker({
+        minDate: new Date((new Date()).getFullYear(), 0, 1),
+        maxDate:"+0D",
+        yearRange: 'c-0:c+0',
+        changeMonth: true,
+        changeYear: false,
+        dateFormat: 'dd-mm-yy',
+        //altField: fecha,
+        //altFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: "../../images/calendar.gif",
+        buttonImageOnly: true
+    });
+
 
     $( "#txt_venpag_fec" ).datepicker({
         //minDate: "-1M",
@@ -1140,6 +1176,68 @@ if($_POST['action']=="editar"){
             }
         });
     }
+    function pasajero_form_i(act,idf,nom,dir,con,tel,est){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/pasajero_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: 		act,
+                cli_id:			idf,
+                cli_nom:		nom,
+                cli_dir:		dir,
+                cli_con:		con,
+                cli_tel:		tel,
+                cli_est:		est,
+                vista:			'hdd_pas_id'
+            }),
+            beforeSend: function(a) {
+                //$('#msj_proveedor').hide();
+                //$("#btn_cmb_pro_id").click(function(e){
+                $("#btn_pas_form_agregar").click(function(e){
+                    //x=e.pageX+5;
+                    //y=e.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_pasajero_form').dialog("open");
+                });
+
+                if(act=='editar'){
+                    if(idf>0){
+                        $("#btn_pas_form_modificar").click(function(e){
+                            //x=e.pageX+5;
+                            //y=e.pageY+15;
+                            //$('#div_cliente_form').dialog({ position: [x,y] });
+                            $('#div_pasajero_form').dialog("open");
+                        });
+                    }
+                    else{
+                        alert('Seleccione Cliente');
+                    }
+                }
+
+                if(act=='editarSunat'){
+                    //x=a.pageX+5;
+                    //y=a.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_pasajero_form').dialog("open");
+                }
+
+                $('#div_pasajero_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_pasajero_form').html(html);
+            },
+            complete: function(){
+                if(act=='insertar' & $('#hdd_ven_pas_id').val()=="")
+                {
+                    $('#txt_pas_doc').val($('#txt_ven_pas_doc').val());
+                    $('#txt_pas_nom').val($('#txt_ven_pas_nom').val());
+                }
+
+            }
+        });
+    }
 
 
 
@@ -1197,6 +1295,32 @@ if($_POST['action']=="editar"){
                 $('#txt_ven_pas_est').val(data.estado);
             }
         });
+    }
+    function venta_cliente_reg(act, idf) {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async: true,
+            dataType: "json",
+            data: ({
+                action_cliente: 'insertar',
+                txt_cli_nom: $('#txt_pasaj_nom').val(),
+                txt_cli_doc: $('#txt_pasaj_dni').val(),
+                rad_cli_tip: $("input[name=rad_cli_tip]:checked").val()
+            }),
+            beforeSend: function () {
+                $('#div_cliente_form').dialog("close");
+                $('#msj_cliente').html("Guardando...");
+                $('#msj_cliente').show(100);
+            },
+            success: function (data) {
+                $('#msj_cliente').html(data.cli_msj);
+                pasajero_cargar_datos(data.cli_id);
+                cliente_cargar_datos(data.cli_id);
+            },
+            complete: function () {
+            }
+        })
     }
 
     function clientecuenta_detalle(ids)
@@ -1371,7 +1495,49 @@ if($_POST['action']=="editar"){
             }
         });
     }
+    function cmb_lugar()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_nom.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_salida_id').html('<option value="">Cargando...</option>');
 
+                // $('#cmb_parada_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_salida_id').html(html);
+
+                // $('#cmb_parada_id').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
+
+    function cmb_lugar_llegada()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_nom_lleg.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
+                // $('#cmb_parada_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_llegada_id').html(html);
+                // $('#cmb_parada_id').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
     $(function() {
 
         $('#txt_ven_fec').keyup(function(e) {
@@ -1387,6 +1553,8 @@ if($_POST['action']=="editar"){
 
         cmb_ven_doc();
         cmb_ven_id();
+        cmb_lugar();
+        cmb_lugar_llegada();
         cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
         lote_venta_car('restablecer');
 
@@ -1499,7 +1667,9 @@ if($_POST['action']=="editar"){
 
                 if($("#hdd_ven_pas_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_pas_id" ).val());
-
+                    if($("#cmb_ven_doc").val()==12){ //solo en boleta electrónica
+                        cliente_cargar_datos($("#hdd_ven_pas_id" ).val());
+                    }
                 }
                 //alert(ui.item.value);
                 // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1518,6 +1688,11 @@ if($_POST['action']=="editar"){
                 $('#hdd_ven_pas_id').change();
                 if($("#hdd_ven_pas_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+
+                    if($("#cmb_ven_doc").val()==12){ //solo en boleta electrónica
+                        cliente_cargar_datos($("#hdd_ven_pas_id" ).val());
+                    }
+
                 }
                 //alert(ui.item.value);
                 // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1863,6 +2038,27 @@ if($_POST['action']=="editar"){
             }
         });
 
+        $( "#div_pasajero_form" ).dialog({
+            title:'Información de Pasajero',
+            autoOpen: false,
+            resizable: false,
+            height: 380,
+            width: 530,
+            zIndex: 4,
+            modal: true,
+            position: ["center",0],
+            buttons: {
+                Guardar: function() {
+                    $("#for_pas").submit();
+                },
+                Cancelar: function() {
+                    $('#for_pas').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+
         $( "#div_catalogo_venta" ).dialog({
             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); },
             title:'Catálogo de Venta',
@@ -1962,7 +2158,6 @@ if($_POST['action']=="editar"){
 //formulario
         $("#for_ven").validate({
             submitHandler: function(){
-
                 $.ajax({
                     type: "POST",
                     url: "../venta/venta_reg.php",
@@ -1999,7 +2194,7 @@ if($_POST['action']=="editar"){
                     },
                     complete: function(){
                         venta_tabla();
-                        filtro_bus();
+                        //filtro_bus();
                         $('#txt_pasaj_dni').val('');
                         $('#txt_pasaj_edad').val('');
                         $('#txt_pasaj_nom').val('');
@@ -2042,6 +2237,18 @@ if($_POST['action']=="editar"){
                 },
                 hdd_ven_doc: {
                     required: true
+                },
+                txt_num_asi:{
+                    required: true
+                },
+                txt_hor_sal:{
+                    required: true
+                },
+                cmb_salida_id:{
+                    required: true
+                },
+                cmb_llegada_id:{
+                    required: true
                 }
             },
             messages: {
@@ -2074,7 +2281,20 @@ if($_POST['action']=="editar"){
                 },
                 hdd_ven_doc: {
                     required: "Existe registro con mismo N° Documento."
+                },
+                txt_num_asi:{
+                    required: "Debe colocar el número de asiento."
+                },
+                txt_hor_sal:{
+                    required: "La hora de salida es necesario."
+                },
+                cmb_salida_id:{
+                    required: "Seleccione el punto de partida."
+                },
+                cmb_llegada_id:{
+                    required: "Seleccione el punto de llegada."
                 }
+
             }
         });
 
@@ -2611,8 +2831,8 @@ if($_POST['action']=="editar"){
                     <table>
                         <tr>
                             <td align="right"><?php if($_POST['action']=='insertar'){?>
-                                    <a id="btn_pas_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
-                                    <a id="btn_pas_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                                    <a id="btn_pas_form_agregar" href="#" onClick="pasajero_form_i('insertar')">Agregar Pasajero</a>
+                                    <a id="btn_pas_form_modificar" href="#" onClick="pasajero_form_i('editar',$('#hdd_ven_pas_id').val())">Modificar Pasajero</a>
                                 <?php }?>
                             </td>
                         </tr>
@@ -2632,13 +2852,13 @@ if($_POST['action']=="editar"){
                             </td>
                         </tr>
                         <tr>
-                            <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                            <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                            <td align="right"><label for="txt_ven_pas_dir">Dirección:</label></td>
+                            <td><input type="text" id="txt_ven_pas_dir" name="txt_ven_pas_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
                         </tr>
                         <tr>
                             <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                             <td>
-                                <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                                <input type="hidden" id="txt_ven_pas_est" name="txt_ven_pas_est" size="40" value="" disabled="disabled"/>
                                 <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                             </td>
                         </tr>
@@ -2700,7 +2920,7 @@ if($_POST['action']=="editar"){
                     <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>
                 </fieldset>
             </div>
-            <div style="float: left; width: 100%;">
+            <div style="float: left; width: 50%;">
                 <fieldset><legend>Registro de Pagos</legend>
                     <?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
                         <table border="0" cellspacing="2" cellpadding="0">
@@ -2846,32 +3066,41 @@ if($_POST['action']=="editar"){
                     </div>
                 </fieldset>
             </div>
+            <div style="float: left; width: 50%; display: block;">
+                <fieldset>
+                    <legend>Origen / Destino</legend>
+                    <label for="cmb_salida_id">Origen:</label>
+                    <select name="cmb_salida_id" id="cmb_salida_id">
+                    </select>
+
+<!--                    <label for="cmb_parada_id">Parada:</label>-->
+<!--                    <select name="cmb_parada_id" id="cmb_parada_id">-->
+
+                    <label for="cmb_llegada_id">Destino:</label>
+                    <select name="cmb_llegada_id" id="cmb_llegada_id">
+
+                    </select>
+                </fieldset>
+            </div>
         </div>
         <div style="float: left; width: 20%; display: block;">
             <fieldset>
                 <legend>Asiento</legend>
                 <label for="txt_num_asi">Asiento:</label>
-                <input type="text" id="txt_num_asi" name="txt_num_asi" size="4" value="<?php echo $asiento_id ?>" /><br>
-                <label for="txt_pre_asi">Precio:</label><br>
-                <input type="text" name="txt_pre_asi" id="txt_pre_asi"  size="4" value="<?php echo $precio ?>"><br>
+                <input type="text" id="txt_num_asi" name="txt_num_asi" size="4" value="<?php echo $asiento_id ?>" placeholder="12"/><br>
                 <label for="txt_fech_sal">Fecha Salida:</label><br>
-                <input type="text" name="txt_fech_sal" id="txt_fech_sal"  size="8" value="<?php echo $viaje_fecha_sal ?>"><br>
+                <input type="text" name="txt_fech_sal" id="txt_fech_sal"  size="8" value="<?php echo $fec ?>"><br>
                 <label for="txt_hor_sal">Hora Salida:</label><br>
-                <input type="text" name="txt_hor_sal" id="txt_hor_sal"  size="8" value="<?php echo $viaje_horario ?>">
-                <input type="hidden" name="hdd_vi_ho_id" id="hdd_vi_ho_id"  size="8" value="<?php echo $viaje_horario_id ?>">
+                <input type="text" name="txt_hor_sal" id="txt_hor_sal"  size="8" value="<?php echo $txt_hor_sal ?>" autocomplete="on" placeholder="08:30 PM">
+                <input type="hidden" name="hdd_tipo" id="hdd_tipo"  size="8" value="pasaje">
             </fieldset>
         </div>
-
-
-
-
-
 
         <div style="clear: both;"></div>
         <?php if($_POST['action']=='insertar'){?>
             <div id="div_productos_servicios_tab">
                 <ul>
-                    <li><a id="carga_productos" href="#div_productos">Agregar Servicios</a></li>
+                    <li><a id="carga_productos" href="#div_productos">Agregar Detalle</a></li>
 <!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
                 </ul>
 

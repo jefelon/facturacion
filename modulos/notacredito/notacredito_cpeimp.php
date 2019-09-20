@@ -8,13 +8,17 @@ $oNotacredito = new cNotacredito();
 require_once ("../formatos/numletras.php");
 require_once ("../formatos/formato.php");
 
-$razon_defecto = "IMPORTACIONES Y DISTRIBUCIONES GRANADOS SRL";
-$direccion_defecto = "AV. AUGUSTO B. LEGUIA NRO. 1160 URB. SAN LORENZO";
-$direccion_defecto .= "<br/>" . "JOSE LEONARDO ORTIZ - CHICLAYO - LAMBAYEQUE";
-$ruc_empresa = "20479676861";
-$contacto_empresa = "Teléfono:  Correo: idigrasrl@hotmail.com";
+require_once ("../empresa/cEmpresa.php");
+$oEmpresa = new cEmpresa();
 
-$tipodoc = 'NOTA DE CREDITO ELECTRONICA';
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt = mysql_fetch_array($dts);
+$ruc_empresa = $dt['tb_empresa_ruc'];
+$razon_defecto = $dt['tb_empresa_razsoc'];
+$direccion_defecto = $dt['tb_empresa_dir'];
+$contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
+
+$tipodoc = 'NOTA DE CREDITO';
 
 $sucursales='
 <table style="font-size:7pt" border="0">
@@ -74,7 +78,7 @@ while($dt = mysql_fetch_array($dts))
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
-    $moneda=1;
+    $moneda=$dt["cs_tipomoneda_id"];
 
     $estsun=$dt['tb_venta_estsun'];
       $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -94,6 +98,12 @@ while($dt = mysql_fetch_array($dts))
 if($moneda==1){
     $moneda  = "SOLES";
     $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
 }
 
 
@@ -413,14 +423,7 @@ $html.='
 <tr>
 <td style="width:78%">';
 
-$html.='<br/>'.$sucursales;
-
 $html.='<br/>
-<p style="font-size:7pt">
-Código de Seguridad (Hash): '.$digval.'<br>
-Representación Impresa de la '.$tipodoc.'.<br>Esta puede ser consultada en: www.granadosllantas.com<br>
-Autorizado mediante Resolución de Intendencia N° 0720050000067/SUNAT
-</p>
 </td>
 <td>
 ';
@@ -436,9 +439,7 @@ $style = array(
 	'module_height' => 1 // height of a single module in points
 );
 
-
-$params = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', '', '', 40, 40, $style, 'N'));
-$html .= '<tcpdf method="write2DBarcode" params="'.$params.'" />
+$html .= '
 </td>
 </tr>
 </table>

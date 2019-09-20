@@ -137,6 +137,16 @@ while($dt = mysql_fetch_array($dts))
     $totanti="0.00";
     $moneda=1;
 
+    if($moneda==1){
+        $moneda  = "SOLES";
+        $mon = "S/ ";
+        $monedaval=1;
+    }
+    if($moneda==2){
+        $moneda  = "DOLARES";
+        $mon = "$ ";
+        $monedaval=2;
+    }
 
     $estsun=$dt['tb_venta_estsun'];
       $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -145,20 +155,22 @@ while($dt = mysql_fetch_array($dts))
       $sigval=$dt['tb_venta_sigval'];
       $val=$dt['tb_venta_val'];
 
-    $estado=$dt['tb_venta_est'];
+    $estado = $dt['tb_venta_est'];
 
-    $lab1=$dt['tb_venta_lab1'];
-    $lab2=$dt['tb_venta_lab2'];
-    $lab3=$dt['tb_venta_lab3'];
-    
+    $lab1 = $dt['tb_venta_lab1'];
+    $lab2 = $dt['tb_venta_lab2'];
+    $lab3 = $dt['tb_venta_lab3'];
+
+    $ori = $dt['tb_venta_origen'];
+    $des = $dt['tb_venta_destino'];
+    $fecsal = $dt['tb_venta_fechasalida'];
+    $horsal = $dt['tb_venta_horasalida'];
+    $asi = $dt['tb_venta_asiento'];
+
 }
 
 $vvs = $oVenta->mostrar_viajeventa($ven_id);
 $vv = mysql_fetch_array($vvs);
-
-$vhs = $oVenta->mostrar_viajehorario($vv['tb_viajehorario_id']);
-$vh = mysql_fetch_array($vhs);
-
 
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
@@ -338,7 +350,7 @@ if($impresion=='pdf')ob_start();
     </tr>
     <tr>
         <td colspan="2"></td>
-        <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
+        <td colspan="2" class="derecha"><?php //echo ' Hora: ' . $hora ?></td>
     </tr>
     <tr>
         <td colspan="4" height="10mm">
@@ -346,39 +358,32 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+        <td colspan="4"> <b>CLIENTE: </b><?php echo $razon ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'RUC: ' .$ruc ?></td>
+        <td colspan="4"> <b>RUC: </b><?php echo $ruc ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+        <td colspan="4"> <b>DIRECCIÓN: </b><?php echo $direccion ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'PASAJERO: ' .$vv['tb_cliente_nom'] ?></td>
+        <td colspan="4"> <b>PASAJERO: </b><?php echo $vv['tb_cliente_nom'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'DNI: ' .$vv['tb_cliente_doc'] ?></td>
+        <td colspan="4"> <b>DNI: </b><?php echo $vv['tb_cliente_doc'] ?></td>
     </tr>
     <tr>
-        <td colspan="2"> <?php echo 'Origen: ' . $vh['ltb_origen'] ?></td>
-        <td colspan="2"> <?php
-            if ($vv['tb_lugar_id']>0){
-                echo 'Destino: ' . $vv['tb_lugar_nom'];
-            }else{
-                echo 'Destino: ' . $vh['ltb_destino'];
-            }
-
-            ?></td>
+        <td colspan="2"> <b>Origen: </b> <?php echo $ori ?></td>
+        <td colspan="2"> <b>Destino: </b><?php echo  $des?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Fecha de Viaje: ' . $vh['tb_viajehorario_fecha'] ?></td>
+        <td colspan="4"> <b>Fecha de Viaje: </b><?php echo $fecsal ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Hora de Viaje: ' . $vh['tb_viajehorario_horario'] ?></td>
+        <td colspan="4"> <b>Hora de Viaje: </b><span style="font-size: 15pt;font-weight: bold"><?php echo $horsal ?></span></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'Nro Asiento: ' . $vv['tb_asiento_nom'] ?></td>
+        <td colspan="4"> <b>Nro Asiento: </b><span style="font-size: 15pt;font-weight: bold"><?php echo $asi ?></span></td>
     </tr>
     <tr>
         <td colspan="4" height="10mm">
@@ -453,11 +458,14 @@ if($impresion=='pdf')ob_start();
           <td colspan="2" class="derecha" style="text-align: right;">
               S/ <?php echo formato_money($tot) ?></td>
       </tr>
+      <tr>
+          <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>
+      </tr>
         <tr>
           <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
         </tr>
         <tr>
-          <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
+          <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
         </tr>
         <tr>
           <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Factura  de Venta  Electrónica,  esta puede ser

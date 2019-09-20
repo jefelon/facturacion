@@ -137,6 +137,17 @@ while($dt = mysql_fetch_array($dts))
     $totanti="0.00";
     $moneda=1;
 
+    if($moneda==1){
+        $moneda  = "SOLES";
+        $mon = "S/ ";
+        $monedaval=1;
+    }
+    if($moneda==2){
+        $moneda  = "DOLARES";
+        $mon = "$ ";
+        $monedaval=2;
+    }
+
 
     $estsun=$dt['tb_venta_estsun'];
       $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -153,11 +164,9 @@ while($dt = mysql_fetch_array($dts))
     
 }
 
-$vvs = $oVenta->mostrar_viajeventa($ven_id);
-$vv = mysql_fetch_array($vvs);
-
 $evs = $oVenta->mostrar_encomienda_viaje($ven_id);
 $ev = mysql_fetch_array($evs);
+
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
 $num_rows_vp= mysql_num_rows($rws1);
@@ -353,18 +362,6 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'REMITENTE: ' . $ev['crtb_cliente'] ?></td>
-    </tr>
-    <tr>
-        <td colspan="4"> <?php echo 'DESTINATARIO: ' . $ev['cdtb_cliente'] ?></td>
-    </tr>
-    <tr>
-        <td colspan="4"> <?php echo 'ORIGEN: ' . $ev['ltb_origen'] ?></td>
-    </tr>
-    <tr>
-        <td colspan="4"> <?php echo 'DESTINO: ' . $ev['ltb_destino'] ?></td>
-    </tr>
-    <tr>
         <td colspan="4" height="10mm">
             .............................................................................................
         </td>
@@ -437,11 +434,14 @@ if($impresion=='pdf')ob_start();
           <td colspan="2" class="derecha" style="text-align: right;">
               S/ <?php echo formato_money($tot) ?></td>
       </tr>
+      <tr>
+          <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>
+      </tr>
         <tr>
           <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
         </tr>
         <tr>
-          <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
+          <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
         </tr>
         <tr>
           <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Factura  de Venta  Electrónica,  esta puede ser

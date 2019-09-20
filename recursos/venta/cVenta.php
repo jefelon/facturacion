@@ -1,23 +1,28 @@
 <?php
 session_start();
 class cVenta{
-	function mostrar_filtro($fec1,$doc_id,$ser,$cor,$mon){
-//	$cor=str_pad($cor,8, '0', STR_PAD_LEFT);
-	$sql="SELECT * 
+    function mostrar_filtro($fec1,$doc_id,$ser,$cor,$mon){
+        $sql="SELECT ev.tb_encomiendaventa_id, vv.tb_viajeventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
+    v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
+    v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
+    v.tb_venta_valven, v.tb_venta_igv,v.tb_documento_id,v.tb_venta_tipo,v.tb_venta_tipodes
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
+	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
+	LEFT JOIN tb_encomiendaventa ev ON v.tb_venta_id=ev.tb_venta_id
+	LEFT JOIN tb_viajeventa vv ON vv.tb_venta_id=v.tb_venta_id	
 	WHERE v.tb_venta_fec = '$fec1'
 	AND v.tb_documento_id = '$doc_id'
 	AND v.tb_venta_ser = '$ser'
 	AND v.tb_venta_num  = '$cor' 
 	AND v.tb_venta_tot = '$mon'";
-		
-	//$sql.=" ORDER BY tb_venta_fec, tb_documento_nom ";
-	$oCado = new Cado();
-	$rst=$oCado->ejecute_sql($sql);
-	return $rst;
-	}
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function mostrar_filtro_cui($cui, $fec1, $fec2,$doc_id,$est,$cli_id){
         $sql="SELECT * 

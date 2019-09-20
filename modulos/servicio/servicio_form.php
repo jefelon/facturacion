@@ -440,7 +440,7 @@ if($_POST['action']=="editar"){
                 <p><label for="txt_ser_nom" style="width: 68px;display: inline-block">Tipo IGV:</label>
                     <select name="cmb_servicio_tip" id="cmb_servicio_tip">
                         <option value="1">GRABADO</option>
-                        <option value="9">EXONERADO</option>
+                        <option value="9" selected>EXONERADO</option>
                     </select>
                 </p>
             </tr>

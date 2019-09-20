@@ -20,6 +20,12 @@ require_once("../menu/acceso.php");
 require_once("../guia/cGuia.php");
 $oGuia = new cGuia();
 
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
+
+$pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
+$pv = mysql_fetch_array($pvs);
+
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
@@ -1339,6 +1345,7 @@ if($_POST['action']=="editar"){
                 $('#txt_ven_rem_dir').val(data.direccion);
                 $("#hdd_ven_rem_tip").val(data.tipo);
                 $('#txt_ven_rem_est').val(data.estado);
+                cliente_cargar_datos(data.cli_id);
             }
         });
     }
@@ -1647,7 +1654,7 @@ if($_POST['action']=="editar"){
                     $("#txt_ven_rem_nom").val(ui.item.nombre);
                     $("#txt_ven_rem_dir").val(ui.item.direccion);
 
-                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
                     cliente_cargar_datos($('#hdd_ven_rem_id').val());
                 }
@@ -1675,7 +1682,7 @@ if($_POST['action']=="editar"){
                     $("#txt_ven_rem_dir").val(ui.item.direccion);
                     $('#hdd_ven_rem_id').change();
 
-                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
                     cliente_cargar_datos($('#hdd_ven_rem_id').val());
                 }
@@ -1723,8 +1730,16 @@ if($_POST['action']=="editar"){
             }else{
                 $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
             }
+            if ((this).value=== '15') {
+                $("#cmb_forpag_id").val(4);
+                $("#cmb_forpag_id").attr('disabled', true);
+            }else{
+                $("#cmb_forpag_id").attr('disabled', false);
+                $("#cmb_forpag_id").val(1);
+                $("#cmb_forpag_id").attr('disabled', true);
+            }
 
-            if ((this).value=== '3' || (this).value=== '12') {
+            if ((this).value=== '3' || (this).value=== '12' || (this).value=== '15') {
                 $('#datos-cliente').hide();
                 cliente_cargar_datos($('#hdd_ven_rem_id').val())
             }else{
@@ -2165,7 +2180,7 @@ if($_POST['action']=="editar"){
 //formulario
         $("#for_ven").validate({
             submitHandler: function(){
-
+                $("#cmb_forpag_id").attr('disabled', false);
                 $.ajax({
                     type: "POST",
                     url: "../venta/venta_reg.php",
@@ -2194,7 +2209,7 @@ if($_POST['action']=="editar"){
                         {
                             if(data.ven_act=='imprime')
                             {
-                                venta_impresion(data.ven_id);
+                                venta_impresion_enc(data.ven_id);
                             }
                         }
                     },
@@ -2239,6 +2254,15 @@ if($_POST['action']=="editar"){
                 },
                 hdd_ven_doc: {
                     required: true
+                },
+                cmb_salida_id: {
+                    required: true
+                },
+                cmb_llegada_id: {
+                    required: true
+                },
+                txt_clave: {
+                    required: true
                 }
             },
             messages: {
@@ -2271,6 +2295,15 @@ if($_POST['action']=="editar"){
                 },
                 hdd_ven_doc: {
                     required: "Existe registro con mismo N° Documento."
+                },
+                cmb_salida_id: {
+                    required: "Seleccione origen."
+                },
+                cmb_llegada_id: {
+                    required: "Seleccione destino."
+                },
+                txt_clave: {
+                    required: "Falta clave."
                 }
             }
         });
@@ -2551,7 +2584,7 @@ if($_POST['action']=="editar"){
                     } else {
                         $('#txt_bus_pro_codbar').val(data.pro_codbar);
                         $('#hdd_bus_pro_nom').val('');
-                            $('#txt_bus_cat_preven').focus();
+                        $('#txt_bus_cat_preven').focus();
 
                     }
                     //precios_min_may($('#hdd_bus_cat_id').val());
@@ -2698,9 +2731,9 @@ if($_POST['action']=="editar"){
                             <a class="btn_imp" title="Imprimir" href="#imprimir" onClick="venta_impresion('<?php echo $_POST['ven_id']?>')">Imprimir</a>
                         <?php }?>
                         <?php
-                        $url=ir_principal($_SESSION['usuariogrupo_id']);
+
                         ?>
-                        <a class="btn_newwin" target="_blank" title="Saltar a otra pestaña" href="<?php echo $url?>">Saltar</a>
+                        <a class="btn_newwin" target="_blank" title="Saltar a otra pestaña" href="venta_vista.php">Saltar</a>
                     </td>
                 </tr>
                 <tr>
@@ -3050,8 +3083,8 @@ if($_POST['action']=="editar"){
             <div style="width: 20%;float: left">
                 <fieldset>
                     <fieldset><legend>Clave encomienda</legend>
-                    <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="5">
-                 </fieldset>
+                        <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="4">
+                    </fieldset>
             </div>
         </div>
 
@@ -3090,7 +3123,7 @@ if($_POST['action']=="editar"){
 
                 <div id="div_servicios">
                     <div id="cuadro-contain" class="ui-widget">
-                                     <legend></legend>
+                        <legend></legend>
                         <?php if($_POST['vista']!='cange'){?>
                             <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="servicio_form_i('insertar')">Agregar</a>
                             <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>

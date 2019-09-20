@@ -1,7 +1,7 @@
 <?php
 class cVenta{
 	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$valven,$igv,$des,$tot,$est,$lab1,$lab2,$lab3,$may,$usu_id,$punven_id,$emp_id,
-		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id){
+		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id,$ori,$des,$fecsal,$horsal,$asi,$tip){
 	$sql = "INSERT INTO tb_venta(
 	`tb_venta_reg` ,
 	`tb_venta_fec` ,
@@ -35,11 +35,17 @@ class cVenta{
 	`tb_venta_desglo`,
 	`cs_tipooperacion_id`,
 	`cs_documentosrelacionados_id`,
-	`tb_vendedor_id`
+	`tb_vendedor_id`,
+	`tb_venta_origen`,
+	`tb_venta_destino`,
+	`tb_venta_fechasalida`,
+	`tb_venta_horasalida`,
+	`tb_venta_asiento`,
+	`tb_venta_tipo`
 	)
 	VALUES (
 	NOW( ) ,  '$fec',  '$doc_id',  '$numdoc', '$ser',  '$num',  '$cli_id',  '$valven',  '$igv', '$des',  '$tot',  '$est', '$lab1', '$lab2', '$lab3', '$may',  '$usu_id', '$punven_id', '$emp_id',
-	'$tipdoc', '$tipmon', '$gra', '$ina', '$exp', '$grat', '$isc', '$otrtri', '$otrcar', '$desglo', '$tipope','$docrel','$use_id'
+	'$tipdoc', '$tipmon', '$gra', '$ina', '$exp', '$grat', '$isc', '$otrtri', '$otrcar', '$desglo', '$tipope','$docrel','$use_id','$ori','$des','$fecsal','$horsal','$asi','$tip'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -55,10 +61,10 @@ class cVenta{
         return $rst;
     }
 
-    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_nom,$origen_id, $destino_id,$clave){
-        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_nom` ,`tb_origen_id`,`tb_destino_id`,`tb_encomiendaventa_clave`
+    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_nom,$origen_id, $destino_id,$clave,$pagado){
+        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_nom` ,`tb_origen_id`,`tb_destino_id`,`tb_encomiendaventa_clave`,`tb_encomiendaventa_pagado`
 	)
-	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_nom', '$origen_id', '$destino_id','$clave'
+	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_nom', '$origen_id', '$destino_id','$clave','$pagado'
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -545,6 +551,23 @@ WHERE tb_software_id =$id";
         return $rst;
     }
 
+    function modificar_encomiendaviaje_pagado($ven_id){
+        $sql="UPDATE tb_encomiendaventa SET
+        `tb_encomiendaventa_pagado` =  1
+        WHERE tb_venta_id=$ven_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function modificar_puntoventa($ven_id,$punven_id){
+        $sql="UPDATE tb_venta SET
+        `tb_puntoventa_id` =  $punven_id
+        WHERE tb_venta_id=$ven_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
     function mostrar_viajeventa($ven_id){
         $sql="SELECT * FROM tb_viajeventa vv
         LEFT JOIN tb_cliente c ON vv.tb_cliente_id=c.tb_cliente_id
@@ -673,8 +696,16 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
-
-
-
+    function mostrar_filtro_pend_facturas($punven_id,$emp_id){
+        $sql="SELECT * 
+	FROM tb_venta v
+	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
+	WHERE v.tb_empresa_id = $emp_id AND v.tb_documento_id = 11 AND v.tb_venta_estsun = 0";
+        if($punven_id>0)$sql.=" AND v.tb_puntoventa_id = $punven_id ";
+        $sql.=" ORDER BY  tb_venta_numdoc ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>
