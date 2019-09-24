@@ -136,41 +136,11 @@ $num_row22 = mysql_num_rows($dts22);
         $igv=($dt22['tb_venta_igv']);
         $total=($dt22['tb_venta_tot']);
         ?>
-        <tr>
-            <td align="right"><?php echo $filas?></td>
-            <td align="center"><?php echo $dt22['cs_tipodocumento_des']?></td>
-            <td align="center"><?php echo $dt22['tb_venta_ser'].'-'.$dt22['tb_venta_num']?></td>
-            <td align="left"><?php echo $dt22['tb_cliente_nom']?></td>
-            <td align="left"><?php echo $dt22['tb_cliente_doc']?></td>
-            <td align="center">PEN</td>
-            <td align='right'><?php echo formato_moneda($opegra)?></td>
-            <td align='right'><?php echo formato_moneda($igv)?></td>
-            <td align='right'><?php echo formato_moneda($total)?></td>
+		<tr>
+            <td align="center"><?php echo $filas?></td>
+            <td align="center"><?php echo mostrarFecha($dt22['tb_venta_fec'])?></td>
             <td align="center">
-                <?php
-                if($dt22['tb_venta_est']=='CANCELADA')echo 'REGISTRADA';
-                ?>
-            </td>
-            <td align="center">
-                <?php
-                // 3 = id nota de credito
-                $dts222=$oVenta->comparar_resumenboleta_detalle_notas($dt22['tb_venta_id'],3);
-                $d22=mysql_num_rows($dts222);
-                if($d22==0)
-                {
-                    echo '<span style="color:green">ADICIONAR</span>';
-                }
-                if($d22==1)
-                {
-                    if($dt22['tb_venta_est']=='CANCELADA')echo 'DECLARADO';
-//                            if($dt1['tb_venta_est']=='ANULADA')echo '<span style="color:blue">ADICIONAR (A)</span>';
-                }
-                if($d22==2)
-                {
-                    echo 'DECLARADO';
-                }
-
-                ?>
+                NOTA DE CRÉDITO -> Se genera automático.
             </td>
         </tr>
     <?php }
