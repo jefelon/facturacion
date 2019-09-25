@@ -80,7 +80,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_salida_id').html(html);
-                $('#cmb_salida_id').find('option').not(':selected').remove();
+                //$('#cmb_salida_id').find('option').not(':selected').remove();
             },
             complete: function(){
 
@@ -120,7 +120,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(html){
                 $('#cmb_llegada_id').html(html);
-                $("#cmb_llegada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
+                //$("#cmb_llegada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
             },
             complete: function(){
 
