@@ -12,6 +12,9 @@ $oMysql= new cMysql();
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 require_once("../guia/cGuia.php");
+require_once ("../almacen/cAlmacen.php");
+$oAlmacen = new cAlmacen();
+
 $oGuia = new cGuia();
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
@@ -20,6 +23,9 @@ $stock_negativo = $dt['tb_formula_dat'];
 $rs2 = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
 $dt2 = mysql_fetch_array($rs2);
 $formato_imp = $dt2['tb_formula_dat'];
+
+$dtsa=$oAlmacen->mostrarTodos($_SESSION['empresa_id']);
+$num_rowsa= mysql_num_rows($dtsa);
 
 $cot_id = $_POST['cot_id'];
 if($_POST['action']=="insertar"){
@@ -631,8 +637,17 @@ if($_POST['action']=="editar"){
             success: function(data){
                 result = data.cat_id;
                 // $('#msj_producto').html(data.pro_msj);
-                if(data.tipo_accion=='insertar_venta'){
-                    actualizar_stock(data.pre_id,<?php echo $_SESSION['almacen_id']?>,'');
+                if(data.tipo_accion=='insertar_venta') {
+                    //actualizar_stock(data.pre_id,<?php// echo $_SESSION['almacen_id']?>, '');
+
+                   <?php  if ($num_rowsa >= 1) {
+                        while($dt = mysql_fetch_array($dtsa)){
+                    ?>
+                    actualizar_stock(data.pre_id,<?php echo $dt['tb_almacen_id']?>, '');
+                    <?php
+                        }
+                   }
+                    ?>
                 }
             },
             complete: function(){
