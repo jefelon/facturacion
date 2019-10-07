@@ -840,7 +840,7 @@ function arr_Signature($header, $detalle, $empresa, $tipodoc){
     $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyIdentification']['child']['ID']['tag'] = 'cbc';
 
     $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['tag'] = 'cac';
-    $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['child']['Name'][0] = $empresa[0]->razon;
+    $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['child']['Name'][0] = '*'.$empresa[0]->razon;
     $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['child']['Name']['tag'] = 'cbc';
 
     $arr['doc'][$tipodoc]['child']['Signature']['child']['DigitalSignatureAttachment']['tag'] = 'cac';
