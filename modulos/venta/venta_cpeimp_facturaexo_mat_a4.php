@@ -420,16 +420,16 @@ $html.='<tr>
             <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
             <th style="text-align: center; width: 8%;"><b>UNIDAD</b></th>
             <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
+            <th style="text-align: right; width: 13%;"><b>PRECIO UNIT.</b></th>
             <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 12%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: right; width: 12%;"><b>IMPORTE</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
 while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
-    $valor_unitario_linea = $dt["tb_ventadetalle_preunilin"];
+    $valor_unitario_linea = $dt["tb_ventadetalle_preuni"];
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
 
@@ -449,14 +449,14 @@ while($dt = mysql_fetch_array($dts)){
                   <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
                   <td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
-                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
+                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_preuni'] * $dt['tb_ventadetalle_can']) . '</td>';
     }else{
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>      
                  <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . '</td>';
         $html .= '<td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td><td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
-                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_valven']) . '</td>';
+                  <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_preuni'] * $dt['tb_ventadetalle_can']) . '</td>';
     }
     $html.='</tr>';
     $cont++;
