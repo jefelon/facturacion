@@ -477,11 +477,10 @@ if ($_POST['action_compra'] == "insertar") {
 
                 //actualizacion en dolares
                 if ($_POST['cmb_com_mon'] == 2) {
-                    $dts = $oCatalogoproducto->actualizar_precio_compra_dolar($indice, $_POST['txt_com_tipcam'], $costo);
+                    $dts = $oCatalogoproducto->actualizar_precio_compra_dolar($indice, $_POST['txt_com_tipcam'], $linea_calculo_cos_dolar);
                 }
 
             }
-
 
 
 
