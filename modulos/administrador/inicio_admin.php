@@ -1,8 +1,17 @@
 <?php
 session_start();
+require_once ("../../config/Cado.php");
 if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 require_once ("../contenido/contenido.php");
 $oContenido = new cContenido();
+
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
+
+$rs = $oFormula->consultar_dato_formula('CUADRO_STOCK_MINIMO');
+$dt = mysql_fetch_array($rs);
+$stock_min = $dt['tb_formula_dat'];
+
 
 ?>
 <!DOCTYPE html>
@@ -57,8 +66,9 @@ function cuadromi(){
         },
 		success: function(html){
 			$('#div_cuadromi').html(html);
+			<?php if($stock_min==1){?>
             stock_minimo();
-
+            <?php }?>
 		}
 	});
 }

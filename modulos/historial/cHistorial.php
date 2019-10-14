@@ -18,7 +18,6 @@ class cHistorial{
 	if($fecfin!="")$sql.=" AND tb_compra_fec<='$fecfin' ";
 	
 	$sql.=" ORDER BY c.tb_compra_fec $ord_fec, c.tb_compra_reg $ord_fec ";
-
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		
@@ -177,6 +176,50 @@ class cHistorial{
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		
+	}
+	function consultar_historial_compras_por_producto_doc($cat_id,$alm_id,$tip_doc,$fecini,$fecfin,$ord_fec,$emp_id){
+		$sql="SELECT COUNT(*) AS cantidad
+	FROM tb_catalogo ct
+	INNER JOIN tb_presentacion pr ON ct.tb_presentacion_id=pr.tb_presentacion_id
+	INNER JOIN tb_producto p ON pr.tb_producto_id=p.tb_producto_id
+	INNER JOIN tb_compradetalle cd ON ct.tb_catalogo_id = cd.tb_catalogo_id
+	INNER JOIN tb_compra c ON c.tb_compra_id = cd.tb_compra_id
+	INNER JOIN tb_documento d ON c.tb_documento_id = d.tb_documento_id
+	WHERE ct.tb_catalogo_id = $cat_id AND d.tb_documento_id=$tip_doc
+	AND c.tb_compra_est IN ('CONTADO', 'CREDITO') ";
+
+
+		if($emp_id>0)$sql.=" AND c.tb_empresa_id = $emp_id ";
+		if($alm_id>0)$sql.=" AND c.tb_almacen_id = $alm_id ";
+		if($fecini!="")$sql.=" AND tb_compra_fec>='$fecini' ";
+		if($fecfin!="")$sql.=" AND tb_compra_fec<='$fecfin' ";
+
+		$sql.=" ORDER BY c.tb_compra_fec $ord_fec, c.tb_compra_reg $ord_fec ";
+
+		$oCado = new Cado();
+		$rst=$oCado->ejecute_sql($sql);
+		return $rst;
+	}
+
+	function consultar_historial_ventas_por_producto_doc($cat_id,$alm_id,$tipo_doc,$fecini,$fecfin){
+		$sql="SELECT COUNT(*) AS cantidad
+	FROM tb_catalogo ct
+	INNER JOIN tb_presentacion pr ON ct.tb_presentacion_id=pr.tb_presentacion_id
+	INNER JOIN tb_producto p ON pr.tb_producto_id=p.tb_producto_id
+	INNER JOIN tb_ventadetalle vd ON ct.tb_catalogo_id = vd.tb_catalogo_id
+	INNER JOIN tb_venta v ON vd.tb_venta_id = v.tb_venta_id
+	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id = pv.tb_puntoventa_id
+	INNER JOIN tb_documento d ON v.tb_documento_id = d.tb_documento_id
+	WHERE ct.tb_catalogo_id = $cat_id  AND d.tb_documento_id=$tipo_doc
+	AND v.tb_venta_est IN ('CANCELADA')";
+        if($alm_id>0)$sql.=" AND pv.tb_almacen_id = $alm_id  ";
+		if($fecini!="")$sql.=" AND tb_venta_fec>='$fecini' ";
+		if($fecfin!="")$sql.=" AND tb_venta_fec<='$fecfin' ";
+
+		$sql.=" ORDER BY v.tb_venta_fec ";
+		$oCado = new Cado();
+		$rst=$oCado->ejecute_sql($sql);
+		return $rst;
 	}
 }
 ?>
