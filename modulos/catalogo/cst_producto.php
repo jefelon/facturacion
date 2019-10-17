@@ -342,8 +342,8 @@ function costo_ponderado_empresa($cat_id,$alm_id,$fecini,$fecfin,$stock_comparac
 	$num_rows_1 = mysql_num_rows($dts1);
 	
 	$dt1 = mysql_fetch_array($dts1);
-    $notalmdet_can=$dt1['tb_kardexdetalle_can'];
-    $notalmdet_pre=$dt1['tb_kardexdetalle_pre'];
+	$notalmdet_can=$dt1['tb_notalmacendetalle_can'];
+	$notalmdet_cos=$dt1['tb_notalmacendetalle_cos'];
 	mysql_free_result($dts1);
 	//__________
 	
@@ -374,17 +374,17 @@ function costo_ponderado_empresa($cat_id,$alm_id,$fecini,$fecfin,$stock_comparac
 			$comdet_can		=$rw1['tb_compradetalle_can'];
 			$tipo_moneda	=$rw1['tb_compra_mon'];
 			$com_tipcam		=$rw1['tb_compra_tipcam'];
-			$comdet_preuni	=$rw1['tb_compradetalle_preuni'];//en soles
+			$comdet_cosuni	=$rw1['tb_compradetalle_cosuni'];//en soles
 			
 			//calculo del costo unitario_______
 			if($tipo_moneda==2)
 			{
-				$costo_unitario_dol=$comdet_preuni/$com_tipcam;
+				$costo_unitario_dol=$comdet_cosuni/$com_tipcam;
 				//$i_dol++;	
 			}
 			
 			//para el cálculo siempre utiliza el costo en soles
-			$costo_unitario_sol=$comdet_preuni;
+			$costo_unitario_sol=$comdet_cosuni;
 			//$i_sol++;
 			
 			//$suma_costo_unitario_dol+=$costo_unitario_dol;
@@ -439,10 +439,10 @@ function costo_ponderado_empresa($cat_id,$alm_id,$fecini,$fecfin,$stock_comparac
 		{
 			//soles			
 			$isuma_sol+=$stock_comparacion;
-			$mul_suma_sol+=($stock_comparacion*$notalmdet_pre);
+			$mul_suma_sol+=($stock_comparacion*$notalmdet_cos);
 			//dolares
 			$isuma_dol+=$stock_comparacion;
-			$mul_suma_dol+=($stock_comparacion*$notalmdet_predol);
+			$mul_suma_dol+=($stock_comparacion*$notalmdet_cosdol);
 		}
 		
 		//$datos4.=$stock_comparacion.$comdet_can.':'.$isuma_sol.'+'.$mul_suma_sol.',';

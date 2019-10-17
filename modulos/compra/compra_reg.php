@@ -473,7 +473,7 @@ if ($_POST['action_compra'] == "insertar") {
                 }
                 //actualizacion de /precio unitario de compra/ y precio costo /
                 $precio_unitario = $linea_preuni * $_POST['txt_com_tipcam'];
-                $dts = $oCatalogoproducto->actualizar_precio_compra($indice, $precio_unitario, $costo);
+                $dts = $oCatalogoproducto->actualizar_precio_compra($indice, $precio_unitario, $linea_calculo_cos);
 
                 //actualizacion en dolares
                 if ($_POST['cmb_com_mon'] == 2) {
