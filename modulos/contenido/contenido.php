@@ -55,7 +55,7 @@ $menu_administrador=
 		  <li><a href="../listaprecio/">Lista de Precios</a></li>
 		  <li><a href="../servicio/">Servicios</a></li>
 		  <li><a href="../transporte/">Transporte</a></li>
-		  <li><a href="../venta/venta_vista_croquis.php">Croquis Transporte</a></li>
+		  <!--<li><a href="../venta/venta_vista_croquis.php">Croquis Transporte</a></li>-->
 		  <li><a href="../conductor/">Condutor</a></li>
 		  <li><a href="../lugar/">Destinos</a></li>
 	    </ul>
