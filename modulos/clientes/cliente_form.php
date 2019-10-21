@@ -59,20 +59,13 @@ if($_POST['action']=="editarSunat"){
             var url = '../../libreriasphp/consultadni/consulta_reniec.php';
             $.ajax({
                 type:'POST',
+                dataType: "json",
                 url:url,
-                data:'dni='+dni,
+                data: ({
+                    dni: dni
+                }),
                 success: function(datos_dni){
-                    var datos = eval(datos_dni);
-
-                    // $('#mostrar_dni').text(datos[0]);
-                    // $('#paterno').text(datos[1]);
-                    // $('#materno').text(datos[2]);
-                    // $('#nombres').text(datos[3]);
-                    if(datos[1]!="" && datos[2]!="" && datos[3]!="") {
-                        $('#txt_cli_nom').val(datos[1] + " " + datos[2] + " " + datos[3]);
-                    }else {
-                        $('#txt_cli_nom').val("Datos no encontrados o menor de edad. Editar manualmente los datos.");
-                    }
+                    $('#txt_cli_nom').val(datos_dni.persona);
                 }
             });
         }else {
