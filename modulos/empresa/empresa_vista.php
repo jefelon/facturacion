@@ -107,7 +107,7 @@ function eliminar_empresa(id)
 		});
 	}
 }
-		
+
 $(function() {	
 	
 	$('#btn_actualizar').button({
@@ -128,7 +128,7 @@ $(function() {
 		title:'Información de Empresa',
 		autoOpen: false,
 		resizable: false,
-		height: 360,
+		height: 370,
 		width: 520,
 		modal: true,
 		buttons: {

@@ -12,7 +12,12 @@ if($_POST['action']=="insertar")
             mkdir('logos', 0777);
         }
 
-        move_uploaded_file($_FILES['file']['tmp_name'], 'logos/' . $_POST['hdd_emp_id'] . '_'. $_FILES['file']['name'] );
+        $imgh = icreate($_FILES['file']['tmp_name']);
+        $imgr = resizeMax($imgh, 180, 130);
+
+        header('Content-type: image/jpeg');
+        imagejpeg($imgr,'logos/' . $_POST['hdd_emp_id'] . '_'. $_FILES['file']['name']);
+
         echo 'Se registró empresa correctamente.';
 	}
 	else
@@ -20,6 +25,61 @@ if($_POST['action']=="insertar")
 		echo 'Intentelo nuevamente.';
 	}
 }
+
+/**
+ * Opens new image
+ *
+ * @param $filename
+ */
+function icreate($filename)
+{
+    $isize = getimagesize($filename);
+    if ($isize['mime']=='image/jpeg')
+        return imagecreatefromjpeg($filename);
+    elseif ($isize['mime']=='image/png')
+//        $imagen = imagecreatefrompng($filename);
+//        return imagecreatefromjpeg($imagen);
+
+    $image = imagecreatefrompng($filename);
+    $bg = imagecreatetruecolor(imagesx($image), imagesy($image)); imagefill($bg, 0, 0, imagecolorallocate($bg, 255, 255, 255));
+    imagealphablending($bg, TRUE);
+
+   imagecopy($bg, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+    //imagedestroy($image);
+    //$quality = 50;
+    // 0 = worst / smaller file, 100 = better / bigger file imagejpeg($bg, $filePath . ".jpg", $quality); imagedestroy($bg);
+
+    return $bg;
+}
+
+/**
+ * Resize image maintaining aspect ratio, occuping
+ * as much as possible with width and height inside
+ * params.
+ *
+ * @param $image
+ * @param $width
+ * @param $height
+ */
+function resizeMax($image, $width, $height)
+{
+    /* Original dimensions */
+    $origw = imagesx($image);
+    $origh = imagesy($image);
+
+    $ratiow = $width / $origw;
+    $ratioh = $height / $origh;
+    $ratio = min($ratioh, $ratiow);
+
+    $neww = $origw * $ratio;
+    $newh = $origh * $ratio;
+
+    $new = imageCreateTrueColor($neww, $newh);
+
+    imagecopyresampled($new, $image, 0, 0, 0, 0, $neww, $newh, $origw, $origh);
+    return $new;
+}
+
 
 if($_POST['action']=="editar")
 {
@@ -30,7 +90,12 @@ if($_POST['action']=="editar")
             mkdir('logos', 0777);
         }
 
-        move_uploaded_file($_FILES['file']['tmp_name'], 'logos/' . $_POST['hdd_emp_id'] . '_'. $_FILES['file']['name'] );
+        $imgh = icreate($_FILES['file']['tmp_name']);
+        $imgr = resizeMax($imgh, 180, 130);
+
+        header('Content-type: image/jpeg');
+        imagejpeg($imgr,'logos/' . $_POST['hdd_emp_id'] . '_'. $_FILES['file']['name']);
+
 		echo 'Se registró empresa correctamente.';
 	}
 	else

@@ -25,17 +25,43 @@ if($_POST['action']=="editar"){
 <script type="text/javascript">
   $(function() {
      $("#file").change(function (){
-         var empId = document.getElementById('hdd_emp_id').value;
-         var fileInput = document.getElementById('file');
-         var fileName = 'logos/'+empId+'_'+fileInput.files[0].name;
-       $("#txt_emp_logo").val(fileName);
+
+         if(checkFile())
+         {
+             var empId = document.getElementById('hdd_emp_id').value;
+             var fileInput = document.getElementById('file');
+             var fileName = 'logos/'+empId+'_'+fileInput.files[0].name;
+             $("#txt_emp_logo").val(fileName);
+         }
+         else {
+             $("#file").val("");
+         }
+
      });
   });
+
+  function checkFile() {
+      var fileElement = document.getElementById("file");
+      var fileExtension = "";
+      if (fileElement.value.lastIndexOf(".") > 0) {
+          fileExtension = fileElement.value.substring(fileElement.value.lastIndexOf(".") + 1, fileElement.value.length);
+      }
+      if (fileExtension.toLowerCase() == "jpg") {
+          return true;
+      }
+      else if (fileExtension.toLowerCase() == "jpeg") {
+          return true;
+      }
+      else if (fileExtension.toLowerCase() == "png") {
+          return true;
+      }
+      else {
+          alert("Solo puede subir imágenes en .png .jpg . jpeg");
+          return false;
+      }
+  }
 </script>
-
-<script type="text/javascript">
-
-
+<script>
 $(function() {
 	$("#for_emp").validate({
 		submitHandler: function() {
@@ -145,7 +171,7 @@ $(function() {
           <td align="right"><label for="txt_emp_logo">Logo:</label></td>
           <td>
               <input name="txt_emp_logo" id="txt_emp_logo" type="text" value="<?php echo $logo?>" size="40" >
-              <input id="file" name="file" size="12" type="file" /><input name="txt_emp_logoimg" id="txt_emp_logoimg" type="image" src="<?php echo $logo?>" width="100" height="30" alt="Logo" >
+              <input id="file" name="file" size="12" type="file" /><input name="txt_emp_logoimg" id="txt_emp_logoimg" type="image" src="<?php echo $logo?>" width="100" alt="Logo" >
           </td>
 
         </tr>
