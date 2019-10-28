@@ -114,7 +114,7 @@ if (isset($_FILES["file_xls"])) {
                         $cat_pre_ven = $Row[9];
                     }
 
-                    $stock_num = "";
+                    $stock_num = 0;
                     if (isset($Row[10])) {
                         $stock_num = $Row[10];
                     }
@@ -143,7 +143,7 @@ if (isset($_FILES["file_xls"])) {
                             $oMarca->insertar($marca);
                             $mrs=$oMarca->ultimoInsert();
                             $mr = mysql_fetch_array($mrs);
-                            $mar_id=$ct['last_insert_id()'];
+                            $mar_id=$mr['last_insert_id()'];
                         }
 
                         if ($afecto = 'GRAVADO') {
@@ -158,9 +158,9 @@ if (isset($_FILES["file_xls"])) {
                             break;
                         }
 
-                        if ($lote = 'SI') {
+                        if ($lote == 'SI') {
                             $lote_id = 1;
-                        } elseif ($lote = 'NO') {
+                        } elseif ($lote == 'NO') {
                             $lote_id = 0;
                         } else {
                             $data['type'] = "error";
@@ -174,7 +174,7 @@ if (isset($_FILES["file_xls"])) {
                             $un = mysql_fetch_array($uns);
                             $un_id = $un['tb_unidad_id'];
                         } else {
-                            $oUnidad->insertar($unidad,$unidad,1);
+                            $oUnidad->insertar($unidad,addslashes($unidad),1);
                             $uns=$oUnidad->ultimoInsert();
                             $un = mysql_fetch_array($uns);
                             $un_id=$ct['last_insert_id()'];
@@ -204,23 +204,23 @@ if (isset($_FILES["file_xls"])) {
                              $cat_pre_cos = $cat_pre_ven ;
                         }
 
-                        if(!preg_match('/^\d+$/',$stock_minimo)) {
+                        if(!is_numeric($stock_minimo)) {
                             $data['type'] = "error";
                             $data['message'] = "Error en stock minimo \"".$stock_minimo."\"";
                             break;
                         }
 
-                        if(!preg_match('/^\d+$/',$stock_num)) {
-                            $data['type'] = "error";
-                            $data['message'] = "Error en stock \"".$stock_num."\"";
-                            break;
-                        }
+//                        if(!is_numeric($stock_num)) {
+//                            $data['type'] = "error";
+//                            $data['message'] = "Error en stock \"".$stock_num."\"";
+//                            break;
+//                        }
 
 
 
                         $oProducto->insertar(
-                            strip_tags(limpia_espacios($nombre)),
-                            strip_tags(limpia_espacios($descripcion)),
+                            addslashes(strip_tags(limpia_espacios($nombre))),
+                            addslashes(strip_tags(limpia_espacios($descripcion))),
                             $estado,
                             $cat_id,
                             $mar_id,
@@ -242,7 +242,7 @@ if (isset($_FILES["file_xls"])) {
 
                         //insertamos presentacion
                         $oPresentacion->insertar(
-                            strip_tags(limpia_espacios($nombre)),
+                            addslashes(strip_tags(limpia_espacios($nombre))),
                             strip_tags($codigo),
                             $stock_minimo,
                             $estado,
@@ -280,7 +280,7 @@ if (isset($_FILES["file_xls"])) {
                             $pre_id
                         );
 
-                        if (!empty($stock_num)) {
+                        if (is_numeric($stock_num)) {
                             //////Insertat Stock
                             $rs = $oCatalogoproducto->presentacion_unidad_base($pre_id);
                             $dt = mysql_fetch_array($rs);

@@ -1,5 +1,14 @@
 <?php
 session_start();
+if ($_SESSION["autentificado"] != "SI") {
+    if ($_SESSION["autentificado2"] == "SI") {
+
+    }
+    else{
+        header("location: ../../index.php");
+        exit();
+    }
+}
 require_once('../../libreriasphp/html2pdf/_tcpdf_5.9.206/tcpdf.php');
 
 require_once ("../../config/Cado.php");
@@ -51,28 +60,6 @@ if(!is_file($empresa_logo)){
     $empresa_logo='../../images/logo.jpg';
 }
 mysql_free_result($dts);
-
-$sucursales='
-<table style="font-size:7pt;text-align: left" border="0" width="70%">
-    <tr>
-        <td width="20%" style="font-weight: bold">PRINCIPAL:</td>
-        <td width="80%">'.$dt['tb_empresa_dir'] .'</td>
-    </tr>
-    <tr>
-        <td style="font-weight: bold">TELEFONO: </td>
-        <td>'.$dt['tb_empresa_tel'] .'</td>
-    </tr>
-
-    <tr>
-        <td style="font-weight: bold">CORREO:</td>
-        <td>'.$dt['tb_empresa_ema'].'</td>
-    </tr>
-    <tr>
-        <td style="font-weight: bold">VENDEDOR:</td>
-        <td>'.$texto_vendedor.'</td>
-    </tr>
-    
-</table>';
 
 $tipodoc = 'BOLETA DE VENTA ELECTRONICA';
 
@@ -218,42 +205,24 @@ class MYPDF extends TCPDF
 {
 
     public function Header() {
-        //$image_file = K_PATH_IMAGES.'logo.jpg';
-        //$this->Image($image_file, 20, 10, 71, '', 'JPG', '', 'T', false, 300, '', false, false, 0, false, false, false);
-        // Set font
-        //$this->SetFont('helvetica', 'B', 20);
-        // Title
-        //$this->Cell(0, 15, '<< TCPDF Example 003 >>', 0, false, 'C', 0, '', 0, false, 'M', 'M');
+        global $estado;
+        if($estado=="ANULADA") {
+            // set bacground image
+            $img_file = '../../images/anulado.jpg';
+            $this->Image($img_file, 0, 0, 210, 297, '', '', '', false, 150, '', false, false, 0);
+            // restore auto-page-break status
+            //$this->SetAutoPageBreak($auto_page_break, $bMargin);
+            // set the starting point for the page content
+            $this->setPageMark();
+        }
     }
 
     public function Footer()
     {
-         $style = array(
-           'position' => 'L',
-           'align' => 'L',
-           'stretch' => false,
-           'fitwidth' => true,
-           'cellfitalign' => '',
-           'border' => false,
-           'padding' => 0,
-           'fgcolor' => array(0,0,0),
-           'bgcolor' => false,
-           'text' => false,
-              'font' => 'helvetica',
-              'fontsize' => 8,
-              'stretchtext' => 4
-         );
-
-         $this -> SetY(-24);
-         // Page number
-         $this->SetFont('helvetica', '', 9);
-         //$this->SetTextColor(0,0,0);
-         $this->Cell(0, 0, 'Página '.$this->getAliasNumPage().' de '.$this->getAliasNbPages(), 'T', 1, 'R', 0, '', 0, false, 'T', 'M');
-
-         $codigo='CAV-'.str_pad($_GET['d1'], 4, "0", STR_PAD_LEFT);
-
-         $this->write1DBarcode($codigo, 'C128', '', 273, '', 6, 0.3, $style, 'N');
-         $this->Cell(0, 0, 'www.prestamosdelnortechiclayo.com', 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+        global $html2;
+        $this -> SetY(-100);
+        $this->SetFont('helvetica', '', 9);
+        $this->writeHTML($html2, true, 0, true, true);
     }
 }
 
@@ -296,7 +265,7 @@ $pdf->AddPage('P', 'A4');
 //helvetica, monaco, monospace;
 
 // Introducimos HTML de prueba
-$html = '
+$html .= '
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -318,25 +287,14 @@ $html = '
         background-color: #01a2e6;
         text-transform:uppercase;
     }
-    .odd_row td {
-        background-color: transparent;
-        border-bottom: 0.9px solid #01a2e6;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    .even_row td {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        background-color: #f6f6f6;
-        border-bottom: 0.9px solid #01a2e6;
-    }
+
     .row td{
         border-right: 0.9px solid #01a2e6;
         border-left: 0.9px solid #01a2e6;
     }
     .cliente{
         border: 1px solid #01a2e6;
-        border-spacing:7px;
+        border-spacing:4px;
     }
 
     .datos-empresa{
@@ -358,15 +316,11 @@ $html = '
     }
 
 </style>
-<body>
+<body>';
+$bordelineas="1px solid #01a2e6;";
+$bordetop="border-top: 1px solid #01a2e6;";
+$html.='
 <table style="width: 100%; margin-bottom: 50mm;" border="0" class="datos-empresa" height="100pt">';
-if($estado=="ANULADA"){
-    $html.='<tr>
-	    <td width="50%"></td>
-	    <td width="10%"></td>
-	    <td td width="40%" style="text-align: center"><strong>ANULADO</strong></td>
-	    </tr>';
-}
 $html.='<tr>
         <td width="25%" height="130">';
         if($image_info[1]<70){
@@ -375,8 +329,8 @@ $html.='<tr>
                 <td valign="middle" align="center">
                 <table>
                     <tr>
-                        <td>                            
-                             <div align="center"><img src="'.$empresa_logo.'" border="0" height="30" width="'.$image_info[0].'" height="'.$image_info[1].'" style="line-height:50%;"/></div>
+                        <td>
+                             <div align="center"><img src="'.$empresa_logo.'" border="0"  width="'.$image_info[0].'" height="'.$image_info[1].'" style="line-height:50%;"/></div>
                         </td>
                      </tr>
                 </table>
@@ -384,7 +338,7 @@ $html.='<tr>
             </tr>
         </table>';
         }else{
-        $html.='                           
+        $html.='
               <div><img src="'.$empresa_logo.'" border="0"  width="'.$image_info[0].'" height="'.$image_info[1].'" /></div>
          ';
         }
@@ -403,8 +357,8 @@ $html.='<tr>
             '.$serie.'-'.$numero.'</strong>           
         </td>
     </tr>
-</table>
-<br/>
+</table>';
+$html.='        
 <br/>
 <br/>
 <table style="width: 100%;" class="cliente">
@@ -434,9 +388,8 @@ $html.='<tr>
 </table>
 <br/>
 <br/>
-<br/>
 
-<table style="width: 100%; border: 0.5px solid #01a2e6; border-collapse:collapse;">
+<table style="width: 100%; border:'.$bordelineas.'; border-collapse:collapse;">
     <tbody>
         <tr class="header_row">
             <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
@@ -445,10 +398,10 @@ $html.='<tr>
             <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
             <th style="text-align: center; width: 8%;"><b>UNIDAD</b></th>
             <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
+            <th style="text-align: right; width: 13%;"><b>PRECIO UNIT.</b></th>
             <th style="text-align: right; width: 12%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>VALOR VENTA</b></th>
+            <th style="text-align: right; width: 13%;"><b>IMPORTE</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
@@ -465,7 +418,7 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                 
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] .' - ' . $ven_det_serie .' ';
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"]. $ven_det_serie .' ';
 
         $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
         while($lote = mysql_fetch_array($lotes)) {
@@ -490,16 +443,17 @@ while($dt = mysql_fetch_array($dts)){
     $cont++;
 }
 
-for ($i=$cont;$i<45;$i++) {
+while ($cont<=35) {
     $html .= '<tr class="row">
-        <td style="text-align: left"></td>
         <td style="text-align: center"></td>
+        <td style="text-align: center"></td>
+        <td style="text-align: right"></td>
         <td style="text-align: right"></td>
         <td style="text-align: right"></td>
         <td style="text-align: right"></td>
      ';
     $html .= '</tr>';
-    $i++;
+    $cont++;
 }
 $html.='</tbody>
 </table>';
@@ -507,10 +461,11 @@ $html.='</tbody>
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 /// TOTALES Y LETRA MONTO
+$html2="";
 $html2.='
-<table class="total-letras" width="100%" style="font-size:8pt;text-align: left;margin-top: 10px">
+<table class="total-letras" width="100%" style="font-size:8pt;text-align: left;margin-top: 8px">
     <tr>
-        <td style="line-height: 6px" border="1" cellpadding="3"><b>SON: </b>';
+        <td style="line-height: 7px;border:'.$bordelineas.'"><b>  SON: </b>';
             if($importetotal>0){
                 $html2.='' . numtoletras($importetotal,$monedaval);
             }else{
@@ -519,110 +474,113 @@ $html2.='
         $html2.='
         </td>
     </tr>
+    <tr><td></td></tr>
 </table>
 
 <table width="100%"  border="0">
     <tr>
-		<td valign="middle" align="center">
-		    
-            <table style="width: 100%; border: 0.5px solid #01a2e6;font-size:7pt">
+		<td valign="middle" align="left" width="66%" height="70" style="border: '.$bordelineas.'">	    
+            <table style="width: 100%;font-size:8pt">
             <tr class="row">
-                <td colspan="2">INFORMACIÓN ADICONAL</td>
+                <td colspan="2" style="font-size:9pt"><b>INFORMACIÓN ADICIONAL</b></td>
                 <td></td>
             </tr>';
-            if($num_rows_vp==1)$texto_pago=trim($texto_pago1[0]);
+            //if($num_rows_vp==1)$texto_pago=trim($texto_pago1[0]);
 
-            if($num_rows_vp>1)
+            if($num_rows_vp>=1)
             {
                 $texto_pago="";
                 foreach($texto_pago2 as $indice=>$valor)
                 {
-                    $texto_pago.='<br>'.trim($valor).'';
+                    $texto_pago.='<br>'.trim($valor);
                 }
             }
 
-            $num=0;
-            $num++;
             $html2.='
-                <tr class="row">
-                    <td width="10%" style="text-align: left;">'.$num.' )Forma de Pago:</td>
-                    <td width="90%" style="text-align: left;">'.$texto_pago.'</td>
-                </tr>';
-
-            $lab1=2;
-            $lab2=3;
-            $lab3=4;
-            $html2.='<tr class="row"><td colspan="2">';
-            if($lab1!="")
-            {
-                $num++;
-                $html2.='<span width="100%" style="text-align: left;">'.$num.'Número de Placa: '.$lab1.'</span>';
-            }
-            if($lab2!="")
-            {
-                $num++;
-                $html2.='<span width="100%" style="text-align: left;">Kilometraje: '.$lab2.'</span>';
-            }
-            if($lab3!="")
-            {
-                $num++;
-                $html2.='<span width="100%" style="text-align: left;">Ord. Servicio: '.$lab2.'</span>';
-            }
-            $html2.="</td></tr>";
+            <tr class="row">
+                <td width="18%" style="text-align: left;"><b>1) Forma Pago:</b></td>
+                <td width="84%" style="text-align: left;">'.$texto_pago.'</td>
+            </tr>
+            <tr class="row">
+                <td width="18%" style="text-align: left;"><b>2) Vendedor: </b></td>
+                <td width="84%" style="text-align: left;">'.$texto_vendedor.'</td>
+            </tr>';
+            $html2.='
+            <tr class="row">
+                <td width="18%" style="text-align: left;"><b>3) Otros: </b></td>
+                <td width="84%" style="text-align: left;">';
+                if($lab1!="")
+                {
+                    $html2.='<span width="100%" style="text-align: left;"><b>Núm. de Placa:</b> '.$lab1.'</span>';
+                }
+                if($lab2!="")
+                {
+                    $html2.='<span width="100%" style="text-align: left;"><b> Kilometraje:</b> '.$lab2.'</span>';
+                }
+                if($lab3!="")
+                {
+                    $html2.='<span width="100%" style="text-align: left;"><b> Ord. Servicio:</b> '.$lab3.'</span>';
+                }
+                $html2.='
+                </td>
+            </tr>';
             $html2.='
             </table>';
 		$html2.='
         </td>
-		<td valign="middle" align="center">
-            <table>
-                <tr>
-                    <td>
-                            tabla 2
-                     </td>
-                 </tr>
-            </table>
-		</td>
-		<td valign="middle"  border="0">
+        <td width="1%">
+            <table><tr><td></td></tr></table>
+        </td>
+		<td valign="middle"  border="0" width="33%">
 		    <table style="width: 100%;font-size:8pt;mapadding-top: 10px"  border="0">';
             if($totopgrat > 0){
                 $html2.='
                 <tr>
-                    <td width="70%" style="text-align: left;" ><b>TOTAL VTAS. GRATUITAS:</b> </td>
-                    <td width="30%" style="text-align: right;">'.$mon . $totopgrat.'</td>
+                    <td width="65%" style="text-align: left" ><b>TOTAL VTAS. GRATUITAS:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopgrat.'</td>
                 </tr>';
             }
 
             $html2.='
                 <tr>
-                    <td width="70%" style="text-align: left;" ><b>TOTAL OPE. GRABADAS:</b> </td>
-                    <td width="30%" style="text-align: right;">'.$mon . $totopgrav.'</td>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL OPE. GRABADAS:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopgrav.'</td>
                 </tr>
                 <tr>
-                    <td width="70%" style="text-align: left;" ><b>TOTAL OPE EXONERADAS:</b> </td>
-                    <td width="30%" style="text-align: right;">'.$mon . $totopexo.'</td>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL OPE EXONERADAS:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopexo.'</td>
                 </tr>
                 <tr>
-                    <td width="70%" style="text-align: left;" ><b>TOTAL OPE. INAFECTAS:</b> </td>
-                    <td width="30%" style="text-align: right;">'.$mon . $totopeina.'</td>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL OPE. INAFECTAS:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$totopeina.'</td>
                 </tr>';
+
             if($totanti > 0){
                 $html2.='<tr>
-                     <td width="70%" style="text-align: left;" ><b>ANTICIPOS: </b></td>
-                    <td width="30%" style="text-align: right;">'.$mon . $totanti.'</td>
+                     <td width="65%" style="text-align: left;" ><b>ANTICIPOS: </b></td>
+                     <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$totanti.'</td>
                 </tr>';
             }
             $html2.='
                 <tr>
-                    <td width="70%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> </td>
-                    <td width="30%" style="text-align: right;">'.$mon . $totdes.'</td>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$totdes.'</td>
                 </tr>
                 <tr>
-                    <td  width="70%" style="text-align: left;" ><b>IGV: </b></td>
-                    <td width="30%" style="text-align: right;">'.$mon . $toigv.'</td>
+                    <td  width="65%" style="text-align: left;" ><b>IGV: </b></td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$toigv.'</td>
                 </tr>
                 <tr>                   
-                    <td width="70%" style="text-align: left;"><b>IMPORTE TOTAL:</b> </td>
-                    <td width="30%" style="text-align: right;font-weight: bold">'.$mon . $importetotal.'</td>
+                    <td width="65%" style="text-align: left;"><b>IMPORTE TOTAL:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;font-weight: bold;font-size: 9pt">'.$importetotal.'</td>
                 </tr>
             
             </table>
@@ -633,47 +591,78 @@ $html2.='
 $html2.='
 <br/>
 <br/>
+<table width="100%" border="0" style="line-height: 6px">
+    <tr>
+        <td width="24%">';
+            $style = array(
+                'border' => 2,
+                'vpadding' => 'auto',
+                'hpadding' => 'auto',
+                'fgcolor' => array(0,0,0),
+                'bgcolor' => false, //array(255,255,255)
+                'module_width' => 1, // width of a single module in points
+                'module_height' => 1 // height of a single module in points
+            );
+
+            $params2 = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
+            $html2 .= '<tcpdf method="write2DBarcode" params="'.$params2.'" />
+            <span style="font-size: 7pt">'.$digval.'</span>
+        </td>
+        <td width="46%">
+            <table>
+                <tr><td colspan="2"><b>CUENTAS BANCARIAS</b></td></tr>
+                <tr><td width="40%"><b>BCP Soles: </b></td> <td width="60%">191-2266774-0-05</td></tr>
+                <tr><td width="40%"><b>BCP Dólares: </b></td> <td width="60%">191-2266744-0-02</td></tr>
+                <tr><td width="40%"><b>BBVA Soles: </b></td> <td width="60%">0011-056602000-52070</td></tr>
+                <tr><td width="40%"><b>BBVA Dólares: </b></td> <td width="0%">0011-056602000-34045</td></tr>
+                <tr><td width="40%"><b>Cta. de Detracciones: </b></td> <td width="60%">00-099-099283</td></tr>
+            </table>
+        </td>
+        <td width="30%">
+           <table>
+                <tr><td height="98px"></td></tr>
+                <tr><td style="text-align: center;'.$bordetop.'"><b>CANCELADO</b></td></tr>
+            </table>
+        </td>
+    </tr>
+</table>
+<table border="0" width="100%">
+    <tr>
+        <td>
+            <img src="../empresa/logos/logo_pie_chint.jpg" border="0"  width="225" height="85" style="line-height:50%;"/>
+        </td>
+        <td>
+            <img src="../empresa/logos/logo_pie_elcope.jpg" border="0"  width="253" height="126" style="line-height:50%;"/>
+        </td>
+        <td>
+            <img src="../empresa/logos/logo_pie_hager.jpg" border="0"  width="300" height="98" style="line-height:50%;"/>
+        </td>
+        <td>
+            <img src="../empresa/logos/logo_pie_leviton.png" border="0"  width="345" height="146" style="line-height:50%;"/>
+        </td>
+        <td>
+            <img src="../empresa/logos/logo_pie_mennekes.jpg" border="0"  width="350" height="97" style="line-height:50%;"/>
+        </td>
+        <td>
+            <img src="../empresa/logos/logo_pie_philips.png" border="0"  width="300" height="54" style="line-height:50%;"/>
+        </td>
+        <td>
+            <img src="../empresa/logos/logo_pie_thorgel.jpg" border="0"  width="373" height="135" style="line-height:50%;"/>
+        </td>
+    </tr>
+</table>
 <table>
-<tr>
-<td style="width:78%">';
-
-$html2.='<br/>'.$sucursales;
-
-$html2.='<br/>
-<p style="font-size:7pt">
-Código de Seguridad (Hash): '.$digval.'<br>
-Representación Impresa de la '.$tipodoc.'.<br>Esta puede ser consultada en: '.$d_documentos_app.'<br>
-'.$d_resolucion.'
-</p>
-</td>
-<td>';
-
-$style = array(
-    'border' => 2,
-    'vpadding' => 'auto',
-    'hpadding' => 'auto',
-    'fgcolor' => array(0,0,0),
-    'bgcolor' => false, //array(255,255,255)
-    'module_width' => 1, // width of a single module in points
-    'module_height' => 1 // height of a single module in points
-);
-
-
-$params2 = $pdf->serializeTCPDFtagParameters(array($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|', 'QRCODE,Q', '', '', 30, 30, $style, 'N'));
-$html2 .= '<tcpdf method="write2DBarcode" params="'.$params2.'" />
-</td>
-</tr>
+    <tr>
+        <td style="font-size: 8pt;text-align: center;line-height: 8px;"><i>Representación Impresa de la '.$tipodoc.' , Esta puede ser consultada en: '.$d_documentos_app.'</i></td>
+    </tr>
 </table>';
+
 $html2.='
 
 </body>
 </html>';
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 $pdf->writeHTML($html, true, 0, true, true);
-$pdf->writeHTMLCell(0, 0, '', '190', $html2, 0, 0, false, "L", true);
-
-//$pdf->write2DBarcode($ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.fecha_mysql($fecha).'|'.$idtipodni.'|'.$ruc.'|', 'QRCODE,Q', 157, 99, 40, 40, $style, 'N');
-
 if ($_POST['tipo']=='correo'){
     $path = "../../cperepositorio/send";
 

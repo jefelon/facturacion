@@ -1286,11 +1286,16 @@ if($_POST['action']=="editar"){
                 clientecuenta_detalle(ui.item.id);
                 if($("#hdd_ven_cli_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+
+                    if($("#hdd_ven_cli_tip").val()==2){
+                        $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                        $('#msj_busqueda_sunat').show(100);
+                        compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+                    }
+                    $("#txt_bus_pro_nom").focus();
                 }
-                //alert(ui.item.value);
-                $('#msj_busqueda_sunat').html("Buscando en Sunat...");
-                $('#msj_busqueda_sunat').show(100);
-                compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+
+
             }
         });
         $( "#txt_ven_cli_nom" ).autocomplete({
@@ -1307,11 +1312,14 @@ if($_POST['action']=="editar"){
                 clientecuenta_detalle(ui.item.id);
                 if($("#hdd_ven_cli_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+
+                    if($("#hdd_ven_cli_tip").val()==2){
+                        $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                        $('#msj_busqueda_sunat').show(100);
+                        compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
+                    }
+                    $("#txt_bus_pro_nom").focus();
                 }
-                //alert(ui.item.value);
-                $('#msj_busqueda_sunat').html("Buscando en Sunat...");
-                $('#msj_busqueda_sunat').show(100);
-                compararSunat(ui.item.documento, ui.item.value, ui.item.direccion, ui.item.id);
             }
         });
         <?php
@@ -1470,24 +1478,26 @@ if($_POST['action']=="editar"){
                 $('.insertar-guia').hide();
             }
         });
-        $('#txt_numletras').keyup( function() {
-            var num_letras = $('#txt_numletras').val();
-            if(num_letras!=="")
-            {
-                var k = 30;
-                for(var i=1;i<=num_letras;i++){
-                    k=$('#dias'+i).val();
-                    $(".letras_fecven"+i).show(100);
-                    txt_venpag_fecletras(i,k);
+        $('#txt_numletras').keyup(function(e) {
+                var num_letras = $('#txt_numletras').val();
+                if (num_letras !== "") {
+                    for (var i = 1; i <= 5; i++) {
+                        $(".letras_fecven" + i).hide(100);
+                    }
+
+                    var k = 30;
+                    for (var i = 1; i <= num_letras; i++) {
+                        k = $('#dias' + i).val();
+                        $(".letras_fecven" + i).show(100);
+                        txt_venpag_fecletras(i, k);
+                    }
+                    //implementar inputs de acuerdo a la cantidad de letras txt_venumletras();
                 }
-                //implementar inputs de acuerdo a la cantidad de letras txt_venumletras();
-            }
-            else
-            {
-                for(var i=1;i<=5;i++){
-                    $(".letras_fecven"+i).hide(100);
+                else {
+                    for (var i = 1; i <= 5; i++) {
+                        $(".letras_fecven" + i).hide(100);
+                    }
                 }
-            }
         });
         $('#dias1').change( function() {
             var fechadoc = $("#txt_ven_fec").val();
@@ -1544,6 +1554,7 @@ if($_POST['action']=="editar"){
                 $('#dias5').val(150);
             }
         });
+        $('#txt_numletras').autoNumeric();
         cmb_tar_id();
         <?php
         if($_POST['action']=="editar"){
