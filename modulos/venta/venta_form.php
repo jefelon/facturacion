@@ -1357,7 +1357,7 @@ if($_POST['action']=="editar"){
                 $("#hdd_ven_cli_id").attr('disabled', false);
             }
         });
-        <?php }?>
+        <?php }?>//FIN INSERTAR COTIZACION
         $("#chk_venpag_aut").change(function(){
             if($('#chk_venpag_aut').is(':checked')){
                 //var chk=1;
