@@ -64,7 +64,13 @@ require_once("../formatos/formato.php");
             $archivo_destino.='../venta/venta_cpeimp_boleta_mat_a4.php';
         }
     }
-    if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../venta/venta_cpeimp_nota_mat.php';
+    if($doc_nom=='NOTA DE SALIDA'){
+        if($dato=='TICKET'){
+            $archivo_destino.='../venta/venta_cpeimp_nota_mat.php';
+        }elseif ($dato=='A4'){
+            $archivo_destino.='../venta/venta_cpeimp_nota_mat_a4.php';
+        }
+    }
 
 ?>
 <script type="text/javascript">

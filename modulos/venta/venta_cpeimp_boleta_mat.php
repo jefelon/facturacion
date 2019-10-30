@@ -118,7 +118,7 @@ $tot = $dt['tb_venta_tot'];
 
 $lab1 = $dt['tb_venta_lab1'];
 
-$usu_id = $dt['tb_usuario_id'];
+$usu_id = $dt['tb_vendedor_id'];
 mysql_free_result($dts);
 
 
