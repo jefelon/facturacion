@@ -30,7 +30,6 @@ while($dt = mysql_fetch_array($dts))
 
     $clicodigo=$dt["tb_cliente_id"];
     $ruc=$dt["tb_cliente_doc"];
-    $rtel=$dt["tb_cliente_tel"];
     $razon=$dt["tb_cliente_nom"];
     $direccion=$dt["tb_cliente_dir"];
     if($dt["tb_cliente_tip"]==1)$idtipodni=1;
@@ -153,7 +152,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 //set margins
-$pdf->SetMargins(0,12,0);// left top right
+$pdf->SetMargins(12, 12, 12);// left top right
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 //$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -235,45 +234,76 @@ $html = '
     }
 
 </style>
-<body><table style="width: 194mm;" border="1">';
+<body><table style="width: 168mm; margin-bottom: 50mm" border="0">';
 $html.='
+<table style="width: 168mm;" border="0">
     <tr style="font-size: 10pt">
-        <td style="text-align: left" width="45mm"></td>
-        <td style="text-align: center" width="25mm">'.str_pad($ltr['tb_letras_numero'], 4, "0", STR_PAD_LEFT).'</td>
-        <td style="text-align: center" width="25mm"> '.$serie.'-'.$numero.'</td>
-        <td style="text-align: center" width="30mm"> AREQUIPA </td>
-        <td style="text-align: center" width="54mm">
-            <table style="font-size: 9pt">
-                <tr><td width="7mm">'.mostrarDiaMesAnio2(1,$fecha).'</td><td width="7mm">'.mostrarDiaMesAnio2(2,$fecha).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$fecha).'</td>
-                <td width="7mm">'.mostrarDiaMesAnio2(1,$ltr['tb_letras_fecha']).'</td><td width="7mm">'.mostrarDiaMesAnio2(2,$ltr['tb_letras_fecha']).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$ltr['tb_letras_fecha']).'</td></tr>
-            </table>
-        </td>
-        <td style="text-align: center" width="30mm">'.$mon.' '.$ltr['tb_letras_monto'].'</td>
+        <td style="text-align: left" width="43mm"></td>
+        <td style="text-align: center" width="22mm">'.str_pad($ltr['tb_letras_numero'], 4, "0", STR_PAD_LEFT).'</td>
+        <td style="text-align: center" width="30mm"> '.$serie.'-'.$numero.'</td>
+        <td style="text-align: center" width="22mm">'.mostrarFecha($fecha).'</td>
+        <td style="text-align: center" width="30mm">'.mostrarFecha($ltr['tb_letras_fecha']).'</td>
+        <td style="text-align: center" width="48mm">'.$mon.' '.$ltr['tb_letras_monto'].'</td>
     </tr>
     <tr>
         <td style="text-align: left;height: 12mm" width="100%"></td>
     </tr>
     <tr>
-        <td style="text-align: left" width="45mm"></td>
-        <td style="text-align: left;height: 10mm;line-height: 13px" width="100%">'.$letras_monto.'</td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="50mm"></td>
-        <td style="text-align: left" width="100mm">'.$razon.'</td>
+        <td style="text-align: left" width="55mm"></td>
+        <td style="text-align: left" width="113mm">'.$razon.'</td>
         <td style="text-align: center" width="24mm">'.str_pad($clicodigo, 7, "0", STR_PAD_LEFT).'</td>
     </tr>
     <tr>
         <td style="text-align: left" width="100%"></td>
     </tr>
     <tr>
-        <td style="text-align: left" width="50mm"></td>
-        <td style="text-align: left" width="100mm" height="10mm">'.$direccion.'</td>
+        <td style="text-align: left" width="55mm"></td>
+        <td style="text-align: left" width="113mm">'.$direccion.'</td>
     </tr>
     <tr>
-        <td style="text-align: left" width="50mm"></td>
-        <td style="text-align: left" width="50mm">'.$ruc.'</td>
-        <td style="text-align: left" width="50mm">'.$tel.'</td>
-    </tr>';
+        <td style="text-align: left;height:5mm" width="100%"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left" width="40mm"></td>
+        <td style="text-align: center" width="27mm">'.mostrarDiaMesAnio(1, $ltr['tb_letras_fecha']).'</td>
+        <td style="text-align: center" width="22mm">'.mostrarDiaMesAnio(2, $ltr['tb_letras_fecha']).'</td>
+        <td style="text-align: center" width="20mm">'.mostrarDiaMesAnio(3, $ltr['tb_letras_fecha']).'</td>
+    </tr>
+    <tr>
+        <td style="text-align: left;height:10mm" width="100%"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left" width="45mm"></td>
+        <td style="text-align: left" width="147mm">'.$letras_monto.'</td>
+    </tr>
+    <tr>
+        <td style="text-align: left;height:6mm" width="100%"></td>
+    </tr>
+     <tr>
+        <td style="text-align: justify;font-size: 6.5pt" width="80%">
+        (1)DE NO SER PAGADO A SU VENCIMIENTO, ESTE DOCUMENTO GENERARÁ EL INTERES COMPENSATORIO Y MORATORIO A LAS TASAS MAXIMAS QUE FIJA LA LEY<br>
+        (2)EL PLAZO DE SU VENCIMIENTO PODRÁ SER PRORROGADO POR EL TENEDOR, POR EL PLAZO QUE ESTE SEÑALE SIN QUE SEA<br>                                  
+        (3)NECESARIA LA INTERVENCIÓN DEL OBLIGADO PRINCIPAL NI DE LOS SOLIDARIOS. <br>                                                                   
+        (4)SU IMPORTE DEBE SER PAGADO SÓLO EN LA MISMA MONEDA QUE EXPRESA ESTE TÍTULO VALOR.<br>                                                         
+        ESTA LETRA DE CAMBIO NO SE REQUIERE SER PROTESTADA POR FALTA DE PAGO <br> 
+        </td>
+    </tr>
+</table>
+<br/>
+<br/>
+<br/>';
+
+
+$style = array(
+    'border' => 2,
+    'vpadding' => 'auto',
+    'hpadding' => 'auto',
+    'fgcolor' => array(0,0,0),
+    'bgcolor' => false, //array(255,255,255)
+    'module_width' => 1, // width of a single module in points
+    'module_height' => 1 // height of a single module in points
+);
+
 $html .= '
 </table>
 </body>
