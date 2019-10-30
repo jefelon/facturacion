@@ -308,15 +308,7 @@ function venta_car(act,cat_id){
 		cat_id =  $('#hdd_bus_cat_id').val();
 	}
 
-	if(act=='agregar' & (dif < 0))
-	{
-		alert('Stock insuficiente. Diferencia en '+(cantidad-stouni)+'.');
-		$('#txt_bus_cat_can').val(stouni);
-	} else {
 
-		if(precio<0) {
-			precio=precio.toFixed(2);
-		} else {
 			$.ajax({
 				type: "POST",
 				url: "../cotizacion/venta_car.php",
@@ -352,8 +344,7 @@ function venta_car(act,cat_id){
                     }
 				}
 			});
-		}
-	}
+		
 }
 
 function venta_car_servicio(act,idf){	
