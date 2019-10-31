@@ -263,7 +263,7 @@ function mostrarDiaMesAnio2($tipo, $fec)
         $mes = date("m", strtotime($fec));
         return$mes;
     } elseif ($tipo == 3){
-        $anio = date("Y", strtotime($fec));
+        $anio = date("y", strtotime($fec));
         return $anio;
     }
 }

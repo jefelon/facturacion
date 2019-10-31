@@ -153,7 +153,7 @@ $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
 $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
 
 //set margins
-$pdf->SetMargins(0,12,0);// left top right
+$pdf->SetMargins(0,13,0);// left top right
 $pdf->SetHeaderMargin(PDF_MARGIN_HEADER);
 //$pdf->SetFooterMargin(PDF_MARGIN_FOOTER);
 
@@ -235,7 +235,7 @@ $html = '
     }
 
 </style>
-<body><table style="width: 194mm;" border="1">';
+<body><table style="width: 194mm;" border="0">';
 $html.='
     <tr style="font-size: 10pt">
         <td style="text-align: left" width="45mm"></td>
@@ -243,34 +243,36 @@ $html.='
         <td style="text-align: center" width="25mm"> '.$serie.'-'.$numero.'</td>
         <td style="text-align: center" width="30mm"> AREQUIPA </td>
         <td style="text-align: center" width="54mm">
-            <table style="font-size: 9pt">
-                <tr><td width="7mm">'.mostrarDiaMesAnio2(1,$fecha).'</td><td width="7mm">'.mostrarDiaMesAnio2(2,$fecha).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$fecha).'</td>
-                <td width="7mm">'.mostrarDiaMesAnio2(1,$ltr['tb_letras_fecha']).'</td><td width="7mm">'.mostrarDiaMesAnio2(2,$ltr['tb_letras_fecha']).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$ltr['tb_letras_fecha']).'</td></tr>
+            <table style="font-size: 9pt;margin-top: 5px;padding-top: 10px;">
+                <tr><td width="9mm">'.mostrarDiaMesAnio2(1,$fecha).'</td><td width="8mm">'.mostrarDiaMesAnio2(2,$fecha).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$fecha).'</td>
+                <td width="9mm">'.mostrarDiaMesAnio2(1,$ltr['tb_letras_fecha']).'</td><td width="8mm">'.mostrarDiaMesAnio2(2,$ltr['tb_letras_fecha']).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$ltr['tb_letras_fecha']).'</td></tr>
             </table>
         </td>
         <td style="text-align: center" width="30mm">'.$mon.' '.$ltr['tb_letras_monto'].'</td>
     </tr>
     <tr>
-        <td style="text-align: left;height: 12mm" width="100%"></td>
+        <td style="text-align: left;height: 10mm" width="100%"></td>
     </tr>
     <tr>
         <td style="text-align: left" width="45mm"></td>
         <td style="text-align: left;height: 10mm;line-height: 13px" width="100%">'.$letras_monto.'</td>
     </tr>
     <tr>
-        <td style="text-align: left" width="50mm"></td>
+        <td style="text-align: left;height: 7mm" width="100%"></td>
+    </tr>
+    <tr>
+        <td style="text-align: left;" width="50mm"></td>
         <td style="text-align: left" width="100mm">'.$razon.'</td>
-        <td style="text-align: center" width="24mm">'.str_pad($clicodigo, 7, "0", STR_PAD_LEFT).'</td>
     </tr>
     <tr>
-        <td style="text-align: left" width="100%"></td>
-    </tr>
-    <tr>
-        <td style="text-align: left" width="50mm"></td>
-        <td style="text-align: left" width="100mm" height="10mm">'.$direccion.'</td>
+        <td style="text-align: left;line-height: 2px" width="100%"></td>
     </tr>
     <tr>
         <td style="text-align: left" width="50mm"></td>
+        <td style="text-align: left" width="100mm" height="8mm">'.$direccion.'</td>
+    </tr>
+    <tr>
+        <td style="text-align: left" width="55mm"></td>
         <td style="text-align: left" width="50mm">'.$ruc.'</td>
         <td style="text-align: left" width="50mm">'.$tel.'</td>
     </tr>';
