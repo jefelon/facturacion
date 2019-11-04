@@ -281,19 +281,19 @@ $html .= '
     }
 
     .header_row th {
-        border-bottom: 0.9px solid #01a2e6;
-        border-right: 0.9px solid #01a2e6;
-        border-left: 0.9px solid #01a2e6;
-        background-color: #01a2e6;
+        border-bottom: 0.9px solid #008f39;
+        border-right: 0.9px solid #008f39;
+        border-left: 0.9px solid #008f39;
+        background-color: #008f39;
         text-transform:uppercase;
     }
 
     .row td{
-        border-right: 0.9px solid #01a2e6;
-        border-left: 0.9px solid #01a2e6;
+        border-right: 0.9px solid #008f39;
+        border-left: 0.9px solid #008f39;
     }
     .cliente{
-        border: 1px solid #01a2e6;
+        border: 1px solid #008f39;
         border-spacing:4px;
     }
 
@@ -317,8 +317,8 @@ $html .= '
 
 </style>
 <body>';
-$bordelineas="1px solid #01a2e6;";
-$bordetop="border-top: 1px solid #01a2e6;";
+$bordelineas="1px solid #008f39;";
+$bordetop="border-top: 1px solid #008f39;";
 $html.='
 <table style="width: 100%; margin-bottom: 50mm;" border="0" class="datos-empresa" height="100pt">';
 $html.='<tr>

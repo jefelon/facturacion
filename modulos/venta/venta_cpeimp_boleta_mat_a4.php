@@ -454,7 +454,7 @@ while($dt = mysql_fetch_array($dts)){
     $max_lin++;
 }
 
-while ($max_lin<=32) {
+while ($max_lin<=31) {
     $html .= '<tr class="row">
         <td style="text-align: center"></td>
         <td style="text-align: center"></td>
