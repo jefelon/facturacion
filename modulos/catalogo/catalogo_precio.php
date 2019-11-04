@@ -14,7 +14,14 @@ $oPrecio = new cPrecio();
 require_once ("../catalogo/cst_producto.php");
 
 require_once ("../formatos/formato.php");
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
 
+
+$rs = $oFormula->consultar_dato_formula('CAT_FORMA_UTI');
+$dt = mysql_fetch_array($rs);
+$forma_uti = $dt['tb_formula_dat'];
+mysql_free_result($rs);
 
 if(isset($_POST['pro_cat']) and $_POST['pro_cat']>0)
 {
@@ -99,208 +106,386 @@ $('.porcentaje').autoNumeric({
 
 function calculo_precioventa_tipcam(idf)
 {
+    var forma_uti='<?php echo $forma_uti ?>';
 	var tipcam	=parseFloat($("#txt_cat_tipcam_"+idf).autoNumericGet());
 
 	var precosdol	=parseFloat($("#txt_cat_precosdol_"+idf).autoNumericGet());
 	var uti		=parseFloat($("#txt_cat_uti_"+idf ).val());
 	var precos=parseFloat(precosdol*tipcam);
-	
-	if(uti>=0)
-	{
-		var utilidad=uti/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
-	}
-	else
-	{
-		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
-	}
+
+    if(forma_uti=="SIMPLE")
+    {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos*(1+utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+    }
+    else {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+    }
 	
 }
 
 function calculo_precioventa_precosdol(idf)
 {
+    var forma_uti='<?php echo $forma_uti ?>';
 	var tipcam	=parseFloat($("#txt_cat_tipcam_"+idf).autoNumericGet());
 
 	var precosdol	=parseFloat($("#txt_cat_precosdol_"+idf).autoNumericGet());
 	var uti		=parseFloat($("#txt_cat_uti_"+idf ).val());
 	var precos=parseFloat(precosdol*tipcam);
-	
-	if(uti>=0)
-	{
-		var utilidad=uti/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
-	}
-	else
-	{
-		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-		$( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
-	}
-	
+
+    if(forma_uti=="SIMPLE")
+    {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos*(1+utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+    }
+    else {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+            $( "#txt_cat_precos_"+idf).autoNumericSet(precos.toFixed(2));
+        }
+    }
+
 }
 
 function calculo_precioventa_precos(idf)
 {
+    var forma_uti='<?php echo $forma_uti ?>';
 	var tipcam	=parseFloat($("#txt_cat_tipcam_"+idf).autoNumericGet());
 
 	var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
 	var uti		=parseFloat($("#txt_cat_uti_"+idf ).val());
 	//var precos=parseFloat(precosdol*tipcam);
-	
-	if(uti>=0)
-	{
-		var utilidad=uti/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	else
-	{
-		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
+    if(forma_uti=="SIMPLE")
+    {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos*(1+utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+    else {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+
 	
 }
 
 function calculo_precioventa_uti(idf)
 {
-	var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
-	var uti		=parseFloat($("#txt_cat_uti_"+idf ).val());
-	
-	if(uti>=0)
-	{
-		var utilidad=uti/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	else
-	{
-		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	
+    var forma_uti='<?php echo $forma_uti ?>';
+    var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
+    var uti		=parseFloat($("#txt_cat_uti_"+idf ).val());
+
+    if(forma_uti=="SIMPLE")
+    {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos*(1+utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+    else{
+
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+
 }
 
 function calculo_precioventa_preven(idf)
 {
-	var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
-	var preven	=parseFloat($("#txt_cat_preven_"+idf).autoNumericGet());
-	
-	if(preven>0 && preven>=precos)
-	{
-		var calculo=(1-precos/preven)*100;
-		$( "#txt_cat_uti_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	else
-	{
-		alert('Precio de Venta debe ser mayor que Precio Costo.');
-		
-		$( "#txt_cat_uti_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$("#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	
+    var forma_uti='<?php echo $forma_uti ?>';
+    var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
+    var preven	=parseFloat($("#txt_cat_preven_"+idf).autoNumericGet());
+
+    if(forma_uti=="SIMPLE")
+    {
+        if(preven>0 && preven>=precos)
+        {
+            var calculo=((preven/precos)-1)*100;
+            $( "#txt_cat_uti_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            alert('Precio de Venta debe ser mayor que Precio Costo.');
+
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+    else{
+        if(preven>0 && preven>=precos)
+        {
+            var calculo=(1-precos/preven)*100;
+            $( "#txt_cat_uti_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            alert('Precio de Venta debe ser mayor que Precio Costo.');
+
+            $( "#txt_cat_uti_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_cat_preven_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+
 }
 
 ///precio min
 function calculo_precioventa_uti2(idf)
 {
-	var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
-	var uti		=parseFloat($("#txt_cat_uti2_"+idf ).val());
-	
-	if(uti>=0)
-	{
-		var utilidad=uti/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	else
-	{
-		$( "#txt_cat_uti2_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	
+    var forma_uti='<?php echo $forma_uti ?>';
+    var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
+    var uti		=parseFloat($("#txt_cat_uti2_"+idf ).val());
+
+    if(forma_uti=="SIMPLE")
+    {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos*(1+utilidad);
+            $( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti2_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+    else {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti2_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+
 }
 
 function calculo_precioventa_preven2(idf)
 {
-	var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
-	var preven	=parseFloat($("#txt_predet_val1_"+idf).autoNumericGet());
-	
-	if(preven>0 && preven>=precos)
-	{
-		var calculo=(1-precos/preven)*100;
-		$( "#txt_cat_uti2_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	else
-	{
-		alert('Precio de Venta debe ser mayor que Precio Costo.');
-		
-		$( "#txt_cat_uti2_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$("#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	
+    var forma_uti='<?php echo $forma_uti ?>';
+    var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
+    var preven	=parseFloat($("#txt_predet_val1_"+idf).autoNumericGet());
+
+    if(forma_uti=="SIMPLE")
+    {
+        if(preven>0 && preven>=precos)
+        {
+            var calculo=((preven/precos)-1)*100;
+            $( "#txt_cat_uti2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            alert('Precio de Venta debe ser mayor que Precio Costo.');
+
+            $( "#txt_cat_uti2_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $("#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+    else {
+        if(preven>0 && preven>=precos)
+        {
+            var calculo=(1-precos/preven)*100;
+            $( "#txt_cat_uti2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            alert('Precio de Venta debe ser mayor que Precio Costo.');
+
+            $( "#txt_cat_uti2_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $("#txt_predet_val1_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+
 }
 
 /// precio mayorista
 function calculo_precioventa_uti3(idf)
 {
+    var forma_uti='<?php echo $forma_uti ?>';
 	var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
 	var uti		=parseFloat($("#txt_cat_uti3_"+idf ).val());
-	
-	if(uti>=0)
-	{
-		var utilidad=uti/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	else
-	{
-		$( "#txt_cat_uti3_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
+
+    if(forma_uti=="SIMPLE")
+    {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos*(1+utilidad);
+            $( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti3_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+    else {
+        if(uti>=0)
+        {
+            var utilidad=uti/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            $( "#txt_cat_uti3_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $( "#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
 	
 }
 
 function calculo_precioventa_preven3(idf)
 {
+    var forma_uti='<?php echo $forma_uti ?>';
 	var precos	=parseFloat($("#txt_cat_precos_"+idf).autoNumericGet());
 	var preven	=parseFloat($("#txt_predet_val2_"+idf).autoNumericGet());
-	
-	if(preven>0 && preven>=precos)
-	{
-		var calculo=(1-precos/preven)*100;
-		$( "#txt_cat_uti3_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
-	else
-	{
-		alert('Precio de Venta debe ser mayor que Precio Costo.');
-		
-		$( "#txt_cat_uti3_"+idf).autoNumericSet(0);
-		var utilidad=0/100;
-		var calculo=precos/(1-utilidad);
-		$("#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
-	}
+    if(forma_uti=="SIMPLE")
+    {
+        if(preven>0 && preven>=precos)
+        {
+            var calculo=((preven/precos)-1)*100;
+            $( "#txt_cat_uti3_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            alert('Precio de Venta debe ser mayor que Precio Costo.');
+
+            $( "#txt_cat_uti3_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $("#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
+    else {
+        if(preven>0 && preven>=precos)
+        {
+            var calculo=(1-precos/preven)*100;
+            $( "#txt_cat_uti3_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+        else
+        {
+            alert('Precio de Venta debe ser mayor que Precio Costo.');
+
+            $( "#txt_cat_uti3_"+idf).autoNumericSet(0);
+            var utilidad=0/100;
+            var calculo=precos/(1-utilidad);
+            $("#txt_predet_val2_"+idf).autoNumericSet(calculo.toFixed(2));
+        }
+    }
 	
 }
 

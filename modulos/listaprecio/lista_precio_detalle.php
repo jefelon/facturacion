@@ -11,7 +11,7 @@ if ($_POST['precio_id']) {
     $lprecs = mysql_fetch_array($lprec);
     $lprecs["tb_detallelistaprecio_precos"];
     $data['precos'] = $lprecs["tb_detallelistaprecio_precos"];
-    $data['preven'] = $lprecs["tb_detallelistaprecio_precos"];
+    $data['preven'] = $lprecs["tb_detallelistaprecio_preven"];
     $data['uti'] = $lprecs["tb_detallelistaprecio_uti"];
     echo json_encode($data);
 }else{

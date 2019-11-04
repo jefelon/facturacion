@@ -208,7 +208,7 @@ function arr_IssueDate($header, $detalle, $empresa, $tipodoc){
 function arr_IssueTime($header, $detalle, $empresa, $tipodoc){
     global $arr;
     if($tipodoc=='Invoice' || $tipodoc=='DespatchAdvice'){
-        $arr['doc'][$tipodoc]['child']['IssueTime'][0] = date_format(date_create($header[0]->fechadoc), 'H:i:s');
+        $arr['doc'][$tipodoc]['child']['IssueTime'][0] = date_format(date_create($header[0]->issuetime), 'H:i:s');
         $arr['doc'][$tipodoc]['child']['IssueTime']['tag'] = 'cbc';
     }else{
         $arr['doc'][$tipodoc]['child']['IssueTime'][0] = date_format(date_create($header[0]->issuetime), 'H:i:s');

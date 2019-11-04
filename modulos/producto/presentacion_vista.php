@@ -2,9 +2,15 @@
 require_once ("../../config/Cado.php");
 require_once ("../producto/cProducto.php");
 $oProducto = new cProducto();
-
 require_once("../formatos/formatos.php");
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
 
+
+$rs = $oFormula->consultar_dato_formula('CAT_FORMA_UTI');
+$dt = mysql_fetch_array($rs);
+$forma_uti = $dt['tb_formula_dat'];
+mysql_free_result($rs);
 $dts= $oProducto->mostrarUno($_POST['pro_id']);
 $dt = mysql_fetch_array($dts);
 $pro_nom	=$dt['tb_producto_nom'];
@@ -600,105 +606,95 @@ else
             // var txt_cat_precos_alt $("#cmb_precio_id").val()+
         });
 
-
-
-        $("#txt_cat_precosdol_alt" ).keyup(function() {
-            var tipcam		=parseFloat($("#txt_cat_tipcam_alt" ).autoNumericGet());
-            var precosdol	=parseFloat($("#txt_cat_precosdol_alt" ).autoNumericGet());
-
-            if(tipcam>0 & precosdol>0)
-            {
-                // var calculo=tipcam*precosdol+(tipcam*precosdol)0.18;
-                var calculo=tipcam*precosdol;
-                //$( "#txt_cat_valven" ).val(calculo.toFixed(2));
-                $( "#txt_cat_precos_alt" ).autoNumericSet(calculo.toFixed(2));
-
-
-                var precos	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
-                var uti		=parseFloat($("#txt_cat_uti_alt" ).val());
-
-                if(uti>=0)
-                {
-                    var calculo=precos+(precos*uti/100);
-                    //$( "#txt_cat_valven" ).val(calculo.toFixed(2));
-                    $( "#txt_cat_valven_alt" ).autoNumericSet(calculo.toFixed(2));
-                    $( "#txt_cat_preven_alt" ).autoNumericSet((calculo*1.18).toFixed(2));
-                }
-
-            }
-        });
-
         $("#txt_cat_precos_alt" ).keyup(function() {
+            var forma_uti='<?php echo $forma_uti ?>';
             var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
             var uti		=parseFloat($("#txt_cat_uti_alt" ).val());
 
-            if(uti>=0)
+            if(forma_uti=="SIMPLE")
             {
-                var calculo=precom+(precom*uti/100);
-                //$( "#txt_cat_valven" ).val(calculo.toFixed(2));
-                $( "#txt_cat_valven_alt" ).autoNumericSet(calculo.toFixed(2));
-                $( "#txt_cat_preven_alt" ).autoNumericSet((calculo*1.18).toFixed(2));
+                var utilidad=uti/100;
+                var calculo=precom+(precom*utilidad);
+                $( "#txt_cat_preven_alt" ).autoNumericSet(calculo.toFixed(2));
+            }
+            else {
+                if(uti>=0)
+                {
+                    var utilidad=uti/100;
+                    var calculo=precom/(1-utilidad);
+                    $( "#txt_cat_preven_alt" ).autoNumericSet(calculo.toFixed(2));
+                }
             }
         });
         $("#txt_cat_descprov_alt" ).keyup(function() {
+            var forma_uti='<?php echo $forma_uti ?>';
             var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
-            var desc =parseFloat($("#txt_cat_descprov_alt" ).val());
             var uti		=parseFloat($("#txt_cat_uti_alt" ).val());
 
-            if(precom>=0 && precom!="")
+            if(forma_uti=="SIMPLE")
             {
-                var descuento=desc/100;
-                var utilidad=uti/100;
-                var costoneto=precom-(precom*descuento)
-                var calculo=costoneto+(costoneto*utilidad);
-                $( "#txt_cat_valven_alt" ).autoNumericSet(calculo.toFixed(2));
-                $( "#txt_cat_preven_alt" ).autoNumericSet((calculo*1.18).toFixed(2));
+                if(precom>=0 && precom!="")
+                {
+                    var utilidad=uti/100;
+                    var calculo=precom+(precom*utilidad);
+                    $( "#txt_cat_preven_alt" ).autoNumericSet(calculo.toFixed(2));
+                }
             }
+            else{
+                if(precom>=0 && precom!="")
+                {
+                    var utilidad=uti/100;
+                    var calculo=precom/(1-utilidad);
+                    $( "#txt_cat_preven_alt" ).autoNumericSet(calculo.toFixed(2));
+                }
+            }
+
         });
         $("#txt_cat_uti_alt" ).keyup(function() {
+            var forma_uti='<?php echo $forma_uti ?>';
             var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
-            var desc =parseFloat($("#txt_cat_descprov_alt" ).val());
             var uti		=parseFloat($("#txt_cat_uti_alt" ).val());
 
-
-            if(precom>=0 && precom!="")
+            if(forma_uti=="SIMPLE")
             {
-                var descuento=desc/100;
-                var utilidad=uti/100;
-                var costoneto=precom-(precom*descuento)
-                var calculo=costoneto+(costoneto*utilidad);
-                $( "#txt_cat_valven_alt" ).autoNumericSet(calculo.toFixed(2));
-                $( "#txt_cat_preven_alt" ).autoNumericSet((calculo*1.18).toFixed(2));
+                if(precom>=0 && precom!="")
+                {
+                    var utilidad=uti/100;
+                    var calculo=precom+(precom*utilidad);
+                    $( "#txt_cat_preven_alt" ).autoNumericSet(calculo.toFixed(2));
+                }
             }
-        });
-
-        $("#txt_cat_valven_alt" ).keyup(function(){
-            var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
-            var preven		=parseFloat($("#txt_cat_preven_alt" ).val());
-            var prevalven	=parseFloat($("#txt_cat_valven_alt" ).autoNumericGet());
-            var desc = parseFloat($("#txt_cat_descprov_alt" ).val());
-            console.log(prevalven);
-            if(precom-desc>=0 && precom!="" && precom-desc<prevalven)
-            {
-                $( "#txt_cat_uti_alt" ).val((utilidad*100).toFixed(2));
-                $( "#txt_cat_preven_alt" ).autoNumericSet((prevalven*1.18).toFixed(2));
-            }
-
-        });
-
-        $("#txt_cat_valven_alt" ).blur(function() {
-            var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
-            var preven		=parseFloat($("#txt_cat_preven_alt" ).val());
-            var prevalven	=parseFloat($("#txt_cat_valven_alt" ).autoNumericGet());
-            var desc =parseFloat($("#txt_cat_descprov_alt" ).val());
-            if (precom != "" && preven != "" && desc != "" && preven != "") {
-                if (prevalven < (precom - desc) ) {
-                    $("#txt_cat_valven_alt").val('');
-                    $("#txt_cat_valven_alt").focus();
+            else{
+                if(precom>=0 && precom!="")
+                {;
+                    var utilidad=uti/100;
+                    var calculo=precom/(1-utilidad);
+                    $( "#txt_cat_preven_alt" ).autoNumericSet(calculo.toFixed(2));
                 }
             }
         });
+        $("#txt_cat_preven_alt" ).keyup(function(){
+            var forma_uti='<?php echo $forma_uti ?>';
+            var precom	=parseFloat($("#txt_cat_precos_alt" ).autoNumericGet());
+            var preven	=parseFloat($("#txt_cat_preven_alt" ).autoNumericGet());
 
+            if(forma_uti=="SIMPLE")
+            {
+                if(precom!="" && preven>0)
+                {
+                    var calculo=(preven/precom-1)*100;
+                    $( "#txt_cat_uti_alt" ).val(calculo.toFixed(2));
+                }
+            }
+            else{
+                if(precom!="" && preven>0)
+                {
+                    var calculo=(1-precom/preven)*100;
+                    $( "#txt_cat_uti_alt" ).val(calculo.toFixed(2));
+                }
+            }
+
+        });
     });
 
     $('.btn_guardar_lista_precio').button({
@@ -815,12 +811,8 @@ if($_POST['vista']=='Presentacion'){
                     <tr class="ui-widget-header">
                         <th align="center">Lista Precios:</th>
                         <th align="center">Precio Costo</th>
-                        <th align="center">Descuento</th>
-                        <!--<th align="center">IGV</th>-->
                         <th align="center">Utilidad (%)</th>
-                        <th align="center">Valor Venta</th>
                         <th align="center">Precio Venta</th>
-                        <!--<th align="center"> IGV</th>-->
                     </tr>
                     <tr>
                         <td>
@@ -828,12 +820,8 @@ if($_POST['vista']=='Presentacion'){
                             </select>
                         </td>
                         <td align="center"><input name="txt_cat_precos_alt" type="text" id="txt_cat_precos_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
-                        <td align="center"><input name="txt_cat_descprov_alt" type="text" id="txt_cat_descprov_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $descprov?>"></td>
-                        <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
                         <td align="center"><input name="txt_cat_uti_alt" type="text" id="txt_cat_uti_alt" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
-                        <td align="center"><input name="txt_cat_valven_alt" type="text" id="txt_cat_valven_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $valven?>"></td>
                         <td align="center"><input name="txt_cat_preven_alt" type="text" id="txt_cat_preven_alt" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
-                        <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
                         <td align="center"><a onclick="guardar_lista_precio()" class="btn_guardar_lista_precio" id=""></a></td>
                         <div id="msj_lista_precio" style="display: none" class="ui-state-highlight ui-corner-all"></div>
                     </tr>

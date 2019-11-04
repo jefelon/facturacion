@@ -267,4 +267,18 @@ function mostrarDiaMesAnio2($tipo, $fec)
         return $anio;
     }
 }
+function mostrarDiaMesAnio3($tipo, $fec)
+{
+    $resultado = '';
+    if ($tipo==1) {
+        $dia = date("d", strtotime($fec));
+        return $dia;
+    }elseif ($tipo==2){
+        $mes = date("m", strtotime($fec));
+        return$mes;
+    } elseif ($tipo == 3){
+        $anio = date("Y", strtotime($fec));
+        return $anio;
+    }
+}
 ?>
