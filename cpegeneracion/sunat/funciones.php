@@ -1,4 +1,12 @@
 <?php
+session_start();
+require_once ("../../config/Cado.php");
+require_once ("../../modulos/empresa/cEmpresa.php");
+$oEmpresa = new cEmpresa();
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt = mysql_fetch_array($dts);
+$webServiceSunat=$dt['tb_empresa_webser'];
+
     function firmar($xml, $dirxml, $arr) {
         require_once('../../cpegeneracion/xmlseclibs/fr3d/xmldsig/Adapter/AdapterInterface.php');
         require_once('../../cpegeneracion/xmlseclibs/robrichards/xmlseclibs/XMLSecurityDSig.php');
@@ -19,25 +27,27 @@
     }
 
     function send_sunat($file, $file_name, $arr, $dircdr, $nomfuncion="sendBill", $tipodoc="Invoice"){
-        global $name_rec;
+        global $name_rec,$webServiceSunat;
 
         $faultcode = '0';
         require_once('wslSunat.php');
 
         //------------------------------------
         //envio pruebas
-        $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService';
-
-        //envio en proceso de homologacion
-        //$wsdlURL = 'https://www.sunat.gob.pe/ol-ti-itcpgem-sqa/billService';
-
-        //envio en produccion
-        // if($tipodoc=='DespatchAdvice')
-        // {
-        //     $wsdlURL = 'https://e-guiaremision.sunat.gob.pe/ol-ti-itemision-guia-gem/billService';
-        // }else{
-        //     $wsdlURL = 'https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService';
-        // }                
+        if($webServiceSunat=="beta")
+        {
+            $wsdlURL = 'https://e-beta.sunat.gob.pe/ol-ti-itcpfegem-beta/billService';
+        }
+        elseif ($webServiceSunat=="produccion")
+        {
+            //envio en produccion
+            if($tipodoc=='DespatchAdvice')
+            {
+                $wsdlURL = 'https://e-guiaremision.sunat.gob.pe/ol-ti-itemision-guia-gem/billService';
+            }else{
+                $wsdlURL = 'https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService';
+            }
+        }
         
         //make the call, and set the soap function that I'll be using
         $XMLString = getSopMessage($file, $file_name, $arr['usuario_sunat'], $arr['clave_sunat'], $nomfuncion);
@@ -46,10 +56,17 @@
     }
 
     function send_sunat2($ruccomprobante, $tipocomprobante, $seriecomprobante, $numerocomprobante, $arr, $dircdr, $nomfuncion="getStatusCdr"){
-        global $name_rec;
+        global $name_rec,$webServiceSunat;
         $faultcode = '0';
         require_once('wslSunat.php');
-        $wsdlURL = 'https://e-factura.sunat.gob.pe/ol-it-wsconscpegem/billConsultService';
+        if($webServiceSunat=="beta")
+        {
+            $faultcode="beta";
+            return $faultcode;
+        }
+        else if($webServiceSunat=="produccion"){
+            $wsdlURL = 'https://e-factura.sunat.gob.pe/ol-it-wsconscpegem/billConsultService';
+        }
 
         $XMLString = getSopMessageCdr($ruccomprobante, $tipocomprobante, $seriecomprobante, $numerocomprobante, $arr['usuario_sunat'], $arr['clave_sunat'], $nomfuncion);
         $faultcode = soapCall($wsdlURL, $nomfuncion, $XMLString, 'file_name', $dircdr);
