@@ -311,6 +311,34 @@ $oContenido = new cContenido();
                 }
             });
         }
+        function cpe_cdr(ecomid)
+        {
+            //if(confirm("Desea generar comprobante electrónico?"))
+            //{
+            $.ajax({
+                type: "POST",
+                url: "../venta/cpe_cdr.php",
+                async:true,
+                dataType: "json",
+                data: ({
+                    ecom_id: ecomid
+                }),
+                beforeSend: function() {
+                    $('#msj_venta_sunat').html("Obteniendo CDR de SUNAT...");
+                    $('#msj_venta_sunat').show(100);
+                    $('#msj_venta_sunat').html('Consultando CDR de SUNAT...');
+                },
+                success: function(data){
+                    $('#msj_venta_sunat').html(data.msj);
+                    $('#msj_venta_sunat').show();
+                    $('#msj_venta_sunat').html(data.msj+': '+data.est);
+                },
+                complete: function(){
+                    venta_tabla();
+                }
+            });
+            //}
+        }
         $(function() {
 
             $('#btn_actualizar').button({

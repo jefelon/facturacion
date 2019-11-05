@@ -53,18 +53,18 @@ $empresa = json_decode(json_encode($empresa));
 $comprobante_id=$_POST['ecom_id'];
 
 $dts = $oVenta->mostrarUno($comprobante_id);
-$dt = mysqli_fetch_array($dts);
+$dt = mysql_fetch_array($dts);
 
 	$documento_cod	=$dt["cs_tipodocumento_cod"];
 	$serie 			=$dt["tb_venta_ser"];
-	$correlativo	=$dt["tb_venta_"];
+	$correlativo	=$dt["tb_venta_num"];
 	$documento 		=$dt["tb_venta_ser"].'-'.$dt["tb_venta_num"];
 
 	$faucod 		=$dt["tb_venta_faucod"];
 	$val 			=$dt["tb_venta_val"];
 	$estsun			=$dt["tb_venta_estsun"];
 	$est 			=$dt["tb_venta_est"];
-mysqli_free_result($dts);
+mysql_free_result($dts);
 
 $header = json_decode(json_encode($header));
 //var_dump($header);

@@ -49,10 +49,11 @@ $num_rows= mysql_num_rows($dts1);
             //icons: {primary: "ui-icon-document"},
             //text: false
         });
-        $('.btn_xml').button({
+        $('.btn_xml,.btn_cdr').button({
             //icons: {primary: "ui-icon-document"},
             //text: false
         });
+
 
         $("#tabla_venta").tablesorter({
             widgets: ['zebra', 'zebraHover'],
