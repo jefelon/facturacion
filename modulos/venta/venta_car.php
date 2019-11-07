@@ -11,7 +11,7 @@ require_once ("../formatos/formato.php");
 $igv_dato=0.18;
 $almacen_venta=$_SESSION['almacen_id'];
 $unico_id=$_POST['unico_id'];
-$tipo_item	=$_POST['cat_tip'];
+//$tipo_item	=$_POST['cat_tip'];
 if ($_POST['cot_id']!='') {
 //    $dts = $oCotizacion->mostrarUno($_POST['cot_id']);
 //    $dt = mysql_fetch_array($dts);
@@ -556,7 +556,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         {
             $linea_desc_x_item_percent = $_SESSION['venta_des'][$unico_id][$indice];
         }
-
+        $tipo_item	=$dt1['tb_afectacion_id'];
         if ($tipo_item==9) {
             $linea_valor_unitario = $precio_unitario;
         }else{
