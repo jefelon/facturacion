@@ -596,8 +596,7 @@ if($_POST['action']=="editar"){
             }
         });
     }
-    function producto_reg(){
-        var result='';
+    function producto_reg(cat_tip){
         $.ajax({
             type: "POST",
             url: "../producto/producto_reg.php",
@@ -612,7 +611,7 @@ if($_POST['action']=="editar"){
                 tipo_accion: "insertar_venta",
                 cmb_cat_id: 1,
                 cmb_mar_id: 1,
-                cmb_afec_id: 1,
+                cmb_afec_id: cat_tip,
                 cmb_lote: "",
                 cmb_pro_est: "Activo",
                 hdd_prod_img:"",
@@ -635,32 +634,38 @@ if($_POST['action']=="editar"){
                 // $('#msj_producto').show(100);
             },
             success: function(data){
-                result = data.cat_id;
+                cat_id = data.cat_id;
+                $('#hdd_bus_cat_id').val(cat_id);
                 // $('#msj_producto').html(data.pro_msj);
                 if(data.tipo_accion=='insertar_venta') {
                     //actualizar_stock(data.pre_id,<?php// echo $_SESSION['almacen_id']?>, '');
 
-                   <?php  if ($num_rowsa >= 1) {
-                        while($dt = mysql_fetch_array($dtsa)){
+                    <?php  if ($num_rowsa >= 1) {
+                    while($dt = mysql_fetch_array($dtsa)){
                     ?>
                     actualizar_stock(data.pre_id,<?php echo $dt['tb_almacen_id']?>, '');
                     <?php
-                        }
-                   }
+                    }
+                    }
                     ?>
                 }
             },
             complete: function(){
             }
         });
-        return result
     }
     function venta_car(act,cat_id){
         var cat_tip=$('#hdd_detven_tip').val();
-        if($('#cmb_afec_id').val())
-        {
-            cat_tip = $('#cmb_afec_id').val() ;
+        if($('#cmb_afec_id').val()) {
+            cat_tip = $('#cmb_afec_id').val();
         }
+
+        if($('#hdd_bus_cat_id').val()=="" && $('#txt_bus_cat_can').val()!="" && $('#txt_bus_cat_preven').val()!=""){
+            producto_reg($('#cmb_afec_id').val());
+        }
+
+        var cat_tip=$('#hdd_detven_tip').val();
+
         if(act=='agregar') {
             var stouni=$('#hdd_bus_cat_stouni').val();
             var cantidad=$('#txt_bus_cat_can').val();
@@ -687,10 +692,6 @@ if($_POST['action']=="editar"){
             //else {
             var cot_id = '';
             cot_id = $('#hdd_cot_id').val();
-            if(!cat_id && $('#txt_bus_cat_can').val() && $('#txt_bus_cat_preven').val()){
-                cat_id = producto_reg();
-                cat_tip = $('#cmb_afec_id').val() ;
-            }
             $.ajax({
                 type: "POST",
                 url: "../venta/venta_car.php",
@@ -717,6 +718,7 @@ if($_POST['action']=="editar"){
                     $('#div_venta_car_tabla').removeClass("ui-state-disabled");
                     if(!($('#chk_modo').is(':checked'))) {
                         $('#hdd_bus_cat_id').val('');
+                        $('#hdd_detven_tip').val('');
                         $('#hdd_bus_cat_stouni').val('');
                         $('#hdd_bus_cat_cospro').val('');
                         $('#txt_bus_pro_codbar').val('');
@@ -1871,6 +1873,7 @@ if($_POST['action']=="editar"){
                 $("#txt_bus_pro_nom").val('');
                 $("#hdd_bus_pro_nom").val('');
                 $('#hdd_bus_cat_id').val('');
+                $('#hdd_detven_tip').val('');
                 $('#hdd_bus_cat_stouni').val('');
                 $('#hdd_bus_cat_cospro').val('');
                 $('#txt_bus_pro_codbar').val('');
@@ -2019,6 +2022,7 @@ if($_POST['action']=="editar"){
                     if ($('#chk_modo').is(':checked')) {
                         venta_car('agregar');
                         $('#hdd_bus_cat_id').val('');
+                        $('#hdd_detven_tip').val('');
                         $('#hdd_bus_cat_stouni').val('');
                         $('#hdd_bus_cat_cospro').val('');
                         $('#txt_bus_pro_codbar').val('');
@@ -2107,6 +2111,7 @@ if($_POST['action']=="editar"){
                     if ($('#chk_modo').is(':checked')) {
                         venta_car('agregar');
                         $('#hdd_bus_cat_id').val('');
+                        $('#hdd_detven_tip').val('');
                         $('#hdd_bus_cat_stouni').val('');
                         $('#hdd_bus_cat_cospro').val('');
                         $('#txt_bus_pro_codbar').val('');
