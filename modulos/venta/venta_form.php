@@ -664,8 +664,6 @@ if($_POST['action']=="editar"){
             producto_reg($('#cmb_afec_id').val());
         }
 
-        var cat_tip=$('#hdd_detven_tip').val();
-
         if(act=='agregar') {
             var stouni=$('#hdd_bus_cat_stouni').val();
             var cantidad=$('#txt_bus_cat_can').val();
@@ -1267,7 +1265,6 @@ if($_POST['action']=="editar"){
         });
 
         ///////////////////////////////////////////////////////////////////////////////////
-
         $('#cmb_afec_id').change(function(){
             $('#hdd_detven_tip').val($('#cmb_afec_id').val());
         });
@@ -1481,25 +1478,25 @@ if($_POST['action']=="editar"){
             }
         });
         $('#txt_numletras').keyup(function(e) {
-                var num_letras = $('#txt_numletras').val();
-                if (num_letras !== "") {
-                    for (var i = 1; i <= 5; i++) {
-                        $(".letras_fecven" + i).hide(100);
-                    }
+            var num_letras = $('#txt_numletras').val();
+            if (num_letras !== "") {
+                for (var i = 1; i <= 5; i++) {
+                    $(".letras_fecven" + i).hide(100);
+                }
 
-                    var k = 30;
-                    for (var i = 1; i <= num_letras; i++) {
-                        k = $('#dias' + i).val();
-                        $(".letras_fecven" + i).show(100);
-                        txt_venpag_fecletras(i, k);
-                    }
-                    //implementar inputs de acuerdo a la cantidad de letras txt_venumletras();
+                var k = 30;
+                for (var i = 1; i <= num_letras; i++) {
+                    k = $('#dias' + i).val();
+                    $(".letras_fecven" + i).show(100);
+                    txt_venpag_fecletras(i, k);
                 }
-                else {
-                    for (var i = 1; i <= 5; i++) {
-                        $(".letras_fecven" + i).hide(100);
-                    }
+                //implementar inputs de acuerdo a la cantidad de letras txt_venumletras();
+            }
+            else {
+                for (var i = 1; i <= 5; i++) {
+                    $(".letras_fecven" + i).hide(100);
                 }
+            }
         });
         $('#dias1').change( function() {
             var fechadoc = $("#txt_ven_fec").val();
@@ -1792,6 +1789,13 @@ if($_POST['action']=="editar"){
             },
             text: true
         });
+        $('.btn_stock_otros').button({
+            icons: {
+                //primary: "ui-icon-plusthick",
+                //secondary:"ui-icon-cart"
+            },
+            text: true
+        });
         $('.btn_bus_mas').button({
             icons: {
                 primary: "ui-icon-plus"
@@ -1818,6 +1822,16 @@ if($_POST['action']=="editar"){
                     $("#hdd_bus_pro_nom").val(ui.item.value);
                     catalogo_buscar(ui.item.catid);
                 }
+            }
+        });
+        $( "#txt_bus_pro_codbar" ).autocomplete({
+            minLength: 2,
+            delay:10,
+            source: "../venta/catalogo_buscar_cod.php",
+            select: function( event, ui ) {
+                $("#txt_bus_pro_codbar").val(ui.item.label);
+                $("#hdd_bus_pro_nom").val(ui.item.value);
+                catalogo_buscar_cod(ui.item.catid);
             }
         });
         $( "#div_producto_form" ).dialog({
@@ -1966,6 +1980,96 @@ if($_POST['action']=="editar"){
         }
     });
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    function catalogo_buscar_cod(cat_id) {
+        $.ajax({
+            type: "POST",
+            url: "../venta/catalogo_buscar.php",
+            async:false,
+            dataType: "json",
+            data: ({
+                action:	 'dato',
+                unico_id: $('#unico_id').val(),
+                txt_bus_pro_codbar: $('#txt_bus_pro_codbar').val(),
+                //txt_bus_pro_nom: $('#hdd_bus_pro_nom').val(),
+                cmb_listaprecio_id: $('#cmb_listaprecio_id').val(),
+                cat_id: cat_id
+            }),
+            beforeSend: function() {
+                //$('#div_venta_pago_car').addClass("ui-state-disabled");
+                $('#msj_venta_det').html("Buscando...");
+                $('#msj_venta_det').show(100);
+            },
+            success: function(data){
+                if(data.accion==0)
+                {
+                    $('#hdd_bus_cat_id').val('');
+                    $('#hdd_bus_cat_stouni').val('');
+                    $('#hdd_bus_cat_cospro').val('');
+                    //$('#txt_bus_pro_codbar').val('');
+                    $('#txt_bus_pro_nom').val('');
+                    $('#txt_bus_cat_preven').val('');
+                    $('#txt_bus_cat_can').val('');
+                    $('#txt_precio_min').val('');
+                    $('#txt_precio_may').val('');
+                    $('#hdd_detven_tip').val('');
+                }
+                if (data.accion == 1) {
+                    if ($('#che_mayorista').is(':checked')) {
+                        data.cat_preven = data.cat_premay;
+                    }else{
+                        if ($('#cmb_listaprecio_id').val()!='') {
+                            data.cat_preven = data.cat_prelista;
+                        }
+                    }
+                    $('#hdd_bus_cat_id').val(data.cat_id);
+                    $('#hdd_bus_cat_stouni').val(data.cat_stouni);
+                    $('#hdd_bus_cat_cospro').val(data.cat_cospro);
+                    $('#txt_bus_pro_nom').val(data.pro_nom);
+                    $('#txt_bus_cat_preven').val(data.cat_preven);
+                    $('#txt_bus_cat_can').val(data.cat_can);
+                    $('#txt_precio_min').val(data.cat_premin);
+                    $('#txt_precio_may').val(data.cat_premay);
+                    $('#hdd_detven_tip').val(data.ven_tip);
+                    var cat_tipo= $('#hdd_detven_tip').val();
+                    $("#cmb_afec_id option[value="+ cat_tipo +"]").attr("selected",true);
+
+                    if ($('#chk_modo').is(':checked')) {
+                        venta_car('agregar');
+                        $('#hdd_bus_cat_id').val('');
+                        $('#hdd_detven_tip').val('');
+                        $('#hdd_bus_cat_stouni').val('');
+                        $('#hdd_bus_cat_cospro').val('');
+                        $('#txt_bus_pro_codbar').val('');
+                        $('#txt_bus_cat_preven').val('');
+                        $('#txt_bus_cat_can').val('');
+                        $('#txt_precio_min').val('');
+                        $('#txt_precio_may').val('');
+                        $('#hdd_bus_pro_nom').val('');
+                        $('#txt_bus_pro_nom').val('');
+                        $('#txt_bus_pro_nom').focus();
+                    } else {
+                        $('#txt_bus_pro_codbar').val(data.pro_codbar);
+                        $('#hdd_bus_pro_nom').val('');
+                        $('#txt_bus_cat_preven').focus();
+                    }
+                    //precios_min_may($('#hdd_bus_cat_id').val());
+                }
+                if (data.accion == 2) {
+                    if ($('#cmb_listaprecio_id').val()) {
+                        data.cat_preven = data.cat_prelista;
+                    }
+                    //$('#txt_bus_pro_codbar').val(data.pro_codbar);
+                    ///catalogo_venta_tab1();
+                    //alert(data.pro_codbar);
+                    //$('#txt_fil_pro_codbar').val('hola');
+                }
+            },
+            complete: function(){
+                //$('#div_venta_pago_car').removeClass("ui-state-disabled");
+                $('#msj_venta_det').hide(100);
+            }
+        });
+    }
     function catalogo_buscar(cat_id) {
         $.ajax({
             type: "POST",
@@ -2277,9 +2381,9 @@ if($_POST['action']=="editar"){
                         <label for="cmb_ven_imp">Formato:</label>
                         <select name="cmb_ven_imp" id="cmb_ven_imp" title="Cambiar el formato en Mantenimiento-->General-->Fórmulas">
                             <?php if($formato_imp=="TICKET"){?>
-                            <option value="1" selected>Ticket</option>
+                                <option value="1" selected>Ticket</option>
                             <?php } elseif ($formato_imp=="A4") {?>
-                            <option value="2" selected>A4</option>
+                                <option value="2" selected>A4</option>
                             <?php }?>
                         </select>
                         <label for="cmb_ven_moneda">Moneda:</label>
@@ -2607,6 +2711,7 @@ if($_POST['action']=="editar"){
                         <label for="cmb_listaprecio_id">Lista Precios:</label>
                         <select name="cmb_listaprecio_id" id="cmb_listaprecio_id">
                         </select>
+                        <a class="btn_stock_otros"  onClick="mas_stock()">Stock Locales</a>
                         <div id="div_listaprecio_form">
                         </div>
                         <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
