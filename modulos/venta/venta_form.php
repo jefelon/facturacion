@@ -1213,6 +1213,30 @@ if($_POST['action']=="editar"){
             }
         });
     }
+    function stock_otros_form(pro_id)
+    {
+        if($("#hdd_bus_cat_id" ).val()==""){
+            alert("Debe buscar un producto y luego presionar este boton.");
+        }
+        else{
+            $.ajax({
+                type: "POST",
+                url: "stock_otros_form.php",
+                async:true,
+                dataType: "html",
+                data: ({
+                    cat_id:$("#hdd_bus_cat_id" ).val(),
+                }),
+                beforeSend: function() {
+                    $('#div_stock_otros_form').dialog("open");
+                    $('#div_stock_otros_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+                },
+                success: function(html){
+                    $('#div_stock_otros_form').html(html);
+                }
+            });
+        }
+    }
     $(function() {
         $('#txt_ven_fec').keyup(function(e) {
             var patron = new Array(2, 2, 4);
@@ -1879,6 +1903,25 @@ if($_POST['action']=="editar"){
                 $("#div_servicio_form").html('Cargando...');
             }
         });
+        $( "#div_stock_otros_form" ).dialog({
+            title:'Stock en otros almacenes',
+            autoOpen: false,
+            resizable: false,
+            height: 250,
+            width: 500,
+            modal: true,
+            position: 'center',
+            buttons: {
+                Cerrar: function() {
+                    $( this ).dialog("close");
+                }
+            },
+            close: function()
+            {
+                $("#div_stock_otros_form").html('Cargando...');
+            }
+        });
+
 
         $('#txt_bus_pro_codbar').keypress(function(e){
             if(e.which == 13){
@@ -2711,7 +2754,9 @@ if($_POST['action']=="editar"){
                         <label for="cmb_listaprecio_id">Lista Precios:</label>
                         <select name="cmb_listaprecio_id" id="cmb_listaprecio_id">
                         </select>
-                        <a class="btn_stock_otros"  onClick="mas_stock()">Stock Locales</a>
+                        <a class="btn_stock_otros"  onClick="stock_otros_form()">Stock Locales</a>
+                        <div id="div_stock_otros_form">
+                        </div>
                         <div id="div_listaprecio_form">
                         </div>
                         <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
