@@ -45,7 +45,7 @@ $webServiceSunat=$dt['tb_empresa_webser'];
             {
                 $wsdlURL = 'https://e-guiaremision.sunat.gob.pe/ol-ti-itemision-guia-gem/billService';
             }else{
-                $wsdlURL = 'https://e-factura.sunat.gob.pe/ol-ti-itcpfegem/billService';
+                $wsdlURL = 'https://www.sunat.gob.pe/ol-ti-itcpfegem/billService';
             }
         }
         

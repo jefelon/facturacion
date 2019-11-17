@@ -89,18 +89,7 @@ if($_POST['action']=="editarSunat"){
                         $('#msj_busqueda_sunat_2').hide();
                     } else {
                         $('#txt_cli_nom').val(data['RazonSocial']);
-                        $('#txt_cli_dir').val(data['Direccion']);
-                        if (typeof data['Contacto'] != 'undefined') {
-                            $('#txt_cli_con').val(data['Contacto']);
-                        } else {
-                            $('#txt_cli_con').val(data['RazonSocial']);
-                        }
-
-                        // var telefono = data['Telefonos'];
-                        // telefono = telefono.replace(/ \/ /g, "/");
-                        // telefono = telefono.replace("/ ", "");
-                        // telefono = telefono.replace(/\//g, " / ");
-                        // $('#txt_cli_tel').val(telefono);
+                        $('#txt_cli_dir').val(data['DireccionCompleta']);
                         $('#txt_cli_est').val(data['Estado']);
                         $('#msj_busqueda_sunat_2').hide();
                     }

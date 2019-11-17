@@ -137,6 +137,11 @@ $menu_administrador=
 	 <li><a href="../venta/venta_vista_garantia.php">Buscar Garantía</a></li>
 	</ul>
   </li>
+  <li class="topmenu"><a href="#" >Reportes</a>
+  	<ul>
+	  <li><a href="../reportes/">Productos más vendidos</a></li>
+	</ul>
+  </li>
 	<li class="topmenu"><a href="#" >Gráficos</a>
   	<ul>
         <li><a href="../grafico" >Volumen de ventas</a>
