@@ -40,18 +40,18 @@ if($_POST['action']=="editar"){
                     $('#msj_busqueda_sunat_2').hide();
                 }else{
                     $('#txt_pro_nom').val(data['RazonSocial']);
-                    $('#txt_pro_dir').val(data['Direccion']);
+                    $('#txt_pro_dir').val(data['DireccionCompleta']);
                     if( typeof data['Contacto'] != 'undefined'){
                         $('#txt_pro_con').val(data['Contacto']);
                     }else{
                         $('#txt_pro_con').val(data['RazonSocial']);
                     }
 
-                    var telefono = data['Telefonos'];
-                    telefono = telefono.replace(/ \/ /g, "/");
-                    telefono = telefono.replace("/ ", "");
-                    telefono = telefono.replace(/\//g, " / ");
-                    $('#txt_pro_tel').val(telefono);
+                    // var telefono = data['Telefonos'];
+                    // telefono = telefono.replace(/ \/ /g, "/");
+                    // telefono = telefono.replace("/ ", "");
+                    // telefono = telefono.replace(/\//g, " / ");
+                    // $('#txt_pro_tel').val(telefono);
                     $('#txt_pro_est').val(data['Estado']);
                     $('#msj_busqueda_sunat_2').hide();
                 }
@@ -81,7 +81,30 @@ if($_POST['action']=="editar"){
     });
 
 $(function() {
-	
+    $("input[id=radio1]").change(function(){
+        if($("input[id=radio1]").is(":checked")){
+            $('#lbl_pro_doc').html("DNI:");
+            $( "#txt_pro_doc" ).attr('maxlength','8');
+            $( "#validar_ruc span").html("Valida DNI");
+            $( "#validar_ruc").show(200);
+        }
+    });
+
+    $("input[id=radio2]").change(function(){
+        if($("input[id=radio2]").is(":checked")){
+            $('#lbl_pro_doc').html("RUC:");
+            $( "#txt_pro_doc" ).attr('maxlength','11');
+            $( "#validar_ruc span").html("Valida RUC");
+            $( "#validar_ruc").show(200);
+        }
+    });
+    $("input[id=radio3]").change(function(){
+        if($("input[id=radio3]").is(":checked")){
+            $('#lbl_pro_doc').html("DOC:");
+            $( "#txt_pro_doc").attr('maxlength','11');
+            $( "#validar_ruc").hide(200);
+        }
+    });
 	$( "#radio" ).buttonset();
 	
 	$('#txt_pro_nom, #txt_pro_dir, #txt_pro_con').keyup(function(){
@@ -172,7 +195,7 @@ $(function() {
             </td>
         </tr>
         <tr>
-            <td align="right"><label for="txt_pro_doc">DNI:</label></td>
+            <td align="right"><label for="txt_pro_doc" id="lbl_pro_doc">DNI:</label></td>
             <td><input name="txt_pro_doc" id="txt_pro_doc" type="text" value="<?php echo $doc?>" size="15" maxlength="11">
                 <a id="validar_ruc" href="#validar" onClick="buscar()">Validar DNI</a>
                 <div id="msj_busqueda_sunat_2" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px;display: none"></div>

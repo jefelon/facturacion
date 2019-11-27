@@ -460,7 +460,7 @@ if ($impresion == 'pdf') ob_start();
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="centrado"><qrcode value="<?php echo $ruc_empresa.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
+                                <td colspan="4" class="centrado"><qrcode value="<?php echo $emp_ruc.'|'.$idcomprobante.'|'.$serie.'|'.$numero.'|'.$toigv.'|'.$importetotal.'|'.mostrarfecha($fecha).'|'.$idtipodni.'|'.$ruc.'|'.$digval.'|' ?>" ec="L" style="width: 20mm;"></qrcode></td>
                             </tr>
                             <tr>
                                 <td colspan="4" style="width: 80mm" class="centrado">Representación impresa de la  Boleta  de Venta  Electrónica,  esta puede ser
@@ -516,8 +516,21 @@ if ($impresion == 'pdf') {
         //$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
 
 
-        $nombre_arc = 'venta_' . $numdoc . '.pdf';
-        $html2pdf->Output($nombre_arc);
+        $nombre_archivo=''.$numdoc.'.pdf';
+
+        if ($_POST['tipo']=='correo'){
+            $path = "../../cperepositorio/send";
+
+            // Supply a filename including the .pdf extension
+            $filename = $nombre_archivo;
+            $full_path = $path . '/' .$emp_ruc.'-0'.$idcomprobante.'-'. $filename;
+            if (!file_exists($full_path))
+            {
+                $html2pdf->Output($full_path, 'F');
+            }
+        }else{
+            $html2pdf->Output($nombre_archivo, 'I');
+        }
     } catch (HTML2PDF_exception $e) {
         echo $e;
         exit;

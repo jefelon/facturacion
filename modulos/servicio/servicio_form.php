@@ -355,7 +355,7 @@ if($_POST['action']=="editar"){
                 txt_ser_nom: {
                     required: true,
                     minlength: 1,
-                    maxlength: 50
+                    maxlength: 250
                 },
                 txt_ser_pre: {
                     required: true
