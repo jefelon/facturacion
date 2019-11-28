@@ -90,7 +90,7 @@ if($_POST['action']=="editarSunat"){
                         $('#msj_busqueda_sunat_2').hide();
                     } else {
                         $('#txt_cli_nom').val(data['RazonSocial']);
-                        $('#txt_cli_dir').val(data['Direccion']);
+                        $('#txt_cli_dir').val(data['DireccionCompleta']);
                         if (typeof data['Contacto'] != 'undefined') {
                             $('#txt_cli_con').val(data['Contacto']);
                         } else {

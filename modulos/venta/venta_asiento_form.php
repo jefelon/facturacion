@@ -337,7 +337,7 @@ $pv = mysql_fetch_array($pvs);
                 url: url,
                 data: 'dni=' + dni,
                 success: function (datos_dni) {
-                    $('#txt_cli_nom').val(datos_dni.persona);
+                    $('#txt_pasaj_nom').val(datos_dni.persona);
                 }
             });
         }
