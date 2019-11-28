@@ -139,7 +139,7 @@ $menu_administrador=
   </li>
   <li class="topmenu"><a href="#" >Reportes</a>
   	<ul>
-	  <li><a href="../reportes/">Productos más vendidos</a></li>
+	  <li><a href="../reportes/reporte_vista.php">Productos más vendidos</a></li>
 	</ul>
   </li>
 	<li class="topmenu"><a href="#" >Gráficos</a>

@@ -50,7 +50,12 @@ $dt = mysql_fetch_array($dts);
 	$emp_dir2=$dt['tb_empresa_dir2'];
 	$emp_tel=$dt['tb_empresa_tel'];
 	$emp_ema=$dt['tb_empresa_ema'];
-	$emp_fir=$dt['tb_empresa_fir'];		
+	$emp_fir=$dt['tb_empresa_fir'];
+    $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
+    $image_info = getimagesize($empresa_logo);
+    if(!is_file($empresa_logo)){
+        $empresa_logo='../../images/logo.jpg';
+    }
 mysql_free_result($dts);
 
 if($emp_tel!="")$texto_telefono='Teléfono: '.$emp_tel;
@@ -149,14 +154,14 @@ if($impresion=='pdf' or $impresion=='html'){
     <td style="width: 70mm; height:12mm; vertical-align:top;">
         <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
         <tr>
-          <td><img src="logo.jpg" width="100"  height="45" border="0" align="" alt="logo"></td>
+          <td><img src="<?php echo $empresa_logo; ?>" width="100"  height="auto" border="0" align="" alt="logo"></td>
         	<td>
             <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
             <tr>
               <td style="font-size: 7pt; font-weight:bold;"><?php echo $emp_razsoc?></td>
             </tr>
             <tr>
-              <td style="font-size: 7pt;"><?php echo $emp_dir.' '.$emp_dir2?></td>
+              <td style="font-size: 7pt;width: 65mm;"><?php echo $emp_dir?></td>
             </tr>
             <tr>
               <td style="font-size: 7pt;"><?php echo 'Telf: '.$emp_tel?></td>
@@ -180,17 +185,6 @@ if($impresion=='pdf' or $impresion=='html'){
 </table>
 <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0" style="width: 80mm;">
   <tr>
-    <td colspan="3" style=" width:128mm; text-align:right;">
-    <table border="<?php echo '0';//$borde_tablas?>" align="right">
-      <tr>
-        <td style=" width:30mm; font-size: 10pt; height:3mm; text-align:right; background:#E6E6E6; font-weight: bold;">
-          <?php echo 'S/. '.$imp;?>
-        </td>
-      </tr>
-    </table>
-    </td>
-  </tr>
-  <tr>
     <td valign="top" style="width:20mm; font-size: 8pt; height:5mm;"><?php echo '<strong>NOMBRE</strong>'?></td>
     <td valign="top" style="width:1mm; font-size: 8pt;"><?php echo '<strong>:</strong>'?></td>
     <td valign="top" style="width:105mm; font-size: 8pt;"><?php echo $pro_nom?></td>
@@ -203,7 +197,7 @@ if($impresion=='pdf' or $impresion=='html'){
   <tr>
     <td valign="top" style="font-size: 8pt; height:5mm;"><?php echo '<strong>IMPORTE</strong>'?></td>
     <td valign="top" style="font-size: 8pt;"><?php echo '<strong>:</strong>'?></td>
-    <td valign="top" style="width:105mm; font-size: 8pt;"><?php echo $monto_letras?></td>
+    <td valign="top" style="width:105mm; font-size: 8pt;background:#E6E6E6;">(<?php echo $monto_letras?>) <?php echo 'S/. '.$imp;?></td>
   </tr>
   <tr>
     <td valign="top" style="font-size: 8pt; height:5mm;"><?php echo '<strong>CONCEPTO</strong>'?></td>
@@ -237,15 +231,13 @@ if($impresion=='pdf' or $impresion=='html'){
 <br>
 <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0" style="width: 80mm;">
   <tr>
-    <td valign="top" style="width:64mm; font-size: 7pt; height:5mm;"><?php echo 'www.uneworld.com'?></td>
+      <td valign="top" style="width:64mm; font-size: 6pt; height:5mm;"><?php echo $_SESSION['empresa_departamento'].' - '.$_SESSION['empresa_provincia'].' - '.$_SESSION['empresa_distrito'];?></td>
     <td valign="top" align="right" style="width:64mm; font-size: 5pt;"><?php echo 'EGRESO | '.$caj_nom?></td>
   </tr>
 </table>
 
 <br>
-<br>
-<br>
-<br>
+    <div style="border:0px; border-bottom:1px dashed #ccc"></div>
 <br>
 
 <table border="<?php echo $borde_tablas?>">
@@ -253,14 +245,14 @@ if($impresion=='pdf' or $impresion=='html'){
     <td style="width: 70mm; height:12mm; vertical-align:top;">
         <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
         <tr>
-          <td><img src="logo.jpg" width="100"  height="45" border="0" align="" alt="logo"></td>
+          <td><img src="<?php echo $empresa_logo; ?>" width="100"  height="auto" border="0" align="" alt="logo"></td>
           <td>
             <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0">
             <tr>
               <td style="font-size: 7pt; font-weight:bold;"><?php echo $emp_razsoc?></td>
             </tr>
             <tr>
-              <td style="font-size: 7pt;"><?php echo $emp_dir.' '.$emp_dir2?></td>
+              <td style="font-size: 7pt;width: 65mm;"><?php echo $emp_dir?></td>
             </tr>
             <tr>
               <td style="font-size: 7pt;"><?php echo 'Telf: '.$emp_tel?></td>
@@ -284,17 +276,6 @@ if($impresion=='pdf' or $impresion=='html'){
 </table>
 <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0" style="width: 80mm;">
   <tr>
-    <td colspan="3" style=" width:128mm; text-align:right;">
-    <table border="<?php echo '0';//$borde_tablas?>" align="right">
-      <tr>
-        <td style=" width:30mm; font-size: 10pt; height:3mm; text-align:right; background:#E6E6E6; font-weight: bold;">
-          <?php echo 'S/. '.$imp;?>
-        </td>
-      </tr>
-    </table>
-    </td>
-  </tr>
-  <tr>
     <td valign="top" style="width:20mm; font-size: 8pt; height:5mm;"><?php echo '<strong>NOMBRE</strong>'?></td>
     <td valign="top" style="width:1mm; font-size: 8pt;"><?php echo '<strong>:</strong>'?></td>
     <td valign="top" style="width:105mm; font-size: 8pt;"><?php echo $pro_nom?></td>
@@ -307,7 +288,7 @@ if($impresion=='pdf' or $impresion=='html'){
   <tr>
     <td valign="top" style="font-size: 8pt; height:5mm;"><?php echo '<strong>IMPORTE</strong>'?></td>
     <td valign="top" style="font-size: 8pt;"><?php echo '<strong>:</strong>'?></td>
-    <td valign="top" style="width:105mm; font-size: 8pt;"><?php echo $monto_letras?></td>
+    <td valign="top" style="width:105mm; font-size: 8pt;background:#E6E6E6;">(<?php echo $monto_letras?>) <?php echo 'S/. '.$imp;?></td>
   </tr>
   <tr>
     <td valign="top" style="font-size: 8pt; height:5mm;"><?php echo '<strong>CONCEPTO</strong>'?></td>
@@ -341,7 +322,7 @@ if($impresion=='pdf' or $impresion=='html'){
 <br>
 <table border="<?php echo $borde_tablas?>" cellspacing="0" cellpadding="0" style="width: 80mm;">
   <tr>
-    <td valign="top" style="width:64mm; font-size: 7pt; height:5mm;"><?php echo 'www.uneworld.com'?></td>
+      <td valign="top" style="width:64mm; font-size: 6pt; height:5mm;"><?php echo $_SESSION['empresa_departamento'].' - '.$_SESSION['empresa_provincia'].' - '.$_SESSION['empresa_distrito'];?></td>
     <td valign="top" align="right" style="width:64mm; font-size: 5pt;"><?php echo 'COPIA | EGRESO | '.$caj_nom?></td>
   </tr>
 </table>

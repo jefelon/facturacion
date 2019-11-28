@@ -36,7 +36,7 @@ if($_POST['action']=="insertar")
         }
 
         $imgh = icreate($_FILES['file']['tmp_name']);
-        $imgr = resizeMax($imgh, 180, 130);
+        $imgr = resizeMax($imgh, 450, 300);
 
         header('Content-type: image/jpeg');
         imagejpeg($imgr,'logos/' . $_POST['hdd_emp_id'] . '_'. $_FILES['file']['name']);
@@ -138,7 +138,7 @@ if($_POST['action']=="editar")
         }
 
         $imgh = icreate($_FILES['file']['tmp_name']);
-        $imgr = resizeMax($imgh, 180, 130);
+        $imgr = resizeMax($imgh, 450, 300);
 
         header('Content-type: image/jpeg');
         imagejpeg($imgr,'logos/' . $_POST['hdd_emp_id'] . '_'. $_FILES['file']['name']);

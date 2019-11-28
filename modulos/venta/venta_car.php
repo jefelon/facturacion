@@ -418,7 +418,7 @@ else
         //aSign: 'S/. ',
         //pSign: 's',
         vMin: '0.00',
-        vMax: '9999.99'
+        vMax: '99999.99'
     });
     $('.btn_tabla_lote').button({
         icons: {primary: "ui-icon-newwin"},
