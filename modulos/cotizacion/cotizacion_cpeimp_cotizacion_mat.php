@@ -367,10 +367,16 @@ $html.='<tr>
             	$codigo = $cont;
 $html.='<tr class="row">';
             if($dt["tb_cotizaciondetalle_tipven"]==1){
+                if ($dt['tb_marca_nom']!='NA'){
+                    $ven_det_marca= ' - '.$dt['tb_marca_nom'];
+                }
+                if(strlen($dt["tb_ventadetalle_nom"].$ven_det_marca. $ven_det_serie)>66){
+                    $max_lin++;
+                }
                 $html.='<td style="text-align: center">'.$cont.'</td>
                 <td style="text-align: center">'.$dt["tb_cotizaciondetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].'</td>
+                <td style="text-align: left">'.$dt["tb_producto_nom"].$ven_det_marca.'</td>
                 <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preunilin"].'</td>
                 <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"].'</td>';
                 $html.='<td style="text-align: right">'.formato_moneda($dt["tb_cotizaciondetalle_preuni"]*$dt["tb_cotizaciondetalle_can"]).'</td>';

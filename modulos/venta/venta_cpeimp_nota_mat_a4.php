@@ -53,7 +53,7 @@ $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
 $contacto_empresa = "<b>Teléfono:</b> " . $dt['tb_empresa_tel'] ."<b> Correo:</b>" . $dt['tb_empresa_ema'];
-$texto_venta_producto="<i>Venta de ferreteria en general, accesorios, focos, calaminas, cemento, pegamento. precios al por mayor y menor.</i>";
+$texto_venta_producto="<i>".$dt['tb_empresa_teximp']."</i>";
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 $image_info = getimagesize($empresa_logo);
 if(!is_file($empresa_logo)){
@@ -392,16 +392,13 @@ $html.='
 <table style="width: 100%; border:'.$bordelineas.'; border-collapse:collapse;">
     <tbody>
         <tr class="header_row">
-            <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 7%;"><b>CANT.</b></th>
-             
-            <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
-            <th style="text-align: center; width: 8%;"><b>UNIDAD</b></th>
-            <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>PRECIO UNIT.</b></th>
-            <th style="text-align: right; width: 12%;"><b>DESCUENT.</b></th>
-            <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>IMPORTE</b></th>
+            <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
+            <th style="text-align: center; width: 7%;"><b>CANT.</b></th>           
+            <th style="text-align: center; width: 56%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 6%;"><b>UNID.</b></th>
+            <th style="text-align: right; width: 9%;"><b>P. UNIT.</b></th>
+            <th style="text-align: right; width: 7%;"><b>DESC.</b></th>
+            <th style="text-align: right; width: 10%;"><b>IMPORTE</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
@@ -411,22 +408,28 @@ while($dt = mysql_fetch_array($dts)){
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
 
-        $ven_det_serie= '';
         if ($dt['tb_ventadetalle_serie']!=''){
             $ven_det_serie= ' - '.$dt['tb_ventadetalle_serie'];
         }
-        $html .='<td style="text-align:center">' . $cont . '</td>
-                 <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
-                
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"]. $ven_det_serie .' ';
-
-        $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
-        while($lote = mysql_fetch_array($lotes)) {
-            $html.= '- L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].'';
+        if ($dt['tb_marca_nom']!='NA'){
+            $ven_det_marca= ' - '.$dt['tb_marca_nom'];
         }
-        $html .= '</td>
-                    <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                    <td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
+        if(strlen($dt["tb_ventadetalle_nom"].$ven_det_marca. $ven_det_serie)>66){
+            $max_lin++;
+        }
+        $html .='
+                <td style="text-align:center">' . $cont . '</td>
+                <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
+                
+                <td style="text-align: left">' . $dt["tb_ventadetalle_nom"].$ven_det_marca. $ven_det_serie.'';
+
+                $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
+                while($lote = mysql_fetch_array($lotes)) {
+                    $html.= '- L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].'';
+                }
+        $html .='</td>
+                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
+                  <td style="text-align: right">' . formato_moneda($valor_unitario_linea) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_des']) . '</td>
                   <td style="text-align: right">' . formato_moneda($dt['tb_ventadetalle_preuni'] * $dt['tb_ventadetalle_can']) . '</td>';
     }else{
@@ -577,12 +580,12 @@ $html2.='
 <table border="0" width="100%">
     <tr>
         <td>
-            <img src="../empresa/logos/logo_pie_chint.jpg" border="0"  width="225" height="85" style="line-height:50%;"/>
+            <img src="../empresa/logos/hermoza.jpg" border="0"  width="230" height="75" style="line-height:50%;"/>
         </td>
         <td>
-            <img src="../empresa/logos/logo_pie_elcope.jpg" border="0"  width="253" height="126" style="line-height:50%;"/>
+            <img src="../empresa/logos/exther.jpg" border="0"  width="230" height="87" style="line-height:50%;"/>
         </td>
-        <td>
+        <!-- <td>
             <img src="../empresa/logos/logo_pie_hager.jpg" border="0"  width="300" height="98" style="line-height:50%;"/>
         </td>
         <td>
@@ -596,7 +599,7 @@ $html2.='
         </td>
         <td>
             <img src="../empresa/logos/logo_pie_thorgel.jpg" border="0"  width="373" height="135" style="line-height:50%;"/>
-        </td>
+        </td>-->
     </tr>
 </table>
 <table>

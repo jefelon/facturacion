@@ -402,10 +402,8 @@ $html.='
             <th style="text-align: center; width: 7%;"><b>CANT.</b></th>
              <th style="text-align: center; width: 6%;"><b>UNID.</b></th>
             <th style="text-align: center; width: 56%;"><b>DESCRIPCION</b></th>
-            <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
             <th style="text-align: right; width: 9%;"><b>P UNIT.</b></th>
             <th style="text-align: right; width: 7%;"><b>DESC.</b></th>
-            <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
             <th style="text-align: right; width: 10%;"><b>IMPORTE</b></th>
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
