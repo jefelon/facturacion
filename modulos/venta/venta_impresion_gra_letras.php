@@ -243,8 +243,8 @@ $html.='
         <td style="text-align: center" width="25mm"> '.$serie.'-'.$numero.'</td>
         <td style="text-align: center" width="30mm"> AREQUIPA </td>
         <td style="text-align: center" width="54mm">
-            <table style="font-size: 9pt;margin-top: 5px;padding-top: 10px;">
-                <tr><td width="9mm">'.mostrarDiaMesAnio2(1,$fecha).'</td><td width="8mm">'.mostrarDiaMesAnio2(2,$fecha).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$fecha).'</td>
+            <table style="font-size: 9pt;margin-top: 5px;padding-top: 8px;">
+                <tr><td width="4mm">'.mostrarDiaMesAnio2(1,$fecha).'</td><td width="8mm">'.mostrarDiaMesAnio2(2,$fecha).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$fecha).'</td>
                 <td width="9mm">'.mostrarDiaMesAnio2(1,$ltr['tb_letras_fecha']).'</td><td width="8mm">'.mostrarDiaMesAnio2(2,$ltr['tb_letras_fecha']).'</td><td width="10mm">'.mostrarDiaMesAnio2(3,$ltr['tb_letras_fecha']).'</td></tr>
             </table>
         </td>
@@ -255,10 +255,10 @@ $html.='
     </tr>
     <tr>
         <td style="text-align: left" width="45mm"></td>
-        <td style="text-align: left;height: 10mm;line-height: 13px" width="100%">'.$letras_monto.'</td>
+        <td style="text-align: left;height: 8mm;line-height: 8px" width="100%">'.$letras_monto.'</td>
     </tr>
     <tr>
-        <td style="text-align: left;height: 7mm" width="100%"></td>
+        <td style="text-align: left;height: 4mm" width="100%"></td>
     </tr>
     <tr>
         <td style="text-align: left;" width="50mm"></td>
