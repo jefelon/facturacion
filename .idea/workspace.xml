@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_letras.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_letras.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/producto/producto_form.php" afterPath="$PROJECT_DIR$/modulos/producto/producto_form.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -231,7 +230,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_impresion_gra_letras.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="venta_impresion_gra_letras.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_impresion_gra_letras.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="381">
@@ -280,6 +279,18 @@
                 <marker date="1576193485978" expanded="false" signature="8493:8509" ph="..." />
                 <marker date="1576193485978" expanded="false" signature="8549:8565" ph="..." />
                 <marker date="1576193485978" expanded="false" signature="8613:8629" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="producto_form.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/producto/producto_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="235">
+              <caret line="892" column="29" lean-forward="false" selection-start-line="892" selection-start-column="29" selection-end-line="892" selection-end-column="29" />
+              <folding>
+                <element signature="e#25136#25164#0#HTML" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -470,7 +481,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cmb_fil_pro_alm</find>
       <find>puntoventa_seleccionar.php</find>
       <find>filtrar_unidades(</find>
       <find>submit</find>
@@ -500,6 +510,7 @@
       <find>$monto_letras</find>
       <find>EMP_D</find>
       <find>cmb_subcue_id</find>
+      <find>txt_pro_nom</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -554,7 +565,6 @@
         <option value="$PROJECT_DIR$/modulos/catalogo/catalogo_precio.php" />
         <option value="$PROJECT_DIR$/modulos/catalogo/catalogo_compra_filtro.php" />
         <option value="$PROJECT_DIR$/modulos/producto/catalogo_form.php" />
-        <option value="$PROJECT_DIR$/modulos/producto/producto_form.php" />
         <option value="$PROJECT_DIR$/modulos/producto/presentacion_vista.php" />
         <option value="$PROJECT_DIR$/modulos/listaprecio/lista_precio_detalle.php" />
         <option value="$PROJECT_DIR$/modulos/venta/rtyty.php" />
@@ -594,6 +604,7 @@
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_a4.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat_a4.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_letras.php" />
+        <option value="$PROJECT_DIR$/modulos/producto/producto_form.php" />
       </list>
     </option>
   </component>
@@ -661,7 +672,7 @@
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="letras" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="producto" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
@@ -804,12 +815,12 @@
       <workItem from="1575305208221" duration="136000" />
       <workItem from="1575306009007" duration="895000" />
       <workItem from="1576191945517" duration="2711000" />
-      <workItem from="1576282906258" duration="46000" />
+      <workItem from="1576282906258" duration="583000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="747918000" />
+    <option name="totallyTimeSpent" value="748455000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -823,7 +834,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27232796" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27232796" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -908,13 +919,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/puntoventa/puntoventa_seleccionar.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="134" column="64" lean-forward="false" selection-start-line="134" selection-start-column="64" selection-end-line="134" selection-end-column="64" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/catalogo_buscar_nom.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -1598,6 +1602,16 @@
             <marker date="1576193485978" expanded="false" signature="8493:8509" ph="..." />
             <marker date="1576193485978" expanded="false" signature="8549:8565" ph="..." />
             <marker date="1576193485978" expanded="false" signature="8613:8629" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/producto/producto_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="892" column="29" lean-forward="false" selection-start-line="892" selection-start-column="29" selection-end-line="892" selection-end-column="29" />
+          <folding>
+            <element signature="e#25136#25164#0#HTML" expanded="true" />
           </folding>
         </state>
       </provider>

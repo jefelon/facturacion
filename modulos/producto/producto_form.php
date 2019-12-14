@@ -890,7 +890,7 @@ $(function() {
 			txt_pro_nom: {
 				required: true,
 				minlength: 1,
-				maxlength: 50
+				maxlength: 70
 			},
 			txt_pro_des: {
 				maxlength: 250
