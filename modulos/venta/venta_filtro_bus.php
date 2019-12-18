@@ -102,7 +102,8 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                             $ast = mysql_fetch_array($asts);
                             ?>
                                 <div id="<?php echo $lugar ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $ast['tb_clientereserva_id']?>); return false;" class="asiento
-                                <?php if ($ast['tb_asientoestado_id']){
+                                <?php
+                                if ($ast['tb_asientoestado_id']){
                                     if($ast['tb_asientoestado_reserva']==1){
                                         echo 'reserva';
                                     }else{

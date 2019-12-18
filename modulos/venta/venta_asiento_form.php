@@ -559,6 +559,29 @@ $pv = mysql_fetch_array($pvs);
 
         }
     }
+    function validar_estado_asiento(){
+        var result='';
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_valida_asiento.php",
+            async:false,
+            dataType: "json",
+            data: ({
+                veh_id:$('#hdd_vehiculo').val(),
+                num_asi:($('.seleccionado').attr("id")).split('_')[1],
+                txt_cli_doc:$('#txt_pasaj_dni').val(),
+                cmb_fech_sal:$('#cmb_fech_sal').val(),
+                cmb_horario:$('#cmb_horario').val()
+            }),
+            beforeSend: function() {
+
+            },
+            success: function(data){
+                result = data.estado;
+            }
+        });
+        return result
+    }
 
 
     function getPosition(el) {
@@ -742,6 +765,16 @@ $pv = mysql_fetch_array($pvs);
             }
 
         });
+        $("#txt_pasaj_dni").keydown(function (e) {
+            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.keyCode == 65 && e.ctrlKey === true) || (e.keyCode >= 35 && e.keyCode <= 39)) {
+                return;
+            }
+
+            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                e.preventDefault();
+            }
+        });
+
 
         $( "#div_venta_horario_form" ).dialog({
             title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
@@ -809,6 +842,12 @@ $pv = mysql_fetch_array($pvs);
 
         $("#bus_form").validate({
             submitHandler: function () {
+                var asi_est=validar_estado_asiento();
+                if(asi_est=="ocupado" || asi_est=="reserva"){
+                    alert("Este asiento fue reservado o vendido en otro punto hace instantes... \n Se recargará el croquis de asientos.");
+                    return false;
+                    filtro_bus();
+                }
                 if($('.seleccionado').length<=0){
                     alert('Seleccione un asiento');
                 }else{
