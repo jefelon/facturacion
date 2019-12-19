@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/modulos/venta/venta_valida_asiento.php" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/libreriasphp/consultadni/src/cookie.txt" afterPath="$PROJECT_DIR$/libreriasphp/consultadni/src/cookie.txt" />
       <change beforePath="$PROJECT_DIR$/modulos/venta/cVenta.php" afterPath="$PROJECT_DIR$/modulos/venta/cVenta.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -54,7 +49,7 @@
       <file leaf-file-name="consulta_reniec.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/libreriasphp/consultadni/consulta_reniec.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
+            <state relative-caret-position="544">
               <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
               <folding />
             </state>
@@ -64,36 +59,9 @@
       <file leaf-file-name="venta_asiento_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="181">
+            <state relative-caret-position="2210">
               <caret line="130" column="13" lean-forward="false" selection-start-line="130" selection-start-column="13" selection-end-line="130" selection-end-column="13" />
-              <folding>
-                <element signature="e#1718#2335#0#HTML" expanded="false" />
-                <element signature="e#2373#2919#0#HTML" expanded="false" />
-                <element signature="e#2958#3509#0#HTML" expanded="false" />
-                <element signature="e#4216#4851#0#HTML" expanded="false" />
-                <element signature="e#4889#7375#0#HTML" expanded="false" />
-                <element signature="e#7418#8413#0#HTML" expanded="false" />
-                <element signature="e#8455#9484#0#HTML" expanded="false" />
-                <element signature="e#9515#10102#0#HTML" expanded="false" />
-                <element signature="e#10130#10644#0#HTML" expanded="false" />
-                <element signature="e#10686#11346#0#HTML" expanded="false" />
-                <element signature="e#11392#12152#0#HTML" expanded="false" />
-                <element signature="e#12192#12851#0#HTML" expanded="false" />
-                <element signature="e#12887#13679#0#HTML" expanded="false" />
-                <element signature="e#13722#14626#0#HTML" expanded="false" />
-                <element signature="e#14668#15500#0#HTML" expanded="false" />
-                <element signature="e#15542#16119#0#HTML" expanded="false" />
-                <element signature="e#16159#16763#0#HTML" expanded="false" />
-                <element signature="e#16801#17932#0#HTML" expanded="false" />
-                <element signature="e#18679#19520#0#HTML" expanded="false" />
-                <element signature="e#19571#21067#0#HTML" expanded="false" />
-                <element signature="e#21672#22443#0#HTML" expanded="false" />
-                <element signature="e#24901#25270#0#HTML" expanded="false" />
-                <element signature="e#25321#25957#0#HTML" expanded="false" />
-                <element signature="e#26006#26657#0#HTML" expanded="false" />
-                <element signature="e#26701#27162#0#HTML" expanded="false" />
-                <element signature="n#style#0;n#!!top" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -101,7 +69,7 @@
       <file leaf-file-name="venta_impresion_gra_manifiesto.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_impresion_gra_manifiesto.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
+            <state relative-caret-position="663">
               <caret line="39" column="28" lean-forward="false" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
               <folding>
                 <marker date="1576621316241" expanded="true" signature="3798:13393" ph="..." />
@@ -276,58 +244,58 @@
         <entry file="file://$PROJECT_DIR$/modulos/venta/cVenta.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="210">
-              <caret line="688" column="39" lean-forward="false" selection-start-line="688" selection-start-column="39" selection-end-line="688" selection-end-column="39" />
+              <caret line="688" column="35" lean-forward="false" selection-start-line="688" selection-start-column="35" selection-end-line="688" selection-end-column="35" />
               <folding>
-                <marker date="1576635684305" expanded="true" signature="260:1240" ph="INSERT INTO tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="1617:2658" ph="INSERT INTO tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="2864:3093" ph="INSERT INTO tb_viajeventa... " />
-                <marker date="1576635684305" expanded="true" signature="3328:3615" ph="INSERT INTO tb_encomiendaventa... " />
-                <marker date="1576635684305" expanded="true" signature="3801:3970" ph="INSERT INTO tb_asientoestado... " />
-                <marker date="1576635684305" expanded="true" signature="4239:4925" ph="INSERT INTO tb_ventadetalle... " />
-                <marker date="1576635684305" expanded="true" signature="5236:6268" ph="SELECT ev.tb... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="6928:7804" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="8394:8682" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="8842:9085" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="9291:10318" ph="SELECT ev.tb... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="10937:11903" ph="SELECT ev.tb... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="12542:12931" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="13854:14753" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="15519:16671" ph="SELECT tb_ve... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="17387:18083" ph="SELECT tb_ve... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="18670:19054" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="19184:19416" ph="SELECT cs_ti... tb_ventadetalle" />
-                <marker date="1576635684305" expanded="true" signature="19589:19658" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="19787:20592" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="20726:21311" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="21444:21903" ph="SELECT * FRO... tb_producto" />
-                <marker date="1576635684305" expanded="true" signature="22046:22239" ph="SELECT * FRO... tb_servicio" />
-                <marker date="1576635684305" expanded="true" signature="22381:22538" ph="UPDATE tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="22669:22768" ph="UPDATE tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="22885:22941" ph="SELECT * FRO... tb_usosoftware" />
-                <marker date="1576635684305" expanded="true" signature="23054:23093" ph="DELETE FROM tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="23202:23292" ph="SELECT DISTI... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="23429:23656" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="23786:23858" ph="UPDATE tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="24015:24245" ph="UPDATE tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="24394:24531" ph="UPDATE tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="24697:25171" ph="SELECT ev.tb... tb_encomiendaventa" />
-                <marker date="1576635684305" expanded="true" signature="25348:25445" ph="UPDATE tb_encomiendaventa... " />
-                <marker date="1576635684305" expanded="true" signature="25620:25707" ph="UPDATE tb_venta... " />
-                <marker date="1576635684305" expanded="true" signature="25870:26083" ph="SELECT * FRO... tb_viajeventa" />
-                <marker date="1576635684305" expanded="true" signature="26247:26654" ph="SELECT tb_vi... tb_viajehorario" />
-                <marker date="1576635684305" expanded="true" signature="26830:27622" ph="SELECT vh.tb... tb_viajehorario" />
-                <marker date="1576635684305" expanded="true" signature="27789:28156" ph="SELECT * FRO... tb_viajeventa" />
-                <marker date="1576635684305" expanded="true" signature="28338:28848" ph="SELECT * FRO... tb_encomiendaventa" />
-                <marker date="1576635684305" expanded="true" signature="29009:29113" ph="SELECT * FRO... tb_encomiendaventa" />
-                <marker date="1576635684305" expanded="true" signature="29284:29397" ph="UPDATE tb_encomiendaventa... " />
-                <marker date="1576635684305" expanded="true" signature="29565:29829" ph="SELECT * FRO... tb_viajeventa" />
-                <marker date="1576635684305" expanded="true" signature="29996:30260" ph="SELECT * FRO... tb_viajeventa" />
-                <marker date="1576635684305" expanded="true" signature="30425:30480" ph="DELETE FROM tb_asientoestado... " />
-                <marker date="1576635684305" expanded="true" signature="30649:30883" ph="SELECT DISTI... tb_encomiendaventa" />
-                <marker date="1576635684305" expanded="true" signature="31047:31184" ph="SELECT * FRO... tb_encomiendaventa" />
-                <marker date="1576635684305" expanded="true" signature="31362:31457" ph="SELECT * FRO... tb_venta" />
-                <marker date="1576635684305" expanded="true" signature="31630:31726" ph="SELECT * FRO... tb_viajeventa" />
-                <marker date="1576635684305" expanded="true" signature="31918:32043" ph="UPDATE tb_viajeventa... " />
+                <marker date="1576718532186" expanded="true" signature="260:1240" ph="INSERT INTO tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="1617:2658" ph="INSERT INTO tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="2864:3093" ph="INSERT INTO tb_viajeventa... " />
+                <marker date="1576718532186" expanded="true" signature="3328:3615" ph="INSERT INTO tb_encomiendaventa... " />
+                <marker date="1576718532186" expanded="true" signature="3801:3970" ph="INSERT INTO tb_asientoestado... " />
+                <marker date="1576718532186" expanded="true" signature="4239:4925" ph="INSERT INTO tb_ventadetalle... " />
+                <marker date="1576718532186" expanded="true" signature="5236:6268" ph="SELECT ev.tb... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="6928:7804" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="8394:8682" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="8842:9085" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="9291:10318" ph="SELECT ev.tb... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="10937:11903" ph="SELECT ev.tb... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="12542:12931" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="13854:14753" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="15519:16671" ph="SELECT tb_ve... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="17387:18083" ph="SELECT tb_ve... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="18670:19054" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="19184:19416" ph="SELECT cs_ti... tb_ventadetalle" />
+                <marker date="1576718532186" expanded="true" signature="19589:19658" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="19787:20592" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="20726:21311" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="21444:21903" ph="SELECT * FRO... tb_producto" />
+                <marker date="1576718532186" expanded="true" signature="22046:22239" ph="SELECT * FRO... tb_servicio" />
+                <marker date="1576718532186" expanded="true" signature="22381:22538" ph="UPDATE tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="22669:22768" ph="UPDATE tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="22885:22941" ph="SELECT * FRO... tb_usosoftware" />
+                <marker date="1576718532186" expanded="true" signature="23054:23093" ph="DELETE FROM tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="23202:23292" ph="SELECT DISTI... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="23429:23656" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="23786:23858" ph="UPDATE tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="24015:24245" ph="UPDATE tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="24394:24531" ph="UPDATE tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="24697:25171" ph="SELECT ev.tb... tb_encomiendaventa" />
+                <marker date="1576718532186" expanded="true" signature="25348:25445" ph="UPDATE tb_encomiendaventa... " />
+                <marker date="1576718532186" expanded="true" signature="25620:25707" ph="UPDATE tb_venta... " />
+                <marker date="1576718532186" expanded="true" signature="25870:26083" ph="SELECT * FRO... tb_viajeventa" />
+                <marker date="1576718532186" expanded="true" signature="26247:26654" ph="SELECT tb_vi... tb_viajehorario" />
+                <marker date="1576718532186" expanded="true" signature="26830:27622" ph="SELECT vh.tb... tb_viajehorario" />
+                <marker date="1576718532186" expanded="true" signature="27789:28152" ph="SELECT * FRO... tb_viajeventa" />
+                <marker date="1576718532186" expanded="true" signature="28334:28844" ph="SELECT * FRO... tb_encomiendaventa" />
+                <marker date="1576718532186" expanded="true" signature="29005:29109" ph="SELECT * FRO... tb_encomiendaventa" />
+                <marker date="1576718532186" expanded="true" signature="29280:29393" ph="UPDATE tb_encomiendaventa... " />
+                <marker date="1576718532186" expanded="true" signature="29561:29825" ph="SELECT * FRO... tb_viajeventa" />
+                <marker date="1576718532186" expanded="true" signature="29992:30256" ph="SELECT * FRO... tb_viajeventa" />
+                <marker date="1576718532186" expanded="true" signature="30421:30476" ph="DELETE FROM tb_asientoestado... " />
+                <marker date="1576718532186" expanded="true" signature="30645:30879" ph="SELECT DISTI... tb_encomiendaventa" />
+                <marker date="1576718532186" expanded="true" signature="31043:31180" ph="SELECT * FRO... tb_encomiendaventa" />
+                <marker date="1576718532186" expanded="true" signature="31358:31453" ph="SELECT * FRO... tb_venta" />
+                <marker date="1576718532186" expanded="true" signature="31626:31722" ph="SELECT * FRO... tb_viajeventa" />
+                <marker date="1576718532186" expanded="true" signature="31914:32039" ph="UPDATE tb_viajeventa... " />
               </folding>
             </state>
           </provider>
@@ -357,7 +325,7 @@
         <entry file="file://$PROJECT_DIR$/modulos/categoria/categoria_reg.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="306">
-              <caret line="18" column="32" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="18" selection-end-column="32" />
+              <caret line="18" column="32" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="18" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -366,12 +334,9 @@
       <file leaf-file-name="venta_filtro_bus.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1305">
+            <state relative-caret-position="1938">
               <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -379,8 +344,8 @@
       <file leaf-file-name="cAsiento.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/asiento/cAsiento.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+            <state relative-caret-position="1241">
+              <caret line="73" column="5" lean-forward="false" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
               <folding>
                 <marker date="1576621312704" expanded="true" signature="408:459" ph="SELECT * FRO... tb_asiento" />
                 <marker date="1576621312704" expanded="true" signature="595:702" ph="SELECT * FRO... tb_asiento" />
@@ -401,7 +366,7 @@
       <file leaf-file-name="venta_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
+            <state relative-caret-position="12818">
               <caret line="754" column="39" lean-forward="false" selection-start-line="754" selection-start-column="25" selection-end-line="754" selection-end-column="39" />
               <folding />
             </state>
@@ -575,7 +540,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -615,7 +580,7 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -722,11 +687,12 @@
       <workItem from="1574872739085" duration="1905000" />
       <workItem from="1574967144792" duration="1183000" />
       <workItem from="1576621668584" duration="11035000" />
+      <workItem from="1576718477198" duration="57000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="545940000" />
+    <option name="totallyTimeSpent" value="545997000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -737,13 +703,12 @@
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3417323" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3417323" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -753,6 +718,7 @@
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -1004,9 +970,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
           <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
-          <folding>
-            <marker date="1576621313239" expanded="true" signature="5836:5861" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1033,7 +996,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
           <caret line="80" column="18" lean-forward="false" selection-start-line="80" selection-start-column="18" selection-end-line="80" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1045,115 +1007,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/asiento/cAsiento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="73" column="5" lean-forward="true" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
-          <folding>
-            <marker date="1576621312704" expanded="true" signature="408:459" ph="SELECT * FRO... tb_asiento" />
-            <marker date="1576621312704" expanded="true" signature="595:702" ph="SELECT * FRO... tb_asiento" />
-            <marker date="1576621312704" expanded="true" signature="836:884" ph="SELECT * FRO... tb_asiento" />
-            <marker date="1576621312704" expanded="true" signature="1009:1067" ph="SELECT * FRO... tb_viajehorario" />
-            <marker date="1576621312704" expanded="true" signature="1228:1328" ph="SELECT * FRO... tb_asiento" />
-            <marker date="1576621312704" expanded="true" signature="1508:1923" ph="SELECT * FRO... tb_asientoestado" />
-            <marker date="1576621312704" expanded="true" signature="2066:2141" ph="UPDATE tb_asiento... " />
-            <marker date="1576621312704" expanded="true" signature="2276:2325" ph="SELECT * FRO... ${$tabla}" />
-            <marker date="1576621312704" expanded="true" signature="2486:2639" ph="SELECT * FRO... tb_distribucionasiento" />
-            <marker date="1576621312704" expanded="true" signature="2814:2930" ph="UPDATE tb_distribucionasiento... " />
-            <marker date="1576621312704" expanded="true" signature="3066:3109" ph="DELETE FROM tb_asiento... " />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/categoria/categoria_reg.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="32" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="18" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="754" column="39" lean-forward="false" selection-start-line="754" selection-start-column="25" selection-end-line="754" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1305">
-          <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/libreriasphp/consultadni/consulta_reniec.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
+        <state relative-caret-position="544">
           <caret line="32" column="0" lean-forward="false" selection-start-line="32" selection-start-column="0" selection-end-line="32" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_valida_asiento.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../phpMyAdmin/index.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
+        <state relative-caret-position="2210">
           <caret line="130" column="13" lean-forward="false" selection-start-line="130" selection-start-column="13" selection-end-line="130" selection-end-column="13" />
-          <folding>
-            <element signature="e#1718#2335#0#HTML" expanded="false" />
-            <element signature="e#2373#2919#0#HTML" expanded="false" />
-            <element signature="e#2958#3509#0#HTML" expanded="false" />
-            <element signature="e#4216#4851#0#HTML" expanded="false" />
-            <element signature="e#4889#7375#0#HTML" expanded="false" />
-            <element signature="e#7418#8413#0#HTML" expanded="false" />
-            <element signature="e#8455#9484#0#HTML" expanded="false" />
-            <element signature="e#9515#10102#0#HTML" expanded="false" />
-            <element signature="e#10130#10644#0#HTML" expanded="false" />
-            <element signature="e#10686#11346#0#HTML" expanded="false" />
-            <element signature="e#11392#12152#0#HTML" expanded="false" />
-            <element signature="e#12192#12851#0#HTML" expanded="false" />
-            <element signature="e#12887#13679#0#HTML" expanded="false" />
-            <element signature="e#13722#14626#0#HTML" expanded="false" />
-            <element signature="e#14668#15500#0#HTML" expanded="false" />
-            <element signature="e#15542#16119#0#HTML" expanded="false" />
-            <element signature="e#16159#16763#0#HTML" expanded="false" />
-            <element signature="e#16801#17932#0#HTML" expanded="false" />
-            <element signature="e#18679#19520#0#HTML" expanded="false" />
-            <element signature="e#19571#21067#0#HTML" expanded="false" />
-            <element signature="e#21672#22443#0#HTML" expanded="false" />
-            <element signature="e#24901#25270#0#HTML" expanded="false" />
-            <element signature="e#25321#25957#0#HTML" expanded="false" />
-            <element signature="e#26006#26657#0#HTML" expanded="false" />
-            <element signature="e#26701#27162#0#HTML" expanded="false" />
-            <element signature="n#style#0;n#!!top" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_impresion_gra_manifiesto.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
+        <state relative-caret-position="663">
           <caret line="39" column="28" lean-forward="false" selection-start-line="39" selection-start-column="28" selection-end-line="39" selection-end-column="28" />
           <folding>
             <marker date="1576621316241" expanded="true" signature="3798:13393" ph="..." />
@@ -1323,61 +1195,121 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_valida_asiento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="38" column="0" lean-forward="false" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../phpMyAdmin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/categoria/categoria_reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="32" lean-forward="false" selection-start-line="16" selection-start-column="8" selection-end-line="18" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1938">
+          <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/asiento/cAsiento.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="73" column="5" lean-forward="false" selection-start-line="73" selection-start-column="5" selection-end-line="73" selection-end-column="5" />
+          <folding>
+            <marker date="1576621312704" expanded="true" signature="408:459" ph="SELECT * FRO... tb_asiento" />
+            <marker date="1576621312704" expanded="true" signature="595:702" ph="SELECT * FRO... tb_asiento" />
+            <marker date="1576621312704" expanded="true" signature="836:884" ph="SELECT * FRO... tb_asiento" />
+            <marker date="1576621312704" expanded="true" signature="1009:1067" ph="SELECT * FRO... tb_viajehorario" />
+            <marker date="1576621312704" expanded="true" signature="1228:1328" ph="SELECT * FRO... tb_asiento" />
+            <marker date="1576621312704" expanded="true" signature="1508:1923" ph="SELECT * FRO... tb_asientoestado" />
+            <marker date="1576621312704" expanded="true" signature="2066:2141" ph="UPDATE tb_asiento... " />
+            <marker date="1576621312704" expanded="true" signature="2276:2325" ph="SELECT * FRO... ${$tabla}" />
+            <marker date="1576621312704" expanded="true" signature="2486:2639" ph="SELECT * FRO... tb_distribucionasiento" />
+            <marker date="1576621312704" expanded="true" signature="2814:2930" ph="UPDATE tb_distribucionasiento... " />
+            <marker date="1576621312704" expanded="true" signature="3066:3109" ph="DELETE FROM tb_asiento... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12818">
+          <caret line="754" column="39" lean-forward="false" selection-start-line="754" selection-start-column="25" selection-end-line="754" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/cVenta.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
-          <caret line="688" column="39" lean-forward="false" selection-start-line="688" selection-start-column="39" selection-end-line="688" selection-end-column="39" />
+          <caret line="688" column="35" lean-forward="false" selection-start-line="688" selection-start-column="35" selection-end-line="688" selection-end-column="35" />
           <folding>
-            <marker date="1576635684305" expanded="true" signature="260:1240" ph="INSERT INTO tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="1617:2658" ph="INSERT INTO tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="2864:3093" ph="INSERT INTO tb_viajeventa... " />
-            <marker date="1576635684305" expanded="true" signature="3328:3615" ph="INSERT INTO tb_encomiendaventa... " />
-            <marker date="1576635684305" expanded="true" signature="3801:3970" ph="INSERT INTO tb_asientoestado... " />
-            <marker date="1576635684305" expanded="true" signature="4239:4925" ph="INSERT INTO tb_ventadetalle... " />
-            <marker date="1576635684305" expanded="true" signature="5236:6268" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="6928:7804" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="8394:8682" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="8842:9085" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="9291:10318" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="10937:11903" ph="SELECT ev.tb... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="12542:12931" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="13854:14753" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="15519:16671" ph="SELECT tb_ve... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="17387:18083" ph="SELECT tb_ve... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="18670:19054" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="19184:19416" ph="SELECT cs_ti... tb_ventadetalle" />
-            <marker date="1576635684305" expanded="true" signature="19589:19658" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="19787:20592" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="20726:21311" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="21444:21903" ph="SELECT * FRO... tb_producto" />
-            <marker date="1576635684305" expanded="true" signature="22046:22239" ph="SELECT * FRO... tb_servicio" />
-            <marker date="1576635684305" expanded="true" signature="22381:22538" ph="UPDATE tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="22669:22768" ph="UPDATE tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="22885:22941" ph="SELECT * FRO... tb_usosoftware" />
-            <marker date="1576635684305" expanded="true" signature="23054:23093" ph="DELETE FROM tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="23202:23292" ph="SELECT DISTI... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="23429:23656" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="23786:23858" ph="UPDATE tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="24015:24245" ph="UPDATE tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="24394:24531" ph="UPDATE tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="24697:25171" ph="SELECT ev.tb... tb_encomiendaventa" />
-            <marker date="1576635684305" expanded="true" signature="25348:25445" ph="UPDATE tb_encomiendaventa... " />
-            <marker date="1576635684305" expanded="true" signature="25620:25707" ph="UPDATE tb_venta... " />
-            <marker date="1576635684305" expanded="true" signature="25870:26083" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1576635684305" expanded="true" signature="26247:26654" ph="SELECT tb_vi... tb_viajehorario" />
-            <marker date="1576635684305" expanded="true" signature="26830:27622" ph="SELECT vh.tb... tb_viajehorario" />
-            <marker date="1576635684305" expanded="true" signature="27789:28156" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1576635684305" expanded="true" signature="28338:28848" ph="SELECT * FRO... tb_encomiendaventa" />
-            <marker date="1576635684305" expanded="true" signature="29009:29113" ph="SELECT * FRO... tb_encomiendaventa" />
-            <marker date="1576635684305" expanded="true" signature="29284:29397" ph="UPDATE tb_encomiendaventa... " />
-            <marker date="1576635684305" expanded="true" signature="29565:29829" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1576635684305" expanded="true" signature="29996:30260" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1576635684305" expanded="true" signature="30425:30480" ph="DELETE FROM tb_asientoestado... " />
-            <marker date="1576635684305" expanded="true" signature="30649:30883" ph="SELECT DISTI... tb_encomiendaventa" />
-            <marker date="1576635684305" expanded="true" signature="31047:31184" ph="SELECT * FRO... tb_encomiendaventa" />
-            <marker date="1576635684305" expanded="true" signature="31362:31457" ph="SELECT * FRO... tb_venta" />
-            <marker date="1576635684305" expanded="true" signature="31630:31726" ph="SELECT * FRO... tb_viajeventa" />
-            <marker date="1576635684305" expanded="true" signature="31918:32043" ph="UPDATE tb_viajeventa... " />
+            <marker date="1576718532186" expanded="true" signature="260:1240" ph="INSERT INTO tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="1617:2658" ph="INSERT INTO tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="2864:3093" ph="INSERT INTO tb_viajeventa... " />
+            <marker date="1576718532186" expanded="true" signature="3328:3615" ph="INSERT INTO tb_encomiendaventa... " />
+            <marker date="1576718532186" expanded="true" signature="3801:3970" ph="INSERT INTO tb_asientoestado... " />
+            <marker date="1576718532186" expanded="true" signature="4239:4925" ph="INSERT INTO tb_ventadetalle... " />
+            <marker date="1576718532186" expanded="true" signature="5236:6268" ph="SELECT ev.tb... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="6928:7804" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="8394:8682" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="8842:9085" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="9291:10318" ph="SELECT ev.tb... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="10937:11903" ph="SELECT ev.tb... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="12542:12931" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="13854:14753" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="15519:16671" ph="SELECT tb_ve... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="17387:18083" ph="SELECT tb_ve... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="18670:19054" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="19184:19416" ph="SELECT cs_ti... tb_ventadetalle" />
+            <marker date="1576718532186" expanded="true" signature="19589:19658" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="19787:20592" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="20726:21311" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="21444:21903" ph="SELECT * FRO... tb_producto" />
+            <marker date="1576718532186" expanded="true" signature="22046:22239" ph="SELECT * FRO... tb_servicio" />
+            <marker date="1576718532186" expanded="true" signature="22381:22538" ph="UPDATE tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="22669:22768" ph="UPDATE tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="22885:22941" ph="SELECT * FRO... tb_usosoftware" />
+            <marker date="1576718532186" expanded="true" signature="23054:23093" ph="DELETE FROM tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="23202:23292" ph="SELECT DISTI... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="23429:23656" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="23786:23858" ph="UPDATE tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="24015:24245" ph="UPDATE tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="24394:24531" ph="UPDATE tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="24697:25171" ph="SELECT ev.tb... tb_encomiendaventa" />
+            <marker date="1576718532186" expanded="true" signature="25348:25445" ph="UPDATE tb_encomiendaventa... " />
+            <marker date="1576718532186" expanded="true" signature="25620:25707" ph="UPDATE tb_venta... " />
+            <marker date="1576718532186" expanded="true" signature="25870:26083" ph="SELECT * FRO... tb_viajeventa" />
+            <marker date="1576718532186" expanded="true" signature="26247:26654" ph="SELECT tb_vi... tb_viajehorario" />
+            <marker date="1576718532186" expanded="true" signature="26830:27622" ph="SELECT vh.tb... tb_viajehorario" />
+            <marker date="1576718532186" expanded="true" signature="27789:28152" ph="SELECT * FRO... tb_viajeventa" />
+            <marker date="1576718532186" expanded="true" signature="28334:28844" ph="SELECT * FRO... tb_encomiendaventa" />
+            <marker date="1576718532186" expanded="true" signature="29005:29109" ph="SELECT * FRO... tb_encomiendaventa" />
+            <marker date="1576718532186" expanded="true" signature="29280:29393" ph="UPDATE tb_encomiendaventa... " />
+            <marker date="1576718532186" expanded="true" signature="29561:29825" ph="SELECT * FRO... tb_viajeventa" />
+            <marker date="1576718532186" expanded="true" signature="29992:30256" ph="SELECT * FRO... tb_viajeventa" />
+            <marker date="1576718532186" expanded="true" signature="30421:30476" ph="DELETE FROM tb_asientoestado... " />
+            <marker date="1576718532186" expanded="true" signature="30645:30879" ph="SELECT DISTI... tb_encomiendaventa" />
+            <marker date="1576718532186" expanded="true" signature="31043:31180" ph="SELECT * FRO... tb_encomiendaventa" />
+            <marker date="1576718532186" expanded="true" signature="31358:31453" ph="SELECT * FRO... tb_venta" />
+            <marker date="1576718532186" expanded="true" signature="31626:31722" ph="SELECT * FRO... tb_viajeventa" />
+            <marker date="1576718532186" expanded="true" signature="31914:32039" ph="UPDATE tb_viajeventa... " />
           </folding>
         </state>
       </provider>
