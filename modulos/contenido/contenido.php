@@ -50,14 +50,13 @@ $menu_administrador=
 	  </li>
 	  <li class="topmenu"><span><a href="#" >Catálogo</a></span>
 	    <ul>
-		  <li><a href="../unidad/">Unidades de Medida</a></li>
-		  <li><a href="../producto/">Productos</a></li>
-		  <li><a href="../listaprecio/">Lista de Precios</a></li>
+	      <li><a href="../transporte/">Transporte</a></li>
+		  <li><a href="../vehiculo/">Vehículo</a></li>	
 		  <li><a href="../servicio/">Servicios</a></li>
-		  <li><a href="../transporte/">Transporte</a></li>
-		  <!--<li><a href="../venta/venta_vista_croquis.php">Croquis Transporte</a></li>-->
+		  <li><a href="../croquis/">Croquis Transporte</a></li>
 		  <li><a href="../conductor/">Condutor</a></li>
 		  <li><a href="../lugar/">Destinos</a></li>
+		  <li><a href="../listaprecio/">Lista de Precios</a></li>
 	    </ul>
 	  </li>
 	  <li class="topmenu"><span><a href="#" >Ventas</a></span>
@@ -68,8 +67,7 @@ $menu_administrador=
 		  <li><a href="../talonario/">Talonarios</a></li>
 		  <li><a href="../talonarionc/">Talonario Nota Crédito</a></li>
 		  <li><a href="../talonariond/">Talonario Nota Débito</a></li>
-		  <li><a href="../clientes/">Clientes</a>
-          </li>
+		  <li><a href="../clientes/">Clientes</a></li>
 		  <li><a href="../tarjeta/">Tarjetas</a></li>
 		  <li><a href="../cuentacorriente/">Cuenta Corriente</a></li>
 		  
