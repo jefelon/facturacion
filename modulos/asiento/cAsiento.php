@@ -97,15 +97,6 @@ class cAsiento{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
-    function actualizar_distribucionasiento($id,$distrib){
-        $sql = "UPDATE tb_distribucionasiento SET  
-	`tb_distribucionasiento_lugar` =  '$distrib'
-	WHERE tb_distribucionasiento_id =$id;";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
-
 	function eliminar($id){
 	$sql="DELETE FROM tb_asiento WHERE tb_asiento_id=$id";
 	$oCado = new Cado();
