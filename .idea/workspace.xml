@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/libreriasphp/consultadni/src/cookie.txt" afterPath="$PROJECT_DIR$/libreriasphp/consultadni/src/cookie.txt" />
-      <change beforePath="$PROJECT_DIR$/modulos/asiento/cAsiento.php" afterPath="$PROJECT_DIR$/modulos/asiento/cAsiento.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/croquis/croquis_actualizar_posicion.php" afterPath="$PROJECT_DIR$/modulos/croquis/croquis_actualizar_posicion.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php" afterPath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php" />
       <change beforePath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php" afterPath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/croquis/croquis_reg.php" afterPath="$PROJECT_DIR$/modulos/croquis/croquis_reg.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -58,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_form.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-187">
-              <caret line="55" column="14" lean-forward="true" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+              <caret line="55" column="14" lean-forward="false" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
               <folding>
                 <marker date="1577578363218" expanded="true" signature="4575:4599" ph="..." />
               </folding>
@@ -70,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_reg.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="176">
-              <caret line="43" column="134" lean-forward="true" selection-start-line="43" selection-start-column="134" selection-end-line="43" selection-end-column="134" />
+              <caret line="43" column="134" lean-forward="false" selection-start-line="43" selection-start-column="134" selection-end-line="43" selection-end-column="134" />
               <folding />
             </state>
           </provider>
@@ -80,7 +72,7 @@
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="286">
-              <caret line="204" column="81" lean-forward="true" selection-start-line="204" selection-start-column="16" selection-end-line="204" selection-end-column="84" />
+              <caret line="204" column="81" lean-forward="false" selection-start-line="204" selection-start-column="16" selection-end-line="204" selection-end-column="84" />
               <folding>
                 <element signature="e#1718#2335#0#HTML" expanded="false" />
                 <element signature="e#2373#2919#0#HTML" expanded="false" />
@@ -127,7 +119,7 @@
         <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="405">
-              <caret line="141" column="85" lean-forward="false" selection-start-line="141" selection-start-column="85" selection-end-line="141" selection-end-column="85" />
+              <caret line="141" column="84" lean-forward="false" selection-start-line="141" selection-start-column="84" selection-end-line="141" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -137,7 +129,7 @@
         <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-720">
-              <caret line="175" column="5" lean-forward="true" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
+              <caret line="175" column="5" lean-forward="false" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
               <folding />
             </state>
           </provider>
@@ -490,12 +482,12 @@
       <workItem from="1577212903097" duration="42269000" />
       <workItem from="1577732023764" duration="1804000" />
       <workItem from="1577998272708" duration="623000" />
-      <workItem from="1578103062845" duration="23086000" />
+      <workItem from="1578103062845" duration="23687000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="613779000" />
+    <option name="totallyTimeSpent" value="614380000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -957,7 +949,7 @@
     <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_reg.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="176">
-          <caret line="43" column="134" lean-forward="true" selection-start-line="43" selection-start-column="134" selection-end-line="43" selection-end-column="134" />
+          <caret line="43" column="134" lean-forward="false" selection-start-line="43" selection-start-column="134" selection-end-line="43" selection-end-column="134" />
           <folding />
         </state>
       </provider>
@@ -965,7 +957,7 @@
     <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-187">
-          <caret line="55" column="14" lean-forward="true" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+          <caret line="55" column="14" lean-forward="false" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
           <folding>
             <marker date="1577578363218" expanded="true" signature="4575:4599" ph="..." />
           </folding>
@@ -989,7 +981,7 @@
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="286">
-          <caret line="204" column="81" lean-forward="true" selection-start-line="204" selection-start-column="16" selection-end-line="204" selection-end-column="84" />
+          <caret line="204" column="81" lean-forward="false" selection-start-line="204" selection-start-column="16" selection-end-line="204" selection-end-column="84" />
           <folding>
             <element signature="e#1718#2335#0#HTML" expanded="false" />
             <element signature="e#2373#2919#0#HTML" expanded="false" />
@@ -1018,7 +1010,7 @@
     <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-720">
-          <caret line="175" column="5" lean-forward="true" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
+          <caret line="175" column="5" lean-forward="false" selection-start-line="175" selection-start-column="5" selection-end-line="175" selection-end-column="5" />
           <folding />
         </state>
       </provider>
@@ -1026,7 +1018,7 @@
     <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="405">
-          <caret line="141" column="85" lean-forward="false" selection-start-line="141" selection-start-column="85" selection-end-line="141" selection-end-column="85" />
+          <caret line="141" column="84" lean-forward="false" selection-start-line="141" selection-start-column="84" selection-end-line="141" selection-end-column="84" />
           <folding />
         </state>
       </provider>

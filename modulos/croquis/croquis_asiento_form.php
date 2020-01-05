@@ -139,7 +139,7 @@ echo  "Modificando vehiculo: ". $veh_nombre;
                     $('.seleccionado').attr("id",nuevoId[0]+'_'+nuevoId[1]+'_'+'tv');
                     $('#sortable3').trigger('sortupdate'); // Trigger the update event manually
                     $('#sortable3').sortable( "refreshPositions" );
-                    croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());s
+                    croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
                     break;
             }
 
