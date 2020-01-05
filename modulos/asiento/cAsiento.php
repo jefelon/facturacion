@@ -64,10 +64,9 @@ class cAsiento{
     function mostrarNombreEstado($nom,$vehiculo,$fecha,$horario){
         $sql="SELECT * 
         FROM tb_asientoestado ae 
-        INNER JOIN tb_asiento a ON a.tb_asiento_id= ae.tb_asiento_id
         INNER JOIN tb_viajehorario vh ON vh.tb_viajehorario_id=ae.tb_viajehorario_id
         INNER JOIN tb_lugar l ON l.tb_lugar_id = ae.tb_destpar_id
-        WHERE a.tb_asiento_nom='$nom' AND vh.tb_vehiculo_id='$vehiculo' AND vh.tb_viajehorario_fecha='$fecha' AND vh.tb_viajehorario_horario='$horario'" ;
+        WHERE ae.tb_asiento_id='$nom' AND vh.tb_vehiculo_id='$vehiculo' AND vh.tb_viajehorario_fecha='$fecha' AND vh.tb_viajehorario_horario='$horario'" ;
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

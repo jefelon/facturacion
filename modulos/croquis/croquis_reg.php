@@ -41,7 +41,7 @@ if($_POST['action_croquis']=="insertar")
                         } elseif ($i == 2) {
                             $dist = "item_4;item_8;item_12;item_16;item_20;item_24;item_28;item_32;item_36;item_40;item_44;item_48;item_52";
                         } elseif ($i == 3) {
-                            $dist = "";
+                            $dist = "item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00";
                         } elseif ($i == 4) {
                             $dist = "item_2;item_6;item_10;item_14;item_18;item_22;item_26;item_30;item_34;item_38;item_42;item_46;item_50;item_54;item_56";
                         } elseif ($i == 5) {

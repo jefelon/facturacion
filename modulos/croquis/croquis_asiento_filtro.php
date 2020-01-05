@@ -15,39 +15,26 @@ require_once("../vehiculo/cVehiculo.php");
 $oVehiculo= new cVehiculo();
 require_once("../formatos/formato.php");
 $vehiculo_id=$_POST["veh_id"];
-if($_POST['action']=="editar_croquis")
-{
-    $dts=$oVehiculo->mostrarUno($vehiculo_id);
-    $dt = mysql_fetch_array($dts);
-    $veh_nombre= $dt['tb_vehiculo_id']. ' '.$dt['tb_vehiculo_marca']. ' - '.$dt['tb_vehiculo_placa'].' de '.$dt['tb_vehiculo_numasi'].' Asientos.';
-    mysql_free_result($dts);
-}
+$piso=$_POST["piso"];
 
-echo  "Modificando vehiculo: ". $veh_nombre;
-$dts1=$oAsiento->mostrarFiltroFila(1,14, $vehiculo_id);
-$dts2=$oAsiento->mostrarFiltroFila(15,28, $vehiculo_id);
-$dts3=$oAsiento->mostrarFiltroFila(36,49, $vehiculo_id);
-$dts4=$oAsiento->mostrarFiltroFila(29,42,$vehiculo_id );
-$dts5=$oAsiento->mostrarFiltroFila(43,56, $vehiculo_id);
+$dts1=$oAsiento->mostrar_distribucionasiento(1,$piso, $vehiculo_id);
+$dts2=$oAsiento->mostrar_distribucionasiento(2,$piso, $vehiculo_id);
+$dts3=$oAsiento->mostrar_distribucionasiento(3,$piso, $vehiculo_id);
+$dts4=$oAsiento->mostrar_distribucionasiento(4,$piso, $vehiculo_id);
+$dts5=$oAsiento->mostrar_distribucionasiento(5,$piso, $vehiculo_id);
 
 $num_rows= mysql_num_rows($dts1);
 
-$dts11=$oAsiento->mostrar_distribucionasiento(1,1, $vehiculo_id);
-$dts22=$oAsiento->mostrar_distribucionasiento(2,1,$vehiculo_id );
-$dts33=$oAsiento->mostrar_distribucionasiento(3,1, $vehiculo_id);
-$dts44=$oAsiento->mostrar_distribucionasiento(4,1, $vehiculo_id);
-$dts55=$oAsiento->mostrar_distribucionasiento(5,1, $vehiculo_id);
-
-$dt11 = mysql_fetch_array($dts11);
-$dt22 = mysql_fetch_array($dts22);
-$dt33 = mysql_fetch_array($dts33);
-$dt44 = mysql_fetch_array($dts44);
-$dt55 = mysql_fetch_array($dts55);
-$orden11=$dt11['tb_distribucionasiento_lugar'];
-$orden22=$dt22['tb_distribucionasiento_lugar'];
-$orden33=$dt33['tb_distribucionasiento_lugar'];
-$orden44=$dt44['tb_distribucionasiento_lugar'];
-$orden55=$dt55['tb_distribucionasiento_lugar'];
+$dt1 = mysql_fetch_array($dts1);
+$dt2 = mysql_fetch_array($dts2);
+$dt3 = mysql_fetch_array($dts3);
+$dt4 = mysql_fetch_array($dts4);
+$dt5 = mysql_fetch_array($dts5);
+$orden1=$dt1['tb_distribucionasiento_lugar'];
+$orden2=$dt2['tb_distribucionasiento_lugar'];
+$orden3=$dt3['tb_distribucionasiento_lugar'];
+$orden4=$dt4['tb_distribucionasiento_lugar'];
+$orden5=$dt5['tb_distribucionasiento_lugar'];
 
 
 
@@ -70,8 +57,8 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
         });
 
 
-        $('.pasadizo >div').addClass('oculto');
-        $('.pasadizo >div:last').removeClass('oculto');
+        // $('.pasadizo >div').addClass('oculto');
+        // $('.pasadizo >div:last').removeClass('oculto');
 
 
         $("#sortable1, #sortable2,#sortable3,#sortable4, #sortable5").sortable({
@@ -101,7 +88,39 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
             }
         }).disableSelection();
 
+        // Bind the update event manually
+        $('#sortable3').live('sortupdate',function() {
+            $.ajax(
+                {
+                    type: "POST",
+                    url: "../croquis/croquis_actualizar_posicion.php",
+                    data:
+                        {
+                            sort1:(($("#sortable1").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            sort2:(($("#sortable2").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            sort3:(($("#sortable3").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            sort4:(($("#sortable4").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            sort5:(($("#sortable5").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            veh_id:$("#hdd_veh_id").val(),
+                            veh_pis:$("#cmb_piso").val()
+                        },
+                    success: function(html)
+                    {
+                        $('.success').fadeIn(500);
+                        $('.success').fadeOut(500);
+                    }
+                });
+            console.log('update')
+        });
+
     });
+
+    function seleccionar(selector) {
+        $('.seleccionado').removeClass('seleccionado');
+
+        $(selector).addClass('seleccionado');
+
+    }
 </script>
 <style>
 
@@ -155,6 +174,10 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
         background-repeat: no-repeat;
         background-position-x: -52px;
     }
+    .d{
+        background: #f5f5f5 !important;
+        /*visibility: hidden;*/
+    }
 
 </style>
 
@@ -166,13 +189,9 @@ if($num_rows>=1){
         <div id="lugares">
             <div id="sortable1" class="connectedSortable">
                 <?php
-                if($orden11==""){ //si no hay distribucion creada
-                    while($dt1 = mysql_fetch_array($dts1)){?>
-                        <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
-                        <?php
-                    }
-                }else{
-                    $lugares = explode(';',$orden11);
+                if($orden1!=""){ //solo si hay distribucion creada
+
+                    $lugares = explode(';',$orden1);
 
                     foreach ($lugares as $lugar) {
                         ?>
@@ -187,13 +206,8 @@ if($num_rows>=1){
             <div class="clear"></div>
             <div id="sortable2" class="connectedSortable">
                 <?php
-                if($orden22==""){
-                    while($dt1 = mysql_fetch_array($dts2)){?>
-                        <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
-                        <?php
-                    }
-                }else{
-                    $lugares = explode(';',$orden22);
+                if($orden2!=""){
+                    $lugares = explode(';',$orden2);
 
                     foreach ($lugares as $lugar) {
                         ?>
@@ -208,18 +222,13 @@ if($num_rows>=1){
             <div class="clear"></div>
             <div id="sortable3" class="connectedSortable pasadizo">
                 <?php
-                if($orden33==""){
-                    while($dt1 = mysql_fetch_array($dts3)){?>
-                        <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
-                        <?php
-                    }
-                }else{
-
-                    $lugares = explode(';',$orden33);
+                if($orden3!=""){
+                    $lugares = explode(';',$orden3);
 
                     foreach ($lugares as $lugar) {
+                        $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada
                         ?>
-                        <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -230,13 +239,8 @@ if($num_rows>=1){
             <div class="clear"></div>
             <div id="sortable4" class="connectedSortable">
                 <?php
-                if($orden44==""){
-                    while($dt1 = mysql_fetch_array($dts4)){?>
-                        <div id="<?php echo 'item_'.$dt1['tb_asiento_nom'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
-                        <?php
-                    }
-                }else{
-                    $lugares = explode(';',$orden44);
+                if($orden4!=""){
+                    $lugares = explode(';',$orden4);
 
                     foreach ($lugares as $lugar) {
                         ?>
@@ -251,13 +255,8 @@ if($num_rows>=1){
             <div class="clear"></div>
             <div id="sortable5" class="connectedSortable">
                 <?php
-                if($orden55==""){
-                    while($dt1 = mysql_fetch_array($dts5)){?>
-                        <div id="<?php echo 'item_'.$dt1['tb_asiento_id'] ?>" class="asiento"><?php echo $dt1['tb_asiento_nom']?></div>
-                        <?php
-                    }
-                }else{
-                    $lugares = explode(';',$orden55);
+                if($orden5!=""){
+                    $lugares = explode(';',$orden5);
 
                     foreach ($lugares as $lugar) {
                         ?>

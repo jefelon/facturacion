@@ -138,7 +138,8 @@ $pv = mysql_fetch_array($pvs);
             data: ({
                 cmb_fech_sal: $('#cmb_fech_sal').val(),
                 cmb_horario: $('#cmb_horario').val(),
-                txt_vehiculo_id: $('#hdd_vehiculo').val()
+                txt_vehiculo_id: $('#hdd_vehiculo').val(),
+                piso:$('#cmb_piso').val()
             }),
             beforeSend: function() {
                 $('#bus').html('<option value="">Cargando...</option>');
@@ -741,6 +742,9 @@ $pv = mysql_fetch_array($pvs);
             filtro_bus();
 
         });
+        $('#cmb_piso').change(function(){
+            filtro_bus();
+        });
 
         $('#cmb_fech_sal').change(function(){
             cmb_fecha_horario();
@@ -1013,9 +1017,11 @@ $pv = mysql_fetch_array($pvs);
         background-position-x: -45px;
         overflow: hidden;
     }
+    .o{
+        background: #f5f5f5 !important
+    }
 
 </style>
-
 
 <form id="bus_form">
     <input type="hidden" id="hdd_vehiculo" value="">
@@ -1109,6 +1115,16 @@ $pv = mysql_fetch_array($pvs);
                         <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
                     </td>
                 </tr>
+                <tr>
+                    <td width="100%" align="left"  valign="top">
+                        <label for="cmb_piso">PISO:</label>
+                        <select name="cmb_piso" id="cmb_piso">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                        </select>
+                    </td>
+                </tr>
+
             </table>
         </fieldset>
         <br>

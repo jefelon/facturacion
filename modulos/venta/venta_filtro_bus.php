@@ -10,31 +10,26 @@ require_once ("../formatos/formato.php");
 
 $fecha_salida=fecha_mysql($_POST['cmb_fech_sal']);
 $hora_salida=$_POST['cmb_horario'];
+$piso=$_POST['piso'];
 
-$dts1=$oAsiento->mostrarFiltroFila(1,14);
-$dts2=$oAsiento->mostrarFiltroFila(15,28);
-$dts3=$oAsiento->mostrarFiltroFila(36,49);
-$dts4=$oAsiento->mostrarFiltroFila(29,42);
-$dts5=$oAsiento->mostrarFiltroFila(43,56);
+$dts1=$oAsiento->mostrar_distribucionasiento(1,$piso, $_POST['txt_vehiculo_id']);
+$dts2=$oAsiento->mostrar_distribucionasiento(2,$piso, $_POST['txt_vehiculo_id']);
+$dts3=$oAsiento->mostrar_distribucionasiento(3,$piso, $_POST['txt_vehiculo_id']);
+$dts4=$oAsiento->mostrar_distribucionasiento(4,$piso, $_POST['txt_vehiculo_id']);
+$dts5=$oAsiento->mostrar_distribucionasiento(5,$piso, $_POST['txt_vehiculo_id']);
 
 $num_rows= mysql_num_rows($dts1);
 
-$dts11=$oAsiento->mostrar_distribucionasiento(1,1, $_POST['txt_vehiculo_id']);
-$dts22=$oAsiento->mostrar_distribucionasiento(2,1, $_POST['txt_vehiculo_id']);
-$dts33=$oAsiento->mostrar_distribucionasiento(3,1, $_POST['txt_vehiculo_id']);
-$dts44=$oAsiento->mostrar_distribucionasiento(4,1, $_POST['txt_vehiculo_id']);
-$dts55=$oAsiento->mostrar_distribucionasiento(5,1, $_POST['txt_vehiculo_id']);
-
-$dt11 = mysql_fetch_array($dts11);
-$dt22 = mysql_fetch_array($dts22);
-$dt33 = mysql_fetch_array($dts33);
-$dt44 = mysql_fetch_array($dts44);
-$dt55 = mysql_fetch_array($dts55);
-$orden11=$dt11['tb_distribucionasiento_lugar'];
-$orden22=$dt22['tb_distribucionasiento_lugar'];
-$orden33=$dt33['tb_distribucionasiento_lugar'];
-$orden44=$dt44['tb_distribucionasiento_lugar'];
-$orden55=$dt55['tb_distribucionasiento_lugar'];
+$dt1 = mysql_fetch_array($dts1);
+$dt2 = mysql_fetch_array($dts2);
+$dt3 = mysql_fetch_array($dts3);
+$dt4 = mysql_fetch_array($dts4);
+$dt5 = mysql_fetch_array($dts5);
+$orden1=$dt1['tb_distribucionasiento_lugar'];
+$orden2=$dt2['tb_distribucionasiento_lugar'];
+$orden3=$dt3['tb_distribucionasiento_lugar'];
+$orden4=$dt4['tb_distribucionasiento_lugar'];
+$orden5=$dt5['tb_distribucionasiento_lugar'];
 
 
 ?>
@@ -55,12 +50,12 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
             text: false
         });
 
-        $('.pasadizo >div').addClass('oculto');
-        $('.pasadizo >div:last').removeClass('oculto');
+        // $('.pasadizo >div').addClass('oculto');
+        // $('.pasadizo >div:last').removeClass('oculto');
 
-        if($('.pasadizo >div:last').is("#item_45")){
-            $('.pasadizo >div:last').css("margin-left","-45px");
-        }
+        // if($('.pasadizo >div:last').is("#item_45")){
+        //     $('.pasadizo >div:last').css("margin-left","-45px");
+        // }
     });
 
     function cambiar_color(selector) {
@@ -89,13 +84,13 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
     });
 </script>
             <?php
-            if(1){
+            if($num_rows>=1){
             ?>
             <div id="frentera"><!--FRENTE--></div>
             <div id="lugares">
                 <div id="sortable1" class="connectedSortable">
                     <?php
-                        $lugares = explode(';',$orden11);
+                        $lugares = explode(';',$orden1);
                         foreach ($lugares as $lugar) {
                             $nom_lugar = explode('_',$lugar)[1];
                             $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
@@ -129,7 +124,7 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                 <div class="clear"></div>
                 <div id="sortable2" class="connectedSortable">
                     <?php
-                        $lugares = explode(';',$orden22);
+                        $lugares = explode(';',$orden2);
 
                         foreach ($lugares as $lugar) {
                             $nom_lugar = explode('_',$lugar)[1];
@@ -164,29 +159,32 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                 <div class="clear"></div>
                 <div id="sortable3" class="connectedSortable pasadizo">
                     <?php
-                    $lugares = explode(';',$orden33);
+                    $asientos = explode(';',$orden3);
 
-                        foreach ($lugares as $lugar) {
-                            $nom_lugar = explode('_',$lugar)[1];
-                            $asts = $oAsiento->mostrarNombreEstado($nom_lugar,$_POST['txt_vehiculo_id'],$fecha_salida,$hora_salida);
+                        foreach ($asientos as $asiento) {
+                            $asiento=explode('_',$asiento);//0=item 1=numero 2=vista ejm tv, oculto, grada
+                            $asts = $oAsiento->mostrarNombreEstado($asiento[1], $_POST['txt_vehiculo_id'], $fecha_salida, $hora_salida);
                             $ast = mysql_fetch_array($asts);
                             ?>
-                            <div id="<?php echo $lugar ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $ast['tb_clientereserva_id']?>); return false;" class="asiento
-                            <?php if ($ast['tb_asientoestado_id']){
-                                if($ast['tb_asientoestado_reserva']==1){
-                                    echo 'reserva';
-                                }else{
-                                    echo 'ocupado';
-                                }
-                            }?>"
+                            <div id="<?php echo $asiento[0]."_".$asiento[1]."_".$asiento[2] ?>"
+                                 oncontextmenu="click_derecho(event,$(this),<?php echo $ast['tb_clientereserva_id'] ?>); return false;"
+                                 class="asiento
+                            <?php if ($ast['tb_asientoestado_id']) {
+                                     if ($ast['tb_asientoestado_reserva'] == 1) {
+                                         echo 'reserva';
+                                     } else {
+                                         echo 'ocupado';
+                                     }
+                                 } ?> <?php echo $asiento[2]?>"
                                  onclick="cambiar_color(this)">
                                 <div class="" style="padding-left: 4px;">
-                                    <?php echo explode('_',$lugar)[1] ?>
+                                    <?php echo  $asiento[1] ?>
                                 </div>
 
-                                <div class="" style="background-color: <?php echo $ast['tb_lugar_color'];?>; color: #000000; position: absolute;bottom: 4px; text-align: center;
-                                        width: 100%;">
-                                    <?php echo substr($ast['tb_lugar_nom'],0,2) ?>
+                                <div class=""
+                                     style="background-color: <?php echo $ast['tb_lugar_color']; ?>; color: #000000; position: absolute;bottom: 4px; text-align: center;
+                                             width: 100%;">
+                                    <?php echo substr($ast['tb_lugar_nom'], 0, 2) ?>
                                 </div>
                             </div>
                             <?php
@@ -198,7 +196,7 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                 <div class="clear"></div>
                 <div id="sortable4" class="connectedSortable">
                     <?php
-                        $lugares = explode(';',$orden44);
+                        $lugares = explode(';',$orden4);
 
                         foreach ($lugares as $lugar) {
                             $nom_lugar = explode('_',$lugar)[1];
@@ -233,7 +231,7 @@ $orden55=$dt55['tb_distribucionasiento_lugar'];
                 <div class="clear"></div>
                 <div id="sortable5" class="connectedSortable">
                     <?php
-                        $lugares = explode(';',$orden55);
+                        $lugares = explode(';',$orden5);
 
                         foreach ($lugares as $lugar) {
                             $nom_lugar = explode('_',$lugar)[1];

@@ -5,4 +5,4 @@
 .sanciones.gob.pe	TRUE	/	FALSE	1585388053	visid_incap_1920929	yr/AEtS0S7uYn0BQFt2cx0hwnlwAAAAAQUIPAAAAAACnAZ+XIrgU3bTsJeNNKJSm
 .sanciones.gob.pe	TRUE	/	FALSE	0	incap_ses_784_1920929	4DVIBEx+Cj882aeOl1ThCkhwnlwAAAAAU3rk0t8pfrw0CdoZoM41bA==
 www.sanciones.gob.pe	FALSE	/Sanciones	TRUE	0	JSESSIONID	QYXCkX1NTBgTZi2U6rUIoPh4.undefined
-clientes.reniec.gob.pe	FALSE	/padronElectoral2012	FALSE	0	JSESSIONID	0e50e0ae921c6031424ef39a9640116a8378d707de61f0670da1d8d431df5e83.e34MaNqPbN0TaO0Nax4Me0
+clientes.reniec.gob.pe	FALSE	/padronElectoral2012	FALSE	0	JSESSIONID	ef2bf7b4a2263db41607a0ee08c6c272a3bbad2376b76056c79fd5abbe7c0739.e34MaNqPbN0TaO0Nax4Me0

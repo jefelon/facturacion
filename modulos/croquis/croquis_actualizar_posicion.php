@@ -10,10 +10,6 @@ require_once("../../config/Cado.php");
 require_once("../croquis/cCroquis.php");
 $oCroquis = new cCroquis();
 
-
-
-
-
 $fila1 = $_POST['sort1'];
 $fila2 = $_POST['sort2'];
 $fila3 = $_POST['sort3'];

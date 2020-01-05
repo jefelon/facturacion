@@ -26,7 +26,7 @@ if($_POST['action']=="editar_croquis")
 echo  "Modificando vehiculo: ". $veh_nombre;
 ?>
 <script type="text/javascript">
-    function croquis_filtro()
+    function croquis_filtro(veh_id,piso)
     {
         $.ajax({
             type: "POST",
@@ -34,19 +34,117 @@ echo  "Modificando vehiculo: ". $veh_nombre;
             async:true,
             dataType: "html",
             data: ({
-
+                veh_id:veh_id,
+                piso:piso
             }),
             beforeSend: function() {
-                $('#div_croquis_tabla').addClass("ui-state-disabled");
+                $('#div_croquis_filtro').addClass("ui-state-disabled");
             },
             success: function(html){
-                $('#div_croquis_tabla').html(html);
+                $('#div_croquis_filtro').html(html);
             },
             complete: function(){
-                $('#div_croquis_tabla').removeClass("ui-state-disabled");
+                $('#div_croquis_filtro').removeClass("ui-state-disabled");
             }
         });
     }
+    function click_derecho(event,selector,cli_id){
+        //o=opaco inabilitado a=activo asiento normal
+        var id_selector = selector.attr('id');
+        var position = $("#"+id_selector).position();
+        if($(selector).hasClass('a')){
+            $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
+            $("#reservar").css({'display': 'none'});
+            $("#vender").css({'display': 'none'});
+            $("#eliminar").css({'display': 'none'});
+            $("#postergar").css({'display': 'block'});
+            $("#detalle").css({'display': 'block'});
+            seleccionar(selector);
+
+        }else if($(selector).hasClass('d')) {
+            $("#menu-click").css({'display': 'block', 'left': position.left + 40, 'top': position.top + 40});
+            $("#reservar").css({'display': 'none'});
+            $("#eliminar").css({'display': 'block'});
+            $("#vender").css({'display': 'block'});
+            $("#postergar").css({'display': 'none'});
+            $("#detalle").css({'display': 'block'});
+            $("#hdd_act_res").val(cli_id);
+            seleccionar(selector);
+        }
+        else if($(selector).hasClass('tv')){
+                $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
+                $("#reservar").css({'display': 'none'});
+                $("#eliminar").css({'display': 'block'});
+                $("#vender").css({'display': 'block'});
+                $("#postergar").css({'display': 'none'});
+                $("#detalle").css({'display': 'block'});
+                $("#hdd_act_res").val(cli_id);
+                seleccionar(selector);
+        }
+        else {
+            seleccionar(selector);
+            $("#menu-click").css({'display': 'block', 'left': position.left+40, 'top': position.top+40 });
+            $("#reservar").css({'display': 'block'});
+            $("#vender").css({'display': 'none'});
+            $("#eliminar").css({'display': 'none'});
+            $("#postergar").css({'display': 'none'});
+            $("#detalle").css({'display': 'none'});
+        }
+    }
+    $(function() {
+        croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
+
+        $('#cmb_piso').change(function(){
+            croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
+        });
+
+        //Ocultamos el menú al cargar la página
+        $("#menu-click").hide();
+
+        //cuando hagamos click, el menú desaparecerá
+        $(document).click(function(e){
+            if(e.button == 0){
+                $("#menu-click").css("display", "none");
+            }
+        });
+
+        //si pulsamos escape, el menú desaparecerá
+        $(document).keydown(function(e){
+            if(e.keyCode == 27){
+                $("#menu-click").css("display", "none");
+            }
+        });
+
+        //controlamos los botones del menú
+        $("#menu-click").click(function(e){
+
+            // El switch utiliza los IDs de los <li> del menú
+            switch(e.target.id){
+                case "d":
+                    var nuevoId=($('.seleccionado').attr("id")).split('_');
+                    $('.seleccionado').attr("id",nuevoId[0]+'_'+nuevoId[1]+'_'+'d');
+                    $('#sortable3').trigger('sortupdate'); // Trigger the update event manually
+                    $('#sortable3').sortable( "refreshPositions" );
+                    croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
+                    break;
+                case "a":
+                    var nuevoId=($('.seleccionado').attr("id")).split('_');
+                    $('.seleccionado').attr("id",nuevoId[0]+'_'+nuevoId[1]+'_'+'a');
+                    $('#sortable3').trigger('sortupdate'); // Trigger the update event manually
+                    $('#sortable3').sortable( "refreshPositions" );
+                    croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
+                    break;
+                case "tv":
+                    var nuevoId=($('.seleccionado').attr("id")).split('_');
+                    $('.seleccionado').attr("id",nuevoId[0]+'_'+nuevoId[1]+'_'+'tv');
+                    $('#sortable3').trigger('sortupdate'); // Trigger the update event manually
+                    $('#sortable3').sortable( "refreshPositions" );
+                    croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());s
+                    break;
+            }
+
+        });
+    });
 </script>
 <input type="hidden" id="hdd_veh_id" value="<?php echo $vehiculo_id;?>">
 <p>PISO:
@@ -58,4 +156,12 @@ echo  "Modificando vehiculo: ". $veh_nombre;
 
 <div id="div_croquis_filtro">
 
+</div>
+
+<div id="menu-click">
+    <ul>
+        <li id="tv">Convertir en TV</li>
+        <li id="d">Desactivar</li>
+        <li id="a">Activar</li>
+    </ul>
 </div>
