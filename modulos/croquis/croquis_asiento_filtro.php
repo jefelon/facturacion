@@ -36,6 +36,12 @@ $orden3=$dt3['tb_distribucionasiento_lugar'];
 $orden4=$dt4['tb_distribucionasiento_lugar'];
 $orden5=$dt5['tb_distribucionasiento_lugar'];
 
+$estado_filas1=$dt1['tb_distribucionasiento_estado'];
+$estado_filas2=$dt2['tb_distribucionasiento_estado'];
+$estado_filas3=$dt3['tb_distribucionasiento_estado'];
+$estado_filas4=$dt4['tb_distribucionasiento_estado'];
+$estado_filas5=$dt5['tb_distribucionasiento_estado'];
+
 
 
 ?>
@@ -53,6 +59,11 @@ $orden5=$dt5['tb_distribucionasiento_lugar'];
 
         $('.btn_eliminar').button({
             icons: {primary: "ui-icon-trash"},
+            text: false
+        });
+
+        $('.btn_desactivar').button({
+            icons: {primary: "ui-icon-close"},
             text: false
         });
 
@@ -77,7 +88,8 @@ $orden5=$dt5['tb_distribucionasiento_lugar'];
                                 sort4:(($("#sortable4").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
                                 sort5:(($("#sortable5").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
                                 veh_id:$("#hdd_veh_id").val(),
-                                veh_pis:$("#cmb_piso").val()
+                                veh_pis:$("#cmb_piso").val(),
+                                vista:'actualizar_posicion'
                             },
                         success: function(html)
                         {
@@ -89,7 +101,7 @@ $orden5=$dt5['tb_distribucionasiento_lugar'];
         }).disableSelection();
 
         // Bind the update event manually
-        $('#sortable3').live('sortupdate',function() {
+        $('#sortable1, #sortable2,#sortable3,#sortable4, #sortable5').live('sortupdate',function() {
             $.ajax(
                 {
                     type: "POST",
@@ -102,7 +114,8 @@ $orden5=$dt5['tb_distribucionasiento_lugar'];
                             sort4:(($("#sortable4").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
                             sort5:(($("#sortable5").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
                             veh_id:$("#hdd_veh_id").val(),
-                            veh_pis:$("#cmb_piso").val()
+                            veh_pis:$("#cmb_piso").val(),
+                            vista:'actualizar_posicion'
                         },
                     success: function(html)
                     {
@@ -120,6 +133,31 @@ $orden5=$dt5['tb_distribucionasiento_lugar'];
 
         $(selector).addClass('seleccionado');
 
+    }
+    function desactivar_fila(fila) {
+        $.ajax({
+            type: "POST",
+            url: "../croquis/croquis_actualizar_posicion.php",
+            async: true,
+            dataType: "json",
+            data: ({
+                veh_id:$("#hdd_veh_id").val(),
+                veh_pis:$("#cmb_piso").val(),
+                fila: fila,
+                estado:"0",
+                vista: "desactivar_fila"
+            }),
+            beforeSend: function () {
+                $('#msj_asientoestado').html("Guardando...");
+                $('#msj_asientoestado').show(100);
+            },
+            success: function (data) {
+                $('#msj_asientoestado').html(data.asientoestado_msj);
+            },
+            complete: function () {
+                croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
+            }
+        })
     }
 </script>
 <style>
@@ -176,7 +214,36 @@ $orden5=$dt5['tb_distribucionasiento_lugar'];
     }
     .d{
         background: #f5f5f5 !important;
+        color: transparent;
         /*visibility: hidden;*/
+    }
+    .tv {
+        width: 33px !important;
+        height: 50px !important;
+        background: url(../../images/tv2.png) !important;
+        background-size: 100% !important;
+        padding: 0 !important;
+        color: transparent;
+    }
+    .g {
+        width: 47px !important;
+        height: 50px !important;
+        background: url(../../images/grada.png) !important;
+        background-size: 100% !important;
+        padding: 0 !important;
+        color: transparent;
+    }
+    .b {
+        width: 33px !important;
+        height: 50px !important;
+        background: url(../../images/banio.png) !important;
+        background-size: 100% !important;
+        padding: 0 !important;
+        color: transparent;
+    }
+
+    .estado_0>div{
+       height: 3px;
     }
 
 </style>
@@ -187,15 +254,15 @@ if($num_rows>=1){
     <div id="bus">
         <div id="frentera"><!--FRENTE--></div>
         <div id="lugares">
-            <div id="sortable1" class="connectedSortable">
+            <div id="sortable1" class="connectedSortable <?php echo "estado_".$estado_filas1?>">
+                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "1"?>')">Desactivar Fila</a>
                 <?php
                 if($orden1!=""){ //solo si hay distribucion creada
-
                     $lugares = explode(';',$orden1);
-
                     foreach ($lugares as $lugar) {
+                        $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -204,14 +271,15 @@ if($num_rows>=1){
                 ?>
             </div>
             <div class="clear"></div>
-            <div id="sortable2" class="connectedSortable">
+            <div id="sortable2" class="connectedSortable <?php echo "estado_".$estado_filas1?>">
+                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "2"?>')">Desactivar Fila</a>
                 <?php
                 if($orden2!=""){
                     $lugares = explode(';',$orden2);
-
                     foreach ($lugares as $lugar) {
+                        $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -220,13 +288,14 @@ if($num_rows>=1){
                 ?>
             </div>
             <div class="clear"></div>
+            <?php if($estado_filas3==1) {?>
             <div id="sortable3" class="connectedSortable pasadizo">
+                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "3"?>')">Desactivar Fila</a>
                 <?php
                 if($orden3!=""){
                     $lugares = explode(';',$orden3);
-
                     foreach ($lugares as $lugar) {
-                        $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada
+                        $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
                         <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
                         <?php
@@ -237,14 +306,17 @@ if($num_rows>=1){
                 ?>
             </div>
             <div class="clear"></div>
+            <?php }?>
+            <?php if($estado_filas4==1) {?>
             <div id="sortable4" class="connectedSortable">
+                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "4"?>')">Desactivar Fila</a>
                 <?php
                 if($orden4!=""){
                     $lugares = explode(';',$orden4);
-
                     foreach ($lugares as $lugar) {
+                        $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -253,14 +325,17 @@ if($num_rows>=1){
                 ?>
             </div>
             <div class="clear"></div>
+            <?php }?>
+            <?php if($estado_filas5==1) {?>
             <div id="sortable5" class="connectedSortable">
+                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "5"?>')">Desactivar Fila</a>
                 <?php
-                if($orden5!=""){
+                if($orden5!="" && $estado_filas5==1){
                     $lugares = explode(';',$orden5);
-
                     foreach ($lugares as $lugar) {
+                        $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar ?>" class="asiento"><?php echo explode('_',$lugar)[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -268,6 +343,7 @@ if($num_rows>=1){
 
                 ?>
             </div>
+            <?php }?>
         </div>
     </div>
     <?php

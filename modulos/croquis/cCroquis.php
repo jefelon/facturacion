@@ -74,6 +74,15 @@ class cCroquis{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function actualizar_distribucionasiento_estado($veh_id,$piso,$fila,$estado){
+        $sql = "UPDATE tb_distribucionasiento SET  
+	`tb_distribucionasiento_estado` =  '$estado'
+	WHERE tb_vehiculo_id =$veh_id AND tb_distribucionasiento_fila=$fila AND tb_distribucionasiento_piso=$piso
+	";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
 	function eliminar($id){
 	$sql="DELETE FROM tb_croquis WHERE tb_croquis_id=$id";
