@@ -158,7 +158,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$documento_tipdoc,//cs_tipodocumento_id
             $_POST['cmb_ven_moneda'],// cs_tipomoneda_id
 			moneda_mysql($_POST['txt_ven_valven']),//tb_venta_gra
-			0,//tb_venta_ina
+            moneda_mysql($_POST['txt_ven_opeina']),//tb_venta_ina
             moneda_mysql($_POST['txt_ven_opeexo']),//tb_venta_exo
 			moneda_mysql($_POST['txt_ven_opegra']),//tb_venta_grat
 			0,//tb_venta_isc
@@ -809,6 +809,16 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$ser_id=0;
 			$unimed_id=12;//NIU
 
+            if ($afeigv_id == 12)//BONIFICACION 31
+            {
+                $descuento_x_item_linea=0;
+                $valor_unitario_linea=0;
+                $valor_venta_x_item_linea=0;
+                $igv_linea=0;
+				$calisc=0;
+				$det_isc=0;
+            }
+
 			//////////////////////
 			$oVenta->insertar_detalle(
 				$tipo_venta,
@@ -947,7 +957,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			
 			$tipo_venta=2;
 			$cat_id=0;
-			$afeigv_id=$_SESSION['servicio_tip'][$unico_id][$indice];;
+			$afeigv_id=$_SESSION['servicio_tip'][$unico_id][$indice];
 			$unimed_id=13;//ZZ
 
 			//////////////////////

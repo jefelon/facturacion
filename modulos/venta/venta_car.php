@@ -534,6 +534,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
     $ope_exoneradas_total = 0;
     $ope_gravadas_total = 0;
     $ope_gratuitas_total = 0;
+    $ope_inafecta_total=0;
     $desc_x_item_total=0;
     if($_SESSION['venta_general_des']=="")
     {
@@ -556,7 +557,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         {
             $linea_desc_x_item_percent = $_SESSION['venta_des'][$unico_id][$indice];
         }
-        $tipo_item	=$dt1['tb_afectacion_id'];
+        $tipo_item	=$_SESSION['venta_tip'][$unico_id][$indice];
         if ($tipo_item==9) {
             $linea_valor_unitario = $precio_unitario;
         }else{
@@ -592,6 +593,14 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gratuitas_total += $valor_venta;
+        }else if($tipo_item==12){// 31 bonificacion segun sunat
+            $tipo_pro='Bonificación';
+            $bono=$precio_unitario * $cantidad;
+            $valor_venta_unitario = 0;
+            $valor_venta = 0;
+            $precio_venta = 0;
+            $linea_valor_venta_x_item=0;
+            $ope_inafecta_total+= $bono;
         }
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];
@@ -686,6 +695,12 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gratuitas_total += $valor_venta;
+        }else if($tipo_item==12){// 31 bonificacion segun sunat
+            $tipo_pro='Bonificación';
+            $valor_venta_unitario = 0;
+            $valor_venta = 0;
+            $precio_venta = 0;
+            $ope_gratuitas_total += $valor_venta;
         }
 
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
@@ -698,7 +713,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         ?>
         <tr>
             <td>Servicio</td>
-            <td>Exonerado</td>
+            <td><?php echo $tipo_pro ?></td>
             <td>&nbsp;</td>
             <td><?php echo $_SESSION['servicio_nom'][$unico_id][$indice] ?></td>
             <!--            <td>--><?php //echo $dt['tb_unidad_abr'];?><!--</td>-->
@@ -782,6 +797,11 @@ $descuento_total= $descuento_global + $desc_x_item_total;
                     <tr>
                         <td nowrap="nowrap"><strong>OPERACIONES GRATUITAS:</strong></td>
                         <td align="right"><input name="txt_ven_opegra" type="text" id="txt_ven_opegra" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_gratuitas_total)?>" size="15" readonly>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td nowrap="nowrap"><strong>OPERACIONES INAFECTAS:</strong></td>
+                        <td align="right"><input name="txt_ven_opeina" type="text" id="txt_ven_opeina" style="text-align:right; font-size:14px" value="<?php echo formato_money($ope_inafecta_total)?>" size="15" readonly>
                         </td>
                     </tr>
                 </table>

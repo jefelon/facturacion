@@ -154,6 +154,9 @@ while($dt = mysql_fetch_array($dts))
 	if($dt["tb_ventadetalle_tipven"]==1)
 	{
 		$codigo=$dt["tb_presentacion_cod"];
+		if($codigo==""){
+		    $codigo=$dt["tb_presentacion_id"];
+        }
 	}
 	if($dt["tb_ventadetalle_tipven"]==2)
 	{
