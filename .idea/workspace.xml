@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/modulos/compra/compra_form.php" afterPath="$PROJECT_DIR$/modulos/compra/compra_form.php" />
     </list>
+=======
+    <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="" />
+>>>>>>> Stashed changes
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -326,11 +330,67 @@
       <workItem from="1547237478872" duration="3645000" />
       <workItem from="1547485894383" duration="9682000" />
       <workItem from="1549384143635" duration="216000" />
+<<<<<<< Updated upstream
+=======
+      <workItem from="1568481904018" duration="23604000" />
+      <workItem from="1569001428231" duration="565000" />
+      <workItem from="1570471481574" duration="3915000" />
+      <workItem from="1570656136202" duration="1186000" />
+      <workItem from="1570677431681" duration="357000" />
+      <workItem from="1570727055643" duration="1281000" />
+      <workItem from="1570735098303" duration="1246000" />
+      <workItem from="1571081739720" duration="5516000" />
+      <workItem from="1571268407381" duration="649000" />
+      <workItem from="1571333436058" duration="7673000" />
+      <workItem from="1571675779882" duration="1259000" />
+      <workItem from="1571682746488" duration="1210000" />
+      <workItem from="1572199886598" duration="25997000" />
+      <workItem from="1572266134237" duration="14823000" />
+      <workItem from="1572281858260" duration="9426000" />
+      <workItem from="1572303751323" duration="17000000" />
+      <workItem from="1572381238662" duration="1378000" />
+      <workItem from="1572391076979" duration="4875000" />
+      <workItem from="1572527010190" duration="9743000" />
+      <workItem from="1572702072612" duration="26420000" />
+      <workItem from="1572737908601" duration="29971000" />
+      <workItem from="1573061177056" duration="8375000" />
+      <workItem from="1573501383423" duration="19981000" />
+      <workItem from="1573662495178" duration="29346000" />
+      <workItem from="1573752295651" duration="3628000" />
+      <workItem from="1573850854179" duration="1242000" />
+      <workItem from="1573855408512" duration="3612000" />
+      <workItem from="1574177758816" duration="3388000" />
+      <workItem from="1574206228681" duration="3115000" />
+      <workItem from="1574453204765" duration="2682000" />
+      <workItem from="1574971466331" duration="9517000" />
+      <workItem from="1575134475179" duration="1471000" />
+      <workItem from="1575150755584" duration="583000" />
+      <workItem from="1575304929826" duration="31000" />
+      <workItem from="1575305208221" duration="136000" />
+      <workItem from="1575306009007" duration="895000" />
+      <workItem from="1576191945517" duration="2711000" />
+      <workItem from="1576282906258" duration="1341000" />
+      <workItem from="1578686193914" duration="17694000" />
+      <workItem from="1578758731063" duration="2597000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< Updated upstream
     <option name="totallyTimeSpent" value="465014000" />
+=======
+    <option name="totallyTimeSpent" value="769504000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+>>>>>>> Stashed changes
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />

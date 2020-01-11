@@ -56,6 +56,7 @@ $dts = $oVenta->mostrarUno($ven_id);
 while($dt = mysql_fetch_array($dts)){
 	
 	$idcomprobante=$dt["cs_tipodocumento_cod"];
+    $documento=$dt["tb_documento_nom"];
 
 	$ser=$dt["tb_venta_ser"];
 	$num=$dt["tb_venta_num"];
@@ -153,6 +154,9 @@ while($dt = mysql_fetch_array($dts))
 	if($dt["tb_ventadetalle_tipven"]==1)
 	{
 		$codigo=$dt["tb_presentacion_cod"];
+		if($codigo==""){
+		    $codigo=$dt["tb_presentacion_id"];
+        }
 	}
 	if($dt["tb_ventadetalle_tipven"]==2)
 	{
@@ -196,15 +200,15 @@ mysql_free_result($dts);
 
 $detalle = json_decode(json_encode($detalle));
 //===============================================================================================
-echo json_encode($detalle);
+//echo json_encode($detalle);
 if($idcomprobante==1)//FACTURA
 {
 	$enviar=true;
 	$r = run(datatoarray($header, $detalle, $empresa, 'Invoice'), "../../cperepositorio/send/", "../../cperepositorio/cdr/", $nodo="", "Invoice", $enviar);
 
-	if($r['faultcode']=='0')
+	if($r['faultcode']=='0' || $r['faultcode']=='1033')
 	{
-        $data['msj']=$documento.' enviado a SUNAT.';
+        $data['msj']="<span style='color: green'>".$documento." enviado a SUNAT</span>";
 		$estado=true;
 		$estado_envsun = 1;
 	}
@@ -215,12 +219,12 @@ if($idcomprobante==1)//FACTURA
 		if($r['faultcode']=='HTTP')
 		{
 			$enviar_doble=1;
-            $data['msj']=$documento.' No pudo hacer conexión.';
+            $data['msj']="<span style='color: orange'>".$documento.' No pudo hacer conexión.'."</span>";
 			$estado_envsun = '';
 		}
 		else
 		{
-            $data['msj']=$documento.' Error: '.$r['faultcode'];
+            $data['msj']="<span style='color: red'>".$documento.' Error: '.$r['faultcode']."</span>";
 			$estado_envsun = 0;
 		}
 

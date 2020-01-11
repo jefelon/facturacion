@@ -208,7 +208,7 @@ function arr_IssueDate($header, $detalle, $empresa, $tipodoc){
 function arr_IssueTime($header, $detalle, $empresa, $tipodoc){
     global $arr;
     if($tipodoc=='Invoice' || $tipodoc=='DespatchAdvice'){
-        $arr['doc'][$tipodoc]['child']['IssueTime'][0] = date_format(date_create($header[0]->fechadoc), 'H:i:s');
+        $arr['doc'][$tipodoc]['child']['IssueTime'][0] = date_format(date_create($header[0]->issuetime), 'H:i:s');
         $arr['doc'][$tipodoc]['child']['IssueTime']['tag'] = 'cbc';
     }else{
         $arr['doc'][$tipodoc]['child']['IssueTime'][0] = date_format(date_create($header[0]->issuetime), 'H:i:s');
@@ -431,7 +431,7 @@ function arr_TaxTotal($header, $detalle, $empresa, $tipodoc){
 
     if($header[0]->totopina>0){
         $xnr++;
-        if($xnr<2)
+//        if($xnr<2)
             $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['tag'] = 'cac';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount'][0] = round($header[0]->totopina,2);
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount']['tag'] = 'cbc';
@@ -453,7 +453,7 @@ function arr_TaxTotal($header, $detalle, $empresa, $tipodoc){
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['ID']['tag'] = 'cbc';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['ID']['atr']['schemeID'] = 'UN/ECE 5153';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['ID']['atr']['schemeAgencyID'] = '6';
-        $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['Name'][0] = 'INAFECTO';
+        $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['Name'][0] = 'INA';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['Name']['tag'] = 'cbc';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['TaxTypeCode'][0] = 'FRE';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxCategory']['child']['TaxScheme']['child']['TaxTypeCode']['tag'] = 'cbc';
@@ -641,15 +641,16 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount']['atr']['currencyID'] = $header[0]->isomoneda;
             }
             $TaxExemptionReasonCode = $item->idafectaciond;
-            if($item->idafectaciond == 10){
-                $impuestos = round(($item->igv + $item->isc),2);
+            if($item->idafectaciond == 10) {
+                $impuestos = round(($item->igv + $item->isc), 2);
                 $basecalculo = round(($item->igv / 0.18), 2);
-                $impuesto = round($item->igv,2);
+                $impuesto = round($item->igv, 2);
                 $TaxCategoryID = 'S';
                 $Percent = '18.00';
                 $TaxSchemeID = 1000;
                 $TaxSchemeName = 'IGV';
                 $TaxSchemeTaxTypeCode = 'VAT';
+
             }elseif ($item->idafectaciond>=11 && $item->idafectaciond<=17) {
                 $impuestos = '0.00';
                 $impuesto = '0.00';
@@ -680,9 +681,9 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxSchemeName = 'GRA';
                 $TaxSchemeTaxTypeCode = 'FRE';
 
-            }elseif ($item->idafectaciond==30) {
+            }elseif ($item->idafectaciond==30 || $item->idafectaciond==31) {
                 $impuestos = '0.00';
-                $basecalculo = round($item->valorventa,2);
+                $basecalculo = round($item->valorventa, 2);
                 $impuesto = '0.00';
                 $TaxCategoryID = 'O';
                 $Percent = '18.00';
@@ -690,7 +691,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxSchemeName = 'INA';
                 $TaxSchemeTaxTypeCode = 'FRE';
 
-            }elseif ($item->idafectaciond>=31 && $item->idafectaciond<=36) {
+            }elseif ($item->idafectaciond>=32 && $item->idafectaciond<=36) {
                 $impuestos = '0.00';
                 $basecalculo = '0.00';
                 $impuesto = '0.00';
@@ -829,7 +830,7 @@ function arr_Signature($header, $detalle, $empresa, $tipodoc){
     $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyIdentification']['child']['ID']['tag'] = 'cbc';
 
     $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['tag'] = 'cac';
-    $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['child']['Name'][0] = $empresa[0]->razon;
+    $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['child']['Name'][0] = '*'.$empresa[0]->razon;
     $arr['doc'][$tipodoc]['child']['Signature']['child']['SignatoryParty']['child']['PartyName']['child']['Name']['tag'] = 'cbc';
 
     $arr['doc'][$tipodoc]['child']['Signature']['child']['DigitalSignatureAttachment']['tag'] = 'cac';
