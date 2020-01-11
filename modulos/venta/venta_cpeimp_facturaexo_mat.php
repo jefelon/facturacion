@@ -430,9 +430,9 @@ $html.='<tr>
             <th style="text-align: center; width: 6%;"><b>ITEM</b></th>
             <th style="text-align: center; width: 7%;"><b>CANT.</b></th>
              <th style="text-align: center; width: 8%;"><b>UNIDAD</b></th>
-            <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 42%;"><b>DESCRIPCION</b></th>
             <!--<th style="text-align: center; width: 7%;"><b>VALOR U.</b></th>-->
-            <th style="text-align: right; width: 13%;"><b>VALOR UNIT.</b></th>
+            <th style="text-align: right; width: 12%;"><b>VALOR UNIT.</b></th>
             <th style="text-align: right; width: 13%;"><b>DESCUENT.</b></th>
             <!--<th style="text-align: center; width: 8%;"><b>VALOR VENTA</b></th>-->
             <th style="text-align: right; width: 12%;"><b>VALOR VENTA</b></th>
@@ -442,6 +442,9 @@ $cont = 1;
 while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
     $valor_unitario_linea = $dt["tb_ventadetalle_preunilin"];
+    if($dt["cs_tipoafectacionigv_id"]==12){
+        $valor_unitario_linea=$dt["tb_ventadetalle_preuni"];
+    }
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
 

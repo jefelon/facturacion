@@ -2407,23 +2407,32 @@ if($_POST['action']=="editar"){
                         <input name="hdd_bus_cat_stouni" id="hdd_bus_cat_stouni"  type="hidden" value="">
                         <input name="hdd_bus_cat_cospro" id="hdd_bus_cat_cospro"  type="hidden" value="">
                         <label for="txt_bus_pro_codbar">COD</label>
-                        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="10">
+                        <input name="txt_bus_pro_codbar" type="text" id="txt_bus_pro_codbar" size="7">
                         <label for="txt_bus_pro_nom">NOM</label>
-                        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="28" style="font-size:13px; font-weight:bold">
+                        <input name="txt_bus_pro_nom" type="text" id="txt_bus_pro_nom" size="25" style="font-size:13px; font-weight:bold">
                         <input name="hdd_bus_pro_nom" type="hidden" id="hdd_bus_pro_nom">
 
                         <label for="txt_bus_cat_preven">S/.</label>
-                        <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="8" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
+                        <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="5" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
                         <input name="txt_bus_cat_preven_noigv" type="text" id="txt_bus_cat_preven_noigv" value="" size="8" maxlength="9" style="display:none; text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
                         <label for="txt_bus_cat_can">CAN</label>
-                        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="5" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
+                        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="3" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
 
                         <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
                         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
                         <label for="txt_detcom_des">DES</label>
-                        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="6" maxlength="5" style="text-align:right" >
+                        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="4" maxlength="5" style="text-align:right" >
+
+                        <label for="cmb_afec_id">T. IGV</label>
+                        <select name="cmb_afec_id" id="cmb_afec_id" style="width: 100px">
+                            <option value="1"<?php if($afec_id=='1')echo 'selected'?>>GRAVADO</option>
+                            <option value="9" <?php if($afec_id=='9')echo 'selected'?>>EXONERADO</option>
+<!--                            <option value="6"--><?php //if($afec_id=='6')echo 'selected'?><!-->GRABADO - BONIFICACIONES</option>-->
+<!--                            <option value="11"--><?php //if($afec_id=='11')echo 'selected'?><!-->INAFECTO - OPERACION ONEROSA</option>-->
+                            <option value="12"<?php if($afec_id=='12')echo 'selected'?>>INAFECTO - BONIFICACIÓN</option>
+                        </select>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
 

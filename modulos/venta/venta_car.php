@@ -593,14 +593,15 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gratuitas_total += $valor_venta;
-        }else if($tipo_item==12){// 31 bonificacion segun sunat
+        }else if($tipo_item==12){// 31 inafecto - bonificacion segun sunat
             $tipo_pro='Bonificación';
-            $bono=$precio_unitario * $cantidad;
+            $bono=$linea_valor_unitario * $cantidad;
             $valor_venta_unitario = 0;
             $valor_venta = 0;
             $precio_venta = 0;
             $linea_valor_venta_x_item=0;
             $ope_inafecta_total+= $bono;
+            $precio_unitario=0;
         }
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];
