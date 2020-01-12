@@ -577,7 +577,7 @@ $html2.='
     </tr>
 </table>
 <br><br>
-<table border="0" width="100%">
+<!--<table border="0" width="100%">
     <tr>
         <td>
             <img src="../empresa/logos/hermoza.jpg" border="0"  width="230" height="75" style="line-height:50%;"/>
@@ -599,9 +599,9 @@ $html2.='
         </td>
         <td>
             <img src="../empresa/logos/logo_pie_thorgel.jpg" border="0"  width="373" height="135" style="line-height:50%;"/>
-        </td>-->
+        </td>
     </tr>
-</table>
+</table>-->
 <table>
     <tr>
         <td style="font-size: 8pt;text-align: center;line-height: 8px;"><i>Representación Impresa de la '.$tipodoc.' , Esta puede ser consultada en: '.$d_documentos_app.'</i></td>

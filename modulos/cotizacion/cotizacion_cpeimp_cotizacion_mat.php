@@ -40,7 +40,7 @@ $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
 $contacto_empresa = "<b>Teléfono:</b> " . $dt['tb_empresa_tel'] ."<b> Correo:</b>" . $dt['tb_empresa_ema'];
-$texto_venta_producto="<i>Venta de ferreteria en general, accesorios, focos, calaminas, cemento, pegamento. precios al por mayor y menor.</i>";
+$texto_venta_producto="<i>".$dt['tb_empresa_teximp']."</i>";
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
 

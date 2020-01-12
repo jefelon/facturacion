@@ -2726,11 +2726,12 @@ if($_POST['action']=="editar"){
                         <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="4" maxlength="5" style="text-align:right" >
 
                         <label for="cmb_afec_id">T. IGV</label>
-                        <select name="cmb_afec_id" id="cmb_afec_id">
+                        <select name="cmb_afec_id" id="cmb_afec_id" style="width: 100px">
                             <option value="1"<?php if($afec_id=='1')echo 'selected'?>>GRAVADO</option>
                             <option value="9" <?php if($afec_id=='9')echo 'selected'?>>EXONERADO</option>
-                            <option value="11"<?php if($afec_id=='11')echo 'selected'?>>INAFECTO</option>
-                            <option value="12"<?php if($afec_id=='12')echo 'selected'?>>BONIFICACIÓN</option>
+<!--                            <option value="6"--><?php //if($afec_id=='6')echo 'selected'?><!-->GRABADO - BONIFICACIONES</option>-->
+<!--                            <option value="11"--><?php //if($afec_id=='11')echo 'selected'?><!-->INAFECTO - OPERACION ONEROSA</option>-->
+                            <option value="12"<?php if($afec_id=='12')echo 'selected'?>>INAFECTO - BONIFICACIÓN</option>
                         </select>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 

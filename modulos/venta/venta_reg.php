@@ -780,10 +780,14 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $precio_unitario_linea	=$_SESSION['venta_preven'][$unico_id][$indice];
             $afeigv_id=$_SESSION['venta_tip'][$unico_id][$indice];
 			//precio unitario de venta
-            if ($afeigv_id == 1) {
+            if ($afeigv_id == 1 ) {
                 $valor_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
+            }elseif ($afeigv_id == 6){
+                $valor_unitario_linea = $precio_unitario_linea;
             }elseif ($afeigv_id == 9){
                 $valor_unitario_linea = $precio_unitario_linea;
+            }elseif ($afeigv_id == 12){
+                $precio_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
             }
 
 			$nom = $_SESSION['venta_nom'][$unico_id][$indice];
@@ -809,7 +813,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$ser_id=0;
 			$unimed_id=12;//NIU
 
-            if ($afeigv_id == 12)//BONIFICACION 31
+            if ($afeigv_id == 12)//INAFECTO - BONIFICACION 31
             {
                 $descuento_x_item_linea=0;
                 $valor_unitario_linea=0;

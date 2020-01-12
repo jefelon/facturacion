@@ -638,7 +638,7 @@ $html2 .= '<tcpdf method="write2DBarcode" params="'.$params2.'" />
         </td>
     </tr>
 </table>
-<table border="0" width="100%">
+<!--<table border="0" width="100%">
     <tr>
         <td>
             <img src="../empresa/logos/logo_pie_chint.jpg" border="0"  width="225" height="85" style="line-height:50%;"/>
@@ -662,7 +662,7 @@ $html2 .= '<tcpdf method="write2DBarcode" params="'.$params2.'" />
             <img src="../empresa/logos/logo_pie_thorgel.jpg" border="0"  width="373" height="135" style="line-height:50%;"/>
         </td>
     </tr>
-</table>
+</table>-->
 <table>
     <tr>
         <td style="font-size: 8pt;text-align: center;line-height: 8px;"><i>Representación Impresa de la '.$tipodoc.' , Esta puede ser consultada en: '.$d_documentos_app.'</i></td>

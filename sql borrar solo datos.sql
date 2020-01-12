@@ -46,4 +46,8 @@ DELETE FROM `tb_cajadetalle`;
 DELETE FROM `tb_talonarionc`;
 DELETE FROM `tb_talonariond`;
 DELETE FROM `tb_compracosto`;
+DELETE FROM `tb_categoria`;
+DELETE FROM `tb_marca`;
+INSERT INTO `tb_marca` (`tb_marca_id`, `tb_marca_nom`, `tb_empresa_id`) VALUES ('1', 'OTROS', '1');
+INSERT INTO `tb_categoria` (`tb_categoria_id`, `tb_categoria_nom`, `tb_categoria_idp`, `tb_empresa_id`) VALUES ('1', 'NA', '0', '1');
 UPDATE `tb_caja` SET `tb_caja_estado` = '0' ;

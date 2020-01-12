@@ -601,6 +601,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $precio_venta = 0;
             $linea_valor_venta_x_item=0;
             $ope_inafecta_total+= $bono;
+            $precio_unitario=0;
         }
         //Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.
         $tipdes = $_SESSION['venta_tipdes'][$unico_id][$indice];
