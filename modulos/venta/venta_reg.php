@@ -780,13 +780,25 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             $precio_unitario_linea	=$_SESSION['venta_preven'][$unico_id][$indice];
             $afeigv_id=$_SESSION['venta_tip'][$unico_id][$indice];
 			//precio unitario de venta
-            if ($afeigv_id == 1 ) {
+            if ($afeigv_id == 1 )
+            {
                 $valor_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
-            }elseif ($afeigv_id == 6){
+            }
+            elseif ($afeigv_id == 6)
+            {
                 $valor_unitario_linea = $precio_unitario_linea;
-            }elseif ($afeigv_id == 9){
+            }
+            elseif ($afeigv_id == 9)
+            {
                 $valor_unitario_linea = $precio_unitario_linea;
-            }elseif ($afeigv_id == 12){
+            }
+            elseif ($afeigv_id == 10)
+            {
+                $precio_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
+                $valor_unitario_linea = $precio_unitario_linea;
+                //$valor_unitario_linea = 0;
+            }
+            elseif ($afeigv_id == 12){
                 $precio_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
             }
 
@@ -812,7 +824,13 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			$tipo_venta=1;
 			$ser_id=0;
 			$unimed_id=12;//NIU
-
+            if ($afeigv_id == 10)//EXONERADO GRATUITO 21
+            {
+                $descuento_x_item_linea=0;
+                $igv_linea=0;
+                $calisc=0;
+                $det_isc=0;
+            }
             if ($afeigv_id == 12)//INAFECTO - BONIFICACION 31
             {
                 $descuento_x_item_linea=0;
@@ -940,6 +958,10 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             if ($afeigv_id == 1) {
                 $valor_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
             }elseif ($afeigv_id == 9){
+                $valor_unitario_linea = $precio_unitario_linea;
+            }
+            elseif ($afeigv_id == 10)
+            {
                 $valor_unitario_linea = $precio_unitario_linea;
             }
 			

@@ -12,24 +12,26 @@ $oMysql= new cMysql();
 require_once("../formatos/formato.php");
 require_once("../menu/acceso.php");
 require_once("../guia/cGuia.php");
+require_once ("../almacen/cAlmacen.php");
+$oAlmacen = new cAlmacen();
+
 $oGuia = new cGuia();
 
 $rs = $oFormula->consultar_dato_formula('VEN_VENTAS_NEGATIVAS');
 $dt = mysql_fetch_array($rs);
 $stock_negativo = $dt['tb_formula_dat'];
 
+$dtsa=$oAlmacen->mostrarTodos($_SESSION['empresa_id']);
+$num_rowsa= mysql_num_rows($dtsa);
 
 $cot_id = $_POST['cot_id'];
-
 if($_POST['action']=="insertar"){
     //$cli_id=1;
     $fec=date('d-m-Y');
     $est='CANCELADA';
     $venpag_fec=date('d-m-Y');
-
     $unico_id=uniqid();
 }
-
 if($_POST['action']=="insertar_cot"){
     $dts= $oCotizacion->mostrarUno($_POST['cot_id']);
     $dt = mysql_fetch_array($dts);
@@ -1766,8 +1768,18 @@ if($_POST['action']=="editar"){
                 }else{
                     $("#txt_bus_pro_nom").val(ui.item.label);
                     $("#hdd_bus_pro_nom").val(ui.item.value);
-                    catalogo_buscar();
+                    catalogo_buscar(ui.item.catid);
                 }
+            }
+        });
+        $( "#txt_bus_pro_codbar" ).autocomplete({
+            minLength: 2,
+            delay:10,
+            source: "../venta/catalogo_buscar_cod.php",
+            select: function( event, ui ) {
+                $("#txt_bus_pro_codbar").val(ui.item.label);
+                $("#hdd_bus_pro_nom").val(ui.item.value);
+                catalogo_buscar_cod(ui.item.catid);
             }
         });
         $( "#div_producto_form" ).dialog({
@@ -1796,7 +1808,7 @@ if($_POST['action']=="editar"){
 
         $('#txt_bus_pro_codbar').keypress(function(e){
             if(e.which == 13){
-                catalogo_buscar();
+                catalogo_buscar_codigo();
                 venta_car('agregar');
                 $("#txt_bus_pro_nom").val('');
                 $("#hdd_bus_pro_nom").val('');
@@ -1893,13 +1905,9 @@ if($_POST['action']=="editar"){
             $("#txt_fil_gui_con_dir").val("");
         }
     });
-
-
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    function catalogo_buscar() {
+    function catalogo_buscar(cat_id) {
         $.ajax({
             type: "POST",
             url: "../venta/catalogo_buscar.php",
@@ -1910,7 +1918,8 @@ if($_POST['action']=="editar"){
                 unico_id: $('#unico_id').val(),
                 txt_bus_pro_codbar: $('#txt_bus_pro_codbar').val(),
                 txt_bus_pro_nom: $('#hdd_bus_pro_nom').val(),
-                cmb_listaprecio_id: $('#cmb_listaprecio_id').val()
+                cmb_listaprecio_id: $('#cmb_listaprecio_id').val(),
+                cat_id: cat_id
             }),
             beforeSend: function() {
                 //$('#div_venta_pago_car').addClass("ui-state-disabled");
@@ -1950,10 +1959,13 @@ if($_POST['action']=="editar"){
                     $('#txt_precio_min').val(data.cat_premin);
                     $('#txt_precio_may').val(data.cat_premay);
                     $('#hdd_detven_tip').val(data.ven_tip);
+                    var cat_tipo= $('#hdd_detven_tip').val();
+                    $("#cmb_afec_id option[value="+ cat_tipo +"]").attr("selected",true);
 
                     if ($('#chk_modo').is(':checked')) {
                         venta_car('agregar');
                         $('#hdd_bus_cat_id').val('');
+                        $('#hdd_detven_tip').val('');
                         $('#hdd_bus_cat_stouni').val('');
                         $('#hdd_bus_cat_cospro').val('');
                         $('#txt_bus_pro_codbar').val('');
@@ -1969,6 +1981,102 @@ if($_POST['action']=="editar"){
                         $('#txt_bus_pro_codbar').val(data.pro_codbar);
                         $('#hdd_bus_pro_nom').val('');
 
+                        if ($("#cmb_ven_doc").val()== '2' || ($("#cmb_ven_doc")).val()== '11') {
+                            $('#txt_bus_cat_preven_noigv').focus();
+                        }else{
+                            $('#txt_bus_cat_preven').focus();
+                        }
+                    }
+                    //precios_min_may($('#hdd_bus_cat_id').val());
+                }
+                if (data.accion == 2) {
+                    if ($('#cmb_listaprecio_id').val()) {
+                        data.cat_preven = data.cat_prelista;
+                    }
+                    //$('#txt_bus_pro_codbar').val(data.pro_codbar);
+                    ///catalogo_venta_tab1();
+                    //alert(data.pro_codbar);
+                    //$('#txt_fil_pro_codbar').val('hola');
+                }
+            },
+            complete: function(){
+                //$('#div_venta_pago_car').removeClass("ui-state-disabled");
+                $('#msj_venta_det').hide(100);
+            }
+        });
+    }
+    function catalogo_buscar_codigo(cat_id) {
+        $.ajax({
+            type: "POST",
+            url: "../venta/catalogo_buscar_codigo.php",
+            async:false,
+            dataType: "json",
+            data: ({
+                action:	 'dato',
+                unico_id: $('#unico_id').val(),
+                txt_bus_pro_codbar: $('#txt_bus_pro_codbar').val(),
+                txt_bus_pro_nom: $('#hdd_bus_pro_nom').val(),
+                cmb_listaprecio_id: $('#cmb_listaprecio_id').val(),
+                cat_id: cat_id
+            }),
+            beforeSend: function() {
+                //$('#div_venta_pago_car').addClass("ui-state-disabled");
+                $('#msj_venta_det').html("Buscando...");
+                $('#msj_venta_det').show(100);
+            },
+            success: function(data){
+                if(data.accion==0)
+                {
+                    $('#hdd_bus_cat_id').val('');
+                    $('#hdd_bus_cat_stouni').val('');
+                    $('#hdd_bus_cat_cospro').val('');
+                    //$('#txt_bus_pro_codbar').val('');
+                    $('#txt_bus_pro_nom').val('');
+                    $('#txt_bus_cat_preven').val('');
+                    $('#txt_bus_cat_preven_noigv').val('');
+                    $('#txt_bus_cat_can').val('');
+                    $('#txt_precio_min').val('');
+                    $('#txt_precio_may').val('');
+                    $('#hdd_detven_tip').val('');
+                }
+                if (data.accion == 1) {
+                    if ($('#che_mayorista').is(':checked')) {
+                        data.cat_preven = data.cat_premay;
+                    }else{
+                        if ($('#cmb_listaprecio_id').val()!='') {
+                            data.cat_preven = data.cat_prelista;
+                        }
+                    }
+                    $('#hdd_bus_cat_id').val(data.cat_id);
+                    $('#hdd_bus_cat_stouni').val(data.cat_stouni);
+                    $('#hdd_bus_cat_cospro').val(data.cat_cospro);
+                    $('#txt_bus_pro_nom').val(data.pro_nom);
+                    $('#txt_bus_cat_preven').val(data.cat_preven);
+                    $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18).toFixed(2));
+                    $('#txt_bus_cat_can').val(data.cat_can);
+                    $('#txt_precio_min').val(data.cat_premin);
+                    $('#txt_precio_may').val(data.cat_premay);
+                    $('#hdd_detven_tip').val(data.ven_tip);
+                    var cat_tipo= $('#hdd_detven_tip').val();
+                    $("#cmb_afec_id option[value="+ cat_tipo +"]").attr("selected",true);
+                    if ($('#chk_modo').is(':checked')) {
+                        venta_car('agregar');
+                        $('#hdd_bus_cat_id').val('');
+                        $('#hdd_detven_tip').val('');
+                        $('#hdd_bus_cat_stouni').val('');
+                        $('#hdd_bus_cat_cospro').val('');
+                        $('#txt_bus_pro_codbar').val('');
+                        $('#txt_bus_cat_preven').val('');
+                        $('#txt_bus_cat_preven_noigv').val('');
+                        $('#txt_bus_cat_can').val('');
+                        $('#txt_precio_min').val('');
+                        $('#txt_precio_may').val('');
+                        $('#hdd_bus_pro_nom').val('');
+                        $('#txt_bus_pro_nom').val('');
+                        $('#txt_bus_pro_nom').focus();
+                    } else {
+                        $('#txt_bus_pro_codbar').val(data.pro_codbar);
+                        $('#hdd_bus_pro_nom').val('');
                         if ($("#cmb_ven_doc").val()== '2' || ($("#cmb_ven_doc")).val()== '11') {
                             $('#txt_bus_cat_preven_noigv').focus();
                         }else{
@@ -2431,7 +2539,7 @@ if($_POST['action']=="editar"){
                             <option value="9" <?php if($afec_id=='9')echo 'selected'?>>EXONERADO</option>
 <!--                            <option value="6"--><?php //if($afec_id=='6')echo 'selected'?><!-->GRABADO - BONIFICACIONES</option>-->
 <!--                            <option value="11"--><?php //if($afec_id=='11')echo 'selected'?><!-->INAFECTO - OPERACION ONEROSA</option>-->
-                            <option value="12"<?php if($afec_id=='12')echo 'selected'?>>INAFECTO - BONIFICACIÓN</option>
+                            <option value="10"<?php if($afec_id=='10')echo 'selected'?>>GRATUITO</option>
                         </select>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 

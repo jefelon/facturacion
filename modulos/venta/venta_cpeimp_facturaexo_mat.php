@@ -445,6 +445,9 @@ while($dt = mysql_fetch_array($dts)){
     if($dt["cs_tipoafectacionigv_id"]==12){
         $valor_unitario_linea=$dt["tb_ventadetalle_preuni"];
     }
+    if($dt["cs_tipoafectacionigv_id"]==10){
+        $valor_unitario_linea=0;
+    }
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
 

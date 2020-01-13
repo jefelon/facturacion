@@ -463,7 +463,8 @@ $(function() {
         <tr>
           <td>
           <?php if($_POST['action']=="insertar" or $unibas==0){?>
-          <a id="btn_cmb_cat_uni_alt" class="btn_ir" href="#" onClick="unidad_form('insertar','','cmb_cat_uni_alt')">Agregar Unidad</a><select name="cmb_cat_uni_alt" id="cmb_cat_uni_alt" <?php if($_POST['action']=="editar" and $unibas==1)echo 'disabled'?>>
+          <a id="btn_cmb_cat_uni_alt" class="btn_ir" href="#" onClick="unidad_form('insertar','','cmb_cat_uni_alt')">Agregar Unidad</a>
+          <select name="cmb_cat_uni_alt" id="cmb_cat_uni_alt" <?php if($_POST['action']=="editar" and $unibas==1)echo 'disabled'?>>
           </select>
             =
             <input name="txt_cat_mul" type="text" class="cantidad" id="txt_cat_mul" style="text-align:right" value="<?php echo $mul?>" size="10" maxlength="6" <?php if($_POST['action']=="editar" and $unibas==1)echo 'disabled'?>>
