@@ -67,6 +67,13 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
             text: false
         });
 
+        $('.btn_activar').button({
+            icons: {primary: "ui-icon-check"},
+            text: false
+        });
+
+
+
 
         // $('.pasadizo >div').addClass('oculto');
         // $('.pasadizo >div:last').removeClass('oculto');
@@ -134,7 +141,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         $(selector).addClass('seleccionado');
 
     }
-    function desactivar_fila(fila) {
+    function desactivar_fila(estado) {
         $.ajax({
             type: "POST",
             url: "../croquis/croquis_actualizar_posicion.php",
@@ -143,8 +150,8 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
             data: ({
                 veh_id:$("#hdd_veh_id").val(),
                 veh_pis:$("#cmb_piso").val(),
-                fila: fila,
-                estado:"0",
+                fila: $("#cmb_fila").val(),
+                estado:estado,
                 vista: "desactivar_fila"
             }),
             beforeSend: function () {
@@ -159,6 +166,12 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
             }
         })
     }
+    function cambiar_color(selector) {
+        $('.seleccionado').removeClass('seleccionado');
+
+        $(selector).addClass('seleccionado');
+        $(selector).attr('contentEditable',true);
+    }
 </script>
 <style>
 
@@ -166,7 +179,6 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         visibility: hidden;
     }
     #sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {
-        border: 1px solid #eee;
         min-height: 40px;
         list-style-type: none;
         margin: 0;
@@ -241,9 +253,9 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         padding: 0 !important;
         color: transparent;
     }
-
-    .estado_0>div{
-       height: 3px;
+    .seleccionado {
+        background: orange !important;
+        color: white;
     }
 
 </style>
@@ -254,15 +266,15 @@ if($num_rows>=1){
     <div id="bus">
         <div id="frentera"><!--FRENTE--></div>
         <div id="lugares">
-            <div id="sortable1" class="connectedSortable <?php echo "estado_".$estado_filas1?>">
-                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "1"?>')">Desactivar Fila</a>
+            <?php if($estado_filas1==1){?>
+            <div id="sortable1" class="connectedSortable">
                 <?php
                 if($orden1!=""){ //solo si hay distribucion creada
                     $lugares = explode(';',$orden1);
                     foreach ($lugares as $lugar) {
                         $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>" onclick="cambiar_color(this)"><?php echo $lugar[1]?></div>
                         <?php
                     }
                 }
@@ -271,15 +283,16 @@ if($num_rows>=1){
                 ?>
             </div>
             <div class="clear"></div>
-            <div id="sortable2" class="connectedSortable <?php echo "estado_".$estado_filas1?>">
-                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "2"?>')">Desactivar Fila</a>
+            <?php }?>
+            <?php if($estado_filas2==1) {?>
+            <div id="sortable2" class="connectedSortable">
                 <?php
                 if($orden2!=""){
                     $lugares = explode(';',$orden2);
                     foreach ($lugares as $lugar) {
                         $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>" onclick="cambiar_color(this)"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -288,16 +301,16 @@ if($num_rows>=1){
                 ?>
             </div>
             <div class="clear"></div>
+            <?php }?>
             <?php if($estado_filas3==1) {?>
             <div id="sortable3" class="connectedSortable pasadizo">
-                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "3"?>')">Desactivar Fila</a>
                 <?php
                 if($orden3!=""){
                     $lugares = explode(';',$orden3);
                     foreach ($lugares as $lugar) {
                         $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>" onclick="cambiar_color(this)"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -309,14 +322,13 @@ if($num_rows>=1){
             <?php }?>
             <?php if($estado_filas4==1) {?>
             <div id="sortable4" class="connectedSortable">
-                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "4"?>')">Desactivar Fila</a>
                 <?php
                 if($orden4!=""){
                     $lugares = explode(';',$orden4);
                     foreach ($lugares as $lugar) {
                         $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>" onclick="cambiar_color(this)"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -328,14 +340,13 @@ if($num_rows>=1){
             <?php }?>
             <?php if($estado_filas5==1) {?>
             <div id="sortable5" class="connectedSortable">
-                <a class="btn_desactivar" href="#" onClick="desactivar_fila('<?php echo "5"?>')">Desactivar Fila</a>
                 <?php
                 if($orden5!="" && $estado_filas5==1){
                     $lugares = explode(';',$orden5);
                     foreach ($lugares as $lugar) {
                         $lugar=explode('_',$lugar);//0=id 1=numero 2=vista ejm tv, oculto, grada, activo, desactivado
                         ?>
-                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>"><?php echo $lugar[1] ?></div>
+                        <div id="<?php echo $lugar[0]."_".$lugar[1]."_".$lugar[2] ?>" oncontextmenu="click_derecho(event,$(this),<?php echo $lugar[1]?>); return false;" class="asiento <?php echo $lugar[2]?>" onclick="cambiar_color(this)"><?php echo $lugar[1] ?></div>
                         <?php
                     }
                 }
@@ -344,6 +355,18 @@ if($num_rows>=1){
                 ?>
             </div>
             <?php }?>
+        </div>
+        <div id="desactivar_filas">
+            <label for="cmb_estado"><b>Fila:</b></label>
+            <select name="cmb_fila" id="cmb_fila">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <a class="btn_desactivar" href="#" onClick="desactivar_fila(0)">Desactivar Fila</a>
+            <a class="btn_activar" href="#" onClick="desactivar_fila(1)">Activar Fila</a>
         </div>
     </div>
     <?php

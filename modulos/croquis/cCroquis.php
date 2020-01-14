@@ -14,16 +14,17 @@ class cCroquis{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-    function insertarCroquis($dis_lug,$dis_fil,$veh_id,$dis_pis,$cro_id){
+    function insertarCroquis($dis_lug,$dis_fil,$veh_id,$dis_pis,$cro_id,$est){
         $sql = "INSERT tb_distribucionasiento (
 		`tb_distribucionasiento_lugar`,
 		`tb_distribucionasiento_fila`,
 		`tb_vehiculo_id`,
 		`tb_distribucionasiento_piso`,
-		`tb_croquis_id`
+		`tb_croquis_id`,
+		tb_distribucionasiento_estado
 		)
 		VALUES (
-		 '$dis_lug',  '$dis_fil',  '$veh_id',  '$dis_pis',  '$cro_id'
+		 '$dis_lug',  '$dis_fil',  '$veh_id',  '$dis_pis',  '$cro_id','$est'
 		);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -76,7 +77,7 @@ class cCroquis{
     }
     function actualizar_distribucionasiento_estado($veh_id,$piso,$fila,$estado){
         $sql = "UPDATE tb_distribucionasiento SET  
-	`tb_distribucionasiento_estado` =  '$estado'
+	`tb_distribucionasiento_estado` =  $estado
 	WHERE tb_vehiculo_id =$veh_id AND tb_distribucionasiento_fila=$fila AND tb_distribucionasiento_piso=$piso
 	";
         $oCado = new Cado();

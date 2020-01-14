@@ -13,8 +13,8 @@ if($_POST['action_croquis']=="insertar")
     $veh_pis=$dt['tb_vehiculo_pisos'];
     mysql_free_result($dts);
 
-	if(!empty($_POST['cmb_vehiculo']))
-	{
+    if(!empty($_POST['cmb_vehiculo']))
+    {
         $oCroquis->insertar(strip_tags($_POST['cmb_vehiculo']),$_POST['cmb_estado'],$_POST['txt_croquis_fondo'],$_POST['cmb_croquis_def']);
 
         if (!file_exists('fondos')) {
@@ -23,80 +23,82 @@ if($_POST['action_croquis']=="insertar")
 
         move_uploaded_file($_FILES['file']['tmp_name'], 'fondos/' . $_POST['hdd_cro_id'] . '_'. $_FILES['file']['name'] );
 
-			$dts=$oCroquis->ultimoInsert();
-			$dt = mysql_fetch_array($dts);
-		    $cro_id=$dt['last_insert_id()'];
-			mysql_free_result($dts);
+        $dts=$oCroquis->ultimoInsert();
+        $dt = mysql_fetch_array($dts);
+        $cro_id=$dt['last_insert_id()'];
+        mysql_free_result($dts);
 
-			$pisos=1;
+        $pisos=1;
 
-			if($_POST['cmb_croquis_def']==56)
-            {
-                while ($pisos<=$veh_pis) {
-                    //distribucion asiento 56 asientos 1 piso
-                    // $i = fila, son 5 porque tiene un pasadizo
-                    for ($i = 1; $i <= 5; $i++) {
-                        if ($i == 1) {
-                            $dist = "item_3;item_7;item_11;item_15;item_19;item_23;item_27;item_31;item_35;item_39;item_43;item_47;item_51";
-                        } elseif ($i == 2) {
-                            $dist = "item_4;item_8;item_12;item_16;item_20;item_24;item_28;item_32;item_36;item_40;item_44;item_48;item_52";
-                        } elseif ($i == 3) {
-                            $dist = "item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00";
-                        } elseif ($i == 4) {
-                            $dist = "item_2;item_6;item_10;item_14;item_18;item_22;item_26;item_30;item_34;item_38;item_42;item_46;item_50;item_54;item_56";
-                        } elseif ($i == 5) {
-                            $dist = "item_1;item_5;item_9;item_13;item_17;item_21;item_25;item_29;item_33;item_37;item_41;item_45;item_49;item_53;item_55";
-                        }
-                        $oCroquis->insertarCroquis(
-                            $dist,
-                            $i,
-                            $_POST['cmb_vehiculo'],
-                            $pisos,
-                            $cro_id
-                        );
+        if($_POST['cmb_croquis_def']==56)
+        {
+            while ($pisos<=$veh_pis) {
+                //distribucion asiento 56 asientos 1 piso
+                // $i = fila, son 5 porque tiene un pasadizo
+                for ($i = 1; $i <= 5; $i++) {
+                    if ($i == 1) {
+                        $dist = "item_3_a;item_7_a;item_11_a;item_15_a;item_19_a;item_23_a;item_27_a;item_31_a;item_35_a;item_39_a;item_43_a;item_47_a;item_51_a";
+                    } elseif ($i == 2) {
+                        $dist = "item_4_a;item_8_a;item_12_a;item_16_a;item_20_a;item_24_a;item_28_a;item_32_a;item_36_a;item_40_a;item_44_a;item_48_a;item_52_a";
+                    } elseif ($i == 3) {
+                        $dist = "item_01_d;item_02_d;item_03_d;item_04_d;item_05_d;item_06_d;item_07_d;item_08_d;item_09_d;item_010_d;item_011_d;item_012_d";
+                    } elseif ($i == 4) {
+                        $dist = "item_2_a;item_6_a;item_10_a;item_14_a;item_18_a;item_22_a;item_26_a;item_30_a;item_34_a;item_38_a;item_42_a;item_46_a;item_50_a;item_54_a;item_56_a";
+                    } elseif ($i == 5) {
+                        $dist = "item_1_a;item_5_a;item_9_a;item_13_a;item_17_a;item_21_a;item_25_a;item_29_a;item_33_a;item_37_a;item_41_a;item_45_a;item_49_a;item_53_a;item_55_a";
                     }
-                    $pisos++;
+                    $oCroquis->insertarCroquis(
+                        $dist,
+                        $i,
+                        $_POST['cmb_vehiculo'],
+                        $pisos,
+                        $cro_id,
+                        $_POST['cmb_estado']
+                    );
                 }
+                $pisos++;
             }
-            elseif($_POST['cmb_croquis_def']==49)
-            {
-                while ($pisos<=$veh_pis){
-                    //distribucion asiento 49 asientos 1 piso
-                    // $i = fila, son 5 porque tiene un pasadizo
-                    for ($i=1;$i<=5;$i++)
-                    {
-                        if($i==1){$dist="item_4;item_8;item_12;item_16;item_20;item_24;item_28;item_32;item_36;item_40;item_44;item_48";}
-                        elseif($i==2){$dist="item_3;item_7;item_11;item_15;item_19;item_23;item_27;item_31;item_35;item_39;item_43;item_47";}
-                        elseif($i==3){$dist="item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_00;item_49";}
-                        elseif($i==4){$dist="item_2;item_6;item_10;item_14;item_18;item_22;item_26;item_30;item_34;item_38;item_42;item_46";}
-                        elseif($i==5){$dist="item_1;item_5;item_9;item_13;item_17;item_21;item_25;item_29;item_33;item_37;item_41;item_45";}
-                        $oCroquis->insertarCroquis(
-                            $dist,
-                            $i,
-                            $_POST['cmb_vehiculo'],
-                            $pisos,
-                            $cro_id
-                        );
-                    }
-                    $pisos++;
+        }
+        elseif($_POST['cmb_croquis_def']==49)
+        {
+            while ($pisos<=$veh_pis){
+                //distribucion asiento 49 asientos 1 piso
+                // $i = fila, son 5 porque tiene un pasadizo
+                for ($i=1;$i<=5;$i++)
+                {
+                    if($i==1){$dist="item_4_a;item_8_a;item_12_a;item_16_a;item_20_a;item_24_a;item_28_a;item_32_a;item_36_a;item_40_a;item_44_a;item_48_a";}
+                    elseif($i==2){$dist="item_3_a;item_7_a;item_11_a;item_15_a;item_19_a;item_23_a;item_27_a;item_31_a;item_35_a;item_39_a;item_43_a;item_47_a";}
+                    elseif($i==3){$dist="item_01_d;item_02_d;item_03_d;item_04_d;item_05_d;item_06_d;item_07_d;item_08_d;item_09_d;item_010_d;item_011_d;item_49_a";}
+                    elseif($i==4){$dist="item_2_a;item_6_a;item_10_a;item_14_a;item_18_a;item_22_a;item_26_a;item_30_a;item_34_a;item_38_a;item_42_a;item_46_a";}
+                    elseif($i==5){$dist="item_1_a;item_5_a;item_9_a;item_13_a;item_17_a;item_21_a;item_25_a;item_29_a;item_33_a;item_37_a;item_41_a;item_45_a";}
+                    $oCroquis->insertarCroquis(
+                        $dist,
+                        $i,
+                        $_POST['cmb_vehiculo'],
+                        $pisos,
+                        $cro_id,
+                        $_POST['cmb_estado']
+                    );
                 }
+                $pisos++;
+            }
 
-            }
+        }
 
 
         echo "Se registró croquis correctamente.";
-	}
-	else
-	{
-		echo 'Intentelo nuevamente';
-	}
+    }
+    else
+    {
+        echo 'Intentelo nuevamente';
+    }
 }
 
 if($_POST['action_croquis']=="editar")
 {
 
     if(!empty($_POST['cmb_vehiculo']))
-	{
+    {
         $oCroquis->modificar($_POST['hdd_cro_id'], $_POST['cmb_vehiculo'],$_POST['cmb_estado'],$_POST['txt_croquis_fondo'],$_POST['cmb_croquis_def']);
 
         if (!file_exists('fondos')) {
@@ -106,24 +108,24 @@ if($_POST['action_croquis']=="editar")
         move_uploaded_file($_FILES['file']['tmp_name'], 'fondos/' . $_POST['hdd_cro_id'] . '_'. $_FILES['file']['name'] );
 
         echo "Se registró croquis correctamente.";
-	}
-	else
-	{
-		echo 'Intentelo nuevamente';
-	}
+    }
+    else
+    {
+        echo 'Intentelo nuevamente';
+    }
 }
 
 if($_POST['action']=="eliminar")
 {
-	if(!empty($_POST['id']))
-	{
+    if(!empty($_POST['id']))
+    {
         $oCroquis->eliminar($_POST['id']);
         $oCroquis->eliminarCroquis($_POST['id']);
         echo 'Se eliminó croquis correctamente.';
-	}
-	else
-	{
-		echo 'Intentelo nuevamente.';
-	}
+    }
+    else
+    {
+        echo 'Intentelo nuevamente.';
+    }
 }
 ?>

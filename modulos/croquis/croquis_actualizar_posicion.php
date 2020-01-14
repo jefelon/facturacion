@@ -34,7 +34,7 @@ if($_POST['vista']=="actualizar_posicion"){
 
 
 else if($_POST['vista']=="desactivar_fila"){
-    $oCroquis->actualizar_distribucionasiento_estado($veh_id,$piso,$_POST['fila'],$estado);
+    $oCroquis->actualizar_distribucionasiento_estado($veh_id,$piso,$_POST['fila'],$_POST['estado']);
     $data['asiento_msj']='Se actualizó el estado d ela fila de asientos.';
 }
 
