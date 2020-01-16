@@ -162,6 +162,11 @@ $menu_administrador=
   
   <li class="topmenu"><a href="#">Integración</a>
 	<ul>
+	  <li class="topmenu"><span><a href="#" >Contasis</a></span>
+	    <ul>
+		  <li><a href="../integracion/contasis_vista_ventas.php">Ventas</a></li>
+	    </ul>
+	  </li>
 	  <li class="topmenu"><span><a href="#" >NetSoft</a></span>
 	    <ul>
 		  <li><a href="../integracion/compra_vista_adm.php">Compras</a></li>

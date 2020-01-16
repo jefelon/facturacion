@@ -35,7 +35,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
 <html>
 <head><meta http-equiv="Content-Type" content="text/html; charset=gb18030">
 
-<title>LIBROS ELECTRÓNICOS - PLE</title>
+<title>CONTASIS</title>
 <link href="../../css/Estilo/miestilo.css" rel="stylesheet" type="text/css">
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -87,7 +87,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
     {
         $.ajax({
             type: "POST",
-            url: "ple_filtro.php",
+            url: "contasis_filtro.php",
             async:true,
             dataType: "html",
             beforeSend: function() {
@@ -108,7 +108,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         {
             $.ajax({
                 type: "POST",
-                url: "ple_tabla_compras.php",
+                url: "contasis_tabla_compras.php",
                 async: true,
                 dataType: "html",
                 data: ({
@@ -131,7 +131,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         {
             $.ajax({
                 type: "POST",
-                url: "ple_tabla_comprasnd.php",
+                url: "contasis_tabla_comprasnd.php",
                 async: true,
                 dataType: "html",
                 data: ({
@@ -154,7 +154,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         {
             $.ajax({
                 type: "POST",
-                url: "ple_tabla_ventas.php",
+                url: "contasis_tabla_ventas.php",
                 async: true,
                 dataType: "html",
                 data: ({
@@ -175,28 +175,13 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         }
 }
 
-    function descargar_txt() {
-        var lineas=0;
-        var moneda =1;
-        if($('#lineas_libro').val()==1){
-            lineas=1;
-        }
-        userDetails = '';
-        $('#tabla_ple tbody:first tr').each(function () {
-            var detail = '';
-            $(this).find('td').each(function () {
-                detail += $(this).html() + '|';
-            });
-            detail = detail.substring(0, detail.length - 1);
-            detail += '';
-            userDetails += detail + "\r\n";
-        });
-        var a = document.getElementById("btn_descargar_txt");
-        var file = new Blob([userDetails], {type: 'text/plain'});
-        a.href = URL.createObjectURL(file);
-        a.download = "LE<?php echo $emp_ruc;?>"+$('#cmb_fil_anio').val()+$('#cmb_fil_mes').val()+"00"+$("#cmb_fil_librople").val()+"00"+"1"+lineas+moneda+"1.txt"
+    function descargar_excel() {
+        $("#hdd_tabla").val($("<div>").append($("#tabla_ple").eq(0).clone()).html());
+        document.for_fil_ple.action = 'contasis_registro_xls.php';
+        $("#for_fil_ple").submit();
     }
 $(function() {
+	
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
 		text: true
@@ -218,6 +203,7 @@ $(function() {
     });
 	libro_filtro();
 	//ple_tabla();
+
 });
 </script>
 </head>
