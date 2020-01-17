@@ -641,6 +641,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['AllowanceCharge']['child']['BaseAmount']['atr']['currencyID'] = $header[0]->isomoneda;
             }
             $TaxExemptionReasonCode = $item->idafectaciond;
+            $valor_unitario=round($item->valorunitario,2);
             if($item->idafectaciond == 10) {
                 $impuestos = round(($item->igv + $item->isc), 2);
                 $basecalculo = round(($item->igv / 0.18), 2);
@@ -672,6 +673,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxSchemeTaxTypeCode = 'VAT';
 
             }elseif ($item->idafectaciond==21) {
+                $valor_unitario='0.00';
                 $impuestos = '0.00';
                 $basecalculo = '0.00';
                 $impuesto = '0.00';
@@ -681,7 +683,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxSchemeName = 'GRA';
                 $TaxSchemeTaxTypeCode = 'FRE';
 
-            }elseif ($item->idafectaciond==30 || $item->idafectaciond==31) {
+            }elseif ($item->idafectaciond==30) {
                 $impuestos = '0.00';
                 $basecalculo = round($item->valorventa, 2);
                 $impuesto = '0.00';
@@ -691,7 +693,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxSchemeName = 'INA';
                 $TaxSchemeTaxTypeCode = 'FRE';
 
-            }elseif ($item->idafectaciond>=32 && $item->idafectaciond<=36) {
+            }elseif ($item->idafectaciond>=31 && $item->idafectaciond<=36) {
                 $impuestos = '0.00';
                 $basecalculo = '0.00';
                 $impuesto = '0.00';
@@ -793,7 +795,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Item']['child']['SellersItemIdentification']['child']['ID']['tag'] = 'cbc';
 
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['tag'] = 'cac';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount'][0] = $item->valorunitario;
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount'][0] = $valor_unitario;
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount']['atr']['currencyID'] = $header[0]->isomoneda;
         }

@@ -587,15 +587,26 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gravadas_total += $valor_venta;
-        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7){
+        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7)
+        {
             $tipo_pro='Gratuito';
             $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gratuitas_total += $valor_venta;
-        }else if($tipo_item==12){// 31 bonificacion segun sunat
+        }
+        else if($tipo_item==10)
+        {
+            $tipo_pro='Gratuito';
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
+            $precio_venta = $valor_venta;
+            $precio_unitario=$linea_valor_unitario;
+            $ope_gratuitas_total += $valor_venta;
+        }
+        else if($tipo_item==12){// 31 inafecto - bonificacion segun sunat
             $tipo_pro='Bonificación';
-            $bono=$precio_unitario * $cantidad;
+            $bono=$linea_valor_unitario * $cantidad;
             $valor_venta_unitario = 0;
             $valor_venta = 0;
             $precio_venta = 0;
@@ -690,7 +701,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
             $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gravadas_total += $valor_venta;
-        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7){
+        }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7 or $tipo_item==10){
             $tipo_pro='Gratuito';
             $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
             $valor_venta = $valor_venta_unitario * $cantidad;

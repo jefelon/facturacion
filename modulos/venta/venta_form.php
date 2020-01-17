@@ -2718,7 +2718,7 @@ if($_POST['action']=="editar"){
                         <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="5" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
                         <label for="txt_bus_cat_can">CAN</label>
-                        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="4" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
+                        <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="3" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">
 
                         <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
                         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
@@ -2731,7 +2731,7 @@ if($_POST['action']=="editar"){
                             <option value="9" <?php if($afec_id=='9')echo 'selected'?>>EXONERADO</option>
 <!--                            <option value="6"--><?php //if($afec_id=='6')echo 'selected'?><!-->GRABADO - BONIFICACIONES</option>-->
 <!--                            <option value="11"--><?php //if($afec_id=='11')echo 'selected'?><!-->INAFECTO - OPERACION ONEROSA</option>-->
-                            <option value="12"<?php if($afec_id=='12')echo 'selected'?>>INAFECTO - BONIFICACIÓN</option>
+                            <option value="10"<?php if($afec_id=='10')echo 'selected'?>>GRATUITO</option>
                         </select>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
