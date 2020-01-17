@@ -49,6 +49,8 @@ if($_POST['action']=="editar"){
     $est	=$dt['tb_compra_est'];
     $numorden	=$dt['tb_compra_orden'];
     $tiporenta_id	=$dt['tb_tiporenta_id'];
+    $tipNot=$dt['tb_compra_tip_nota'];
+    $tipDoc=$dt['tb_documento_id'];
     mysql_free_result($dts);
 }
 ?>
@@ -739,6 +741,47 @@ if($_POST['action']=="editar"){
 
         });
 
+        $("#cmb_com_doc").change(function() {
+            if($('#cmb_com_doc').val()=='20' )//NOTA DE CREDITO
+            {
+                var select = $('#cmb_com_tip');
+                var newOptions = {
+                    '1' : 'Anulación de la operación',
+                    '2' : 'Anulación por error en el RUC',
+                    '3' : 'Corrección por error en la descripción',
+                    '4' : 'Descuento global',
+                    '5' : 'Descuento por ítem',
+                    '6' : 'Devolución total',
+                    '7' : 'Devolución por ítem',
+                    '8' : 'Bonificación',
+                    '9' : 'Disminución en el valor'
+                };
+                $('option', select).remove();
+                $.each(newOptions, function(text, key) {
+                    var option = new Option(key, text);
+                    select.append($(option));
+                });
+            }
+            if($('#cmb_com_doc').val()=='21' )//NOTA DE DEBITO
+            {
+                var select = $('#cmb_com_tip');
+                var newOptions = {
+                    '1' : 'Intereses por mora',
+                    '2' : 'Aumento en el valor',
+                    '3' : 'Penalidades/ otros conceptos',
+                    '4' : 'Ajustes de operaciones de exportación',
+                    '5' : 'Ajustes afectos al IVAP'
+                };
+                $('option', select).remove();
+                $.each(newOptions, function(text, key) {
+                    var option = new Option(key, text);
+                    select.append($(option));
+                });
+            }
+        });
+
+
+
         <?php
         }
         if($_POST['action']=="editar"){
@@ -1122,6 +1165,35 @@ if($_POST['action']=="editar"){
         <?php }?>
         <?php //if($_POST['action']=='editar') echo 'COMPRA: '.$est?>
         <?php if($_POST['action']=='editar'){?>
+            <div id="nota-debito-credito">
+                <label for="cmb_com_tip">Tipo:</label>
+                <select name="cmb_com_tip" id="cmb_com_tip" disabled>
+                    <?php if($tipDoc==20) {?>
+                    <option value="1" <?php if ($tipNot==1){ echo "selected";}?>>Anulación de la operación</option>
+                    <option value="2" <?php if ($tipNot==2){ echo "selected";}?>>Anulación por error en el RUC</option>
+                    <option value="3" <?php if ($tipNot==3){ echo "selected";}?>>Corrección por error en la descripción</option>
+                    <option value="4" <?php if ($tipNot==4){ echo "selected";}?>>Descuento global</option>
+                    <option value="5" <?php if ($tipNot==5){ echo "selected";}?>>Descuento por ítem</option>
+                    <option value="6" <?php if ($tipNot==6){ echo "selected";}?>>Devolución total</option>
+                    <option value="7" <?php if ($tipNot==7){ echo "selected";}?>>Devolución por ítem</option>
+                    <option value="8" <?php if ($tipNot==8){ echo "selected";}?>>Bonificación</option>
+                    <option value="9" <?php if ($tipNot==9){ echo "selected";}?>>Disminución en el valor</option>
+                    <?php } else if($tipDoc==21){ ?>
+                    <option value="1" <?php if ($tipNot==1){ echo "selected";}?>>Intereses por mora</option>
+                    <option value="2" <?php if ($tipNot==2){ echo "selected";}?>>Aumento en el valor</option>
+                    <option value="3" <?php if ($tipNot==3){ echo "selected";}?>>Penalidades/ otros conceptos</option>
+                    <?php } ?>
+
+                </select>
+                <label for="txt_com_ser_nota">Serie:</label>
+                <input name="txt_com_ser_nota" type="text" id="txt_com_ser_nota" disabled
+                       style="text-align:right; font-size:14px" value=""
+                       maxlength="4" size="6">
+                <label for="txt_com_num_nota">Número:</label>
+                <input name="txt_com_num_nota" type="text" id="txt_com_num_nota" disabled
+                       style="text-align:right; font-size:14px" value=""
+                       maxlength="8" size="10">
+            </div>
             <a id="btn_compra_precio_form" href="#precio" onClick="compra_precio_form('insertar','<?php echo $_POST['com_id']?>')">Actualizar Precios</a>
         <?php }?>
 

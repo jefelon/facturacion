@@ -2,11 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/contable/contable_registro_filtro.php" afterPath="$PROJECT_DIR$/modulos/contable/contable_registro_filtro.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/contable/ple_filtro.php" afterPath="$PROJECT_DIR$/modulos/contable/ple_filtro.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/contable/ple_vista.php" afterPath="$PROJECT_DIR$/modulos/contable/ple_vista.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/contenido/contenido.php" afterPath="$PROJECT_DIR$/modulos/contenido/contenido.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/compra/compra_form.php" afterPath="$PROJECT_DIR$/modulos/compra/compra_form.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -170,11 +166,47 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="contasis_tabla_ventas.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="contasis_tabla_ventas.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/integracion/contasis_tabla_ventas.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="17">
               <caret line="177" column="33" lean-forward="false" selection-start-line="177" selection-start-column="33" selection-end-line="177" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compra_form.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/compra/compra_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-6426">
+              <caret line="783" column="0" lean-forward="true" selection-start-line="783" selection-start-column="0" selection-end-line="783" selection-end-column="0" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#2;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#2;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="funciones.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/funciones.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="compra_reg.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/compra/compra_reg.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="184">
+              <caret line="578" column="42" lean-forward="false" selection-start-line="578" selection-start-column="39" selection-end-line="578" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -231,10 +263,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>cantidad3</find>
-      <find>moneda2</find>
-      <find>logo.jpg</find>
-      <find>$empresa_logo</find>
       <find>logo</find>
       <find>$monto_letras</find>
       <find>EMP_D</find>
@@ -261,6 +289,10 @@
       <find>excel</find>
       <find>filtro</find>
       <find>$moneda</find>
+      <find>no</find>
+      <find>cmb_com_tip</find>
+      <find>$tipNot</find>
+      <find>//NOTA DE CREDITO</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -304,7 +336,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/modulos/producto/lote_form.php" />
         <option value="$PROJECT_DIR$/modulos/producto/cPresentacion.php" />
         <option value="$PROJECT_DIR$/modulos/venta/stock_otros_form.php" />
         <option value="$PROJECT_DIR$/modulos/reportes/index.html" />
@@ -355,6 +386,7 @@
         <option value="$PROJECT_DIR$/modulos/contable/ple_filtro.php" />
         <option value="$PROJECT_DIR$/modulos/contable/contable_registro_filtro.php" />
         <option value="$PROJECT_DIR$/modulos/integracion/contasis_tabla_ventas.php" />
+        <option value="$PROJECT_DIR$/modulos/compra/compra_form.php" />
       </list>
     </option>
   </component>
@@ -411,18 +443,24 @@
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="cpegeneracion" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="libreriasphp" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="excel" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="cpegeneracion" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="sunat" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="compra" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
@@ -582,12 +620,12 @@
       <workItem from="1578758731063" duration="2514000" />
       <workItem from="1578785203075" duration="960000" />
       <workItem from="1579116839191" duration="9104000" />
-      <workItem from="1579205806970" duration="10000" />
+      <workItem from="1579205806970" duration="5989000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="779495000" />
+    <option name="totallyTimeSpent" value="785474000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -600,8 +638,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3169839" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3169839" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -698,11 +737,26 @@
           <line>752</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/modulos/compra/compra_reg.php</url>
+          <line>57</line>
+          <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/modulos/compra/compra_reg.php</url>
+          <line>71</line>
+          <option name="timeStamp" value="45" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/modulos/compra/compra_reg.php</url>
+          <line>64</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="44" />
+      <option name="time" value="47" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -736,20 +790,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car_item.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1445">
-          <caret line="85" column="20" lean-forward="false" selection-start-line="85" selection-start-column="20" selection-end-line="85" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/ventanota/venta_car.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1919">
-          <caret line="273" column="16" lean-forward="false" selection-start-line="273" selection-start-column="16" selection-end-line="273" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/empresa/empresa_reg.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
@@ -852,13 +892,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
           <caret line="36" column="13" lean-forward="false" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/funciones.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="38" column="80" lean-forward="false" selection-start-line="38" selection-start-column="24" selection-end-line="38" selection-end-column="84" />
         </state>
       </provider>
     </entry>
@@ -1159,6 +1192,36 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="177" column="33" lean-forward="false" selection-start-line="177" selection-start-column="33" selection-end-line="177" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/compra/compra_reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="578" column="42" lean-forward="false" selection-start-line="578" selection-start-column="39" selection-end-line="578" selection-end-column="42" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/compra/compra_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-6426">
+          <caret line="783" column="0" lean-forward="true" selection-start-line="783" selection-start-column="0" selection-end-line="783" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#0;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#2;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#2;n#fieldset#0;n#form#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/funciones.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="47" column="28" lean-forward="true" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="80" />
           <folding />
         </state>
       </provider>
