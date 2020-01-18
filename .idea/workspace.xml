@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" afterPath="$PROJECT_DIR$/cpegeneracion/sunat/toarray21.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_car.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_car.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" />
       <change beforePath="$PROJECT_DIR$/modulos/venta/venta_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_reg.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_reg.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -96,11 +93,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="funciones.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="funciones.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cpegeneracion/sunat/funciones.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="526">
               <caret line="57" column="28" lean-forward="false" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_form.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="493">
+              <caret line="2739" column="32" lean-forward="false" selection-start-line="2739" selection-start-column="32" selection-end-line="2739" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -269,7 +276,6 @@
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_a4.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_a4.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat_a4.php" />
-        <option value="$PROJECT_DIR$/modulos/venta/venta_form.php" />
         <option value="$PROJECT_DIR$/modulos/integracion/contasis/con_vista.php" />
         <option value="$PROJECT_DIR$/modulos/integracion/contasis_vista.php" />
         <option value="$PROJECT_DIR$/modulos/contenido/contenido.php" />
@@ -281,6 +287,7 @@
         <option value="$PROJECT_DIR$/modulos/contable/contable_registro_filtro.php" />
         <option value="$PROJECT_DIR$/modulos/integracion/contasis_tabla_ventas.php" />
         <option value="$PROJECT_DIR$/modulos/compra/compra_form.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_form.php" />
       </list>
     </option>
   </component>
@@ -300,7 +307,7 @@
       <path value="C:\xampp\php\PEAR" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="181" />
     <option name="y" value="135" />
     <option name="width" value="1386" />
@@ -497,12 +504,12 @@
       <workItem from="1578785203075" duration="960000" />
       <workItem from="1579116839191" duration="9104000" />
       <workItem from="1579205806970" duration="5989000" />
-      <workItem from="1579299023034" duration="350000" />
+      <workItem from="1579299023034" duration="2058000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="785824000" />
+    <option name="totallyTimeSpent" value="787532000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -514,9 +521,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3169839" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3169839" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -866,13 +874,6 @@
     <entry file="file://$PROJECT_DIR$/modulos/integracion/contasis/con_vista.php" />
     <entry file="file://$PROJECT_DIR$/modulos/integracion/contasis/contasis_vista.php" />
     <entry file="file://$PROJECT_DIR$/modulos/integracion/index.php" />
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="2720" column="45" lean-forward="true" selection-start-line="2720" selection-start-column="45" selection-end-line="2720" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/integracion/contasis_vista.php" />
     <entry file="file://$PROJECT_DIR$/modulos/contenido/contenido.php">
       <provider selected="true" editor-type-id="text-editor">
@@ -961,6 +962,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="526">
           <caret line="57" column="28" lean-forward="false" selection-start-line="57" selection-start-column="28" selection-end-line="57" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="2739" column="32" lean-forward="false" selection-start-line="2739" selection-start-column="32" selection-end-line="2739" selection-end-column="32" />
           <folding />
         </state>
       </provider>

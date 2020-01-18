@@ -2482,8 +2482,13 @@ if($_POST['action']=="editar"){
                     </tr>
                     <tr>
                         <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/>
-                            <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est"  value="" disabled="disabled"/><div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
+                        <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                    </tr>
+                    <tr>
+                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>
+                        <td>
+                            <input type="text" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                            <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                         </td>
                     </tr>
                 </table>
@@ -2731,7 +2736,7 @@ if($_POST['action']=="editar"){
                             <option value="9" <?php if($afec_id=='9')echo 'selected'?>>EXONERADO</option>
 <!--                            <option value="6"--><?php //if($afec_id=='6')echo 'selected'?><!-->GRABADO - BONIFICACIONES</option>-->
 <!--                            <option value="11"--><?php //if($afec_id=='11')echo 'selected'?><!-->INAFECTO - OPERACION ONEROSA</option>-->
-                            <option value="10"<?php if($afec_id=='10')echo 'selected'?>>GRATUITO</option>
+<!--                            <option value="10"--><?php //if($afec_id=='10')echo 'selected'?><!-->GRATUITO</option>-->
                         </select>
                         <a class="btn_bus_agregar" href="#" onClick="foco(); venta_car('agregar')">Agregar</a>
 
