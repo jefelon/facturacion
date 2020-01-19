@@ -23,8 +23,6 @@ $dts3=$oAsiento->mostrar_distribucionasiento(3,$piso, $vehiculo_id);
 $dts4=$oAsiento->mostrar_distribucionasiento(4,$piso, $vehiculo_id);
 $dts5=$oAsiento->mostrar_distribucionasiento(5,$piso, $vehiculo_id);
 
-$num_rows= mysql_num_rows($dts1);
-
 $dt1 = mysql_fetch_array($dts1);
 $dt2 = mysql_fetch_array($dts2);
 $dt3 = mysql_fetch_array($dts3);
@@ -89,11 +87,21 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
                         url: "../croquis/croquis_actualizar_posicion.php",
                         data:
                             {
+                                <?php if($estado_filas1=='1'){?>
                                 sort1:(($("#sortable1").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                <?php }?>
+                                <?php if($estado_filas2=='1'){?>
                                 sort2:(($("#sortable2").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                <?php }?>
+                                <?php if($estado_filas3=='1'){?>
                                 sort3:(($("#sortable3").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                <?php }?>
+                                <?php if($estado_filas4=='1'){?>
                                 sort4:(($("#sortable4").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                <?php }?>
+                                <?php if($estado_filas5=='1'){?>
                                 sort5:(($("#sortable5").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                                <?php }?>
                                 veh_id:$("#hdd_veh_id").val(),
                                 veh_pis:$("#cmb_piso").val(),
                                 vista:'actualizar_posicion'
@@ -115,11 +123,21 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
                     url: "../croquis/croquis_actualizar_posicion.php",
                     data:
                         {
+                            <?php if($estado_filas1=='1'){?>
                             sort1:(($("#sortable1").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            <?php }?>
+                            <?php if($estado_filas2=='1'){?>
                             sort2:(($("#sortable2").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            <?php }?>
+                            <?php if($estado_filas3=='1'){?>
                             sort3:(($("#sortable3").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            <?php }?>
+                            <?php if($estado_filas4=='1'){?>
                             sort4:(($("#sortable4").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            <?php }?>
+                            <?php if($estado_filas5=='1'){?>
                             sort5:(($("#sortable5").sortable('toArray')).join(';')).split('"').pop().split('"')[0],
+                            <?php }?>
                             veh_id:$("#hdd_veh_id").val(),
                             veh_pis:$("#cmb_piso").val(),
                             vista:'actualizar_posicion'
@@ -192,7 +210,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         padding: 5px;
         font-size: 1.2em;
         width: 35px;
-        height: 50px;
+        height: 45px;
         cursor: move;
         position: relative;
         float: left;
@@ -202,40 +220,95 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
     .clear{
         clear: both;
     }
-    #frentera{
-        height: 200px;
-        width: 220px;
-        /*background: #0D8BBD;*/
+    #frentera {
+        <?php
+        if($estado_filas1=="0" || $estado_filas2=="0" || $estado_filas3=="0" || $estado_filas4=="0" || $estado_filas5=="0")
+        {
+            echo "height: 299px;";
+            echo "width: 92px;";
+        }
+        else
+        {
+            echo "height: 372px;";
+            echo "width: 114px;";
+        }
+
+        ?>
+         background: url(../../images/frente-bus.jpg);
+         float: left;
+         background-size: contain;
+         background-repeat: no-repeat;
+         background-color: yellow;
+     }
+    #atras {
+        <?php
+        if($estado_filas1=="0" || $estado_filas2=="0" || $estado_filas3=="0" || $estado_filas4=="0" || $estado_filas5=="0")
+        {
+            echo "height: 273px;";
+            echo "width: 44px;";
+        }
+        else
+        {
+            echo "height: 345px;";
+            echo "width: 44px;";
+        }
+        ?>
+        background: url(../../images/atras-bus.jpg);
         float: left;
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin-top: 13px;
     }
     #lugares{
         float: left;
-        height: 200px;
-        margin-top: 100px;
+        <?php
+        if($estado_filas1=="0" || $estado_filas2=="0" || $estado_filas3=="0" || $estado_filas4=="0" || $estado_filas5=="0")
+        {
+            echo "margin-top: 20px;";
+        }
+        else
+        {
+            echo "margin-top: 24px;";
+        }
+        ?>
+        background: #e4eaea;
+        overflow: hidden;
     }
     .pasadizo{
         height: 40px;
     }
     #bus{
-        width: 1180px;
-        height: 550px;
-        background: url("../../images/bus_fondo.png");
-        background-size: 95%;
-        background-repeat: no-repeat;
-        background-position-x: -52px;
+        width: 1000px;
+        /*height: 550px;*/
+        /*!*background: url("../../images/bus_fondo.png");*!*/
+        /*background-size: 95%;*/
+        /*background-repeat: no-repeat;*/
+        /*background-position-x: -52px;*/
     }
     .d{
         background: #f5f5f5 !important;
-        color: transparent;
+        color: #dedede;
         /*visibility: hidden;*/
     }
     .tv {
-        width: 33px !important;
-        height: 50px !important;
+        width: 45px !important;
+        height: 55px !important;
         background: url(../../images/tv2.png) !important;
-        background-size: 100% !important;
         padding: 0 !important;
         color: transparent;
+        background-size: contain !important;
+        background-repeat: no-repeat !important;
+        padding: 0px !important;
+        position: relative;
+        <?php
+            if($estado_filas1==1){
+                echo "top: 33px;";
+            }
+            else{
+                echo "top: 50px;";
+            }
+        ?>
+        z-index: 2;
     }
     .g {
         width: 47px !important;
@@ -259,10 +332,6 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
     }
 
 </style>
-
-<?php
-if($num_rows>=1){
-    ?>
     <div id="bus">
         <div id="frentera"><!--FRENTE--></div>
         <div id="lugares">
@@ -356,8 +425,10 @@ if($num_rows>=1){
             </div>
             <?php }?>
         </div>
+        <div id="atras"><!--atras--></div>
+        <div class="clear"></div>
         <div id="desactivar_filas">
-            <label for="cmb_estado"><b>Fila:</b></label>
+            <label for="cmb_estado"><b>Ocultar/Mostrar Fila:</b></label>
             <select name="cmb_fila" id="cmb_fila">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -369,9 +440,4 @@ if($num_rows>=1){
             <a class="btn_activar" href="#" onClick="desactivar_fila(1)">Activar Fila</a>
         </div>
     </div>
-    <?php
-
-
-}
-?>
 
