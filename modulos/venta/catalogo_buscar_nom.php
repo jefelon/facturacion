@@ -33,7 +33,8 @@ if($num_rows>0){
         $n_producto=strlen($producto);
         $alm_id=$_SESSION['almacen_id'];
         $stock = mysql_fetch_array($oStock->stock_por_presentacion($fila["tb_presentacion_id"],$alm_id))['tb_stock_num'];
-        //$stock=$stock/$fila["tb_catalogo_fac"];
+        $stock=($stock/$fila["tb_catalogo_mul"]);
+
         $stock=" ".$stock*1;
         $precio="S/. ".$fila["tb_catalogo_preven"];
         $n_precio=strlen($precio);
