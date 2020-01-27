@@ -21,9 +21,7 @@ if ($_SESSION['usuariogrupo_id']==3){
     $usu_ses = $_POST['hdd_usu_id']!==$_SESSION['usuario_id'];
 }
 
-if($usu_ses ||
-	$_POST['hdd_punven_id']!==$_SESSION['puntoventa_id'] ||
-	$_POST['hdd_emp_id']!==$_SESSION['empresa_id'])
+if($usu_ses || $_POST['hdd_punven_id']!==$_SESSION['puntoventa_id'] || $_POST['hdd_emp_id']!==$_SESSION['empresa_id'])
 {
 	echo json_encode(['redireccionar'=>true]);
 	exit();
@@ -134,8 +132,18 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         }
 
         $descuento_numero_global = $_POST['txt_ven_des'];
+
+
+        if($_POST['hdd_tipo']=='encomienda'){
+            $tipo_venta=2;
+            $dtipo='encomienda';
+        }else if($_POST['hdd_tipo']=='viaje'){
+            $tipo_venta=1;
+            $dtipo='viaje';
+        }
+
 		//insertamos venta
-		$oVenta->insertar( 
+		$oVenta->insertar(
 			fecha_mysql($_POST['txt_ven_fec']),
 			$_POST['cmb_ven_doc'],
 			$numdoc,
@@ -173,14 +181,9 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             fecha_mysql($_POST['txt_fech_sal']),
             $_POST['txt_hor_sal'],
             $_POST['txt_num_asi'],
-            $_POST['hdd_tipo']
+            $tipo_venta,
+            $dtipo
 		);
-
-        $_SESSION['cmb_salida_nom']=$_POST['cmb_salida_id'];
-        $_SESSION['cmb_llegada_nom']=$_POST['cmb_llegada_id'];
-        $_SESSION['txt_hor_sal']=$_POST['txt_hor_sal'];
-
-
         if ($_POST['hdd_cot_id']!=''){
          $oCotizacion->modificar_est($_POST['hdd_cot_id'],'VENDIDA');
         }
@@ -246,6 +249,12 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 
         }
 
+        if ($_POST['cmb_forpag_id'] == 4) {
+            $pagado=0;
+        }else{
+            $pagado=1;
+        }
+
         //REGISTRO VIAJE
         if($_POST['hdd_tipo']=='encomienda'){
             $oVenta->insertarEncomiendaVenta(
@@ -254,12 +263,13 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                 $_POST['txt_ven_des_nom'],
                 $_POST['cmb_salida_id'],
                 $_POST['cmb_llegada_id'],
-                $_POST['txt_clave']
+                $_POST['txt_clave'],
+                $pagado
             );
         }else{
             $oVenta->insertarViajeVenta(
                 $ven_id,
-                0,
+                $_POST['hdd_vi_ho_id'],
                 $_POST['txt_num_asi'],
                 fecha_mysql($_POST['txt_fech_sal']),
                 $_POST['hdd_ven_pas_id'],
@@ -287,23 +297,23 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
         //REGISTRO DE PAGOS
 		//PAGO AUTOMATICO
 		
-		if($_POST['chk_venpag_aut']==1)
-		{
-			//Registro de pago
-			$oVentapago->insertar(
-				$_POST['cmb_forpag_id'],
-				$_POST['cmb_modpag_id'],
-				fecha_mysql($_POST['txt_ven_fec']),
-				moneda_mysql($_POST['txt_venpag_mon']),
-				$_POST['cmb_cuecor_id'],
-				$_POST['cmb_tar_id'],
-				$_POST['txt_venpag_numope'],
-				$_POST['txt_venpag_numdia'],
-				fecha_mysql($_POST['txt_venpag_fecven']),
-				$ven_id,
-				$_SESSION['empresa_id']
-			);
-			
+		if($_POST['chk_venpag_aut']==1) {
+            if ($_POST['cmb_forpag_id'] != 4) {
+                //Registro de pago
+                $oVentapago->insertar(
+                    $_POST['cmb_forpag_id'],
+                    $_POST['cmb_modpag_id'],
+                    fecha_mysql($_POST['txt_ven_fec']),
+                    moneda_mysql($_POST['txt_venpag_mon']),
+                    $_POST['cmb_cuecor_id'],
+                    $_POST['cmb_tar_id'],
+                    $_POST['txt_venpag_numope'],
+                    $_POST['txt_venpag_numdia'],
+                    fecha_mysql($_POST['txt_venpag_fecven']),
+                    $ven_id,
+                    $_SESSION['empresa_id']
+                );
+            }
 			//datos para glosa cuenta cliente
 			switch ($_POST['cmb_forpag_id']) {
 				case 1:

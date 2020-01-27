@@ -1,6 +1,7 @@
 <?php
 require_once ("../../config/Cado.php");
 require_once ("../venta/cVenta.php");
+session_start();
 $oVenta = new cVenta();
 
 //defino una clase que voy a utilizar para generar los elementos sugeridos en autocompletar
@@ -18,7 +19,7 @@ class ElementoAutocompletar {
 $datoBuscar = $_GET["term"];
 
 //busco un valor aproximado al dato escrito
-$rs=$oVenta->mostrar_cli_nom($datoBuscar);
+$rs=$oVenta->mostrar_cli_nom($datoBuscar,$_SESSION['puntoventa_id']);
 
 //creo el array de los elementos sugeridos
 $arrayElementos = array();

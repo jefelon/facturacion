@@ -352,13 +352,34 @@ if($_POST['action']=="editar"){
             url: "../lugar/cmb_lug_id.php",
             async:true,
             dataType: "html",
+            //data: ({
+            //    lug_id: <?php //echo $pv['tb_lugar_id']?>
+            //}),
             beforeSend: function() {
                 $('#cmb_salida_id').html('<option value="">Cargando...</option>');
-                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
             },
             success: function(html){
                 $('#cmb_salida_id').html(html);
+                // $('#cmb_salida_id').find('option').not(':selected').remove();
+            },
+            complete: function(){
+
+            }
+        });
+    }
+    function cmb_lugar_destino()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_id.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_llegada_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
                 $('#cmb_llegada_id').html(html);
+                $("#cmb_llegada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
             },
             complete: function(){
 
@@ -882,7 +903,6 @@ if($_POST['action']=="editar"){
 
 
     function venta_car_servicio(act,idf){
-        console.log('funciona');
         $.ajax({
             type: "POST",
             url: "../venta/venta_car_encomienda.php",
@@ -1522,9 +1542,8 @@ if($_POST['action']=="editar"){
             }
         });
     }
-
     $(function() {
-
+        $("#cmb_forpag_id").attr('disabled', true);
         $('#txt_ven_fec').keyup(function(e) {
             var patron = new Array(2, 2, 4);
             mascara(this,'-',patron,false);
@@ -1539,6 +1558,7 @@ if($_POST['action']=="editar"){
         cmb_ven_doc();
         cmb_ven_id();
         cmb_lugar();
+        cmb_lugar_destino();
         cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
         lote_venta_car('restablecer');
 
@@ -1645,14 +1665,14 @@ if($_POST['action']=="editar"){
             select: function(event, ui){
 
 
-                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12'){
+                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     $("#hdd_ven_cli_id").val(ui.item.id);
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);
                     $('#hdd_ven_cli_id').change();
                 }
-                    $("#hdd_ven_rem_id").val(ui.item.id);
-                    $("#txt_ven_rem_nom").val(ui.item.nombre);
-                    $("#txt_ven_rem_dir").val(ui.item.direccion);
+                $("#hdd_ven_rem_id").val(ui.item.id);
+                $("#txt_ven_rem_nom").val(ui.item.nombre);
+                $("#txt_ven_rem_dir").val(ui.item.direccion);
 
                 if($("#hdd_ven_rem_id" ).val()>0 && $('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15'){
                     cmb_dir_id($( "#hdd_ven_rem_id" ).val());
@@ -1672,7 +1692,7 @@ if($_POST['action']=="editar"){
             minLength: 1,
             source: "../clientes/cliente_complete_nom.php",
             select: function(event, ui){
-                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12') {
+                if ($('#cmb_ven_doc').val()=='3' || $('#cmb_ven_doc').val()=='12' || $('#cmb_ven_doc').val()=='15') {
 
                     $("#hdd_ven_cli_id").val(ui.item.id);
                     $("#hdd_ven_cli_tip").val(ui.item.tipo);

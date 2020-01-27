@@ -90,8 +90,6 @@ $hora = mostrarHora($dt['tb_venta_reg']);
 
 $fec = mostrarFecha($dt['tb_venta_fec']);
 
-
-
 $doc_id = $dt['tb_documento_id'];
 $doc_nom = $dt['tb_documento_nom'];
 $numdoc = $dt['tb_venta_numdoc'];
@@ -119,7 +117,7 @@ while ($dt = mysql_fetch_array($dts)) {
 
     $serie = $dt["tb_venta_ser"];
     $numero = $dt["tb_venta_num"];
-
+    $punto_venta_dir=$dt["tb_puntoventa_direccion"];
     $ruc = $dt["tb_cliente_doc"];
     $razon = $dt["tb_cliente_nom"];
     $direccion = $dt["tb_cliente_dir"];
@@ -138,6 +136,17 @@ while ($dt = mysql_fetch_array($dts)) {
     $totanti = "0.00";
     $moneda = 1;
 
+    if($moneda==1){
+        $moneda  = "SOLES";
+        $mon = "S/ ";
+        $monedaval=1;
+    }
+    if($moneda==2){
+        $moneda  = "DOLARES";
+        $mon = "$ ";
+        $monedaval=2;
+    }
+
 
     $estsun = $dt['tb_venta_estsun'];
     $fecenvsun = mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -154,13 +163,8 @@ while ($dt = mysql_fetch_array($dts)) {
 
 }
 
-$vvs = $oVenta->mostrar_viajeventa($ven_id);
-$vv = mysql_fetch_array($vvs);
-
-$vhs = $oVenta->mostrar_viajehorario($vv['tb_viajehorario_id']);
-$vh = mysql_fetch_array($vhs);
-
-
+$evs = $oVenta->mostrar_encomienda_viaje($ven_id);
+$ev = mysql_fetch_array($evs);
 
 //pagos
 $rws1 = $oVentapago->mostrar_pagos($ven_id);
@@ -208,8 +212,8 @@ if ($num_rows_vp > 0) {
 
         $pago_mon = formato_money($rw1['tb_ventapago_mon']);
 
-        $texto_pago1[] = $forma . ' ' . $modo;
-        $texto_pago2[] = $forma . ' ' . $modo . ': S/.  ' . $pago_mon;
+        $texto_pago1[]=$forma.' '.$modo;
+        $texto_pago2[]=$forma.' '.$modo.':'.$mon.'  '.$pago_mon;
     }
     mysql_free_result($rws1);
 }
@@ -322,28 +326,29 @@ if ($impresion == 'pdf') ob_start();
                 </td>
             </tr>
             <tr>
-                <td colspan="4" class="centrado"></td>
-            </tr>
-            <tr>
-                <td colspan="4" height="10mm">
-                    .............................................................................................
+                <td colspan="4" class="centrado">
+                    <b>PUNTO DE VENTA:</b> <?php echo $punto_venta_dir ?>
                 </td>
             </tr>
             <tr>
-                <td colspan="4" class="centrado negrita py-5">NOTA DE VENTA</td>
+                <td colspan="4" class="centrado"></td>
             </tr>
             <tr>
-                <td colspan="2"><?php echo 'Nro. de Nota: ' .$serie . ' - ' . $numero ?></td>
+                <td colspan="4" height="10mm">.............................................................................................</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="centrado negrita py-5">NOTA DE SALIDA</td>
+            </tr>
+            <tr>
+                <td colspan="2"><?php echo 'Nro. Nota S.: ' .$serie . ' - ' . $numero ?></td>
                 <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
             </tr>
             <tr>
                 <td colspan="2"></td>
-                <td colspan="2" class="derecha"><?php echo ' Hora: ' . $hora ?></td>
+                <td colspan="2" class="derecha"><?php echo ' Hora Registro: ' . $hora ?></td>
             </tr>
             <tr>
-                <td colspan="4" height="10mm">
-                    .............................................................................................
-                </td>
+                <td colspan="4" height="10mm">.............................................................................................</td>
             </tr>
             <tr>
                 <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
@@ -352,33 +357,19 @@ if ($impresion == 'pdf') ob_start();
                 <td colspan="4"> <?php echo 'DNI: ' .$ruc ?></td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
-            </tr>
-
-            <tr>
-                <td colspan="2"> <?php echo 'Origen: ' . $vh['ltb_origen'] ?></td>
-                <td colspan="2"> <?php
-                    if ($vv['tb_lugar_id']>0){
-                        echo 'Destino: ' . $vv['tb_lugar_nom'];
-                    }else{
-                        echo 'Destino: ' . $vh['ltb_destino'];
-                    }
-
-                    ?></td>
+                <td colspan="4"> <?php echo 'REMITENTE: ' . $ev['crtb_cliente'] ?></td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'Fecha de Viaje: ' . $vh['tb_viajehorario_fecha'] ?></td>
+                <td colspan="4"> <?php echo 'DESTINATARIO: ' . $ev['cdtb_cliente'] ?></td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'Hora de Viaje: ' . $vh['tb_viajehorario_horario'] ?></td>
+                <td colspan="4"> <?php echo 'ORIGEN: ' . $ev['ltb_origen'] ?></td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'Nro Asiento: ' . $vv['tb_asiento_nom'] ?></td>
+                <td colspan="4"> <?php echo 'DESTINO: ' . $ev['ltb_destino'] ?></td>
             </tr>
             <tr>
-                <td colspan="4" height="10mm">
-                    .............................................................................................
-                </td>
+                <td colspan="4" height="10mm">.............................................................................................</td>
             </tr>
             <tr>
                 <td colspan="4">
@@ -431,22 +422,18 @@ if ($impresion == 'pdf') ob_start();
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
+                            <td colspan="2" class="izquierda negrita">TOTAL POR PAGAR:</td>
                             <td colspan="2" class="derecha" style="text-align: right;">
-                                S/ <?php echo formato_money($tot) ?></td>
+                                <?php echo $mon . formato_money($tot) ?></td>
                         </tr>
                         <tr>
-                            <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
+                            <td colspan="4" height="10mm">.............................................................................................</td>
                         </tr>
                         <tr>
-                            <td colspan="4" height="10mm">
-                                .............................................................................................
-                            </td>
+                            <td colspan="4" style="width: 80mm" class="centrado">Nota: No es comprobante válido para efectos tributarios</td>
                         </tr>
                         <tr>
-                            <td colspan="4" style="width: 80mm;" class="centrado">Solo valido en hora y fecha indicada; no se acepta reclamos posteriores.<br>
-                                Todo niño mayor a 5 años paga pasaje.
-                            </td>
+                            <td colspan="4" class="centrado negrita">Todo entrega de encomienda es personal y con su respectiva clave de seguridad.</td>
                         </tr>
                         </tbody>
                     </table>
@@ -484,7 +471,8 @@ if ($impresion == 'pdf') {
 
         $nombre_arc = 'venta_' . $numdoc . '.pdf';
         $html2pdf->Output($nombre_arc);
-    } catch (HTML2PDF_exception $e) {
+    }
+    catch (HTML2PDF_exception $e) {
         echo $e;
         exit;
     }
