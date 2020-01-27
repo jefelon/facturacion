@@ -121,7 +121,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                     if(act=='insertar')
                     {
                         $( "#div_venta_form" ).dialog({
-                            title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
+                            title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar",
                             height: 650,
                             width: 980,
                             buttons: {
@@ -151,7 +151,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                     if(act=='editar')
                     {
                         $( "#div_venta_form" ).dialog({
-                            title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar',
+                            title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar",
                             buttons: {
                                 Cancelar: function() {
                                     $('#for_ven').each (function(){this.reset();});
@@ -493,7 +493,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
             });
 
             $( "#div_venta_form" ).dialog({
-                title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+                title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?>",
                 autoOpen: false,
                 resizable: false,
                 height: 600,

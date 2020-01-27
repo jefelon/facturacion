@@ -359,7 +359,7 @@ $(function() {
 	venta_filtro();		
 	
 	$( "#div_venta_form" ).dialog({
-		title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+		title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?>",
 		autoOpen: false,
 		resizable: false,
 		height: 550,

@@ -12,7 +12,21 @@ session_start();
 
     });
 
+    function ComboAno(){
+
+        var d = new Date();
+        var n = d.getFullYear();
+        var select = document.getElementById("cmb_fil_anio");
+        for(var i = n; i >= 2015; i--) {
+            var opc = document.createElement("option");
+            opc.text = i;
+            opc.value = i;
+            select.add(opc);
+        }
+    }
+
 $(function() {
+    ComboAno();
     $('#cmb_fil_anio').change(function(e) {
         tipocambiosunat_tabla();
     });
@@ -55,9 +69,6 @@ $(function() {
     <fieldset style="width: 100%;float: left"><legend>Descargar PLE</legend>
         <label for="cmb_fil_anio" align="right">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio">
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-            <option value="2017">2017</option>
         </select>
 
         <label for="cmb_fil_mes" align="right">Mes:</label>

@@ -9,9 +9,9 @@ if($_POST['action']=="insertar")
 	{
 		$oEmpresa->insertar(
 		    $_POST['txt_emp_ruc'],
-            strip_tags($_POST['txt_emp_nomcom']),
-            strip_tags($_POST['txt_emp_razsoc']),
-            strip_tags($_POST['txt_emp_dir']),
+            addslashes(strip_tags($_POST['txt_emp_nomcom'])),
+            addslashes(strip_tags($_POST['txt_emp_razsoc'])),
+            addslashes(strip_tags($_POST['txt_emp_dir'])),
             strip_tags($_POST['txt_emp_dir2']),
             $_POST['txt_emp_tel'],
             $_POST['txt_emp_ema'],

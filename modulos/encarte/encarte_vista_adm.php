@@ -220,7 +220,7 @@ $(function() {
 	encarte_filtro();		
 	
 	$( "#div_encarte_form" ).dialog({
-		title:'Información de Encarte | <?php echo $_SESSION['empresa_nombre']?>',
+		title:"Información de Encarte | <?php echo $_SESSION['empresa_nombre']?>",
 		autoOpen: false,
 		resizable: false,
 		height: 600,

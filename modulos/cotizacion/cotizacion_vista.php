@@ -129,7 +129,7 @@ function cotizacion_form(act,idf){
 			if(act=='insertar')
 			{
 				$( "#div_venta_form" ).dialog({
-					title:'Información de Cotización | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
+					title:"Información de Cotización | <?php echo $_SESSION['empresa_nombre']?> | Agregar",
 					height: 650,
 					width: 980,
 					buttons: {
@@ -160,7 +160,7 @@ function cotizacion_form(act,idf){
 			if(act=='editar')
 			{
 				$( "#div_venta_form" ).dialog({
-					title:'Información de Cotización | <?php echo $_SESSION['empresa_nombre']?> | Editar',
+					title:"Información de Cotización | <?php echo $_SESSION['empresa_nombre']?> | Editar",
 					buttons: {
 						Cancelar: function() {
 							$('#for_ven').each (function(){this.reset();});
@@ -197,7 +197,7 @@ function venta_form(act,idf){
             if(act=='insertar' || act=='insertar_cot')
             {
                 $( "#div_venta_form" ).dialog({
-                    title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
+                    title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar",
                     height: 650,
                     width: 980,
                     buttons: {
@@ -228,7 +228,7 @@ function venta_form(act,idf){
             if(act=='editar')
             {
                 $( "#div_venta_form" ).dialog({
-                    title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar',
+                    title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar",
                     buttons: {
                         <?php if($_SESSION['usuariogrupo_id']==2):?>
                         Guardar: function(){
@@ -422,7 +422,7 @@ $(function() {
 	});
 	
 	$( "#div_venta_form" ).dialog({
-		title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+		title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?>",
 		autoOpen: false,
 		resizable: false,
 		height: 600,

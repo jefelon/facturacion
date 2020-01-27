@@ -214,7 +214,7 @@ $(function() {
 	notalmacen_filtro();		
 	
 	$( "#div_notalmacen_form" ).dialog({
-		title:'Información de Nota de Almacén | <?php echo $_SESSION['empresa_nombre']?>',
+		title:"Información de Nota de Almacén | <?php echo $_SESSION['empresa_nombre']?>",
 		autoOpen: false,
 		resizable: false,
 		height: 600,

@@ -323,7 +323,7 @@ if($impresion=='pdf')ob_start();
                 </tr>
                 <tr>
                     <td colspan="4" class="centrado" >
-                        <img src="<?php echo $empresa_logo ?>" alt="" width="auto" height="auto">
+                        <img src="<?php echo $empresa_logo ?>" alt="" width="200" height="auto">
                     </td>
                 </tr>
                 <tr>
@@ -396,10 +396,18 @@ if($impresion=='pdf')ob_start();
                             </tr>
                             </thead>
                             <?php  if($numero_filas>=1){ ?>
-                                <?php while($dt1 = mysql_fetch_array($dts1)){ ?>
+                                <?php while($dt1 = mysql_fetch_array($dts1)){
+                                    $ven_det_serie= '';
+                                    if ($dt1['tb_ventadetalle_serie']!=''){
+                                        $ven_det_serie= ' - '.$dt1['tb_ventadetalle_serie'];
+                                    }
+                                    if ($dt1['tb_marca_nom']!='NA'){
+                                        $ven_det_marca= ' - '.$dt1['tb_marca_nom'];
+                                    }
+                                    ?>
                                     <tr>
                                         <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
-                                        <td class="izquierda" style="width: 30mm; font-size: 8pt;"><?php echo $dt1['tb_producto_nom'] . ' x ' .$dt1['tb_unidad_abr']; ?></td>
+                                        <td class="izquierda" style="width: 30mm; font-size: 8pt;"><?php echo $dt1['tb_producto_nom'] . ' x ' .$dt1['tb_unidad_abr'].$ven_det_marca. $ven_det_serie.''; ?></td>
                                         <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'])?></td>
                                         <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']*$dt1['tb_ventadetalle_can'])?></td>
                                     </tr>

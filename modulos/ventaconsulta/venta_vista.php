@@ -126,7 +126,7 @@ function venta_form(act,idf){
 			if(act=='insertar')
 			{
 				$( "#div_venta_form" ).dialog({
-					title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
+					title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar",
 					buttons: {
 						Guardar: function(){
 							txt_ven_numdoc();
@@ -155,7 +155,7 @@ function venta_form(act,idf){
 			if(act=='editar')
 			{
 				$( "#div_venta_form" ).dialog({
-					title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar',
+					title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Editar",
 					buttons: {
 						<?php if($_SESSION['usuariogrupo_id']==2):?>
 						Guardar: function(){
@@ -330,7 +330,7 @@ $(function() {
 	});
 	
 	$( "#div_venta_form" ).dialog({
-		title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+		title:"Información de Venta | <?php echo $_SESSION['empresa_nombre']?>",
 		autoOpen: false,
 		resizable: false,
 		height: 600,
