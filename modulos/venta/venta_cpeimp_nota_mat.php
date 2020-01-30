@@ -311,7 +311,7 @@ if($impresion=='pdf')ob_start();
                 <!-- </tr> -->
                 <tr>
                     <td colspan="4" class="centrado" >
-                        <img src="<?php echo $empresa_logo ?>" alt="" width="auto" height="auto">
+                        <img src="<?php echo $empresa_logo ?>" alt="" width="200" height="auto">
                     </td>
                 </tr>
                 <tr>
