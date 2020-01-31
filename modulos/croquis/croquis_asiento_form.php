@@ -142,6 +142,13 @@ echo  "Modificando vehiculo: ". $veh_nombre;
                     croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
                     break;
                 case "grada":
+                var nuevoId=($('.seleccionado').attr("id")).split('_');
+                $('.seleccionado').attr("id",nuevoId[0]+'_'+nuevoId[1]+'_'+'g');
+                $('#sortable3').trigger('sortupdate'); // Trigger the update event manually
+                $('#sortable3').sortable( "refreshPositions" );
+                croquis_filtro(<?php echo $vehiculo_id ?>,$("#cmb_piso").val());
+                break;
+                case "cambio":
                     var nuevoId=($('.seleccionado').attr("id")).split('_');
                     $('.seleccionado').attr("id",nuevoId[0]+'_'+nuevoId[1]+'_'+'g');
                     $('#sortable3').trigger('sortupdate'); // Trigger the update event manually
@@ -171,5 +178,6 @@ echo  "Modificando vehiculo: ". $veh_nombre;
         <li id="grada">Convertir en Gradas</li>
         <li id="d">Desactivar</li>
         <li id="a">Convertir en Asiento</li>
+        <li id="cambio">Cambiar Número</li>
     </ul>
 </div>

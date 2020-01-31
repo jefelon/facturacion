@@ -3,9 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/css/Estilo/miestilo.css" afterPath="$PROJECT_DIR$/css/Estilo/miestilo.css" />
-      <change beforePath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php" afterPath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/croquis/croquis_vista.php" afterPath="$PROJECT_DIR$/modulos/croquis/croquis_vista.php" />
+      <change beforePath="$PROJECT_DIR$/cperepositorio/send/20601411076-03-B001-0431.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/cperepositorio/send/20601411076-03-B001-0431.zip" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/cperepositorio/send/20601411076-03-B001-0432.xml" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/cperepositorio/send/20601411076-03-B001-0432.zip" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php" afterPath="$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php" />
+      <change beforePath="$PROJECT_DIR$/transportefac.sql" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -52,7 +55,7 @@
       <file leaf-file-name="croquis_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
+            <state relative-caret-position="332">
               <caret line="160" column="66" lean-forward="false" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="66" />
               <folding />
             </state>
@@ -62,18 +65,38 @@
       <file leaf-file-name="venta_asiento_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3604">
+            <state relative-caret-position="17">
               <caret line="212" column="22" lean-forward="false" selection-start-line="212" selection-start-column="22" selection-end-line="212" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="croquis_asiento_filtro.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="croquis_asiento_filtro.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="289" column="23" lean-forward="false" selection-start-line="289" selection-start-column="23" selection-end-line="289" selection-end-column="23" />
+            <state relative-caret-position="17">
+              <caret line="287" column="6" lean-forward="false" selection-start-line="287" selection-start-column="6" selection-end-line="287" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="croquis_asiento_form.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="145" column="80" lean-forward="false" selection-start-line="145" selection-start-column="80" selection-end-line="145" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="venta_car.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -83,7 +106,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>tb_croquis_id</find>
       <find>cmb_vehiculo</find>
       <find>logos</find>
       <find>for_emp</find>
@@ -113,6 +135,7 @@
       <find>.seleccionado</find>
       <find>btn_desactivar</find>
       <find>menu</find>
+      <find>grada</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -205,13 +228,13 @@
         <option value="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" />
         <option value="$PROJECT_DIR$/modulos/asiento/cAsiento.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php" />
-        <option value="$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php" />
         <option value="$PROJECT_DIR$/modulos/croquis/croquis_reg.php" />
         <option value="$PROJECT_DIR$/modulos/croquis/cCroquis.php" />
         <option value="$PROJECT_DIR$/modulos/croquis/croquis_actualizar_posicion.php" />
         <option value="$PROJECT_DIR$/modulos/croquis/croquis_vista.php" />
         <option value="$PROJECT_DIR$/css/Estilo/miestilo.css" />
         <option value="$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php" />
+        <option value="$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php" />
       </list>
     </option>
   </component>
@@ -252,7 +275,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
@@ -260,17 +282,6 @@
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
-            </path>
-            <path>
-              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
-              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="css" type="2a2b976b:PhpTreeStructureProvider$1" />
-              <item name="Estilo" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
             <path>
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
@@ -293,11 +304,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hbanoticias.com" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../apiruc" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
   </component>
@@ -410,11 +422,13 @@
       <workItem from="1578957343154" duration="9866000" />
       <workItem from="1579315031128" duration="3147000" />
       <workItem from="1579391607192" duration="3451000" />
+      <workItem from="1580425611626" duration="1104000" />
+      <workItem from="1580511182989" duration="209000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="638910000" />
+    <option name="totallyTimeSpent" value="640223000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -532,7 +546,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_vista_encomienda.php" />
     <entry file="file://$PROJECT_DIR$/modulos/clientes/cliente_form.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1360">
@@ -821,26 +834,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="160" column="66" lean-forward="false" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="66" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="96" column="8" lean-forward="false" selection-start-line="96" selection-start-column="8" selection-end-line="98" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/css/Estilo/miestilo.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="473">
           <caret line="749" column="19" lean-forward="false" selection-start-line="749" selection-start-column="19" selection-end-line="749" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -848,7 +845,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-3590">
           <caret line="18" column="37" lean-forward="false" selection-start-line="18" selection-start-column="33" selection-end-line="18" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -864,7 +860,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
           <caret line="80" column="0" lean-forward="false" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -876,18 +871,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_car.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3604">
-          <caret line="212" column="22" lean-forward="false" selection-start-line="212" selection-start-column="22" selection-end-line="212" selection-end-column="22" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_filtro.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="289" column="23" lean-forward="false" selection-start-line="289" selection-start-column="23" selection-end-line="289" selection-end-column="23" />
+        <state relative-caret-position="17">
+          <caret line="287" column="6" lean-forward="false" selection-start-line="287" selection-start-column="6" selection-end-line="287" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_asiento_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="212" column="22" lean-forward="false" selection-start-line="212" selection-start-column="22" selection-end-line="212" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="160" column="66" lean-forward="false" selection-start-line="160" selection-start-column="16" selection-end-line="160" selection-end-column="66" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/croquis/croquis_asiento_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="145" column="80" lean-forward="false" selection-start-line="145" selection-start-column="80" selection-end-line="145" selection-end-column="80" />
           <folding />
         </state>
       </provider>
