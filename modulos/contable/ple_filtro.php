@@ -43,8 +43,20 @@ function cmb_ven_doc(ids)
 		}
 	});
 }
-$(function() {
+    function ComboAno(){
 
+        var d = new Date();
+        var n = d.getFullYear();
+        var select = document.getElementById("cmb_fil_anio");
+        for(var i = n; i >= 2015; i--) {
+            var opc = document.createElement("option");
+            opc.text = i;
+            opc.value = i;
+            select.add(opc);
+        }
+    }
+$(function() {
+    ComboAno();
 	cmb_ven_doc('<?php echo $_POST['doc']?>');
     $('#cmb_fil_librople').change(function(e) {
         ple_tabla();
@@ -91,8 +103,7 @@ $(function() {
     <fieldset style="width: 100%;float: left"><legend>Descargar PLE</legend>
         <label for="cmb_fil_anio" align="right">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio">
-            <option value="2018">2018</option>
-            <option value="2017">2017</option>
+
         </select>
 
         <label for="cmb_fil_mes" align="right">Mes:</label>
@@ -117,7 +128,7 @@ $(function() {
         <select name="cmb_fil_librople" id="cmb_fil_librople">
             <option value="-">Seleccionar Libro</option>
             <option value="080100">PLE Registro de Compras 080100 - COMPLETO</option>
-            <option value="080200-">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
+            <option value="080200">PLE Registro de Compras 080200 - NO DOMICILIADO</option>
             <option value="140100">PLE Registro de Ventas 140100 - COMPLETO</option>
             <option value="4">PLE Diario de Formato Simplificado 050200</option>
             <option value="5">PLE Diario de Formato Simplificado - PLAN CONTABLE</option>

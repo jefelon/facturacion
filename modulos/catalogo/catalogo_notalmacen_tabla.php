@@ -59,6 +59,7 @@ if($_POST['tipo']==1)
 <script type="text/javascript">
 
 $('.moneda').autoNumeric({
+    mDec: '2',
 	aSep: ',',
 	aDec: '.',
 	//aSign: 'S/. ',
@@ -66,11 +67,12 @@ $('.moneda').autoNumeric({
 	vMin: '0.00',
 	vMax: '9999.99'
 });
-$('.cantidad').autoNumeric({
+$('.cantidad--').autoNumeric({
+    mDec: '2',
 	aSep: ',',
 	aDec: '.',
 	vMin: '1',
-	vMax: '999'
+	vMax: '99999'
 });
 
 function cantidad(act,idf)
@@ -113,7 +115,7 @@ if($_POST['tipo']==1)
 	if(act=='mas')
 	{
 		valor=can+sum;
-		if(valor<=999)$('#txt_cat_can_'+idf).val(valor);
+		if(valor<=9999)$('#txt_cat_can_'+idf).val(valor);
 	}
 	
 	if(act=='menos')

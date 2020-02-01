@@ -148,7 +148,7 @@ $(function() {
                     ?>
                 <!--3--><td><?php echo $cuoamc ?></td>
                 <!--4--><td><?php echo $fecha ?></td>
-               <!-- 5--><td><?php echo $fechavence ?></td>
+               <!-- 5--><td><?php echo $fecha ?></td>
 
                     <?php if(strlen($dt1['cs_tipodocumento_cod'])==1)
                     {$coddoc = '0' . $dt1['cs_tipodocumento_cod'];}
@@ -178,24 +178,36 @@ $(function() {
                 <!--12--><td><?php echo $prov_doc; ?></td>
                 <!--13--><td><?php echo $prov_nom; ?></td>
                 <?php
-                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_venta_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
-                $ina=$dt1['tb_venta_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_venta_otrcar'];$tot=$dt1['tb_compra_tot'];
-                $moneda=$dt1['cs_tipomoneda_cod'];$tc=$dt1['tb_compra_tipcam'];
-                if($dt1['tb_venta_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
-                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambio="";}
+                $tipo_baseimp=$dt1['tb_compra_baseimp_tip'];
+                $exo="";$ina="";$isc="";
+                $gravado=$dt1['tb_compra_gra'];$descuento=$dt1['tb_compra_des'];$igv=$dt1['tb_compra_igv'];$exo=$dt1['tb_compra_exo'];
+                $ina=$dt1['tb_compra_ina'];$isc=$dt1['tb_compra_isc'];$otrcar=$dt1['tb_compra_otrcar'];$tot=$dt1['tb_compra_tot'];
+                $moneda=$dt1['cs_tipomoneda_cod'];$tipocambiov=$dt1['tb_compra_tipcam']; $valorventa=$dt1['tb_compra_valven'];
+                if($tipocambiov<1 && $moneda=="PEN") {$tipocambiov=1.000;}
+                if($moneda=="USD" && $tipocambiov>1)
+                {
+                    $gravado=round($gravado*$tipocambiov,2);
+                    $igv=round($igv*$tipocambiov,2);
+                    $valorventa=round($valorventa*$tipocambiov,2);
+                    $exo=round($exo*$tipocambiov,2);
+                    $isc=round($isc*$tipocambiov,2);
+                    $tot=round($tot*$tipocambiov,2);
+                }
+                if($dt1['tb_compra_est']=="ANULADA"){$gravado="";$descuento="";$igv="";$exo="";
+                    $ina="";$isc="";$otrcar="";$tot=""; $moneda="";$tipocambiov=""; $valorventa="";}
                 ?>
-                <!--14--><td><?php echo $gravado; ?></td>
-                <!--15--><td><?php echo $igv; ?></td>
-                <!--16--><td></td>
-                <!--17--><td></td>
-                <!--18--><td></td>
-                <!--19--><td></td>
+                <!--14--><td><?php if($tipo_baseimp==1){echo $gravado;} ?></td>
+                <!--15--><td><?php if($tipo_baseimp==1){echo $igv;} ?></td>
+                <!--16--><td><?php if($tipo_baseimp==2){echo $valorventa;} ?></td>
+                <!--17--><td><?php if($tipo_baseimp==2){echo $igv;} ?></td>
+                <!--18--><td><?php if($tipo_baseimp==3){echo $valorventa;}?></td>
+                <!--19--><td><?php if($tipo_baseimp==3){echo $igv;} ?></td>
                 <!--20--><td><?php echo $exo; ?></td>
                 <!--21--><td><?php echo $isc; ?></td>
                 <!--22--><td></td>
                 <!--23--><td><?php echo $tot; ?></td>
                 <!--24--><td><?php echo $moneda; ?></td>
-                <!--25--><td><?php echo $tipocambio; ?></td>
+                <!--25--><td><?php echo $tipocambiov; ?></td>
 
                 <?php
                 $fec_nota="";
@@ -255,4 +267,5 @@ $(function() {
         <td colspan="41"><?php echo $num_rows.' registros'; ?></td>
     </tr>
 </table>
+<input type="text" id="lineas_libro" value="<?php if($num_rows>0){ echo "1";  }?>">
 

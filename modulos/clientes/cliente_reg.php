@@ -24,43 +24,23 @@ if($_POST['action_cliente']=="insertar")
 		{
 			$oCliente->insertar(
 				$_POST['rad_cli_tip'],
-                strip_tags(limpia_espacios($_POST['txt_cli_nom'])),
+                addslashes(strip_tags(limpia_espacios($_POST['txt_cli_nom']))),
 				$_POST['txt_cli_doc'],
                 strip_tags($_POST['txt_cli_dir']),
                 strip_tags(limpia_espacios($_POST['txt_cli_con'])),
-                fecha_mysql($_POST['txt_cli_cum']),
 				$_POST['txt_cli_tel'], 
 				$_POST['txt_cli_ema'],
 				$_POST['txt_cli_est'],
                 $_SESSION['empresa_id'],
                 $_POST['cmb_precio_id'],
-                $_POST['cmb_cli_retiene'],
-                $_POST['txt_cli_cui'],
-                $_POST['cmb_regimen_id'],
-                $_POST['rad_cli_afp'],
-                $_POST['cmb_regimen_id'],
-                $_POST['rad_cli_planilla'],
-                $_POST['rad_cli_pdt'],
-                $_POST['rad_cli_bienesfizcalizados'],
-                $_POST['rad_cli_balancea'],
-                $_POST['rad_cli_clientefijo'],
-                $_POST['txt_clie_foto'],
-                $_POST['txt_cli_clavesolusuario'],
-                $_POST['txt_cli_clavesolclave'],
-                $_POST['txt_cli_claveafpusuario'],
-                $_POST['txt_cli_claveafpclave']
+                $_POST['cmb_cli_retiene']
+
 				);
 			
 				$dts=$oCliente->ultimoInsert();
 				$dt = mysql_fetch_array($dts);
-			    $cli_id=$dt['last_insert_id()'];
+			$cli_id=$dt['last_insert_id()'];
 				mysql_free_result($dts);
-
-                if(!empty($_POST['chk_cli_libros'])){
-                        foreach($_POST['chk_cli_libros'] as $selected){
-                            $oCliente->insertar_librocontablecliente($cli_id,$selected);
-                        }
-                }
 			
 			$data['cli_id']=$cli_id;
 			$data['cli_msj']='Se registró cliente correctamente.';
@@ -98,34 +78,14 @@ if($_POST['action_cliente']=="editar")
 				$_POST['txt_cli_doc'],
                 strip_tags($_POST['txt_cli_dir']),
                 strip_tags(limpia_espacios($_POST['txt_cli_con'])),
-                fecha_mysql($_POST['txt_cli_cum']),
 				$_POST['txt_cli_tel'], 
 				$_POST['txt_cli_ema'],
 				$_POST['txt_cli_est'],
                 $_SESSION['empresa_id'],
                 $_POST['cmb_precio_id'],
-                $_POST['cmb_cli_retiene'],
-                $_POST['txt_cli_cui'],
-                $_POST['cmb_regimen_id'],
-                $_POST['rad_cli_afp'],
-                $_POST['rad_cli_planilla'],
-                $_POST['rad_cli_pdt'],
-                $_POST['rad_cli_bienesfizcalizados'],
-                $_POST['rad_cli_balancea'],
-                $_POST['rad_cli_clientefijo'],
-                $_POST['txt_clie_foto'],
-                $_POST['txt_cli_clavesolusuario'],
-                $_POST['txt_cli_clavesolclave'],
-                $_POST['txt_cli_claveafpusuario'],
-                $_POST['txt_cli_claveafpclave']
-				);
+                $_POST['cmb_cli_retiene']
 
-                if(!empty($_POST['chk_cli_libros'])){
-                    $oCliente->borraLibroContableCliente($_POST['hdd_cli_id']);// aqui mejorar
-                    foreach($_POST['chk_cli_libros'] as $selected){
-                        $oCliente->insertar_librocontablecliente($_POST['hdd_cli_id'],$selected); // aqui solo deberia actualizar
-                    }
-                }
+				);
 			
 			$data['cli_msj']='Se registró cliente correctamente.';
 			$data['cli_id']=$_POST['hdd_cli_id'];

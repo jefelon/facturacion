@@ -33,9 +33,20 @@ session_start();
         $('#hdd_action').val('filter_doc');
         venta_tabla();
     }
+    function ComboAno(){
 
+        var d = new Date();
+        var n = d.getFullYear();
+        var select = document.getElementById("cmb_fil_anio");
+        for(var i = n; i >= 2015; i--) {
+            var opc = document.createElement("option");
+            opc.text = i;
+            opc.value = i;
+            select.add(opc);
+        }
+    }
 $(function() {
-
+    ComboAno();
 	cmb_ven_doc('<?php echo $_POST['doc']?>');
     registro_filtro();
 
@@ -78,8 +89,7 @@ $(function() {
     <fieldset style="width: 100%;float: left; text-align: center;"><legend>Descargar Registro</legend>
         <label for="cmb_fil_ven_doc" align="right" style="font-size: 12px;">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio" required>
-            <option value="2018">2018</option>
-            <option value="2018">2017</option>
+
         </select>
 
         <label for="cmb_fil_mes" align="right" style="font-size: 12px;">Mes:</label>
@@ -109,7 +119,6 @@ $(function() {
 
         <a class="btn_descargar_excel" id="btn_descargar_excel" href="#" onClick="registro_reporte_xls()" title="Imprimir en Excel">DESCARGAR EXCEL</a>
         <a class="btn_descargar_pdf" id="btn_descargar_pdf" href="#" onClick="registro_reporte_pdf()" title="Imprimir en PDF">DESCARGAR PDF</a>
-        <a class="btn_descargar_txt" id="btn_descargar_txt" href="#" onClick="registro_reporte_txt()" title="Descargar PLE TXT">DESCARGAR PLE TXT</a>
         <a class="filtrar_consulta" id="filtrar_consulta" href="#" onClick="registro_filtro()" title="Filtrar">FILTRAR</a>
     </fieldset>
 </div>

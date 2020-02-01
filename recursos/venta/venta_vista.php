@@ -1,13 +1,11 @@
 <?php
-
 	/*session_start();
 	if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 	require_once ("../../config/Cado.php");
 	
 	require_once ("../../modulos/contenido/contenido.php");
 	$oContenido = new cContenido();*/
-session_start();
-if($_SESSION["autentificado2"]!= "SI"){ header("location: ../index.php"); exit();}
+
 	require_once ("../../config/datos.php");
 ?>
 <!DOCTYPE html>
@@ -67,7 +65,15 @@ function venta_filtro(er,doc,ser,cor,fec,mon)
 		type: "POST",
 		url: "venta_filtro.php",
 		async:true,
-		dataType: "html",
+		dataType: "html",                      
+		data: ({
+			error: er,
+			doc: doc,
+			ser: ser,
+			cor: cor,
+			fec: fec,
+			mon: mon
+		}),
 		beforeSend: function() {
 			$('#div_venta_filtro').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
         },
@@ -179,6 +185,10 @@ $(function() {
 		icons: {primary: "ui-icon-print"},
 		text: true
 	});
+
+    $('#btn_iniciar_sesion').button({
+        text: true
+    });
 	
 	$('.btn_modo').button({
 		icons: {primary: "ui-icon-document"},
@@ -230,27 +240,25 @@ $(function() {
 
 <div class="container">
 	<header>
+    	<?php /*echo $oContenido->print_header()*/ ?>
 </header>
     <article class="content">
     	<div class="contenido">
             <div class="contenido_des">
             <table align="center" class="tabla_cont">
                   <tr>
-                    <td class="caption_cont">CONSULTA DE MIS COMPROBANTES</td>
+                    <td class="caption_cont">CONSULTA DE DOCUMENTOS</td>
                   </tr>
-                <tr>
-                    <td height="30px" align="center" class=""> <b>CUI:</b> <?php echo $_SESSION['cliente_cui'].'   '.$_SESSION['cliente_nombre']; ?>
-
-                        <img src="../../images/iconos/shut_down.png" alt="Cerrar Sesion" width="14" height="14" border="0" align="top" />
-                        <a href="../usuarios/cerrar_sesion.php" title="Cerrar Sesión" tabindex="9999">FINALIZAR</a>
-                    </td>
-                </tr>
                   <tr>
                     <td align="right" class="cont_emp"><?php echo $razon ?></td>
                   </tr>
               </table>
 			</div>
 			<div class="ct-logo"></div>
+            <div class="contenido_tabla" style="text-align: right">
+                <a class="btn_iniciar_sesion" id="btn_iniciar_sesion" href="../../recursos2/venta" title="Iniciar Sesion">Iniciar Sesion</a>
+            </div>
+
         	<div id="div_venta_filtro" class="contenido_tabla">
       		</div>
             <div id="div_venta_form">
@@ -264,7 +272,6 @@ $(function() {
 </div>
 <footer>
     <?php /*echo $oContenido->print_footer()*/?>
-   <p style="text-align: center"> <a href="https://www.aqpfact.pe" target="_blank">AQPFACT - Facturación electrónica <?php echo date("Y");?></a></p>
 </footer>
 </body>
 </html>

@@ -100,8 +100,7 @@ function cliente_form(act,idf){
 			action: act,
 			cli_id:	idf,
 			vista:	'cliente_tabla',
-            dir:'ok',
-            ver:'todo'
+            dir:'ok'
 		}),
 		beforeSend: function() {
 			$('#msj_cliente').hide();
@@ -229,13 +228,7 @@ function cliente_reporte_xls(){
     $("#for_rep_xls").submit();
 }
 $(function() {
-
-    $('#btn_agregar').button({
-        icons: {primary: "ui-icon-plus"},
-        text: true
-    });
-
-
+	
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
 		text: true
@@ -254,8 +247,8 @@ $(function() {
 		title:'Información de Cliente',
 		autoOpen: false,
 		resizable: false,
-        height: 660,
-        width: 1100,
+		height: 'auto',
+		width: 530,
 		modal: true,
 		position: 'top',
 		buttons: {
@@ -352,7 +345,7 @@ $(function() {
             //$( "#div_venta_por_cliente" ).html('venta_cliente');
         }
     });
-
+	
 });
 </script>
 

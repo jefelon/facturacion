@@ -173,7 +173,7 @@ $caja_venta		=$pv['tb_caja_id'];
 $monto_inicial=$inicial;
 
 
-$dts1=$oIngreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fechahora_mysql($apertura),fechahora_mysql($cierre),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_ing_numdoc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ing_est']);
+$dts1=$oIngreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fecha_mysql($apertura),fecha_mysql($cierre),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_ing_numdoc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ing_est'],$_SESSION['usuario_id']);
 
 $num_rows= mysql_num_rows($dts1);
 ?>
@@ -236,7 +236,9 @@ $num_rows= mysql_num_rows($dts1);
     <tbody>
     <?php
     $sum_imp_ingr=0;
+    $sum_imp=0;
     while($dt1 = mysql_fetch_array($dts1)){
+        $sum_imp+=$dt1['tb_ingreso_imp'];
         $sum_imp_ingr+=$dt1['tb_ingreso_imp'];
         $caja_estado=caja_cierre($dt1['tb_caja_id'],$dt1['tb_ingreso_fec']);
         ?>
@@ -331,7 +333,7 @@ $num_rows= mysql_num_rows($dts1);
 $saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
 ?>
 <div class="ui-widget-header ui-corner-all" style="width:auto; padding:2px; margin:3px">CONSULTA SALDO CAJA</div>
-<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left;">
     <tr>
         <th height="24" align="left">CAJA</th>
         <th height="24" align="right">SOLES S/.</th>
@@ -365,6 +367,22 @@ $saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
     <tr style="font-weight:bold" height="25">
         <td align="left">SALDO</td>
         <td align="right"><?php echo formato_money($saldo_sol)?></td>
+        <td align="right">&nbsp;</td>
+    </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:right">
+    <tr>
+        <th height="24" align="left">TIPO</th>
+        <th height="24" align="right">SOLES S/.</th>
+        <th height="24" align="right">&nbsp;</th>
+    <tr>
+        <td align="left">VENTAS</td>
+        <td align="right"><?php echo formato_money($sum_imp)?></td>
+        <td align="right">&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">&nbsp;</td>
+        <td align="right">&nbsp;</td>
         <td align="right">&nbsp;</td>
     </tr>
 </table>

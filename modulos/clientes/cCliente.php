@@ -1,39 +1,22 @@
 <?php
 class cCliente{
-	function insertar(
-	    $tip,$nom,$doc,$dir,$con,$cum,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
-        $pdt,$bienfizc,$balancean,$clifijo,$foto,$soluser,$solpass,$afpuser,$afppass
-    ){
+	function insertar($tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene){
 	$sql = "INSERT tb_cliente(
 	`tb_cliente_tip` ,
 	`tb_cliente_nom` ,
 	`tb_cliente_doc` ,
 	`tb_cliente_dir` ,
 	`tb_cliente_con` ,
-	`tb_cliente_cumpleanos` ,
 	`tb_cliente_tel` ,
 	`tb_cliente_ema` ,
 	`tb_cliente_est`,
 	`tb_empresa_id`,
 	`tb_precio_id`,
-	`tb_cliente_retiene`,
-	`tb_cliente_cui`,
-	`tb_clienteregimen_id`,
-	`tb_cliente_afp`,
-	`tb_cliente_planilla`,
-	`tb_cliente_pdt`,
-	`tb_cliente_bienfizc`,
-	`tb_cliente_balanceanual`,
-	`tb_cliente_clientefijo`,
-	`tb_cliente_foto`,
-	`tb_cliente_soluser`,
-	`tb_cliente_solpass`,
-	`tb_cliente_afpuser`,
-	`tb_cliente_afppass`
+	`tb_cliente_retiene`
+
 	)
 	VALUES (
-	'$tip',  '$nom',  '$doc',  '$dir','$cum', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio','$retiene','$cui','$regimen_id',
-	'$afp','$planilla','$pdt','$bienfizc','$balancean','$clifijo','$foto','$soluser','$solpass','$afpuser','$afppass'
+	'$tip',  '$nom',  '$doc',  '$dir', '$con',  '$tel', '$ema', '$est', '$empresa', '$precio','$retiene'
 	);";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -51,60 +34,22 @@ class cCliente{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
-    function insertar_librocontablecliente($id_cliente,$id_libro_cont){
-        $sql = "INSERT tb_librocontablecliente(
-        `tb_cliente_id` ,
-        `tb_librocontable_id` 
-        )
-        VALUES (
-        '$id_cliente','$id_libro_cont'
-        );";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
-
-    function borraLibroContableCliente($id_cliente){
-        $sql = "DELETE FROM tb_librocontablecliente WHERE tb_cliente_id=$id_cliente";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
-
 	function ultimoInsert(){
 	$sql = "SELECT last_insert_id()";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-    function mostrarTodoscl(){
-        $sql="SELECT * FROM tb_cliente c
-	    ORDER BY c.tb_cliente_nom
-	";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
-
 	function mostrarTodos($fil){
 	$sql="SELECT * FROM tb_cliente c
 	LEFT JOIN tb_precio p ON c.tb_precio_id=p.tb_precio_id
 	ORDER BY c.tb_cliente_nom
 	";
 	if($fil!="")$sql.=" LIMIT 0,$fil ";
-	print $sql;
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-    function mostrarLibrosContables(){
-        $sql="SELECT * FROM tb_librocontable 
-	ORDER BY tb_librocontable_id
-	";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
     function mostrarDireccionesTodos($cli_id){
         $sql="SELECT * FROM tb_clientedireccion d";
         if($cli_id>0)$sql.=" WHERE tb_cliente_id = $cli_id";
@@ -130,36 +75,19 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id,$tip,$nom,$doc,$dir,$con,$cum,$tel,$ema,$est,$empresa,$precio,$retiene,$cui,$regimen_id,$afp,$planilla,
-                       $pdt,$bienfizc,$balancean,$clifijo,$foto,$soluser,$solpass,$afpuser,$afppass
-    )
-    {
+	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene){
 	$sql = "UPDATE tb_cliente SET  
 	`tb_cliente_tip` =  '$tip',
 	`tb_cliente_nom` =  '$nom',
 	`tb_cliente_doc` =  '$doc',
 	`tb_cliente_dir` =  '$dir',
 	`tb_cliente_con` =  '$con',
-	`tb_cliente_cumpleanos` =  '$cum',
 	`tb_cliente_tel` =  '$tel',
 	`tb_cliente_ema` =  '$ema',
 	`tb_cliente_est` =  '$est',
 	`tb_empresa_id` =  '$empresa',
 	`tb_precio_id` =  '$precio',
-	`tb_cliente_retiene` =  '$retiene',
-	`tb_cliente_cui` =  '$cui',
-	`tb_clienteregimen_id`=  '$regimen_id',
-	`tb_cliente_afp`=  '$afp',
-	`tb_cliente_planilla`=  '$planilla',
-	`tb_cliente_pdt`=  '$pdt',
-	`tb_cliente_bienfizc`=  '$bienfizc',
-	`tb_cliente_balanceanual`=  '$balancean',
-	`tb_cliente_clientefijo`=  '$clifijo',
-	`tb_cliente_foto`=  '$foto',
-	`tb_cliente_soluser`=  '$soluser',
-	`tb_cliente_solpass`=  '$solpass',
-	`tb_cliente_afpuser`=  '$afpuser',
-	`tb_cliente_afppass`=  '$afppass'
+	`tb_cliente_retiene` =  '$retiene'
 	
 	WHERE tb_cliente_id =$id";
 	$oCado = new Cado();
@@ -201,18 +129,6 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;		  
 	}
-
-    function complete_cod($dato){
-        $sql="SELECT *
-		FROM tb_cliente
-		WHERE tb_cliente_cui LIKE '%$dato%' OR tb_cliente_nom LIKE '%$dato%' OR tb_cliente_doc LIKE '%$dato%'
-		GROUP BY tb_cliente_nom
-		LIMIT 0,12
-		";
-        $oCado = new Cado();
-        $rst=$oCado->ejecute_sql($sql);
-        return $rst;
-    }
 	function mostrar_ventas_por_cliente($fec1,$fec2,$cli_id){		
 	$sql="SELECT * 
 	FROM tb_venta v

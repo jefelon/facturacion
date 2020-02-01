@@ -25,7 +25,7 @@ $fec_cierre=date('d-m-Y h:i:s a');
 $pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
 $pv = mysql_fetch_array($pvs);
 
-$cdets=$oCajadetalle->mostrarTodosCaja($pv['tb_caja_id'],20);
+$cdets=$oCajadetalle->mostrarTodosCaja($pv['tb_caja_id'],$_SESSION['usuario_id'],20);
 $num_rows= mysql_num_rows($cdets);
 
 
@@ -78,7 +78,7 @@ $num_rows= mysql_num_rows($cdets);
                 <td nowrap="nowrap"><?php if ($cdet['tb_caja_estado']==1){echo 'Abierta';}else{echo 'Cerrada';}?></td>
                 <td nowrap="nowrap"><?php echo formato_moneda($cdet['tb_caja_inicial']); ?></td>
                 <td nowrap="nowrap"><?php echo formato_moneda($cdet['tb_caja_final']); ?></td>
-                <td align="center"><a class="btn_detalle" href="#" onclick="caja_detalle_consulta('actualizar','<?php echo mostrarFechaHora($cdet['tb_caja_apertura']); ?>','<?php if ($cdet['tb_caja_estado']==1){echo mostrarFechaHora($fec_cierre);}else{echo mostrarFechaHora($cdet['tb_caja_cierre']);} ?>','<?php echo $cdet['tb_cajadetalle_id'];?>','<?php echo $cdet['tb_caja_inicial']; ?>')">Ver Detalle</a></td>
+                <td align="center"><a class="btn_detalle" href="#" onclick="caja_detalle_consulta('actualizar','<?php echo mostrarFechaHora($cdet['tb_caja_apertura']); ?>','<?php if ($cdet['tb_caja_estado']==1){echo mostrarFechaHora($fec_cierre);}else{echo mostrarFechaHora($cdet['tb_caja_cierre']);} ?>','<?php echo $cdet['tb_cajadetalle_id'];?>','<?php echo $cdet['tb_caja_inicial']; ?>','<?php echo $cdet['tb_usuario_id']; ?>')">Ver Detalle</a></td>
             </tr>
             <?php
         }

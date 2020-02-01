@@ -1,15 +1,16 @@
 <?php
 class cCajadetalle{
-	function insertar($caja_id, $fec_apertura, $fec_cierre, $inicial, $estado){
+	function insertar($caja_id, $fec_apertura, $fec_cierre, $inicial, $estado,$usuario_id){
 	$sql = "INSERT tb_cajadetalle (
 		`tb_caja_id`,
 		`tb_caja_apertura`,
 		`tb_caja_cierre`,
 		`tb_caja_inicial`,
-		`tb_caja_estado`
+		`tb_caja_estado`,
+		`tb_usuario_id`
 		)
 		VALUES (
-		 '$caja_id', '$fec_apertura', '$fec_cierre', '$inicial', '$estado'
+		 '$caja_id', '$fec_apertura', '$fec_cierre', '$inicial', '$estado', '$usuario_id'
 		);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -42,12 +43,11 @@ class cCajadetalle{
 	return $rst;
 	}
 
-    function mostrarTodosCaja($id,$limit){
+    function mostrarTodosCaja($id,$usuario_id,$limit){
         $sql="SELECT * 
 	FROM tb_cajadetalle
-    WHERE tb_caja_id=$id
-    ORDER BY tb_cajadetalle_id DESC
-    LIMIT 20";
+    WHERE tb_caja_id=$id AND tb_usuario_id=$usuario_id
+    ORDER BY tb_cajadetalle_id DESC LIMIT 20";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -69,9 +69,9 @@ class cCajadetalle{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
-    function modificar_fec_cierre($id,$ape,$est,$final){
+    function modificar_fec_cierre($id,$est,$final){
         $sql = "UPDATE tb_cajadetalle SET  
-	`tb_caja_cierre` =  '$ape',
+	`tb_caja_cierre` =  NOW(),
 	`tb_caja_estado` =  '$est',
 	`tb_caja_final` =  '$final'
 	WHERE  tb_cajadetalle_id =$id;";

@@ -1,6 +1,6 @@
 <?php
 class cCompra{
-	function insertar($fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento,$fec_nota,$ser_nota, $num_nota,$tip_nota){
+	function insertar($fechareg,$fec,$fecven,$doc_id,$numdoc,$mon,$tipcam,$tipcam2,$pro_id,$subtot,$des,$descal,$fle,$tipfle,$ajupos,$ajuneg,$valven,$opexo,$opegrav,$igv,$tot,$tipper,$per,$alm_id,$est,$usu_id,$emp_id,$orden,$tipodocumento,$fec_nota,$ser_nota, $num_nota,$tip_nota,$tiporenta_id,$baseimp_tip){
 	$sql = "INSERT INTO tb_compra(
 	`tb_compra_reg` ,
 	`tb_compra_mod` ,
@@ -35,10 +35,12 @@ class cCompra{
 	`tb_compra_fec_nota`,
 	`tb_compra_ser_nota` ,
 	`tb_compra_num_nota`,
-	`tb_compra_tip_nota`
+	`tb_compra_tip_nota`,
+	`tb_tiporenta_id`,
+	`tb_compra_baseimp_tip`
 	)
 	VALUES (
-	NOW( ) , NOW( ) ,  '$fec', '$fecven',  '$doc_id','$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento','$fec_nota', '$ser_nota','$num_nota','$tip_nota'
+	'$fechareg', NOW( ) ,  '$fec', '$fecven',  '$doc_id','$numdoc', '$mon', '$tipcam', '$tipcam2', '$pro_id',  '$subtot',  '$des',  '$descal',  '$fle',  '$tipfle',  '$ajupos',  '$ajuneg',  '$valven', '$opexo', '$opegrav', '$igv',  '$tot', '$tipper', '$per',  '$alm_id',  '$est',  '$usu_id',  '$emp_id',  '$orden','$tipodocumento','$fec_nota', '$ser_nota','$num_nota','$tip_nota','$tiporenta_id','$baseimp_tip'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
@@ -96,6 +98,25 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;	
 	}
+    function mostrar_filtro_integracion($fec1,$fec2,$mon,$pro_id,$est,$emp_id){
+        $sql="SELECT * 
+	FROM tb_compra c
+	INNER JOIN tb_proveedor p ON c.tb_proveedor_id=p.tb_proveedor_id
+	INNER JOIN tb_documento d ON c.tb_documento_id=d.tb_documento_id
+	INNER JOIN tb_almacen a ON c.tb_almacen_id=a.tb_almacen_id
+	LEFT JOIN tb_tipocambio tc ON c.tb_compra_fec = tc.tb_tipocambio_fec
+	LEFT JOIN cs_tipodocumento td ON c.cs_tipodocumento_id=td.cs_tipodocumento_id
+	WHERE c.tb_empresa_id = $emp_id AND tb_compra_fec BETWEEN '$fec1' AND '$fec2' AND tb_compra_est NOT IN('ANULADA')";
+
+        if($mon>0)$sql.=" AND tb_compra_mon = $mon ";
+        if($pro_id>0)$sql.=" AND c.tb_proveedor_id = $pro_id ";
+//        if($est!="")$sql.=" AND tb_compra_est LIKE '$est' ";
+
+        $sql.=" ORDER BY tb_compra_fec ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_filtro($fec1,$fec2,$mon,$pro_id,$est,$emp_id){
 	$sql="SELECT * 
 	FROM tb_compra c
@@ -113,6 +134,22 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+    function mostrar_filtro_suma($ano,$mon,$est,$emp_id){
+        $sql="SELECT SUM(tb_compra_tot) AS suma_compras, YEAR(`tb_compra_fec`) as `ano`, MONTH(`tb_compra_fec`)  as `mes`,
+              COUNT(*) 
+	FROM tb_compra c
+	INNER JOIN tb_proveedor p ON c.tb_proveedor_id=p.tb_proveedor_id
+	INNER JOIN tb_documento d ON c.tb_documento_id=d.tb_documento_id
+	INNER JOIN tb_almacen a ON c.tb_almacen_id=a.tb_almacen_id
+	WHERE c.tb_empresa_id = $emp_id AND YEAR(`tb_compra_fec`) in ($ano,$ano) ";
+        if($mon>0)$sql.=" AND tb_compra_mon = $mon ";
+        if($est!="")$sql.=" AND tb_compra_est LIKE '$est' ";
+        $sql.="GROUP BY YEAR(`tb_compra_fec`),MONTH(`tb_compra_fec`)";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function mostrar_filtro_por_mes_anio($mes_id,$anio_id,$emp_id){
         $sql="SELECT * 
@@ -208,8 +245,9 @@ class cCompra{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function modificar($id, $fec, $fecven, $doc_id, $numdoc, $pro_id, $est,$orden,$tipodocumento){
+	function modificar($id, $fecreg,$fec, $fecven, $doc_id, $numdoc, $pro_id, $est,$orden,$tipodocumento){
 	$sql = "UPDATE tb_compra SET  
+    `tb_compra_reg` =  '$fecreg',
 	`tb_compra_fec` =  '$fec',
 	`tb_compra_fecven` =  '$fecven',
 	`tb_documento_id` =  '$doc_id',
@@ -275,6 +313,13 @@ WHERE tb_software_id =$id";
         $sql="SELECT * 
 	FROM tb_compra c
 	WHERE c.tb_compra_numdoc='$numdoc'";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function mostrarTipoRentaND(){
+        $sql="SELECT * 
+	FROM tb_tiporenta";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;

@@ -3,5 +3,5 @@
 
  */
 //require('login.php');
-header("location: usuarios/");
+header("location: venta/");
 ?>

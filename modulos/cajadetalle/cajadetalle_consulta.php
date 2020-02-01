@@ -1,16 +1,28 @@
 <?php
 session_start();
 require_once ("../../config/Cado.php");
-require_once ("../ingreso/cIngreso.php");
-$oIngreso = new cIngreso();
-require_once ("../cajaobs/cajaobs_cierre.php");
+
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
+
+require_once("../venta/cVenta.php");
+$oVenta = new cVenta();
+
 require_once("../formatos/formato.php");
+require_once("../menu/acceso.php");
+require_once ("../puntoventa/cPuntoventa.php");
+$oPuntoventa = new cPuntoventa();
 
 require_once ("../cajadetalle/cCajadetalle.php");
 $oCajadetalle = new cCajadetalle();
 
-require_once ("../puntoventa/cPuntoventa.php");
-$oPuntoventa = new cPuntoventa();
+require_once ("../egreso/cEgreso.php");
+$oEgreso = new cEgreso();
+require_once ("../cajaobs/cajaobs_cierre.php");
+
+require_once ("../ingreso/cIngreso.php");
+$oIngreso = new cIngreso();
+require_once ("../cajaobs/cajaobs_cierre.php");
 
 
 $pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
@@ -29,7 +41,7 @@ $cdetant = mysql_fetch_array($cdetants);
 $saldo_anterior_sol =  $cdetant['tb_caja_final'];
 
 
-$dts1=$oIngreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fechahora_mysql($_POST['txt_fil_caj_fec1']),fechahora_mysql($_POST['txt_fil_caj_fec2']),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_ing_numdoc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ing_est']);
+$dts1=$oIngreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fecha_mysql($_POST['txt_fil_caj_fec1']),fecha_mysql($_POST['txt_fil_caj_fec2']),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_ing_numdoc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ing_est'],$_POST['usuario_id']);
 
 $num_rows= mysql_num_rows($dts1);
 ?>
@@ -92,7 +104,9 @@ $num_rows= mysql_num_rows($dts1);
     <tbody>
     <?php
     $sum_imp_ingr=0;
+    $sum_imp=0;
     while($dt1 = mysql_fetch_array($dts1)){
+        $sum_imp+=$dt1['tb_ingreso_imp'];
         $sum_imp_ingr+=$dt1['tb_ingreso_imp'];
         $caja_estado=caja_cierre($dt1['tb_caja_id'],$dt1['tb_ingreso_fec']);
         ?>
@@ -114,11 +128,6 @@ $num_rows= mysql_num_rows($dts1);
 <input name="hdd_ingreso_total" id="hdd_ingreso_total" type="hidden" value="<?php echo $sum_imp_ingr?>">
 
 <?php
-require_once ("../egreso/cEgreso.php");
-$oEgreso = new cEgreso();
-require_once ("../cajaobs/cajaobs_cierre.php");
-require_once("../formatos/formato.php");
-
 $dts1=$oEgreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fechahora_mysql($_POST['txt_fil_caj_fec1']),fechahora_mysql($_POST['txt_fil_caj_fec2']),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_egr_numdoc'],$_POST['hdd_fil_pro_id'],$_POST['cmb_fil_egr_est']);
 
 $num_rows= mysql_num_rows($dts1);
@@ -226,6 +235,22 @@ $saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
     <tr style="font-weight:bold" height="25">
         <td align="left">SALDO</td>
         <td align="right"><?php echo formato_money($saldo_sol)?></td>
+        <td align="right">&nbsp;</td>
+    </tr>
+</table>
+<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:right">
+    <tr>
+        <th height="24" align="left">TIPO</th>
+        <th height="24" align="right">SOLES S/.</th>
+        <th height="24" align="right">&nbsp;</th>
+    <tr>
+        <td align="left">VENTAS</td>
+        <td align="right"><?php echo formato_money($sum_imp)?></td>
+        <td align="right">&nbsp;</td>
+    </tr>
+    <tr>
+        <td align="left">&nbsp;</td>
+        <td align="right">&nbsp;</td>
         <td align="right">&nbsp;</td>
     </tr>
 </table>

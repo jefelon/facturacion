@@ -101,10 +101,46 @@ $(function() {
                       <td><?php echo $dt1['tb_proveedor_doc']?></td>
                       <td><?php echo $dt1['tb_almacen_nom']?></td>
                       <td align="right"><?php if($dt1['tb_compra_mon']==1)echo "S/."; if($dt1['tb_compra_mon']==2)echo "US$";?></td>
-                      <td align="right"><?php echo formato_money($dt1['tb_compra_valven'])?></td>
-                      <td align="right"><?php echo formato_money($dt1['tb_compra_igv'])?></td>
-                      <td align="right"><?php echo formato_money($dt1['tb_compra_per'])?></td>
-                      <td align="right"><?php echo formato_money($dt1['tb_compra_tot'])?></td>
+                      <td align="right">
+                          <?php
+                          if ($estado == "ANULADA") {
+                              echo "0";
+                          }
+                          else{
+                              echo formato_money($dt1['tb_compra_valven']);
+                          }
+                          ?>
+                      </td>
+                      <td align="right">
+                          <?php
+                          if ($estado == "ANULADA") {
+                              echo "0";
+                          }
+                          else{
+                             echo formato_money($dt1['tb_compra_igv']);
+                          }
+                          ?>
+                      </td>
+                      <td align="right">
+                          <?php
+                          if ($estado == "ANULADA") {
+                              echo "0";
+                          }
+                          else{
+                              echo formato_money($dt1['tb_compra_per']);
+                          }
+                          ?>
+                      </td>
+                      <td align="right">
+                          <?php
+                          if ($estado == "ANULADA") {
+                              echo "0";
+                          }
+                          else {
+                              echo formato_money($dt1['tb_compra_tot']);
+                          }
+                          ?>
+                      </td>
                       <td align="right"><?php echo $dt1['tb_compra_est']?></td>
                       <td align="left" nowrap="nowrap">
                       <?php if($dt1['tb_compra_est']!='ANULADA'){?>

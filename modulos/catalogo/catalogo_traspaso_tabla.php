@@ -63,7 +63,7 @@ $('.cantidad').autoNumeric({
 	aSep: ',',
 	aDec: '.',
 	vMin: '1',
-	vMax: '999'
+	vMax: '99999'
 });
 
 function cantidad(act,idf)
@@ -191,7 +191,7 @@ if($_POST['alm_ori']=="")
                             <a class="btn_menos" href="#menos" onClick="cantidad('menos','<?php echo $dt1['tb_catalogo_id']?>')">Disminuir</a>
                             </td>
                             <td align="center">
-                            <?php if($stock_unidad!=0){?>
+                            <?php if($stock_unidad>0){?>
                             
                             <a class="btn_agregar" href="#" onClick="traspaso_car('agregar','<?php echo $dt1['tb_catalogo_id']?>')">Agregar</a>
                             <?php }?>

@@ -57,6 +57,14 @@ $(function() {
 			producto_tabla();
 		}
     });
+    $( "#txt_fil_pro_cod" ).autocomplete({
+        minLength: 1,
+        source: "../producto/presentacion_complete_cod.php",
+        select: function(event, ui) {
+            $("#txt_fil_pro_cod").val(ui.item.label);
+            producto_tabla();
+        }
+    });
 	
 });
 </script>
@@ -75,6 +83,8 @@ $(function() {
   <label for="cmb_fil_pro_mar">Marca:</label>
   <select name="cmb_fil_pro_mar" id="cmb_fil_pro_mar">
   </select>
+    <td><label for="txt_fil_pro_cod">Código:</label>
+        <input name="txt_fil_pro_cod" type="text" id="txt_fil_pro_cod" size="20"></td>
 <br>  
   <label for="cmb_fil_pro_cat">Categoría:</label>
   <select name="cmb_fil_pro_cat" id="cmb_fil_pro_cat">
@@ -101,6 +111,7 @@ $(function() {
         <option value="tb_producto_nom">Nombre</option>
         <option value="tb_producto_mod DESC" selected="selected">Modificación</option>
   </select>
+
   
   <a href="#" onClick="producto_tabla()" id="btn_filtrar">Filtrar</a>
   <a href="#" onClick="producto_filtro()" id="btn_resfil">Restablecer</a>

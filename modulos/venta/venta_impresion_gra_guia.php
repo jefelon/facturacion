@@ -83,6 +83,14 @@ $apemat		=$dt['tb_usuario_apemat'];
 $ema		=$dt['tb_usuario_ema'];
 mysql_free_result($dts);
 
+$dts7= $oVenta->mostrarUno($ven_id);
+$dt7 = mysql_fetch_array($dts7);
+
+$cli_id	=$dt7['tb_cliente_id'];
+$cli_doc=$dt7['tb_cliente_doc'];
+
+mysql_free_result($dts7);
+
 $tipodoc = 'GUIA DE REMISIÓN';
 
 $ven_id=$_POST['ven_id'];
@@ -124,32 +132,10 @@ class MYPDF extends TCPDF
 
     public function Footer()
     {
-        // $style = array(
-        //   'position' => 'L',
-        //   'align' => 'L',
-        //   'stretch' => false,
-        //   'fitwidth' => true,
-        //   'cellfitalign' => '',
-        //   'border' => false,
-        //   'padding' => 0,
-        //   'fgcolor' => array(0,0,0),
-        //   'bgcolor' => false,
-        //   'text' => false
-        // //     'font' => 'helvetica',
-        // //     'fontsize' => 8,
-        // //     'stretchtext' => 4
-        // );
-
-        // $this -> SetY(-24);
-        // // Page number
-        // $this->SetFont('helvetica', '', 9);
-        // //$this->SetTextColor(0,0,0);
-        // $this->Cell(0, 0, 'Página '.$this->getAliasNumPage().' de '.$this->getAliasNbPages(), 'T', 1, 'R', 0, '', 0, false, 'T', 'M');
-
-        // $codigo='CAV-'.str_pad($_GET['d1'], 4, "0", STR_PAD_LEFT);
-
-        // $this->write1DBarcode($codigo, 'C128', '', 273, '', 6, 0.3, $style, 'N');
-        // $this->Cell(0, 0, 'www.prestamosdelnortechiclayo.com', 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+        global $html2;
+        $this -> SetY(-39);
+        $this->SetFont('helvetica', '', 9);
+        $this->writeHTML($html2, true, 0, true, true);
     }
 }
 
@@ -204,7 +190,7 @@ $html = '
         font-family: Verdana, Arial, Consolas;
         margin: 0px;
         padding-top: 0px;
-        font-size: 7.5pt;
+        font-size: 8pt;
     }
 
     .header_row th {
@@ -233,7 +219,7 @@ $html = '
 
 </style>
 <body>
-<table style="width: 194mm;" border="0">';
+<table style="width: 110mm;" border="0">';
 if($estado=="ANULADA"){
     $html.='<tr>
 	    <td width="50%"></td>
@@ -243,62 +229,46 @@ if($estado=="ANULADA"){
 }
 $html.='
     <tr>
-        <td colspan="4" style="text-align: left; height:48mm;"></td>
+        <td style="text-align: left; height:40mm;"></td>
     </tr>
+    <tr>
+        <td style="text-align: left;width:21mm;">&nbsp;</td>
+        <td style="width: 35mm">
+            <table><tr><td>'.mostrarDiaMesAnio3(1,$guia['tb_guia_fec']).'</td><td>'.mostrarDiaMesAnio3(2,$guia['tb_guia_fec']).'</td><td>'.mostrarDiaMesAnio3(3,$guia['tb_guia_fec']).'</td></tr></table>
+        </td>
+        <td style="width:17mm;"></td>
+        <td style="width: 35mm">
+            <table><tr><td>'.mostrarDiaMesAnio3(1,$guia['tb_guia_fec']).'</td><td>'.mostrarDiaMesAnio3(2,$guia['tb_guia_fec']).'</td><td>'.mostrarDiaMesAnio3(3,$guia['tb_guia_fec']).'</td></tr></table>
+        </td>
+    </tr>
+    <tr><td style="width: 100%;height: 8mm"></td></tr>
 </table>
 <table style="width: 194mm;" border="0">
     <tr><!--punto de partida -->
-        <td style="text-align: left;width:26mm; height:11mm;">&nbsp;</td>
-        <td style="text-align: left;width:74mm;">'.$guia['tb_guia_punpar'].'</td>
-        <td style="text-align: left;width:23mm;"></td>
-        <td style="text-align: left;width:74mm;">'.$guia['tb_guia_punlle'].'</td>
+        <td style="text-align: left;width:95mm;height: 15mm">'.$guia['tb_guia_punpar'].'</td>
+        <td style="text-align: left;width:4mm;"></td>
+        <td style="text-align: left;width:95mm;">'.$guia['tb_guia_punlle'].'</td>
     </tr>
-
+    <tr><td style="height: 4mm" colspan="3"></td></tr>
     <tr>
-        <!--razon social destinatario -->
-        <td style="text-align: left; width:38mm; height:4mm;">&nbsp;</td>
-        <td style="text-align: left; width:108mm">'.$guia['tb_guia_des'].'</td>
-        <td style="text-align: left; width:20mm"></td>
-        <td style="text-align: left; width:40mm">'.$ruc_empresa.'</td>
-    </tr>
-    <tr>
-        <!--fecha inicio traslado -->
-        <td style="text-align: left; width:33mm; height:4mm;">&nbsp;</td>
-        <td style="text-align: left; width:46mm;">'.mostrarFecha($guia['tb_guia_fec']).'</td>
-        <td style="text-align: left; width:18mm;"></td>
-        <td style="text-align: left; width:30mm;">'.$guia['tb_guia_numdoc'].'</td>
-        <td style="text-align: left; width:25mm;"></td>
-        <td style="text-align: right; width:30mm;">-</td>
-    </tr>
- </table>
- 
- <table style="width: 194mm;" border="0"> 
-    <tr> <!--ESPACIO UNIDAD TRASNSPORTE Y CONDUCTOR-->
-        <td colspan="4" style="text-align: left;width:190mm;height: 6mm"></td>
-    </tr>
-    <tr>
-        <!--marca y placa -->
-        <td style="text-align: left;width:30mm;height: 4mm"></td>
-        <td style="text-align: left;width:72mm">'. $marca.' / '.$placa .'</td>
-        <td style="text-align: left;width:20mm;"></td>
-        <td style="text-align: left;width:85mm;">' . $trans_razsoc . '</td>
-    </tr>
-    <tr>
-        <!--constancia inscripcion-->
-        <td style="text-align: left; width:55mm;height: 4mm;"></td>
-        <td style="text-align: left;width:140mm;">-</td>
-    </tr>
-    <tr>
-        <!--n licencia de conducir-->
-        <td style="text-align: left;width:43mm;height: 4mm;"></td>
-        <td style="text-align: left;width:55mm;">'.$cond_lic.'</td>
-        <td style="text-align: left;width:20mm;"></td>
-        <td style="text-align: left;width:43mm;">' . $trans_ruc . '</td>
-        <td style="text-align: right;width:27mm;">-</td>
+        <td style="text-align: left; width:90mm;height: 15mm">&nbsp;
+            <table><!--razon social destinatario -->
+                <tr><td style="width: 27mm; height: 7mm"></td><td>'.$guia['tb_guia_des'].'</td></tr>
+                <tr><td style="width: 50mm"></td><td>'.$cli_doc.'</td></tr>
+            </table>
+        </td>
+        <td style="text-align: left; width:14mm"></td>
+        <td style="text-align: left; width:90mm;">&nbsp;
+            <table><!--UNIDAD DE TRANSPORTE -->
+                <tr><td style="width: 27mm;height: 7mm"></td><td>'. $marca.' / '.$placa .'</td></tr>
+                <tr><td style="width: 50mm;height: 5mm"></td><td>-</td></tr>
+                <tr><td style="width: 50mm;height: 5mm"></td><td>'.$cond_lic.'</td></tr>
+            </table>
+        </td>
     </tr>
  </table>
 
-<table border="0" style="width: 194mm;">
+<table border="0" style="width: 194mm;font-size: 9pt">
     <tbody>
         <tr>
             <td colspan="5" style="height: 6mm;"></td>
@@ -309,17 +279,34 @@ while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
     $html.='<tr>';
 
-    $html .= '   <td style="text-align:center;width: 15mm">' . $dt["tb_presentacion_cod"] .'</td>
-                 <td style="text-align: left; width: 119mm; font-size; 10pt;"> &nbsp; &nbsp; ' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
-                 <td style="text-align:center; width: 16mm">' . $dt["tb_guiadetalle_can"] . '</td>
-                 <td style="text-align:center; width: 24mm">NIU</td>
-                 <td style="text-align:center; width: 20mm">-</td>';
+    $html .= '
+                 <td style="text-align: left; width: 135mm;">'. $dt["tb_presentacion_cod"] .' ' . $dt["tb_producto_nom"] .' - ' . $dt['tb_marca_nom'] .'</td>
+                 <td style="text-align:center; width: 17mm">NIU</td>
+                 <td style="text-align:right; width: 19mm">' . $dt["tb_guiadetalle_can"] . '</td>
+                 <td style="text-align:center; width: 23mm">-</td>';
     $html.='</tr>';
     $cont++;
 }
 $html.='
 </tbody>
-</table>
+</table>';
+
+$html2='';
+$html2.='
+ <table width="96mm" border="0"> 
+    <tr>
+        <td style="width: 13mm"></td>
+        <td style="text-align: left;width:85mm;height: 9mm;">' . $trans_razsoc . '</td>
+    </tr>
+    <tr>
+        <td style="width: 10mm"></td>
+        <td style="text-align: left;width:88mm ;height: 10mm">' . $trans_ruc . '</td>
+    </tr>
+    <tr>
+        <td style="width: 10mm"></td>
+        <td style="text-align: left;width:88mm">FAC.: '.$guia['tb_guia_numdoc'].'</td>
+    </tr>
+ </table>
 </body>
 </html>';
 

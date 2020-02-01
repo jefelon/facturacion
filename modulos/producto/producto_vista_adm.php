@@ -87,7 +87,8 @@ function producto_tabla()
 			pro_mar:	$('#cmb_fil_pro_mar').val(),
 			pro_est:	$('#cmb_fil_pro_est').val(),
 			limit:		$('#cmb_fil_lim').val(),
-			ordby:		$('#cmb_fil_ordby').val()
+			ordby:		$('#cmb_fil_ordby').val(),
+            pro_cod:	$('#txt_fil_pro_cod').val()
 			
 		}),
 		beforeSend: function() {
@@ -216,6 +217,25 @@ function presentacion_vista(proid){
 	});
 }
 
+function producto_importar_form(){
+    $.ajax({
+        type: "POST",
+        url: "producto_importar_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+        }),
+        beforeSend: function() {
+            $('#msj_producto').hide();
+            $('#div_producto_importar').dialog("open");
+            $('#div_producto_importar').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_producto_importar').html(html);
+        }
+    });
+}
+
 $(function() {
 	
 	$('#btn_actualizar').button({
@@ -229,8 +249,18 @@ $(function() {
 		icons: {primary: "ui-icon-plus"},
 		text: true
 	});
-		
-	producto_filtro();		
+
+    $('#btn_importar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
+    $('#btn_descargar_plantilla').button({
+        icons: {primary: "ui-icon-print"},
+        text: true
+    });
+
+
+    producto_filtro();
 	
 	$( "#div_producto_form" ).dialog({
 		title:'Información de Producto',
@@ -255,6 +285,30 @@ $(function() {
 			$("#div_producto_form").html('Cargando...');
 		}
 	});
+
+    $( "#div_producto_importar" ).dialog({
+        title:'Importar Productos',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 990,
+        modal: true,
+        position: 'top',
+        buttons: {
+            Importar: function() {
+                $("#for_pro_imp").submit();
+            },
+            Cancelar: function() {
+                $('#for_pro').each (function(){this.reset();});
+                $( this ).dialog("close");
+            }
+        },
+        close: function()
+        {
+            $("#div_producto_importar").html('Cargando...');
+        }
+    });
+
 	$( "#div_presentacion_vista" ).dialog({
 		title:'',
 		autoOpen: false,
@@ -301,6 +355,8 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="producto_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
+                        <td width="25" align="left" valign="middle"><a id="btn_importar" href="#" onClick="producto_importar_form()">Importar</a></td>
+                        <td width="180" align="left" valign="middle"><a id="btn_descargar_plantilla" href="../../libreriasphp/excel/ejemplo_productos.xlsx">Descargar Plantilla</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
                       <td align="right">
                       <div id="msj_producto" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
@@ -319,6 +375,8 @@ $(function() {
       		</div>
             <div id="div_producto_form">
 			</div>
+            <div id="div_producto_importar">
+            </div>
             <div id="div_producto_tabla" class="contenido_tabla">
       		</div>
 			<div id="div_presentacion_vista">

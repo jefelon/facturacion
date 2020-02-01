@@ -39,7 +39,8 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa=$dt['tb_empresa_ruc'];
 $razon_defecto = $dt['tb_empresa_razsoc'];
 $direccion_defecto = $dt['tb_empresa_dir'];
-$contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
+$contacto_empresa = "<b>Teléfono:</b> " . $dt['tb_empresa_tel'] ."<b> Correo:</b>" . $dt['tb_empresa_ema'];
+$texto_venta_producto="<i>".$dt['tb_empresa_teximp']."</i>";
 $empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
 
@@ -73,7 +74,7 @@ while($dt = mysql_fetch_array($dts))
 
     $serie=$dt["tb_cotizacion_ser"];
     $numero=$dt["tb_cotizacion_num"];
-
+    $punto_venta_dir=$dt["tb_puntoventa_direccion"];
     $ruc=$dt["tb_cliente_doc"];
     $razon=$dt["tb_cliente_nom"];
     $direccion=$dt["tb_cliente_dir"];
@@ -105,12 +106,16 @@ while($dt = mysql_fetch_array($dts))
     $lab3=$dt['tb_cotizacion_lab3'];
 }
 
-
 if($moneda==1){
     $moneda  = "SOLES";
     $mon = "S/ ";
+    $monedaval=1;
 }
-
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
+}
 
 //pagos
 $rws1=$oVentapago->mostrar_pagos($cot_id);
@@ -197,32 +202,10 @@ class MYPDF extends TCPDF
 
     public function Footer()
     {
-      // $style = array(
-      //   'position' => 'L',
-      //   'align' => 'L',
-      //   'stretch' => false,
-      //   'fitwidth' => true,
-      //   'cellfitalign' => '',
-      //   'border' => false,
-      //   'padding' => 0,
-      //   'fgcolor' => array(0,0,0),
-      //   'bgcolor' => false,
-      //   'text' => false
-      // //     'font' => 'helvetica',
-      // //     'fontsize' => 8,
-      // //     'stretchtext' => 4
-      // );
-
-      // $this -> SetY(-24);
-      // // Page number
-      // $this->SetFont('helvetica', '', 9);
-      // //$this->SetTextColor(0,0,0);
-      // $this->Cell(0, 0, 'Página '.$this->getAliasNumPage().' de '.$this->getAliasNbPages(), 'T', 1, 'R', 0, '', 0, false, 'T', 'M');
-
-      // $codigo='CAV-'.str_pad($_GET['d1'], 4, "0", STR_PAD_LEFT);
-
-      // $this->write1DBarcode($codigo, 'C128', '', 273, '', 6, 0.3, $style, 'N');
-      // $this->Cell(0, 0, 'www.prestamosdelnortechiclayo.com', 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+        global $html2;
+        $this -> SetY(-45);
+        $this->SetFont('helvetica', '', 9);
+        $this->writeHTML($html2, true, 0, true, true);
     }
 }
 
@@ -280,26 +263,25 @@ $html = '
         font-size: 7.5pt;
     }
     .header_row th {
-        border-bottom: 0.9px solid #ddd;
-        border-right: 0.9px solid #ddd;
-        border-left: 0.9px solid #ddd;
-        background-color: #efaa7c
+        border: 0.9px solid #ddd;
+        background-color: #01a2e6
     }
     .odd_row td {
         background-color: transparent;
-        border-bottom: 0.9px solid #ddd;
+        border-bottom: 0.9px solid #01a2e6;
         padding-top: 5px;
         padding-bottom: 5px;
     }
     .even_row td {
         padding-top: 5px;
         padding-bottom: 5px;
-        background-color: #f6f6f6;
-        border-bottom: 0.9px solid #ddd;
+        background-color: #01a2e6;
+        border-bottom: 0.9px solid #01a2e6;
     }
     .row td{
-        border-right: 0.9px solid #ddd;
-        border-left: 0.9px solid #ddd;
+        border-right: 0.9px solid #01a2e6;
+        border-left: 0.9px solid #01a2e6;
+        line-height: 7px;
     }
 </style>
 
@@ -308,7 +290,9 @@ $html = '
         display: none;
     }
 
-</style>
+</style>';
+$bordelineas="1px solid #01a2e6;";
+$html.='
 <body><table style="width: 100%; margin-bottom: 50mm" border="0">';
 if($estado=="ANULADA"){
 	$html.='<tr>
@@ -318,21 +302,25 @@ if($estado=="ANULADA"){
 	    </tr>';
 }
 $html.='<tr>
-        <td style="text-align: left" width="15%" align="left">
+        <td style="text-align: left" width="25%" align="left">
             <img src="'.$empresa_logo.'" alt="" width: "100%">
         </td>    
-        <td style="text-align: left" width="45%" align="left"><strong style="font-size: 11pt">'.$razon_defecto.'</strong><br>'.$direccion_defecto.'<br>
-         Importaciones Mayoristas
+        <td style="text-align: left;font-size: 9pt" width="50%" align="center"><strong style="font-size: 12pt">'.$razon_defecto.'</strong><br>
+        '.$direccion_defecto.'
+        <br>'.$contacto_empresa.'
+        <div style="height: 2px"></div><b>PUNTO DE VENTA:</b> '.$punto_venta_dir.'
+        <br>'.$texto_venta_producto.'
+        <br>
         </td>
       
-        <td style="text-align: center;" width="40%" border="1">
-            <strong style="font-size: 11pt">'.$tipodoc.'<br>
+        <td style="text-align: center;line-height: 5px" width="25%" border="1">
+        <div style="height: 24px"></div>
+            <strong style="font-size: 12pt">'.$tipodoc.'<br>
             RUC: '.$ruc_empresa.'<br>
             '.$serie.'-'.$numero.'</strong>
         </td>
     </tr>
 </table>
-<br/>
 <br/>
 <br/>
 <table style="width: 100%;" border="0">
@@ -362,18 +350,16 @@ $html.='<tr>
 </table>
 <br/>
 <br/>
-<br/>
-<table style="width: 100%; border: 0.5px solid #eeeeee; border-collapse:collapse;">
+<table style="width: 100%;border:'.$bordelineas.'; border-collapse:collapse;line-height: 10px">
     <tbody>
         <tr class="header_row">
             <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
-            <th style="text-align: center; width: 41%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 7%;"><b>CANT</b></th>
             <th style="text-align: center; width: 7%;"><b>UNIDAD</b></th>
-            <th style="text-align: center; width: 8%;"><b>CANT</b></th>
-            <th style="text-align: center; width: 9%;"><b>VALOR UNIT</b></th>
-            <th style="text-align: center; width: 10%;"><b>PRECIO UNIT</b></th>
-            <th style="text-align: center; width: 10%;"><b>VALOR VENTA</b></th>
-            <th style="text-align: center; width: 10%;"><b>PRECIO VENTA</b></th>
+            <th style="text-align: center; width: 45%;"><b>DESCRIPCION</b></th>
+            <th style="text-align: center; width: 12%;"><b>VALOR UNIT</b></th>
+            <th style="text-align: center; width: 12%;"><b>PRECIO UNIT</b></th>
+            <th style="text-align: center; width: 12%;"><b>IMPORTE</b></th>
         </tr>';
             $dts = $oCotizacion->mostrar_venta_detalle_ps($cot_id);
             $cont = 1;
@@ -381,150 +367,142 @@ $html.='<tr>
             	$codigo = $cont;
 $html.='<tr class="row">';
             if($dt["tb_cotizaciondetalle_tipven"]==1){
-                $html.='<td style="text-align: left">'.$cont.'</td>
-                <td style="text-align: left">'.$dt["tb_producto_nom"].' - '.$dt['tb_marca_nom'].'</td>
+                if ($dt['tb_marca_nom']!='NA'){
+                    $ven_det_marca= ' - '.$dt['tb_marca_nom'];
+                }
+                if(strlen($dt["tb_ventadetalle_nom"].$ven_det_marca. $ven_det_serie)>66){
+                    $max_lin++;
+                }
+                $html.='<td style="text-align: center">'.$cont.'</td>
+                <td style="text-align: center">'.$dt["tb_cotizaciondetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_can"].'</td>
-                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"].'</td>
-                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"]*1.18 .'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_cotizaciondetalle_valven"]).'</td>';
-                $html.='<td style="text-align: right">'.formato_moneda($dt["tb_cotizaciondetalle_preunilin"]*$dt["tb_cotizaciondetalle_can"]).'</td>';
+                <td style="text-align: left">'.$dt["tb_producto_nom"].$ven_det_marca.'</td>
+                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preunilin"].'</td>
+                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"].'</td>';
+                $html.='<td style="text-align: right">'.formato_moneda($dt["tb_cotizaciondetalle_preuni"]*$dt["tb_cotizaciondetalle_can"]).'</td>';
             }else{
-                $html.='<td style="text-align: left">'.$cont.'</td>
-                <td style="text-align: left">'.$dt["tb_servicio_nom"].'</td>
+                $html.='<td style="text-align: center">'.$cont.'</td>
+                <td style="text-align: center">'.$dt["tb_cotizaciondetalle_can"].'</td>
                 <td style="text-align: center">'.$dt['tb_unidad_abr'].'</td>
-                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_can"].'</td>
-                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"].'</td>
-                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_des"].'</td>
-                <td style="text-align: right">'.formato_moneda($dt["tb_cotizaciondetalle_valven"]).'</td>';
-                $html.='<td style="text-align: right">'.formato_moneda($dt['tb_cotizaciondetalle_valven']+$dt['tb_cotizaciondetalle_igv']).'</td>';
+                <td style="text-align: left">'.$dt["tb_servicio_nom"].'</td>
+                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preunilin"].'</td>
+                <td style="text-align: right">'.$dt["tb_cotizaciondetalle_preuni"].'</td>';
+                $html.='<td style="text-align: right">'.formato_moneda($dt['tb_cotizaciondetalle_preuni']+$dt['tb_cotizaciondetalle_can']).'</td>';
             }
             $html.='</tr>';
         $cont++;
     	}
+    while ($cont<=32) {
+        $html .= '<tr class="row">
+                <td style="text-align: center"></td>
+                <td style="text-align: center"></td>
+                <td style="text-align: right"></td>
+                <td style="text-align: right"></td>
+                <td style="text-align: right"></td>
+                <td style="text-align: right"></td>
+                <td style="text-align: right"></td>';
+        $html .= '</tr>';
+        $cont++;
+    }
     $html.='</tbody>
-</table>
-<br/>
-<br/>
-<table style="width: 100%"  border="0">
+</table>';
+$html2.='
+<table class="total-letras" width="100%" style="font-size:8pt;text-align: left;margin-top: 8px">
     <tr>
-        <td style="text-align: left;" colspan="3">'.$observacion.'</td>
-    </tr>';
-    if($totopgrat > 0){
-    $html.='<tr>
-        <td width="80%" style="text-align: right;" colspan="2">Vtas. Gratuitas: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $totopgrat.'</td>
-    </tr>';
-    }
-    $html.='<tr>
-        <td width="80%" style="text-align: right;" colspan="2">Sub Total: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $subtotal.'</td>
-    </tr>';
-    if($totanti > 0){
-        $html.='<tr>
-            <td width="80%" style="text-align: right;" colspan="2">Anticipos: </td>
-            <td width="20%" style="text-align: right;">'.$mon . $totanti.'</td>
-        </tr';
-    }
-    $html.='<tr>
-        <td width="80%" style="text-align: right;" colspan="2">Descuentos: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $totdes.'</td>
-    </tr>
-    <tr>
-        <td width="80%" style="text-align: right;" colspan="2">Valor Venta: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $valorventa.'</td>
-    </tr>
-    <tr>
-        <td  width="80%" style="text-align: right;" colspan="2">IGV: </td>
-        <td width="20%" style="text-align: right;">'.$mon . $toigv.'</td>
-    </tr>
-        <tr>
-            <td width="60%" style="text-align: left;">';
+        <td style="line-height: 7px;border:'.$bordelineas.'"><b>  SON: </b>';
             if($importetotal>0){
-            	$html.='SON: ' . numtoletras($importetotal);
+                $html2.='' . numtoletras($importetotal,$monedaval);
             }else{
-            	$html.='Leyenda TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE';
+                $html2.='Leyenda TRANSFERENCIA GRATUITA DE UN BIEN Y/O SERVICIO PRESTADO GRATUITAMENTE';
             }
-            $html.='</td>
-            <td width="20%" style="text-align: right;">Importe Total: </td>
-            <td width="20%" style="text-align: right;">'.$mon . $importetotal.'</td>
-        </tr>
-
+        $html2.='
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<table>
+    <tr>
+    <td width="60%" style="height: 60px; border: '.$bordelineas.'">
+        <table>
+            <tr>
+                <td>';
+                    $html2.='
+                    <table style="line-height: 7px">
+                        <tr class="row">
+                                <th colspan="3" style="text-align: left;"><b>INFORMACIÓN ADICIONAL</b></th>
+                        </tr>
+                        <tr class="row">
+                                <td width="5%" style="text-align: left;">1 )</td>
+                                <td width="25%" style="text-align: left;"><b>Vendedor:</b></td>
+                                <td width="70%" style="text-align: left;">'.$texto_vendedor.'</td>
+                        </tr>
+                        <tr class="row">
+                                <td width="5%" style="text-align: left;">2 )</td>
+                                <td width="25%" style="text-align: left;"><b>Otros:</b></td>
+                                <td width="70%" style="text-align: left;"></td>
+                        </tr>';
+                    $html2.='
+                    </table>
+                </td>
+            </tr>
+          </table>
+        
+        </td>
+        <td width="7%"></td>
+        <td width="33%">
+            <table>';
+                if($totopgrat > 0){
+                $html2.='<tr>
+                    <td width="63%" style="text-align: left;"><b>VTAS GRATUITAS: </b></td>
+                    <td width="7%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;">'.$totopgrat.'</td>
+                </tr>';
+                }
+                $html2.='<tr>
+                    <td width="63%" style="text-align: left;"><b>SUB TOTAL:</b> </td>
+                    <td width="7%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;">'.$subtotal.'</td>
+                </tr>';
+                if($totanti > 0){
+                    $html2.='<tr>
+                        <td width="63%" style="text-align: left;"><b>ANTICIPOS: </b></td>
+                        <td width="7%" style="text-align: right">'.$mon.'</td>
+                        <td width="30%" style="text-align: right;">'.$totanti.'</td>
+                    </tr';
+                }
+                $html2.='<tr>
+                    <td width="63%" style="text-align: left;"><b>DESCUENTOS:</b> </td>
+                    <td width="7%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;">'.$totdes.'</td>
+                </tr>
+                <tr>
+                    <td width="63%" style="text-align: left;"><b>VALOR VENTA: </b></td>
+                    <td width="7%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;">'.$valorventa.'</td>
+                </tr>
+                <tr>
+                    <td  width="63%" style="text-align: left;"><b>IGV:</b> </td>
+                    <td width="7%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;">'.$toigv.'</td>
+                </tr>
+                <tr>                   
+                     <td width="63%" style="text-align: left;"><b>IMPORTE TOTAL:</b> </td>
+                     <td width="7%" style="text-align: right">'.$mon.'</td>
+                     <td width="30%" style="text-align: right;font-weight: bold;font-size: 9pt">'.$importetotal.'</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
 </table>
 <br/>
 <br/>';
-
-if($num_rows_vp==1)$texto_pago=trim($texto_pago1[0]);
-
-if($num_rows_vp>1)
-{
-    $texto_pago="";
-    foreach($texto_pago2 as $indice=>$valor)
-    {
-        $texto_pago.='<br>'.trim($valor).'';
-    }
-}
-
-$num=0;
-$html.='INFORMACIÓN ADICIONAL<br>
-<table style="width: 50%; border: 0.5px solid #eeeeee; border-collapse:collapse;">';
-    $num++;
-    $html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Forma de Pago:</td>
-        <td width="70%" style="text-align: left;">'.$texto_pago.'</td>
-    </tr>';
-
-    if($lab1!="")
-    {
-    $num++;
-    $html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Nro. de Placa:</td>
-        <td width="70%" style="text-align: left;">'.$lab1.'</td>
-    </tr>';
-    }
-    if($lab2!="")
-    {
-    $num++;
-    $html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Kilometraje:</td>
-        <td width="70%" style="text-align: left;">'.$lab2.'</td>
-    </tr>';
-    }
-    if($lab3!="")
-    {
-    $num++;
-    $html.='
-    <tr class="row">
-        <td width="5%" style="text-align: left;">'.$num.')</td>
-        <td width="25%" style="text-align: left;">Ord. Servicio:</td>
-        <td width="70%" style="text-align: left;">'.$lab3.'</td>
-    </tr>';
-    }
-
-$html.='
-</table>';
-
-
-$html.='
+$html2.='
 <br/>
 <br/>
 <table>
 <tr>
-<td style="width:78%">';
-
-$html.='<br/>'.$sucursales;
-
-$html.='<br/>
-</td>
-
-</tr>
-</table>
+<td style="width:78%">
 </body>
 </html>';
 

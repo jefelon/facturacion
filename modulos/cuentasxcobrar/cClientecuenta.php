@@ -9,7 +9,7 @@ class cClientecuenta{
 	`tb_clientecuenta_tip` ,
 	`tb_clientecuenta_mon` ,
 	`tb_clientecuenta_est` ,
-	`tb_venta_id` ,
+	`tb_clientecuenta_ven_id` ,
 	`tb_formapago_id` ,
 	`tb_modopago_id` ,
 	`tb_cuentacorriente_id` ,
@@ -142,20 +142,6 @@ class cClientecuenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	function obtener_total_entradas_salidas_fec($fec1,$fec2,$cli_id, $emp_id){
-		$sql = "
-	SELECT tb_clientecuenta_tip AS tipo, sum(tb_clientecuenta_mon) AS monto
-	FROM tb_clientecuenta
-	WHERE tb_empresa_id = $emp_id
-	AND tb_cliente_id = $cli_id
-	AND tb_clientecuenta_fec BETWEEN '$fec1' AND '$fec2'
-	GROUP BY tb_clientecuenta_tip
-	";
-		print $sql;
-		$oCado = new Cado();
-		$rst=$oCado->ejecute_sql($sql);
-		return $rst;
-	}
 	function caja_filtro_adm($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$forpag_id,$modpag_id,$cuecor_id,$tar_id,$clicue_tipreg,$clicue_tip){
 	$sql="SELECT ct.tb_formapago_id, fp.tb_formapago_nom, ct.tb_modopago_id, mp.tb_modopago_nom, ct.tb_cuentacorriente_id, tb_cuentacorriente_nom, ct.tb_tarjeta_id, tb_tarjeta_nom, ef.tb_entfinanciera_id AS banco_cuecor_id, ef.tb_entfinanciera_nom AS banco_cuecor, e.tb_entfinanciera_id AS banco_tar_id, e.tb_entfinanciera_nom AS banco_tar, SUM(tb_clientecuenta_mon) AS total
 	FROM tb_clientecuenta ct
@@ -195,5 +181,7 @@ class cClientecuenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+
+
 }
 ?>

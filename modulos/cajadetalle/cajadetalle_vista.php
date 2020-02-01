@@ -76,7 +76,7 @@ $anio=date('Y');
 
 
 
-    function caja_detalle_consulta(act,fec_apertura, fec_cierre, caja_id, mon_inicial){
+    function caja_detalle_consulta(act,fec_apertura, fec_cierre, caja_id, mon_inicial, usuario_id){
         $.ajax({
             type: "POST",
             url: "../cajadetalle/cajadetalle_consulta.php",
@@ -87,7 +87,8 @@ $anio=date('Y');
                 txt_fil_caj_fec1:	fec_apertura,
                 txt_fil_caj_fec2:   fec_cierre,
                 cmb_fil_caj_id: caja_id,
-                txt_mon_inicial: mon_inicial
+                txt_mon_inicial: mon_inicial,
+                usuario_id: usuario_id
             }),
             beforeSend: function() {
                 $('#msj_cajadetalle').hide();

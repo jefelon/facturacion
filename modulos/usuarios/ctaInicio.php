@@ -49,7 +49,7 @@ if($usuario!="" and $password!="")
 				$_SESSION['autentificado']		= "SI";
 			
 				$_SESSION['usuario_id']			=$dt['tb_usuario_id'];
-				$_SESSION['usuario_nombre']		=$dt['tb_usuario_apepat']." ".$dt['tb_usuario_apemat']." ".$dt['tb_usuario_nom'];
+				$_SESSION['usuario_nombre']		=addslashes($dt['tb_usuario_apepat']." ".$dt['tb_usuario_apemat']." ".$dt['tb_usuario_nom']);
 				
 				$_SESSION['usuariogrupo_id']	=$dt['tb_usuariogrupo_id'];
 				$_SESSION['usuariogrupo_nombre']=$dt['tb_usuariogrupo_nom'];
@@ -58,16 +58,21 @@ if($usuario!="" and $password!="")
 				
 				//datos empresa sesión
 				$_SESSION['empresa_id']			=$dt['tb_empresa_id'];
-				$_SESSION['empresa_razsoc']		=$dt['tb_empresa_razsoc'];
-                $_SESSION['empresa_tel']		=$dt['tb_empresa_tel'];
-                $_SESSION['empresa_ema']		=$dt['tb_empresa_ema'];
-                $_SESSION['empresa_ruc']		=$dt['tb_empresa_ruc'];
-                $_SESSION['empresa_nomcom']		=$dt['tb_empresa_nomcom'];
-                $_SESSION['empresa_dir']		=$dt['tb_empresa_dir'];
+				$_SESSION['empresa_ruc']		=$dt['tb_empresa_ruc'];
+				$_SESSION['empresa_razsoc']     =addslashes($dt['tb_empresa_razsoc']);
+				$_SESSION['empresa_nomcom']     =addslashes($dt['tb_empresa_nomcom']);
 
+                $_SESSION['empresa_certificado']  =$dt['tb_empresa_certificado'];
+                $_SESSION['empresa_clave_certificado']  =$dt['tb_empresa_clave_certificado'];
+                $_SESSION['empresa_usuario_sunat']=$dt['tb_empresa_usuario_sunat'];
+                $_SESSION['empresa_clave_sunat']  =$dt['tb_empresa_clave_sunat'];
+                $_SESSION['empresa_iddistrito']   =$dt['tb_empresa_iddistrito'];
+                $_SESSION['empresa_subdivision']  =$dt['tb_empresa_subdivision'];
+                $_SESSION['empresa_departamento'] =$dt['tb_empresa_departamento'];
+                $_SESSION['empresa_provincia']    =$dt['tb_empresa_provincia'];
+                $_SESSION['empresa_distrito']     =$dt['tb_empresa_distrito'];
+                $_SESSION['empresa_direccion']     =$dt['tb_empresa_dir'];
 
-
-			
 			$url=ir_principal($dt['tb_usuariogrupo_id']);
 			header("Location: $url");
 		}

@@ -34,6 +34,7 @@ $(function() {
                 <tr>
                 <th>NOMBRE DE PUNTO DE VENTA</th>
                 <th>ALMACEN PARA VENTA</th>
+                <th>DIRECCION</th>
                 <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -47,6 +48,7 @@ $(function() {
                 <tr>
                 <td><?php echo $dt['tb_puntoventa_nom']?></td>
                 <td><?php echo $dt['tb_almacen_nom']?></td>
+                <td><?php echo $dt['tb_puntoventa_direccion']?></td>
                 <td align="center"><a class="btn_editar" href="#" onClick="puntoventa_form('editar','<?php echo $dt['tb_puntoventa_id']?>')">Editar</a> <a class="btn_eliminar" href="#" onClick="eliminar_puntoventa('<?php echo $dt['tb_puntoventa_id']?>')">Eliminar</a></td>
                 </tr>
 			<?php

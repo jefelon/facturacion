@@ -81,6 +81,8 @@ if($_POST['action']=='agregar')
 			{
 				$precio_unitario=moneda_mysql($_POST['cat_precom'])/(1+$igv_dato);
 			}
+
+
 			//PRECIO UNITARIO
 			$_SESSION['compra_linea_preuni'][$_POST['cat_id']]=$precio_unitario;
 			//-----------------------------------------------------------------------
@@ -305,9 +307,9 @@ $(function() {
 
 });
 
-function cambiar_costo_unitario(cost_uni,n) {
-    $("#cost_uni"+n).html(cost_uni);
-}
+// function cambiar_costo_unitario(cost_uni,n) {
+//     $("#cost_uni"+n).html(cost_uni);
+// }
 </script>
 <input name="hdd_com_numite" id="hdd_com_numite" type="hidden" value="<?php echo $filas?>">
 <fieldset><legend>Detalle de Compra</legend>
@@ -362,7 +364,7 @@ if($num_rows>0){
 				$dts1=$oCatalogoproducto->presentacion_catalogo($indice);
 				$dt1 = mysql_fetch_array($dts1);
 
-                $tipo_item	=$dt1['tb_afectacion_id'];
+                $tipo_item	=$_SESSION['compra_linea_tip_bon'][$indice];
 				
 				//tipo de cambio
 				$mul_tipo_cambio=$_POST['tipo_cambio'];
@@ -458,10 +460,6 @@ if($num_rows>0){
 
                 $_SESSION['compra_linea_cos'][$indice] = $linea_calculo_cos;
 
-                if($_SESSION['compra_linea_tip_bon'][$indice]){
-                    $tipo_item=6;
-                }
-
 				if($tipo_item==9){
                     $linea_preuni=$linea_preuni*1.18;
                     $valor_venta = $linea_preuni*$linea_cantidad;
@@ -469,8 +467,8 @@ if($num_rows>0){
                 }elseif ($tipo_item==6){
                     $valor_venta = $linea_preuni*$linea_cantidad;
                 }elseif ($tipo_item==1){
-                    $valor_venta = $linea_preuni*$linea_cantidad;
-                    $total_opegrav =$total_opegrav+$valor_venta-($valor_venta*($general_des/100));
+                        $valor_venta = $linea_preuni*$linea_cantidad;
+                        $total_opegrav =$total_opegrav+$valor_venta-($valor_venta*($general_des/100));
                 }
 
 
@@ -503,8 +501,13 @@ if($num_rows>0){
                     $total_operaciones_exoneradas += $valor_venta_x_item;
 
                 }elseif ($tipo_item==1){
-                    $igv_linea = ($valor_venta * $linea_calculo_des) * 0.18;
-                    $total_operaciones_gravadas += $valor_venta_x_item;
+                    if($_POST['cmb_com_doc']=='19'){
+                        $igv_linea=0;
+                        $total_operaciones_gravadas += $valor_venta_x_item;
+                    }else{
+                        $igv_linea = ($valor_venta * $linea_calculo_des) * 0.18;
+                        $total_operaciones_gravadas += $valor_venta_x_item;
+                    }
                 }
                 $linea_importe= $linea_calculo_cos * $linea_cantidad;
 
@@ -641,13 +644,20 @@ if($num_rows2>0)foreach($_SESSION['servicio_car'][$unico_id] as $indice=>$cantid
 </table>
 
 <?php
+
 $igv_total = $ope_gravadas_total*0.18;
 $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
 
 $total_operaciones_exoneradas = $total_operaciones_exoneradas-$total_operaciones_exoneradas*($general_des/100);
 $total_operaciones_gravadas=$total_operaciones_gravadas-$total_operaciones_gravadas*($general_des/100) + $ajuste_positivo-$ajuste_negativo;
 $total_operaciones_gravadas_productos=$total_operaciones_gravadas;
-$igv_total_gravados=$total_operaciones_gravadas*18/100;
+if($_POST['cmb_com_doc']=='19'){
+    $igv_total_gravados=0;
+}else{
+    $igv_total_gravados=$total_operaciones_gravadas*18/100;
+}
+
+
 $importe_total_venta = $total_operaciones_exoneradas + $total_operaciones_gravadas + $igv_total_gravados;
 $descuento_global = $valor_venta_x_item_total*($general_des/100);
 $descuento_total=$descuento_global+$desc_x_item_total;
@@ -678,7 +688,7 @@ foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad) {
     $costo_unitario=$costo_total/$linea_cantidad;
     ?>
     <script>
-        cambiar_costo_unitario(<?php echo  formato_decimal($costo_unitario,3);?>, <?php echo  $cont;?>);
+        //cambiar_costo_unitario(<?php //echo  formato_decimal($costo_unitario,3);?>//, <?php //echo  $cont;?>//);
     </script>
     <?php
     $cont++;
@@ -742,25 +752,25 @@ foreach($_SESSION['compra_car'] as $indice=>$linea_cantidad) {
 <table border="0" align="right" cellpadding="0" cellspacing="0">
   <tr>
     <td width="110">VALOR VENTA</td>
-    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_decimal($total_operaciones_gravadas, 3)?>" readonly style="text-align:right"></td>
+    <td width="140" align="right"><input type="text" name="txt_com_valven" id="txt_com_valven" value="<?php echo formato_decimal($total_operaciones_gravadas, 2)?>" readonly style="text-align:right"></td>
   </tr>
   <tr>
     <td><label for="txt_com_igv">IGV</label></td>
-    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_decimal($igv_total_gravados,3)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_igv" id="txt_com_igv" value="<?php echo formato_decimal($igv_total_gravados,2)?>" readonly style="text-align:right"></td>
   </tr>
     <tr>
         <td width="110">OPE. EXO.</td>
-        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_decimal($total_operaciones_exoneradas,3)?>" readonly style="text-align:right"></td>
+        <td width="140" align="right"><input type="text" name="txt_com_opexo" id="txt_com_opexo" value="<?php echo formato_decimal($total_operaciones_exoneradas,2)?>" readonly style="text-align:right"></td>
     </tr>
   <tr>
   <?php if($_POST['com_tipper']==1){?>
     <td><label for="txt_com_per">PERCEPCION(2%)</label></td>
-    <td align="right"><input type="text" name="txt_com_per" id="txt_com_per" value="<?php echo formato_decimal($total_percepcion, 3)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_per" id="txt_com_per" value="<?php echo formato_decimal($total_percepcion, 2)?>" readonly style="text-align:right"></td>
   </tr>
   <?php }?>
   <tr>
     <td><label for="txt_com_tot"><strong>TOTAL</strong></label></td>
-    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" value="<?php echo formato_decimal($importe_total_venta, 3)?>" readonly style="text-align:right"></td>
+    <td align="right"><input type="text" name="txt_com_tot" id="txt_com_tot" class="totales" value="<?php echo formato_decimal($importe_total_venta, 2)?>" readonly style="text-align:right"></td>
   </tr>
     <input type="hidden" name="hdd_cant_filas" id="hdd_cant_filas" value="<?php echo $num_rows ?>">
 </table>

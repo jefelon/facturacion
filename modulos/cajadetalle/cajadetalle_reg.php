@@ -80,7 +80,8 @@ if($_POST['action_caja']=="insertar") {
             fechahora_mysql($_POST['txt_fec_ape']),
             NULL,
             $_POST['txt_mon_inicial'],
-            1
+            1,
+            $_SESSION['usuario_id']
         );
 
         $oCaja->modificar_estado($caja_venta, 1);
@@ -102,7 +103,6 @@ if($_POST['action_caja']=="actualizar") {
         //insertamos venta
         $oCajadetalle->modificar_fec_cierre(
             $_POST['hdd_cajadetalle_id'],
-            fechahora_mysql($_POST['txt_fec_cie']),
             0,
             $_POST['txt_mon_cie']
         );

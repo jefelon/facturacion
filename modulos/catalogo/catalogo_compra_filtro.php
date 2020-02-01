@@ -147,7 +147,8 @@ $(function() {
 }*/
 </style>
 <fieldset><legend>Filtro de producto</legend>
-
+  <label for="txt_fil_pro_cod">Código:</label>
+  <input name="txt_fil_pro_cod" type="text" id="txt_fil_pro_cod" size="20">
   <label for="txt_fil_pro_nom">Nombre:</label>
   <input name="txt_fil_pro_nom" type="text" id="txt_fil_pro_nom" size="50">
   

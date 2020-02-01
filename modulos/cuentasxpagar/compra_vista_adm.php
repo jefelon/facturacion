@@ -166,7 +166,7 @@ $(function() {
 	compra_filtro();
 	
 	$( "#div_compra_form" ).dialog({
-		title:'Información de Compra | <?php echo $_SESSION['empresa_nombre']?>',
+		title:"Información de Compra | <?php echo $_SESSION['empresa_nombre']?>",
 		autoOpen: false,
 		resizable: false,
 		height: 600,

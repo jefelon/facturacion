@@ -1,14 +1,6 @@
 <?php
 session_start();
-if ($_SESSION["autentificado"] != "SI") {
-    if ($_SESSION["autentificado2"] == "SI") {
-
-    }
-    else{
-        header("location: ../../index.php");
-        exit();
-    }
-}
+if($_SESSION["autentificado"]!= "SI"){ header("location: ../../index.php"); exit();}
 require_once ("../../config/Cado.php");
 require_once ("../../config/datos.php");
 require_once ("../empresa/cEmpresa.php");
@@ -46,6 +38,11 @@ require_once("../formatos/numletras.php");
 $rs = $oFormula->consultar_dato_formula('VEN_IMP_DIR');
 $dt = mysql_fetch_array($rs);
 $imprimir_direccion = $dt['tb_formula_dat'];
+mysql_free_result($rs);
+
+$rs = $oFormula->consultar_dato_formula('NUM_COPIAS');
+$dt = mysql_fetch_array($rs);
+$num_copias = $dt['tb_formula_dat'];
 mysql_free_result($rs);
 
 $pager_formato='format="350x90" orientation="P" style="font-size: 9pt; font-family:'.$tipo_de_letra.'"';
@@ -107,7 +104,7 @@ $tot  =$dt['tb_venta_tot'];
 
 $lab1 =$dt['tb_venta_lab1'];
 
-$usu_id =$dt['tb_usuario_id'];
+$usu_id =$dt['tb_vendedor_id'];
 mysql_free_result($dts);
 
 
@@ -135,7 +132,7 @@ while($dt = mysql_fetch_array($dts))
     $toisc="0.00";
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
-    $moneda=1;
+    $moneda=$dt["cs_tipomoneda_id"];
 
 
     $estsun=$dt['tb_venta_estsun'];
@@ -152,6 +149,19 @@ while($dt = mysql_fetch_array($dts))
     $lab3=$dt['tb_venta_lab3'];
 
 }
+
+
+if($moneda==1){
+    $moneda  = "SOLES";
+    $mon = "S/ ";
+    $monedaval=1;
+}
+if($moneda==2){
+    $moneda  = "DOLARES";
+    $mon = "$ ";
+    $monedaval=2;
+}
+
 
 //pagos
 $rws1=$oVentapago->mostrar_pagos($ven_id);
@@ -301,7 +311,7 @@ if($impresion=='pdf')ob_start();
                 <!-- </tr> -->
                 <tr>
                     <td colspan="4" class="centrado" >
-                        <img src="<?php echo $empresa_logo ?>" alt="" width="auto" height="auto">
+                        <img src="<?php echo $empresa_logo ?>" alt="" width="200" height="auto">
                     </td>
                 </tr>
                 <tr>
@@ -400,32 +410,19 @@ if($impresion=='pdf')ob_start();
                             <tbody>
                             <tr>
                                 <td colspan="2" class="izquierda negrita" >TOTAL:</td>
-                                <td colspan="2"  class="derecha negrita" style="text-align: right;">S/ <?php echo  formato_money($tot)?></td>
+                                <td colspan="2"  class="derecha negrita" style="text-align: right;"><?php echo $mon . formato_money($tot)?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot)?></td>
+                                <td colspan="4" class="izquierda pt-5">SON: <?php echo numtoletras($tot,$monedaval)?></td>
                             </tr>
                             <tr>
                                 <td colspan="4" class="centrado py-5" ><?php echo $digval ?></td>
                             </tr>
                             <tr>
-                                <td colspan="4" style="width: 80mm" class="centrado"><b>SERVICIOS:</b></td>
+                                <td colspan="4" style="width: 80mm" class="centrado">Canjear por comprobante de pago</td>
                             </tr>
                             <tr>
-                                <td colspan="4" class="centrado" style="border: 1px dotted #000">Asesoría Contable,
-                                        Asesoría Laboral,
-                                        Auditorías,
-                                        Declaraciones Juradas,
-                                        Llevado de Contabilidad,
-                                        PDT,
-                                        PLAME
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" style="width: 80mm" class="centrado" style="height:10mm">"Canjear por comprobante de pago"</td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" class="centrado"><h5>GRACIAS POR SU PREFERENCIA</h5></td>
+                                <td colspan="4" class="centrado"><h5>GRACIAS POR LA COMPRA</h5></td>
                             </tr>
                             </tbody>
                         </table>
@@ -457,8 +454,12 @@ if($impresion=='pdf')
 
         $html_d=$_GET['vuehtml'];
         //$html_d=1;
-
-        $html2pdf->writeHTML($content, isset($html_d));
+        $copias = 1;
+        while ($copias<=$num_copias)
+        {
+            $html2pdf->writeHTML($content, isset($html_d));
+            $copias++;
+        }
         $html2pdf->pdf->IncludeJS("print(true);");
         //$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
 

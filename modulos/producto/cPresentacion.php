@@ -31,6 +31,15 @@ class cPresentacion{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrar_por_catalogo($cat_id){
+        $sql="SELECT pr.tb_producto_id FROM tb_presentacion pr 
+        INNER join tb_producto p  on pr.tb_producto_id=p.tb_producto_id
+        INNER join tb_catalogo c  on c.tb_presentacion_id=pr.tb_presentacion_id
+        WHERE c.tb_catalogo_id=$cat_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_por_producto_res($pro_id){
 	$sql="SELECT * 
 	FROM tb_presentacion

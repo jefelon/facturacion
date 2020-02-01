@@ -1,5 +1,4 @@
 <?php
-session_start();
 class cVenta{
 	function mostrar_filtro($fec1,$doc_id,$ser,$cor,$mon){
 //	$cor=str_pad($cor,8, '0', STR_PAD_LEFT);
@@ -7,6 +6,7 @@ class cVenta{
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	WHERE v.tb_venta_fec = '$fec1'
 	AND v.tb_documento_id = '$doc_id'
 	AND v.tb_venta_ser = '$ser'
@@ -18,14 +18,13 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-
-    function mostrar_filtro_cui($cui, $fec1, $fec2,$doc_id,$est,$cli_id){
+    function mostrar_filtro_cui($cui, $fec1,$doc_id,$est,$cli_id){
         $sql="SELECT * 
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
-	WHERE tb_venta_fec BETWEEN '$fec1' AND '$fec2' AND c.tb_cliente_cui = '$cui' AND c.tb_cliente_id = $cli_id
+	WHERE tb_venta_fec = '$fec1' AND c.tb_cliente_cui = '$cui' AND c.tb_cliente_id = $cli_id
 	";
         if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
         if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
@@ -35,8 +34,6 @@ class cVenta{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
-
-
 	function mostrarUno($id){
 	$sql="SELECT * 
 	FROM tb_venta v
@@ -58,7 +55,7 @@ class cVenta{
 	LEFT JOIN tb_producto p ON pr.tb_producto_id = p.tb_producto_id
 	LEFT JOIN tb_marca m ON p.tb_marca_id = m.tb_marca_id
 	LEFT JOIN tb_categoria cg ON p.tb_categoria_id = cg.tb_categoria_id
-	LEFT JOIN tb_unidad un ON ct.tb_unidad_id_bas = un.tb_unidad_id 
+	LEFT JOIN tb_unidad un ON ct.tb_unidad_id_equ=un.tb_unidad_id
 	
 	LEFT JOIN tb_servicio s ON vd.tb_servicio_id = s.tb_servicio_id
 	

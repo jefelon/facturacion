@@ -257,7 +257,8 @@ function gasto_form(act,idf){
 			glosa:	'<?php echo 'PAGO DE '.$doc_abr.' '.$numdoc?>',
 			//com_tot: '<?php echo $tot*$tipcam?>',
 			com_tot: $('#gasto_res').val(),
-			vista: 'gasto_tabla'
+			vista: 'gasto_tabla',
+            prov_id: $('#hdd_com_pro_id').val()
 		}),
 		beforeSend: function() {
 			//$('#msj_gasto').hide();

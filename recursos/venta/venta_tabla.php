@@ -9,12 +9,13 @@ require_once ("../../modulos/formatos/numletras.php");
 require_once ("../../modulos/formatos/formato.php");
 require_once ("../../modulos/empresa/cEmpresa.php");
 $oEmpresa = new cEmpresa();
-require_once ("../../modulos/usuarios/cUsuario.php");
-$oUsuario = new cUsuario();
 
+require_once("../../modulos/formula/cFormula.php");
+$oFormula = new cFormula();
 
-require_once ("../../modulos/lote/cLote.php");
-$oLote = new cLote();
+$rs = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
+$dt = mysql_fetch_array($rs);
+$dato = $dt['tb_formula_dat'];
 
 $dts=$oEmpresa->mostrarUno(1);
 $dt = mysql_fetch_array($dts);
@@ -24,8 +25,7 @@ $direccion_defecto = $dt['tb_empresa_dir'];
 $contacto_empresa = "Teléfono:" . $dt['tb_empresa_tel'] ."Correo:" . $dt['tb_empresa_ema'];
 $empresa_logo = '../../modulos/empresa/'.$dt['tb_empresa_logo'];
 mysql_free_result($dts);
-
-$dts1=$oVenta->mostrar_filtro_cui($_SESSION['cliente_cui'],fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['cmb_fil_ven_est'],$_SESSION['cliente_id']);
+$dts1=$oVenta->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),$_POST['cmb_fil_ven_doc'],$_POST['txt_fil_ser'],$_POST['txt_fil_cor'],$_POST['txt_fil_mon']);
 $num_rows= mysql_num_rows($dts1);
 
 ?>
@@ -65,24 +65,24 @@ $num_rows= mysql_num_rows($dts1);
     }
 </style>
 <?php
-if($num_rows>0){
-    ?>
-    <table cellspacing="1" id="tabla_venta" class="tablesorter">
-        <thead>
-        <tr>
-            <th align="center">ALUMNO</th>
-            <th align="center">TIPO DOCUMENTO</th>
-            <th align="center">DOCUMENTO</th>
-            <th align="center">MONEDA</th>
-            <th align="center">IMPORTE TOTAL</th>
-            <th align="center">FECHA EMISIÓN</th>
-            <th align="center">ESTADO DOC.</th>
-            <th>&nbsp;</th>
-        </tr>
-        </thead>
+      if($num_rows>0){
+      ?>
+        <table cellspacing="1" id="tabla_venta" class="tablesorter">
+            <thead>
+                <tr>
+                  <th align="center">CLIENTE</th>
+                  <th align="center">TIPO DOCUMENTO</th>
+                  <th align="center">DOCUMENTO</th>
+                  <th align="center">MONEDA</th>
+                  <th align="center">IMPORTE TOTAL</th>
+                  <th align="center">FECHA EMISIÓN</th>
+                  <th align="center">ESTADO DOC.</th>
+                  <th>&nbsp;</th>
+                </tr>
+            </thead>
 
-        <tbody>
-        <?php
+            <tbody>
+                <?php
         while($dt1 = mysql_fetch_array($dts1)){
             if($dt1['tb_venta_est']=='CANCELADA'){
                 $total_ventas+=$dt1['tb_venta_tot'];
@@ -116,8 +116,21 @@ if($num_rows>0){
                         $doc_nom=$dt1['tb_documento_nom'];
                         if($doc_nom=='FACTURA')$archivo_destino='../../modulos/venta/venta_impresion_gra_factura.php';
                         if($doc_nom=='BOLETA')$archivo_destino='../../modulos/venta/venta_impresion_gra_boleta.php';
-                        if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
-                        if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+                        if($doc_nom=='FACTURA ELECTRONICA'){
+                            if($dato=='TICKET'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_facturaexo_mat.php';
+                            }elseif ($dato=='A4'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_facturaexo_mat_a4.php';
+                            }
+                        }
+
+                        if($doc_nom=='BOLETA ELECTRONICA'){
+                            if($dato=='TICKET'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_boleta_mat.php';
+                            }elseif ($dato=='A4'){
+                                $archivo_destino.='../../modulos/venta/venta_cpeimp_facturaexo_mat_a4.php';
+                            }
+                        }
                         if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../../modulos/venta/venta_cpeimp_nota_mat.php';
 
                         $xml="";

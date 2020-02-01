@@ -102,7 +102,18 @@ function cmb_ven_doc()
 		}
 	});
 }
+    function ComboAno(){
 
+        var d = new Date();
+        var n = d.getFullYear();
+        var select = document.getElementById("cmb_fil_ven_y");
+        for(var i = n; i >= 2015; i--) {
+            var opc = document.createElement("option");
+            opc.text = i;
+            opc.value = i;
+            select.add(opc);
+        }
+    }
 $(function() {
 	
 	var dates = $( "#txt_fil_ven_fec1, #txt_fil_ven_fec2" ).datepicker({
@@ -123,6 +134,7 @@ $(function() {
 	});
 	
 	//cmb_fil_cli_id();
+    ComboAno();
 	cmb_ven_doc();
 	cmb_fil_ven_ven();
 	cmb_punven_id(<?php echo $punven_id?>);
@@ -177,8 +189,6 @@ $(function() {
     </select>-->
     <label for="cmb_fil_ven_y">Año:</label>
 	<select name="cmb_fil_ven_y" id="cmb_fil_ven_y">
-        <option value="2018" selected="selected">2018</option>
-	  <option value="2017">2017</option>
 
     </select>
     

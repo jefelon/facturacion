@@ -10,6 +10,7 @@ require_once("../proveedor/cProveedor.php");
 $oProveedor = new cProveedor();
 
 if($_POST['action']=="insertar"){
+    $fecreg=date('d-m-Y');
     $fec=date('d-m-Y');
     $dias=0;
     $fecven=date('d-m-Y');
@@ -20,6 +21,7 @@ if($_POST['action']=="insertar"){
 if($_POST['action']=="editar"){
     $dts= $oCompra->mostrarUno($_POST['com_id']);
     $dt = mysql_fetch_array($dts);
+    $fecreg	=mostrarFecha($dt['tb_compra_reg']);
     $fec	=mostrarFecha($dt['tb_compra_fec']);
     $fecven	=mostrarFecha($dt['tb_compra_fecven']);
 
@@ -46,6 +48,9 @@ if($_POST['action']=="editar"){
     $alm_id	=$dt['tb_almacen_id'];
     $est	=$dt['tb_compra_est'];
     $numorden	=$dt['tb_compra_orden'];
+    $tiporenta_id	=$dt['tb_tiporenta_id'];
+    $tipNot=$dt['tb_compra_tip_nota'];
+    $tipDoc=$dt['tb_documento_id'];
     mysql_free_result($dts);
 }
 ?>
@@ -79,7 +84,7 @@ if($_POST['action']=="editar"){
 
 
     $( "#txt_com_fec,.txt_com_fec" ).datepicker({
-        minDate: "-1Y",
+        minDate: "-2Y",
         maxDate:"+0D",
         yearRange: 'c-0:c+0',
         changeMonth: true,
@@ -96,6 +101,19 @@ if($_POST['action']=="editar"){
             if (e.target.value.length == 2) e.target.value = e.target.value + "-";
             if (e.target.value.length == 5) e.target.value = e.target.value + "-";
         }
+    });
+    $( "#txt_com_fecreg" ).datepicker({
+        minDate: "-1Y",
+        maxDate:"+0D",
+        yearRange: 'c-0:c+0',
+        changeMonth: true,
+        changeYear: false,
+        dateFormat: 'dd-mm-yy',
+        //altField: fecha,
+        //altFormat: 'yy-mm-dd',
+        showOn: "button",
+        buttonImage: "../../images/calendar.gif",
+        buttonImageOnly: true
     });
 
     $( "#txt_com_fecven" ).datepicker({
@@ -253,7 +271,8 @@ if($_POST['action']=="editar"){
                 cmb_afec_id: 	$('#cmb_afec_id_'+idf).val(),
                 com_tipper:	tipper,
                 unico_id: $('#unico_id').val(),
-                imp_dol: imp_dol
+                imp_dol: imp_dol,
+                cmb_com_doc: $('#cmb_com_doc').val()
 
             }),
             beforeSend: function() {
@@ -618,7 +637,25 @@ if($_POST['action']=="editar"){
             d.valant = val
         }
     }
+    function cmb_tiporenta_id()
+    {
+        $.ajax({
+            type: "POST",
+            url: "cmb_tiporenta_id.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                tiporenta_id: '<?php echo $tiporenta_id; ?>'
+            }),
+            beforeSend: function() {
+                $('#cmb_tiporenta_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_tiporenta_id').html(html);
+            }
+        });
 
+    }
 
 
     $(function() {
@@ -629,7 +666,7 @@ if($_POST['action']=="editar"){
         });
         $('#txt_com_fecven').keyup(function(e) {
             var patron = new Array(2, 2, 4);
-                mascara(this,'-',patron,false);
+            mascara(this,'-',patron,false);
         });
 
         $('#cmb_com_doc').change(function(e) {
@@ -640,6 +677,7 @@ if($_POST['action']=="editar"){
 
         cmb_com_doc();
         cmb_com_alm_id();
+        cmb_tiporenta_id();
 
         <?php
         if($_POST['action']=="insertar"){
@@ -682,10 +720,14 @@ if($_POST['action']=="editar"){
                 $("#txt_com_num_nota").attr('disabled', true);
                 $("#cmb_com_tip").attr('disabled', true);
             }
-            if ($(this).val()=='19') {
+            if ($(this).val()=='19' || $(this).val()=='23') {
+                $("#cmb_com_tippre").val('2');
                 $('#doc_compra_serv').css('display', 'block');
+                $('.tipo_renta').css('display', 'block');
             }else{
+                $("#cmb_com_tippre").val('1');
                 $('#doc_compra_serv').css('display', 'none');
+                $('.tipo_renta').css('display', 'none');
             }
         });
 
@@ -698,6 +740,47 @@ if($_POST['action']=="editar"){
             }
 
         });
+
+        $("#cmb_com_doc").change(function() {
+            if($('#cmb_com_doc').val()=='20' )//NOTA DE CREDITO
+            {
+                var select = $('#cmb_com_tip');
+                var newOptions = {
+                    '1' : 'Anulación de la operación',
+                    '2' : 'Anulación por error en el RUC',
+                    '3' : 'Corrección por error en la descripción',
+                    '4' : 'Descuento global',
+                    '5' : 'Descuento por ítem',
+                    '6' : 'Devolución total',
+                    '7' : 'Devolución por ítem',
+                    '8' : 'Bonificación',
+                    '9' : 'Disminución en el valor'
+                };
+                $('option', select).remove();
+                $.each(newOptions, function(text, key) {
+                    var option = new Option(key, text);
+                    select.append($(option));
+                });
+            }
+            if($('#cmb_com_doc').val()=='21' )//NOTA DE DEBITO
+            {
+                var select = $('#cmb_com_tip');
+                var newOptions = {
+                    '1' : 'Intereses por mora',
+                    '2' : 'Aumento en el valor',
+                    '3' : 'Penalidades/ otros conceptos',
+                    '4' : 'Ajustes de operaciones de exportación',
+                    '5' : 'Ajustes afectos al IVAP'
+                };
+                $('option', select).remove();
+                $.each(newOptions, function(text, key) {
+                    var option = new Option(key, text);
+                    select.append($(option));
+                });
+            }
+        });
+
+
 
         <?php
         }
@@ -995,7 +1078,9 @@ if($_POST['action']=="editar"){
 
     <fieldset>
         <legend>Datos Principales</legend>
-        <label for="txt_com_fec">Fecha:</label>
+        <label for="txt_com_fecreg">Fecha Reg:</label>
+        <input name="txt_com_fecreg" placeholder="dd-mm-aaaa" class="fecha" id="txt_com_fecreg"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fecreg?>" size="10" maxlength="10">
+        <label for="txt_com_fec">Fecha Doc:</label>
         <input name="txt_com_fec" placeholder="dd-mm-aaaa" class="fecha" id="txt_com_fec"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fec?>" size="10" maxlength="10">
         <label for="txt_fecven_dias">Dias:</label>
         <input name="txt_fecven_dias" type="text" class="dias" id="txt_fecven_dias" value="<?php echo $dias?>" size="2" maxlength="5">
@@ -1003,13 +1088,12 @@ if($_POST['action']=="editar"){
         <input name="txt_com_fecven" placeholder="dd-mm-aaaa"  type="text" class="fecha" id="txt_com_fecven"  pattern="\d{1,2}/\d{1,2}/\d{4}" value="<?php echo $fecven?>" size="10" maxlength="10">
 
         <label for="cmb_com_doc">Documento:</label>
-        <select name="cmb_com_doc" id="cmb_com_doc">
+        <select name="cmb_com_doc" id="cmb_com_doc" style="width: 140px">
         </select>
         <label for="txt_com_numdoc">N° Doc:</label>
-        <input style="width:90px" type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
-        <br />
+        <input style="width:80px" type="text" name="txt_com_numdoc" id="txt_com_numdoc"  value="<?php echo $numdoc?>">
         <label for="txt_com_numorden">N° Orden:</label>
-        <input style="width:90px" type="text" name="txt_com_numorden" id="txt_com_numorden"  value="<?php echo $numorden?>">
+        <input style="width:80px" type="text" name="txt_com_numorden" id="txt_com_numorden"  value="<?php echo $numorden?>">
         <?php /*?>
     <label for="chk_com_tipper">Percepción(2%)</label><input name="chk_com_tipper" type="checkbox" id="chk_com_tipper" value="1" <?php if($tipper==1)echo 'checked'?>><?php */?>
         <?php
@@ -1037,6 +1121,11 @@ if($_POST['action']=="editar"){
             <option value="CREDITO" <?php if($est=='CREDITO')echo 'selected'?>>CREDITO</option>
             <option value="CONTADO" <?php if($est=='CONTADO')echo 'selected'?>>CONTADO</option>
         </select>
+        <fieldset class="tipo_renta" style="display: none;">
+            <legend>Tipo de Renta</legend>
+            <select name="cmb_tiporenta_id" id="cmb_tiporenta_id">
+            </select>
+        </fieldset>
         <?php if($_POST['action']=='insertar'){?>
             <label for="cmb_com_tippre">Mostrar  con:</label>
             <select name="cmb_com_tippre" id="cmb_com_tippre">
@@ -1046,8 +1135,9 @@ if($_POST['action']=="editar"){
             <div id="nota-debito-credito" style="display:none;">
                 <label for="cmb_com_tip">Tipo:</label>
                 <select name="cmb_com_tip" id="cmb_com_tip">
-                    <option value="6" selected="selected">DEVOLUCIÓN TOTAL</option>
-                    <option value="9" selected="selected">DISMINUICIÓN EN EL VALOR</option>
+                    <option value="0" selected="selected">-</option>
+                    <option value="6">DEVOLUCIÓN TOTAL</option>
+                    <option value="9">DISMINUICIÓN EN EL VALOR</option>
                 </select>
                 <label for="txt_com_ser_nota">Serie:</label>
                 <input name="txt_com_ser_nota" type="text" id="txt_com_ser_nota" disabled
@@ -1058,9 +1148,52 @@ if($_POST['action']=="editar"){
                        style="text-align:right; font-size:14px" value=""
                        maxlength="8" size="10">
             </div>
+            <div id="tipobase" style="width: 45%">
+                <label for="cmb_baseimp_tip">Tipo de base imponible - IGV:</label>
+                <select name="cmb_baseimp_tip" id="cmb_baseimp_tip">
+                    <option value="1" selected="selected" title="Base imponible de las adquisiciones gravadas que dan derecho a crédito fiscal y/o saldo a favor por exportación, destinadas exclusivamente a operaciones gravadas y/o de exportación
+                    ">BI1 - CRÉDITO FIZCAL
+                    </option>
+                    <option value="2" title="Base imponible de las adquisiciones gravadas que dan derecho a crédito fiscal y/o saldo a favor por exportación, destinadas a operaciones gravadas y/o de exportación y a operaciones no gravadas
+                    ">BI2 - PRÓRRATA
+                    </option>
+                    <option value="3" title="Base imponible de las adquisiciones gravadas que no dan derecho a crédito fiscal y/o saldo a favor por exportación, por no estar destinadas a operaciones gravadas y/o de exportación.
+                    ">BI3 - COSTO/GASTO
+                    </option>
+                </select>
+            </div>
         <?php }?>
         <?php //if($_POST['action']=='editar') echo 'COMPRA: '.$est?>
         <?php if($_POST['action']=='editar'){?>
+            <div id="nota-debito-credito">
+                <label for="cmb_com_tip">Tipo:</label>
+                <select name="cmb_com_tip" id="cmb_com_tip" disabled>
+                    <?php if($tipDoc==20) {?>
+                    <option value="1" <?php if ($tipNot==1){ echo "selected";}?>>Anulación de la operación</option>
+                    <option value="2" <?php if ($tipNot==2){ echo "selected";}?>>Anulación por error en el RUC</option>
+                    <option value="3" <?php if ($tipNot==3){ echo "selected";}?>>Corrección por error en la descripción</option>
+                    <option value="4" <?php if ($tipNot==4){ echo "selected";}?>>Descuento global</option>
+                    <option value="5" <?php if ($tipNot==5){ echo "selected";}?>>Descuento por ítem</option>
+                    <option value="6" <?php if ($tipNot==6){ echo "selected";}?>>Devolución total</option>
+                    <option value="7" <?php if ($tipNot==7){ echo "selected";}?>>Devolución por ítem</option>
+                    <option value="8" <?php if ($tipNot==8){ echo "selected";}?>>Bonificación</option>
+                    <option value="9" <?php if ($tipNot==9){ echo "selected";}?>>Disminución en el valor</option>
+                    <?php } else if($tipDoc==21){ ?>
+                    <option value="1" <?php if ($tipNot==1){ echo "selected";}?>>Intereses por mora</option>
+                    <option value="2" <?php if ($tipNot==2){ echo "selected";}?>>Aumento en el valor</option>
+                    <option value="3" <?php if ($tipNot==3){ echo "selected";}?>>Penalidades/ otros conceptos</option>
+                    <?php } ?>
+
+                </select>
+                <label for="txt_com_ser_nota">Serie:</label>
+                <input name="txt_com_ser_nota" type="text" id="txt_com_ser_nota" disabled
+                       style="text-align:right; font-size:14px" value=""
+                       maxlength="4" size="6">
+                <label for="txt_com_num_nota">Número:</label>
+                <input name="txt_com_num_nota" type="text" id="txt_com_num_nota" disabled
+                       style="text-align:right; font-size:14px" value=""
+                       maxlength="8" size="10">
+            </div>
             <a id="btn_compra_precio_form" href="#precio" onClick="compra_precio_form('insertar','<?php echo $_POST['com_id']?>')">Actualizar Precios</a>
         <?php }?>
 
@@ -1078,9 +1211,9 @@ if($_POST['action']=="editar"){
         <label for="txt_com_pro_doc">RUC/DNI:</label>
         <input type="text" id="txt_com_pro_doc" name="txt_com_pro_doc" size="11" value="<?php echo $pro_doc?>" />
         <label for="txt_com_pro">Proveedor:</label>
-        <input type="text" id="txt_com_pro_nom" name="txt_com_pro_nom" size="40" value="<?php echo $pro_nom?>" />
+        <input type="text" id="txt_com_pro_nom" name="txt_com_pro_nom" size="39" value="<?php echo $pro_nom?>" />
         <label for="txt_com_pro_dir">Dirección:</label>
-        <input type="text" id="txt_com_pro_dir" name="txt_com_pro_dir" size="40" value="<?php echo $pro_dir?>" disabled="disabled"/>
+        <input type="text" id="txt_com_pro_dir" name="txt_com_pro_dir" size="39" value="<?php echo $pro_dir?>" disabled="disabled"/>
     </fieldset>
     <?php
     if($_POST['action']=="insertar"){
@@ -1193,74 +1326,84 @@ if($_POST['action']=="editar"){
                                             <td align="right" nowrap="" title="Importe Dolares"><input type="text"
                                                                                                        class="moneda"
                                                                                                        name="imp_dol[]"
-                                                                                                       value="0.00"></td>
+                                                                                                       placeholder="0.00"></td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text"
                                                                                                      class="moneda"
                                                                                                      name="imp_sol[]"
-                                                                                                     value="0.00"></td>
+                                                                                                     placeholder="0.00"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice" value="0"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text"  name="fec_ser[]" class="txt_com_fec fecha" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
-                                            <td title="Detalle de Dua"><input type="text" value="F066-35053"
-                                                                               name="dua[]"></td>
+                                            <td title="Detalle de Dua"><input type="text" placeholder="F066-35053"
+                                                                              name="dua[]"></td>
                                             <input type="hidden" name="proveedor[]" value="10" >
                                             <td align="right">ADVALOREM ADUANAS</td>
                                             <input type="hidden" name="servicio[]" value="10">
                                             <td align="right" nowrap="" title="Servicio">ADVALOREM</td>
                                             <td align="right" nowrap="" title="Importe Dolares"><input id="imp_dol1"
-                                                                                                        type="text"
+                                                                                                       type="text"
                                                                                                        class="moneda"
                                                                                                        name="imp_dol[]"
-                                                                                                       value="5.89">
+                                                                                                       placeholder="5.89">
                                             </td>
                                             <td align="right" nowrap="" title="Importe Soles"><input type="text"
                                                                                                      class="moneda"
                                                                                                      name="imp_sol[]"
-                                                                                                     value="19.00"></td>
+                                                                                                     placeholder="19.00"></td>
+                                            <td align="right">
+                                                <input name="chk_invoice[]" type="checkbox" id="chk_invoice1" value="1">
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
-                                            <td title="Detalle de Dua"><input type="text" value="F066-35053" name="dua[]"></td>
+                                            <td title="Detalle de Dua"><input type="text" placeholder="F066-35053" name="dua[]"></td>
                                             <input type="hidden" name="proveedor[]" value="11">
                                             <td align="right" nowrap="" title="Proveedor">TALMA SERVICIOS AEROPORTUARIOS</td>
                                             <input type="hidden" name="servicio[]" value="11">
                                             <td align="right" nowrap="" title="Servicio">ALMACENAJE, ESTIBA</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"> <input id="imp_dol2" type="text" class="moneda" name="imp_dol[]" value="150.60"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="485.68"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"> <input id="imp_dol2" type="text" class="moneda" name="imp_dol[]" placeholder="150.60"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="485.68"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice2" value="2"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
-                                            <td title="Detalle de Dua"><input type="text" value="F003-7747" name="dua[]"></td>
+                                            <td title="Detalle de Dua"><input type="text" placeholder="F003-7747" name="dua[]"></td>
                                             <input type="hidden" name="proveedor[]" value="12">
                                             <td align="right" nowrap="" title="Proveedor">SCHENKER PERU SRL</td>
                                             <input type="hidden" name="servicio[]" value="12">
                                             <td align="right" nowrap="" title="Servicio">TRAMITE DOCUMENTARIO</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" id="imp_dol3" class="moneda" name="imp_dol[]" value="110.00"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="354.75"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" id="imp_dol3" class="moneda" name="imp_dol[]" placeholder="110.00"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="354.75"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice3" value="3"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
-                                            <td title="Detalle de Dua"><input type="text" value="F001-10637" name="dua[]"></td>
+                                            <td title="Detalle de Dua"><input type="text" placeholder="F001-10637" name="dua[]"></td>
                                             <input type="hidden" name="proveedor[]" value="13">
                                             <td align="right" nowrap="" title="Proveedor">MILLENNIUM AGENES DE ADUANA SAC</td>
                                             <input type="hidden" name="servicio[]" value="13">
                                             <td align="right" nowrap="" title="Servicio">GASTOS OPERATIVOS</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" id="imp_dol4" name="imp_dol[]" value="247.93"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="806.02"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" id="imp_dol4" name="imp_dol[]" placeholder="247.93"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="806.02"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice4" value="4"></td>
                                         </tr>
                                         <tr>
                                             <td title="Fecha"><input type="text" class="txt_com_fec fecha" name="fec_ser[]" size="10" maxlength="10" value="<?php echo $fec?>" readonly></td>
-                                            <td title="Detalle de Dua"><input type="text" value="001-13376" name="dua[]"></td>
+                                            <td title="Detalle de Dua"><input type="text" placeholder="0001-13376" name="dua[]"></td>
                                             <input type="hidden" name="proveedor[]" value="14">
                                             <td align="right" nowrap="" title="Proveedor">PACIFICO DEL SUR SAC</td>
                                             <input type="hidden" name="servicio[]" value="14">
                                             <td align="right" nowrap="" title="Servicio">TRANSPORTE LM-AQP</td>
-                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" name="imp_dol[]" id="imp_dol5" value="15.80"> </td>
-                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" value="50.85"></td>
+                                            <td align="right" nowrap="" title="Importe Dolares"><input type="text" class="moneda" name="imp_dol[]" id="imp_dol5" placeholder="15.80"> </td>
+                                            <td align="right" nowrap="" title="Importe Soles"><input type="text" class="moneda" name="imp_sol[]" placeholder="50.85"></td>
+                                            <td align="right"><input name="chk_invoice[]" type="checkbox" id="chk_invoice5" value="5"></td>
                                         </tr>
                                     <?php }?>
                                     </tbody>
                                 </table>
+    </fieldset>
+
 </form>
 </div>
 </td>
@@ -1272,6 +1415,6 @@ if($_POST['action']=="editar"){
     <td colspan="2">&nbsp;</td>
 </tr>
 </tbody>
-</table></div>
+</table>
 </div>
-</fieldset>
+</div>

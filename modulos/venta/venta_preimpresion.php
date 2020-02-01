@@ -8,9 +8,18 @@ require_once ("../letras/cLetras.php");
 $cLetras = new cLetras();
 require_once ("../guia/cGuia.php");
 $oGuia = new cGuia();
+require_once("../formula/cFormula.php");
+$oFormula = new cFormula();
+
 $dts= $oGuia->mostrarGuiaUno($_POST['ven_id']);
 $chk_guia = mysql_num_rows($dts);
 mysql_free_result($dts);
+
+$rs = $oFormula->consultar_dato_formula('VEN_IMP_FORMATO');
+$dt = mysql_fetch_array($rs);
+$dato = $dt['tb_formula_dat'];
+mysql_free_result($rs);
+
 
 require_once("../formatos/formato.php");
 
@@ -40,9 +49,28 @@ require_once("../formatos/formato.php");
 	//if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_factura.php';
 	//if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta.php';
 
-	if($doc_nom=='FACTURA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_facturaexo_mat.php';
-	if($doc_nom=='BOLETA ELECTRONICA')$archivo_destino='../venta/venta_cpeimp_boleta_mat.php';
-    if($doc_nom=='NOTA DE SALIDA')$archivo_destino='../venta/venta_cpeimp_nota_mat.php';
+    if($doc_nom=='FACTURA ELECTRONICA'){
+        if($dato=='TICKET'){
+            $archivo_destino.='../venta/venta_cpeimp_facturaexo_mat.php';
+        }elseif ($dato=='A4'){
+            $archivo_destino.='../venta/venta_cpeimp_facturaexo_mat_a4.php';
+        }
+    }
+
+    if($doc_nom=='BOLETA ELECTRONICA'){
+        if($dato=='TICKET'){
+            $archivo_destino.='../venta/venta_cpeimp_boleta_mat.php';
+        }elseif ($dato=='A4'){
+            $archivo_destino.='../venta/venta_cpeimp_boleta_mat_a4.php';
+        }
+    }
+    if($doc_nom=='NOTA DE SALIDA'){
+        if($dato=='TICKET'){
+            $archivo_destino.='../venta/venta_cpeimp_nota_mat.php';
+        }elseif ($dato=='A4'){
+            $archivo_destino.='../venta/venta_cpeimp_nota_mat_a4.php';
+        }
+    }
 
 ?>
 <script type="text/javascript">
@@ -55,7 +83,8 @@ $('.btn_canimp').button({
 	text: true
 });
 function imprimir()
-{	
+{
+    $('#for_preimp').attr('action', '<?php echo $archivo_destino?>');
 	$("#for_preimp").submit();
 }
 
