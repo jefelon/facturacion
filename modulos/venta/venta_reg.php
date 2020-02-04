@@ -95,6 +95,8 @@ if($_POST['action']=="postergar")
         $ae_rows = mysql_numrows($aes);
         if($ae_rows<=0){
             $oVenta->modificar_venta_viaje($_POST['viaje_horario_id'],$_POST['asiento_id'],$_POST['viaje_horario_pos']);
+            $oVenta->modificar_venta_viaje($_POST['viaje_horario_id'],$_POST['asiento_id'],$_POST['viaje_horario_pos']);
+            $oAsientoestado->modificar_asiento_estado($_POST['viaje_horario_id'],$_POST['asiento_id'],$_POST['viaje_horario_pos']);
             $oAsientoestado->modificar_asiento_estado($_POST['viaje_horario_id'],$_POST['asiento_id'],$_POST['viaje_horario_pos']);
             echo "Se postergo correctamente";
         }else{

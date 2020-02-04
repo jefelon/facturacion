@@ -1140,6 +1140,68 @@ if($_POST['action']=="editar"){
             }
         });
     }
+    function pasajero_form_i(act,idf,nom,dir,con,tel,est){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/pasajero_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: 		act,
+                cli_id:			idf,
+                cli_nom:		nom,
+                cli_dir:		dir,
+                cli_con:		con,
+                cli_tel:		tel,
+                cli_est:		est,
+                vista:			'hdd_pas_id'
+            }),
+            beforeSend: function(a) {
+                //$('#msj_proveedor').hide();
+                //$("#btn_cmb_pro_id").click(function(e){
+                $("#btn_pas_form_agregar").click(function(e){
+                    //x=e.pageX+5;
+                    //y=e.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_pasajero_form').dialog("open");
+                });
+
+                if(act=='editar'){
+                    if(idf>0){
+                        $("#btn_pas_form_modificar").click(function(e){
+                            //x=e.pageX+5;
+                            //y=e.pageY+15;
+                            //$('#div_cliente_form').dialog({ position: [x,y] });
+                            $('#div_pasajero_form').dialog("open");
+                        });
+                    }
+                    else{
+                        alert('Seleccione Cliente');
+                    }
+                }
+
+                if(act=='editarSunat'){
+                    //x=a.pageX+5;
+                    //y=a.pageY+15;
+                    //$('#div_cliente_form').dialog({ position: [x,y] });
+                    $('#div_pasajero_form').dialog("open");
+                }
+
+                $('#div_pasajero_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_pasajero_form').html(html);
+            },
+            complete: function(){
+                if(act=='insertar' & $('#hdd_ven_pas_id').val()=="")
+                {
+                    $('#txt_pas_doc').val($('#txt_ven_pas_doc').val());
+                    $('#txt_pas_nom').val($('#txt_ven_pas_nom').val());
+                }
+
+            }
+        });
+    }
 
 
 
@@ -1198,6 +1260,32 @@ if($_POST['action']=="editar"){
                 $('#txt_ven_pas_est').val(data.estado);
             }
         });
+    }
+    function venta_cliente_reg(act, idf) {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async: true,
+            dataType: "json",
+            data: ({
+                action_cliente: 'insertar',
+                txt_cli_nom: $('#txt_pasaj_nom').val(),
+                txt_cli_doc: $('#txt_pasaj_dni').val(),
+                rad_cli_tip: $("input[name=rad_cli_tip]:checked").val()
+            }),
+            beforeSend: function () {
+                $('#div_cliente_form').dialog("close");
+                $('#msj_cliente').html("Guardando...");
+                $('#msj_cliente').show(100);
+            },
+            success: function (data) {
+                $('#msj_cliente').html(data.cli_msj);
+                pasajero_cargar_datos(data.cli_id);
+                cliente_cargar_datos(data.cli_id);
+            },
+            complete: function () {
+            }
+        })
     }
 
     function clientecuenta_detalle(ids)
@@ -1500,7 +1588,9 @@ if($_POST['action']=="editar"){
 
                 if($("#hdd_ven_pas_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_pas_id" ).val());
-
+                    if($("#cmb_ven_doc").val()==12){ //solo en boleta electrónica
+                        cliente_cargar_datos($("#hdd_ven_pas_id" ).val());
+                    }
                 }
                 //alert(ui.item.value);
                 // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1519,6 +1609,11 @@ if($_POST['action']=="editar"){
                 $('#hdd_ven_pas_id').change();
                 if($("#hdd_ven_pas_id" ).val()>0){
                     cmb_dir_id($( "#hdd_ven_cli_id" ).val());
+
+                    if($("#cmb_ven_doc").val()==12){ //solo en boleta electrónica
+                        cliente_cargar_datos($("#hdd_ven_pas_id" ).val());
+                    }
+
                 }
                 //alert(ui.item.value);
                 // $('#msj_busqueda_sunat').html("Buscando en Sunat...");
@@ -1864,6 +1959,27 @@ if($_POST['action']=="editar"){
             }
         });
 
+        $( "#div_pasajero_form" ).dialog({
+            title:'Información de Pasajero',
+            autoOpen: false,
+            resizable: false,
+            height: 380,
+            width: 530,
+            zIndex: 4,
+            modal: true,
+            position: ["center",0],
+            buttons: {
+                Guardar: function() {
+                    $("#for_pas").submit();
+                },
+                Cancelar: function() {
+                    $('#for_pas').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
+
+
         $( "#div_catalogo_venta" ).dialog({
             open: function(event, ui) { $(".ui-dialog-titlebar-close", ui.dialog).show(); },
             title:'Catálogo de Venta',
@@ -1963,7 +2079,6 @@ if($_POST['action']=="editar"){
 //formulario
         $("#for_ven").validate({
             submitHandler: function(){
-
                 $.ajax({
                     type: "POST",
                     url: "../venta/venta_reg.php",
@@ -2144,6 +2259,28 @@ if($_POST['action']=="editar"){
             }
         });
 
+        $( "#div_servicio_form" ).dialog({
+            title:'Información de Servicio',
+            autoOpen: false,
+            resizable: false,
+            height: 200,
+            width: 480,
+            modal: true,
+            position: 'center',
+            buttons: {
+                Guardar: function() {
+                    $("#for_ser").submit();
+                },
+                Cancelar: function() {
+                    $('#for_ser').each (function(){this.reset();});
+                    $( this ).dialog("close");
+                }
+            },
+            close: function()
+            {
+                $("#div_servicio_form").html('Cargando...');
+            }
+        });
 
         $('#txt_bus_pro_codbar').keypress(function(e){
             if(e.which == 13){
@@ -2589,8 +2726,8 @@ if($_POST['action']=="editar"){
                     <table>
                         <tr>
                             <td align="right"><?php if($_POST['action']=='insertar'){?>
-                                    <a id="btn_pas_form_agregar" href="#" onClick="cliente_form_i('insertar')">Agregar Cliente</a>
-                                    <a id="btn_pas_form_modificar" href="#" onClick="cliente_form_i('editar',$('#hdd_ven_cli_id').val())">Modificar Cliente</a>
+                                    <a id="btn_pas_form_agregar" href="#" onClick="pasajero_form_i('insertar')">Agregar Pasajero</a>
+                                    <a id="btn_pas_form_modificar" href="#" onClick="pasajero_form_i('editar',$('#hdd_ven_pas_id').val())">Modificar Pasajero</a>
                                 <?php }?>
                             </td>
                         </tr>
@@ -2610,13 +2747,13 @@ if($_POST['action']=="editar"){
                             </td>
                         </tr>
                         <tr>
-                            <td align="right"><label for="txt_ven_cli_dir">Dirección:</label></td>
-                            <td><input type="text" id="txt_ven_cli_dir" name="txt_ven_cli_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
+                            <td align="right"><label for="txt_ven_pas_dir">Dirección:</label></td>
+                            <td><input type="text" id="txt_ven_pas_dir" name="txt_ven_pas_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
                         </tr>
                         <tr>
                             <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
                             <td>
-                                <input type="hidden" id="txt_ven_cli_est" name="txt_ven_cli_est" size="40" value="" disabled="disabled"/>
+                                <input type="hidden" id="txt_ven_pas_est" name="txt_ven_pas_est" size="40" value="" disabled="disabled"/>
                                 <div id="msj_busqueda_sunat" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
                             </td>
                         </tr>
@@ -2904,6 +3041,8 @@ if($_POST['action']=="editar"){
 </div>
 
 <div id="div_lote_venta_form">
+</div>
+<div id="div_servicio_form">
 </div>
 <script type="text/javascript">
     //catalogo_venta_tab();

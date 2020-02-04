@@ -154,6 +154,7 @@ $menu_vendedor=
 '
 <ul id="menu1" class="topmenu">
   <li class="topfirst"><a href="../vendedor/">Principal</a></li>
+    <li class="topfirst"><a href="../clientes/">Clientes</a></li>
   <li class="topmenu"><a href="#" >Operaciones</a>
 	<ul>
 	  <li><a href="../venta/">Vender Pasaje</a></li>

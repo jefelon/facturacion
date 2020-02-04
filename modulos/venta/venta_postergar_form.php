@@ -16,9 +16,17 @@ $fec=date('d-m-Y');
 
 require_once ("../puntoventa/cPuntoventa.php");
 $oPuntoventa = new cPuntoventa();
+require_once("../vehiculo/cVehiculo.php");
+$oVehiculo = new cVehiculo();
+require_once("../venta/cVenta.php");
+$oVenta = new cVenta();
 
 $pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
 $pv = mysql_fetch_array($pvs);
+
+$vehs=$oVehiculo->mostrarUno($_POST['hdd_vehiculo']);
+$veh = mysql_fetch_array($vehs);
+$num_asi=$veh['tb_vehiculo_numasi'];
 
 ?>
 
@@ -167,6 +175,30 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(data){
                 $('#hdd_vi_ho_pos').val(data.viajehorario_id);
+                rellenar_asi_disponibles(<?php echo $num_asi;?>);
+
+            },
+            complete: function(){
+
+            }
+        });
+    }
+    function rellenar_asi_disponibles(num_asi)
+    {
+        $.ajax({
+            type: "POST",
+            url: "../asiento/cmb_asi_dis.php",
+            async:false,
+            dataType: "html",
+            data: ({
+                num_asi:num_asi,
+                hdd_vi_ho_pos: $('#hdd_vi_ho_pos').val(),
+            }),
+            beforeSend: function() {
+
+            },
+            success: function(html){
+                $('#cmb_asiento').html(html);
 
             },
             complete: function(){
@@ -350,7 +382,8 @@ $pv = mysql_fetch_array($pvs);
                         dataType: "html",
                         data: ({
                             action: 'postergar',
-                            asiento_id: id_seleccionado,
+                            asiento_id:id_seleccionado,
+                            asiento_pos_id:$('#cmb_asiento').val(),
                             viaje_horario_id: $('#hdd_vi_ho').val(),
                             viaje_horario_pos: $('#hdd_vi_ho_pos').val(),
                             hdd_punven_id: <?php echo $_SESSION['puntoventa_id']?>,
@@ -429,6 +462,11 @@ $pv = mysql_fetch_array($pvs);
                         </td>
                         <td align="center" valign="top"><label for="cmb_horario_pos">Hora Salida:</label><br>
                             <select name="cmb_horario_pos" id="cmb_horario_pos">
+                            </select>
+                        </td>
+                        <td align="center" valign="top"><label for="cmb_asiento">Num Asiento:</label><br>
+                            <select name="cmb_asiento" id="cmb_asiento">
+
                             </select>
                         </td>
                 </table>

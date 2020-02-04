@@ -339,6 +339,9 @@ $pv = mysql_fetch_array($pvs);
                 data: 'dni=' + dni,
                 success: function (datos_dni) {
                     $('#txt_pasaj_nom').val(datos_dni.persona);
+                    if(datos_dni.resultado=="si"){
+                        venta_cliente_reg();
+                    }
                 }
             });
         }
@@ -396,7 +399,9 @@ $pv = mysql_fetch_array($pvs);
             async:true,
             dataType: "html",
             data: ({
-                action: act
+                action: act,
+                hdd_vehiculo:$('#hdd_vehiculo').val(),
+                hdd_vi_ho_pos:$('#hdd_vi_ho_pos').val(),
             }),
             beforeSend: function() {
                 $('#msj_venta').hide();
@@ -502,6 +507,7 @@ $pv = mysql_fetch_array($pvs);
             },
             success: function(data){
                 $('#txt_pasaj_nom').val(data.cli_nom);
+
             }
         });
     }
@@ -700,7 +706,7 @@ $pv = mysql_fetch_array($pvs);
         $("input[id=radiopas3]").change(function(){
             if($("input[id=radiopas3]").is(":checked")){
                 $('#lbl_cli_doc_pas').html("DOC:");
-                $( "#txt_pasaj_dni").attr('maxlength','11');
+                $( "#txt_pasaj_dni").attr('maxlength','13');
                 $( "#txt_pasaj_dni").val('');
                 $( "#validar_ruc").hide(200);
             }
@@ -770,14 +776,19 @@ $pv = mysql_fetch_array($pvs);
 
         });
         $("#txt_pasaj_dni").keydown(function (e) {
-            if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.keyCode == 65 && e.ctrlKey === true) || (e.keyCode >= 35 && e.keyCode <= 39)) {
-                return;
-            }
 
-            if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-                e.preventDefault();
+            if($("#radiopas1").is(':checked')) {
+                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.keyCode == 65 && e.ctrlKey === true) || (e.keyCode >= 35 && e.keyCode <= 39)) {
+                    return;
+                }
+
+                if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+                    e.preventDefault();
+                }
+
             }
         });
+
 
 
         $( "#div_venta_horario_form" ).dialog({

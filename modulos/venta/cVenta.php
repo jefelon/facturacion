@@ -799,6 +799,15 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function mostrar_asientos_ocupados($vh_id){
+        $sql = "SELECT * 
+        FROM tb_viajeventa
+        WHERE tb_viajehorario_id=$vh_id";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function modificar_venta_viaje($vh_id,$asiento_id, $n_vh_id){
         $sql="UPDATE tb_viajeventa SET
