@@ -198,7 +198,7 @@ $num_asi=$veh['tb_vehiculo_numasi'];
 
             },
             success: function(html){
-                $('#cmb_asiento').html(html);
+                $('#cmb_asiento_pos').html(html);
 
             },
             complete: function(){
@@ -383,7 +383,7 @@ $num_asi=$veh['tb_vehiculo_numasi'];
                         data: ({
                             action: 'postergar',
                             asiento_id:id_seleccionado,
-                            asiento_pos_id:$('#cmb_asiento').val(),
+                            cmb_asiento_pos:$('#cmb_asiento_pos').val(),
                             viaje_horario_id: $('#hdd_vi_ho').val(),
                             viaje_horario_pos: $('#hdd_vi_ho_pos').val(),
                             hdd_punven_id: <?php echo $_SESSION['puntoventa_id']?>,
@@ -464,8 +464,8 @@ $num_asi=$veh['tb_vehiculo_numasi'];
                             <select name="cmb_horario_pos" id="cmb_horario_pos">
                             </select>
                         </td>
-                        <td align="center" valign="top"><label for="cmb_asiento">Num Asiento:</label><br>
-                            <select name="cmb_asiento" id="cmb_asiento">
+                        <td align="center" valign="top"><label for="cmb_asiento_pos">Num Asiento:</label><br>
+                            <select name="cmb_asiento_pos" id="cmb_asiento_pos">
 
                             </select>
                         </td>

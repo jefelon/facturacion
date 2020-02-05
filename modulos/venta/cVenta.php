@@ -809,9 +809,10 @@ WHERE tb_software_id =$id";
         return $rst;
     }
 
-    function modificar_venta_viaje($vh_id,$asiento_id, $n_vh_id){
+    function modificar_venta_viaje($vh_id,$asiento_id, $n_vh_id,$asiento_pos_id){
         $sql="UPDATE tb_viajeventa SET
-        `tb_viajehorario_id` =  $n_vh_id
+        `tb_viajehorario_id` =  $n_vh_id,
+        `tb_asiento_nom` =  $asiento_pos_id
         WHERE tb_viajehorario_id=$vh_id AND tb_asiento_nom=$asiento_id";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
