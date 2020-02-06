@@ -111,12 +111,13 @@ $menu_administrador=
 	  <li><a href="../gasto_r/">Pagos a Proveedores</a></li>
 	</ul>
   </li>
-    <li class="topmenu"><a href="#" >Consultas</a>
+  <li class="topmenu"><a href="#" >Consultas</a>
   	<ul>
-	  <li><a href="../venta/venta_vista_adm.php">Ventas General</a></li>
+	  <li><a href="../venta/venta_vista_adm.php">Historial Ventas</a></li>
+	  <li><a href="../venta/venta_manifiesto_vista.php">Manifiesto de Pasajeros</a></li>
 	</ul>
   </li>
-	<li class="topmenu"><a href="#" >Gráficos</a>
+  <li class="topmenu"><a href="#" >Gráficos</a>
   	<ul>
         <li><a href="../grafico" >Volumen de ventas</a>
 	</ul>
@@ -154,7 +155,12 @@ $menu_vendedor=
 '
 <ul id="menu1" class="topmenu">
   <li class="topfirst"><a href="../vendedor/">Principal</a></li>
-    <li class="topfirst"><a href="../clientes/">Clientes</a></li>
+  <li class="topmenu"><a href="#">Mantenimiento</a>
+	<ul>
+	  <li><a href="../clientes/">Clientes</a></li>
+	  <li><a href="../conductor/">Conductor</a></li>
+	</ul>
+   </li>
   <li class="topmenu"><a href="#" >Operaciones</a>
 	<ul>
 	  <li><a href="../venta/">Vender Pasaje</a></li>
@@ -168,7 +174,12 @@ $menu_vendedor=
 	  <li><a href="../cuentasxcobrar/pago_vista.php">Pagos Cuentas por Cobrar</a></li>
 	</ul>
   </li>
- 
+  <li class="topmenu"><a href="#" >Consultas</a>
+  	<ul>
+	  <li><a href="../venta/venta_vista_adm.php">Historial Ventas</a></li>
+	  <li><a href="../venta/venta_manifiesto_vista.php">Manifiesto de Pasajeros</a></li>
+	</ul>
+  </li>
   <li class="topmenu"><a href="#" >Caja</a>
   	<ul>
   	  <li><a href="../cajadetalle">Apertura y Cierre</a></li>

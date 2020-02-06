@@ -273,6 +273,28 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrar_filtro_man($fec1,$fec2,$con_id,$est,$usu_id,$punven_id,$emp_id){
+        $sql="SELECT  vh.tb_viajehorario_id,tb_viajehorario_ser, tb_viajehorario_num, tb_viajehorario_fecha,tb_conductor_nom,tb_conductor_doc 
+        FROM tb_viajehorario vh 
+        INNER JOIN tb_viajeventa vv ON vh.tb_viajehorario_id=vv.tb_viajehorario_id 
+        INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
+        INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
+        INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
+        INNER JOIN tb_conductor c ON vh.tb_conductor_id=c.tb_conductor_id	
+        WHERE v.tb_empresa_id = $emp_id 
+        AND tb_viajehorario_fecha BETWEEN '$fec1' AND '$fec2' ";
+        if($con_id>0)$sql.=" AND vh.tb_conductor_id = $con_id ";
+        if($usu_id>0)$sql.=" AND u.tb_usuario_id = $usu_id ";
+        if($punven_id>0)$sql.=" AND v.tb_puntoventa_id = $punven_id ";
+        if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
+
+        $sql.=" GROUP BY tb_viajehorario_ser, tb_viajehorario_num, tb_viajehorario_fecha,tb_conductor_nom,tb_conductor_doc";
+        $sql.=" ORDER BY tb_viajehorario_fecha, tb_viajehorario_num";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
     function mostrar_filtro_cobro_destino($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay){
         $sql="SELECT ev.tb_encomiendaventa_id, vv.tb_viajeventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
