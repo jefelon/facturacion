@@ -13,7 +13,7 @@ class Cado{
         $this->Servidor = 'localhost'; $this->Usuario = 'root'; $this->Clave = '';
 
         //$this->Servidor = 'localhost'; $this->Usuario = ''; $this->Clave = '';
-        $this->BaseDatos ="marvicon";
+        $this->BaseDatos ="fiorick";
     }
 	
 	function conectar()

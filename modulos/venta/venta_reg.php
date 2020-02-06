@@ -167,7 +167,8 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             moneda_mysql($_POST['txt_ven_desglob']),//tb_venta_desglo
 			1,//cs_tipooperacion_id
 			0,//cs_documentosrelacionados_id
-            $usu_id
+            $usu_id,
+            $descuento_numero_global
 		);
 
         if ($_POST['hdd_cot_id']!=''){

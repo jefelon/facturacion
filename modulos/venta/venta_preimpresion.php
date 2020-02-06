@@ -64,11 +64,18 @@ require_once("../formatos/formato.php");
             $archivo_destino.='../venta/venta_cpeimp_boleta_mat_a4.php';
         }
     }
-    if($doc_nom=='NOTA DE SALIDA'){
+    if($doc_nom=='NOTA DE SALIDA') {
+        if ($dato == 'TICKET') {
+            $archivo_destino .= '../venta/venta_cpeimp_nota_mat.php';
+        } elseif ($dato == 'A4') {
+            $archivo_destino .= '../venta/venta_cpeimp_nota_mat_a4.php';
+        }
+    }
+    if($doc_nom=='NOTA DE VENTA'){
         if($dato=='TICKET'){
-            $archivo_destino.='../venta/venta_cpeimp_nota_mat.php';
+                $archivo_destino.='../venta/venta_cpeimp_nota_mat.php';
         }elseif ($dato=='A4'){
-            $archivo_destino.='../venta/venta_cpeimp_nota_mat_a4.php';
+                $archivo_destino.='../venta/venta_cpeimp_nota_mat_a4.php';
         }
     }
 

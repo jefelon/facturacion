@@ -61,7 +61,7 @@ if(!is_file($empresa_logo)){
 }
 mysql_free_result($dts);
 
-$tipodoc = 'NOTA DE SALIDA';
+$tipodoc = 'NOTA DE VENTA';
 
 $ven_id=$_POST['ven_id'];
 
@@ -92,6 +92,8 @@ while($dt = mysql_fetch_array($dts))
     $totdes=$dt["tb_venta_des"];
     $totanti="0.00";
     $moneda=$dt["cs_tipomoneda_id"];
+
+    $totdesglo=$dt["tb_venta_desc"];
 
     $estsun=$dt['tb_venta_estsun'];
     $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
@@ -281,19 +283,19 @@ $html .= '
     }
 
     .header_row th {
-        border-bottom: 0.9px solid #008f39;
-        border-right: 0.9px solid #008f39;
-        border-left: 0.9px solid #008f39;
-        background-color: #008f39;
+        border-bottom: 0.9px solid #ed236c;
+        border-right: 0.9px solid #ed236c;
+        border-left: 0.9px solid #ed236c;
+        background-color: #ed236c;
         text-transform:uppercase;
     }
 
     .row td{
-        border-right: 0.9px solid #008f39;
-        border-left: 0.9px solid #008f39;
+        border-right: 0.9px solid #ed236c;
+        border-left: 0.9px solid #ed236c;
     }
     .cliente{
-        border: 1px solid #008f39;
+        border: 1px solid #ed236c;
         border-spacing:4px;
     }
 
@@ -317,8 +319,8 @@ $html .= '
 
 </style>
 <body>';
-$bordelineas="1px solid #008f39;";
-$bordetop="border-top: 1px solid #008f39;";
+$bordelineas="1px solid #ed236c;";
+$bordetop="border-top: 1px solid #ed236c;";
 $html.='
 <table style="width: 100%; margin-bottom: 50mm;" border="0" class="datos-empresa" height="100pt">';
 $html.='<tr>
@@ -350,7 +352,7 @@ $html.='
         <b>PUNTO DE VENTA:</b> '.$punto_venta_dir.'
         <br><br>'.$texto_venta_producto.'
         </td>
-        <td  width="25%" border="1" class="tipo-documento"> 
+        <td  width="25%"  class="tipo-documento" style="border:'.$bordelineas.'"> 
             <div style="line-height: 4px"></div>  
             <strong>'.$tipodoc.'<br>
             RUC: '.$ruc_empresa.'<br>
@@ -536,7 +538,27 @@ $html2.='
         </td>
 		<td valign="middle"  border="0" width="33%">
 		    <table style="width: 100%;font-size:8pt;mapadding-top: 10px"  border="0">';
-            $html2.='             
+            $html2.=' 
+                <tr>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL OPE. GRABADAS:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopgrav.'</td>
+                </tr>
+                <tr>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL OPE EXONERADAS:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopexo.'</td>
+                </tr>
+                <tr>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> % '.$totdesglo.' </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$totdes.'</td>
+                </tr>
+                <tr>
+                    <td  width="65%" style="text-align: left;" ><b>IGV: </b></td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$toigv.'</td>
+                </tr>
                <tr>                   
                     <td width="65%" style="text-align: left;"><b>IMPORTE TOTAL:</b> </td>
                     <td width="5%" style="text-align: right">'.$mon.'</td>
@@ -555,8 +577,8 @@ $html2.='
         <td width="50%">
             <table>
                 <tr><td colspan="2"><b>CUENTAS BANCARIAS</b></td></tr>
-                <tr><td width="40%"><b>BCP Soles: </b></td> <td width="60%">191-2266774-0-05</td></tr>
-               <!-- <tr><td width="40%"><b>BCP Dólares: </b></td> <td width="60%">191-2266744-0-02</td></tr>
+                <!--<tr><td width="40%"><b>BCP Soles: </b></td> <td width="60%">191-2266774-0-05</td></tr>
+                <tr><td width="40%"><b>BCP Dólares: </b></td> <td width="60%">191-2266744-0-02</td></tr>
                 <tr><td width="40%"><b>BBVA Soles: </b></td> <td width="60%">0011-056602000-52070</td></tr>
                 <tr><td width="40%"><b>BBVA Dólares: </b></td> <td width="0%">0011-056602000-34045</td></tr>
                 <tr><td width="40%"><b>Cta. de Detracciones: </b></td> <td width="60%">00-099-099283</td></tr>-->

@@ -94,6 +94,8 @@ while($dt = mysql_fetch_array($dts))
     $totanti="0.00";
     $moneda=$dt["cs_tipomoneda_id"];
 
+    $totdesglo=$dt["tb_venta_desc"];
+
     $estsun=$dt['tb_venta_estsun'];
     $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
     $faucod=$dt['tb_venta_faucod'];
@@ -282,20 +284,20 @@ $html .= '
     }
 
     .header_row th {
-        border-bottom: 0.9px solid #008f39;
-        border-right: 0.9px solid #008f39;
-        border-left: 0.9px solid #008f39;
-        background-color: #008f39;
+        border-bottom: 0.9px solid #ed236c;
+        border-right: 0.9px solid #ed236c;
+        border-left: 0.9px solid #ed236c;
+        background-color: #ed236c;
         text-transform:uppercase;
         line-height: 6px;
     }
 
     .row td{
-        border-right: 0.9px solid #008f39;
-        border-left: 0.9px solid #008f39;
+        border-right: 0.9px solid #ed236c;
+        border-left: 0.9px solid #ed236c;
     }
     .cliente{
-        border: 1px solid #008f39;
+        border: 1px solid #ed236c;
         border-spacing:4px;
     }
 
@@ -319,8 +321,8 @@ $html .= '
 
 </style>
 <body>';
-$bordelineas="1px solid #008f39;";
-$bordetop="border-top: 1px solid #008f39;";
+$bordelineas="1px solid #ed236c;";
+$bordetop="border-top: 1px solid #ed236c;";
 $html.='
 <table style="width: 100%; margin-bottom: 50mm;" border="0" class="datos-empresa" height="100pt">';
 $html.='<tr>
@@ -352,7 +354,7 @@ $html.='
         <br><b>PUNTO DE VENTA:</b> '.$punto_venta_dir.'
         <br>'.$texto_venta_producto.'
         </td>
-        <td  width="25%" border="1" class="tipo-documento"> 
+        <td  width="25%" class="tipo-documento" style="border:'.$bordelineas.'"> 
             <div style="line-height: 4px"></div>  
             <strong>'.$tipodoc.'<br>
             RUC: '.$ruc_empresa.'<br>
@@ -578,7 +580,7 @@ if($totanti > 0){
 }
 $html2.='
                 <tr>
-                    <td width="65%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> </td>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> % '.$totdesglo.'</td>
                     <td width="5%" style="text-align: right">'.$mon.'</td>
                     <td width="30%" style="text-align: right;;font-size: 9pt">'.$totdes.'</td>
                 </tr>
@@ -621,8 +623,8 @@ $html2 .= '<tcpdf method="write2DBarcode" params="'.$params2.'" />
         <td width="46%">
             <table>
                 <tr><td colspan="2"><b>CUENTAS BANCARIAS</b></td></tr>
-                <tr><td width="40%"><b>BCP Soles: </b></td> <td width="60%">215-2315471012</td></tr>
-                <!--<tr><td width="40%"><b>BCP Dólares: </b></td> <td width="60%">191-2266744-0-02</td></tr>
+                <!--<tr><td width="40%"><b>BCP Soles: </b></td> <td width="60%">215-2315471012</td></tr>
+                <tr><td width="40%"><b>BCP Dólares: </b></td> <td width="60%">191-2266744-0-02</td></tr>
                 <tr><td width="40%"><b>BBVA Soles: </b></td> <td width="60%">0011-056602000-52070</td></tr>
                 <tr><td width="40%"><b>BBVA Dólares: </b></td> <td width="0%">0011-056602000-34045</td></tr>
                 <tr><td width="40%"><b>Cta. de Detracciones: </b></td> <td width="60%">00-099-099283</td></tr>-->

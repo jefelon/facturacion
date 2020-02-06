@@ -41,7 +41,7 @@
       </script>
    </head>
 
-   <body style="background: url(../../images/bg<?php echo $numero;?>.jpg) no-repeat center fixed; background-color: #e9e8ec;">
+   <body style="background: url(../../images/bg1.jpg) no-repeat center fixed; background-color: #e9e8ec;background-size: cover">
 
       <?php echo $_GET['mm']?>
       <?php /*?><header id="main-header">
@@ -60,10 +60,10 @@
 
      <div class="container">
        <label><b>Usuario</b></label>
-       <input type="text" name="txt_use" id="txt_use" placeholder="Nombre de Usuario" value="admin" required>
+       <input type="text" name="txt_use" id="txt_use" placeholder="Nombre de Usuario" value="" required>
       <br>
        <label><b>Clave</b></label>
-       <input type="password" placeholder="Contraseña" name="txt_pas" id="txt_pas" required value="admin">
+       <input type="password" placeholder="Contraseña" name="txt_pas" id="txt_pas" required value="">
 
        <button type="submit" id="btn_ingresar">Ingresar</button>
      </div>

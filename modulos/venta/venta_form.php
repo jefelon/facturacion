@@ -27,6 +27,7 @@ $formato_imp = $dt2['tb_formula_dat'];
 $dtsa=$oAlmacen->mostrarTodos($_SESSION['empresa_id']);
 $num_rowsa= mysql_num_rows($dtsa);
 
+$_SESSION['venta_general_des']="";
 $cot_id = $_POST['cot_id'];
 if($_POST['action']=="insertar"){
     //$cli_id=1;
@@ -312,7 +313,7 @@ if($_POST['action']=="editar"){
             complete: function(){
                 <?php if($_POST['action']=="insertar" or $_POST['action']=="insertar_cot"){?>
                 txt_ven_numdoc();
-                if ($('#cmb_ven_doc').val()==12){
+                if ($('#cmb_ven_doc').val()==12 || $('#cmb_ven_doc').val()==15 || $('#cmb_ven_doc').val()==4){
                     cliente_cargar_datos(1);
                 }
                 <?php }?>
@@ -1350,7 +1351,7 @@ if($_POST['action']=="editar"){
         ?>
         $('#cmb_ven_doc').change( function() {
             txt_ven_numdoc();
-            if ((this).value=== '12' || (this).value=== '15') {
+            if ((this).value=== '12' || (this).value=== '15' || (this).value=== '4') {
                 cliente_cargar_datos(1);
                 $("#chk_imprimir_guia").attr('checked', false);
             }else{
@@ -2727,8 +2728,7 @@ if($_POST['action']=="editar"){
 
                         <a class="btn_bus_mas" href="#mas" onClick="bus_cantidad('mas')">Aumentar</a>
                         <a class="btn_bus_menos" href="#menos" onClick="bus_cantidad('menos')">Disminuir</a>
-                        <label for="txt_detcom_des">DES</label>
-                        <input type="text" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="4" maxlength="5" style="text-align:right" >
+                        <input type="hidden" name="txt_detcom_des" id="txt_detcom_des" class="moneda" value="<?php echo formato_money(0.00)?>" size="4" maxlength="5" style="text-align:right" >
 
                         <label for="cmb_afec_id">T. IGV</label>
                         <select name="cmb_afec_id" id="cmb_afec_id" style="width: 100px">

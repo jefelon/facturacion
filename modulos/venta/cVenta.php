@@ -1,7 +1,7 @@
 <?php
 class cVenta{
 	function insertar($fec,$doc_id,$numdoc,$ser,$num,$cli_id,$valven,$igv,$des,$tot,$est,$lab1,$lab2,$lab3,$may,$usu_id,$punven_id,$emp_id,
-		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id){
+		$tipdoc,$tipmon,$gra,$ina,$exp,$grat,$isc,$otrtri,$otrcar,$desglo,$tipope,$docrel,$use_id,$desc){
 	$sql = "INSERT INTO tb_venta(
 	`tb_venta_reg` ,
 	`tb_venta_fec` ,
@@ -35,11 +35,12 @@ class cVenta{
 	`tb_venta_desglo`,
 	`cs_tipooperacion_id`,
 	`cs_documentosrelacionados_id`,
-	`tb_vendedor_id`
+	`tb_vendedor_id`,
+	`tb_venta_desc`
 	)
 	VALUES (
 	NOW( ) ,  '$fec',  '$doc_id',  '$numdoc', '$ser',  '$num',  '$cli_id',  '$valven',  '$igv', '$des',  '$tot',  '$est', '$lab1', '$lab2', '$lab3', '$may',  '$usu_id', '$punven_id', '$emp_id',
-	'$tipdoc', '$tipmon', '$gra', '$ina', '$exp', '$grat', '$isc', '$otrtri', '$otrcar', '$desglo', '$tipope','$docrel','$use_id'
+	'$tipdoc', '$tipmon', '$gra', '$ina', '$exp', '$grat', '$isc', '$otrtri', '$otrcar', '$desglo', '$tipope','$docrel','$use_id','$desc'
 	);"; 
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

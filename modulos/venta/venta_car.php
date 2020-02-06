@@ -474,8 +474,13 @@ else
         });
     }
     $('#txt_ven_des').change(function(e) {
-        venta_car_prorrateo()
+        venta_car_prorrateo();
     });
+
+    // $('#cmb_ven_des').change(function(){
+    //     $('#txt_ven_des').val($('#cmb_ven_des').val());
+    //     venta_car_prorrateo();
+    // });
     $(function() {
         $("#txt_importe_cliente").keyup(function() {
             calcular_vuelto();
@@ -765,6 +770,7 @@ $importe_total=$ope_gravadas_total+$ope_exoneradas_total+$igv_total;
 $descuento_global=$sub_total*($general_des/100);
 $descuento_total= $descuento_global + $desc_x_item_total;
 ?>
+
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tr>
         <td>
@@ -772,7 +778,13 @@ $descuento_total= $descuento_global + $desc_x_item_total;
                 <fieldset><legend>Aplicar a filas</legend>
                     <table><tr>
                             <td width="80"><label for="txt_ven_des">DSCTO %</label></td>
-                            <td><input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right" value="<?php echo formato_money($general_des)?>" size="10" maxlength="5" class="porcentaje_car"></td>
+                            <td>
+                                <select name="txt_ven_des" id="txt_ven_des">
+                                    <option value="0" selected>0%</option>
+                                    <option value="35">35%</option>
+                                    <option value="40">40%</option>
+                                </select>
+<!--                                <input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right" value="--><?php //echo formato_money($general_des)?><!--" size="10" maxlength="5" class="porcentaje_car"></td>-->
 
                     </table>
                 </fieldset>

@@ -403,6 +403,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         }
         function venta_car_prorrateo()
         {
+            var valAct=$('#txt_ven_des').val();
             $.ajax({
                 type: "POST",
                 url: "venta_car_prorrateo.php",
@@ -420,6 +421,8 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
                 },
                 complete: function(){
                     venta_car('actualizar');
+
+                    $("#txt_ven_des option[value="+ valAct +"]").attr("selected",true);
                 }
             });
         }
