@@ -354,7 +354,7 @@ $html.='
         <br><b>PUNTO DE VENTA:</b> '.$punto_venta_dir.'
         <br>'.$texto_venta_producto.'
         </td>
-        <td  width="25%" border="1" class="tipo-documento" style="border:'.$bordelineas.'"> 
+        <td  width="25%" class="tipo-documento" style="border:'.$bordelineas.'"> 
             <div style="line-height: 4px"></div>  
             <strong>'.$tipodoc.'<br>
             RUC: '.$ruc_empresa.'<br>
