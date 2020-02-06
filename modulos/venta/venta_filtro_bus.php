@@ -50,12 +50,12 @@ $orden5=$dt5['tb_distribucionasiento_lugar'];
             text: false
         });
 
-        // $('.pasadizo >div').addClass('oculto');
-        // $('.pasadizo >div:last').removeClass('oculto');
+        $('.pasadizo >div').addClass('oculto');
+        $('.pasadizo >div:last').removeClass('oculto');
 
-        // if($('.pasadizo >div:last').is("#item_45")){
-        //     $('.pasadizo >div:last').css("margin-left","-45px");
-        // }
+        if($('.pasadizo >div:last').is("#item_45")){
+            $('.pasadizo >div:last').css("margin-left","-45px");
+        }
     });
 
     function cambiar_color(selector) {
