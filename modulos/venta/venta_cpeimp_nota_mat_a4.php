@@ -407,8 +407,10 @@ $html.='
         </tr>';
 $dts = $oVenta->mostrar_venta_detalle_ps($ven_id);
 $cont = 1;
+$subtotalPrecio=0;
 while($dt = mysql_fetch_array($dts)){
     $codigo = $cont;
+    $subtotalPrecio+=$dt['tb_ventadetalle_preuni'] * $dt['tb_ventadetalle_can'];
     $valor_unitario_linea = $dt["tb_ventadetalle_preuni"];
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
@@ -545,27 +547,12 @@ $html2.='
                 <tr>
                     <td width="65%" style="text-align: left;" ><b>SUB TOTAL:</b> </td>
                     <td width="5%" style="text-align: right">'.$mon.'</td>
-                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$subtotal.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.formato_moneda($subtotalPrecio).'</td>
                 </tr>
                 <tr>
                     <td width="65%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> % '.$totdesglo.' </td>
                     <td width="5%" style="text-align: right">'.$mon.'</td>
-                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$totdes.'</td>
-                </tr>
-                <tr>
-                    <td width="65%" style="text-align: left;" ><b>TOTAL OPE. GRABADAS:</b> </td>
-                    <td width="5%" style="text-align: right">'.$mon.'</td>
-                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopgrav.'</td>
-                </tr>
-                <tr>
-                    <td width="65%" style="text-align: left;" ><b>TOTAL OPE EXONERADAS:</b> </td>
-                    <td width="5%" style="text-align: right">'.$mon.'</td>
-                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopexo.'</td>
-                </tr>              
-                <tr>
-                    <td  width="65%" style="text-align: left;" ><b>IGV: </b></td>
-                    <td width="5%" style="text-align: right">'.$mon.'</td>
-                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$toigv.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.formato_moneda($subtotalPrecio*($totdesglo/100)).'</td>
                 </tr>
                <tr>                   
                     <td width="65%" style="text-align: left;"><b>IMPORTE TOTAL:</b> </td>

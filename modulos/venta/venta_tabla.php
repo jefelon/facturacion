@@ -132,7 +132,7 @@ $num_rows= mysql_num_rows($dts1);
             </td>
             <td align="right">
                 <?php
-                if ($estado == "ANULADA") {
+                if ($estado == "ANULADA" || $dt1['cs_tipodocumento_id'] == '0') {
                     echo "0";
                 } else {
                     echo formato_money($dt1['tb_venta_valven']);
@@ -141,7 +141,7 @@ $num_rows= mysql_num_rows($dts1);
             </td>
             <td align="right">
                 <?php
-                if ($estado == "ANULADA") {
+                if ($estado == "ANULADA" || $dt1['cs_tipodocumento_id'] == '0') {
                     echo "0";
                 } else {
                     echo formato_money($dt1['tb_venta_igv']);
@@ -262,8 +262,8 @@ $num_rows= mysql_num_rows($dts1);
                     ?>
                 </td>
                 <td align="left" nowrap="nowrap">
+            <?php if($dt1['tb_documento_ele']==1):?>
                     <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">Editar</a>
-                    <?php if($dt1['tb_documento_ele']==1):?>
                         <?php if($mostrar_envio_sunat==1):?>
                             <a class="btn_sunat" href="#sunat" onClick="enviar_sunat('<?php echo $dt1['tb_venta_id']?>')">E. Sunat</a><?php endif;?>
                             <a class="btn_accion" id="btn_accion" href="#correo" title="Enviar correo" onClick="venta_correo_form('enviar',
@@ -287,6 +287,7 @@ $num_rows= mysql_num_rows($dts1);
                         }
                         ?>
                     <?php endif;?>
+                    <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="venta_impresion('<?php echo $dt1['tb_venta_id']?>')">PDF</a>
                     <?php //if($dt1['tb_documento_ele']==0):?>
                     <?php if($dt1['tb_venta_est']!='ANULADA' and $_POST['chk_ven_anu']==1){?>
                         <a class="btn_anular" href="#anular" onClick="venta_anular('<?php echo $dt1['tb_venta_id']?>','<?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_venta_numdoc']?>')">Anular</a>
