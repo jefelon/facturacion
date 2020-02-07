@@ -99,8 +99,13 @@ $(function() {
             
                 <?php
 				while($dt1 = mysql_fetch_array($dts1)){
-					$sub_total=$dt1['valven']+$dt1['igv'];
-					
+				    if(	$dt1['cs_tipoafectacionigv_id']==1){
+                        $sub_total=$dt1['valven']+$dt1['igv'];
+                    }
+                    elseif(	$dt1['cs_tipoafectacionigv_id']==9){
+                        $sub_total=$dt1['valven'];
+                    }
+
 					if($dt1['tb_venta_est']=='CANCELADA'){
 						$total_valven	+=$dt1['valven'];
 						$total_igv		+=$dt1['igv'];

@@ -98,7 +98,7 @@ class cVenta{
 	return $rst;
 	}
 	function mostrar_resumen_productos_ventas($fec1,$fec2,$cat_ids,$mar_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay){
-	$sql="SELECT tb_venta_est, tb_ventadetalle_tipven, p.tb_producto_id, p.tb_producto_nom, m.tb_marca_nom, cg.tb_categoria_nom, pr.tb_presentacion_id, pr.tb_presentacion_nom, un.tb_unidad_id, un.tb_unidad_abr, ct.tb_catalogo_mul, SUM(tb_ventadetalle_can) AS can, SUM(tb_ventadetalle_preuni) AS preuni, SUM(tb_ventadetalle_valven) AS valven, SUM(tb_ventadetalle_igv) AS igv
+	$sql="SELECT tb_venta_est, tb_ventadetalle_tipven, p.tb_producto_id, p.tb_producto_nom, m.tb_marca_nom, cg.tb_categoria_nom, pr.tb_presentacion_id, pr.tb_presentacion_nom, un.tb_unidad_id, un.tb_unidad_abr, ct.tb_catalogo_mul, SUM(tb_ventadetalle_can) AS can, SUM(tb_ventadetalle_preuni) AS preuni, SUM(tb_ventadetalle_valven) AS valven, SUM(tb_ventadetalle_igv) AS igv,vd.cs_tipoafectacionigv_id
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
@@ -125,7 +125,7 @@ class cVenta{
 	if($venmay>0)$sql.=" AND v.tb_venta_may = $venmay ";
 	if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
 	
-	$sql.=" GROUP BY p.tb_producto_id, pr.tb_presentacion_id, un.tb_unidad_id ";
+	$sql.=" GROUP BY p.tb_producto_id, pr.tb_presentacion_id, un.tb_unidad_id , vd.cs_tipoafectacionigv_id";
 	
 	//$sql.=" ORDER BY tb_venta_fec, tb_documento_nom, tb_venta_numdoc ";
 	$oCado = new Cado();
