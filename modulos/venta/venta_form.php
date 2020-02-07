@@ -340,7 +340,7 @@ if($_POST['action']=="editar"){
                 {
                     $('#hdd_val_cli_tip').val('1');
                 }
-                if($('#cmb_ven_doc').val()*1==15)//nota de salida
+                if($('#cmb_ven_doc').val()*1==15 || $('#cmb_ven_doc').val()*1==4)//nota de salida
                 {
                     $('#hdd_val_cli_tip').val('15');
                 }

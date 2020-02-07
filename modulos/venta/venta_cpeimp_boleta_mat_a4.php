@@ -96,6 +96,9 @@ while($dt = mysql_fetch_array($dts))
 
     $totdesglo=$dt["tb_venta_desc"];
 
+    $descuento=$dt["tb_venta_des"];
+    $subtotal=$totopgrav+$descuento;
+
     $estsun=$dt['tb_venta_estsun'];
     $fecenvsun=mostrarFechaHora($dt['tb_venta_fecenvsun']);
     $faucod=$dt['tb_venta_faucod'];
@@ -558,6 +561,16 @@ if($totopgrat > 0){
 
 $html2.='
                 <tr>
+                    <td width="65%" style="text-align: left;" ><b>SUB TOTAL:</b> </td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt;">'.$subtotal.'</td>
+                </tr>
+                <tr>
+                    <td width="65%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> % '.$totdesglo.'</td>
+                    <td width="5%" style="text-align: right">'.$mon.'</td>
+                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$totdes.'</td>
+                </tr>
+                <tr>
                     <td width="65%" style="text-align: left;" ><b>TOTAL OPE. GRABADAS:</b> </td>
                     <td width="5%" style="text-align: right">'.$mon.'</td>
                     <td width="30%" style="text-align: right;;font-size: 9pt;">'.$totopgrav.'</td>
@@ -581,11 +594,7 @@ if($totanti > 0){
                 </tr>';
 }
 $html2.='
-                <tr>
-                    <td width="65%" style="text-align: left;" ><b>TOTAL DESCUENTO:</b> % '.$totdesglo.'</td>
-                    <td width="5%" style="text-align: right">'.$mon.'</td>
-                    <td width="30%" style="text-align: right;;font-size: 9pt">'.$totdes.'</td>
-                </tr>
+
                 <tr>
                     <td  width="65%" style="text-align: left;" ><b>IGV: </b></td>
                     <td width="5%" style="text-align: right">'.$mon.'</td>
