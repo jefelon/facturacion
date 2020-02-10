@@ -780,9 +780,10 @@ $descuento_total= $descuento_global + $desc_x_item_total;
                             <td width="80"><label for="txt_ven_des">DSCTO %</label></td>
                             <td>
                                 <select name="txt_ven_des" id="txt_ven_des">
-                                    <option value="0" selected>0%</option>
-                                    <option value="35">35%</option>
-                                    <option value="40">40%</option>
+                                    <option value="0">0%</option>
+                                    <option value="30" <?php if($general_des==30)echo "selected" ?>>30%</option>
+                                    <option value="35" <?php if($general_des==35)echo "selected" ?>>35%</option>
+                                    <option value="40" <?php if($general_des==40)echo "selected" ?>>40%</option>
                                 </select>
 <!--                                <input name="txt_ven_des" type="text" id="txt_ven_des" style="text-align:right" value="--><?php //echo formato_money($general_des)?><!--" size="10" maxlength="5" class="porcentaje_car"></td>-->
 
