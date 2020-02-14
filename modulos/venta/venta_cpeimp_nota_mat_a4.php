@@ -225,7 +225,7 @@ class MYPDF extends TCPDF
     public function Footer()
     {
         global $html2;
-        $this -> SetY(-100);
+        $this -> SetY(-60);
         $this->SetFont('helvetica', '', 9);
         $this->writeHTML($html2, true, 0, true, true);
     }
@@ -282,7 +282,7 @@ $html .= '
         font-family: Verdana, Arial, Consolas;
         margin: 0px;
         padding-top: 0px;
-        font-size: 7.5pt;
+        font-size: 7pt;
     }
 
     .header_row th {
@@ -453,7 +453,7 @@ while($dt = mysql_fetch_array($dts)){
     $cont++;
 }
 
-while ($cont<=35) {
+while ($cont<=50) {
     $html .= '<tr class="row">
         <td style="text-align: center"></td>
         <td style="text-align: center"></td>
@@ -581,50 +581,18 @@ $html2.='
         </td>
         <td width="20%">
            <table>
-                <tr><td height="80px"></td></tr>
+                <tr><td height="auto"></td></tr>
                 <tr><td></td></tr>
             </table>
         </td>
         <td width="30%">
            <table>
-                <tr><td height="80px"></td></tr>
+                <tr><td height="50px"></td></tr>
                 <tr><td style="text-align: center;'.$bordetop.'"><b>OBSERVACIÓN</b></td></tr>
             </table>
         </td>
     </tr>
-</table>
-<br><br>
-<!--<table border="0" width="100%">
-    <tr>
-        <td>
-            <img src="../empresa/logos/hermoza.jpg" border="0"  width="230" height="75" style="line-height:50%;"/>
-        </td>
-        <td>
-            <img src="../empresa/logos/exther.jpg" border="0"  width="230" height="87" style="line-height:50%;"/>
-        </td>
-        <!-- <td>
-            <img src="../empresa/logos/logo_pie_hager.jpg" border="0"  width="300" height="98" style="line-height:50%;"/>
-        </td>
-        <td>
-            <img src="../empresa/logos/logo_pie_leviton.png" border="0"  width="345" height="146" style="line-height:50%;"/>
-        </td>
-        <td>
-            <img src="../empresa/logos/logo_pie_mennekes.jpg" border="0"  width="350" height="97" style="line-height:50%;"/>
-        </td>
-        <td>
-            <img src="../empresa/logos/logo_pie_philips.png" border="0"  width="300" height="54" style="line-height:50%;"/>
-        </td>
-        <td>
-            <img src="../empresa/logos/logo_pie_thorgel.jpg" border="0"  width="373" height="135" style="line-height:50%;"/>
-        </td>
-    </tr>
-</table>-->
-<table>
-    <tr>
-        <td style="font-size: 8pt;text-align: center;line-height: 8px;"><i>Representación Impresa de la '.$tipodoc.' , Esta puede ser consultada en: '.$d_documentos_app.'</i></td>
-    </tr>
 </table>';
-
 $html2.='
 
 </body>
