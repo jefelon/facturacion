@@ -2709,7 +2709,7 @@ if($_POST['action']=="editar"){
             </fieldset>
         </div>
         <div style="clear: both;"></div>
-        <?php if($_POST['action']=='insertar'){?>
+        <?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
             <div id="div_productos_servicios_tab">
                 <ul>
                     <li><a id="carga_productos" href="#div_productos">Agregar Productos</a></li>
