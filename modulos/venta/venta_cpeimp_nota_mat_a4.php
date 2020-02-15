@@ -296,6 +296,7 @@ $html .= '
     .row td{
         border-right: 0.9px solid #ed236c;
         border-left: 0.9px solid #ed236c;
+        border-top: 0.9px solid #e1e1e1;
     }
     .cliente{
         border: 1px solid #ed236c;
@@ -457,6 +458,7 @@ while ($cont<=50) {
     $html .= '<tr class="row">
         <td style="text-align: center"></td>
         <td style="text-align: center"></td>
+        <td style="text-align: right"></td>
         <td style="text-align: right"></td>
         <td style="text-align: right"></td>
         <td style="text-align: right"></td>

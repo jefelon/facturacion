@@ -226,7 +226,7 @@ class MYPDF extends TCPDF
     public function Footer()
     {
         global $html2;
-        $this -> SetY(-98);
+        $this -> SetY(-88);
         $this->SetFont('helvetica', '', 9);
         $this->writeHTML($html2, true, 0, true, true);
     }
@@ -278,12 +278,12 @@ $html .= '
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 </head>
 <style type="text/css">
-    body {
+body {
         color: black;
         font-family: Verdana, Arial, Consolas;
         margin: 0px;
         padding-top: 0px;
-        font-size: 7.5pt;
+        font-size: 7pt;
     }
 
     .header_row th {
@@ -292,12 +292,12 @@ $html .= '
         border-left: 0.9px solid #ed236c;
         background-color: #ed236c;
         text-transform:uppercase;
-        line-height: 6px;
     }
 
     .row td{
         border-right: 0.9px solid #ed236c;
         border-left: 0.9px solid #ed236c;
+        border-top: 0.9px solid #e1e1e1;
     }
     .cliente{
         border: 1px solid #ed236c;
@@ -400,7 +400,7 @@ $html.='
 <br/>
 <br/>
 
-<table style="width: 100%; border:'.$bordelineas.'; border-collapse:collapse;font-size: 8.5pt;">
+<table style="width: 100%; border:'.$bordelineas.'; border-collapse:collapse;">
     <tbody>
         <tr class="header_row">
             <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
@@ -457,10 +457,11 @@ while($dt = mysql_fetch_array($dts)){
     $max_lin++;
 }
 
-while ($max_lin<=30) {
+while ($max_lin<=42) {
     $html .= '<tr class="row">
         <td style="text-align: center"></td>
         <td style="text-align: center"></td>
+        <td style="text-align: right"></td>
         <td style="text-align: right"></td>
         <td style="text-align: right"></td>
         <td style="text-align: right"></td>

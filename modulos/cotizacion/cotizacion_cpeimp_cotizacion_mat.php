@@ -255,33 +255,40 @@ $html = '
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 </head>
 <style type="text/css">
-    body {
+body {
         color: black;
         font-family: Verdana, Arial, Consolas;
         margin: 0px;
         padding-top: 0px;
-        font-size: 7.5pt;
+        font-size: 7pt;
     }
+
     .header_row th {
-        border: 0.9px solid #ddd;
-        background-color: #01a2e6
+        border-bottom: 0.9px solid #ed236c;
+        border-right: 0.9px solid #ed236c;
+        border-left: 0.9px solid #ed236c;
+        background-color: #ed236c;
+        text-transform:uppercase;
     }
-    .odd_row td {
-        background-color: transparent;
-        border-bottom: 0.9px solid #01a2e6;
-        padding-top: 5px;
-        padding-bottom: 5px;
-    }
-    .even_row td {
-        padding-top: 5px;
-        padding-bottom: 5px;
-        background-color: #01a2e6;
-        border-bottom: 0.9px solid #01a2e6;
-    }
+
     .row td{
-        border-right: 0.9px solid #01a2e6;
-        border-left: 0.9px solid #01a2e6;
-        line-height: 7px;
+        border-right: 0.9px solid #ed236c;
+        border-left: 0.9px solid #ed236c;
+        border-top: 0.9px solid #e1e1e1;
+    }
+    .cliente{
+        border: 1px solid #ed236c;
+        border-spacing:4px;
+    }
+
+    .datos-empresa{
+        text-align: center;
+        font-size: 8.5pt;
+    }
+
+    .tipo-documento{
+        text-align: center;
+        font-size: 11pt;
     }
 </style>
 
@@ -291,7 +298,7 @@ $html = '
     }
 
 </style>';
-$bordelineas="1px solid #01a2e6;";
+$bordelineas="1px solid #ed236c;";
 $html.='
 <body><table style="width: 100%; margin-bottom: 50mm" border="0">';
 if($estado=="ANULADA"){
@@ -350,7 +357,7 @@ $html.='<tr>
 </table>
 <br/>
 <br/>
-<table style="width: 100%;border:'.$bordelineas.'; border-collapse:collapse;line-height: 10px">
+<table style="width: 100%;border:'.$bordelineas.'; border-collapse:collapse;line-height: 5px">
     <tbody>
         <tr class="header_row">
             <th style="text-align: center; width: 5%;"><b>ITEM</b></th>
@@ -392,7 +399,7 @@ $html.='<tr class="row">';
             $html.='</tr>';
         $cont++;
     	}
-    while ($cont<=32) {
+    while ($cont<=50) {
         $html .= '<tr class="row">
                 <td style="text-align: center"></td>
                 <td style="text-align: center"></td>

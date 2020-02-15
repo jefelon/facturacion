@@ -657,10 +657,10 @@ if($_POST['action']=="editar"){
     }
     function venta_car(act,cat_id){
         var items=$('#hdd_ven_numite').val();
-        if(items>=50 && $('#cmb_ven_doc').val()==4) {
+        if(items>42 && $('#cmb_ven_doc').val()==4) {
             alert('Ha excedido el número de items para este comprobante.');
         }
-        if(items>=30 && ($('#cmb_ven_doc').val()==11 || $('#cmb_ven_doc').val()==12)) {
+        if(items>42&& ($('#cmb_ven_doc').val()==11 || $('#cmb_ven_doc').val()==12)) {
             alert('Ha excedido el número de items para este comprobante.');
         }
 

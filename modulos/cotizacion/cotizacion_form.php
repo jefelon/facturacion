@@ -292,6 +292,10 @@ function txt_venpag_fecven(){
 }
 
 function venta_car(act,cat_id){
+    var items=$('#hdd_ven_numite').val();
+    if(items>50) {
+        alert('Ha excedido el número de items para este comprobante.');
+    }
 	if(act=='agregar') {
 		var stouni=$('#hdd_bus_cat_stouni').val();
 		var cantidad=$('#txt_bus_cat_can').val();
@@ -665,6 +669,7 @@ function compararSunat(doc, nom, dir, id) {
 
 $(function() {
 	cmb_ven_doc();
+    cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
 	$("#txt_ven_numdoc").addClass("ui-state-active");
 	
 	$('#txt_ven_lab1').change(function(){
@@ -693,7 +698,19 @@ $(function() {
 			compararSunat(ui.item.value, ui.item.nombre, ui.item.direccion, ui.item.id);
 		}
     });
-	
+    $('#cmb_listaprecio_id').change(function(){
+        if($(this).val()){
+            $('#che_mayorista').prop('disabled',true);
+        }else{
+            $('#che_mayorista').prop('disabled',false);
+        }
+    });
+    $('#hdd_ven_cli_id').change(function(){
+        if ($('#hdd_ven_cli_id').val()!=''){
+            cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
+            $('#cmb_listaprecio_id').change();
+        }
+    });
 	$( "#txt_ven_cli_nom" ).autocomplete({
    		minLength: 1,
    		source: "../clientes/cliente_complete_nom.php",
@@ -1070,6 +1087,25 @@ $(function() {
 });
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function cmb_listaprecio_id(ids,cliente_id)
+{
+    $.ajax({
+        type: "POST",
+        url: "../listaprecio/cmb_precio_id.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            precio_id: ids,
+            cliente_id: cliente_id
+        }),
+        beforeSend: function() {
+            $('#cmb_listaprecio_id').html('<option value="">Cargando...</option>');
+        },
+        success: function(html){
+            $('#cmb_listaprecio_id').html(html);
+        }
+    });
+}
 
 function catalogo_buscar(cat_id) {
     $.ajax({
@@ -1437,6 +1473,9 @@ function bus_cantidad(act)
         <label for="che_mayorista">Precio Mayorista</label>
         <input type="checkbox" id="che_mayorista" style="margin-top: 5px;">
 
+        <label for="cmb_listaprecio_id">Lista Precios:</label>
+        <select name="cmb_listaprecio_id" id="cmb_listaprecio_id">
+        </select>
         <div id="msj_venta_det" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div>
 
     </fieldset>
