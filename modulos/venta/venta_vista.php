@@ -406,7 +406,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
             var valAct=$('#txt_ven_des').val();
             $.ajax({
                 type: "POST",
-                url: "venta_car_prorrateo.php",
+                url: "../venta/venta_car_prorrateo.php",
                 async:true,
                 dataType: "json",
                 data: ({

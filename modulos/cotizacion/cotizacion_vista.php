@@ -362,7 +362,31 @@ function venta_reporte(url)
 	$("#for_fil_ven").attr("action", url);
 	$("#for_fil_ven").submit();
 }
+function venta_car_prorrateo()
+{
+    var valAct=$('#txt_ven_des').val();
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_car_prorrateo.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            ven_des: 	$('#txt_ven_des').val(),
+        }),
+        beforeSend: function(){
+            $('#msj_venta_car_item').html("Cargando...");
+            $('#msj_venta_car_item').show(100);
+        },
+        success: function(data){
+            $('#msj_venta_car_item').html(data.msj);
+        },
+        complete: function(){
+            venta_car('actualizar');
 
+            $("#txt_ven_des option[value="+ valAct +"]").attr("selected",true);
+        }
+    });
+}
 function enviar_sunat(id)
 {
     if(confirm("Realmente desea Enviar a la Sunat?")){
