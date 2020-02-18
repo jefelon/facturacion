@@ -1146,6 +1146,7 @@ if($_POST['action']=="editar"){
                         text : direccionPrincipal
                     }));
                     $("#cmb_cli_suc option[value='0']").attr("selected", true);
+                    $('#txt_ven_guia_dir').val(direccionPrincipal);
                 }
             }
         });
@@ -1211,6 +1212,11 @@ if($_POST['action']=="editar"){
         $('#cmb_afec_id').change(function(){
             $('#hdd_detven_tip').val($('#cmb_afec_id').val());
         });
+
+        $('#cmb_cli_suc').change(function(){
+            $('#txt_ven_guia_dir').val($('#cmb_cli_suc').text());
+        });
+
 
         cmb_tar_id(<?php echo $tar_id?>);
         cmb_cuecor_id(<?php echo $cuecor_id?>);
