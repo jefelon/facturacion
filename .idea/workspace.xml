@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/modulos/servicio/existe_servicio.php" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/contenido/contenido.php" afterPath="$PROJECT_DIR$/modulos/contenido/contenido.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/libroselectronicos/libroelectronico_form.php" afterPath="$PROJECT_DIR$/modulos/libroselectronicos/libroelectronico_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/libroselectronicos/libroelectronico_reg.php" afterPath="$PROJECT_DIR$/modulos/libroselectronicos/libroelectronico_reg.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/marcacionpersonal/marcacionpersonal_form.php" afterPath="$PROJECT_DIR$/modulos/marcacionpersonal/marcacionpersonal_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/marcacionpersonal/marcacionpersonal_reg.php" afterPath="$PROJECT_DIR$/modulos/marcacionpersonal/marcacionpersonal_reg.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/planilla/planilla_form.php" afterPath="$PROJECT_DIR$/modulos/planilla/planilla_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/planilla/planilla_reg.php" afterPath="$PROJECT_DIR$/modulos/planilla/planilla_reg.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/servicio/cServicio.php" afterPath="$PROJECT_DIR$/modulos/servicio/cServicio.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/servicio/servicio_complete_nom.php" afterPath="$PROJECT_DIR$/modulos/servicio/servicio_complete_nom.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/servicio/servicio_form.php" afterPath="$PROJECT_DIR$/modulos/servicio/servicio_form.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/servicio/servicio_reg.php" afterPath="$PROJECT_DIR$/modulos/servicio/servicio_reg.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_form.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_form.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/recursoshumanos/recursoshumanos_reg.php" afterPath="$PROJECT_DIR$/modulos/recursoshumanos/recursoshumanos_reg.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -40,7 +27,7 @@
       <file leaf-file-name="venta_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
+            <state relative-caret-position="46002">
               <caret line="2706" column="94" lean-forward="false" selection-start-line="2706" selection-start-column="94" selection-end-line="2706" selection-end-column="94" />
               <folding />
             </state>
@@ -50,7 +37,7 @@
       <file leaf-file-name="contenido.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/contenido/contenido.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
+            <state relative-caret-position="2822">
               <caret line="166" column="45" lean-forward="false" selection-start-line="166" selection-start-column="45" selection-end-line="166" selection-end-column="45" />
               <folding>
                 <marker date="1582048101225" expanded="true" signature="188:977" ph="..." />
@@ -129,7 +116,7 @@
       <file leaf-file-name="tipocambiosunat_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/tipocambio/tipocambiosunat_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1541">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -139,14 +126,14 @@
       <file leaf-file-name="tipocambiosunat_filtro.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/tipocambio/tipocambiosunat_filtro.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="28" column="4" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="15" />
+            <state relative-caret-position="476">
+              <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_filtro.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="venta_filtro.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/tributos/venta_filtro.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="332">
@@ -156,10 +143,20 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="recursoshumanos_reg.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/modulos/recursoshumanos/recursoshumanos_reg.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="8" column="123" lean-forward="false" selection-start-line="8" selection-start-column="123" selection-end-line="8" selection-end-column="123" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="tipocambio_vista.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/tipocambio/tipocambio_vista.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3519">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
@@ -248,7 +245,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/config/20601411076-RA-20181110-001.xml" />
         <option value="$PROJECT_DIR$/config/20603179138-RA-20181110-001.xml" />
         <option value="$PROJECT_DIR$/modulos/comunicacionbaja/cVenta.php" />
         <option value="$PROJECT_DIR$/cpegeneracion/sunat/toarray.php" />
@@ -299,6 +295,7 @@
         <option value="$PROJECT_DIR$/modulos/venta/venta_form.php" />
         <option value="$PROJECT_DIR$/modulos/contenido/contenido.php" />
         <option value="$PROJECT_DIR$/modulos/tributos/venta_filtro.php" />
+        <option value="$PROJECT_DIR$/modulos/recursoshumanos/recursoshumanos_reg.php" />
       </list>
     </option>
   </component>
@@ -316,7 +313,7 @@
       <path value="C:\xampp\php\PEAR" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="181" />
     <option name="y" value="135" />
     <option name="width" value="1386" />
@@ -358,14 +355,20 @@
               <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
               <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="recursoshumanos" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
+            <path>
+              <item name="facturacion" type="b2602c69:ProjectViewProjectNode" />
+              <item name="facturacion" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="modulos" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="venta" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -449,27 +452,27 @@
       <workItem from="1546884910388" duration="11739000" />
       <workItem from="1549315079204" duration="11419000" />
       <workItem from="1582046118003" duration="3751000" />
+      <workItem from="1582060029537" duration="172000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="478284000" />
+    <option name="totallyTimeSpent" value="478456000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24158126" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Docker" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -479,6 +482,7 @@
       <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Database Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913387" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -569,13 +573,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/modulos/contable/contable_registro_venta_tabla.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="144" column="48" lean-forward="false" selection-start-line="144" selection-start-column="48" selection-end-line="144" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/modulos/contable/ple_tabla_ventas.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3264">
@@ -811,7 +808,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -827,7 +823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
           <caret line="15" column="60" lean-forward="false" selection-start-line="15" selection-start-column="50" selection-end-line="15" selection-end-column="60" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -835,7 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="127" column="31" lean-forward="false" selection-start-line="127" selection-start-column="31" selection-end-line="127" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -855,38 +849,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="550">
           <caret line="393" column="13" lean-forward="false" selection-start-line="393" selection-start-column="13" selection-end-line="393" selection-end-column="13" />
-          <folding>
-            <marker date="1582046109660" expanded="true" signature="260:1240" ph="INSERT INTO tb_venta... " />
-            <marker date="1582046109660" expanded="true" signature="2443:3129" ph="INSERT INTO tb_ventadetalle... " />
-            <marker date="1582046109660" expanded="true" signature="3435:3778" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="4230:4632" ph="SELECT SUM(t... " />
-            <marker date="1582046109660" expanded="true" signature="5165:6041" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="6631:6919" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="7079:7322" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="7530:8040" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="8659:9169" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="9838:10227" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="11150:12049" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="12815:13967" ph="SELECT tb_ve... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="14683:15379" ph="SELECT tb_ve... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="15966:16402" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="16532:16764" ph="SELECT cs_ti... tb_ventadetalle" />
-            <marker date="1582046109660" expanded="true" signature="16937:17006" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="17144:17946" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="18104:18689" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="18822:19281" ph="SELECT * FRO... tb_producto" />
-            <marker date="1582046109660" expanded="true" signature="19424:19617" ph="SELECT * FRO... tb_servicio" />
-            <marker date="1582046109660" expanded="true" signature="19759:19916" ph="UPDATE tb_venta... " />
-            <marker date="1582046109660" expanded="true" signature="20047:20146" ph="UPDATE tb_venta... " />
-            <marker date="1582046109660" expanded="true" signature="20263:20319" ph="SELECT * FRO... tb_usosoftware" />
-            <marker date="1582046109660" expanded="true" signature="20432:20471" ph="DELETE FROM tb_venta... " />
-            <marker date="1582046109660" expanded="true" signature="20580:20670" ph="SELECT DISTI... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="20807:21034" ph="SELECT * FRO... tb_venta" />
-            <marker date="1582046109660" expanded="true" signature="21164:21236" ph="UPDATE tb_venta... " />
-            <marker date="1582046109660" expanded="true" signature="21393:21623" ph="UPDATE tb_venta... " />
-            <marker date="1582046109660" expanded="true" signature="21772:21909" ph="UPDATE tb_venta... " />
-            <marker date="1582046109660" expanded="true" signature="22089:22272" ph="SELECT * FRO... tb_venta" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -894,7 +856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="120" column="30" lean-forward="false" selection-start-line="120" selection-start-column="30" selection-end-line="120" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -902,7 +863,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="115" lean-forward="false" selection-start-line="8" selection-start-column="115" selection-end-line="8" selection-end-column="115" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -910,7 +870,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="123" lean-forward="false" selection-start-line="8" selection-start-column="123" selection-end-line="8" selection-end-column="123" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -918,7 +877,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="127" column="30" lean-forward="false" selection-start-line="127" selection-start-column="30" selection-end-line="127" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -932,7 +890,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/venta/venta_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
+        <state relative-caret-position="46002">
           <caret line="2706" column="94" lean-forward="false" selection-start-line="2706" selection-start-column="94" selection-end-line="2706" selection-end-column="94" />
           <folding />
         </state>
@@ -940,7 +898,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/contenido/contenido.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
+        <state relative-caret-position="2822">
           <caret line="166" column="45" lean-forward="false" selection-start-line="166" selection-start-column="45" selection-end-line="166" selection-end-column="45" />
           <folding>
             <marker date="1582048101225" expanded="true" signature="188:977" ph="..." />
@@ -1017,7 +975,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/tipocambio/tipocambio_vista.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3519">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1025,7 +983,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/tipocambio/tipocambiosunat_form.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1541">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1033,8 +991,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/modulos/tipocambio/tipocambiosunat_filtro.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="28" column="4" lean-forward="true" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="15" />
+        <state relative-caret-position="476">
+          <caret line="28" column="4" lean-forward="false" selection-start-line="28" selection-start-column="4" selection-end-line="28" selection-end-column="15" />
           <folding />
         </state>
       </provider>
@@ -1043,6 +1001,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="332">
           <caret line="122" column="52" lean-forward="false" selection-start-line="122" selection-start-column="52" selection-end-line="122" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/recursoshumanos/recursoshumanos_reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="123" lean-forward="false" selection-start-line="8" selection-start-column="123" selection-end-line="8" selection-end-column="123" />
           <folding />
         </state>
       </provider>
