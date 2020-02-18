@@ -110,7 +110,7 @@ $(function() {
 			});
 		},
 		rules: {
-            txt_recnom_empresa: {
+            txt_recdoc_empresa: {
 				required: true
 			},
             txt_nomperspentrega: {
@@ -125,7 +125,7 @@ $(function() {
 
 		},
 		messages: {
-            txt_recnom_empresa: {
+            txt_recdoc_empresa: {
 				required: '*'
 			},
             txt_nomperspentrega: {

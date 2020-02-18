@@ -106,31 +106,25 @@ $(function() {
 			});
 		},
 		rules: {
-            txt_recnom_empresa: {
+            txt_recdoc_empresa: {
 				required: true
 			},
-            txt_nomperspentrega: {
+            txt_fech_ven: {
                 required: true
             },
-            txt_nomrecepdocumentos: {
-                required: true
-            },
-            txt_nompersrecojo: {
+            txt_docpersdecl: {
                 required: true
             }
 
 		},
 		messages: {
-            txt_recnom_empresa: {
+            txt_recdoc_empresa: {
 				required: '*'
 			},
-            txt_nomperspentrega: {
+            txt_fech_ven: {
                 required: '*'
             },
-            txt_nomrecepdocumentos: {
-                required: '*'
-            },
-            txt_nompersrecojo: {
+            txt_docpersdecl: {
                 required: '*'
             }
 		}

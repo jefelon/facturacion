@@ -2704,7 +2704,7 @@ if($_POST['action']=="editar"){
             <div id="div_productos_servicios_tab">
                 <ul>
                     <li><a id="carga_productos" href="#div_productos">Agregar Productos</a></li>
-                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
+                    <li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
                 </ul>
                 <div id="div_productos">
                     <div id="cuadro-contain" class="ui-widget">

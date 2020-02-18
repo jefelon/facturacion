@@ -113,7 +113,7 @@ if($_POST['action']=="editar")
                 });
             },
             rules: {
-                txt_recnom_empresa: {
+                txt_recdoc_empresa: {
                     required: true
                 },
                 txt_nomperspentrega: {
@@ -123,12 +123,15 @@ if($_POST['action']=="editar")
                     required: true
                 },
                 txt_nompersrecojo: {
+                    required: true
+                },
+                txt_docpersdecl: {
                     required: true
                 }
 
             },
             messages: {
-                txt_recnom_empresa: {
+                txt_recdoc_empresa: {
                     required: '*'
                 },
                 txt_nomperspentrega: {
@@ -139,7 +142,11 @@ if($_POST['action']=="editar")
                 },
                 txt_nompersrecojo: {
                     required: '*'
+                },
+                txt_docpersdecl: {
+                    required: '*'
                 }
+
             }
         });
         $( "#txt_fech_decl,#txt_fech_ven,#txt_fech_envio" ).datepicker({
@@ -167,8 +174,8 @@ if($_POST['action']=="editar")
         <tr>
             <td align="right" valign="top">Empresa:</td>
             <td>
-                <input name="txt_recdoc_empresa" type="text" id="txt_recdoc_empresa" value="<?php echo $recdoc_empresa?>" size="10" maxlength="11">
-                <input name="txt_recnom_empresa" type="text" id="txt_recnom_empresa" value="<?php echo $recnom_empresa?>" size="30">
+                <input name="txt_recdoc_empresa" type="text" id="txt_recdoc_empresa" value="<?php echo $recdoc_empresa?>" size="10" maxlength="11" required>
+                <input name="txt_recnom_empresa" type="text" id="txt_recnom_empresa" value="<?php echo $recnom_empresa?>" size="30" required>
             </td>
         </tr>
         <tr>
@@ -216,8 +223,8 @@ if($_POST['action']=="editar")
         <tr>
             <td align="right" valign="top">Resp. Declaración:</td>
             <td>
-                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11">
-                <input name="txt_docpersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30">
+                <input name="txt_docpersdecl" type="text" id="txt_docpersdecl" value="<?php echo $docpersdecl?>" size="10" maxlength="11" required>
+                <input name="txt_nompersdecl" type="text" id="txt_nompersdecl" value="<?php echo $nompersdecl?>" size="30" required>
             </td>
         </tr>
         <tr>

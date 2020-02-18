@@ -8,9 +8,10 @@ class ElementoAutocompletar {
    var $value;
    var $label;
    
-   function __construct($label, $value){
+   function __construct($label, $value, $serid){
       $this->label = $label;
       $this->value = $value;
+       $this->serid = $serid;
    }
 }
 
@@ -25,7 +26,7 @@ $arrayElementos = array();
 
 //bucle para meter todas las sugerencias de autocompletar en el array
 while ($fila = mysql_fetch_array($rs)){
-   array_push($arrayElementos, new ElementoAutocompletar($fila["tb_servicio_nom"], $fila["tb_servicio_nom"]));
+    array_push($arrayElementos, new ElementoAutocompletar($fila["tb_servicio_nom"], $fila["tb_servicio_nom"], $fila["tb_servicio_id"]));
 }
 
 print_r(json_encode($arrayElementos));

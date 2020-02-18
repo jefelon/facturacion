@@ -6,8 +6,7 @@ $oMarcacionpersonal = new cMarcacionpersonal();
 
 if($_POST['action_marcacionpersonal']=="insertar")
 {
-	if(!empty($_POST['hdd_recdoc_empresa_id']) && !empty($_POST['txt_fecha_ingreso']) && !empty($_POST['txt_fecha_salida'])
-        && !empty($_POST['txt_tardanza']) && !empty($_POST['txt_falta']) && !empty($_POST['txt_permisos']))
+	if(!empty($_POST['hdd_recdoc_empresa_id']) && !empty($_POST['txt_fecha_ingreso']) && !empty($_POST['txt_fecha_salida']))
 	{
 		$oMarcacionpersonal->insertar($_POST['hdd_recdoc_empresa_id'], fecha_mysql($_POST['txt_fecha_ingreso']),
             hora_mysql($_POST['txt_hora_ingreso']),fecha_mysql($_POST['txt_fecha_salida']),

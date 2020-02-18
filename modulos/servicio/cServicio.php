@@ -50,7 +50,17 @@ class cServicio{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
-	
+
+    function mostrar_filtro_3($nom){
+        $sql="SELECT * 
+        FROM tb_servicio p	
+        WHERE UPPER(tb_servicio_nom) = '$nom' AND tb_servicio_est='Activo'";
+        $sql.=" ORDER BY tb_servicio_nom ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 	
 	function mostrar_venta_detalle($ven_id){
 	$sql="SELECT * 
