@@ -139,7 +139,7 @@ $html = '
         font-family: Verdana, Arial, Consolas;
         margin: 0px;
         padding-top: 0px;
-        font-size: 7.5pt;
+        font-size: 7.2pt;
     }
 
     .header_row th {

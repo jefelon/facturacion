@@ -14,7 +14,7 @@ require_once("../venta/cVenta.php");
 $oVenta = new cVenta();
 
 $vvs=$oVenta->mostrar_asientos_ocupados($_POST['hdd_vi_ho_pos']);
-$num_asi=$_POST['num_asi'];
+$num_asi=$_POST['num_asi']; //número total de asientos
 
 $asi_ocu=array();
 while ($dt= mysql_fetch_array($vvs)){
@@ -23,10 +23,16 @@ while ($dt= mysql_fetch_array($vvs)){
 
 $asi_libre=array();
 for ($i=1;$i<=$num_asi;$i++){
-    foreach ($asi_ocu as $ocu){
-        if($i==$ocu){
-            $i++;
+    if($asi_ocu)
+    {
+        foreach ($asi_ocu as $ocu){
+            if($i==$ocu){
+                $i++;
+            }
+            $asi_libre[]=$i;
         }
+    }
+    else{
         $asi_libre[]=$i;
     }
 }

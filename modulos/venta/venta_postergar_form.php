@@ -26,7 +26,7 @@ $pv = mysql_fetch_array($pvs);
 
 $vehs=$oVehiculo->mostrarUno($_POST['hdd_vehiculo']);
 $veh = mysql_fetch_array($vehs);
-$num_asi=$veh['tb_vehiculo_numasi'];
+$num_asi=$veh['tb_vehiculo_numasi']; //numero total de asientos
 
 ?>
 
