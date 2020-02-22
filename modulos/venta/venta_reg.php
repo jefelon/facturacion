@@ -91,7 +91,7 @@ if($_POST['action']=="postergar")
     if(!empty($_POST['asiento_id']) && !empty($_POST['viaje_horario_id']) && !empty($_POST['viaje_horario_pos']))
     {
 
-        $aes=$oAsientoestado->mostrar_asiento_estado($_POST['viaje_horario_pos'],$_POST['asiento_id']);
+        $aes=$oAsientoestado->mostrar_asiento_estado($_POST['viaje_horario_pos'],$_POST['cmb_asiento_pos']);
         $ae_rows = mysql_numrows($aes);
         if($ae_rows<=0){
             $oVenta->modificar_venta_viaje($_POST['viaje_horario_id'],$_POST['asiento_id'],$_POST['viaje_horario_pos'],$_POST['cmb_asiento_pos']);

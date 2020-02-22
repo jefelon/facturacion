@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/config/Cado.php" afterPath="$PROJECT_DIR$/config/Cado.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/asiento/cmb_asi_dis.php" afterPath="$PROJECT_DIR$/modulos/asiento/cmb_asi_dis.php" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/cVenta.php" afterPath="$PROJECT_DIR$/modulos/venta/cVenta.php" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_reg.php" afterPath="$PROJECT_DIR$/modulos/venta/venta_reg.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -78,8 +76,8 @@
       <file leaf-file-name="venta_postergar_form.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_postergar_form.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="201">
-              <caret line="189" column="37" lean-forward="false" selection-start-line="189" selection-start-column="37" selection-end-line="189" selection-end-column="37" />
+            <state relative-caret-position="252">
+              <caret line="384" column="38" lean-forward="false" selection-start-line="384" selection-start-column="28" selection-end-line="384" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -150,7 +148,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_filtro_bus.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="venta_filtro_bus.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_filtro_bus.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-979">
@@ -160,15 +158,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="venta_reg.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="venta_reg.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/modulos/venta/venta_reg.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="99" column="14" lean-forward="true" selection-start-line="99" selection-start-column="14" selection-end-line="99" selection-end-column="14" />
+            <state relative-caret-position="364">
+              <caret line="93" column="104" lean-forward="false" selection-start-line="93" selection-start-column="104" selection-end-line="93" selection-end-column="104" />
               <folding>
-                <element signature="e#3482#31002#0#PHP" expanded="false" />
-                <element signature="e#31004#31538#0#PHP" expanded="false" />
-                <element signature="e#31540#31974#0#PHP" expanded="false" />
+                <element signature="e#3487#31007#0#PHP" expanded="false" />
+                <element signature="e#31009#31543#0#PHP" expanded="false" />
+                <element signature="e#31545#31979#0#PHP" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="cAsientoestado.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/modulos/asientoestado/cAsientoestado.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="270">
+              <caret line="23" column="74" lean-forward="false" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+              <folding>
+                <marker date="1582411148884" expanded="true" signature="536:717" ph="SELECT * FRO... tb_asientoestado" />
+                <marker date="1582411148884" expanded="true" signature="1051:1130" ph="DELETE FROM tb_asientoestado... " />
+                <marker date="1582411148884" expanded="true" signature="1340:1510" ph="UPDATE tb_asientoestado... " />
               </folding>
             </state>
           </provider>
@@ -253,8 +265,8 @@
       <find>reg</find>
       <find>poster</find>
       <find>num_asi</find>
-      <find>cmb_asiento_pos</find>
       <find>anular</find>
+      <find>cmb_asiento_pos</find>
     </findStrings>
     <replaceStrings>
       <replace>a-zetasoft.com</replace>
@@ -336,8 +348,6 @@
         <option value="$PROJECT_DIR$/modulos/clientes/pasajero_form.php" />
         <option value="$PROJECT_DIR$/libreriasphp/consultadni/consulta_reniec.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_asiento_form.php" />
-        <option value="$PROJECT_DIR$/modulos/asientoestado/cAsientoestado.php" />
-        <option value="$PROJECT_DIR$/modulos/venta/venta_reg.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_manifiesto_filtro.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_manifiesto_vista.php" />
         <option value="$PROJECT_DIR$/modulos/cuentasxcobrar/clientecuenta_tabla.php" />
@@ -350,6 +360,8 @@
         <option value="$PROJECT_DIR$/modulos/asiento/cmb_asi_dis.php" />
         <option value="$PROJECT_DIR$/modulos/venta/cVenta.php" />
         <option value="$PROJECT_DIR$/modulos/venta/venta_anular.php" />
+        <option value="$PROJECT_DIR$/modulos/asientoestado/cAsientoestado.php" />
+        <option value="$PROJECT_DIR$/modulos/venta/venta_reg.php" />
       </list>
     </option>
   </component>
@@ -369,7 +381,7 @@
       <path value="C:\xampp\php\PEAR" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="181" />
     <option name="y" value="135" />
     <option name="width" value="1386" />
@@ -564,12 +576,12 @@
       <workItem from="1580996449510" duration="618000" />
       <workItem from="1581013565804" duration="901000" />
       <workItem from="1582223372788" duration="3500000" />
-      <workItem from="1582403518092" duration="5213000" />
+      <workItem from="1582403518092" duration="6292000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="834034000" />
+    <option name="totallyTimeSpent" value="835113000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -581,7 +593,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25036603" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3289689" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -904,13 +916,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/asientoestado/cAsientoestado.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="356">
-          <caret line="46" column="41" lean-forward="true" selection-start-line="46" selection-start-column="41" selection-end-line="46" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cpegeneracion/xmlseclibs/fr3d/xmldsig/Adapter/XmlseclibsAdapter.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1819">
@@ -1017,31 +1022,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_postergar_form.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="201">
-          <caret line="189" column="37" lean-forward="false" selection-start-line="189" selection-start-column="37" selection-end-line="189" selection-end-column="37" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/../../phpMyAdmin/index.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="147">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_reg.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="99" column="14" lean-forward="true" selection-start-line="99" selection-start-column="14" selection-end-line="99" selection-end-column="14" />
-          <folding>
-            <element signature="e#3482#31002#0#PHP" expanded="false" />
-            <element signature="e#31004#31538#0#PHP" expanded="false" />
-            <element signature="e#31540#31974#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1129,6 +1114,38 @@
         <state relative-caret-position="-979">
           <caret line="96" column="28" lean-forward="false" selection-start-line="96" selection-start-column="28" selection-end-line="96" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/asientoestado/cAsientoestado.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="74" lean-forward="false" selection-start-line="23" selection-start-column="74" selection-end-line="23" selection-end-column="74" />
+          <folding>
+            <marker date="1582411148884" expanded="true" signature="536:717" ph="SELECT * FRO... tb_asientoestado" />
+            <marker date="1582411148884" expanded="true" signature="1051:1130" ph="DELETE FROM tb_asientoestado... " />
+            <marker date="1582411148884" expanded="true" signature="1340:1510" ph="UPDATE tb_asientoestado... " />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_postergar_form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="384" column="38" lean-forward="false" selection-start-line="384" selection-start-column="28" selection-end-line="384" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/modulos/venta/venta_reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="93" column="104" lean-forward="false" selection-start-line="93" selection-start-column="104" selection-end-line="93" selection-end-column="104" />
+          <folding>
+            <element signature="e#3487#31007#0#PHP" expanded="false" />
+            <element signature="e#31009#31543#0#PHP" expanded="false" />
+            <element signature="e#31545#31979#0#PHP" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
