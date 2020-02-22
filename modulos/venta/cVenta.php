@@ -830,6 +830,15 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function mostrar_asientos_reservados($vh_id){
+        $sql = "SELECT * 
+        FROM tb_asientoestado ae
+        INNER JOIN tb_viajehorario vh ON ae.tb_viajehorario_id=vh.tb_viajehorario_id
+        WHERE ae.tb_viajehorario_id=$vh_id and ae.tb_asientoestado_reserva=1 ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function modificar_venta_viaje($vh_id,$asiento_id, $n_vh_id,$asiento_pos_id){
         $sql="UPDATE tb_viajeventa SET

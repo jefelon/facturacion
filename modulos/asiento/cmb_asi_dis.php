@@ -14,29 +14,30 @@ require_once("../venta/cVenta.php");
 $oVenta = new cVenta();
 
 $vvs=$oVenta->mostrar_asientos_ocupados($_POST['hdd_vi_ho_pos']);
+$dset_ocu=$oVenta->mostrar_asientos_reservados($_POST['hdd_vi_ho_pos']);
+
 $num_asi=$_POST['num_asi']; //número total de asientos
+
+$i=1;
+$asi_libre=array();
+while ($i<=$num_asi){
+    $asi_libre[]=$i;
+    $i++;
+}
 
 $asi_ocu=array();
 while ($dt= mysql_fetch_array($vvs)){
     $asi_ocu[]=$dt['tb_asiento_nom'];
 }
 
-$asi_libre=array();
-for ($i=1;$i<=$num_asi;$i++){
-    if($asi_ocu)
-    {
-        foreach ($asi_ocu as $ocu){
-            if($i==$ocu){
-                $i++;
-            }
-            $asi_libre[]=$i;
-        }
-    }
-    else{
-        $asi_libre[]=$i;
-    }
+$asi_res=array();
+while ($dt2= mysql_fetch_array($dset_ocu)){
+    $asi_res[]=$dt2['tb_asiento_id'];
 }
 
-foreach ($asi_libre as $lib){
+$resultado = array_diff($asi_libre, $asi_ocu);
+$asi_libre_res=array_diff($resultado, $asi_res);
+
+foreach ($asi_libre_res as $lib){
     echo "<option value='".$lib."'>".$lib."</option>";
 }

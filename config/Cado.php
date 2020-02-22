@@ -11,7 +11,7 @@ class Cado{
 
     function Cado(){
         $this->Servidor = 'localhost'; $this->Usuario = 'root'; $this->Clave = '';
-        $this->BaseDatos ="transportefac";
+        $this->BaseDatos ="angelestour";
     }
 	
 	function conectar()
