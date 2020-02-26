@@ -1139,14 +1139,15 @@ if($_POST['action']=="editar"){
             },
             success: function(html){
                 $('#cmb_cli_suc').html(html);
-                var direccionPrincipal=  $('#txt_ven_cli_dir').val();
+
                 if($("#hdd_ven_cli_id" ).val()>0){
+                    var direccionPrincipal=  $('#txt_ven_cli_dir').val();
                     $('#cmb_cli_suc').append($('<option>', {
-                        value: 0,
+                        value: direccionPrincipal,
                         text : direccionPrincipal
                     }));
                     $("#cmb_cli_suc option[value='0']").attr("selected", true);
-                    $('#txt_ven_guia_dir').val(direccionPrincipal);
+                    $('#txt_ven_guia_dir').val( $('#cmb_cli_suc').val());
                 }
             }
         });
@@ -1214,7 +1215,7 @@ if($_POST['action']=="editar"){
         });
 
         $('#cmb_cli_suc').change(function(){
-            $('#txt_ven_guia_dir').val($('#cmb_cli_suc').text());
+            $('#txt_ven_guia_dir').val($('#cmb_cli_suc').val());
         });
 
 
