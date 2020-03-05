@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-06-2019 a las 02:33:47
+-- Tiempo de generación: 06-03-2020 a las 00:56:27
 -- Versión del servidor: 10.1.32-MariaDB
 -- Versión de PHP: 5.6.36
 
@@ -2663,7 +2663,15 @@ INSERT INTO `tb_asientoestado` (`tb_asientoestado_id`, `tb_asiento_id`, `tb_viaj
 (88, 3, 36, 1, 3),
 (89, 2, 38, 1, 4),
 (90, 6, 38, 1, 4),
-(91, 30, 0, 1, 0);
+(91, 30, 0, 1, 0),
+(92, 23, 0, 1, 0),
+(93, 25, 0, 1, 0),
+(94, 23, 0, 1, 0),
+(95, 15, 0, 1, 0),
+(96, 16, 0, 1, 0),
+(97, 24, 0, 1, 0),
+(98, 13, 0, 1, 0),
+(99, 23, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2934,7 +2942,9 @@ INSERT INTO `tb_cliente` (`tb_cliente_id`, `tb_cliente_tip`, `tb_cliente_doc`, `
 (23, 1, '47356859', 'ZAVALETA CASTRO BENJAMIN GUSTAVO', '', '', '', '', '', 0, 0, 0, 0),
 (24, 1, '47265865', 'SAHUARAURA AUCCAPUMA NELSON', '', '', '', '', '', 0, 0, 0, 0),
 (25, 1, '45065624', 'NAVARRO JUAREZ DIANA ELIZABETH', '', '', '', '', '', 0, 0, 0, 0),
-(26, 1, '47585625', 'GERONIMO TORRES KELIN KELVIS', '', '', '', '', '', 0, 0, 0, 0);
+(26, 1, '47585625', 'GERONIMO TORRES KELIN KELVIS', '', '', '', '', '', 0, 0, 0, 0),
+(27, 1, '47265895', 'SANDOVAL POLO CARMEN ROSA', '', '', '', '', '', 0, 0, 0, 0),
+(28, 1, '47095685', 'DE LA CRUZ AQUIJE RENZO JESUS', '', '', '', '', '', 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -3212,7 +3222,45 @@ INSERT INTO `tb_clientecuenta` (`tb_clientecuenta_id`, `tb_clientecuenta_fecreg`
 (237, '2019-02-20 10:53:34', 1, 1, '2019-02-20', 'VENTA CONTADO EFECTIVO | BE B001-0529', 1, '34.00', 1, 1, 11, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 0, 1, 1),
 (238, '2019-02-20 10:53:34', 1, 1, '2019-02-20', 'PAGO CONTADO EFECTIVO | BE B001-0529', 2, '34.00', 0, 1, 11, 1, 1, 0, 0, '', 0, '0000-00-00', 1, 1, 237, 1, 1),
 (239, '2019-06-10 21:37:35', 1, 1, '2019-06-10', 'VENTA CONTADO EFECTIVO | BE B001-0530', 1, '100.00', 1, 1, 12, 1, 1, 0, 0, '', 0, '0000-00-00', 16, 1, 0, 1, 1),
-(240, '2019-06-10 21:37:35', 1, 1, '2019-06-10', 'PAGO CONTADO EFECTIVO | BE B001-0530', 2, '100.00', 0, 1, 12, 1, 1, 0, 0, '', 0, '0000-00-00', 16, 1, 239, 1, 1);
+(240, '2019-06-10 21:37:35', 1, 1, '2019-06-10', 'PAGO CONTADO EFECTIVO | BE B001-0530', 2, '100.00', 0, 1, 12, 1, 1, 0, 0, '', 0, '0000-00-00', 16, 1, 239, 1, 1),
+(241, '2019-09-14 21:02:18', 1, 1, '2019-09-14', 'VENTA CONTADO EFECTIVO | BE B001-0531', 1, '10.00', 1, 1, 13, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(242, '2019-09-14 21:02:18', 1, 1, '2019-09-14', 'PAGO CONTADO EFECTIVO | BE B001-0531', 2, '10.00', 0, 1, 13, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 241, 1, 1),
+(243, '2019-09-14 21:07:18', 1, 1, '2019-09-14', 'VENTA CONTADO EFECTIVO | BE B001-0532', 1, '6.00', 1, 1, 14, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(244, '2019-09-14 21:07:18', 1, 1, '2019-09-14', 'PAGO CONTADO EFECTIVO | BE B001-0532', 2, '6.00', 0, 1, 14, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 243, 1, 1),
+(245, '2019-09-19 12:30:27', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0533', 1, '10.00', 1, 1, 15, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(246, '2019-09-19 12:30:27', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0533', 2, '10.00', 0, 1, 15, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 245, 1, 1),
+(247, '2019-09-19 13:16:31', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0534', 1, '30.00', 1, 1, 16, 1, 1, 0, 0, '', 0, '0000-00-00', 16, 1, 0, 1, 1),
+(248, '2019-09-19 13:16:31', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0534', 2, '30.00', 0, 1, 16, 1, 1, 0, 0, '', 0, '0000-00-00', 16, 1, 247, 1, 1),
+(249, '2019-09-19 13:17:37', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | FE F001-00082', 1, '30.00', 1, 1, 17, 1, 1, 0, 0, '', 0, '0000-00-00', 8, 1, 0, 1, 1),
+(250, '2019-09-19 13:17:37', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | FE F001-00082', 2, '30.00', 0, 1, 17, 1, 1, 0, 0, '', 0, '0000-00-00', 8, 1, 249, 1, 1),
+(251, '2019-09-19 13:50:55', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0535', 1, '50.00', 1, 1, 18, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(252, '2019-09-19 13:50:55', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0535', 2, '50.00', 0, 1, 18, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 251, 1, 1),
+(253, '2019-09-19 15:11:15', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0536', 1, '10.00', 1, 1, 19, 1, 1, 0, 0, '', 0, '0000-00-00', 15, 1, 0, 1, 1),
+(254, '2019-09-19 15:11:15', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0536', 2, '10.00', 0, 1, 19, 1, 1, 0, 0, '', 0, '0000-00-00', 15, 1, 253, 1, 1),
+(255, '2019-09-19 15:35:30', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | FE F001-00083', 1, '56.00', 1, 1, 20, 1, 1, 0, 0, '', 0, '0000-00-00', 18, 1, 0, 1, 1),
+(256, '2019-09-19 15:35:30', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | FE F001-00083', 2, '56.00', 0, 1, 20, 1, 1, 0, 0, '', 0, '0000-00-00', 18, 1, 255, 1, 1),
+(257, '2019-09-19 15:44:28', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | FE F001-00084', 1, '15.00', 1, 1, 21, 1, 1, 0, 0, '', 0, '0000-00-00', 18, 1, 0, 1, 1),
+(258, '2019-09-19 15:44:28', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | FE F001-00084', 2, '15.00', 0, 1, 21, 1, 1, 0, 0, '', 0, '0000-00-00', 18, 1, 257, 1, 1),
+(259, '2019-09-19 15:47:40', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0537', 1, '56.00', 1, 1, 22, 1, 1, 0, 0, '', 0, '0000-00-00', 16, 1, 0, 1, 1),
+(260, '2019-09-19 15:47:40', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0537', 2, '56.00', 0, 1, 22, 1, 1, 0, 0, '', 0, '0000-00-00', 16, 1, 259, 1, 1),
+(261, '2019-09-19 16:11:34', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0538', 1, '50.00', 1, 1, 23, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(262, '2019-09-19 16:11:34', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0538', 2, '50.00', 0, 1, 23, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 261, 1, 1),
+(263, '2019-09-19 16:17:31', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0539', 1, '20.00', 1, 1, 24, 1, 1, 0, 0, '', 0, '0000-00-00', 15, 1, 0, 1, 1),
+(264, '2019-09-19 16:17:31', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0539', 2, '20.00', 0, 1, 24, 1, 1, 0, 0, '', 0, '0000-00-00', 15, 1, 263, 1, 1),
+(265, '2019-09-19 16:26:41', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0540', 1, '30.00', 1, 1, 25, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(266, '2019-09-19 16:26:41', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0540', 2, '30.00', 0, 1, 25, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 265, 1, 1),
+(267, '2019-09-19 16:28:05', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | FE F001-00085', 1, '5.00', 1, 1, 26, 1, 1, 0, 0, '', 0, '0000-00-00', 18, 1, 0, 1, 1),
+(268, '2019-09-19 16:28:05', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | FE F001-00085', 2, '5.00', 0, 1, 26, 1, 1, 0, 0, '', 0, '0000-00-00', 18, 1, 267, 1, 1),
+(269, '2019-09-19 17:36:27', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0541', 1, '40.00', 1, 1, 27, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(270, '2019-09-19 17:36:27', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0541', 2, '40.00', 0, 1, 27, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 269, 1, 1),
+(271, '2019-09-19 19:00:26', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | NS NS01-00003', 1, '5.00', 1, 1, 30, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(272, '2019-09-19 19:00:26', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | NS NS01-00003', 2, '5.00', 0, 1, 30, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 271, 1, 1),
+(273, '2019-09-19 20:40:18', 1, 1, '2019-09-19', 'VENTA CONTADO EFECTIVO | BE B001-0548', 1, '30.00', 1, 1, 32, 1, 1, 0, 0, '', 0, '0000-00-00', 17, 1, 0, 1, 1),
+(274, '2019-09-19 20:40:18', 1, 1, '2019-09-19', 'PAGO CONTADO EFECTIVO | BE B001-0548', 2, '30.00', 0, 1, 32, 1, 1, 0, 0, '', 0, '0000-00-00', 17, 1, 273, 1, 1),
+(275, '2020-01-27 14:30:24', 1, 1, '2020-01-27', 'VENTA CONTADO EFECTIVO | BE B001-0549', 1, '5.00', 1, 1, 33, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 0, 1, 1),
+(276, '2020-01-27 14:30:24', 1, 1, '2020-01-27', 'PAGO CONTADO EFECTIVO | BE B001-0549', 2, '5.00', 0, 1, 33, 1, 1, 0, 0, '', 0, '0000-00-00', 7, 1, 275, 1, 1),
+(277, '2020-01-27 16:39:27', 1, 1, '2020-01-27', 'VENTA CONTADO EFECTIVO | BE B001-00552', 1, '25.00', 1, 1, 38, 1, 1, 0, 0, '', 0, '0000-00-00', 28, 1, 0, 1, 1),
+(278, '2020-01-27 16:39:28', 1, 1, '2020-01-27', 'PAGO CONTADO EFECTIVO | BE B001-00552', 2, '25.00', 0, 1, 38, 1, 1, 0, 0, '', 0, '0000-00-00', 28, 1, 277, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -4275,12 +4323,18 @@ INSERT INTO `tb_encomiendaventa` (`tb_encomiendaventa_id`, `tb_venta_id`, `tb_re
 (21, 115, 7, 1, 2, '12455', 0, 'juan peres chavez', NULL),
 (22, 116, 7, 1, 2, '1234', 0, 'chaves loza', NULL),
 (23, 1, 7, 1, 2, '11111', 0, 'juan', NULL),
-(24, 2, 7, 1, 2, '33333', 0, 'luis', NULL),
+(24, 2, 7, 1, 2, '33333', 0, 'luis', 1),
 (25, 3, 7, 1, 3, '4444', 0, 'dfgfg', NULL),
 (26, 4, 7, 1, 2, '1244', 0, 'peres guardiola', NULL),
 (27, 6, 7, 1, 3, '11111', 0, 'jose 454554', NULL),
 (28, 7, 7, 1, 2, '4444', 0, 'ghjghhj', NULL),
-(29, 8, 3, 1, 2, '1234', 0, '', NULL);
+(29, 8, 3, 1, 2, '1234', 0, '', NULL),
+(30, 25, 7, 1, 3, '12345', 0, 'JOSE LUIS PERALES', 1),
+(31, 26, 15, 1, 2, '1234', 0, 'LOZA DELGADO MIA', NULL),
+(32, 30, 7, 1, 4, '1234', 0, 'receptor', 1),
+(33, 32, 17, 1, 3, '1234', 0, 'donal', 1),
+(34, 33, 7, 1, 2, '1234', 1, 'recepcionista', 1),
+(35, 34, 12, 1, 2, '1111', 1, 'por pagar', 1);
 
 -- --------------------------------------------------------
 
@@ -4567,8 +4621,7 @@ CREATE TABLE `tb_horario` (
 
 INSERT INTO `tb_horario` (`tb_horario_id`, `tb_horario_reg`, `tb_horario_mod`, `tb_horario_nom`, `tb_horario_fecini`, `tb_horario_fecfin`, `tb_horario_lun`, `tb_horario_mar`, `tb_horario_mie`, `tb_horario_jue`, `tb_horario_vie`, `tb_horario_sab`, `tb_horario_dom`, `tb_horario_horini1`, `tb_horario_horfin1`, `tb_horario_horini2`, `tb_horario_horfin2`, `tb_horario_est`, `tb_empresa_id`) VALUES
 (1, '2013-01-02 00:29:58', '2018-03-16 19:18:25', 'HORARIO STANDAR', '2018-01-01', '2018-12-31', 1, 1, 1, 1, 1, 1, 1, '08:30:00', '23:59:00', NULL, NULL, 'ACTIVO', 0),
-(2, '2014-05-22 02:16:42', '2018-03-16 19:19:22', 'HORARIO VENDEDOR', '2015-01-01', '2018-12-31', 1, 1, 1, 1, 1, 1, 1, '01:00:00', '23:59:00', NULL, NULL, 'ACTIVO', 0),
-(3, '2018-04-03 16:16:42', '2018-04-03 16:16:55', 'horario de trabajo', '2018-04-02', '2018-04-27', 1, 1, 0, 1, 1, 1, 0, '03:00:00', '08:00:00', '16:00:00', '23:00:00', 'ACTIVO', 6);
+(2, '2014-05-22 02:16:42', '2020-01-27 14:41:37', 'HORARIO VENDEDOR', '2015-01-01', '2021-04-30', 1, 1, 1, 1, 1, 1, 1, '01:00:00', '23:59:00', NULL, NULL, 'ACTIVO', 0);
 
 -- --------------------------------------------------------
 
@@ -4724,7 +4777,30 @@ INSERT INTO `tb_ingreso` (`tb_ingreso_id`, `tb_ingreso_fecreg`, `tb_ingreso_fecm
 (118, '2019-01-31 18:24:24', '2019-01-31 18:24:24', 1, 1, 1, '2019-01-31', 12, 'B001-0528', 'VENTA BE B001-0528 | EFECTIVO', '30.00', 1, 22, 157, 24, 1, 1, 1, 9, 1),
 (119, '2019-02-20 10:53:12', '2019-02-20 10:53:12', 1, 1, 1, '2019-02-20', 15, 'NS01-00002', 'VENTA NS NS01-00002 | EFECTIVO', '34.00', 1, 22, 157, 1, 1, 1, 1, 10, 1),
 (120, '2019-02-20 10:53:34', '2019-02-20 10:53:34', 1, 1, 1, '2019-02-20', 12, 'B001-0529', 'VENTA BE B001-0529 | EFECTIVO', '34.00', 1, 22, 157, 1, 1, 1, 1, 11, 1),
-(121, '2019-06-10 21:37:35', '2019-06-10 21:37:35', 1, 1, 1, '2019-06-10', 12, 'B001-0530', 'VENTA BE B001-0530 | EFECTIVO', '100.00', 1, 22, 157, 16, 1, 1, 1, 12, 1);
+(121, '2019-06-10 21:37:35', '2019-06-10 21:37:35', 1, 1, 1, '2019-06-10', 12, 'B001-0530', 'VENTA BE B001-0530 | EFECTIVO', '100.00', 1, 22, 157, 16, 1, 1, 1, 12, 1),
+(122, '2019-09-14 21:02:18', '2019-09-14 21:02:18', 1, 1, 1, '2019-09-14', 12, 'B001-0531', 'VENTA BE B001-0531 | EFECTIVO', '10.00', 1, 22, 157, 7, 1, 1, 1, 13, 1),
+(123, '2019-09-14 21:07:18', '2019-09-14 21:07:18', 1, 1, 1, '2019-09-14', 12, 'B001-0532', 'VENTA BE B001-0532 | EFECTIVO', '6.00', 1, 22, 157, 7, 1, 1, 1, 14, 1),
+(124, '2019-09-19 12:30:27', '2019-09-19 12:30:27', 1, 1, 1, '2019-09-19', 12, 'B001-0533', 'VENTA BE B001-0533 | EFECTIVO', '10.00', 1, 22, 157, 7, 1, 1, 1, 15, 1),
+(125, '2019-09-19 13:16:31', '2019-09-19 13:16:31', 1, 1, 1, '2019-09-19', 12, 'B001-0534', 'VENTA BE B001-0534 | EFECTIVO', '30.00', 1, 22, 157, 16, 1, 1, 1, 16, 1),
+(126, '2019-09-19 13:17:37', '2019-09-19 13:17:37', 1, 1, 1, '2019-09-19', 11, 'F001-00082', 'VENTA FE F001-00082 | EFECTIVO', '30.00', 1, 22, 157, 8, 1, 1, 1, 17, 1),
+(127, '2019-09-19 13:50:55', '2019-09-19 13:50:55', 1, 1, 1, '2019-09-19', 12, 'B001-0535', 'VENTA BE B001-0535 | EFECTIVO', '50.00', 1, 22, 157, 7, 1, 1, 1, 18, 1),
+(128, '2019-09-19 15:11:15', '2019-09-19 15:11:15', 1, 1, 1, '2019-09-19', 12, 'B001-0536', 'VENTA BE B001-0536 | EFECTIVO', '10.00', 1, 22, 157, 15, 1, 1, 1, 19, 1),
+(129, '2019-09-19 15:35:30', '2019-09-19 15:35:30', 1, 1, 1, '2019-09-19', 11, 'F001-00083', 'VENTA FE F001-00083 | EFECTIVO', '56.00', 1, 22, 157, 18, 1, 1, 1, 20, 1),
+(130, '2019-09-19 15:44:28', '2019-09-19 15:44:28', 1, 1, 1, '2019-09-19', 11, 'F001-00084', 'VENTA FE F001-00084 | EFECTIVO', '15.00', 1, 22, 157, 18, 1, 1, 1, 21, 1),
+(131, '2019-09-19 15:47:40', '2019-09-19 15:47:40', 1, 1, 1, '2019-09-19', 12, 'B001-0537', 'VENTA BE B001-0537 | EFECTIVO', '56.00', 1, 22, 157, 16, 1, 1, 1, 22, 1),
+(132, '2019-09-19 16:11:34', '2019-09-19 16:11:34', 1, 1, 1, '2019-09-19', 12, 'B001-0538', 'VENTA BE B001-0538 | EFECTIVO', '50.00', 1, 22, 157, 7, 1, 1, 1, 23, 1),
+(133, '2019-09-19 16:17:31', '2019-09-19 16:17:31', 1, 1, 1, '2019-09-19', 12, 'B001-0539', 'VENTA BE B001-0539 | EFECTIVO', '20.00', 1, 22, 157, 15, 1, 1, 1, 24, 1),
+(134, '2019-09-19 16:26:41', '2019-09-19 16:26:41', 1, 1, 1, '2019-09-19', 12, 'B001-0540', 'VENTA BE B001-0540 | EFECTIVO', '30.00', 1, 22, 157, 7, 1, 1, 1, 25, 1),
+(135, '2019-09-19 16:28:05', '2019-09-19 16:28:05', 1, 1, 1, '2019-09-19', 11, 'F001-00085', 'VENTA FE F001-00085 | EFECTIVO', '5.00', 1, 22, 157, 18, 1, 1, 1, 26, 1),
+(136, '2019-09-19 17:36:27', '2019-09-19 17:36:27', 1, 1, 1, '2019-09-19', 12, 'B001-0541', 'VENTA BE B001-0541 | EFECTIVO', '40.00', 1, 22, 157, 7, 1, 1, 1, 27, 1),
+(137, '2019-09-19 18:54:27', '2019-09-19 18:54:27', 1, 1, 1, '2019-09-19', 12, 'B001-0545', 'VENTA  B001-0545 | EFECTIVO', '30.00', 1, 22, 157, 7, 1, 1, 1, 28, 1),
+(138, '2019-09-19 18:57:33', '2019-09-19 18:57:33', 1, 1, 1, '2019-09-19', 12, 'B001-0546', 'VENTA  B001-0546 | EFECTIVO', '7.50', 1, 22, 157, 7, 1, 1, 1, 29, 1),
+(139, '2019-09-19 19:00:26', '2019-09-19 19:00:26', 1, 1, 1, '2019-09-19', 15, 'NS01-00003', 'VENTA NS NS01-00003 | EFECTIVO', '5.00', 1, 22, 157, 7, 1, 1, 1, 30, 1),
+(140, '2019-09-19 19:01:16', '2019-09-19 19:01:16', 1, 1, 1, '2019-09-19', 12, 'B001-0547', 'VENTA  B001-0547 | EFECTIVO', '5.00', 1, 22, 157, 27, 1, 1, 1, 31, 1),
+(141, '2019-09-19 20:40:18', '2019-09-19 20:40:18', 1, 1, 1, '2019-09-19', 12, 'B001-0548', 'VENTA BE B001-0548 | EFECTIVO', '30.00', 1, 22, 157, 17, 1, 1, 1, 32, 1),
+(142, '2020-01-27 14:30:24', '2020-01-27 14:30:24', 1, 1, 1, '2020-01-27', 12, 'B001-0549', 'VENTA BE B001-0549 | EFECTIVO', '5.00', 1, 22, 157, 7, 1, 1, 1, 33, 1),
+(143, '2020-01-27 16:16:11', '2020-01-27 16:16:11', 35, 35, 1, '2020-01-27', 12, 'B001-0105', 'VENTA  B001-0105 | EFECTIVO', '6.00', 1, 22, 157, 28, 2, 1, 1, 35, 1),
+(144, '2020-01-27 16:39:28', '2020-01-27 16:39:28', 1, 1, 1, '2020-01-27', 12, 'B001-00552', 'VENTA BE B001-00552 | EFECTIVO', '25.00', 1, 22, 157, 28, 1, 1, 1, 38, 1);
 
 -- --------------------------------------------------------
 
@@ -4904,7 +4980,31 @@ INSERT INTO `tb_kardex` (`tb_kardex_id`, `tb_kardex_xac`, `tb_kardex_reg`, `tb_k
 (117, 1, '2019-01-31 18:24:24', 1, '117', '2019-01-31', 2, 12, 'B001-0528', 3, 'VENTA', 9, 1, 0, 1),
 (118, 1, '2019-02-20 10:53:14', 1, '118', '2019-02-20', 2, 15, 'NS01-00002', 3, 'VENTA', 10, 1, 0, 1),
 (119, 1, '2019-02-20 10:53:36', 1, '119', '2019-02-20', 2, 12, 'B001-0529', 3, 'VENTA', 11, 1, 0, 1),
-(120, 1, '2019-06-10 21:37:35', 1, '120', '2019-06-10', 2, 12, 'B001-0530', 3, 'VENTA', 12, 1, 0, 1);
+(120, 1, '2019-06-10 21:37:35', 1, '120', '2019-06-10', 2, 12, 'B001-0530', 3, 'VENTA', 12, 1, 0, 1),
+(121, 1, '2019-09-14 21:02:18', 1, '121', '2019-09-14', 2, 12, 'B001-0531', 3, 'VENTA', 13, 1, 0, 1),
+(122, 1, '2019-09-14 21:07:19', 1, '122', '2019-09-14', 2, 12, 'B001-0532', 3, 'VENTA', 14, 1, 0, 1),
+(123, 1, '2019-09-19 12:30:27', 1, '123', '2019-09-19', 2, 12, 'B001-0533', 3, 'VENTA', 15, 1, 0, 1),
+(124, 1, '2019-09-19 13:16:31', 1, '124', '2019-09-19', 2, 12, 'B001-0534', 3, 'VENTA', 16, 1, 0, 1),
+(125, 1, '2019-09-19 13:17:37', 1, '125', '2019-09-19', 2, 11, 'F001-00082', 3, 'VENTA', 17, 1, 0, 1),
+(126, 1, '2019-09-19 13:50:55', 1, '126', '2019-09-19', 2, 12, 'B001-0535', 3, 'VENTA', 18, 1, 0, 1),
+(127, 1, '2019-09-19 15:11:15', 1, '127', '2019-09-19', 2, 12, 'B001-0536', 3, 'VENTA', 19, 1, 0, 1),
+(128, 1, '2019-09-19 15:35:31', 1, '128', '2019-09-19', 2, 11, 'F001-00083', 3, 'VENTA', 20, 1, 0, 1),
+(129, 1, '2019-09-19 15:44:29', 1, '129', '2019-09-19', 2, 11, 'F001-00084', 3, 'VENTA', 21, 1, 0, 1),
+(130, 1, '2019-09-19 15:47:40', 1, '130', '2019-09-19', 2, 12, 'B001-0537', 3, 'VENTA', 22, 1, 0, 1),
+(131, 1, '2019-09-19 16:11:34', 1, '131', '2019-09-19', 2, 12, 'B001-0538', 3, 'VENTA', 23, 1, 0, 1),
+(132, 1, '2019-09-19 16:17:32', 1, '132', '2019-09-19', 2, 12, 'B001-0539', 3, 'VENTA', 24, 1, 0, 1),
+(133, 1, '2019-09-19 16:26:41', 1, '133', '2019-09-19', 2, 12, 'B001-0540', 3, 'VENTA', 25, 1, 0, 1),
+(134, 1, '2019-09-19 16:28:05', 1, '134', '2019-09-19', 2, 11, 'F001-00085', 3, 'VENTA', 26, 1, 0, 1),
+(135, 1, '2019-09-19 17:36:28', 1, '135', '2019-09-19', 2, 12, 'B001-0541', 3, 'VENTA', 27, 1, 0, 1),
+(136, 1, '1970-01-01 13:54:26', 1, '136', '1970-01-01', 1, 12, 'B001-0545', 11, 'VENTA', 28, 1, 0, 1),
+(137, 1, '1970-01-01 13:57:33', 1, '137', '1970-01-01', 1, 12, 'B001-0546', 11, 'VENTA', 29, 1, 0, 1),
+(138, 1, '2019-09-19 19:00:26', 1, '138', '2019-09-19', 2, 15, 'NS01-00003', 3, 'VENTA', 30, 1, 0, 1),
+(139, 1, '1970-01-01 14:01:16', 1, '139', '1970-01-01', 1, 12, 'B001-0547', 11, 'VENTA', 31, 1, 0, 1),
+(140, 1, '2019-09-19 20:40:18', 1, '140', '2019-09-19', 2, 12, 'B001-0548', 3, 'VENTA', 32, 1, 0, 1),
+(141, 1, '2020-01-27 14:30:24', 1, '141', '2020-01-27', 2, 12, 'B001-0549', 3, 'VENTA', 33, 1, 0, 1),
+(142, 1, '2020-01-27 16:15:33', 1, '142', '2020-01-27', 2, 15, 'NS01-00004', 3, 'VENTA', 34, 1, 0, 1),
+(143, 1, '1970-01-01 11:16:10', 1, '143', '1970-01-01', 1, 12, 'B001-0105', 11, 'VENTA', 35, 1, 0, 1),
+(144, 1, '2020-01-27 16:39:28', 1, '144', '2020-01-27', 2, 12, 'B001-00552', 3, 'VENTA', 38, 1, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -5438,16 +5538,18 @@ CREATE TABLE `tb_puntoventa` (
   `tb_puntoventa_nom` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `tb_almacen_id` int(11) NOT NULL,
   `tb_caja_id` int(11) NOT NULL,
-  `tb_empresa_id` int(11) NOT NULL
+  `tb_empresa_id` int(11) NOT NULL,
+  `tb_lugar_id` int(11) NOT NULL,
+  `tb_puntoventa_direccion` varchar(300) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tb_puntoventa`
 --
 
-INSERT INTO `tb_puntoventa` (`tb_puntoventa_id`, `tb_puntoventa_nom`, `tb_almacen_id`, `tb_caja_id`, `tb_empresa_id`) VALUES
-(1, 'CALLE PRINCIPAL NÂ° 345 - SABANDIA -AREQUIPA', 1, 1, 1),
-(2, 'NUEVO PUNTO', 1, 2, 1);
+INSERT INTO `tb_puntoventa` (`tb_puntoventa_id`, `tb_puntoventa_nom`, `tb_almacen_id`, `tb_caja_id`, `tb_empresa_id`, `tb_lugar_id`, `tb_puntoventa_direccion`) VALUES
+(1, 'CALLE PRINCIPAL NÂ° 345 - SABANDIA -AREQUIPA', 1, 1, 1, 1, 'DIRECCION'),
+(2, 'SUCURSAL -SECOCHA', 1, 2, 1, 2, 'DIRECCION 2');
 
 -- --------------------------------------------------------
 
@@ -5594,7 +5696,10 @@ INSERT INTO `tb_servicio` (`tb_servicio_id`, `tb_servicio_nom`, `tb_servicio_des
 (9, 'CAJAS BLANCAS', '', '5.00', 'Activo', 1, 1),
 (10, 'CEBOLLA', '', '10.00', 'Activo', 1, 1),
 (11, 'FUNCIONA', '', '15.00', 'Activo', 1, 1),
-(12, 'JAUJA A CHILLE IDA Y VUELTA', '', '100.00', 'Activo', 1, 1);
+(12, 'JAUJA A CHILLE IDA Y VUELTA', '', '100.00', 'Activo', 1, 1),
+(13, 'RELOJ EN CAJA', '', '30.00', 'Activo', 1, 1),
+(14, 'LATAS DE PINTURA', '', '4.00', 'Activo', 1, 1),
+(15, 'PASAJEBAGUA GRNADE', '', '25.00', 'Activo', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -5697,16 +5802,16 @@ CREATE TABLE `tb_talonario` (
 INSERT INTO `tb_talonario` (`tb_talonario_id`, `tb_talonario_reg`, `tb_talonario_mod`, `tb_talonario_ser`, `tb_talonario_ini`, `tb_talonario_fin`, `tb_talonario_num`, `tb_puntoventa_id`, `tb_documento_id`, `tb_talonario_est`, `tb_empresa_id`) VALUES
 (3, '2013-01-07 11:31:00', '2018-12-22 14:02:59', '0002', 1, 99999, 1882, 1, 2, 'ACTIVO', 1),
 (4, '2013-01-07 11:32:55', '2018-12-24 13:01:53', '0002', 1, 99999, 636, 1, 3, 'ACTIVO', 1),
-(17, '2016-11-26 17:49:45', '2019-01-31 15:45:54', 'F001', 1, 99999, 81, 1, 11, 'ACTIVO', 1),
-(19, '2016-11-27 23:12:03', '2019-06-10 21:37:35', 'B001', 1, 1300, 530, 1, 12, 'ACTIVO', 1),
-(20, '2018-03-03 12:07:43', '2019-01-17 21:38:00', 'B001', 1, 2333, 104, 2, 12, 'ACTIVO', 1),
+(17, '2016-11-26 17:49:45', '2019-09-19 16:28:05', 'F001', 1, 99999, 85, 1, 11, 'ACTIVO', 1),
+(19, '2016-11-27 23:12:03', '2020-01-27 16:39:28', 'B001', 1, 99999, 552, 1, 12, 'ACTIVO', 1),
+(20, '2018-03-03 12:07:43', '2020-01-27 16:16:10', 'B001', 1, 2333, 105, 2, 12, 'ACTIVO', 1),
 (21, '2018-03-23 14:01:45', '2018-06-05 13:19:03', 'CT', 1, 99999, 0, 1, 14, 'ACTIVO', 1),
 (22, '2018-04-02 19:37:33', '2018-04-02 19:39:28', 'F001', 1, 99999, 1, 5, 11, 'ACTIVO', 6),
 (23, '2018-04-03 18:05:01', '2018-04-04 17:03:37', '999999', 1, 1000, 3, 5, 14, 'ACTIVO', 6),
 (24, '2018-04-05 13:05:24', '2018-04-05 13:05:24', '55555', 1, 3333, 20, 3, 14, 'ACTIVO', 1),
 (25, '2018-04-05 13:06:37', '2018-04-05 13:06:37', '333333', 1, 33333, 10, 4, 14, 'ACTIVO', 1),
 (26, '2018-04-05 13:07:56', '2018-04-05 13:08:26', '3434343', 1, 4434, 1, 2, 14, 'ACTIVO', 1),
-(27, '2018-04-12 16:47:03', '2019-02-20 10:53:12', 'NS01', 1, 99999, 2, 1, 15, 'ACTIVO', 1),
+(27, '2018-04-12 16:47:03', '2020-01-27 16:15:33', 'NS01', 1, 99999, 4, 1, 15, 'ACTIVO', 1),
 (28, '2018-05-22 19:19:35', '2018-10-23 17:10:33', 'F001', 1, 10000, 46, 2, 11, 'ACTIVO', 1),
 (29, '2018-10-31 15:10:27', '2019-01-26 16:41:57', '0001', 1, 99999, 43, 1, 22, 'ACTIVO', 1);
 
@@ -8129,11 +8234,12 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`tb_usuario_id`, `tb_usuario_use`, `tb_usuario_pas`, `tb_usuario_apepat`, `tb_usuario_apemat`, `tb_usuario_nom`, `tb_usuario_ema`, `tb_usuario_reg`, `tb_usuario_mod`, `tb_usuario_ultvis`, `tb_usuario_blo`, `tb_usuariogrupo_id`, `tb_empresa_id`) VALUES
-(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2019-06-10 20:22:20', 0, 2, 1),
+(1, 'admin', '21232f297a57a5a743894a0e4a801fc3', '.', '.', 'REP VET MARVIC E.I.R.L.', 'rep.marvic@gmail.com', '0000-00-00 00:00:00', '2018-10-23 20:53:14', '2020-01-27 16:34:25', 0, 2, 1),
 (29, 'superusuario', '261a7d80916532797f8735dd198d4ada', 'APELLIDO PATERNO', 'APELIIDO MATERNO', 'SUPER', 'gerencia@a-zetasoft.com', '0000-00-00 00:00:00', '2018-03-03 12:28:53', '2018-12-27 18:54:26', 0, 1, 1),
 (30, 'vendedor', 'a60c36fc7c825e68bb5371a0e08f828a', 'ZIRENA', 'BEJARANO', 'ALFREDO', 'alfredzb@gmail.com', '0000-00-00 00:00:00', '2018-10-26 22:58:22', '2018-04-19 14:23:49', 0, 3, 1),
 (33, 'liquidador', '221b3a9e09a367bb69f7c7c1141c1dd9', 'PALOMINO', 'SANCHEZ', 'JOSE', 'rrpalomino65@hotmail.com', '2018-01-31 11:00:40', '2018-01-31 11:01:05', '2018-03-17 11:24:17', 0, 4, 1),
-(34, 'correo@gmail.com', '9fb49d1fb3f585794fb9ca7f39263773', 'APP', 'MAT', 'NOM', 'correo@gmail.com', '2018-12-27 18:58:24', '2018-12-27 18:58:24', '0000-00-00 00:00:00', 0, 2, 1);
+(34, 'correo@gmail.com', '9fb49d1fb3f585794fb9ca7f39263773', 'APP', 'MAT', 'NOM', 'correo@gmail.com', '2018-12-27 18:58:24', '2018-12-27 18:58:24', '0000-00-00 00:00:00', 0, 2, 1),
+(35, 'ventas', '530b350d414da3378a15b3149b322908', '.', '.', 'SECOCHA', 'correo@gmail.com', '2020-01-27 14:34:17', '2020-01-27 14:35:41', '2020-01-27 16:13:42', 0, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -8158,7 +8264,8 @@ INSERT INTO `tb_usuariodetalle` (`tb_usuario_id`, `tb_usuario_dni`, `tb_usuario_
 (29, '', '', 1, 0),
 (30, '', '', 1, 2),
 (33, '43219752', '', 0, 0),
-(34, '', '', 0, 0);
+(34, '', '', 0, 0),
+(35, '', '', 2, 2);
 
 -- --------------------------------------------------------
 
@@ -8202,7 +8309,8 @@ CREATE TABLE `tb_usuariopv` (
 INSERT INTO `tb_usuariopv` (`tb_usuariopv_id`, `tb_usuario_id`, `tb_puntoventa_id`) VALUES
 (1, 1, 1),
 (4, 33, 0),
-(7, 30, 1);
+(7, 30, 1),
+(8, 35, 2);
 
 -- --------------------------------------------------------
 
@@ -8274,26 +8382,59 @@ CREATE TABLE `tb_venta` (
   `tb_venta_val` varchar(200) COLLATE utf8_spanish_ci NOT NULL,
   `tb_venta_fecenvsun` datetime NOT NULL,
   `tb_venta_estsun` tinyint(1) NOT NULL,
-  `tb_vendedor_id` int(11) NOT NULL
+  `tb_vendedor_id` int(11) NOT NULL,
+  `tb_venta_origen` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `tb_venta_destino` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `tb_venta_fechasalida` date NOT NULL,
+  `tb_venta_horasalida` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `tb_venta_asiento` varchar(3) COLLATE utf8_spanish_ci NOT NULL,
+  `tb_venta_tipo` varchar(16) COLLATE utf8_spanish_ci NOT NULL,
+  `tb_venta_tipodes` varchar(100) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `tb_venta`
 --
 
-INSERT INTO `tb_venta` (`tb_venta_id`, `tb_venta_reg`, `tb_venta_fec`, `tb_documento_id`, `tb_venta_numdoc`, `tb_cliente_id`, `tb_venta_valven`, `tb_venta_des`, `tb_venta_igv`, `tb_venta_tot`, `tb_venta_est`, `tb_venta_lab1`, `tb_venta_lab2`, `tb_venta_lab3`, `tb_venta_may`, `tb_usuario_id`, `tb_puntoventa_id`, `tb_empresa_id`, `cs_tipodocumento_id`, `tb_venta_ser`, `tb_venta_num`, `cs_tipomoneda_id`, `tb_venta_gra`, `tb_venta_ina`, `tb_venta_exo`, `tb_venta_grat`, `tb_venta_isc`, `tb_venta_otrtri`, `tb_venta_otrcar`, `tb_venta_desglo`, `cs_tipooperacion_id`, `cs_documentosrelacionados_id`, `tb_venta_faucod`, `tb_venta_digval`, `tb_venta_sigval`, `tb_venta_val`, `tb_venta_fecenvsun`, `tb_venta_estsun`, `tb_vendedor_id`) VALUES
-(1, '2019-01-30 20:50:47', '2019-01-30', 11, 'F001-00078', 18, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00078', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'ddhLxkRopcEnTL9EE0zyt2BGixo=', 'FPuD6Ayw6/aEHOHBRBGIuQOLnOMxUkR6uRsd5fGkkdIb+1zRjgKmrFwAEAsuF9qtNKb7pQoCFiJbINc0dmK7uiFkHGPJseBUPs70wdC4lvwxQ4n/IVyOIUT5Ef/+MNuwFJiP9s3gRKl8SQULhL1XwdRWi9+m/QtmsRV0urGgZtHbaWfHF132Xt5yMA55197oJh51J+7uBnw/ZkhHcTfjknyyKcWF5L6Y/tqLFY1N5X3nK+D+j0LMR3ctiM+sovZEUm2kXorjhD5fvfINsCXPLIEgGdzql/+TYsB1gf4nQBKMWuHeZpIQyu32k+/JcPFusANIQU5oFF3Bn9DBFoxJ7g==', '1', '2019-01-30 20:53:44', 1, 1),
-(2, '2019-01-30 21:19:24', '2019-01-30', 11, 'F001-00079', 8, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00079', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'mw1zLjKeMBtw2mr5EM83rkC5r08=', 'mRuyLwFUwis0wLiQuzdSfgDpktnuIvmbM/oh0qgT0bqgE6PuGHMLmokPzOymXYDIf8xPqIRykgPlvSaXf1cEqRzm5tG8OJBpfZ9I0QXW9ujt3brjTgHVqUO9BvVjQLJ29N4ls0B4PzZeb4G9Ynus/bkBY2DPLlEqpRpJ6Fyk3Xboo9Kc3J4M9Su8PvDN11nDadUBdOA+g7MbBGOCHK7ioSYcPvW2wLMmHWFGt1zR9fR0zJPiB3S6YvhO+fQbfPr/VliD8i0lBTilQlvbqmXkckS7p/4C0Itf7NHDZY6AmEj4YI1KDhki8SKVcvH8t0cSonpSjgSDPV1fwGMRxajiNA==', '1', '2019-01-30 21:19:25', 1, 1),
-(3, '2019-01-30 21:26:12', '2019-01-30', 11, 'F001-00080', 18, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00080', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'lFluXinLhM9S76ChQwlHJRK31FQ=', 'OTy//xuPci+mwCeUH/VvzVlgJ7b5gR06aufZh1JF60JeSeIu85fBm8M1NkBsUmsLtnxWeB2r0J2zEgbca+2oFDPuSSySjjyIG05J5b5OerYQuj4np+qRJURKSqHAFAwPqFDhbp9/SmT4h9qUk5ps29pvmFKYhYDkloIBEMaJv63ci6QXTbHahfhzWIpb9hpE7vHD8yWknUwZAF20VLtrR4TO75f6P986sd4TSZrxfwUhB039vQca7UIHIptn6tAH1MrlDLlybJivbkoixhPLowrzyWKCA2scGDsbQL/kzm873WFzKZNXVaK3WOKE3zPF6ibHC6CuHFV73jfLNX6xIA==', '1', '2019-01-30 21:45:27', 1, 1),
-(4, '2019-01-31 15:45:54', '2019-01-31', 11, 'F001-00081', 18, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00081', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'YoqjNLZkKHi4bHyJRv5kj+PT4u4=', 'IQyvzMamNVBzcwtMMTRq3kLJG/cJW1frWClZal/VFXEMpYfUj0Hw9T1F69Jct2vXd4NdmnF4lCnOJTSNOX9+n2uXnZTcJnRpCffCv7CoiRxFgqsKuaF8PitNFS8Srv9UR20QqNTBSbyUjCsKx+L4nDtPnc/nBkI2tW1xUKHGmD0VpQyM3nlJEWpQ72/b3XxQEplI+Fnk8BpBjZ41BzdFw9YAwVaV2R4lg2apHHfs79khxfxFuhlmCbcFpTZ7Mv2y0Jwp6tBDpBr4Dy1NpwowJMSzU5BWi94aY6tI3K6ffkFjQjl+Af2m6AZV4OJ2V7vTI/WpsTY35ObEDgg2TwNO3Q==', '1', '2019-01-31 15:45:56', 1, 1),
-(5, '2019-01-31 16:24:17', '2019-01-31', 12, 'B001-0524', 7, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0524', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '4NCIkLf/Ua++9FH6Z3L/be9FEnQ=', 'WStrzsiI1iAKV7JY5PfTrh78dneycxEJ20z9AblKnvpmOovOGePSAi2vbugAKVP2Q6bXjejoimL3hpv57A1gLDIjU7Urw1b8mKC78PiyCdELiIBhUQRAWWXxLkYmgKAKfdRYzlb/3n20wzuNexhyv6fra0VbMNC3a0/f/CE1adFAwNYss4O+0f0WU5Wzy4r90w+T/K5Kk5JWXdF0BQx+OnLs2DqZZ98PZq1jT0YGmtSOJMTTuCqZriP0zVo8mxg5QGJiEMMzcZ7IO1kikpZV38xueyfKiQGIvm6XfOQfDOnYgHVc+1hLK930+Q78dKrNqQaag5yjCPz/i+DGYuWIaQ==', '1', '2019-01-31 16:24:19', 10, 1),
-(6, '2019-01-31 16:27:28', '2019-01-31', 12, 'B001-0525', 7, '0.00', '0.00', '0.00', '10.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0525', 1, '0.00', '0.00', '10.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '0GJTrtJFWJ7BsxqijX426csb0mI=', 'wZHFsTNTjWWw5au52ncCvmguiJJp+Vjfs/WAXOwkMsXoohdyRXIlG60Z441PQzlxgFjuR/NQoOnaUZxu63tHpejfgeguob6XU6vmxpByneXi2p0Fj4KIn5sXFRdiPIhKzVruem2CQgYbk0qXUxM/UIS84E4jJoyBQFWieBBE/sG9XFKB9IyCYrtRoCdWWPIRhcld+3yz+IWyeUozQZ7XljUPuYN599FNsE9TDelMRqeb4XKX0EpV2zSOO6wONTkZA57VQ33i1f9meqYLpOwn1EXonu+Eb74ECCv2wA2SdB8wPWkdfujWSzyL4hQ6aIi1r41PU1InJPqpl8coHH9CKg==', '1', '2019-01-31 16:27:29', 10, 1),
-(7, '2019-01-31 16:55:34', '2019-01-31', 12, 'B001-0526', 7, '0.00', '0.00', '0.00', '15.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0526', 1, '0.00', '0.00', '15.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'TSHhwY0kaE7Hq4fXKvl1snVd7Hw=', 'nMMn2Y1cZzFApbIsLxL5tdBL54o32/yoBLPwTZqP+YRj7vu+kUZhiXW7uxF6UgPCbupOUF/aK6FyK3Q7c3++9OmfGfOucCfzYB8UTzovwMWmn49BYHFJ7bY4RcnkGEVZXvOdS35fTEh6OR3SyOjqVAaaf7QPXzMvudfOtBBwRnCOFCOPLu1HtzLP/jxlOTwu7hqfOJEt93bwC0LK/8szIhQC5mpLVkOMhXNGt+nZfESMgHpL2Yeqi1NRWLpINXqDjET7iVLpu6cGVVioVQNOxuxWWtLswQWt8qywsyu1k+qrk3EC/6iA9tb2Rqtoj8Lv1SPM6kemxOs62UZBmLPZ6w==', '1', '2019-01-31 16:55:35', 10, 1),
-(8, '2019-01-31 17:18:45', '2019-01-31', 12, 'B001-0527', 3, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0527', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1),
-(9, '2019-01-31 18:24:24', '2019-01-31', 12, 'B001-0528', 24, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0528', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'Bm1LitE8RSNAPkEVyLiiWGraphM=', 'HVTLDaMqaABFyGDb/7ixwTdbSCWw9Y+lXUkwBC746VRJTRWluJeIsSKpqjdABVIxgvwjhNN9CDVZh8jtlAgdab/fITCTduSldM+LinG1wWbreFtD6AE8atHQ8HKuFD7b8ndUSPRl5h1y7UZ4vJ/2lcPk+o0Q8JJnhk2yNme5oblACeWAuliKEi+CLPnHxVHcVmphgLHNo2ZDVxXpDkrp71erIGR0w8BoAmsJuPO4/5haMxofuEHdQu7ir81AxqjmCNZX1GGGLLJnHnfgETf+E/sBTCZvausUNA3OSu+6w2t7xGIJ9iXY1tDe+CcGBBUcwyVjOACeOBqYYSSwyTgy0w==', '1', '2019-01-31 18:24:25', 10, 1),
-(10, '2019-02-20 10:53:12', '2019-02-20', 15, 'NS01-00002', 1, '0.00', '0.00', '0.00', '34.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 0, 'NS01', '00002', 1, '0.00', '0.00', '34.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1),
-(11, '2019-02-20 10:53:34', '2019-02-20', 12, 'B001-0529', 1, '0.00', '0.00', '0.00', '34.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0529', 1, '0.00', '0.00', '34.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1),
-(12, '2019-06-10 21:37:34', '2019-06-10', 12, 'B001-0530', 16, '0.00', '0.00', '0.00', '100.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0530', 1, '0.00', '0.00', '100.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'mToACnl+cTlFQweQVXw426o6tSY=', 'TiS7mE13djuv8QWeukSW83ws3whV/Kv/evZj2XntcFJt44XlJpfsruGDfESAGSmsCSuYLzIcYT2AwZ3O3SQ+T37SCJ53XjvpsR5vloQ5gfKHgrAfS32wUei/hdUg0P78GmXcXH8YdltL4m1+mjD/teXovURPZNZndmLPdGRw/jGQV6YCXOadysojmD9s39K90eGiOl4PqBObuM7EC2HfNq2XSfIEPpRsNKmPDderyXgJU+NQWkrkIrdXx+/OiL+DDI4XHloa6inXd8C3dpFxBX8/u2QVRW6QGRvhv5XcY1tGNFfmoH4+qoP+vTjbDtnS3LEUb5QaFHt1whtugrePaw==', '1', '2019-06-10 21:37:36', 10, 1);
+INSERT INTO `tb_venta` (`tb_venta_id`, `tb_venta_reg`, `tb_venta_fec`, `tb_documento_id`, `tb_venta_numdoc`, `tb_cliente_id`, `tb_venta_valven`, `tb_venta_des`, `tb_venta_igv`, `tb_venta_tot`, `tb_venta_est`, `tb_venta_lab1`, `tb_venta_lab2`, `tb_venta_lab3`, `tb_venta_may`, `tb_usuario_id`, `tb_puntoventa_id`, `tb_empresa_id`, `cs_tipodocumento_id`, `tb_venta_ser`, `tb_venta_num`, `cs_tipomoneda_id`, `tb_venta_gra`, `tb_venta_ina`, `tb_venta_exo`, `tb_venta_grat`, `tb_venta_isc`, `tb_venta_otrtri`, `tb_venta_otrcar`, `tb_venta_desglo`, `cs_tipooperacion_id`, `cs_documentosrelacionados_id`, `tb_venta_faucod`, `tb_venta_digval`, `tb_venta_sigval`, `tb_venta_val`, `tb_venta_fecenvsun`, `tb_venta_estsun`, `tb_vendedor_id`, `tb_venta_origen`, `tb_venta_destino`, `tb_venta_fechasalida`, `tb_venta_horasalida`, `tb_venta_asiento`, `tb_venta_tipo`, `tb_venta_tipodes`) VALUES
+(1, '2019-01-30 20:50:47', '2019-01-30', 11, 'F001-00078', 18, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00078', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'ddhLxkRopcEnTL9EE0zyt2BGixo=', 'FPuD6Ayw6/aEHOHBRBGIuQOLnOMxUkR6uRsd5fGkkdIb+1zRjgKmrFwAEAsuF9qtNKb7pQoCFiJbINc0dmK7uiFkHGPJseBUPs70wdC4lvwxQ4n/IVyOIUT5Ef/+MNuwFJiP9s3gRKl8SQULhL1XwdRWi9+m/QtmsRV0urGgZtHbaWfHF132Xt5yMA55197oJh51J+7uBnw/ZkhHcTfjknyyKcWF5L6Y/tqLFY1N5X3nK+D+j0LMR3ctiM+sovZEUm2kXorjhD5fvfINsCXPLIEgGdzql/+TYsB1gf4nQBKMWuHeZpIQyu32k+/JcPFusANIQU5oFF3Bn9DBFoxJ7g==', '1', '2019-01-30 20:53:44', 1, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(2, '2019-01-30 21:19:24', '2019-01-30', 11, 'F001-00079', 8, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00079', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'mw1zLjKeMBtw2mr5EM83rkC5r08=', 'mRuyLwFUwis0wLiQuzdSfgDpktnuIvmbM/oh0qgT0bqgE6PuGHMLmokPzOymXYDIf8xPqIRykgPlvSaXf1cEqRzm5tG8OJBpfZ9I0QXW9ujt3brjTgHVqUO9BvVjQLJ29N4ls0B4PzZeb4G9Ynus/bkBY2DPLlEqpRpJ6Fyk3Xboo9Kc3J4M9Su8PvDN11nDadUBdOA+g7MbBGOCHK7ioSYcPvW2wLMmHWFGt1zR9fR0zJPiB3S6YvhO+fQbfPr/VliD8i0lBTilQlvbqmXkckS7p/4C0Itf7NHDZY6AmEj4YI1KDhki8SKVcvH8t0cSonpSjgSDPV1fwGMRxajiNA==', '1', '2019-01-30 21:19:25', 1, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(3, '2019-01-30 21:26:12', '2019-01-30', 11, 'F001-00080', 18, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00080', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'lFluXinLhM9S76ChQwlHJRK31FQ=', 'OTy//xuPci+mwCeUH/VvzVlgJ7b5gR06aufZh1JF60JeSeIu85fBm8M1NkBsUmsLtnxWeB2r0J2zEgbca+2oFDPuSSySjjyIG05J5b5OerYQuj4np+qRJURKSqHAFAwPqFDhbp9/SmT4h9qUk5ps29pvmFKYhYDkloIBEMaJv63ci6QXTbHahfhzWIpb9hpE7vHD8yWknUwZAF20VLtrR4TO75f6P986sd4TSZrxfwUhB039vQca7UIHIptn6tAH1MrlDLlybJivbkoixhPLowrzyWKCA2scGDsbQL/kzm873WFzKZNXVaK3WOKE3zPF6ibHC6CuHFV73jfLNX6xIA==', '1', '2019-01-30 21:45:27', 1, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(4, '2019-01-31 15:45:54', '2019-01-31', 11, 'F001-00081', 18, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00081', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'YoqjNLZkKHi4bHyJRv5kj+PT4u4=', 'IQyvzMamNVBzcwtMMTRq3kLJG/cJW1frWClZal/VFXEMpYfUj0Hw9T1F69Jct2vXd4NdmnF4lCnOJTSNOX9+n2uXnZTcJnRpCffCv7CoiRxFgqsKuaF8PitNFS8Srv9UR20QqNTBSbyUjCsKx+L4nDtPnc/nBkI2tW1xUKHGmD0VpQyM3nlJEWpQ72/b3XxQEplI+Fnk8BpBjZ41BzdFw9YAwVaV2R4lg2apHHfs79khxfxFuhlmCbcFpTZ7Mv2y0Jwp6tBDpBr4Dy1NpwowJMSzU5BWi94aY6tI3K6ffkFjQjl+Af2m6AZV4OJ2V7vTI/WpsTY35ObEDgg2TwNO3Q==', '1', '2019-01-31 15:45:56', 1, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(5, '2019-01-31 16:24:17', '2019-01-31', 12, 'B001-0524', 7, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0524', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '4NCIkLf/Ua++9FH6Z3L/be9FEnQ=', 'WStrzsiI1iAKV7JY5PfTrh78dneycxEJ20z9AblKnvpmOovOGePSAi2vbugAKVP2Q6bXjejoimL3hpv57A1gLDIjU7Urw1b8mKC78PiyCdELiIBhUQRAWWXxLkYmgKAKfdRYzlb/3n20wzuNexhyv6fra0VbMNC3a0/f/CE1adFAwNYss4O+0f0WU5Wzy4r90w+T/K5Kk5JWXdF0BQx+OnLs2DqZZ98PZq1jT0YGmtSOJMTTuCqZriP0zVo8mxg5QGJiEMMzcZ7IO1kikpZV38xueyfKiQGIvm6XfOQfDOnYgHVc+1hLK930+Q78dKrNqQaag5yjCPz/i+DGYuWIaQ==', '1', '2019-01-31 16:24:19', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(6, '2019-01-31 16:27:28', '2019-01-31', 12, 'B001-0525', 7, '0.00', '0.00', '0.00', '10.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0525', 1, '0.00', '0.00', '10.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '0GJTrtJFWJ7BsxqijX426csb0mI=', 'wZHFsTNTjWWw5au52ncCvmguiJJp+Vjfs/WAXOwkMsXoohdyRXIlG60Z441PQzlxgFjuR/NQoOnaUZxu63tHpejfgeguob6XU6vmxpByneXi2p0Fj4KIn5sXFRdiPIhKzVruem2CQgYbk0qXUxM/UIS84E4jJoyBQFWieBBE/sG9XFKB9IyCYrtRoCdWWPIRhcld+3yz+IWyeUozQZ7XljUPuYN599FNsE9TDelMRqeb4XKX0EpV2zSOO6wONTkZA57VQ33i1f9meqYLpOwn1EXonu+Eb74ECCv2wA2SdB8wPWkdfujWSzyL4hQ6aIi1r41PU1InJPqpl8coHH9CKg==', '1', '2019-01-31 16:27:29', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(7, '2019-01-31 16:55:34', '2019-01-31', 12, 'B001-0526', 7, '0.00', '0.00', '0.00', '15.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0526', 1, '0.00', '0.00', '15.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'TSHhwY0kaE7Hq4fXKvl1snVd7Hw=', 'nMMn2Y1cZzFApbIsLxL5tdBL54o32/yoBLPwTZqP+YRj7vu+kUZhiXW7uxF6UgPCbupOUF/aK6FyK3Q7c3++9OmfGfOucCfzYB8UTzovwMWmn49BYHFJ7bY4RcnkGEVZXvOdS35fTEh6OR3SyOjqVAaaf7QPXzMvudfOtBBwRnCOFCOPLu1HtzLP/jxlOTwu7hqfOJEt93bwC0LK/8szIhQC5mpLVkOMhXNGt+nZfESMgHpL2Yeqi1NRWLpINXqDjET7iVLpu6cGVVioVQNOxuxWWtLswQWt8qywsyu1k+qrk3EC/6iA9tb2Rqtoj8Lv1SPM6kemxOs62UZBmLPZ6w==', '1', '2019-01-31 16:55:35', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(8, '2019-01-31 17:18:45', '2019-01-31', 12, 'B001-0527', 3, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0527', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(9, '2019-01-31 18:24:24', '2019-01-31', 12, 'B001-0528', 24, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0528', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'Bm1LitE8RSNAPkEVyLiiWGraphM=', 'HVTLDaMqaABFyGDb/7ixwTdbSCWw9Y+lXUkwBC746VRJTRWluJeIsSKpqjdABVIxgvwjhNN9CDVZh8jtlAgdab/fITCTduSldM+LinG1wWbreFtD6AE8atHQ8HKuFD7b8ndUSPRl5h1y7UZ4vJ/2lcPk+o0Q8JJnhk2yNme5oblACeWAuliKEi+CLPnHxVHcVmphgLHNo2ZDVxXpDkrp71erIGR0w8BoAmsJuPO4/5haMxofuEHdQu7ir81AxqjmCNZX1GGGLLJnHnfgETf+E/sBTCZvausUNA3OSu+6w2t7xGIJ9iXY1tDe+CcGBBUcwyVjOACeOBqYYSSwyTgy0w==', '1', '2019-01-31 18:24:25', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(10, '2019-02-20 10:53:12', '2019-02-20', 15, 'NS01-00002', 1, '0.00', '0.00', '0.00', '34.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 0, 'NS01', '00002', 1, '0.00', '0.00', '34.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(11, '2019-02-20 10:53:34', '2019-02-20', 12, 'B001-0529', 1, '0.00', '0.00', '0.00', '34.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0529', 1, '0.00', '0.00', '34.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(12, '2019-06-10 21:37:34', '2019-06-10', 12, 'B001-0530', 16, '0.00', '0.00', '0.00', '100.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0530', 1, '0.00', '0.00', '100.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'mToACnl+cTlFQweQVXw426o6tSY=', 'TiS7mE13djuv8QWeukSW83ws3whV/Kv/evZj2XntcFJt44XlJpfsruGDfESAGSmsCSuYLzIcYT2AwZ3O3SQ+T37SCJ53XjvpsR5vloQ5gfKHgrAfS32wUei/hdUg0P78GmXcXH8YdltL4m1+mjD/teXovURPZNZndmLPdGRw/jGQV6YCXOadysojmD9s39K90eGiOl4PqBObuM7EC2HfNq2XSfIEPpRsNKmPDderyXgJU+NQWkrkIrdXx+/OiL+DDI4XHloa6inXd8C3dpFxBX8/u2QVRW6QGRvhv5XcY1tGNFfmoH4+qoP+vTjbDtnS3LEUb5QaFHt1whtugrePaw==', '1', '2019-06-10 21:37:36', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(13, '2019-09-14 21:02:18', '2019-09-14', 12, 'B001-0531', 7, '0.00', '0.00', '0.00', '10.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0531', 1, '0.00', '0.00', '10.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '3rt4A3gl1qAXkhqKvwZvPRAZJCI=', 'YMsRpqd+p2V/p0XPvhvjQlPVWHBup2/nOLU1AVSdn6XqkIl6lifRO/sT14kNKrx9lVJDYa5UOfUsUiaBwKozwigj/Wdf1aMOAjO6MTUuF/c5YY+AT+cBEzCTT2mPKquXgtj+4FmO9WFNo9bKJKSiTOSx8LAovBRouW9WodalcFnaMIEXOCsf/KycprOO9xHBrMBoS90Wuf6rkU3TtvsWZT5N3w6K5izMjcjnIwDoy6UwHeQ2B4odtgklhpoSfW1IE9ZG4D+8CdcqrrPS5V7TByrkxsqi0vrn/BH0N+M7M2jPraQ3aLYm+LM7GkAm8d6HXDx3iY4LkNPhIzGBbq5yfQ==', '1', '2019-09-14 21:02:19', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(14, '2019-09-14 21:07:18', '2019-09-14', 12, 'B001-0532', 7, '5.08', '0.00', '0.92', '6.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0532', 1, '5.08', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'N7Kr/dZzL7d5WEXNMieRZwSRaz8=', 'OQf024vGwFGwsrFvqCDfkyLcggV0c2iP2FV9G1/XbSjiGA3Ysh4ZftfIhGwUwwymh/mZ/Q4l/wePmHYg/+96mqsk5SpzgJ/8oSUfcAtn2Z38Zz8Go89T2w91X9aVLc6eV+dEdBdVSVUN9QNd5ovSq1RMLO8Qb4/fdsxP7O4s+g0tqfytZbJkL9OYPqHl/3SDrTRlXdRXSKTWxDQ6blRDGVzekA7YvaJBIxn+wY/bydIV2cV80R8QKcsQ+ktFNOvToKFJbhFQX2QCuOJfyN00qKvRQzyVcF3NcAOd6zOAQzKCrEmmNI2oO5HtRK/Zeos5XLIeq8Vi0PmfLHIwLHuR7A==', '1', '2019-09-14 21:07:19', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(15, '2019-09-19 12:30:27', '2019-09-19', 12, 'B001-0533', 7, '8.47', '0.00', '1.53', '10.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0533', 1, '8.47', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'I3bcK5fiDdcua9RnxviUqdjvU24=', 'N35ZmNgfuH+Olz6SsZbPMvoH6iAmoVfR4K1ZwAHY96yJ5TUjZgt7hnCbwG9bFpSZeOGu/hdyCNO0o3o2d4Y1Sws4m0zbIzJMXDNTUfBe2oMfT5VV7UNHdYC04kz8GdynEYP0IZba68S7ZVQar64r/rm/EHH9+IhKws0JaXTgzKjdkyB9Jk0tOFL8jiQQ56H2Z68VeBal87dDaEyQ4qYONfTP66hVq7d2rwngP73QIs6pEqivuSvulIpW+T+fBGmL4wIum4EAO9fcUHlA3vv2ATo+naQZgSLpUeOJO00JfIdjibiaakw6P/F0iSm+M+PutrlcEJYsAmggLUa5XbOEdw==', '1', '2019-09-19 12:30:28', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(16, '2019-09-19 13:16:31', '2019-09-19', 12, 'B001-0534', 16, '25.42', '0.00', '4.58', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0534', 1, '25.42', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '9o0WTapMqx8dEpnwK1jN8+gifA0=', 'c1PRfz264dRYxanV98zvixd9kKJ4gMDTOuHF/5h+8XnPjvArjSbTwjZz9we+7Xkj5Hb/sFm9Y7tu80QxF1P68kWboRQjcKd0PUyaLBCs2jtsnr/sw8sS/nu1XR7peholCaeJrfe1vh/xLxDdOkXfpZ925J1N98P5vDLU/8x3k/tP/PBhHnaCt/1gjY+nsaELoUmMoprI4i5zyef+PkxJWMONPyypQ/F0WU1uwWWxEfLCutBfO+nwATL+jwxUSWRtjOEYaarmFq06ED0bQmiLCOG92qBOTyyfoMWfr15u3+FyUN/2WKtuCWmRK+ZocfUo2L7Il0J7FGeZddBgXFQDEA==', '1', '2019-09-19 13:16:31', 10, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(17, '2019-09-19 13:17:37', '2019-09-19', 11, 'F001-00082', 8, '25.42', '0.00', '4.58', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00082', 1, '25.42', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'XXRMqAMHxWKzOfREGqzlLCHSqks=', 'lTVZgmkd6kxRAsSW+S4RpCQ4lrMKUAzpv1o6SZrCt/kTr+w23gprbh2rN4ouWF5rwxtY631e4KL/AwveuuA0uEl9CpoVOF5ta2JBLBlTuAVkQKIjhBquKjW9MoKetAFOkXKX2QQh52CL6ZuaTgZo4QHvU1ep1B15G8+2o1X1f8tl+50b5J5eCQ/Xm1oNjNzxVp1hgR+o833kEyv2KNbx1ZHBfZh02//CktuNDuELiHLeLuYicLyRAXKA1mqBpHPOLRlCHzDOetSOzLS9S7v5XpKFjH9fW4nbjFzf6eb46e7umEZpygrjd+fUnnmle9wRZkDoUvD5yUddtSSF44fHQg==', '1', '2019-09-19 13:17:38', 1, 1, '0', '0', '0000-00-00', '', '', '', ''),
+(18, '2019-09-19 13:50:55', '2019-09-19', 12, 'B001-0535', 7, '0.00', '4.00', '0.00', '50.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0535', 1, '0.00', '0.00', '50.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '6J3t0hOwVCMDjdIKW2MOhTuly5Y=', 'sR6nxPcway6qa7DOwdg2Jn0eeBKcTubCCBW8o/J82CAx01jYBtEHg/hty7nJnT7NWpDPeuik2OLBgeKWwXFGWxKHgAvc1hIexL0L/ZempntxGhSbOdIFhrEiYTz17JCN5wobx7GZy+PZQVTeedXBh/4hEU3mhAc8to6J12wenmNl0TUZlvgX9NuoaznFVWe6PtqFDluQBDUlBGdmE0I4lxGdjVffFC2Pdqn7UVguDRP5t6vVeADcZSPrR71LfzcwqkVJnJ65JhVXomnb5Si3gn2wM29z5hnUVx7cptNkyhuSD2lRo4zehyaTad1M5HkvcGP7pcUBdA+Pdc2jUQa0Xw==', '1', '2019-09-19 13:50:56', 10, 1, '3', '4', '0000-00-00', '8:30PM', '40', 'PASAJE', ''),
+(19, '2019-09-19 15:11:15', '2019-09-19', 12, 'B001-0536', 15, '8.47', '0.00', '1.53', '10.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0536', 1, '8.47', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'cJfUxFqg16qC0tXwxsomNzjV0JY=', 'SVK+HJVLO8Ef4qi5OPG78tP5BjUHiBwqy6xwBuLxLuokpBQ7y2KZj4L+KgQq3G0qZ1q6mGpwcQiBb2JEWgs4WJCt0ucIqyBsYCTCsYbAqf3C6LRYLp92mX4xbo3HkeFri9umt0EhTXz4uGsbRDKjWBeVb/ZbyWAFh8YPN/OZLzD1857oaqGn7lKQOqhgE+3Q7AQYDl6lz2n32o6DS60bWiGDB9EIvwVFUKs6nGfBMe74gBQubYSIWomaX6bIZlWQMXuBT4WYiwOF0XomTRq0+K3u0+sgRP8bBT9GPLXlyihjKhQl0OmbFCJMwcNjTWxO6z/d1AMKn4mUIYFA+rLmPw==', '1', '2019-09-19 15:11:17', 10, 1, 'Arequipa', 'Secocha', '2019-09-19', '8:30pm', '20', 'PASAJE', ''),
+(20, '2019-09-19 15:35:30', '2019-09-19', 11, 'F001-00083', 18, '0.00', '0.00', '0.00', '56.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00083', 1, '0.00', '0.00', '56.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'L50M82oquQzOlDdb1FN3ITkDmUA=', 'VINpU6jSP7pCvyAINrCBFS2SdgnDt4/6H9K1yLatjK71kj3NuQFlBUy80LqvUUOpaz9JUrrvqq0xU2hHod8+ATmx5Hpn7KLKIfGW9q2HtU8Px9cnAsIK332bWERO+BhiLDqltZz43A7tdm2c9v+6Me01XocdU67uDsF2uXKvIJzv4aKzdvFIlwWeT2sR7HW9iraBtuF0QO5iBe7DlsuvQQ67bX5SrpsdPaxLqBpV659IIrwToz7sRaUoYyKsW59R8SaLgY3bit8Dz19whr0Xb65htSRIOrGigGYYvtvY8nPZmuhwbXh0xhyE1CSacJVL+IIH7a1RTOvyTbW3GE1fFQ==', '1', '2019-09-19 15:35:32', 1, 1, 'Arequipa', 'Secocha', '2019-09-12', '8:30PM', '20', 'PASAJE', ''),
+(21, '2019-09-19 15:44:28', '2019-09-19', 11, 'F001-00084', 18, '0.00', '0.00', '0.00', '15.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00084', 1, '0.00', '0.00', '15.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'Dh8PDcVVslcx1tHU2xS+2KdpFx8=', 'j1Cq5r+BXhYbfoDrlWzVfmMDHxo8hyu7WTR9A0NJ5RTPkHIKDA0T6bBsNB0v5Nyh/tv/JEWtRdhNBQs2UynPeKcDEUYErc+oI9U8n38AUxPUcu2kkNdY436COE7SelbjP4E5Z7Y3xHuBUFgn5zuaXAKdUR5+uZKkN7SQG2L9KC+7GjDRTAWRaOEfIM7kWRkYgwoNdLomR4yie9l9H+8ln4xYsb6oGEDfXlexomzKPl2fEIAD4slaThMc76xN4Uw9lVcNao/LuAeMAnTp9vHpSeSsKNV/1cswXzMxAcFpGJZJkiZQukeUsPyiMGdCGylq2kU1xysYRNflI4b6C6Gzyw==', '1', '2019-09-19 15:44:29', 1, 1, 'Arequipa', 'Santo Tomas', '2019-09-19', '08:30PM', '23', 'pasaje', ''),
+(22, '2019-09-19 15:47:40', '2019-09-19', 12, 'B001-0537', 16, '0.00', '0.00', '0.00', '56.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0537', 1, '0.00', '0.00', '56.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'lr8wFOo7aJAMq4KsiQpiXh3O/3Y=', 'V9XtGMbEwSaOJHs+FB85aXUy6mBjYPFS01i6S9eGuwu8UK6aJtaTDhUweyeXF+i+FmpjYz6rh0UWutRyhwBdOOOK54T+x0nPd7SwY32hRpwX/4whnLfzqMx1QaUQYLuLI5vrwERfvp4ymOCqqbjgbo++F4XdTuln7b7UJeWZc64cnNCW56nQRVxvbbnpUAl2LlOl76FED4JGezLokB6Sb+/vZcKLPEUUc0AGk0dqooIsv7wUJk2mZPVoeaYyFUeoMMsBGe2iwD4j+mFZdTg7yG8+ZzoNoie85+zpRXGZuAi+vGH3kbdpIVKwVoxgqWT7DfEYAvb5084BSET76pyJLw==', '1', '2019-09-19 15:47:41', 10, 1, 'Arequipa', 'Santo Tomas', '2019-09-19', '8:30 PM', '15', 'pasaje', ''),
+(23, '2019-09-19 16:11:34', '2019-09-19', 12, 'B001-0538', 7, '0.00', '0.00', '0.00', '50.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0538', 1, '0.00', '0.00', '50.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'A+SvUKTRZr4EjG2UHV4FQoA/3vQ=', 'UXqOf/142yxXr3M/6QICBdPHLse1IqHQVzZcmWmQCuqUxcGjmyCF0D1Cn5tBd+4JgukkLKKVp/0dntOY4B5XiivmEdCzAjusNbfayEB681iVs3mlZ4kKL618j0Oxpc0lh3T/VENL3yY8tfDzagpq9jA07ggt7a2fDGwvuMozg2nx4a23Y4xzihXXtthq9u7DFG0VC4rx448PxP1gr4Fb4q+oqjvzl2UOXoKXxxedwI6lHk/nyAhGIaz5ogiFwy6fm96uKmV0KNad4afrHVST+xEdoDwocuDlbOGS479ttM3Rd42TN0jsxf7c/YWUBDNVUo73QNIQtG2poE0+dKbtkw==', '1', '2019-09-19 16:11:35', 10, 1, 'Arequipa', 'Camana', '2019-09-19', '8:30 PM', '16', 'pasaje', ''),
+(24, '2019-09-19 16:17:31', '2019-09-19', 12, 'B001-0539', 15, '0.00', '0.00', '0.00', '20.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0539', 1, '0.00', '0.00', '20.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', '9Wb4n+MRZv6Fzn2m3vhtsRnP2Cg=', 'O6GpbKsg8JbCVDrDpVLGYgms1+qe3G1u8nCWo8xuvSRESmp+f3ZOQaUVLH2Hb+Jplb2E4wzcrIxF/grLqwSzxkWoT5Bs5G40jjuVvwov0rHmPIHzNtDPoX63RHM6Ki9N71gqrPdG0gzUiIfhl/qcsGLUZnbX+UcCP06YTO+5I1zNHfGY+4JXYZ1v5I/TzwudKrqer/s3eiZct2ESpFn+seWcoghbsmr8MlpEXgug59LlYtd8Hag1BddUI6Az0XXbbhrE7+UkzoFD8Pf4na7alDN+6i9J+SEJ1gTj/05Yn041DjLOwncMlJ1mgGxraajvihOsNJ01wMuSyVbL/u/P5g==', '1', '2019-09-19 16:17:32', 10, 1, 'Camana', 'Secocha', '2019-09-19', '9:30 PM', '24', 'pasaje', ''),
+(25, '2019-09-19 16:26:41', '2019-09-19', 12, 'B001-0540', 7, '0.00', '3.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0540', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'MiPoDWM74uak1VdPysHK/N13Lx4=', 'a0+MPP7Eh/E87MkzL/UBf0VF+JFC22PR9anybEZQ2mvG4D0fjV68lI6NL6SfD+xa+TKzOk1t5PPlhxf9RUBiSisnXDm8QxMD/Y35j3wRD1dOFyB5LXb+S/7cFcKqoTRwlaBB3g/YlXH3ZSi6USZrJASyRbRybXYRNFME/NfZ3vYbFpUI+pYaVqTGALa24EekMagyyKdQK8r7rGvf99noHeedlPEYWY8yXBvNQlYdQM2ZO8TEY/WwfuUhs8zee9FglqU95q23v4gSIJQ0YzEikMMUMmGCIbNI6l8HULmKdMr2YetOOd1WMromi/Wnc8H3OfLCu4MgJLMVDOVNmMNzVg==', '1', '2019-09-19 16:26:42', 10, 1, '1', '3', '0000-00-00', '', '', 'encomienda', ''),
+(26, '2019-09-19 16:28:05', '2019-09-19', 11, 'F001-00085', 18, '0.00', '2.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 1, 'F001', '00085', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '0', 'QZ1AcWWMoBohslbSr4HGJmK0UaU=', 'doJvBwBp4L6AlZL1nW97wTucT9ghfj23iwvnL574zvHngTb9w1+8eLTlIl/4LJdcJtubPRlR3GDl8jChz+Ks5GLutAase8PKzoc6MWnm5IKv1mYOd2koGceA2jLl2ES+PWH6QpWjZwqfaDRh1zzVXNSbSGdJ0bd6SzJYVBsPrVvtw8DW6Dfxsw+eXsQo36Med6OkpytSDCXJxgSpt8sCzz4mBXBBO4ni2Kxc+NyZxQo+UNUtAtdJouxwuzgT9UfUoVNQOAS02JvE8yFuXa1Do9vdbyN263VG8kwQgQqu7jfI0UIfNud787cH8Id3vhSe5tkSa2sU4bp8S7ntzlkMZw==', '1', '2019-09-19 16:28:06', 1, 1, '1', '2', '0000-00-00', '', '', 'encomienda', ''),
+(27, '2019-09-19 17:36:27', '2019-09-19', 12, 'B001-0541', 7, '0.00', '0.00', '0.00', '40.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0541', 1, '0.00', '0.00', '40.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'MUaxM7UCwqoQiQl9kuqg+9fo38M=', 'ZfXANV0e3z+l1czXT4FsWIp1ahmVXyCPSFKL3bLGmshzIfkMiLk1EZwDoCz+140tsfpfwq6C+W8ayVFYSZ12wcmx4LY8Jj713uSlvrmryCAss/0I1tBXRWR1DFIF9e0Ii84WWe3HCnkPNQoiX4FzBiBfxeV3hO9aoQBJcYdxWeHeLUpwl+erdyPCtG10jV/pVkVp9h0mcudLQhZvYatQ/bqX5IjDY6tq7vIAkWKF37C2ubyz7Ym/swHFTuGF1EaL3jq1w/i0naYOrYEOPqvVWKzFYWSbbJ5Gs52E5q80f2WinSVqOGxGNe1jJ5n3uF4V4HVb3BRcPU5tkVq8QTtVcg==', '1', '2019-09-19 17:36:28', 10, 1, 'Arequipa', 'Santo Tomas', '2019-09-19', '08:40 PM', '13', 'pasaje', ''),
+(28, '2019-09-19 18:54:26', '2019-09-19', 12, 'B001-0545', 7, '0.00', '0.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0545', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'kq9i77/VMthBezUpQnyG5wOLMv4=', 'nNfpLZr78FTMKCC2HlPlU3s24E1CEyTlt3zf24u36PvkSACHSHe9+VOSTYg5XEZeP+Dp1FoGHUsXgLkgCE7atcK1B+B9DZggDq2HYmUlM8bppufEKEo/r5R6clWdw8OKaFyLaVoae5Pi1VlgqCQAFxZOeD5Y9NEqhR/wZNEGvVa0eBkRA/dTX8AdFC+vqWA5lhKlB1jZwXIWQ7kiMdlclJGiOcuCxZdywH+QN1nQIorZJICAcdZnYQsakcWjQMKesn9nyxX4CSnW83fl+eKr112MtR1VyqaTVRnuVpGBMV9IUmAyH9dKOxqAPyWogezceUp4LjpmxceNeMEC2KMi4Q==', '1', '2019-09-19 18:54:27', 10, 1, '', '', '0000-00-00', '', '', 'encomiendapagada', ''),
+(29, '2019-09-19 18:57:32', '2019-09-19', 12, 'B001-0546', 7, '0.00', '0.00', '0.00', '7.50', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0546', 1, '0.00', '0.00', '7.50', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'rSMaHfYSJXgpbqcrxphQhHs1gPs=', 'XhJcWHdp4Mivmwoq5JW9E9JXFbUwGSv6K2/IRnVTS+AMF8vqF2R1Z7XY/pbxzn4ew7WYCzxII6+040l+hqnaXjgn5sRmGfwxs5zlPMGdcOPHYTMT9g9meCqyJ8poSi6xoDwneoDyJFBIRaAaOoWTH4wIgtUjBLsAiGRHkD677ihmDdrpHy4Hdg+JYPvsGsQE6Qogxm+UED3l96YbhhGhkviGdaJx5aJJX86pVxMkkjUFoBSIswzaba7Oggri/Gw2Kiaye46W7y0hoXf7I7D8EuPuxCc771F10Ueq/ih2mEkaLb8dnoBPKxI8bxG1+wxAeHm+XRRoEKFFIy2qzn8c3Q==', '1', '2019-09-19 18:57:33', 10, 1, '', '', '0000-00-00', '', '', 'encomiendapagada', ''),
+(30, '2019-09-19 19:00:25', '2019-09-19', 15, 'NS01-00003', 7, '0.00', '4.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 0, 'NS01', '00003', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1, '1', '4', '0000-00-00', '', '', 'encomienda', ''),
+(31, '2019-09-19 19:01:16', '2019-09-19', 12, 'B001-0547', 27, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0547', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'm/HWXofEGzpEaHBUwZOuu8ygasY=', 'ZYBw4BMUkZ8ui8wY2Cw3a00Oz+sgtDRHPvjrEjvvIVJtDv4bnFm7Crxn7E9CbjtOqB2dxa8In6ZGDJiyapmVM0CXKnx3i5ulNKJnuS0Cnyb0P0rEdCgDqgqg+nx0Eg7cZvSddDLaY8lY1YWzanKani28/7kslF4jW7lQsndzM22N/dxxgK9QmqDTnL7Y5nwmha0MDD4gJhBb5O4xylGfYbqPbj1lIX19ovimxpPah63hXf/gVxlapxlziQm/gbWAmJ8WHcaddNWMof+Tmnx25/F6r4953ZE4c8qjofdIeccu9Y5W9I0Z1xjDMpC0DVe2S074yKW4bDdQ3elJYftJGw==', '1', '2019-09-19 19:01:16', 10, 1, '', '', '0000-00-00', '', '', 'encomiendapagada', ''),
+(32, '2019-09-19 20:40:18', '2019-09-19', 12, 'B001-0548', 17, '0.00', '3.00', '0.00', '30.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0548', 1, '0.00', '0.00', '30.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'e8K4d0fW5hyW8eK6UNeQJyCR2ug=', 'tpFCTc1eBX3sRwjRUE7x3OLUUpqSrT0szHfxYI8q7u1gIW1iI9xQb6r2F3e+umsvgF8ixF9yoci6XmlBXNp61mLj+hp7oihb13FCAyWF+fLe6Pgp/bhKNtZF+THezIiADLAWlbfIn6kGPgo9uLWYahO631pQQyojoBHGBZ1f1LLCOFg0+wlpv3bv+wXyaYV58pjB2mjCt5U+78stcdyAlzso1JDFobeRpHtifEpEYrCdzG+yD0DTLbktKupCGtRvM8itGbbbA8wcyppqwJND6sZohKSx3wcPjipxjj0tLdGnEKY/kOvmTTp4BYHEkOptdEqZ04gMghpScPz6hejSKQ==', '1', '2019-09-19 20:40:20', 10, 1, '1', '3', '0000-00-00', '', '', 'encomienda', ''),
+(33, '2020-01-27 14:30:23', '2020-01-27', 12, 'B001-0549', 7, '0.00', '2.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0549', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'CXEJrdiP1i2k9ppfNt2djyPF8ec=', 'WqVdyzBmHwbgqFRixp09bDzeq+Ok9JEUfwldSkakCvbqAHLp/HsNmBR8Jy5viJB4Yc82Z7yRcU6Dt10m3/6SNGUg0WLxp16v2YY70DyOL6BbOsm2MYScQPrOMU2cMhHEXplFTCjcHDjrukZON/KWpX5L1wANiwDL8/UXL5ZJ4yO6LhI9ZUoDtJ6zz/aAwQjp0S5JGgwq6BvuW3GGmLypjL0rlSBcdYAuqmfMAwEcV63/qGyRqLsCm+Pr3GmqKuGgsvCUfnBvqU6ORgnC7tL8XwXCJZSwLE5+BxvpDinqCgiUlJ42zjzvyZKAmEy3lr1MsvxJC3LCFSGwqMwk+1YsRg==', '1', '2020-01-27 14:30:25', 10, 1, '1', '2', '0000-00-00', '', '', '2', ''),
+(34, '2020-01-27 16:15:33', '2020-01-27', 15, 'NS01-00004', 12, '0.00', '2.00', '0.00', '6.00', 'CANCELADA', '', '', '', 0, 1, 2, 1, 0, 'NS01', '00004', 1, '0.00', '0.00', '6.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1, '1', '2', '0000-00-00', '', '', '2', ''),
+(35, '2020-01-27 16:16:10', '2020-01-27', 12, 'B001-0105', 28, '0.00', '0.00', '0.00', '6.00', 'CANCELADA', '', '', '', 0, 35, 2, 1, 2, 'B001', '0105', 1, '0.00', '0.00', '6.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'QQuEDbTKn/bDTpLee1G7T1DMQ0I=', 'Bt8BVMD0x0EuFh8XB/vQ+STjV4SLIgcD3AWDD+iuI+BPEI6mLvlVS5PnGIkGtUBuZhvsq8gGF1bSUGTyAklceeD857duTNjFoAs/FlHMzEGzyGeBJyfto9U459Tf3/zMjh3JKrvrwXp7fTkVO+iAxI6FSDkHJJPBSuBCzOq0K8f0wSw/YBSMpKIC9ptN19yY6SwLE2M/ZtLIfCMRE9V7ZKTWIwOT9Jcz6NV1U6TaZzByCMmWzAeDmMz/kVFWr50vbC4FaOCVwpBJ1+MgRMoiDtEGn3+puMS9WioMP/FIwF3A1NxJRiuZ/y12wyh7JTMctWiw6M8D/r8bQHrhXA2fgg==', '1', '2020-01-27 16:16:14', 10, 1, '', '', '0000-00-00', '', '', 'encomiendapagada', ''),
+(36, '2020-01-27 16:35:47', '2020-01-27', 12, 'B001-0550', 28, '0.00', '0.00', '0.00', '5.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '0550', 1, '0.00', '0.00', '5.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1, 'Arequipa', 'Secocha', '2020-01-27', '08:50 PM', '12', '', ''),
+(37, '2020-01-27 16:37:17', '2020-01-27', 12, 'B001-00551', 28, '0.00', '0.00', '0.00', '25.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '00551', 1, '0.00', '0.00', '25.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '', '', '', '', '0000-00-00 00:00:00', 0, 1, 'Arequipa', 'Secocha', '2020-01-27', '8:30PM', '4', '', ''),
+(38, '2020-01-27 16:39:27', '2020-01-27', 12, 'B001-00552', 28, '0.00', '0.00', '0.00', '25.00', 'CANCELADA', '', '', '', 0, 1, 1, 1, 2, 'B001', '00552', 1, '0.00', '0.00', '25.00', '0.00', '0.00', '0.00', '0.00', '0.00', 1, 0, '-1', 'hNpPkmavOD/wDGNwqipgiwNnwD0=', 'aG0QihZVVdvkH+aegF3di0wajK+JBw143jQPB+BAgYxUC42hHaaOHeSdl3uPnbRgxc2BlO2CY+AojaMvmNIV2mBIQ/yVg+3yiKKkxzJUz8uWx3TFcxtRk+evrRbn0dwjcnaX7yqcyJTkvW76KMwvQWeteUNswasm+KUDPNc0AMsHxaVMWLCWCVVjAQNPLoqNoQqh4kG5wIiiIvbybdB4NjhDonS7+rpDSCSjULEh6EsgFu93WawKY0YWjaA2UDvOz9kn0pRRKQxxOny1gUXmZmNfi2SH0KZF2boiBFymDnleJcjb3PGeUY6+zAb8xRqzc0Km0Ru2cO2A+BFijjd9hQ==', '1', '2020-01-27 16:39:28', 10, 1, 'Arequipa', 'Secocha', '2020-01-27', '08:30PM', '23', '', '');
 
 -- --------------------------------------------------------
 
@@ -8379,7 +8520,31 @@ INSERT INTO `tb_ventadetalle` (`tb_ventadetalle_id`, `tb_ventadetalle_tipven`, `
 (9, 2, 0, 1, 'PASAJE-Arequipa-Santo Tomas ', '30.00', '1.00', 0, '0.00', '30.00', '30.00', '5.40', 9, 9, 13, 0, '0.00', 1, ''),
 (10, 2, 0, 1, 'PASAJE-Arequipa-Camana ', '34.00', '1.00', 0, '0.00', '34.00', '34.00', '6.12', 10, 9, 13, 0, '0.00', 1, ''),
 (11, 2, 0, 1, 'PASAJE-Arequipa-Camana ', '34.00', '1.00', 0, '0.00', '34.00', '34.00', '6.12', 11, 9, 13, 0, '0.00', 1, ''),
-(12, 2, 0, 12, 'JAUJA A CHILLE IDA Y VUELTA', '100.00', '1.00', 0, '0.00', '100.00', '100.00', '18.00', 12, 9, 13, 0, '0.00', 1, '');
+(12, 2, 0, 12, 'JAUJA A CHILLE IDA Y VUELTA', '100.00', '1.00', 0, '0.00', '100.00', '100.00', '18.00', 12, 9, 13, 0, '0.00', 1, ''),
+(13, 2, 0, 1, 'PASAJE', '10.00', '1.00', 0, '0.00', '10.00', '10.00', '1.80', 13, 9, 13, 0, '0.00', 1, ''),
+(14, 2, 0, 1, 'PASAJE', '6.00', '1.00', 0, '0.00', '5.08', '5.08', '0.92', 14, 1, 13, 0, '0.00', 1, ''),
+(15, 2, 0, 1, 'PASAJE', '10.00', '1.00', 0, '0.00', '8.47', '8.47', '1.53', 15, 1, 13, 0, '0.00', 1, ''),
+(16, 2, 0, 7, 'CAJA DE ZAPATOS', '30.00', '1.00', 0, '0.00', '25.42', '25.42', '4.58', 16, 1, 13, 0, '0.00', 1, ''),
+(17, 2, 0, 7, 'CAJA DE ZAPATOS', '30.00', '1.00', 0, '0.00', '25.42', '25.42', '4.58', 17, 1, 13, 0, '0.00', 1, ''),
+(18, 2, 0, 1, 'PASAJE', '50.00', '1.00', 0, '0.00', '50.00', '50.00', '9.00', 18, 9, 13, 0, '0.00', 1, ''),
+(19, 2, 0, 1, 'PASAJE', '10.00', '1.00', 0, '0.00', '8.47', '8.47', '1.53', 19, 1, 13, 0, '0.00', 1, ''),
+(20, 2, 0, 1, 'PASAJE', '56.00', '1.00', 0, '0.00', '56.00', '56.00', '10.08', 20, 9, 13, 0, '0.00', 1, ''),
+(21, 2, 0, 1, 'PASAJE', '15.00', '1.00', 0, '0.00', '15.00', '15.00', '2.70', 21, 9, 13, 0, '0.00', 1, ''),
+(22, 2, 0, 1, 'PASAJE', '56.00', '1.00', 0, '0.00', '56.00', '56.00', '10.08', 22, 9, 13, 0, '0.00', 1, ''),
+(23, 2, 0, 1, 'PASAJE', '50.00', '1.00', 0, '0.00', '50.00', '50.00', '9.00', 23, 9, 13, 0, '0.00', 1, ''),
+(24, 2, 0, 1, 'PASAJE', '20.00', '1.00', 0, '0.00', '20.00', '20.00', '3.60', 24, 9, 13, 0, '0.00', 1, ''),
+(25, 2, 0, 7, 'CAJA DE ZAPATOS', '30.00', '1.00', 0, '0.00', '30.00', '30.00', '5.40', 25, 9, 13, 0, '0.00', 1, ''),
+(26, 2, 0, 5, 'CAJAS DE DINAMITA', '5.00', '1.00', 0, '0.00', '5.00', '5.00', '0.90', 26, 9, 13, 0, '0.00', 1, ''),
+(27, 2, 0, 1, 'PASAJE', '40.00', '1.00', 0, '0.00', '40.00', '40.00', '7.20', 27, 9, 13, 0, '0.00', 1, ''),
+(28, 2, 0, 7, 'CAJA DE ZAPATOS', '30.00', '1.00', 0, '0.00', '30.00', '30.00', '5.40', 28, 9, 13, 0, '0.00', 1, ''),
+(29, 2, 0, 8, 'EXONERADO ', '5.00', '1.50', 0, '0.00', '4.24', '6.36', '0.00', 29, 9, 13, 0, '0.00', 1, ''),
+(30, 2, 0, 5, 'CAJAS DE DINAMITA', '5.00', '1.00', 0, '0.00', '5.00', '5.00', '0.90', 30, 9, 13, 0, '0.00', 1, ''),
+(31, 2, 0, 5, 'CAJAS DE DINAMITA', '5.00', '1.00', 0, '0.00', '5.00', '5.00', '0.90', 31, 9, 13, 0, '0.00', 1, ''),
+(32, 2, 0, 13, 'RELOJ EN CAJA', '30.00', '1.00', 0, '0.00', '30.00', '30.00', '5.40', 32, 9, 13, 0, '0.00', 1, ''),
+(33, 2, 0, 9, 'CAJAS BLANCAS', '5.00', '1.00', 0, '0.00', '5.00', '5.00', '0.90', 33, 9, 13, 0, '0.00', 1, ''),
+(34, 2, 0, 14, 'LATAS DE PINTURA', '6.00', '1.00', 0, '0.00', '6.00', '6.00', '1.08', 34, 9, 13, 0, '0.00', 1, ''),
+(35, 2, 0, 14, 'LATAS DE PINTURA', '6.00', '1.00', 0, '0.00', '6.00', '6.00', '1.08', 35, 9, 13, 0, '0.00', 1, ''),
+(36, 2, 0, 15, 'PASAJEBAGUA GRNADE', '25.00', '1.00', 0, '0.00', '25.00', '25.00', '4.50', 38, 9, 13, 0, '0.00', 1, '');
 
 -- --------------------------------------------------------
 
@@ -8654,7 +8819,26 @@ INSERT INTO `tb_ventapago` (`tb_ventapago_id`, `tb_ventapago_fecreg`, `tb_formap
 (117, '2019-01-31 18:24:24', 1, 1, '2019-01-31', '30.00', 0, 0, '', 0, '0000-00-00', 9, 1),
 (118, '2019-02-20 10:53:12', 1, 1, '2019-02-20', '34.00', 0, 0, '', 0, '0000-00-00', 10, 1),
 (119, '2019-02-20 10:53:34', 1, 1, '2019-02-20', '34.00', 0, 0, '', 0, '0000-00-00', 11, 1),
-(120, '2019-06-10 21:37:35', 1, 1, '2019-06-10', '100.00', 0, 0, '', 0, '0000-00-00', 12, 1);
+(120, '2019-06-10 21:37:35', 1, 1, '2019-06-10', '100.00', 0, 0, '', 0, '0000-00-00', 12, 1),
+(121, '2019-09-14 21:02:18', 1, 1, '2019-09-14', '10.00', 0, 0, '', 0, '0000-00-00', 13, 1),
+(122, '2019-09-14 21:07:18', 1, 1, '2019-09-14', '6.00', 0, 0, '', 0, '0000-00-00', 14, 1),
+(123, '2019-09-19 12:30:27', 1, 1, '2019-09-19', '10.00', 0, 0, '', 0, '0000-00-00', 15, 1),
+(124, '2019-09-19 13:16:31', 1, 1, '2019-09-19', '30.00', 0, 0, '', 0, '0000-00-00', 16, 1),
+(125, '2019-09-19 13:17:37', 1, 1, '2019-09-19', '30.00', 0, 0, '', 0, '0000-00-00', 17, 1),
+(126, '2019-09-19 13:50:55', 1, 1, '2019-09-19', '50.00', 0, 0, '', 0, '0000-00-00', 18, 1),
+(127, '2019-09-19 15:11:15', 1, 1, '2019-09-19', '10.00', 0, 0, '', 0, '0000-00-00', 19, 1),
+(128, '2019-09-19 15:35:30', 1, 1, '2019-09-19', '56.00', 0, 0, '', 0, '0000-00-00', 20, 1),
+(129, '2019-09-19 15:44:28', 1, 1, '2019-09-19', '15.00', 0, 0, '', 0, '0000-00-00', 21, 1),
+(130, '2019-09-19 15:47:40', 1, 1, '2019-09-19', '56.00', 0, 0, '', 0, '0000-00-00', 22, 1),
+(131, '2019-09-19 16:11:34', 1, 1, '2019-09-19', '50.00', 0, 0, '', 0, '0000-00-00', 23, 1),
+(132, '2019-09-19 16:17:31', 1, 1, '2019-09-19', '20.00', 0, 0, '', 0, '0000-00-00', 24, 1),
+(133, '2019-09-19 16:26:41', 1, 1, '2019-09-19', '30.00', 0, 0, '', 0, '0000-00-00', 25, 1),
+(134, '2019-09-19 16:28:05', 1, 1, '2019-09-19', '5.00', 0, 0, '', 0, '0000-00-00', 26, 1),
+(135, '2019-09-19 17:36:27', 1, 1, '2019-09-19', '40.00', 0, 0, '', 0, '0000-00-00', 27, 1),
+(136, '2019-09-19 19:00:26', 1, 1, '2019-09-19', '5.00', 0, 0, '', 0, '0000-00-00', 30, 1),
+(137, '2019-09-19 20:40:18', 1, 1, '2019-09-19', '30.00', 0, 0, '', 0, '0000-00-00', 32, 1),
+(138, '2020-01-27 14:30:23', 1, 1, '2020-01-27', '5.00', 0, 0, '', 0, '0000-00-00', 33, 1),
+(139, '2020-01-27 16:39:27', 1, 1, '2020-01-27', '25.00', 0, 0, '', 0, '0000-00-00', 38, 1);
 
 -- --------------------------------------------------------
 
@@ -8728,7 +8912,17 @@ INSERT INTO `tb_viajeventa` (`tb_viajeventa_id`, `tb_venta_id`, `tb_viajehorario
 (1, 9, '36', 3, '2019-01-31', 24, 0),
 (2, 10, '38', 2, '2019-02-20', 1, 0),
 (3, 11, '38', 6, '2019-02-20', 1, 0),
-(4, 12, '', 30, '2019-07-10', 16, 0);
+(4, 12, '', 30, '2019-07-10', 16, 0),
+(5, 13, '', 23, '2019-09-14', 7, 0),
+(6, 14, '', 25, '2019-09-14', 7, 0),
+(7, 21, '0', 23, '2019-09-19', 7, 0),
+(8, 22, '0', 15, '2019-09-19', 16, 0),
+(9, 23, '0', 16, '2019-09-19', 7, 0),
+(10, 24, '0', 24, '2019-09-19', 15, 0),
+(11, 27, '0', 13, '2019-09-19', 7, 0),
+(12, 36, '', 12, '2020-01-27', 28, 0),
+(13, 37, '', 4, '2020-01-27', 28, 0),
+(14, 38, '', 23, '2020-01-27', 28, 0);
 
 -- --------------------------------------------------------
 
@@ -9774,7 +9968,7 @@ ALTER TABLE `tb_asiento`
 -- AUTO_INCREMENT de la tabla `tb_asientoestado`
 --
 ALTER TABLE `tb_asientoestado`
-  MODIFY `tb_asientoestado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `tb_asientoestado_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_caja`
@@ -9840,13 +10034,13 @@ ALTER TABLE `tb_categoria`
 -- AUTO_INCREMENT de la tabla `tb_cliente`
 --
 ALTER TABLE `tb_cliente`
-  MODIFY `tb_cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `tb_cliente_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_clientecuenta`
 --
 ALTER TABLE `tb_clientecuenta`
-  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=241;
+  MODIFY `tb_clientecuenta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=279;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_clientedireccion`
@@ -9996,7 +10190,7 @@ ALTER TABLE `tb_encartedetalle`
 -- AUTO_INCREMENT de la tabla `tb_encomiendaventa`
 --
 ALTER TABLE `tb_encomiendaventa`
-  MODIFY `tb_encomiendaventa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `tb_encomiendaventa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_entfinanciera`
@@ -10056,13 +10250,13 @@ ALTER TABLE `tb_guiapagonota`
 -- AUTO_INCREMENT de la tabla `tb_horario`
 --
 ALTER TABLE `tb_horario`
-  MODIFY `tb_horario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `tb_horario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ingreso`
 --
 ALTER TABLE `tb_ingreso`
-  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=122;
+  MODIFY `tb_ingreso_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ingreso_r`
@@ -10074,7 +10268,7 @@ ALTER TABLE `tb_ingreso_r`
 -- AUTO_INCREMENT de la tabla `tb_kardex`
 --
 ALTER TABLE `tb_kardex`
-  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `tb_kardex_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=145;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_kardexdetalle`
@@ -10236,7 +10430,7 @@ ALTER TABLE `tb_resumenboletadetalle`
 -- AUTO_INCREMENT de la tabla `tb_servicio`
 --
 ALTER TABLE `tb_servicio`
-  MODIFY `tb_servicio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tb_servicio_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_soporte`
@@ -10362,13 +10556,13 @@ ALTER TABLE `tb_unidad`
 -- AUTO_INCREMENT de la tabla `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  MODIFY `tb_usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `tb_usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_usuariodetalle`
 --
 ALTER TABLE `tb_usuariodetalle`
-  MODIFY `tb_usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `tb_usuario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_usuariogrupo`
@@ -10380,7 +10574,7 @@ ALTER TABLE `tb_usuariogrupo`
 -- AUTO_INCREMENT de la tabla `tb_usuariopv`
 --
 ALTER TABLE `tb_usuariopv`
-  MODIFY `tb_usuariopv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `tb_usuariopv_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_vehiculo`
@@ -10392,7 +10586,7 @@ ALTER TABLE `tb_vehiculo`
 -- AUTO_INCREMENT de la tabla `tb_venta`
 --
 ALTER TABLE `tb_venta`
-  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tb_venta_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventacanje`
@@ -10410,7 +10604,7 @@ ALTER TABLE `tb_ventacorreo`
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle`
 --
 ALTER TABLE `tb_ventadetalle`
-  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `tb_ventadetalle_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_ventadetalle_lote`
@@ -10440,7 +10634,7 @@ ALTER TABLE `tb_ventanotapago`
 -- AUTO_INCREMENT de la tabla `tb_ventapago`
 --
 ALTER TABLE `tb_ventapago`
-  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=121;
+  MODIFY `tb_ventapago_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=140;
 
 --
 -- AUTO_INCREMENT de la tabla `tb_viajehorario`
@@ -10452,7 +10646,7 @@ ALTER TABLE `tb_viajehorario`
 -- AUTO_INCREMENT de la tabla `tb_viajeventa`
 --
 ALTER TABLE `tb_viajeventa`
-  MODIFY `tb_viajeventa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `tb_viajeventa_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT de la tabla `va_cliente`
