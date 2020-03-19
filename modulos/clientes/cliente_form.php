@@ -85,7 +85,6 @@ if($_POST['action']=="editarSunat"){
                         alert('Intente nuevamente...Sunat');
                     }
                     if (data.length == 1) {
-                        alert(data[0]);
                         $('#msj_busqueda_sunat_2').hide();
                     } else {
                         $('#txt_cli_nom').val(data['RazonSocial']);
