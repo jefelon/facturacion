@@ -5664,7 +5664,9 @@ INSERT INTO `tb_formula` (`tb_formula_id`, `tb_formula_ele`, `tb_formula_ide`, `
 (5, 'Ventas', 'VEN_VENTAS_NEGATIVAS', '1', 'Permite vender productos sin stock'),
 (6, 'Ventas', 'VEN_IMP_FORMATO', 'A4', 'Configurar el formato de impresiÃ³n de los comprobantes de pago electrÃ³nicos. A4= A4 GRANDE TICKET=TICKET PEQUEÃ‘O'),
 (7, 'Ventas', 'NUM_COPIAS', '2', 'Numero de copias, por defecto 1'),
-(8, 'Compras', 'CUADRO_STOCK_MINIMO', '0', 'Muestra una ventana de stock negativo al entrar al sistema');
+(8, 'Compras', 'CUADRO_STOCK_MINIMO', '0', 'Muestra una ventana de stock negativo al entrar al sistema'),
+(9, 'Catalogo', 'CAT_FORMA_UTI', 'SIMPLE', 'MARGEN= MARGEN DE GANANCIA  Se utiliza fÃ³rmula SIMPLE = PORCENTAJE SIMPLE Se aplica porcentaje simple');
+
 
 -- --------------------------------------------------------
 
