@@ -559,9 +559,9 @@ if($filas>=2)echo $filas.' ítems agregados.';
         }
         $tipo_item	=$_SESSION['venta_tip'][$unico_id][$indice];
         if ($tipo_item==9) {
-            $linea_valor_unitario = $precio_unitario;
+            $linea_valor_unitario = round($precio_unitario,2);
         }else{
-            $linea_valor_unitario = $precio_unitario / 1.18;
+            $linea_valor_unitario = round($precio_unitario / 1.18,2);
         }
         $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
         $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
@@ -570,28 +570,28 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $linea_igv=$linea_valor_venta_x_item*0.18;
         //tipo g/e/i ingresado
 //    if ($tipo_item==9) {
-        $precio_unitario = $precio_unitario - $precio_unitario * ($linea_desc_x_item_percent / 100);
+        $precio_unitario = round($precio_unitario - $precio_unitario * ($linea_desc_x_item_percent / 100),2);
 //    }
 //    else if($tipo_item==1){
-        $precio_unitario = $precio_unitario - $precio_unitario * ($general_des / 100);
+        $precio_unitario = round($precio_unitario - $precio_unitario * ($general_des / 100),2);
 //    }
         if ($tipo_item==9){
             $tipo_pro='Exonerado';
             $valor_venta_unitario = $precio_unitario;
-            $valor_venta = $valor_venta_unitario * $cantidad;
+            $valor_venta = round($valor_venta_unitario * $cantidad,2);
             $precio_venta = $precio_unitario * $cantidad;
             $ope_exoneradas_total += $valor_venta;
         }else if($tipo_item==1){
             $tipo_pro='Gravado';
-            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-            $valor_venta = $valor_venta_unitario * $cantidad;
+            $valor_venta_unitario = round($precio_unitario/(1+$igv_dato),2);
+            $valor_venta = round($valor_venta_unitario * $cantidad,2);
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gravadas_total += $valor_venta;
         }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7)
         {
             $tipo_pro='Gratuito';
-            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
-            $valor_venta = $valor_venta_unitario * $cantidad;
+            $valor_venta_unitario = round($precio_unitario/(1+$igv_dato),2);
+            $valor_venta = round($valor_venta_unitario * $cantidad,2);
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gratuitas_total += $valor_venta;
         }
