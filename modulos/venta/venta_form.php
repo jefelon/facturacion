@@ -1285,14 +1285,10 @@ if($_POST['action']=="editar"){
             if ((this).value=== '2' || (this).value=== '11') {
                 $('.imprimir_guia').show();
                 $('.insertar-guia').show();
-                $('#txt_bus_cat_preven_noigv').show();
-                $('#txt_bus_cat_preven').hide();
                 $("#chk_imprimir_guia").attr('checked', true);
             }else{
                 $('.imprimir_guia').hide();
                 $('.insertar-guia').hide();
-                $('#txt_bus_cat_preven_noigv').hide();
-                $('#txt_bus_cat_preven').show();
                 $("#chk_imprimir_guia").attr('checked', false);
             }
 
@@ -1311,12 +1307,7 @@ if($_POST['action']=="editar"){
                 $("#hdd_ven_cli_id").attr('disabled', false);
             }
         });
-
-        $("#txt_bus_cat_preven_noigv").keyup(function(){
-            $("#txt_bus_cat_preven").val(($("#txt_bus_cat_preven_noigv").val() * 1.18));
-        });
         <?php }?>
-
         $("#chk_venpag_aut").change(function(){
             if($('#chk_venpag_aut').is(':checked')){
                 //var chk=1;
@@ -1942,7 +1933,6 @@ if($_POST['action']=="editar"){
                     //$('#txt_bus_pro_codbar').val('');
                     $('#txt_bus_pro_nom').val('');
                     $('#txt_bus_cat_preven').val('');
-                    $('#txt_bus_cat_preven_noigv').val('');
                     $('#txt_bus_cat_can').val('');
                     $('#txt_precio_min').val('');
                     $('#txt_precio_may').val('');
@@ -1961,7 +1951,6 @@ if($_POST['action']=="editar"){
                     $('#hdd_bus_cat_cospro').val(data.cat_cospro);
                     $('#txt_bus_pro_nom').val(data.pro_nom);
                     $('#txt_bus_cat_preven').val(data.cat_preven);
-                    $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18).toFixed(2));
                     $('#txt_bus_cat_can').val(data.cat_can);
                     $('#txt_precio_min').val(data.cat_premin);
                     $('#txt_precio_may').val(data.cat_premay);
@@ -1977,8 +1966,7 @@ if($_POST['action']=="editar"){
                         $('#hdd_bus_cat_cospro').val('');
                         $('#txt_bus_pro_codbar').val('');
                         $('#txt_bus_cat_preven').val('');
-                        $('#txt_bus_cat_preven_noigv').val('');
-                        $('#txt_bus_cat_can').val('');
+                         $('#txt_bus_cat_can').val('');
                         $('#txt_precio_min').val('');
                         $('#txt_precio_may').val('');
                         $('#hdd_bus_pro_nom').val('');
@@ -1987,12 +1975,7 @@ if($_POST['action']=="editar"){
                     } else {
                         $('#txt_bus_pro_codbar').val(data.pro_codbar);
                         $('#hdd_bus_pro_nom').val('');
-
-                        if ($("#cmb_ven_doc").val()== '2' || ($("#cmb_ven_doc")).val()== '11') {
-                            $('#txt_bus_cat_preven_noigv').focus();
-                        }else{
-                            $('#txt_bus_cat_preven').focus();
-                        }
+                        $('#txt_bus_cat_preven').focus();
                     }
                     //precios_min_may($('#hdd_bus_cat_id').val());
                 }
@@ -2040,7 +2023,6 @@ if($_POST['action']=="editar"){
                     //$('#txt_bus_pro_codbar').val('');
                     $('#txt_bus_pro_nom').val('');
                     $('#txt_bus_cat_preven').val('');
-                    $('#txt_bus_cat_preven_noigv').val('');
                     $('#txt_bus_cat_can').val('');
                     $('#txt_precio_min').val('');
                     $('#txt_precio_may').val('');
@@ -2059,7 +2041,6 @@ if($_POST['action']=="editar"){
                     $('#hdd_bus_cat_cospro').val(data.cat_cospro);
                     $('#txt_bus_pro_nom').val(data.pro_nom);
                     $('#txt_bus_cat_preven').val(data.cat_preven);
-                    $('#txt_bus_cat_preven_noigv').val((data.cat_preven/1.18).toFixed(2));
                     $('#txt_bus_cat_can').val(data.cat_can);
                     $('#txt_precio_min').val(data.cat_premin);
                     $('#txt_precio_may').val(data.cat_premay);
@@ -2074,7 +2055,6 @@ if($_POST['action']=="editar"){
                         $('#hdd_bus_cat_cospro').val('');
                         $('#txt_bus_pro_codbar').val('');
                         $('#txt_bus_cat_preven').val('');
-                        $('#txt_bus_cat_preven_noigv').val('');
                         $('#txt_bus_cat_can').val('');
                         $('#txt_precio_min').val('');
                         $('#txt_precio_may').val('');
@@ -2084,11 +2064,7 @@ if($_POST['action']=="editar"){
                     } else {
                         $('#txt_bus_pro_codbar').val(data.pro_codbar);
                         $('#hdd_bus_pro_nom').val('');
-                        if ($("#cmb_ven_doc").val()== '2' || ($("#cmb_ven_doc")).val()== '11') {
-                            $('#txt_bus_cat_preven_noigv').focus();
-                        }else{
-                            $('#txt_bus_cat_preven').focus();
-                        }
+                        $('#txt_bus_cat_preven').focus();
                     }
                     //precios_min_may($('#hdd_bus_cat_id').val());
                 }
@@ -2512,7 +2488,7 @@ if($_POST['action']=="editar"){
             <div id="div_productos_servicios_tab">
                 <ul>
                     <li><a id="carga_productos" href="#div_productos">Agregar Productos</a></li>
-                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>
+<!--                    <li><a id="carga_servicios" href="#div_servicios">Agregar Servicios</a></li>-->
                 </ul>
                 <div id="div_productos">
                     <div id="cuadro-contain" class="ui-widget">
@@ -2529,8 +2505,6 @@ if($_POST['action']=="editar"){
 
                         <label for="txt_bus_cat_preven">S/.</label>
                         <input name="txt_bus_cat_preven" type="text" id="txt_bus_cat_preven" value="" size="5" maxlength="9" style="text-align:right; font-size:13px; font-weight:bold" class="moneda">
-
-                        <input name="txt_bus_cat_preven_noigv" type="text" id="txt_bus_cat_preven_noigv" value="" size="8" maxlength="9" style="display:none; text-align:right; font-size:13px; font-weight:bold" class="moneda">
 
                         <label for="txt_bus_cat_can">CAN</label>
                         <input name="txt_bus_cat_can" type="text" id="txt_bus_cat_can" class="cantidad_cat_ven" value="" size="3" maxlength="6" style="text-align:right; font-size:13px; font-weight:bold">

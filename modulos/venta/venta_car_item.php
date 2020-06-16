@@ -83,7 +83,7 @@ $('.moneda4').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '999999.99'
+	vMax: '999999.9999'
 });
 $('.porcentaje3').autoNumeric({
 	aSep: ',',
@@ -176,7 +176,7 @@ $(function() {
   	  </tr>
     	<tr>
     	  <td nowrap="nowrap"><label for="txt_item_preven">Precio Venta:</label></td>
-    	  <td><input name="txt_item_preven" id="txt_item_preven" type="text" value="<?php echo formato_money($preven)?>" size="10" maxlength="11"  class="moneda4" style="text-align:right; font-size:11px; font-weight:bold"></td>
+    	  <td><input name="txt_item_preven" id="txt_item_preven" type="text" value="<?php echo formato_decimal($preven,4)?>" size="10" maxlength="11"  class="moneda4" style="text-align:right; font-size:11px; font-weight:bold"></td>
   	  </tr>
         <tr>
             <td><label for="txt_item_des">Descuento (%):</label></td>

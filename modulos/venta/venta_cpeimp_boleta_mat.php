@@ -76,7 +76,7 @@ $sucursales='
     
 </table>';
 
-$tipodoc = 'FACTURA ELECTRONICA';
+$tipodoc = 'BOLETA ELECTRONICA';
 
 $ven_id=$_POST['ven_id'];
 

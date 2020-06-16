@@ -59,7 +59,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '99999.99'
+	vMax: '99999.9999'
 });
 $('.moneda_cambio').autoNumeric({
 	aSep: ',',
@@ -563,8 +563,8 @@ $(function() {
 		{
 			var calculo=precom+(precom*uti/100);
 			//$( "#txt_cat_valven" ).val(calculo.toFixed(2));
-			$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
-            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
+			$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(4));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(4));
 		}
 	});
     $("#txt_cat_descprov" ).keyup(function() {
@@ -578,8 +578,8 @@ $(function() {
             var utilidad=uti/100;
             var costoneto=precom-(precom*descuento)
             var calculo=costoneto+(costoneto*utilidad);
-            $( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
-            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
+            $( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(4));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(4));
         }
     });
 	$("#txt_cat_uti" ).keyup(function() {
@@ -593,8 +593,8 @@ $(function() {
             var utilidad=uti/100;
             var costoneto=precom-(precom*descuento)
             var calculo=costoneto+(costoneto*utilidad);
-			$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(2));
-            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(2));
+			$( "#txt_cat_valven" ).autoNumericSet(calculo.toFixed(4));
+            $( "#txt_cat_preven" ).autoNumericSet((calculo*1.18).toFixed(4));
 		}
 	});
 
@@ -610,8 +610,8 @@ $(function() {
             var costoneto=precom-(precom*descuento);
             var utilidad = (prevalven/costoneto)-1;
 
-            $( "#txt_cat_uti" ).autoNumericSet((utilidad*100).toFixed(2));
-            $( "#txt_cat_preven" ).autoNumericSet((prevalven*1.18).toFixed(2));
+            $( "#txt_cat_uti" ).autoNumericSet((utilidad*100).toFixed(4));
+            $( "#txt_cat_preven" ).autoNumericSet((prevalven*1.18).toFixed(4));
         }
 	});
 

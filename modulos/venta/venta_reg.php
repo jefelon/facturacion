@@ -782,7 +782,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 			//precio unitario de venta
             if ($afeigv_id == 1 )
             {
-                $valor_unitario_linea = round($precio_unitario_linea/(1+$igv_dato),2);
+                $valor_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
             }
             elseif ($afeigv_id == 6)
             {
@@ -794,12 +794,12 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             }
             elseif ($afeigv_id == 10)
             {
-                $precio_unitario_linea = round($precio_unitario_linea/(1+$igv_dato),2);
+                $precio_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
                 $valor_unitario_linea = $precio_unitario_linea;
                 //$valor_unitario_linea = 0;
             }
             elseif ($afeigv_id == 12){
-                $precio_unitario_linea = round($precio_unitario_linea/(1+$igv_dato),2);
+                $precio_unitario_linea = $precio_unitario_linea/(1+$igv_dato);
             }
 
 			$nom = $_SESSION['venta_nom'][$unico_id][$indice];
@@ -964,7 +964,7 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
             {
                 $valor_unitario_linea = $precio_unitario_linea;
             }
-			
+
 			$nom = $_SESSION['servicio_nom'][$unico_id][$indice];
 
 			//Verifico si el descuento realizado es de tipo porcentaje o en dinero 1% - 2S/.

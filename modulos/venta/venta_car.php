@@ -559,9 +559,9 @@ if($filas>=2)echo $filas.' ítems agregados.';
         }
         $tipo_item	=$_SESSION['venta_tip'][$unico_id][$indice];
         if ($tipo_item==9) {
-            $linea_valor_unitario = round($precio_unitario,2);
+            $linea_valor_unitario = $precio_unitario;
         }else{
-            $linea_valor_unitario = round($precio_unitario / 1.18,2);
+            $linea_valor_unitario = $precio_unitario / 1.18;
         }
         $linea_valor_venta_bruto=$linea_valor_unitario*$cantidad;
         $linea_desc_x_item=$linea_valor_venta_bruto*$linea_desc_x_item_percent/100;
@@ -570,28 +570,28 @@ if($filas>=2)echo $filas.' ítems agregados.';
         $linea_igv=$linea_valor_venta_x_item*0.18;
         //tipo g/e/i ingresado
 //    if ($tipo_item==9) {
-        $precio_unitario = round($precio_unitario - $precio_unitario * ($linea_desc_x_item_percent / 100),2);
+        $precio_unitario = $precio_unitario - $precio_unitario * ($linea_desc_x_item_percent / 100);
 //    }
 //    else if($tipo_item==1){
-        $precio_unitario = round($precio_unitario - $precio_unitario * ($general_des / 100),2);
+        $precio_unitario = $precio_unitario - $precio_unitario * ($general_des / 100);
 //    }
         if ($tipo_item==9){
             $tipo_pro='Exonerado';
             $valor_venta_unitario = $precio_unitario;
-            $valor_venta = round($valor_venta_unitario * $cantidad,2);
+            $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_exoneradas_total += $valor_venta;
         }else if($tipo_item==1){
             $tipo_pro='Gravado';
-            $valor_venta_unitario = round($precio_unitario/(1+$igv_dato),2);
-            $valor_venta = round($valor_venta_unitario * $cantidad,2);
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gravadas_total += $valor_venta;
         }else if($tipo_item==2 or $tipo_item==3 or $tipo_item==4 or $tipo_item==5 or $tipo_item==6 or $tipo_item==7)
         {
             $tipo_pro='Gratuito';
-            $valor_venta_unitario = round($precio_unitario/(1+$igv_dato),2);
-            $valor_venta = round($valor_venta_unitario * $cantidad,2);
+            $valor_venta_unitario = $precio_unitario/(1+$igv_dato);
+            $valor_venta = $valor_venta_unitario * $cantidad;
             $precio_venta = $precio_unitario * $cantidad;
             $ope_gratuitas_total += $valor_venta;
         }
@@ -636,12 +636,12 @@ if($filas>=2)echo $filas.' ítems agregados.';
             <!--<td><?php //echo $dt1['tb_presentacion_nom']?></td>-->
             <td align="left" title="<?php echo $dt1['tb_unidad_nom']?>"><?php echo $dt1['tb_unidad_abr']?></td>
             <td align="right"><?php echo $cantidad?></td>
-            <td align="right"><?php echo formato_money($linea_valor_unitario)?></td>
+            <td align="right"><?php echo formato_decimal($linea_valor_unitario,4)?></td>
             <?php if ($tipo_item==9){ ?>
                 <td align="right"></td>
-                <td align="right"><?php echo formato_money($precio_unitario)?></td>
+                <td align="right"><?php echo formato_decimal($precio_unitario,4)?></td>
             <?php } else{ ?>
-                <td align="right"><?php echo formato_money($precio_unitario)?></td>
+                <td align="right"><?php echo formato_decimal($precio_unitario,4)?></td>
                 <td align="right"></td>
             <?php } ?>
             <td align="right">
@@ -649,11 +649,11 @@ if($filas>=2)echo $filas.' ítems agregados.';
             </td>
             <td align="right">
                 <?php
-                echo formato_money($linea_valor_venta_x_item);
+                echo formato_decimal($linea_valor_venta_x_item,4);
                 ?>
             </td>
             <td align="right">
-                <?php echo formato_money($precio_venta)?>
+                <?php echo formato_decimal($precio_venta,4)?>
 
             </td>
             <!--<td align="right"><?php //echo formato_money($igv)?></td>-->
