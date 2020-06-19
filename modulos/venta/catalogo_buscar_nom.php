@@ -40,9 +40,9 @@ if($num_rows>0){
 
         $alm_id=$_SESSION['almacen_id'];
         $stock = mysql_fetch_array($oStock->stock_por_presentacion($fila["tb_presentacion_id"],$alm_id))['tb_stock_num'];
-        $stock=$stock/$fila["tb_catalogo_mul"];
-
-        $stock=" ".$stock*1;
+        if($stock>0 || $stock <0){
+            $stock= " ".round($stock/$fila["tb_catalogo_mul"],2);
+        }
 
         $precio="S/. ".$fila["tb_catalogo_preven"];
         $n_precio=strlen($precio);
@@ -50,7 +50,7 @@ if($num_rows>0){
         $n_espacio=$largo-$n_producto-$n_precio-2;
         $espacio=" ".str_pad($ini,$n_espacio,"-")." ";
 
-        $etiqueta= '<span style="display:inline-block; width:250px;">'.$producto.'</span><span style="display:inline-block; width:100px;">'.$marca.'</span><span style="display:inline-block; width:50px;text-align:right;">'.$stock." ".$fila["tb_unidad_abr"].'</span><span style="display:inline-block; width:100px;text-align:right;">'.$precio;
+        $etiqueta= '<span style="display:inline-block; width:250px;">'.$producto.'</span><span style="display:inline-block; width:100px;">'.$marca.'</span><span style="display:inline-block; width:100px;text-align:right;">'.$stock." ".$fila["tb_unidad_abr"].'</span><span style="display:inline-block; width:100px;text-align:right;">'.$precio;
         array_push($arrayElementos, new ElementoAutocompletar($etiqueta, $fila["tb_producto_nom"],$fila["tb_catalogo_id"]));
     }
 }else{
