@@ -318,8 +318,8 @@ while($dt = mysql_fetch_array($dts)){
     $html.='<tr>';
 
     $html .= '   <td style="text-align:center;width: 15mm">' . $dt["tb_presentacion_cod"] .'</td>
-                 <td style="text-align: left; width: 119mm; font-size; 10pt;"> &nbsp; &nbsp; ' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
-                 <td style="text-align:center; width: 16mm">' . $dt["tb_guiadetalle_can"] . '</td>
+                 <td style="text-align: left; width: 119mm; font-size; 11pt;"> &nbsp; &nbsp; ' . $dt["tb_producto_nom"] .' / '. $dt["tb_categoria_nom"] . ' / ' . $dt['tb_marca_nom'] .'</td>
+                 <td style="text-align:center; width: 16mm; font-size; 11pt;">' . $dt["tb_guiadetalle_can"] . '</td>
                  <td style="text-align:center; width: 24mm">NIU</td>
                  <td style="text-align:center; width: 20mm">-</td>';
     $html.='</tr>';
