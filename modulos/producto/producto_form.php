@@ -90,6 +90,11 @@ $('.btn_ir').button({
 });
 $(".btn_ir").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
+$('.btn_eliminar').button({
+		icons: {primary: "ui-icon-trash"},
+		text: false
+});
+
 function cmb_cat_id(ids)
 {
 	$.ajax({
@@ -189,6 +194,32 @@ function producto_presentacion_vista(){
 		}
 	});
 }
+function eliminar_productoproveedor(id)
+    {
+        $('#msj_presentacion').hide();
+        if(confirm("Realmente desea eliminar?")){
+            $.ajax({
+                type: "POST",
+                url: "../producto/productoproveedor_reg.php",
+                async:true,
+                dataType: "html",
+                data: ({
+                    action: "eliminar",
+                    id:		id
+                }),
+                beforeSend: function() {
+                    $('#msj_presentacion').html("Cargando...");
+                    $('#msj_presentacion').show(100);
+                },
+                success: function(html){
+                    $('#msj_presentacion').html(html);
+                },
+                complete: function(){
+                    producto_proveedor_tabla();
+                }
+            });
+        }
+    }
 
 //adicionales
 

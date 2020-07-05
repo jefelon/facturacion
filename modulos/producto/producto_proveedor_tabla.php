@@ -20,6 +20,11 @@ $prod_id=$dt['tb_producto_id'];
             text: false
         });
 
+        $('.btn_eliminar').button({
+		icons: {primary: "ui-icon-trash"},
+		text: false
+        });
+        
         $('.btn_agregar_proveedor').button({
             icons: {primary: "ui-icon-plus"},
             text: false
@@ -98,6 +103,7 @@ $prod_id=$dt['tb_producto_id'];
             <td><?php echo $dt1['tb_productoproveedor_desc'] ?></td>
             <td><?php echo $dt1['tb_productoproveedor_fechaini'] ?></td>
             <td><?php echo $dt1['tb_productoproveedor_fechafin'] ?></td>
+            <td><a class="btn_eliminar" onClick="eliminar_productoproveedor('<?php echo $dt1['tb_productoproveedor_id']?>')"> Eliminar Registro</a></td>
             </tr><?php
         }
         ?>
