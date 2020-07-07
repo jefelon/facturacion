@@ -91,7 +91,7 @@ $('.moneda').autoNumeric({
 	//aSign: 'S/. ',
 	//pSign: 's',
 	vMin: '0.00',
-	vMax: '9999.9999'
+	vMax: '99999.9999'
 });
 $('.moneda_cambio').autoNumeric({
 	aSep: ',',
@@ -522,8 +522,8 @@ $(function() {
             <td align="center"><input name="txt_cat_descprov" type="text" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo formato_decimal(abs($descprov),2)?>"></td>
           <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
           <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti; ?>"></td>
-            <td align="center"><input name="txt_cat_valven" type="text" id="txt_cat_valven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo formato_decimal($valven, 2)?>"></td>
-          <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
+            <td align="center"><input name="txt_cat_valven" type="text" id="txt_cat_valven" class="moneda" style="text-align:right" size="10" maxlength="10" value="<?php echo formato_decimal($valven, 2)?>"></td>
+          <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="10" value="<?php echo $preven?>"></td>
           <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
         </tr>        
     </table>

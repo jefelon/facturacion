@@ -1106,8 +1106,8 @@ $(function() {
                       <th align="center" nowrap="nowrap">Precio Costo US$</th>
                   </tr>
                   <tr>
-                      <td align="center"><input name="txt_cat_tipcam" type="text" id="txt_cat_tipcam" class="moneda_cambio" style="text-align:right" size="10" maxlength="9" value="<?php echo $tipcam?>"></td>
-                      <td align="center"><input name="txt_cat_precosdol" type="text" id="txt_cat_precosdol" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precosdol?>"></td>
+                      <td align="center"><input name="txt_cat_tipcam" type="text" id="txt_cat_tipcam" class="moneda_cambio" style="text-align:right" size="10" maxlength="10" value="<?php echo $tipcam?>"></td>
+                      <td align="center"><input name="txt_cat_precosdol" type="text" id="txt_cat_precosdol" class="moneda" style="text-align:right" size="10" maxlength="10" value="<?php echo $precosdol?>"></td>
                   </tr>
               </table>
           </div>
@@ -1124,12 +1124,12 @@ $(function() {
                         <!--<th align="center"> IGV</th>-->
                     </tr>
                     <tr class="">
-                        <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $precom?>"></td>
-                        <td align="center"><input name="txt_cat_descprov" type="text" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $descprov?>"></td>
+                        <td align="center"><input name="txt_cat_precos" type="text" id="txt_cat_precos" class="moneda" style="text-align:right" size="10" maxlength="10" value="<?php echo $precom?>"></td>
+                        <td align="center"><input name="txt_cat_descprov" type="text" id="txt_cat_descprov" class="moneda" style="text-align:right" size="10" maxlength="10" value="<?php echo $descprov?>"></td>
                         <!--<td align="center"><input name="chk_cat_igvcom" id="chk_cat_igvcom" type="checkbox" value="1" <?php //if($igvcom=="1") echo 'checked'?>></td>-->
                         <td align="center"><input name="txt_cat_uti" type="text" id="txt_cat_uti" class="porcentaje" style="text-align:right" size="8" maxlength="6" value="<?php echo $uti?>"></td>
-                        <td align="center"><input name="txt_cat_valven" type="text" id="txt_cat_valven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $valven?>"></td>
-                        <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="9" value="<?php echo $preven?>"></td>
+                        <td align="center"><input name="txt_cat_valven" type="text" id="txt_cat_valven" class="moneda" style="text-align:right" size="10" maxlength="10" value="<?php echo $valven?>"></td>
+                        <td align="center"><input name="txt_cat_preven" type="text" id="txt_cat_preven" class="moneda" style="text-align:right" size="10" maxlength="10" value="<?php echo $preven?>"></td>
                         <!--<td align="center"><input type="checkbox" name="chk_cat_igvven" id="chk_cat_igvven" value="1" <?php //if($igvven=="1") echo 'checked'?>></td>-->
                     </tr>
                 </table>
