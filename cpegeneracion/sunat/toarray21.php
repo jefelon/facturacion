@@ -592,13 +592,13 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['InvoicedQuantity']['atr']['unitCodeListID'] = "UN/ECE rec 20";
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['InvoicedQuantity']['atr']['unitCodeListAgencyName'] = 'United Nations Economic Commission for Europe';
 
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['LineExtensionAmount'][0] = round($item->valorventa,10);;
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['LineExtensionAmount'][0] = round($item->valorventa,2);;
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['LineExtensionAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['LineExtensionAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['tag'] = 'cac';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['tag']='cac';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount'][0] = round($item->preciounitario, 2);
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount'][0] = round($item->preciounitario, 4);
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
