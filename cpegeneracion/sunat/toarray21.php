@@ -598,7 +598,7 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
 
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['tag'] = 'cac';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['tag']='cac';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount'][0] = round($item->preciounitario, 4);
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount'][0] = round($item->preciounitario, 2);
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
