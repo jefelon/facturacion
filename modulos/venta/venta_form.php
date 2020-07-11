@@ -1162,6 +1162,13 @@ if($_POST['action']=="editar"){
             var patron = new Array(2, 2, 4);
             mascara(this,'-',patron,false);
         });
+        $('#txt_bus_cat_preven').blur(function(){
+        if($("#txt_bus_cat_preven").val()<=0){
+            alert("Valor no permitido. Ingrese valor mayor a 0.1");
+            $("#txt_bus_cat_preven").val(0.1);
+            $("#txt_bus_cat_preven").focus();
+        }
+        });
 
         <?php
         if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
