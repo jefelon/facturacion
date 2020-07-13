@@ -461,7 +461,7 @@ function arr_TaxTotal($header, $detalle, $empresa, $tipodoc){
 
     if($header[0]->totopgrat>0){
         $xnr++;
-        if($xnr<2)
+        //if($xnr<2)
             $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['tag'] = 'cac';
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount'][0] = round($header[0]->totopgrat,2);
         $arr['doc'][$tipodoc]['child']['TaxTotal']['child']['childs'][$xnr]['TaxSubtotal']['child']['TaxableAmount']['tag'] = 'cbc';
@@ -602,11 +602,21 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceAmount']['atr']['currencyID'] = $header[0]->isomoneda;
 
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode'][0] = '01';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['tag'] = 'cbc';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listName'] = 'SUNAT:Indicador de Tipo de Precio';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listAgencyName'] = 'PE:SUNAT';
-            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listURI'] = 'urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16';
+            if($item->idafectaciond == 21 ){
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode'][0] = '02';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['tag'] = 'cbc';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listName'] = 'SUNAT:Indicador de Tipo de Precio';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listAgencyName'] = 'PE:SUNAT';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listURI'] = 'urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16';
+            }
+            else{
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode'][0] = '01';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['tag'] = 'cbc';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listName'] = 'SUNAT:Indicador de Tipo de Precio';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listAgencyName'] = 'PE:SUNAT';
+                $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][1]['PricingReference']['child']['AlternativeConditionPrice']['child']['PriceTypeCode']['atr']['listURI'] = 'urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo16';
+            }
+        
             //
             // if ($item->valorrefunitario>0){
             //     $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['childs'][2]['PricingReference']['tag'] = 'cac';
@@ -673,9 +683,9 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
                 $TaxSchemeTaxTypeCode = 'VAT';
 
             }elseif ($item->idafectaciond==21) {
-                $valor_unitario='0.00';
+                //$valor_unitario='0.00';
                 $impuestos = '0.00';
-                $basecalculo = '0.00';
+                //$basecalculo = '0.00';
                 $impuesto = '0.00';
                 $TaxCategoryID = 'E';
                 $Percent = '18.00';
@@ -794,10 +804,18 @@ function arr_InvoiceLine($header, $detalle, $empresa, $tipodoc){
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Item']['child']['SellersItemIdentification']['child']['ID'][0] = (($item->idproducto=='0') ? $item->nro : $item->codigo);
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Item']['child']['SellersItemIdentification']['child']['ID']['tag'] = 'cbc';
 
+            if($item->idafectaciond==21){
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['tag'] = 'cac';
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount'][0] = 0.00;
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount']['tag'] = 'cbc';
+            $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount']['atr']['currencyID'] = $header[0]->isomoneda;
+            }
+            else{
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['tag'] = 'cac';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount'][0] = $valor_unitario;
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount']['tag'] = 'cbc';
             $arr['doc'][$tipodoc]['child']['childs'][$row+1]['InvoiceLine']['child']['Price']['child']['PriceAmount']['atr']['currencyID'] = $header[0]->isomoneda;
+            }
         }
     }
 }

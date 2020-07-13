@@ -445,8 +445,8 @@ while($dt = mysql_fetch_array($dts)){
     if($dt["cs_tipoafectacionigv_id"]==12){
         $valor_unitario_linea=$dt["tb_ventadetalle_preuni"];
     }
-    if($dt["cs_tipoafectacionigv_id"]==10){
-        $valor_unitario_linea=0;
+    if($dt["cs_tipoafectacionigv_id"]==10){  
+        $texGrat=" (Op. Gratuita) ";
     }
     $html.='<tr class="row">';
     if($dt["tb_ventadetalle_tipven"]==1){
@@ -459,7 +459,7 @@ while($dt = mysql_fetch_array($dts)){
         $html .='<td style="text-align:center">' . $cont . '</td>
                  <td style="text-align: center">' . $dt["tb_ventadetalle_can"] . '</td>
                  <td style="text-align: center">' . $dt['tb_unidad_abr'] . '</td>
-                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $ven_det_serie . ' - ';
+                 <td style="text-align: left">' . $dt["tb_ventadetalle_nom"] . ' - ' . $dt['tb_marca_nom'] . $texGrat.$ven_det_serie . ' - ';
                 $lotes=$oVentaDetalleLote->mostrar_filtro_venta_detalle($dt["tb_ventadetalle_id"]);
                 while($lote = mysql_fetch_array($lotes)) {
                     $html.= 'L. '. $lote["tb_ventadetalle_lotenum"]. ' F.V. '. $lote["tb_fecha_ven"].', ';
