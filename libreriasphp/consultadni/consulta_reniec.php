@@ -16,15 +16,22 @@ if( $search0->success == true){
     $persona=$search0->result->apellidos." ".$search0->result->Nombres;
 }
 else{
-    $consulta = file_get_html('http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI='.$dni)->plaintext;
-	//LA LOGICA DE LA PAGINAS ES APELLIDO PATERNO | APELLIDO MATERNO | NOMBRES
+
+
+	$link="https://www.facturacionelectronica.us/facturacion/controller/ws_consulta_rucdni_v2.php?documento=DNI&usuario=10447915125&password=985511933&nro_documento=";
+    $consulta = file_get_html($link.$dni)->plaintext;
+    $datos344=json_decode($consulta,true);
+	$dni=$datos344['result']['DNI'];
+	$nom=$datos344['result']['Nombre'];
+	$pat=$datos344['result']['Paterno'];
+	$mat=$datos344['result']['Materno'];
 
     $search1 = $essalud->search( $dni );
     if($search1->success == true){
         $persona=$search1->result->paterno." ".$search1->result->materno." ".$search1->result->nombre;
     }
     else if($consulta){
-    	$persona=$consulta;
+    	$persona=$pat.' '.$mat.' '.$nom;
     }
 }
 
