@@ -59,20 +59,13 @@ if($_POST['action']=="editarSunat"){
             var url = '../../libreriasphp/consultadni/consulta_reniec.php';
             $.ajax({
                 type:'POST',
+                dataType: "json",
                 url:url,
-                data:'dni='+dni,
+                data: ({
+                    dni: dni
+                }),
                 success: function(datos_dni){
-                    var datos = eval(datos_dni);
-
-                    // $('#mostrar_dni').text(datos[0]);
-                    // $('#paterno').text(datos[1]);
-                    // $('#materno').text(datos[2]);
-                    // $('#nombres').text(datos[3]);
-                    if(datos[1]!="" && datos[2]!="" && datos[3]!="") {
-                        $('#txt_cli_nom').val(datos[1] + " " + datos[2] + " " + datos[3]);
-                    }else {
-                        $('#txt_cli_nom').val("Datos no encontrados o menor de edad. Editar manualmente los datos.");
-                    }
+                    $('#txt_cli_nom').val(datos_dni.persona);
                 }
             });
         }else {
@@ -92,22 +85,10 @@ if($_POST['action']=="editarSunat"){
                         alert('Intente nuevamente...Sunat');
                     }
                     if (data.length == 1) {
-                        alert(data[0]);
                         $('#msj_busqueda_sunat_2').hide();
                     } else {
                         $('#txt_cli_nom').val(data['RazonSocial']);
-                        $('#txt_cli_dir').val(data['Direccion']);
-                        if (typeof data['Contacto'] != 'undefined') {
-                            $('#txt_cli_con').val(data['Contacto']);
-                        } else {
-                            $('#txt_cli_con').val(data['RazonSocial']);
-                        }
-
-                        // var telefono = data['Telefonos'];
-                        // telefono = telefono.replace(/ \/ /g, "/");
-                        // telefono = telefono.replace("/ ", "");
-                        // telefono = telefono.replace(/\//g, " / ");
-                        // $('#txt_cli_tel').val(telefono);
+                        $('#txt_cli_dir').val(data['DireccionCompleta']);
                         $('#txt_cli_est').val(data['Estado']);
                         $('#msj_busqueda_sunat_2').hide();
                     }
