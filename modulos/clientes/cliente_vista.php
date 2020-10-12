@@ -238,6 +238,10 @@ $(function() {
 		}).click(function() {
 		location.reload();
 	});
+    $('#btn_agregar').button({
+        icons: {primary: "ui-icon-plus"},
+        text: true
+    });
 
     $('#btn_imprimir_xls').button({
         icons: {primary: "ui-icon-print"},
