@@ -1777,9 +1777,6 @@ if($_POST['action']=="editar"){
                 hdd_venpag_tot: {
                     equalTo: "#txt_ven_tot"
                 },
-                hdd_ven_cli_tip: {
-                    equalOr: "#hdd_val_cli_tip"
-                },
                 hdd_ven_doc: {
                     required: true
                 }
