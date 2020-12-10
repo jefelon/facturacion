@@ -47,7 +47,7 @@ class cPle
         return $rst;
     }
     function mostrar_ventas($anio,$mes){
-        $sql="SELECT tb_venta_id,DATE_FORMAT(v.tb_venta_reg,'%d/%m/%Y') AS  tb_venta_reg, DATE_FORMAT(tb_venta_fec,'%d/%m/%Y') AS tb_venta_fec, td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_venta_ser,tb_venta_num,c.tb_cliente_tip,
+        $sql="SELECT tb_venta_id,DATE_FORMAT(v.tb_venta_fec,'%d/%m/%Y') AS  tb_venta_reg, DATE_FORMAT(tb_venta_fec,'%d/%m/%Y') AS tb_venta_fec, td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_venta_ser,tb_venta_num,c.tb_cliente_tip,
               tb_cliente_doc,tb_cliente_nom,tb_venta_gra,tb_venta_des,tb_venta_igv,tb_venta_exo,tb_venta_ina,tb_venta_isc,tb_venta_otrcar,tb_venta_tot,
               m.cs_tipomoneda_cod, (SELECT tb_tipocambio_dolsunv FROM tb_tipocambio tc WHERE tc.tb_tipocambio_fec = tb_venta_fec) as tc,
              '' as tb_venta_vennumdoc,'' as tb_venta_ventipdoc, tb_venta_est
@@ -57,11 +57,11 @@ class cPle
             INNER JOIN tb_documento td2 ON v.tb_documento_id=td2.tb_documento_id
             INNER JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
             INNER JOIN cs_tipomoneda m ON v.cs_tipomoneda_id=m.cs_tipomoneda_id 
-            WHERE YEAR(v.tb_venta_reg) = '$anio' AND MONTH(v.tb_venta_reg) ='$mes' AND cs_tipodocumento_cod <> ''
+            WHERE YEAR(v.tb_venta_fec) = '$anio' AND MONTH(v.tb_venta_fec) ='$mes' AND cs_tipodocumento_cod <> ''
             
         UNION ALL 
         
-              SELECT tb_venta_id,DATE_FORMAT(nc.tb_venta_reg,'%d/%m/%Y') AS  tb_venta_reg,DATE_FORMAT(tb_venta_fec,'%d/%m/%Y') AS tb_venta_fec,td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_venta_ser,tb_venta_num,c.tb_cliente_tip,
+              SELECT tb_venta_id,DATE_FORMAT(nc.tb_venta_fec,'%d/%m/%Y') AS  tb_venta_reg,DATE_FORMAT(tb_venta_fec,'%d/%m/%Y') AS tb_venta_fec,td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_venta_ser,tb_venta_num,c.tb_cliente_tip,
               c.tb_cliente_doc,c.tb_cliente_nom,tb_venta_gra,'' as tb_venta_des, tb_venta_igv,tb_venta_exo,tb_venta_ina,tb_venta_isc,tb_venta_otrcar,tb_venta_tot,
               m.cs_tipomoneda_cod,(SELECT tb_tipocambio_dolsunv FROM tb_tipocambio tc WHERE tc.tb_tipocambio_fec = tb_venta_fec) as tc,
               tb_venta_vennumdoc, tb_venta_ventipdoc, tb_venta_est
@@ -70,11 +70,11 @@ class cPle
             LEFT JOIN cs_tipodocumento td ON nc.cs_tipodocumento_id=td.cs_tipodocumento_id
             LEFT JOIN tb_cliente c ON nc.tb_cliente_id=c.tb_cliente_id
             INNER JOIN cs_tipomoneda m ON nc.cs_tipomoneda_id=m.cs_tipomoneda_id
-            WHERE YEAR(nc.tb_venta_reg) = '$anio'  AND MONTH(nc.tb_venta_reg) ='$mes'
+            WHERE YEAR(nc.tb_venta_fec) = '$anio'  AND MONTH(nc.tb_venta_fec) ='$mes'
          
         UNION ALL   
          
-        SELECT tb_venta_id,DATE_FORMAT(nd.tb_venta_reg,'%d/%m/%Y') AS  tb_venta_reg,DATE_FORMAT(tb_venta_fec,'%d/%m/%Y') AS tb_venta_fec,td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_venta_ser,tb_venta_num,c.tb_cliente_tip,
+        SELECT tb_venta_id,DATE_FORMAT(nd.tb_venta_fec,'%d/%m/%Y') AS  tb_venta_reg,DATE_FORMAT(tb_venta_fec,'%d/%m/%Y') AS tb_venta_fec,td.cs_tipodocumento_cod,td.cs_tipodocumento_des,tb_venta_ser,tb_venta_num,c.tb_cliente_tip,
               c.tb_cliente_doc,c.tb_cliente_nom,tb_venta_gra,'' as tb_venta_des, tb_venta_igv,tb_venta_exo,tb_venta_ina,tb_venta_isc,tb_venta_otrcar,tb_venta_tot,
               m.cs_tipomoneda_cod,(SELECT tb_tipocambio_dolsunv FROM tb_tipocambio tc WHERE tc.tb_tipocambio_fec = tb_venta_fec) as tc,
               tb_venta_vennumdoc, tb_venta_ventipdoc, tb_venta_est
@@ -83,7 +83,7 @@ class cPle
             LEFT JOIN cs_tipodocumento td ON nd.cs_tipodocumento_id=td.cs_tipodocumento_id
             LEFT JOIN tb_cliente c ON nd.tb_cliente_id=c.tb_cliente_id
             INNER JOIN cs_tipomoneda m ON nd.cs_tipomoneda_id=m.cs_tipomoneda_id
-            WHERE YEAR(nd.tb_venta_reg) = '$anio'  AND MONTH(nd.tb_venta_reg) ='$mes'
+            WHERE YEAR(nd.tb_venta_fec) = '$anio'  AND MONTH(nd.tb_venta_fec) ='$mes'
             
             ORDER BY tb_venta_reg ASC 
         ";

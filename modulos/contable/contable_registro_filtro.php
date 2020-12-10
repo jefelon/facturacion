@@ -33,9 +33,20 @@ session_start();
         $('#hdd_action').val('filter_doc');
         venta_tabla();
     }
+    function ComboAno(){
 
+        var d = new Date();
+        var n = d.getFullYear();
+        var select = document.getElementById("cmb_fil_anio");
+        for(var i = n; i >= 2015; i--) {
+            var opc = document.createElement("option");
+            opc.text = i;
+            opc.value = i;
+            select.add(opc);
+        }
+    }
 $(function() {
-
+    ComboAno();
 	cmb_ven_doc('<?php echo $_POST['doc']?>');
     registro_filtro();
 

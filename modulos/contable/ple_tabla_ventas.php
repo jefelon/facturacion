@@ -83,7 +83,7 @@ $(function() {
            <th>9 N FINAL CONSOLID</th>
            <th>10 TIPO DOC CLIENTE</th>
            <th>11 RUC CLIENTE</th>
-           <th>12 PROVEEDOR</th>
+           <th>12 NOM CLIENTE</th>
            <th>13 VALOR EXPORT</th>
            <th>14 OP GRAVADA</th>
            <th>15 DESC BI</th>
