@@ -339,7 +339,7 @@ $pv = mysql_fetch_array($pvs);
                 data: 'dni=' + dni,
                 success: function (datos_dni) {
                     $('#txt_pasaj_nom').val(datos_dni.persona);
-                    if(datos_dni.resultado!=""){
+                    if(datos_dni.persona!="" && datos_dni.persona!="Datos no encontrados, completa el nombre manualmente."){
                         venta_cliente_reg();
                     }
                 }
@@ -566,7 +566,7 @@ $pv = mysql_fetch_array($pvs);
 
         }
     }
-    function validar_estado_asiento(){
+    function validar_reserva(){
         var result='';
         $.ajax({
             type: "POST",
@@ -696,6 +696,8 @@ $pv = mysql_fetch_array($pvs);
 
 
         $("input[id=radiopas1]").change(function(){
+            $("#radiopas1").attr('checked', true);
+            $("#radiopas3").attr('checked', false);
             if($("input[id=radiopas1]").is(":checked")){
                 $('#lbl_cli_doc_pas').html("DNI:");
                 $( "#txt_pasaj_dni" ).attr('maxlength','8');
@@ -704,6 +706,8 @@ $pv = mysql_fetch_array($pvs);
         });
 
         $("input[id=radiopas3]").change(function(){
+            $("#radiopas3").attr('checked', true);
+            $("#radiopas1").attr('checked', false);
             if($("input[id=radiopas3]").is(":checked")){
                 $('#lbl_cli_doc_pas').html("DOC:");
                 $( "#txt_pasaj_dni").attr('maxlength','13');
@@ -873,7 +877,7 @@ $pv = mysql_fetch_array($pvs);
         $("#bus_form").validate({
 
             submitHandler: function () {
-                var asi_est=validar_estado_asiento();
+                var asi_est=validar_reserva();
                 if(asi_est=="ocupado" || asi_est=="reserva"){
                     alert("Este asiento fue reservado o vendido en otro punto hace instantes... \n Se recargará el croquis de asientos.");
                     return false;
@@ -1131,7 +1135,7 @@ $pv = mysql_fetch_array($pvs);
             <form id="datos_pasajero">
             <fieldset><legend>Datos Pasajero</legend>
                 <div id="radiopas">
-                    <input name="rad_cli_tip_pas" type="radio" id="radiopas1" value="1"><label for="radiopas1">DNI</label>
+                    <input name="rad_cli_tip_pas" type="radio" id="radiopas1" value="1" checked><label for="radiopas1">DNI</label>
                     <input name="rad_cli_tip_pas" type="radio" id="radiopas3" value="3"><label for="radiopas3">OTROS</label>
                 </div>
                 <label for="txt_pasaj_dni" id="lbl_cli_doc_pas">DNI:</label><br>

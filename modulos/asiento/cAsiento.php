@@ -71,7 +71,31 @@ class cAsiento{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
-
+    function estadoReserva($nom,$vehiculo,$fecha,$horario){
+        $sql="SELECT * 
+        FROM tb_asientoestado ae 
+        INNER JOIN tb_viajehorario vh ON vh.tb_viajehorario_id=ae.tb_viajehorario_id
+        INNER JOIN tb_lugar l ON l.tb_lugar_id = ae.tb_destpar_id
+        WHERE ae.tb_asiento_id='$nom' AND vh.tb_vehiculo_id='$vehiculo' 
+        AND vh.tb_viajehorario_fecha='$fecha' 
+        AND vh.tb_viajehorario_horario='$horario'" ;
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function etttstadoReserva($nom,$vehiculo,$fecha,$horario,$cli_id){
+        $sql="SELECT * 
+        FROM tb_asientoestado ae 
+        INNER JOIN tb_viajehorario vh ON vh.tb_viajehorario_id=ae.tb_viajehorario_id
+        INNER JOIN tb_lugar l ON l.tb_lugar_id = ae.tb_destpar_id
+        WHERE ae.tb_asiento_id='$nom' AND vh.tb_vehiculo_id='$vehiculo' 
+        AND vh.tb_viajehorario_fecha='$fecha' 
+        AND vh.tb_viajehorario_horario='$horario'
+        AND ae.tb_clientereserva_id not in('$cli_id')" ;
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
 	function modificar($id,$nom){ 
 	$sql = "UPDATE tb_asiento SET  

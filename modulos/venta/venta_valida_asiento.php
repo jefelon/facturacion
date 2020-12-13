@@ -12,16 +12,24 @@ require_once ("../../config/Cado.php");
 require_once ("../asiento/cAsiento.php");
 $oAsiento = new cAsiento();
 
+require_once ("../clientes/cCliente.php");
+$oCliente = new cCliente();
+
 require_once ("../formatos/formato.php");
 
 $fecha_salida=fecha_mysql($_POST['cmb_fech_sal']);
 $hora_salida=$_POST['cmb_horario'];
 $num_asi=$_POST['num_asi'];
+$cli_doc= $_POST['txt_cli_doc'];
 
-$asts = $oAsiento->mostrarNombreEstado($num_asi,$_POST['veh_id'],$fecha_salida,$hora_salida);
+$dtsCli = $oCliente->mostrarUnoDoc($cli_doc);
+$dtcli = mysql_fetch_array($dtsCli);
+$cli_id=$dtcli['tb_cliente_id'];
+
+$asts = $oAsiento->estadoReserva($num_asi,$_POST['veh_id'],$fecha_salida,$hora_salida);
 $ast = mysql_fetch_array($asts);
 $estado="";
-if ($ast['tb_asientoestado_id']){
+if ($ast['tb_asientoestado_id'] && $ast['tb_clientereserva_id']!=$cli_id){
     if($ast['tb_asientoestado_reserva']==1){
        $estado='reserva';
        $msj='El asiento está reservado.';
