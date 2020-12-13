@@ -83,6 +83,27 @@ function tipocambio_form(act,idf){
 		}
 	});
 }
+function tipocambiosunat_form(act,idf){
+    $.ajax({
+        type: "POST",
+        url: "tipocambiosunat_form.php",
+        async:true,
+        dataType: "html",
+        data: ({
+            action: act,
+            tipcam_id:	idf,
+            vista:	'tipocambio_tabla'
+        }),
+        beforeSend: function() {
+            $('#msj_tipocambio').hide();
+            $('#div_tipocambiosunat_form').dialog("open");
+            $('#div_tipocambiosunat_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(html){
+            $('#div_tipocambiosunat_form').html(html);
+        }
+    });
+}
 
 function eliminar_tipocambio(id)
 {      
@@ -119,7 +140,14 @@ $(function() {
 		}).click(function() {
 		location.reload();
 	});
-	
+    $('#btn_tcsunat').button({
+        icons: {primary: "ui-icon-transferthick-e-w"},
+        text: true
+        }).click(function() {
+        tipocambiosunat_form('insertar');
+    });
+
+
 	$('#btn_agregar').button({
 		icons: {primary: "ui-icon-plus"},
 		text: true
@@ -143,7 +171,24 @@ $(function() {
 				$( this ).dialog( "close" );
 			}
 		}
-	});	
+	});
+    $( "#div_tipocambiosunat_form" ).dialog({
+        title:'Información de Tipo de Cambio Sunat',
+        autoOpen: false,
+        resizable: false,
+        height: 'auto',
+        width: 400,
+        modal: true,
+        buttons: {
+            Guardar: function() {
+                $("#for_tipcamsunat").submit();
+            },
+            Cancelar: function() {
+                $('#for_tipcamsunat').each (function(){this.reset();});
+                $( this ).dialog( "close" );
+            }
+        }
+    });
 });
 </script>
 
@@ -170,6 +215,7 @@ $(function() {
                     <tr>
                       <td width="25" align="left" valign="middle"><a id="btn_agregar" href="#" onClick="tipocambio_form('insertar')">Agregar</a></td>
                       <td width="25" align="left" valign="middle"><a id="btn_actualizar" href="#">Actualizar</a></td>
+                      <td width="25" align="left" valign="middle"><a id="btn_tcsunat" href="#">SUNAT</a></td>
                       <td align="left" valign="middle">&nbsp;</td>
                       <td align="right"><div id="msj_tipocambio" class="ui-state-highlight ui-corner-all" style="width:auto; float:right; padding:2px; display:none"></div></td>
                     </tr>
@@ -184,6 +230,9 @@ $(function() {
 			</div>
             <div id="div_tipocambio_form">
             </div>
+            <div id="div_tipocambiosunat_form">
+            </div>
+
         	<div id="div_tipocambio_tabla" class="contenido_tabla">
       		</div>
       	</div>

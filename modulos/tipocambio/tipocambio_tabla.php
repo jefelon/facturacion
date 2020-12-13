@@ -25,16 +25,17 @@ $(function() {
 			0: {sorter: 'shortDate' },
 			2: {sorter: false }
 			},
-		//sortForce: [[0,0]],
-		sortList: [[0,1]]
+		sortForce: [[0,0]],
+		//sortList: [[0,1]]
     });
 }); 
 </script>
         <table cellspacing="1" id="tabla_tipocambio" class="tablesorter">
             <thead>
                 <tr>
-                  <th>FECHA</th>               
-                    <th>DOLAR SUNAT</th>                                        
+                  <th>FECHA</th>
+                    <th>DOLAR SUNAT COMPRA</th>
+                    <th>DOLAR SUNAT VENTA</th>
                     <th>&nbsp;</th>
                 </tr>
             </thead>
@@ -46,7 +47,8 @@ $(function() {
 					while($dt1 = mysql_fetch_array($dts1)){?>
                         <tr>
                           <td><?php echo mostrarFecha($dt1['tb_tipocambio_fec'])?></td>                            
-                            <td><?php echo number_format($dt1['tb_tipocambio_dolsun'],3)?></td>                            
+                            <td><?php echo number_format($dt1['tb_tipocambio_dolsunc'],3)?></td>
+                            <td><?php echo number_format($dt1['tb_tipocambio_dolsunv'],3)?></td>
                             <td align="center"><a class="btn_editar" href="#" onClick="tipocambio_form('editar','<?php echo $dt1['tb_tipocambio_id']?>')">Editar</a> <a class="btn_eliminar" href="#" onClick="eliminar_tipocambio('<?php echo $dt1['tb_tipocambio_id']?>')">Eliminar</a></td>
                         </tr>
                 <?php
