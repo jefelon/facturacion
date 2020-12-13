@@ -56,7 +56,7 @@ $num_rows= mysql_num_rows($dts);
                 <td><?php echo $dt['tb_vehiculo_id']. ' '.$dt['tb_vehiculo_marca']. ' - '.$dt['tb_vehiculo_placa'].' de '.$dt['tb_vehiculo_numasi'].' Asientos.' ?></td>
                 <td align="center"><a class="btn_croquis" href="#" onClick="croquis_distribucion_form('editar_croquis','<?php echo $dt['tb_croquis_id']?>','<?php echo $dt['tb_vehiculo_id']?>')">Editar</a></td>
                 <td align="center"><a class="btn_editar" href="#" onClick="croquis_form('editar','<?php echo $dt['tb_croquis_id']?>')">Editar</a></td>
-                <td align="center"><a class="btn_eliminar" href="#" onClick="eliminar_croquis('<?php echo $dt['tb_croquis_id']?>')">Eliminar</a></td>
+                <td align="center"><a class="btn_eliminar" href="#" onClick="eliminar_croquis('<?php echo $dt['tb_croquis_id']?>','<?php echo $dt['tb_vehiculo_id']?>')">Eliminar</a></td>
             </tr>
             <?php
         }

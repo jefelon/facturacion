@@ -102,5 +102,13 @@ class cAsiento{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+	function  editarFila($id,$fila){
+        $sql = "UPDATE tb_distribucionasiento SET  
+	`tb_distribucionasiento_fila` =  '$fila',
+	WHERE  tb_distribucionasiento =$id;";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 }
 ?>

@@ -97,17 +97,11 @@ if($_POST['action_croquis']=="insertar")
 if($_POST['action_croquis']=="editar")
 {
 
-    if(!empty($_POST['cmb_vehiculo']))
+    if(!empty($_POST['hdd_veh_id']))
     {
-        $oCroquis->modificar($_POST['hdd_cro_id'], $_POST['cmb_vehiculo'],$_POST['cmb_estado'],$_POST['txt_croquis_fondo'],$_POST['cmb_croquis_def']);
+        $oCroquis->editarCroquis($_POST['distribucion'],$_POST['hdd_fila'],$_POST['hdd_veh_id'],$_POST['hdd_piso']);
 
-        if (!file_exists('fondos')) {
-            mkdir('fondos', 0777);
-        }
-
-        move_uploaded_file($_FILES['file']['tmp_name'], 'fondos/' . $_POST['hdd_cro_id'] . '_'. $_FILES['file']['name'] );
-
-        echo "Se registró croquis correctamente.";
+        echo "Las ubicaciones del croquis se editaron correctamente.";
     }
     else
     {
@@ -118,12 +112,6 @@ if($_POST['action_croquis']=="editar")
 if($_POST['action']=="eliminar")
 {
     if(!empty($_POST['id']))
-    {
-        $oCroquis->eliminar($_POST['id']);
-        $oCroquis->eliminarCroquis($_POST['id']);
-        echo 'Se eliminó croquis correctamente.';
-    }
-    if(!empty($_POST['veh_id']))
     {
         $oCroquis->eliminar($_POST['id']);
         $oCroquis->eliminarCroquis($_POST['id']);

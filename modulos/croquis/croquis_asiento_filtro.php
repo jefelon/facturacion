@@ -69,9 +69,29 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
             icons: {primary: "ui-icon-check"},
             text: false
         });
+        $('.btn_agregar').button({
+            icons: {primary: "ui-icon-pencil"},
+            text: false
+        });
 
 
-
+        $( "#div_agregar_asiento_form" ).dialog({
+            title:'Información de Croquis',
+            autoOpen: false,
+            resizable: false,
+            height: 200,
+            width: 950,
+            modal: true,
+            buttons: {
+                Guardar: function() {
+                    $("#for_ediasi").submit();
+                },
+                Cancelar: function() {
+                    $('#for_ediasi').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
+            }
+        });
 
         // $('.pasadizo >div').addClass('oculto');
         // $('.pasadizo >div:last').removeClass('oculto');
@@ -190,6 +210,30 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         $(selector).addClass('seleccionado');
         $(selector).attr('contentEditable',true);
     }
+    function agregar_asiento_form(act,veh_id,piso,fila)
+    {
+        $.ajax({
+            type: "POST",
+            url: "croquis_agregar_asiento_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act,
+                veh_id:	veh_id,
+                piso:piso,
+                fila:fila,
+                vista:	'croquis_tabla'
+            }),
+            beforeSend: function() {
+                $('#msj_croquis').hide();
+                $('#div_agregar_asiento_form').dialog("open");
+                $('#div_agregar_asiento_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_agregar_asiento_form').html(html);
+            }
+        });
+    }
 </script>
 <style>
 
@@ -201,8 +245,8 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         list-style-type: none;
         margin: 0;
         padding: 5px 0 0 0;
-        /*float: left;*/
         margin-right: 10px;
+        float: left;
     }
 
     #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {
@@ -215,6 +259,17 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         position: relative;
         float: left;
         background: #00aa00;
+    }
+    .opciones{
+        margin: 5px 0px;
+        font-size: 1.2em;
+        width: 41px;
+        height: 55px;
+        float: left;
+        background: #00b8ff;
+        float: right;
+        color: #fff;
+        text-align: center;
     }
 
     .clear{
@@ -351,6 +406,10 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
 
                 ?>
             </div>
+            <div class="opciones">
+                Fila 1
+                <a class="btn_agregar" href="#" onClick="agregar_asiento_form('editar',<?php echo $vehiculo_id ?>,<?php echo $piso ?>,1)">Editar fila 1</a>
+            </div>
             <div class="clear"></div>
             <?php }?>
             <?php if($estado_filas2==1) {?>
@@ -368,6 +427,10 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
                 mysql_free_result($dts2);
 
                 ?>
+            </div>
+            <div class="opciones">
+                Fila 2
+                <a class="btn_agregar" href="#" onClick="agregar_asiento_form('editar',<?php echo $vehiculo_id ?>,<?php echo $piso ?>,2)">Editar fila 2</a>
             </div>
             <div class="clear"></div>
             <?php }?>
@@ -387,6 +450,10 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
 
                 ?>
             </div>
+            <div class="opciones">
+                Fila 3
+                <a class="btn_agregar" href="#" onClick="agregar_asiento_form('editar',<?php echo $vehiculo_id ?>,<?php echo $piso ?>,3)">Editar fila 3</a>
+            </div>
             <div class="clear"></div>
             <?php }?>
             <?php if($estado_filas4==1) {?>
@@ -404,6 +471,10 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
                 mysql_free_result($dts4);
 
                 ?>
+            </div>
+            <div class="opciones">
+                Fila 4
+                <a class="btn_agregar" href="#" onClick="agregar_asiento_form('editar',<?php echo $vehiculo_id ?>,<?php echo $piso ?>,4)">Editar fila 4</a>
             </div>
             <div class="clear"></div>
             <?php }?>
@@ -423,6 +494,10 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
 
                 ?>
             </div>
+            <div class="opciones">
+                Fila 5
+                <a class="btn_agregar" href="#" onClick="agregar_asiento_form('editar',<?php echo $vehiculo_id ?>,<?php echo $piso ?>,5)">Editar fila 5</a>
+            </div>
             <?php }?>
         </div>
         <div id="atras"><!--atras--></div>
@@ -439,5 +514,6 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
             <a class="btn_desactivar" href="#" onClick="desactivar_fila(0)">Desactivar Fila</a>
             <a class="btn_activar" href="#" onClick="desactivar_fila(1)">Activar Fila</a>
         </div>
+        <div id="div_agregar_asiento_form"></div>
     </div>
 

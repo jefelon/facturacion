@@ -167,7 +167,7 @@ echo  "Modificando vehiculo: ". $veh_nombre;
         <option value="2">2</option>
     </select>
 </p>
-
+<div id="msj_agregar_asiento" class="ui-state-highlight ui-corner-all" style="width:auto;padding:2px;display:none;position: absolute;right: 10px;"></div>
 <div id="div_croquis_filtro">
 
 </div>

@@ -102,7 +102,7 @@ $oContenido = new cContenido();
             });
         }
 
-        function eliminar_croquis(id)
+        function eliminar_croquis(id,veh_id)
         {
             $('#msj_croquis').hide();
             if(confirm("Realmente desea eliminar?")){
@@ -113,7 +113,8 @@ $oContenido = new cContenido();
                     dataType: "html",
                     data: ({
                         action: "eliminar",
-                        id:		id
+                        id:		id,
+                        veh_id:veh_id
                     }),
                     beforeSend: function() {
                         $('#msj_croquis').html("Cargando...");
@@ -171,7 +172,7 @@ $oContenido = new cContenido();
             croquis_tabla();
 
             $( "#div_croquis_form" ).dialog({
-                title:'Información de Categoría',
+                title:'Información de Croquis',
                 autoOpen: false,
                 resizable: false,
                 height: 460,

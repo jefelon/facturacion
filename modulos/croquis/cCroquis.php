@@ -30,6 +30,18 @@ class cCroquis{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function editarCroquis($dis_lug,$dis_fil,$veh_id,$dis_pis){
+        $sql = "UPDATE tb_distribucionasiento SET
+		`tb_distribucionasiento_lugar`='$dis_lug',
+		`tb_distribucionasiento_fila`='$dis_fil',
+		`tb_vehiculo_id`='$veh_id',
+		`tb_distribucionasiento_piso`='$dis_pis'
+		WHERE  tb_vehiculo_id =$veh_id AND tb_distribucionasiento_fila=$dis_fil AND tb_distribucionasiento_piso=$dis_pis";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function ultimoInsert(){
 	$sql = "SELECT last_insert_id()"; 
 	$oCado = new Cado();
