@@ -75,6 +75,14 @@ class cCliente{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrarUnoDoc($doc){
+        $sql="SELECT * 
+	FROM tb_cliente 
+	WHERE tb_cliente_doc=$doc";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function modificar($id,$tip,$nom,$doc,$dir,$con,$tel,$ema,$est,$empresa,$precio,$retiene,$cui){
 	$sql = "UPDATE tb_cliente SET  
 	`tb_cliente_tip` =  '$tip',

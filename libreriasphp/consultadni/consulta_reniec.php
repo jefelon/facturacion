@@ -20,7 +20,12 @@ else{
 
 
     $link="https://www.facturacionelectronica.us/facturacion/controller/ws_consulta_rucdni_v2.php?documento=DNI&usuario=10447915125&password=985511933&nro_documento=";
-    $consulta = file_get_html($link.$dni)->plaintext;
+    $consulta = file_get_contents($link.$dni);
+    //Make sure we received utf-8:
+    $encoding = @mb_detect_encoding($consulta);
+    if ($encoding && strtoupper($encoding) != "utf-8")
+        $consulta = @iconv($encoding, "utf-8//TRANSLIT//IGNORE", $consulta);
+
     $datos344=json_decode($consulta,true);
     $dni=$datos344['result']['DNI'];
     $nom=$datos344['result']['Nombre'];
