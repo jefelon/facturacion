@@ -339,7 +339,7 @@ $pv = mysql_fetch_array($pvs);
                 data: 'dni=' + dni,
                 success: function (datos_dni) {
                     $('#txt_pasaj_nom').val(datos_dni.persona);
-                    if(datos_dni.resultado=="si"){
+                    if(datos_dni.resultado!=""){
                         venta_cliente_reg();
                     }
                 }
@@ -787,8 +787,23 @@ $pv = mysql_fetch_array($pvs);
                 }
 
             }
+            else{
+                alert("Seleccione DNI");
+            }
         });
 
+        $("#txt_precio").keydown(function (e){
+            // Capturamos qué telca ha sido
+            var keyCode= e.which;
+            // Si la tecla es el Intro/Enter
+            if (keyCode == 13){
+                // Evitamos que se ejecute eventos
+                event.preventDefault();
+                // Devolvemos falso
+                $("#txt_pasaj_dni").focus();
+                return false;
+            }
+        });
 
 
         $( "#div_venta_horario_form" ).dialog({
@@ -856,6 +871,7 @@ $pv = mysql_fetch_array($pvs);
 
 
         $("#bus_form").validate({
+
             submitHandler: function () {
                 var asi_est=validar_estado_asiento();
                 if(asi_est=="ocupado" || asi_est=="reserva"){
@@ -941,6 +957,15 @@ $pv = mysql_fetch_array($pvs);
                 },
                 txt_precio: {
                     required: true
+                },
+                txt_pasaj_dni:{
+                    required: true
+                },
+                txt_pasaj_nom:{
+                    required: true
+                },
+                rad_cli_tip_pas: {
+                    required: true
                 }
             },
             messages: {
@@ -955,6 +980,15 @@ $pv = mysql_fetch_array($pvs);
                 },
                 txt_precio: {
                     required: '*'
+                },
+                txt_pasaj_dni:{
+                    required: '*'
+                },
+                txt_pasaj_nom:{
+                    required: '*'
+                },
+                rad_cli_tip_pas: {
+                    required: '*'
                 }
             }
         });
@@ -962,75 +996,75 @@ $pv = mysql_fetch_array($pvs);
 </script>
 
 <style>
+*/
+    /*.oculto{*/
+        /*visibility: hidden;*/
+    /*}*/
 
-    .oculto{
-        visibility: hidden;
-    }
+    /*.seleccionado {*/
+        /*background: orange !important;*/
+        /*color: white;*/
+    /*}*/
 
-    .seleccionado {
-        background: orange !important;
-        color: white;
-    }
+    /*.reserva{*/
+        /*background: #dd09ff !important;*/
+        /*color: white;*/
+    /*}*/
+    /*.ocupado {*/
+        /*background: red !important;*/
+        /*color: white;*/
+    /*}*/
+    /*#sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {*/
+        /*border: 1px solid #eee;*/
+        /*min-height: 40px;*/
+        /*list-style-type: none;*/
+        /*margin: 0;*/
+        /*padding: 5px 0 0 0;*/
+        /*!*float: left;*!*/
+        /*margin-right: 10px;*/
+    /*}*/
 
-    .reserva{
-        background: #dd09ff !important;
-        color: white;
-    }
-    .ocupado {
-        background: red !important;
-        color: white;
-    }
-    #sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {
-        border: 1px solid #eee;
-        min-height: 40px;
-        list-style-type: none;
-        margin: 0;
-        padding: 5px 0 0 0;
+    /*#sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {*/
+        /*margin: 0 5px 5px 5px;*/
+        /*padding: 0px;*/
+        /*font-size: 1.2em;*/
+        /*width: 40px;*/
+        /*height: 50px;*/
+        /*cursor: pointer !important;*/
+        /*position: relative;*/
         /*float: left;*/
-        margin-right: 10px;
-    }
+        /*background: #00aa00;*/
+    /*}*/
 
-    #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {
-        margin: 0 5px 5px 5px;
-        padding: 0px;
-        font-size: 1.2em;
-        width: 40px;
-        height: 50px;
-        cursor: pointer !important;
-        position: relative;
-        float: left;
-        background: #00aa00;
-    }
-
-    .clear{
-        clear: both;
-    }
-    #frentera{
-        height: 200px;
-        width: 185px;
-        /*background: #0D8BBD;*/
-        float: left;
-    }
-    #lugares{
-        float: left;
-        height: 200px;
-        margin-top: 80px;
-    }
-    .pasadizo{
-        height: 40px;
-    }
+    /*.clear{*/
+        /*clear: both;*/
+    /*}*/
+    /*#frentera{*/
+        /*height: 200px;*/
+        /*width: 185px;*/
+        /*!*background: #0D8BBD;*!*/
+        /*float: left;*/
+    /*}*/
+    /*#lugares{*/
+        /*float: left;*/
+        /*height: 200px;*/
+        /*margin-top: 80px;*/
+    /*}*/
+    /*.pasadizo{*/
+        /*height: 40px;*/
+    /*}*/
     #bus{
-        width: 1229px;
+        width: 1000px;
         height: 480px;
-        background: url("../../images/bus_fondo.png");
-        background-size: 99%;
-        background-repeat: no-repeat;
-        background-position-x: -45px;
-        overflow: hidden;
+        /*background: url("../../images/bus_fondo.png");*/
+        /*background-size: 99%;*/
+        /*background-repeat: no-repeat;*/
+        /*background-position-x: -45px;*/
+        /*overflow: hidden;*/
     }
-    .o{
-        background: #f5f5f5 !important
-    }
+    /*.o{*/
+        /*background: #f5f5f5 !important*/
+    /*}*/
 
 </style>
 
@@ -1091,74 +1125,79 @@ $pv = mysql_fetch_array($pvs);
     <div id="bus" style="width: 80%;float:left">
 
     </div>
-    <div id="pasajero" style="width: 20%;float: right">
-        <fieldset><legend>Datos Pasajero</legend>
-            <div id="radiopas">
-                <input name="rad_cli_tip_pas" type="radio" id="radiopas1" value="1" checked="checked"/><label for="radiopas1">DNI</label>
-                <input name="rad_cli_tip_pas" type="radio" id="radiopas3" value="3"><label for="radiopas3">OTROS</label>
-            </div>
-            <label for="txt_pasaj_dni" id="lbl_cli_doc_pas">DNI:</label><br>
-            <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
-            <label for="txt_pasaj_nom">NOMBRE: </label><br>
-            <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
-        </fieldset>
-        <br>
-        <br>
-    </div>
-    <div id="datos-vehiculo" style="width: 20%;float: right">
-        <fieldset><legend>Datos Vehiculo</legend>
-            <table>
-                <tr>
-                    <td width="100%" align="left"  valign="top">
-                        <label for="txt_placa_vehiculo">VEHICULO:</label><br>
-                        <input name="txt_placa_vehiculo" type="text" id="txt_placa_vehiculo" value="" disabled>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="100%" align="left"  valign="top"><br>
-                        <label for="txt_asientos_vehiculo">ASIENTOS:</label><br>
-                        <input name="txt_asientos_vehiculo" type="text" id="txt_asientos_vehiculo" value="" disabled>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="100%" align="left"  valign="top">
-                        <label for="txt_modelo_vehiculo">MODELO:</label><br>
-                        <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
-                    </td>
-                </tr>
-                <tr>
-                    <td width="100%" align="left"  valign="top">
-                        <label for="cmb_piso">PISO:</label>
-                        <select name="cmb_piso" id="cmb_piso">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                        </select>
-                    </td>
-                </tr>
+</form>
+    <div style="width: 20%;float: right">
+        <div id="pasajero">
+            <form id="datos_pasajero">
+            <fieldset><legend>Datos Pasajero</legend>
+                <div id="radiopas">
+                    <input name="rad_cli_tip_pas" type="radio" id="radiopas1" value="1"><label for="radiopas1">DNI</label>
+                    <input name="rad_cli_tip_pas" type="radio" id="radiopas3" value="3"><label for="radiopas3">OTROS</label>
+                </div>
+                <label for="txt_pasaj_dni" id="lbl_cli_doc_pas">DNI:</label><br>
+                <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
+                <label for="txt_pasaj_nom">NOMBRE: </label><br>
+                <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
+            </fieldset>
+            </form>
+            <br>
+            <br>
+        </div>
+        <div id="datos-vehiculo">
+            <fieldset><legend>Datos Vehiculo</legend>
+                <table>
+                    <tr>
+                        <td width="100%" align="left"  valign="top">
+                            <label for="txt_placa_vehiculo">VEHICULO:</label><br>
+                            <input name="txt_placa_vehiculo" type="text" id="txt_placa_vehiculo" value="" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" align="left"  valign="top"><br>
+                            <label for="txt_asientos_vehiculo">ASIENTOS:</label><br>
+                            <input name="txt_asientos_vehiculo" type="text" id="txt_asientos_vehiculo" value="" disabled>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" align="left"  valign="top">
+                            <label for="txt_modelo_vehiculo">MODELO:</label><br>
+                            <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="100%" align="left"  valign="top">
+                            <label for="cmb_piso">PISO:</label>
+                            <select name="cmb_piso" id="cmb_piso">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                            </select>
+                        </td>
+                    </tr>
 
-            </table>
-        </fieldset>
-        <br>
-        <br>
+                </table>
+            </fieldset>
+            <br>
+            <br>
+        </div>
+        <div>
+            <fieldset><legend>Imprimir Manifiesto</legend>
+                <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post" style="text-align: center">
+                    <input name="hdd_vh_id" type="hidden" id="hdd_vh_id" name="hdd_vh_id"  value="">
+                    <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
+                </form>
+            </fieldset>
+        </div>
     </div>
 
     <div id="div_venta_horario_form">
 
     </div>
-</form>
+
 <div id="div_postergacion_form">
 
 </div>
 <div id="div_detalleviaje">
 
-</div>
-<div>
-    <fieldset><legend>Imprimir Manifiesto</legend>
-        <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post" style="text-align: center">
-            <input name="hdd_vh_id" type="hidden" id="hdd_vh_id" name="hdd_vh_id"  value="">
-            <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
-        </form>
-    </fieldset>
 </div>
 
 <div id="menu-click">

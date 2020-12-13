@@ -57,8 +57,8 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
     <script src="../../js/ckeditor/ckeditor-standar/jquery.min.js"></script>
     <script src="../../js/ckeditor/ckeditor-standar/ckeditor.js"></script>
     <script src="../../js/ckeditor/ckeditor-standar/adapters/jquery.js"></script>
-    <link rel="stylesheet" href="../../js/contextmenu/jquery.contextmenu.css" type="text/css" />
-    <script src="../../js/contextmenu/jquery.contextmenu.js"></script>
+<!--    <link rel="stylesheet" href="../../js/contextmenu/jquery.contextmenu.css" type="text/css" />-->
+<!--    <script src="../../js/contextmenu/jquery.contextmenu.js"></script>-->
     <script> var $j = jQuery.noConflict(true); </script>
 
     <script type="text/javascript">
