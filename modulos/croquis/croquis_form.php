@@ -151,7 +151,7 @@ $(function() {
             <td valign="top">
                 <label for="cmb_croquis"><b>Croquis:</b></label><br>
                 <select name="cmb_croquis_def" id="cmb_croquis_def" title="Se insertará esta distribución por defecto, luego puede modificar en editar croquis.">
-                    <option value="48" <?php if($def==48)echo 'selected'?>>48 ASIENTOS</option>
+                    <option value="49" <?php if($def==49)echo 'selected'?>>49 ASIENTOS</option>
                     <option value="56" <?php if($def==56)echo 'selected'?>>56 ASIENTOS</option>
                 </select>
             </td>
