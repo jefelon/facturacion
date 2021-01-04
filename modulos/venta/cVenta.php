@@ -103,10 +103,10 @@ class cVenta{
         return $rst;
     }
 
-    function insertarEncomiendaVenta($ven_id,$remitente_id,$destinatario_nom,$origen_id, $destino_id,$clave,$pagado){
-        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_remitente_id` ,`tb_destinatario_nom` ,`tb_origen_id`,`tb_destino_id`,`tb_encomiendaventa_clave`,`tb_encomiendaventa_pagado`
+    function insertarEncomiendaVenta($ven_id,$viajehora_id,$remitente_id,$destinatario_nom,$origen_id, $destino_id,$clave,$pagado){
+        $sql = "INSERT INTO tb_encomiendaventa(`tb_venta_id` ,`tb_viajehorario_id`,`tb_remitente_id` ,`tb_destinatario_nom` ,`tb_origen_id`,`tb_destino_id`,`tb_encomiendaventa_clave`,`tb_encomiendaventa_pagado`
 	)
-	VALUES ('$ven_id',   '$remitente_id',  '$destinatario_nom', '$origen_id', '$destino_id','$clave','$pagado'
+	VALUES ('$ven_id', '$viajehora_id', '$remitente_id',  '$destinatario_nom', '$origen_id', '$destino_id','$clave','$pagado'
 	);";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
@@ -274,14 +274,36 @@ class cVenta{
 	return $rst;
 	}
     function mostrar_filtro_man($fec1,$fec2,$con_id,$est,$usu_id,$punven_id,$emp_id){
-        $sql="SELECT  vh.tb_viajehorario_id,tb_viajehorario_ser, tb_viajehorario_num, tb_viajehorario_fecha,tb_conductor_nom,tb_conductor_doc 
+        $sql="SELECT  COUNT(*) as total,vh.tb_viajehorario_id,tb_viajehorario_ser, tb_viajehorario_num, tb_viajehorario_fecha,tb_conductor_nom,tb_conductor_doc 
         FROM tb_viajehorario vh 
         INNER JOIN tb_viajeventa vv ON vh.tb_viajehorario_id=vv.tb_viajehorario_id 
         INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
         INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
         INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
         INNER JOIN tb_conductor c ON vh.tb_conductor_id=c.tb_conductor_id	
-        WHERE v.tb_empresa_id = $emp_id 
+        WHERE v.tb_empresa_id = $emp_id AND v.tb_venta_est NOT IN ('ANULADA')
+        AND tb_viajehorario_fecha BETWEEN '$fec1' AND '$fec2' ";
+        if($con_id>0)$sql.=" AND vh.tb_conductor_id = $con_id ";
+        if($usu_id>0)$sql.=" AND u.tb_usuario_id = $usu_id ";
+        if($punven_id>0)$sql.=" AND v.tb_puntoventa_id = $punven_id ";
+        if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
+
+        $sql.=" GROUP BY tb_viajehorario_ser, tb_viajehorario_num, tb_viajehorario_fecha,tb_conductor_nom,tb_conductor_doc";
+        $sql.=" ORDER BY tb_viajehorario_fecha, tb_viajehorario_num";
+
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+    function mostrar_filtro_enc($fec1,$fec2,$con_id,$est,$usu_id,$punven_id,$emp_id){
+        $sql="SELECT  COUNT(*) as total, tb_encomiendaventa_id,vh.tb_viajehorario_id,tb_viajehorario_ser, tb_viajehorario_num, tb_viajehorario_fecha,tb_conductor_nom,tb_conductor_doc 
+        FROM tb_viajehorario vh 
+        INNER JOIN tb_encomiendaventa vv ON vh.tb_viajehorario_id=vv.tb_viajehorario_id 
+        INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
+        INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
+        INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
+        INNER JOIN tb_conductor c ON vh.tb_conductor_id=c.tb_conductor_id	
+        WHERE v.tb_empresa_id = $emp_id AND v.tb_venta_est NOT IN ('ANULADA')
         AND tb_viajehorario_fecha BETWEEN '$fec1' AND '$fec2' ";
         if($con_id>0)$sql.=" AND vh.tb_conductor_id = $con_id ";
         if($usu_id>0)$sql.=" AND u.tb_usuario_id = $usu_id ";
@@ -701,6 +723,25 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function mostrar_cabecera_manifiesto_enc($vh_id)
+    {
+        $sql = "SELECT vh.tb_viajehorario_fecha,vh.tb_viajehorario_horario,vh.tb_viajehorario_ser,vh.tb_viajehorario_num, 
+        o.tb_lugar_nom as Origen, d.tb_lugar_nom as Destino, v.tb_vehiculo_marca,v.tb_vehiculo_placa,v.tb_vehiculo_numasi, 
+        c.tb_conductor_nom, co.tb_conductor_nom AS tb_copiloto_nom,co.tb_conductor_lic AS tb_copiloto_lic, c.tb_conductor_lic, pv.tb_puntoventa_direccion,ev.tb_encomiendaventa_id
+        FROM tb_viajehorario vh 
+        INNER JOIN tb_encomiendaventa ev ON ev.tb_viajehorario_id= vh.tb_viajehorario_id
+        INNER JOIN tb_venta ve ON ve.tb_venta_id=ev.tb_venta_id
+        INNER JOIN tb_puntoventa pv ON pv.tb_puntoventa_id=ve.tb_puntoventa_id
+        INNER JOIN tb_lugar o ON vh.tb_viajehorario_salida=o.tb_lugar_id 
+        INNER JOIN tb_lugar d ON vh.tb_viajehorario_llegada=d.tb_lugar_id 
+        INNER JOIN tb_vehiculo v ON vh.tb_vehiculo_id=v.tb_vehiculo_id 
+        LEFT JOIN tb_conductor c ON vh.tb_conductor_id=c.tb_conductor_id
+        LEFT JOIN tb_conductor co ON vh.tb_copiloto_id=co.tb_conductor_id
+        WHERE vh.tb_viajehorario_id=$vh_id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
     function mostrar_manifiesto($vh_id)
     {
         $sql = "SELECT * FROM tb_viajeventa vv 
@@ -714,7 +755,32 @@ WHERE tb_software_id =$id";
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+    function mostrar_manifiesto_enc($vh_id)
+    {
+        $sql = "SELECT * FROM tb_encomiendaventa vv 
+        INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
+        INNER JOIN tb_lugar d ON d.tb_lugar_id = vv.tb_destino_id
+        LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+        WHERE tb_viajehorario_id=$vh_id AND v.tb_venta_est NOT IN ('ANULADA')
+        ORDER  BY v.tb_venta_numdoc
+        ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
+    function mostrar_detalle_manifiesto_enc($vh_id)
+    {
+        $sql = "SELECT * FROM tb_encomiendaventa vv 
+        INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
+        INNER JOIN tb_ventadetalle vd ON vd.tb_venta_id=v.tb_venta_id 
+        WHERE tb_viajehorario_id=$vh_id AND v.tb_venta_est NOT IN ('ANULADA')
+        ORDER  BY vd.tb_ventadetalle_id DESC
+        ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
     function mostrar_filtro_cliente($des_nom, $punven_id){
         $sql="SELECT * 
 	FROM tb_encomiendaventa ev

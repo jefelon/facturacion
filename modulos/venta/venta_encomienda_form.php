@@ -157,6 +157,17 @@ if($_POST['action']=="editar"){
         icons: {primary: "ui-icon-pencil"},
         text: false
     });
+    $('#btn_agregar_horario').button({
+        icons: {primary: "ui-icon-plus"},
+        text: false
+    });
+    $('#btn_editar_horario').button({
+        icons: {primary: "ui-icon-pencil"},
+        text: false
+    });
+
+
+
     $(".btn_ir").css({width: "13px", height: "14px", 'vertical-align':"buttom", padding: "0 0 3px 0" });
 
     $('#btn_cli_form_agregar,#btn_rem_form_agregar,#btn_des_form_agregar').button({
@@ -367,6 +378,25 @@ if($_POST['action']=="editar"){
             }
         });
     }
+    function cmb_lugar_parada()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_lug_id.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_parada_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_parada_id').html(html);
+                $("#cmb_parada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
+            },
+            complete: function(){
+
+            }
+        });
+    }
     function cmb_lugar_destino()
     {
         $.ajax({
@@ -380,6 +410,76 @@ if($_POST['action']=="editar"){
             success: function(html){
                 $('#cmb_llegada_id').html(html);
                 $("#cmb_llegada_id").find("option[value='<?php echo $pv['tb_lugar_id']?>']").remove();
+            },
+            complete: function(){
+
+            }
+        });
+    }
+    function cmb_horario_vehiculo()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_veh_id.php",
+            async:false,
+            dataType: "json",
+            data: ({
+                salida_id: $('#cmb_salida_id').val(),
+                llegada_id: $('#cmb_llegada_id').val(),
+                horario: $('#cmb_horario').val(),
+                fecha: $('#cmb_fech_sal').val()
+            }),
+            beforeSend: function() {
+                $('#txt_placa_vehiculo').val('<option value="">Cargando...</option>');
+            },
+            success: function(data){
+                $('#txt_placa_vehiculo').val(data.vehiculo_placa);
+                $('#txt_modelo_vehiculo').val(data.vehiculo_marca);
+                $('#txt_asientos_vehiculo').val(data.vehiculo_numasi);
+                $('#hdd_vehiculo').val(data.vehiculo_id);
+                $('#hdd_vi_ho').val(data.viajehorario_id);
+                $('#hdd_vh_id').val(data.viajehorario_id);
+
+            },
+            complete: function(){
+
+            }
+        });
+    }
+    function cmb_fecha()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_fecha.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                salida_id: $('#cmb_salida_id').val(),
+                llegada_id: $('#cmb_llegada_id').val()
+            }),
+            beforeSend: function() {
+                $('#cmb_fech_sal').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_fech_sal').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
+    function cmb_conductor()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../conductor/cmb_con_id.php",
+            async:true,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_conductor_id').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_conductor_id').html(html);
             },
             complete: function(){
 
@@ -1557,7 +1657,9 @@ if($_POST['action']=="editar"){
         cmb_ven_doc();
         cmb_ven_id();
         cmb_lugar();
+        cmb_lugar_parada();
         cmb_lugar_destino();
+        cmb_conductor();
         cmb_listaprecio_id($('#hdd_cli_precio_id').val(),$('#hdd_ven_cli_id').val());
         lote_venta_car('restablecer');
 
@@ -1605,6 +1707,33 @@ if($_POST['action']=="editar"){
                     txt_venpag_fecletras(i,k);
                 }
             }
+        });
+
+        $('#cmb_horario').change(function(){
+            cmb_horario_vehiculo();
+        });
+
+        $('#cmb_fech_sal').change(function(){
+            cmb_fecha_horario();
+            $('#txt_placa_vehiculo').val('');
+            $('#txt_modelo_vehiculo').val('');
+            $('#txt_asientos_vehiculo').val('');
+            $('#bus').html('');
+            $('#hdd_vi_ho').val('');
+        });
+
+        $('#cmb_parada_id').prop("disabled", true).addClass("ui-state-disabled");
+        $('#cmb_llegada_id').change(function(){
+            $('#cmb_horario').val('');
+            cmb_fecha();
+            $('#txt_placa_vehiculo').val('');
+            $('#txt_modelo_vehiculo').val('');
+            $('#txt_asientos_vehiculo').val('');
+            $('#bus').html('');
+            $('#hdd_vi_ho').val('');
+            $('#cmb_parada_id').prop("disabled", false);
+            $('#cmb_parada_id').removeClass("ui-state-disabled");
+
         });
 
         cmb_tar_id(<?php echo $tar_id?>);
@@ -2282,7 +2411,10 @@ if($_POST['action']=="editar"){
                 },
                 txt_clave: {
                     required: true
-                }
+                },
+                cmb_conductor_id: {
+                    required: true
+                },
             },
             messages: {
                 txt_ven_fec: {
@@ -2323,7 +2455,10 @@ if($_POST['action']=="editar"){
                 },
                 txt_clave: {
                     required: "Falta clave."
-                }
+                },
+                cmb_conductor_id: {
+                    required: "Seleccione conductor."
+                },
             }
         });
 
@@ -2412,6 +2547,26 @@ if($_POST['action']=="editar"){
             close: function()
             {
                 $("#div_servicio_form").html('Cargando...');
+            }
+        });
+        $( "#div_venta_horario_form" ).dialog({
+            title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?>',
+            autoOpen: false,
+            resizable: false,
+            height: 'auto',
+            width: 'auto',
+            zIndex: 1,
+            modal: true,
+            position: "center",
+            closeOnEscape: false,
+            buttons: {
+                Guardar: function() {
+                    $("#for_hor").submit();
+                },
+                Cancelar: function() {
+                    $('#for_hor').each (function(){this.reset();});
+                    $( this ).dialog( "close" );
+                }
             }
         });
 
@@ -2684,6 +2839,71 @@ if($_POST['action']=="editar"){
         }
 
     }
+    function venta_horario_form(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_horario_form.php",
+            // url: "../venta/croquis.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#div_venta_horario_form').dialog("open");
+                $('#div_venta_horario_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_venta_horario_form').html(html);
+            }
+        });
+    }
+    function venta_vh_vehiculo_form(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_vh_vehiculo_form.php",
+            // url: "../venta/croquis.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: act,
+                veh_id: $('#hdd_vehiculo').val(),
+                vh_id: $('#hdd_vi_ho').val()
+            }),
+            beforeSend: function() {
+                $('#msj_venta').hide();
+                $('#div_venta_horario_form').dialog("open");
+                $('#div_venta_horario_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_venta_horario_form').html(html);
+            }
+        });
+    }
+    function cmb_fecha_horario()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../lugar/cmb_hor_id.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                salida_id: $('#cmb_salida_id').val(),
+                llegada_id: $('#cmb_llegada_id').val(),
+                fecha: $('#cmb_fech_sal').val()
+            }),
+            beforeSend: function() {
+                $('#cmb_horario').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_horario').html(html);
+            },
+            complete: function(){
+
+            }
+        });
+    }
 
 </script>
 
@@ -2705,6 +2925,10 @@ if($_POST['action']=="editar"){
         <input name="hdd_tipo" id="hdd_tipo" type="hidden" value="encomienda">
         <input name="hdd_precio" id="hdd_precio" type="hidden" value="<?php echo $_POST['precio']?>">
 
+        <input type="hidden" id="hdd_vehiculo" value="">
+        <input type="hidden" name="hdd_vi_ho" id="hdd_vi_ho" value="">
+        <input type="hidden" id="hdd_cli_res" value="">
+        <input type="hidden" id="hdd_act_res" value="">
 
         <fieldset>
             <legend>Datos Principales</legend>
@@ -2792,7 +3016,7 @@ if($_POST['action']=="editar"){
             </table>
         </fieldset>
 
-        <div class="cliente-pasajero" style="float: left; width: 80%";>
+        <div class="cliente-pasajero" style="float: left; width: 60%";>
             <div id="datos-cliente" style="display:none; width: 100%%;">
                 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
                 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
@@ -2952,7 +3176,7 @@ if($_POST['action']=="editar"){
                     <input type="text" id="txt_fil_gui_con_cat" name="txt_fil_gui_con_cat" size="10" value="<?php echo $con_cat?>" readonly="readonly"/>
                 </fieldset>
             </div>
-            <div style="float: left; width: 80%;">
+            <div style="float: left; width: 75%;">
                 <fieldset><legend>Registro de Pagos</legend>
                     <?php if($_POST['action']=='insertar' || $_POST['action']=='insertar_cot'){?>
                         <table border="0" cellspacing="2" cellpadding="0">
@@ -3099,29 +3323,55 @@ if($_POST['action']=="editar"){
                     </div>
                 </fieldset>
             </div>
-            <div style="width: 20%;float: left">
-                <fieldset>
-                    <fieldset><legend>Clave encomienda</legend>
+            <div style="width: 25%;float: left">
+                    <fieldset>
+                        <legend>Seguridad</legend>
+                        <label for="txt_ven_guia_dir">Clave:</label>
                         <input type="text" name="txt_clave" id="txt_clave" size="10" maxlength="4">
                     </fieldset>
             </div>
         </div>
 
-        <div style="float: left; width: 20%; display: block;">
+        <div style="float: left; width: 40%; display: block;">
             <fieldset>
                 <fieldset><legend>Origen Destino</legend>
 
-                    <table border="0" cellspacing="2" cellpadding="0">
+                    <table border="0" cellspacing="2" cellpadding="0" width="100%">
                         <tr>
                             <td valign="top">
                                 <label for="cmb_salida_id">Origen</label><br>
-                                <select name="cmb_salida_id" id="cmb_salida_id">
+                                <select name="cmb_salida_id" id="cmb_salida_id" style="width: 150px">
+                                </select>
+                            </td>
+                            <td valign="top">
+                                <label for="cmb_salida_id">Parada</label><br>
+                                <select name="cmb_parada_id" id="cmb_parada_id" style="width: 150px">
                                 </select>
                             </td>
                         </tr>
                         <tr>
                             <td valign="top"><label for="cmb_llegada_id">Destino:</label><br>
-                                <select name="cmb_llegada_id" id="cmb_llegada_id">
+                                <select name="cmb_llegada_id" id="cmb_llegada_id" style="width: 150px">
+                                </select>
+                            </td>
+                            <td align="left" valign="middle">
+                                <label for="cmb_fech_sal">Agregar/Editar</label><br>
+                                <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
+
+                                <a id="btn_editar_horario" title="Editar Horario de salida de bus" href="#" onClick="venta_vh_vehiculo_form()">Editar Horario</a>
+                                <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top" colspan="2">
+                                <label for="cmb_fech_sal">F. Salida</label><br>
+                                <select name="cmb_fech_sal" id="cmb_fech_sal">
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center" valign="top"  colspan="2"><label for="cmb_horario">Hora Salida:</label><br>
+                                <select name="cmb_horario" id="cmb_horario" style="width: 100%">
                                 </select>
                             </td>
                         </tr>
@@ -3190,6 +3440,9 @@ if($_POST['action']=="editar"){
 </div>
 
 <div id="div_lote_venta_form">
+</div>
+<div id="div_venta_horario_form">
+
 </div>
 <script type="text/javascript">
     //catalogo_venta_tab();

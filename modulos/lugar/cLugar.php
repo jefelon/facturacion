@@ -59,6 +59,8 @@ class cLugar{
     function mostrarFechaHorario($salida_id,$llegada_id,$fecha){
         $sql="SELECT * 
 	    FROM tb_viajehorario vh
+	    INNER JOIN tb_vehiculo v ON v.tb_vehiculo_id=vh.tb_vehiculo_id
+	    INNER JOIN tb_conductor c ON c.tb_conductor_id=vh.tb_conductor_id
 	    WHERE vh.tb_viajehorario_salida='$salida_id' AND vh.tb_viajehorario_llegada='$llegada_id' AND vh.tb_viajehorario_fecha='$fecha'";
         $sql.=" ORDER BY tb_viajehorario_horario";
         $oCado = new Cado();

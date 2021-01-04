@@ -115,6 +115,7 @@ $menu_administrador=
   	<ul>
 	  <li><a href="../venta/venta_vista_adm.php">Historial Ventas</a></li>
 	  <li><a href="../venta/venta_manifiesto_vista.php">Manifiesto de Pasajeros</a></li>
+	  <li><a href="../venta/venta_manifiesto_vista_enc.php">Manifiesto de Encomiendas</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Gráficos</a>
@@ -178,6 +179,7 @@ $menu_vendedor=
   	<ul>
 	  <li><a href="../venta/venta_vista_adm.php">Historial Ventas</a></li>
 	  <li><a href="../venta/venta_manifiesto_vista.php">Manifiesto de Pasajeros</a></li>
+	  <li><a href="../venta/venta_manifiesto_vista_enc.php">Manifiesto de Encomiendas</a></li>
 	</ul>
   </li>
   <li class="topmenu"><a href="#" >Caja</a>
