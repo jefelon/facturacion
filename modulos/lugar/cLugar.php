@@ -83,7 +83,9 @@ class cLugar{
 
 
     function mostrarFechas($salida_id,$llegada_id){
-        $fecha = date('Y-m-d');
+        $fecha_actual = date('Y-m-d H:i:s');
+        $fecha=date("Y-m-d H:i:s",strtotime($fecha_actual."- 8888 minute"));
+
         $nuevafecha = strtotime ( '+30 day' , strtotime ( $fecha ) ) ;
         $nuevafecha = date ( 'Y-m-d' , $nuevafecha );
 

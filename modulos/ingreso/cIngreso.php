@@ -195,7 +195,7 @@ class cIngreso{
 	LEFT JOIN tb_subcuenta sc ON i.tb_subcuenta_id = sc.tb_subcuenta_id
 	WHERE tb_ingreso_xac=1
 	AND i.tb_empresa_id=$emp_id 
-	AND i.tb_ingreso_fec BETWEEN '$fec1' AND '$fec2' AND i.tb_ingreso_usureg=$usu_reg";
+	AND i.tb_ingreso_fecreg BETWEEN '$fec1' AND '$fec2' AND i.tb_ingreso_usureg=$usu_reg";
 
         if($caj_id>0){
             $sql = $sql." AND i.tb_caja_id = $caj_id ";

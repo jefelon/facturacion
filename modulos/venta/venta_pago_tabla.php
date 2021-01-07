@@ -83,6 +83,7 @@ if($num_rows>0){
                                     echo ' L'.$ltr['tb_letras_orden'].' FV: '.mostrarFecha($ltr['tb_letras_fecha']). ' M. '.$ltr['tb_letras_monto'];
                                 }
                             }
+                            if($dt1['tb_formapago_id']==4)echo 'POR PAGAR ';
 
 							
 							/*if($dt1['tb_modopago_id']==1)echo 'EFECTIVO';

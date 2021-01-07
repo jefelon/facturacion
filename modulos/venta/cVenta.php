@@ -155,7 +155,7 @@ class cVenta{
 	return $rst;	
 	}
 	function mostrar_filtro($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$venmay,$tip){
-	$sql="SELECT ev.tb_encomiendaventa_id, ev.tb_destinatario_nom, cc.tb_cliente_nom AS tb_remitente_nom, v.tb_venta_id,
+	$sql="SELECT  v.tb_venta_id,
     v.tb_venta_est,v.tb_documento_id, v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
@@ -164,19 +164,10 @@ class cVenta{
     LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id 
     INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id 
     LEFT JOIN tb_viajeventa vv ON vv.tb_venta_id=v.tb_venta_id 
-    LEFT JOIN tb_encomiendaventa ev ON ev.tb_venta_id=v.tb_venta_id
-    LEFT JOIN tb_cliente cc ON ev.tb_remitente_id=cc.tb_cliente_id 
     
 	WHERE tb_usuario_id = $usu_id 
 	AND tb_puntoventa_id = $punven_id
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
-
-	if ($tip=='ENCOMIENDA'){
-        $sql.=" AND ev.tb_encomiendaventa_id IS NOT NULL";
-    }
-    if ($tip=='PASAJE'){
-        $sql.=" AND vv.tb_viajeventa_id IS NOT NULL";
-    }
 
 	if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
 	if($cli_id>0)$sql.=" AND v.tb_cliente_id = $cli_id ";
@@ -188,6 +179,32 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrar_filtro_encomienda($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$venmay,$tip){
+        $sql="SELECT ev.tb_encomiendaventa_id, ev.tb_destinatario_nom, cc.tb_cliente_nom AS tb_remitente_nom, v.tb_venta_id,
+    v.tb_venta_est,v.tb_documento_id, v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
+    v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
+    v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
+    v.tb_venta_valven, v.tb_venta_igv
+    FROM tb_venta v LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id 
+    LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id 
+    INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id 
+    LEFT JOIN tb_encomiendaventa ev ON ev.tb_venta_id=v.tb_venta_id
+    LEFT JOIN tb_cliente cc ON ev.tb_remitente_id=cc.tb_cliente_id 
+    
+	WHERE tb_usuario_id = $usu_id 
+	AND tb_puntoventa_id = $punven_id
+	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
+
+        if($doc_id>0)$sql.=" AND v.tb_documento_id = $doc_id ";
+        if($cli_id>0)$sql.=" AND v.tb_cliente_id = $cli_id ";
+        if($venmay>0)$sql.=" AND v.tb_venta_may = $venmay ";
+        if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
+
+        $sql.=" ORDER BY tb_venta_fec, tb_documento_nom, tb_venta_numdoc ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 	function mostrar_filtro_detalle($fec1,$fec2,$doc_id,$art,$cat_ids,$cli_id,$est,$usu_id,$punven_id,$venmay){
 	$sql="SELECT * 
 	FROM tb_venta v

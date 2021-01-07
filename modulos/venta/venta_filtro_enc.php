@@ -113,7 +113,7 @@ $(function() {
 }*/
 </style>
 <form name="for_fil_ven" id="for_fil_ven" target="_blank" action="venta_reporte.php" method="post">
-<input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla.php">
+<input name="hdd_modo" id="hdd_modo" type="hidden" value="venta_tabla_enc.php">
 <fieldset><legend>Filtro de Venta</legend>
     <label for="txt_fil_ven_fec1">Fecha:</label>
     <input name="txt_fil_ven_fec1" type="text" id="txt_fil_ven_fec1" value="<?php echo $fec1?>" size="8" readonly>
@@ -142,7 +142,7 @@ $(function() {
     <label for="cmb_fil_ven_tip">Tipo:</label>
     <select name="cmb_fil_ven_tip" id="cmb_fil_ven_tip" disabled>
         <option value="">-</option>
-        <option value="PASAJE" selected>PASAJE</option>
+        <option value="ENCOMIENDA" selected>ENCOMIENDA</option>
     </select>
     <label for="chk_fil_ven_may" title="Venta Mayorista">Venta Mayorista<input name="chk_fil_ven_may" id="chk_fil_ven_may" type="checkbox" value="1"></label>
     <label for="chk_ven_anu" title="Activar para anular venta.">Anular Venta<input name="chk_ven_anu" id="chk_ven_anu" type="checkbox" value="1"></label>

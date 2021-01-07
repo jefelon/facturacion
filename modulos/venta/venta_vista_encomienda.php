@@ -63,7 +63,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
         {
             $.ajax({
                 type: "POST",
-                url: "../venta/venta_filtro.php",
+                url: "../venta/venta_filtro_enc.php",
                 async:true,
                 dataType: "html",
                 data: ({

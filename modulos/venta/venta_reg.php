@@ -326,23 +326,23 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
 		//REGISTRO DE PAGOS
 		//PAGO AUTOMATICO
 		
-		if($_POST['chk_venpag_aut']==1) {
-            if ($_POST['cmb_forpag_id'] != 4) {
-                //Registro de pago
-                $oVentapago->insertar(
-                    $_POST['cmb_forpag_id'],
-                    $_POST['cmb_modpag_id'],
-                    fecha_mysql($_POST['txt_ven_fec']),
-                    moneda_mysql($_POST['txt_venpag_mon']),
-                    $_POST['cmb_cuecor_id'],
-                    $_POST['cmb_tar_id'],
-                    $_POST['txt_venpag_numope'],
-                    $_POST['txt_venpag_numdia'],
-                    fecha_mysql($_POST['txt_venpag_fecven']),
-                    $ven_id,
-                    $_SESSION['empresa_id']
-                );
-            }
+		if($_POST['chk_venpag_aut']==1)
+		{
+			//Registro de pago
+			$oVentapago->insertar(
+				$_POST['cmb_forpag_id'],
+				$_POST['cmb_modpag_id'],
+				fecha_mysql($_POST['txt_ven_fec']),
+				moneda_mysql($_POST['txt_venpag_mon']),
+				$_POST['cmb_cuecor_id'],
+				$_POST['cmb_tar_id'],
+				$_POST['txt_venpag_numope'],
+				$_POST['txt_venpag_numdia'],
+				fecha_mysql($_POST['txt_venpag_fecven']),
+				$ven_id,
+				$_SESSION['empresa_id']
+			);
+
 			//datos para glosa cuenta cliente
 			switch ($_POST['cmb_forpag_id']) {
 				case 1:
@@ -553,6 +553,93 @@ if($_POST['action_venta']=="insertar" || $_POST['action_venta']=="insertar_cot")
                         $numero_letra+$i
                     );
                 }
+            }
+            //FORMA DE PAGO POR PAGAR
+            if($_POST['cmb_forpag_id']==4)
+            {
+                //registro entrada
+                $xac=1;
+                $cuecli_tipreg=1;
+                $cuecli_tip=1;
+                $cuecli_est=2;
+                $verif=2;
+                $ventip=1;//venta
+                $oClientecuenta->insertar(
+                    $xac,
+                    $cuecli_tipreg,
+                    fecha_mysql($_POST['txt_ven_fec']),
+                    "VENTA $forma_pago $modo_pago | $documento $numdoc",
+                    $cuecli_tip,
+                    moneda_mysql($_POST['txt_venpag_mon']),
+                    $cuecli_est,
+                    $ventip,
+                    $ven_id,
+                    $_POST['cmb_forpag_id'],
+                    $_POST['cmb_modpag_id'],
+                    $_POST['cmb_cuecor_id'],
+                    $_POST['cmb_tar_id'],
+                    $_POST['txt_venpag_numope'],
+                    $_POST['txt_venpag_numdia'],
+                    fecha_mysql($_POST['txt_venpag_fecven']),
+                    $_POST['hdd_ven_cli_id'],
+                    $verif,
+                    $clicue_idp,
+                    $_SESSION['usuario_id'],
+                    $_SESSION['empresa_id']
+                );
+
+                //INGRESO CAJA
+                $xac=1;
+                $ing_det="VENTA $documento $numdoc | $modo_pago";
+                $ing_est='1';
+                $ing_cue_id=22;
+                if($_SESSION['empresa_id']==1)$ing_subcue_id=157;
+                //$ing_subcue_id=0;
+                //$caj_id=1;
+                $mon_id=1;
+                $mod_id=1;//modulo 1 venta
+
+                //SELECCIONAR CAJA
+                if($_POST['cmb_modpag_id']==1)
+                {
+                    $caj_id=$caja_venta;//efectivo
+                }
+                if($_POST['cmb_modpag_id']==2)
+                {
+                    $dts=$oCuentacorriente->mostrarUno($_POST['cmb_cuecor_id']);
+                    $dt = mysql_fetch_array($dts);
+                    $cuecor_nom	=$dt['tb_cuentacorriente_nom'];
+                    $caj_id	=$dt['tb_caja_id'];
+                    mysql_free_result($dts);
+                }
+                if($_POST['cmb_modpag_id']==3)
+                {
+                    $dts=$oTarjeta->mostrarUno($_POST['cmb_tar_id']);
+                    $dt = mysql_fetch_array($dts);
+                    $tar_nom	=$dt['tb_tarjeta_nom'];
+                    $caj_id		=$dt['tb_caja_id'];
+                    mysql_free_result($dts);
+                }
+
+                $oIngreso->insertar(
+                    $_SESSION['usuario_id'],
+                    $_SESSION['usuario_id'],
+                    $xac,
+                    fecha_mysql($_POST['txt_ven_fec']),
+                    $_POST['cmb_ven_doc'],
+                    $numdoc,
+                    $ing_det,
+                    moneda_mysql($_POST['txt_venpag_mon']),
+                    $ing_est,
+                    $ing_cue_id,
+                    $ing_subcue_id,
+                    $_POST['hdd_ven_cli_id'],
+                    $caj_id,
+                    $mon_id,
+                    $mod_id,
+                    $ven_id,
+                    $_SESSION['empresa_id']
+                );
             }
 
 		}

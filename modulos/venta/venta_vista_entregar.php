@@ -592,6 +592,21 @@ function buscar() {
             }, "json");
     }
 }
+function buscar_dni() {
+    if ($('#txt_rem_nom').val()==""){
+        var dni = $('#txt_rem_dni').val();
+        var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+        $.ajax({
+            type: 'POST',
+            dataType: "json",
+            url: url,
+            data: 'dni=' + dni,
+            success: function (datos_dni) {
+                $('#txt_rem_nom').html(datos_dni.persona);
+            }
+        });
+    }
+}
 $(function() {
 	$('#btn_actualizar').button({
 		icons: {primary: "ui-icon-arrowrefresh-1-e"},
@@ -609,6 +624,11 @@ $(function() {
 		icons: {primary: "ui-icon-document"},
 		text: true
 	});
+    $('.btn_buscar').button({
+        icons: {primary: "ui-icon-search"},
+        text: false
+    });
+
 
     $('#btn_agregar').button({
         icons: {primary: "ui-icon-plus"},
@@ -876,7 +896,15 @@ $(function() {
 
                                 <td>
                                     <label for="txt_ven_cli_nom">Cliente:</label>
-                                    <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="40" value='<?php echo $cli_nom?>' />
+                                    <input type="text" id="txt_ven_cli_nom" name="txt_ven_cli_nom" size="40" value='<?php echo $cli_nom?>' title="Busca por nombre del remitente en la base de datos."/>
+                                </td>
+                                <td>
+                                    <label for="txt_ven_cli_nom">Verificar DNI:</label>
+                                    <input type="text" id="txt_rem_dni" name="txt_rem_dni" size="10" title="Busca el DNI en RENIEC y compara los nombres"/>
+                                    <a href="#" class="btn_buscar" id="buscar_dni" onclick="buscar_dni()">Buscar</a>
+                                </td>
+                                <td>
+                                    <p id="txt_rem_nom" style="color:green;margin: 0"></p>
                                 </td>
                             </tr>
                         </table>

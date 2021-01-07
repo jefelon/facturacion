@@ -23,7 +23,7 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa = $dt['tb_empresa_ruc'];
 
 
-$dts1=$oVenta->mostrar_filtro(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may'],$_POST['cmb_fil_ven_tip']);
+$dts1=$oVenta->mostrar_filtro_encomienda(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may'],$_POST['cmb_fil_ven_tip']);
 $num_rows= mysql_num_rows($dts1);
 ?>
 
@@ -77,7 +77,9 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">DOCUMENTO</th>
         <th align="center">FECHA EMISIÓN</th>
         <th align="center">CLIENTE</th>
-        <th lign="center">RUC/DNI</th>
+        <th align="center">REMITENTE</th>
+        <th align="center">DESTINATARIO</th>
+        <th align="center">RUC/DNI</th>
         <th align="center">MONEDA</th>
 
         <th align="center"> <?php if ($_POST['cmb_fil_ven_tip']=='ENCOMIENDA'){
@@ -135,6 +137,8 @@ $num_rows= mysql_num_rows($dts1);
                 <td nowrap="nowrap"><?php echo $dt1['tb_venta_ser'].'-'.$dt1['tb_venta_num']?></td>
                 <td nowrap="nowrap" align="center"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                 <td><?php echo $dt1['tb_cliente_nom']?></td>
+                <td><?php echo $dt1['tb_remitente_nom']?></td>
+                <td><?php echo $dt1['tb_destinatario_nom']?></td>
                 <td><?php echo $dt1['tb_cliente_doc']?></td>
                 <td align="center">
                     <?php
@@ -306,7 +310,7 @@ $num_rows= mysql_num_rows($dts1);
     }
     ?>
     <tr class="even">
-        <td colspan="6">TOTAL</td>
+        <td colspan="8">TOTAL</td>
         <td align="right"><strong><?php echo formato_money($total_val_ven)?></strong></td>
         <td align="right"><strong><?php echo formato_money($total_igv)?></strong></td>
         <td align="right"><strong><?php echo formato_money($total_ventas)?></strong></td>

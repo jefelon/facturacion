@@ -160,7 +160,7 @@ $(function() {
                     $('#msj_horario').delay(5000).hide(600);
 				},
 				complete: function(){
-
+                    $('#msj_horario').delay(5000).hide(600);
 				}
 			});
 		},

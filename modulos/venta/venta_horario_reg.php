@@ -22,7 +22,7 @@ if($_POST['action']=="insertar")
         $numdoc=$tal_ser.'-'.$numero;
         mysql_free_result($dts);
 
-        $oLugar->insertarViajeHorario($_POST['cmb_salida'], $_POST['cmb_llegada'], fecha_mysql($_POST['txt_fech_salida']), $_POST['txt_hora'], $_POST['cmb_vehiculo'],$_POST['cmb_conductor'],$_POST['cmb_copiloto'],$tal_ser,$numero);
+        $oLugar->insertarViajeHorario($_POST['cmb_salida'], $_POST['cmb_llegada'], fechahora_mysql($_POST['txt_fech_salida'].' '.$_POST['txt_hora']), $_POST['txt_hora'], $_POST['cmb_vehiculo'],$_POST['cmb_conductor'],$_POST['cmb_copiloto'],$tal_ser,$numero);
         $dts=$oLugar->ultimoInsert();
         $dt = mysql_fetch_array($dts);
         $hor_id=$dt['last_insert_id()'];

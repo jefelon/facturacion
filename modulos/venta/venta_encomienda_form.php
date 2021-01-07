@@ -1879,12 +1879,12 @@ if($_POST['action']=="editar"){
                 $('#hdd_ven_cli_id, #txt_ven_cli_nom, #txt_ven_cli_doc, #txt_ven_cli_dir, #hdd_ven_cli_tip, #hdd_ven_cli_ret, #txt_ven_cli_est').val('');
             }
             if ((this).value=== '15') {
-                $("#cmb_forpag_id").val(4);
-                $("#cmb_forpag_id").attr('disabled', true);
-            }else{
+                // $("#cmb_forpag_id").val(4);
                 $("#cmb_forpag_id").attr('disabled', false);
-                $("#cmb_forpag_id").val(1);
+            }else{
                 $("#cmb_forpag_id").attr('disabled', true);
+                $("#cmb_forpag_id").val(1);
+                // $("#cmb_forpag_id").attr('disabled', true);
             }
 
             if ((this).value=== '3' || (this).value=== '12' || (this).value=== '15') {
@@ -3359,7 +3359,7 @@ if($_POST['action']=="editar"){
                                 <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
 
                                 <a id="btn_editar_horario" title="Editar Horario de salida de bus" href="#" onClick="venta_vh_vehiculo_form()">Editar Horario</a>
-                                <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: absolute;top: 8%;right: 3%;"></div>
+                                <div id="msj_horario" class="ui-state-highlight ui-corner-all" style="width: 195px;display: none;position: relative;top: 8%;right: 3%;"></div>
                             </td>
                         </tr>
                         <tr>
