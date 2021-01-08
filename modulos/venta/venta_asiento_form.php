@@ -1103,7 +1103,7 @@ $pv = mysql_fetch_array($pvs);
                         </select>
                     </td>
                     <td align="center" valign="top"><label for="cmb_horario">Hora Salida:</label><br>
-                        <select name="cmb_horario" id="cmb_horario">
+                        <select name="cmb_horario" id="cmb_horario" style="width: 100%;font-size: 1.6em;">
                         </select>
                     </td>
 

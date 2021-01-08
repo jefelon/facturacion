@@ -2363,7 +2363,7 @@ if($_POST['action']=="editar"){
                     },
                     complete: function(){
                         venta_tabla();
-                        //sventa_asiento_form();
+                        venta_form('insertar');
                     }
                 });
             },
@@ -2415,6 +2415,12 @@ if($_POST['action']=="editar"){
                 cmb_conductor_id: {
                     required: true
                 },
+                cmb_fech_sal:{
+                    required: true
+                },
+                cmb_horario:{
+                    required: true
+                }
             },
             messages: {
                 txt_ven_fec: {
@@ -2459,6 +2465,12 @@ if($_POST['action']=="editar"){
                 cmb_conductor_id: {
                     required: "Seleccione conductor."
                 },
+                cmb_fech_sal:{
+                    required: "Seleccione fecha de salida."
+                },
+                cmb_horario:{
+                    required: "Seleccione el horario de salida."
+                }
             }
         });
 
