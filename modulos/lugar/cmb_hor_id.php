@@ -9,7 +9,7 @@ $oLugar = new cLugar();
 	while($dt1 = mysql_fetch_array($dts1))
 	{
 ?>
-        <option value="<?php echo $dt1['tb_viajehorario_horario']?>"><?php echo $dt1['tb_conductor_nom'] . ' - '.$dt1['tb_vehiculo_placa'] .' - '. $dt1['tb_viajehorario_horario'] ?></option>
+        <option value="<?php echo $dt1['tb_viajehorario_horario']?>"><?php echo $dt1['tb_vehiculo_placa'] .' - '. $dt1['tb_viajehorario_horario'] ?></option>
 <?php
 	}
 	mysql_free_result($dts1);

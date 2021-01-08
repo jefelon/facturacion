@@ -121,7 +121,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         padding: 0;
     }
     #sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {
-        margin: 0 5px 5px 5px;
+        margin: 0 2px 5px 5px;
         padding: 5px;
         font-size: 1.2em;
         width: 35px;
