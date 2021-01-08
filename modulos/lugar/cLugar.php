@@ -147,5 +147,20 @@ class cLugar{
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
     }
+
+    function validarViajeHorario($salida_id,$llegada_id,$fech_salida,$hora,$vehiculo){
+        $sql="SELECT * 
+	    FROM tb_viajehorario 
+	    WHERE tb_viajehorario_salida=$salida_id
+	    AND tb_viajehorario_llegada=$llegada_id
+	    AND tb_viajehorario_fecha='$fech_salida'
+	    AND tb_viajehorario_horario='$hora'
+	    AND tb_vehiculo_id=$vehiculo
+	    ";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
+
 }
 ?>

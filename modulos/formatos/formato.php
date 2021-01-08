@@ -131,6 +131,24 @@
 		
 		return $hora;
 	}
+    function formato_hora_min_seg($hor){
+        if(!empty($hor))
+        {
+            if($hor!='NULL'){
+                $hora	=date('H:i:s', strtotime($hor));
+            }
+            else
+            {
+                $hora="";
+            }
+        }
+        else
+        {
+            $hora="";
+        }
+
+        return $hora;
+    }
 	
 	function hora_mysql($hor){
 		if(!empty($hor) and $hor!="")
