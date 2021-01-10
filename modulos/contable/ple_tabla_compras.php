@@ -90,26 +90,27 @@ $(function() {
         <th>19 IGV3</th>
         <th>20 NO GRA</th>
         <th>21 ISC</th>
-        <th>22 OTROS CARGOS</th>
-        <th>23 TOTAL</th>
-        <th>24 MON</th>
-        <th>25 TC</th>
-        <th>26 FECHA DOC MOD</th>
-        <th>27 TIPO DOC MOD</th>
-        <th>28 N SERIE DOC MD</th>
-        <th>29 DUA </th>
-        <th>30 N DOC MOD</th>
-        <th>31 FECHA DETRACCION</th>
-        <th>32 N DETRACCION</th>
-        <th>33 MARCA COMP RET</th>
-        <th>34 CLAS BIENES > 1500UIT</th>
-        <th>35 ID CONTRA</th>
-        <th>36 ERROR 1</th>
-        <th>37 ERROR 2</th>
-        <th>38 ERROR 3</th>
-        <th>39 ERROR 4</th>
-        <th>40 MEDIO PAGO</th>
-        <th>41 ESTADO</th>
+        <th>22 ICBPER</th>
+        <th>23 OTROS CARGOS</th>
+        <th>24 TOTAL</th>
+        <th>25 MON</th>
+        <th>26 TC</th>
+        <th>27 FECHA DOC MOD</th>
+        <th>28 TIPO DOC MOD</th>
+        <th>29 N SERIE DOC MD</th>
+        <th>30 DUA </th>
+        <th>31 N DOC MOD</th>
+        <th>32 FECHA DETRACCION</th>
+        <th>33 N DETRACCION</th>
+        <th>34 MARCA COMP RET</th>
+        <th>35 CLAS BIENES > 1500UIT</th>
+        <th>36 ID CONTRA</th>
+        <th>37 ERROR 1</th>
+        <th>38 ERROR 2</th>
+        <th>39 ERROR 3</th>
+        <th>40 ERROR 4</th>
+        <th>41 MEDIO PAGO</th>
+        <th>42 ESTADO</th>
         <th></th>
     </tr>
     </thead>
@@ -205,9 +206,10 @@ $(function() {
                 <!--20--><td><?php echo $exo; ?></td>
                 <!--21--><td><?php echo $isc; ?></td>
                 <!--22--><td></td>
-                <!--23--><td><?php echo $tot; ?></td>
-                <!--24--><td><?php echo $moneda; ?></td>
-                <!--25--><td><?php echo $tipocambiov; ?></td>
+                <!--23--><td></td>
+                <!--24--><td><?php echo $tot; ?></td>
+                <!--25--><td><?php echo $moneda; ?></td>
+                <!--26--><td><?php echo $tipocambiov; ?></td>
 
                 <?php
                 $fec_nota="";
@@ -228,12 +230,11 @@ $(function() {
 
                 }
                 ?>
-                <!--26--><td><?php echo $fec_nota; ?></td>
-                <!--27--><td><?php echo $tip_doc_mod; ?></td>
-                <!--28--><td><?php echo $tip_doc_modserie; ?></td>
-                <!--29--><td></td>
-                <!--30--><td><?php echo $tip_doc_modnum; ?></td>
-                <!--31--><td></td>
+                <!--27--><td><?php echo $fec_nota; ?></td>
+                <!--28--><td><?php echo $tip_doc_mod; ?></td>
+                <!--29--><td><?php echo $tip_doc_modserie; ?></td>
+                <!--30--><td></td>
+                <!--31--><td><?php echo $tip_doc_modnum; ?></td>
                 <!--32--><td></td>
                 <!--33--><td></td>
                 <!--34--><td></td>
@@ -243,6 +244,7 @@ $(function() {
                 <!--38--><td></td>
                 <!--39--><td></td>
                 <!--40--><td></td>
+                <!--41--><td></td>
                             <?php
                             $estado=1;
                             $fechastring=explode("/",$fecha);
@@ -254,7 +256,7 @@ $(function() {
                                 $estado=7;
                             }
                             ?>
-                <!--41--><td><?php echo $estado; ?></td>
+                <!--42--><td><?php echo $estado; ?></td>
                 <td></td>
             </tr>
             <?php

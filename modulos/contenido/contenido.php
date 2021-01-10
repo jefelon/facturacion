@@ -137,7 +137,7 @@ $menu_administrador=
   </li>
    <li class="topmenu"><a href="#">Contable</a>
 	<ul>
-      <li class="topmenu"><a href="../contable/ple_vista.php">PLE - 5.1.0.0 (Actualizado el 01.03.2018)</a></li>
+      <li class="topmenu"><a href="../contable/ple_vista.php">PLE - 5.2.0.0 (Actualizado el 09.01.2021)</a></li>
        <li><a href="../contable/contable_vista_registro.php">Informes Contables</a></li>
 	</ul>
   </li>

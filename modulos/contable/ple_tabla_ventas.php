@@ -94,18 +94,19 @@ $(function() {
            <th>20 ISC </th>
            <th>21 BI ARROZ PILADO</th>
            <th>22 IVAP</th>
-           <th>23 OTROS CARGOS NO BI</th>
-           <th>24 TOTAL </th>
-           <th>25 MONEDA </th>
-           <th>26 TC </th>
-           <th>27 FECHA DOC MOD </th>
-           <th>28 TIPO DOC MOD</th>
-           <th>29 SERIE DOC MOD </th>
-           <th>30 NUMERO DOC MOD </th>
-           <th>31 ID CONTRATO </th>
-           <th>32 ERROR 1 </th>
-           <th>33 IND MEDIO P </th>
-           <th>34 ESTADO </th>
+           <th>23 ICBPER</th>
+           <th>24 OTROS CARGOS NO BI</th>
+           <th>25 TOTAL </th>
+           <th>26 MONEDA </th>
+           <th>27 TC </th>
+           <th>28 FECHA DOC MOD </th>
+           <th>29 TIPO DOC MOD</th>
+           <th>30 SERIE DOC MOD </th>
+           <th>31 NUMERO DOC MOD </th>
+           <th>32 ID CONTRATO </th>
+           <th>33 ERROR 1 </th>
+           <th>34 IND MEDIO P </th>
+           <th>35 ESTADO </th>
            <th></th>
         </tr>
         </thead>
@@ -210,9 +211,10 @@ $(function() {
                     <!--20--><td><?php echo $isc; ?></td>
                     <!--21--><td></td>
                     <!--22--><td></td>
-                    <!--23--><td><?php echo $otrcar; ?></td>
-                    <!--24--><td><?php if($coddoc=="07") {echo "-".$tot;}else{ echo $tot;} ?></td>
-                    <!--25--><td><?php echo $moneda; ?></td>
+                    <!--23--><td>0.00</td>
+                    <!--24--><td><?php echo $otrcar; ?></td>
+                    <!--25--><td><?php if($coddoc=="07") {echo "-".$tot;}else{ echo $tot;} ?></td>
+                    <!--26--><td><?php echo $moneda; ?></td>
 
                     <?php
                     $fec_ventanota="";
@@ -236,14 +238,14 @@ $(function() {
 
                     }
                     ?>
-                    <!--26--><td><?php echo $tc; ?></td>
-                    <!--27--><td><?php echo $fec_ventanota; ?></td>
-                    <!--28--><td><?php echo $tip_doc_mod; ?></td>
-                    <!--29--><td><?php echo $tip_doc_modserie; ?></td>
-                    <!--30--><td><?php echo $tip_doc_modnum; ?></td>
-                    <!--31--><td></td>
+                    <!--27--><td><?php echo $tc; ?></td>
+                    <!--28--><td><?php echo $fec_ventanota; ?></td>
+                    <!--29--><td><?php echo $tip_doc_mod; ?></td>
+                    <!--30--><td><?php echo $tip_doc_modserie; ?></td>
+                    <!--31--><td><?php echo $tip_doc_modnum; ?></td>
                     <!--32--><td></td>
                     <!--33--><td></td>
+                    <!--34--><td></td>
                     <?php
                     $estado=1;
                     $fechastring=explode("/",$fecha);
@@ -259,7 +261,7 @@ $(function() {
                         $estado=2;
                     }
                     ?>
-                    <!--34--><td><?php echo $estado; ?></td>
+                    <!--35--><td><?php echo $estado; ?></td>
                     <td></td>
                 </tr>
             <?php
