@@ -205,7 +205,7 @@ $(function() {
                 <!--19--><td><?php if($tipo_baseimp==3){echo $igv;} ?></td>
                 <!--20--><td><?php echo $exo; ?></td>
                 <!--21--><td><?php echo $isc; ?></td>
-                <!--22--><td></td>
+                <!--22--><td>0.00</td>
                 <!--23--><td></td>
                 <!--24--><td><?php echo $tot; ?></td>
                 <!--25--><td><?php echo $moneda; ?></td>
