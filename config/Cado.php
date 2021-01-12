@@ -29,7 +29,7 @@ class Cado{
 			echo"Error al Seleccionar la Base de Datos.";      
             exit();
 		}
-		
+
 		return $conexion;
 	}
 	
@@ -49,6 +49,12 @@ class Cado{
   			echo 'MySQL Error: ' . mysql_error();
 	    	exit;
 		}
+		else{
+            //cambiando a hora peruana America/Lima
+            mysql_query("SET time_zone ='-5:00'",$this->conectar());
+        }
+
+
 		return $rsql;
 	}
 	
