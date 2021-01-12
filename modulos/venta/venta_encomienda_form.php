@@ -2360,6 +2360,7 @@ if($_POST['action']=="editar"){
                                 venta_impresion_enc(data.ven_id);
                             }
                         }
+                        previaDatos(data.ven_id);
                     },
                     complete: function(){
                         venta_tabla();
@@ -2916,6 +2917,44 @@ if($_POST['action']=="editar"){
             }
         });
     }
+    function previaDatos(id_venta){
+        $.ajax({
+            type: "POST",
+            url: "../venta/venta_reg.php",
+            async:true,
+            dataType: "json",
+            data: ({
+                action: "obtener_datos",
+                ven_id:50993
+            }),
+            beforeSend: function() {
+                //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(data){
+                enviarEncSistemaNuevo(data.header,data.detalle);
+            }
+        });
+    }
+    function enviarEncSistemaNuevo(header,detalle){
+
+        console.log(header);
+        $.ajax({
+            type: "POST",
+            url: "http:///api/encomiendas/store",
+            async:true,
+            dataType: "json",
+            data: ({
+                action: "obtener_datos",
+                ven_id:50993
+            }),
+            beforeSend: function() {
+                //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(data){
+
+            }
+        });
+    }
 
 </script>
 
@@ -2925,6 +2964,7 @@ if($_POST['action']=="editar"){
     }
 </style>
 <div class="carro">
+    <button onclick="previaDatos(50993)">obtener</button>
     <form id="for_ven">
         <input name="action_venta" id="action_venta" type="hidden" value="<?php echo $_POST['action']?>">
         <input name="hdd_ven_id" id="hdd_ven_id" type="hidden" value="<?php echo $_POST['ven_id']?>">
