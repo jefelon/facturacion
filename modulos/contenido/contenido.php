@@ -91,10 +91,12 @@ $menu_administrador=
 	  <li><a href="../compra/">Compras</a></li>
 	  <li class="separator">_____________________</li>
 	  <li><a href="../venta/venta_vista.php">Vender Pasaje</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../compra/">Encomiendas</a></li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
-	  <li class="separator">----------------------</li>
 	  <li><a href="../venta/venta_vista_encomienda_cobro_destino.php">Encomiendas cobradas en el destino</a></li>
+	  <li><a href="../venta/venta_manifiestoarmar_vista_enc.php">Armar manifiesto de Encomiendas</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../notacredito/">Nota de Crédito</a></li>
 	  <li class="separator">----------------------</li>
@@ -164,11 +166,13 @@ $menu_vendedor=
    </li>
   <li class="topmenu"><a href="#" >Operaciones</a>
 	<ul>
-	  <li><a href="../venta/">Vender Pasaje</a></li>
+	  <li><a href="../venta/venta_vista.php">Vender Pasaje</a></li>
+	  <li class="separator">----------------------</li>
+	  <li><a href="../compra/">Encomiendas</a></li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
-      <li class="separator">-----------------------</li>
-      <li><a href="../venta/venta_vista_encomienda_cobro_destino.php">Encomiendas cobradas en el destino</a></li>
+	  <li><a href="../venta/venta_vista_encomienda_cobro_destino.php">Encomiendas cobradas en el destino</a></li>
+	  <li><a href="../venta/venta_manifiestoarmar_vista_enc.php">Armar manifiesto de Encomiendas</a></li>
       <li class="separator">----------------------</li>
       <li><a href="../clientecuenta/">Estado de Cuenta Clientes</a></li>
 	  <li><a href="../cuentasxcobrar/">Cuentas por Cobrar</a></li>

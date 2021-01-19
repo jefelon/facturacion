@@ -695,7 +695,7 @@ div.m {
 }
 
 #cmb_salida_id,#cmb_llegada_id,#placa_vehiculo,#cmb_fech_sal,#cmb_parada_id{
-	font-size: 15pt;
+	font-size: 13pt;
 	text-align: center;
 	font-weight: bold;
 	color:#0092ef;

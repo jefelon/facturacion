@@ -1388,5 +1388,31 @@ if($_POST['action']=="obtener_datos")
 
 
 }
+if($_POST['action_venta']=="pasar_encomienda"){
+
+    if(!empty($_POST['hdd_vi_ho']))
+    {
+        $oVenta->pasarEncomiendaVenta(
+            $_POST['ven_id'],
+            $_POST['hdd_vi_ho']
+        );
+        $data['ven_msj']='Se agregó la encomienda correctamente.';
+        echo json_encode($data);
+    }
+
+}
+if($_POST['action_venta']=="retornar_encomienda"){
+
+    if(!empty($_POST['ven_id']))
+    {
+        $oVenta->pasarEncomiendaVenta(
+            $_POST['ven_id'],
+            $_POST['hdd_vi_ho']
+        );
+        $data['ven_msj']='Se retornó la encomienda correctamente.';
+        echo json_encode($data);
+    }
+
+}
 
 ?>

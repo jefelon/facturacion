@@ -76,6 +76,7 @@ class cLugar{
 	      AND vh.tb_viajehorario_llegada='$llegada_id'
 	      AND vh.tb_viajehorario_fecha='$fecha' 
 	      AND vh.tb_viajehorario_horario='$horario'";
+
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -94,6 +95,7 @@ class cLugar{
 	    WHERE vh.tb_viajehorario_salida=$salida_id AND vh.tb_viajehorario_llegada=$llegada_id AND tb_viajehorario_fecha BETWEEN '$fecha' AND '$nuevafecha'";
 
         $sql.=" ORDER BY tb_viajehorario_fecha";
+
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
         return $rst;
@@ -137,11 +139,13 @@ class cLugar{
         return $rst;
     }
 
-    function modificar_vh_vehiculo($vh_ho_id, $vehiculo_id,$conductor_id,$copiloto_id){
+    function modificar_vh_vehiculo($vh_ho_id, $vehiculo_id,$conductor_id,$copiloto_id,$fecha,$hora){
         $sql = "UPDATE tb_viajehorario SET  
 	`tb_vehiculo_id` =  '$vehiculo_id',
 	`tb_conductor_id` =  '$conductor_id',
-	`tb_copiloto_id` =  '$copiloto_id'
+	`tb_copiloto_id` =  '$copiloto_id',
+	`tb_viajehorario_fecha` =  '$fecha',
+	`tb_viajehorario_horario` =  '$hora'
 	WHERE  tb_viajehorario_id =$vh_ho_id;";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);

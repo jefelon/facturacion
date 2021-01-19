@@ -127,7 +127,9 @@ $(function() {
                     hdd_vi_ho: $('#hdd_vi_ho').val(),
                     cmb_vehiculo: $('#cmb_vehiculo').val(),
                     cmb_conductor: $('#cmb_conductor').val(),
-                    cmb_copiloto: $('#cmb_copiloto').val()
+                    cmb_copiloto: $('#cmb_copiloto').val(),
+                    txt_fech_salida:$('#txt_fech_salida').val(),
+                    txt_hora:$('#txt_hora').val(),
 
                 }),
 				beforeSend: function() {
@@ -139,6 +141,8 @@ $(function() {
                     cmb_horario_vehiculo();
                     // $('#cmb_horario').val(data.vh_horario);
 					$('#msj_horario').html(data.ven_ho_msj);
+                    cmb_fecha();
+                    cmb_fecha_horario();
                     $("#div_venta_horario_form" ).dialog( "close" );
                     $('#msj_horario').delay(5000).hide(600);
 				},
@@ -178,6 +182,18 @@ $(function() {
 </script>
 <form id="for_hor">
     <table>
+        <tr>
+            <td valign="top">
+                <label for="txt_fech_salida">Fecha Salida:</label><br>
+                <input name="txt_fech_salida" type="text" class="fecha" id="txt_fech_salida" value="<?php echo $fec ?>" size="10" maxlength="10">
+            </td>
+        </tr>
+        <tr>
+            <td valign="top">
+                <label for="txt_hora">Hora</label><br>
+                <input name="txt_hora" type="text" id="txt_hora" value="<?php echo substr($vh['tb_viajehorario_horario'],0,5)?>" size="10" maxlength="5" />
+            </td>
+        </tr>
         <tr>
             <td valign="top">
                 <label for="cmb_vehiculo">Vehiculo</label><br>

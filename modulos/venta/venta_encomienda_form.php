@@ -2412,15 +2412,6 @@ if($_POST['action']=="editar"){
                 },
                 txt_clave: {
                     required: true
-                },
-                cmb_conductor_id: {
-                    required: true
-                },
-                cmb_fech_sal:{
-                    required: true
-                },
-                cmb_horario:{
-                    required: true
                 }
             },
             messages: {
@@ -2462,15 +2453,6 @@ if($_POST['action']=="editar"){
                 },
                 txt_clave: {
                     required: "Falta clave."
-                },
-                cmb_conductor_id: {
-                    required: "Seleccione conductor."
-                },
-                cmb_fech_sal:{
-                    required: "Seleccione fecha de salida."
-                },
-                cmb_horario:{
-                    required: "Seleccione el horario de salida."
                 }
             }
         });
