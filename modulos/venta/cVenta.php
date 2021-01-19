@@ -553,6 +553,21 @@ class cVenta{
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
 	}
+    function mostrarUnoEnc($id){
+        $sql="SELECT * 
+	FROM tb_venta v
+	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
+	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
+	INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id
+	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
+	INNER JOIN tb_almacen a ON pv.tb_almacen_id=a.tb_almacen_id
+	INNER JOIN tb_encomiendaventa ev ON v.tb_venta_id= ev.tb_venta_id
+	INNER JOIN tb_viajehorario vh ON ev.tb_viajehorario_id=vh.tb_viajehorario_id
+	WHERE v.tb_venta_id=$id";
+        $oCado = new Cado();
+        $rst=$oCado->ejecute_sql($sql);
+        return $rst;
+    }
 
     function mostrarValorBruto($id){
         $sql="SELECT cs_tipoafectacionigv_cod,tb_ventadetalle_can,tb_ventadetalle_preuni ,tb_ventadetalle_des

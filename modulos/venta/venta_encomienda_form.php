@@ -2907,7 +2907,7 @@ if($_POST['action']=="editar"){
             dataType: "json",
             data: ({
                 action: "obtener_datos",
-                ven_id:50993
+                ven_id:3867
             }),
             beforeSend: function() {
                 //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');

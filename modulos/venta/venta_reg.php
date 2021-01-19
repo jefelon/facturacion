@@ -23,8 +23,8 @@ if ($_SESSION['usuariogrupo_id']==3){
 
 if($usu_ses || $_POST['hdd_punven_id']!==$_SESSION['puntoventa_id'] || $_POST['hdd_emp_id']!==$_SESSION['empresa_id'])
 {
-	echo json_encode(['redireccionar'=>true]);
-	exit();
+	//echo json_encode(['redireccionar'=>true]);
+	//exit();
 }
 
 require_once ("../../config/Cado.php");
@@ -1233,7 +1233,7 @@ if($_POST['action']=="obtener_datos")
 
         mysql_free_result($dts2);
 
-        $dts = $oVenta->mostrarUno($ven_id);
+        $dts = $oVenta->mostrarUnoEnc($ven_id);
 
         while($dt = mysql_fetch_array($dts)){
 
@@ -1253,6 +1253,16 @@ if($_POST['action']=="obtener_datos")
             }
 
             $fechadoc=$dt["tb_venta_fec"];
+
+            $cliente_id=$dt["tb_cliente_id"];
+            $rem_id=$dt["tb_remitente_id"];
+            $destinatario=$dt["tb_destinatario_nom"];
+
+            $origen=$dt["tb_origen_nom"];
+            $destino=$dt["tb_destino_id"];
+
+            $clave =$dt["tb_encomiendaventa_clave"];
+            $veiculo=$dt["tb_vehiculo_id"];
 
             $identidad=$dt["tb_cliente_doc"];
             if($dt["tb_cliente_tip"]==1)$idtipodni=1;
@@ -1322,7 +1332,16 @@ if($_POST['action']=="obtener_datos")
 
        $header = array(
            'ven_id'=>$ven_id,
-           'importetotal'=>$tot
+           'serie' =>$ser,
+           'num'   =>$num,
+           'cliente'=>$cliente_id,
+           'remitente'=>$rem_id,
+           'destinatario'=>$destinatario,
+           'origen'=>$origen,
+           'destino'=>$destino,
+           'clave' =>$clave,
+           'observacion'=>'',
+           'vehiculo'=>$vehiculo
        );
 
         //===============================================================================================
