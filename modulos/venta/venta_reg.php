@@ -1258,11 +1258,12 @@ if($_POST['action']=="obtener_datos")
             $rem_id=$dt["tb_remitente_id"];
             $destinatario=$dt["tb_destinatario_nom"];
 
-            $origen=$dt["tb_origen_nom"];
+            $origen=$dt["tb_origen_id"];
             $destino=$dt["tb_destino_id"];
 
             $clave =$dt["tb_encomiendaventa_clave"];
-            $veiculo=$dt["tb_vehiculo_id"];
+            $vehiculo=$dt["tb_vehiculo_id"];
+            $fecha_salida=$dt["tb_viajehorario_fecha"];
 
             $identidad=$dt["tb_cliente_doc"];
             if($dt["tb_cliente_tip"]==1)$idtipodni=1;
@@ -1292,48 +1293,11 @@ if($_POST['action']=="obtener_datos")
 
         $total_letras = numtoletras($tot,$monval);
 
-        $header[0]['idcomprobante']		=$idcomprobante;//1FACTURA 3BOLETA 7NCREDITO 8NDEBITO
-        $header[0]['serie']				=$ser;
-        $header[0]['numero']			=$num;
-
-        $header[0]['fechadoc']			=$fechadoc;
-
-        $header[0]['identidad']			=$identidad;
-        $header[0]['idtipodni']			=$idtipodni;
-        $header[0]['razon']				=$razon;
-
-        $header[0]['isomoneda']			=$mon;
-
-        $header[0]['totopgra']			=$gra;
-        $header[0]['totopina']			=$ina;
-        $header[0]['totopexo']			=$exo;
-        $header[0]['totopgrat']			=$grat;
-        $header[0]['totdescto']			=$des;//descto linea (o) + dscto global
-//sumatorias
-        $header[0]['totigv']			=$igv;
-        $header[0]['totisc']			=$isc;
-        $header[0]['tototh']			=$otrtri;//sumatoria otros tributos
-        $header[0]['desctoglobal']		=$desglo;//descuentos globales
-        $header[0]['tototroca']			=$otrcar;//otros cargos
-        $header[0]['importetotal']		=$tot;
-
-        $header[0]['idtoperacion']		=$idtoperacion;//VENTA INTERNA
-
-        $header[0]['totanti']			="0.00";//si es mayor a cero concidera
-        $header[0]['iddoctributario']	="";//CATALOGO 12
-        $header[0]['iddoctriref']		="";
-
-        $header[0]['nroplaca']			=$numpla;//placa
-
-        $header[0]['AdditionalProperty_Value']=$total_letras;
-        $header[0]['tvalorventa_bruto']			=$tsub_total_bruto;//total valor venta bruto
-        $header[0]['tvalorventa']			=$tvalorventa;//total valor  venta
-
-
        $header = array(
            'ven_id'=>$ven_id,
+           'fecha_salida'=>$fecha_salida,
            'serie' =>$ser,
-           'num'   =>$num,
+           'numero'   =>$num,
            'cliente'=>$cliente_id,
            'remitente'=>$rem_id,
            'destinatario'=>$destinatario,
