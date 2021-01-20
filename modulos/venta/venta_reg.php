@@ -1304,7 +1304,7 @@ if($_POST['action']=="obtener_datos")
            'origen'=>$origen,
            'destino'=>$destino,
            'clave' =>$clave,
-           'observacion'=>'',
+           'observacion'=>'-',
            'vehiculo'=>$vehiculo
        );
 
@@ -1329,15 +1329,15 @@ if($_POST['action']=="obtener_datos")
 
             $detalle[$autoin]['idmedida']				=$dt["cs_tipounidadmedida_cod"];
 
-            $detalle[$autoin]['cantidad']				=$dt["tb_ventadetalle_can"];
+            $detalle[$autoin]['cantidad']				=round($dt["tb_ventadetalle_can"]);
+            $detalle[$autoin]['peso']				=0;
             $detalle[$autoin]['idproducto']				=$codigo;
             $detalle[$autoin]['codigo']					=$codigo;
-            $detalle[$autoin]['detalle']				=$dt["tb_ventadetalle_nom"];
+            $detalle[$autoin]['descripcion']				=$dt["tb_ventadetalle_nom"];
             $detalle[$autoin]['cdsc']					=$dt["tb_ventadetalle_nom"];
 
             //$igv 										=$dt["tb_ventadetalle_igv"] / $dt["tb_ventadetalle_can"];
-            $detalle[$autoin]['preciounitario']					=$dt["tb_ventadetalle_preuni"];
-            $detalle[$autoin]['valorunitario']					=$dt["tb_ventadetalle_preunilin"];
+            $detalle[$autoin]['valor_unitario']					=$dt["tb_ventadetalle_preuni"];
             if ($dt["cs_tipoafectacionigv_cod"] == 10){
                 $detalle[$autoin]['igv']					=$dt["tb_ventadetalle_igv"];//sumatoria con cantidad
             }
@@ -1353,6 +1353,7 @@ if($_POST['action']=="obtener_datos")
             $detalle[$autoin]['descto']					=$dt["tb_ventadetalle_des"];
             $detalle[$autoin]['idtiposcisc']			=$dt["cs_tiposistemacalculoisc_id"];
             $detalle[$autoin]['isc']					=$dt["tb_ventadetalle_isc"];
+            $detalle[$autoin]['importe']                =$dt["tb_ventadetalle_preuni"]*$dt["tb_ventadetalle_can"];
 
             $autoin++;
         }

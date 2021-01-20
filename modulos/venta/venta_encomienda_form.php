@@ -2907,7 +2907,7 @@ if($_POST['action']=="editar"){
             dataType: "json",
             data: ({
                 action: "obtener_datos",
-                ven_id:3868
+                ven_id:id_venta
             }),
             beforeSend: function() {
                 //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
@@ -2919,40 +2919,31 @@ if($_POST['action']=="editar"){
     }
     function enviarEncSistemaNuevo(header,detalle){
 
-        // console.log(header);
-        // $.ajax({
-        //     type: "POST",
-        //     url: "http://165.227.52.2/api/encomiendas/store",
-        //     async:true,
-        //     dataType: "json",
-        //     data: ({
-        //         header:header
-        //     }),
-        //     beforeSend: function() {
-        //         //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
-        //     },
-        //     success: function(data){
-        //
-        //     }
-        // });
-
-
-        axios.post('http://165.227.52.2/api/encomiendas/store', {
-            header:header
-        })
-            .then(function (response) {
-                if (response.data.estado === 'Ok'){
-                }else {
-                    this.$swal.fire({
-                        icon: 'error',
-                        title: 'Algo salio mal!',
-                        text: 'Compruebe estar insertando todos los datos'
-                    })
-                }
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
+        console.log(detalle);
+        $.ajax({
+            type: "POST",
+            url: "http://165.227.52.2/api/encomiendas/store",
+            async:true,
+            dataType: "json",
+            data: ({
+                fecha_salida:header.fecha_salida,
+                serie:header.serie,
+                numero:header.numero,
+                destinatario:header.destinatario,
+                origen:header.origen,
+                destino:header.destino,
+                vehiculo:header.vehiculo,
+                clave:header.clave,
+                observacion:header.observacion,
+                detalle:detalle
+            }),
+            beforeSend: function() {
+                //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(data){
+                console.log(data);
+            }
+        });
     }
 
 </script>
@@ -2963,9 +2954,7 @@ if($_POST['action']=="editar"){
     }
 </style>
 
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <div class="carro">
-    <button onclick="previaDatos(50993)">obtener</button>
     <form id="for_ven">
         <input name="action_venta" id="action_venta" type="hidden" value="<?php echo $_POST['action']?>">
         <input name="hdd_ven_id" id="hdd_ven_id" type="hidden" value="<?php echo $_POST['ven_id']?>">
