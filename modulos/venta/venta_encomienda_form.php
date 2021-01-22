@@ -2348,7 +2348,7 @@ if($_POST['action']=="editar"){
                         }
 
                         $('#msj_venta').html(data.ven_msj);
-
+                        venta_form('insertar');
                         if(data.ven_sun=='enviar')
                         {
                             enviar_sunat(data.ven_id,data.ven_act);
@@ -2364,7 +2364,6 @@ if($_POST['action']=="editar"){
                     },
                     complete: function(){
                         venta_tabla();
-                        venta_form('insertar');
                     }
                 });
             },
@@ -2913,7 +2912,9 @@ if($_POST['action']=="editar"){
                 //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
             },
             success: function(data){
-                enviarEncSistemaNuevo(data.header,data.detalle);
+                if(data.header.vehiculo>0){
+                    enviarEncSistemaNuevo(data.header,data.detalle);
+                }
             }
         });
     }

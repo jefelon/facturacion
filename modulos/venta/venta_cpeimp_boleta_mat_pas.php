@@ -347,7 +347,7 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="4" class="centrado negrita py-5">BOLETA DE VENTA ELECTRÓNICA</td>
                 </tr>
                 <tr>
-                    <td colspan="2"><?php echo 'Nro. Boleta: ' .$serie . ' - ' . $numero ?></td>
+                    <td colspan="2"><b><?php echo 'Nro. ' .$serie . ' - ' . $numero ?></b></td>
                     <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
                 </tr>
                 <tr>
@@ -360,18 +360,18 @@ if ($impresion == 'pdf') ob_start();
                     </td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+                    <td colspan="4"> <b>CLIENTE: </b><?php echo $razon ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'DNI: ' .$ruc ?></td>
+                    <td colspan="4"> <b>DNI: </b><?php echo $ruc ?></td>
                 </tr>
                 <tr>
-                    <td colspan="2"> <?php echo 'Origen: ' . $vh['ltb_origen'] ?></td>
+                    <td colspan="2"> <b>Origen: </b><?php echo $vh['ltb_origen'] ?></td>
                     <td colspan="2"> <?php
                         if ($vv['tb_lugar_id']>0){
-                            echo 'Destino: ' . $vv['tb_lugar_nom'];
+                            echo '<b>Destino: </b>' . $vv['tb_lugar_nom'];
                         }else{
-                            echo 'Destino: ' . $vh['ltb_destino'];
+                            echo '<b>Destino: </b>' . $vh['ltb_destino'];
                         }
 
                         ?></td>
@@ -380,10 +380,10 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="4"> <?php echo 'Fecha de Viaje: ' . $vh['tb_viajehorario_fecha'] ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="font-size: 12pt"><b><?php echo 'HORA DE VIAJE: ' . mostrarHora($vh['tb_viajehorario_horario']) ?></b></td>
+                    <td colspan="4" style="font-size: 12pt"><b> <?php echo 'HORA DE VIAJE: ' . mostrarHora($vh['tb_viajehorario_horario']) ?></b></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <?php echo 'Nro Asiento: ' . $vv['tb_asiento_nom'] ?></td>
+                    <td colspan="4"><b>Nro Asiento:  <?php echo ' ' . $vv['tb_asiento_nom'] ?></b></td>
                 </tr>
                 <tr>
                     <td colspan="4" height="10mm">
@@ -456,7 +456,7 @@ if ($impresion == 'pdf') ob_start();
                                     <?php echo $mon . formato_money($igv) ?></td>
                             </tr>
                             <tr>
-                                <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
+                                <td colspan="2" class="izquierda negrita">TOTAL:</td>
                                 <td colspan="2" class="derecha" style="text-align: right;">
                                     <?php echo $mon . formato_money($tot) ?></td>
                             </tr>

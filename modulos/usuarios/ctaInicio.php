@@ -49,6 +49,10 @@ if($usuario!="" and $password!="")
 				$_SESSION['autentificado']		= "SI";
 			
 				$_SESSION['usuario_id']			=$dt['tb_usuario_id'];
+
+                $_SESSION['usuario_clave']		=$dt['tb_usuario_pas'];
+                $_SESSION['usuario_grupo']		=$dt['tb_usuariogrupo_id'];
+
 				$_SESSION['usuario_nombre']		=$dt['tb_usuario_apepat']." ".$dt['tb_usuario_apemat']." ".$dt['tb_usuario_nom'];
 				
 				$_SESSION['usuariogrupo_id']	=$dt['tb_usuariogrupo_id'];

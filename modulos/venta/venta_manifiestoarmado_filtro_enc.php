@@ -179,6 +179,7 @@ function cmb_ven_doc()
             }
         });
     }
+
 $(function() {
     cmb_lugar();
     cmb_lugar_destino();
@@ -205,17 +206,18 @@ $(function() {
 	//cmb_fil_cli_id();
 	cmb_fil_ven_ven();
 	
-	$( "#txt_fil_cli" ).autocomplete({
+	$( "#txt_fil_cli2" ).autocomplete({
    		minLength: 1,
    		source: "../clientes/cliente_complete_nom.php",
 		select: function(event, ui){
-			$("#hdd_fil_cli_id").val(ui.item.id);														
+			$("#hdd_fil_cli_id2").val(ui.item.id);
+            venta_tabla_manifiesto_armado();
 		}
     });
 	
-	$("#txt_fil_cli").change(function(){
-		var cli=$("#txt_fil_cli").val();
-		if(cli=="")$("#hdd_fil_cli_id").val('');
+	$("#txt_fil_cli2").change(function(){
+		var cli=$("#txt_fil_cli2").val();
+		if(cli=="")$("#hdd_fil_cli_id2").val('');
 	});
 
     $( "#txt_fil_ven_numdoc2" ).autocomplete({

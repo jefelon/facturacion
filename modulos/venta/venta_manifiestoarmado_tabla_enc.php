@@ -16,7 +16,7 @@ $ruc_empresa=$dt['tb_empresa_ruc'];
 $horario=$_POST['hdd_vi_ho'];
 
 if($horario>0) {
-    $dts1 = $oVenta->mostrar_filtro_detalle_armado_enc($_POST['hdd_fil_cli_id2'], $_SESSION['usuario_id'], $_SESSION['puntoventa_id'], $_POST['hdd_vi_ho']);
+    $dts1 = $oVenta->mostrar_filtro_detalle_armado_enc($_POST['hdd_fil_cli_id2'], $_SESSION['usuario_id'], $_SESSION['puntoventa_id'], $_POST['hdd_vi_ho'],$_POST['txt_fil_ven_numdoc2']);
     $num_rows = mysql_num_rows($dts1);
 }
 ?>
@@ -70,6 +70,7 @@ if($horario>0) {
         <th>&nbsp;</th>
         <th>FECHA</th>
         <th>HORA</th>
+        <th>CLIENTE</th>
         <th>DOCUMENTO</th>
         <th>ARTICULO</th>
         <th align="right">CAN</th>
@@ -100,6 +101,7 @@ if($horario>0) {
                 </td>
                 <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                 <td nowrap="nowrap"><?php echo mostrarHora_fh($dt1['tb_venta_reg'])?></td>
+                <td nowrap="nowrap"><?php echo $dt1['tb_cliente_nom']?></td>
                 <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_venta_numdoc']?></td>
                 <td><?php
                     if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_producto_nom'];

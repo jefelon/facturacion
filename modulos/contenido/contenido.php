@@ -92,7 +92,6 @@ $menu_administrador=
 	  <li class="separator">_____________________</li>
 	  <li><a href="../venta/venta_vista.php">Vender Pasaje</a></li>
 	  <li class="separator">----------------------</li>
-	  <li><a href="../compra/">Encomiendas</a></li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_encomienda_cobro_destino.php">Encomiendas cobradas en el destino</a></li>
@@ -151,6 +150,8 @@ $menu_administrador=
   </li>
   <li class="topmenu"><a href="../soporte/">Soporte</a>
   </li>
+  <li class="topmenu"><a href="http://165.227.52.2/" target="_blank">Rastreo GPS</a>
+  </li>
 </ul>
 ';
 
@@ -168,7 +169,6 @@ $menu_vendedor=
 	<ul>
 	  <li><a href="../venta/venta_vista.php">Vender Pasaje</a></li>
 	  <li class="separator">----------------------</li>
-	  <li><a href="../compra/">Encomiendas</a></li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_encomienda_cobro_destino.php">Encomiendas cobradas en el destino</a></li>
@@ -204,6 +204,8 @@ $menu_vendedor=
 	</ul>
   </li>
   <li class="topmenu"><a href="../soporte/">Soporte</a>
+  </li>
+  <li class="topmenu"><a href="http://165.227.52.2/" target="_blank">Rastreo GPS</a>
   </li>
 </ul>
 ';

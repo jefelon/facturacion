@@ -65,6 +65,7 @@ $num_rows= mysql_num_rows($dts1);
     <tr>
         <th>FECHA</th>
         <th>HORA</th>
+        <th>CLIENTE</th>
         <th>DOCUMENTO</th>
         <th>ARTICULO</th>
         <th align="right">CAN</th>
@@ -92,6 +93,7 @@ $num_rows= mysql_num_rows($dts1);
             <tr>
                 <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_venta_fec'])?></td>
                 <td nowrap="nowrap"><?php echo mostrarHora_fh($dt1['tb_venta_reg'])?></td>
+                <td nowrap="nowrap"><?php echo $dt1['tb_cliente_nom']?></td>
                 <td nowrap="nowrap" title="<?php echo $dt1['tb_documento_nom']?>"><?php echo $dt1['tb_venta_numdoc']?></td>
                 <td><?php
                     if($dt1['tb_ventadetalle_tipven']==1)echo $dt1['tb_producto_nom'];

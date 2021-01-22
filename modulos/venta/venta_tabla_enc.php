@@ -23,7 +23,7 @@ $dt = mysql_fetch_array($dts);
 $ruc_empresa = $dt['tb_empresa_ruc'];
 
 
-$dts1=$oVenta->mostrar_filtro_encomienda(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may'],$_POST['cmb_fil_ven_tip']);
+$dts1=$oVenta->mostrar_filtro_encomienda(fecha_mysql($_POST['txt_fil_ven_fec1']),fecha_mysql($_POST['txt_fil_ven_fec2']),$_POST['cmb_fil_ven_doc'],$_POST['hdd_fil_cli_id'],$_POST['cmb_fil_ven_est'],$_SESSION['usuario_id'],$_SESSION['puntoventa_id'],$_POST['chk_fil_ven_may'],'ENCOMIENDA');
 $num_rows= mysql_num_rows($dts1);
 ?>
 
@@ -263,19 +263,13 @@ $num_rows= mysql_num_rows($dts1);
                     ?>
                 </td>
                 <td align="left" nowrap="nowrap">
-                    <a class="btn_editar" href="#update" onClick="venta_form('editar','<?php echo $dt1['tb_venta_id']?>')">Editar</a>
+                    <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="venta_impresion_enc(<?php echo $dt1['tb_venta_id']?>)"> PDF</a>
                     <?php if($dt1['tb_documento_ele']==1):?>
                         <?php if($mostrar_envio_sunat==1):?>
                             <a class="btn_sunat" href="#sunat" onClick="enviar_sunat('<?php echo $dt1['tb_venta_id']?>')">E. Sunat</a><?php endif;?>
                             <a class="btn_accion" id="btn_accion" href="#correo" title="Enviar correo" onClick="venta_correo_form('enviar',
                                     '<?php echo $dt1['tb_venta_id']?>'
                                     )">Enviar Correo</a>
-                            <a class="btn_pdf" id="btn_pdf" href="#print" title="Descargar pdf" onClick="<?php if($dt1['tb_encomiendaventa_id']){?>
-                                venta_impresion_enc('<?php echo $dt1['tb_venta_id']?>')"
-                            <?php }else{?>
-                                venta_impresion_pas('<?php echo $dt1['tb_venta_id']?>')"
-                            <?php }?>
-                        >PDF</a>
                             <a class="btn_xml" id="btn_xml" target="_blank" href="<?php echo "../../cperepositorio/send/$xml.zip";?>" title="Descargar XML">XML</a>
                         <?php
                         if($dt1['cs_tipodocumento_cod']==1){

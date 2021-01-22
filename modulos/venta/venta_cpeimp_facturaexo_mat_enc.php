@@ -359,25 +359,25 @@ if($impresion=='pdf')ob_start();
         </td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+        <td colspan="4"> <b>CLIENTE: </b><?php echo $razon ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'RUC: ' .$ruc ?></td>
+        <td colspan="4"> <b>RUC: </b><?php echo $ruc ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'DIRECCIÓN: ' .$direccion ?></td>
+        <td colspan="4"> <b>DIRECCIÓN: </b><?php echo $direccion ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'REMITENTE: ' . $ev['crtb_cliente'] ?></td>
+        <td colspan="4"> <b>REMITENTE: </b><?php echo $ev['crtb_cliente'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'DESTINATARIO: ' . $ev['cdtb_cliente'] ?></td>
+        <td colspan="4"> <b>DESTINATARIO: </b><?php echo $ev['cdtb_cliente'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'ORIGEN: ' . $ev['ltb_origen'] ?></td>
+        <td colspan="4"> <b>ORIGEN: </b><?php echo $ev['ltb_origen'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <?php echo 'DESTINO: ' . $ev['ltb_destino'] ?></td>
+        <td colspan="4"> <b>DESTINO: </b><?php echo $ev['ltb_destino'] ?></td>
     </tr>
     <tr>
         <td colspan="4" height="10mm">
@@ -448,7 +448,7 @@ if($impresion=='pdf')ob_start();
               <?php echo $mon . formato_money($igv) ?></td>
       </tr>
       <tr>
-          <td colspan="2" class="izquierda negrita">TOTAL A PAGAR:</td>
+          <td colspan="2" class="izquierda negrita">TOTAL:</td>
           <td colspan="2" class="derecha" style="text-align: right;">
               <?php echo $mon . formato_money($tot) ?></td>
       </tr>

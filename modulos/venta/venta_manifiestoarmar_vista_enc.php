@@ -190,6 +190,7 @@ function pasar_encomieda(idf){
             success: function(html){
                 venta_tabla_manifiesto_armado();
                 venta_tabla();
+                previaDatos(idf);
             }
         });
     }
@@ -223,6 +224,7 @@ function retornar_encomieda(idf){
             success: function(html){
                 venta_tabla_manifiesto_armado();
                 venta_tabla();
+                previaDatos2(idf);
             }
         });
     }
@@ -396,6 +398,103 @@ function cmb_fecha_horario()
         },
         complete: function(){
 
+        }
+    });
+}
+
+function previaDatos(id_venta){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_reg.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            action: "obtener_datos",
+            ven_id:id_venta
+        }),
+        beforeSend: function() {
+            //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(data){
+            if($('#hdd_vehiculo').val()>0){
+                enviarEncSistemaNuevo(data.header,data.detalle);
+            }
+        }
+    });
+}
+function enviarEncSistemaNuevo(header,detalle){
+
+    console.log(detalle);
+    $.ajax({
+        type: "POST",
+        url: "http://165.227.52.2/api/encomiendas/store",
+        async:true,
+        dataType: "json",
+        data: ({
+            fecha_salida:header.fecha_salida,
+            serie:header.serie,
+            numero:header.numero,
+            destinatario:header.destinatario,
+            origen:header.origen,
+            destino:header.destino,
+            vehiculo:header.vehiculo,
+            clave:header.clave,
+            observacion:header.observacion,
+            detalle:detalle
+        }),
+        beforeSend: function() {
+            //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(data){
+            console.log(data);
+        }
+    });
+}
+function previaDatos2(id_venta){
+    $.ajax({
+        type: "POST",
+        url: "../venta/venta_reg.php",
+        async:true,
+        dataType: "json",
+        data: ({
+            action: "obtener_datos",
+            ven_id:id_venta
+        }),
+        beforeSend: function() {
+            //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(data){
+            if($('#hdd_vehiculo').val()>0){
+                retornarEncSistemaNuevo(data.header,data.detalle);
+            }
+        }
+    });
+}
+function retornarEncSistemaNuevo(header,detalle){
+
+    console.log(header,detalle);
+    $.ajax({
+        type: "POST",
+        url: "http://165.227.52.2/api/encomiendas/delete",
+        async:true,
+        dataType: "json",
+        data: ({
+            fecha_salida:header.fecha_salida,
+            serie:header.serie,
+            numero:header.numero,
+            destinatario:header.destinatario,
+            origen:header.origen,
+            destino:header.destino,
+            vehiculo:header.vehiculo,
+            clave:header.clave,
+            observacion:header.observacion,
+            detalle:detalle
+        }),
+        beforeSend: function() {
+            //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+        },
+        success: function(data){
+            console.log(data);
         }
     });
 }

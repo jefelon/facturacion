@@ -174,7 +174,7 @@ if ($num_rows_vp > 0) {
     while ($rw1 = mysql_fetch_array($rws1)) {
         //forma
         if ($rw1['tb_formapago_id'] == 1) {
-            $forma = '';
+            $forma = 'CONTADO';
             //modo
             if ($rw1['tb_modopago_id'] == 1) {
                 $modo = ' EFECTIVO';
@@ -208,6 +208,10 @@ if ($num_rows_vp > 0) {
                 $modo = '' . $rw1['tb_tarjeta_nom'] . ' OP: ' . $rw1['tb_ventapago_numope'];
                 $suma_pago6 += $rw1['tb_ventapago_mon'];
             }
+        }
+        if ($rw1['tb_formapago_id'] == 4) {
+            $forma = 'PAGO EN DESTINO';
+
         }
 
         $pago_mon = formato_money($rw1['tb_ventapago_mon']);
@@ -340,7 +344,7 @@ if ($impresion == 'pdf') ob_start();
                 <td colspan="4" class="centrado negrita py-5">NOTA DE SALIDA</td>
             </tr>
             <tr>
-                <td colspan="2"><?php echo 'Nro. Nota S.: ' .$serie . ' - ' . $numero ?></td>
+                <td colspan="2">Nro.: <b><?php echo $serie . ' - ' . $numero ?></b></td>
                 <td colspan="2" class="derecha"><?php echo ' Fecha: ' . $fec ?></td>
             </tr>
             <tr>
@@ -351,22 +355,16 @@ if ($impresion == 'pdf') ob_start();
                 <td colspan="4" height="10mm">.............................................................................................</td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'CLIENTE: ' .$razon ?></td>
+                <td colspan="4"><b>CLIENTE:</b><?php echo $razon ?></td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'DNI: ' .$ruc ?></td>
+                <td colspan="4"><b>DNI:</b>  <?php echo $ruc ?></td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'REMITENTE: ' . $ev['crtb_cliente'] ?></td>
+                <td colspan="4"> <b>ORIGEN:</b><?php echo $ev['ltb_origen'] ?></td>
             </tr>
             <tr>
-                <td colspan="4"> <?php echo 'DESTINATARIO: ' . $ev['cdtb_cliente'] ?></td>
-            </tr>
-            <tr>
-                <td colspan="4"> <?php echo 'ORIGEN: ' . $ev['ltb_origen'] ?></td>
-            </tr>
-            <tr>
-                <td colspan="4"> <?php echo 'DESTINO: ' . $ev['ltb_destino'] ?></td>
+                <td colspan="4"> <b>DESTINO:</b><?php echo $ev['ltb_destino'] ?></td>
             </tr>
             <tr>
                 <td colspan="4" height="10mm">.............................................................................................</td>
@@ -422,12 +420,21 @@ if ($impresion == 'pdf') ob_start();
                         </thead>
                         <tbody>
                         <tr>
-                            <td colspan="2" class="izquierda negrita">TOTAL POR PAGAR:</td>
+                            <?php
+                                if($forma=="PAGO EN DESTINO"){?>
+                                    <td colspan="3" class="derecha negrita">TOTAL POR PAGAR:</td>
+                            <?php } else{ ?>
+                                     <td colspan="3" class="derecha negrita">TOTAL:</td>
+                            <?php }?>
+
                             <td colspan="2" class="derecha" style="text-align: right;">
                                 <?php echo $mon . formato_money($tot) ?></td>
                         </tr>
                         <tr>
                             <td colspan="4" height="10mm">.............................................................................................</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4" style="width: 80mm" class="centrado">CONDICIÓN: <b><?php echo $forma ?></b></td>
                         </tr>
                         <tr>
                             <td colspan="4" style="width: 80mm" class="centrado">Nota: No es comprobante válido para efectos tributarios</td>
