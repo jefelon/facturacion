@@ -1,0 +1,3 @@
+INSERT INTO `tb_formula` (`tb_formula_id`, `tb_formula_ele`, `tb_formula_ide`, `tb_formula_dat`, `tb_formula_des`) VALUES (NULL, 'Ventas', 'NUM_COPIAS_ENC', '1', 'Numero de copias encomienda');
+
+INSERT INTO `tb_formula` (`tb_formula_id`, `tb_formula_ele`, `tb_formula_ide`, `tb_formula_dat`, `tb_formula_des`) VALUES (NULL, 'Ventas', 'NUM_COPIAS_PAS', '1', 'Numero de copias pasajes');

@@ -48,6 +48,11 @@ $rs = $oFormula->consultar_dato_formula('VEN_IMP_DIR');
   $imprimir_direccion = $dt['tb_formula_dat'];
   mysql_free_result($rs);
 
+$rs = $oFormula->consultar_dato_formula('NUM_COPIAS_PAS');
+$dt = mysql_fetch_array($rs);
+$num_copias = $dt['tb_formula_dat'];
+mysql_free_result($rs);
+
 $pager_formato='format="350x90" orientation="P" style="font-size: 9pt; font-family:'.$tipo_de_letra.'"';
 
 $pager_margen='backtop="0mm" backbottom="0mm" backleft="0mm" backright="0mm"';
@@ -518,12 +523,16 @@ if($impresion=='pdf')
     //$html2pdf->AddFont($tipo_de_letra, '',"../../libreriasphp/html2pdf/_tcpdf_5.0.002/fonts/$tipo_de_letra_arch");
     //$html2pdf->pdf->SetFont($tipo_de_letra, '', 11);
 
-    $html_d=$_GET['vuehtml'];
-    //$html_d=1;
-
-        $html2pdf->writeHTML($content, isset($html_d));
-    $html2pdf->pdf->IncludeJS("print(true);");
-    //$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
+        $html_d=$_GET['vuehtml'];
+        //$html_d=1;
+        $copias = 1;
+        while ($copias<=$num_copias)
+        {
+            $html2pdf->writeHTML($content, isset($html_d));
+            $copias++;
+        }
+        $html2pdf->pdf->IncludeJS("print(true);");
+        //$html2pdf->pdf->IncludeJS("app.alert('a-zetasoft.com');");
 
 
 
