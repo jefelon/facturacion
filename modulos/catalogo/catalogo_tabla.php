@@ -91,7 +91,9 @@ else
         <th>CÓDIGO</th>
         <th>NOMBRE</th>
         <th>MARCA</th>
-        <th >CATEGORIA</th>
+        <th>CATEGORIA</th>
+        <th>AFECTACION</th>
+        <th>IGV</th>
         <th align="right" nowrap>P. COSTO US$</th>
         <th align="right" nowrap>P. COSTO S/.</th>
         <th align="right" nowrap>UTI %</th>
@@ -149,6 +151,18 @@ else
                 </td>
                 <td><?php echo $dt1['tb_marca_nom']?></td>
                 <td><?php echo $dt1['tb_categoria_nom']?></td>
+                <td><?php echo $dt1['cs_tipoafectacionigv_cod']?></td>
+                <td>
+                    <?php
+
+                    if($dt1['cs_tipoafectacionigv_cod']=='10') {
+                        echo "SI";
+                    }
+                    elseif ($dt1['cs_tipoafectacionigv_cod']=='20'){
+                        echo "NO";
+                    }
+                    ?>
+                </td>
                 <td align="right"><?php if($dt1['tb_catalogo_precosdol']!=0)echo formato_money($dt1['tb_catalogo_precosdol'])?></td>
                 <td align="right"><?php if($dt1['tb_catalogo_precos']!=0)echo formato_money($dt1['tb_catalogo_precos'])?></td>
                 <td align="right"><?php echo $dt1['tb_catalogo_uti']?></td>

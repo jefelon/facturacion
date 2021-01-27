@@ -247,7 +247,10 @@ class cCatalogo{
 	INNER JOIN tb_presentacion pr ON p.tb_producto_id=pr.tb_producto_id
 	INNER JOIN tb_catalogo ct ON pr.tb_presentacion_id=ct.tb_presentacion_id
 	INNER JOIN tb_unidad u ON ct.tb_unidad_id_equ=u.tb_unidad_id
-	INNER JOIN tb_stock s ON pr.tb_presentacion_id=s.tb_presentacion_id ";
+	INNER JOIN tb_stock s ON pr.tb_presentacion_id=s.tb_presentacion_id
+	INNER JOIN cs_tipoafectacionigv af ON af.cs_tipoafectacionigv_id=p.tb_afectacion_id
+	
+	  ";
 	
 	if($atr_ids!="")$sql.=" INNER JOIN tb_tag t ON pr.tb_presentacion_id=t.tb_presentacion_id ";
 	
