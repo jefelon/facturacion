@@ -2996,7 +2996,7 @@ if($_POST['action']=="editar"){
                     <div id="cuadro-contain" class="ui-widget">
                         <legend></legend>
                         <?php if($_POST['vista']!='cange'){?>
-                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="catalogo_venta_tab()">Agregar</a>
+<!--                            <a class="btn_agregar_producto" title="Agregar Producto y/o Servicio (A+P)" href="#" onClick="servicio_form_i('insertar')">Agregar</a>-->
                             <a class="btn_rest_car" href="#" onClick="venta_car('restablecer')">Vaciar</a>
                         <?php }?>
                         <a class="btn_rest_act" href="#" onClick="venta_car('actualizar')">Actualizar</a>

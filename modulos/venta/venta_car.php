@@ -515,6 +515,37 @@ else
         text: false
     });
 
+    function servicio_form_i(act,idf){
+        $.ajax({
+            type: "POST",
+            url: "../servicio/servicio_form.php",
+            async:true,
+            dataType: "html",
+            data: ({
+                action: 		act,
+                ser_id:			idf,
+                aut: 			1,
+                vista:			'hdd_ser_id'
+            }),
+            beforeSend: function(a) {
+                $('#div_servicio_form').dialog("open");
+
+                $('#div_servicio_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(html){
+                $('#div_servicio_form').html(html);
+            },
+            complete: function(){
+                /*if(act=='insertar' & $('#hdd_ven_ser_id').val()=="")
+                {
+                    $('#txt_ser_doc').val($('#txt_ven_ser_doc').val());
+                    $('#txt_ser_nom').val($('#txt_ven_ser_nom').val());
+                }*/
+
+            }
+        });
+    }
+
     function calcular_vuelto(){
         var importe = $("#txt_importe_cliente").val();
         var total = $('#txt_ven_tot').val();

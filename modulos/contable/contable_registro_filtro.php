@@ -89,9 +89,7 @@ $(function() {
     <fieldset style="width: 100%;float: left; text-align: center;"><legend>Descargar Registro</legend>
         <label for="cmb_fil_ven_doc" align="right" style="font-size: 12px;">Año:</label>
         <select name="cmb_fil_anio" id="cmb_fil_anio" required>
-            <option value="2019">2019</option>
-            <option value="2018">2018</option>
-            <option value="2018">2017</option>
+
         </select>
 
         <label for="cmb_fil_mes" align="right" style="font-size: 12px;">Mes:</label>
