@@ -150,8 +150,6 @@ $menu_administrador=
   </li>
   <li class="topmenu"><a href="../soporte/">Soporte</a>
   </li>
-  <li class="topmenu"><a href="http://165.227.52.2/" target="_blank">Rastreo GPS</a>
-  </li>
 </ul>
 ';
 
@@ -204,8 +202,6 @@ $menu_vendedor=
 	</ul>
   </li>
   <li class="topmenu"><a href="../soporte/">Soporte</a>
-  </li>
-  <li class="topmenu"><a href="http://165.227.52.2/" target="_blank">Rastreo GPS</a>
   </li>
 </ul>
 ';

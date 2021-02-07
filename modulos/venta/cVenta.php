@@ -647,9 +647,7 @@ class cVenta{
 	
 	function mostrar_venta_detalle_servicio($ven_id){
 	$sql="SELECT * 
-	FROM tb_servicio s
-	INNER JOIN tb_categoria c ON s.tb_categoria_id = c.tb_categoria_id		
-	INNER JOIN tb_ventadetalle vd ON vd.tb_servicio_id = s.tb_servicio_id
+	FROM tb_ventadetalle vd	
 	WHERE vd.tb_venta_id=$ven_id ";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);

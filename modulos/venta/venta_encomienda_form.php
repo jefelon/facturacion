@@ -2923,7 +2923,7 @@ if($_POST['action']=="editar"){
         console.log(detalle);
         $.ajax({
             type: "POST",
-            url: "http://165.227.52.2/api/encomiendas/store",
+            url: "#",
             async:true,
             dataType: "json",
             data: ({

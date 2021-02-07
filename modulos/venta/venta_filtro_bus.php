@@ -62,6 +62,10 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         if($('.pasadizo >div:last').is("#item_45")){
             $('.pasadizo >div:last').css("margin-left","-45px");
         }
+
+        if ($('#cant >tbody >tr >td').length <8 ){
+            $('.big').switchClass('big', 'mini');
+        }
     });
 
     function cambiar_color(selector) {
@@ -198,6 +202,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
     ?>
         background: #e4eaea;
         overflow: hidden;
+        text-align: center;
     }
     .pasadizo{
         height: auto;
@@ -260,12 +265,19 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
         color: white;
     }
 
+    .mini{
+        width: 600px;
+    }
+    .mini .asiento{
+        width: 60px !important;
+    }
+
 </style>
 <div id="frentera"><!--FRENTE--></div>
 <div id="lugares">
     <?php if($estado_filas1==1){ ?>
         <div id="sortable1" class="connectedSortable">
-            <table><tr>
+            <table id="cant" class="big"><tr>
             <?php
             if($orden1!=""){ //solo si hay distribucion creada
                 $lugares = explode(';',$orden1);
@@ -310,7 +322,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
     <?php }?>
     <?php if($estado_filas2==1){?>
         <div id="sortable2" class="connectedSortable">
-            <table><tr>
+            <table class="big"><tr>
             <?php
             if($orden2!=""){ //solo si hay distribucion creada
                 $lugares = explode(';',$orden2);
@@ -357,7 +369,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
     <?php }?>
     <?php if($estado_filas3==1){?>
         <div id="sortable3" class="connectedSortable pasadizo">
-            <table><tr>
+            <table class="big"><tr>
             <?php
             if($orden3!=""){ //solo si hay distribucion creada
                 $lugares = explode(';',$orden3);
@@ -402,7 +414,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
     <?php }?>
     <?php if($estado_filas4==1){?>
         <div id="sortable4" class="connectedSortable">
-            <table><tr>
+            <table class="big"><tr>
             <?php
             if($orden4!=""){ //solo si hay distribucion creada
                 $lugares = explode(';',$orden4);
@@ -447,7 +459,7 @@ $estado_filas5=$dt5['tb_distribucionasiento_estado'];
     <?php }?>
     <?php if($estado_filas5==1){?>
         <div id="sortable5" class="connectedSortable">
-            <table><tr>
+            <table class="big"><tr>
             <?php
             if($orden5!=""){ //solo si hay distribucion creada
                 $lugares = explode(';',$orden5);

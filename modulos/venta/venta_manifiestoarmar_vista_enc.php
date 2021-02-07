@@ -427,7 +427,7 @@ function enviarEncSistemaNuevo(header,detalle){
     console.log(detalle);
     $.ajax({
         type: "POST",
-        url: "http://165.227.52.2/api/encomiendas/store",
+        url: "#",
         async:true,
         dataType: "json",
         data: ({
@@ -475,7 +475,7 @@ function retornarEncSistemaNuevo(header,detalle){
     console.log(header,detalle);
     $.ajax({
         type: "POST",
-        url: "http://165.227.52.2/api/encomiendas/delete",
+        url: "#",
         async:true,
         dataType: "json",
         data: ({

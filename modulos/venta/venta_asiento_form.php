@@ -12,7 +12,7 @@ require_once ("../../config/Cado.php");
 
 require_once ("../formatos/formato.php");
 
-$fec=date('d-m-Y');
+$fec=date('Y-m-d');
 
 require_once ("../puntoventa/cPuntoventa.php");
 $oPuntoventa = new cPuntoventa();
@@ -183,14 +183,14 @@ $pv = mysql_fetch_array($pvs);
             alert('Seleccione un asiento');
         }else{
 
-            if($('#txt_pasaj_dni').val()=='' || $('#txt_precio').val()==''){
+            if($('#txt_cli_dni').val()=='' || $('#txt_precio').val()==''){
                 var mensaje = '';
-                if ($('#txt_pasaj_dni').val()==''){
+                if ($('#txt_cli_dni').val()==''){
                     mensaje = mensaje + 'Falta Documento';
                     alert(mensaje);
-                    $('#txt_pasaj_dni').focus();
+                    $('#txt_cli_dni').focus();
                 }
-                else if ($('#txt_pasaj_dni').val()=='' && $('#txt_precio').val()==''){
+                else if ($('#txt_cli_dni').val()=='' && $('#txt_precio').val()==''){
                     mensaje = mensaje + ',';
                     alert(mensaje);
                     $('#txt_precio').focus();
@@ -232,8 +232,8 @@ $pv = mysql_fetch_array($pvs);
                     },
                     complete: function () {
                         filtro_bus();
-                        $('#txt_pasaj_dni').val('');
-                        $('#txt_pasaj_nom').val('');
+                        $('#txt_cli_dni').val('');
+                        $('#txt_cli_nom').val('');
                         cmb_lugar_parada();
                     }
                 })
@@ -289,9 +289,7 @@ $pv = mysql_fetch_array($pvs);
                 $('#txt_placa_vehiculo').val('<option value="">Cargando...</option>');
             },
             success: function(data){
-                $('#txt_placa_vehiculo').val(data.vehiculo_placa);
-                $('#txt_modelo_vehiculo').val(data.vehiculo_marca);
-                $('#txt_asientos_vehiculo').val(data.vehiculo_numasi);
+                $('#txt_placa_vehiculo').val(data.vehiculo_placa+ " "+data.vehiculo_marca);
                 $('#hdd_vehiculo').val(data.vehiculo_id);
                 $('#hdd_vi_ho').val(data.viajehorario_id);
                 $('#hdd_vh_id').val(data.viajehorario_id);
@@ -326,25 +324,72 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
-    function buscar_dni() {
-
+    function buscar() {
         obtener_cliente_nombre();
-        if ($('#txt_pasaj_nom').val()==""){
-            var dni = $('#txt_pasaj_dni').val();
-            var url = '../../libreriasphp/consultadni/consulta_reniec.php';
-            $.ajax({
-                type: 'POST',
-                dataType: "json",
-                url: url,
-                data: 'dni=' + dni,
-                success: function (datos_dni) {
-                    $('#txt_pasaj_nom').val(datos_dni.persona);
-                    if(datos_dni.persona!="" && datos_dni.persona!="Datos no encontrados, completa el nombre manualmente."){
-                        venta_cliente_reg();
+        if ($('#txt_cli_nom').val()=="") {
+
+            if ($('#rad_cli_tip_pas').val() == '1') {
+                $('#msj_busqueda_sunat').html("Buscando en RENIEC...");
+                $('#msj_busqueda_sunat').show(100);
+                var dni = $('#txt_cli_dni').val();
+                var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: url,
+                    data: 'dni=' + dni,
+                    success: function (datos_dni) {
+                        $('#txt_cli_nom').val(datos_dni.persona);
+                        if (datos_dni.persona != "" && datos_dni.persona != "Datos no encontrados, completa el nombre manualmente.") {
+                            venta_cliente_reg();
+                        }
                     }
-                }
-            });
+                });
+            } else if($('#rad_cli_tip_pas').val() == '2'){
+                $('#msj_busqueda_sunat').html("Buscando en Sunat...");
+                $('#msj_busqueda_sunat').show(100);
+                $.post('../../libreriasphp/consultaruc/index.php', {
+                        vruc: $('#txt_cli_dni').val(),
+                        vtipod: 6
+                    },
+                    function (data, textStatus) {
+                        if (data == null) {
+                            alert('Intente nuevamente...Sunat');
+                        }
+                        if (data.length == 1) {
+
+                            $('#msj_busqueda_sunat').hide();
+                        } else {
+                            //venta_cliente_reg();
+                            $('#txt_cli_nom').val(data['RazonSocial']);
+                            $('#txt_cli_dir').val(data['DireccionCompleta']);
+                            $('#hdd_cli_est').html(data['Estado']);
+                            $('#msj_busqueda_sunat').hide();
+                            $('#txt_pas_doc').focus();
+                        }
+                    }, "json");
+            }
         }
+    }
+    function buscar_pas() {
+            if ($('#rad_cli_tip_pas').val() == '2') {
+                $('#msj_busqueda_sunat').html("Buscando en RENIEC...");
+                $('#msj_busqueda_sunat').show(100);
+                var dni = $('#txt_pas_doc').val();
+                var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+                $.ajax({
+                    type: 'POST',
+                    dataType: "json",
+                    url: url,
+                    data: 'dni=' + dni,
+                    success: function (datos_dni) {
+                        $('#txt_pas_nom').val(datos_dni.persona);
+                        if (datos_dni.persona != "" && datos_dni.persona != "Datos no encontrados, completa el nombre manualmente.") {
+                            venta_pas_reg();
+                        }
+                    }
+                });
+            }
     }
 
     function venta_horario_form(act,idf){
@@ -437,7 +482,7 @@ $pv = mysql_fetch_array($pvs);
         });
     }
 
-    function venta_cliente_reg(act, idf) {
+    function venta_cliente_reg() {
         $.ajax({
             type: "POST",
             url: "../clientes/cliente_reg.php",
@@ -445,25 +490,71 @@ $pv = mysql_fetch_array($pvs);
             dataType: "json",
             data: ({
                 action_cliente: 'insertar',
-                txt_cli_nom: $('#txt_pasaj_nom').val(),
-                txt_cli_doc: $('#txt_pasaj_dni').val(),
-                rad_cli_tip: $("input[name=rad_cli_tip_pas]:checked").val()
+                txt_cli_nom: $('#txt_cli_nom').val(),
+                txt_cli_doc: $('#txt_cli_dni').val(),
+                rad_cli_tip: $("#rad_cli_tip_pas").val(),
+                txt_cli_dir: $('#txt_cli_dir').val(),
             }),
             beforeSend: function () {
-                $('#div_cliente_form').dialog("close");
                 $('#msj_cliente').html("Guardando...");
                 $('#msj_cliente').show(100);
             },
             success: function (data) {
                 $('#msj_cliente').html(data.cli_msj);
-                pasajero_cargar_datos(data.cli_id);
-                cliente_cargar_datos(data.cli_id);
+               cliente_cargar_datos(data.cli_id);
+            },
+            complete: function () {
+            }
+        })
+    }
+    function venta_pas_reg() {
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async: true,
+            dataType: "json",
+            data: ({
+                action_cliente: 'insertar',
+                txt_cli_nom: $('#txt_cli_nom').val(),
+                txt_cli_doc: $('#txt_pas_doc').val(),
+                rad_cli_tip: 1,
+                txt_cli_dir:'',
+            }),
+            beforeSend: function () {
+                $('#msj_cliente').html("Guardando...");
+                $('#msj_cliente').show(100);
+            },
+            success: function (data) {
+                $('#msj_cliente').html(data.cli_msj);
+                $('#hdd_ven_pas_id').val(data.cli_id);
+                $('#txt_pas_nom').val(data.cli_nom);
             },
             complete: function () {
             }
         })
     }
 
+    function cliente_cargar_datos(idf){
+        $.ajax({
+            type: "POST",
+            url: "../clientes/cliente_reg.php",
+            async:true,
+            dataType: "json",
+            data: ({
+                action: "obtener_datos",
+                cli_id:	idf
+            }),
+            beforeSend: function() {
+                //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+            },
+            success: function(data){
+                $('#hdd_ven_cli_id').val(idf);
+                $('#txt_cli_nom').val(data.nombre);
+                $('#txt_cli_dni').val(data.documento);
+                $('#txt_cli_dir').val(data.direccion);
+            }
+        });
+    }
     function venta_clientereserva_reg() {
         var cli_id='';
         $.ajax({
@@ -473,9 +564,9 @@ $pv = mysql_fetch_array($pvs);
             dataType: "json",
             data: ({
                 action_cliente: 'insertar',
-                txt_cli_nom: $('#txt_pasaj_nom').val(),
-                txt_cli_doc: $('#txt_pasaj_dni').val(),
-                rad_cli_tip: $("input[name=rad_cli_tip_pas]:checked").val()
+                txt_cli_nom: $('#txt_cli_nom').val(),
+                txt_cli_doc: $('#txt_cli_dni').val(),
+                rad_cli_tip: $("#rad_cli_tip_pas").val()
             }),
             beforeSend: function () {
                 $('#msj_cliente').html("Guardando...");
@@ -492,7 +583,7 @@ $pv = mysql_fetch_array($pvs);
         return cli_id;
     }
 
-    function obtener_cliente_nombre(idf){
+    function obtener_cliente_nombre(){
         $.ajax({
             type: "POST",
             url: "../clientes/cliente_reg.php",
@@ -500,13 +591,16 @@ $pv = mysql_fetch_array($pvs);
             dataType: "json",
             data: ({
                 action: "obtener_nombre",
-                txt_cli_doc:	$('#txt_pasaj_dni').val()
+                txt_cli_doc:	$('#txt_cli_dni').val()
             }),
             beforeSend: function() {
                 //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
             },
             success: function(data){
-                $('#txt_pasaj_nom').val(data.cli_nom);
+                $('#hdd_ven_cli_id').val(data.cli_id);
+                //$('#txt_cli_dni').val(data.cli_doc);
+                $('#txt_cli_nom').val(data.cli_nom);
+                $('#txt_cli_dir').val(data.cli_dir);
 
             }
         });
@@ -526,8 +620,8 @@ $pv = mysql_fetch_array($pvs);
                 //$('#div_proveedor_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
             },
             success: function(data){
-                $('#txt_pasaj_dni').val(data.documento);
-                $('#txt_pasaj_nom').val(data.nombre);
+                $('#txt_cli_dni').val(data.documento);
+                $('#txt_cli_nom').val(data.nombre);
             }
         });
     }
@@ -576,7 +670,7 @@ $pv = mysql_fetch_array($pvs);
             data: ({
                 veh_id:$('#hdd_vehiculo').val(),
                 num_asi:($('.seleccionado').attr("id")).split('_')[1],
-                txt_cli_doc:$('#txt_pasaj_dni').val(),
+                txt_cli_doc:$('#txt_cli_dni').val(),
                 cmb_fech_sal:$('#cmb_fech_sal').val(),
                 cmb_horario:$('#cmb_horario').val()
             }),
@@ -694,28 +788,6 @@ $pv = mysql_fetch_array($pvs);
 
         });
 
-
-        $("input[id=radiopas1]").change(function(){
-            $("#radiopas1").attr('checked', true);
-            $("#radiopas3").attr('checked', false);
-            if($("input[id=radiopas1]").is(":checked")){
-                $('#lbl_cli_doc_pas').html("DNI:");
-                $( "#txt_pasaj_dni" ).attr('maxlength','8');
-                $( "#txt_pasaj_dni").val('');
-            }
-        });
-
-        $("input[id=radiopas3]").change(function(){
-            $("#radiopas3").attr('checked', true);
-            $("#radiopas1").attr('checked', false);
-            if($("input[id=radiopas3]").is(":checked")){
-                $('#lbl_cli_doc_pas').html("DOC:");
-                $( "#txt_pasaj_dni").attr('maxlength','13');
-                $( "#txt_pasaj_dni").val('');
-                $( "#validar_ruc").hide(200);
-            }
-        });
-
         cmb_lugar_origen();
         cmb_lugar_parada();
         cmb_lugar_destino();
@@ -724,8 +796,6 @@ $pv = mysql_fetch_array($pvs);
             $('#cmb_horario').val('');
             cmb_fecha();
             $('#txt_placa_vehiculo').val('');
-            $('#txt_modelo_vehiculo').val('');
-            $('#txt_asientos_vehiculo').val('');
             $('#bus').html('');
             $('#hdd_vi_ho').val('');
             $('#cmb_parada_id').prop("disabled", false);
@@ -737,8 +807,6 @@ $pv = mysql_fetch_array($pvs);
             $('#cmb_horario').val('');
             cmb_fecha();
             $('#txt_placa_vehiculo').val('');
-            $('#txt_modelo_vehiculo').val('');
-            $('#txt_asientos_vehiculo').val('');
             $('#bus').html('');
             $('#hdd_vi_ho').val('');
 
@@ -759,8 +827,6 @@ $pv = mysql_fetch_array($pvs);
         $('#cmb_fech_sal').change(function(){
             cmb_fecha_horario();
             $('#txt_placa_vehiculo').val('');
-            $('#txt_modelo_vehiculo').val('');
-            $('#txt_asientos_vehiculo').val('');
             $('#bus').html('');
             $('#hdd_vi_ho').val('');
         });
@@ -769,30 +835,33 @@ $pv = mysql_fetch_array($pvs);
 
         $( "#txt_precio" ).keypress(function( event ) {
             if ( event.which == 13 ) {
-                $( "#txt_pasaj_dni" ).focus();
+                $( "#txt_cli_dni" ).focus();
             }
 
         });
-        $( "#txt_pasaj_dni" ).keypress(function( event ) {
-            if ( event.which == 13 && $("input[name=rad_cli_tip_pas]:checked").val()==1) {
-                buscar_dni();
+        $( "#txt_cli_dni" ).keypress(function( event ) {
+            if ( event.which == 13) {
+                buscar();
+                $( "#txt_pas_doc" ).focus();
             }
 
         });
-        $("#txt_pasaj_dni").keydown(function (e) {
+        $( "#txt_pas_doc" ).keypress(function( event ) {
+            if ( event.which == 13) {
+                buscar_pas();
+            }
 
-            if($("#radiopas1").is(':checked')) {
-                    if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.keyCode == 65 && e.ctrlKey === true) || (e.keyCode >= 35 && e.keyCode <= 39)) {
+        });
+        $("#txt_cli_dni").keydown(function (e) {
+
+            if($("#rad_cli_tip_pas").val()==1 || $("#rad_cli_tip_pas").val()==2) {
+                if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 || (e.keyCode == 65 && e.ctrlKey === true) || (e.keyCode >= 35 && e.keyCode <= 39)) {
                     return;
                 }
 
                 if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
                     e.preventDefault();
                 }
-
-            }
-            else{
-                alert("Seleccione DNI");
             }
         });
 
@@ -804,9 +873,30 @@ $pv = mysql_fetch_array($pvs);
                 // Evitamos que se ejecute eventos
                 event.preventDefault();
                 // Devolvemos falso
-                $("#txt_pasaj_dni").focus();
+                $("#txt_cli_dni").focus();
                 return false;
             }
+        });
+
+        $('#cmb_ven_doc').change( function(){
+           if( $('#cmb_ven_doc').val()=='12' ||  $('#cmb_ven_doc').val()=='15') //boleta o nota
+           {
+               $('#rad_cli_tip_pas').val('1');
+               $('#txt_cli_dni').attr('maxlength', 8);
+               $('#field_pasajero').css("display", "none");
+           }
+           else{
+               $('#rad_cli_tip_pas').val('2');
+               $('#txt_cli_dni').attr('maxlength', 11);
+               $('#field_pasajero').css("display", "block");
+            }
+
+            $('#hdd_ven_cli_id').val("");
+            $('#txt_cli_dni').val("");
+            $('#txt_cli_nom').val("");
+            $('#txt_cli_dir').val("");
+
+           $('#txt_cli_dni').focus();
         });
 
 
@@ -889,62 +979,72 @@ $pv = mysql_fetch_array($pvs);
                     var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
                     $.ajax({
                         type: "POST",
-                        url: "../venta/venta_form.php",
+                        url: "../venta/venta_reg_rapida.php",
                         async:true,
-                        dataType: "html",
+                        dataType: "json",
                         data: ({
-                            action: 'insertar',
+                            action_venta: 'insertar',
                             ven_id:	'',
-                            asiento_id: id_seleccionado,
-                            precio: $('#txt_precio').val(),
-                            viaje_fecha_sal: $('#cmb_fech_sal').val(),
-                            viaje_horario_id: $('#hdd_vi_ho').val(),
-                            viaje_horario: $('#cmb_horario').val(),
-                            pasaj_dni:$('#txt_pasaj_dni').val(),
-                            pasaj_nom:$('#txt_pasaj_nom').val(),
+                            txt_num_asi: id_seleccionado,
+                            txt_precio: $('#txt_precio').val(),
+                            txt_fech_sal: $('#cmb_fech_sal').val(),
+                            hdd_vi_ho_id: $('#hdd_vi_ho').val(),
+                            txt_hor_sal: $('#cmb_horario').val(),
+                            hdd_ven_cli_id:$('#hdd_ven_cli_id').val(),
+                            hdd_ven_pas_id:$('#hdd_ven_pas_id').val(),
+                            viaje_partida_text:$('#cmb_salida_id option:selected').html(),
+                            viaje_parada_text:$('#cmb_parada_id option:selected').html(),
+                            viaje_llegada_text:$('#cmb_llegada_id option:selected').html(),
                             viaje_parada: $('#cmb_parada_id').val(),
-                            viaje_llegada: $('#cmb_llegada_id').val()
+                            viaje_llegada: $('#cmb_llegada_id').val(),
+                            chk_venpag_aut:1,
+                            hdd_tipo:'pasaje',
+                            detalle_array:1,
+                            servicio_tip:9,
+                            hdd_punven_id: <?php echo $_SESSION['puntoventa_id']?>,
+                            hdd_emp_id:<?php echo $_SESSION['empresa_id']?>,
+                            cmb_ven_doc:$('#cmb_ven_doc').val(),
+                            cmb_forpag_id:1,
+                            chk_imprimir:1,
+                            txt_ven_fec:'<?php echo $fec ?>',
+                            txt_venpag_mon:$('#txt_precio').val(),
+                            txt_venpag_fecven:'<?php echo $fec ?>',
+                            cmb_modpag_id:1
                         }),
                         beforeSend: function () {
-                            //$('#div_venta_asiento_form').dialog("close");
-                            $('#div_venta_form').dialog("open");
-                            $('#div_venta_form').html('Cargando <img src="../../images/loadingf11.gif" align="absmiddle"/>');
+
                         },
-                        success: function (html) {
-                            $('#div_venta_form').html(html);
-                            venta_cliente_reg();
+                        success: function (data) {
+
+                            if(data.redireccionar){
+                                alert("Venta No Registrada.\n Por Favor Inicie Sesión Nuevamente.");
+                                window.location.href = "../usuarios/cerrar_sesion.php";
+                                return;
+                            }
+
+                            $('#msj_venta').html(data.ven_msj);
+
+                            if(data.ven_sun=='enviar')
+                            {
+                                console.log('enviar sunat');
+                                enviar_sunat(data.ven_id,data.ven_act);
+                            }
+                            else
+                            {
+                                if(data.ven_act=='imprime')
+                                {
+                                    console.log('imprimir');
+                                    venta_impresion_pas(data.ven_id);
+                                }
+                            }
+
                         },
                         complete: function () {
-                            $( "#div_venta_form" ).dialog({
-                                title:'Información de Venta | <?php echo $_SESSION['empresa_nombre']?> | Agregar',
-                                height: 650,
-                                width: 980,
-                                buttons: {
-                                    Guardar: function(){
-                                        txt_ven_numdoc();
-                                        if($('#hdd_ven_doc').val()==1){
-                                            if($('#hdd_ven_numite').val()>0)
-                                            {
-                                                venta_check();
-                                            }
-                                            else{
-                                                $("#for_ven").submit();
-                                            }
-                                        }
-                                        else
-                                        {
-                                            $("#for_ven").submit();
-                                            cmb_lugar_vehiculo();
-                                            filtro_bus();
-                                        }
-                                    },
-                                    Cancelar: function() {
-                                        $('#for_ven').each (function(){this.reset();});
-                                        $('#cmb_parada_id').val('');
-                                        $( this ).dialog( "close" );
-                                    }
-                                }
-                            });
+                            venta_tabla();
+                            filtro_bus();
+                            $('#txt_cli_dni').val('');
+                            $('#txt_cli_nom').val('');
+                            $('#txt_cli_dir').val('');
                         }
                     });
                 }
@@ -962,10 +1062,10 @@ $pv = mysql_fetch_array($pvs);
                 txt_precio: {
                     required: true
                 },
-                txt_pasaj_dni:{
+                txt_cli_dni:{
                     required: true
                 },
-                txt_pasaj_nom:{
+                txt_cli_nom:{
                     required: true
                 },
                 rad_cli_tip_pas: {
@@ -985,10 +1085,10 @@ $pv = mysql_fetch_array($pvs);
                 txt_precio: {
                     required: '*'
                 },
-                txt_pasaj_dni:{
+                txt_cli_dni:{
                     required: '*'
                 },
-                txt_pasaj_nom:{
+                txt_cli_nom:{
                     required: '*'
                 },
                 rad_cli_tip_pas: {
@@ -1000,63 +1100,6 @@ $pv = mysql_fetch_array($pvs);
 </script>
 
 <style>
-*/
-    /*.oculto{*/
-        /*visibility: hidden;*/
-    /*}*/
-
-    /*.seleccionado {*/
-        /*background: orange !important;*/
-        /*color: white;*/
-    /*}*/
-
-    /*.reserva{*/
-        /*background: #dd09ff !important;*/
-        /*color: white;*/
-    /*}*/
-    /*.ocupado {*/
-        /*background: red !important;*/
-        /*color: white;*/
-    /*}*/
-    /*#sortable1, #sortable2,#sortable3,#sortable4,#sortable5 {*/
-        /*border: 1px solid #eee;*/
-        /*min-height: 40px;*/
-        /*list-style-type: none;*/
-        /*margin: 0;*/
-        /*padding: 5px 0 0 0;*/
-        /*!*float: left;*!*/
-        /*margin-right: 10px;*/
-    /*}*/
-
-    /*#sortable1 .asiento, #sortable2 .asiento,#sortable3 .asiento,#sortable4 .asiento,#sortable5 .asiento {*/
-        /*margin: 0 5px 5px 5px;*/
-        /*padding: 0px;*/
-        /*font-size: 1.2em;*/
-        /*width: 40px;*/
-        /*height: 50px;*/
-        /*cursor: pointer !important;*/
-        /*position: relative;*/
-        /*float: left;*/
-        /*background: #00aa00;*/
-    /*}*/
-
-    /*.clear{*/
-        /*clear: both;*/
-    /*}*/
-    /*#frentera{*/
-        /*height: 200px;*/
-        /*width: 185px;*/
-        /*!*background: #0D8BBD;*!*/
-        /*float: left;*/
-    /*}*/
-    /*#lugares{*/
-        /*float: left;*/
-        /*height: 200px;*/
-        /*margin-top: 80px;*/
-    /*}*/
-    /*.pasadizo{*/
-        /*height: 40px;*/
-    /*}*/
     #bus{
         width: 1000px;
         height: 480px;
@@ -1066,10 +1109,6 @@ $pv = mysql_fetch_array($pvs);
         /*background-position-x: -45px;*/
         /*overflow: hidden;*/
     }
-    /*.o{*/
-        /*background: #f5f5f5 !important*/
-    /*}*/
-
 </style>
 
 <form id="bus_form">
@@ -1131,21 +1170,42 @@ $pv = mysql_fetch_array($pvs);
     </div>
 </form>
     <div style="width: 20%;float: right">
+        <div id="documento">
+                <fieldset><legend>Tipo Comprobante</legend>
+                    <select name="cmb_ven_doc" id="cmb_ven_doc">
+                        <option value="12" selected="">BE | BOLETA ELECTRONICA</option>
+                        <option value="11">FE | FACTURA ELECTRONICA</option>
+                        <option value="15">NS | NOTA DE SALIDA</option>
+                    </select>
+                </fieldset>
+        </div>
         <div id="pasajero">
             <form id="datos_pasajero">
-            <fieldset><legend>Datos Pasajero</legend>
+            <fieldset><legend>Datos Cliente</legend>
                 <div id="radiopas">
-                    <input name="rad_cli_tip_pas" type="radio" id="radiopas1" value="1" checked><label for="radiopas1">DNI</label>
-                    <input name="rad_cli_tip_pas" type="radio" id="radiopas3" value="3"><label for="radiopas3">OTROS</label>
+                    <input type="hidden" name="hdd_ven_cli_id" id="hdd_ven_cli_id" value="">
+                    <select name="rad_cli_tip_pas" id="rad_cli_tip_pas">
+                        <option value="1">DNI</option>
+                        <option value="2">RUC</option>
+                        <option value="3">OTROS</option>
+                    </select>
+                    <input name="txt_cli_dni" type="text"  id="txt_cli_dni" value="" size="20" maxlength="8">
                 </div>
-                <label for="txt_pasaj_dni" id="lbl_cli_doc_pas">DNI:</label><br>
-                <input name="txt_pasaj_dni" type="text"  id="txt_pasaj_dni" value="" size="20" maxlength="8"><br>
-                <label for="txt_pasaj_nom">NOMBRE: </label><br>
-                <input name="txt_pasaj_nom" type="text"  id="txt_pasaj_nom" value="" size="20"><br>
+                <br>
+                <label for="txt_cli_nom">NOMBRE: </label><br>
+                <input name="txt_cli_nom" type="text"  id="txt_cli_nom" value="" size="29"><br>
+                <label for="txt_cli_nom">DIRECCION: </label><br>
+                <input name="txt_cli_dir" type="text"  id="txt_cli_dir" value="" size="29">
+            </fieldset>
+            <fieldset id="field_pasajero" style="display: none">
+                <legend>Datos Pasajero</legend>
+
+                    <input type="hidden" name="hdd_ven_pas_id" id="hdd_ven_pas_id" value="">
+                    <label for="txt_pas_doc">DNI: </label><input name="txt_pas_doc" type="text"  id="txt_pas_doc" value="" size="20" maxlength="8">
+                    <label for="txt_cli_nom">NOMBRE: </label>
+                    <input name="txt_pas_nom" type="text"  id="txt_pas_nom" value="" size="20" maxlength="8">
             </fieldset>
             </form>
-            <br>
-            <br>
         </div>
         <div id="datos-vehiculo">
             <fieldset><legend>Datos Vehiculo</legend>
@@ -1154,18 +1214,6 @@ $pv = mysql_fetch_array($pvs);
                         <td width="100%" align="left"  valign="top">
                             <label for="txt_placa_vehiculo">VEHICULO:</label><br>
                             <input name="txt_placa_vehiculo" type="text" id="txt_placa_vehiculo" value="" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100%" align="left"  valign="top"><br>
-                            <label for="txt_asientos_vehiculo">ASIENTOS:</label><br>
-                            <input name="txt_asientos_vehiculo" type="text" id="txt_asientos_vehiculo" value="" disabled>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td width="100%" align="left"  valign="top">
-                            <label for="txt_modelo_vehiculo">MODELO:</label><br>
-                            <input name="txt_modelo_vehiculo" type="text" id="txt_modelo_vehiculo" value="" disabled >
                         </td>
                     </tr>
                     <tr>
@@ -1180,8 +1228,6 @@ $pv = mysql_fetch_array($pvs);
 
                 </table>
             </fieldset>
-            <br>
-            <br>
         </div>
         <div>
             <fieldset><legend>Imprimir Manifiesto</legend>
