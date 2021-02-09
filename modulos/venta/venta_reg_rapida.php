@@ -165,43 +165,43 @@ if($_POST['action_venta']=="insertar")
             $dtipo='viaje';
         }
 
-		//insertamos venta
-		$oVenta->insertar_tipo_venta(
+        //insertamos venta
+        $oVenta->insertar_tipo_venta(
             fecha_mysql($_POST['txt_ven_fec']),
-			$_POST['cmb_ven_doc'],
-			$numdoc,
-			$tal_ser,
-			$numero,
-			$_POST['hdd_ven_cli_id'],
-			0,//valven
-			0,//txt_ven_igv
-			0,
-			moneda_mysql($_POST['txt_precio']),
-			"CANCELADA",
-			"",
-			"",
-			"",
-			0,
+            $_POST['cmb_ven_doc'],
+            $numdoc,
+            $tal_ser,
+            $numero,
+            $_POST['hdd_ven_cli_id'],
+            moneda_mysql($_POST['txt_ven_valven']),
+            moneda_mysql($_POST['txt_ven_igv']),
+            moneda_mysql($_POST['txt_com_destotal']),
+            moneda_mysql($_POST['txt_ven_tot']),
+            $_POST['cmb_ven_est'],
+            $_POST['txt_ven_lab1'],
+            $_POST['txt_ven_lab2'],
+            $_POST['txt_ven_lab3'],
+            $_POST['chk_ven_may'],
             $_SESSION['usuario_id'],
-            $_SESSION['puntoventa_id'],
-			$_SESSION['empresa_id'],
+            $_POST['hdd_punven_id'],
+            $_SESSION['empresa_id'],
 
-			$documento_tipdoc,//cs_tipodocumento_id
-            1,// cs_tipomoneda_id
-			0,//tb_venta_gra
-			0,//tb_venta_ina
-            moneda_mysql($_POST['txt_precio']),//tb_venta_exo
-			0,//tb_venta_grat
-			0,//tb_venta_isc
-			0,
-			0,
-            0,//tb_venta_desglo
-			1,//cs_tipooperacion_id
-			0,//cs_documentosrelacionados_id
+            $documento_tipdoc,//cs_tipodocumento_id
+            $_POST['cmb_ven_moneda'],// cs_tipomoneda_id
+            moneda_mysql($_POST['txt_ven_valven']),//tb_venta_gra
+            0,//tb_venta_ina
+            moneda_mysql($_POST['txt_ven_opeexo']),//tb_venta_exo
+            moneda_mysql($_POST['txt_ven_opegra']),//tb_venta_grat
+            0,//tb_venta_isc
+            moneda_mysql($_POST['txt_ven_otrtri']),
+            moneda_mysql($_POST['txt_ven_otrcar']),
+            moneda_mysql($_POST['txt_ven_desglob']),//tb_venta_desglo
+            1,//cs_tipooperacion_id
+            0,//cs_documentosrelacionados_id
             $usu_id,
             $tipo_venta,
             $dtipo
-		);
+        );
 
 		//ultima venta
 			$dts=$oVenta->ultimoInsert();
@@ -539,7 +539,7 @@ if($_POST['action_venta']=="insertar")
 
             $cantidad=1;
 			//precio de venta ingresado
-            $precio_unitario_linea = $_POST['txt_precio'];
+            $precio_unitario_linea = $_POST['txt_ven_opeexo'];
 
             $afeigv_id=$_POST['servicio_tip'];
 			//precio unitario de venta
@@ -585,7 +585,7 @@ if($_POST['action_venta']=="insertar")
                 $descuento_x_item_linea,
 				$valor_unitario_linea,
                 $valor_venta_x_item_linea,
-                $igv_linea,
+                0,//igv
 				$ven_id,
 				$afeigv_id,
 				$unimed_id,

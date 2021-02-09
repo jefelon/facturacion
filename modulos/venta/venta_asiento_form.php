@@ -986,7 +986,8 @@ $pv = mysql_fetch_array($pvs);
                             action_venta: 'insertar',
                             ven_id:	'',
                             txt_num_asi: id_seleccionado,
-                            txt_precio: $('#txt_precio').val(),
+                            txt_ven_opegra:0,
+                            txt_ven_opeexo: $('#txt_precio').val(),
                             txt_fech_sal: $('#cmb_fech_sal').val(),
                             hdd_vi_ho_id: $('#hdd_vi_ho').val(),
                             txt_hor_sal: $('#cmb_horario').val(),
@@ -1009,7 +1010,14 @@ $pv = mysql_fetch_array($pvs);
                             txt_ven_fec:'<?php echo $fec ?>',
                             txt_venpag_mon:$('#txt_precio').val(),
                             txt_venpag_fecven:'<?php echo $fec ?>',
-                            cmb_modpag_id:1
+                            cmb_modpag_id:1,
+                            txt_ven_valven:0,
+                            txt_ven_igv:0,
+                            txt_com_destotal:0,
+                            txt_ven_tot:$('#txt_precio').val(),
+                            cmb_ven_est:"CANCELADA",
+                            cmb_ven_moneda:1,
+
                         }),
                         beforeSend: function () {
 

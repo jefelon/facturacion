@@ -31,5 +31,4 @@ $departamento = "AREQUIPA";
 $provincia = "AREQUIPA";
 $distrito = "CERCADO";
 
-mysql_free_result($dts);
 ?>
