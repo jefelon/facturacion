@@ -230,7 +230,7 @@ if($idcomprobante==1)//FACTURA
 
 	}
 
-	//$oVenta->actualizar_sunat($ven_id,$r['faultcode'],$r['digvalue'],$r['signvalue'],$r['valid'],$estado_envsun);
+	$oVenta->actualizar_sunat($ven_id,$r['faultcode'],$r['digvalue'],$r['signvalue'],$r['valid'],$estado_envsun);
 
 }
 
