@@ -90,7 +90,8 @@ $menu_administrador=
 	<ul>
 	  <li><a href="../compra/">Compras</a></li>
 	  <li class="separator">_____________________</li>
-	  <li><a href="../venta/venta_vista.php">Vender Pasaje</a></li>
+	  <li><a href="../venta/venta_vista.php">Vender Pasaje con Croquis</a></li>
+	  <li><a href="../venta/venta_vistarapida.php">Vender Pasaje sin Croquis</a></li>
 	  <li class="separator">----------------------</li>
 	  <li><a href="../venta/venta_vista_encomienda.php">Enviar Encomienda</a></li>
 	  <li><a href="../venta/venta_vista_entregar.php">Entregar Encomienda</a></li>

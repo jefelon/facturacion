@@ -82,12 +82,7 @@ $num_rows= mysql_num_rows($dts1);
         <th align="center">RUC/DNI</th>
         <th align="center">MONEDA</th>
 
-        <th align="center"> <?php if ($_POST['cmb_fil_ven_tip']=='ENCOMIENDA'){
-                        echo 'VALOR VENTA';
-                    }else{
-                        echo 'OP EXO';;
-                    } ?>
-        </th>
+        <th align="center">VALOR VENTA </th>
         <th align="center">IGV</th>
         <th align="center">IMPORTE TOTAL</th>
         <th align="center">ESTADO DOC.</th>

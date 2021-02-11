@@ -722,6 +722,15 @@ div.m {
 	text-align: center;
 	font-weight: bold;
 	color:#00aa00;
+	width: 80px;
+}
+
+#txt_numasi {
+	font-size: 15pt;
+	text-align: center;
+	font-weight: bold;
+	color: #aa0e00;
+	width: 73px;
 }
 
 #menu-click ul{
