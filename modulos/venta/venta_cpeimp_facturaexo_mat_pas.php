@@ -377,7 +377,7 @@ if($impresion=='pdf')ob_start();
         <td colspan="4"> <b>PASAJERO: </b><?php echo $vv['tb_cliente_nom'] ?></td>
     </tr>
     <tr>
-        <td colspan="4"> <b>DNI:</b><?php $vv['tb_cliente_doc'] ?></td>
+        <td colspan="4"> <b>DNI:</b><?php echo $vv['tb_cliente_doc'] ?></td>
     </tr>
     <tr>
         <td colspan="2"> <b>Origen: </b><?php echo $vh['ltb_origen'] ?></td>

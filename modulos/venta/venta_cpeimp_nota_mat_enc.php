@@ -395,7 +395,7 @@ if ($impresion == 'pdf') ob_start();
                             <?php while ($dt1 = mysql_fetch_array($dts1)) { ?>
                                 <tr>
                                     <td class="izquierda" style="width: 10mm"><?php echo $dt1["tb_ventadetalle_can"] ?></td>
-                                    <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_producto_nom'] ?></td>
+                                    <td class="izquierda" style="width: 30mm"><?php echo $dt1['tb_ventadetalle_nom'] ?></td>
                                     <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni']) ?></td>
                                     <td class="derecha" style="width: 20mm"><?php echo formato_money($dt1['tb_ventadetalle_preuni'] * $dt1['tb_ventadetalle_can']) ?></td>
                                 </tr>
@@ -407,7 +407,7 @@ if ($impresion == 'pdf') ob_start();
                         <?php while ($dt2 = mysql_fetch_array($dts2)) { ?>
                             <tr>
                                 <td class="izquierda" style="width: 10mm"><?php echo $dt2["tb_ventadetalle_can"] ?></td>
-                                <td class="izquierda" style="width: 30mm"><?php echo $dt2["tb_servicio_nom"] ?></td>
+                                <td class="izquierda" style="width: 30mm"><?php echo $dt2["tb_ventadetalle_nom"] ?></td>
                                 <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni']) ?></td>
                                 <td class="derecha" style="width: 20mm"><?php echo formato_money($dt2['tb_ventadetalle_preuni'] * $dt2['tb_ventadetalle_can']) ?></td>
                             </tr>
