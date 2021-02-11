@@ -13,7 +13,7 @@ $xml_factura = '<?xml version="1.0" encoding="UTF-8"?>
   <cbc:IssueDate>'.date_format(date_create($arr["header"]->fechadoc), "Y-m-d").'</cbc:IssueDate>
   <cbc:IssueTime>'.date_format(date_create($arr['header']->issuetime), 'H:i:s').'</cbc:IssueTime>
   <cbc:DueDate>'.date_format(date_create($arr["header"]->fechavence), "Y-m-d").'</cbc:DueDate>
-  <cbc:InvoiceTypeCode listID="0101" listAgencyName="PE:SUNAT" listName="Tipo de Documento" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01" name="Tipo de Operacion" listSchemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo51">01</cbc:InvoiceTypeCode>
+  <cbc:InvoiceTypeCode listID="0101" listAgencyName="PE:SUNAT" listName="Tipo de Documento" listURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo01" name="Tipo de Operacion" listSchemeURI="urn:pe:gob:sunat:cpe:see:gem:catalogos:catalogo51">0'.$arr["header"]->idcomprobante.'</cbc:InvoiceTypeCode>
   <cbc:Note languageLocaleID="1000">'.$arr["header"]->AdditionalProperty_Value.'</cbc:Note>
   <cbc:DocumentCurrencyCode listID="ISO 4217 Alpha" listAgencyName="United Nations Economic Commission for Europe" listName="Currency">'.$arr["header"]->isomoneda.'</cbc:DocumentCurrencyCode>
   <cac:Signature>
