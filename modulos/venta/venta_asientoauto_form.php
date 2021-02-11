@@ -671,7 +671,7 @@ $pv = mysql_fetch_array($pvs);
             dataType: "json",
             data: ({
                 veh_id:$('#hdd_vehiculo').val(),
-                num_asi:$('#txt_numasi').val(),
+                num_asi:$('#txt_num_asi').val(),
                 txt_cli_doc:$('#txt_cli_dni').val(),
                 cmb_fech_sal:$('#cmb_fech_sal').val(),
                 cmb_horario:$('#cmb_horario').val()
@@ -981,7 +981,13 @@ $pv = mysql_fetch_array($pvs);
                     $('#txt_cli_dni').focus();
                     return false;
                 }
-                if($('#txt_numasi').val()<0){
+                if($('#txt_pas_nom').val()=="" && $('#rad_cli_tip_pas').val()==2 ){
+                    alert('Escriba el DNI del pasajero y presione ENTER');
+                    $('#txt_pas_doc').focus();
+                    return false;
+                }
+
+                if($('#txt_num_asi').val()<0){
                     alert('Escriba un número de asiento');
                     return false;
                 }else{
@@ -994,17 +1000,18 @@ $pv = mysql_fetch_array($pvs);
                         data: ({
                             action_venta: 'insertar',
                             ven_id:	'',
-                            txt_num_asi: $('#txt_numasi').val(),
+                            txt_num_asi: $('#txt_num_asi').val(),
                             txt_ven_opegra:0,
                             txt_ven_opeexo: $('#txt_precio').val(),
                             txt_fech_sal: $('#txt_fech_sal').val(),
                             hdd_vi_ho_id: 1,
-                            txt_hor_sal: 1,
+                            txt_hor_sal: $('#txt_hor_sal').val(),
                             hdd_ven_cli_id:$('#hdd_ven_cli_id').val(),
                             hdd_ven_pas_id:$('#hdd_ven_pas_id').val(),
                             viaje_partida_text:$('#cmb_salida_id option:selected').html(),
                             viaje_parada_text:$('#cmb_parada_id option:selected').html(),
                             viaje_llegada_text:$('#cmb_llegada_id option:selected').html(),
+                            viaje_salida: $('#cmb_salida_id').val(),
                             viaje_parada: $('#cmb_parada_id').val(),
                             viaje_llegada: $('#cmb_llegada_id').val(),
                             chk_venpag_aut:1,
@@ -1088,7 +1095,7 @@ $pv = mysql_fetch_array($pvs);
                 rad_cli_tip_pas: {
                     required: true
                 },
-                txt_numasi: {
+                txt_num_asi: {
                     required: true
                 },
             },
@@ -1114,7 +1121,7 @@ $pv = mysql_fetch_array($pvs);
                 rad_cli_tip_pas: {
                     required: '*'
                 },
-                txt_numasi: {
+                txt_num_asi: {
                     required: '*'
                 },
             }
@@ -1171,8 +1178,8 @@ $pv = mysql_fetch_array($pvs);
 
                         <label for="txt_precio">Precio:</label>
                         <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
-                        <label for="txt_precio">Nro Asiento:</label>
-                        <input class="venpag_moneda__" name="txt_numasi" size="4" type="text" id="txt_numasi">
+                        <label for="txt_num_asi">Nro Asiento:</label>
+                        <input class="venpag_moneda__" name="txt_num_asi" size="4" type="text" id="txt_num_asi">
                     </td>
                 </tr>
             </table>
@@ -1180,7 +1187,7 @@ $pv = mysql_fetch_array($pvs);
     </div>
 </form>
     <div>
-        <div class="otros-datos" style="width: 60%;margin: 0 auto;margin-top: 20px">
+        <div class="otros-datos" style="width: 60%;margin: 0 auto;margin-top: 10px;font-size: 11pt">
             <div id="documento">
                 <fieldset><legend>Tipo Comprobante</legend>
                     <select name="cmb_ven_doc" id="cmb_ven_doc">
@@ -1200,31 +1207,22 @@ $pv = mysql_fetch_array($pvs);
                                 <option value="2">RUC</option>
                                 <option value="3">OTROS</option>
                             </select>
-                            <input name="txt_cli_dni" type="text"  id="txt_cli_dni" value="" size="20" maxlength="8">
+                            <input name="txt_cli_dni" type="text"  id="txt_cli_dni" value="" size="44" maxlength="8">
                         </div>
                         <br>
                         <label for="txt_cli_nom">NOMBRE: </label><br>
-                        <input name="txt_cli_nom" type="text"  id="txt_cli_nom" value="" size="29"><br>
+                        <input name="txt_cli_nom" type="text"  id="txt_cli_nom" value="" size="44"><br><br>
                         <label for="txt_cli_nom">DIRECCION: </label><br>
-                        <input name="txt_cli_dir" type="text"  id="txt_cli_dir" value="" size="29">
+                        <input name="txt_cli_dir" type="text"  id="txt_cli_dir" value="" size="44">
                     </fieldset>
                     <fieldset id="field_pasajero" style="display: none">
                         <legend>Datos Pasajero</legend>
-
                         <input type="hidden" name="hdd_ven_pas_id" id="hdd_ven_pas_id" value="">
-                        <label for="txt_pas_doc">DNI: </label><input name="txt_pas_doc" type="text"  id="txt_pas_doc" value="" size="20" maxlength="8">
-                        <label for="txt_cli_nom">NOMBRE: </label>
-                        <input name="txt_pas_nom" type="text"  id="txt_pas_nom" value="" size="20" maxlength="8">
+                        <label for="txt_pas_doc">DNI: </label><input name="txt_pas_doc" type="text"  id="txt_pas_doc" value="" size="40" maxlength="8"><br><br>
+                        <label for="txt_cli_nom">NOMBRE: </label><br>
+                        <input name="txt_pas_nom" type="text"  id="txt_pas_nom" value="" size="40" maxlength="8">
                     </fieldset>
                 </form>
-            </div>
-            <div>
-                <fieldset><legend>Imprimir Manifiesto</legend>
-                    <form action="venta_impresion_gra_manifiesto.php" target="_blank" method="post" style="text-align: center">
-                        <input name="hdd_vh_id" type="hidden" id="hdd_vh_id" name="hdd_vh_id"  value="">
-                        <button class="btn_manifiesto" id="btn_manifiesto"  type="submit" title="Imprimir manifiesto de pasajeros">Imprimir Manifiesto</button>
-                    </form>
-                </fieldset>
             </div>
         </div>
     </div>
