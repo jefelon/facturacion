@@ -633,7 +633,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
         }
 
 
-        $tipo_item	=$dt1['tb_afectacion_id'];
+        $tipo_item	=9;
 
         if ($tipo_item==9) {
             $linea_valor_unitario = $precio_unitario;
@@ -745,7 +745,7 @@ if($filas>=2)echo $filas.' ítems agregados.';
 
 
         //tipo g/e/i ingresado
-        $tipo_item	= 1;
+        $tipo_item	= 9;
 
 
         if ($tipo_item==9) {

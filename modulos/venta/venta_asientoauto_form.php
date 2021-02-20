@@ -1033,6 +1033,8 @@ $pv = mysql_fetch_array($pvs);
                             txt_ven_tot:$('#txt_precio').val(),
                             cmb_ven_est:"CANCELADA",
                             cmb_ven_moneda:1,
+                            hdd_usu_id:<?php echo $_SESSION['usuario_id'] ?>
+
 
                         }),
                         beforeSend: function () {

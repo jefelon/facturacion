@@ -163,7 +163,7 @@ while($dt = mysql_fetch_array($dts))
 		$codigo=$dt["tb_servicio_id"];
 	}
 
-	$detalle[$autoin]['idafectaciond']			=$dt["cs_tipoafectacionigv_cod"]; //10AFECTO 20EXONERADO 31BONO
+	$detalle[$autoin]['idafectaciond']			=20; //10AFECTO 20EXONERADO 31BONO
 	$detalle[$autoin]['nro']					=$dt["tb_ventadetalle_nro"];
 
 	$detalle[$autoin]['idmedida']				=$dt["cs_tipounidadmedida_cod"];
