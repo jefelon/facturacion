@@ -86,6 +86,8 @@ $dt = mysql_fetch_array($dts);
 $emp_razsoc=$dt['tb_empresa_razsoc'];
 $emp_dir=$dt['tb_empresa_dir'];
 mysql_free_result($dts);
+require_once ("../lugar/cLugar.php");
+$oLugar = new cLugar();
 
 if($_POST['action']=="postergar")
 {
@@ -222,40 +224,54 @@ if($_POST['action_venta']=="insertar")
 
 
         //REGISTRO VIAJE
+        $oLugar->insertarViajeHorario(
+            $_POST['viaje_salida'],
+            $_POST['viaje_llegada'],
+            fechahora_mysql($_POST['txt_fech_sal'].' '.$_POST['txt_hor_sal']),
+            $_POST['txt_hor_sal'],
+            $_POST['cmb_vehiculo'],
+            $_POST['cmb_conductor'],
+            $_POST['cmb_copiloto'],$tal_ser,$numero);
+        $dts=$oLugar->ultimoInsert();
+        $dt = mysql_fetch_array($dts);
+        $hor_id=$dt['last_insert_id()'];
+        mysql_free_result($dts);
+
         if($_POST['hdd_tipo']=='encomienda'){
             $oVenta->insertarEncomiendaVenta(
                 $ven_id,
-                $_POST['hdd_vi_ho'],
+                $hor_id,
                 $_POST['hdd_ven_rem_id'],
                 $_POST['txt_ven_des_nom'],
-                $_POST['cmb_salida_id'],
-                $_POST['cmb_llegada_id'],
+                $_POST['viaje_salida'],
+                $_POST['viaje_llegada'],
                 $_POST['txt_clave'],
                 $pagado
             );
         }else{
+
             $oVenta->insertarViajeVenta(
                 $ven_id,
-                $_POST['hdd_vi_ho_id'],
+                $hor_id,
                 $_POST['txt_num_asi'],
                 fecha_mysql($_POST['txt_fech_sal']),
                 $pas_id,
                 $_POST['viaje_parada']
             );
 
-            $oAsientoestado->eliminar($_POST['hdd_vi_ho_id'],$_POST['txt_num_asi']);
+            $oAsientoestado->eliminar($hor_id,$_POST['txt_num_asi']);
 
 
             if ($_POST['viaje_parada']>0){
                 $oVenta->insertarAsientoEstado(
                     $_POST['txt_num_asi'],
-                    $_POST['hdd_vi_ho_id'],
+                    $hor_id,
                     $_POST['viaje_parada']
                 );
             }else{
                 $oVenta->insertarAsientoEstado(
                     $_POST['txt_num_asi'],
-                    $_POST['hdd_vi_ho_id'],
+                    $hor_id,
                     $_POST['viaje_llegada']
                 );
             }
