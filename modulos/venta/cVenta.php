@@ -351,7 +351,7 @@ class cVenta{
         INNER JOIN tb_usuario u ON v.tb_usuario_id=u.tb_usuario_id
         INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
         INNER JOIN tb_conductor c ON vh.tb_conductor_id=c.tb_conductor_id	
-        WHERE v.tb_empresa_id = $emp_id AND v.tb_venta_est NOT IN ('ANULADA')
+        WHERE v.tb_empresa_id = $emp_id AND v.tb_venta_est NOT IN ('ANULADA') AND vh.tb_viajehorario_ser NOT IN ('libre')
         AND tb_viajehorario_fecha BETWEEN '$fec1' AND '$fec2' ";
         if($con_id>0)$sql.=" AND vh.tb_conductor_id = $con_id ";
         if($usu_id>0)$sql.=" AND u.tb_usuario_id = $usu_id ";

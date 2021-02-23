@@ -994,7 +994,7 @@ $pv = mysql_fetch_array($pvs);
                     //var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
                     $.ajax({
                         type: "POST",
-                        url: "../venta/venta_reg_rapida.php",
+                        url: "../venta/venta_reg_rapidalibre.php",
                         async:true,
                         dataType: "json",
                         data: ({
