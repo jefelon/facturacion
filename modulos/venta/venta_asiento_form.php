@@ -997,6 +997,7 @@ $pv = mysql_fetch_array($pvs);
                             viaje_partida_text:$('#cmb_salida_id option:selected').html(),
                             viaje_parada_text:$('#cmb_parada_id option:selected').html(),
                             viaje_llegada_text:$('#cmb_llegada_id option:selected').html(),
+                            viaje_salida: $('#cmb_salida_id').val(),
                             viaje_parada: $('#cmb_parada_id').val(),
                             viaje_llegada: $('#cmb_llegada_id').val(),
                             chk_venpag_aut:1,
@@ -1018,6 +1019,7 @@ $pv = mysql_fetch_array($pvs);
                             txt_ven_tot:$('#txt_precio').val(),
                             cmb_ven_est:"CANCELADA",
                             cmb_ven_moneda:1,
+                            hdd_usu_id:<?php echo $_SESSION['usuario_id'] ?>
 
                         }),
                         beforeSend: function () {
@@ -1157,9 +1159,6 @@ $pv = mysql_fetch_array($pvs);
 
                     <td valign="top"><label for="txt_precio">Precio:</label><br>
                         <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
-                    </td>
-                    <td valign="top"><label for="txt_precio">Precio:</label><br>
-                        <input class="venpag_moneda__" name="txt_numasi" size="4" type="text" id="txt_numasi">
                     </td>
                     <td align="left" valign="middle">
                         <a id="btn_agregar_horario" title="Agregar Horarios de salida de bus" href="#" onClick="venta_horario_form()">Agregar Horario</a>
