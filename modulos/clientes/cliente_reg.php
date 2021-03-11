@@ -19,13 +19,12 @@ if($_POST['action_cliente']=="insertar")
 
             $cst2 = $oCliente->verifica_cliente_nombre($_POST['txt_cli_doc'],0);
             $dt = mysql_fetch_array($cst2);
-            $cli_nom=$dt['tb_cliente_nom'];
-            if($cli_nom=="")// cliente con nombre vacio
-            {
-                $oCliente->actualizar_nombre(
-                    $cli_id,
-                    strip_tags(limpia_espacios($_POST['txt_cli_nom'])));
-            }
+
+            $oCliente->actualizar_nombre(
+                $cli_id,
+                strip_tags(limpia_espacios($_POST['txt_cli_nom'])));
+
+            $cli_nom=$_POST['txt_cli_nom'];
 
             $data['cli_id']=$cli_id;
             $data['cli_nom']=$cli_nom;

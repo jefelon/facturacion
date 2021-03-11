@@ -733,6 +733,8 @@ $pv = mysql_fetch_array($pvs);
             $("#postergar").css({'display': 'none'});
             $("#detalle").css({'display': 'block'});
             $("#hdd_act_res").val(cli_id);
+            $("#hdd_ven_cli_id").val(cli_id);
+            $("#hdd_ven_pas_id").val(cli_id);
             seleccionar(selector);
 
         }else {

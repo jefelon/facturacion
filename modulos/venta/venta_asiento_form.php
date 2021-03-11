@@ -732,6 +732,8 @@ $pv = mysql_fetch_array($pvs);
             $("#postergar").css({'display': 'none'});
             $("#detalle").css({'display': 'block'});
             $("#hdd_act_res").val(cli_id);
+            $("#hdd_ven_cli_id").val(cli_id);
+            $("#hdd_ven_pas_id").val(cli_id);
             seleccionar(selector);
 
         }else {
@@ -966,17 +968,17 @@ $pv = mysql_fetch_array($pvs);
 
 
         $("#bus_form").validate({
-
             submitHandler: function () {
                 var asi_est=validar_reserva();
                 if(asi_est=="ocupado" || asi_est=="reserva"){
-                    alert("Este asiento fue reservado o vendido en otro punto hace instantes... \n Se recargará el croquis de asientos.");
+                    alert("Este asiento fue reservado o vendido en otro punto hace instantes...\n Si hizo esta reserva, intente otra vez. \n Se recargará el croquis de asientos.");
                     return false;
                     filtro_bus();
                 }
                 if($('.seleccionado').length<=0){
                     alert('Seleccione un asiento');
                 }else{
+                    venta_cliente_reg();
                     var id_seleccionado = ($('.seleccionado').attr("id")).split('_')[1];
                     $.ajax({
                         type: "POST",
