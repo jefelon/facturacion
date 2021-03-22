@@ -15,9 +15,24 @@ $oEmpresa = new cEmpresa();
 require_once ("../usuarios/cUsuario.php");
 $oUsuario = new cUsuario();
 
+
+$dts=$oEmpresa->mostrarUno($_SESSION['empresa_id']);
+$dt = mysql_fetch_array($dts);
+$emp_ruc=$dt['tb_empresa_ruc'];
+$emp_nomcom=$dt['tb_empresa_nomcom'];
+$emp_razsoc=$dt['tb_empresa_razsoc'];
+$emp_dir=$dt['tb_empresa_dir'];
+$emp_dir2=$dt['tb_empresa_dir2'];
+$emp_tel=$dt['tb_empresa_tel'];
+$emp_ema=$dt['tb_empresa_ema'];
+$emp_fir=$dt['tb_empresa_fir'];
+$empresa_logo = '../empresa/'.$dt['tb_empresa_logo'];
+mysql_free_result($dts);
+
 $dts= $oVenta->mostrar_cabecera_manifiesto($_POST['hdd_vh_id']);
 $dt = mysql_fetch_array($dts);
 
+$punto_venta_dir=$dt["tb_puntoventa_direccion"];
 $fecha=strtotime($dt['tb_viajehorario_fecha']);
 $hora=$dt['tb_viajehorario_horario'];
 $origen=$dt['Origen'];
@@ -84,7 +99,7 @@ class MYPDF extends TCPDF
          // Page number
          $this->SetFont('helvetica', '', 6);
          //$this->SetTextColor(0,0,0);
-         $this->Cell(0, 0, 'NUMERO DE AUTORIZACIÓN DE IMPRESIÓN: 0599155053', 0, 1, 'C', 0, '', 0, false, 'T', 'M');
+         $this->Cell(0, 0, 'VIAJE SEGURO', 0, 1, 'C', 0, '', 0, false, 'T', 'M');
     }
 }
 
@@ -176,12 +191,9 @@ $html = '
             <tr>
                 <td style="width: 78mm;">
                     <table style="width: 78mm; height: 18mm;" border="0">
-                        <tr><td style="text-align: center; font-size: 4mm;">Transportes y Turismo</td></tr>
-                        <tr><td style="text-align: center; font-size: 4mm;">Angeles Tour Jul Perú S.a.c</td></tr>
-                        <tr><td style="text-align: center; font-size: 1.5mm;">Domic. Fiscal Av. Lima 749 - Cercado</td></tr>
-                        <tr><td style="text-align: center; font-size: 1.5mm;">CAMANÁ - CAMANÁ - AREQUIPA</td></tr>
-                        <tr><td style="text-align: center; font-size: 2.5mm;">Sucursal: Terminal Terrestre Counter B-16</td></tr>
-                        <tr><td style="text-align: center; font-size: 2.5mm;">JACOBO HUNTER - AREQUIPA - AREQUIPA</td></tr>
+                        <tr><td style="text-align: center; font-size: 4mm;">'.$emp_razsoc.'</td></tr>
+                        <tr><td style="text-align: center; font-size: 6pt;">'.$emp_dir.'</td></tr>
+                        <tr><td style="text-align: center; font-size: 6pt;">'.$punto_venta_dir.'</td></tr>
                     </table>
                 </td>
                 <td style="height: 23mm; width: 28mm;">
@@ -248,7 +260,7 @@ $html = '
         <td style="text-align: center; height:40mm; width: 82mm;">
             <table style="width: 82mm; margin-right: 25mm;" border="1">
                <tr>
-                  <td style="text-align: center; font-size: 7mm; font-weight: bolder" width="82mm">R.U.C.'.$ruc.'</td>
+                  <td style="text-align: center; font-size: 7mm; font-weight: bolder" width="82mm">R.U.C.'.$emp_ruc.'</td>
                </tr>
                <tr style="background-color: orange; color: black;">
                   <td style="text-align: center; font-size: 5mm; font-weight: bold" width="82mm">MANIFIESTO DE PASAJEROS</td>
@@ -313,7 +325,8 @@ $html = '
     <thead>
         <tr>
             <th style="border: 1px solid #000; text-align:center; width: 8mm; font-weight: bold;">Item</th>
-            <th style="border: 1px solid #000; text-align:left; width: 80mm; font-weight: bold;">NOMBRES Y APELLIDOS</th>
+            <th style="border: 1px solid #000; text-align:left; width: 60mm; font-weight: bold;">NOMBRES Y APELLIDOS</th>
+            <th style="border: 1px solid #000; text-align:center; width: 20mm; font-weight: bold;">DESTINO</th>
             <th style="border: 1px solid #000; text-align:center; width: 16mm; font-weight: bold;">TIPO DOC.</th>
             <th style="border: 1px solid #000; text-align:center; width: 20mm; font-weight: bold;">Nº DE DOC</th>
             <th style="border: 1px solid #000; text-align:center; width: 18mm; font-weight: bold;">Nº ASIENTO</th>
@@ -327,13 +340,19 @@ $cont = 1;
 $tipo_doc="";
 while($dt = mysql_fetch_array($dts)){
     if($dt['tb_cliente_tip']==1){$tipo_doc="DNI";}elseif ($dt['tb_cliente_tip']==3){$tipo_doc="OTROS";}
+    $destino=$dt['tb_lugar_nom'];
+    if($dt['tb_viajeventa_parada']>0)
+    {
+        $destino=$dt['parada'];
+    }
     $html.='<tr>';
 
     $html .= '   
                     <td style="text-align:center;  width: 8mm; height: 2mm; border-left: 1px solid #000;
     border-right: 1px solid #000;">'.$cont.'</td>
-                    <td style="text-align:left;border-left: 1px solid #000; width: 80mm;
+                    <td style="text-align:left;border-left: 1px solid #000; width: 60mm;
     border-right: 1px solid #000;">' .$dt["tb_cliente_nom"] .'</td>
+                    <td style="text-align:left;border-left: 1px solid #000; width: 20mm;border-right: 1px solid #000;">'.$destino .'</td>
                     <td style="text-align: center; border-left: 1px solid #000; width: 16mm;
     border-right: 1px solid #000;">' .$tipo_doc.'</td>
                     <td style="text-align:center; border-left: 1px solid #000; width: 20mm;

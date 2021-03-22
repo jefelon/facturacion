@@ -45,6 +45,8 @@ $copiloto=$dt['tb_copiloto_nom'];
 $licencia=$dt['tb_conductor_lic'];
 $copiloto_lic=$dt['tb_copiloto_lic'];
 
+$ruc=$_SESSION['empresa_ruc'];
+
 $certmtc="";
 
 mysql_free_result($dts);

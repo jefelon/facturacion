@@ -5,7 +5,7 @@ class cVenta{
         $sql="SELECT ev.tb_encomiendaventa_id, vv.tb_viajeventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
-    v.tb_venta_valven, v.tb_venta_igv,v.tb_documento_id,v.tb_venta_tipo,v.tb_venta_tipodes
+    v.tb_venta_valven, v.tb_venta_exo, v.tb_venta_igv,v.tb_documento_id,v.tb_venta_tipo,v.tb_venta_tipodes
 	FROM tb_venta v
 	LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id
 	LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id

@@ -151,7 +151,7 @@ $num_rows= mysql_num_rows($dts1);
                     if ($estado == "ANULADA" || $doc_id==15) {
                         echo "0";
                     } else {
-                        echo formato_money($dt1['tb_venta_valven']);
+                        echo formato_money($dt1['tb_venta_exo']);
                     }
                     ?>
                 </td>

@@ -169,7 +169,7 @@ class cVenta{
     v.tb_venta_est,v.tb_documento_id, v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
-    v.tb_venta_valven, v.tb_venta_igv
+    v.tb_venta_valven,v.tb_venta_exo, v.tb_venta_igv
     FROM tb_venta v LEFT JOIN tb_cliente c ON v.tb_cliente_id=c.tb_cliente_id 
     LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id 
     INNER JOIN tb_documento d ON v.tb_documento_id=d.tb_documento_id 
@@ -315,7 +315,7 @@ class cVenta{
         return $rst;
     }
 
-	function mostrar_filtro_adm($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay){
+	function mostrar_filtro_adm($fec1,$fec2,$doc_id,$cli_id,$est,$usu_id,$punven_id,$emp_id,$venmay,$veh_id){
 	$sql="SELECT ev.tb_encomiendaventa_id, vv.tb_viajeventa_id, v.tb_venta_id,v.tb_venta_est,v.tb_venta_tot,td.cs_tipodocumento_cod,v.tb_venta_ser,v.tb_venta_num,
     v.tb_venta_fec, c.tb_cliente_nom,c.tb_cliente_doc ,v.cs_tipomoneda_id, d.tb_documento_ele, v.tb_venta_estsun, 
     v.tb_venta_fecenvsun, td.cs_tipodocumento_cod, d.tb_documento_abr, v.tb_venta_numdoc, d.tb_documento_nom, 
@@ -328,6 +328,7 @@ class cVenta{
 	INNER JOIN tb_puntoventa pv ON v.tb_puntoventa_id=pv.tb_puntoventa_id
 	LEFT JOIN tb_encomiendaventa ev ON v.tb_venta_id=ev.tb_venta_id
 	LEFT JOIN tb_viajeventa vv ON vv.tb_venta_id=v.tb_venta_id	
+	LEFT JOIN tb_viajehorario vh ON vh.tb_viajehorario_id=vv.tb_viajehorario_id	
 	WHERE v.tb_empresa_id = $emp_id 
 	AND tb_venta_fec BETWEEN '$fec1' AND '$fec2' ";
 	
@@ -337,6 +338,7 @@ class cVenta{
 	 if($punven_id>0)$sql.=" AND v.tb_puntoventa_id = $punven_id ";
 	 if($venmay>0)$sql.=" AND v.tb_venta_may = $venmay ";
 	 if($est!="")$sql.=" AND tb_venta_est LIKE '$est' ";
+     if($veh_id>0)$sql.=" AND vh.tb_vehiculo_id = $veh_id ";
 	
 	$sql.=" ORDER BY tb_venta_fec, tb_documento_nom, tb_venta_numdoc ";
 	$oCado = new Cado();
@@ -827,11 +829,15 @@ WHERE tb_software_id =$id";
     }
     function mostrar_manifiesto($vh_id)
     {
-        $sql = "SELECT * FROM tb_viajeventa vv 
+        $sql = "SELECT c.tb_cliente_nom, lu.tb_lugar_id, lu.tb_lugar_nom, vv.tb_viajeventa_parada, pa.tb_lugar_nom as parada, c.tb_cliente_tip,c.tb_cliente_doc,vv.tb_asiento_nom,v.tb_venta_numdoc, v.tb_venta_tot
+FROM tb_viajeventa vv 
         INNER JOIN tb_cliente c ON vv.tb_cliente_id=c.tb_cliente_id 
         INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
         LEFT JOIN cs_tipodocumento td ON v.cs_tipodocumento_id=td.cs_tipodocumento_id
-        WHERE tb_viajehorario_id=$vh_id AND v.tb_venta_est NOT IN ('ANULADA')
+        LEFT JOIN tb_viajehorario vh ON vh.tb_viajehorario_id=vv.tb_viajehorario_id
+        LEFT JOIN tb_lugar lu ON lu.tb_lugar_id = vh.tb_viajehorario_llegada
+        LEFT JOIN tb_lugar pa ON pa.tb_lugar_id = vv.tb_viajeventa_parada
+        WHERE vh.tb_viajehorario_id=$vh_id AND v.tb_venta_est NOT IN ('ANULADA')
         ORDER  BY v.tb_venta_numdoc
         ";
         $oCado = new Cado();

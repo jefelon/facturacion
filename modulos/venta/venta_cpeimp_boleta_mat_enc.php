@@ -311,6 +311,13 @@ if ($impresion == 'pdf') ob_start();
                     <td></td>
                 </tr>
                 </thead>
+                <?php if(file_exists($empresa_logo)) { ?>
+                    <tr>
+                        <td colspan="4" class="centrado">
+                            <img src="<?php echo $empresa_logo ?>" width="100%">
+                        </td>
+                    </tr>
+                <?php } ?>
                 <tr>
                     <td colspan="4" class="centrado">
                         <?php //echo //'<h3>'.$emp_nomcom .'</h3>'?>

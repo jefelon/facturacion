@@ -102,6 +102,25 @@ function cmb_ven_doc()
 		}
 	});
 }
+    function cmb_vehiculo()
+    {
+        $.ajax({
+            type: "POST",
+            url: "../vehiculo/cmb_veh_id.php",
+            async:false,
+            dataType: "html",
+            beforeSend: function() {
+                $('#cmb_fil_veh').html('<option value="">Cargando...</option>');
+            },
+            success: function(html){
+                $('#cmb_fil_veh').html(html);
+
+            },
+            complete: function(){
+
+            }
+        });
+    }
 
 $(function() {
 	
@@ -126,6 +145,7 @@ $(function() {
 	cmb_ven_doc();
 	cmb_fil_ven_ven();
 	cmb_punven_id(<?php echo $punven_id?>);
+    cmb_vehiculo();
 	
 	$( "#txt_fil_cli" ).autocomplete({
    		minLength: 1,
@@ -156,6 +176,9 @@ $(function() {
 	$('#chk_ven_anu').change( function() {
 		venta_tabla();
 	});
+    $('#cmb_fil_veh').change(function(e) {
+        venta_tabla();
+    });
 	
 });
 </script>
@@ -192,6 +215,10 @@ $(function() {
 	  <option value="">-</option>
 	  <option value="CANCELADA" selected>CANCELADA</option>
 	  <option value="ANULADA">ANULADA</option>
+    </select>
+
+    <label for="cmb_fil_veh">Vehículo:</label>
+    <select name="cmb_fil_veh" id="cmb_fil_veh">
     </select>
     <br>
     <label for="cmb_fil_ven_ven">Vendedor:</label>
