@@ -196,7 +196,7 @@ $oContenido = new cContenido();
             if(confirm("Realmente desea Enviar a la Sunat?")){
                 $.ajax({
                     type: "POST",
-                    url: "../venta/enviar_sunat.php",
+                    url: "../venta/enviar_sunat_donal.php",
                     async:true,
                     dataType: "json",
                     data: ({
