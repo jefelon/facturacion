@@ -68,6 +68,8 @@ if($usuario!="" and $password!="")
                 $_SESSION['empresa_ruc']		=$dt['tb_empresa_ruc'];
                 $_SESSION['empresa_nomcom']		=$dt['tb_empresa_nomcom'];
                 $_SESSION['empresa_dir']		=$dt['tb_empresa_dir'];
+                $_SESSION['punto_venta_cod']	=$dt['tb_puntoventa_cod'];
+
 
 
 

@@ -45,7 +45,7 @@ $xml_factura = '<?xml version="1.0" encoding="UTF-8"?>
         <cbc:RegistrationName>'.$arr["empresa"]->razon.'</cbc:RegistrationName>
         <cac:RegistrationAddress>
           <cbc:ID schemeName="Ubigeos" schemeAgencyName="PE:INEI">'.$arr["empresa"]->iddistrito.'</cbc:ID>
-          <cbc:AddressTypeCode listAgencyName="PE:SUNAT" listName="Establecimientos anexos">0001</cbc:AddressTypeCode>
+          <cbc:AddressTypeCode listAgencyName="PE:SUNAT" listName="Establecimientos anexos">'.$arr["empresa"]->punto_venta_cod.'</cbc:AddressTypeCode>
           <cbc:CityName>'.$arr["empresa"]->provincia.'</cbc:CityName>
           <cbc:CountrySubentity>'.$arr["empresa"]->departamento.'</cbc:CountrySubentity>
           <cbc:District>'.$arr["empresa"]->distrito.'</cbc:District>

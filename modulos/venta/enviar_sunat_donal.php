@@ -22,6 +22,7 @@ $empresa[0]['subdivision']			= $subdivision;
 $empresa[0]['departamento']			= $departamento;
 $empresa[0]['provincia']			= $provincia;
 $empresa[0]['distrito']				= $distrito;
+$empresa[0]['punto_venta_cod']	    = $punto_venta_cod;
 
 $empresa = json_decode(json_encode($empresa));
 

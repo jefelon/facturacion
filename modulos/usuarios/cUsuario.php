@@ -77,11 +77,12 @@ class cUsuario{
 	return $rst;
 	}
 	function registroAcceso($id){
-	$sql="SELECT * 
-		FROM tb_usuario u
+	$sql="SELECT * FROM tb_usuario u
 		INNER JOIN tb_usuariogrupo g ON u.tb_usuariogrupo_id=g.tb_usuariogrupo_id
 		INNER JOIN tb_empresa e ON u.tb_empresa_id=e.tb_empresa_id
-		WHERE tb_usuario_id=$id;";
+        INNER JOIN tb_usuariopv upv ON upv.tb_usuario_id = u.tb_usuario_id
+        INNER JOIN tb_puntoventa pv ON pv.tb_puntoventa_id = upv.tb_puntoventa_id
+		WHERE u.tb_usuario_id=$id;";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;
