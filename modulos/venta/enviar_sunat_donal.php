@@ -22,9 +22,8 @@ $empresa[0]['subdivision']			= $subdivision;
 $empresa[0]['departamento']			= $departamento;
 $empresa[0]['provincia']			= $provincia;
 $empresa[0]['distrito']				= $distrito;
-$empresa[0]['punto_venta_cod']	    = $punto_venta_cod;
 
-$empresa = json_decode(json_encode($empresa));
+//$empresa = json_decode(json_encode($empresa));
 
 //================================================================================================
 require_once ("../../config/Cado.php");
@@ -55,7 +54,7 @@ mysql_free_result($dts2);
 $dts = $oVenta->mostrarUno($ven_id);
 
 while($dt = mysql_fetch_array($dts)){
-	
+    $empresa[0]['punto_venta_cod']	    = $dt["tb_puntoventa_cod"];
 	$idcomprobante=$dt["cs_tipodocumento_cod"];
     $documento=$dt["tb_documento_nom"];
 
@@ -199,6 +198,7 @@ while($dt = mysql_fetch_array($dts))
 
 mysql_free_result($dts);
 
+$empresa = json_decode(json_encode($empresa));
 $detalle = json_decode(json_encode($detalle));
 //===============================================================================================
 //echo json_encode($detalle);

@@ -30,6 +30,5 @@ $subdivision = "URB. CERCADO";
 $departamento = "AREQUIPA";
 $provincia = "AREQUIPA";
 $distrito = "CERCADO";
-$punto_venta_cod = $_SESSION['punto_venta_cod'];
 
 ?>
