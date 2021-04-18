@@ -319,7 +319,7 @@ if($_SESSION['usuariogrupo_id']==3)$titulo='Registrar Ventas - Vendedor';
             //{
             $.ajax({
                 type: "POST",
-                url: "../venta/enviar_sunat.php",
+                url: "../venta/enviar_sunat_donal.php",
                 async:true,
                 dataType: "json",
                 data: ({

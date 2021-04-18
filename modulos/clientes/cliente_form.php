@@ -170,6 +170,33 @@ $(function() {
             $( "#validar_ruc").hide(200);
         }
     });
+    if( $('#autogenerar').attr('checked') ) {
+        $( "#txt_cli_doc" ).val('hula');
+        if($("input[id=radio1]").is(":checked") || $("input[id=radio3]").is(":checked")){
+            $( "#txt_cli_doc" ).html('hula')
+        }
+    }
+
+    $("#autogenerar").click(function() {
+        if($("#autogenerar").is(':checked')) {
+                if($("input[id=radio1]").is(":checked") || $("input[id=radio3]").is(":checked")){
+
+                    var min=10;
+                    var max=9999;
+                    var random =Math.floor(Math.random() * (+max - +min)) + +min;
+
+                    $( "#txt_cli_doc" ).val(random.toString().padStart(8,'0'))
+                }
+                else{
+
+                }
+        } else {
+            $( "#txt_cli_doc" ).val('');
+        }
+    });
+
+
+
 
     if($( "#hdd_cli_id" ).val()>0){
         cmb_dir_id($( "#hdd_cli_id" ).val());
@@ -286,13 +313,14 @@ $(function() {
     <table>
     	<tr>
     	  <td align="right">Documento:</td>
-    	  <td>
+    	  <td width="100px">
           	<div id="radio">
               <input name="rad_cli_tip" type="radio" id="radio1" value="1" <?php if($tip==1)echo 'checked="checked"'?>/><label for="radio1">DNI</label>
               <input name="rad_cli_tip" type="radio" id="radio2" value="2" <?php if($tip==2)echo 'checked="checked"'?>/><label for="radio2">RUC</label>
               <input name="rad_cli_tip" type="radio" id="radio3" value="3" <?php if($tip==3)echo 'checked="checked"'?>/><label for="radio3">OTROS</label>
             </div>
     	  </td>
+            <td width="100px"><label for="autogenerar"> Autogenerar</label><input type="checkbox" id="autogenerar" name="autogenerar"></td>
   	    </tr>
     	<tr>
             <td align="right"><label for="txt_cli_doc" id="lbl_cli_doc" >DNI:</label></td>

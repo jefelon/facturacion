@@ -44,7 +44,7 @@ class cLugar{
 	function verifica_lugar_tabla($id,$tabla){
 	$sql = "SELECT * 
 		FROM  $tabla 
-		WHERE tb_lugar_id =$id";
+		WHERE tb_viajehorario_salida =$id OR tb_viajehorario_llegada= $id";
 	$oCado = new Cado();
 	$rst=$oCado->ejecute_sql($sql);
 	return $rst;

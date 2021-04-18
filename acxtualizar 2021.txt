@@ -1,3 +1,0 @@
-ALTER TABLE `tb_encomiendaventa` ADD `tb_viajehorario_id` INT(11) NOT NULL AFTER `tb_venta_id`;
-
-ALTER TABLE `tb_viajehorario` CHANGE `tb_viajehorario_fecha` `tb_viajehorario_fecha` DATETIME NOT NULL;

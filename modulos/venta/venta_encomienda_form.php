@@ -1887,13 +1887,6 @@ if($_POST['action']=="editar"){
                 // $("#cmb_forpag_id").attr('disabled', true);
             }
 
-            if ((this).value=== '3' || (this).value=== '12' || (this).value=== '15') {
-                $('#datos-cliente').hide();
-                cliente_cargar_datos($('#hdd_ven_rem_id').val())
-            }else{
-                $('#datos-cliente').show();
-            }
-
             if ((this).value=== '2' || (this).value=== '11') {
 
                 $('#txt_bus_cat_preven_noigv').show();
@@ -3060,7 +3053,7 @@ if($_POST['action']=="editar"){
         </fieldset>
 
         <div class="cliente-pasajero" style="float: left; width: 60%";>
-            <div id="datos-cliente" style="display:none; width: 100%%;">
+            <div id="datos-cliente" style="width: 100%;">
                 <input type="hidden" id="hdd_ven_cli_id" name="hdd_ven_cli_id" value="<?php echo $cli_id?>" />
                 <input type="hidden" id="hdd_ven_cli_tip" name="hdd_ven_cli_tip" value="<?php echo $cli_ret?>" />
                 <input type="hidden" id="hdd_ven_cli_ret" name="hdd_ven_cli_ret" value="<?php echo $cli_tip?>" />
@@ -3102,47 +3095,6 @@ if($_POST['action']=="editar"){
                     </table>
                 </fieldset>
             </div>
-
-            <div id="datos-pasajero" style="float: left; width: 100%;">
-                <input type="hidden" id="hdd_ven_rem_id" name="hdd_ven_rem_id" value="<?php echo $cli_id?>" />
-
-                <fieldset>
-                    <legend>Datos Remitente</legend>
-                    <div id="div_remitente_form">
-                    </div>
-                    <table>
-                        <tr>
-                            <td align="right"><?php if($_POST['action']=='insertar'){?>
-                                    <a id="btn_rem_form_agregar" href="#" onClick="remitente_form_i('insertar')">Agregar Cliente</a>
-                                    <a id="btn_rem_form_modificar" href="#" onClick="remitente_form_i('editar',$('#hdd_ven_rem_id').val())">Modificar Cliente</a>
-                                <?php }?>
-                            </td>
-                            <td align="right">
-                                <label for="txt_ven_rem_doc">DNI:</label>
-                            </td>
-                            <td>
-                                <input name="txt_ven_rem_doc" type="text" id="txt_ven_rem_doc" value="" size="11" maxlength="11" />
-
-                                <label for="txt_ven_rem_nom">Cliente:</label>
-                                <input type="text" id="txt_ven_rem_nom" name="txt_ven_rem_nom" size="40" value="" />
-                            </td>
-                            <td rowspan="2" valign="top">
-                                <div id="div_clientecuenta_detalle">
-                                </div>
-                            </td>
-
-                            <td><input type="hidden" id="txt_ven_cli_dir" name="txt_ven_rem_dir" size="62" value="<?php echo $cli_dir?>" readonly="readonly"/></td>
-                            <!--                        <td align="right"><label for="txt_ven_cli_est">Estado:</label></td>-->
-                            <td>
-                                <input type="hidden" id="txt_ven_cli_est" name="txt_ven_rem_est" size="40" value="" disabled="disabled"/>
-                                <div id="msj_busqueda_sunat" class="ui-state-highlight ui-fcorner-all" style="width:auto; float:right; padding:2px; display:none"></div>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </div>
-
-
 
             <div id="datos-destinatario" style="float: left; width: 100%;">
                 <input type="hidden" id="hdd_ven_des_id" name="hdd_ven_des_id" value="<?php echo $cli_id?>" />

@@ -402,7 +402,7 @@ if ($impresion == 'pdf') ob_start();
                     <td colspan="4"> <b>DESTINATARIO: </b><?php echo $ev['cdtb_cliente'] ?></td>
                 </tr>
                 <tr>
-                    <td colspan="4"> <b>ORIGEN: </b><?php echo $ev['ltb_origen'] ?> <b> DESTINO: </b><?php echo $ev['ltb_destino'] ?></td>
+                    <td colspan="4"> <b>ORIGEN: </b><?php echo $ev['ltb_origen'] ?> <p style="font-size: 20px"><b> DESTINO: </b><?php echo $ev['ltb_destino'] ?></p></td>
                 </tr>
 
                 <tr>
