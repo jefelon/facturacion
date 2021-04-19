@@ -504,6 +504,9 @@ if($_POST['action']=="editar"){
             },
             success: function(html){
                 $('#cmb_ven_doc').html(html);
+                if($('#cmb_ven_doc').val()==='15'){
+                    $("#cmb_forpag_id").attr('disabled', false);
+                }
             },
             complete: function(){
                 <?php if($_POST['action']=="insertar" or $_POST['action']=="insertar_cot"){?>
@@ -1870,6 +1873,7 @@ if($_POST['action']=="editar"){
         <?php
         if($_POST['action']=="insertar" || $_POST['action']=='insertar_cot'){
         ?>
+        $("#cmb_forpag_id").attr('disabled', false);
         $('#cmb_ven_doc').change( function() {
             txt_ven_numdoc();
             if ((this).value=== '12' || (this).value=== '15') {

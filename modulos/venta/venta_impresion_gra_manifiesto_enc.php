@@ -324,13 +324,13 @@ $html = '
 
 $cont = 1;
 $tipo_doc="";
-while($dt = mysql_fetch_array($dts)){
+$dts5= $oVenta->mostrar_detalle_manifiesto_enc($_POST['hdd_vh_id']);
+
+while($dt = mysql_fetch_array($dts5)){
     if($dt['tb_cliente_tip']==1){$tipo_doc="DNI";}elseif ($dt['tb_cliente_tip']==3){$tipo_doc="OTROS";}
     $detalle="";
 
-    $dts5= $oVenta->mostrar_detalle_manifiesto_enc($_POST['hdd_vh_id']);
-    $dt5 = mysql_fetch_array($dts5);
-    $detalle=$dt5['tb_ventadetalle_nom'];
+    $detalle=$dt['tb_ventadetalle_nom'];
 
     $html.='<tr>';
 
@@ -342,7 +342,7 @@ while($dt = mysql_fetch_array($dts)){
                     <td style="text-align:center; border-left: 1px solid #000; width: 60mm;
     border-right: 1px solid #000;">'.$detalle.'</td>
                     <td style="text-align:right; border-left: 1px solid #000; width: 15mm;
-    border-right: 1px solid #000;">' .$dt["tb_venta_tot"].'</td>
+    border-right: 1px solid #000;">' .$dt["tb_ventadetalle_preuni"].'</td>
                     <td style="text-align:left;border-left: 1px solid #000; width: 40mm;
     border-right: 1px solid #000;">' .$dt["tb_destinatario_nom"] .'</td>
                     <td style="text-align:right; border-left: 1px solid #000; width: 18mm;

@@ -864,7 +864,7 @@ FROM tb_viajeventa vv
         INNER JOIN tb_venta v ON vv.tb_venta_id=v.tb_venta_id 
         INNER JOIN tb_ventadetalle vd ON vd.tb_venta_id=v.tb_venta_id 
         WHERE tb_viajehorario_id=$vh_id AND v.tb_venta_est NOT IN ('ANULADA')
-        ORDER  BY vd.tb_ventadetalle_id DESC
+        ORDER  BY vd.tb_ventadetalle_id ASC
         ";
         $oCado = new Cado();
         $rst=$oCado->ejecute_sql($sql);
