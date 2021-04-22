@@ -3,11 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_consulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_consulta.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_manifiesto_enc.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_manifiesto_enc.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,7 +209,8 @@
       <workItem from="1618792761707" duration="2787000" />
       <workItem from="1618873416824" duration="26000" />
       <workItem from="1619034087891" duration="2701000" />
-      <workItem from="1619059566762" duration="1828000" />
+      <workItem from="1619059566762" duration="2442000" />
+      <workItem from="1619100083539" duration="148000" />
     </task>
     <servers />
   </component>
@@ -337,16 +334,6 @@
           <url>file://$PROJECT_DIR$/modulos/venta/venta_reg.php</url>
           <line>586</line>
           <option name="timeStamp" value="18" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php</url>
-          <line>301</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php</url>
-          <line>288</line>
-          <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/modulos/lugar/cLugar.php</url>

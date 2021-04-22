@@ -231,7 +231,7 @@ $(function() {
             }
         },
         close: function(event, ui) {
-            $('#div_cajadetalle_form').dialog( "close" );
+            //$('#div_cajadetalle_form').dialog( "close" );
             $('#div_cajadetalle_form').html('cajadetalle_form');
         }
     });
