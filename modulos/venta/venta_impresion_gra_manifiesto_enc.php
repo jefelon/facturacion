@@ -314,10 +314,10 @@ $html = '
             <th style="border: 1px solid #000; text-align:center; width: 20mm; font-weight: bold;">Nº DE DOC</th>
             <th style="border: 1px solid #000; text-align:left; width: 60mm; font-weight: bold;">DESCRIPCIÓN</th>
             <th style="border: 1px solid #000; text-align:right; width: 15mm; font-weight: bold;">IMP. S/</th>
-            <th style="border: 1px solid #000; text-align:left; width: 40mm; font-weight: bold;">DESTINATARIO</th>
+            <th style="border: 1px solid #000; text-align:left; width: 30mm; font-weight: bold;">DESTINATARIO</th>
             <th style="border: 1px solid #000; text-align:right; width: 18mm; font-weight: bold;">TELEFONO</th>
             <th style="border: 1px solid #000; text-align:right; width: 21mm; font-weight: bold;">LUGAR DESTINO</th>
-            <th style="border: 1px solid #000; text-align:center; width: 16mm; font-weight: bold;">OBSERVACIÓN</th>
+            <th style="border: 1px solid #000; text-align:center; width: 26mm; font-weight: bold;">OBSERVACIÓN</th>
         </tr>
     </thead>
     <tbody>';
@@ -332,6 +332,14 @@ while($dt = mysql_fetch_array($dts5)){
 
     $detalle=$dt['tb_ventadetalle_nom'];
 
+    $dts22 = $oVentapago->mostrar_pagos($dt['tb_venta_id']);
+    $num_rows22 = mysql_num_rows($dts22);
+
+    $tipo_ven="-";
+    while ($dt2 = mysql_fetch_array($dts22)) {
+        if ($dt2['tb_formapago_id'] == 4) $tipo_ven= '<span style="font-size: 25px">Pago a destino</span>';
+    }
+
     $html.='<tr>';
 
     $html .= '   
@@ -343,14 +351,14 @@ while($dt = mysql_fetch_array($dts5)){
     border-right: 1px solid #000;">'.$detalle.'</td>
                     <td style="text-align:right; border-left: 1px solid #000; width: 15mm;
     border-right: 1px solid #000;">' .$dt["tb_ventadetalle_preuni"].'</td>
-                    <td style="text-align:left;border-left: 1px solid #000; width: 40mm;
+                    <td style="text-align:left;border-left: 1px solid #000; width: 30mm;
     border-right: 1px solid #000;">' .$dt["tb_destinatario_nom"] .'</td>
                     <td style="text-align:right; border-left: 1px solid #000; width: 18mm;
     border-right: 1px solid #000;"></td>
                     <td style="text-align:center; border-left: 1px solid #000; width: 21mm;
     border-right: 1px solid #000;">' .$dt["tb_lugar_nom"]. '</td>
-                    <td style="text-align:right; border-left: 1px solid #000; width: 16mm;
-    border-right: 1px solid #000;"></td>';
+                    <td style="text-align:center; border-left: 1px solid #000; width: 26mm;
+    border-right: 1px solid #000;"> '.$tipo_ven.'</td>';
     $html.='</tr>';
     $cont++;
 }

@@ -198,6 +198,16 @@ function cajadetalle_tabla()
         }
     });
 }
+function printDiv(nombreDiv) {
+    var contenido= document.getElementById(nombreDiv).innerHTML;
+    var contenidoOriginal= document.body.innerHTML;
+
+    document.body.innerHTML = contenido;
+
+    window.print();
+
+    document.body.innerHTML = contenidoOriginal;
+}
 
 //
 $(function() {
@@ -221,7 +231,7 @@ $(function() {
             }
         },
         close: function(event, ui) {
-            $('#div_catalogo_venta').dialog( "close" );
+            $('#div_cajadetalle_form').dialog( "close" );
             $('#div_cajadetalle_form').html('cajadetalle_form');
         }
     });
@@ -237,7 +247,7 @@ $(function() {
         position: "top",
         closeOnEscape: false,
         close: function(event, ui) {
-            $('#div_catalogo_venta').dialog( "close" );
+            $('#div_cajadetalle_consulta').dialog( "close" );
             $('#div_cajadetalle_consulta').html('cajadetalle_consulta');
         }
     });

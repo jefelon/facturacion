@@ -23,11 +23,13 @@ require_once ("../cajaobs/cajaobs_cierre.php");
 require_once ("../ingreso/cIngreso.php");
 $oIngreso = new cIngreso();
 require_once ("../cajaobs/cajaobs_cierre.php");
-
+require_once ("../venta/cVentapago.php");
+$oVentapago = new cVentapago();
 
 $pvs=$oPuntoventa->mostrarUno($_SESSION['puntoventa_id']);
 $pv = mysql_fetch_array($pvs);
 $caja_venta		=$pv['tb_caja_id'];
+mysql_free_result($dts);
 
 $monto_inicial=$_POST['txt_mon_inicial'];
 
@@ -63,6 +65,10 @@ $num_rows= mysql_num_rows($dts1);
             icons: {primary: "ui-icon-cancel"},
             text: false
         });
+        $('.imprimir').button({
+            icons: {primary: "ui-icon-print"},
+            text: true
+        });
 
         $("#tabla_ingreso").tablesorter({
             widgets: ['zebra'],
@@ -76,6 +82,12 @@ $num_rows= mysql_num_rows($dts1);
             <?php }?>
         });
         $("#monto_inicial").tablesorter({
+            widgets: ['zebra']
+        });
+        $("#tabla_der").tablesorter({
+            widgets: ['zebra']
+        });
+        $("#tabla_izq").tablesorter({
             widgets: ['zebra']
         });
     });
@@ -99,6 +111,7 @@ $num_rows= mysql_num_rows($dts1);
         <th nowrap title="Fecha">FECHA</th>
         <th>DOCUMENTO</th>
         <th>TIPO</th>
+        <th align="right">IMPORTE POR PAGAR EN DESTINO</th>
         <th align="right">IMPORTE</th>
     </tr>
     </thead>
@@ -106,10 +119,12 @@ $num_rows= mysql_num_rows($dts1);
     <?php
     $sum_imp_ingr=0;
     $sum_imp_enc=0;
-    $sum_imp_encpag=0;
     $sum_imp_via=0;
+    $sum_imp_encpag=0;
+    $total_destino=0;
+    $por_pagar=false;
     while($dt1 = mysql_fetch_array($dts1)){
-        $vvs=$oVenta->mostrar_venta_viaje($dt1['tb_ingreso_modide']);
+        $vvs=$oVenta->mostrar_venta_viaje($dt1['tb_ingreso_modide']); //id venta
         $ves=$oVenta->mostrar_venta_encomienda($dt1['tb_ingreso_modide']);
         $eps=$oVenta->mostrar_venta_encomienda_pagada($dt1['tb_ingreso_modide']);
 
@@ -117,25 +132,77 @@ $num_rows= mysql_num_rows($dts1);
         $ves_rows = mysql_num_rows($ves);
         $eps_rows = mysql_num_rows($eps);
 
+
+        $dts11=$oVentapago->mostrar_pagos($dt1['tb_ingreso_modide']);
+        while($dt11 = mysql_fetch_array($dts11)){
+            if($dt11['tb_formapago_id']==4){ //por pagar
+                $total_revisado=0;
+                $por_pagar=true;
+            }
+            else{
+                $total_revisado=$dt11['tb_ventapago_mon'];
+                $por_pagar=false;
+            }
+        }
+
         if($vvs_rows>0){
             $tipo_ven='Pasaje';
             $sum_imp_via+=$dt1['tb_ingreso_imp'];
-        }else if($ves_rows>0){
+        }
+        else if($ves_rows>0&& $por_pagar==false){
             $tipo_ven='Encomienda';
             $sum_imp_enc+=$dt1['tb_ingreso_imp'];
-        }else if($eps_rows>0){
+        }
+        if($ves_rows>0 && $por_pagar==true){
+
+            if($estado=="ANULADA") {
+                echo "ANULADA";
+            }
+            else{
+                $dts22 = $oVentapago->mostrar_pagos($dt1['tb_ingreso_modide']);
+                $num_rows22 = mysql_num_rows($dts22);
+
+                while ($dt2 = mysql_fetch_array($dts22)) {
+                    if ($dt2['tb_formapago_id'] == 1) echo 'CONTADO ';
+                    if ($dt2['tb_formapago_id'] == 4) $tipo_ven= 'POR PAGAR EN DESTINO ';
+
+                    $total_destino+=$dt1['tb_ingreso_imp'];
+
+                }
+            }
+            mysql_free_result($dts22);
+
+        }
+        if($eps_rows>0  && $por_pagar==false){
             $tipo_ven='Encomienda Pagada';
             $sum_imp_encpag+=$dt1['tb_ingreso_imp'];
         }
 
-        $sum_imp_ingr+=$dt1['tb_ingreso_imp'];
+        if($por_pagar==false){
+            $sum_imp_ingr+=$dt1['tb_ingreso_imp'];
+        }
         $caja_estado=caja_cierre($dt1['tb_caja_id'],$dt1['tb_ingreso_fec']);
         ?>
         <tr>
             <td nowrap="nowrap"><?php echo mostrarFecha($dt1['tb_ingreso_fec'])?></td>
             <td><?php echo $dt1['tb_documento_abr'].' '.$dt1['tb_ingreso_numdoc']?></td>
             <td><?php echo $tipo_ven ?></td>
-            <td align="right"><?php echo formato_money($dt1['tb_ingreso_imp'])?></td>
+            <td align="right">
+                <?php
+                if($por_pagar)
+                    echo formato_money($dt1['tb_ingreso_imp']);
+                ?>
+            </td>
+            <td align="right">
+                <?php
+                    if($por_pagar){
+                        echo 0;
+                    }
+                    else{
+                        echo formato_money($dt1['tb_ingreso_imp']);
+                    }
+                ?>
+            </td>
         </tr>
         <?php
     }
@@ -144,13 +211,15 @@ $num_rows= mysql_num_rows($dts1);
     </tbody>
     <tr class="even">
         <td colspan="3"><strong>TOTAL <?php echo $num_rows." registros";?></strong></td>
+
+        <td colspan="1" align="right"><strong style="color:red"><?php echo formato_money($total_destino)?></strong></td>
         <td colspan="1" align="right"><strong><?php echo formato_money($sum_imp_ingr)?></strong></td>
     </tr>
 </table>
 <input name="hdd_ingreso_total" id="hdd_ingreso_total" type="hidden" value="<?php echo $sum_imp_ingr?>">
 
 <?php
-$dts1=$oEgreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fechahora_mysql($_POST['txt_fil_caj_fec1']),fechahora_mysql($_POST['txt_fil_caj_fec2']),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_egr_numdoc'],$_POST['hdd_fil_pro_id'],$_POST['cmb_fil_egr_est']);
+$dts1=$oEgreso->mostrar_filtro_fechahora($_SESSION['empresa_id'],$cdet['tb_caja_id'],fechahora_mysql($apertura),fechahora_mysql($cierre),$_POST['cmb_fil_cue_id'],$_POST['cmb_fil_subcue_id'],$_POST['cmb_fil_doc_id'],$_POST['txt_fil_egr_numdoc'],$_POST['hdd_fil_pro_id'],$_POST['cmb_fil_egr_est']);
 
 $num_rows= mysql_num_rows($dts1);
 ?>
@@ -223,72 +292,67 @@ $num_rows= mysql_num_rows($dts1);
 $saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
 ?>
 <div class="ui-widget-header ui-corner-all" style="width:auto; padding:2px; margin:3px">CONSULTA SALDO CAJA</div>
-<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:left">
+<table cellspacing="0" cellpadding="0" style="width:30%;float:left;" class="tablesorter" id="tabla_izq">
+    <thead>
     <tr>
-        <th height="24" align="left">CAJA</th>
-        <th height="24" align="right">SOLES S/.</th>
-        <th height="24" align="right">&nbsp;</th>
+        <th>CONCEPTO</th>
+        <th>MONTO S/</th>
+    </tr>
+    </thead>
     <tr>
         <td align="left">SALDO ANTERIOR</td>
         <td align="right"><?php echo formato_money($saldo_anterior_sol)?></td>
-        <td align="right">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="left">&nbsp;</td>
-        <td align="right">&nbsp;</td>
-        <td align="right">&nbsp;</td>
     </tr>
 
     <tr>
         <td align="left">MONTO INICIAL</td>
         <td align="right">+<?php echo formato_money($monto_inicial)?></td>
-        <td align="right">&nbsp;</td>
     </tr>
     <tr>
         <td align="left">INGRESOS</td>
         <td align="right">+<?php echo formato_money($sum_imp_ingr)?></td>
-        <td align="right">&nbsp;</td>
     </tr>
     <tr>
         <td align="left">EGRESOS</td>
-        <td align="right">-<?php echo formato_money($sum_imp_egr)?></td>
-        <td align="right">&nbsp;</td>
+        <td align="right"><b style="color: red">-<?php echo formato_money($sum_imp_egr)?></b></td>
     </tr>
     <tr style="font-weight:bold" height="25">
         <td align="left">SALDO</td>
         <td align="right"><?php echo formato_money($saldo_sol)?></td>
-        <td align="right">&nbsp;</td>
     </tr>
 </table>
-<table border="0" cellspacing="0" cellpadding="0" style="width:30%;float:right">
+<table cellspacing="0" cellpadding="0" style="width:35%;float:right" id="tabla_der" class="tablesorter">
+    <thead>
     <tr>
-        <th height="24" align="left">TIPO</th>
-        <th height="24" align="right">SOLES S/.</th>
-        <th height="24" align="right">&nbsp;</th>
-    <tr>
-        <td align="left">VENTAS ENCOMIENDAS</td>
-        <td align="right"><?php echo formato_money($sum_imp_enc)?></td>
-        <td align="right">&nbsp;</td>
+        <th>TIPO </th>
+        <th align="right">MONTO S/</th>
+    </tr>
+    </thead>
+        <td align="left">TOTAL ENCOMIENDAS</td>
+        <td align="right"><b><?php echo formato_money($sum_imp_enc)?></b></td>
     </tr>
     <tr>
-        <td align="left">VENTAS ENCOMIENDAS PAGADAS</td>
-        <td align="right"><?php echo formato_money($sum_imp_encpag)?></td>
-        <td align="right">&nbsp;</td>
+        <td align="left">TOTAL ENCOMIENDAS PAGADAS</td>
+        <td align="right"><b><?php echo formato_money($sum_imp_encpag)?></b></td>
     </tr>
     <tr>
-        <td align="left">&nbsp;</td>
-        <td align="right">&nbsp;</td>
-        <td align="right">&nbsp;</td>
+        <td align="left">TOTAL ENCOMIENDAS PAGO DESTINO</td>
+        <td align="right"><b style="color:red"><?php echo formato_money($total_destino)?></b></td>
     </tr>
     <tr>
-        <td align="left">VENTA PASAJES</td>
-        <td align="right"><?php echo formato_money($sum_imp_via)?></td>
-        <td align="right">&nbsp;</td>
-    </tr>
-    <tr>
-        <td align="left">&nbsp;</td>
-        <td align="right">&nbsp;</td>
-        <td align="right">&nbsp;</td>
+        <td align="left">TOTAL PASAJES</td>
+        <td align="right"><b><?php echo formato_money($sum_imp_via)?></b></td>
     </tr>
 </table>
+<table border="0" cellspacing="0" cellpadding="0" style="width:100%;">
+    <tr>
+        <td align="center">
+            <?php
+                $gran_total=$saldo_anterior_sol;
+            ?>
+            <p>DEBE HABER DINERO EN CAJA: <b style="color: green"><?php echo $saldo_sol?></b> <a onclick="printDiv('div_cajadetalle_consulta')" value="IMPRIMIR DETALLADO"  class="imprimir">IMPRIMIR DETALLADO</a></p>
+        </td>
+    </tr>
+</table>
+
 

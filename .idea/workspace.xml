@@ -3,17 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/acxtualizar 2021.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/agregar numero copias impresion sql.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/clientes/cliente_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/clientes/cliente_form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/lugar/cLugar.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/lugar/cLugar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_consulta.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_consulta.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/mirespuesta.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_enc.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_boleta_mat_enc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_enc.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_facturaexo_mat_enc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat_enc.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_cpeimp_nota_mat_enc.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_encomienda_form.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_reg.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_reg.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_vista_encomienda_cobro_destino.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_vista_encomienda_cobro_destino.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_manifiesto_enc.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_impresion_gra_manifiesto_enc.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +64,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
-    <property name="settings.editor.selected.configurable" value="project.propDebugger" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -215,7 +209,11 @@
       <workItem from="1615586524089" duration="1593000" />
       <workItem from="1616371370628" duration="7362000" />
       <workItem from="1616703778501" duration="41000" />
-      <workItem from="1618668181005" duration="7436000" />
+      <workItem from="1618668181005" duration="7636000" />
+      <workItem from="1618792761707" duration="2787000" />
+      <workItem from="1618873416824" duration="26000" />
+      <workItem from="1619034087891" duration="2701000" />
+      <workItem from="1619059566762" duration="1828000" />
     </task>
     <servers />
   </component>
@@ -342,12 +340,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php</url>
-          <line>297</line>
+          <line>301</line>
           <option name="timeStamp" value="32" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/modulos/cajadetalle/caja_cerrar_form.php</url>
-          <line>284</line>
+          <line>288</line>
           <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="php">

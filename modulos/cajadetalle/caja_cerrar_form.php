@@ -198,6 +198,10 @@ $num_rows= mysql_num_rows($dts1);
             icons: {primary: "ui-icon-cancel"},
             text: false
         });
+        $('.imprimir').button({
+            icons: {primary: "ui-icon-print"},
+            text: true
+        });
 
         $("#tabla_ingreso").tablesorter({
             widgets: ['zebra'],
@@ -354,6 +358,17 @@ $num_rows= mysql_num_rows($dts1);
 ?>
 
 <script type="text/javascript">
+    function printDiv(nombreDiv) {
+        var contenido= document.getElementById(nombreDiv).innerHTML;
+        var contenidoOriginal= document.body.innerHTML;
+
+        document.body.innerHTML = contenido;
+
+        window.print();
+
+        document.body.innerHTML = contenidoOriginal;
+    }
+
     $(function() {
 
         $('.btn_editar').button({
@@ -479,7 +494,7 @@ $saldo_sol = $saldo_anterior_sol+$monto_inicial+$sum_imp_ingr-$sum_imp_egr
             <?php
                 $gran_total=$saldo_anterior_sol;
             ?>
-            <p>DEBE HABER DINERO EN CAJA: <b style="color: green"><?php echo $saldo_sol?></b></p>
+            <p>DEBE HABER DINERO EN CAJA: <b style="color: green"><?php echo $saldo_sol?></b><a onclick="printDiv('div_cajadetalle_form')" value="IMPRIMIR DETALLADO"  class="imprimir">IMPRIMIR DETALLADO</a></p>
         </td>
     </tr>
 </table>
