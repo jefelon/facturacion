@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="4e8a46f8-a61b-4202-b30a-3ea80158d1b4" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/cajadetalle/cajadetalle_vista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_filtro.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_filtro.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_filtro_adm.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_filtro_adm.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_filtro_enc.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_filtro_enc.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modulos/venta/venta_filtro_encomienda_cobro_destino.php" beforeDir="false" afterPath="$PROJECT_DIR$/modulos/venta/venta_filtro_encomienda_cobro_destino.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,6 +214,9 @@
       <workItem from="1619034087891" duration="2701000" />
       <workItem from="1619059566762" duration="2442000" />
       <workItem from="1619100083539" duration="148000" />
+      <workItem from="1619724343475" duration="3005000" />
+      <workItem from="1619730969851" duration="594000" />
+      <workItem from="1619799487310" duration="38000" />
     </task>
     <servers />
   </component>

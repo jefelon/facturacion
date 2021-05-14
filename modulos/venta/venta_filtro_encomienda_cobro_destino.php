@@ -201,7 +201,7 @@ $(function() {
 <!--    <select name="cmb_fil_ven_punven" id="cmb_fil_ven_punven">-->
 <!--    </select>-->
     <label for="chk_fil_ven_may" title="Venta Mayorista">Venta Mayorista<input name="chk_fil_ven_may" id="chk_fil_ven_may" type="checkbox" value="1"></label>
-    <label for="chk_ven_anu" title="Activar para anular venta.">Anular<input name="chk_ven_anu" id="chk_ven_anu" type="checkbox" value="1"></label>
+<!--    <label for="chk_ven_anu" title="Activar para anular venta.">Anular<input name="chk_ven_anu" id="chk_ven_anu" type="checkbox" value="1"></label>-->
   	<a href="#" onClick="venta_tabla()" id="btn_filtrar">Filtrar</a>
     <a href="#" onClick="venta_filtro()" id="btn_resfil">Restablecer</a>
 </fieldset>
