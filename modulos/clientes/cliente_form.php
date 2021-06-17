@@ -56,44 +56,58 @@ if($_POST['action']=="editarSunat"){
     function buscar() {
 
         if($("input[id=radio1]").is(":checked")){
+            $('#msj_busqueda_sunat_2').html("Buscando en RENIEC...");
+            $('#msj_busqueda_sunat_2').show(100);
             var dni = $('#txt_cli_doc').val();
-            var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+            var url = 'https://apiperu.dev/api/dni/'+dni;
             $.ajax({
-                type:'POST',
+                type: 'GET',
                 dataType: "json",
-                url:url,
-                data: ({
-                    dni: dni
-                }),
-                success: function(datos_dni){
-                    $('#txt_cli_nom').val(datos_dni.persona);
+                url: url,
+                headers: {
+                    "Authorization":"Bearer f994603f76fb2ca38b8aeae9aa2f2ec1e6c0554f36b238b5ffd76dd3e22175b9",
+                    'Accept' : 'application/json'
+                },
+                accepts: "application/json",
+                crossDomain: true,
+                success: function (datos_dni) {
+                    if(datos_dni.success==true) {
+                        $('#txt_cli_nom').val(datos_dni.data.nombre_completo);
+                    }
+                    else if(datos_dni.success==false){
+                        alert('No existe el DNI.');
+                    }
+                    $('#msj_busqueda_sunat_2').hide(100);
                 }
             });
         }else {
-            /*if($("#txt_cli_doc").val().substr(0,2)=='20'){
-                $('#radio2').prop( "checked", true );
-            }else if($("#txt_cli_doc").val().substr(0,2)=='10'){
-                $('#radio1').prop( "checked", true );
-            }*/
-            $('#msj_busqueda_sunat_2').html("Buscando en Sunat...");
-            $('#msj_busqueda_sunat_2').show(100);
-            $.post('../../libreriasphp/consultaruc/index.php', {
-                    vruc: $('#txt_cli_doc').val(),
-                    vtipod: 6
-                },
-                function (data, textStatus) {
-                    if (data == null) {
-                        alert('Intente nuevamente...Sunat');
+                $('#msj_busqueda_sunat_2').html("Buscando en Sunat...");
+                $('#msj_busqueda_sunat_2').show(100);
+                var ruc = $('#txt_cli_doc').val();
+                var url = 'https://apiperu.dev/api/ruc/'+ruc;
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: url,
+                    headers: {
+                        "Authorization":"Bearer f994603f76fb2ca38b8aeae9aa2f2ec1e6c0554f36b238b5ffd76dd3e22175b9",
+                        'Accept' : 'application/json'
+                    },
+                    accepts: "application/json",
+                    crossDomain: true,
+                    success: function (data) {
+                        if(data.success==true){
+                            $('#txt_cli_nom').val(data.data.nombre_o_razon_social);
+                            $('#txt_cli_dir').val(data.data.direccion_completa);
+                            $('#txt_cli_est').val(data.data.estado);
+                            $('#hdd_cli_est').html(data.data.estado);
+                        }
+                        else if(data.success==false){
+                            alert('No existe el RUC.');
+                        }
+                        $('#msj_busqueda_sunat_2').hide(100);
                     }
-                    if (data.length == 1) {
-                        $('#msj_busqueda_sunat_2').hide();
-                    } else {
-                        $('#txt_cli_nom').val(data['RazonSocial']);
-                        $('#txt_cli_dir').val(data['DireccionCompleta']);
-                        $('#txt_cli_est').val(data['Estado']);
-                        $('#msj_busqueda_sunat_2').hide();
-                    }
-                }, "json");
+                });
         }
 }
 

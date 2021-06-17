@@ -333,43 +333,58 @@ $pv = mysql_fetch_array($pvs);
                 $('#msj_busqueda_sunat').html("Buscando en RENIEC...");
                 $('#msj_busqueda_sunat').show(100);
                 var dni = $('#txt_cli_dni').val();
-                var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+                var url = 'https://apiperu.dev/api/dni/'+dni;
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     dataType: "json",
                     url: url,
-                    data: 'dni=' + dni,
+                    headers: {
+                        "Authorization":"Bearer f994603f76fb2ca38b8aeae9aa2f2ec1e6c0554f36b238b5ffd76dd3e22175b9",
+                        'Accept' : 'application/json'
+                    },
+                    accepts: "application/json",
+                    crossDomain: true,
                     success: function (datos_dni) {
-                        $('#txt_cli_nom').val(datos_dni.persona);
-                        if (datos_dni.persona != "" && datos_dni.persona != "Datos no encontrados, completa el nombre manualmente.") {
+                        if(datos_dni.success==true) {
+                            $('#txt_cli_nom').val(datos_dni.data.nombre_completo);
                             venta_cliente_reg();
                         }
+                        else if(datos_dni.success==false){
+                            alert('No existe el DNI.');
+                        }
+                        $('#msj_busqueda_sunat').hide(100);
                     }
                 });
             } else if($('#rad_cli_tip_pas').val() == '2'){
                 $('#msj_busqueda_sunat').html("Buscando en Sunat...");
                 $('#msj_busqueda_sunat').show(100);
-                $.post('../../libreriasphp/consultaruc/index.php', {
-                        vruc: $('#txt_cli_dni').val(),
-                        vtipod: 6
+                var ruc = $('#txt_cli_dni').val();
+                var url = 'https://apiperu.dev/api/ruc/'+ruc;
+                $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: url,
+                    headers: {
+                        "Authorization":"Bearer f994603f76fb2ca38b8aeae9aa2f2ec1e6c0554f36b238b5ffd76dd3e22175b9",
+                        'Accept' : 'application/json'
                     },
-                    function (data, textStatus) {
-                        if (data == null) {
-                            alert('Intente nuevamente...Sunat');
+                    accepts: "application/json",
+                    crossDomain: true,
+                    success: function (data) {
+                        if(data.success==true){
+                            $('#txt_cli_nom').val(data.data.nombre_o_razon_social);
+                            $('#txt_cli_dir').val(data.data.direccion_completa);
+                            $('#hdd_cli_est').html(data.data.estado);
+                            if (data.txt_cli_nom != "" && data.txt_cli_nom == "-") {
+                                venta_cliente_reg();
+                            }
                         }
-                        if (data.length == 1) {
-
-                            $('#msj_busqueda_sunat').hide();
-                        } else {
-                            $('#txt_cli_nom').val(data['RazonSocial']);
-                            $('#txt_cli_dir').val(data['DireccionCompleta']);
-                            $('#hdd_cli_est').html(data['Estado']);
-                            $('#msj_busqueda_sunat').hide();
-                            venta_cliente_reg();
-                            $('#txt_pas_doc').focus();
-
+                        else if(data.success==false){
+                            alert('No existe el RUC.');
                         }
-                    }, "json");
+                        $('#msj_busqueda_sunat').hide(100);
+                    }
+                });
             }
         }
     }
@@ -378,17 +393,26 @@ $pv = mysql_fetch_array($pvs);
                 $('#msj_busqueda_sunat').html("Buscando en RENIEC...");
                 $('#msj_busqueda_sunat').show(100);
                 var dni = $('#txt_pas_doc').val();
-                var url = '../../libreriasphp/consultadni/consulta_reniec.php';
+                var url = 'https://apiperu.dev/api/dni/'+dni;
                 $.ajax({
-                    type: 'POST',
+                    type: 'GET',
                     dataType: "json",
                     url: url,
-                    data: 'dni=' + dni,
+                    headers: {
+                        "Authorization":"Bearer f994603f76fb2ca38b8aeae9aa2f2ec1e6c0554f36b238b5ffd76dd3e22175b9",
+                        'Accept' : 'application/json'
+                    },
+                    accepts: "application/json",
+                    crossDomain: true,
                     success: function (datos_dni) {
-                        $('#txt_pas_nom').val(datos_dni.persona);
-                        if (datos_dni.persona != "" && datos_dni.persona != "Datos no encontrados, completa el nombre manualmente.") {
+                        if(datos_dni.success==true) {
+                            $('#txt_pas_nom').val(datos_dni.data.nombre_completo);
                             venta_pas_reg();
                         }
+                        else if(datos_dni.success==false){
+                            alert('No existe el DNI.');
+                        }
+                        $('#msj_busqueda_sunat').hide(100);
                     }
                 });
             }
@@ -1181,9 +1205,9 @@ $pv = mysql_fetch_array($pvs);
                         <input type="text" name="txt_hor_sal" id="txt_hor_sal"  value="<?php echo $hor; ?>" style="width: 75px">
 
                         <label for="txt_precio">Precio:</label>
-                        <input class="venpag_moneda__" name="txt_precio" size="4" type="text" id="txt_precio">
+                        <input class="venpag_moneda__" name="txt_precio" size="3" type="text" id="txt_precio">
                         <label for="txt_num_asi">Nro Asiento:</label>
-                        <input class="venpag_moneda__" name="txt_num_asi" size="4" type="text" id="txt_num_asi">
+                        <input class="venpag_moneda__" name="txt_num_asi" size="3" type="text" id="txt_num_asi">
                     </td>
                 </tr>
             </table>
@@ -1192,6 +1216,7 @@ $pv = mysql_fetch_array($pvs);
 </form>
     <div>
         <div class="otros-datos" style="width: 60%;margin: 0 auto;margin-top: 10px;font-size: 11pt">
+            <span for="" id="msj_busqueda_sunat" style="position: absolute;left:20px; top:110px; color: #00aa00"></span>
             <div id="documento">
                 <fieldset><legend>Tipo Comprobante</legend>
                     <select name="cmb_ven_doc" id="cmb_ven_doc">
