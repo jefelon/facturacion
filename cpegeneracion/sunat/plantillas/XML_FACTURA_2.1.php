@@ -69,6 +69,12 @@ $xml_factura = '<?xml version="1.0" encoding="UTF-8"?>
       </cac:PartyLegalEntity>
     </cac:Party>
   </cac:AccountingCustomerParty>';
+$xml_factura .='
+    <cac:PaymentTerms>
+    <cbc:ID>FormaPago</cbc:ID>
+    <cbc:PaymentMeansID>Contado</cbc:PaymentMeansID>
+  </cac:PaymentTerms>
+';
 if($arr['header']->totopexo>0){
     $xml_factura.='
   <cac:TaxTotal>
