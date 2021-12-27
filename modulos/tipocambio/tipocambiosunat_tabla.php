@@ -31,7 +31,7 @@ $mesElegido=$_POST['mesElegido'];
 $anioElegido=$_POST['anioElegido'];
 $mes=$_POST['mes'];
 $anho=$_POST['anho'];
-$sUrl = "http://www.sunat.gob.pe/cl-at-ittipcam/tcS01Alias?mesElegido=$mesElegido&anioElegido=2017&mes=$mes&anho=$anho&accion=init&email='";
+$sUrl = "https://e-consulta.sunat.gob.pe/cl-at-ittipcam/tcS01Alias?mesElegido=$mesElegido&anioElegido=2017&mes=$mes&anho=$anho&accion=init&email='";
 $sContent = file_get_contents($sUrl);
 $doc = new DOMDocument();
 $doc->loadHTML($sContent);
